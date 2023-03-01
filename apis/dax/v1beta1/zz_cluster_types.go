@@ -80,8 +80,8 @@ type ClusterParameters struct {
 
 	// –  The compute and memory capacity of the nodes. See
 	// Nodes for supported node types
-	// +kubebuilder:validation:Required
-	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,8 @@ type ClusterParameters struct {
 
 	// node cluster, without any read
 	// replicas
-	// +kubebuilder:validation:Required
-	ReplicationFactor *float64 `json:"replicationFactor" tf:"replication_factor,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -180,8 +180,10 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationFactor)",message="replicationFactor is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

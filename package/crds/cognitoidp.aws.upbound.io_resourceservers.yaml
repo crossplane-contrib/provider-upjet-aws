@@ -165,8 +165,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - identifier
-                - name
                 - region
                 type: object
               providerConfigRef:

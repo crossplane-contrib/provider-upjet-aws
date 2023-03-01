@@ -25,8 +25,8 @@ type SecurityConfigurationObservation struct {
 type SecurityConfigurationParameters struct {
 
 	// A JSON formatted Security Configuration
-	// +kubebuilder:validation:Required
-	Configuration *string `json:"configuration" tf:"configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -58,8 +58,9 @@ type SecurityConfigurationStatus struct {
 type SecurityConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityConfigurationSpec   `json:"spec"`
-	Status            SecurityConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)",message="configuration is a required parameter"
+	Spec   SecurityConfigurationSpec   `json:"spec"`
+	Status SecurityConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

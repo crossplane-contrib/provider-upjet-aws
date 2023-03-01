@@ -245,8 +245,8 @@ type ScheduleParameters struct {
 	EndDate *string `json:"endDate,omitempty" tf:"end_date,omitempty"`
 
 	// Configures a time window during which EventBridge Scheduler invokes the schedule. Detailed below.
-	// +kubebuilder:validation:Required
-	FlexibleTimeWindow []FlexibleTimeWindowParameters `json:"flexibleTimeWindow" tf:"flexible_time_window,omitempty"`
+	// +kubebuilder:validation:Optional
+	FlexibleTimeWindow []FlexibleTimeWindowParameters `json:"flexibleTimeWindow,omitempty" tf:"flexible_time_window,omitempty"`
 
 	// Name of the schedule group to associate with this schedule. When omitted, the default schedule group is used.
 	// +kubebuilder:validation:Optional
@@ -275,8 +275,8 @@ type ScheduleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Defines when the schedule runs. Read more in Schedule types on EventBridge Scheduler.
-	// +kubebuilder:validation:Required
-	ScheduleExpression *string `json:"scheduleExpression" tf:"schedule_expression,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
 	// Timezone in which the scheduling expression is evaluated. Defaults to UTC. Example: Australia/Sydney.
 	// +kubebuilder:validation:Optional
@@ -291,8 +291,8 @@ type ScheduleParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Configures the target of the schedule. Detailed below.
-	// +kubebuilder:validation:Required
-	Target []TargetParameters `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type SqsParametersObservation struct {
@@ -395,8 +395,11 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduleSpec   `json:"spec"`
-	Status            ScheduleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.flexibleTimeWindow)",message="flexibleTimeWindow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scheduleExpression)",message="scheduleExpression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)",message="target is a required parameter"
+	Spec   ScheduleSpec   `json:"spec"`
+	Status ScheduleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

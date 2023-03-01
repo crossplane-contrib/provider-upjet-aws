@@ -51,8 +51,8 @@ type ConfigRuleParameters struct {
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Scope Below.
-	// +kubebuilder:validation:Required
-	Source []SourceParameters `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -173,8 +173,9 @@ type ConfigRuleStatus struct {
 type ConfigRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigRuleSpec   `json:"spec"`
-	Status            ConfigRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	Spec   ConfigRuleSpec   `json:"spec"`
+	Status ConfigRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

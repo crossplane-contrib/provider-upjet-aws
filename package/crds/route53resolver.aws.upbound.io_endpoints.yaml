@@ -259,8 +259,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - direction
-                - ipAddress
                 - region
                 type: object
               providerConfigRef:

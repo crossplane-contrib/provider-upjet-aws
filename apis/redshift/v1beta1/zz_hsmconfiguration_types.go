@@ -27,24 +27,24 @@ type HSMConfigurationObservation struct {
 type HSMConfigurationParameters struct {
 
 	// A text description of the HSM configuration to be created.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The IP address that the Amazon Redshift cluster must use to access the HSM.
-	// +kubebuilder:validation:Required
-	HSMIPAddress *string `json:"hsmIpAddress" tf:"hsm_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	HSMIPAddress *string `json:"hsmIpAddress,omitempty" tf:"hsm_ip_address,omitempty"`
 
 	// The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
-	// +kubebuilder:validation:Required
-	HSMPartitionName *string `json:"hsmPartitionName" tf:"hsm_partition_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	HSMPartitionName *string `json:"hsmPartitionName,omitempty" tf:"hsm_partition_name,omitempty"`
 
 	// The password required to access the HSM partition.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	HSMPartitionPasswordSecretRef v1.SecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
 
 	// The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
-	// +kubebuilder:validation:Required
-	HSMServerPublicCertificate *string `json:"hsmServerPublicCertificate" tf:"hsm_server_public_certificate,omitempty"`
+	// +kubebuilder:validation:Optional
+	HSMServerPublicCertificate *string `json:"hsmServerPublicCertificate,omitempty" tf:"hsm_server_public_certificate,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +80,13 @@ type HSMConfigurationStatus struct {
 type HSMConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HSMConfigurationSpec   `json:"spec"`
-	Status            HSMConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmIpAddress)",message="hsmIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmPartitionName)",message="hsmPartitionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmPartitionPasswordSecretRef)",message="hsmPartitionPasswordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmServerPublicCertificate)",message="hsmServerPublicCertificate is a required parameter"
+	Spec   HSMConfigurationSpec   `json:"spec"`
+	Status HSMConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -28,8 +28,8 @@ type TagOptionParameters struct {
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
 	// Tag option key.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -37,8 +37,8 @@ type TagOptionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Tag option value.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // TagOptionSpec defines the desired state of TagOption
@@ -65,8 +65,10 @@ type TagOptionStatus struct {
 type TagOption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TagOptionSpec   `json:"spec"`
-	Status            TagOptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.key)",message="key is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   TagOptionSpec   `json:"spec"`
+	Status TagOptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

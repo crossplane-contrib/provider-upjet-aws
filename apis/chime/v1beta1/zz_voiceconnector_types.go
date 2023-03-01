@@ -32,8 +32,8 @@ type VoiceConnectorParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
-	// +kubebuilder:validation:Required
-	RequireEncryption *bool `json:"requireEncryption" tf:"require_encryption,omitempty"`
+	// +kubebuilder:validation:Optional
+	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
 }
 
 // VoiceConnectorSpec defines the desired state of VoiceConnector
@@ -60,8 +60,9 @@ type VoiceConnectorStatus struct {
 type VoiceConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorSpec   `json:"spec"`
-	Status            VoiceConnectorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.requireEncryption)",message="requireEncryption is a required parameter"
+	Spec   VoiceConnectorSpec   `json:"spec"`
+	Status VoiceConnectorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

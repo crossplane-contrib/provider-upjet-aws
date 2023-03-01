@@ -114,10 +114,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - directoryName
-                - organizationalUnitDistinguishedNames
                 - region
-                - serviceAccountCredentials
                 type: object
               providerConfigRef:
                 default:

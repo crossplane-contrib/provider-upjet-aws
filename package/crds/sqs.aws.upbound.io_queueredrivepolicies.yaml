@@ -150,7 +150,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - redrivePolicy
                 - region
                 type: object
               providerConfigRef:

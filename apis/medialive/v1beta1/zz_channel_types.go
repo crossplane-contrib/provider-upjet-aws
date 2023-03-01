@@ -503,24 +503,24 @@ type ChannelParameters struct {
 	CdiInputSpecification []CdiInputSpecificationParameters `json:"cdiInputSpecification,omitempty" tf:"cdi_input_specification,omitempty"`
 
 	// Concise argument description.
-	// +kubebuilder:validation:Required
-	ChannelClass *string `json:"channelClass" tf:"channel_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	ChannelClass *string `json:"channelClass,omitempty" tf:"channel_class,omitempty"`
 
 	// Destinations for channel. See Destinations for more details.
-	// +kubebuilder:validation:Required
-	Destinations []DestinationsParameters `json:"destinations" tf:"destinations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destinations []DestinationsParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// Encoder settings. See Encoder Settings for more details.
-	// +kubebuilder:validation:Required
-	EncoderSettings []EncoderSettingsParameters `json:"encoderSettings" tf:"encoder_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncoderSettings []EncoderSettingsParameters `json:"encoderSettings,omitempty" tf:"encoder_settings,omitempty"`
 
 	// Input attachments for the channel. See Input Attachments for more details.
-	// +kubebuilder:validation:Required
-	InputAttachments []InputAttachmentsParameters `json:"inputAttachments" tf:"input_attachments,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputAttachments []InputAttachmentsParameters `json:"inputAttachments,omitempty" tf:"input_attachments,omitempty"`
 
 	// Specification of network and file inputs for the channel.
-	// +kubebuilder:validation:Required
-	InputSpecification []InputSpecificationParameters `json:"inputSpecification" tf:"input_specification,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputSpecification []InputSpecificationParameters `json:"inputSpecification,omitempty" tf:"input_specification,omitempty"`
 
 	// The log level to write to Cloudwatch logs.
 	// +kubebuilder:validation:Optional
@@ -531,8 +531,8 @@ type ChannelParameters struct {
 	Maintenance []MaintenanceParameters `json:"maintenance,omitempty" tf:"maintenance,omitempty"`
 
 	// Name of the Channel.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -2928,8 +2928,14 @@ type ChannelStatus struct {
 type Channel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ChannelSpec   `json:"spec"`
-	Status            ChannelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.channelClass)",message="channelClass is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinations)",message="destinations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encoderSettings)",message="encoderSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputAttachments)",message="inputAttachments is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputSpecification)",message="inputSpecification is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ChannelSpec   `json:"spec"`
+	Status ChannelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

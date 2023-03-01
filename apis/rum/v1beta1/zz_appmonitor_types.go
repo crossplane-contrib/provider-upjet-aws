@@ -88,8 +88,8 @@ type AppMonitorParameters struct {
 	CwLogEnabled *bool `json:"cwLogEnabled,omitempty" tf:"cw_log_enabled,omitempty"`
 
 	// The top-level internet domain name for which your application has administrative authority.
-	// +kubebuilder:validation:Required
-	Domain *string `json:"domain" tf:"domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -135,8 +135,9 @@ type AppMonitorStatus struct {
 type AppMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppMonitorSpec   `json:"spec"`
-	Status            AppMonitorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domain)",message="domain is a required parameter"
+	Spec   AppMonitorSpec   `json:"spec"`
+	Status AppMonitorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -54,12 +54,12 @@ type ExperimentTemplateObservation struct {
 type ExperimentTemplateParameters struct {
 
 	// Action to be performed during an experiment. See below.
-	// +kubebuilder:validation:Required
-	Action []ActionParameters `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Description for the experiment template.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +81,8 @@ type ExperimentTemplateParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// When an ongoing experiment should be stopped. See below.
-	// +kubebuilder:validation:Required
-	StopCondition []StopConditionParameters `json:"stopCondition" tf:"stop_condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	StopCondition []StopConditionParameters `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -217,8 +217,11 @@ type ExperimentTemplateStatus struct {
 type ExperimentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExperimentTemplateSpec   `json:"spec"`
-	Status            ExperimentTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stopCondition)",message="stopCondition is a required parameter"
+	Spec   ExperimentTemplateSpec   `json:"spec"`
+	Status ExperimentTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

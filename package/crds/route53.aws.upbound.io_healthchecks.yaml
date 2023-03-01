@@ -246,7 +246,6 @@ spec:
                     type: string
                 required:
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

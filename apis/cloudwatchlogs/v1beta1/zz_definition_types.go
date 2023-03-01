@@ -27,12 +27,12 @@ type DefinitionParameters struct {
 	LogGroupNames []*string `json:"logGroupNames,omitempty" tf:"log_group_names,omitempty"`
 
 	// The name of the query.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The query to save. You can read more about CloudWatch Logs Query Syntax in the documentation.
-	// +kubebuilder:validation:Required
-	QueryString *string `json:"queryString" tf:"query_string,omitempty"`
+	// +kubebuilder:validation:Optional
+	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -64,8 +64,10 @@ type DefinitionStatus struct {
 type Definition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DefinitionSpec   `json:"spec"`
-	Status            DefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryString)",message="queryString is a required parameter"
+	Spec   DefinitionSpec   `json:"spec"`
+	Status DefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

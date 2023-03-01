@@ -200,7 +200,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - authorizationType
                 - region
                 type: object
               providerConfigRef:

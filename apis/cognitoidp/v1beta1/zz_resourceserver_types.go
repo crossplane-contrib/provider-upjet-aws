@@ -23,12 +23,12 @@ type ResourceServerObservation struct {
 type ResourceServerParameters struct {
 
 	// An identifier for the resource server.
-	// +kubebuilder:validation:Required
-	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// A name for the resource server.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +90,10 @@ type ResourceServerStatus struct {
 type ResourceServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceServerSpec   `json:"spec"`
-	Status            ResourceServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identifier)",message="identifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ResourceServerSpec   `json:"spec"`
+	Status ResourceServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

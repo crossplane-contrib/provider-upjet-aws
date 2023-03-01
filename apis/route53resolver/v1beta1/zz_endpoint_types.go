@@ -26,7 +26,7 @@ type EndpointObservation struct {
 
 	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	IPAddress []IPAddressObservation `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -38,13 +38,13 @@ type EndpointParameters struct {
 	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
 	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
 	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
-	// +kubebuilder:validation:Required
-	Direction *string `json:"direction" tf:"direction,omitempty"`
+	// +kubebuilder:validation:Optional
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
-	// +kubebuilder:validation:Required
-	IPAddress []IPAddressParameters `json:"ipAddress" tf:"ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPAddress []IPAddressParameters `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The friendly name of the Route 53 Resolver endpoint.
 	// +kubebuilder:validation:Optional
@@ -126,8 +126,10 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EndpointSpec   `json:"spec"`
-	Status            EndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.direction)",message="direction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipAddress)",message="ipAddress is a required parameter"
+	Spec   EndpointSpec   `json:"spec"`
+	Status EndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

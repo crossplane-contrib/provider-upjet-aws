@@ -181,8 +181,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - location
-                - properties
                 - region
                 type: object
               providerConfigRef:

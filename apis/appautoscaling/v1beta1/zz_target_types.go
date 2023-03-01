@@ -20,12 +20,12 @@ type TargetObservation struct {
 type TargetParameters struct {
 
 	// Max capacity of the scalable target.
-	// +kubebuilder:validation:Required
-	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Min capacity of the scalable target.
-	// +kubebuilder:validation:Required
-	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +83,10 @@ type TargetStatus struct {
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TargetSpec   `json:"spec"`
-	Status            TargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.maxCapacity)",message="maxCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.minCapacity)",message="minCapacity is a required parameter"
+	Spec   TargetSpec   `json:"spec"`
+	Status TargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

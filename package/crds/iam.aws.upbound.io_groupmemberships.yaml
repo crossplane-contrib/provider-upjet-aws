@@ -225,8 +225,6 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - name
                 type: object
               providerConfigRef:
                 default:

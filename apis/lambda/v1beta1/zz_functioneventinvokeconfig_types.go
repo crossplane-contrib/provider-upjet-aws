@@ -60,8 +60,8 @@ type FunctionEventInvokeConfigParameters struct {
 	DestinationConfig []FunctionEventInvokeConfigDestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
-	// +kubebuilder:validation:Required
-	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
 	// +kubebuilder:validation:Optional
@@ -125,8 +125,9 @@ type FunctionEventInvokeConfigStatus struct {
 type FunctionEventInvokeConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionEventInvokeConfigSpec   `json:"spec"`
-	Status            FunctionEventInvokeConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	Spec   FunctionEventInvokeConfigSpec   `json:"spec"`
+	Status FunctionEventInvokeConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

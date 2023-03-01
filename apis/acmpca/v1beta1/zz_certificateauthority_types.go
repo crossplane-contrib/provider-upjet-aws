@@ -67,8 +67,8 @@ type CertificateAuthorityObservation struct {
 type CertificateAuthorityParameters struct {
 
 	// Nested argument containing algorithms and certificate subject information. Defined below.
-	// +kubebuilder:validation:Required
-	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationParameters `json:"certificateAuthorityConfiguration" tf:"certificate_authority_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationParameters `json:"certificateAuthorityConfiguration,omitempty" tf:"certificate_authority_configuration,omitempty"`
 
 	// Whether the certificate authority is enabled or disabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -237,8 +237,9 @@ type CertificateAuthorityStatus struct {
 type CertificateAuthority struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateAuthoritySpec   `json:"spec"`
-	Status            CertificateAuthorityStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateAuthorityConfiguration)",message="certificateAuthorityConfiguration is a required parameter"
+	Spec   CertificateAuthoritySpec   `json:"spec"`
+	Status CertificateAuthorityStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

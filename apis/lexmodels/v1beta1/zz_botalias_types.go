@@ -37,12 +37,12 @@ type BotAliasObservation struct {
 type BotAliasParameters struct {
 
 	// The name of the bot.
-	// +kubebuilder:validation:Required
-	BotName *string `json:"botName" tf:"bot_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
 
 	// The name of the bot.
-	// +kubebuilder:validation:Required
-	BotVersion *string `json:"botVersion" tf:"bot_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	BotVersion *string `json:"botVersion,omitempty" tf:"bot_version,omitempty"`
 
 	// The settings that determine how Amazon Lex uses conversation logs for the alias. Attributes are documented under conversation_logs.
 	// +kubebuilder:validation:Optional
@@ -125,8 +125,10 @@ type BotAliasStatus struct {
 type BotAlias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotAliasSpec   `json:"spec"`
-	Status            BotAliasStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.botName)",message="botName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.botVersion)",message="botVersion is a required parameter"
+	Spec   BotAliasSpec   `json:"spec"`
+	Status BotAliasStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

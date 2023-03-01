@@ -354,9 +354,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - artifactStore
                 - region
-                - stage
                 type: object
               providerConfigRef:
                 default:

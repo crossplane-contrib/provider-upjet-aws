@@ -33,8 +33,8 @@ type ReplicationSubnetGroupParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Description for the subnet group.
-	// +kubebuilder:validation:Required
-	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription" tf:"replication_subnet_group_description,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,9 @@ type ReplicationSubnetGroupStatus struct {
 type ReplicationSubnetGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationSubnetGroupSpec   `json:"spec"`
-	Status            ReplicationSubnetGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationSubnetGroupDescription)",message="replicationSubnetGroupDescription is a required parameter"
+	Spec   ReplicationSubnetGroupSpec   `json:"spec"`
+	Status ReplicationSubnetGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

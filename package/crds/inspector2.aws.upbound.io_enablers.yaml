@@ -79,9 +79,7 @@ spec:
                       type: string
                     type: array
                 required:
-                - accountIds
                 - region
-                - resourceTypes
                 type: object
               providerConfigRef:
                 default:

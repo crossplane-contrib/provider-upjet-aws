@@ -83,7 +83,6 @@ spec:
                     type: array
                 required:
                 - region
-                - replica
                 type: object
               providerConfigRef:
                 default:

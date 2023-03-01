@@ -35,8 +35,8 @@ type InstancePublicPortsParameters struct {
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
-	// +kubebuilder:validation:Required
-	PortInfo []PortInfoParameters `json:"portInfo" tf:"port_info,omitempty"`
+	// +kubebuilder:validation:Optional
+	PortInfo []PortInfoParameters `json:"portInfo,omitempty" tf:"port_info,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +97,9 @@ type InstancePublicPortsStatus struct {
 type InstancePublicPorts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstancePublicPortsSpec   `json:"spec"`
-	Status            InstancePublicPortsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.portInfo)",message="portInfo is a required parameter"
+	Spec   InstancePublicPortsSpec   `json:"spec"`
+	Status InstancePublicPortsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

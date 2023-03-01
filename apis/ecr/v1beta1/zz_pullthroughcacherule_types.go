@@ -23,8 +23,8 @@ type PullThroughCacheRuleObservation struct {
 type PullThroughCacheRuleParameters struct {
 
 	// The repository name prefix to use when caching images from the source registry.
-	// +kubebuilder:validation:Required
-	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix" tf:"ecr_repository_prefix,omitempty"`
+	// +kubebuilder:validation:Optional
+	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -32,8 +32,8 @@ type PullThroughCacheRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The registry URL of the upstream public registry to use as the source.
-	// +kubebuilder:validation:Required
-	UpstreamRegistryURL *string `json:"upstreamRegistryUrl" tf:"upstream_registry_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	UpstreamRegistryURL *string `json:"upstreamRegistryUrl,omitempty" tf:"upstream_registry_url,omitempty"`
 }
 
 // PullThroughCacheRuleSpec defines the desired state of PullThroughCacheRule
@@ -60,8 +60,10 @@ type PullThroughCacheRuleStatus struct {
 type PullThroughCacheRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PullThroughCacheRuleSpec   `json:"spec"`
-	Status            PullThroughCacheRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ecrRepositoryPrefix)",message="ecrRepositoryPrefix is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.upstreamRegistryUrl)",message="upstreamRegistryUrl is a required parameter"
+	Spec   PullThroughCacheRuleSpec   `json:"spec"`
+	Status PullThroughCacheRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

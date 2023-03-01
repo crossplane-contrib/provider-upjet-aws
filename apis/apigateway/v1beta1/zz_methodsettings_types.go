@@ -20,8 +20,8 @@ type MethodSettingsObservation struct {
 type MethodSettingsParameters struct {
 
 	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path (e.g., trimprefix(aws_api_gateway_resource.example.path, "/")).
-	// +kubebuilder:validation:Required
-	MethodPath *string `json:"methodPath" tf:"method_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	MethodPath *string `json:"methodPath,omitempty" tf:"method_path,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -43,8 +43,8 @@ type MethodSettingsParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Settings block, see below.
-	// +kubebuilder:validation:Required
-	Settings []SettingsParameters `json:"settings" tf:"settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// Name of the stage
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Stage
@@ -131,8 +131,10 @@ type MethodSettingsStatus struct {
 type MethodSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodSettingsSpec   `json:"spec"`
-	Status            MethodSettingsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.methodPath)",message="methodPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settings)",message="settings is a required parameter"
+	Spec   MethodSettingsSpec   `json:"spec"`
+	Status MethodSettingsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

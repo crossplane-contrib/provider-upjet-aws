@@ -35,8 +35,8 @@ type ConstraintParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Constraint parameters in JSON format. The syntax depends on the constraint type. See details below.
-	// +kubebuilder:validation:Required
-	Parameters *string `json:"parameters" tf:"parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
@@ -72,8 +72,8 @@ type ConstraintParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Type of constraint. Valid values are LAUNCH, NOTIFICATION, RESOURCE_UPDATE, STACKSET, and TEMPLATE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ConstraintSpec defines the desired state of Constraint
@@ -100,8 +100,10 @@ type ConstraintStatus struct {
 type Constraint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConstraintSpec   `json:"spec"`
-	Status            ConstraintStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parameters)",message="parameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ConstraintSpec   `json:"spec"`
+	Status ConstraintStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

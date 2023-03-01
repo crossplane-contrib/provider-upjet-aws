@@ -110,8 +110,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - definition
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -116,17 +116,7 @@ spec:
                     description: The version of the sampling rule format (1 )
                     type: number
                 required:
-                - fixedRate
-                - host
-                - httpMethod
-                - priority
                 - region
-                - reservoirSize
-                - resourceArn
-                - serviceName
-                - serviceType
-                - urlPath
-                - version
                 type: object
               providerConfigRef:
                 default:

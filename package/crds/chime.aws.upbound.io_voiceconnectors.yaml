@@ -79,7 +79,6 @@ spec:
                     type: boolean
                 required:
                 - region
-                - requireEncryption
                 type: object
               providerConfigRef:
                 default:

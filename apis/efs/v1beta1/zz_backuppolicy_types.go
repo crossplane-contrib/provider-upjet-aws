@@ -32,8 +32,8 @@ type BackupPolicyObservation struct {
 type BackupPolicyParameters struct {
 
 	// A backup_policy object (documented below).
-	// +kubebuilder:validation:Required
-	BackupPolicy []BackupPolicyBackupPolicyParameters `json:"backupPolicy" tf:"backup_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackupPolicy []BackupPolicyBackupPolicyParameters `json:"backupPolicy,omitempty" tf:"backup_policy,omitempty"`
 
 	// The ID of the EFS file system.
 	// +crossplane:generate:reference:type=FileSystem
@@ -78,8 +78,9 @@ type BackupPolicyStatus struct {
 type BackupPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupPolicySpec   `json:"spec"`
-	Status            BackupPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupPolicy)",message="backupPolicy is a required parameter"
+	Spec   BackupPolicySpec   `json:"spec"`
+	Status BackupPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

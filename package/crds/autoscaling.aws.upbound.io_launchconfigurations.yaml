@@ -239,8 +239,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - imageId
-                - instanceType
                 - region
                 type: object
               providerConfigRef:

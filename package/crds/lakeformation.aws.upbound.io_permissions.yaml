@@ -480,8 +480,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - permissions
-                - principal
                 - region
                 type: object
               providerConfigRef:

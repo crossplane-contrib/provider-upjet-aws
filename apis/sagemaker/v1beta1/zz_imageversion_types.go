@@ -33,8 +33,8 @@ type ImageVersionObservation struct {
 type ImageVersionParameters struct {
 
 	// The registry path of the container image on which this image version is based.
-	// +kubebuilder:validation:Required
-	BaseImage *string `json:"baseImage" tf:"base_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Image
@@ -80,8 +80,9 @@ type ImageVersionStatus struct {
 type ImageVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageVersionSpec   `json:"spec"`
-	Status            ImageVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.baseImage)",message="baseImage is a required parameter"
+	Spec   ImageVersionSpec   `json:"spec"`
+	Status ImageVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

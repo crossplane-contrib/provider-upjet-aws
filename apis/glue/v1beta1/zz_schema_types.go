@@ -40,12 +40,12 @@ type SchemaObservation struct {
 type SchemaParameters struct {
 
 	// The compatibility mode of the schema. Values values are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, and FULL_ALL.
-	// +kubebuilder:validation:Required
-	Compatibility *string `json:"compatibility" tf:"compatibility,omitempty"`
+	// +kubebuilder:validation:Optional
+	Compatibility *string `json:"compatibility,omitempty" tf:"compatibility,omitempty"`
 
 	// The data format of the schema definition. Valid values are AVRO, JSON and PROTOBUF.
-	// +kubebuilder:validation:Required
-	DataFormat *string `json:"dataFormat" tf:"data_format,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// –  A description of the schema.
 	// +kubebuilder:validation:Optional
@@ -71,12 +71,12 @@ type SchemaParameters struct {
 	RegistryArnSelector *v1.Selector `json:"registryArnSelector,omitempty" tf:"-"`
 
 	// The schema definition using the data_format setting for schema_name.
-	// +kubebuilder:validation:Required
-	SchemaDefinition *string `json:"schemaDefinition" tf:"schema_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
 	// –  The Name of the schema.
-	// +kubebuilder:validation:Required
-	SchemaName *string `json:"schemaName" tf:"schema_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -107,8 +107,12 @@ type SchemaStatus struct {
 type Schema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SchemaSpec   `json:"spec"`
-	Status            SchemaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.compatibility)",message="compatibility is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataFormat)",message="dataFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaDefinition)",message="schemaDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaName)",message="schemaName is a required parameter"
+	Spec   SchemaSpec   `json:"spec"`
+	Status SchemaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

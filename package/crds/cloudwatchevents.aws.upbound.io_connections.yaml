@@ -445,8 +445,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - authParameters
-                - authorizationType
                 - region
                 type: object
               providerConfigRef:

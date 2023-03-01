@@ -479,7 +479,6 @@ spec:
                     type: array
                 required:
                 - region
-                - vpcConfig
                 type: object
               providerConfigRef:
                 default:

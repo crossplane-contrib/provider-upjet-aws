@@ -365,9 +365,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
-                - spec
                 type: object
               providerConfigRef:
                 default:

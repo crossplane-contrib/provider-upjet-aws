@@ -220,7 +220,6 @@ spec:
                     type: array
                 required:
                 - region
-                - variations
                 type: object
               providerConfigRef:
                 default:

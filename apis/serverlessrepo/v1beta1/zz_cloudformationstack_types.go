@@ -28,16 +28,16 @@ type CloudFormationStackObservation struct {
 type CloudFormationStackParameters struct {
 
 	// The ARN of the application from the Serverless Application Repository.
-	// +kubebuilder:validation:Required
-	ApplicationID *string `json:"applicationId" tf:"application_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
 	// A list of capabilities. Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND
-	// +kubebuilder:validation:Required
-	Capabilities []*string `json:"capabilities" tf:"capabilities,omitempty"`
+	// +kubebuilder:validation:Optional
+	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// The name of the stack to create. The resource deployed in AWS will be prefixed with serverlessrepo-
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of Parameter structures that specify input parameters for the stack.
 	// +kubebuilder:validation:Optional
@@ -81,8 +81,11 @@ type CloudFormationStackStatus struct {
 type CloudFormationStack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CloudFormationStackSpec   `json:"spec"`
-	Status            CloudFormationStackStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.applicationId)",message="applicationId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.capabilities)",message="capabilities is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   CloudFormationStackSpec   `json:"spec"`
+	Status CloudFormationStackStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

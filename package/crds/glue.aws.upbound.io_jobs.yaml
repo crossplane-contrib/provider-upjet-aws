@@ -254,7 +254,6 @@ spec:
                       a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 required:
-                - command
                 - region
                 type: object
               providerConfigRef:

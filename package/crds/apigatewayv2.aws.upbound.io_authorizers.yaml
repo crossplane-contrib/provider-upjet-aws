@@ -284,8 +284,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - authorizerType
-                - name
                 - region
                 type: object
               providerConfigRef:

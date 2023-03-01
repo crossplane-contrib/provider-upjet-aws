@@ -572,8 +572,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - eventDestination
-                - eventDestinationName
                 - region
                 type: object
               providerConfigRef:

@@ -185,12 +185,12 @@ type ScalingPlanObservation struct {
 type ScalingPlanParameters struct {
 
 	// CloudFormation stack or set of tags. You can create one scaling plan per application source.
-	// +kubebuilder:validation:Required
-	ApplicationSource []ApplicationSourceParameters `json:"applicationSource" tf:"application_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApplicationSource []ApplicationSourceParameters `json:"applicationSource,omitempty" tf:"application_source,omitempty"`
 
 	// Name of the scaling plan. Names cannot contain vertical bars, colons, or forward slashes.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -198,8 +198,8 @@ type ScalingPlanParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Scaling instructions. More details can be found in the AWS Auto Scaling API Reference.
-	// +kubebuilder:validation:Required
-	ScalingInstruction []ScalingInstructionParameters `json:"scalingInstruction" tf:"scaling_instruction,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScalingInstruction []ScalingInstructionParameters `json:"scalingInstruction,omitempty" tf:"scaling_instruction,omitempty"`
 }
 
 type TagFilterObservation struct {
@@ -279,8 +279,11 @@ type ScalingPlanStatus struct {
 type ScalingPlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScalingPlanSpec   `json:"spec"`
-	Status            ScalingPlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.applicationSource)",message="applicationSource is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scalingInstruction)",message="scalingInstruction is a required parameter"
+	Spec   ScalingPlanSpec   `json:"spec"`
+	Status ScalingPlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

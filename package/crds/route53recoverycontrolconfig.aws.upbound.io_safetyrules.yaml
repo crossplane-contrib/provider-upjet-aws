@@ -276,10 +276,7 @@ spec:
                       any request against the target routing controls will fail.
                     type: number
                 required:
-                - name
                 - region
-                - ruleConfig
-                - waitPeriodMs
                 type: object
               providerConfigRef:
                 default:

@@ -191,8 +191,8 @@ type ClusterParameters struct {
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
 	// The node type to be provisioned for the cluster.
-	// +kubebuilder:validation:Required
-	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1.
 	// +kubebuilder:validation:Optional
@@ -328,8 +328,9 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

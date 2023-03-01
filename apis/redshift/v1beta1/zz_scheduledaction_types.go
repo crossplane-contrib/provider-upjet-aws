@@ -99,16 +99,16 @@ type ScheduledActionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The schedule of action. The schedule is defined format of "at expression" or "cron expression", for example at(2016-03-04T17:27:00) or cron(0 10 ? * MON *). See Scheduled Action for more information.
-	// +kubebuilder:validation:Required
-	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The start time in UTC when the schedule is active, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// Target action. Documented below.
-	// +kubebuilder:validation:Required
-	TargetAction []TargetActionParameters `json:"targetAction" tf:"target_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetAction []TargetActionParameters `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 }
 
 type TargetActionObservation struct {
@@ -153,8 +153,10 @@ type ScheduledActionStatus struct {
 type ScheduledAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduledActionSpec   `json:"spec"`
-	Status            ScheduledActionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)",message="targetAction is a required parameter"
+	Spec   ScheduledActionSpec   `json:"spec"`
+	Status ScheduledActionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

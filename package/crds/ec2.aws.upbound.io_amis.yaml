@@ -282,7 +282,6 @@ spec:
                       of further arguments that are required, as described below.
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

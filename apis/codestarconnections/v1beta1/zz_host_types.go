@@ -28,16 +28,16 @@ type HostObservation struct {
 type HostParameters struct {
 
 	// The name of the host to be created. The name must be unique in the calling AWS account.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The endpoint of the infrastructure to be represented by the host after it is created.
-	// +kubebuilder:validation:Required
-	ProviderEndpoint *string `json:"providerEndpoint" tf:"provider_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderEndpoint *string `json:"providerEndpoint,omitempty" tf:"provider_endpoint,omitempty"`
 
 	// The name of the external provider where your third-party code repository is configured.
-	// +kubebuilder:validation:Required
-	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -95,8 +95,11 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostSpec   `json:"spec"`
-	Status            HostStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerEndpoint)",message="providerEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerType)",message="providerType is a required parameter"
+	Spec   HostSpec   `json:"spec"`
+	Status HostStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

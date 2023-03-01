@@ -102,7 +102,6 @@ spec:
                     - namespace
                     type: object
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -234,8 +234,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
-                - query
                 - region
                 type: object
               providerConfigRef:

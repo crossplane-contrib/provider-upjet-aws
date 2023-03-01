@@ -86,16 +86,16 @@ type ExtensionObservation struct {
 type ExtensionParameters struct {
 
 	// The action points defined in the extension. Detailed below.
-	// +kubebuilder:validation:Required
-	ActionPoint []ActionPointParameters `json:"actionPoint" tf:"action_point,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionPoint []ActionPointParameters `json:"actionPoint,omitempty" tf:"action_point,omitempty"`
 
 	// Information about the extension.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A name for the extension. Each extension name in your account must be unique. Extension versions use the same name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The parameters accepted by the extension. You specify parameter values when you associate the extension to an AppConfig resource by using the CreateExtensionAssociation API action. For Lambda extension actions, these parameters are included in the Lambda request object. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -153,8 +153,10 @@ type ExtensionStatus struct {
 type Extension struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExtensionSpec   `json:"spec"`
-	Status            ExtensionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionPoint)",message="actionPoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ExtensionSpec   `json:"spec"`
+	Status ExtensionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

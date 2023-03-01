@@ -33,7 +33,7 @@ type FunctionObservation struct {
 type FunctionParameters struct {
 
 	// Source code of the function
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CodeSecretRef v1.SecretKeySelector `json:"codeSecretRef" tf:"-"`
 
 	// Comment.
@@ -50,8 +50,8 @@ type FunctionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
-	// +kubebuilder:validation:Required
-	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
+	// +kubebuilder:validation:Optional
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
 // FunctionSpec defines the desired state of Function
@@ -78,8 +78,10 @@ type FunctionStatus struct {
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionSpec   `json:"spec"`
-	Status            FunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.codeSecretRef)",message="codeSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.runtime)",message="runtime is a required parameter"
+	Spec   FunctionSpec   `json:"spec"`
+	Status FunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

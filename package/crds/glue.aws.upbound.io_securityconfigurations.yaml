@@ -364,7 +364,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - encryptionConfiguration
                 - region
                 type: object
               providerConfigRef:

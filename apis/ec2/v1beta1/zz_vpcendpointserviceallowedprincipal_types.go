@@ -22,8 +22,8 @@ type VPCEndpointServiceAllowedPrincipalObservation struct {
 type VPCEndpointServiceAllowedPrincipalParameters struct {
 
 	// The ARN of the principal to allow permissions.
-	// +kubebuilder:validation:Required
-	PrincipalArn *string `json:"principalArn" tf:"principal_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,8 +69,9 @@ type VPCEndpointServiceAllowedPrincipalStatus struct {
 type VPCEndpointServiceAllowedPrincipal struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointServiceAllowedPrincipalSpec   `json:"spec"`
-	Status            VPCEndpointServiceAllowedPrincipalStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalArn)",message="principalArn is a required parameter"
+	Spec   VPCEndpointServiceAllowedPrincipalSpec   `json:"spec"`
+	Status VPCEndpointServiceAllowedPrincipalStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

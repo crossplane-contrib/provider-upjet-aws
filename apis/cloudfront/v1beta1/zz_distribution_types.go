@@ -260,8 +260,8 @@ type DistributionParameters struct {
 
 	// The default cache behavior for this distribution (maximum
 	// one).
-	// +kubebuilder:validation:Required
-	DefaultCacheBehavior []DefaultCacheBehaviorParameters `json:"defaultCacheBehavior" tf:"default_cache_behavior,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultCacheBehavior []DefaultCacheBehaviorParameters `json:"defaultCacheBehavior,omitempty" tf:"default_cache_behavior,omitempty"`
 
 	// The object that you want CloudFront to
 	// return (for example, index.html) when an end user requests the root URL.
@@ -270,8 +270,8 @@ type DistributionParameters struct {
 
 	// Whether the distribution is enabled to accept end
 	// user requests for content.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The maximum HTTP version to support on the
 	// distribution. Allowed values are http1.1, http2, http2and3 and http3. The default is
@@ -297,8 +297,8 @@ type DistributionParameters struct {
 
 	// One or more origins for this
 	// distribution (multiples allowed).
-	// +kubebuilder:validation:Required
-	Origin []OriginParameters `json:"origin" tf:"origin,omitempty"`
+	// +kubebuilder:validation:Optional
+	Origin []OriginParameters `json:"origin,omitempty" tf:"origin,omitempty"`
 
 	// One or more origin_group for this
 	// distribution (multiples allowed).
@@ -317,8 +317,8 @@ type DistributionParameters struct {
 
 	// The restriction
 	// configuration for this distribution (maximum one).
-	// +kubebuilder:validation:Required
-	Restrictions []RestrictionsParameters `json:"restrictions" tf:"restrictions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Restrictions []RestrictionsParameters `json:"restrictions,omitempty" tf:"restrictions,omitempty"`
 
 	// If this is set,
 	// the distribution needs to be deleted manually afterwards. Default: false.
@@ -332,8 +332,8 @@ type DistributionParameters struct {
 	// The SSL
 	// configuration for this distribution (maximum
 	// one).
-	// +kubebuilder:validation:Required
-	ViewerCertificate []ViewerCertificateParameters `json:"viewerCertificate" tf:"viewer_certificate,omitempty"`
+	// +kubebuilder:validation:Optional
+	ViewerCertificate []ViewerCertificateParameters `json:"viewerCertificate,omitempty" tf:"viewer_certificate,omitempty"`
 
 	// If enabled, the resource will wait for
 	// the distribution status to change from InProgress to Deployed. Setting
@@ -960,8 +960,13 @@ type DistributionStatus struct {
 type Distribution struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DistributionSpec   `json:"spec"`
-	Status            DistributionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultCacheBehavior)",message="defaultCacheBehavior is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.origin)",message="origin is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.restrictions)",message="restrictions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.viewerCertificate)",message="viewerCertificate is a required parameter"
+	Spec   DistributionSpec   `json:"spec"`
+	Status DistributionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

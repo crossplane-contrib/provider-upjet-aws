@@ -152,8 +152,8 @@ type AMICopyParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region-unique name for the AMI.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -176,8 +176,8 @@ type AMICopyParameters struct {
 
 	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.
-	// +kubebuilder:validation:Required
-	SourceAMIRegion *string `json:"sourceAmiRegion" tf:"source_ami_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -208,8 +208,10 @@ type AMICopyStatus struct {
 type AMICopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AMICopySpec   `json:"spec"`
-	Status            AMICopyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceAmiRegion)",message="sourceAmiRegion is a required parameter"
+	Spec   AMICopySpec   `json:"spec"`
+	Status AMICopyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

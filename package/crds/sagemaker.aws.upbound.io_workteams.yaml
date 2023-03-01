@@ -458,8 +458,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - description
-                - memberDefinition
                 - region
                 type: object
               providerConfigRef:

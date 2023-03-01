@@ -85,12 +85,12 @@ type RemediationConfigurationParameters struct {
 	RetryAttemptSeconds *float64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
 
 	// Target ID is the name of the public document.
-	// +kubebuilder:validation:Required
-	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
 	// Type of the target. Target executes remediation. For example, SSM document.
-	// +kubebuilder:validation:Required
-	TargetType *string `json:"targetType" tf:"target_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
 	// Version of the target. For example, version of the SSM document
 	// +kubebuilder:validation:Optional
@@ -135,8 +135,10 @@ type RemediationConfigurationStatus struct {
 type RemediationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RemediationConfigurationSpec   `json:"spec"`
-	Status            RemediationConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetId)",message="targetId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetType)",message="targetType is a required parameter"
+	Spec   RemediationConfigurationSpec   `json:"spec"`
+	Status RemediationConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

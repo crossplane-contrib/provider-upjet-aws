@@ -41,8 +41,8 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	Trigger []TriggerTriggerParameters `json:"trigger" tf:"trigger,omitempty"`
+	// +kubebuilder:validation:Optional
+	Trigger []TriggerTriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type TriggerTriggerObservation struct {
@@ -105,8 +105,9 @@ type TriggerStatus struct {
 type Trigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TriggerSpec   `json:"spec"`
-	Status            TriggerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trigger)",message="trigger is a required parameter"
+	Spec   TriggerSpec   `json:"spec"`
+	Status TriggerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

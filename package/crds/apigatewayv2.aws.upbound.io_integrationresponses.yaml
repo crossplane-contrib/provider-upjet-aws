@@ -239,7 +239,6 @@ spec:
                       response.
                     type: string
                 required:
-                - integrationResponseKey
                 - region
                 type: object
               providerConfigRef:

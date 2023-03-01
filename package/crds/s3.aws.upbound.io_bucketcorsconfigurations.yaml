@@ -194,7 +194,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - corsRule
                 - region
                 type: object
               providerConfigRef:

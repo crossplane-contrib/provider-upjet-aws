@@ -358,9 +358,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
-                - subnetMapping
                 type: object
               providerConfigRef:
                 default:

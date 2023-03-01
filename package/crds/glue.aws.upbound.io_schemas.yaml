@@ -170,11 +170,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - compatibility
-                - dataFormat
                 - region
-                - schemaDefinition
-                - schemaName
                 type: object
               providerConfigRef:
                 default:

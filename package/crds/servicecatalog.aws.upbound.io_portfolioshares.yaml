@@ -175,9 +175,7 @@ spec:
                       to be accepted. Organizational shares are automatically accepted.
                     type: boolean
                 required:
-                - principalId
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

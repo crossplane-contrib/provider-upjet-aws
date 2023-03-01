@@ -76,8 +76,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - cidr
-                - policy
                 - region
                 type: object
               providerConfigRef:

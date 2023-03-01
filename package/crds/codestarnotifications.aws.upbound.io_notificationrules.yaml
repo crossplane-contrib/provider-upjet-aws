@@ -262,9 +262,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - detailType
-                - eventTypeIds
-                - name
                 - region
                 type: object
               providerConfigRef:

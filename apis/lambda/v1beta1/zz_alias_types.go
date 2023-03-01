@@ -44,8 +44,8 @@ type AliasParameters struct {
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Lambda function version for which you are creating the alias. Pattern: (\$LATEST|[0-9]+).
-	// +kubebuilder:validation:Required
-	FunctionVersion *string `json:"functionVersion" tf:"function_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -91,8 +91,9 @@ type AliasStatus struct {
 type Alias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AliasSpec   `json:"spec"`
-	Status            AliasStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionVersion)",message="functionVersion is a required parameter"
+	Spec   AliasSpec   `json:"spec"`
+	Status AliasStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -283,7 +283,6 @@ spec:
                       the grant by using RetireGrant operation in ARN format.
                     type: string
                 required:
-                - operations
                 - region
                 type: object
               providerConfigRef:

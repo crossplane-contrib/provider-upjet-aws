@@ -179,8 +179,8 @@ type ClassificationJobParameters struct {
 	JobStatus *string `json:"jobStatus,omitempty" tf:"job_status,omitempty"`
 
 	// The schedule for running the job. Valid values are: ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the schedule_frequency property. SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the schedule_frequency property to define the recurrence pattern for the job.
-	// +kubebuilder:validation:Required
-	JobType *string `json:"jobType" tf:"job_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	JobType *string `json:"jobType,omitempty" tf:"job_type,omitempty"`
 
 	// A custom name for the job. The name can contain as many as 500 characters. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
@@ -192,8 +192,8 @@ type ClassificationJobParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The S3 buckets that contain the objects to analyze, and the scope of that analysis. (documented below)
-	// +kubebuilder:validation:Required
-	S3JobDefinition []S3JobDefinitionParameters `json:"s3JobDefinition" tf:"s3_job_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3JobDefinition []S3JobDefinitionParameters `json:"s3JobDefinition,omitempty" tf:"s3_job_definition,omitempty"`
 
 	// The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
 	// +kubebuilder:validation:Optional
@@ -489,8 +489,10 @@ type ClassificationJobStatus struct {
 type ClassificationJob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClassificationJobSpec   `json:"spec"`
-	Status            ClassificationJobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.jobType)",message="jobType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3JobDefinition)",message="s3JobDefinition is a required parameter"
+	Spec   ClassificationJobSpec   `json:"spec"`
+	Status ClassificationJobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

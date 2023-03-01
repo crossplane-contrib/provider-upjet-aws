@@ -41,8 +41,8 @@ type DomainParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Length of time that SWF will continue to retain information about the workflow execution after the workflow execution is complete, must be between 0 and 90 days.
-	// +kubebuilder:validation:Required
-	WorkflowExecutionRetentionPeriodInDays *string `json:"workflowExecutionRetentionPeriodInDays" tf:"workflow_execution_retention_period_in_days,omitempty"`
+	// +kubebuilder:validation:Optional
+	WorkflowExecutionRetentionPeriodInDays *string `json:"workflowExecutionRetentionPeriodInDays,omitempty" tf:"workflow_execution_retention_period_in_days,omitempty"`
 }
 
 // DomainSpec defines the desired state of Domain
@@ -69,8 +69,9 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec"`
-	Status            DomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.workflowExecutionRetentionPeriodInDays)",message="workflowExecutionRetentionPeriodInDays is a required parameter"
+	Spec   DomainSpec   `json:"spec"`
+	Status DomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

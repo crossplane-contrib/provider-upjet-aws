@@ -55,8 +55,8 @@ type BucketReplicationConfigurationParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of configuration blocks describing the rules managing the replication documented below.
-	// +kubebuilder:validation:Required
-	Rule []BucketReplicationConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketReplicationConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// A token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// For more details, see Using S3 Object Lock with replication.
@@ -342,8 +342,9 @@ type BucketReplicationConfigurationStatus struct {
 type BucketReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketReplicationConfigurationSpec   `json:"spec"`
-	Status            BucketReplicationConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   BucketReplicationConfigurationSpec   `json:"spec"`
+	Status BucketReplicationConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

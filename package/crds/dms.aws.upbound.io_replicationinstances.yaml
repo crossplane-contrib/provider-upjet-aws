@@ -364,7 +364,6 @@ spec:
                     type: array
                 required:
                 - region
-                - replicationInstanceClass
                 type: object
               providerConfigRef:
                 default:

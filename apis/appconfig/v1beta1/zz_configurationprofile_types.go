@@ -49,12 +49,12 @@ type ConfigurationProfileParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
-	// +kubebuilder:validation:Required
-	LocationURI *string `json:"locationUri" tf:"location_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
 	// Name for the configuration profile. Must be between 1 and 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -126,8 +126,10 @@ type ConfigurationProfileStatus struct {
 type ConfigurationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationProfileSpec   `json:"spec"`
-	Status            ConfigurationProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.locationUri)",message="locationUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ConfigurationProfileSpec   `json:"spec"`
+	Status ConfigurationProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

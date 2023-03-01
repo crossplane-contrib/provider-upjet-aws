@@ -66,8 +66,8 @@ type ContainerServiceParameters struct {
 	// The power specification for the container service. The power specifies the amount of memory,
 	// the number of vCPUs, and the monthly price of each node of the container service.
 	// Possible values: nano, micro, small, medium, large, xlarge.
-	// +kubebuilder:validation:Required
-	Power *string `json:"power" tf:"power,omitempty"`
+	// +kubebuilder:validation:Optional
+	Power *string `json:"power,omitempty" tf:"power,omitempty"`
 
 	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
 	// +kubebuilder:validation:Optional
@@ -88,8 +88,8 @@ type ContainerServiceParameters struct {
 
 	// The scale specification for the container service. The scale specifies the allocated compute
 	// nodes of the container service.
-	// +kubebuilder:validation:Required
-	Scale *float64 `json:"scale" tf:"scale,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -172,8 +172,10 @@ type ContainerServiceStatus struct {
 type ContainerService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerServiceSpec   `json:"spec"`
-	Status            ContainerServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.power)",message="power is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scale)",message="scale is a required parameter"
+	Spec   ContainerServiceSpec   `json:"spec"`
+	Status ContainerServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

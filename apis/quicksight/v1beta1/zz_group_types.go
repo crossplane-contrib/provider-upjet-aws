@@ -32,8 +32,8 @@ type GroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A name for the group.
-	// +kubebuilder:validation:Required
-	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The namespace. Currently, you should set this to default.
 	// +kubebuilder:validation:Optional
@@ -69,8 +69,9 @@ type GroupStatus struct {
 type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupSpec   `json:"spec"`
-	Status            GroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupName)",message="groupName is a required parameter"
+	Spec   GroupSpec   `json:"spec"`
+	Status GroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

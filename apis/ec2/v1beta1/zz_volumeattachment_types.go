@@ -21,8 +21,8 @@ type VolumeAttachmentParameters struct {
 
 	// The device name to expose to the instance (for
 	// example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
-	// +kubebuilder:validation:Required
-	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Set to true if you want to force the
 	// volume to detach. Useful if previous attempts failed, but use this option only
@@ -100,8 +100,9 @@ type VolumeAttachmentStatus struct {
 type VolumeAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VolumeAttachmentSpec   `json:"spec"`
-	Status            VolumeAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceName)",message="deviceName is a required parameter"
+	Spec   VolumeAttachmentSpec   `json:"spec"`
+	Status VolumeAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

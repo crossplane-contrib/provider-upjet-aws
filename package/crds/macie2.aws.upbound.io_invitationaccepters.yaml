@@ -73,7 +73,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - administratorAccountId
                 - region
                 type: object
               providerConfigRef:

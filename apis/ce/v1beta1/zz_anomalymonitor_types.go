@@ -36,12 +36,12 @@ type AnomalyMonitorParameters struct {
 	MonitorSpecification *string `json:"monitorSpecification,omitempty" tf:"monitor_specification,omitempty"`
 
 	// The possible type values. Valid values: DIMENSIONAL | CUSTOM.
-	// +kubebuilder:validation:Required
-	MonitorType *string `json:"monitorType" tf:"monitor_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	MonitorType *string `json:"monitorType,omitempty" tf:"monitor_type,omitempty"`
 
 	// The name of the monitor.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,8 +77,10 @@ type AnomalyMonitorStatus struct {
 type AnomalyMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AnomalyMonitorSpec   `json:"spec"`
-	Status            AnomalyMonitorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.monitorType)",message="monitorType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AnomalyMonitorSpec   `json:"spec"`
+	Status AnomalyMonitorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

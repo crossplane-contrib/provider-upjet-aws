@@ -115,8 +115,8 @@ type ReceiptRuleParameters struct {
 	LambdaAction []LambdaActionParameters `json:"lambdaAction,omitempty" tf:"lambda_action,omitempty"`
 
 	// The name of the rule
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of email addresses
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,8 @@ type ReceiptRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the rule set
-	// +kubebuilder:validation:Required
-	RuleSetName *string `json:"ruleSetName" tf:"rule_set_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 
 	// A list of S3 Action blocks. Documented below.
 	// +kubebuilder:validation:Optional
@@ -260,8 +260,10 @@ type ReceiptRuleStatus struct {
 type ReceiptRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReceiptRuleSpec   `json:"spec"`
-	Status            ReceiptRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleSetName)",message="ruleSetName is a required parameter"
+	Spec   ReceiptRuleSpec   `json:"spec"`
+	Status ReceiptRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

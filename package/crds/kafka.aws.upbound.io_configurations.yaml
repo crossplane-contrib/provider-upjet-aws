@@ -86,9 +86,7 @@ spec:
                       properties are documented in the MSK Developer Guide.
                     type: string
                 required:
-                - name
                 - region
-                - serverProperties
                 type: object
               providerConfigRef:
                 default:

@@ -35,24 +35,24 @@ type ConfigurationParameters_2 struct {
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
 	// Broker configuration in XML format. See official docs for supported parameters and format of the XML.
-	// +kubebuilder:validation:Required
-	Data *string `json:"data" tf:"data,omitempty"`
+	// +kubebuilder:validation:Optional
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Description of the configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
-	// +kubebuilder:validation:Required
-	EngineType *string `json:"engineType" tf:"engine_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
 	// Version of the broker engine.
-	// +kubebuilder:validation:Required
-	EngineVersion *string `json:"engineVersion" tf:"engine_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of the configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -88,8 +88,12 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSpec   `json:"spec"`
-	Status            ConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.data)",message="data is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineType)",message="engineType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineVersion)",message="engineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ConfigurationSpec   `json:"spec"`
+	Status ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

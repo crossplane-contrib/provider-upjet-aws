@@ -42,8 +42,8 @@ type ClusterActivityStreamParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. One of: sync, async.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -89,8 +89,9 @@ type ClusterActivityStreamStatus struct {
 type ClusterActivityStream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterActivityStreamSpec   `json:"spec"`
-	Status            ClusterActivityStreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mode)",message="mode is a required parameter"
+	Spec   ClusterActivityStreamSpec   `json:"spec"`
+	Status ClusterActivityStreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

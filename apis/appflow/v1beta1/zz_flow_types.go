@@ -310,8 +310,8 @@ type FlowParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A Destination Flow Config that controls how Amazon AppFlow places data in the destination connector.
-	// +kubebuilder:validation:Required
-	DestinationFlowConfig []DestinationFlowConfigParameters `json:"destinationFlowConfig" tf:"destination_flow_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationFlowConfig []DestinationFlowConfigParameters `json:"destinationFlowConfig,omitempty" tf:"destination_flow_config,omitempty"`
 
 	// ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.
 	// +kubebuilder:validation:Optional
@@ -323,20 +323,20 @@ type FlowParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
-	// +kubebuilder:validation:Required
-	SourceFlowConfig []SourceFlowConfigParameters `json:"sourceFlowConfig" tf:"source_flow_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceFlowConfig []SourceFlowConfigParameters `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A Task that Amazon AppFlow performs while transferring the data in the flow run.
-	// +kubebuilder:validation:Required
-	Task []TaskParameters `json:"task" tf:"task,omitempty"`
+	// +kubebuilder:validation:Optional
+	Task []TaskParameters `json:"task,omitempty" tf:"task,omitempty"`
 
 	// A Trigger that determine how and when the flow runs.
-	// +kubebuilder:validation:Required
-	TriggerConfig []TriggerConfigParameters `json:"triggerConfig" tf:"trigger_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	TriggerConfig []TriggerConfigParameters `json:"triggerConfig,omitempty" tf:"trigger_config,omitempty"`
 }
 
 type GoogleAnalyticsObservation struct {
@@ -1146,8 +1146,12 @@ type FlowStatus struct {
 type Flow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FlowSpec   `json:"spec"`
-	Status            FlowStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationFlowConfig)",message="destinationFlowConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceFlowConfig)",message="sourceFlowConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.task)",message="task is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.triggerConfig)",message="triggerConfig is a required parameter"
+	Spec   FlowSpec   `json:"spec"`
+	Status FlowStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -94,8 +94,6 @@ spec:
                       Defaults to SERVICE_CONTROL_POLICY.
                     type: string
                 required:
-                - content
-                - name
                 - region
                 type: object
               providerConfigRef:

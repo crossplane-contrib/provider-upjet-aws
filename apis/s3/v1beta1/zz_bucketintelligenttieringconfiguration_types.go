@@ -51,8 +51,8 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	Filter []BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -64,8 +64,8 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
-	// +kubebuilder:validation:Required
-	Tiering []TieringParameters `json:"tiering" tf:"tiering,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tiering []TieringParameters `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }
 
 type TieringObservation struct {
@@ -106,8 +106,10 @@ type BucketIntelligentTieringConfigurationStatus struct {
 type BucketIntelligentTieringConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketIntelligentTieringConfigurationSpec   `json:"spec"`
-	Status            BucketIntelligentTieringConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tiering)",message="tiering is a required parameter"
+	Spec   BucketIntelligentTieringConfigurationSpec   `json:"spec"`
+	Status BucketIntelligentTieringConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -40,8 +40,8 @@ type ServiceLinkedRoleObservation struct {
 type ServiceLinkedRoleParameters struct {
 
 	// The AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com. To find the full list of services that support service-linked roles, check the docs.
-	// +kubebuilder:validation:Required
-	AwsServiceName *string `json:"awsServiceName" tf:"aws_service_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	AwsServiceName *string `json:"awsServiceName,omitempty" tf:"aws_service_name,omitempty"`
 
 	// Additional string appended to the role name. Not all AWS services support custom suffixes.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,9 @@ type ServiceLinkedRoleStatus struct {
 type ServiceLinkedRole struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceLinkedRoleSpec   `json:"spec"`
-	Status            ServiceLinkedRoleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.awsServiceName)",message="awsServiceName is a required parameter"
+	Spec   ServiceLinkedRoleSpec   `json:"spec"`
+	Status ServiceLinkedRoleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

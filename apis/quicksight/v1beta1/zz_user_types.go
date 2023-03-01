@@ -28,16 +28,16 @@ type UserParameters struct {
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// The email address of the user that you want to register.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
 	// +kubebuilder:validation:Optional
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
 	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
-	// +kubebuilder:validation:Required
-	IdentityType *string `json:"identityType" tf:"identity_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
 	// +kubebuilder:validation:Optional
@@ -57,8 +57,8 @@ type UserParameters struct {
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
-	// +kubebuilder:validation:Required
-	UserRole *string `json:"userRole" tf:"user_role,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -85,8 +85,11 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityType)",message="identityType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userRole)",message="userRole is a required parameter"
+	Spec   UserSpec   `json:"spec"`
+	Status UserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

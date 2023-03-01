@@ -188,8 +188,8 @@ type TaskDefinitionParameters struct {
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// A list of valid container definitions provided as a single valid JSON document. Please note that you should only provide values that are part of the container definition document. For a detailed description of what parameters are available, see the Task Definition Parameters section from the official Developer Guide.
-	// +kubebuilder:validation:Required
-	ContainerDefinitions *string `json:"containerDefinitions" tf:"container_definitions,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContainerDefinitions *string `json:"containerDefinitions,omitempty" tf:"container_definitions,omitempty"`
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	// +kubebuilder:validation:Optional
@@ -210,8 +210,8 @@ type TaskDefinitionParameters struct {
 	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// A unique name for your task definition.
-	// +kubebuilder:validation:Required
-	Family *string `json:"family" tf:"family,omitempty"`
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Configuration block(s) with Inference Accelerators settings. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -336,8 +336,10 @@ type TaskDefinitionStatus struct {
 type TaskDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TaskDefinitionSpec   `json:"spec"`
-	Status            TaskDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerDefinitions)",message="containerDefinitions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
+	Spec   TaskDefinitionSpec   `json:"spec"`
+	Status TaskDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

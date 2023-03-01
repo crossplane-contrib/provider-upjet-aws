@@ -38,16 +38,16 @@ type SubscriptionFilterParameters struct {
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
 	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
-	// +kubebuilder:validation:Required
-	FilterPattern *string `json:"filterPattern" tf:"filter_pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
 	// The name of the log group to associate the subscription filter with
-	// +kubebuilder:validation:Required
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// A name for the subscription filter
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +93,11 @@ type SubscriptionFilterStatus struct {
 type SubscriptionFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionFilterSpec   `json:"spec"`
-	Status            SubscriptionFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterPattern)",message="filterPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logGroupName)",message="logGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SubscriptionFilterSpec   `json:"spec"`
+	Status SubscriptionFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

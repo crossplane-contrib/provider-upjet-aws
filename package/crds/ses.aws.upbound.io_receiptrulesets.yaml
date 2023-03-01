@@ -73,7 +73,6 @@ spec:
                     type: string
                 required:
                 - region
-                - ruleSetName
                 type: object
               providerConfigRef:
                 default:

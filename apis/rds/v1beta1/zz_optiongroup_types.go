@@ -28,12 +28,12 @@ type OptionGroupObservation struct {
 type OptionGroupParameters struct {
 
 	// Specifies the name of the engine that this option group should be associated with.
-	// +kubebuilder:validation:Required
-	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Specifies the major version of the engine that this option group should be associated with.
-	// +kubebuilder:validation:Required
-	MajorEngineVersion *string `json:"majorEngineVersion" tf:"major_engine_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
 	// A list of Options to apply.
 	// +kubebuilder:validation:Optional
@@ -121,8 +121,10 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OptionGroupSpec   `json:"spec"`
-	Status            OptionGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
+	Spec   OptionGroupSpec   `json:"spec"`
+	Status OptionGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

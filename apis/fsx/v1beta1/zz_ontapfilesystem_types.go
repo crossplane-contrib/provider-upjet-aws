@@ -101,8 +101,8 @@ type OntapFileSystemParameters struct {
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
 	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
-	// +kubebuilder:validation:Required
-	DeploymentType *string `json:"deploymentType" tf:"deployment_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
 	// +kubebuilder:validation:Optional
@@ -195,8 +195,8 @@ type OntapFileSystemParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048.
-	// +kubebuilder:validation:Required
-	ThroughputCapacity *float64 `json:"throughputCapacity" tf:"throughput_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
@@ -227,8 +227,10 @@ type OntapFileSystemStatus struct {
 type OntapFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OntapFileSystemSpec   `json:"spec"`
-	Status            OntapFileSystemStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deploymentType)",message="deploymentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
+	Spec   OntapFileSystemSpec   `json:"spec"`
+	Status OntapFileSystemStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

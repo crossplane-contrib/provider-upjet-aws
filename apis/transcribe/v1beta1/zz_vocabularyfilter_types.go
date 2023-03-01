@@ -30,8 +30,8 @@ type VocabularyFilterObservation struct {
 type VocabularyFilterParameters struct {
 
 	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
-	// +kubebuilder:validation:Required
-	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -75,8 +75,9 @@ type VocabularyFilterStatus struct {
 type VocabularyFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VocabularyFilterSpec   `json:"spec"`
-	Status            VocabularyFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	Spec   VocabularyFilterSpec   `json:"spec"`
+	Status VocabularyFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

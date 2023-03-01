@@ -237,7 +237,6 @@ spec:
                       period.
                     type: number
                 required:
-                - diskContainer
                 - region
                 type: object
               providerConfigRef:

@@ -22,8 +22,8 @@ type PermissionSetInlinePolicyObservation struct {
 type PermissionSetInlinePolicyParameters struct {
 
 	// The IAM inline policy to attach to a Permission Set.
-	// +kubebuilder:validation:Required
-	InlinePolicy *string `json:"inlinePolicy" tf:"inline_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
@@ -83,8 +83,9 @@ type PermissionSetInlinePolicyStatus struct {
 type PermissionSetInlinePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSetInlinePolicySpec   `json:"spec"`
-	Status            PermissionSetInlinePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inlinePolicy)",message="inlinePolicy is a required parameter"
+	Spec   PermissionSetInlinePolicySpec   `json:"spec"`
+	Status PermissionSetInlinePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

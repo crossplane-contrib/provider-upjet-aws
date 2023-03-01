@@ -77,8 +77,8 @@ type SafetyRuleParameters struct {
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 
 	// Name describing the safety rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -86,16 +86,16 @@ type SafetyRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block for safety rule criteria. See below.
-	// +kubebuilder:validation:Required
-	RuleConfig []RuleConfigParameters `json:"ruleConfig" tf:"rule_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleConfig []RuleConfigParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	// +kubebuilder:validation:Optional
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
-	// +kubebuilder:validation:Required
-	WaitPeriodMs *float64 `json:"waitPeriodMs" tf:"wait_period_ms,omitempty"`
+	// +kubebuilder:validation:Optional
+	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
 }
 
 // SafetyRuleSpec defines the desired state of SafetyRule
@@ -122,8 +122,11 @@ type SafetyRuleStatus struct {
 type SafetyRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SafetyRuleSpec   `json:"spec"`
-	Status            SafetyRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleConfig)",message="ruleConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.waitPeriodMs)",message="waitPeriodMs is a required parameter"
+	Spec   SafetyRuleSpec   `json:"spec"`
+	Status SafetyRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

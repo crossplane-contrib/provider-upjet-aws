@@ -159,7 +159,6 @@ spec:
                     type: object
                 required:
                 - region
-                - snapshotCopyGrantName
                 type: object
               providerConfigRef:
                 default:

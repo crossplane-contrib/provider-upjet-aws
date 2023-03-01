@@ -125,9 +125,6 @@ spec:
                       user data
                     type: string
                 required:
-                - availabilityZone
-                - blueprintId
-                - bundleId
                 - region
                 type: object
               providerConfigRef:

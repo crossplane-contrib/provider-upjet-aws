@@ -75,7 +75,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - globalSettings
                 - region
                 type: object
               providerConfigRef:

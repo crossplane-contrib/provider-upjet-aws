@@ -155,7 +155,6 @@ spec:
                       for which forwarders will be used.
                     type: string
                 required:
-                - dnsIps
                 - region
                 - remoteDomainName
                 type: object

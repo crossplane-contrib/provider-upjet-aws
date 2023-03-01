@@ -181,9 +181,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - identityManagementType
-                - inboundCallsEnabled
-                - outboundCallsEnabled
                 - region
                 type: object
               providerConfigRef:

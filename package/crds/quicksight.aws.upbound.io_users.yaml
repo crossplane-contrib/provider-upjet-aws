@@ -106,10 +106,7 @@ spec:
                       role can be one of the following: READER, AUTHOR, or ADMIN'
                     type: string
                 required:
-                - email
-                - identityType
                 - region
-                - userRole
                 type: object
               providerConfigRef:
                 default:

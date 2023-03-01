@@ -240,7 +240,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - email
                 - region
                 type: object
               providerConfigRef:

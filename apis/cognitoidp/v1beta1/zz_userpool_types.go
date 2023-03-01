@@ -422,8 +422,8 @@ type UserPoolParameters struct {
 	MfaConfiguration *string `json:"mfaConfiguration,omitempty" tf:"mfa_configuration,omitempty"`
 
 	// Name of the user pool.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration blocked for information about the user pool password policy. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -543,8 +543,9 @@ type UserPoolStatus struct {
 type UserPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserPoolSpec   `json:"spec"`
-	Status            UserPoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UserPoolSpec   `json:"spec"`
+	Status UserPoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

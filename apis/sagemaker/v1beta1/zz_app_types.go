@@ -28,12 +28,12 @@ type AppObservation struct {
 type AppParameters struct {
 
 	// The name of the app.
-	// +kubebuilder:validation:Required
-	AppName *string `json:"appName" tf:"app_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
 
 	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
-	// +kubebuilder:validation:Required
-	AppType *string `json:"appType" tf:"app_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
 	// The domain ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
@@ -127,8 +127,10 @@ type AppStatus struct {
 type App struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppSpec   `json:"spec"`
-	Status            AppStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.appName)",message="appName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.appType)",message="appType is a required parameter"
+	Spec   AppSpec   `json:"spec"`
+	Status AppStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

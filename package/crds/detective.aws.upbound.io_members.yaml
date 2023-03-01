@@ -163,8 +163,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - accountId
-                - emailAddress
                 - region
                 type: object
               providerConfigRef:

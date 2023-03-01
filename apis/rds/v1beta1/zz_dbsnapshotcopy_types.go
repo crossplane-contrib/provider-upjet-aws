@@ -118,8 +118,8 @@ type DBSnapshotCopyParameters struct {
 	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
 
 	// The Identifier for the snapshot.
-	// +kubebuilder:validation:Required
-	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier" tf:"target_db_snapshot_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 }
 
 // DBSnapshotCopySpec defines the desired state of DBSnapshotCopy
@@ -146,8 +146,9 @@ type DBSnapshotCopyStatus struct {
 type DBSnapshotCopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DBSnapshotCopySpec   `json:"spec"`
-	Status            DBSnapshotCopyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetDbSnapshotIdentifier)",message="targetDbSnapshotIdentifier is a required parameter"
+	Spec   DBSnapshotCopySpec   `json:"spec"`
+	Status DBSnapshotCopyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

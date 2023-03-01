@@ -218,7 +218,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - hierarchyStructure
                 - region
                 type: object
               providerConfigRef:

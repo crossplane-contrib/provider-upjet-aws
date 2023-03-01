@@ -197,16 +197,16 @@ type TableParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Describes the schema of the table.
-	// +kubebuilder:validation:Required
-	SchemaDefinition []SchemaDefinitionParameters `json:"schemaDefinition" tf:"schema_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaDefinition []SchemaDefinitionParameters `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
 	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// The name of the table.
-	// +kubebuilder:validation:Required
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -237,8 +237,10 @@ type TableStatus struct {
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TableSpec   `json:"spec"`
-	Status            TableStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaDefinition)",message="schemaDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tableName)",message="tableName is a required parameter"
+	Spec   TableSpec   `json:"spec"`
+	Status TableStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

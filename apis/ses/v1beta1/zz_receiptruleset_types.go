@@ -30,8 +30,8 @@ type ReceiptRuleSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Name of the rule set.
-	// +kubebuilder:validation:Required
-	RuleSetName *string `json:"ruleSetName" tf:"rule_set_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
 }
 
 // ReceiptRuleSetSpec defines the desired state of ReceiptRuleSet
@@ -58,8 +58,9 @@ type ReceiptRuleSetStatus struct {
 type ReceiptRuleSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReceiptRuleSetSpec   `json:"spec"`
-	Status            ReceiptRuleSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleSetName)",message="ruleSetName is a required parameter"
+	Spec   ReceiptRuleSetSpec   `json:"spec"`
+	Status ReceiptRuleSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

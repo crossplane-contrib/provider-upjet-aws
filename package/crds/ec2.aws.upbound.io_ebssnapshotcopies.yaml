@@ -250,7 +250,6 @@ spec:
                     type: number
                 required:
                 - region
-                - sourceRegion
                 type: object
               providerConfigRef:
                 default:

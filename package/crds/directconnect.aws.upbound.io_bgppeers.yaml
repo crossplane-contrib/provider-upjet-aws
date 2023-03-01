@@ -167,8 +167,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - addressFamily
-                - bgpAsn
                 - region
                 type: object
               providerConfigRef:

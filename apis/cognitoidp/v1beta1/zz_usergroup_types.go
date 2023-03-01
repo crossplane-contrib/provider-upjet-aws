@@ -24,8 +24,8 @@ type UserGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the user group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The precedence of the user group.
 	// +kubebuilder:validation:Optional
@@ -88,8 +88,9 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserGroupSpec   `json:"spec"`
-	Status            UserGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UserGroupSpec   `json:"spec"`
+	Status UserGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

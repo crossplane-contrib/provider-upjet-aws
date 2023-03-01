@@ -158,7 +158,6 @@ spec:
                       to false.
                     type: boolean
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

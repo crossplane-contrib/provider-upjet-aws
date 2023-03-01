@@ -349,8 +349,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - authorization
-                - httpMethod
                 - region
                 type: object
               providerConfigRef:

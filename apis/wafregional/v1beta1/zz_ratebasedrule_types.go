@@ -59,24 +59,24 @@ type RateBasedRuleObservation struct {
 type RateBasedRuleParameters struct {
 
 	// The name or description for the Amazon CloudWatch metric of this rule.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// The name or description of the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The objects to include in a rule (documented below).
 	// +kubebuilder:validation:Optional
 	Predicate []PredicateParameters `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
 	// Valid value is IP.
-	// +kubebuilder:validation:Required
-	RateKey *string `json:"rateKey" tf:"rate_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RateKey *string `json:"rateKey,omitempty" tf:"rate_key,omitempty"`
 
 	// The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. Minimum value is 100.
-	// +kubebuilder:validation:Required
-	RateLimit *float64 `json:"rateLimit" tf:"rate_limit,omitempty"`
+	// +kubebuilder:validation:Optional
+	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -112,8 +112,12 @@ type RateBasedRuleStatus struct {
 type RateBasedRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RateBasedRuleSpec   `json:"spec"`
-	Status            RateBasedRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricName)",message="metricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rateKey)",message="rateKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rateLimit)",message="rateLimit is a required parameter"
+	Spec   RateBasedRuleSpec   `json:"spec"`
+	Status RateBasedRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

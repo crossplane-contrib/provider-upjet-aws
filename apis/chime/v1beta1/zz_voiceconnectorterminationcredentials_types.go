@@ -36,8 +36,8 @@ type VoiceConnectorTerminationCredentialsObservation struct {
 type VoiceConnectorTerminationCredentialsParameters struct {
 
 	// List of termination SIP credentials.
-	// +kubebuilder:validation:Required
-	Credentials []CredentialsParameters `json:"credentials" tf:"credentials,omitempty"`
+	// +kubebuilder:validation:Optional
+	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +83,9 @@ type VoiceConnectorTerminationCredentialsStatus struct {
 type VoiceConnectorTerminationCredentials struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorTerminationCredentialsSpec   `json:"spec"`
-	Status            VoiceConnectorTerminationCredentialsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.credentials)",message="credentials is a required parameter"
+	Spec   VoiceConnectorTerminationCredentialsSpec   `json:"spec"`
+	Status VoiceConnectorTerminationCredentialsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

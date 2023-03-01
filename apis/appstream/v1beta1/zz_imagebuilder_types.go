@@ -107,8 +107,8 @@ type ImageBuilderParameters struct {
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
 	// Instance type to use when launching the image builder.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -173,8 +173,9 @@ type ImageBuilderStatus struct {
 type ImageBuilder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageBuilderSpec   `json:"spec"`
-	Status            ImageBuilderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   ImageBuilderSpec   `json:"spec"`
+	Status ImageBuilderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -87,8 +87,8 @@ type QueueParameters struct {
 	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
 	// Specifies the name of the Queue.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that defines the outbound caller ID name, number, and outbound whisper flow. The Outbound Caller Config block is documented below.
 	// +kubebuilder:validation:Optional
@@ -136,8 +136,9 @@ type QueueStatus struct {
 type Queue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QueueSpec   `json:"spec"`
-	Status            QueueStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   QueueSpec   `json:"spec"`
+	Status QueueStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

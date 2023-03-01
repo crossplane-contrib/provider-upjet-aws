@@ -31,8 +31,8 @@ type WorkspaceSAMLConfigurationParameters struct {
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
 	// The editor role values.
-	// +kubebuilder:validation:Required
-	EditorRoleValues []*string `json:"editorRoleValues" tf:"editor_role_values,omitempty"`
+	// +kubebuilder:validation:Optional
+	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
 
 	// The email assertion.
 	// +kubebuilder:validation:Optional
@@ -113,8 +113,9 @@ type WorkspaceSAMLConfigurationStatus struct {
 type WorkspaceSAMLConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSAMLConfigurationSpec   `json:"spec"`
-	Status            WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.editorRoleValues)",message="editorRoleValues is a required parameter"
+	Spec   WorkspaceSAMLConfigurationSpec   `json:"spec"`
+	Status WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

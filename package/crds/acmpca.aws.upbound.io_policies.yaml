@@ -152,7 +152,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - policy
                 - region
                 type: object
               providerConfigRef:

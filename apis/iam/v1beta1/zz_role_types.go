@@ -52,8 +52,8 @@ type RoleObservation struct {
 type RoleParameters struct {
 
 	// Policy that grants an entity permission to assume the role.
-	// +kubebuilder:validation:Required
-	AssumeRolePolicy *string `json:"assumeRolePolicy" tf:"assume_role_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
 
 	// Description of the role.
 	// +kubebuilder:validation:Optional
@@ -104,8 +104,9 @@ type RoleStatus struct {
 type Role struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleSpec   `json:"spec"`
-	Status            RoleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.assumeRolePolicy)",message="assumeRolePolicy is a required parameter"
+	Spec   RoleSpec   `json:"spec"`
+	Status RoleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

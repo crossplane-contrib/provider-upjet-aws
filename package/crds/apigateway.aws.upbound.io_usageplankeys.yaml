@@ -228,7 +228,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - keyType
                 - region
                 type: object
               providerConfigRef:

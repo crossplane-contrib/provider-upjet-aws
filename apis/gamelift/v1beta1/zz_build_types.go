@@ -28,12 +28,12 @@ type BuildObservation struct {
 type BuildParameters struct {
 
 	// Name of the build
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
-	// +kubebuilder:validation:Required
-	OperatingSystem *string `json:"operatingSystem" tf:"operating_system,omitempty"`
+	// +kubebuilder:validation:Optional
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -41,8 +41,8 @@ type BuildParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Information indicating where your game build files are stored. See below.
-	// +kubebuilder:validation:Required
-	StorageLocation []StorageLocationParameters `json:"storageLocation" tf:"storage_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageLocation []StorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,11 @@ type BuildStatus struct {
 type Build struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BuildSpec   `json:"spec"`
-	Status            BuildStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operatingSystem)",message="operatingSystem is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageLocation)",message="storageLocation is a required parameter"
+	Spec   BuildSpec   `json:"spec"`
+	Status BuildStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

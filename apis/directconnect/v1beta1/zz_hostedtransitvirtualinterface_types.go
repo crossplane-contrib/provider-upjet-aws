@@ -32,16 +32,16 @@ type HostedTransitVirtualInterfaceObservation struct {
 type HostedTransitVirtualInterfaceParameters struct {
 
 	// The address family for the BGP peer. ipv4  or ipv6.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
 	// +kubebuilder:validation:Optional
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	// +kubebuilder:validation:Required
-	BGPAsn *float64 `json:"bgpAsn" tf:"bgp_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -69,12 +69,12 @@ type HostedTransitVirtualInterfaceParameters struct {
 	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// The name for the virtual interface.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The AWS account that will own the new virtual interface.
-	// +kubebuilder:validation:Required
-	OwnerAccountID *string `json:"ownerAccountId" tf:"owner_account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +82,8 @@ type HostedTransitVirtualInterfaceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The VLAN ID.
-	// +kubebuilder:validation:Required
-	Vlan *float64 `json:"vlan" tf:"vlan,omitempty"`
+	// +kubebuilder:validation:Optional
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 // HostedTransitVirtualInterfaceSpec defines the desired state of HostedTransitVirtualInterface
@@ -110,8 +110,13 @@ type HostedTransitVirtualInterfaceStatus struct {
 type HostedTransitVirtualInterface struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostedTransitVirtualInterfaceSpec   `json:"spec"`
-	Status            HostedTransitVirtualInterfaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)",message="bgpAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerAccountId)",message="ownerAccountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vlan)",message="vlan is a required parameter"
+	Spec   HostedTransitVirtualInterfaceSpec   `json:"spec"`
+	Status HostedTransitVirtualInterfaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

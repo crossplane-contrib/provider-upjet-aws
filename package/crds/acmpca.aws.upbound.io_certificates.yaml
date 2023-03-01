@@ -192,10 +192,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - certificateSigningRequestSecretRef
                 - region
-                - signingAlgorithm
-                - validity
                 type: object
               providerConfigRef:
                 default:

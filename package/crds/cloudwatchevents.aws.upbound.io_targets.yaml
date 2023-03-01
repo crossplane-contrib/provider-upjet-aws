@@ -709,7 +709,6 @@ spec:
                       generate a random, unique id.
                     type: string
                 required:
-                - arn
                 - region
                 type: object
               providerConfigRef:

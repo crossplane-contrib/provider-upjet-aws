@@ -126,8 +126,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - botName
-                - botVersion
                 - region
                 type: object
               providerConfigRef:

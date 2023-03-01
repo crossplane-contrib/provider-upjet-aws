@@ -56,8 +56,8 @@ type JobObservation struct {
 type JobParameters struct {
 
 	// –  The command of the job. Defined below.
-	// +kubebuilder:validation:Required
-	Command []CommandParameters `json:"command" tf:"command,omitempty"`
+	// +kubebuilder:validation:Optional
+	Command []CommandParameters `json:"command,omitempty" tf:"command,omitempty"`
 
 	// –  The list of connections used for this job.
 	// +kubebuilder:validation:Optional
@@ -173,8 +173,9 @@ type JobStatus struct {
 type Job struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              JobSpec   `json:"spec"`
-	Status            JobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.command)",message="command is a required parameter"
+	Spec   JobSpec   `json:"spec"`
+	Status JobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

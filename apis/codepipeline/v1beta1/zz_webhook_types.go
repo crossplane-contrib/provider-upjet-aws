@@ -59,16 +59,16 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// The type of authentication  to use. One of IP, GITHUB_HMAC, or UNAUTHENTICATED.
-	// +kubebuilder:validation:Required
-	Authentication *string `json:"authentication" tf:"authentication,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// An auth block. Required for IP and GITHUB_HMAC. Auth blocks are documented below.
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration []AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// One or more filter blocks. Filter blocks are documented below.
-	// +kubebuilder:validation:Required
-	Filter []FilterParameters `json:"filter" tf:"filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +80,8 @@ type WebhookParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
-	// +kubebuilder:validation:Required
-	TargetAction *string `json:"targetAction" tf:"target_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 
 	// The name of the pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
@@ -121,8 +121,11 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebhookSpec   `json:"spec"`
-	Status            WebhookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filter)",message="filter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)",message="targetAction is a required parameter"
+	Spec   WebhookSpec   `json:"spec"`
+	Status WebhookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

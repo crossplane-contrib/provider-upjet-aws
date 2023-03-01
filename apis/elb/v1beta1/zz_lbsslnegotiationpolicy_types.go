@@ -42,8 +42,8 @@ type LBSSLNegotiationPolicyParameters struct {
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	// +kubebuilder:validation:Required
-	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.
@@ -61,8 +61,8 @@ type LBSSLNegotiationPolicyParameters struct {
 	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -94,8 +94,10 @@ type LBSSLNegotiationPolicyStatus struct {
 type LBSSLNegotiationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBSSLNegotiationPolicySpec   `json:"spec"`
-	Status            LBSSLNegotiationPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lbPort)",message="lbPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   LBSSLNegotiationPolicySpec   `json:"spec"`
+	Status LBSSLNegotiationPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

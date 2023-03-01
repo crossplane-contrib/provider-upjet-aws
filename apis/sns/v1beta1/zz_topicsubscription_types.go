@@ -68,8 +68,8 @@ type TopicSubscriptionParameters struct {
 	FilterPolicyScope *string `json:"filterPolicyScope,omitempty" tf:"filter_policy_scope,omitempty"`
 
 	// Protocol to use. Valid values are: sqs, sms, lambda, firehose, and application. Protocols email, email-json, http and https are also valid but partially supported. See details below.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is false.
 	// +kubebuilder:validation:Optional
@@ -137,8 +137,9 @@ type TopicSubscriptionStatus struct {
 type TopicSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicSubscriptionSpec   `json:"spec"`
-	Status            TopicSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	Spec   TopicSubscriptionSpec   `json:"spec"`
+	Status TopicSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -39,8 +39,8 @@ type FileSystemPolicyParameters struct {
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +72,9 @@ type FileSystemPolicyStatus struct {
 type FileSystemPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FileSystemPolicySpec   `json:"spec"`
-	Status            FileSystemPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   FileSystemPolicySpec   `json:"spec"`
+	Status FileSystemPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

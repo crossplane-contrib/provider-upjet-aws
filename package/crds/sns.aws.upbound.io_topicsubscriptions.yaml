@@ -337,7 +337,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - protocol
                 - region
                 type: object
               providerConfigRef:

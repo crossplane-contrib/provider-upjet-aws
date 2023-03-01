@@ -58,20 +58,20 @@ type ManagedPrefixListObservation struct {
 type ManagedPrefixListParameters struct {
 
 	// Address family (IPv4 or IPv6) of this prefix list.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// Configuration block for prefix list entry. Detailed below. Different entries may have overlapping CIDR blocks, but a particular CIDR should not be duplicated.
 	// +kubebuilder:validation:Optional
 	Entry []EntryParameters `json:"entry,omitempty" tf:"entry,omitempty"`
 
 	// Maximum number of entries that this prefix list can contain.
-	// +kubebuilder:validation:Required
-	MaxEntries *float64 `json:"maxEntries" tf:"max_entries,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxEntries *float64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
 
 	// Name of this resource. The name must not start with com.amazonaws.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -107,8 +107,11 @@ type ManagedPrefixListStatus struct {
 type ManagedPrefixList struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedPrefixListSpec   `json:"spec"`
-	Status            ManagedPrefixListStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.maxEntries)",message="maxEntries is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ManagedPrefixListSpec   `json:"spec"`
+	Status ManagedPrefixListStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

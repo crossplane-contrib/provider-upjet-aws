@@ -260,10 +260,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - duration
-                - name
                 - region
-                - rulesPackageArns
                 type: object
               providerConfigRef:
                 default:

@@ -45,12 +45,12 @@ type ConfigurationSetEventDestinationParameters struct {
 	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
 
 	// A name that identifies the event destination within the configuration set.
-	// +kubebuilder:validation:Required
-	EventDestination []EventDestinationParameters `json:"eventDestination" tf:"event_destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventDestination []EventDestinationParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
 	// An object that defines the event destination. See event_destination below.
-	// +kubebuilder:validation:Required
-	EventDestinationName *string `json:"eventDestinationName" tf:"event_destination_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -203,8 +203,10 @@ type ConfigurationSetEventDestinationStatus struct {
 type ConfigurationSetEventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSetEventDestinationSpec   `json:"spec"`
-	Status            ConfigurationSetEventDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventDestination)",message="eventDestination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventDestinationName)",message="eventDestinationName is a required parameter"
+	Spec   ConfigurationSetEventDestinationSpec   `json:"spec"`
+	Status ConfigurationSetEventDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

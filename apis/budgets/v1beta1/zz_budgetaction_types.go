@@ -49,16 +49,16 @@ type BudgetActionParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The trigger threshold of the action. See Action Threshold.
-	// +kubebuilder:validation:Required
-	ActionThreshold []ActionThresholdParameters `json:"actionThreshold" tf:"action_threshold,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionThreshold []ActionThresholdParameters `json:"actionThreshold,omitempty" tf:"action_threshold,omitempty"`
 
 	// The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. Valid values are APPLY_IAM_POLICY, APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
-	// +kubebuilder:validation:Required
-	ActionType *string `json:"actionType" tf:"action_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionType *string `json:"actionType,omitempty" tf:"action_type,omitempty"`
 
 	// This specifies if the action needs manual or automatic approval. Valid values are AUTOMATIC and MANUAL.
-	// +kubebuilder:validation:Required
-	ApprovalModel *string `json:"approvalModel" tf:"approval_model,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApprovalModel *string `json:"approvalModel,omitempty" tf:"approval_model,omitempty"`
 
 	// The name of a budget.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
@@ -74,8 +74,8 @@ type BudgetActionParameters struct {
 	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Specifies all of the type-specific parameters. See Definition.
-	// +kubebuilder:validation:Required
-	Definition []DefinitionParameters `json:"definition" tf:"definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// The role passed for action execution and reversion. Roles and actions must be in the same account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -92,8 +92,8 @@ type BudgetActionParameters struct {
 	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The type of a notification. Valid values are ACTUAL or FORECASTED.
-	// +kubebuilder:validation:Required
-	NotificationType *string `json:"notificationType" tf:"notification_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// The Region to run the SSM document.
 	// Region is the region you'd like your resource to be created in.
@@ -102,8 +102,8 @@ type BudgetActionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A list of subscribers. See Subscriber.
-	// +kubebuilder:validation:Required
-	Subscriber []SubscriberParameters `json:"subscriber" tf:"subscriber,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subscriber []SubscriberParameters `json:"subscriber,omitempty" tf:"subscriber,omitempty"`
 }
 
 type DefinitionObservation struct {
@@ -226,8 +226,14 @@ type BudgetActionStatus struct {
 type BudgetAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BudgetActionSpec   `json:"spec"`
-	Status            BudgetActionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionThreshold)",message="actionThreshold is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionType)",message="actionType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.approvalModel)",message="approvalModel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)",message="definition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)",message="notificationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriber)",message="subscriber is a required parameter"
+	Spec   BudgetActionSpec   `json:"spec"`
+	Status BudgetActionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

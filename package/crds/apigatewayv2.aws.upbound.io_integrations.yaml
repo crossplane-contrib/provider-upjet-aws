@@ -484,7 +484,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - integrationType
                 - region
                 type: object
               providerConfigRef:

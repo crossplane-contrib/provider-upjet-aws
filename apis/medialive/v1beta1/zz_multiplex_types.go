@@ -48,16 +48,16 @@ type MultiplexObservation struct {
 type MultiplexParameters struct {
 
 	// A list of availability zones. You must specify exactly two.
-	// +kubebuilder:validation:Required
-	AvailabilityZones []*string `json:"availabilityZones" tf:"availability_zones,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Multiplex settings. See Multiplex Settings for more details.
 	// +kubebuilder:validation:Optional
 	MultiplexSettings []MultiplexMultiplexSettingsParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +97,10 @@ type MultiplexStatus struct {
 type Multiplex struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MultiplexSpec   `json:"spec"`
-	Status            MultiplexStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZones)",message="availabilityZones is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   MultiplexSpec   `json:"spec"`
+	Status MultiplexStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

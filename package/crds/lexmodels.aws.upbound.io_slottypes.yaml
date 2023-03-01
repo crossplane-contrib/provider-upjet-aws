@@ -109,7 +109,6 @@ spec:
                       otherwise null is returned. Defaults to ORIGINAL_VALUE.
                     type: string
                 required:
-                - enumerationValue
                 - region
                 type: object
               providerConfigRef:

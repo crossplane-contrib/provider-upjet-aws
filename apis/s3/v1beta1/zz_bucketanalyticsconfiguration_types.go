@@ -51,8 +51,8 @@ type BucketAnalyticsConfigurationParameters struct {
 	Filter []BucketAnalyticsConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier of the analytics configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -154,8 +154,9 @@ type BucketAnalyticsConfigurationStatus struct {
 type BucketAnalyticsConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketAnalyticsConfigurationSpec   `json:"spec"`
-	Status            BucketAnalyticsConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   BucketAnalyticsConfigurationSpec   `json:"spec"`
+	Status BucketAnalyticsConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

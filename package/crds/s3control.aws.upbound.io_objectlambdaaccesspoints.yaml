@@ -312,8 +312,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - configuration
-                - name
                 - region
                 type: object
               providerConfigRef:

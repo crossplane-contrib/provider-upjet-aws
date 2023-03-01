@@ -100,8 +100,8 @@ type ExperienceParameters struct {
 	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// A name for your Amazon Kendra experience.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -157,8 +157,9 @@ type ExperienceStatus struct {
 type Experience struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExperienceSpec   `json:"spec"`
-	Status            ExperienceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ExperienceSpec   `json:"spec"`
+	Status ExperienceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

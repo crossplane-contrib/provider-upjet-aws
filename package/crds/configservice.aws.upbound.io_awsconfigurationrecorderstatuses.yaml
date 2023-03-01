@@ -74,7 +74,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - isEnabled
                 - region
                 type: object
               providerConfigRef:

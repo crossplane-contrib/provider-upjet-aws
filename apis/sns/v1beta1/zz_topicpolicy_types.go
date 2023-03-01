@@ -37,8 +37,8 @@ type TopicPolicyParameters struct {
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The fully-formed AWS policy as JSON.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -70,8 +70,9 @@ type TopicPolicyStatus struct {
 type TopicPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicPolicySpec   `json:"spec"`
-	Status            TopicPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   TopicPolicySpec   `json:"spec"`
+	Status TopicPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

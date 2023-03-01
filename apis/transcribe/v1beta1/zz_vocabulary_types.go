@@ -30,8 +30,8 @@ type VocabularyObservation struct {
 type VocabularyParameters struct {
 
 	// The language code you selected for your vocabulary.
-	// +kubebuilder:validation:Required
-	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
 	// +kubebuilder:validation:Optional
@@ -75,8 +75,9 @@ type VocabularyStatus struct {
 type Vocabulary struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VocabularySpec   `json:"spec"`
-	Status            VocabularyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	Spec   VocabularySpec   `json:"spec"`
+	Status VocabularyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

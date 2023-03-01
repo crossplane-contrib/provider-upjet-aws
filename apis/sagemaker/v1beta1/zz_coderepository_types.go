@@ -28,8 +28,8 @@ type CodeRepositoryObservation struct {
 type CodeRepositoryParameters struct {
 
 	// Specifies details about the repository. see Git Config details below.
-	// +kubebuilder:validation:Required
-	GitConfig []GitConfigParameters `json:"gitConfig" tf:"git_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	GitConfig []GitConfigParameters `json:"gitConfig,omitempty" tf:"git_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +93,9 @@ type CodeRepositoryStatus struct {
 type CodeRepository struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CodeRepositorySpec   `json:"spec"`
-	Status            CodeRepositoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gitConfig)",message="gitConfig is a required parameter"
+	Spec   CodeRepositorySpec   `json:"spec"`
+	Status CodeRepositoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

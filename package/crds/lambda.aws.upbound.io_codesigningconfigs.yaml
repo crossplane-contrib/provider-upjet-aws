@@ -186,7 +186,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - allowedPublishers
                 - region
                 type: object
               providerConfigRef:

@@ -35,13 +35,13 @@ type MetricFilterParameters struct {
 	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
-	// +kubebuilder:validation:Required
-	MetricTransformation []MetricTransformationParameters `json:"metricTransformation" tf:"metric_transformation,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricTransformation []MetricTransformationParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
 
 	// A valid CloudWatch Logs filter pattern
 	// for extracting metric data out of ingested log events.
-	// +kubebuilder:validation:Required
-	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -103,8 +103,10 @@ type MetricFilterStatus struct {
 type MetricFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricFilterSpec   `json:"spec"`
-	Status            MetricFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricTransformation)",message="metricTransformation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pattern)",message="pattern is a required parameter"
+	Spec   MetricFilterSpec   `json:"spec"`
+	Status MetricFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

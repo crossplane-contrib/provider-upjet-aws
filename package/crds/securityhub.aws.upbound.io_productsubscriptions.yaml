@@ -73,7 +73,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - productArn
                 - region
                 type: object
               providerConfigRef:

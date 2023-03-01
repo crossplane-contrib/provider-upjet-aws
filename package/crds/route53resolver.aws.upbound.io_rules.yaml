@@ -185,9 +185,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - domainName
                 - region
-                - ruleType
                 type: object
               providerConfigRef:
                 default:

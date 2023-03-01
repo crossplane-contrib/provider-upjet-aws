@@ -24,8 +24,8 @@ type MethodParameters struct {
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Type of authorization used for the method (NONE, CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
-	// +kubebuilder:validation:Required
-	Authorization *string `json:"authorization" tf:"authorization,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
 	// +kubebuilder:validation:Optional
@@ -46,8 +46,8 @@ type MethodParameters struct {
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
-	// +kubebuilder:validation:Required
-	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
 	// +kubebuilder:validation:Optional
@@ -126,8 +126,10 @@ type MethodStatus struct {
 type Method struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodSpec   `json:"spec"`
-	Status            MethodStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorization)",message="authorization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
+	Spec   MethodSpec   `json:"spec"`
+	Status MethodStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

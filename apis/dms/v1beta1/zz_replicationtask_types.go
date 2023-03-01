@@ -37,8 +37,8 @@ type ReplicationTaskParameters struct {
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
-	// +kubebuilder:validation:Required
-	MigrationType *string `json:"migrationType" tf:"migration_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +82,8 @@ type ReplicationTaskParameters struct {
 	StartReplicationTask *bool `json:"startReplicationTask,omitempty" tf:"start_replication_task,omitempty"`
 
 	// An escaped JSON string that contains the table mappings. For information on table mapping see Using Table Mapping with an AWS Database Migration Service Task to Select and Filter Data
-	// +kubebuilder:validation:Required
-	TableMappings *string `json:"tableMappings" tf:"table_mappings,omitempty"`
+	// +kubebuilder:validation:Optional
+	TableMappings *string `json:"tableMappings,omitempty" tf:"table_mappings,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,10 @@ type ReplicationTaskStatus struct {
 type ReplicationTask struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationTaskSpec   `json:"spec"`
-	Status            ReplicationTaskStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.migrationType)",message="migrationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tableMappings)",message="tableMappings is a required parameter"
+	Spec   ReplicationTaskSpec   `json:"spec"`
+	Status ReplicationTaskStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

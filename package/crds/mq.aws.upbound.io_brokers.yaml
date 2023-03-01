@@ -467,12 +467,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - brokerName
-                - engineType
-                - engineVersion
-                - hostInstanceType
                 - region
-                - user
                 type: object
               providerConfigRef:
                 default:

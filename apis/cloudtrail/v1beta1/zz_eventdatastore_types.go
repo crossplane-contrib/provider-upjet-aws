@@ -84,8 +84,8 @@ type EventDataStoreParameters struct {
 	MultiRegionEnabled *bool `json:"multiRegionEnabled,omitempty" tf:"multi_region_enabled,omitempty"`
 
 	// The name of the event data store.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies whether an event data store collects events logged for an organization in AWS Organizations. Default: false.
 	// +kubebuilder:validation:Optional
@@ -133,8 +133,9 @@ type EventDataStoreStatus struct {
 type EventDataStore struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventDataStoreSpec   `json:"spec"`
-	Status            EventDataStoreStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   EventDataStoreSpec   `json:"spec"`
+	Status EventDataStoreStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

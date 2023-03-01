@@ -76,8 +76,6 @@ spec:
                     type: string
                 required:
                 - region
-                - settingId
-                - settingValue
                 type: object
               providerConfigRef:
                 default:

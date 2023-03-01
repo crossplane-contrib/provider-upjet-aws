@@ -153,8 +153,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - action
-                - findingCriteria
                 - region
                 type: object
               providerConfigRef:

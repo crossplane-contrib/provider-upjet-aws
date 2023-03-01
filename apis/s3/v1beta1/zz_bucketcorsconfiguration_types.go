@@ -66,8 +66,8 @@ type BucketCorsConfigurationParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Set of origins and methods (cross-origin access that you want to allow) documented below. You can configure up to 100 rules.
-	// +kubebuilder:validation:Required
-	CorsRule []BucketCorsConfigurationCorsRuleParameters `json:"corsRule" tf:"cors_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	CorsRule []BucketCorsConfigurationCorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
 	// The account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
@@ -103,8 +103,9 @@ type BucketCorsConfigurationStatus struct {
 type BucketCorsConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketCorsConfigurationSpec   `json:"spec"`
-	Status            BucketCorsConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.corsRule)",message="corsRule is a required parameter"
+	Spec   BucketCorsConfigurationSpec   `json:"spec"`
+	Status BucketCorsConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

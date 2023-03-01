@@ -97,8 +97,8 @@ type LBTargetGroupParameters struct {
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
 
 	// Name of the target group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
@@ -219,8 +219,9 @@ type LBTargetGroupStatus struct {
 type LBTargetGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBTargetGroupSpec   `json:"spec"`
-	Status            LBTargetGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   LBTargetGroupSpec   `json:"spec"`
+	Status LBTargetGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

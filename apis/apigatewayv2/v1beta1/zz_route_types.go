@@ -98,8 +98,8 @@ type RouteParameters struct {
 	RequestParameter []RequestParameterParameters `json:"requestParameter,omitempty" tf:"request_parameter,omitempty"`
 
 	// Route key for the route. For HTTP APIs, the route key can be either $default, or a combination of an HTTP method and resource path, for example, GET /pets.
-	// +kubebuilder:validation:Required
-	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
 	// The route response selection expression for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
@@ -144,8 +144,9 @@ type RouteStatus struct {
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteSpec   `json:"spec"`
-	Status            RouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routeKey)",message="routeKey is a required parameter"
+	Spec   RouteSpec   `json:"spec"`
+	Status RouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

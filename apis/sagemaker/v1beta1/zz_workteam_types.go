@@ -113,12 +113,12 @@ type WorkteamObservation struct {
 type WorkteamParameters struct {
 
 	// A description of the work team.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of Member Definitions that contains objects that identify the workers that make up the work team. Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use cognito_member_definition. For workforces created using your own OIDC identity provider (IdP) use oidc_member_definition. Do not provide input for both of these parameters in a single request. see Member Definition details below.
-	// +kubebuilder:validation:Required
-	MemberDefinition []MemberDefinitionParameters `json:"memberDefinition" tf:"member_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemberDefinition []MemberDefinitionParameters `json:"memberDefinition,omitempty" tf:"member_definition,omitempty"`
 
 	// Configures notification of workers regarding available or expiring work items. see Notification Configuration details below.
 	// +kubebuilder:validation:Optional
@@ -172,8 +172,10 @@ type WorkteamStatus struct {
 type Workteam struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkteamSpec   `json:"spec"`
-	Status            WorkteamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.memberDefinition)",message="memberDefinition is a required parameter"
+	Spec   WorkteamSpec   `json:"spec"`
+	Status WorkteamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -95,8 +95,8 @@ type ClusterInstanceParameters struct {
 
 	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
 	// supports the below instance classes. Please see AWS Documentation for complete details.
-	// +kubebuilder:validation:Required
-	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key.
 	// +kubebuilder:validation:Optional
@@ -145,8 +145,9 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterInstanceSpec   `json:"spec"`
-	Status            ClusterInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	Spec   ClusterInstanceSpec   `json:"spec"`
+	Status ClusterInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

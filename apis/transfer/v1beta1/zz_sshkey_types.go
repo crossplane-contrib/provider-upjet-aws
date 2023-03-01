@@ -20,8 +20,8 @@ type SSHKeyObservation struct {
 type SSHKeyParameters struct {
 
 	// (Requirement) The public key portion of an SSH key pair.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +80,9 @@ type SSHKeyStatus struct {
 type SSHKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SSHKeySpec   `json:"spec"`
-	Status            SSHKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.body)",message="body is a required parameter"
+	Spec   SSHKeySpec   `json:"spec"`
+	Status SSHKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

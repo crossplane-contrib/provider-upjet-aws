@@ -116,8 +116,8 @@ type ClusterInstanceParameters struct {
 
 	// The instance class to use. For details on CPU
 	// and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
-	// +kubebuilder:validation:Required
-	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	// +kubebuilder:validation:Optional
@@ -213,8 +213,9 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterInstanceSpec   `json:"spec"`
-	Status            ClusterInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	Spec   ClusterInstanceSpec   `json:"spec"`
+	Status ClusterInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

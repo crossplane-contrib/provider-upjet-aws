@@ -60,8 +60,8 @@ type FunctionURLObservation struct {
 type FunctionURLParameters struct {
 
 	// The type of authentication that the function URL uses. Set to "AWS_IAM" to restrict access to authenticated IAM users only. Set to "NONE" to bypass IAM authentication and create a public endpoint. See the AWS documentation for more details.
-	// +kubebuilder:validation:Required
-	AuthorizationType *string `json:"authorizationType" tf:"authorization_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
 	// +kubebuilder:validation:Optional
@@ -114,8 +114,9 @@ type FunctionURLStatus struct {
 type FunctionURL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionURLSpec   `json:"spec"`
-	Status            FunctionURLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizationType)",message="authorizationType is a required parameter"
+	Spec   FunctionURLSpec   `json:"spec"`
+	Status FunctionURLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

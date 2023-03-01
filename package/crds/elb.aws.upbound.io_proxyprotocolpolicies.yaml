@@ -153,7 +153,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - instancePorts
                 - region
                 type: object
               providerConfigRef:

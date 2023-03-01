@@ -101,8 +101,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - accountId
-                - email
                 - region
                 type: object
               providerConfigRef:

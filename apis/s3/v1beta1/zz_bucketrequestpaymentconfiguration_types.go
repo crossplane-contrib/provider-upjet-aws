@@ -39,8 +39,8 @@ type BucketRequestPaymentConfigurationParameters struct {
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
 	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
-	// +kubebuilder:validation:Required
-	Payer *string `json:"payer" tf:"payer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +72,9 @@ type BucketRequestPaymentConfigurationStatus struct {
 type BucketRequestPaymentConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketRequestPaymentConfigurationSpec   `json:"spec"`
-	Status            BucketRequestPaymentConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.payer)",message="payer is a required parameter"
+	Spec   BucketRequestPaymentConfigurationSpec   `json:"spec"`
+	Status BucketRequestPaymentConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

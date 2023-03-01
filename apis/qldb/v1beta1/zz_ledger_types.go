@@ -45,8 +45,8 @@ type LedgerParameters struct {
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
-	// +kubebuilder:validation:Required
-	PermissionsMode *string `json:"permissionsMode" tf:"permissions_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +82,9 @@ type LedgerStatus struct {
 type Ledger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LedgerSpec   `json:"spec"`
-	Status            LedgerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissionsMode)",message="permissionsMode is a required parameter"
+	Spec   LedgerSpec   `json:"spec"`
+	Status LedgerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

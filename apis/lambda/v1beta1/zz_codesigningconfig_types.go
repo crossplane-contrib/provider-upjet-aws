@@ -50,8 +50,8 @@ type CodeSigningConfigObservation struct {
 type CodeSigningConfigParameters struct {
 
 	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
-	// +kubebuilder:validation:Required
-	AllowedPublishers []AllowedPublishersParameters `json:"allowedPublishers" tf:"allowed_publishers,omitempty"`
+	// +kubebuilder:validation:Optional
+	AllowedPublishers []AllowedPublishersParameters `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
 
 	// Descriptive name for this code signing configuration.
 	// +kubebuilder:validation:Optional
@@ -101,8 +101,9 @@ type CodeSigningConfigStatus struct {
 type CodeSigningConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CodeSigningConfigSpec   `json:"spec"`
-	Status            CodeSigningConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allowedPublishers)",message="allowedPublishers is a required parameter"
+	Spec   CodeSigningConfigSpec   `json:"spec"`
+	Status CodeSigningConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

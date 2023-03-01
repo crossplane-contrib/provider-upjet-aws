@@ -238,7 +238,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - peerRegion
                 - region
                 type: object
               providerConfigRef:

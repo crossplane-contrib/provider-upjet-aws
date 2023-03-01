@@ -263,7 +263,6 @@ spec:
                     type: array
                 required:
                 - region
-                - trigger
                 type: object
               providerConfigRef:
                 default:

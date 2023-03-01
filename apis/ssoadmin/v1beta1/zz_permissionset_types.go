@@ -35,12 +35,12 @@ type PermissionSetParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
-	// +kubebuilder:validation:Required
-	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
 	// The name of the Permission Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -84,8 +84,10 @@ type PermissionSetStatus struct {
 type PermissionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSetSpec   `json:"spec"`
-	Status            PermissionSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceArn)",message="instanceArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   PermissionSetSpec   `json:"spec"`
+	Status PermissionSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

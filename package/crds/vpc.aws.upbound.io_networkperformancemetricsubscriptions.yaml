@@ -86,9 +86,7 @@ spec:
                       Valid values: p50. Default: p50.'
                     type: string
                 required:
-                - destination
                 - region
-                - source
                 type: object
               providerConfigRef:
                 default:

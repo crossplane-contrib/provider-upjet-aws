@@ -27,8 +27,8 @@ type ApplicationVersionObservation struct {
 type ApplicationVersionParameters struct {
 
 	// Name of the Beanstalk Application the version is associated with.
-	// +kubebuilder:validation:Required
-	Application *string `json:"application" tf:"application,omitempty"`
+	// +kubebuilder:validation:Optional
+	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 
 	// S3 bucket that contains the Application Version source bundle.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
@@ -100,8 +100,9 @@ type ApplicationVersionStatus struct {
 type ApplicationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationVersionSpec   `json:"spec"`
-	Status            ApplicationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.application)",message="application is a required parameter"
+	Spec   ApplicationVersionSpec   `json:"spec"`
+	Status ApplicationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -167,10 +167,7 @@ spec:
                       T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
                     type: string
                 required:
-                - apiCachingBehavior
                 - region
-                - ttl
-                - type
                 type: object
               providerConfigRef:
                 default:

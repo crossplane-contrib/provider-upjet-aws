@@ -361,7 +361,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - listener
                 - region
                 type: object
               providerConfigRef:

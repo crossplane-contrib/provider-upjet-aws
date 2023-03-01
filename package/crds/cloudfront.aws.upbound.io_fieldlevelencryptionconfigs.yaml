@@ -247,8 +247,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - contentTypeProfileConfig
-                - queryArgProfileConfig
                 - region
                 type: object
               providerConfigRef:

@@ -335,9 +335,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - migrationType
                 - region
-                - tableMappings
                 type: object
               providerConfigRef:
                 default:

@@ -190,9 +190,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
-                - tiering
                 type: object
               providerConfigRef:
                 default:

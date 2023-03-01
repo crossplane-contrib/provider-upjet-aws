@@ -154,7 +154,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - alias
                 - region
                 type: object
               providerConfigRef:

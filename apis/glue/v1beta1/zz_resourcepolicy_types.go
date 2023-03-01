@@ -24,8 +24,8 @@ type ResourcePolicyParameters struct {
 	EnableHybrid *string `json:"enableHybrid,omitempty" tf:"enable_hybrid,omitempty"`
 
 	// –  The policy to be applied to the aws glue data catalog.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +57,9 @@ type ResourcePolicyStatus struct {
 type ResourcePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourcePolicySpec   `json:"spec"`
-	Status            ResourcePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   ResourcePolicySpec   `json:"spec"`
+	Status ResourcePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

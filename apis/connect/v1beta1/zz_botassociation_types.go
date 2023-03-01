@@ -36,8 +36,8 @@ type BotAssociationParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Configuration information of an Amazon Lex (V1) bot. Detailed below.
-	// +kubebuilder:validation:Required
-	LexBot []LexBotParameters `json:"lexBot" tf:"lex_bot,omitempty"`
+	// +kubebuilder:validation:Optional
+	LexBot []LexBotParameters `json:"lexBot,omitempty" tf:"lex_bot,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -92,8 +92,9 @@ type BotAssociationStatus struct {
 type BotAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotAssociationSpec   `json:"spec"`
-	Status            BotAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lexBot)",message="lexBot is a required parameter"
+	Spec   BotAssociationSpec   `json:"spec"`
+	Status BotAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

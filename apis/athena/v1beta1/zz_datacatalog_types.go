@@ -28,12 +28,12 @@ type DataCatalogObservation struct {
 type DataCatalogParameters struct {
 
 	// Description of the data catalog.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key value pairs that specifies the Lambda function or functions to use for the data catalog. The mapping used depends on the catalog type.
-	// +kubebuilder:validation:Required
-	Parameters map[string]*string `json:"parameters" tf:"parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -45,8 +45,8 @@ type DataCatalogParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // DataCatalogSpec defines the desired state of DataCatalog
@@ -73,8 +73,11 @@ type DataCatalogStatus struct {
 type DataCatalog struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataCatalogSpec   `json:"spec"`
-	Status            DataCatalogStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parameters)",message="parameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   DataCatalogSpec   `json:"spec"`
+	Status DataCatalogStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -162,8 +162,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - completeLock
-                - policy
                 - region
                 type: object
               providerConfigRef:

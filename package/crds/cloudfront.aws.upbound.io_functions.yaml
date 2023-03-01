@@ -99,9 +99,7 @@ spec:
                       cloudfront-js-1.0 is valid.
                     type: string
                 required:
-                - codeSecretRef
                 - region
-                - runtime
                 type: object
               providerConfigRef:
                 default:

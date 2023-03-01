@@ -154,7 +154,6 @@ spec:
                     type: string
                 required:
                 - region
-                - targetId
                 type: object
               providerConfigRef:
                 default:

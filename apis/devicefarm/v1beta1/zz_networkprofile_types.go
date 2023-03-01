@@ -47,8 +47,8 @@ type NetworkProfileParameters struct {
 	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
 
 	// The name for the network profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the project for the network profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
@@ -118,8 +118,9 @@ type NetworkProfileStatus struct {
 type NetworkProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkProfileSpec   `json:"spec"`
-	Status            NetworkProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   NetworkProfileSpec   `json:"spec"`
+	Status NetworkProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

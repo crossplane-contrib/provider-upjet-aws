@@ -92,8 +92,6 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                required:
-                - assumeRolePolicy
                 type: object
               providerConfigRef:
                 default:

@@ -22,12 +22,12 @@ type DocumentationPartObservation struct {
 type DocumentationPartParameters struct {
 
 	// Location of the targeted API entity of the to-be-created documentation part. See below.
-	// +kubebuilder:validation:Required
-	Location []LocationParameters `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location []LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
-	// +kubebuilder:validation:Required
-	Properties *string `json:"properties" tf:"properties,omitempty"`
+	// +kubebuilder:validation:Optional
+	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -99,8 +99,10 @@ type DocumentationPartStatus struct {
 type DocumentationPart struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DocumentationPartSpec   `json:"spec"`
-	Status            DocumentationPartStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.properties)",message="properties is a required parameter"
+	Spec   DocumentationPartSpec   `json:"spec"`
+	Status DocumentationPartStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

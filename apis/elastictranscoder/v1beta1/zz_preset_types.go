@@ -81,8 +81,8 @@ type PresetParameters struct {
 	AudioCodecOptions []AudioCodecOptionsParameters `json:"audioCodecOptions,omitempty" tf:"audio_codec_options,omitempty"`
 
 	// The container type for the output file. Valid values are flac, flv, fmp4, gif, mp3, mp4, mpg, mxf, oga, ogg, ts, and webm.
-	// +kubebuilder:validation:Required
-	Container *string `json:"container" tf:"container,omitempty"`
+	// +kubebuilder:validation:Optional
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// A description of the preset (maximum 255 characters)
 	// +kubebuilder:validation:Optional
@@ -283,8 +283,9 @@ type PresetStatus struct {
 type Preset struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PresetSpec   `json:"spec"`
-	Status            PresetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.container)",message="container is a required parameter"
+	Spec   PresetSpec   `json:"spec"`
+	Status PresetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

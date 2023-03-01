@@ -234,9 +234,6 @@ spec:
                       see Available Voices in the Amazon Polly Developer Guide.
                     type: string
                 required:
-                - abortStatement
-                - childDirected
-                - intent
                 - region
                 type: object
               providerConfigRef:

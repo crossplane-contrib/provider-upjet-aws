@@ -99,12 +99,12 @@ type DistributionConfigurationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// One or more configuration blocks with distribution settings. Detailed below.
-	// +kubebuilder:validation:Required
-	Distribution []DistributionParameters `json:"distribution" tf:"distribution,omitempty"`
+	// +kubebuilder:validation:Optional
+	Distribution []DistributionParameters `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
 	// Name of the distribution configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// AWS Region for the distribution.
 	// Region is the region you'd like your resource to be created in.
@@ -265,8 +265,10 @@ type DistributionConfigurationStatus struct {
 type DistributionConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DistributionConfigurationSpec   `json:"spec"`
-	Status            DistributionConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.distribution)",message="distribution is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   DistributionConfigurationSpec   `json:"spec"`
+	Status DistributionConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

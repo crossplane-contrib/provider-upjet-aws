@@ -295,8 +295,6 @@ spec:
                       delivered messages.
                     type: string
                 required:
-                - platform
-                - platformCredentialSecretRef
                 - region
                 type: object
               providerConfigRef:

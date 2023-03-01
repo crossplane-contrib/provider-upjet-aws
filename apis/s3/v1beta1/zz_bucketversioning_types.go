@@ -49,8 +49,8 @@ type BucketVersioningParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block for the versioning parameters detailed below.
-	// +kubebuilder:validation:Required
-	VersioningConfiguration []VersioningConfigurationParameters `json:"versioningConfiguration" tf:"versioning_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	VersioningConfiguration []VersioningConfigurationParameters `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
 
 type VersioningConfigurationObservation struct {
@@ -91,8 +91,9 @@ type BucketVersioningStatus struct {
 type BucketVersioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketVersioningSpec   `json:"spec"`
-	Status            BucketVersioningStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.versioningConfiguration)",message="versioningConfiguration is a required parameter"
+	Spec   BucketVersioningSpec   `json:"spec"`
+	Status BucketVersioningStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

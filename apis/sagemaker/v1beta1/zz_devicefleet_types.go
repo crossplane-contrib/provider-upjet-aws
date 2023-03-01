@@ -38,8 +38,8 @@ type DeviceFleetParameters struct {
 	EnableIotRoleAlias *bool `json:"enableIotRoleAlias,omitempty" tf:"enable_iot_role_alias,omitempty"`
 
 	// Specifies details about the repository. see Output Config details below.
-	// +kubebuilder:validation:Required
-	OutputConfig []OutputConfigParameters `json:"outputConfig" tf:"output_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputConfig []OutputConfigParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -103,8 +103,9 @@ type DeviceFleetStatus struct {
 type DeviceFleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceFleetSpec   `json:"spec"`
-	Status            DeviceFleetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputConfig)",message="outputConfig is a required parameter"
+	Spec   DeviceFleetSpec   `json:"spec"`
+	Status DeviceFleetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -158,8 +158,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - lbPort
-                - name
                 - region
                 type: object
               providerConfigRef:

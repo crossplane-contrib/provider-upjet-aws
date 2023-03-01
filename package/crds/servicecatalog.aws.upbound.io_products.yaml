@@ -139,11 +139,7 @@ spec:
                       MARKETPLACE.
                     type: string
                 required:
-                - name
-                - owner
-                - provisioningArtifactParameters
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

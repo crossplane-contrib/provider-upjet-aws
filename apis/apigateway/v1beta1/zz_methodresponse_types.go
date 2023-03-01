@@ -77,8 +77,8 @@ type MethodResponseParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// HTTP status code
-	// +kubebuilder:validation:Required
-	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 // MethodResponseSpec defines the desired state of MethodResponse
@@ -105,8 +105,9 @@ type MethodResponseStatus struct {
 type MethodResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodResponseSpec   `json:"spec"`
-	Status            MethodResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statusCode)",message="statusCode is a required parameter"
+	Spec   MethodResponseSpec   `json:"spec"`
+	Status MethodResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

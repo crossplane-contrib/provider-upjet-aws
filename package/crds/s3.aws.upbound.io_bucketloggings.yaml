@@ -267,7 +267,6 @@ spec:
                     type: string
                 required:
                 - region
-                - targetPrefix
                 type: object
               providerConfigRef:
                 default:

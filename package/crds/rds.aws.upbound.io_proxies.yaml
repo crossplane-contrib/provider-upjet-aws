@@ -379,10 +379,7 @@ spec:
                       type: string
                     type: array
                 required:
-                - auth
-                - engineFamily
                 - region
-                - vpcSubnetIds
                 type: object
               providerConfigRef:
                 default:

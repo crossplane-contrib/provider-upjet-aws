@@ -22,12 +22,12 @@ type LBStickinessPolicyObservation struct {
 type LBStickinessPolicyParameters struct {
 
 	// The cookie duration in seconds. This determines the length of the session stickiness.
-	// +kubebuilder:validation:Required
-	CookieDuration *float64 `json:"cookieDuration" tf:"cookie_duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -59,8 +59,10 @@ type LBStickinessPolicyStatus struct {
 type LBStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBStickinessPolicySpec   `json:"spec"`
-	Status            LBStickinessPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cookieDuration)",message="cookieDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	Spec   LBStickinessPolicySpec   `json:"spec"`
+	Status LBStickinessPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

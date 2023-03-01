@@ -83,8 +83,6 @@ spec:
                     type: string
                 required:
                 - region
-                - thingGroupName
-                - thingName
                 type: object
               providerConfigRef:
                 default:

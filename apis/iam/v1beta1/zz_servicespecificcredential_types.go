@@ -28,8 +28,8 @@ type ServiceSpecificCredentialObservation struct {
 type ServiceSpecificCredentialParameters struct {
 
 	// The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.
-	// +kubebuilder:validation:Required
-	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// The status to be assigned to the service-specific credential. Valid values are Active and Inactive. Default value is Active.
 	// +kubebuilder:validation:Optional
@@ -73,8 +73,9 @@ type ServiceSpecificCredentialStatus struct {
 type ServiceSpecificCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceSpecificCredentialSpec   `json:"spec"`
-	Status            ServiceSpecificCredentialStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceName)",message="serviceName is a required parameter"
+	Spec   ServiceSpecificCredentialSpec   `json:"spec"`
+	Status ServiceSpecificCredentialStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

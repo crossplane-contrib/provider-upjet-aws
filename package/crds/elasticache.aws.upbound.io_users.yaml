@@ -112,10 +112,7 @@ spec:
                     description: The username of the user.
                     type: string
                 required:
-                - accessString
-                - engine
                 - region
-                - userName
                 type: object
               providerConfigRef:
                 default:

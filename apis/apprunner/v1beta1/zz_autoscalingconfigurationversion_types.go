@@ -36,8 +36,8 @@ type AutoScalingConfigurationVersionObservation struct {
 type AutoScalingConfigurationVersionParameters struct {
 
 	// Name of the auto scaling configuration.
-	// +kubebuilder:validation:Required
-	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName" tf:"auto_scaling_configuration_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName,omitempty" tf:"auto_scaling_configuration_name,omitempty"`
 
 	// Maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
 	// +kubebuilder:validation:Optional
@@ -85,8 +85,9 @@ type AutoScalingConfigurationVersionStatus struct {
 type AutoScalingConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutoScalingConfigurationVersionSpec   `json:"spec"`
-	Status            AutoScalingConfigurationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoScalingConfigurationName)",message="autoScalingConfigurationName is a required parameter"
+	Spec   AutoScalingConfigurationVersionSpec   `json:"spec"`
+	Status AutoScalingConfigurationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

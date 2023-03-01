@@ -134,8 +134,8 @@ type StageParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Name of the stage
-	// +kubebuilder:validation:Required
-	StageName *string `json:"stageName" tf:"stage_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -174,8 +174,9 @@ type StageStatus struct {
 type Stage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StageSpec   `json:"spec"`
-	Status            StageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stageName)",message="stageName is a required parameter"
+	Spec   StageSpec   `json:"spec"`
+	Status StageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

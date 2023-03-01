@@ -249,9 +249,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - eventTimeFeatureName
-                - featureDefinition
-                - recordIdentifierFeatureName
                 - region
                 type: object
               providerConfigRef:

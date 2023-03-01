@@ -33,8 +33,8 @@ type RouteCalculatorObservation struct {
 type RouteCalculatorParameters struct {
 
 	// Specifies the data provider of traffic and road network data.
-	// +kubebuilder:validation:Required
-	DataSource *string `json:"dataSource" tf:"data_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// The optional description for the route calculator resource.
 	// +kubebuilder:validation:Optional
@@ -74,8 +74,9 @@ type RouteCalculatorStatus struct {
 type RouteCalculator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteCalculatorSpec   `json:"spec"`
-	Status            RouteCalculatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataSource)",message="dataSource is a required parameter"
+	Spec   RouteCalculatorSpec   `json:"spec"`
+	Status RouteCalculatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

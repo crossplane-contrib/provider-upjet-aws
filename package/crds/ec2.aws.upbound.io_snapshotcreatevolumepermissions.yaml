@@ -150,7 +150,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - accountId
                 - region
                 type: object
               providerConfigRef:

@@ -166,7 +166,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - functionVersion
                 - region
                 type: object
               providerConfigRef:

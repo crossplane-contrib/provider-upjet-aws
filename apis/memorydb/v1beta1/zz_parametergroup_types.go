@@ -32,8 +32,8 @@ type ParameterGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The engine version that the parameter group can be used with.
-	// +kubebuilder:validation:Required
-	Family *string `json:"family" tf:"family,omitempty"`
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Set of MemoryDB parameters to apply. Any parameters not specified will fall back to their family defaults. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -87,8 +87,9 @@ type ParameterGroupStatus struct {
 type ParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ParameterGroupSpec   `json:"spec"`
-	Status            ParameterGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
+	Spec   ParameterGroupSpec   `json:"spec"`
+	Status ParameterGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

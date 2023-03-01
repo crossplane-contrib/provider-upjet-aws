@@ -268,8 +268,6 @@ spec:
                     description: A statement identifier prefix. Conflicts with statement_id.
                     type: string
                 required:
-                - action
-                - principal
                 - region
                 type: object
               providerConfigRef:

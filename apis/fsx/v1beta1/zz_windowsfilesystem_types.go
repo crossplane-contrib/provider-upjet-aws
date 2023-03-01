@@ -209,8 +209,8 @@ type WindowsFileSystemParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
-	// +kubebuilder:validation:Required
-	ThroughputCapacity *float64 `json:"throughputCapacity" tf:"throughput_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
@@ -241,8 +241,9 @@ type WindowsFileSystemStatus struct {
 type WindowsFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WindowsFileSystemSpec   `json:"spec"`
-	Status            WindowsFileSystemStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
+	Spec   WindowsFileSystemSpec   `json:"spec"`
+	Status WindowsFileSystemStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

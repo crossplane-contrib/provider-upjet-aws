@@ -28,8 +28,8 @@ type EBSVolumeObservation struct {
 type EBSVolumeParameters struct {
 
 	// The AZ where the EBS volume will exist.
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// If true, the disk will be encrypted.
 	// +kubebuilder:validation:Optional
@@ -114,8 +114,9 @@ type EBSVolumeStatus struct {
 type EBSVolume struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EBSVolumeSpec   `json:"spec"`
-	Status            EBSVolumeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	Spec   EBSVolumeSpec   `json:"spec"`
+	Status EBSVolumeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

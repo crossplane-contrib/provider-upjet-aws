@@ -530,7 +530,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - domainName
                 - region
                 type: object
               providerConfigRef:

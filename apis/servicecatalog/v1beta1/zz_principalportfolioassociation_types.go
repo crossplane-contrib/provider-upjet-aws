@@ -22,8 +22,8 @@ type PrincipalPortfolioAssociationObservation struct {
 type PrincipalPortfolioAssociationParameters struct {
 
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
-	// +kubebuilder:validation:Required
-	AcceptLanguage *string `json:"acceptLanguage" tf:"accept_language,omitempty"`
+	// +kubebuilder:validation:Optional
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=Portfolio
@@ -86,8 +86,9 @@ type PrincipalPortfolioAssociationStatus struct {
 type PrincipalPortfolioAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrincipalPortfolioAssociationSpec   `json:"spec"`
-	Status            PrincipalPortfolioAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptLanguage)",message="acceptLanguage is a required parameter"
+	Spec   PrincipalPortfolioAssociationSpec   `json:"spec"`
+	Status PrincipalPortfolioAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

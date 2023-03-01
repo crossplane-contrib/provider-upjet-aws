@@ -72,7 +72,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - configuration
                 - region
                 type: object
               providerConfigRef:

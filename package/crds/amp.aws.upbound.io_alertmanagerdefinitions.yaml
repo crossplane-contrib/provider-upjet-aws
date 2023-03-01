@@ -151,7 +151,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - definition
                 - region
                 type: object
               providerConfigRef:

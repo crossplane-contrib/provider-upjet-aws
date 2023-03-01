@@ -61,8 +61,8 @@ type DelegatedAdministratorParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
-	// +kubebuilder:validation:Required
-	ServicePrincipal *string `json:"servicePrincipal" tf:"service_principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 }
 
 // DelegatedAdministratorSpec defines the desired state of DelegatedAdministrator
@@ -89,8 +89,9 @@ type DelegatedAdministratorStatus struct {
 type DelegatedAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DelegatedAdministratorSpec   `json:"spec"`
-	Status            DelegatedAdministratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.servicePrincipal)",message="servicePrincipal is a required parameter"
+	Spec   DelegatedAdministratorSpec   `json:"spec"`
+	Status DelegatedAdministratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

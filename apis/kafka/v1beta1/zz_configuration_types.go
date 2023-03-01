@@ -35,8 +35,8 @@ type ConfigurationParameters struct {
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Name of the configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -44,8 +44,8 @@ type ConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
-	// +kubebuilder:validation:Required
-	ServerProperties *string `json:"serverProperties" tf:"server_properties,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServerProperties *string `json:"serverProperties,omitempty" tf:"server_properties,omitempty"`
 }
 
 // ConfigurationSpec defines the desired state of Configuration
@@ -72,8 +72,10 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSpec   `json:"spec"`
-	Status            ConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverProperties)",message="serverProperties is a required parameter"
+	Spec   ConfigurationSpec   `json:"spec"`
+	Status ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

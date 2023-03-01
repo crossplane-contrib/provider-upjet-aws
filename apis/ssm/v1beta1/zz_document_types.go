@@ -83,16 +83,16 @@ type DocumentParameters struct {
 	AttachmentsSource []AttachmentsSourceParameters `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
 
 	// The JSON or YAML content of the document.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The format of the document. Valid document types include: JSON and YAML
 	// +kubebuilder:validation:Optional
 	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
 
 	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
-	// +kubebuilder:validation:Required
-	DocumentType *string `json:"documentType" tf:"document_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
 	// Additional Permissions to attach to the document. See Permissions below for details.
 	// +kubebuilder:validation:Optional
@@ -156,8 +156,10 @@ type DocumentStatus struct {
 type Document struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DocumentSpec   `json:"spec"`
-	Status            DocumentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.documentType)",message="documentType is a required parameter"
+	Spec   DocumentSpec   `json:"spec"`
+	Status DocumentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

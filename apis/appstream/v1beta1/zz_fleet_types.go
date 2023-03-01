@@ -52,7 +52,7 @@ type FleetObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block for the desired capacity of the fleet. See below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ComputeCapacity []ComputeCapacityObservation `json:"computeCapacity,omitempty" tf:"compute_capacity,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when the fleet was created.
@@ -70,8 +70,8 @@ type FleetObservation struct {
 type FleetParameters struct {
 
 	// Configuration block for the desired capacity of the fleet. See below.
-	// +kubebuilder:validation:Required
-	ComputeCapacity []ComputeCapacityParameters `json:"computeCapacity" tf:"compute_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	ComputeCapacity []ComputeCapacityParameters `json:"computeCapacity,omitempty" tf:"compute_capacity,omitempty"`
 
 	// Description to display.
 	// +kubebuilder:validation:Optional
@@ -124,16 +124,16 @@ type FleetParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// Instance type to use when launching fleet instances.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Maximum amount of time that a streaming session can remain active, in seconds.
 	// +kubebuilder:validation:Optional
 	MaxUserDurationInSeconds *float64 `json:"maxUserDurationInSeconds,omitempty" tf:"max_user_duration_in_seconds,omitempty"`
 
 	// Unique name for the fleet.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -202,8 +202,11 @@ type FleetStatus struct {
 type Fleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FleetSpec   `json:"spec"`
-	Status            FleetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.computeCapacity)",message="computeCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FleetSpec   `json:"spec"`
+	Status FleetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

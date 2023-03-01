@@ -95,9 +95,7 @@ spec:
                       at this time is "ipsec.1".
                     type: string
                 required:
-                - bgpAsn
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

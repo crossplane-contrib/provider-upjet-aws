@@ -83,7 +83,6 @@ spec:
                     type: string
                 required:
                 - region
-                - workflowExecutionRetentionPeriodInDays
                 type: object
               providerConfigRef:
                 default:

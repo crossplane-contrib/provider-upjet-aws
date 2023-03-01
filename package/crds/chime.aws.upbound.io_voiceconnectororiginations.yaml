@@ -190,7 +190,6 @@ spec:
                     type: object
                 required:
                 - region
-                - route
                 type: object
               providerConfigRef:
                 default:

@@ -503,9 +503,6 @@ spec:
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean
-                required:
-                - name
-                - shortName
                 type: object
               providerConfigRef:
                 default:

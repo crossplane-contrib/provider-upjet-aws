@@ -35,8 +35,8 @@ type DiskAttachmentParameters struct {
 	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
 
 	// The disk path to expose to the instance.
-	// +kubebuilder:validation:Required
-	DiskPath *string `json:"diskPath" tf:"disk_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
 
 	// The name of the Lightsail Instance to attach to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
@@ -81,8 +81,9 @@ type DiskAttachmentStatus struct {
 type DiskAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DiskAttachmentSpec   `json:"spec"`
-	Status            DiskAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.diskPath)",message="diskPath is a required parameter"
+	Spec   DiskAttachmentSpec   `json:"spec"`
+	Status DiskAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

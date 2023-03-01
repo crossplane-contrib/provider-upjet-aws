@@ -35,8 +35,8 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
 	// +kubebuilder:validation:Optional
@@ -63,8 +63,8 @@ type RuleParameters struct {
 	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
 	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
-	// +kubebuilder:validation:Required
-	RuleType *string `json:"ruleType" tf:"rule_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -114,8 +114,10 @@ type RuleStatus struct {
 type Rule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RuleSpec   `json:"spec"`
-	Status            RuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainName)",message="domainName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleType)",message="ruleType is a required parameter"
+	Spec   RuleSpec   `json:"spec"`
+	Status RuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

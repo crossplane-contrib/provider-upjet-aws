@@ -183,7 +183,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - certificateSecretRef
                 - region
                 type: object
               providerConfigRef:

@@ -52,8 +52,8 @@ type AcceleratorParameters struct {
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the accelerator.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -119,8 +119,9 @@ type AcceleratorStatus struct {
 type Accelerator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AcceleratorSpec   `json:"spec"`
-	Status            AcceleratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AcceleratorSpec   `json:"spec"`
+	Status AcceleratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

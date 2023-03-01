@@ -184,8 +184,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceType
-                - targets
                 type: object
               providerConfigRef:
                 default:

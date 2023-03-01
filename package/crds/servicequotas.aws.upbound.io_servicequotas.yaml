@@ -86,10 +86,7 @@ spec:
                       of the pending request.
                     type: number
                 required:
-                - quotaCode
                 - region
-                - serviceCode
-                - value
                 type: object
               providerConfigRef:
                 default:

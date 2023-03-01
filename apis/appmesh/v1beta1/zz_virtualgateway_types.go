@@ -499,16 +499,16 @@ type VirtualGatewayObservation struct {
 type VirtualGatewayParameters struct {
 
 	// Name of the service mesh in which to create the virtual gateway. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	MeshName *string `json:"meshName" tf:"mesh_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the virtual gateway. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -516,8 +516,8 @@ type VirtualGatewayParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Virtual gateway specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []VirtualGatewaySpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []VirtualGatewaySpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -566,8 +566,11 @@ type VirtualGatewayStatus struct {
 type VirtualGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualGatewaySpec   `json:"spec"`
-	Status            VirtualGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.meshName)",message="meshName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   VirtualGatewaySpec   `json:"spec"`
+	Status VirtualGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

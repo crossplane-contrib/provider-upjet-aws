@@ -159,10 +159,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - keyName
-                - keyRole
                 - region
-                - secondsToLive
                 type: object
               providerConfigRef:
                 default:

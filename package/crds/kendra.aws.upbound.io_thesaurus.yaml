@@ -400,9 +400,7 @@ spec:
                       matching keys will overwrite those defined at the provider-level.
                     type: object
                 required:
-                - name
                 - region
-                - sourceS3Path
                 type: object
               providerConfigRef:
                 default:

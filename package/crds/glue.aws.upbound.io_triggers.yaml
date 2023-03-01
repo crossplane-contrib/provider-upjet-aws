@@ -515,9 +515,7 @@ spec:
                       triggers.
                     type: string
                 required:
-                - actions
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

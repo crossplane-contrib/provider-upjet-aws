@@ -337,7 +337,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - domainName
                 - region
                 type: object
               providerConfigRef:

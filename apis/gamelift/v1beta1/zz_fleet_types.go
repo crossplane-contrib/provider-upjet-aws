@@ -96,8 +96,8 @@ type FleetParameters struct {
 	EC2InboundPermission []EC2InboundPermissionParameters `json:"ec2InboundPermission,omitempty" tf:"ec2_inbound_permission,omitempty"`
 
 	// Name of an EC2 instance typeE.g., t2.micro
-	// +kubebuilder:validation:Required
-	EC2InstanceType *string `json:"ec2InstanceType" tf:"ec2_instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EC2InstanceType *string `json:"ec2InstanceType,omitempty" tf:"ec2_instance_type,omitempty"`
 
 	// Type of fleet. This value must be ON_DEMAND or SPOT. Defaults to ON_DEMAND.
 	// +kubebuilder:validation:Optional
@@ -122,8 +122,8 @@ type FleetParameters struct {
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`
 
 	// The name of the fleet.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Game session protection policy to apply to all instances in this fleetE.g., FullProtection. Defaults to NoProtection.
 	// +kubebuilder:validation:Optional
@@ -225,8 +225,10 @@ type FleetStatus struct {
 type Fleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FleetSpec   `json:"spec"`
-	Status            FleetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ec2InstanceType)",message="ec2InstanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FleetSpec   `json:"spec"`
+	Status FleetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

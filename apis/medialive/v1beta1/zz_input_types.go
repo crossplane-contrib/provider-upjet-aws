@@ -75,8 +75,8 @@ type InputParameters struct {
 	MediaConnectFlows []MediaConnectFlowsParameters `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
 
 	// Name of the input.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -106,8 +106,8 @@ type InputParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Settings for a private VPC Input. See VPC for more details.
 	// +kubebuilder:validation:Optional
@@ -180,8 +180,10 @@ type InputStatus struct {
 type Input struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InputSpec   `json:"spec"`
-	Status            InputStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   InputSpec   `json:"spec"`
+	Status InputStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

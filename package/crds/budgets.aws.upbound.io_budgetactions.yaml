@@ -430,13 +430,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - actionThreshold
-                - actionType
-                - approvalModel
-                - definition
-                - notificationType
                 - region
-                - subscriber
                 type: object
               providerConfigRef:
                 default:

@@ -102,11 +102,11 @@ type DirectoryParameters struct {
 	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
 
 	// The fully qualified name for the directory, such as corp.example.com
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The password for the directory administrator or connector user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -193,8 +193,10 @@ type DirectoryStatus struct {
 type Directory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DirectorySpec   `json:"spec"`
-	Status            DirectoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	Spec   DirectorySpec   `json:"spec"`
+	Status DirectoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

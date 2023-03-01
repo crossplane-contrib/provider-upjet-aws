@@ -233,7 +233,6 @@ spec:
                     type: string
                 required:
                 - region
-                - routeResponseKey
                 type: object
               providerConfigRef:
                 default:

@@ -89,11 +89,7 @@ spec:
                       requests. Valid values: sigv4.'
                     type: string
                 required:
-                - name
-                - originAccessControlOriginType
                 - region
-                - signingBehavior
-                - signingProtocol
                 type: object
               providerConfigRef:
                 default:

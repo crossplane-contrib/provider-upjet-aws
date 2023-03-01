@@ -165,10 +165,7 @@ spec:
                     description: 'The type of the schema. Valid values: OpenApi3.'
                     type: string
                 required:
-                - content
-                - name
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

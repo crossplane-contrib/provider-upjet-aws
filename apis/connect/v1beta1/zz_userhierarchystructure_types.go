@@ -142,7 +142,7 @@ type LevelTwoParameters struct {
 type UserHierarchyStructureObservation struct {
 
 	// A block that defines the hierarchy structure's levels. The hierarchy_structure block is documented below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	HierarchyStructure []HierarchyStructureObservation `json:"hierarchyStructure,omitempty" tf:"hierarchy_structure,omitempty"`
 
 	// The identifier of the hosting Amazon Connect Instance.
@@ -152,8 +152,8 @@ type UserHierarchyStructureObservation struct {
 type UserHierarchyStructureParameters struct {
 
 	// A block that defines the hierarchy structure's levels. The hierarchy_structure block is documented below.
-	// +kubebuilder:validation:Required
-	HierarchyStructure []HierarchyStructureParameters `json:"hierarchyStructure" tf:"hierarchy_structure,omitempty"`
+	// +kubebuilder:validation:Optional
+	HierarchyStructure []HierarchyStructureParameters `json:"hierarchyStructure,omitempty" tf:"hierarchy_structure,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
@@ -199,8 +199,9 @@ type UserHierarchyStructureStatus struct {
 type UserHierarchyStructure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserHierarchyStructureSpec   `json:"spec"`
-	Status            UserHierarchyStructureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hierarchyStructure)",message="hierarchyStructure is a required parameter"
+	Spec   UserHierarchyStructureSpec   `json:"spec"`
+	Status UserHierarchyStructureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

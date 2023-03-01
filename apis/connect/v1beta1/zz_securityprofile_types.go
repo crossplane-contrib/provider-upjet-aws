@@ -52,8 +52,8 @@ type SecurityProfileParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Security Profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
 	// +kubebuilder:validation:Optional
@@ -93,8 +93,9 @@ type SecurityProfileStatus struct {
 type SecurityProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityProfileSpec   `json:"spec"`
-	Status            SecurityProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SecurityProfileSpec   `json:"spec"`
+	Status SecurityProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

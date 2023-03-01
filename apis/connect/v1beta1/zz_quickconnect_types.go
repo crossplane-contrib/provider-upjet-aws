@@ -95,12 +95,12 @@ type QuickConnectParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Quick Connect.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that defines the configuration information for the Quick Connect: quick_connect_type and one of phone_config, queue_config, user_config . The Quick Connect Config block is documented below.
-	// +kubebuilder:validation:Required
-	QuickConnectConfig []QuickConnectConfigParameters `json:"quickConnectConfig" tf:"quick_connect_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	QuickConnectConfig []QuickConnectConfigParameters `json:"quickConnectConfig,omitempty" tf:"quick_connect_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -150,8 +150,10 @@ type QuickConnectStatus struct {
 type QuickConnect struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QuickConnectSpec   `json:"spec"`
-	Status            QuickConnectStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.quickConnectConfig)",message="quickConnectConfig is a required parameter"
+	Spec   QuickConnectSpec   `json:"spec"`
+	Status QuickConnectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

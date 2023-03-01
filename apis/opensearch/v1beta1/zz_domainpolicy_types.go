@@ -20,8 +20,8 @@ type DomainPolicyObservation struct {
 type DomainPolicyParameters struct {
 
 	// IAM policy document specifying the access policies for the domain
-	// +kubebuilder:validation:Required
-	AccessPolicies *string `json:"accessPolicies" tf:"access_policies,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Name of the domain.
 	// +crossplane:generate:reference:type=Domain
@@ -66,8 +66,9 @@ type DomainPolicyStatus struct {
 type DomainPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainPolicySpec   `json:"spec"`
-	Status            DomainPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessPolicies)",message="accessPolicies is a required parameter"
+	Spec   DomainPolicySpec   `json:"spec"`
+	Status DomainPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

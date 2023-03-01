@@ -42,8 +42,8 @@ type PortfolioShareParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
-	// +kubebuilder:validation:Required
-	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -59,8 +59,8 @@ type PortfolioShareParameters struct {
 	ShareTagOptions *bool `json:"shareTagOptions,omitempty" tf:"share_tag_options,omitempty"`
 
 	// Type of portfolio share. Valid values are ACCOUNT (an external account), ORGANIZATION (a share to every account in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT (a share to an account in an organization).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Whether to wait (up to the timeout) for the share to be accepted. Organizational shares are automatically accepted.
 	// +kubebuilder:validation:Optional
@@ -91,8 +91,10 @@ type PortfolioShareStatus struct {
 type PortfolioShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PortfolioShareSpec   `json:"spec"`
-	Status            PortfolioShareStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   PortfolioShareSpec   `json:"spec"`
+	Status PortfolioShareStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

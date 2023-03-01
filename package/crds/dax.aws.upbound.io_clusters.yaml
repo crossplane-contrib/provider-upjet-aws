@@ -280,9 +280,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - nodeType
                 - region
-                - replicationFactor
                 type: object
               providerConfigRef:
                 default:

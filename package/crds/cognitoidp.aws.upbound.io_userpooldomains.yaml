@@ -227,7 +227,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - domain
                 - region
                 type: object
               providerConfigRef:

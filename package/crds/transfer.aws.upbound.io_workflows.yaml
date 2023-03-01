@@ -489,7 +489,6 @@ spec:
                     type: object
                 required:
                 - region
-                - steps
                 type: object
               providerConfigRef:
                 default:

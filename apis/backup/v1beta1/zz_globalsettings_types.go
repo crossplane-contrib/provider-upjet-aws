@@ -22,8 +22,8 @@ type GlobalSettingsObservation struct {
 type GlobalSettingsParameters struct {
 
 	// A list of resources along with the opt-in preferences for the account.
-	// +kubebuilder:validation:Required
-	GlobalSettings map[string]*string `json:"globalSettings" tf:"global_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -55,8 +55,9 @@ type GlobalSettingsStatus struct {
 type GlobalSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GlobalSettingsSpec   `json:"spec"`
-	Status            GlobalSettingsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.globalSettings)",message="globalSettings is a required parameter"
+	Spec   GlobalSettingsSpec   `json:"spec"`
+	Status GlobalSettingsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

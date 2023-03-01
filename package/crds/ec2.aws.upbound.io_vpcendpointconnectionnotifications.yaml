@@ -235,7 +235,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - connectionEvents
                 - region
                 type: object
               providerConfigRef:

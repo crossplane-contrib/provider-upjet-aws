@@ -58,8 +58,8 @@ type SelectionParameters struct {
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// The display name of a resource selection document.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
 	// +kubebuilder:validation:Optional
@@ -190,8 +190,9 @@ type SelectionStatus struct {
 type Selection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SelectionSpec   `json:"spec"`
-	Status            SelectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SelectionSpec   `json:"spec"`
+	Status SelectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

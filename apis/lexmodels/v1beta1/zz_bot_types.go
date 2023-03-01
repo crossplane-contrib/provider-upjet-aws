@@ -62,12 +62,12 @@ type BotObservation struct {
 type BotParameters struct {
 
 	// The message that Amazon Lex uses to abort a conversation. Attributes are documented under statement.
-	// +kubebuilder:validation:Required
-	AbortStatement []AbortStatementParameters `json:"abortStatement" tf:"abort_statement,omitempty"`
+	// +kubebuilder:validation:Optional
+	AbortStatement []AbortStatementParameters `json:"abortStatement,omitempty" tf:"abort_statement,omitempty"`
 
 	// By specifying true, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. For more information see the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
-	// +kubebuilder:validation:Required
-	ChildDirected *bool `json:"childDirected" tf:"child_directed,omitempty"`
+	// +kubebuilder:validation:Optional
+	ChildDirected *bool `json:"childDirected,omitempty" tf:"child_directed,omitempty"`
 
 	// The message that Amazon Lex uses when it doesn't understand the user's request. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
@@ -94,8 +94,8 @@ type BotParameters struct {
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
 	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
-	// +kubebuilder:validation:Required
-	Intent []IntentParameters `json:"intent" tf:"intent,omitempty"`
+	// +kubebuilder:validation:Optional
+	Intent []IntentParameters `json:"intent,omitempty" tf:"intent,omitempty"`
 
 	// Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. For available locales, see Amazon Lex Bot PutBot API Docs. Default is en-US.
 	// +kubebuilder:validation:Optional
@@ -217,8 +217,11 @@ type BotStatus struct {
 type Bot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotSpec   `json:"spec"`
-	Status            BotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.abortStatement)",message="abortStatement is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.childDirected)",message="childDirected is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.intent)",message="intent is a required parameter"
+	Spec   BotSpec   `json:"spec"`
+	Status BotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

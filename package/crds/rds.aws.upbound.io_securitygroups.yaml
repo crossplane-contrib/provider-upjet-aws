@@ -96,7 +96,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - ingress
                 - region
                 type: object
               providerConfigRef:

@@ -168,9 +168,7 @@ spec:
                       | DID.'
                     type: string
                 required:
-                - countryCode
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

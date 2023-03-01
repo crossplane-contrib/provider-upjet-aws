@@ -92,12 +92,12 @@ type MetricStreamParameters struct {
 	IncludeFilter []IncludeFilterParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
 	// Friendly name of the metric stream. Conflicts with name_prefix.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
-	// +kubebuilder:validation:Required
-	OutputFormat *string `json:"outputFormat" tf:"output_format,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -165,8 +165,10 @@ type MetricStreamStatus struct {
 type MetricStream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricStreamSpec   `json:"spec"`
-	Status            MetricStreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputFormat)",message="outputFormat is a required parameter"
+	Spec   MetricStreamSpec   `json:"spec"`
+	Status MetricStreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

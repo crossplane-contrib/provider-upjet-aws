@@ -79,8 +79,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - accountId
-                - email
                 - region
                 type: object
               providerConfigRef:

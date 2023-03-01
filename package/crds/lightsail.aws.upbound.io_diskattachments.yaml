@@ -226,7 +226,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - diskPath
                 - region
                 type: object
               providerConfigRef:

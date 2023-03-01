@@ -27,8 +27,8 @@ type LicenseAssociationObservation struct {
 type LicenseAssociationParameters struct {
 
 	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
-	// +kubebuilder:validation:Required
-	LicenseType *string `json:"licenseType" tf:"license_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -74,8 +74,9 @@ type LicenseAssociationStatus struct {
 type LicenseAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LicenseAssociationSpec   `json:"spec"`
-	Status            LicenseAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.licenseType)",message="licenseType is a required parameter"
+	Spec   LicenseAssociationSpec   `json:"spec"`
+	Status LicenseAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

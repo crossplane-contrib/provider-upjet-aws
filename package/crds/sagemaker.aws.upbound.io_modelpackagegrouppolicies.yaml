@@ -151,7 +151,6 @@ spec:
                     type: string
                 required:
                 - region
-                - resourcePolicy
                 type: object
               providerConfigRef:
                 default:

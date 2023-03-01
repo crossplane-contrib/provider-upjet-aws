@@ -971,8 +971,8 @@ type VirtualNodeParameters struct {
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the virtual node. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -980,8 +980,8 @@ type VirtualNodeParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Virtual node specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []VirtualNodeSpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []VirtualNodeSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -1048,8 +1048,10 @@ type VirtualNodeStatus struct {
 type VirtualNode struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNodeSpec   `json:"spec"`
-	Status            VirtualNodeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   VirtualNodeSpec   `json:"spec"`
+	Status VirtualNodeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

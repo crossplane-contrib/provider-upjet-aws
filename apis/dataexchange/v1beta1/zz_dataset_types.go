@@ -28,16 +28,16 @@ type DataSetObservation struct {
 type DataSetParameters struct {
 
 	// The type of asset that is added to a data set. Valid values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.
-	// +kubebuilder:validation:Required
-	AssetType *string `json:"assetType" tf:"asset_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AssetType *string `json:"assetType,omitempty" tf:"asset_type,omitempty"`
 
 	// A description for the data set.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the data set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -73,8 +73,11 @@ type DataSetStatus struct {
 type DataSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataSetSpec   `json:"spec"`
-	Status            DataSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.assetType)",message="assetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   DataSetSpec   `json:"spec"`
+	Status DataSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

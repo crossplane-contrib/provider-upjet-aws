@@ -207,12 +207,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - destinationCidrBlock
                 - region
-                - ruleAction
-                - ruleNumber
-                - sourceCidrBlock
-                - trafficDirection
                 type: object
               providerConfigRef:
                 default:

@@ -278,8 +278,8 @@ type RuleGroupObservation struct {
 type RuleGroupParameters struct {
 
 	// The maximum number of operating resources that this rule group can use. For a stateless rule group, the capacity required is the sum of the capacity requirements of the individual rules. For a stateful rule group, the minimum capacity required is the number of individual rules.
-	// +kubebuilder:validation:Required
-	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// A friendly description of the rule group.
 	// +kubebuilder:validation:Optional
@@ -290,8 +290,8 @@ type RuleGroupParameters struct {
 	EncryptionConfiguration []RuleGroupEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// A friendly name of the rule group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -311,8 +311,8 @@ type RuleGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether the rule group is stateless (containing stateless rules) or stateful (containing stateful rules). Valid values include: STATEFUL or STATELESS.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RuleGroupRuleGroupObservation struct {
@@ -526,8 +526,11 @@ type RuleGroupStatus struct {
 type RuleGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RuleGroupSpec   `json:"spec"`
-	Status            RuleGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.capacity)",message="capacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   RuleGroupSpec   `json:"spec"`
+	Status RuleGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -155,9 +155,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - cidrBlock
                 - region
-                - reservationType
                 type: object
               providerConfigRef:
                 default:

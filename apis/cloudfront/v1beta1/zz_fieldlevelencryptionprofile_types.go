@@ -69,12 +69,12 @@ type FieldLevelEncryptionProfileParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The encryption entities config block for field-level encryption profiles that contains an attribute items which includes the encryption key and field pattern specifications.
-	// +kubebuilder:validation:Required
-	EncryptionEntities []EncryptionEntitiesParameters `json:"encryptionEntities" tf:"encryption_entities,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncryptionEntities []EncryptionEntitiesParameters `json:"encryptionEntities,omitempty" tf:"encryption_entities,omitempty"`
 
 	// The name of the Field Level Encryption Profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -115,8 +115,10 @@ type FieldLevelEncryptionProfileStatus struct {
 type FieldLevelEncryptionProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FieldLevelEncryptionProfileSpec   `json:"spec"`
-	Status            FieldLevelEncryptionProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encryptionEntities)",message="encryptionEntities is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FieldLevelEncryptionProfileSpec   `json:"spec"`
+	Status FieldLevelEncryptionProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

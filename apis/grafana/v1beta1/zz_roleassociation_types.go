@@ -29,8 +29,8 @@ type RoleAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The grafana role. Valid values can be found here.
-	// +kubebuilder:validation:Required
-	Role *string `json:"role" tf:"role,omitempty"`
+	// +kubebuilder:validation:Optional
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The AWS SSO user ids to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
@@ -74,8 +74,9 @@ type RoleAssociationStatus struct {
 type RoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleAssociationSpec   `json:"spec"`
-	Status            RoleAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.role)",message="role is a required parameter"
+	Spec   RoleAssociationSpec   `json:"spec"`
+	Status RoleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -31,8 +31,8 @@ type CapacityReservationObservation struct {
 type CapacityReservationParameters struct {
 
 	// The Availability Zone in which to create the Capacity Reservation.
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Indicates whether the Capacity Reservation supports EBS-optimized instances.
 	// +kubebuilder:validation:Optional
@@ -51,20 +51,20 @@ type CapacityReservationParameters struct {
 	EphemeralStorage *bool `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// The number of instances for which to reserve capacity.
-	// +kubebuilder:validation:Required
-	InstanceCount *float64 `json:"instanceCount" tf:"instance_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts. Specify either open or targeted.
 	// +kubebuilder:validation:Optional
 	InstanceMatchCriteria *string `json:"instanceMatchCriteria,omitempty" tf:"instance_match_criteria,omitempty"`
 
 	// The type of operating system for which to reserve capacity. Valid options are Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard or Windows with SQL Server Web.
-	// +kubebuilder:validation:Required
-	InstancePlatform *string `json:"instancePlatform" tf:"instance_platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstancePlatform *string `json:"instancePlatform,omitempty" tf:"instance_platform,omitempty"`
 
 	// The instance type for which to reserve capacity.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
 	// +kubebuilder:validation:Optional
@@ -112,8 +112,12 @@ type CapacityReservationStatus struct {
 type CapacityReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CapacityReservationSpec   `json:"spec"`
-	Status            CapacityReservationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceCount)",message="instanceCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePlatform)",message="instancePlatform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   CapacityReservationSpec   `json:"spec"`
+	Status CapacityReservationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -242,9 +242,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
-                - ruleSetName
                 type: object
               providerConfigRef:
                 default:

@@ -905,8 +905,8 @@ type TopicRuleParameters struct {
 	Elasticsearch []ElasticsearchParameters `json:"elasticsearch,omitempty" tf:"elasticsearch,omitempty"`
 
 	// Specifies whether the rule is enabled.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Configuration block with error action to be associated with the rule. See the documentation for cloudwatch_alarm, cloudwatch_logs, cloudwatch_metric, dynamodb, dynamodbv2, elasticsearch, firehose, http, iot_analytics, iot_events, kafka, kinesis, lambda, republish, s3, sns, sqs, step_functions, timestream configuration blocks for further configuration details.
 	// +kubebuilder:validation:Optional
@@ -945,12 +945,12 @@ type TopicRuleParameters struct {
 	S3 []TopicRuleS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
 	// The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference) in the AWS IoT Developer Guide.
-	// +kubebuilder:validation:Required
-	SQL *string `json:"sql" tf:"sql,omitempty"`
+	// +kubebuilder:validation:Optional
+	SQL *string `json:"sql,omitempty" tf:"sql,omitempty"`
 
 	// The version of the SQL rules engine to use when evaluating the rule.
-	// +kubebuilder:validation:Required
-	SQLVersion *string `json:"sqlVersion" tf:"sql_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	SQLVersion *string `json:"sqlVersion,omitempty" tf:"sql_version,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Sns []TopicRuleSnsParameters `json:"sns,omitempty" tf:"sns,omitempty"`
@@ -1133,8 +1133,11 @@ type TopicRuleStatus struct {
 type TopicRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicRuleSpec   `json:"spec"`
-	Status            TopicRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sql)",message="sql is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sqlVersion)",message="sqlVersion is a required parameter"
+	Spec   TopicRuleSpec   `json:"spec"`
+	Status TopicRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

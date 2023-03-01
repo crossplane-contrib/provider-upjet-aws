@@ -104,8 +104,8 @@ type ImagePipelineParameters struct {
 	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Name of the image pipeline.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -167,8 +167,9 @@ type ImagePipelineStatus struct {
 type ImagePipeline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImagePipelineSpec   `json:"spec"`
-	Status            ImagePipelineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ImagePipelineSpec   `json:"spec"`
+	Status ImagePipelineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

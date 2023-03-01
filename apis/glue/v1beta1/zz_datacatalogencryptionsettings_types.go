@@ -64,8 +64,8 @@ type DataCatalogEncryptionSettingsParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// –  The security configuration to set. see Data Catalog Encryption Settings.
-	// +kubebuilder:validation:Required
-	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings" tf:"data_catalog_encryption_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -121,8 +121,9 @@ type DataCatalogEncryptionSettingsStatus struct {
 type DataCatalogEncryptionSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataCatalogEncryptionSettingsSpec   `json:"spec"`
-	Status            DataCatalogEncryptionSettingsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataCatalogEncryptionSettings)",message="dataCatalogEncryptionSettings is a required parameter"
+	Spec   DataCatalogEncryptionSettingsSpec   `json:"spec"`
+	Status DataCatalogEncryptionSettingsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

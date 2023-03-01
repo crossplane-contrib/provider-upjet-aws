@@ -76,8 +76,8 @@ type ClusterSnapshotParameters struct {
 	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Identifier for the snapshot.
-	// +kubebuilder:validation:Required
-	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier" tf:"db_cluster_snapshot_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -113,8 +113,9 @@ type ClusterSnapshotStatus struct {
 type ClusterSnapshot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSnapshotSpec   `json:"spec"`
-	Status            ClusterSnapshotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbClusterSnapshotIdentifier)",message="dbClusterSnapshotIdentifier is a required parameter"
+	Spec   ClusterSnapshotSpec   `json:"spec"`
+	Status ClusterSnapshotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

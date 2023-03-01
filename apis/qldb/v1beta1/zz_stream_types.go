@@ -56,12 +56,12 @@ type StreamParameters struct {
 	ExclusiveEndTime *string `json:"exclusiveEndTime,omitempty" tf:"exclusive_end_time,omitempty"`
 
 	// The inclusive start date and time from which to start streaming journal data. This parameter must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be in the future and must be before exclusive_end_time.  If you provide a value that is before the ledger's CreationDateTime, QLDB effectively defaults it to the ledger's CreationDateTime.
-	// +kubebuilder:validation:Required
-	InclusiveStartTime *string `json:"inclusiveStartTime" tf:"inclusive_start_time,omitempty"`
+	// +kubebuilder:validation:Optional
+	InclusiveStartTime *string `json:"inclusiveStartTime,omitempty" tf:"inclusive_start_time,omitempty"`
 
 	// The configuration settings of the Kinesis Data Streams destination for your stream request. Documented below.
-	// +kubebuilder:validation:Required
-	KinesisConfiguration []KinesisConfigurationParameters `json:"kinesisConfiguration" tf:"kinesis_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	KinesisConfiguration []KinesisConfigurationParameters `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
 
 	// The name of the QLDB ledger.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/qldb/v1beta1.Ledger
@@ -97,8 +97,8 @@ type StreamParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
-	// +kubebuilder:validation:Required
-	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -129,8 +129,11 @@ type StreamStatus struct {
 type Stream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamSpec   `json:"spec"`
-	Status            StreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inclusiveStartTime)",message="inclusiveStartTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kinesisConfiguration)",message="kinesisConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.streamName)",message="streamName is a required parameter"
+	Spec   StreamSpec   `json:"spec"`
+	Status StreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

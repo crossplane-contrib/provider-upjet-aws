@@ -109,12 +109,12 @@ type ConnectionObservation struct {
 type ConnectionParameters struct {
 
 	// Parameters used for authorization. A maximum of 1 are allowed. Documented below.
-	// +kubebuilder:validation:Required
-	AuthParameters []AuthParametersParameters `json:"authParameters" tf:"auth_parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthParameters []AuthParametersParameters `json:"authParameters,omitempty" tf:"auth_parameters,omitempty"`
 
 	// Choose the type of authorization to use for the connection. One of API_KEY,BASIC,OAUTH_CLIENT_CREDENTIALS.
-	// +kubebuilder:validation:Required
-	AuthorizationType *string `json:"authorizationType" tf:"authorization_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// Enter a description for the connection. Maximum of 512 characters.
 	// +kubebuilder:validation:Optional
@@ -298,8 +298,10 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionSpec   `json:"spec"`
-	Status            ConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authParameters)",message="authParameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizationType)",message="authorizationType is a required parameter"
+	Spec   ConnectionSpec   `json:"spec"`
+	Status ConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

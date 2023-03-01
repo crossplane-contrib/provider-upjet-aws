@@ -43,8 +43,8 @@ type BrokerParameters struct {
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// Name of the broker.
-	// +kubebuilder:validation:Required
-	BrokerName *string `json:"brokerName" tf:"broker_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
 	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -59,16 +59,16 @@ type BrokerParameters struct {
 	EncryptionOptions []EncryptionOptionsParameters `json:"encryptionOptions,omitempty" tf:"encryption_options,omitempty"`
 
 	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
-	// +kubebuilder:validation:Required
-	EngineType *string `json:"engineType" tf:"engine_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
 	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
-	// +kubebuilder:validation:Required
-	EngineVersion *string `json:"engineVersion" tf:"engine_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Broker's instance type. For example, mq.t3.micro, mq.m5.large.
-	// +kubebuilder:validation:Required
-	HostInstanceType *string `json:"hostInstanceType" tf:"host_instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	HostInstanceType *string `json:"hostInstanceType,omitempty" tf:"host_instance_type,omitempty"`
 
 	// Configuration block for the LDAP server used to authenticate and authorize connections to the broker. Not supported for engine_type RabbitMQ. Detailed below. (Currently, AWS may not process changes to LDAP server metadata.)
 	// +kubebuilder:validation:Optional
@@ -119,8 +119,8 @@ type BrokerParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for broker users. For engine_type of RabbitMQ, Amazon MQ does not return broker users preventing this resource from making user updates and drift detection. Detailed below.
-	// +kubebuilder:validation:Required
-	User []UserParameters `json:"user" tf:"user,omitempty"`
+	// +kubebuilder:validation:Optional
+	User []UserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type ConfigurationObservation struct {
@@ -304,8 +304,13 @@ type BrokerStatus struct {
 type Broker struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BrokerSpec   `json:"spec"`
-	Status            BrokerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.brokerName)",message="brokerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineType)",message="engineType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineVersion)",message="engineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hostInstanceType)",message="hostInstanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.user)",message="user is a required parameter"
+	Spec   BrokerSpec   `json:"spec"`
+	Status BrokerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

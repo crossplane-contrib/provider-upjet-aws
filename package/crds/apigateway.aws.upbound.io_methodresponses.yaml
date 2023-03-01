@@ -320,7 +320,6 @@ spec:
                     type: string
                 required:
                 - region
-                - statusCode
                 type: object
               providerConfigRef:
                 default:

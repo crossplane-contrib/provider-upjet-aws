@@ -328,7 +328,6 @@ spec:
                     description: Target URL for website redirect.
                     type: string
                 required:
-                - key
                 - region
                 type: object
               providerConfigRef:

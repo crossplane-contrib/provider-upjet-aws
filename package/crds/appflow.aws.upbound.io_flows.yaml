@@ -1388,11 +1388,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - destinationFlowConfig
                 - region
-                - sourceFlowConfig
-                - task
-                - triggerConfig
                 type: object
               providerConfigRef:
                 default:

@@ -230,7 +230,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - permissions
                 - region
                 type: object
               providerConfigRef:

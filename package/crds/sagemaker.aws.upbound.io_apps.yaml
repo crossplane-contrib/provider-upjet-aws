@@ -264,8 +264,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - appName
-                - appType
                 - region
                 type: object
               providerConfigRef:

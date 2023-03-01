@@ -36,8 +36,8 @@ type ApprovalRuleTemplateObservation struct {
 type ApprovalRuleTemplateParameters struct {
 
 	// The content of the approval rule template. Maximum of 3000 characters.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The description of the approval rule template. Maximum of 1000 characters.
 	// +kubebuilder:validation:Optional
@@ -73,8 +73,9 @@ type ApprovalRuleTemplateStatus struct {
 type ApprovalRuleTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApprovalRuleTemplateSpec   `json:"spec"`
-	Status            ApprovalRuleTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	Spec   ApprovalRuleTemplateSpec   `json:"spec"`
+	Status ApprovalRuleTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

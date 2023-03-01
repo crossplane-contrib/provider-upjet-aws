@@ -55,16 +55,16 @@ type FrameworkObservation struct {
 type FrameworkParameters struct {
 
 	// One or more control blocks that make up the framework. Each control in the list has a name, input parameters, and scope. Detailed below.
-	// +kubebuilder:validation:Required
-	Control []ControlParameters `json:"control" tf:"control,omitempty"`
+	// +kubebuilder:validation:Optional
+	Control []ControlParameters `json:"control,omitempty" tf:"control,omitempty"`
 
 	// The description of the framework with a maximum of 1,024 characters
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -132,8 +132,10 @@ type FrameworkStatus struct {
 type Framework struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrameworkSpec   `json:"spec"`
-	Status            FrameworkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.control)",message="control is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FrameworkSpec   `json:"spec"`
+	Status FrameworkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

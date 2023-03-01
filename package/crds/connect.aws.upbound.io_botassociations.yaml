@@ -238,7 +238,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - lexBot
                 - region
                 type: object
               providerConfigRef:

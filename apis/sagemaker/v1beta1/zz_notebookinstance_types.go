@@ -74,8 +74,8 @@ type NotebookInstanceParameters struct {
 	InstanceMetadataServiceConfiguration []InstanceMetadataServiceConfigurationParameters `json:"instanceMetadataServiceConfiguration,omitempty" tf:"instance_metadata_service_configuration,omitempty"`
 
 	// The name of ML compute instance type.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -171,8 +171,9 @@ type NotebookInstanceStatus struct {
 type NotebookInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotebookInstanceSpec   `json:"spec"`
-	Status            NotebookInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   NotebookInstanceSpec   `json:"spec"`
+	Status NotebookInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

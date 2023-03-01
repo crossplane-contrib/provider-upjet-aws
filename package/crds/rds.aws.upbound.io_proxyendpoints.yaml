@@ -246,7 +246,6 @@ spec:
                     type: array
                 required:
                 - region
-                - vpcSubnetIds
                 type: object
               providerConfigRef:
                 default:

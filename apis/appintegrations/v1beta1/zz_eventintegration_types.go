@@ -42,12 +42,12 @@ type EventIntegrationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Block that defines the configuration information for the event filter. The Event Filter block is documented below.
-	// +kubebuilder:validation:Required
-	EventFilter []EventFilterParameters `json:"eventFilter" tf:"event_filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventFilter []EventFilterParameters `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 
 	// EventBridge bus.
-	// +kubebuilder:validation:Required
-	EventbridgeBus *string `json:"eventbridgeBus" tf:"eventbridge_bus,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventbridgeBus *string `json:"eventbridgeBus,omitempty" tf:"eventbridge_bus,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +83,10 @@ type EventIntegrationStatus struct {
 type EventIntegration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventIntegrationSpec   `json:"spec"`
-	Status            EventIntegrationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventFilter)",message="eventFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventbridgeBus)",message="eventbridgeBus is a required parameter"
+	Spec   EventIntegrationSpec   `json:"spec"`
+	Status EventIntegrationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -673,16 +673,16 @@ type InsightObservation struct {
 type InsightParameters struct {
 
 	// A configuration block including one or more (up to 10 distinct) attributes used to filter the findings included in the insight. The insight only includes findings that match criteria defined in the filters. See filters below for more details.
-	// +kubebuilder:validation:Required
-	Filters []FiltersParameters `json:"filters" tf:"filters,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 
 	// The attribute used to group the findings for the insight e.g., if an insight is grouped by ResourceId, then the insight produces a list of resource identifiers.
-	// +kubebuilder:validation:Required
-	GroupByAttribute *string `json:"groupByAttribute" tf:"group_by_attribute,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupByAttribute *string `json:"groupByAttribute,omitempty" tf:"group_by_attribute,omitempty"`
 
 	// The name of the custom insight.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -1874,8 +1874,11 @@ type InsightStatus struct {
 type Insight struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InsightSpec   `json:"spec"`
-	Status            InsightStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filters)",message="filters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupByAttribute)",message="groupByAttribute is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   InsightSpec   `json:"spec"`
+	Status InsightStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

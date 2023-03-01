@@ -28,16 +28,16 @@ type ReportDefinitionParameters struct {
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
 	// A list of schema elements. Valid values are: RESOURCES.
-	// +kubebuilder:validation:Required
-	AdditionalSchemaElements []*string `json:"additionalSchemaElements" tf:"additional_schema_elements,omitempty"`
+	// +kubebuilder:validation:Optional
+	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.
-	// +kubebuilder:validation:Required
-	Compression *string `json:"compression" tf:"compression,omitempty"`
+	// +kubebuilder:validation:Optional
+	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// Format for report. Valid values are: textORcsv, Parquet. If Parquet is used, then Compression must also be Parquet.
-	// +kubebuilder:validation:Required
-	Format *string `json:"format" tf:"format,omitempty"`
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// Set to true to update your reports after they have been finalized if AWS detects charges related to previous months.
 	// +kubebuilder:validation:Optional
@@ -70,12 +70,12 @@ type ReportDefinitionParameters struct {
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 
 	// Region of the existing S3 bucket to hold generated reports.
-	// +kubebuilder:validation:Required
-	S3Region *string `json:"s3Region" tf:"s3_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
 
 	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
-	// +kubebuilder:validation:Required
-	TimeUnit *string `json:"timeUnit" tf:"time_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
 }
 
 // ReportDefinitionSpec defines the desired state of ReportDefinition
@@ -102,8 +102,13 @@ type ReportDefinitionStatus struct {
 type ReportDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReportDefinitionSpec   `json:"spec"`
-	Status            ReportDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.additionalSchemaElements)",message="additionalSchemaElements is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.compression)",message="compression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.format)",message="format is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Region)",message="s3Region is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeUnit)",message="timeUnit is a required parameter"
+	Spec   ReportDefinitionSpec   `json:"spec"`
+	Status ReportDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

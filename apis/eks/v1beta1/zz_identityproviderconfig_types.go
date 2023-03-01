@@ -78,8 +78,8 @@ type IdentityProviderConfigParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
-	// +kubebuilder:validation:Required
-	Oidc []IdentityProviderConfigOidcParameters `json:"oidc" tf:"oidc,omitempty"`
+	// +kubebuilder:validation:Optional
+	Oidc []IdentityProviderConfigOidcParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -115,8 +115,9 @@ type IdentityProviderConfigStatus struct {
 type IdentityProviderConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityProviderConfigSpec   `json:"spec"`
-	Status            IdentityProviderConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.oidc)",message="oidc is a required parameter"
+	Spec   IdentityProviderConfigSpec   `json:"spec"`
+	Status IdentityProviderConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

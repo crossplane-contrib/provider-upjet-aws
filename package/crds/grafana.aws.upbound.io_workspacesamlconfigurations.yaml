@@ -190,7 +190,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - editorRoleValues
                 - region
                 type: object
               providerConfigRef:

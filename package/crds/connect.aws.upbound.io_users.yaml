@@ -335,10 +335,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
-                - phoneConfig
                 - region
-                - securityProfileIds
                 type: object
               providerConfigRef:
                 default:

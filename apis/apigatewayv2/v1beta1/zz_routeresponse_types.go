@@ -61,8 +61,8 @@ type RouteResponseParameters struct {
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// Route response key.
-	// +kubebuilder:validation:Required
-	RouteResponseKey *string `json:"routeResponseKey" tf:"route_response_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
 }
 
 // RouteResponseSpec defines the desired state of RouteResponse
@@ -89,8 +89,9 @@ type RouteResponseStatus struct {
 type RouteResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteResponseSpec   `json:"spec"`
-	Status            RouteResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routeResponseKey)",message="routeResponseKey is a required parameter"
+	Spec   RouteResponseSpec   `json:"spec"`
+	Status RouteResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

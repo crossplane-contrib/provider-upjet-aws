@@ -77,8 +77,8 @@ type PoolRolesAttachmentParameters struct {
 	RoleMapping []RoleMappingParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
 	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
-	// +kubebuilder:validation:Required
-	Roles map[string]*string `json:"roles" tf:"roles,omitempty"`
+	// +kubebuilder:validation:Optional
+	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type RoleMappingObservation struct {
@@ -127,8 +127,9 @@ type PoolRolesAttachmentStatus struct {
 type PoolRolesAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PoolRolesAttachmentSpec   `json:"spec"`
-	Status            PoolRolesAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roles)",message="roles is a required parameter"
+	Spec   PoolRolesAttachmentSpec   `json:"spec"`
+	Status PoolRolesAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

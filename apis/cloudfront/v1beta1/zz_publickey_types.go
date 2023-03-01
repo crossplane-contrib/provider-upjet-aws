@@ -32,7 +32,7 @@ type PublicKeyParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	EncodedKeySecretRef v1.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
 
 	// The name for the public key.
@@ -69,8 +69,9 @@ type PublicKeyStatus struct {
 type PublicKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PublicKeySpec   `json:"spec"`
-	Status            PublicKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encodedKeySecretRef)",message="encodedKeySecretRef is a required parameter"
+	Spec   PublicKeySpec   `json:"spec"`
+	Status PublicKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

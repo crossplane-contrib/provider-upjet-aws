@@ -304,9 +304,6 @@ spec:
                     description: Opsworks application type. One of aws-flow-ruby,
                       java, rails, php, nodejs, static or other.
                     type: string
-                required:
-                - name
-                - type
                 type: object
               providerConfigRef:
                 default:

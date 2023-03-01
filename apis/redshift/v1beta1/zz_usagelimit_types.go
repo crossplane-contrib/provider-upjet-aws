@@ -28,8 +28,8 @@ type UsageLimitObservation struct {
 type UsageLimitParameters struct {
 
 	// The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number.
-	// +kubebuilder:validation:Required
-	Amount *float64 `json:"amount" tf:"amount,omitempty"`
+	// +kubebuilder:validation:Optional
+	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
 	// The action that Amazon Redshift takes when the limit is reached. The default is log. Valid values are log, emit-metric, and disable.
 	// +kubebuilder:validation:Optional
@@ -50,12 +50,12 @@ type UsageLimitParameters struct {
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Amazon Redshift feature that you want to limit. Valid values are spectrum, concurrency-scaling, and cross-region-datasharing.
-	// +kubebuilder:validation:Required
-	FeatureType *string `json:"featureType" tf:"feature_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	FeatureType *string `json:"featureType,omitempty" tf:"feature_type,omitempty"`
 
 	// The type of limit. Depending on the feature type, this can be based on a time duration or data size. If FeatureType is spectrum, then LimitType must be data-scanned. If FeatureType is concurrency-scaling, then LimitType must be time. If FeatureType is cross-region-datasharing, then LimitType must be data-scanned. Valid values are data-scanned, and time.
-	// +kubebuilder:validation:Required
-	LimitType *string `json:"limitType" tf:"limit_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LimitType *string `json:"limitType,omitempty" tf:"limit_type,omitempty"`
 
 	// The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly. Valid values are daily, weekly, and monthly.
 	// +kubebuilder:validation:Optional
@@ -95,8 +95,11 @@ type UsageLimitStatus struct {
 type UsageLimit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UsageLimitSpec   `json:"spec"`
-	Status            UsageLimitStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.amount)",message="amount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureType)",message="featureType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.limitType)",message="limitType is a required parameter"
+	Spec   UsageLimitSpec   `json:"spec"`
+	Status UsageLimitStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

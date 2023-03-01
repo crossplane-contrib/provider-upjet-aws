@@ -109,11 +109,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - description
-                - hsmIpAddress
-                - hsmPartitionName
-                - hsmPartitionPasswordSecretRef
-                - hsmServerPublicCertificate
                 - region
                 type: object
               providerConfigRef:

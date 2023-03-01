@@ -801,7 +801,6 @@ spec:
                     type: object
                 required:
                 - region
-                - taskType
                 type: object
               providerConfigRef:
                 default:

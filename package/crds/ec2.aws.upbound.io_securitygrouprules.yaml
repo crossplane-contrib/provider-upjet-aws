@@ -263,11 +263,7 @@ spec:
                       (inbound) or egress (outbound).
                     type: string
                 required:
-                - fromPort
-                - protocol
                 - region
-                - toPort
-                - type
                 type: object
               providerConfigRef:
                 default:

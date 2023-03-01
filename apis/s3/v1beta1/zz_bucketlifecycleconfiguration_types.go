@@ -77,8 +77,8 @@ type BucketLifecycleConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// List of configuration blocks describing the rules managing the replication documented below.
-	// +kubebuilder:validation:Required
-	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketLifecycleConfigurationRuleObservation struct {
@@ -255,8 +255,9 @@ type BucketLifecycleConfigurationStatus struct {
 type BucketLifecycleConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketLifecycleConfigurationSpec   `json:"spec"`
-	Status            BucketLifecycleConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   BucketLifecycleConfigurationSpec   `json:"spec"`
+	Status BucketLifecycleConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

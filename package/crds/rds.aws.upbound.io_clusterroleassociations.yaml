@@ -228,7 +228,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - featureName
                 - region
                 type: object
               providerConfigRef:

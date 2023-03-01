@@ -50,8 +50,8 @@ type CompositeAlarmParameters struct {
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
 	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
-	// +kubebuilder:validation:Required
-	AlarmRule *string `json:"alarmRule" tf:"alarm_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +kubebuilder:validation:Optional
@@ -105,8 +105,9 @@ type CompositeAlarmStatus struct {
 type CompositeAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CompositeAlarmSpec   `json:"spec"`
-	Status            CompositeAlarmStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alarmRule)",message="alarmRule is a required parameter"
+	Spec   CompositeAlarmSpec   `json:"spec"`
+	Status CompositeAlarmStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

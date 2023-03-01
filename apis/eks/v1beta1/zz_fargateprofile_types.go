@@ -63,8 +63,8 @@ type FargateProfileParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block(s) for selecting Kubernetes Pods to execute with this EKS Fargate Profile. Detailed below.
-	// +kubebuilder:validation:Required
-	Selector []SelectorParameters `json:"selector" tf:"selector,omitempty"`
+	// +kubebuilder:validation:Optional
+	Selector []SelectorParameters `json:"selector,omitempty" tf:"selector,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
@@ -124,8 +124,9 @@ type FargateProfileStatus struct {
 type FargateProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FargateProfileSpec   `json:"spec"`
-	Status            FargateProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.selector)",message="selector is a required parameter"
+	Spec   FargateProfileSpec   `json:"spec"`
+	Status FargateProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -755,7 +755,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - instanceClass
                 - region
                 type: object
               providerConfigRef:

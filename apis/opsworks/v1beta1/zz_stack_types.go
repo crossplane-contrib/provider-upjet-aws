@@ -139,8 +139,8 @@ type StackParameters struct {
 	ManageBerkshelf *bool `json:"manageBerkshelf,omitempty" tf:"manage_berkshelf,omitempty"`
 
 	// The name of the stack.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the region where the stack will exist.
 	// +kubebuilder:validation:Required
@@ -211,8 +211,9 @@ type StackStatus struct {
 type Stack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StackSpec   `json:"spec"`
-	Status            StackStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   StackSpec   `json:"spec"`
+	Status StackStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

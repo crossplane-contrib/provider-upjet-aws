@@ -1278,8 +1278,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - maxSize
-                - minSize
                 - region
                 type: object
               providerConfigRef:

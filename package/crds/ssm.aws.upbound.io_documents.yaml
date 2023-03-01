@@ -127,8 +127,6 @@ spec:
                       cannot be changed for an existing document version.
                     type: string
                 required:
-                - content
-                - documentType
                 - region
                 type: object
               providerConfigRef:

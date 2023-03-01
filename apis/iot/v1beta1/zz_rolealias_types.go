@@ -24,8 +24,8 @@ type RoleAliasObservation struct {
 type RoleAliasParameters struct {
 
 	// The name of the role alias.
-	// +kubebuilder:validation:Required
-	Alias *string `json:"alias" tf:"alias,omitempty"`
+	// +kubebuilder:validation:Optional
+	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// The duration of the credential, in seconds. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 900 seconds (15 minutes) to 43200 seconds (12 hours).
 	// +kubebuilder:validation:Optional
@@ -75,8 +75,9 @@ type RoleAliasStatus struct {
 type RoleAlias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleAliasSpec   `json:"spec"`
-	Status            RoleAliasStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alias)",message="alias is a required parameter"
+	Spec   RoleAliasSpec   `json:"spec"`
+	Status RoleAliasStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

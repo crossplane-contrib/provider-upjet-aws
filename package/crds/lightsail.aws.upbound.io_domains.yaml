@@ -72,7 +72,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - domainName
                 - region
                 type: object
               providerConfigRef:

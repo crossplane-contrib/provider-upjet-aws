@@ -30,8 +30,8 @@ type VPCLinkParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name used to label and identify the VPC link.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +83,9 @@ type VPCLinkStatus struct {
 type VPCLink struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCLinkSpec   `json:"spec"`
-	Status            VPCLinkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   VPCLinkSpec   `json:"spec"`
+	Status VPCLinkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

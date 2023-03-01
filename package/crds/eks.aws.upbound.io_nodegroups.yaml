@@ -614,7 +614,6 @@ spec:
                     type: object
                 required:
                 - region
-                - scalingConfig
                 type: object
               providerConfigRef:
                 default:

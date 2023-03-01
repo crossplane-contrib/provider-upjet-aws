@@ -22,8 +22,8 @@ type VoiceConnectorStreamingObservation struct {
 type VoiceConnectorStreamingParameters struct {
 
 	// The retention period, in hours, for the Amazon Kinesis data.
-	// +kubebuilder:validation:Required
-	DataRetention *float64 `json:"dataRetention" tf:"data_retention,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
 
 	// When true, media streaming to Amazon Kinesis is turned off. Default: false
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,9 @@ type VoiceConnectorStreamingStatus struct {
 type VoiceConnectorStreaming struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorStreamingSpec   `json:"spec"`
-	Status            VoiceConnectorStreamingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRetention)",message="dataRetention is a required parameter"
+	Spec   VoiceConnectorStreamingSpec   `json:"spec"`
+	Status VoiceConnectorStreamingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

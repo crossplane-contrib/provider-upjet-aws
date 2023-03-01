@@ -61,8 +61,8 @@ type GlobalClusterParameters struct {
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The global cluster identifier.
-	// +kubebuilder:validation:Required
-	GlobalClusterIdentifier *string `json:"globalClusterIdentifier" tf:"global_cluster_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -112,8 +112,9 @@ type GlobalClusterStatus struct {
 type GlobalCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GlobalClusterSpec   `json:"spec"`
-	Status            GlobalClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.globalClusterIdentifier)",message="globalClusterIdentifier is a required parameter"
+	Spec   GlobalClusterSpec   `json:"spec"`
+	Status GlobalClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

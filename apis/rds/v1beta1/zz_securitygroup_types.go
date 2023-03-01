@@ -55,8 +55,8 @@ type SecurityGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of ingress rules.
-	// +kubebuilder:validation:Required
-	Ingress []IngressParameters `json:"ingress" tf:"ingress,omitempty"`
+	// +kubebuilder:validation:Optional
+	Ingress []IngressParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -92,8 +92,9 @@ type SecurityGroupStatus struct {
 type SecurityGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityGroupSpec   `json:"spec"`
-	Status            SecurityGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ingress)",message="ingress is a required parameter"
+	Spec   SecurityGroupSpec   `json:"spec"`
+	Status SecurityGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

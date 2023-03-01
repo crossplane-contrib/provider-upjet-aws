@@ -173,7 +173,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - monitoringSubscription
                 - region
                 type: object
               providerConfigRef:

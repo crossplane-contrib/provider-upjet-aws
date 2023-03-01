@@ -281,7 +281,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - identityPoolName
                 - region
                 type: object
               providerConfigRef:

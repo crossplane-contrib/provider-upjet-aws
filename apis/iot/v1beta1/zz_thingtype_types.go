@@ -31,8 +31,8 @@ type ThingTypeParameters struct {
 	Deprecated *bool `json:"deprecated,omitempty" tf:"deprecated,omitempty"`
 
 	// The name of the thing type.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// , Configuration block that can contain the following properties of the thing type:
 	// +kubebuilder:validation:Optional
@@ -86,8 +86,9 @@ type ThingTypeStatus struct {
 type ThingType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ThingTypeSpec   `json:"spec"`
-	Status            ThingTypeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ThingTypeSpec   `json:"spec"`
+	Status ThingTypeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

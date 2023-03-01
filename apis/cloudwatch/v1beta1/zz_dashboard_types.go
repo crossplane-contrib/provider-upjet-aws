@@ -24,8 +24,8 @@ type DashboardObservation struct {
 type DashboardParameters struct {
 
 	// The detailed information about the dashboard, including what widgets are included and their location on the dashboard. You can read more about the body structure in the documentation.
-	// +kubebuilder:validation:Required
-	DashboardBody *string `json:"dashboardBody" tf:"dashboard_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	DashboardBody *string `json:"dashboardBody,omitempty" tf:"dashboard_body,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +57,9 @@ type DashboardStatus struct {
 type Dashboard struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DashboardSpec   `json:"spec"`
-	Status            DashboardStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dashboardBody)",message="dashboardBody is a required parameter"
+	Spec   DashboardSpec   `json:"spec"`
+	Status DashboardStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

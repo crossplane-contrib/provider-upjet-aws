@@ -180,13 +180,7 @@ spec:
                     description: The VLAN ID.
                     type: number
                 required:
-                - addressFamily
-                - bgpAsn
-                - name
-                - ownerAccountId
                 - region
-                - routeFilterPrefixes
-                - vlan
                 type: object
               providerConfigRef:
                 default:

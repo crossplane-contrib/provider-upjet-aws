@@ -68,12 +68,12 @@ type APIParameters struct {
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
 	// Name of the API. Must be less than or equal to 128 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// API protocol. Valid values: HTTP, WEBSOCKET.
-	// +kubebuilder:validation:Required
-	ProtocolType *string `json:"protocolType" tf:"protocol_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProtocolType *string `json:"protocolType,omitempty" tf:"protocol_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -158,8 +158,10 @@ type APIStatus struct {
 type API struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APISpec   `json:"spec"`
-	Status            APIStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocolType)",message="protocolType is a required parameter"
+	Spec   APISpec   `json:"spec"`
+	Status APIStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

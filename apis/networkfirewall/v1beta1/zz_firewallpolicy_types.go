@@ -109,8 +109,8 @@ type FirewallPolicyParameters struct {
 	EncryptionConfiguration []FirewallPolicyEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
-	// +kubebuilder:validation:Required
-	FirewallPolicy []FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy" tf:"firewall_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	FirewallPolicy []FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -232,8 +232,9 @@ type FirewallPolicyStatus struct {
 type FirewallPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallPolicySpec   `json:"spec"`
-	Status            FirewallPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.firewallPolicy)",message="firewallPolicy is a required parameter"
+	Spec   FirewallPolicySpec   `json:"spec"`
+	Status FirewallPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

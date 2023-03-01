@@ -25,8 +25,8 @@ type VaultNotificationsObservation struct {
 type VaultNotificationsParameters struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
-	// +kubebuilder:validation:Required
-	BackupVaultEvents []*string `json:"backupVaultEvents" tf:"backup_vault_events,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.
 	// +crossplane:generate:reference:type=Vault
@@ -85,8 +85,9 @@ type VaultNotificationsStatus struct {
 type VaultNotifications struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VaultNotificationsSpec   `json:"spec"`
-	Status            VaultNotificationsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupVaultEvents)",message="backupVaultEvents is a required parameter"
+	Spec   VaultNotificationsSpec   `json:"spec"`
+	Status VaultNotificationsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

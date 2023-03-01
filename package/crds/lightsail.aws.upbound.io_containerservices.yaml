@@ -144,9 +144,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - power
                 - region
-                - scale
                 type: object
               providerConfigRef:
                 default:

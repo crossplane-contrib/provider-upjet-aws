@@ -198,7 +198,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - instanceClass
                 - region
                 type: object
               providerConfigRef:

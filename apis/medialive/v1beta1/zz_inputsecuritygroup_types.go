@@ -39,8 +39,8 @@ type InputSecurityGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whitelist rules. See Whitelist Rules for more details.
-	// +kubebuilder:validation:Required
-	WhitelistRules []WhitelistRulesParameters `json:"whitelistRules" tf:"whitelist_rules,omitempty"`
+	// +kubebuilder:validation:Optional
+	WhitelistRules []WhitelistRulesParameters `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
 type WhitelistRulesObservation struct {
@@ -77,8 +77,9 @@ type InputSecurityGroupStatus struct {
 type InputSecurityGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InputSecurityGroupSpec   `json:"spec"`
-	Status            InputSecurityGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.whitelistRules)",message="whitelistRules is a required parameter"
+	Spec   InputSecurityGroupSpec   `json:"spec"`
+	Status InputSecurityGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

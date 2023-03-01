@@ -78,9 +78,7 @@ spec:
                     description: Tag option value.
                     type: string
                 required:
-                - key
                 - region
-                - value
                 type: object
               providerConfigRef:
                 default:

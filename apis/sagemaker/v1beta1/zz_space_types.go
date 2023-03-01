@@ -50,8 +50,8 @@ type SpaceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the space.
-	// +kubebuilder:validation:Required
-	SpaceName *string `json:"spaceName" tf:"space_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
 	// A collection of space settings. See Space Settings below.
 	// +kubebuilder:validation:Optional
@@ -208,8 +208,9 @@ type SpaceStatus struct {
 type Space struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpaceSpec   `json:"spec"`
-	Status            SpaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spaceName)",message="spaceName is a required parameter"
+	Spec   SpaceSpec   `json:"spec"`
+	Status SpaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

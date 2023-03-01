@@ -1002,9 +1002,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - authMode
-                - defaultUserSettings
-                - domainName
                 - region
                 type: object
               providerConfigRef:

@@ -27,8 +27,8 @@ type SnapshotScheduleObservation struct {
 type SnapshotScheduleParameters struct {
 
 	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).
-	// +kubebuilder:validation:Required
-	Definitions []*string `json:"definitions" tf:"definitions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definitions []*string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The description of the snapshot schedule.
 	// +kubebuilder:validation:Optional
@@ -72,8 +72,9 @@ type SnapshotScheduleStatus struct {
 type SnapshotSchedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotScheduleSpec   `json:"spec"`
-	Status            SnapshotScheduleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definitions)",message="definitions is a required parameter"
+	Spec   SnapshotScheduleSpec   `json:"spec"`
+	Status SnapshotScheduleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

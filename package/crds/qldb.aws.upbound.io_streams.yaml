@@ -346,10 +346,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - inclusiveStartTime
-                - kinesisConfiguration
                 - region
-                - streamName
                 type: object
               providerConfigRef:
                 default:

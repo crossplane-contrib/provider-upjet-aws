@@ -23,8 +23,8 @@ type NetworkPerformanceMetricSubscriptionObservation struct {
 type NetworkPerformanceMetricSubscriptionParameters struct {
 
 	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
-	// +kubebuilder:validation:Required
-	Destination *string `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
 	// +kubebuilder:validation:Optional
@@ -36,8 +36,8 @@ type NetworkPerformanceMetricSubscriptionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
-	// +kubebuilder:validation:Required
-	Source *string `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
 	// +kubebuilder:validation:Optional
@@ -68,8 +68,10 @@ type NetworkPerformanceMetricSubscriptionStatus struct {
 type NetworkPerformanceMetricSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkPerformanceMetricSubscriptionSpec   `json:"spec"`
-	Status            NetworkPerformanceMetricSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	Spec   NetworkPerformanceMetricSubscriptionSpec   `json:"spec"`
+	Status NetworkPerformanceMetricSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

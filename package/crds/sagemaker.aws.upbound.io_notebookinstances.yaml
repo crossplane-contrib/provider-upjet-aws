@@ -456,7 +456,6 @@ spec:
                       to the notebook instance. The default value is 5 GB.
                     type: number
                 required:
-                - instanceType
                 - region
                 type: object
               providerConfigRef:

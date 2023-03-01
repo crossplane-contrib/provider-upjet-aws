@@ -332,11 +332,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - destination
-                - includedObjectVersions
-                - name
                 - region
-                - schedule
                 type: object
               providerConfigRef:
                 default:

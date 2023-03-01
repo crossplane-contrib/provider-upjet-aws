@@ -113,8 +113,8 @@ type CodepipelineObservation struct {
 type CodepipelineParameters struct {
 
 	// One or more artifact_store blocks. Artifact stores are documented below.
-	// +kubebuilder:validation:Required
-	ArtifactStore []ArtifactStoreParameters `json:"artifactStore" tf:"artifact_store,omitempty"`
+	// +kubebuilder:validation:Optional
+	ArtifactStore []ArtifactStoreParameters `json:"artifactStore,omitempty" tf:"artifact_store,omitempty"`
 
 	// The region in which to run the action.
 	// Region is the region you'd like your resource to be created in.
@@ -137,8 +137,8 @@ type CodepipelineParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// (Minimum of at least two stage blocks is required) A stage block. Stages are documented below.
-	// +kubebuilder:validation:Required
-	Stage []StageParameters `json:"stage" tf:"stage,omitempty"`
+	// +kubebuilder:validation:Optional
+	Stage []StageParameters `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -197,8 +197,10 @@ type CodepipelineStatus struct {
 type Codepipeline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CodepipelineSpec   `json:"spec"`
-	Status            CodepipelineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.artifactStore)",message="artifactStore is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stage)",message="stage is a required parameter"
+	Spec   CodepipelineSpec   `json:"spec"`
+	Status CodepipelineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

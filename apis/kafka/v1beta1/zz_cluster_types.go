@@ -165,16 +165,16 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// Configuration block for the broker nodes of the Kafka cluster.
-	// +kubebuilder:validation:Required
-	BrokerNodeGroupInfo []BrokerNodeGroupInfoParameters `json:"brokerNodeGroupInfo" tf:"broker_node_group_info,omitempty"`
+	// +kubebuilder:validation:Optional
+	BrokerNodeGroupInfo []BrokerNodeGroupInfoParameters `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
 	// Configuration block for specifying a client authentication. See below.
 	// +kubebuilder:validation:Optional
 	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
-	// +kubebuilder:validation:Required
-	ClusterName *string `json:"clusterName" tf:"cluster_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Configuration block for specifying a MSK Configuration to attach to Kafka brokers. See below.
 	// +kubebuilder:validation:Optional
@@ -189,16 +189,16 @@ type ClusterParameters struct {
 	EnhancedMonitoring *string `json:"enhancedMonitoring,omitempty" tf:"enhanced_monitoring,omitempty"`
 
 	// Specify the desired Kafka software version.
-	// +kubebuilder:validation:Required
-	KafkaVersion *string `json:"kafkaVersion" tf:"kafka_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	KafkaVersion *string `json:"kafkaVersion,omitempty" tf:"kafka_version,omitempty"`
 
 	// Configuration block for streaming broker logs to Cloudwatch/S3/Kinesis Firehose. See below.
 	// +kubebuilder:validation:Optional
 	LoggingInfo []LoggingInfoParameters `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
 	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
-	// +kubebuilder:validation:Required
-	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes" tf:"number_of_broker_nodes,omitempty"`
+	// +kubebuilder:validation:Optional
+	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See below.
 	// +kubebuilder:validation:Optional
@@ -481,8 +481,12 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.brokerNodeGroupInfo)",message="brokerNodeGroupInfo is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clusterName)",message="clusterName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kafkaVersion)",message="kafkaVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.numberOfBrokerNodes)",message="numberOfBrokerNodes is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

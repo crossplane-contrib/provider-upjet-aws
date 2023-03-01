@@ -71,8 +71,8 @@ type PermissionParameters struct {
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +80,8 @@ type PermissionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// An identifier string for the external account that you are granting permissions to.
-	// +kubebuilder:validation:Required
-	StatementID *string `json:"statementId" tf:"statement_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 }
 
 // PermissionSpec defines the desired state of Permission
@@ -108,8 +108,10 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSpec   `json:"spec"`
-	Status            PermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statementId)",message="statementId is a required parameter"
+	Spec   PermissionSpec   `json:"spec"`
+	Status PermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

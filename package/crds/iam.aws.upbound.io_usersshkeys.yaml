@@ -156,9 +156,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - encoding
-                - publicKey
                 type: object
               providerConfigRef:
                 default:

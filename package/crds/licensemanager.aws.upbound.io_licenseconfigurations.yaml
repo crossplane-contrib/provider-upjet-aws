@@ -95,8 +95,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - licenseCountingType
-                - name
                 - region
                 type: object
               providerConfigRef:

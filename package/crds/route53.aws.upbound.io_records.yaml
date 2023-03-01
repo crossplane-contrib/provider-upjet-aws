@@ -339,9 +339,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

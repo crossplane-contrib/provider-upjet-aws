@@ -126,10 +126,6 @@ spec:
                       Specify either default or dedicated.
                     type: string
                 required:
-                - availabilityZone
-                - instanceCount
-                - instancePlatform
-                - instanceType
                 - region
                 type: object
               providerConfigRef:

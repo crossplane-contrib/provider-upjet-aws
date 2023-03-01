@@ -63,11 +63,11 @@ type PlatformApplicationParameters struct {
 	FailureFeedbackRoleArnSelector *v1.Selector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The platform that the app is registered with. See Platform for supported platforms.
-	// +kubebuilder:validation:Required
-	Platform *string `json:"platform" tf:"platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Application Platform credential. See Credential for type of credential required for platform.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PlatformCredentialSecretRef v1.SecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
 
 	// Application Platform principal. See Principal for type of principal required for platform.
@@ -122,8 +122,10 @@ type PlatformApplicationStatus struct {
 type PlatformApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PlatformApplicationSpec   `json:"spec"`
-	Status            PlatformApplicationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platform)",message="platform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platformCredentialSecretRef)",message="platformCredentialSecretRef is a required parameter"
+	Spec   PlatformApplicationSpec   `json:"spec"`
+	Status PlatformApplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

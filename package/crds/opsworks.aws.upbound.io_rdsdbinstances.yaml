@@ -238,9 +238,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - dbPasswordSecretRef
-                - dbUser
                 type: object
               providerConfigRef:
                 default:

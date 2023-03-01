@@ -35,8 +35,8 @@ type ListenerPolicyParameters struct {
 	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// The load balancer listener port to apply the policy to.
-	// +kubebuilder:validation:Required
-	LoadBalancerPort *float64 `json:"loadBalancerPort" tf:"load_balancer_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
 	// +kubebuilder:validation:Optional
@@ -72,8 +72,9 @@ type ListenerPolicyStatus struct {
 type ListenerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ListenerPolicySpec   `json:"spec"`
-	Status            ListenerPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loadBalancerPort)",message="loadBalancerPort is a required parameter"
+	Spec   ListenerPolicySpec   `json:"spec"`
+	Status ListenerPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

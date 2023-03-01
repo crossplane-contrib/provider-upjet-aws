@@ -35,8 +35,8 @@ type HostParameters struct {
 	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
 
 	// The Availability Zone in which to allocate the Dedicated Host.
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Indicates whether to enable or disable host recovery for the Dedicated Host. Valid values: on, off. Default: off.
 	// +kubebuilder:validation:Optional
@@ -88,8 +88,9 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostSpec   `json:"spec"`
-	Status            HostStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	Spec   HostSpec   `json:"spec"`
+	Status HostStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

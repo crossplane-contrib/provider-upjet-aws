@@ -66,8 +66,8 @@ type AuthorizerParameters struct {
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 
 	// Name of the authorizer
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
 	// +kubebuilder:validation:Optional
@@ -121,8 +121,9 @@ type AuthorizerStatus struct {
 type Authorizer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AuthorizerSpec   `json:"spec"`
-	Status            AuthorizerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AuthorizerSpec   `json:"spec"`
+	Status AuthorizerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

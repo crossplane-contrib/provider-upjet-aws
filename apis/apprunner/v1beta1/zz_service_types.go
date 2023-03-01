@@ -322,12 +322,12 @@ type ServiceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// (Forces new resource) Name of the service.
-	// +kubebuilder:validation:Required
-	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// The source to deploy to the App Runner service. Can be a code or an image repository. See Source Configuration below for more details.
-	// +kubebuilder:validation:Required
-	SourceConfiguration []SourceConfigurationParameters `json:"sourceConfiguration" tf:"source_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceConfiguration []SourceConfigurationParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -394,8 +394,10 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceSpec   `json:"spec"`
-	Status            ServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceName)",message="serviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceConfiguration)",message="sourceConfiguration is a required parameter"
+	Spec   ServiceSpec   `json:"spec"`
+	Status ServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -45,8 +45,8 @@ type InstanceStateParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// - State of the instance. Valid values are stopped, running.
-	// +kubebuilder:validation:Required
-	State *string `json:"state" tf:"state,omitempty"`
+	// +kubebuilder:validation:Optional
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 // InstanceStateSpec defines the desired state of InstanceState
@@ -73,8 +73,9 @@ type InstanceStateStatus struct {
 type InstanceState struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceStateSpec   `json:"spec"`
-	Status            InstanceStateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.state)",message="state is a required parameter"
+	Spec   InstanceStateSpec   `json:"spec"`
+	Status InstanceStateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

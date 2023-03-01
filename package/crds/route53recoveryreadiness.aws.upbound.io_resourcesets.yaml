@@ -228,8 +228,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceSetType
-                - resources
                 type: object
               providerConfigRef:
                 default:

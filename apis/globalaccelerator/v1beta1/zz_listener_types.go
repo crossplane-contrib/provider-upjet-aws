@@ -39,12 +39,12 @@ type ListenerParameters struct {
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 
 	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
-	// +kubebuilder:validation:Required
-	PortRange []PortRangeParameters `json:"portRange" tf:"port_range,omitempty"`
+	// +kubebuilder:validation:Optional
+	PortRange []PortRangeParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
 
 	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +90,10 @@ type ListenerStatus struct {
 type Listener struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ListenerSpec   `json:"spec"`
-	Status            ListenerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.portRange)",message="portRange is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	Spec   ListenerSpec   `json:"spec"`
+	Status ListenerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -79,8 +79,8 @@ type ProvisioningTemplateParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The JSON formatted contents of the fleet provisioning template.
-	// +kubebuilder:validation:Required
-	TemplateBody *string `json:"templateBody" tf:"template_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 }
 
 // ProvisioningTemplateSpec defines the desired state of ProvisioningTemplate
@@ -107,8 +107,9 @@ type ProvisioningTemplateStatus struct {
 type ProvisioningTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProvisioningTemplateSpec   `json:"spec"`
-	Status            ProvisioningTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.templateBody)",message="templateBody is a required parameter"
+	Spec   ProvisioningTemplateSpec   `json:"spec"`
+	Status ProvisioningTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

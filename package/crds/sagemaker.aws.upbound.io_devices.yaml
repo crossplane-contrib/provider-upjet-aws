@@ -166,7 +166,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - device
                 - region
                 type: object
               providerConfigRef:

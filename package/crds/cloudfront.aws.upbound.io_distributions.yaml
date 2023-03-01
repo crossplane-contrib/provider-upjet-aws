@@ -1132,12 +1132,7 @@ spec:
                       permissions assigned.
                     type: string
                 required:
-                - defaultCacheBehavior
-                - enabled
-                - origin
                 - region
-                - restrictions
-                - viewerCertificate
                 type: object
               providerConfigRef:
                 default:

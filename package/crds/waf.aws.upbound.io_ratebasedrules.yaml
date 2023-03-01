@@ -193,10 +193,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - metricName
-                - name
-                - rateKey
-                - rateLimit
                 - region
                 type: object
               providerConfigRef:

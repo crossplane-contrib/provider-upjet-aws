@@ -342,7 +342,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - container
                 - region
                 type: object
               providerConfigRef:

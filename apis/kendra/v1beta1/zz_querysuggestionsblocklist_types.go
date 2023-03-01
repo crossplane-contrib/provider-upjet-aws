@@ -50,8 +50,8 @@ type QuerySuggestionsBlockListParameters struct {
 	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The name for the block list.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -73,8 +73,8 @@ type QuerySuggestionsBlockListParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 path where your block list text file sits in S3. Detailed below.
-	// +kubebuilder:validation:Required
-	SourceS3Path []SourceS3PathParameters `json:"sourceS3Path" tf:"source_s3_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceS3Path []SourceS3PathParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
@@ -129,8 +129,10 @@ type QuerySuggestionsBlockListStatus struct {
 type QuerySuggestionsBlockList struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QuerySuggestionsBlockListSpec   `json:"spec"`
-	Status            QuerySuggestionsBlockListStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
+	Spec   QuerySuggestionsBlockListSpec   `json:"spec"`
+	Status QuerySuggestionsBlockListStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

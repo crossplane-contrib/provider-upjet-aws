@@ -262,8 +262,8 @@ type GangliaLayerParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The password to use for Ganglia.
-	// +kubebuilder:validation:Required
-	Password *string `json:"password" tf:"password,omitempty"`
+	// +kubebuilder:validation:Optional
+	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 
 	// ID of the stack the layer will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
@@ -324,8 +324,9 @@ type GangliaLayerStatus struct {
 type GangliaLayer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GangliaLayerSpec   `json:"spec"`
-	Status            GangliaLayerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.password)",message="password is a required parameter"
+	Spec   GangliaLayerSpec   `json:"spec"`
+	Status GangliaLayerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

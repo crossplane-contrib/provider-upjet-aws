@@ -63,12 +63,12 @@ type FeatureGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the feature that stores the EventTime of a Record in a Feature Group.
-	// +kubebuilder:validation:Required
-	EventTimeFeatureName *string `json:"eventTimeFeatureName" tf:"event_time_feature_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventTimeFeatureName *string `json:"eventTimeFeatureName,omitempty" tf:"event_time_feature_name,omitempty"`
 
 	// A list of Feature names and types. See Feature Definition Below.
-	// +kubebuilder:validation:Required
-	FeatureDefinition []FeatureDefinitionParameters `json:"featureDefinition" tf:"feature_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	FeatureDefinition []FeatureDefinitionParameters `json:"featureDefinition,omitempty" tf:"feature_definition,omitempty"`
 
 	// The Offline Feature Store Configuration. See Offline Store Config Below.
 	// +kubebuilder:validation:Optional
@@ -79,8 +79,8 @@ type FeatureGroupParameters struct {
 	OnlineStoreConfig []OnlineStoreConfigParameters `json:"onlineStoreConfig,omitempty" tf:"online_store_config,omitempty"`
 
 	// The name of the Feature whose value uniquely identifies a Record defined in the Feature Store. Only the latest record per identifier value will be stored in the Online Store.
-	// +kubebuilder:validation:Required
-	RecordIdentifierFeatureName *string `json:"recordIdentifierFeatureName" tf:"record_identifier_feature_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RecordIdentifierFeatureName *string `json:"recordIdentifierFeatureName,omitempty" tf:"record_identifier_feature_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -186,8 +186,11 @@ type FeatureGroupStatus struct {
 type FeatureGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FeatureGroupSpec   `json:"spec"`
-	Status            FeatureGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTimeFeatureName)",message="eventTimeFeatureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureDefinition)",message="featureDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recordIdentifierFeatureName)",message="recordIdentifierFeatureName is a required parameter"
+	Spec   FeatureGroupSpec   `json:"spec"`
+	Status FeatureGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

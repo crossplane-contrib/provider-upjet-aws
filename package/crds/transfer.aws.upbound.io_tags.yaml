@@ -152,9 +152,7 @@ spec:
                     description: Tag value.
                     type: string
                 required:
-                - key
                 - region
-                - value
                 type: object
               providerConfigRef:
                 default:

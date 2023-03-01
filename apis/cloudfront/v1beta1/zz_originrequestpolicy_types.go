@@ -71,16 +71,16 @@ type OriginRequestPolicyParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
-	// +kubebuilder:validation:Required
-	CookiesConfig []OriginRequestPolicyCookiesConfigParameters `json:"cookiesConfig" tf:"cookies_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	CookiesConfig []OriginRequestPolicyCookiesConfigParameters `json:"cookiesConfig,omitempty" tf:"cookies_config,omitempty"`
 
 	// Object that determines whether any HTTP headers (and if so, which headers) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
-	// +kubebuilder:validation:Required
-	HeadersConfig []OriginRequestPolicyHeadersConfigParameters `json:"headersConfig" tf:"headers_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	HeadersConfig []OriginRequestPolicyHeadersConfigParameters `json:"headersConfig,omitempty" tf:"headers_config,omitempty"`
 
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the origin request key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
-	// +kubebuilder:validation:Required
-	QueryStringsConfig []OriginRequestPolicyQueryStringsConfigParameters `json:"queryStringsConfig" tf:"query_strings_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	QueryStringsConfig []OriginRequestPolicyQueryStringsConfigParameters `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -133,8 +133,11 @@ type OriginRequestPolicyStatus struct {
 type OriginRequestPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OriginRequestPolicySpec   `json:"spec"`
-	Status            OriginRequestPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cookiesConfig)",message="cookiesConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.headersConfig)",message="headersConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryStringsConfig)",message="queryStringsConfig is a required parameter"
+	Spec   OriginRequestPolicySpec   `json:"spec"`
+	Status OriginRequestPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

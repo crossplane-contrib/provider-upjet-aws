@@ -156,8 +156,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - groupNames
-                - notifications
                 - region
                 type: object
               providerConfigRef:

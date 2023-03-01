@@ -79,7 +79,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceSetName
                 type: object
               providerConfigRef:
                 default:

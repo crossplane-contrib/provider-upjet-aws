@@ -150,7 +150,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - data
                 - region
                 type: object
               providerConfigRef:

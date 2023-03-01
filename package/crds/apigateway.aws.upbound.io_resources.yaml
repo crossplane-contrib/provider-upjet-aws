@@ -228,7 +228,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - pathPart
                 - region
                 type: object
               providerConfigRef:

@@ -44,8 +44,8 @@ type ClusterEndpointParameters struct {
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER, WRITER, ANY.
-	// +kubebuilder:validation:Required
-	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
 	// +kubebuilder:validation:Optional
@@ -89,8 +89,9 @@ type ClusterEndpointStatus struct {
 type ClusterEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterEndpointSpec   `json:"spec"`
-	Status            ClusterEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointType)",message="endpointType is a required parameter"
+	Spec   ClusterEndpointSpec   `json:"spec"`
+	Status ClusterEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

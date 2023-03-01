@@ -97,10 +97,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - ipAddressVersion
-                - name
                 - region
-                - scope
                 type: object
               providerConfigRef:
                 default:

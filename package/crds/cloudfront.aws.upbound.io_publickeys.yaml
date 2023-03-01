@@ -94,7 +94,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - encodedKeySecretRef
                 - region
                 type: object
               providerConfigRef:

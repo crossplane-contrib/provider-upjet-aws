@@ -98,8 +98,8 @@ type EBSSnapshotImportParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Information about the disk container. Detailed below.
-	// +kubebuilder:validation:Required
-	DiskContainer []DiskContainerParameters `json:"diskContainer" tf:"disk_container,omitempty"`
+	// +kubebuilder:validation:Optional
+	DiskContainer []DiskContainerParameters `json:"diskContainer,omitempty" tf:"disk_container,omitempty"`
 
 	// Specifies whether the destination snapshot of the imported image should be encrypted. The default KMS key for EBS is used unless you specify a non-default KMS key using KmsKeyId.
 	// +kubebuilder:validation:Optional
@@ -182,8 +182,9 @@ type EBSSnapshotImportStatus struct {
 type EBSSnapshotImport struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EBSSnapshotImportSpec   `json:"spec"`
-	Status            EBSSnapshotImportStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.diskContainer)",message="diskContainer is a required parameter"
+	Spec   EBSSnapshotImportSpec   `json:"spec"`
+	Status EBSSnapshotImportStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

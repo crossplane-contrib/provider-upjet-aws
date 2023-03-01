@@ -47,8 +47,8 @@ type PlacementGroupParameters struct {
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
 	// The placement strategy. Can be "cluster", "partition" or "spread".
-	// +kubebuilder:validation:Required
-	Strategy *string `json:"strategy" tf:"strategy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -79,8 +79,9 @@ type PlacementGroupStatus struct {
 type PlacementGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PlacementGroupSpec   `json:"spec"`
-	Status            PlacementGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.strategy)",message="strategy is a required parameter"
+	Spec   PlacementGroupSpec   `json:"spec"`
+	Status PlacementGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

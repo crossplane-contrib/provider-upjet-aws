@@ -44,8 +44,8 @@ type DeviceObservation struct {
 type DeviceParameters struct {
 
 	// The device to register with SageMaker Edge Manager. See Device details below.
-	// +kubebuilder:validation:Required
-	Device []DeviceDeviceParameters `json:"device" tf:"device,omitempty"`
+	// +kubebuilder:validation:Optional
+	Device []DeviceDeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.DeviceFleet
@@ -90,8 +90,9 @@ type DeviceStatus struct {
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceSpec   `json:"spec"`
-	Status            DeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.device)",message="device is a required parameter"
+	Spec   DeviceSpec   `json:"spec"`
+	Status DeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

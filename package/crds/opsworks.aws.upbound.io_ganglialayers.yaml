@@ -424,8 +424,6 @@ spec:
                     description: (Optiona) The username to use for Ganglia. Defaults
                       to "opsworks".
                     type: string
-                required:
-                - password
                 type: object
               providerConfigRef:
                 default:

@@ -40,8 +40,8 @@ type GroupTagParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Tag to create. The tag block is documented below.
-	// +kubebuilder:validation:Required
-	Tag []GroupTagTagParameters `json:"tag" tf:"tag,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tag []GroupTagTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type GroupTagTagObservation struct {
@@ -86,8 +86,9 @@ type GroupTagStatus struct {
 type GroupTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupTagSpec   `json:"spec"`
-	Status            GroupTagStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tag)",message="tag is a required parameter"
+	Spec   GroupTagSpec   `json:"spec"`
+	Status GroupTagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

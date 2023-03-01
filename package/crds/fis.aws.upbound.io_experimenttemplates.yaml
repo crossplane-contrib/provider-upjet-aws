@@ -295,10 +295,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - action
-                - description
                 - region
-                - stopCondition
                 type: object
               providerConfigRef:
                 default:

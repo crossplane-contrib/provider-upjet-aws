@@ -1909,9 +1909,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - filters
-                - groupByAttribute
-                - name
                 - region
                 type: object
               providerConfigRef:

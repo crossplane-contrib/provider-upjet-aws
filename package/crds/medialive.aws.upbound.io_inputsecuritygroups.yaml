@@ -86,7 +86,6 @@ spec:
                     type: array
                 required:
                 - region
-                - whitelistRules
                 type: object
               providerConfigRef:
                 default:

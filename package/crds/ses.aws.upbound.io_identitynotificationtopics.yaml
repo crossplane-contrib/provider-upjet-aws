@@ -236,7 +236,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - notificationType
                 - region
                 type: object
               providerConfigRef:

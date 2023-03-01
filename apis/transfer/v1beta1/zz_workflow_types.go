@@ -367,8 +367,8 @@ type WorkflowParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the details for the steps that are in the specified workflow. See Workflow Steps below.
-	// +kubebuilder:validation:Required
-	Steps []StepsParameters `json:"steps" tf:"steps,omitempty"`
+	// +kubebuilder:validation:Optional
+	Steps []StepsParameters `json:"steps,omitempty" tf:"steps,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -399,8 +399,9 @@ type WorkflowStatus struct {
 type Workflow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkflowSpec   `json:"spec"`
-	Status            WorkflowStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.steps)",message="steps is a required parameter"
+	Spec   WorkflowSpec   `json:"spec"`
+	Status WorkflowStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

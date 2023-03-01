@@ -123,8 +123,8 @@ type OntapStorageVirtualMachineParameters struct {
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The name of the SVM. You can use a maximum of 47 alphanumeric characters, plus the underscore (_) special character.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -209,8 +209,9 @@ type OntapStorageVirtualMachineStatus struct {
 type OntapStorageVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OntapStorageVirtualMachineSpec   `json:"spec"`
-	Status            OntapStorageVirtualMachineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   OntapStorageVirtualMachineSpec   `json:"spec"`
+	Status OntapStorageVirtualMachineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

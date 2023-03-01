@@ -236,7 +236,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - mode
                 - region
                 type: object
               providerConfigRef:

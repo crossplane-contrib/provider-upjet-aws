@@ -181,10 +181,7 @@ spec:
                     description: The to port to match.
                     type: number
                 required:
-                - protocol
                 - region
-                - ruleAction
-                - ruleNumber
                 type: object
               providerConfigRef:
                 default:

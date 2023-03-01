@@ -68,8 +68,8 @@ type EventDestinationParameters struct {
 	KinesisDestination []KinesisDestinationParameters `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
-	// +kubebuilder:validation:Required
-	MatchingTypes []*string `json:"matchingTypes" tf:"matching_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -159,8 +159,9 @@ type EventDestinationStatus struct {
 type EventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventDestinationSpec   `json:"spec"`
-	Status            EventDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.matchingTypes)",message="matchingTypes is a required parameter"
+	Spec   EventDestinationSpec   `json:"spec"`
+	Status EventDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

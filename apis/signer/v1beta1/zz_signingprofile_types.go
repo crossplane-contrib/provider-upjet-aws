@@ -54,8 +54,8 @@ type SigningProfileObservation struct {
 type SigningProfileParameters struct {
 
 	// The ID of the platform that is used by the target signing profile.
-	// +kubebuilder:validation:Required
-	PlatformID *string `json:"platformId" tf:"platform_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -106,8 +106,9 @@ type SigningProfileStatus struct {
 type SigningProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningProfileSpec   `json:"spec"`
-	Status            SigningProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platformId)",message="platformId is a required parameter"
+	Spec   SigningProfileSpec   `json:"spec"`
+	Status SigningProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

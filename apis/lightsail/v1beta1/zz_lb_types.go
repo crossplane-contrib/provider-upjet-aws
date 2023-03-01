@@ -50,8 +50,8 @@ type LBParameters struct {
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The instance port the load balancer will connect.
-	// +kubebuilder:validation:Required
-	InstancePort *float64 `json:"instancePort" tf:"instance_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -87,8 +87,9 @@ type LBStatus struct {
 type LB struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBSpec   `json:"spec"`
-	Status            LBStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePort)",message="instancePort is a required parameter"
+	Spec   LBSpec   `json:"spec"`
+	Status LBStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

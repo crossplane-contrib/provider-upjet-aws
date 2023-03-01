@@ -99,8 +99,8 @@ type BucketObjectParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Name of the object once it is in the bucket.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
 	// +kubebuilder:validation:Optional
@@ -172,8 +172,9 @@ type BucketObjectStatus struct {
 type BucketObject struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketObjectSpec   `json:"spec"`
-	Status            BucketObjectStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.key)",message="key is a required parameter"
+	Spec   BucketObjectSpec   `json:"spec"`
+	Status BucketObjectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

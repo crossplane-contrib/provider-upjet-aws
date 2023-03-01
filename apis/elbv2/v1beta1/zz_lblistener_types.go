@@ -203,8 +203,8 @@ type LBListenerParameters struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. Detailed below.
-	// +kubebuilder:validation:Required
-	DefaultAction []DefaultActionParameters `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
 	// +crossplane:generate:reference:type=LB
@@ -332,8 +332,9 @@ type LBListenerStatus struct {
 type LBListener struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBListenerSpec   `json:"spec"`
-	Status            LBListenerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	Spec   LBListenerSpec   `json:"spec"`
+	Status LBListenerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

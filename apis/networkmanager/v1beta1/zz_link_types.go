@@ -41,8 +41,8 @@ type LinkObservation struct {
 type LinkParameters struct {
 
 	// The upload speed and download speed in Mbps. Documented below.
-	// +kubebuilder:validation:Required
-	Bandwidth []BandwidthParameters `json:"bandwidth" tf:"bandwidth,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bandwidth []BandwidthParameters `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// A description of the link.
 	// +kubebuilder:validation:Optional
@@ -117,8 +117,9 @@ type LinkStatus struct {
 type Link struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkSpec   `json:"spec"`
-	Status            LinkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bandwidth)",message="bandwidth is a required parameter"
+	Spec   LinkSpec   `json:"spec"`
+	Status LinkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

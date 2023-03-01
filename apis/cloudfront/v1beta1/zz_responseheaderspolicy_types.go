@@ -187,8 +187,8 @@ type ResponseHeadersPolicyParameters struct {
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// A unique name to identify the response headers policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -316,8 +316,9 @@ type ResponseHeadersPolicyStatus struct {
 type ResponseHeadersPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResponseHeadersPolicySpec   `json:"spec"`
-	Status            ResponseHeadersPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ResponseHeadersPolicySpec   `json:"spec"`
+	Status ResponseHeadersPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

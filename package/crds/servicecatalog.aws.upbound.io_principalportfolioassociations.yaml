@@ -231,7 +231,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - acceptLanguage
                 - region
                 type: object
               providerConfigRef:

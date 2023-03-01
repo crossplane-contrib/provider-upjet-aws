@@ -36,8 +36,8 @@ type ClusterRoleAssociationParameters struct {
 	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
-	// +kubebuilder:validation:Required
-	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +83,9 @@ type ClusterRoleAssociationStatus struct {
 type ClusterRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterRoleAssociationSpec   `json:"spec"`
-	Status            ClusterRoleAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureName)",message="featureName is a required parameter"
+	Spec   ClusterRoleAssociationSpec   `json:"spec"`
+	Status ClusterRoleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

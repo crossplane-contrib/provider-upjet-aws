@@ -110,8 +110,8 @@ type UsagePlanParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the usage plan.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
 	// +kubebuilder:validation:Optional
@@ -173,8 +173,9 @@ type UsagePlanStatus struct {
 type UsagePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UsagePlanSpec   `json:"spec"`
-	Status            UsagePlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UsagePlanSpec   `json:"spec"`
+	Status UsagePlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

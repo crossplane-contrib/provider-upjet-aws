@@ -20,8 +20,8 @@ type PermissionObservation struct {
 type PermissionParameters struct {
 
 	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The Event Source Token to validate.  Used with Alexa Skills.
 	// +kubebuilder:validation:Optional
@@ -45,8 +45,8 @@ type PermissionParameters struct {
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
 	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
 	// +kubebuilder:validation:Optional
@@ -115,8 +115,10 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSpec   `json:"spec"`
-	Status            PermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   PermissionSpec   `json:"spec"`
+	Status PermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

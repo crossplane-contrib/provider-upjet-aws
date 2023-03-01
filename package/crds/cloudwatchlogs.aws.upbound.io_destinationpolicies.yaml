@@ -77,7 +77,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - accessPolicy
                 - region
                 type: object
               providerConfigRef:

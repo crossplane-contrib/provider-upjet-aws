@@ -259,9 +259,7 @@ spec:
                       you are granting permissions to.
                     type: string
                 required:
-                - principal
                 - region
-                - statementId
                 type: object
               providerConfigRef:
                 default:

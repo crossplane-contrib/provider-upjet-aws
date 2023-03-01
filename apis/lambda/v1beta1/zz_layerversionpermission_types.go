@@ -28,20 +28,20 @@ type LayerVersionPermissionObservation struct {
 type LayerVersionPermissionParameters struct {
 
 	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name or ARN of the Lambda Layer, which you want to grant access to.
-	// +kubebuilder:validation:Required
-	LayerName *string `json:"layerName" tf:"layer_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
 	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
 	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -49,12 +49,12 @@ type LayerVersionPermissionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
-	// +kubebuilder:validation:Required
-	StatementID *string `json:"statementId" tf:"statement_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
 	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
-	// +kubebuilder:validation:Required
-	VersionNumber *float64 `json:"versionNumber" tf:"version_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 // LayerVersionPermissionSpec defines the desired state of LayerVersionPermission
@@ -81,8 +81,13 @@ type LayerVersionPermissionStatus struct {
 type LayerVersionPermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LayerVersionPermissionSpec   `json:"spec"`
-	Status            LayerVersionPermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.layerName)",message="layerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statementId)",message="statementId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.versionNumber)",message="versionNumber is a required parameter"
+	Spec   LayerVersionPermissionSpec   `json:"spec"`
+	Status LayerVersionPermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

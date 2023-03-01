@@ -273,7 +273,6 @@ spec:
                     type: object
                 required:
                 - region
-                - source
                 type: object
               providerConfigRef:
                 default:

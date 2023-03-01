@@ -58,8 +58,8 @@ type LayerVersionParameters struct {
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// Unique name for your Lambda Layer
-	// +kubebuilder:validation:Required
-	LayerName *string `json:"layerName" tf:"layer_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
 
 	// License info for your Lambda Layer. See License Info.
 	// +kubebuilder:validation:Optional
@@ -115,8 +115,9 @@ type LayerVersionStatus struct {
 type LayerVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LayerVersionSpec   `json:"spec"`
-	Status            LayerVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.layerName)",message="layerName is a required parameter"
+	Spec   LayerVersionSpec   `json:"spec"`
+	Status LayerVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

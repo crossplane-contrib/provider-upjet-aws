@@ -158,8 +158,8 @@ type EndpointConfigurationParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
-	// +kubebuilder:validation:Required
-	ProductionVariants []ProductionVariantsParameters `json:"productionVariants" tf:"production_variants,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProductionVariants []ProductionVariantsParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -364,8 +364,9 @@ type EndpointConfigurationStatus struct {
 type EndpointConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EndpointConfigurationSpec   `json:"spec"`
-	Status            EndpointConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.productionVariants)",message="productionVariants is a required parameter"
+	Spec   EndpointConfigurationSpec   `json:"spec"`
+	Status EndpointConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

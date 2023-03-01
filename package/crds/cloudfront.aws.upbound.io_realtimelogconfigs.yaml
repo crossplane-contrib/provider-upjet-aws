@@ -273,11 +273,7 @@ spec:
                       1 and 100, inclusive.
                     type: number
                 required:
-                - endpoint
-                - fields
-                - name
                 - region
-                - samplingRate
                 type: object
               providerConfigRef:
                 default:

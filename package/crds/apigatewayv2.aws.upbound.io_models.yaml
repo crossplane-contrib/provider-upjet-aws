@@ -162,10 +162,7 @@ spec:
                       in length.
                     type: string
                 required:
-                - contentType
-                - name
                 - region
-                - schema
                 type: object
               providerConfigRef:
                 default:

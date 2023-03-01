@@ -1185,9 +1185,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
-                - spec
                 type: object
               providerConfigRef:
                 default:

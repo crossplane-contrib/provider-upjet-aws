@@ -1345,10 +1345,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - enabled
                 - region
-                - sql
-                - sqlVersion
                 type: object
               providerConfigRef:
                 default:

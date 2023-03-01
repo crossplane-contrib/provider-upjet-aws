@@ -86,7 +86,6 @@ spec:
                       contains your custom vocabulary.
                     type: string
                 required:
-                - languageCode
                 - region
                 type: object
               providerConfigRef:

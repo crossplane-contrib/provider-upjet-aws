@@ -138,20 +138,20 @@ type ImageRecipeParameters struct {
 	BlockDeviceMapping []ImageRecipeBlockDeviceMappingParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
 
 	// Ordered configuration block(s) with components for the image recipe. Detailed below.
-	// +kubebuilder:validation:Required
-	Component []ImageRecipeComponentParameters `json:"component" tf:"component,omitempty"`
+	// +kubebuilder:validation:Optional
+	Component []ImageRecipeComponentParameters `json:"component,omitempty" tf:"component,omitempty"`
 
 	// Description of the image recipe.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the image recipe.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
-	// +kubebuilder:validation:Required
-	ParentImage *string `json:"parentImage" tf:"parent_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -171,8 +171,8 @@ type ImageRecipeParameters struct {
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
 	// The semantic version of the image recipe, which specifies the version in the following format, with numeric values in each position to indicate a specific version: major.minor.patch. For example: 1.0.0.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// The working directory to be used during build and test workflows.
 	// +kubebuilder:validation:Optional
@@ -213,8 +213,12 @@ type ImageRecipeStatus struct {
 type ImageRecipe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageRecipeSpec   `json:"spec"`
-	Status            ImageRecipeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.component)",message="component is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentImage)",message="parentImage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   ImageRecipeSpec   `json:"spec"`
+	Status ImageRecipeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

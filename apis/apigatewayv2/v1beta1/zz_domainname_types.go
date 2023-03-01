@@ -60,7 +60,7 @@ type DomainNameObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Domain name configuration. See below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	DomainNameConfiguration []DomainNameConfigurationObservation `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
 
 	// Domain name identifier.
@@ -73,8 +73,8 @@ type DomainNameObservation struct {
 type DomainNameParameters struct {
 
 	// Domain name configuration. See below.
-	// +kubebuilder:validation:Required
-	DomainNameConfiguration []DomainNameConfigurationParameters `json:"domainNameConfiguration" tf:"domain_name_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainNameConfiguration []DomainNameConfigurationParameters `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
 
 	// Mutual TLS authentication configuration for the domain name.
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,9 @@ type DomainNameStatus struct {
 type DomainName struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainNameSpec   `json:"spec"`
-	Status            DomainNameStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainNameConfiguration)",message="domainNameConfiguration is a required parameter"
+	Spec   DomainNameSpec   `json:"spec"`
+	Status DomainNameStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

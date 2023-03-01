@@ -48,8 +48,8 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// The name of the Access Control List to associate with the cluster.
-	// +kubebuilder:validation:Required
-	ACLName *string `json:"aclName" tf:"acl_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
 
 	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -89,8 +89,8 @@ type ClusterParameters struct {
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
-	// +kubebuilder:validation:Required
-	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
 	// +kubebuilder:validation:Optional
@@ -242,8 +242,10 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.aclName)",message="aclName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

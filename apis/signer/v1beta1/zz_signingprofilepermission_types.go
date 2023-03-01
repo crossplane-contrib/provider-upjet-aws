@@ -20,12 +20,12 @@ type SigningProfilePermissionObservation struct {
 type SigningProfilePermissionParameters struct {
 
 	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The AWS principal to be granted a cross-account permission.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Name of the signing profile to add the cross-account permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile
@@ -92,8 +92,10 @@ type SigningProfilePermissionStatus struct {
 type SigningProfilePermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningProfilePermissionSpec   `json:"spec"`
-	Status            SigningProfilePermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   SigningProfilePermissionSpec   `json:"spec"`
+	Status SigningProfilePermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

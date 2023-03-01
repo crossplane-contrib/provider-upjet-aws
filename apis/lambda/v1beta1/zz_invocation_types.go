@@ -36,8 +36,8 @@ type InvocationParameters struct {
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// JSON payload to the lambda function.
-	// +kubebuilder:validation:Required
-	Input *string `json:"input" tf:"input,omitempty"`
+	// +kubebuilder:validation:Optional
+	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
 	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,9 @@ type InvocationStatus struct {
 type Invocation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InvocationSpec   `json:"spec"`
-	Status            InvocationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)",message="input is a required parameter"
+	Spec   InvocationSpec   `json:"spec"`
+	Status InvocationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

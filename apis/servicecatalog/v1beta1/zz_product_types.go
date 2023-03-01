@@ -49,16 +49,16 @@ type ProductParameters struct {
 	Distributor *string `json:"distributor,omitempty" tf:"distributor,omitempty"`
 
 	// Name of the product.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Owner of the product.
-	// +kubebuilder:validation:Required
-	Owner *string `json:"owner" tf:"owner,omitempty"`
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
-	// +kubebuilder:validation:Required
-	ProvisioningArtifactParameters []ProvisioningArtifactParametersParameters `json:"provisioningArtifactParameters" tf:"provisioning_artifact_parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProvisioningArtifactParameters []ProvisioningArtifactParametersParameters `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +82,8 @@ type ProductParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningArtifactParametersObservation struct {
@@ -140,8 +140,12 @@ type ProductStatus struct {
 type Product struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductSpec   `json:"spec"`
-	Status            ProductStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.owner)",message="owner is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.provisioningArtifactParameters)",message="provisioningArtifactParameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ProductSpec   `json:"spec"`
+	Status ProductStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

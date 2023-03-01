@@ -158,7 +158,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - mailFromDomain
                 - region
                 type: object
               providerConfigRef:

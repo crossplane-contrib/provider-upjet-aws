@@ -117,8 +117,8 @@ type RoutingProfileParameters struct {
 	DefaultOutboundQueueIDSelector *v1.Selector `json:"defaultOutboundQueueIdSelector,omitempty" tf:"-"`
 
 	// Specifies the description of the Routing Profile.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
@@ -135,12 +135,12 @@ type RoutingProfileParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// One or more media_concurrencies blocks that specify the channels that agents can handle in the Contact Control Panel (CCP) for this Routing Profile. The media_concurrencies block is documented below.
-	// +kubebuilder:validation:Required
-	MediaConcurrencies []MediaConcurrenciesParameters `json:"mediaConcurrencies" tf:"media_concurrencies,omitempty"`
+	// +kubebuilder:validation:Optional
+	MediaConcurrencies []MediaConcurrenciesParameters `json:"mediaConcurrencies,omitempty" tf:"media_concurrencies,omitempty"`
 
 	// Specifies the name of the Routing Profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more queue_configs blocks that specify the inbound queues associated with the routing profile. If no queue is added, the agent only can make outbound calls. The queue_configs block is documented below.
 	// +kubebuilder:validation:Optional
@@ -180,8 +180,11 @@ type RoutingProfileStatus struct {
 type RoutingProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoutingProfileSpec   `json:"spec"`
-	Status            RoutingProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mediaConcurrencies)",message="mediaConcurrencies is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RoutingProfileSpec   `json:"spec"`
+	Status RoutingProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

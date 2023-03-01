@@ -228,7 +228,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - backupVaultEvents
                 - region
                 type: object
               providerConfigRef:

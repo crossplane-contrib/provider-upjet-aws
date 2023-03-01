@@ -67,16 +67,16 @@ type ProxyObservation struct {
 type ProxyParameters struct {
 
 	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Described below.
-	// +kubebuilder:validation:Required
-	Auth []AuthParameters `json:"auth" tf:"auth,omitempty"`
+	// +kubebuilder:validation:Optional
+	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
 	// +kubebuilder:validation:Optional
 	DebugLogging *bool `json:"debugLogging,omitempty" tf:"debug_logging,omitempty"`
 
 	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora. Valid values are MYSQL and POSTGRESQL.
-	// +kubebuilder:validation:Required
-	EngineFamily *string `json:"engineFamily" tf:"engine_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
 	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	// +kubebuilder:validation:Optional
@@ -125,8 +125,8 @@ type ProxyParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
-	// +kubebuilder:validation:Required
-	VPCSubnetIds []*string `json:"vpcSubnetIds" tf:"vpc_subnet_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 // ProxySpec defines the desired state of Proxy
@@ -153,8 +153,11 @@ type ProxyStatus struct {
 type Proxy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxySpec   `json:"spec"`
-	Status            ProxyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.auth)",message="auth is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineFamily)",message="engineFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	Spec   ProxySpec   `json:"spec"`
+	Status ProxyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

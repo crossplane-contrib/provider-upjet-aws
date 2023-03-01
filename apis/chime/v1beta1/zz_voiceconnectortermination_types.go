@@ -22,12 +22,12 @@ type VoiceConnectorTerminationObservation struct {
 type VoiceConnectorTerminationParameters struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
-	// +kubebuilder:validation:Required
-	CallingRegions []*string `json:"callingRegions" tf:"calling_regions,omitempty"`
+	// +kubebuilder:validation:Optional
+	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
-	// +kubebuilder:validation:Required
-	CidrAllowList []*string `json:"cidrAllowList" tf:"cidr_allow_list,omitempty"`
+	// +kubebuilder:validation:Optional
+	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
 	// +kubebuilder:validation:Optional
@@ -85,8 +85,10 @@ type VoiceConnectorTerminationStatus struct {
 type VoiceConnectorTermination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorTerminationSpec   `json:"spec"`
-	Status            VoiceConnectorTerminationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.callingRegions)",message="callingRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cidrAllowList)",message="cidrAllowList is a required parameter"
+	Spec   VoiceConnectorTerminationSpec   `json:"spec"`
+	Status VoiceConnectorTerminationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

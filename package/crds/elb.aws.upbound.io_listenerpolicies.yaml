@@ -154,7 +154,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - loadBalancerPort
                 - region
                 type: object
               providerConfigRef:

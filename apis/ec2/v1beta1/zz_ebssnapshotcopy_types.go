@@ -76,8 +76,8 @@ type EBSSnapshotCopyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The region of the source snapshot.
-	// +kubebuilder:validation:Required
-	SourceRegion *string `json:"sourceRegion" tf:"source_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
 	// The ARN for the snapshot to be copied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSSnapshot
@@ -130,8 +130,9 @@ type EBSSnapshotCopyStatus struct {
 type EBSSnapshotCopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EBSSnapshotCopySpec   `json:"spec"`
-	Status            EBSSnapshotCopyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceRegion)",message="sourceRegion is a required parameter"
+	Spec   EBSSnapshotCopySpec   `json:"spec"`
+	Status EBSSnapshotCopyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

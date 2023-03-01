@@ -38,8 +38,8 @@ type VaultPolicyParameters struct {
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
 	// The backup vault access policy document in JSON format.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -71,8 +71,9 @@ type VaultPolicyStatus struct {
 type VaultPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VaultPolicySpec   `json:"spec"`
-	Status            VaultPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   VaultPolicySpec   `json:"spec"`
+	Status VaultPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

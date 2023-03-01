@@ -29,8 +29,8 @@ type UserGroupParameters struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The current supported value is REDIS.
-	// +kubebuilder:validation:Required
-	Engine *string `json:"engine" tf:"engine,omitempty"`
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +81,9 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserGroupSpec   `json:"spec"`
-	Status            UserGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engine)",message="engine is a required parameter"
+	Spec   UserGroupSpec   `json:"spec"`
+	Status UserGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

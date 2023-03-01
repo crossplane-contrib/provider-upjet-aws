@@ -112,12 +112,12 @@ type LaunchConfigurationParameters struct {
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
 	// The EC2 image ID to launch.
-	// +kubebuilder:validation:Required
-	ImageID *string `json:"imageId" tf:"image_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The size of instance to launch.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The key name that should be used for the instance.
 	// +kubebuilder:validation:Optional
@@ -237,8 +237,10 @@ type LaunchConfigurationStatus struct {
 type LaunchConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LaunchConfigurationSpec   `json:"spec"`
-	Status            LaunchConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.imageId)",message="imageId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   LaunchConfigurationSpec   `json:"spec"`
+	Status LaunchConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -171,8 +171,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - portRange
-                - protocol
                 - region
                 type: object
               providerConfigRef:

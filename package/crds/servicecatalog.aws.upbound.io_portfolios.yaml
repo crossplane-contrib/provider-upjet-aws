@@ -83,8 +83,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
-                - providerName
                 - region
                 type: object
               providerConfigRef:

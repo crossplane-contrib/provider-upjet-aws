@@ -188,12 +188,7 @@ spec:
                       and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.'
                     type: string
                 required:
-                - additionalSchemaElements
-                - compression
-                - format
                 - region
-                - s3Region
-                - timeUnit
                 type: object
               providerConfigRef:
                 default:

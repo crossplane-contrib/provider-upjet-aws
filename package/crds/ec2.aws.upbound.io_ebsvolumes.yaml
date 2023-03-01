@@ -187,7 +187,6 @@ spec:
                       io1, io2, sc1 or st1 (Default: gp2).'
                     type: string
                 required:
-                - availabilityZone
                 - region
                 type: object
               providerConfigRef:

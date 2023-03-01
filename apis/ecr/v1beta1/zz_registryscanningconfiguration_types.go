@@ -32,8 +32,8 @@ type RegistryScanningConfigurationParameters struct {
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// the scanning type to set for the registry. Can be either ENHANCED or BASIC.
-	// +kubebuilder:validation:Required
-	ScanType *string `json:"scanType" tf:"scan_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
 }
 
 type RepositoryFilterObservation struct {
@@ -86,8 +86,9 @@ type RegistryScanningConfigurationStatus struct {
 type RegistryScanningConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RegistryScanningConfigurationSpec   `json:"spec"`
-	Status            RegistryScanningConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scanType)",message="scanType is a required parameter"
+	Spec   RegistryScanningConfigurationSpec   `json:"spec"`
+	Status RegistryScanningConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

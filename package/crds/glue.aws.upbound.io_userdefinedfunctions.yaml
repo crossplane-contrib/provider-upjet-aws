@@ -178,9 +178,6 @@ spec:
                     type: array
                 required:
                 - catalogId
-                - className
-                - ownerName
-                - ownerType
                 - region
                 type: object
               providerConfigRef:

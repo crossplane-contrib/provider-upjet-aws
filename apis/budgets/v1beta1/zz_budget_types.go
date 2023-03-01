@@ -54,8 +54,8 @@ type BudgetParameters struct {
 	AutoAdjustData []AutoAdjustDataParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
-	// +kubebuilder:validation:Required
-	BudgetType *string `json:"budgetType" tf:"budget_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	BudgetType *string `json:"budgetType,omitempty" tf:"budget_type,omitempty"`
 
 	// A list of CostFilter name/values pair to apply to budget.
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,8 @@ type BudgetParameters struct {
 	TimePeriodStart *string `json:"timePeriodStart,omitempty" tf:"time_period_start,omitempty"`
 
 	// The length of time until a budget resets the actual and forecasted spend. Valid values: MONTHLY, QUARTERLY, ANNUALLY, and DAILY.
-	// +kubebuilder:validation:Required
-	TimeUnit *string `json:"timeUnit" tf:"time_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
 }
 
 type CostFilterObservation struct {
@@ -248,8 +248,10 @@ type BudgetStatus struct {
 type Budget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BudgetSpec   `json:"spec"`
-	Status            BudgetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.budgetType)",message="budgetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeUnit)",message="timeUnit is a required parameter"
+	Spec   BudgetSpec   `json:"spec"`
+	Status BudgetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

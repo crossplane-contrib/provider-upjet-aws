@@ -538,10 +538,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - meshName
-                - name
                 - region
-                - spec
                 type: object
               providerConfigRef:
                 default:

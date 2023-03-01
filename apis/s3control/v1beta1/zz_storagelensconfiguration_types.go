@@ -323,8 +323,8 @@ type StorageLensConfigurationParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The ID of the S3 Storage Lens configuration.
-	// +kubebuilder:validation:Required
-	ConfigID *string `json:"configId" tf:"config_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -332,8 +332,8 @@ type StorageLensConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The S3 Storage Lens configuration. See Storage Lens Configuration below for more details.
-	// +kubebuilder:validation:Required
-	StorageLensConfiguration []StorageLensConfigurationStorageLensConfigurationParameters `json:"storageLensConfiguration" tf:"storage_lens_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageLensConfiguration []StorageLensConfigurationStorageLensConfigurationParameters `json:"storageLensConfiguration,omitempty" tf:"storage_lens_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -408,8 +408,10 @@ type StorageLensConfigurationStatus struct {
 type StorageLensConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageLensConfigurationSpec   `json:"spec"`
-	Status            StorageLensConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configId)",message="configId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageLensConfiguration)",message="storageLensConfiguration is a required parameter"
+	Spec   StorageLensConfigurationSpec   `json:"spec"`
+	Status StorageLensConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

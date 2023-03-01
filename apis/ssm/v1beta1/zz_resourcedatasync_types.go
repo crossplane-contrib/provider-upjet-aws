@@ -26,8 +26,8 @@ type ResourceDataSyncParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Amazon S3 configuration details for the sync.
-	// +kubebuilder:validation:Required
-	S3Destination []S3DestinationParameters `json:"s3Destination" tf:"s3_destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Destination []S3DestinationParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
 }
 
 type S3DestinationObservation struct {
@@ -99,8 +99,9 @@ type ResourceDataSyncStatus struct {
 type ResourceDataSync struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceDataSyncSpec   `json:"spec"`
-	Status            ResourceDataSyncStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Destination)",message="s3Destination is a required parameter"
+	Spec   ResourceDataSyncSpec   `json:"spec"`
+	Status ResourceDataSyncStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

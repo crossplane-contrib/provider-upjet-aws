@@ -79,8 +79,8 @@ type ConnectAttachmentParameters struct {
 	EdgeLocationSelector *v1.Selector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
 	// Options for creating an attachment.
-	// +kubebuilder:validation:Required
-	Options []OptionsParameters `json:"options" tf:"options,omitempty"`
+	// +kubebuilder:validation:Optional
+	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -139,8 +139,9 @@ type ConnectAttachmentStatus struct {
 type ConnectAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectAttachmentSpec   `json:"spec"`
-	Status            ConnectAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.options)",message="options is a required parameter"
+	Spec   ConnectAttachmentSpec   `json:"spec"`
+	Status ConnectAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

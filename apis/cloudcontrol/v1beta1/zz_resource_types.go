@@ -23,8 +23,8 @@ type ResourceObservation struct {
 type ResourceParameters struct {
 
 	// JSON string matching the CloudFormation resource type schema with desired configuration.
-	// +kubebuilder:validation:Required
-	DesiredState *string `json:"desiredState" tf:"desired_state,omitempty"`
+	// +kubebuilder:validation:Optional
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -50,8 +50,8 @@ type ResourceParameters struct {
 	SchemaSecretRef *v1.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
 
 	// CloudFormation resource type name. For example, AWS::EC2::VPC.
-	// +kubebuilder:validation:Required
-	TypeName *string `json:"typeName" tf:"type_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// Identifier of the CloudFormation resource type version.
 	// +kubebuilder:validation:Optional
@@ -82,8 +82,10 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSpec   `json:"spec"`
-	Status            ResourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.desiredState)",message="desiredState is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.typeName)",message="typeName is a required parameter"
+	Spec   ResourceSpec   `json:"spec"`
+	Status ResourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

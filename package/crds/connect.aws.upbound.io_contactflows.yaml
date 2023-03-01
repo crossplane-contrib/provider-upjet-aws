@@ -180,7 +180,6 @@ spec:
                       OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER.'
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

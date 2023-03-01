@@ -49,12 +49,12 @@ type WorkspaceObservation struct {
 type WorkspaceParameters struct {
 
 	// The type of account access for the workspace. Valid values are CURRENT_ACCOUNT and ORGANIZATION. If ORGANIZATION is specified, then organizational_units must also be present.
-	// +kubebuilder:validation:Required
-	AccountAccessType *string `json:"accountAccessType" tf:"account_access_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountAccessType *string `json:"accountAccessType,omitempty" tf:"account_access_type,omitempty"`
 
 	// The authentication providers for the workspace. Valid values are AWS_SSO, SAML, or both.
-	// +kubebuilder:validation:Required
-	AuthenticationProviders []*string `json:"authenticationProviders" tf:"authentication_providers,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationProviders []*string `json:"authenticationProviders,omitempty" tf:"authentication_providers,omitempty"`
 
 	// The configuration string for the workspace that you create. For more information about the format and configuration options available, see Working in your Grafana workspace.
 	// +kubebuilder:validation:Optional
@@ -85,8 +85,8 @@ type WorkspaceParameters struct {
 	OrganizationalUnits []*string `json:"organizationalUnits,omitempty" tf:"organizational_units,omitempty"`
 
 	// The permission type of the workspace. If SERVICE_MANAGED is specified, the IAM roles and IAM policy attachments are generated automatically. If CUSTOMER_MANAGED is specified, the IAM roles and IAM policy attachments will not be created.
-	// +kubebuilder:validation:Required
-	PermissionType *string `json:"permissionType" tf:"permission_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -144,8 +144,11 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSpec   `json:"spec"`
-	Status            WorkspaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountAccessType)",message="accountAccessType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationProviders)",message="authenticationProviders is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissionType)",message="permissionType is a required parameter"
+	Spec   WorkspaceSpec   `json:"spec"`
+	Status WorkspaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -156,7 +156,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - cookieName
                 - lbPort
                 - region
                 type: object

@@ -335,7 +335,6 @@ spec:
                       files. Maximum size of a zip file is 5 MB.
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -73,8 +73,8 @@ type DomainNameParameters struct {
 	CertificatePrivateKeySecretRef *v1.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
 
 	// Fully-qualified domain name to register.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Configuration block defining API endpoint information including type. See below.
 	// +kubebuilder:validation:Optional
@@ -168,8 +168,9 @@ type DomainNameStatus struct {
 type DomainName struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainNameSpec   `json:"spec"`
-	Status            DomainNameStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainName)",message="domainName is a required parameter"
+	Spec   DomainNameSpec   `json:"spec"`
+	Status DomainNameStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

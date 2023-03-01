@@ -156,7 +156,6 @@ spec:
                     type: string
                 required:
                 - region
-                - target
                 - type
                 type: object
               providerConfigRef:

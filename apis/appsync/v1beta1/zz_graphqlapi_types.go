@@ -97,8 +97,8 @@ type GraphQLAPIParameters struct {
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-	// +kubebuilder:validation:Required
-	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	// +kubebuilder:validation:Optional
@@ -109,8 +109,8 @@ type GraphQLAPIParameters struct {
 	LogConfig []LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
 	// User-supplied name for the GraphqlApi.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Nested argument containing OpenID Connect configuration. Defined below.
 	// +kubebuilder:validation:Optional
@@ -280,8 +280,10 @@ type GraphQLAPIStatus struct {
 type GraphQLAPI struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GraphQLAPISpec   `json:"spec"`
-	Status            GraphQLAPIStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationType)",message="authenticationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   GraphQLAPISpec   `json:"spec"`
+	Status GraphQLAPIStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -101,8 +101,8 @@ type AMIParameters struct {
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
 	// Region-unique name for the AMI.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ID of an initrd image (ARI) that will be used when booting the
 	// created instances.
@@ -234,8 +234,9 @@ type AMIStatus struct {
 type AMI struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AMISpec   `json:"spec"`
-	Status            AMIStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AMISpec   `json:"spec"`
+	Status AMIStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

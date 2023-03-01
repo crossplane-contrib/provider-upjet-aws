@@ -438,8 +438,6 @@ spec:
                       false.
                     type: boolean
                 required:
-                - authenticationType
-                - name
                 - region
                 type: object
               providerConfigRef:

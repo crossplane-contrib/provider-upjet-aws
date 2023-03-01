@@ -509,8 +509,8 @@ type SpotFleetRequestParameters struct {
 	// Spot instances on your behalf when you cancel its Spot fleet request using
 	// CancelSpotFleetRequests or when the Spot fleet request expires, if you set
 	// terminateInstancesWithExpiration.
-	// +kubebuilder:validation:Required
-	IAMFleetRole *string `json:"iamFleetRole" tf:"iam_fleet_role,omitempty"`
+	// +kubebuilder:validation:Optional
+	IAMFleetRole *string `json:"iamFleetRole,omitempty" tf:"iam_fleet_role,omitempty"`
 
 	// Indicates whether a Spot
 	// instance stops or terminates when it is interrupted. Default is
@@ -575,8 +575,8 @@ type SpotFleetRequestParameters struct {
 	// The number of units to request. You can choose to set the
 	// target capacity in terms of instances or a performance characteristic that is
 	// important to your application workload, such as vCPUs, memory, or I/O.
-	// +kubebuilder:validation:Required
-	TargetCapacity *float64 `json:"targetCapacity" tf:"target_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetCapacity *float64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
 
 	// The unit for the target capacity. This can only be done with instance_requirements defined
 	// +kubebuilder:validation:Optional
@@ -643,8 +643,10 @@ type SpotFleetRequestStatus struct {
 type SpotFleetRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpotFleetRequestSpec   `json:"spec"`
-	Status            SpotFleetRequestStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.iamFleetRole)",message="iamFleetRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetCapacity)",message="targetCapacity is a required parameter"
+	Spec   SpotFleetRequestSpec   `json:"spec"`
+	Status SpotFleetRequestStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -161,7 +161,6 @@ spec:
                     type: object
                 required:
                 - region
-                - replicationSubnetGroupDescription
                 type: object
               providerConfigRef:
                 default:

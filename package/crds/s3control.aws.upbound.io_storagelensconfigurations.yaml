@@ -460,9 +460,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - configId
                 - region
-                - storageLensConfiguration
                 type: object
               providerConfigRef:
                 default:

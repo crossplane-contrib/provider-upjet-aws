@@ -848,9 +848,7 @@ spec:
                   waitForFulfillment:
                     type: boolean
                 required:
-                - iamFleetRole
                 - region
-                - targetCapacity
                 type: object
               providerConfigRef:
                 default:

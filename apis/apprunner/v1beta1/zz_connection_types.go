@@ -30,8 +30,8 @@ type ConnectionObservation struct {
 type ConnectionParameters struct {
 
 	// Source repository provider. Valid values: GITHUB.
-	// +kubebuilder:validation:Required
-	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -67,8 +67,9 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionSpec   `json:"spec"`
-	Status            ConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerType)",message="providerType is a required parameter"
+	Spec   ConnectionSpec   `json:"spec"`
+	Status ConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

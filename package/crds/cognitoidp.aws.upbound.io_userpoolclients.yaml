@@ -448,7 +448,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

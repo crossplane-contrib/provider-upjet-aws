@@ -87,8 +87,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - monitorType
-                - name
                 - region
                 type: object
               providerConfigRef:

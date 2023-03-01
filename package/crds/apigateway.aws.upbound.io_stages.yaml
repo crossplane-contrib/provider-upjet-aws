@@ -303,7 +303,6 @@ spec:
                     type: boolean
                 required:
                 - region
-                - stageName
                 type: object
               providerConfigRef:
                 default:

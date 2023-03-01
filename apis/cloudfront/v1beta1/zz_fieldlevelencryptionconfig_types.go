@@ -73,12 +73,12 @@ type FieldLevelEncryptionConfigParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Content Type Profile Config specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
-	// +kubebuilder:validation:Required
-	ContentTypeProfileConfig []ContentTypeProfileConfigParameters `json:"contentTypeProfileConfig" tf:"content_type_profile_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentTypeProfileConfig []ContentTypeProfileConfigParameters `json:"contentTypeProfileConfig,omitempty" tf:"content_type_profile_config,omitempty"`
 
 	// Query Arg Profile Config that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
-	// +kubebuilder:validation:Required
-	QueryArgProfileConfig []QueryArgProfileConfigParameters `json:"queryArgProfileConfig" tf:"query_arg_profile_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	QueryArgProfileConfig []QueryArgProfileConfigParameters `json:"queryArgProfileConfig,omitempty" tf:"query_arg_profile_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -157,8 +157,10 @@ type FieldLevelEncryptionConfigStatus struct {
 type FieldLevelEncryptionConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FieldLevelEncryptionConfigSpec   `json:"spec"`
-	Status            FieldLevelEncryptionConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentTypeProfileConfig)",message="contentTypeProfileConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryArgProfileConfig)",message="queryArgProfileConfig is a required parameter"
+	Spec   FieldLevelEncryptionConfigSpec   `json:"spec"`
+	Status FieldLevelEncryptionConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

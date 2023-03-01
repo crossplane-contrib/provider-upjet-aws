@@ -649,8 +649,6 @@ spec:
                     type: object
                 required:
                 - region
-                - serviceName
-                - sourceConfiguration
                 type: object
               providerConfigRef:
                 default:

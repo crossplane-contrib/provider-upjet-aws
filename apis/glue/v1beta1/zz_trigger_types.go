@@ -161,8 +161,8 @@ type TriggerObservation struct {
 type TriggerParameters struct {
 
 	// –  List of actions initiated by this trigger when it fires. See Actions Below.
-	// +kubebuilder:validation:Required
-	Actions []ActionsParameters `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// –  A description of the new trigger.
 	// +kubebuilder:validation:Optional
@@ -198,8 +198,8 @@ type TriggerParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A workflow to which the trigger should be associated to. Every workflow graph (DAG) needs a starting trigger (ON_DEMAND or SCHEDULED type) and can contain multiple additional CONDITIONAL triggers.
 	// +kubebuilder:validation:Optional
@@ -230,8 +230,10 @@ type TriggerStatus struct {
 type Trigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TriggerSpec   `json:"spec"`
-	Status            TriggerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)",message="actions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   TriggerSpec   `json:"spec"`
+	Status TriggerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

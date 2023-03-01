@@ -77,8 +77,8 @@ type ProxyEndpointParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
-	// +kubebuilder:validation:Required
-	VPCSubnetIds []*string `json:"vpcSubnetIds" tf:"vpc_subnet_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 // ProxyEndpointSpec defines the desired state of ProxyEndpoint
@@ -105,8 +105,9 @@ type ProxyEndpointStatus struct {
 type ProxyEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxyEndpointSpec   `json:"spec"`
-	Status            ProxyEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	Spec   ProxyEndpointSpec   `json:"spec"`
+	Status ProxyEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -67,8 +67,8 @@ type BucketLoggingParameters struct {
 	TargetGrant []TargetGrantParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 
 	// A prefix for all log object keys.
-	// +kubebuilder:validation:Required
-	TargetPrefix *string `json:"targetPrefix" tf:"target_prefix,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
 }
 
 type TargetGrantGranteeObservation struct {
@@ -136,8 +136,9 @@ type BucketLoggingStatus struct {
 type BucketLogging struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketLoggingSpec   `json:"spec"`
-	Status            BucketLoggingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetPrefix)",message="targetPrefix is a required parameter"
+	Spec   BucketLoggingSpec   `json:"spec"`
+	Status BucketLoggingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

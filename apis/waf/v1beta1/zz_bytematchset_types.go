@@ -28,8 +28,8 @@ type ByteMatchSetParameters struct {
 	ByteMatchTuples []ByteMatchTuplesParameters `json:"byteMatchTuples,omitempty" tf:"byte_match_tuples,omitempty"`
 
 	// The name or description of the Byte Match Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -111,8 +111,9 @@ type ByteMatchSetStatus struct {
 type ByteMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ByteMatchSetSpec   `json:"spec"`
-	Status            ByteMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ByteMatchSetSpec   `json:"spec"`
+	Status ByteMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

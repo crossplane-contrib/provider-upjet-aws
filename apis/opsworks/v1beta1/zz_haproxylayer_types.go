@@ -288,8 +288,8 @@ type HAProxyLayerParameters struct {
 	StatsEnabled *bool `json:"statsEnabled,omitempty" tf:"stats_enabled,omitempty"`
 
 	// The password to use for HAProxy stats.
-	// +kubebuilder:validation:Required
-	StatsPassword *string `json:"statsPassword" tf:"stats_password,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatsPassword *string `json:"statsPassword,omitempty" tf:"stats_password,omitempty"`
 
 	// The HAProxy stats URL. Defaults to "/haproxy?stats".
 	// +kubebuilder:validation:Optional
@@ -336,8 +336,9 @@ type HAProxyLayerStatus struct {
 type HAProxyLayer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HAProxyLayerSpec   `json:"spec"`
-	Status            HAProxyLayerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statsPassword)",message="statsPassword is a required parameter"
+	Spec   HAProxyLayerSpec   `json:"spec"`
+	Status HAProxyLayerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

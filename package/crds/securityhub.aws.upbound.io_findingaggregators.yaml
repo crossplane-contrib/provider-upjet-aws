@@ -82,7 +82,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - linkingMode
                 - region
                 type: object
               providerConfigRef:

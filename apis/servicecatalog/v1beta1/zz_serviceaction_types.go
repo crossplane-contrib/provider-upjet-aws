@@ -52,16 +52,16 @@ type ServiceActionParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Self-service action definition configuration block. Detailed below.
-	// +kubebuilder:validation:Required
-	Definition []DefinitionParameters `json:"definition" tf:"definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Self-service action description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Self-service action name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +93,10 @@ type ServiceActionStatus struct {
 type ServiceAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceActionSpec   `json:"spec"`
-	Status            ServiceActionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)",message="definition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ServiceActionSpec   `json:"spec"`
+	Status ServiceActionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

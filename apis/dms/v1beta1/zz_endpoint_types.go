@@ -61,12 +61,12 @@ type EndpointParameters struct {
 	ElasticsearchSettings []ElasticsearchSettingsParameters `json:"elasticsearchSettings,omitempty" tf:"elasticsearch_settings,omitempty"`
 
 	// Type of endpoint. Valid values are source, target.
-	// +kubebuilder:validation:Required
-	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
-	// +kubebuilder:validation:Required
-	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Additional attributes associated with the connection. For available attributes see Using Extra Connection Attributes with AWS Database Migration Service.
 	// +kubebuilder:validation:Optional
@@ -555,8 +555,10 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EndpointSpec   `json:"spec"`
-	Status            EndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointType)",message="endpointType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineName)",message="engineName is a required parameter"
+	Spec   EndpointSpec   `json:"spec"`
+	Status EndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

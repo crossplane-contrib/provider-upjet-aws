@@ -60,8 +60,8 @@ type StreamParameters struct {
 
 	// A name to identify the stream. This is unique to the
 	// AWS account and region the Stream is created in.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +97,9 @@ type StreamStatus struct {
 type Stream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamSpec   `json:"spec"`
-	Status            StreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   StreamSpec   `json:"spec"`
+	Status StreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -247,7 +247,6 @@ spec:
                     type: string
                 required:
                 - region
-                - targetDbSnapshotIdentifier
                 type: object
               providerConfigRef:
                 default:

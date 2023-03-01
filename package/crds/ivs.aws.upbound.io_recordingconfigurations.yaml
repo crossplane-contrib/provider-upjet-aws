@@ -120,7 +120,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - destinationConfiguration
                 - region
                 type: object
               providerConfigRef:

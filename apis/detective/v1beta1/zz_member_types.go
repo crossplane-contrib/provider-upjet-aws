@@ -39,16 +39,16 @@ type MemberObservation struct {
 type MemberParameters struct {
 
 	// AWS account ID for the account.
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// If set to true, then the root user of the invited account will not receive an email notification. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. By default, this is set to false.
 	// +kubebuilder:validation:Optional
 	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
 
 	// Email address for the account.
-	// +kubebuilder:validation:Required
-	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// ARN of the behavior graph to invite the member accounts to contribute their data to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
@@ -98,8 +98,10 @@ type MemberStatus struct {
 type Member struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MemberSpec   `json:"spec"`
-	Status            MemberStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountId)",message="accountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddress)",message="emailAddress is a required parameter"
+	Spec   MemberSpec   `json:"spec"`
+	Status MemberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

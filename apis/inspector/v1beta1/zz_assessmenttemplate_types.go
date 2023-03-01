@@ -27,16 +27,16 @@ type AssessmentTemplateObservation struct {
 type AssessmentTemplateParameters struct {
 
 	// The duration of the inspector run.
-	// +kubebuilder:validation:Required
-	Duration *float64 `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
 	// +kubebuilder:validation:Optional
 	EventSubscription []EventSubscriptionParameters `json:"eventSubscription,omitempty" tf:"event_subscription,omitempty"`
 
 	// The name of the assessment template.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -44,8 +44,8 @@ type AssessmentTemplateParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The rules to be used during the run.
-	// +kubebuilder:validation:Required
-	RulesPackageArns []*string `json:"rulesPackageArns" tf:"rules_package_arns,omitempty"`
+	// +kubebuilder:validation:Optional
+	RulesPackageArns []*string `json:"rulesPackageArns,omitempty" tf:"rules_package_arns,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -114,8 +114,11 @@ type AssessmentTemplateStatus struct {
 type AssessmentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AssessmentTemplateSpec   `json:"spec"`
-	Status            AssessmentTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.duration)",message="duration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rulesPackageArns)",message="rulesPackageArns is a required parameter"
+	Spec   AssessmentTemplateSpec   `json:"spec"`
+	Status AssessmentTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

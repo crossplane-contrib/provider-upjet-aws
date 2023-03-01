@@ -35,8 +35,8 @@ type VPCIpamPoolObservation struct {
 type VPCIpamPoolParameters struct {
 
 	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
 	// +kubebuilder:validation:Optional
@@ -136,8 +136,9 @@ type VPCIpamPoolStatus struct {
 type VPCIpamPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCIpamPoolSpec   `json:"spec"`
-	Status            VPCIpamPoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	Spec   VPCIpamPoolSpec   `json:"spec"`
+	Status VPCIpamPoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -22,8 +22,8 @@ type RegexMatchSetObservation struct {
 type RegexMatchSetParameters struct {
 
 	// The name or description of the Regex Match Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The regular expression pattern that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings. See below.
 	// +kubebuilder:validation:Optional
@@ -108,8 +108,9 @@ type RegexMatchSetStatus struct {
 type RegexMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RegexMatchSetSpec   `json:"spec"`
-	Status            RegexMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RegexMatchSetSpec   `json:"spec"`
+	Status RegexMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

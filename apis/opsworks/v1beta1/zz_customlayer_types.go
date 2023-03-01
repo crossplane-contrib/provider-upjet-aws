@@ -119,12 +119,12 @@ type CustomLayerParameters struct {
 	LoadBasedAutoScaling []LoadBasedAutoScalingParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
 
 	// A human-readable name for the layer.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A short, machine-readable name for the layer, which will be used to identify it in the Chef node JSON.
-	// +kubebuilder:validation:Required
-	ShortName *string `json:"shortName" tf:"short_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// ID of the stack the layer will belong to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
@@ -347,8 +347,10 @@ type CustomLayerStatus struct {
 type CustomLayer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CustomLayerSpec   `json:"spec"`
-	Status            CustomLayerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.shortName)",message="shortName is a required parameter"
+	Spec   CustomLayerSpec   `json:"spec"`
+	Status CustomLayerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

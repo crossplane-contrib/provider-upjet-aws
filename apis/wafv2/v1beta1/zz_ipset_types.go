@@ -38,12 +38,12 @@ type IPSetParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
-	// +kubebuilder:validation:Required
-	IPAddressVersion *string `json:"ipAddressVersion" tf:"ip_address_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
 
 	// A friendly name of the IP set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -51,8 +51,8 @@ type IPSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the Region US East (N. Virginia).
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -83,8 +83,11 @@ type IPSetStatus struct {
 type IPSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IPSetSpec   `json:"spec"`
-	Status            IPSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipAddressVersion)",message="ipAddressVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	Spec   IPSetSpec   `json:"spec"`
+	Status IPSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

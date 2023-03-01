@@ -94,8 +94,8 @@ type FeatureParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more blocks that contain the configuration of the feature's different variations. Detailed below
-	// +kubebuilder:validation:Required
-	Variations []VariationsParameters `json:"variations" tf:"variations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Variations []VariationsParameters `json:"variations,omitempty" tf:"variations,omitempty"`
 }
 
 type ValueObservation struct {
@@ -158,8 +158,9 @@ type FeatureStatus struct {
 type Feature struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FeatureSpec   `json:"spec"`
-	Status            FeatureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.variations)",message="variations is a required parameter"
+	Spec   FeatureSpec   `json:"spec"`
+	Status FeatureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

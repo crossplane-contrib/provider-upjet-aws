@@ -44,8 +44,8 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Set of server-side encryption configuration rules. documented below. Currently, only a single rule is supported.
-	// +kubebuilder:validation:Required
-	Rule []BucketServerSideEncryptionConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketServerSideEncryptionConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketServerSideEncryptionConfigurationRuleObservation struct {
@@ -110,8 +110,9 @@ type BucketServerSideEncryptionConfigurationStatus struct {
 type BucketServerSideEncryptionConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketServerSideEncryptionConfigurationSpec   `json:"spec"`
-	Status            BucketServerSideEncryptionConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   BucketServerSideEncryptionConfigurationSpec   `json:"spec"`
+	Status BucketServerSideEncryptionConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

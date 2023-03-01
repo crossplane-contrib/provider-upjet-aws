@@ -52,8 +52,8 @@ type IntegrationResponseParameters struct {
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
 	// Integration response key.
-	// +kubebuilder:validation:Required
-	IntegrationResponseKey *string `json:"integrationResponseKey" tf:"integration_response_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +93,9 @@ type IntegrationResponseStatus struct {
 type IntegrationResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntegrationResponseSpec   `json:"spec"`
-	Status            IntegrationResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.integrationResponseKey)",message="integrationResponseKey is a required parameter"
+	Spec   IntegrationResponseSpec   `json:"spec"`
+	Status IntegrationResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -71,7 +71,7 @@ type ResourceSetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of resources to add to this resource set. See below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -86,12 +86,12 @@ type ResourceSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Type of the resources in the resource set.
-	// +kubebuilder:validation:Required
-	ResourceSetType *string `json:"resourceSetType" tf:"resource_set_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceSetType *string `json:"resourceSetType,omitempty" tf:"resource_set_type,omitempty"`
 
 	// List of resources to add to this resource set. See below.
-	// +kubebuilder:validation:Required
-	Resources []ResourcesParameters `json:"resources" tf:"resources,omitempty"`
+	// +kubebuilder:validation:Optional
+	Resources []ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -167,8 +167,10 @@ type ResourceSetStatus struct {
 type ResourceSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSetSpec   `json:"spec"`
-	Status            ResourceSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceSetType)",message="resourceSetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resources)",message="resources is a required parameter"
+	Spec   ResourceSetSpec   `json:"spec"`
+	Status ResourceSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

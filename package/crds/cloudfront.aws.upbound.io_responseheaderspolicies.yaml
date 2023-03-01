@@ -360,7 +360,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

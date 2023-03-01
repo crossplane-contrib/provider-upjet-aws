@@ -231,7 +231,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - groupIpAddress
                 - region
                 type: object
               providerConfigRef:

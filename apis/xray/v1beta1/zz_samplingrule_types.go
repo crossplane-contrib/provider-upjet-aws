@@ -32,20 +32,20 @@ type SamplingRuleParameters struct {
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The percentage of matching requests to instrument, after the reservoir is exhausted.
-	// +kubebuilder:validation:Required
-	FixedRate *float64 `json:"fixedRate" tf:"fixed_rate,omitempty"`
+	// +kubebuilder:validation:Optional
+	FixedRate *float64 `json:"fixedRate,omitempty" tf:"fixed_rate,omitempty"`
 
 	// Matches the HTTP method of a request.
-	// +kubebuilder:validation:Required
-	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// Matches the hostname from a request URL.
-	// +kubebuilder:validation:Required
-	Host *string `json:"host" tf:"host,omitempty"`
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The priority of the sampling rule.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -53,32 +53,32 @@ type SamplingRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
-	// +kubebuilder:validation:Required
-	ReservoirSize *float64 `json:"reservoirSize" tf:"reservoir_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
 
 	// Matches the ARN of the AWS resource on which the service runs.
-	// +kubebuilder:validation:Required
-	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Matches the name that the service uses to identify itself in segments.
-	// +kubebuilder:validation:Required
-	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// Matches the origin that the service uses to identify its type in segments.
-	// +kubebuilder:validation:Required
-	ServiceType *string `json:"serviceType" tf:"service_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Matches the path from a request URL.
-	// +kubebuilder:validation:Required
-	URLPath *string `json:"urlPath" tf:"url_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	URLPath *string `json:"urlPath,omitempty" tf:"url_path,omitempty"`
 
 	// The version of the sampling rule format (1 )
-	// +kubebuilder:validation:Required
-	Version *float64 `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // SamplingRuleSpec defines the desired state of SamplingRule
@@ -105,8 +105,18 @@ type SamplingRuleStatus struct {
 type SamplingRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SamplingRuleSpec   `json:"spec"`
-	Status            SamplingRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fixedRate)",message="fixedRate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.host)",message="host is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)",message="priority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reservoirSize)",message="reservoirSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceArn)",message="resourceArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceName)",message="serviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceType)",message="serviceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.urlPath)",message="urlPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   SamplingRuleSpec   `json:"spec"`
+	Status SamplingRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

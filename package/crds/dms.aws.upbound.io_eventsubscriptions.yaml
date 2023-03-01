@@ -168,7 +168,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - eventCategories
                 - region
                 type: object
               providerConfigRef:

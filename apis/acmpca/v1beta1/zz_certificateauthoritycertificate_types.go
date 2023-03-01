@@ -37,7 +37,7 @@ type CertificateAuthorityCertificateParameters struct {
 	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
 	// PEM-encoded certificate for the Certificate Authority.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -70,8 +70,9 @@ type CertificateAuthorityCertificateStatus struct {
 type CertificateAuthorityCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateAuthorityCertificateSpec   `json:"spec"`
-	Status            CertificateAuthorityCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateSecretRef)",message="certificateSecretRef is a required parameter"
+	Spec   CertificateAuthorityCertificateSpec   `json:"spec"`
+	Status CertificateAuthorityCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

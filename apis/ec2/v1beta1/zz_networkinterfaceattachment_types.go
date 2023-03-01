@@ -27,8 +27,8 @@ type NetworkInterfaceAttachmentObservation struct {
 type NetworkInterfaceAttachmentParameters struct {
 
 	// Network interface index (int).
-	// +kubebuilder:validation:Required
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Instance ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
@@ -88,8 +88,9 @@ type NetworkInterfaceAttachmentStatus struct {
 type NetworkInterfaceAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceAttachmentSpec   `json:"spec"`
-	Status            NetworkInterfaceAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceIndex)",message="deviceIndex is a required parameter"
+	Spec   NetworkInterfaceAttachmentSpec   `json:"spec"`
+	Status NetworkInterfaceAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

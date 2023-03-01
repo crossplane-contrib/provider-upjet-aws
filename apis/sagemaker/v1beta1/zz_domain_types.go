@@ -236,19 +236,19 @@ type DomainParameters struct {
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
 	// The mode of authentication that members use to access the domain. Valid values are IAM and SSO.
-	// +kubebuilder:validation:Required
-	AuthMode *string `json:"authMode" tf:"auth_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthMode *string `json:"authMode,omitempty" tf:"auth_mode,omitempty"`
 
 	// The default space settings. See Default Space Settings below.
 	// +kubebuilder:validation:Optional
 	DefaultSpaceSettings []DefaultSpaceSettingsParameters `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
 	// The default user settings. See Default User Settings below.* domain_name -  The domain name.
-	// +kubebuilder:validation:Required
-	DefaultUserSettings []DefaultUserSettingsParameters `json:"defaultUserSettings" tf:"default_user_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultUserSettings []DefaultUserSettingsParameters `json:"defaultUserSettings,omitempty" tf:"default_user_settings,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The domain's settings.
 	// +kubebuilder:validation:Optional
@@ -602,8 +602,11 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec"`
-	Status            DomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authMode)",message="authMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultUserSettings)",message="defaultUserSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainName)",message="domainName is a required parameter"
+	Spec   DomainSpec   `json:"spec"`
+	Status DomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

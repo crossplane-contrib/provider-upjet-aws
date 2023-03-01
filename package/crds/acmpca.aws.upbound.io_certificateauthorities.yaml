@@ -266,7 +266,6 @@ spec:
                       values: GENERAL_PURPOSE and SHORT_LIVED_CERTIFICATE.'
                     type: string
                 required:
-                - certificateAuthorityConfiguration
                 - region
                 type: object
               providerConfigRef:

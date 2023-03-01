@@ -56,8 +56,8 @@ type ReportPlanParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -65,12 +65,12 @@ type ReportPlanParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// An object that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports. Detailed below.
-	// +kubebuilder:validation:Required
-	ReportDeliveryChannel []ReportDeliveryChannelParameters `json:"reportDeliveryChannel" tf:"report_delivery_channel,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReportDeliveryChannel []ReportDeliveryChannelParameters `json:"reportDeliveryChannel,omitempty" tf:"report_delivery_channel,omitempty"`
 
 	// An object that identifies the report template for the report. Reports are built using a report template. Detailed below.
-	// +kubebuilder:validation:Required
-	ReportSetting []ReportSettingParameters `json:"reportSetting" tf:"report_setting,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReportSetting []ReportSettingParameters `json:"reportSetting,omitempty" tf:"report_setting,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -119,8 +119,11 @@ type ReportPlanStatus struct {
 type ReportPlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReportPlanSpec   `json:"spec"`
-	Status            ReportPlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reportDeliveryChannel)",message="reportDeliveryChannel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reportSetting)",message="reportSetting is a required parameter"
+	Spec   ReportPlanSpec   `json:"spec"`
+	Status ReportPlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

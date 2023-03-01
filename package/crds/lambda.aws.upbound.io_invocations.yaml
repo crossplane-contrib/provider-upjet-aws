@@ -158,7 +158,6 @@ spec:
                       will trigger a re-invocation.
                     type: object
                 required:
-                - input
                 - region
                 type: object
               providerConfigRef:

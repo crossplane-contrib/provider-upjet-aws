@@ -28,8 +28,8 @@ type CustomerGatewayObservation struct {
 type CustomerGatewayParameters struct {
 
 	// The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
-	// +kubebuilder:validation:Required
-	BGPAsn *string `json:"bgpAsn" tf:"bgp_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	BGPAsn *string `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the customer gateway certificate.
 	// +kubebuilder:validation:Optional
@@ -54,8 +54,8 @@ type CustomerGatewayParameters struct {
 
 	// The type of customer gateway. The only type AWS
 	// supports at this time is "ipsec.1".
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // CustomerGatewaySpec defines the desired state of CustomerGateway
@@ -82,8 +82,10 @@ type CustomerGatewayStatus struct {
 type CustomerGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CustomerGatewaySpec   `json:"spec"`
-	Status            CustomerGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)",message="bgpAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   CustomerGatewaySpec   `json:"spec"`
+	Status CustomerGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

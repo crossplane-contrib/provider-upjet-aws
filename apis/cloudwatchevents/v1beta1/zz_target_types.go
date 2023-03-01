@@ -276,8 +276,8 @@ type TargetObservation struct {
 type TargetParameters struct {
 
 	// The Amazon Resource Name (ARN) of the target.
-	// +kubebuilder:validation:Required
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon Batch Job. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
@@ -401,8 +401,9 @@ type TargetStatus struct {
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TargetSpec   `json:"spec"`
-	Status            TargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.arn)",message="arn is a required parameter"
+	Spec   TargetSpec   `json:"spec"`
+	Status TargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

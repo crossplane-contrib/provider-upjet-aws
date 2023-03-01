@@ -208,10 +208,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - authentication
-                - filter
                 - region
-                - targetAction
                 type: object
               providerConfigRef:
                 default:

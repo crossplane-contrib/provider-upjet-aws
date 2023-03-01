@@ -53,8 +53,8 @@ type AuthorizerParameters struct {
 	// Authorizer type. Valid values: JWT, REQUEST.
 	// Specify REQUEST for a Lambda function using incoming request parameters.
 	// For HTTP APIs, specify JWT to use JSON Web Tokens.
-	// +kubebuilder:validation:Required
-	AuthorizerType *string `json:"authorizerType" tf:"authorizer_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
 
 	// Authorizer's Uniform Resource Identifier (URI).
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
@@ -89,8 +89,8 @@ type AuthorizerParameters struct {
 	JwtConfiguration []JwtConfigurationParameters `json:"jwtConfiguration,omitempty" tf:"jwt_configuration,omitempty"`
 
 	// Name of the authorizer. Must be between 1 and 128 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -136,8 +136,10 @@ type AuthorizerStatus struct {
 type Authorizer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AuthorizerSpec   `json:"spec"`
-	Status            AuthorizerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizerType)",message="authorizerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AuthorizerSpec   `json:"spec"`
+	Status AuthorizerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

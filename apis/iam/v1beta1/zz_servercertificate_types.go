@@ -34,8 +34,8 @@ type ServerCertificateObservation struct {
 type ServerCertificateParameters struct {
 
 	// encoded format.
-	// +kubebuilder:validation:Required
-	CertificateBody *string `json:"certificateBody" tf:"certificate_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
 	// encoded public key certificates
 	// of the chain.
@@ -50,7 +50,7 @@ type ServerCertificateParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// encoded format.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Key-value map of resource tags.
@@ -82,8 +82,10 @@ type ServerCertificateStatus struct {
 type ServerCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServerCertificateSpec   `json:"spec"`
-	Status            ServerCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateBody)",message="certificateBody is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateKeySecretRef)",message="privateKeySecretRef is a required parameter"
+	Spec   ServerCertificateSpec   `json:"spec"`
+	Status ServerCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

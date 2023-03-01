@@ -168,7 +168,6 @@ spec:
                     type: array
                 required:
                 - region
-                - tag
                 type: object
               providerConfigRef:
                 default:

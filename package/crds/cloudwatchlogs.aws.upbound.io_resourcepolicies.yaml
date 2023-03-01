@@ -74,7 +74,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - policyDocument
                 - region
                 type: object
               providerConfigRef:

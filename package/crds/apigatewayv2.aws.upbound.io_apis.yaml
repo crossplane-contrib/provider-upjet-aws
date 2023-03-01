@@ -167,8 +167,6 @@ spec:
                       and 64 characters in length.
                     type: string
                 required:
-                - name
-                - protocolType
                 - region
                 type: object
               providerConfigRef:

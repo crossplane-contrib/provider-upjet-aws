@@ -22,8 +22,8 @@ type TransitGatewayMulticastGroupMemberObservation struct {
 type TransitGatewayMulticastGroupMemberParameters struct {
 
 	// The IP address assigned to the transit gateway multicast group.
-	// +kubebuilder:validation:Required
-	GroupIPAddress *string `json:"groupIpAddress" tf:"group_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupIPAddress *string `json:"groupIpAddress,omitempty" tf:"group_ip_address,omitempty"`
 
 	// The group members' network interface ID to register with the transit gateway multicast group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
@@ -83,8 +83,9 @@ type TransitGatewayMulticastGroupMemberStatus struct {
 type TransitGatewayMulticastGroupMember struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TransitGatewayMulticastGroupMemberSpec   `json:"spec"`
-	Status            TransitGatewayMulticastGroupMemberStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupIpAddress)",message="groupIpAddress is a required parameter"
+	Spec   TransitGatewayMulticastGroupMemberSpec   `json:"spec"`
+	Status TransitGatewayMulticastGroupMemberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -672,8 +672,6 @@ spec:
                     type: array
                 required:
                 - region
-                - resourceType
-                - storageConfig
                 type: object
               providerConfigRef:
                 default:

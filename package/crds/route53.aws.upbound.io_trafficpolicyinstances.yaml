@@ -237,10 +237,7 @@ spec:
                       zone.
                     type: number
                 required:
-                - name
                 - region
-                - trafficPolicyVersion
-                - ttl
                 type: object
               providerConfigRef:
                 default:

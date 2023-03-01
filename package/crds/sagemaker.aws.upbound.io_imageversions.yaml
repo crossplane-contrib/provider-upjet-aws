@@ -149,7 +149,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - baseImage
                 - region
                 type: object
               providerConfigRef:

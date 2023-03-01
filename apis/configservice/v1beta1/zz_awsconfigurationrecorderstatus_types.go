@@ -20,8 +20,8 @@ type AWSConfigurationRecorderStatusObservation struct {
 type AWSConfigurationRecorderStatusParameters struct {
 
 	// Whether the configuration recorder should be enabled or disabled.
-	// +kubebuilder:validation:Required
-	IsEnabled *bool `json:"isEnabled" tf:"is_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -53,8 +53,9 @@ type AWSConfigurationRecorderStatusStatus struct {
 type AWSConfigurationRecorderStatus struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AWSConfigurationRecorderStatusSpec   `json:"spec"`
-	Status            AWSConfigurationRecorderStatusStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.isEnabled)",message="isEnabled is a required parameter"
+	Spec   AWSConfigurationRecorderStatusSpec   `json:"spec"`
+	Status AWSConfigurationRecorderStatusStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

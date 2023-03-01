@@ -54,8 +54,8 @@ type BucketInventoryParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
-	// +kubebuilder:validation:Required
-	Destination []BucketInventoryDestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []BucketInventoryDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Specifies whether the inventory is enabled or disabled.
 	// +kubebuilder:validation:Optional
@@ -66,12 +66,12 @@ type BucketInventoryParameters struct {
 	Filter []BucketInventoryFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Object versions to include in the inventory list. Valid values: All, Current.
-	// +kubebuilder:validation:Required
-	IncludedObjectVersions *string `json:"includedObjectVersions" tf:"included_object_versions,omitempty"`
+	// +kubebuilder:validation:Optional
+	IncludedObjectVersions *string `json:"includedObjectVersions,omitempty" tf:"included_object_versions,omitempty"`
 
 	// Unique identifier of the inventory configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
 	// +kubebuilder:validation:Optional
@@ -83,8 +83,8 @@ type BucketInventoryParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the schedule for generating inventory results (documented below).
-	// +kubebuilder:validation:Required
-	Schedule []ScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
 type DestinationBucketObservation struct {
@@ -187,8 +187,12 @@ type BucketInventoryStatus struct {
 type BucketInventory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketInventorySpec   `json:"spec"`
-	Status            BucketInventoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.includedObjectVersions)",message="includedObjectVersions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	Spec   BucketInventorySpec   `json:"spec"`
+	Status BucketInventoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

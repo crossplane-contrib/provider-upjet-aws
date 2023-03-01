@@ -22,8 +22,8 @@ type SQLInjectionMatchSetObservation struct {
 type SQLInjectionMatchSetParameters struct {
 
 	// The name or description of the SizeConstraintSet.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -95,8 +95,9 @@ type SQLInjectionMatchSetStatus struct {
 type SQLInjectionMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLInjectionMatchSetSpec   `json:"spec"`
-	Status            SQLInjectionMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SQLInjectionMatchSetSpec   `json:"spec"`
+	Status SQLInjectionMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

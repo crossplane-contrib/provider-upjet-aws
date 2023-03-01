@@ -356,7 +356,6 @@ spec:
                     type: array
                 required:
                 - region
-                - rule
                 type: object
               providerConfigRef:
                 default:

@@ -123,7 +123,6 @@ spec:
                       archive.
                     type: string
                 required:
-                - layerName
                 - region
                 type: object
               providerConfigRef:

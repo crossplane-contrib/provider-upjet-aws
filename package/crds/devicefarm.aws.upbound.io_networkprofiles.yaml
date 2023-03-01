@@ -194,7 +194,6 @@ spec:
                       from 0 to 100 percent.
                     type: number
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

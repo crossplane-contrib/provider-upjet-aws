@@ -353,10 +353,7 @@ spec:
                       or Pacific/Tahiti. Default is UTC.
                     type: string
                 required:
-                - name
                 - region
-                - scalableTargetAction
-                - schedule
                 type: object
               providerConfigRef:
                 default:

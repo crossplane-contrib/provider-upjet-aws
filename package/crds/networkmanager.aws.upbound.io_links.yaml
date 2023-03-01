@@ -249,7 +249,6 @@ spec:
                     description: The type of the link.
                     type: string
                 required:
-                - bandwidth
                 - region
                 type: object
               providerConfigRef:

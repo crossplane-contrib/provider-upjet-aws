@@ -357,12 +357,12 @@ type LBListenerRuleObservation struct {
 type LBListenerRuleParameters struct {
 
 	// An Action block. Action blocks are documented below.
-	// +kubebuilder:validation:Required
-	Action []ActionParameters `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A Condition block. Multiple condition blocks of different types can be set and all must be satisfied for the rule to match. Condition blocks are documented below.
-	// +kubebuilder:validation:Required
-	Condition []ConditionParameters `json:"condition" tf:"condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the listener to which to attach the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
@@ -450,8 +450,10 @@ type LBListenerRuleStatus struct {
 type LBListenerRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBListenerRuleSpec   `json:"spec"`
-	Status            LBListenerRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.condition)",message="condition is a required parameter"
+	Spec   LBListenerRuleSpec   `json:"spec"`
+	Status LBListenerRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

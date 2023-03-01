@@ -231,9 +231,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - accountAccessType
-                - authenticationProviders
-                - permissionType
                 - region
                 type: object
               providerConfigRef:

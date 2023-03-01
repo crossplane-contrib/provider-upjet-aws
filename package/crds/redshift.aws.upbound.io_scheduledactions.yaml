@@ -225,8 +225,6 @@ spec:
                     type: array
                 required:
                 - region
-                - schedule
-                - targetAction
                 type: object
               providerConfigRef:
                 default:

@@ -251,8 +251,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - contentSecretRef
-                - contentType
                 - region
                 type: object
               providerConfigRef:

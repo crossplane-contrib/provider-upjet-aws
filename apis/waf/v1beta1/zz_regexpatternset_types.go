@@ -25,8 +25,8 @@ type RegexPatternSetObservation struct {
 type RegexPatternSetParameters struct {
 
 	// The name or description of the Regex Pattern Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of regular expression (regex) patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t.
 	// +kubebuilder:validation:Optional
@@ -62,8 +62,9 @@ type RegexPatternSetStatus struct {
 type RegexPatternSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RegexPatternSetSpec   `json:"spec"`
-	Status            RegexPatternSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RegexPatternSetSpec   `json:"spec"`
+	Status RegexPatternSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

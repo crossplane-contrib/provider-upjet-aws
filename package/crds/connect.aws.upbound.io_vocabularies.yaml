@@ -171,9 +171,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - content
-                - languageCode
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -88,10 +88,7 @@ spec:
                       GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'
                     type: string
                 required:
-                - description
-                - parameters
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

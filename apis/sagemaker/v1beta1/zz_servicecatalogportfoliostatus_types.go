@@ -27,8 +27,8 @@ type ServicecatalogPortfolioStatusParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Whether Service Catalog is enabled or disabled in SageMaker. Valid values are Enabled and Disabled.
-	// +kubebuilder:validation:Required
-	Status *string `json:"status" tf:"status,omitempty"`
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 // ServicecatalogPortfolioStatusSpec defines the desired state of ServicecatalogPortfolioStatus
@@ -55,8 +55,9 @@ type ServicecatalogPortfolioStatusStatus struct {
 type ServicecatalogPortfolioStatus struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicecatalogPortfolioStatusSpec   `json:"spec"`
-	Status            ServicecatalogPortfolioStatusStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.status)",message="status is a required parameter"
+	Spec   ServicecatalogPortfolioStatusSpec   `json:"spec"`
+	Status ServicecatalogPortfolioStatusStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

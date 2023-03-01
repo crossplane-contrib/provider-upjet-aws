@@ -46,8 +46,8 @@ type MultiRegionAccessPointPolicyParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// A configuration block containing details about the policy for the Multi-Region Access Point. See Details Configuration Block below for more details
-	// +kubebuilder:validation:Required
-	Details []MultiRegionAccessPointPolicyDetailsParameters `json:"details" tf:"details,omitempty"`
+	// +kubebuilder:validation:Optional
+	Details []MultiRegionAccessPointPolicyDetailsParameters `json:"details,omitempty" tf:"details,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -79,8 +79,9 @@ type MultiRegionAccessPointPolicyStatus struct {
 type MultiRegionAccessPointPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MultiRegionAccessPointPolicySpec   `json:"spec"`
-	Status            MultiRegionAccessPointPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.details)",message="details is a required parameter"
+	Spec   MultiRegionAccessPointPolicySpec   `json:"spec"`
+	Status MultiRegionAccessPointPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

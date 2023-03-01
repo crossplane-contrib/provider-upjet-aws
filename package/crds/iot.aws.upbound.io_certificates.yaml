@@ -118,7 +118,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - active
                 - region
                 type: object
               providerConfigRef:

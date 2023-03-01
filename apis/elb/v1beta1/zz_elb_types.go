@@ -110,8 +110,8 @@ type ELBParameters struct {
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
 	// A list of listener blocks. Listeners documented below.
-	// +kubebuilder:validation:Required
-	Listener []ListenerParameters `json:"listener" tf:"listener,omitempty"`
+	// +kubebuilder:validation:Optional
+	Listener []ListenerParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -227,8 +227,9 @@ type ELBStatus struct {
 type ELB struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ELBSpec   `json:"spec"`
-	Status            ELBStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.listener)",message="listener is a required parameter"
+	Spec   ELBSpec   `json:"spec"`
+	Status ELBStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

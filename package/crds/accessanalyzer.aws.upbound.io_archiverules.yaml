@@ -102,7 +102,6 @@ spec:
                     type: string
                 required:
                 - analyzerName
-                - filter
                 - region
                 type: object
               providerConfigRef:

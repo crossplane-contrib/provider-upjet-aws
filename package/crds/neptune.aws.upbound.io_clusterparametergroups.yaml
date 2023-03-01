@@ -100,7 +100,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - family
                 - region
                 type: object
               providerConfigRef:

@@ -758,10 +758,7 @@ spec:
                       values include: STATEFUL or STATELESS.'
                     type: string
                 required:
-                - capacity
-                - name
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

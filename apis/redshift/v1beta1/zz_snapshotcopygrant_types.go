@@ -45,8 +45,8 @@ type SnapshotCopyGrantParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A friendly name for identifying the grant.
-	// +kubebuilder:validation:Required
-	SnapshotCopyGrantName *string `json:"snapshotCopyGrantName" tf:"snapshot_copy_grant_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SnapshotCopyGrantName *string `json:"snapshotCopyGrantName,omitempty" tf:"snapshot_copy_grant_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,9 @@ type SnapshotCopyGrantStatus struct {
 type SnapshotCopyGrant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotCopyGrantSpec   `json:"spec"`
-	Status            SnapshotCopyGrantStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.snapshotCopyGrantName)",message="snapshotCopyGrantName is a required parameter"
+	Spec   SnapshotCopyGrantSpec   `json:"spec"`
+	Status SnapshotCopyGrantStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -171,8 +171,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - callingRegions
-                - cidrAllowList
                 - region
                 type: object
               providerConfigRef:

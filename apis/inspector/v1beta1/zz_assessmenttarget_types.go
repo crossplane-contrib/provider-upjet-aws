@@ -24,8 +24,8 @@ type AssessmentTargetObservation struct {
 type AssessmentTargetParameters struct {
 
 	// The name of the assessment target.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -71,8 +71,9 @@ type AssessmentTargetStatus struct {
 type AssessmentTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AssessmentTargetSpec   `json:"spec"`
-	Status            AssessmentTargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AssessmentTargetSpec   `json:"spec"`
+	Status AssessmentTargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -23,8 +23,8 @@ type RepositoryPolicyObservation struct {
 type RepositoryPolicyParameters struct {
 
 	// The policy document. This is a JSON formatted string
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,8 +69,9 @@ type RepositoryPolicyStatus struct {
 type RepositoryPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RepositoryPolicySpec   `json:"spec"`
-	Status            RepositoryPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   RepositoryPolicySpec   `json:"spec"`
+	Status RepositoryPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

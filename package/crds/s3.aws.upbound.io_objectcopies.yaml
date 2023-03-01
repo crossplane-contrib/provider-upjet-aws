@@ -338,10 +338,7 @@ spec:
                     description: Specifies a target URL for website redirect.
                     type: string
                 required:
-                - bucket
-                - key
                 - region
-                - source
                 type: object
               providerConfigRef:
                 default:

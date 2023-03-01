@@ -97,12 +97,7 @@ spec:
                       of a layer.'
                     type: number
                 required:
-                - action
-                - layerName
-                - principal
                 - region
-                - statementId
-                - versionNumber
                 type: object
               providerConfigRef:
                 default:

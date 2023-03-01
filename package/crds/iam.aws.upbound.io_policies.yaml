@@ -78,8 +78,6 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                required:
-                - policy
                 type: object
               providerConfigRef:
                 default:

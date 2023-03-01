@@ -335,7 +335,6 @@ spec:
                       Cognito user pool. Defaults to TOKEN.
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

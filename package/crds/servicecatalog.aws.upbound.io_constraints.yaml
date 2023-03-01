@@ -240,9 +240,7 @@ spec:
                       RESOURCE_UPDATE, STACKSET, and TEMPLATE.
                     type: string
                 required:
-                - parameters
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

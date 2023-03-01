@@ -617,10 +617,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - flexibleTimeWindow
                 - region
-                - scheduleExpression
-                - target
                 type: object
               providerConfigRef:
                 default:

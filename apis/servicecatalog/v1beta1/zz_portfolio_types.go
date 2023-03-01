@@ -32,12 +32,12 @@ type PortfolioParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the portfolio.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the person or organization who owns the portfolio.
-	// +kubebuilder:validation:Required
-	ProviderName *string `json:"providerName" tf:"provider_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -73,8 +73,10 @@ type PortfolioStatus struct {
 type Portfolio struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PortfolioSpec   `json:"spec"`
-	Status            PortfolioStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerName)",message="providerName is a required parameter"
+	Spec   PortfolioSpec   `json:"spec"`
+	Status PortfolioStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

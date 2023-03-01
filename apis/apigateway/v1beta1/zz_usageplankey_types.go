@@ -42,8 +42,8 @@ type UsagePlanKeyParameters struct {
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Type of the API key resource. Currently, the valid key type is API_KEY.
-	// +kubebuilder:validation:Required
-	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -89,8 +89,9 @@ type UsagePlanKeyStatus struct {
 type UsagePlanKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UsagePlanKeySpec   `json:"spec"`
-	Status            UsagePlanKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyType)",message="keyType is a required parameter"
+	Spec   UsagePlanKeySpec   `json:"spec"`
+	Status UsagePlanKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

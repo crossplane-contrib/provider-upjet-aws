@@ -172,8 +172,6 @@ spec:
                       Auto Scaling API Reference'
                     type: string
                 required:
-                - maxCapacity
-                - minCapacity
                 - region
                 - resourceId
                 - scalableDimension

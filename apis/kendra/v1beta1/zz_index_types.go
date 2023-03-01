@@ -104,8 +104,8 @@ type IndexParameters struct {
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
 
 	// Specifies the name of the Index.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -325,8 +325,9 @@ type IndexStatus struct {
 type Index struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IndexSpec   `json:"spec"`
-	Status            IndexStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   IndexSpec   `json:"spec"`
+	Status IndexStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

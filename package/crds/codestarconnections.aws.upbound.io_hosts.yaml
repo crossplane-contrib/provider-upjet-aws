@@ -115,9 +115,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
-                - providerEndpoint
-                - providerType
                 - region
                 type: object
               providerConfigRef:

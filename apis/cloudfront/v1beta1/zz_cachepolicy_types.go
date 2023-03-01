@@ -41,12 +41,12 @@ type CachePolicyParameters struct {
 	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// A unique name to identify the cache policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The HTTP headers, cookies, and URL query strings to include in the cache key. See Parameters In Cache Key And Forwarded To Origin for more information.
-	// +kubebuilder:validation:Required
-	ParametersInCacheKeyAndForwardedToOrigin []ParametersInCacheKeyAndForwardedToOriginParameters `json:"parametersInCacheKeyAndForwardedToOrigin" tf:"parameters_in_cache_key_and_forwarded_to_origin,omitempty"`
+	// +kubebuilder:validation:Optional
+	ParametersInCacheKeyAndForwardedToOrigin []ParametersInCacheKeyAndForwardedToOriginParameters `json:"parametersInCacheKeyAndForwardedToOrigin,omitempty" tf:"parameters_in_cache_key_and_forwarded_to_origin,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -176,8 +176,10 @@ type CachePolicyStatus struct {
 type CachePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CachePolicySpec   `json:"spec"`
-	Status            CachePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parametersInCacheKeyAndForwardedToOrigin)",message="parametersInCacheKeyAndForwardedToOrigin is a required parameter"
+	Spec   CachePolicySpec   `json:"spec"`
+	Status CachePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

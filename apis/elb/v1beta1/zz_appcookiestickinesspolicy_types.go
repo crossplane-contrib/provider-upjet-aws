@@ -22,8 +22,8 @@ type AppCookieStickinessPolicyObservation struct {
 type AppCookieStickinessPolicyParameters struct {
 
 	// Application cookie whose lifetime the ELB's cookie should follow.
-	// +kubebuilder:validation:Required
-	CookieName *string `json:"cookieName" tf:"cookie_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
 
 	// Load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
@@ -75,8 +75,9 @@ type AppCookieStickinessPolicyStatus struct {
 type AppCookieStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppCookieStickinessPolicySpec   `json:"spec"`
-	Status            AppCookieStickinessPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cookieName)",message="cookieName is a required parameter"
+	Spec   AppCookieStickinessPolicySpec   `json:"spec"`
+	Status AppCookieStickinessPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -78,7 +78,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - bucket
                 - region
                 type: object
               providerConfigRef:

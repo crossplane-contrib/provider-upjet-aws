@@ -56,8 +56,8 @@ type CapacityProviderObservation struct {
 type CapacityProviderParameters struct {
 
 	// Configuration block for the provider for the ECS auto scaling group. Detailed below.
-	// +kubebuilder:validation:Required
-	AutoScalingGroupProvider []AutoScalingGroupProviderParameters `json:"autoScalingGroupProvider" tf:"auto_scaling_group_provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutoScalingGroupProvider []AutoScalingGroupProviderParameters `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -119,8 +119,9 @@ type CapacityProviderStatus struct {
 type CapacityProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CapacityProviderSpec   `json:"spec"`
-	Status            CapacityProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoScalingGroupProvider)",message="autoScalingGroupProvider is a required parameter"
+	Spec   CapacityProviderSpec   `json:"spec"`
+	Status CapacityProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

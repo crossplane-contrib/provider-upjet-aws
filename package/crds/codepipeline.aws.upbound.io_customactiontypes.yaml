@@ -181,12 +181,7 @@ spec:
                     description: The version identifier of the custom action.
                     type: string
                 required:
-                - category
-                - inputArtifactDetails
-                - outputArtifactDetails
-                - providerName
                 - region
-                - version
                 type: object
               providerConfigRef:
                 default:

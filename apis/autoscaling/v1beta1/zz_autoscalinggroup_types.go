@@ -151,8 +151,8 @@ type AutoscalingGroupParameters struct {
 	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
 	// Maximum size of the Auto Scaling Group.
-	// +kubebuilder:validation:Required
-	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
 	// +kubebuilder:validation:Optional
@@ -165,8 +165,8 @@ type AutoscalingGroupParameters struct {
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
-	// +kubebuilder:validation:Required
-	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	// +kubebuilder:validation:Optional
@@ -745,8 +745,10 @@ type AutoscalingGroupStatus struct {
 type AutoscalingGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutoscalingGroupSpec   `json:"spec"`
-	Status            AutoscalingGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.maxSize)",message="maxSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.minSize)",message="minSize is a required parameter"
+	Spec   AutoscalingGroupSpec   `json:"spec"`
+	Status AutoscalingGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

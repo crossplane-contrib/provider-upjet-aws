@@ -138,9 +138,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - cookiesConfig
-                - headersConfig
-                - queryStringsConfig
                 - region
                 type: object
               providerConfigRef:

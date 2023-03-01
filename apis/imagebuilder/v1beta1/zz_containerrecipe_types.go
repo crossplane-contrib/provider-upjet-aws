@@ -85,12 +85,12 @@ type ContainerRecipeObservation struct {
 type ContainerRecipeParameters struct {
 
 	// Ordered configuration block(s) with components for the container recipe. Detailed below.
-	// +kubebuilder:validation:Required
-	Component []ContainerRecipeComponentParameters `json:"component" tf:"component,omitempty"`
+	// +kubebuilder:validation:Optional
+	Component []ContainerRecipeComponentParameters `json:"component,omitempty" tf:"component,omitempty"`
 
 	// The type of the container to create. Valid values: DOCKER.
-	// +kubebuilder:validation:Required
-	ContainerType *string `json:"containerType" tf:"container_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContainerType *string `json:"containerType,omitempty" tf:"container_type,omitempty"`
 
 	// The description of the container recipe.
 	// +kubebuilder:validation:Optional
@@ -122,12 +122,12 @@ type ContainerRecipeParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the container recipe.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The base image for the container recipe.
-	// +kubebuilder:validation:Required
-	ParentImage *string `json:"parentImage" tf:"parent_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -139,12 +139,12 @@ type ContainerRecipeParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The destination repository for the container image. Detailed below.
-	// +kubebuilder:validation:Required
-	TargetRepository []TargetRepositoryParameters `json:"targetRepository" tf:"target_repository,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetRepository []TargetRepositoryParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
 
 	// Version of the container recipe.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// The working directory to be used during build and test workflows.
 	// +kubebuilder:validation:Optional
@@ -264,8 +264,14 @@ type ContainerRecipeStatus struct {
 type ContainerRecipe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerRecipeSpec   `json:"spec"`
-	Status            ContainerRecipeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.component)",message="component is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerType)",message="containerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentImage)",message="parentImage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRepository)",message="targetRepository is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   ContainerRecipeSpec   `json:"spec"`
+	Status ContainerRecipeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -87,8 +87,8 @@ type IntegrationParameters struct {
 
 	// Integration type of an integration.
 	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
-	// +kubebuilder:validation:Required
-	IntegrationType *string `json:"integrationType" tf:"integration_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
 
 	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
 	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
@@ -197,8 +197,9 @@ type IntegrationStatus struct {
 type Integration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntegrationSpec   `json:"spec"`
-	Status            IntegrationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.integrationType)",message="integrationType is a required parameter"
+	Spec   IntegrationSpec   `json:"spec"`
+	Status IntegrationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

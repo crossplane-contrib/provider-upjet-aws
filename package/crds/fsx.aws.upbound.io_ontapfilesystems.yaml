@@ -476,9 +476,7 @@ spec:
                       weekly maintenance, in the UTC time zone.
                     type: string
                 required:
-                - deploymentType
                 - region
-                - throughputCapacity
                 type: object
               providerConfigRef:
                 default:

@@ -246,9 +246,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - filterPattern
-                - logGroupName
-                - name
                 - region
                 type: object
               providerConfigRef:

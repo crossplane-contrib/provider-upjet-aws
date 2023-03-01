@@ -179,9 +179,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - addressFamily
-                - maxEntries
-                - name
                 - region
                 type: object
               providerConfigRef:

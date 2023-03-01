@@ -208,9 +208,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - destination
                 - region
-                - source
                 type: object
               providerConfigRef:
                 default:

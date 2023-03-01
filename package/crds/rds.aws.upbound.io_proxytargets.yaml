@@ -228,7 +228,6 @@ spec:
                     type: string
                 required:
                 - region
-                - targetGroupName
                 type: object
               providerConfigRef:
                 default:

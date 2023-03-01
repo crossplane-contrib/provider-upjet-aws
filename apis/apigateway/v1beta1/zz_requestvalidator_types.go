@@ -22,8 +22,8 @@ type RequestValidatorObservation struct {
 type RequestValidatorParameters struct {
 
 	// Name of the request validator
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,8 +77,9 @@ type RequestValidatorStatus struct {
 type RequestValidator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RequestValidatorSpec   `json:"spec"`
-	Status            RequestValidatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RequestValidatorSpec   `json:"spec"`
+	Status RequestValidatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

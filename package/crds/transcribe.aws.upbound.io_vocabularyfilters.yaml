@@ -87,7 +87,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - languageCode
                 - region
                 type: object
               providerConfigRef:

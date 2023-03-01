@@ -117,11 +117,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - cutoff
-                - duration
-                - name
                 - region
-                - schedule
                 type: object
               providerConfigRef:
                 default:

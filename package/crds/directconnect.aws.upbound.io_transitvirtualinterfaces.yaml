@@ -265,11 +265,7 @@ spec:
                     description: The VLAN ID.
                     type: number
                 required:
-                - addressFamily
-                - bgpAsn
-                - name
                 - region
-                - vlan
                 type: object
               providerConfigRef:
                 default:

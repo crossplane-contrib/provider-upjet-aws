@@ -41,8 +41,8 @@ type VirtualMfaDeviceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
-	// +kubebuilder:validation:Required
-	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName" tf:"virtual_mfa_device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }
 
 // VirtualMfaDeviceSpec defines the desired state of VirtualMfaDevice
@@ -69,8 +69,9 @@ type VirtualMfaDeviceStatus struct {
 type VirtualMfaDevice struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualMfaDeviceSpec   `json:"spec"`
-	Status            VirtualMfaDeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMfaDeviceName)",message="virtualMfaDeviceName is a required parameter"
+	Spec   VirtualMfaDeviceSpec   `json:"spec"`
+	Status VirtualMfaDeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

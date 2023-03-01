@@ -111,8 +111,8 @@ type PatchBaselineParameters struct {
 	GlobalFilter []GlobalFilterParameters `json:"globalFilter,omitempty" tf:"global_filter,omitempty"`
 
 	// The name of the patch baseline.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
@@ -214,8 +214,9 @@ type PatchBaselineStatus struct {
 type PatchBaseline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PatchBaselineSpec   `json:"spec"`
-	Status            PatchBaselineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   PatchBaselineSpec   `json:"spec"`
+	Status PatchBaselineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

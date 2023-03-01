@@ -92,8 +92,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - eventFilter
-                - eventbridgeBus
                 - region
                 type: object
               providerConfigRef:

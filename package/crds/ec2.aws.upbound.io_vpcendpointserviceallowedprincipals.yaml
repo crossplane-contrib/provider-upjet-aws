@@ -152,7 +152,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - principalArn
                 - region
                 type: object
               providerConfigRef:

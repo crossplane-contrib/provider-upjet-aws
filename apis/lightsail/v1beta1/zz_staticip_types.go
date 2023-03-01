@@ -30,8 +30,8 @@ type StaticIPObservation struct {
 type StaticIPParameters struct {
 
 	// The name for the allocated static IP
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -63,8 +63,9 @@ type StaticIPStatus struct {
 type StaticIP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StaticIPSpec   `json:"spec"`
-	Status            StaticIPStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   StaticIPSpec   `json:"spec"`
+	Status StaticIPStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

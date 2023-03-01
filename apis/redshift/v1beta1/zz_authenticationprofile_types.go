@@ -22,8 +22,8 @@ type AuthenticationProfileObservation struct {
 type AuthenticationProfileParameters struct {
 
 	// The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
-	// +kubebuilder:validation:Required
-	AuthenticationProfileContent *string `json:"authenticationProfileContent" tf:"authentication_profile_content,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationProfileContent *string `json:"authenticationProfileContent,omitempty" tf:"authentication_profile_content,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -55,8 +55,9 @@ type AuthenticationProfileStatus struct {
 type AuthenticationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AuthenticationProfileSpec   `json:"spec"`
-	Status            AuthenticationProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationProfileContent)",message="authenticationProfileContent is a required parameter"
+	Spec   AuthenticationProfileSpec   `json:"spec"`
+	Status AuthenticationProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -332,7 +332,6 @@ spec:
                     type: object
                 required:
                 - region
-                - selector
                 type: object
               providerConfigRef:
                 default:

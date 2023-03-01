@@ -60,8 +60,8 @@ type SlotTypeParameters struct {
 	// the slot type can take. Each value can have a list of synonyms, which are additional values that help
 	// train the machine learning model about the values that it resolves for a slot. Attributes are
 	// documented under enumeration_value.
-	// +kubebuilder:validation:Required
-	EnumerationValue []EnumerationValueParameters `json:"enumerationValue" tf:"enumeration_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	EnumerationValue []EnumerationValueParameters `json:"enumerationValue,omitempty" tf:"enumeration_value,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -100,8 +100,9 @@ type SlotTypeStatus struct {
 type SlotType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SlotTypeSpec   `json:"spec"`
-	Status            SlotTypeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enumerationValue)",message="enumerationValue is a required parameter"
+	Spec   SlotTypeSpec   `json:"spec"`
+	Status SlotTypeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

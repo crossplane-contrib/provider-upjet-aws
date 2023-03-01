@@ -83,8 +83,6 @@ spec:
                     type: object
                 required:
                 - region
-                - studioLifecycleConfigAppType
-                - studioLifecycleConfigContent
                 type: object
               providerConfigRef:
                 default:

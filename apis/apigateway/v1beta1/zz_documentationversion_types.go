@@ -43,8 +43,8 @@ type DocumentationVersionParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Version identifier of the API documentation snapshot.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // DocumentationVersionSpec defines the desired state of DocumentationVersion
@@ -71,8 +71,9 @@ type DocumentationVersionStatus struct {
 type DocumentationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DocumentationVersionSpec   `json:"spec"`
-	Status            DocumentationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   DocumentationVersionSpec   `json:"spec"`
+	Status DocumentationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

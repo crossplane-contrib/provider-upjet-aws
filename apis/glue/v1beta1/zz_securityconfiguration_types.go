@@ -110,8 +110,8 @@ type SecurityConfigurationObservation struct {
 type SecurityConfigurationParameters struct {
 
 	// –  Configuration block containing encryption configuration. Detailed below.
-	// +kubebuilder:validation:Required
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration" tf:"encryption_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -143,8 +143,9 @@ type SecurityConfigurationStatus struct {
 type SecurityConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityConfigurationSpec   `json:"spec"`
-	Status            SecurityConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encryptionConfiguration)",message="encryptionConfiguration is a required parameter"
+	Spec   SecurityConfigurationSpec   `json:"spec"`
+	Status SecurityConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

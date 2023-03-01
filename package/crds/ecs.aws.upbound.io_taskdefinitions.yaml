@@ -451,8 +451,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - containerDefinitions
-                - family
                 - region
                 type: object
               providerConfigRef:

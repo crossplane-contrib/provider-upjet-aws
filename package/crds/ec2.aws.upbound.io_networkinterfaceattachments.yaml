@@ -227,7 +227,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - deviceIndex
                 - region
                 type: object
               providerConfigRef:

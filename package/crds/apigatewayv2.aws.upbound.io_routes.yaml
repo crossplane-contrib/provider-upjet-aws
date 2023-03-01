@@ -360,7 +360,6 @@ spec:
                     type: object
                 required:
                 - region
-                - routeKey
                 type: object
               providerConfigRef:
                 default:

@@ -74,16 +74,16 @@ type RealtimeLogConfigObservation struct {
 type RealtimeLogConfigParameters struct {
 
 	// The Amazon Kinesis data streams where real-time log data is sent.
-	// +kubebuilder:validation:Required
-	Endpoint []EndpointParameters `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint []EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
-	// +kubebuilder:validation:Required
-	Fields []*string `json:"fields" tf:"fields,omitempty"`
+	// +kubebuilder:validation:Optional
+	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The unique name to identify this real-time log configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -91,8 +91,8 @@ type RealtimeLogConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
-	// +kubebuilder:validation:Required
-	SamplingRate *float64 `json:"samplingRate" tf:"sampling_rate,omitempty"`
+	// +kubebuilder:validation:Optional
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
 }
 
 // RealtimeLogConfigSpec defines the desired state of RealtimeLogConfig
@@ -119,8 +119,12 @@ type RealtimeLogConfigStatus struct {
 type RealtimeLogConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RealtimeLogConfigSpec   `json:"spec"`
-	Status            RealtimeLogConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpoint)",message="endpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fields)",message="fields is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.samplingRate)",message="samplingRate is a required parameter"
+	Spec   RealtimeLogConfigSpec   `json:"spec"`
+	Status RealtimeLogConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

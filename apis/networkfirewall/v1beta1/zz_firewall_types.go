@@ -90,8 +90,8 @@ type FirewallParameters struct {
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
 
 	// A friendly name of the firewall.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -103,8 +103,8 @@ type FirewallParameters struct {
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
 	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
-	// +kubebuilder:validation:Required
-	SubnetMapping []SubnetMappingParameters `json:"subnetMapping" tf:"subnet_mapping,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubnetMapping []SubnetMappingParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -189,8 +189,10 @@ type FirewallStatus struct {
 type Firewall struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallSpec   `json:"spec"`
-	Status            FirewallStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subnetMapping)",message="subnetMapping is a required parameter"
+	Spec   FirewallSpec   `json:"spec"`
+	Status FirewallStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

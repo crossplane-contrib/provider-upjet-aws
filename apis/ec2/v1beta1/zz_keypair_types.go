@@ -37,8 +37,8 @@ type KeyPairObservation struct {
 type KeyPairParameters struct {
 
 	// The public key material.
-	// +kubebuilder:validation:Required
-	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -74,8 +74,9 @@ type KeyPairStatus struct {
 type KeyPair struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyPairSpec   `json:"spec"`
-	Status            KeyPairStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicKey)",message="publicKey is a required parameter"
+	Spec   KeyPairSpec   `json:"spec"`
+	Status KeyPairStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -246,7 +246,6 @@ spec:
                       only valid value is HTTP.
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

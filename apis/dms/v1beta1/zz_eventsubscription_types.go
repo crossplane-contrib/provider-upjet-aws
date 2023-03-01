@@ -31,8 +31,8 @@ type EventSubscriptionParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
-	// +kubebuilder:validation:Required
-	EventCategories []*string `json:"eventCategories" tf:"event_categories,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +90,9 @@ type EventSubscriptionStatus struct {
 type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventSubscriptionSpec   `json:"spec"`
-	Status            EventSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventCategories)",message="eventCategories is a required parameter"
+	Spec   EventSubscriptionSpec   `json:"spec"`
+	Status EventSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

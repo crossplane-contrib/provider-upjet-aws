@@ -2402,8 +2402,6 @@ spec:
                       Defaults to LATEST.
                     type: string
                 required:
-                - destination
-                - name
                 - region
                 type: object
               providerConfigRef:

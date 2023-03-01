@@ -289,7 +289,6 @@ spec:
                     type: object
                 required:
                 - region
-                - roles
                 type: object
               providerConfigRef:
                 default:

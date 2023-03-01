@@ -273,7 +273,6 @@ spec:
                     type: object
                 required:
                 - region
-                - spaceName
                 type: object
               providerConfigRef:
                 default:

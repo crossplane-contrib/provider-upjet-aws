@@ -249,7 +249,6 @@ spec:
                     type: string
                 required:
                 - region
-                - vpcConnectorName
                 type: object
               providerConfigRef:
                 default:

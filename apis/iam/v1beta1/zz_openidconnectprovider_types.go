@@ -27,20 +27,20 @@ type OpenIDConnectProviderObservation struct {
 type OpenIDConnectProviderParameters struct {
 
 	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
-	// +kubebuilder:validation:Required
-	ClientIDList []*string `json:"clientIdList" tf:"client_id_list,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientIDList []*string `json:"clientIdList,omitempty" tf:"client_id_list,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
-	// +kubebuilder:validation:Required
-	ThumbprintList []*string `json:"thumbprintList" tf:"thumbprint_list,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThumbprintList []*string `json:"thumbprintList,omitempty" tf:"thumbprint_list,omitempty"`
 
 	// The URL of the identity provider. Corresponds to the iss claim.
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 // OpenIDConnectProviderSpec defines the desired state of OpenIDConnectProvider
@@ -67,8 +67,11 @@ type OpenIDConnectProviderStatus struct {
 type OpenIDConnectProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OpenIDConnectProviderSpec   `json:"spec"`
-	Status            OpenIDConnectProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientIdList)",message="clientIdList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thumbprintList)",message="thumbprintList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	Spec   OpenIDConnectProviderSpec   `json:"spec"`
+	Status OpenIDConnectProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

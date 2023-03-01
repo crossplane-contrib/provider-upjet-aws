@@ -42,8 +42,8 @@ type GeoMatchSetParameters struct {
 	GeoMatchConstraint []GeoMatchConstraintParameters `json:"geoMatchConstraint,omitempty" tf:"geo_match_constraint,omitempty"`
 
 	// The name or description of the Geo Match Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -75,8 +75,9 @@ type GeoMatchSetStatus struct {
 type GeoMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GeoMatchSetSpec   `json:"spec"`
-	Status            GeoMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   GeoMatchSetSpec   `json:"spec"`
+	Status GeoMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

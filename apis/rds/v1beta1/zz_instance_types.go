@@ -202,8 +202,8 @@ type InstanceParameters struct {
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
 	// The instance type of the RDS instance.
-	// +kubebuilder:validation:Required
-	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The amount of provisioned IOPS. Setting this implies a
 	// storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
@@ -496,8 +496,9 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

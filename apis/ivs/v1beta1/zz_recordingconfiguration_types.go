@@ -40,8 +40,8 @@ type RecordingConfigurationObservation struct {
 type RecordingConfigurationParameters struct {
 
 	// Object containing destination configuration for where recorded video will be stored.
-	// +kubebuilder:validation:Required
-	DestinationConfiguration []DestinationConfigurationParameters `json:"destinationConfiguration" tf:"destination_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationConfiguration []DestinationConfigurationParameters `json:"destinationConfiguration,omitempty" tf:"destination_configuration,omitempty"`
 
 	// Recording Configuration name.
 	// +kubebuilder:validation:Optional
@@ -113,8 +113,9 @@ type RecordingConfigurationStatus struct {
 type RecordingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RecordingConfigurationSpec   `json:"spec"`
-	Status            RecordingConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationConfiguration)",message="destinationConfiguration is a required parameter"
+	Spec   RecordingConfigurationSpec   `json:"spec"`
+	Status RecordingConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

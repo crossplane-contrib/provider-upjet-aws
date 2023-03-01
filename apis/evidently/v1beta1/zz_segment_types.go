@@ -44,8 +44,8 @@ type SegmentParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The pattern to use for the segment. For more information about pattern syntax, see Segment rule pattern syntax.
-	// +kubebuilder:validation:Required
-	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +81,9 @@ type SegmentStatus struct {
 type Segment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SegmentSpec   `json:"spec"`
-	Status            SegmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pattern)",message="pattern is a required parameter"
+	Spec   SegmentSpec   `json:"spec"`
+	Status SegmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

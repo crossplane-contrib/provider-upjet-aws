@@ -35,8 +35,8 @@ type InstanceProfileParameters struct {
 	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
 
 	// The name for the instance profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// When set to true, Device Farm removes app packages after a test run. The default value is false for private devices.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,9 @@ type InstanceProfileStatus struct {
 type InstanceProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceProfileSpec   `json:"spec"`
-	Status            InstanceProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   InstanceProfileSpec   `json:"spec"`
+	Status InstanceProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

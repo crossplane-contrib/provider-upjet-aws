@@ -280,7 +280,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - functionName
                 - region
                 type: object
               providerConfigRef:

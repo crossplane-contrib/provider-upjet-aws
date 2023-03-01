@@ -68,12 +68,12 @@ type InstanceStorageConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
-	// +kubebuilder:validation:Required
-	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Specifies the storage configuration options for the Connect Instance. Documented below.
-	// +kubebuilder:validation:Required
-	StorageConfig []StorageConfigParameters `json:"storageConfig" tf:"storage_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageConfig []StorageConfigParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 }
 
 type KinesisFirehoseConfigObservation struct {
@@ -236,8 +236,10 @@ type InstanceStorageConfigStatus struct {
 type InstanceStorageConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceStorageConfigSpec   `json:"spec"`
-	Status            InstanceStorageConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceType)",message="resourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageConfig)",message="storageConfig is a required parameter"
+	Spec   InstanceStorageConfigSpec   `json:"spec"`
+	Status InstanceStorageConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

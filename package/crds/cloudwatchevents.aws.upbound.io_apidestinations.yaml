@@ -166,8 +166,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - httpMethod
-                - invocationEndpoint
                 - region
                 type: object
               providerConfigRef:

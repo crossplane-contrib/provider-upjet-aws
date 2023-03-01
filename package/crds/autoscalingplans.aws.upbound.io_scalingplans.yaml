@@ -310,10 +310,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - applicationSource
-                - name
                 - region
-                - scalingInstruction
                 type: object
               providerConfigRef:
                 default:

@@ -196,7 +196,6 @@ spec:
                       EXPRESS.'
                     type: string
                 required:
-                - definition
                 - region
                 type: object
               providerConfigRef:

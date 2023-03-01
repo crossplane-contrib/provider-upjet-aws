@@ -232,7 +232,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - inlinePolicy
                 - region
                 type: object
               providerConfigRef:

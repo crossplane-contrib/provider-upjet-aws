@@ -153,8 +153,8 @@ type MaintenanceWindowTaskParameters struct {
 	TaskInvocationParameters []TaskInvocationParametersParameters `json:"taskInvocationParameters,omitempty" tf:"task_invocation_parameters,omitempty"`
 
 	// The type of task being registered. Valid values: AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.
-	// +kubebuilder:validation:Required
-	TaskType *string `json:"taskType" tf:"task_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
 	// The Id of the maintenance window to register the task with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
@@ -355,8 +355,9 @@ type MaintenanceWindowTaskStatus struct {
 type MaintenanceWindowTask struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MaintenanceWindowTaskSpec   `json:"spec"`
-	Status            MaintenanceWindowTaskStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.taskType)",message="taskType is a required parameter"
+	Spec   MaintenanceWindowTaskSpec   `json:"spec"`
+	Status MaintenanceWindowTaskStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

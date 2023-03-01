@@ -197,7 +197,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - autoScalingGroupProvider
                 - region
                 type: object
               providerConfigRef:

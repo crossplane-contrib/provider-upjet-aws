@@ -173,7 +173,6 @@ spec:
                       and encrypted.
                     type: boolean
                 required:
-                - globalClusterIdentifier
                 - region
                 type: object
               providerConfigRef:

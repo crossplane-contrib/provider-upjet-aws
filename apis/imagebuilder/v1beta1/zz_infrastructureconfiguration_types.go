@@ -76,8 +76,8 @@ type InfrastructureConfigurationParameters struct {
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
 	// Name for the configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -210,8 +210,9 @@ type InfrastructureConfigurationStatus struct {
 type InfrastructureConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InfrastructureConfigurationSpec   `json:"spec"`
-	Status            InfrastructureConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   InfrastructureConfigurationSpec   `json:"spec"`
+	Status InfrastructureConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

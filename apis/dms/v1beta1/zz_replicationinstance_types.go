@@ -86,8 +86,8 @@ type ReplicationInstanceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The compute and memory capacity of the replication instance as specified by the replication instance class. See AWS DMS User Guide for available instance sizes and advice on which one to choose.
-	// +kubebuilder:validation:Required
-	ReplicationInstanceClass *string `json:"replicationInstanceClass" tf:"replication_instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationInstanceClass *string `json:"replicationInstanceClass,omitempty" tf:"replication_instance_class,omitempty"`
 
 	// A subnet group to associate with the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationSubnetGroup
@@ -147,8 +147,9 @@ type ReplicationInstanceStatus struct {
 type ReplicationInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationInstanceSpec   `json:"spec"`
-	Status            ReplicationInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationInstanceClass)",message="replicationInstanceClass is a required parameter"
+	Spec   ReplicationInstanceSpec   `json:"spec"`
+	Status ReplicationInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

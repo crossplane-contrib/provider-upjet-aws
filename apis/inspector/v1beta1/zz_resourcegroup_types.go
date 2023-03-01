@@ -29,8 +29,8 @@ type ResourceGroupParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Key-value map of resource tags.
-	// +kubebuilder:validation:Required
-	Tags map[string]*string `json:"tags" tf:"tags,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // ResourceGroupSpec defines the desired state of ResourceGroup
@@ -57,8 +57,9 @@ type ResourceGroupStatus struct {
 type ResourceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceGroupSpec   `json:"spec"`
-	Status            ResourceGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tags)",message="tags is a required parameter"
+	Spec   ResourceGroupSpec   `json:"spec"`
+	Status ResourceGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -300,8 +300,6 @@ spec:
                     type: array
                 required:
                 - region
-                - schemaDefinition
-                - tableName
                 type: object
               providerConfigRef:
                 default:

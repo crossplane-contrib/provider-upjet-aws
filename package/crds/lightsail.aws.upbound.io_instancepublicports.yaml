@@ -184,7 +184,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - portInfo
                 - region
                 type: object
               providerConfigRef:

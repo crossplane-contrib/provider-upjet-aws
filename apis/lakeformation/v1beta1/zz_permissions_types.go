@@ -141,16 +141,16 @@ type PermissionsParameters struct {
 	LfTagPolicy []LfTagPolicyParameters `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
 
 	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
-	// +kubebuilder:validation:Required
-	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Subset of permissions which the principal can pass.
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
 	// account permissions. For more information, see Lake Formation Permissions Reference.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -251,8 +251,10 @@ type PermissionsStatus struct {
 type Permissions struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionsSpec   `json:"spec"`
-	Status            PermissionsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissions)",message="permissions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   PermissionsSpec   `json:"spec"`
+	Status PermissionsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -167,9 +167,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - providerDetails
-                - providerName
-                - providerType
                 - region
                 type: object
               providerConfigRef:

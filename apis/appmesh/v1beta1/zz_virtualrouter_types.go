@@ -69,8 +69,8 @@ type VirtualRouterParameters struct {
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the virtual router. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -78,8 +78,8 @@ type VirtualRouterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Virtual router specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []VirtualRouterSpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []VirtualRouterSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -130,8 +130,10 @@ type VirtualRouterStatus struct {
 type VirtualRouter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualRouterSpec   `json:"spec"`
-	Status            VirtualRouterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   VirtualRouterSpec   `json:"spec"`
+	Status VirtualRouterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

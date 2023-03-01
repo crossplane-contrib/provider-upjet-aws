@@ -80,8 +80,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - document
-                - name
                 - region
                 type: object
               providerConfigRef:

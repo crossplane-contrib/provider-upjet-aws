@@ -143,8 +143,6 @@ spec:
                     type: string
                 required:
                 - region
-                - targetId
-                - targetType
                 type: object
               providerConfigRef:
                 default:

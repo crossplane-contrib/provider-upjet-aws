@@ -67,8 +67,8 @@ type ParameterParameters_2 struct {
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// Type of the parameter. Valid types are String, StringList and SecureString.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
@@ -99,8 +99,9 @@ type ParameterStatus struct {
 type Parameter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ParameterSpec   `json:"spec"`
-	Status            ParameterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ParameterSpec   `json:"spec"`
+	Status ParameterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

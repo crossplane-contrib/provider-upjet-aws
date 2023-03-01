@@ -78,16 +78,16 @@ type InstanceParameters struct {
 
 	// The Availability Zone in which to create your
 	// instance (see list below)
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
-	// +kubebuilder:validation:Required
-	BlueprintID *string `json:"blueprintId" tf:"blueprint_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
 
 	// The bundle of specification information (see list below)
-	// +kubebuilder:validation:Required
-	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
 	// +kubebuilder:validation:Optional
@@ -136,8 +136,11 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.blueprintId)",message="blueprintId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bundleId)",message="bundleId is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

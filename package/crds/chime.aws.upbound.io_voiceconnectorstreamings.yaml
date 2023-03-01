@@ -164,7 +164,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - dataRetention
                 - region
                 type: object
               providerConfigRef:

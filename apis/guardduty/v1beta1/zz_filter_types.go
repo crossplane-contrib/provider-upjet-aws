@@ -62,8 +62,8 @@ type FilterObservation struct {
 type FilterParameters struct {
 
 	// Specifies the action that is to be applied to the findings that match the filter. Can be one of ARCHIVE or NOOP.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Description of the filter.
 	// +kubebuilder:validation:Optional
@@ -84,12 +84,12 @@ type FilterParameters struct {
 	DetectorIDSelector *v1.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
 
 	// Represents the criteria to be used in the filter for querying findings. Contains one or more criterion blocks, documented below.
-	// +kubebuilder:validation:Required
-	FindingCriteria []FindingCriteriaParameters `json:"findingCriteria" tf:"finding_criteria,omitempty"`
+	// +kubebuilder:validation:Optional
+	FindingCriteria []FindingCriteriaParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
 	// Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
-	// +kubebuilder:validation:Required
-	Rank *float64 `json:"rank" tf:"rank,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -134,8 +134,11 @@ type FilterStatus struct {
 type Filter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FilterSpec   `json:"spec"`
-	Status            FilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.findingCriteria)",message="findingCriteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rank)",message="rank is a required parameter"
+	Spec   FilterSpec   `json:"spec"`
+	Status FilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

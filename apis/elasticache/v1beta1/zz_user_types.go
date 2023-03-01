@@ -22,16 +22,16 @@ type UserObservation struct {
 type UserParameters struct {
 
 	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
-	// +kubebuilder:validation:Required
-	AccessString *string `json:"accessString" tf:"access_string,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
 	// The ARN of the created ElastiCache User.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The current supported value is REDIS.
-	// +kubebuilder:validation:Required
-	Engine *string `json:"engine" tf:"engine,omitempty"`
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Indicates a password is not required for this user.
 	// +kubebuilder:validation:Optional
@@ -51,8 +51,8 @@ type UserParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The username of the user.
-	// +kubebuilder:validation:Required
-	UserName *string `json:"userName" tf:"user_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -79,8 +79,11 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessString)",message="accessString is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engine)",message="engine is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userName)",message="userName is a required parameter"
+	Spec   UserSpec   `json:"spec"`
+	Status UserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

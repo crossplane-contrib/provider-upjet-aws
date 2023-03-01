@@ -130,8 +130,8 @@ type NodeGroupParameters struct {
 	RemoteAccess []RemoteAccessParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
 	// Configuration block with scaling settings. Detailed below.
-	// +kubebuilder:validation:Required
-	ScalingConfig []ScalingConfigParameters `json:"scalingConfig" tf:"scaling_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScalingConfig []ScalingConfigParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
@@ -285,8 +285,9 @@ type NodeGroupStatus struct {
 type NodeGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodeGroupSpec   `json:"spec"`
-	Status            NodeGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scalingConfig)",message="scalingConfig is a required parameter"
+	Spec   NodeGroupSpec   `json:"spec"`
+	Status NodeGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

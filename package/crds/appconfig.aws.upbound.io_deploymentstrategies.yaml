@@ -105,11 +105,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - deploymentDurationInMinutes
-                - growthFactor
-                - name
                 - region
-                - replicateTo
                 type: object
               providerConfigRef:
                 default:

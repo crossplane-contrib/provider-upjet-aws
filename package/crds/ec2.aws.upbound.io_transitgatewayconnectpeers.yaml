@@ -185,8 +185,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - insideCidrBlocks
-                - peerAddress
                 - region
                 type: object
               providerConfigRef:

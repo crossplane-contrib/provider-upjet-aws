@@ -81,8 +81,8 @@ type GrantParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of operations that the grant permits. The permitted values are: Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, or GenerateDataKeyPairWithoutPlaintext.
-	// +kubebuilder:validation:Required
-	Operations []*string `json:"operations" tf:"operations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operations []*string `json:"operations,omitempty" tf:"operations,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -123,8 +123,9 @@ type GrantStatus struct {
 type Grant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GrantSpec   `json:"spec"`
-	Status            GrantStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operations)",message="operations is a required parameter"
+	Spec   GrantSpec   `json:"spec"`
+	Status GrantStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

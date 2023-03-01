@@ -314,7 +314,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - options
                 - region
                 type: object
               providerConfigRef:

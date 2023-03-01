@@ -31,12 +31,12 @@ type ThingGroupMembershipParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the group to which you are adding a thing.
-	// +kubebuilder:validation:Required
-	ThingGroupName *string `json:"thingGroupName" tf:"thing_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingGroupName *string `json:"thingGroupName,omitempty" tf:"thing_group_name,omitempty"`
 
 	// The name of the thing to add to a group.
-	// +kubebuilder:validation:Required
-	ThingName *string `json:"thingName" tf:"thing_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingName *string `json:"thingName,omitempty" tf:"thing_name,omitempty"`
 }
 
 // ThingGroupMembershipSpec defines the desired state of ThingGroupMembership
@@ -63,8 +63,10 @@ type ThingGroupMembershipStatus struct {
 type ThingGroupMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ThingGroupMembershipSpec   `json:"spec"`
-	Status            ThingGroupMembershipStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingGroupName)",message="thingGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingName)",message="thingName is a required parameter"
+	Spec   ThingGroupMembershipSpec   `json:"spec"`
+	Status ThingGroupMembershipStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

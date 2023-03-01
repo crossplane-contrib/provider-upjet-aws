@@ -409,8 +409,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
-                - passwordSecretRef
                 - region
                 type: object
               providerConfigRef:

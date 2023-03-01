@@ -395,8 +395,6 @@ spec:
                       to true.
                     type: boolean
                 required:
-                - aclName
-                - nodeType
                 - region
                 type: object
               providerConfigRef:

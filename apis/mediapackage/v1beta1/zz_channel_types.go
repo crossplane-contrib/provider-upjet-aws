@@ -31,8 +31,8 @@ type ChannelObservation struct {
 type ChannelParameters struct {
 
 	// A unique identifier describing the channel
-	// +kubebuilder:validation:Required
-	ChannelID *string `json:"channelId" tf:"channel_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ChannelID *string `json:"channelId,omitempty" tf:"channel_id,omitempty"`
 
 	// A description of the channel
 	// +kubebuilder:validation:Optional
@@ -96,8 +96,9 @@ type ChannelStatus struct {
 type Channel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ChannelSpec   `json:"spec"`
-	Status            ChannelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.channelId)",message="channelId is a required parameter"
+	Spec   ChannelSpec   `json:"spec"`
+	Status ChannelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -241,7 +241,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - deviceName
                 - region
                 type: object
               providerConfigRef:

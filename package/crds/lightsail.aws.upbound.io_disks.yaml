@@ -80,9 +80,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - availabilityZone
                 - region
-                - sizeInGb
                 type: object
               providerConfigRef:
                 default:

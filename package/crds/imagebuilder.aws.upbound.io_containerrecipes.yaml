@@ -452,13 +452,7 @@ spec:
                       test workflows.
                     type: string
                 required:
-                - component
-                - containerType
-                - name
-                - parentImage
                 - region
-                - targetRepository
-                - version
                 type: object
               providerConfigRef:
                 default:

@@ -153,8 +153,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
-                - policy
                 - region
                 type: object
               providerConfigRef:

@@ -222,7 +222,6 @@ spec:
                       resource to be created in.
                     type: string
                 required:
-                - details
                 - region
                 type: object
               providerConfigRef:

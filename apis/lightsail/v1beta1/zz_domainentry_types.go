@@ -45,8 +45,8 @@ type DomainEntryParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Target of the domain entry
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Type of record
 	// +kubebuilder:validation:Required
@@ -77,8 +77,9 @@ type DomainEntryStatus struct {
 type DomainEntry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainEntrySpec   `json:"spec"`
-	Status            DomainEntryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)",message="target is a required parameter"
+	Spec   DomainEntrySpec   `json:"spec"`
+	Status DomainEntryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -181,7 +181,6 @@ spec:
                     type: string
                 required:
                 - region
-                - templateBody
                 type: object
               providerConfigRef:
                 default:

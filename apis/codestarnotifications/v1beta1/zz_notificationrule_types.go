@@ -32,17 +32,17 @@ type NotificationRuleObservation struct {
 type NotificationRuleParameters struct {
 
 	// The level of detail to include in the notifications for this resource. Possible values are BASIC and FULL.
-	// +kubebuilder:validation:Required
-	DetailType *string `json:"detailType" tf:"detail_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
-	// +kubebuilder:validation:Required
-	EventTypeIds []*string `json:"eventTypeIds" tf:"event_type_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -127,8 +127,11 @@ type NotificationRuleStatus struct {
 type NotificationRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationRuleSpec   `json:"spec"`
-	Status            NotificationRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.detailType)",message="detailType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTypeIds)",message="eventTypeIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   NotificationRuleSpec   `json:"spec"`
+	Status NotificationRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -38,8 +38,8 @@ type IdentityNotificationTopicParameters struct {
 	IncludeOriginalHeaders *bool `json:"includeOriginalHeaders,omitempty" tf:"include_original_headers,omitempty"`
 
 	// The type of notifications that will be published to the specified Amazon SNS topic. Valid Values: Bounce, Complaint or Delivery.
-	// +kubebuilder:validation:Required
-	NotificationType *string `json:"notificationType" tf:"notification_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -85,8 +85,9 @@ type IdentityNotificationTopicStatus struct {
 type IdentityNotificationTopic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityNotificationTopicSpec   `json:"spec"`
-	Status            IdentityNotificationTopicStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)",message="notificationType is a required parameter"
+	Spec   IdentityNotificationTopicSpec   `json:"spec"`
+	Status IdentityNotificationTopicStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

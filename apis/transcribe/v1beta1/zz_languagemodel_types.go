@@ -55,16 +55,16 @@ type LanguageModelObservation struct {
 type LanguageModelParameters struct {
 
 	// Name of reference base model.
-	// +kubebuilder:validation:Required
-	BaseModelName *string `json:"baseModelName" tf:"base_model_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BaseModelName *string `json:"baseModelName,omitempty" tf:"base_model_name,omitempty"`
 
 	// The input data config for the LanguageModel. See Input Data Config for more details.
-	// +kubebuilder:validation:Required
-	InputDataConfig []InputDataConfigParameters `json:"inputDataConfig" tf:"input_data_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputDataConfig []InputDataConfigParameters `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
 
 	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
-	// +kubebuilder:validation:Required
-	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -100,8 +100,11 @@ type LanguageModelStatus struct {
 type LanguageModel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LanguageModelSpec   `json:"spec"`
-	Status            LanguageModelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.baseModelName)",message="baseModelName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputDataConfig)",message="inputDataConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	Spec   LanguageModelSpec   `json:"spec"`
+	Status LanguageModelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

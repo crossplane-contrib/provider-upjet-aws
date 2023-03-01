@@ -247,7 +247,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - protocol
                 - region
                 type: object
               providerConfigRef:

@@ -61,8 +61,8 @@ type ContactFlowModuleParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Contact Flow Module.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -98,8 +98,9 @@ type ContactFlowModuleStatus struct {
 type ContactFlowModule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContactFlowModuleSpec   `json:"spec"`
-	Status            ContactFlowModuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ContactFlowModuleSpec   `json:"spec"`
+	Status ContactFlowModuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

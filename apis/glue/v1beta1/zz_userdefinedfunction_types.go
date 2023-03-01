@@ -46,8 +46,8 @@ type UserDefinedFunctionParameters struct {
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// The Java class that contains the function code.
-	// +kubebuilder:validation:Required
-	ClassName *string `json:"className" tf:"class_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
 
 	// The name of the Database to create the Function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
@@ -63,12 +63,12 @@ type UserDefinedFunctionParameters struct {
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The owner of the function.
-	// +kubebuilder:validation:Required
-	OwnerName *string `json:"ownerName" tf:"owner_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
 
 	// The owner type. can be one of USER, ROLE, and GROUP.
-	// +kubebuilder:validation:Required
-	OwnerType *string `json:"ownerType" tf:"owner_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -104,8 +104,11 @@ type UserDefinedFunctionStatus struct {
 type UserDefinedFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserDefinedFunctionSpec   `json:"spec"`
-	Status            UserDefinedFunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.className)",message="className is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerName)",message="ownerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerType)",message="ownerType is a required parameter"
+	Spec   UserDefinedFunctionSpec   `json:"spec"`
+	Status UserDefinedFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

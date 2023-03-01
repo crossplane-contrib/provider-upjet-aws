@@ -258,9 +258,7 @@ spec:
                       and DAILY.'
                     type: string
                 required:
-                - budgetType
                 - region
-                - timeUnit
                 type: object
               providerConfigRef:
                 default:

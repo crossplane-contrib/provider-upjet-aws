@@ -625,7 +625,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - nodeType
                 - region
                 type: object
               providerConfigRef:

@@ -40,8 +40,8 @@ type MetricAlarmParameters struct {
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
 	// The arithmetic operation to use when comparing the specified Statistic and Threshold. The specified Statistic value is used as the first operand. Either of the following is supported: GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold. Additionally, the values  LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold, and GreaterThanUpperThreshold are used only for alarms based on anomaly detection models.
-	// +kubebuilder:validation:Required
-	ComparisonOperator *string `json:"comparisonOperator" tf:"comparison_operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
 	// The number of datapoints that must be breaching to trigger the alarm.
 	// +kubebuilder:validation:Optional
@@ -61,8 +61,8 @@ type MetricAlarmParameters struct {
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
 	// The number of periods over which data is compared to the specified threshold.
-	// +kubebuilder:validation:Required
-	EvaluationPeriods *float64 `json:"evaluationPeriods" tf:"evaluation_periods,omitempty"`
+	// +kubebuilder:validation:Optional
+	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	// +kubebuilder:validation:Optional
@@ -212,8 +212,10 @@ type MetricAlarmStatus struct {
 type MetricAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricAlarmSpec   `json:"spec"`
-	Status            MetricAlarmStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.comparisonOperator)",message="comparisonOperator is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.evaluationPeriods)",message="evaluationPeriods is a required parameter"
+	Spec   MetricAlarmSpec   `json:"spec"`
+	Status MetricAlarmStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

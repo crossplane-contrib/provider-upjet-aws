@@ -798,8 +798,6 @@ spec:
                     description: User name to be used to login to the endpoint database.
                     type: string
                 required:
-                - endpointType
-                - engineName
                 - region
                 type: object
               providerConfigRef:

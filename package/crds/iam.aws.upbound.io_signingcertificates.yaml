@@ -77,9 +77,6 @@ spec:
                     description: –  The name of the user the signing certificate is
                       for.
                     type: string
-                required:
-                - certificateBody
-                - userName
                 type: object
               providerConfigRef:
                 default:

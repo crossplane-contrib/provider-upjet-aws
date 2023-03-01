@@ -76,8 +76,8 @@ type ProxyTargetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the target group.
-	// +kubebuilder:validation:Required
-	TargetGroupName *string `json:"targetGroupName" tf:"target_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
 }
 
 // ProxyTargetSpec defines the desired state of ProxyTarget
@@ -104,8 +104,9 @@ type ProxyTargetStatus struct {
 type ProxyTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxyTargetSpec   `json:"spec"`
-	Status            ProxyTargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetGroupName)",message="targetGroupName is a required parameter"
+	Spec   ProxyTargetSpec   `json:"spec"`
+	Status ProxyTargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

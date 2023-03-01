@@ -2820,12 +2820,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - channelClass
-                - destinations
-                - encoderSettings
-                - inputAttachments
-                - inputSpecification
-                - name
                 - region
                 type: object
               providerConfigRef:

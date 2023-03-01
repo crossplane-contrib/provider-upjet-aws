@@ -50,8 +50,8 @@ type NetworkInsightsPathParameters struct {
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
 	// Protocol to use for analysis. Valid options are tcp or udp.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -105,8 +105,9 @@ type NetworkInsightsPathStatus struct {
 type NetworkInsightsPath struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInsightsPathSpec   `json:"spec"`
-	Status            NetworkInsightsPathStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	Spec   NetworkInsightsPathSpec   `json:"spec"`
+	Status NetworkInsightsPathStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

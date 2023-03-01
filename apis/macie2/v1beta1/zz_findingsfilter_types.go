@@ -75,16 +75,16 @@ type FindingsFilterObservation struct {
 type FindingsFilterParameters struct {
 
 	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A custom description of the filter. The description can contain as many as 512 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The criteria to use to filter findings.
-	// +kubebuilder:validation:Required
-	FindingCriteria []FindingCriteriaParameters `json:"findingCriteria" tf:"finding_criteria,omitempty"`
+	// +kubebuilder:validation:Optional
+	FindingCriteria []FindingCriteriaParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
 
 	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
@@ -128,8 +128,10 @@ type FindingsFilterStatus struct {
 type FindingsFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FindingsFilterSpec   `json:"spec"`
-	Status            FindingsFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.findingCriteria)",message="findingCriteria is a required parameter"
+	Spec   FindingsFilterSpec   `json:"spec"`
+	Status FindingsFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

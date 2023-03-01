@@ -25,16 +25,16 @@ type SigningCertificateObservation struct {
 type SigningCertificateParameters struct {
 
 	// encoded format.
-	// +kubebuilder:validation:Required
-	CertificateBody *string `json:"certificateBody" tf:"certificate_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
 	// –   The status you want to assign to the certificate. Active means that the certificate can be used for programmatic calls to Amazon Web Services Inactive means that the certificate cannot be used.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// –  The name of the user the signing certificate is for.
-	// +kubebuilder:validation:Required
-	UserName *string `json:"userName" tf:"user_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 // SigningCertificateSpec defines the desired state of SigningCertificate
@@ -61,8 +61,10 @@ type SigningCertificateStatus struct {
 type SigningCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningCertificateSpec   `json:"spec"`
-	Status            SigningCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateBody)",message="certificateBody is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userName)",message="userName is a required parameter"
+	Spec   SigningCertificateSpec   `json:"spec"`
+	Status SigningCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -159,8 +159,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - hashKey
-                - item
                 - region
                 type: object
               providerConfigRef:

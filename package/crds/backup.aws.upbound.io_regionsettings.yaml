@@ -85,7 +85,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceTypeOptInPreference
                 type: object
               providerConfigRef:
                 default:

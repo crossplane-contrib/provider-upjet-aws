@@ -142,8 +142,8 @@ type UserPoolClientParameters struct {
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool.
 	// +kubebuilder:validation:Optional
@@ -212,8 +212,9 @@ type UserPoolClientStatus struct {
 type UserPoolClient struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserPoolClientSpec   `json:"spec"`
-	Status            UserPoolClientStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UserPoolClientSpec   `json:"spec"`
+	Status UserPoolClientStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

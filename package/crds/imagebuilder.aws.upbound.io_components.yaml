@@ -183,10 +183,7 @@ spec:
                     description: Version of the component.
                     type: string
                 required:
-                - name
-                - platform
                 - region
-                - version
                 type: object
               providerConfigRef:
                 default:

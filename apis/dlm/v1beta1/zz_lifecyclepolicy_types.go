@@ -204,8 +204,8 @@ type LifecyclePolicyObservation struct {
 type LifecyclePolicyParameters struct {
 
 	// A description for the DLM lifecycle policy.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ARN of an IAM role that is able to be assumed by the DLM service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -222,8 +222,8 @@ type LifecyclePolicyParameters struct {
 	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// See the policy_details configuration block. Max of 1.
-	// +kubebuilder:validation:Required
-	PolicyDetails []PolicyDetailsParameters `json:"policyDetails" tf:"policy_details,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyDetails []PolicyDetailsParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -447,8 +447,10 @@ type LifecyclePolicyStatus struct {
 type LifecyclePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LifecyclePolicySpec   `json:"spec"`
-	Status            LifecyclePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyDetails)",message="policyDetails is a required parameter"
+	Spec   LifecyclePolicySpec   `json:"spec"`
+	Status LifecyclePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

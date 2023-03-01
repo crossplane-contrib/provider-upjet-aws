@@ -119,8 +119,8 @@ type SigningJobObservation struct {
 type SigningJobParameters struct {
 
 	// The S3 bucket in which to save your signed object. See Destination below for details.
-	// +kubebuilder:validation:Required
-	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Set this argument to true to ignore signing job failures and retrieve failed status and reason. Default false.
 	// +kubebuilder:validation:Optional
@@ -145,8 +145,8 @@ type SigningJobParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The S3 bucket that contains the object to sign. See Source below for details.
-	// +kubebuilder:validation:Required
-	Source []SourceParameters `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type SourceObservation struct {
@@ -201,8 +201,10 @@ type SigningJobStatus struct {
 type SigningJob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningJobSpec   `json:"spec"`
-	Status            SigningJobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	Spec   SigningJobSpec   `json:"spec"`
+	Status SigningJobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

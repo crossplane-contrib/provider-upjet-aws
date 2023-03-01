@@ -216,8 +216,8 @@ type IntentParameters_2 struct {
 	// Describes how the intent is fulfilled. For example, after a
 	// user provides all of the information for a pizza order, fulfillment_activity defines how the bot
 	// places an order with a local pizza store. Attributes are documented under fulfillment_activity.
-	// +kubebuilder:validation:Required
-	FulfillmentActivity []FulfillmentActivityParameters `json:"fulfillmentActivity" tf:"fulfillment_activity,omitempty"`
+	// +kubebuilder:validation:Optional
+	FulfillmentActivity []FulfillmentActivityParameters `json:"fulfillmentActivity,omitempty" tf:"fulfillment_activity,omitempty"`
 
 	// A unique identifier for the built-in intent to base this
 	// intent on. To find the signature for an intent, see
@@ -481,8 +481,9 @@ type IntentStatus struct {
 type Intent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntentSpec   `json:"spec"`
-	Status            IntentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fulfillmentActivity)",message="fulfillmentActivity is a required parameter"
+	Spec   IntentSpec   `json:"spec"`
+	Status IntentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

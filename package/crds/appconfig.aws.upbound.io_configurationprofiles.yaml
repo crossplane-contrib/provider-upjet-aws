@@ -288,8 +288,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - locationUri
-                - name
                 - region
                 type: object
               providerConfigRef:

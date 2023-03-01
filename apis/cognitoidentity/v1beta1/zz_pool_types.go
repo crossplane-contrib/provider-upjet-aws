@@ -72,8 +72,8 @@ type PoolParameters struct {
 	DeveloperProviderName *string `json:"developerProviderName,omitempty" tf:"developer_provider_name,omitempty"`
 
 	// The Cognito Identity Pool name.
-	// +kubebuilder:validation:Required
-	IdentityPoolName *string `json:"identityPoolName" tf:"identity_pool_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityPoolName *string `json:"identityPoolName,omitempty" tf:"identity_pool_name,omitempty"`
 
 	// Set of OpendID Connect provider ARNs.
 	// +kubebuilder:validation:Optional
@@ -131,8 +131,9 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PoolSpec   `json:"spec"`
-	Status            PoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityPoolName)",message="identityPoolName is a required parameter"
+	Spec   PoolSpec   `json:"spec"`
+	Status PoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

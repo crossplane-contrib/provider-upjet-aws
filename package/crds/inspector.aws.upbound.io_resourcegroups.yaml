@@ -75,7 +75,6 @@ spec:
                     type: object
                 required:
                 - region
-                - tags
                 type: object
               providerConfigRef:
                 default:

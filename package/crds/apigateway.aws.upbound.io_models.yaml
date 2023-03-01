@@ -159,8 +159,6 @@ spec:
                     description: Schema of the model in a JSON form
                     type: string
                 required:
-                - contentType
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -81,8 +81,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
-                - queryString
                 - region
                 type: object
               providerConfigRef:

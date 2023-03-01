@@ -28,12 +28,12 @@ type GroupObservation struct {
 type GroupParameters struct {
 
 	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
-	// +kubebuilder:validation:Required
-	FilterExpression *string `json:"filterExpression" tf:"filter_expression,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// The name of the group.
-	// +kubebuilder:validation:Required
-	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Configuration options for enabling insights.
 	// +kubebuilder:validation:Optional
@@ -87,8 +87,10 @@ type GroupStatus struct {
 type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupSpec   `json:"spec"`
-	Status            GroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterExpression)",message="filterExpression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupName)",message="groupName is a required parameter"
+	Spec   GroupSpec   `json:"spec"`
+	Status GroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -1121,9 +1121,7 @@ spec:
                       list of values, refer to Valid Values for Type.
                     type: string
                 required:
-                - name
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

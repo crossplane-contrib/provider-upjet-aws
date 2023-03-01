@@ -248,7 +248,6 @@ spec:
                     type: array
                 required:
                 - region
-                - s3Destination
                 type: object
               providerConfigRef:
                 default:

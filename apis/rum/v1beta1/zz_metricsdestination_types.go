@@ -35,8 +35,8 @@ type MetricsDestinationParameters struct {
 	AppMonitorNameSelector *v1.Selector `json:"appMonitorNameSelector,omitempty" tf:"-"`
 
 	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
-	// +kubebuilder:validation:Required
-	Destination *string `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
 	// +kubebuilder:validation:Optional
@@ -86,8 +86,9 @@ type MetricsDestinationStatus struct {
 type MetricsDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricsDestinationSpec   `json:"spec"`
-	Status            MetricsDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	Spec   MetricsDestinationSpec   `json:"spec"`
+	Status MetricsDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

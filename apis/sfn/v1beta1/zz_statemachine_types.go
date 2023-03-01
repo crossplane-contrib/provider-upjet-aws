@@ -52,8 +52,8 @@ type StateMachineObservation struct {
 type StateMachineParameters struct {
 
 	// The Amazon States Language definition of the state machine.
-	// +kubebuilder:validation:Required
-	Definition *string `json:"definition" tf:"definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	// +kubebuilder:validation:Optional
@@ -124,8 +124,9 @@ type StateMachineStatus struct {
 type StateMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StateMachineSpec   `json:"spec"`
-	Status            StateMachineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)",message="definition is a required parameter"
+	Spec   StateMachineSpec   `json:"spec"`
+	Status StateMachineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

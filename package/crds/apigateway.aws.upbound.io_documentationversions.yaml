@@ -154,7 +154,6 @@ spec:
                     type: string
                 required:
                 - region
-                - version
                 type: object
               providerConfigRef:
                 default:

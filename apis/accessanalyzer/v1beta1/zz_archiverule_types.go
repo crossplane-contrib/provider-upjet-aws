@@ -26,8 +26,8 @@ type ArchiveRuleParameters struct {
 	AnalyzerName *string `json:"analyzerName" tf:"analyzer_name,omitempty"`
 
 	// Filter criteria for the archive rule. See Filter for more details.
-	// +kubebuilder:validation:Required
-	Filter []FilterParameters `json:"filter" tf:"filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -85,8 +85,9 @@ type ArchiveRuleStatus struct {
 type ArchiveRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ArchiveRuleSpec   `json:"spec"`
-	Status            ArchiveRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filter)",message="filter is a required parameter"
+	Spec   ArchiveRuleSpec   `json:"spec"`
+	Status ArchiveRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

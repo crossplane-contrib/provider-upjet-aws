@@ -229,7 +229,6 @@ spec:
                     description: Identifier of the source portfolio.
                     type: string
                 required:
-                - acceptLanguage
                 - region
                 type: object
               providerConfigRef:

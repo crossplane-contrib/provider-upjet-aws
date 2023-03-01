@@ -72,8 +72,8 @@ type VPCConnectorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Name for the VPC connector.
-	// +kubebuilder:validation:Required
-	VPCConnectorName *string `json:"vpcConnectorName" tf:"vpc_connector_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCConnectorName *string `json:"vpcConnectorName,omitempty" tf:"vpc_connector_name,omitempty"`
 }
 
 // VPCConnectorSpec defines the desired state of VPCConnector
@@ -100,8 +100,9 @@ type VPCConnectorStatus struct {
 type VPCConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCConnectorSpec   `json:"spec"`
-	Status            VPCConnectorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
+	Spec   VPCConnectorSpec   `json:"spec"`
+	Status VPCConnectorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

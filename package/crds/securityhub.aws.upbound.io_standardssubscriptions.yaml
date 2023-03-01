@@ -73,7 +73,6 @@ spec:
                     type: string
                 required:
                 - region
-                - standardsArn
                 type: object
               providerConfigRef:
                 default:

@@ -240,9 +240,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
-                - type
                 type: object
               providerConfigRef:
                 default:

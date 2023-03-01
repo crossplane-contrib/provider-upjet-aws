@@ -275,11 +275,7 @@ spec:
                       test workflows.
                     type: string
                 required:
-                - component
-                - name
-                - parentImage
                 - region
-                - version
                 type: object
               providerConfigRef:
                 default:

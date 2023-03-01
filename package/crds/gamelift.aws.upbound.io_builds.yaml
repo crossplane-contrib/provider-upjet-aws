@@ -334,10 +334,7 @@ spec:
                     description: Version that is associated with this build.
                     type: string
                 required:
-                - name
-                - operatingSystem
                 - region
-                - storageLocation
                 type: object
               providerConfigRef:
                 default:

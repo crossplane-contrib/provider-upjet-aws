@@ -212,8 +212,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
-                - parametersInCacheKeyAndForwardedToOrigin
                 - region
                 type: object
               providerConfigRef:

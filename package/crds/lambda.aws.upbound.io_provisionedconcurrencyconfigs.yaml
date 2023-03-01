@@ -81,9 +81,6 @@ spec:
                       be created in.
                     type: string
                 required:
-                - functionName
-                - provisionedConcurrentExecutions
-                - qualifier
                 - region
                 type: object
               providerConfigRef:

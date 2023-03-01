@@ -265,11 +265,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - addressFamily
-                - bgpAsn
-                - name
                 - region
-                - vlan
                 type: object
               providerConfigRef:
                 default:

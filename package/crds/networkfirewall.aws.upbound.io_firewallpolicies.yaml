@@ -346,7 +346,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - firewallPolicy
                 - region
                 type: object
               providerConfigRef:

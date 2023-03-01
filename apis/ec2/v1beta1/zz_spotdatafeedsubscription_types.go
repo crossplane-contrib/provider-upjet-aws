@@ -20,8 +20,8 @@ type SpotDatafeedSubscriptionObservation struct {
 type SpotDatafeedSubscriptionParameters struct {
 
 	// The Amazon S3 bucket in which to store the Spot instance data feed.
-	// +kubebuilder:validation:Required
-	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Path of folder inside bucket to place spot pricing data.
 	// +kubebuilder:validation:Optional
@@ -57,8 +57,9 @@ type SpotDatafeedSubscriptionStatus struct {
 type SpotDatafeedSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpotDatafeedSubscriptionSpec   `json:"spec"`
-	Status            SpotDatafeedSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bucket)",message="bucket is a required parameter"
+	Spec   SpotDatafeedSubscriptionSpec   `json:"spec"`
+	Status SpotDatafeedSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

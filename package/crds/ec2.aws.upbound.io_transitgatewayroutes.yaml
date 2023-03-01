@@ -233,7 +233,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - destinationCidrBlock
                 - region
                 type: object
               providerConfigRef:

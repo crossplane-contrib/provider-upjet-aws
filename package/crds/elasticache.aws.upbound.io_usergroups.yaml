@@ -161,7 +161,6 @@ spec:
                       type: string
                     type: array
                 required:
-                - engine
                 - region
                 type: object
               providerConfigRef:

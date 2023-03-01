@@ -57,8 +57,8 @@ type VoiceConnectorOriginationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Set of call distribution properties defined for your SIP hosts. See route below for more details. Minimum of 1. Maximum of 20.
-	// +kubebuilder:validation:Required
-	Route []RouteParameters `json:"route" tf:"route,omitempty"`
+	// +kubebuilder:validation:Optional
+	Route []RouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
@@ -99,8 +99,9 @@ type VoiceConnectorOriginationStatus struct {
 type VoiceConnectorOrigination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorOriginationSpec   `json:"spec"`
-	Status            VoiceConnectorOriginationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.route)",message="route is a required parameter"
+	Spec   VoiceConnectorOriginationSpec   `json:"spec"`
+	Status VoiceConnectorOriginationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

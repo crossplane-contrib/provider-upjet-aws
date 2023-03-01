@@ -72,7 +72,6 @@ spec:
                       like your resource to be created in.
                     type: string
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

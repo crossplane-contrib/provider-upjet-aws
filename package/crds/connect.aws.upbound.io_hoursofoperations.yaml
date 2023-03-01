@@ -209,10 +209,7 @@ spec:
                     description: Specifies the time zone of the Hours of Operation.
                     type: string
                 required:
-                - config
-                - name
                 - region
-                - timeZone
                 type: object
               providerConfigRef:
                 default:

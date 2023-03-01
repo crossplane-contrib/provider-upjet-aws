@@ -28,8 +28,8 @@ type VPCEndpointConnectionNotificationObservation struct {
 type VPCEndpointConnectionNotificationParameters struct {
 
 	// One or more endpoint events for which to receive notifications.
-	// +kubebuilder:validation:Required
-	ConnectionEvents []*string `json:"connectionEvents" tf:"connection_events,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
 	// The ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
@@ -93,8 +93,9 @@ type VPCEndpointConnectionNotificationStatus struct {
 type VPCEndpointConnectionNotification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointConnectionNotificationSpec   `json:"spec"`
-	Status            VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionEvents)",message="connectionEvents is a required parameter"
+	Spec   VPCEndpointConnectionNotificationSpec   `json:"spec"`
+	Status VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

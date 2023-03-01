@@ -70,8 +70,8 @@ type VPCEndpointServiceObservation struct {
 type VPCEndpointServiceParameters struct {
 
 	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
-	// +kubebuilder:validation:Required
-	AcceptanceRequired *bool `json:"acceptanceRequired" tf:"acceptance_required,omitempty"`
+	// +kubebuilder:validation:Optional
+	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
@@ -123,8 +123,9 @@ type VPCEndpointServiceStatus struct {
 type VPCEndpointService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointServiceSpec   `json:"spec"`
-	Status            VPCEndpointServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptanceRequired)",message="acceptanceRequired is a required parameter"
+	Spec   VPCEndpointServiceSpec   `json:"spec"`
+	Status VPCEndpointServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

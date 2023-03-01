@@ -32,8 +32,8 @@ type AliasParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the alias.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -41,8 +41,8 @@ type AliasParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the fleet and/or routing type to use for the alias.
-	// +kubebuilder:validation:Required
-	RoutingStrategy []RoutingStrategyParameters `json:"routingStrategy" tf:"routing_strategy,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoutingStrategy []RoutingStrategyParameters `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -91,8 +91,10 @@ type AliasStatus struct {
 type Alias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AliasSpec   `json:"spec"`
-	Status            AliasStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routingStrategy)",message="routingStrategy is a required parameter"
+	Spec   AliasSpec   `json:"spec"`
+	Status AliasStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

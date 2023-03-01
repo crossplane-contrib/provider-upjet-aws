@@ -77,9 +77,7 @@ spec:
                       to use as the source.
                     type: string
                 required:
-                - ecrRepositoryPrefix
                 - region
-                - upstreamRegistryUrl
                 type: object
               providerConfigRef:
                 default:

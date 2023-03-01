@@ -324,9 +324,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - computeCapacity
-                - instanceType
-                - name
                 - region
                 type: object
               providerConfigRef:

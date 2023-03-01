@@ -90,11 +90,7 @@ spec:
                     type: string
                 required:
                 - alternateContactType
-                - emailAddress
-                - name
-                - phoneNumber
                 - region
-                - title
                 type: object
               providerConfigRef:
                 default:

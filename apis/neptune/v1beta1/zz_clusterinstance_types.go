@@ -80,8 +80,8 @@ type ClusterInstanceParameters struct {
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The instance class to use.
-	// +kubebuilder:validation:Required
-	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The name of the neptune parameter group to associate with this instance.
 	// +crossplane:generate:reference:type=ParameterGroup
@@ -164,8 +164,9 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterInstanceSpec   `json:"spec"`
-	Status            ClusterInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	Spec   ClusterInstanceSpec   `json:"spec"`
+	Status ClusterInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

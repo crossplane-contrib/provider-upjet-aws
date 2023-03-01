@@ -158,7 +158,6 @@ spec:
                     type: string
                 required:
                 - region
-                - state
                 type: object
               providerConfigRef:
                 default:

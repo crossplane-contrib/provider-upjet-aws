@@ -56,12 +56,12 @@ type HostedConfigurationVersionParameters struct {
 	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
 	// Content of the configuration or the configuration data.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Description of the configuration.
 	// +kubebuilder:validation:Optional
@@ -97,8 +97,10 @@ type HostedConfigurationVersionStatus struct {
 type HostedConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostedConfigurationVersionSpec   `json:"spec"`
-	Status            HostedConfigurationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentSecretRef)",message="contentSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentType)",message="contentType is a required parameter"
+	Spec   HostedConfigurationVersionSpec   `json:"spec"`
+	Status HostedConfigurationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

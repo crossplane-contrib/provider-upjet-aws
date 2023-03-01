@@ -873,10 +873,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - brokerNodeGroupInfo
-                - clusterName
-                - kafkaVersion
-                - numberOfBrokerNodes
                 - region
                 type: object
               providerConfigRef:

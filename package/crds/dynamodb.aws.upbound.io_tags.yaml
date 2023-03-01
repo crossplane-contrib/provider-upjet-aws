@@ -82,7 +82,6 @@ spec:
                 - key
                 - region
                 - resourceArn
-                - value
                 type: object
               providerConfigRef:
                 default:

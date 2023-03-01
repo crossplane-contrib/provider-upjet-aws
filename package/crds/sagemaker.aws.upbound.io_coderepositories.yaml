@@ -174,7 +174,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - gitConfig
                 - region
                 type: object
               providerConfigRef:

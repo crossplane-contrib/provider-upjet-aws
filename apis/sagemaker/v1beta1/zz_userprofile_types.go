@@ -76,8 +76,8 @@ type UserProfileParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name for the User Profile.
-	// +kubebuilder:validation:Required
-	UserProfileName *string `json:"userProfileName" tf:"user_profile_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 
 	// The user settings. See User Settings below.
 	// +kubebuilder:validation:Optional
@@ -368,8 +368,9 @@ type UserProfileStatus struct {
 type UserProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserProfileSpec   `json:"spec"`
-	Status            UserProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userProfileName)",message="userProfileName is a required parameter"
+	Spec   UserProfileSpec   `json:"spec"`
+	Status UserProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

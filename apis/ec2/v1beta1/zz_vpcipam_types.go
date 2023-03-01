@@ -56,8 +56,8 @@ type VPCIpamParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
-	// +kubebuilder:validation:Required
-	OperatingRegions []OperatingRegionsParameters `json:"operatingRegions" tf:"operating_regions,omitempty"`
+	// +kubebuilder:validation:Optional
+	OperatingRegions []OperatingRegionsParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +93,9 @@ type VPCIpamStatus struct {
 type VPCIpam struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCIpamSpec   `json:"spec"`
-	Status            VPCIpamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operatingRegions)",message="operatingRegions is a required parameter"
+	Spec   VPCIpamSpec   `json:"spec"`
+	Status VPCIpamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

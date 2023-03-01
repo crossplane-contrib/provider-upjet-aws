@@ -64,12 +64,12 @@ type InstanceParameters struct {
 	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
 
 	// Specifies the identity management type attached to the instance. Allowed Values are: SAML, CONNECT_MANAGED, EXISTING_DIRECTORY.
-	// +kubebuilder:validation:Required
-	IdentityManagementType *string `json:"identityManagementType" tf:"identity_management_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityManagementType *string `json:"identityManagementType,omitempty" tf:"identity_management_type,omitempty"`
 
 	// Specifies whether inbound calls are enabled.
-	// +kubebuilder:validation:Required
-	InboundCallsEnabled *bool `json:"inboundCallsEnabled" tf:"inbound_calls_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	InboundCallsEnabled *bool `json:"inboundCallsEnabled,omitempty" tf:"inbound_calls_enabled,omitempty"`
 
 	// Specifies the name of the instance. Required if directory_id not specified.
 	// +kubebuilder:validation:Optional
@@ -80,8 +80,8 @@ type InstanceParameters struct {
 	MultiPartyConferenceEnabled *bool `json:"multiPartyConferenceEnabled,omitempty" tf:"multi_party_conference_enabled,omitempty"`
 
 	// Specifies whether outbound calls are enabled.
-	// +kubebuilder:validation:Required
-	OutboundCallsEnabled *bool `json:"outboundCallsEnabled" tf:"outbound_calls_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutboundCallsEnabled *bool `json:"outboundCallsEnabled,omitempty" tf:"outbound_calls_enabled,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -113,8 +113,11 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityManagementType)",message="identityManagementType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inboundCallsEnabled)",message="inboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outboundCallsEnabled)",message="outboundCallsEnabled is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

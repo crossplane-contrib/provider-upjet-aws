@@ -78,9 +78,7 @@ spec:
                       disabled.
                     type: string
                 required:
-                - name
                 - region
-                - value
                 type: object
               providerConfigRef:
                 default:

@@ -40,8 +40,8 @@ type DomainMailFromParameters struct {
 	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
-	// +kubebuilder:validation:Required
-	MailFromDomain *string `json:"mailFromDomain" tf:"mail_from_domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -73,8 +73,9 @@ type DomainMailFromStatus struct {
 type DomainMailFrom struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainMailFromSpec   `json:"spec"`
-	Status            DomainMailFromStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mailFromDomain)",message="mailFromDomain is a required parameter"
+	Spec   DomainMailFromSpec   `json:"spec"`
+	Status DomainMailFromStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

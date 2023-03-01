@@ -96,8 +96,8 @@ type ApplicationParameters struct {
 	Environment []EnvironmentParameters `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// A human-readable name for the application.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Rails environment for application of type rails.
 	// +kubebuilder:validation:Optional
@@ -126,8 +126,8 @@ type ApplicationParameters struct {
 	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
 
 	// Opsworks application type. One of aws-flow-ruby, java, rails, php, nodejs, static or other.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EnvironmentObservation struct {
@@ -190,8 +190,10 @@ type ApplicationStatus struct {
 type Application struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationSpec   `json:"spec"`
-	Status            ApplicationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ApplicationSpec   `json:"spec"`
+	Status ApplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

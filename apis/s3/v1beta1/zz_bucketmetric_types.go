@@ -51,8 +51,8 @@ type BucketMetricParameters struct {
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -84,8 +84,9 @@ type BucketMetricStatus struct {
 type BucketMetric struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketMetricSpec   `json:"spec"`
-	Status            BucketMetricStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   BucketMetricSpec   `json:"spec"`
+	Status BucketMetricStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

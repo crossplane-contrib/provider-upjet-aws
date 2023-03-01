@@ -434,8 +434,6 @@ spec:
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean
-                required:
-                - statsPassword
                 type: object
               providerConfigRef:
                 default:

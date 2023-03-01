@@ -43,16 +43,16 @@ type LicenseConfigurationParameters struct {
 	LicenseCountHardLimit *bool `json:"licenseCountHardLimit,omitempty" tf:"license_count_hard_limit,omitempty"`
 
 	// Dimension to use to track license inventory. Specify either vCPU, Instance, Core or Socket.
-	// +kubebuilder:validation:Required
-	LicenseCountingType *string `json:"licenseCountingType" tf:"license_counting_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LicenseCountingType *string `json:"licenseCountingType,omitempty" tf:"license_counting_type,omitempty"`
 
 	// Array of configured License Manager rules.
 	// +kubebuilder:validation:Optional
 	LicenseRules []*string `json:"licenseRules,omitempty" tf:"license_rules,omitempty"`
 
 	// Name of the license configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -88,8 +88,10 @@ type LicenseConfigurationStatus struct {
 type LicenseConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LicenseConfigurationSpec   `json:"spec"`
-	Status            LicenseConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.licenseCountingType)",message="licenseCountingType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   LicenseConfigurationSpec   `json:"spec"`
+	Status LicenseConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

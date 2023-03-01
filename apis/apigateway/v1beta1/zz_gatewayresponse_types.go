@@ -33,8 +33,8 @@ type GatewayResponseParameters struct {
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// Response type of the associated GatewayResponse.
-	// +kubebuilder:validation:Required
-	ResponseType *string `json:"responseType" tf:"response_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 
 	// String identifier of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
@@ -79,8 +79,9 @@ type GatewayResponseStatus struct {
 type GatewayResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GatewayResponseSpec   `json:"spec"`
-	Status            GatewayResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.responseType)",message="responseType is a required parameter"
+	Spec   GatewayResponseSpec   `json:"spec"`
+	Status GatewayResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

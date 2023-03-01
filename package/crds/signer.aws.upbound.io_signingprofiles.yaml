@@ -91,7 +91,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - platformId
                 - region
                 type: object
               providerConfigRef:

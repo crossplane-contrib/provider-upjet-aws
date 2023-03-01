@@ -604,7 +604,6 @@ spec:
                       the pipeline fails. Defaults to false.
                     type: boolean
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

@@ -91,7 +91,6 @@ spec:
                       type: object
                     type: array
                 required:
-                - observabilityConfigurationName
                 - region
                 type: object
               providerConfigRef:

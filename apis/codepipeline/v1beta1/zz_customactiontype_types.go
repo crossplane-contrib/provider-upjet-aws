@@ -65,24 +65,24 @@ type CustomActionTypeObservation struct {
 type CustomActionTypeParameters struct {
 
 	// The category of the custom action. Valid values: Source, Build, Deploy, Test, Invoke, Approval
-	// +kubebuilder:validation:Required
-	Category *string `json:"category" tf:"category,omitempty"`
+	// +kubebuilder:validation:Optional
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The configuration properties for the custom action. Max 10 items.
 	// +kubebuilder:validation:Optional
 	ConfigurationProperty []ConfigurationPropertyParameters `json:"configurationProperty,omitempty" tf:"configuration_property,omitempty"`
 
 	// The details of the input artifact for the action.
-	// +kubebuilder:validation:Required
-	InputArtifactDetails []InputArtifactDetailsParameters `json:"inputArtifactDetails" tf:"input_artifact_details,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputArtifactDetails []InputArtifactDetailsParameters `json:"inputArtifactDetails,omitempty" tf:"input_artifact_details,omitempty"`
 
 	// The details of the output artifact of the action.
-	// +kubebuilder:validation:Required
-	OutputArtifactDetails []OutputArtifactDetailsParameters `json:"outputArtifactDetails" tf:"output_artifact_details,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputArtifactDetails []OutputArtifactDetailsParameters `json:"outputArtifactDetails,omitempty" tf:"output_artifact_details,omitempty"`
 
 	// The provider of the service used in the custom action
-	// +kubebuilder:validation:Required
-	ProviderName *string `json:"providerName" tf:"provider_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -98,8 +98,8 @@ type CustomActionTypeParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version identifier of the custom action.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type InputArtifactDetailsObservation struct {
@@ -176,8 +176,13 @@ type CustomActionTypeStatus struct {
 type CustomActionType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CustomActionTypeSpec   `json:"spec"`
-	Status            CustomActionTypeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.category)",message="category is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputArtifactDetails)",message="inputArtifactDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputArtifactDetails)",message="outputArtifactDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerName)",message="providerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   CustomActionTypeSpec   `json:"spec"`
+	Status CustomActionTypeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

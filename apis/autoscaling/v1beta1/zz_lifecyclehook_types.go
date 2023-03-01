@@ -41,8 +41,8 @@ type LifecycleHookParameters struct {
 	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
-	// +kubebuilder:validation:Required
-	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
+	// +kubebuilder:validation:Optional
+	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
 	// Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.
 	// +kubebuilder:validation:Optional
@@ -96,8 +96,9 @@ type LifecycleHookStatus struct {
 type LifecycleHook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LifecycleHookSpec   `json:"spec"`
-	Status            LifecycleHookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lifecycleTransition)",message="lifecycleTransition is a required parameter"
+	Spec   LifecycleHookSpec   `json:"spec"`
+	Status LifecycleHookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

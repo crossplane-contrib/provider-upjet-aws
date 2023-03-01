@@ -164,8 +164,6 @@ spec:
                     description: ID of the calling account
                     type: string
                 required:
-                - actions
-                - principal
                 - region
                 type: object
               providerConfigRef:

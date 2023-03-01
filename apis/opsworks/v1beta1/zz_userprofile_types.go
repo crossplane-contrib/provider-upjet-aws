@@ -30,8 +30,8 @@ type UserProfileParameters struct {
 	SSHPublicKey *string `json:"sshPublicKey,omitempty" tf:"ssh_public_key,omitempty"`
 
 	// The ssh username, with witch this user wants to log in
-	// +kubebuilder:validation:Required
-	SSHUsername *string `json:"sshUsername" tf:"ssh_username,omitempty"`
+	// +kubebuilder:validation:Optional
+	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
 
 	// The user's IAM ARN
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
@@ -72,8 +72,9 @@ type UserProfileStatus struct {
 type UserProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserProfileSpec   `json:"spec"`
-	Status            UserProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sshUsername)",message="sshUsername is a required parameter"
+	Spec   UserProfileSpec   `json:"spec"`
+	Status UserProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

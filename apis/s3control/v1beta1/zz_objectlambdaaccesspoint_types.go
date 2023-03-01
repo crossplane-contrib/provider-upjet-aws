@@ -95,12 +95,12 @@ type ObjectLambdaAccessPointParameters struct {
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
-	// +kubebuilder:validation:Required
-	Configuration []ConfigurationParameters `json:"configuration" tf:"configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// The name for this Object Lambda Access Point.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -146,8 +146,10 @@ type ObjectLambdaAccessPointStatus struct {
 type ObjectLambdaAccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ObjectLambdaAccessPointSpec   `json:"spec"`
-	Status            ObjectLambdaAccessPointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ObjectLambdaAccessPointSpec   `json:"spec"`
+	Status ObjectLambdaAccessPointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -55,8 +55,8 @@ type DataRepositoryAssociationParameters struct {
 	BatchImportMetaDataOnCreate *bool `json:"batchImportMetaDataOnCreate,omitempty" tf:"batch_import_meta_data_on_create,omitempty"`
 
 	// The path to the Amazon S3 data repository that will be linked to the file system. The path must be an S3 bucket s3://myBucket/myPrefix/. This path specifies where in the S3 data repository files will be imported from or exported to. The same S3 bucket cannot be linked more than once to the same file system.
-	// +kubebuilder:validation:Required
-	DataRepositoryPath *string `json:"dataRepositoryPath" tf:"data_repository_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataRepositoryPath *string `json:"dataRepositoryPath,omitempty" tf:"data_repository_path,omitempty"`
 
 	// Set to true to delete files from the file system upon deleting this data repository association. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -77,8 +77,8 @@ type DataRepositoryAssociationParameters struct {
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with data_repository_path. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.
-	// +kubebuilder:validation:Required
-	FileSystemPath *string `json:"fileSystemPath" tf:"file_system_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 
 	// For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.
 	// +kubebuilder:validation:Optional
@@ -137,8 +137,10 @@ type DataRepositoryAssociationStatus struct {
 type DataRepositoryAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataRepositoryAssociationSpec   `json:"spec"`
-	Status            DataRepositoryAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRepositoryPath)",message="dataRepositoryPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fileSystemPath)",message="fileSystemPath is a required parameter"
+	Spec   DataRepositoryAssociationSpec   `json:"spec"`
+	Status DataRepositoryAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -166,7 +166,6 @@ spec:
                       is disabled. Default: true.'
                     type: boolean
                 required:
-                - name
                 - region
                 type: object
               providerConfigRef:

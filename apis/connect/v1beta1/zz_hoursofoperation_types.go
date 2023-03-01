@@ -66,8 +66,8 @@ type HoursOfOperationObservation struct {
 type HoursOfOperationParameters struct {
 
 	// One or more config blocks which define the configuration information for the hours of operation: day, start time, and end time . Config blocks are documented below.
-	// +kubebuilder:validation:Required
-	Config []ConfigParameters `json:"config" tf:"config,omitempty"`
+	// +kubebuilder:validation:Optional
+	Config []ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Specifies the description of the Hours of Operation.
 	// +kubebuilder:validation:Optional
@@ -88,8 +88,8 @@ type HoursOfOperationParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Hours of Operation.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -101,8 +101,8 @@ type HoursOfOperationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the time zone of the Hours of Operation.
-	// +kubebuilder:validation:Required
-	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type StartTimeObservation struct {
@@ -143,8 +143,11 @@ type HoursOfOperationStatus struct {
 type HoursOfOperation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HoursOfOperationSpec   `json:"spec"`
-	Status            HoursOfOperationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.config)",message="config is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeZone)",message="timeZone is a required parameter"
+	Spec   HoursOfOperationSpec   `json:"spec"`
+	Status HoursOfOperationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -43,8 +43,8 @@ type PlaceIndexObservation struct {
 type PlaceIndexParameters struct {
 
 	// Specifies the geospatial data provider for the new place index.
-	// +kubebuilder:validation:Required
-	DataSource *string `json:"dataSource" tf:"data_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Configuration block with the data storage option chosen for requesting Places. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -88,8 +88,9 @@ type PlaceIndexStatus struct {
 type PlaceIndex struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PlaceIndexSpec   `json:"spec"`
-	Status            PlaceIndexStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataSource)",message="dataSource is a required parameter"
+	Spec   PlaceIndexSpec   `json:"spec"`
+	Status PlaceIndexStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
