@@ -18,7 +18,14 @@ type DomainIdentityObservation struct {
 	// The ARN of the domain identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The domain name to assign to SES
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// A code which when added to the domain as a TXT record
 	// will signal to SES that the owner of the domain has authorised SES to act on
@@ -32,8 +39,8 @@ type DomainIdentityObservation struct {
 type DomainIdentityParameters struct {
 
 	// The domain name to assign to SES
-	// +kubebuilder:validation:Required
-	Domain *string `json:"domain" tf:"domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -65,8 +72,9 @@ type DomainIdentityStatus struct {
 type DomainIdentity struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainIdentitySpec   `json:"spec"`
-	Status            DomainIdentityStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domain)",message="domain is a required parameter"
+	Spec   DomainIdentitySpec   `json:"spec"`
+	Status DomainIdentityStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

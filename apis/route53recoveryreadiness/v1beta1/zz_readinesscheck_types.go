@@ -20,6 +20,16 @@ type ReadinessCheckObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Name describing the resource set that will be monitored for readiness.
+	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -32,8 +42,8 @@ type ReadinessCheckParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Name describing the resource set that will be monitored for readiness.
-	// +kubebuilder:validation:Required
-	ResourceSetName *string `json:"resourceSetName" tf:"resource_set_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -64,8 +74,9 @@ type ReadinessCheckStatus struct {
 type ReadinessCheck struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReadinessCheckSpec   `json:"spec"`
-	Status            ReadinessCheckStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceSetName)",message="resourceSetName is a required parameter"
+	Spec   ReadinessCheckSpec   `json:"spec"`
+	Status ReadinessCheckStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

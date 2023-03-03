@@ -18,11 +18,79 @@ type HealthCheckObservation struct {
 	// The Amazon Resource Name (ARN) of the Health Check.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive
+	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
+
+	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
+	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
+
+	// The name of the CloudWatch alarm.
+	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
+
+	// The CloudWatchRegion that the CloudWatch alarm was created in.
+	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
+
+	// A boolean value that stops Route 53 from performing health checks. When set to true, Route 53 will do the following depending on the type of health check:
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
+	// A boolean value that indicates whether Route53 should send the fqdn to the endpoint when performing the health check. This defaults to AWS' defaults: when the type is "HTTPS" enable_sni defaults to true, when type is anything else enable_sni defaults to false.
+	EnableSni *bool `json:"enableSni,omitempty" tf:"enable_sni,omitempty"`
+
+	// The number of consecutive health checks that an endpoint must pass or fail.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// The fully qualified domain name of the endpoint to be checked.
+	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
 	// The id of the health check
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP address of the endpoint to be checked.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The status of the health check when CloudWatch has insufficient data about the state of associated alarm. Valid values are Healthy , Unhealthy and LastKnownStatus.
+	InsufficientDataHealthStatus *string `json:"insufficientDataHealthStatus,omitempty" tf:"insufficient_data_health_status,omitempty"`
+
+	// A boolean value that indicates whether the status of health check should be inverted. For example, if a health check is healthy but Inverted is True , then Route 53 considers the health check to be unhealthy.
+	InvertHealthcheck *bool `json:"invertHealthcheck,omitempty" tf:"invert_healthcheck,omitempty"`
+
+	// A Boolean value that indicates whether you want Route 53 to measure the latency between health checkers in multiple AWS regions and your endpoint and to display CloudWatch latency graphs in the Route 53 console.
+	MeasureLatency *bool `json:"measureLatency,omitempty" tf:"measure_latency,omitempty"`
+
+	// The port of the endpoint to be checked.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// This is a reference name used in Caller Reference
+	// (helpful for identifying single health_check set amongst others)
+	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+
+	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
+	RequestInterval *float64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
+
+	// The path that you want Amazon Route 53 to request when performing health checks.
+	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control. This is used when health check type is RECOVERY_CONTROL
+	RoutingControlArn *string `json:"routingControlArn,omitempty" tf:"routing_control_arn,omitempty"`
+
+	// String searched in the first 5120 bytes of the response body for check to be considered healthy. Only valid with HTTP_STR_MATCH and HTTPS_STR_MATCH.
+	SearchString *string `json:"searchString,omitempty" tf:"search_string,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthCheckParameters struct {
@@ -123,8 +191,8 @@ type HealthCheckParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // HealthCheckSpec defines the desired state of HealthCheck
@@ -151,8 +219,9 @@ type HealthCheckStatus struct {
 type HealthCheck struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthCheckSpec   `json:"spec"`
-	Status            HealthCheckStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   HealthCheckSpec   `json:"spec"`
+	Status HealthCheckStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

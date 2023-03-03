@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: transitgatewayvpcattachmentaccepters.ec2.aws.upbound.io
 spec:
@@ -165,6 +165,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -357,11 +366,20 @@ spec:
                     description: 'Whether IPv6 support is enabled. Valid values: disable,
                       enable.'
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   subnetIds:
                     description: Identifiers of EC2 Subnets.
                     items:
                       type: string
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -369,6 +387,19 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  transitGatewayAttachmentId:
+                    description: The ID of the EC2 Transit Gateway Attachment to manage.
+                    type: string
+                  transitGatewayDefaultRouteTableAssociation:
+                    description: 'Boolean whether the VPC Attachment should be associated
+                      with the EC2 Transit Gateway association default route table.
+                      Default value: true.'
+                    type: boolean
+                  transitGatewayDefaultRouteTablePropagation:
+                    description: 'Boolean whether the VPC Attachment should propagate
+                      routes with the EC2 Transit Gateway propagation default route
+                      table. Default value: true.'
+                    type: boolean
                   transitGatewayId:
                     description: Identifier of EC2 Transit Gateway.
                     type: string
@@ -420,9 +451,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

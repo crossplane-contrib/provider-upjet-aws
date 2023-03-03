@@ -14,6 +14,15 @@ import (
 )
 
 type APIStagesObservation struct {
+
+	// API Id of the associated API stage in a usage plan.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// API stage name of the associated API stage in a usage plan.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// The throttling limits of the usage plan.
+	Throttle []ThrottleObservation `json:"throttle,omitempty" tf:"throttle,omitempty"`
 }
 
 type APIStagesParameters struct {
@@ -52,6 +61,15 @@ type APIStagesParameters struct {
 }
 
 type QuotaSettingsObservation struct {
+
+	// Maximum number of requests that can be made in a given time period.
+	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+
+	// Number of requests subtracted from the given limit in the initial time period.
+	Offset *float64 `json:"offset,omitempty" tf:"offset,omitempty"`
+
+	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
+	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 }
 
 type QuotaSettingsParameters struct {
@@ -70,6 +88,15 @@ type QuotaSettingsParameters struct {
 }
 
 type ThrottleObservation struct {
+
+	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
+	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+
+	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The API request steady-state rate limit.
+	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 
 type ThrottleParameters struct {
@@ -89,14 +116,39 @@ type ThrottleParameters struct {
 
 type UsagePlanObservation struct {
 
+	// Associated API stages of the usage plan.
+	APIStages []APIStagesObservation `json:"apiStages,omitempty" tf:"api_stages,omitempty"`
+
 	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Description of a usage plan.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the API resource
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the usage plan.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
+	ProductCode *string `json:"productCode,omitempty" tf:"product_code,omitempty"`
+
+	// The quota settings of the usage plan.
+	QuotaSettings []QuotaSettingsObservation `json:"quotaSettings,omitempty" tf:"quota_settings,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The throttling limits of the usage plan.
+	ThrottleSettings []UsagePlanThrottleSettingsObservation `json:"throttleSettings,omitempty" tf:"throttle_settings,omitempty"`
 }
 
 type UsagePlanParameters struct {
@@ -110,8 +162,8 @@ type UsagePlanParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the usage plan.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// AWS Marketplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
 	// +kubebuilder:validation:Optional
@@ -136,6 +188,12 @@ type UsagePlanParameters struct {
 }
 
 type UsagePlanThrottleSettingsObservation struct {
+
+	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
+	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+
+	// The API request steady-state rate limit.
+	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
 }
 
 type UsagePlanThrottleSettingsParameters struct {
@@ -173,8 +231,9 @@ type UsagePlanStatus struct {
 type UsagePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UsagePlanSpec   `json:"spec"`
-	Status            UsagePlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UsagePlanSpec   `json:"spec"`
+	Status UsagePlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

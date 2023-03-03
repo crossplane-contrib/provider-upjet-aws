@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: optiongroups.rds.aws.upbound.io
 spec:
@@ -131,10 +131,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - engineName
-                - majorEngineVersion
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -306,6 +313,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: engineName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineName)
+            - message: majorEngineVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.majorEngineVersion)
           status:
             description: OptionGroupStatus defines the observed state of OptionGroup.
             properties:
@@ -314,9 +326,70 @@ spec:
                   arn:
                     description: The ARN of the db option group.
                     type: string
+                  engineName:
+                    description: Specifies the name of the engine that this option
+                      group should be associated with.
+                    type: string
                   id:
                     description: The db option group name.
                     type: string
+                  majorEngineVersion:
+                    description: Specifies the major version of the engine that this
+                      option group should be associated with.
+                    type: string
+                  option:
+                    description: A list of Options to apply.
+                    items:
+                      properties:
+                        dbSecurityGroupMemberships:
+                          description: A list of DB Security Groups for which the
+                            option is enabled.
+                          items:
+                            type: string
+                          type: array
+                        optionName:
+                          description: The Name of the Option (e.g., MEMCACHED).
+                          type: string
+                        optionSettings:
+                          description: A list of option settings to apply.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the option group. Must be
+                                  lowercase, to match as it is stored in AWS.
+                                type: string
+                              value:
+                                description: The Value of the setting.
+                                type: string
+                            type: object
+                          type: array
+                        port:
+                          description: The Port number when connecting to the Option
+                            (e.g., 11211).
+                          type: number
+                        version:
+                          description: The version of the option (e.g., 13.1.0.0).
+                          type: string
+                        vpcSecurityGroupMemberships:
+                          description: A list of VPC Security Groups for which the
+                            option is enabled.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  optionGroupDescription:
+                    description: The description of the option group.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -366,9 +439,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

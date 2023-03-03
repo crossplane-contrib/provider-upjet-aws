@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: servercertificates.iam.aws.upbound.io
 spec:
@@ -98,10 +98,16 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                required:
-                - certificateBody
-                - privateKeySecretRef
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -273,6 +279,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: certificateBody is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateBody)
+            - message: privateKeySecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateKeySecretRef)
           status:
             description: ServerCertificateStatus defines the observed state of ServerCertificate.
             properties:
@@ -282,6 +293,12 @@ spec:
                     description: The Amazon Resource Name (ARN) specifying the server
                       certificate.
                     type: string
+                  certificateBody:
+                    description: encoded format.
+                    type: string
+                  certificateChain:
+                    description: encoded public key certificates of the chain.
+                    type: string
                   expiration:
                     description: Date and time in RFC3339 format on which the certificate
                       is set to expire.
@@ -289,6 +306,34 @@ spec:
                   id:
                     description: The unique Server Certificate name
                     type: string
+                  path:
+                    description: The IAM path for the server certificate.  If it is
+                      not included, it defaults to a slash (/). If this certificate
+                      is for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+                      See IAM Identifiers for more details on IAM Paths.
+                    type: string
+                  privateKeySecretRef:
+                    description: encoded format.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -300,6 +345,8 @@ spec:
                     description: Date and time in RFC3339 format when the server certificate
                       was uploaded.
                     type: string
+                required:
+                - privateKeySecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -342,9 +389,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

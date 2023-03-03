@@ -14,7 +14,21 @@ import (
 )
 
 type DocumentationVersionObservation struct {
+
+	// Description of the API documentation version.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the associated Rest API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Version identifier of the API documentation snapshot.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type DocumentationVersionParameters struct {
@@ -43,8 +57,8 @@ type DocumentationVersionParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Version identifier of the API documentation snapshot.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // DocumentationVersionSpec defines the desired state of DocumentationVersion
@@ -71,8 +85,9 @@ type DocumentationVersionStatus struct {
 type DocumentationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DocumentationVersionSpec   `json:"spec"`
-	Status            DocumentationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   DocumentationVersionSpec   `json:"spec"`
+	Status DocumentationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

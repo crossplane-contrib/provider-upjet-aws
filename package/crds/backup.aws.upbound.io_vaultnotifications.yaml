@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vaultnotifications.backup.aws.upbound.io
 spec:
@@ -228,9 +228,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - backupVaultEvents
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -402,6 +410,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: backupVaultEvents is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupVaultEvents)
           status:
             description: VaultNotificationsStatus defines the observed state of VaultNotifications.
             properties:
@@ -410,8 +421,25 @@ spec:
                   backupVaultArn:
                     description: The ARN of the vault.
                     type: string
+                  backupVaultEvents:
+                    description: An array of events that indicate the status of jobs
+                      to back up resources to the backup vault.
+                    items:
+                      type: string
+                    type: array
+                  backupVaultName:
+                    description: Name of the backup vault to add notifications for.
+                    type: string
                   id:
                     description: The name of the vault.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  snsTopicArn:
+                    description: The Amazon Resource Name (ARN) that specifies the
+                      topic for a backup vault’s events
                     type: string
                 type: object
               conditions:
@@ -455,9 +483,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

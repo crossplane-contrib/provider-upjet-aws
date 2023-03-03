@@ -39,10 +39,28 @@ type ImageObservation struct {
 	// Amazon Resource Name (ARN) of the image.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// - Amazon Resource Name (ARN) of the container recipe.
+	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
+
 	// Date the image was created.
 	DateCreated *string `json:"dateCreated,omitempty" tf:"date_created,omitempty"`
 
+	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
+
+	// Whether additional information about the image being created is collected. Defaults to true.
+	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the image recipe.
+	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Configuration block with image tests configuration. Detailed below.
+	ImageTestsConfiguration []ImageTestsConfigurationObservation `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
 
 	// Name of the AMI.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -55,6 +73,14 @@ type ImageObservation struct {
 
 	// Platform of the image.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Region of the AMI.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -131,6 +157,12 @@ type ImageParameters struct {
 }
 
 type ImageTestsConfigurationObservation struct {
+
+	// Whether image tests are enabled. Defaults to true.
+	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
+
+	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
+	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImageTestsConfigurationParameters struct {

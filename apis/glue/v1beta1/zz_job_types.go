@@ -14,6 +14,15 @@ import (
 )
 
 type CommandObservation struct {
+
+	// –  The name you assign to this job. It must be unique in your account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
+	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
+
+	// Specifies the S3 path to a script that executes a job.
+	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
 }
 
 type CommandParameters struct {
@@ -32,6 +41,9 @@ type CommandParameters struct {
 }
 
 type ExecutionPropertyObservation struct {
+
+	// The maximum number of concurrent runs allowed for a job. The default is 1.
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 }
 
 type ExecutionPropertyParameters struct {
@@ -46,18 +58,73 @@ type JobObservation struct {
 	// Amazon Resource Name (ARN) of Glue Job
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  The command of the job. Defined below.
+	Command []CommandObservation `json:"command,omitempty" tf:"command,omitempty"`
+
+	// –  The list of connections used for this job.
+	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
+
+	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
+
+	// –  Description of the job.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. Valid value: FLEX, STANDARD.
+	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
+
+	// –  Execution property of the job. Defined below.
+	ExecutionProperty []ExecutionPropertyObservation `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
+
+	// The version of glue to use, for example "1.0". For information about available versions, see the AWS Glue Release Notes.
+	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
+
 	// Job name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// –  The maximum number of times to retry this job if it fails.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// overridable arguments for this job, specified as name-value pairs.
+	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
+
+	// Notification property of the job. Defined below.
+	NotificationProperty []NotificationPropertyObservation `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
+
+	// The number of workers of a defined workerType that are allocated when a job runs.
+	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// –  The ARN of the IAM role associated with this job.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Security Configuration to be associated with the job.
+	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
+	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
 type JobParameters struct {
 
 	// –  The command of the job. Defined below.
-	// +kubebuilder:validation:Required
-	Command []CommandParameters `json:"command" tf:"command,omitempty"`
+	// +kubebuilder:validation:Optional
+	Command []CommandParameters `json:"command,omitempty" tf:"command,omitempty"`
 
 	// –  The list of connections used for this job.
 	// +kubebuilder:validation:Optional
@@ -140,6 +207,9 @@ type JobParameters struct {
 }
 
 type NotificationPropertyObservation struct {
+
+	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type NotificationPropertyParameters struct {
@@ -173,8 +243,9 @@ type JobStatus struct {
 type Job struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              JobSpec   `json:"spec"`
-	Status            JobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.command)",message="command is a required parameter"
+	Spec   JobSpec   `json:"spec"`
+	Status JobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

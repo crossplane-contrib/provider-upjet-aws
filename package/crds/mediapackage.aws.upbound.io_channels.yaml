@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: channels.mediapackage.aws.upbound.io
 spec:
@@ -80,9 +80,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - channelId
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -254,6 +262,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: channelId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.channelId)
           status:
             description: ChannelStatus defines the observed state of Channel.
             properties:
@@ -261,6 +272,12 @@ spec:
                 properties:
                   arn:
                     description: The ARN of the channel
+                    type: string
+                  channelId:
+                    description: A unique identifier describing the channel
+                    type: string
+                  description:
+                    description: A description of the channel
                     type: string
                   hlsIngest:
                     description: A single item list of HLS ingest information
@@ -286,6 +303,15 @@ spec:
                   id:
                     description: The same as channel_id
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -335,9 +361,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -24,14 +24,30 @@ type VocabularyFilterObservation struct {
 	// VocabularyFilter name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words.
+	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
+
+	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }
 
 type VocabularyFilterParameters struct {
 
 	// The language code you selected for your vocabulary filter. Refer to the supported languages page for accepted codes.
-	// +kubebuilder:validation:Required
-	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -75,8 +91,9 @@ type VocabularyFilterStatus struct {
 type VocabularyFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VocabularyFilterSpec   `json:"spec"`
-	Status            VocabularyFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	Spec   VocabularyFilterSpec   `json:"spec"`
+	Status VocabularyFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

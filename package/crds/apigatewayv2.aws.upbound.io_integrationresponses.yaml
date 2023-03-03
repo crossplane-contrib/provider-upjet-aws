@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: integrationresponses.apigatewayv2.aws.upbound.io
 spec:
@@ -239,9 +239,17 @@ spec:
                       response.
                     type: string
                 required:
-                - integrationResponseKey
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -413,13 +421,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: integrationResponseKey is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.integrationResponseKey)
           status:
             description: IntegrationResponseStatus defines the observed state of IntegrationResponse.
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: API identifier.
+                    type: string
+                  contentHandlingStrategy:
+                    description: 'How to handle response payload content type conversions.
+                      Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.'
+                    type: string
                   id:
                     description: Integration response identifier.
+                    type: string
+                  integrationId:
+                    description: Identifier of the aws_apigatewayv2_integration.
+                    type: string
+                  integrationResponseKey:
+                    description: Integration response key.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  responseTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of Velocity templates that are applied on the
+                      request payload based on the value of the Content-Type header
+                      sent by the client.
+                    type: object
+                  templateSelectionExpression:
+                    description: The template selection expression for the integration
+                      response.
                     type: string
                 type: object
               conditions:
@@ -463,9 +502,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

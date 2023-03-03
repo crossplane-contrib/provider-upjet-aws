@@ -14,24 +14,50 @@ import (
 )
 
 type UserObservation struct {
+
+	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
+	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
+
+	// The ARN of the created ElastiCache User.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The current supported value is REDIS.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Indicates a password is not required for this user.
+	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
+
+	// Passwords used for this user. You can create up to two passwords for each user.
+	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The username of the user.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type UserParameters struct {
 
 	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
-	// +kubebuilder:validation:Required
-	AccessString *string `json:"accessString" tf:"access_string,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
 	// The ARN of the created ElastiCache User.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The current supported value is REDIS.
-	// +kubebuilder:validation:Required
-	Engine *string `json:"engine" tf:"engine,omitempty"`
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Indicates a password is not required for this user.
 	// +kubebuilder:validation:Optional
@@ -51,8 +77,8 @@ type UserParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The username of the user.
-	// +kubebuilder:validation:Required
-	UserName *string `json:"userName" tf:"user_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -79,8 +105,11 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessString)",message="accessString is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engine)",message="engine is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userName)",message="userName is a required parameter"
+	Spec   UserSpec   `json:"spec"`
+	Status UserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

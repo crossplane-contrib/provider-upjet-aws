@@ -15,8 +15,24 @@ import (
 
 type ClusterInstanceObservation struct {
 
+	// Specifies whether any database modifications
+	// are applied immediately, or during the next maintenance window. Default isfalse.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
 	// Amazon Resource Name (ARN) of cluster instance
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set (see docs). Default true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The identifier of the CA certificate for the DB instance.
+	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
+
+	// The identifier of the aws_docdb_cluster in which to launch this instance.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// The DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -24,16 +40,29 @@ type ClusterInstanceObservation struct {
 	// The region-unique, immutable identifier for the DB instance.
 	DbiResourceID *string `json:"dbiResourceId,omitempty" tf:"dbi_resource_id,omitempty"`
 
+	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
+	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
+
 	// The DNS address for this instance. May not be writable
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The name of the database engine to be used for the DocDB instance. Defaults to docdb. Valid Values: docdb.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The database engine version
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
+	// supports the below instance classes. Please see AWS Documentation for complete details.
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
+
 	// The ARN for the KMS encryption key if one is set to the cluster.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key.
+	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
 	// The database port
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -41,10 +70,24 @@ type ClusterInstanceObservation struct {
 	// The daily time range during which automated backups are created if automated backups are enabled.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
+	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -95,8 +138,8 @@ type ClusterInstanceParameters struct {
 
 	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
 	// supports the below instance classes. Please see AWS Documentation for complete details.
-	// +kubebuilder:validation:Required
-	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key.
 	// +kubebuilder:validation:Optional
@@ -145,8 +188,9 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterInstanceSpec   `json:"spec"`
-	Status            ClusterInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	Spec   ClusterInstanceSpec   `json:"spec"`
+	Status ClusterInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,18 @@ import (
 
 type GroupTagObservation struct {
 
+	// Name of the Autoscaling Group to apply the tag to.
+	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
+
 	// ASG name and key, separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Tag to create. The tag block is documented below.
+	Tag []GroupTagTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type GroupTagParameters struct {
@@ -40,11 +50,20 @@ type GroupTagParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Tag to create. The tag block is documented below.
-	// +kubebuilder:validation:Required
-	Tag []GroupTagTagParameters `json:"tag" tf:"tag,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tag []GroupTagTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type GroupTagTagObservation struct {
+
+	// Tag name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Whether to propagate the tags to instances launched by the ASG.
+	PropagateAtLaunch *bool `json:"propagateAtLaunch,omitempty" tf:"propagate_at_launch,omitempty"`
+
+	// Tag value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GroupTagTagParameters struct {
@@ -86,8 +105,9 @@ type GroupTagStatus struct {
 type GroupTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupTagSpec   `json:"spec"`
-	Status            GroupTagStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tag)",message="tag is a required parameter"
+	Spec   GroupTagSpec   `json:"spec"`
+	Status GroupTagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

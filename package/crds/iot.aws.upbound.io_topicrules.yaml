@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: topicrules.iot.aws.upbound.io
 spec:
@@ -1345,11 +1345,17 @@ spec:
                       type: object
                     type: array
                 required:
-                - enabled
                 - region
-                - sql
-                - sqlVersion
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -1521,6 +1527,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: enabled is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)
+            - message: sql is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sql)
+            - message: sqlVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sqlVersion)
           status:
             description: TopicRuleStatus defines the observed state of TopicRule.
             properties:
@@ -1529,9 +1542,776 @@ spec:
                   arn:
                     description: The ARN of the topic rule
                     type: string
+                  cloudwatchAlarm:
+                    items:
+                      properties:
+                        alarmName:
+                          description: The CloudWatch alarm name.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        stateReason:
+                          description: The reason for the alarm change.
+                          type: string
+                        stateValue:
+                          description: 'The value of the alarm state. Acceptable values
+                            are: OK, ALARM, INSUFFICIENT_DATA.'
+                          type: string
+                      type: object
+                    type: array
+                  cloudwatchLogs:
+                    items:
+                      properties:
+                        logGroupName:
+                          description: The CloudWatch log group name.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  cloudwatchMetric:
+                    items:
+                      properties:
+                        metricName:
+                          description: The CloudWatch metric name.
+                          type: string
+                        metricNamespace:
+                          description: The CloudWatch metric namespace name.
+                          type: string
+                        metricTimestamp:
+                          description: An optional Unix timestamp (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
+                          type: string
+                        metricUnit:
+                          description: 'The metric unit (supported units can be found
+                            here: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)'
+                          type: string
+                        metricValue:
+                          description: The CloudWatch metric value.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: The description of the rule.
+                    type: string
+                  dynamodb:
+                    items:
+                      properties:
+                        hashKeyField:
+                          description: The hash key name.
+                          type: string
+                        hashKeyType:
+                          description: The hash key type. Valid values are "STRING"
+                            or "NUMBER".
+                          type: string
+                        hashKeyValue:
+                          description: The hash key value.
+                          type: string
+                        operation:
+                          description: The operation. Valid values are "INSERT", "UPDATE",
+                            or "DELETE".
+                          type: string
+                        payloadField:
+                          description: The action payload.
+                          type: string
+                        rangeKeyField:
+                          description: The range key name.
+                          type: string
+                        rangeKeyType:
+                          description: The range key type. Valid values are "STRING"
+                            or "NUMBER".
+                          type: string
+                        rangeKeyValue:
+                          description: The range key value.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        tableName:
+                          description: The name of the DynamoDB table.
+                          type: string
+                      type: object
+                    type: array
+                  dynamodbv2:
+                    items:
+                      properties:
+                        putItem:
+                          description: Configuration block with DynamoDB Table to
+                            which the message will be written. Nested arguments below.
+                          items:
+                            properties:
+                              tableName:
+                                description: The name of the DynamoDB table.
+                                type: string
+                            type: object
+                          type: array
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  elasticsearch:
+                    items:
+                      properties:
+                        endpoint:
+                          description: The endpoint of your Elasticsearch domain.
+                          type: string
+                        id:
+                          description: The unique identifier for the document you
+                            are storing.
+                          type: string
+                        index:
+                          description: The Elasticsearch index where you want to store
+                            your data.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        type:
+                          description: The type of document you are storing.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: Specifies whether the rule is enabled.
+                    type: boolean
+                  errorAction:
+                    description: Configuration block with error action to be associated
+                      with the rule. See the documentation for cloudwatch_alarm, cloudwatch_logs,
+                      cloudwatch_metric, dynamodb, dynamodbv2, elasticsearch, firehose,
+                      http, iot_analytics, iot_events, kafka, kinesis, lambda, republish,
+                      s3, sns, sqs, step_functions, timestream configuration blocks
+                      for further configuration details.
+                    items:
+                      properties:
+                        cloudwatchAlarm:
+                          items:
+                            properties:
+                              alarmName:
+                                description: The CloudWatch alarm name.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              stateReason:
+                                description: The reason for the alarm change.
+                                type: string
+                              stateValue:
+                                description: 'The value of the alarm state. Acceptable
+                                  values are: OK, ALARM, INSUFFICIENT_DATA.'
+                                type: string
+                            type: object
+                          type: array
+                        cloudwatchLogs:
+                          items:
+                            properties:
+                              logGroupName:
+                                description: The CloudWatch log group name.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        cloudwatchMetric:
+                          items:
+                            properties:
+                              metricName:
+                                description: The CloudWatch metric name.
+                                type: string
+                              metricNamespace:
+                                description: The CloudWatch metric namespace name.
+                                type: string
+                              metricTimestamp:
+                                description: An optional Unix timestamp (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
+                                type: string
+                              metricUnit:
+                                description: 'The metric unit (supported units can
+                                  be found here: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)'
+                                type: string
+                              metricValue:
+                                description: The CloudWatch metric value.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        dynamodb:
+                          items:
+                            properties:
+                              hashKeyField:
+                                description: The hash key name.
+                                type: string
+                              hashKeyType:
+                                description: The hash key type. Valid values are "STRING"
+                                  or "NUMBER".
+                                type: string
+                              hashKeyValue:
+                                description: The hash key value.
+                                type: string
+                              operation:
+                                description: The operation. Valid values are "INSERT",
+                                  "UPDATE", or "DELETE".
+                                type: string
+                              payloadField:
+                                description: The action payload.
+                                type: string
+                              rangeKeyField:
+                                description: The range key name.
+                                type: string
+                              rangeKeyType:
+                                description: The range key type. Valid values are
+                                  "STRING" or "NUMBER".
+                                type: string
+                              rangeKeyValue:
+                                description: The range key value.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              tableName:
+                                description: The name of the DynamoDB table.
+                                type: string
+                            type: object
+                          type: array
+                        dynamodbv2:
+                          items:
+                            properties:
+                              putItem:
+                                description: Configuration block with DynamoDB Table
+                                  to which the message will be written. Nested arguments
+                                  below.
+                                items:
+                                  properties:
+                                    tableName:
+                                      description: The name of the DynamoDB table.
+                                      type: string
+                                  type: object
+                                type: array
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        elasticsearch:
+                          items:
+                            properties:
+                              endpoint:
+                                description: The endpoint of your Elasticsearch domain.
+                                type: string
+                              id:
+                                description: The unique identifier for the document
+                                  you are storing.
+                                type: string
+                              index:
+                                description: The Elasticsearch index where you want
+                                  to store your data.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              type:
+                                description: The type of document you are storing.
+                                type: string
+                            type: object
+                          type: array
+                        firehose:
+                          items:
+                            properties:
+                              deliveryStreamName:
+                                description: The delivery stream name.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              separator:
+                                description: 'A character separator that is used to
+                                  separate records written to the Firehose stream.
+                                  Valid values are: ''\n'' (newline), ''\t'' (tab),
+                                  ''\r\n'' (Windows newline), '','' (comma).'
+                                type: string
+                            type: object
+                          type: array
+                        http:
+                          items:
+                            properties:
+                              confirmationUrl:
+                                description: The HTTPS URL used to verify ownership
+                                  of url.
+                                type: string
+                              httpHeader:
+                                description: Custom HTTP header IoT Core should send.
+                                  It is possible to define more than one custom header.
+                                items:
+                                  properties:
+                                    key:
+                                      description: The name of the HTTP header.
+                                      type: string
+                                    value:
+                                      description: The value of the HTTP header.
+                                      type: string
+                                  type: object
+                                type: array
+                              url:
+                                description: The HTTPS URL.
+                                type: string
+                            type: object
+                          type: array
+                        iotAnalytics:
+                          items:
+                            properties:
+                              channelName:
+                                description: Name of AWS IOT Analytics channel.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        iotEvents:
+                          items:
+                            properties:
+                              inputName:
+                                description: The name of the AWS IoT Events input.
+                                type: string
+                              messageId:
+                                description: Use this to ensure that only one input
+                                  (message) with a given messageId is processed by
+                                  an AWS IoT Events detector.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        kafka:
+                          items:
+                            properties:
+                              clientProperties:
+                                additionalProperties:
+                                  type: string
+                                description: Properties of the Apache Kafka producer
+                                  client. For more info, see the AWS documentation.
+                                type: object
+                              destinationArn:
+                                description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
+                                  .
+                                type: string
+                              key:
+                                description: The name of the HTTP header.
+                                type: string
+                              partition:
+                                description: The Kafka message partition.
+                                type: string
+                              topic:
+                                description: The Kafka topic for messages to be sent
+                                  to the Kafka broker.
+                                type: string
+                            type: object
+                          type: array
+                        kinesis:
+                          items:
+                            properties:
+                              partitionKey:
+                                description: The partition key.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              streamName:
+                                description: The name of the Amazon Kinesis stream.
+                                type: string
+                            type: object
+                          type: array
+                        lambda:
+                          items:
+                            properties:
+                              functionArn:
+                                description: The ARN of the Lambda function.
+                                type: string
+                            type: object
+                          type: array
+                        republish:
+                          items:
+                            properties:
+                              qos:
+                                description: The Quality of Service (QoS) level to
+                                  use when republishing messages. Valid values are
+                                  0 or 1. The default value is 0.
+                                type: number
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              topic:
+                                description: The Kafka topic for messages to be sent
+                                  to the Kafka broker.
+                                type: string
+                            type: object
+                          type: array
+                        s3:
+                          items:
+                            properties:
+                              bucketName:
+                                description: The Amazon S3 bucket name.
+                                type: string
+                              cannedAcl:
+                                description: The Amazon S3 canned ACL that controls
+                                  access to the object identified by the object key.
+                                  Valid values.
+                                type: string
+                              key:
+                                description: The name of the HTTP header.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                            type: object
+                          type: array
+                        sns:
+                          items:
+                            properties:
+                              messageFormat:
+                                description: The message format of the message to
+                                  publish. Accepted values are "JSON" and "RAW".
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              targetArn:
+                                description: The ARN of the SNS topic.
+                                type: string
+                            type: object
+                          type: array
+                        sqs:
+                          items:
+                            properties:
+                              queueUrl:
+                                description: The URL of the Amazon SQS queue.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              useBase64:
+                                description: Specifies whether to use Base64 encoding.
+                                type: boolean
+                            type: object
+                          type: array
+                        stepFunctions:
+                          items:
+                            properties:
+                              executionNamePrefix:
+                                description: The prefix used to generate, along with
+                                  a UUID, the unique state machine execution name.
+                                type: string
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              stateMachineName:
+                                description: The name of the Step Functions state
+                                  machine whose execution will be started.
+                                type: string
+                            type: object
+                          type: array
+                        timestream:
+                          items:
+                            properties:
+                              databaseName:
+                                description: The name of an Amazon Timestream database.
+                                type: string
+                              dimension:
+                                description: Configuration blocks with metadata attributes
+                                  of the time series that are written in each measure
+                                  record. Nested arguments below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the rule.
+                                      type: string
+                                    value:
+                                      description: The value of the HTTP header.
+                                      type: string
+                                  type: object
+                                type: array
+                              roleArn:
+                                description: The IAM role ARN that allows access to
+                                  the CloudWatch alarm.
+                                type: string
+                              tableName:
+                                description: The name of the DynamoDB table.
+                                type: string
+                              timestamp:
+                                description: Configuration block specifying an application-defined
+                                  value to replace the default value assigned to the
+                                  Timestream record's timestamp in the time column.
+                                  Nested arguments below.
+                                items:
+                                  properties:
+                                    unit:
+                                      description: 'The precision of the timestamp
+                                        value that results from the expression described
+                                        in value. Valid values: SECONDS, MILLISECONDS,
+                                        MICROSECONDS, NANOSECONDS.'
+                                      type: string
+                                    value:
+                                      description: The value of the HTTP header.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  firehose:
+                    items:
+                      properties:
+                        deliveryStreamName:
+                          description: The delivery stream name.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        separator:
+                          description: 'A character separator that is used to separate
+                            records written to the Firehose stream. Valid values are:
+                            ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline),
+                            '','' (comma).'
+                          type: string
+                      type: object
+                    type: array
+                  http:
+                    items:
+                      properties:
+                        confirmationUrl:
+                          description: The HTTPS URL used to verify ownership of url.
+                          type: string
+                        httpHeader:
+                          description: Custom HTTP header IoT Core should send. It
+                            is possible to define more than one custom header.
+                          items:
+                            properties:
+                              key:
+                                description: The name of the HTTP header.
+                                type: string
+                              value:
+                                description: The value of the HTTP header.
+                                type: string
+                            type: object
+                          type: array
+                        url:
+                          description: The HTTPS URL.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The unique identifier for the document you are storing.
                     type: string
+                  iotAnalytics:
+                    items:
+                      properties:
+                        channelName:
+                          description: Name of AWS IOT Analytics channel.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  iotEvents:
+                    items:
+                      properties:
+                        inputName:
+                          description: The name of the AWS IoT Events input.
+                          type: string
+                        messageId:
+                          description: Use this to ensure that only one input (message)
+                            with a given messageId is processed by an AWS IoT Events
+                            detector.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  kafka:
+                    items:
+                      properties:
+                        clientProperties:
+                          additionalProperties:
+                            type: string
+                          description: Properties of the Apache Kafka producer client.
+                            For more info, see the AWS documentation.
+                          type: object
+                        destinationArn:
+                          description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
+                            .
+                          type: string
+                        key:
+                          description: The name of the HTTP header.
+                          type: string
+                        partition:
+                          description: The Kafka message partition.
+                          type: string
+                        topic:
+                          description: The Kafka topic for messages to be sent to
+                            the Kafka broker.
+                          type: string
+                      type: object
+                    type: array
+                  kinesis:
+                    items:
+                      properties:
+                        partitionKey:
+                          description: The partition key.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        streamName:
+                          description: The name of the Amazon Kinesis stream.
+                          type: string
+                      type: object
+                    type: array
+                  lambda:
+                    items:
+                      properties:
+                        functionArn:
+                          description: The ARN of the Lambda function.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  republish:
+                    items:
+                      properties:
+                        qos:
+                          description: The Quality of Service (QoS) level to use when
+                            republishing messages. Valid values are 0 or 1. The default
+                            value is 0.
+                          type: number
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        topic:
+                          description: The Kafka topic for messages to be sent to
+                            the Kafka broker.
+                          type: string
+                      type: object
+                    type: array
+                  s3:
+                    items:
+                      properties:
+                        bucketName:
+                          description: The Amazon S3 bucket name.
+                          type: string
+                        cannedAcl:
+                          description: The Amazon S3 canned ACL that controls access
+                            to the object identified by the object key. Valid values.
+                          type: string
+                        key:
+                          description: The name of the HTTP header.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  sns:
+                    items:
+                      properties:
+                        messageFormat:
+                          description: The message format of the message to publish.
+                            Accepted values are "JSON" and "RAW".
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        targetArn:
+                          description: The ARN of the SNS topic.
+                          type: string
+                      type: object
+                    type: array
+                  sql:
+                    description: The SQL statement used to query the topic. For more
+                      information, see AWS IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference)
+                      in the AWS IoT Developer Guide.
+                    type: string
+                  sqlVersion:
+                    description: The version of the SQL rules engine to use when evaluating
+                      the rule.
+                    type: string
+                  sqs:
+                    items:
+                      properties:
+                        queueUrl:
+                          description: The URL of the Amazon SQS queue.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        useBase64:
+                          description: Specifies whether to use Base64 encoding.
+                          type: boolean
+                      type: object
+                    type: array
+                  stepFunctions:
+                    items:
+                      properties:
+                        executionNamePrefix:
+                          description: The prefix used to generate, along with a UUID,
+                            the unique state machine execution name.
+                          type: string
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        stateMachineName:
+                          description: The name of the Step Functions state machine
+                            whose execution will be started.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1539,6 +2319,53 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  timestream:
+                    items:
+                      properties:
+                        databaseName:
+                          description: The name of an Amazon Timestream database.
+                          type: string
+                        dimension:
+                          description: Configuration blocks with metadata attributes
+                            of the time series that are written in each measure record.
+                            Nested arguments below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the rule.
+                                type: string
+                              value:
+                                description: The value of the HTTP header.
+                                type: string
+                            type: object
+                          type: array
+                        roleArn:
+                          description: The IAM role ARN that allows access to the
+                            CloudWatch alarm.
+                          type: string
+                        tableName:
+                          description: The name of the DynamoDB table.
+                          type: string
+                        timestamp:
+                          description: Configuration block specifying an application-defined
+                            value to replace the default value assigned to the Timestream
+                            record's timestamp in the time column. Nested arguments
+                            below.
+                          items:
+                            properties:
+                              unit:
+                                description: 'The precision of the timestamp value
+                                  that results from the expression described in value.
+                                  Valid values: SECONDS, MILLISECONDS, MICROSECONDS,
+                                  NANOSECONDS.'
+                                type: string
+                              value:
+                                description: The value of the HTTP header.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -1581,9 +2408,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

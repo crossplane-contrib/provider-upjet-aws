@@ -15,8 +15,20 @@ import (
 
 type DomainNameConfigurationObservation struct {
 
+	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Endpoint type. Valid values: REGIONAL.
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+
 	// (Computed) Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
+	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
+	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
+
+	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
 
 	// (Computed) Target domain name.
 	TargetDomainName *string `json:"targetDomainName,omitempty" tf:"target_domain_name,omitempty"`
@@ -60,11 +72,20 @@ type DomainNameObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Domain name configuration. See below.
-	// +kubebuilder:validation:Required
 	DomainNameConfiguration []DomainNameConfigurationObservation `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
 
 	// Domain name identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Mutual TLS authentication configuration for the domain name.
+	MutualTLSAuthentication []MutualTLSAuthenticationObservation `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -73,8 +94,8 @@ type DomainNameObservation struct {
 type DomainNameParameters struct {
 
 	// Domain name configuration. See below.
-	// +kubebuilder:validation:Required
-	DomainNameConfiguration []DomainNameConfigurationParameters `json:"domainNameConfiguration" tf:"domain_name_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainNameConfiguration []DomainNameConfigurationParameters `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
 
 	// Mutual TLS authentication configuration for the domain name.
 	// +kubebuilder:validation:Optional
@@ -91,6 +112,12 @@ type DomainNameParameters struct {
 }
 
 type MutualTLSAuthenticationObservation struct {
+
+	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
+	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
+
+	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+	TruststoreVersion *string `json:"truststoreVersion,omitempty" tf:"truststore_version,omitempty"`
 }
 
 type MutualTLSAuthenticationParameters struct {
@@ -128,8 +155,9 @@ type DomainNameStatus struct {
 type DomainName struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainNameSpec   `json:"spec"`
-	Status            DomainNameStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainNameConfiguration)",message="domainNameConfiguration is a required parameter"
+	Spec   DomainNameSpec   `json:"spec"`
+	Status DomainNameStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -37,10 +37,23 @@ type LBCertificateObservation struct {
 	// The timestamp when the instance was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The domain name (e.g., example.com) for your SSL/TLS certificate.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	DomainValidationRecords []DomainValidationRecordsObservation `json:"domainValidationRecords,omitempty" tf:"domain_validation_records,omitempty"`
 
 	// A combination of attributes to create a unique id: lb_name,name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer name where you want to create the SSL/TLS certificate.
+	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
+	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 }

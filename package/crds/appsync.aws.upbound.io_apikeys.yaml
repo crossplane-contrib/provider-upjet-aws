@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: apikeys.appsync.aws.upbound.io
 spec:
@@ -157,6 +157,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,8 +342,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: ID of the associated AppSync API
+                    type: string
+                  description:
+                    description: API key description.
+                    type: string
+                  expires:
+                    description: RFC3339 string representation of the expiry date.
+                      Rounded down to nearest hour. By default, it is 7 days from
+                      the date of creation.
+                    type: string
                   id:
                     description: API Key ID (Formatted as ApiId:Key)
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -378,9 +402,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

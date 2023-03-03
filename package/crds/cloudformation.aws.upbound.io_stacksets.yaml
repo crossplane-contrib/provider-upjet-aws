@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: stacksets.cloudformation.aws.upbound.io
 spec:
@@ -250,6 +250,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -426,15 +435,115 @@ spec:
             properties:
               atProvider:
                 properties:
+                  administrationRoleArn:
+                    description: Amazon Resource Number (ARN) of the IAM Role in the
+                      administrator account. This must be defined when using the SELF_MANAGED
+                      permission model.
+                    type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the StackSet.
+                    type: string
+                  autoDeployment:
+                    description: Configuration block containing the auto-deployment
+                      model for your StackSet. This can only be defined when using
+                      the SERVICE_MANAGED permission model.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether or not auto-deployment is enabled.
+                          type: boolean
+                        retainStacksOnAccountRemoval:
+                          description: Whether or not to retain stacks when the account
+                            is removed.
+                          type: boolean
+                      type: object
+                    type: array
+                  callAs:
+                    description: 'Specifies whether you are acting as an account administrator
+                      in the organization''s management account or as a delegated
+                      administrator in a member account. Valid values: SELF (default),
+                      DELEGATED_ADMIN.'
+                    type: string
+                  capabilities:
+                    description: 'A list of capabilities. Valid values: CAPABILITY_IAM,
+                      CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND.'
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: Description of the StackSet.
+                    type: string
+                  executionRoleName:
+                    description: Name of the IAM Role in all target accounts for StackSet
+                      operations. Defaults to AWSCloudFormationStackSetExecutionRole
+                      when using the SELF_MANAGED permission model. This should not
+                      be defined when using the SERVICE_MANAGED permission model.
                     type: string
                   id:
                     description: Name of the StackSet.
                     type: string
+                  operationPreferences:
+                    description: Preferences for how AWS CloudFormation performs a
+                      stack set update.
+                    items:
+                      properties:
+                        failureToleranceCount:
+                          description: The number of accounts, per Region, for which
+                            this operation can fail before AWS CloudFormation stops
+                            the operation in that Region.
+                          type: number
+                        failureTolerancePercentage:
+                          description: The percentage of accounts, per Region, for
+                            which this stack operation can fail before AWS CloudFormation
+                            stops the operation in that Region.
+                          type: number
+                        maxConcurrentCount:
+                          description: The maximum number of accounts in which to
+                            perform this operation at one time.
+                          type: number
+                        maxConcurrentPercentage:
+                          description: The maximum percentage of accounts in which
+                            to perform this operation at one time.
+                          type: number
+                        regionConcurrencyType:
+                          description: The concurrency type of deploying StackSets
+                            operations in Regions, could be in parallel or one Region
+                            at a time.
+                          type: string
+                        regionOrder:
+                          description: The order of the Regions in where you want
+                            to perform the stack operation.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of input parameters for the StackSet
+                      template. All template parameters, including those with a Default,
+                      must be configured or ignored with lifecycle configuration block
+                      ignore_changes argument. All NoEcho template parameters must
+                      be ignored with the lifecycle configuration block ignore_changes
+                      argument.
+                    type: object
+                  permissionModel:
+                    description: 'Describes how the IAM roles required for your StackSet
+                      are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   stackSetId:
                     description: Unique identifier of the StackSet.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -442,6 +551,16 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  templateBody:
+                    description: 'String containing the CloudFormation template body.
+                      Maximum size: 51,200 bytes. Conflicts with template_url.'
+                    type: string
+                  templateUrl:
+                    description: 'String containing the location of a file containing
+                      the CloudFormation template body. The URL must point to a template
+                      that is located in an Amazon S3 bucket. Maximum location file
+                      size: 460,800 bytes. Conflicts with template_body.'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -484,9 +603,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

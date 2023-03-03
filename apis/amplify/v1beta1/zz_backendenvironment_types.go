@@ -15,11 +15,24 @@ import (
 
 type BackendEnvironmentObservation struct {
 
+	// Unique ID for an Amplify app.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
 	// ARN for a backend environment that is part of an Amplify app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name of deployment artifacts.
+	DeploymentArtifacts *string `json:"deploymentArtifacts,omitempty" tf:"deployment_artifacts,omitempty"`
+
 	// Unique ID of the Amplify backend environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// AWS CloudFormation stack name of a backend environment.
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 }
 
 type BackendEnvironmentParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: voiceconnectorstreamings.chime.aws.upbound.io
 spec:
@@ -164,9 +164,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - dataRetention
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -338,13 +346,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: dataRetention is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRetention)
           status:
             description: VoiceConnectorStreamingStatus defines the observed state
               of VoiceConnectorStreaming.
             properties:
               atProvider:
                 properties:
+                  dataRetention:
+                    description: The retention period, in hours, for the Amazon Kinesis
+                      data.
+                    type: number
+                  disabled:
+                    description: 'When true, media streaming to Amazon Kinesis is
+                      turned off. Default: false'
+                    type: boolean
                   id:
+                    description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  streamingNotificationTargets:
+                    description: 'The streaming notification targets. Valid Values:
+                      EventBridge | SNS | SQS'
+                    items:
+                      type: string
+                    type: array
+                  voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
                 type: object
@@ -389,9 +421,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

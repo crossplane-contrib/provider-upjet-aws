@@ -15,10 +15,23 @@ import (
 
 type WebhookObservation struct {
 
+	// Unique ID for an Amplify app.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
 	// ARN for the webhook.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name for a branch that is part of the Amplify app.
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// Description for a webhook.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// URL of the webhook.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

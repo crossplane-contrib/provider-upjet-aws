@@ -14,7 +14,30 @@ import (
 )
 
 type SMSPreferencesObservation struct {
+
+	// The type of SMS message that you will send by default. Possible values are: Promotional, Transactional
+	DefaultSMSType *string `json:"defaultSmsType,omitempty" tf:"default_sms_type,omitempty"`
+
+	// A string, such as your business brand, that is displayed as the sender on the receiving device.
+	DefaultSenderID *string `json:"defaultSenderId,omitempty" tf:"default_sender_id,omitempty"`
+
+	// The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs.
+	DeliveryStatusIAMRoleArn *string `json:"deliveryStatusIamRoleArn,omitempty" tf:"delivery_status_iam_role_arn,omitempty"`
+
+	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
+	DeliveryStatusSuccessSamplingRate *string `json:"deliveryStatusSuccessSamplingRate,omitempty" tf:"delivery_status_success_sampling_rate,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The maximum amount in USD that you are willing to spend each month to send SMS messages.
+	MonthlySpendLimit *float64 `json:"monthlySpendLimit,omitempty" tf:"monthly_spend_limit,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS.
+	UsageReportS3Bucket *string `json:"usageReportS3Bucket,omitempty" tf:"usage_report_s3_bucket,omitempty"`
 }
 
 type SMSPreferencesParameters struct {

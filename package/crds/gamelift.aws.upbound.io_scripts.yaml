@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: scripts.gamelift.aws.upbound.io
 spec:
@@ -335,9 +335,17 @@ spec:
                       files. Maximum size of a zip file is 5 MB.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -509,6 +517,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ScriptStatus defines the observed state of Script.
             properties:
@@ -520,6 +531,40 @@ spec:
                   id:
                     description: GameLift Script ID.
                     type: string
+                  name:
+                    description: Name of the script
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  storageLocation:
+                    description: Information indicating where your game script files
+                      are stored. See below.
+                    items:
+                      properties:
+                        bucket:
+                          description: Name of your S3 bucket.
+                          type: string
+                        key:
+                          description: Name of the zip file containing your script
+                            files.
+                          type: string
+                        objectVersion:
+                          description: A specific version of the file. If not set,
+                            the latest version of the file is retrieved.
+                          type: string
+                        roleArn:
+                          description: ARN of the access role that allows Amazon GameLift
+                            to access your S3 bucket.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -527,6 +572,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  version:
+                    description: Version that is associated with this script.
+                    type: string
+                  zipFile:
+                    description: A data object containing your Realtime scripts and
+                      dependencies as a zip  file. The zip file can have one or multiple
+                      files. Maximum size of a zip file is 5 MB.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -569,9 +622,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

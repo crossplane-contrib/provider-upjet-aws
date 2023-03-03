@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: stacks.opsworks.aws.upbound.io
 spec:
@@ -503,9 +503,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -677,18 +685,150 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StackStatus defines the observed state of Stack.
             properties:
               atProvider:
                 properties:
+                  agentVersion:
+                    description: If set to "LATEST", OpsWorks will automatically install
+                      the latest version.
+                    type: string
                   arn:
+                    type: string
+                  berkshelfVersion:
+                    description: If manage_berkshelf is enabled, the version of Berkshelf
+                      to use.
+                    type: string
+                  color:
+                    description: Color to paint next to the stack's resources in the
+                      OpsWorks console.
+                    type: string
+                  configurationManagerName:
+                    description: Name of the configuration manager to use. Defaults
+                      to "Chef".
+                    type: string
+                  configurationManagerVersion:
+                    description: Version of the configuration manager to use. Defaults
+                      to "11.4".
+                    type: string
+                  customCookbooksSource:
+                    description: When use_custom_cookbooks is set, provide this sub-object
+                      as described below.
+                    items:
+                      properties:
+                        passwordSecretRef:
+                          description: Password to use when authenticating to the
+                            source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        revision:
+                          description: For sources that are version-aware, the revision
+                            to use.
+                          type: string
+                        sshKeySecretRef:
+                          description: SSH key to use when authenticating to the source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        type:
+                          description: The type of source to use. For example, "archive".
+                          type: string
+                        url:
+                          description: The URL where the cookbooks resource can be
+                            found.
+                          type: string
+                        username:
+                          description: Username to use when authenticating to the
+                            source.
+                          type: string
+                      type: object
+                    type: array
+                  customJson:
+                    description: User defined JSON passed to "Chef". Use a "here doc"
+                      for multiline JSON.
+                    type: string
+                  defaultAvailabilityZone:
+                    description: Name of the availability zone where instances will
+                      be created by default. Cannot be set when vpc_id is set.
+                    type: string
+                  defaultInstanceProfileArn:
+                    description: The ARN of an IAM Instance Profile that created instances
+                      will have by default.
+                    type: string
+                  defaultOs:
+                    description: Name of OS that will be installed on instances by
+                      default.
+                    type: string
+                  defaultRootDeviceType:
+                    description: Name of the type of root device instances will have
+                      by default.
+                    type: string
+                  defaultSshKeyName:
+                    description: Name of the SSH keypair that instances will have
+                      by default.
+                    type: string
+                  defaultSubnetId:
+                    description: ID of the subnet in which instances will be created
+                      by default. Required if vpc_id is set to a VPC other than the
+                      default VPC, and forbidden if it isn't.
+                    type: string
+                  hostnameTheme:
+                    description: Keyword representing the naming scheme that will
+                      be used for instance hostnames within this stack.
                     type: string
                   id:
                     description: The id of the stack.
                     type: string
+                  manageBerkshelf:
+                    description: Boolean value controlling whether Opsworks will run
+                      Berkshelf for this stack.
+                    type: boolean
+                  name:
+                    description: The name of the stack.
+                    type: string
+                  region:
+                    description: The name of the region where the stack will exist.
+                    type: string
+                  serviceRoleArn:
+                    description: The ARN of an IAM role that the OpsWorks service
+                      will act as.
+                    type: string
                   stackEndpoint:
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -696,6 +836,18 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  useCustomCookbooks:
+                    description: Boolean value controlling whether the custom cookbook
+                      settings are enabled.
+                    type: boolean
+                  useOpsworksSecurityGroups:
+                    description: Boolean value controlling whether the standard OpsWorks
+                      security groups apply to created instances.
+                    type: boolean
+                  vpcId:
+                    description: ID of the VPC that this stack belongs to. Defaults
+                      to the region's default VPC.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -738,9 +890,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

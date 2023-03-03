@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: realtimelogconfigs.cloudfront.aws.upbound.io
 spec:
@@ -273,12 +273,17 @@ spec:
                       1 and 100, inclusive.
                     type: number
                 required:
-                - endpoint
-                - fields
-                - name
                 - region
-                - samplingRate
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -450,6 +455,15 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: endpoint is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpoint)
+            - message: fields is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fields)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: samplingRate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.samplingRate)
           status:
             description: RealtimeLogConfigStatus defines the observed state of RealtimeLogConfig.
             properties:
@@ -459,9 +473,54 @@ spec:
                     description: The ARN (Amazon Resource Name) of the CloudFront
                       real-time log configuration.
                     type: string
+                  endpoint:
+                    description: The Amazon Kinesis data streams where real-time log
+                      data is sent.
+                    items:
+                      properties:
+                        kinesisStreamConfig:
+                          description: The Amazon Kinesis data stream configuration.
+                          items:
+                            properties:
+                              roleArn:
+                                description: The ARN of an IAM role that CloudFront
+                                  can use to send real-time log data to the Kinesis
+                                  data stream. See the AWS documentation for more
+                                  information.
+                                type: string
+                              streamArn:
+                                description: The ARN of the Kinesis data stream.
+                                type: string
+                            type: object
+                          type: array
+                        streamType:
+                          description: The type of data stream where real-time log
+                            data is sent. The only valid value is Kinesis.
+                          type: string
+                      type: object
+                    type: array
+                  fields:
+                    description: The fields that are included in each real-time log
+                      record. See the AWS documentation for supported values.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the CloudFront real-time log configuration.
                     type: string
+                  name:
+                    description: The unique name to identify this real-time log configuration.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  samplingRate:
+                    description: The sampling rate for this real-time log configuration.
+                      The sampling rate determines the percentage of viewer requests
+                      that are represented in the real-time log data. An integer between
+                      1 and 100, inclusive.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -504,9 +563,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

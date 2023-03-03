@@ -18,6 +18,13 @@ type InviteAccepterObservation struct {
 
 	// The ID of the invitation.
 	InvitationID *string `json:"invitationId,omitempty" tf:"invitation_id,omitempty"`
+
+	// The account ID of the master Security Hub account whose invitation you're accepting.
+	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InviteAccepterParameters struct {

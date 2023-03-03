@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: metricstreams.cloudwatch.aws.upbound.io
 spec:
@@ -306,10 +306,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
-                - outputFormat
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -481,6 +488,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: outputFormat is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputFormat)
           status:
             description: MetricStreamStatus defines the observed state of MetricStream.
             properties:
@@ -493,16 +505,99 @@ spec:
                     description: Date and time in RFC3339 format that the metric stream
                       was created.
                     type: string
+                  excludeFilter:
+                    description: List of exclusive metric filters. If you specify
+                      this parameter, the stream sends metrics from all metric namespaces
+                      except for the namespaces that you specify here. Conflicts with
+                      include_filter.
+                    items:
+                      properties:
+                        namespace:
+                          description: Name of the metric namespace in the filter.
+                          type: string
+                      type: object
+                    type: array
+                  firehoseArn:
+                    description: ARN of the Amazon Kinesis Firehose delivery stream
+                      to use for this metric stream.
+                    type: string
                   id:
                     type: string
+                  includeFilter:
+                    description: List of inclusive metric filters. If you specify
+                      this parameter, the stream sends only the metrics from the metric
+                      namespaces that you specify here. Conflicts with exclude_filter.
+                    items:
+                      properties:
+                        namespace:
+                          description: Name of the metric namespace in the filter.
+                          type: string
+                      type: object
+                    type: array
                   lastUpdateDate:
                     description: Date and time in RFC3339 format that the metric stream
                       was last updated.
+                    type: string
+                  name:
+                    description: Friendly name of the metric stream. Conflicts with
+                      name_prefix.
+                    type: string
+                  outputFormat:
+                    description: Output format for the stream. Possible values are
+                      json and opentelemetry0.7. For more information about output
+                      formats, see Metric streams output formats.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: ARN of the IAM role that this metric stream will
+                      use to access Amazon Kinesis Firehose resources. For more information
+                      about role permissions, see Trust between CloudWatch and Kinesis
+                      Data Firehose.
                     type: string
                   state:
                     description: State of the metric stream. Possible values are running
                       and stopped.
                     type: string
+                  statisticsConfiguration:
+                    description: For each entry in this array, you specify one or
+                      more metrics and the list of additional statistics to stream
+                      for those metrics. The additional statistics that you can stream
+                      depend on the stream's output_format. If the OutputFormat is
+                      json, you can stream any additional statistic that is supported
+                      by CloudWatch, listed in CloudWatch statistics definitions.
+                      If the OutputFormat is opentelemetry0.7, you can stream percentile
+                      statistics (p99 etc.). See details below.
+                    items:
+                      properties:
+                        additionalStatistics:
+                          description: The additional statistics to stream for the
+                            metrics listed in include_metrics.
+                          items:
+                            type: string
+                          type: array
+                        includeMetric:
+                          description: An array that defines the metrics that are
+                            to have additional statistics streamed. See details below.
+                          items:
+                            properties:
+                              metricName:
+                                description: The name of the metric.
+                                type: string
+                              namespace:
+                                description: The namespace of the metric.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -552,9 +647,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

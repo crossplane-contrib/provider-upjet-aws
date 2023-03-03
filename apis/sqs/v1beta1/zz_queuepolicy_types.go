@@ -15,13 +15,23 @@ import (
 
 type QueuePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The JSON policy for the SQS queue.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The URL of the SQS Queue to which to attach the policy
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type QueuePolicyParameters struct {
 
 	// The JSON policy for the SQS queue.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The URL of the SQS Queue to which to attach the policy
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
@@ -67,8 +77,9 @@ type QueuePolicyStatus struct {
 type QueuePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QueuePolicySpec   `json:"spec"`
-	Status            QueuePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   QueuePolicySpec   `json:"spec"`
+	Status QueuePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

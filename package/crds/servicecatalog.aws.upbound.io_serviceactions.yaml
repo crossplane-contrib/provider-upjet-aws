@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: serviceactions.servicecatalog.aws.upbound.io
 spec:
@@ -110,10 +110,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - definition
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -285,13 +292,60 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: definition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ServiceActionStatus defines the observed state of ServiceAction.
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: Language code. Valid values are en (English), jp
+                      (Japanese), and zh (Chinese). Default is en.
+                    type: string
+                  definition:
+                    description: Self-service action definition configuration block.
+                      Detailed below.
+                    items:
+                      properties:
+                        assumeRole:
+                          description: ARN of the role that performs the self-service
+                            actions on your behalf. For example, arn:aws:iam::12345678910:role/ActionRole.
+                            To reuse the provisioned product launch role, set to LAUNCH_ROLE.
+                          type: string
+                        name:
+                          description: Name of the SSM document. For example, AWS-RestartEC2Instance.
+                            If you are using a shared SSM document, you must provide
+                            the ARN instead of the name.
+                          type: string
+                        parameters:
+                          description: 'List of parameters in JSON format. For example:
+                            [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].'
+                          type: string
+                        type:
+                          description: Service action definition type. Valid value
+                            is SSM_AUTOMATION. Default is SSM_AUTOMATION.
+                          type: string
+                        version:
+                          description: SSM document version. For example, 1.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Self-service action description.
+                    type: string
                   id:
                     description: Identifier of the service action.
+                    type: string
+                  name:
+                    description: Self-service action name.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -335,9 +389,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

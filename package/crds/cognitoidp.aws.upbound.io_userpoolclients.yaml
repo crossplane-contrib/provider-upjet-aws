@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userpoolclients.cognitoidp.aws.upbound.io
 spec:
@@ -448,9 +448,17 @@ spec:
                       type: string
                     type: array
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -622,14 +630,173 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: UserPoolClientStatus defines the observed state of UserPoolClient.
             properties:
               atProvider:
                 properties:
+                  accessTokenValidity:
+                    description: Time limit, between 5 minutes and 1 day, after which
+                      the access token is no longer valid and cannot be used. This
+                      value will be overridden if you have entered a value in token_validity_units.
+                    type: number
+                  allowedOauthFlows:
+                    description: List of allowed OAuth flows (code, implicit, client_credentials).
+                    items:
+                      type: string
+                    type: array
+                  allowedOauthFlowsUserPoolClient:
+                    description: Whether the client is allowed to follow the OAuth
+                      protocol when interacting with Cognito user pools.
+                    type: boolean
+                  allowedOauthScopes:
+                    description: List of allowed OAuth scopes (phone, email, openid,
+                      profile, and aws.cognito.signin.user.admin).
+                    items:
+                      type: string
+                    type: array
+                  analyticsConfiguration:
+                    description: Configuration block for Amazon Pinpoint analytics
+                      for collecting metrics for this user pool. Detailed below.
+                    items:
+                      properties:
+                        applicationArn:
+                          description: Application ARN for an Amazon Pinpoint application.
+                            Conflicts with external_id and role_arn.
+                          type: string
+                        applicationId:
+                          description: Application ID for an Amazon Pinpoint application.
+                          type: string
+                        externalId:
+                          description: ID for the Analytics Configuration. Conflicts
+                            with application_arn.
+                          type: string
+                        roleArn:
+                          description: ARN of an IAM role that authorizes Amazon Cognito
+                            to publish events to Amazon Pinpoint analytics. Conflicts
+                            with application_arn.
+                          type: string
+                        userDataShared:
+                          description: If set to true, Amazon Cognito will include
+                            user data in the events it publishes to Amazon Pinpoint
+                            analytics.
+                          type: boolean
+                      type: object
+                    type: array
+                  authSessionValidity:
+                    description: Amazon Cognito creates a session token for each API
+                      request in an authentication flow. AuthSessionValidity is the
+                      duration, in minutes, of that session token. Your user pool
+                      native user must respond to each authentication challenge before
+                      the session expires. Valid values between 3 and 15. Default
+                      value is 3.
+                    type: number
+                  callbackUrls:
+                    description: List of allowed callback URLs for the identity providers.
+                    items:
+                      type: string
+                    type: array
+                  defaultRedirectUri:
+                    description: Default redirect URI. Must be in the list of callback
+                      URLs.
+                    type: string
+                  enablePropagateAdditionalUserContextData:
+                    description: Activates the propagation of additional user context
+                      data.
+                    type: boolean
+                  enableTokenRevocation:
+                    description: Enables or disables token revocation.
+                    type: boolean
+                  explicitAuthFlows:
+                    description: List of authentication flows (ADMIN_NO_SRP_AUTH,
+                      CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH,
+                      ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH,
+                      ALLOW_REFRESH_TOKEN_AUTH).
+                    items:
+                      type: string
+                    type: array
+                  generateSecret:
+                    description: Should an application secret be generated.
+                    type: boolean
                   id:
                     description: ID of the user pool client.
                     type: string
+                  idTokenValidity:
+                    description: Time limit, between 5 minutes and 1 day, after which
+                      the ID token is no longer valid and cannot be used. This value
+                      will be overridden if you have entered a value in token_validity_units.
+                    type: number
+                  logoutUrls:
+                    description: List of allowed logout URLs for the identity providers.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: Name of the application client.
+                    type: string
+                  preventUserExistenceErrors:
+                    description: Choose which errors and responses are returned by
+                      Cognito APIs during authentication, account confirmation, and
+                      password recovery when the user does not exist in the user pool.
+                      When set to ENABLED and the user does not exist, authentication
+                      returns an error indicating either the username or password
+                      was incorrect, and account confirmation and password recovery
+                      return a response indicating a code was sent to a simulated
+                      destination. When set to LEGACY, those APIs will return a UserNotFoundException
+                      exception if the user does not exist in the user pool.
+                    type: string
+                  readAttributes:
+                    description: List of user pool attributes the application client
+                      can read from.
+                    items:
+                      type: string
+                    type: array
+                  refreshTokenValidity:
+                    description: Time limit in days refresh tokens are valid for.
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  supportedIdentityProviders:
+                    description: List of provider names for the identity providers
+                      that are supported on this client. Uses the provider_name attribute
+                      of aws_cognito_identity_provider resource(s), or the equivalent
+                      string(s).
+                    items:
+                      type: string
+                    type: array
+                  tokenValidityUnits:
+                    description: Configuration block for units in which the validity
+                      times are represented in. Detailed below.
+                    items:
+                      properties:
+                        accessToken:
+                          description: Time unit in for the value in access_token_validity,
+                            defaults to hours.
+                          type: string
+                        idToken:
+                          description: Time unit in for the value in id_token_validity,
+                            defaults to hours.
+                          type: string
+                        refreshToken:
+                          description: Time unit in for the value in refresh_token_validity,
+                            defaults to days.
+                          type: string
+                      type: object
+                    type: array
+                  userPoolId:
+                    description: User pool the client belongs to.
+                    type: string
+                  writeAttributes:
+                    description: List of user pool attributes the application client
+                      can write to.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -672,9 +839,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

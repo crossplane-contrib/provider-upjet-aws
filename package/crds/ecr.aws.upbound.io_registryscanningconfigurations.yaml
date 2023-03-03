@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: registryscanningconfigurations.ecr.aws.upbound.io
 spec:
@@ -105,8 +105,16 @@ spec:
                     type: string
                 required:
                 - region
-                - scanType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -278,6 +286,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: scanType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scanType)
           status:
             description: RegistryScanningConfigurationStatus defines the observed
               state of RegistryScanningConfiguration.
@@ -286,9 +297,41 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   registryId:
                     description: The registry ID the scanning configuration applies
                       to.
+                    type: string
+                  rule:
+                    description: One or multiple blocks specifying scanning rules
+                      to determine which repository filters are used and at what frequency
+                      scanning will occur. See below for schema.
+                    items:
+                      properties:
+                        repositoryFilter:
+                          description: One or more repository filter blocks, containing
+                            a filter  and a filter_type .
+                          items:
+                            properties:
+                              filter:
+                                type: string
+                              filterType:
+                                type: string
+                            type: object
+                          type: array
+                        scanFrequency:
+                          description: The frequency that scans are performed at for
+                            a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN,
+                            or MANUAL.
+                          type: string
+                      type: object
+                    type: array
+                  scanType:
+                    description: the scanning type to set for the registry. Can be
+                      either ENHANCED or BASIC.
                     type: string
                 type: object
               conditions:
@@ -332,9 +375,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

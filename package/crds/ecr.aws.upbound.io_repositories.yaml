@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: repositories.ecr.aws.upbound.io
 spec:
@@ -191,6 +191,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -370,7 +379,48 @@ spec:
                   arn:
                     description: Full ARN of the repository.
                     type: string
+                  encryptionConfiguration:
+                    description: Encryption configuration for the repository. See
+                      below for schema.
+                    items:
+                      properties:
+                        encryptionType:
+                          description: The encryption type to use for the repository.
+                            Valid values are AES256 or KMS. Defaults to AES256.
+                          type: string
+                        kmsKey:
+                          description: The ARN of the KMS key to use when encryption_type
+                            is KMS. If not specified, uses the default AWS managed
+                            key for ECR.
+                          type: string
+                      type: object
+                    type: array
+                  forceDelete:
+                    description: If true, will delete the repository even if it contains
+                      images. Defaults to false.
+                    type: boolean
                   id:
+                    type: string
+                  imageScanningConfiguration:
+                    description: Configuration block that defines image scanning configuration
+                      for the repository. By default, image scanning must be manually
+                      triggered. See the ECR User Guide for more information about
+                      image scanning.
+                    items:
+                      properties:
+                        scanOnPush:
+                          description: Indicates whether images are scanned after
+                            being pushed to the repository (true) or not scanned (false).
+                          type: boolean
+                      type: object
+                    type: array
+                  imageTagMutability:
+                    description: 'The tag mutability setting for the repository. Must
+                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   registryId:
                     description: The registry ID where the repository was created.
@@ -378,6 +428,11 @@ spec:
                   repositoryUrl:
                     description: The URL of the repository (in the form aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName).
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -427,9 +482,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

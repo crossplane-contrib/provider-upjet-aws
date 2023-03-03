@@ -15,13 +15,23 @@ import (
 
 type FindingAggregatorObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Indicates whether to aggregate findings from all of the available Regions or from a specified list. The options are ALL_REGIONS, ALL_REGIONS_EXCEPT_SPECIFIED or SPECIFIED_REGIONS. When ALL_REGIONS or ALL_REGIONS_EXCEPT_SPECIFIED are used, Security Hub will automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.
+	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// List of regions to include or exclude
+	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
 }
 
 type FindingAggregatorParameters struct {
 
 	// Indicates whether to aggregate findings from all of the available Regions or from a specified list. The options are ALL_REGIONS, ALL_REGIONS_EXCEPT_SPECIFIED or SPECIFIED_REGIONS. When ALL_REGIONS or ALL_REGIONS_EXCEPT_SPECIFIED are used, Security Hub will automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.
-	// +kubebuilder:validation:Required
-	LinkingMode *string `json:"linkingMode" tf:"linking_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +67,9 @@ type FindingAggregatorStatus struct {
 type FindingAggregator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FindingAggregatorSpec   `json:"spec"`
-	Status            FindingAggregatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.linkingMode)",message="linkingMode is a required parameter"
+	Spec   FindingAggregatorSpec   `json:"spec"`
+	Status FindingAggregatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

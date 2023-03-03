@@ -18,8 +18,33 @@ type RuleObservation struct {
 	// The Amazon Resource Name (ARN) of the rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The event bus to associate with this rule. If you omit this, the default event bus is used.
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
+	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details.
+	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
 	// The name of the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether the rule should be enabled (defaults to true).
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: autoscalingconfigurationversions.apprunner.aws.upbound.io
 spec:
@@ -91,9 +91,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - autoScalingConfigurationName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -265,6 +273,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: autoScalingConfigurationName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoScalingConfigurationName)
           status:
             description: AutoScalingConfigurationVersionStatus defines the observed
               state of AutoScalingConfigurationVersion.
@@ -273,6 +284,9 @@ spec:
                 properties:
                   arn:
                     description: ARN of this auto scaling configuration version.
+                    type: string
+                  autoScalingConfigurationName:
+                    description: Name of the auto scaling configuration.
                     type: string
                   autoScalingConfigurationRevision:
                     description: The revision of this auto scaling configuration.
@@ -284,11 +298,33 @@ spec:
                       auto_scaling_configuration_revision among all configurations
                       that share the same auto_scaling_configuration_name.
                     type: boolean
+                  maxConcurrency:
+                    description: Maximal number of concurrent requests that you want
+                      an instance to process. When the number of concurrent requests
+                      goes over this limit, App Runner scales up your service.
+                    type: number
+                  maxSize:
+                    description: Maximal number of instances that App Runner provisions
+                      for your service.
+                    type: number
+                  minSize:
+                    description: Minimal number of instances that App Runner provisions
+                      for your service.
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   status:
                     description: Current state of the auto scaling configuration.
                       An INACTIVE configuration revision has been deleted and can't
                       be used. It is permanently removed some time after deletion.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -337,9 +373,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

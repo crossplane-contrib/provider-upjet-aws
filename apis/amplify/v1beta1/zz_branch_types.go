@@ -15,22 +15,74 @@ import (
 
 type BranchObservation struct {
 
+	// Unique ID for an Amplify app.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
 	// ARN for the branch.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A list of custom resources that are linked to this branch.
 	AssociatedResources []*string `json:"associatedResources,omitempty" tf:"associated_resources,omitempty"`
 
+	// ARN for a backend environment that is part of an Amplify app.
+	BackendEnvironmentArn *string `json:"backendEnvironmentArn,omitempty" tf:"backend_environment_arn,omitempty"`
+
+	// Basic authorization credentials for the branch.
+	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+
 	// Custom domains for the branch.
 	CustomDomains []*string `json:"customDomains,omitempty" tf:"custom_domains,omitempty"`
+
+	// Description for the branch.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Destination branch if the branch is a pull request branch.
 	DestinationBranch *string `json:"destinationBranch,omitempty" tf:"destination_branch,omitempty"`
 
+	// Display name for a branch. This is used as the default domain prefix.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Enables auto building for the branch.
+	EnableAutoBuild *bool `json:"enableAutoBuild,omitempty" tf:"enable_auto_build,omitempty"`
+
+	// Enables basic authorization for the branch.
+	EnableBasicAuth *bool `json:"enableBasicAuth,omitempty" tf:"enable_basic_auth,omitempty"`
+
+	// Enables notifications for the branch.
+	EnableNotification *bool `json:"enableNotification,omitempty" tf:"enable_notification,omitempty"`
+
+	// Enables performance mode for the branch.
+	EnablePerformanceMode *bool `json:"enablePerformanceMode,omitempty" tf:"enable_performance_mode,omitempty"`
+
+	// Enables pull request previews for this branch.
+	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
+
+	// Environment variables for the branch.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
+	// Framework for the branch.
+	Framework *string `json:"framework,omitempty" tf:"framework,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amplify environment name for the pull request.
+	PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty" tf:"pull_request_environment_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Source branch if the branch is a pull request branch.
 	SourceBranch *string `json:"sourceBranch,omitempty" tf:"source_branch,omitempty"`
+
+	// Describes the current stage for the branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// Content Time To Live (TTL) for the website in seconds.
+	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

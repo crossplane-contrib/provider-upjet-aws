@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: trackerassociations.location.aws.upbound.io
 spec:
@@ -228,6 +228,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -404,7 +413,20 @@ spec:
             properties:
               atProvider:
                 properties:
+                  consumerArn:
+                    description: The Amazon Resource Name (ARN) for the geofence collection
+                      to be associated to tracker resource. Used when you need to
+                      specify a resource across all AWS.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  trackerName:
+                    description: The name of the tracker resource to be associated
+                      with a geofence collection.
                     type: string
                 type: object
               conditions:
@@ -448,9 +470,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

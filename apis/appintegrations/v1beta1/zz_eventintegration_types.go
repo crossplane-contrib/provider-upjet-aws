@@ -14,6 +14,9 @@ import (
 )
 
 type EventFilterObservation struct {
+
+	// Source of the events.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type EventFilterParameters struct {
@@ -28,8 +31,24 @@ type EventIntegrationObservation struct {
 	// ARN of the Event Integration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the Event Integration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Block that defines the configuration information for the event filter. The Event Filter block is documented below.
+	EventFilter []EventFilterObservation `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
+
+	// EventBridge bus.
+	EventbridgeBus *string `json:"eventbridgeBus,omitempty" tf:"eventbridge_bus,omitempty"`
+
 	// Identifier of the Event Integration which is the name of the Event Integration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -42,12 +61,12 @@ type EventIntegrationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Block that defines the configuration information for the event filter. The Event Filter block is documented below.
-	// +kubebuilder:validation:Required
-	EventFilter []EventFilterParameters `json:"eventFilter" tf:"event_filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventFilter []EventFilterParameters `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 
 	// EventBridge bus.
-	// +kubebuilder:validation:Required
-	EventbridgeBus *string `json:"eventbridgeBus" tf:"eventbridge_bus,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventbridgeBus *string `json:"eventbridgeBus,omitempty" tf:"eventbridge_bus,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +102,10 @@ type EventIntegrationStatus struct {
 type EventIntegration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventIntegrationSpec   `json:"spec"`
-	Status            EventIntegrationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventFilter)",message="eventFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventbridgeBus)",message="eventbridgeBus is a required parameter"
+	Spec   EventIntegrationSpec   `json:"spec"`
+	Status EventIntegrationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

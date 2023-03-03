@@ -18,7 +18,20 @@ type NetworkInterfaceAttachmentObservation struct {
 	// The ENI Attachment ID.
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
+	// Network interface index (int).
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Instance ID to attach.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// ENI ID to attach.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The status of the Network Interface Attachment.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -27,8 +40,8 @@ type NetworkInterfaceAttachmentObservation struct {
 type NetworkInterfaceAttachmentParameters struct {
 
 	// Network interface index (int).
-	// +kubebuilder:validation:Required
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Instance ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
@@ -88,8 +101,9 @@ type NetworkInterfaceAttachmentStatus struct {
 type NetworkInterfaceAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceAttachmentSpec   `json:"spec"`
-	Status            NetworkInterfaceAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceIndex)",message="deviceIndex is a required parameter"
+	Spec   NetworkInterfaceAttachmentSpec   `json:"spec"`
+	Status NetworkInterfaceAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

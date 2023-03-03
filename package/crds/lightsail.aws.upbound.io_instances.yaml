@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: instances.lightsail.aws.upbound.io
 spec:
@@ -125,11 +125,17 @@ spec:
                       user data
                     type: string
                 required:
-                - availabilityZone
-                - blueprintId
-                - bundleId
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -301,13 +307,55 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: availabilityZone is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)
+            - message: blueprintId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.blueprintId)
+            - message: bundleId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bundleId)
           status:
             description: InstanceStatus defines the observed state of Instance.
             properties:
               atProvider:
                 properties:
+                  addOn:
+                    description: The add on configuration for the instance. Detailed
+                      below.
+                    items:
+                      properties:
+                        snapshotTime:
+                          description: The daily time when an automatic snapshot will
+                            be created. Must be in HH:00 format, and in an hourly
+                            increment and specified in Coordinated Universal Time
+                            (UTC). The snapshot will be automatically created between
+                            the time specified and up to 45 minutes after.
+                          type: string
+                        status:
+                          description: 'The status of the add on. Valid Values: Enabled,
+                            Disabled.'
+                          type: string
+                        type:
+                          description: The add-on type. There is currently only one
+                            valid type AutoSnapshot.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: The ARN of the Lightsail instance (matches id).
+                    type: string
+                  availabilityZone:
+                    description: The Availability Zone in which to create your instance
+                      (see list below)
+                    type: string
+                  blueprintId:
+                    description: 'The ID for a virtual private server image. A list
+                      of available blueprint IDs can be obtained using the AWS CLI
+                      command: aws lightsail get-blueprints'
+                    type: string
+                  bundleId:
+                    description: The bundle of specification information (see list
+                      below)
                     type: string
                   cpuCount:
                     description: The number of vCPUs the instance has.
@@ -317,6 +365,10 @@ spec:
                     type: string
                   id:
                     description: The ARN of the Lightsail instance (matches arn).
+                    type: string
+                  ipAddressType:
+                    description: 'The IP address type of the Lightsail Instance. Valid
+                      Values: dualstack | ipv4.'
                     type: string
                   ipv6Address:
                     description: (Deprecated) The first IPv6 address of the Lightsail
@@ -331,6 +383,10 @@ spec:
                     description: A Boolean value indicating whether this instance
                       has a static IP assigned to it.
                     type: boolean
+                  keyPairName:
+                    description: The name of your key pair. Created in the Lightsail
+                      console (cannot use aws_key_pair at this time)
+                    type: string
                   privateIpAddress:
                     description: The private IP address of the instance.
                     type: string
@@ -340,6 +396,15 @@ spec:
                   ramSize:
                     description: The amount of RAM in GB on the instance (e.g., 1.0).
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -347,6 +412,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  userData:
+                    description: launch script to configure server with additional
+                      user data
+                    type: string
                   username:
                     description: The user name for connecting to the instance (e.g.,
                       ec2-user).
@@ -393,9 +462,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

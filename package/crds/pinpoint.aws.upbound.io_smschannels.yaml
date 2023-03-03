@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: smschannels.pinpoint.aws.upbound.io
 spec:
@@ -157,6 +157,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,11 +342,28 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applicationId:
+                    description: The application ID.
+                    type: string
+                  enabled:
+                    description: Whether the channel is enabled or disabled. Defaults
+                      to true.
+                    type: boolean
                   id:
                     type: string
                   promotionalMessagesPerSecond:
                     description: Promotional messages per second that can be sent.
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  senderId:
+                    description: Sender identifier of your messages.
+                    type: string
+                  shortCode:
+                    description: The Short Code registered with the phone provider.
+                    type: string
                   transactionalMessagesPerSecond:
                     description: Transactional messages per second that can be sent.
                     type: number
@@ -383,9 +409,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

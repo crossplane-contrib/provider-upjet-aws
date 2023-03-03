@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: globalsettings.backup.aws.upbound.io
 spec:
@@ -75,9 +75,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - globalSettings
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -249,13 +257,26 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: globalSettings is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.globalSettings)
           status:
             description: GlobalSettingsStatus defines the observed state of GlobalSettings.
             properties:
               atProvider:
                 properties:
+                  globalSettings:
+                    additionalProperties:
+                      type: string
+                    description: A list of resources along with the opt-in preferences
+                      for the account.
+                    type: object
                   id:
                     description: The AWS Account ID.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -299,9 +320,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

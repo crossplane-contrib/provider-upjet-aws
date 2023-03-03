@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: certificatevalidations.acm.aws.upbound.io
 spec:
@@ -156,6 +156,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,9 +342,25 @@ spec:
             properties:
               atProvider:
                 properties:
+                  certificateArn:
+                    description: ARN of the certificate that is being validated.
+                    type: string
                   id:
                     description: Time at which the certificate was issued
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  validationRecordFqdns:
+                    description: List of FQDNs that implement the validation. Only
+                      valid for DNS validation method ACM certificates. If this is
+                      set, the resource can implement additional sanity checks and
+                      has an explicit dependency on the resource that is implementing
+                      the validation
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -378,9 +403,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

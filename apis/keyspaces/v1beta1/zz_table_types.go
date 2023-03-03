@@ -14,6 +14,15 @@ import (
 )
 
 type CapacitySpecificationObservation struct {
+
+	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
+	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
+
+	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
+	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
+
+	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
+	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type CapacitySpecificationParameters struct {
@@ -32,6 +41,12 @@ type CapacitySpecificationParameters struct {
 }
 
 type ClusteringKeyObservation struct {
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The order modifier. Valid values: ASC, DESC.
+	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
 }
 
 type ClusteringKeyParameters struct {
@@ -46,6 +61,12 @@ type ClusteringKeyParameters struct {
 }
 
 type ColumnObservation struct {
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ColumnParameters struct {
@@ -60,6 +81,9 @@ type ColumnParameters struct {
 }
 
 type CommentObservation struct {
+
+	// A description of the table.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
 
 type CommentParameters struct {
@@ -70,6 +94,12 @@ type CommentParameters struct {
 }
 
 type EncryptionSpecificationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the customer managed KMS key.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionSpecificationParameters struct {
@@ -84,6 +114,9 @@ type EncryptionSpecificationParameters struct {
 }
 
 type PartitionKeyObservation struct {
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PartitionKeyParameters struct {
@@ -94,6 +127,9 @@ type PartitionKeyParameters struct {
 }
 
 type PointInTimeRecoveryObservation struct {
+
+	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type PointInTimeRecoveryParameters struct {
@@ -104,6 +140,18 @@ type PointInTimeRecoveryParameters struct {
 }
 
 type SchemaDefinitionObservation struct {
+
+	// The columns that are part of the clustering key of the table.
+	ClusteringKey []ClusteringKeyObservation `json:"clusteringKey,omitempty" tf:"clustering_key,omitempty"`
+
+	// The regular columns of the table.
+	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
+
+	// The columns that are part of the partition key of the table .
+	PartitionKey []PartitionKeyObservation `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition.
+	StaticColumn []StaticColumnObservation `json:"staticColumn,omitempty" tf:"static_column,omitempty"`
 }
 
 type SchemaDefinitionParameters struct {
@@ -126,6 +174,9 @@ type SchemaDefinitionParameters struct {
 }
 
 type StaticColumnObservation struct {
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type StaticColumnParameters struct {
@@ -136,6 +187,9 @@ type StaticColumnParameters struct {
 }
 
 type TTLObservation struct {
+
+	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TTLParameters struct {
@@ -150,7 +204,41 @@ type TableObservation struct {
 	// The ARN of the table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies the read/write throughput capacity mode for the table.
+	CapacitySpecification []CapacitySpecificationObservation `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
+
+	// A description of the table.
+	Comment []CommentObservation `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
+	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
+
+	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
+	EncryptionSpecification []EncryptionSpecificationObservation `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the keyspace that the table is going to be created in.
+	KeyspaceName *string `json:"keyspaceName,omitempty" tf:"keyspace_name,omitempty"`
+
+	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
+	PointInTimeRecovery []PointInTimeRecoveryObservation `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Describes the schema of the table.
+	SchemaDefinition []SchemaDefinitionObservation `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
+
+	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
+	TTL []TTLObservation `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// The name of the table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -197,16 +285,16 @@ type TableParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Describes the schema of the table.
-	// +kubebuilder:validation:Required
-	SchemaDefinition []SchemaDefinitionParameters `json:"schemaDefinition" tf:"schema_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaDefinition []SchemaDefinitionParameters `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
 	// Enables Time to Live custom settings for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// The name of the table.
-	// +kubebuilder:validation:Required
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -237,8 +325,10 @@ type TableStatus struct {
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TableSpec   `json:"spec"`
-	Status            TableStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaDefinition)",message="schemaDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tableName)",message="tableName is a required parameter"
+	Spec   TableSpec   `json:"spec"`
+	Status TableStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

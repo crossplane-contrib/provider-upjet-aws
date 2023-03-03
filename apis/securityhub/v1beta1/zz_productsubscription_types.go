@@ -19,13 +19,20 @@ type ProductSubscriptionObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the product that generates findings that you want to import into Security Hub - see below.
+	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ProductSubscriptionParameters struct {
 
 	// The ARN of the product that generates findings that you want to import into Security Hub - see below.
-	// +kubebuilder:validation:Required
-	ProductArn *string `json:"productArn" tf:"product_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +64,9 @@ type ProductSubscriptionStatus struct {
 type ProductSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductSubscriptionSpec   `json:"spec"`
-	Status            ProductSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.productArn)",message="productArn is a required parameter"
+	Spec   ProductSubscriptionSpec   `json:"spec"`
+	Status ProductSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

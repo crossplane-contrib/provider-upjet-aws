@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: conformancepacks.configservice.aws.upbound.io
 spec:
@@ -109,6 +109,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -288,7 +297,46 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the conformance pack.
                     type: string
+                  deliveryS3Bucket:
+                    description: Amazon S3 bucket where AWS Config stores conformance
+                      pack templates. Maximum length of 63.
+                    type: string
+                  deliveryS3KeyPrefix:
+                    description: The prefix for the Amazon S3 bucket. Maximum length
+                      of 1024.
+                    type: string
                   id:
+                    type: string
+                  inputParameter:
+                    description: Set of configuration blocks describing input parameters
+                      passed to the conformance pack template. Documented below. When
+                      configured, the parameters must also be included in the template_body
+                      or in the template stored in Amazon S3 if using template_s3_uri.
+                    items:
+                      properties:
+                        parameterName:
+                          description: The input key.
+                          type: string
+                        parameterValue:
+                          description: The input value.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  templateBody:
+                    description: A string containing full conformance pack template
+                      body. Maximum length of 51200. Drift detection is not possible
+                      with this argument.
+                    type: string
+                  templateS3Uri:
+                    description: Location of file, e.g., s3://bucketname/prefix, containing
+                      the template body. The uri must point to the conformance pack
+                      template that is located in an Amazon S3 bucket in the same
+                      region as the conformance pack. Maximum length of 1024. Drift
+                      detection is not possible with this argument.
                     type: string
                 type: object
               conditions:
@@ -332,9 +380,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

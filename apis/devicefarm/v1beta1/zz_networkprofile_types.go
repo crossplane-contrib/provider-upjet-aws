@@ -18,10 +18,53 @@ type NetworkProfileObservation struct {
 	// The Amazon Resource Name of this network profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the network profile.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
+	DownlinkBandwidthBits *float64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
+
+	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
+	DownlinkDelayMs *float64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
+
+	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
+	DownlinkJitterMs *float64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
+
+	// Proportion of received packets that fail to arrive from 0 to 100 percent.
+	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name for the network profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the project for the network profile.
+	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of network profile to create. Valid values are listed are PRIVATE and CURATED.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
+	UplinkBandwidthBits *float64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
+
+	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
+	UplinkDelayMs *float64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
+
+	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
+	UplinkJitterMs *float64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
+
+	// Proportion of received packets that fail to arrive from 0 to 100 percent.
+	UplinkLossPercent *float64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
 }
 
 type NetworkProfileParameters struct {
@@ -47,8 +90,8 @@ type NetworkProfileParameters struct {
 	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
 
 	// The name for the network profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the project for the network profile.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
@@ -118,8 +161,9 @@ type NetworkProfileStatus struct {
 type NetworkProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkProfileSpec   `json:"spec"`
-	Status            NetworkProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   NetworkProfileSpec   `json:"spec"`
+	Status NetworkProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

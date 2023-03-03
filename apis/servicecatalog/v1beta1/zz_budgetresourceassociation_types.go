@@ -15,8 +15,18 @@ import (
 
 type BudgetResourceAssociationObservation struct {
 
+	// Budget name.
+	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Resource identifier.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type BudgetResourceAssociationParameters struct {

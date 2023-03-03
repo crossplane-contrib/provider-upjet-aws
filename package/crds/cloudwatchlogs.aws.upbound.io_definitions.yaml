@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: definitions.cloudwatchlogs.aws.upbound.io
 spec:
@@ -81,10 +81,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
-                - queryString
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -256,6 +263,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: queryString is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryString)
           status:
             description: DefinitionStatus defines the observed state of Definition.
             properties:
@@ -263,8 +275,24 @@ spec:
                 properties:
                   id:
                     type: string
+                  logGroupNames:
+                    description: Specific log groups to use with the query.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the query.
+                    type: string
                   queryDefinitionId:
                     description: The query definition ID.
+                    type: string
+                  queryString:
+                    description: The query to save. You can read more about CloudWatch
+                      Logs Query Syntax in the documentation.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -308,9 +336,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

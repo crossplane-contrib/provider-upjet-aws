@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: directories.ds.aws.upbound.io
 spec:
@@ -409,10 +409,17 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
-                - passwordSecretRef
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -584,6 +591,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: passwordSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)
           status:
             description: DirectoryStatus defines the observed state of Directory.
             properties:
@@ -591,6 +603,10 @@ spec:
                 properties:
                   accessUrl:
                     description: The access URL for the directory, such as http://alias.awsapps.com.
+                    type: string
+                  alias:
+                    description: The alias for the directory (must be unique amongst
+                      all aliases in AWS). Required for enable_sso.
                     type: string
                   connectSettings:
                     description: Connector related information about the directory.
@@ -606,20 +622,95 @@ spec:
                           items:
                             type: string
                           type: array
+                        customerDnsIps:
+                          description: The DNS IP addresses of the domain to connect
+                            to.
+                          items:
+                            type: string
+                          type: array
+                        customerUsername:
+                          description: The username corresponding to the password
+                            provided.
+                          type: string
+                        subnetIds:
+                          description: The identifiers of the subnets for the directory
+                            servers (2 subnets in 2 different AZs).
+                          items:
+                            type: string
+                          type: array
+                        vpcId:
+                          description: The identifier of the VPC that the directory
+                            is in.
+                          type: string
                       type: object
                     type: array
+                  description:
+                    description: A textual description for the directory.
+                    type: string
+                  desiredNumberOfDomainControllers:
+                    description: The number of domain controllers desired in the directory.
+                      Minimum value of 2. Scaling of domain controllers is only supported
+                      for MicrosoftAD directories.
+                    type: number
                   dnsIpAddresses:
                     description: A list of IP addresses of the DNS servers for the
                       directory or connector.
                     items:
                       type: string
                     type: array
+                  edition:
+                    description: The MicrosoftAD edition (Standard or Enterprise).
+                      Defaults to Enterprise.
+                    type: string
+                  enableSso:
+                    description: Whether to enable single-sign on for the directory.
+                      Requires alias. Defaults to false.
+                    type: boolean
                   id:
                     description: The directory identifier.
+                    type: string
+                  name:
+                    description: The fully qualified name for the directory, such
+                      as corp.example.com
+                    type: string
+                  passwordSecretRef:
+                    description: The password for the directory administrator or connector
+                      user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   securityGroupId:
                     description: The ID of the security group created by the directory.
                     type: string
+                  shortName:
+                    description: The short name of the directory, such as CORP.
+                    type: string
+                  size:
+                    description: (For SimpleAD and ADConnector types) The size of
+                      the directory (Small or Large are accepted values). Large by
+                      default.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -627,6 +718,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  type:
+                    description: The directory type (SimpleAD, ADConnector or MicrosoftAD
+                      are accepted values). Defaults to SimpleAD.
+                    type: string
                   vpcSettings:
                     description: VPC related information about the directory. Fields
                       documented below.
@@ -636,8 +731,20 @@ spec:
                           items:
                             type: string
                           type: array
+                        subnetIds:
+                          description: The identifiers of the subnets for the directory
+                            servers (2 subnets in 2 different AZs).
+                          items:
+                            type: string
+                          type: array
+                        vpcId:
+                          description: The identifier of the VPC that the directory
+                            is in.
+                          type: string
                       type: object
                     type: array
+                required:
+                - passwordSecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -680,9 +787,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

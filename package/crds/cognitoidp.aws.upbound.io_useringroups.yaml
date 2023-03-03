@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: useringroups.cognitoidp.aws.upbound.io
 spec:
@@ -304,6 +304,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -480,7 +489,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  groupName:
+                    description: The name of the group to which the user is to be
+                      added.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  userPoolId:
+                    description: The user pool ID of the user and group.
+                    type: string
+                  username:
+                    description: The username of the user to be added to the group.
                     type: string
                 type: object
               conditions:
@@ -524,9 +547,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

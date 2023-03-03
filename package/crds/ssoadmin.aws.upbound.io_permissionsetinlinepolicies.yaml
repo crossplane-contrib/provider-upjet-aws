@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: permissionsetinlinepolicies.ssoadmin.aws.upbound.io
 spec:
@@ -232,9 +232,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - inlinePolicy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -406,6 +414,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: inlinePolicy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inlinePolicy)
           status:
             description: PermissionSetInlinePolicyStatus defines the observed state
               of PermissionSetInlinePolicy.
@@ -415,6 +426,21 @@ spec:
                   id:
                     description: The Amazon Resource Names (ARNs) of the Permission
                       Set and SSO Instance, separated by a comma (,).
+                    type: string
+                  inlinePolicy:
+                    description: The IAM inline policy to attach to a Permission Set.
+                    type: string
+                  instanceArn:
+                    description: The Amazon Resource Name (ARN) of the SSO Instance
+                      under which the operation will be executed.
+                    type: string
+                  permissionSetArn:
+                    description: The Amazon Resource Name (ARN) of the Permission
+                      Set.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -458,9 +484,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

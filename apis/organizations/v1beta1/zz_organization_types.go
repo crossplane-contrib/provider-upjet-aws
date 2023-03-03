@@ -63,6 +63,15 @@ type OrganizationObservation struct {
 	// ARN of the account
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
+	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
+
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
+
+	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
+
 	// Identifier of the account
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -77,6 +86,10 @@ type OrganizationObservation struct {
 
 	// List of organization accounts excluding the master account. For a list including the master account, see the accounts attribute. All elements have these attributes:
 	NonMasterAccounts []NonMasterAccountsObservation `json:"nonMasterAccounts,omitempty" tf:"non_master_accounts,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// List of organization roots. All elements have these attributes:
 	Roots []RootsObservation `json:"roots,omitempty" tf:"roots,omitempty"`

@@ -27,8 +27,18 @@ type ScheduleGroupObservation struct {
 	// Time at which the schedule group was last modified.
 	LastModificationDate *string `json:"lastModificationDate,omitempty" tf:"last_modification_date,omitempty"`
 
+	// Name of the schedule group. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// State of the schedule group. Can be ACTIVE or DELETING.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

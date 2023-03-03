@@ -14,6 +14,12 @@ import (
 )
 
 type CreateDatabaseDefaultPermissionsObservation struct {
+
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
 type CreateDatabaseDefaultPermissionsParameters struct {
@@ -28,6 +34,12 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 }
 
 type CreateTableDefaultPermissionsObservation struct {
+
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
 type CreateTableDefaultPermissionsParameters struct {
@@ -42,7 +54,27 @@ type CreateTableDefaultPermissionsParameters struct {
 }
 
 type DataLakeSettingsObservation struct {
+
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// –  Identifier for the Data Catalog. By default, the account ID.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Up to three configuration blocks of principal permissions for default create database permissions. Detailed below.
+	CreateDatabaseDefaultPermissions []CreateDatabaseDefaultPermissionsObservation `json:"createDatabaseDefaultPermissions,omitempty" tf:"create_database_default_permissions,omitempty"`
+
+	// Up to three configuration blocks of principal permissions for default create table permissions. Detailed below.
+	CreateTableDefaultPermissions []CreateTableDefaultPermissionsObservation `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
+	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
 
 type DataLakeSettingsParameters struct {

@@ -14,6 +14,18 @@ import (
 )
 
 type BlockDeviceMappingObservation struct {
+
+	// Name of the device. For example, /dev/sda or /dev/xvdb.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Configuration block with Elastic Block Storage (EBS) block device mapping settings. Detailed below.
+	EBS []EBSObservation `json:"ebs,omitempty" tf:"ebs,omitempty"`
+
+	// Set to true to remove a mapping from the parent image.
+	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	// Virtual device name. For example, ephemeral0. Instance store volumes are numbered starting from 0.
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type BlockDeviceMappingParameters struct {
@@ -36,6 +48,12 @@ type BlockDeviceMappingParameters struct {
 }
 
 type ContainerRecipeComponentObservation struct {
+
+	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
+
+	// Configuration block(s) for parameters to configure the component. Detailed below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 }
 
 type ContainerRecipeComponentParameters struct {
@@ -64,33 +82,76 @@ type ContainerRecipeObservation struct {
 	// Amazon Resource Name (ARN) of the container recipe.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Ordered configuration block(s) with components for the container recipe. Detailed below.
+	Component []ContainerRecipeComponentObservation `json:"component,omitempty" tf:"component,omitempty"`
+
+	// The type of the container to create. Valid values: DOCKER.
+	ContainerType *string `json:"containerType,omitempty" tf:"container_type,omitempty"`
+
 	// Date the container recipe was created.
 	DateCreated *string `json:"dateCreated,omitempty" tf:"date_created,omitempty"`
+
+	// The description of the container recipe.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Dockerfile template used to build the image as an inline data blob.
+	DockerfileTemplateData *string `json:"dockerfileTemplateData,omitempty" tf:"dockerfile_template_data,omitempty"`
+
+	// The Amazon S3 URI for the Dockerfile that will be used to build the container image.
+	DockerfileTemplateURI *string `json:"dockerfileTemplateUri,omitempty" tf:"dockerfile_template_uri,omitempty"`
 
 	// A flag that indicates if the target container is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Configuration block used to configure an instance for building and testing container images. Detailed below.
+	InstanceConfiguration []InstanceConfigurationObservation `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// The KMS key used to encrypt the container image.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The name of the container recipe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Owner of the container recipe.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The base image for the container recipe.
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Platform of the container recipe.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The destination repository for the container image. Detailed below.
+	TargetRepository []TargetRepositoryObservation `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
+
+	// Version of the container recipe.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type ContainerRecipeParameters struct {
 
 	// Ordered configuration block(s) with components for the container recipe. Detailed below.
-	// +kubebuilder:validation:Required
-	Component []ContainerRecipeComponentParameters `json:"component" tf:"component,omitempty"`
+	// +kubebuilder:validation:Optional
+	Component []ContainerRecipeComponentParameters `json:"component,omitempty" tf:"component,omitempty"`
 
 	// The type of the container to create. Valid values: DOCKER.
-	// +kubebuilder:validation:Required
-	ContainerType *string `json:"containerType" tf:"container_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContainerType *string `json:"containerType,omitempty" tf:"container_type,omitempty"`
 
 	// The description of the container recipe.
 	// +kubebuilder:validation:Optional
@@ -122,12 +183,12 @@ type ContainerRecipeParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the container recipe.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The base image for the container recipe.
-	// +kubebuilder:validation:Required
-	ParentImage *string `json:"parentImage" tf:"parent_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -139,12 +200,12 @@ type ContainerRecipeParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The destination repository for the container image. Detailed below.
-	// +kubebuilder:validation:Required
-	TargetRepository []TargetRepositoryParameters `json:"targetRepository" tf:"target_repository,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetRepository []TargetRepositoryParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
 
 	// Version of the container recipe.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// The working directory to be used during build and test workflows.
 	// +kubebuilder:validation:Optional
@@ -152,6 +213,30 @@ type ContainerRecipeParameters struct {
 }
 
 type EBSObservation struct {
+
+	// Whether to delete the volume on termination. Defaults to unset, which is the value inherited from the parent image.
+	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Whether to encrypt the volume. Defaults to unset, which is the value inherited from the parent image.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Identifier of the EC2 Volume Snapshot.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of the volume, in GiB.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of the volume. For example, gp2 or io2.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type EBSParameters struct {
@@ -190,6 +275,12 @@ type EBSParameters struct {
 }
 
 type InstanceConfigurationObservation struct {
+
+	// Configuration block(s) with block device mappings for the container recipe. Detailed below.
+	BlockDeviceMapping []BlockDeviceMappingObservation `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
+
+	// The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 }
 
 type InstanceConfigurationParameters struct {
@@ -204,6 +295,12 @@ type InstanceConfigurationParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// The name of the component parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value for the named component parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -218,6 +315,12 @@ type ParameterParameters struct {
 }
 
 type TargetRepositoryObservation struct {
+
+	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// The service in which this image is registered. Valid values: ECR.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type TargetRepositoryParameters struct {
@@ -264,8 +367,14 @@ type ContainerRecipeStatus struct {
 type ContainerRecipe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerRecipeSpec   `json:"spec"`
-	Status            ContainerRecipeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.component)",message="component is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerType)",message="containerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentImage)",message="parentImage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRepository)",message="targetRepository is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   ContainerRecipeSpec   `json:"spec"`
+	Status ContainerRecipeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

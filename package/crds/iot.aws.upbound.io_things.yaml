@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: things.iot.aws.upbound.io
 spec:
@@ -79,6 +79,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -258,10 +267,22 @@ spec:
                   arn:
                     description: The ARN of the thing.
                     type: string
+                  attributes:
+                    additionalProperties:
+                      type: string
+                    description: Map of attributes of the thing.
+                    type: object
                   defaultClientId:
                     description: The default client ID.
                     type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  thingTypeName:
+                    description: The thing type name.
                     type: string
                   version:
                     description: The current version of the thing record in the registry.
@@ -308,9 +329,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

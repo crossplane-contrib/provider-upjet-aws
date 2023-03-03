@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: licenseassociations.grafana.aws.upbound.io
 spec:
@@ -149,9 +149,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - licenseType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -323,6 +331,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: licenseType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.licenseType)
           status:
             description: LicenseAssociationStatus defines the observed state of LicenseAssociation.
             properties:
@@ -337,6 +348,17 @@ spec:
                   licenseExpiration:
                     description: If license_type is set to ENTERPRISE, this is the
                       expiration date of the enterprise license.
+                    type: string
+                  licenseType:
+                    description: The type of license for the workspace license association.
+                      Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  workspaceId:
+                    description: The workspace id.
                     type: string
                 type: object
               conditions:
@@ -380,9 +402,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

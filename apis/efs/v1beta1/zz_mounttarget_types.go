@@ -27,8 +27,15 @@ type MountTargetObservation struct {
 	// Amazon Resource Name of the file system.
 	FileSystemArn *string `json:"fileSystemArn,omitempty" tf:"file_system_arn,omitempty"`
 
+	// The ID of the file system for which the mount target is intended.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
 	// The ID of the mount target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The address (within the address range of the specified subnet) at
+	// which the file system may be mounted via the mount target.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The DNS name for the given subnet/AZ per documented convention.
 	MountTargetDNSName *string `json:"mountTargetDnsName,omitempty" tf:"mount_target_dns_name,omitempty"`
@@ -38,6 +45,17 @@ type MountTargetObservation struct {
 
 	// AWS account ID that owns the resource.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of up to 5 VPC security group IDs (that must
+	// be for the same VPC as subnet specified) in effect for the mount target.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The ID of the subnet to add the mount target in.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type MountTargetParameters struct {

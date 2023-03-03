@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: gamesessionqueues.gamelift.aws.upbound.io
 spec:
@@ -182,6 +182,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -361,8 +370,44 @@ spec:
                   arn:
                     description: Game Session Queue ARN.
                     type: string
+                  destinations:
+                    description: List of fleet/alias ARNs used by session queue for
+                      placing game sessions.
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
+                  notificationTarget:
+                    description: An SNS topic ARN that is set up to receive game session
+                      placement notifications.
+                    type: string
+                  playerLatencyPolicy:
+                    description: One or more policies used to choose fleet based on
+                      player latency. See below.
+                    items:
+                      properties:
+                        maximumIndividualPlayerLatencyMilliseconds:
+                          description: Maximum latency value that is allowed for any
+                            player.
+                          type: number
+                        policyDurationSeconds:
+                          description: Length of time that the policy is enforced
+                            while placing a new game session. Absence of value for
+                            this attribute means that the policy is enforced until
+                            the queue times out.
+                          type: number
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -370,6 +415,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  timeoutInSeconds:
+                    description: Maximum time a game session request can remain in
+                      the queue.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -412,9 +461,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

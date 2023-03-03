@@ -14,18 +14,41 @@ import (
 )
 
 type SigningProfilePermissionObservation struct {
+
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The AWS principal to be granted a cross-account permission.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Name of the signing profile to add the cross-account permissions.
+	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
+
+	// The signing profile version that a permission applies to.
+	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A unique statement identifier.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// A statement identifier prefix. Conflicts with statement_id.
+	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
 
 type SigningProfilePermissionParameters struct {
 
 	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The AWS principal to be granted a cross-account permission.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Name of the signing profile to add the cross-account permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile
@@ -92,8 +115,10 @@ type SigningProfilePermissionStatus struct {
 type SigningProfilePermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningProfilePermissionSpec   `json:"spec"`
-	Status            SigningProfilePermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   SigningProfilePermissionSpec   `json:"spec"`
+	Status SigningProfilePermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

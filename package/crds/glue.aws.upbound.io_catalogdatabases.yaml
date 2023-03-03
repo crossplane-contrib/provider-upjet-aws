@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: catalogdatabases.glue.aws.upbound.io
 spec:
@@ -128,6 +128,15 @@ spec:
                 - catalogId
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -307,9 +316,66 @@ spec:
                   arn:
                     description: ARN of the Glue Catalog Database.
                     type: string
+                  catalogId:
+                    description: ID of the Glue Catalog to create the database in.
+                      If omitted, this defaults to the AWS Account ID.
+                    type: string
+                  createTableDefaultPermission:
+                    description: Creates a set of default permissions on the table
+                      for principals. See create_table_default_permission below.
+                    items:
+                      properties:
+                        permissions:
+                          description: The permissions that are granted to the principal.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: The principal who is granted permissions..
+                            See principal below.
+                          items:
+                            properties:
+                              dataLakePrincipalIdentifier:
+                                description: An identifier for the Lake Formation
+                                  principal.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Description of the database.
+                    type: string
                   id:
                     description: Catalog ID and name of the database
                     type: string
+                  locationUri:
+                    description: Location of the database (for example, an HDFS path).
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: List of key-value pairs that define parameters and
+                      properties of the database.
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  targetDatabase:
+                    description: Configuration block for a target database for resource
+                      linking. See target_database below.
+                    items:
+                      properties:
+                        catalogId:
+                          description: ID of the Data Catalog in which the database
+                            resides.
+                          type: string
+                        databaseName:
+                          description: Name of the catalog database.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -352,9 +418,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

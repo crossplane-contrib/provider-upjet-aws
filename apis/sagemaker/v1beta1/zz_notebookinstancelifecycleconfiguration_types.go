@@ -19,6 +19,16 @@ type NotebookInstanceLifecycleConfigurationObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
+
+	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type NotebookInstanceLifecycleConfigurationParameters struct {

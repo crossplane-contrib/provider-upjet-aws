@@ -18,13 +18,31 @@ type ConfigurationSetObservation struct {
 	// ARN of the Configuration Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+	DeliveryOptions []DeliveryOptionsObservation `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.
-	// +kubebuilder:validation:Optional
 	ReputationOptions []ReputationOptionsObservation `json:"reputationOptions,omitempty" tf:"reputation_options,omitempty"`
 
+	// An object that defines whether or not Amazon SES can send email that you send using the configuration set.
+	SendingOptions []SendingOptionsObservation `json:"sendingOptions,omitempty" tf:"sending_options,omitempty"`
+
+	// An object that contains information about the suppression list preferences for your account.
+	SuppressionOptions []SuppressionOptionsObservation `json:"suppressionOptions,omitempty" tf:"suppression_options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// An object that defines the open and click tracking options for emails that you send using the configuration set.
+	TrackingOptions []TrackingOptionsObservation `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 }
 
 type ConfigurationSetParameters struct {
@@ -60,6 +78,12 @@ type ConfigurationSetParameters struct {
 }
 
 type DeliveryOptionsObservation struct {
+
+	// The name of the dedicated IP pool to associate with the configuration set.
+	SendingPoolName *string `json:"sendingPoolName,omitempty" tf:"sending_pool_name,omitempty"`
+
+	// Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). Valid values: REQUIRE, OPTIONAL.
+	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
 type DeliveryOptionsParameters struct {
@@ -77,6 +101,9 @@ type ReputationOptionsObservation struct {
 
 	// The date and time (in Unix time) when the reputation metrics were last given a fresh start. When your account is given a fresh start, your reputation metrics are calculated starting from the date of the fresh start.
 	LastFreshStart *string `json:"lastFreshStart,omitempty" tf:"last_fresh_start,omitempty"`
+
+	// If true, tracking of reputation metrics is enabled for the configuration set. If false, tracking of reputation metrics is disabled for the configuration set.
+	ReputationMetricsEnabled *bool `json:"reputationMetricsEnabled,omitempty" tf:"reputation_metrics_enabled,omitempty"`
 }
 
 type ReputationOptionsParameters struct {
@@ -87,6 +114,9 @@ type ReputationOptionsParameters struct {
 }
 
 type SendingOptionsObservation struct {
+
+	// If true, email sending is enabled for the configuration set. If false, email sending is disabled for the configuration set.
+	SendingEnabled *bool `json:"sendingEnabled,omitempty" tf:"sending_enabled,omitempty"`
 }
 
 type SendingOptionsParameters struct {
@@ -97,6 +127,9 @@ type SendingOptionsParameters struct {
 }
 
 type SuppressionOptionsObservation struct {
+
+	// A list that contains the reasons that email addresses are automatically added to the suppression list for your account. Valid values: BOUNCE, COMPLAINT.
+	SuppressedReasons []*string `json:"suppressedReasons,omitempty" tf:"suppressed_reasons,omitempty"`
 }
 
 type SuppressionOptionsParameters struct {
@@ -107,6 +140,9 @@ type SuppressionOptionsParameters struct {
 }
 
 type TrackingOptionsObservation struct {
+
+	// The domain to use for tracking open and click events.
+	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
 }
 
 type TrackingOptionsParameters struct {

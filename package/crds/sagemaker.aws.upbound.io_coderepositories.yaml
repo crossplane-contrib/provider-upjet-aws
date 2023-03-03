@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: coderepositories.sagemaker.aws.upbound.io
 spec:
@@ -174,9 +174,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - gitConfig
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +356,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: gitConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gitConfig)
           status:
             description: CodeRepositoryStatus defines the observed state of CodeRepository.
             properties:
@@ -357,9 +368,38 @@ spec:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
                       this Code Repository.
                     type: string
+                  gitConfig:
+                    description: Specifies details about the repository. see Git Config
+                      details below.
+                    items:
+                      properties:
+                        branch:
+                          description: The default branch for the Git repository.
+                          type: string
+                        repositoryUrl:
+                          description: The URL where the Git repository is located.
+                          type: string
+                        secretArn:
+                          description: 'The Amazon Resource Name (ARN) of the AWS
+                            Secrets Manager secret that contains the credentials used
+                            to access the git repository. The secret must have a staging
+                            label of AWSCURRENT and must be in the following format:
+                            {"username": UserName, "password": Password}'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The name of the Code Repository.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -409,9 +449,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

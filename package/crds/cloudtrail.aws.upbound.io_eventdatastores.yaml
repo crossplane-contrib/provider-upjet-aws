@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: eventdatastores.cloudtrail.aws.upbound.io
 spec:
@@ -166,9 +166,17 @@ spec:
                       is disabled. Default: true.'
                     type: boolean
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -340,23 +348,127 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: EventDataStoreStatus defines the observed state of EventDataStore.
             properties:
               atProvider:
                 properties:
+                  advancedEventSelector:
+                    description: The advanced event selectors to use to select the
+                      events for the data store. For more information about how to
+                      use advanced event selectors, see Log events by using advanced
+                      event selectors in the CloudTrail User Guide.
+                    items:
+                      properties:
+                        fieldSelector:
+                          description: Specifies the selector statements in an advanced
+                            event selector. Fields documented below.
+                          items:
+                            properties:
+                              endsWith:
+                                description: A list of values that includes events
+                                  that match the last few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              equals:
+                                description: A list of values that includes events
+                                  that match the exact value of the event record field
+                                  specified as the value of field. This is the only
+                                  valid operator that you can use with the readOnly,
+                                  eventCategory, and resources.type fields.
+                                items:
+                                  type: string
+                                type: array
+                              field:
+                                description: 'Specifies a field in an event record
+                                  on which to filter events to be logged. You can
+                                  specify only the following values: readOnly, eventSource,
+                                  eventName, eventCategory, resources.type, resources.ARN.'
+                                type: string
+                              notEndsWith:
+                                description: A list of values that excludes events
+                                  that match the last few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              notEquals:
+                                description: A list of values that excludes events
+                                  that match the exact value of the event record field
+                                  specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              notStartsWith:
+                                description: A list of values that excludes events
+                                  that match the first few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              startsWith:
+                                description: A list of values that includes events
+                                  that match the first few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: The name of the event data store.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: ARN of the event data store.
                     type: string
                   id:
                     description: Name of the event data store.
                     type: string
+                  multiRegionEnabled:
+                    description: 'Specifies whether the event data store includes
+                      events from all regions, or only from the region in which the
+                      event data store is created. Default: true.'
+                    type: boolean
+                  name:
+                    description: The name of the event data store.
+                    type: string
+                  organizationEnabled:
+                    description: 'Specifies whether an event data store collects events
+                      logged for an organization in AWS Organizations. Default: false.'
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  retentionPeriod:
+                    description: 'The retention period of the event data store, in
+                      days. You can set a retention period of up to 2555 days, the
+                      equivalent of seven years. Default: 2555.'
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  terminationProtectionEnabled:
+                    description: 'Specifies whether termination protection is enabled
+                      for the event data store. If termination protection is enabled,
+                      you cannot delete the event data store until termination protection
+                      is disabled. Default: true.'
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -399,9 +511,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

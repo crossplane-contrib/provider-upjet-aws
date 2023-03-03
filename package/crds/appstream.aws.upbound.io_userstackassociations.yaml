@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userstackassociations.appstream.aws.upbound.io
 spec:
@@ -304,6 +304,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -481,8 +490,26 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authenticationType:
+                    description: Authentication type for the user.
+                    type: string
                   id:
                     description: Unique ID of the appstream User Stack association.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sendEmailNotification:
+                    description: Whether a welcome email is sent to a user after the
+                      user is created in the user pool.
+                    type: boolean
+                  stackName:
+                    description: Name of the stack that is associated with the user.
+                    type: string
+                  userName:
+                    description: Email address of the user who is associated with
+                      the stack.
                     type: string
                 type: object
               conditions:
@@ -526,9 +553,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

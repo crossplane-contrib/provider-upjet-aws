@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lbcookiestickinesspolicies.elb.aws.upbound.io
 spec:
@@ -158,10 +158,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - lbPort
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,14 +340,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: lbPort is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lbPort)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: LBCookieStickinessPolicyStatus defines the observed state
               of LBCookieStickinessPolicy.
             properties:
               atProvider:
                 properties:
+                  cookieExpirationPeriod:
+                    description: The time period after which the session cookie should
+                      be considered stale, expressed in seconds.
+                    type: number
                   id:
                     description: The ID of the policy.
+                    type: string
+                  lbPort:
+                    description: The load balancer port to which the policy should
+                      be applied. This must be an active listener on the load balancer.
+                    type: number
+                  loadBalancer:
+                    description: The load balancer to which the policy should be attached.
+                    type: string
+                  name:
+                    description: The name of the stickiness policy.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -384,9 +414,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

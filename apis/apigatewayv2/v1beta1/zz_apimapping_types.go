@@ -15,8 +15,24 @@ import (
 
 type APIMappingObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// The API mapping key.
+	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
+
+	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// API mapping identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 }
 
 type APIMappingParameters struct {

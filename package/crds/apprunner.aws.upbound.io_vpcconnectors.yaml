@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcconnectors.apprunner.aws.upbound.io
 spec:
@@ -249,8 +249,16 @@ spec:
                     type: string
                 required:
                 - region
-                - vpcConnectorName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -422,6 +430,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: vpcConnectorName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcConnectorName)
           status:
             description: VPCConnectorStatus defines the observed state of VPCConnector.
             properties:
@@ -432,18 +443,47 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  securityGroups:
+                    description: List of IDs of security groups that App Runner should
+                      use for access to AWS resources under the specified subnets.
+                      If not specified, App Runner uses the default security group
+                      of the Amazon VPC. The default security group allows all outbound
+                      traffic.
+                    items:
+                      type: string
+                    type: array
                   status:
                     description: Current state of the VPC connector. If the status
                       of a connector revision is INACTIVE, it was deleted and can't
                       be used. Inactive connector revisions are permanently removed
                       some time after they are deleted.
                     type: string
+                  subnets:
+                    description: List of IDs of subnets that App Runner should use
+                      when it associates your service with a custom Amazon VPC. Specify
+                      IDs of subnets of a single Amazon VPC. App Runner determines
+                      the Amazon VPC from the subnets you specify.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  vpcConnectorName:
+                    description: Name for the VPC connector.
+                    type: string
                   vpcConnectorRevision:
                     description: 'The revision of VPC connector. It''s unique among
                       all the active connectors ("Status": "ACTIVE") that share the
@@ -491,9 +531,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

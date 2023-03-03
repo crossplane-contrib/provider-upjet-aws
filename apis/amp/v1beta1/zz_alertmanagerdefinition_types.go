@@ -14,14 +14,25 @@ import (
 )
 
 type AlertManagerDefinitionObservation struct {
+
+	// the alert manager definition that you want to be applied. See more in AWS Docs.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the prometheus workspace the alert manager definition should be linked to
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type AlertManagerDefinitionParameters struct {
 
 	// the alert manager definition that you want to be applied. See more in AWS Docs.
-	// +kubebuilder:validation:Required
-	Definition *string `json:"definition" tf:"definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -67,8 +78,9 @@ type AlertManagerDefinitionStatus struct {
 type AlertManagerDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AlertManagerDefinitionSpec   `json:"spec"`
-	Status            AlertManagerDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)",message="definition is a required parameter"
+	Spec   AlertManagerDefinitionSpec   `json:"spec"`
+	Status AlertManagerDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,10 +14,27 @@ import (
 )
 
 type SMSChannelObservation struct {
+
+	// The application ID.
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Whether the channel is enabled or disabled. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Promotional messages per second that can be sent.
 	PromotionalMessagesPerSecond *float64 `json:"promotionalMessagesPerSecond,omitempty" tf:"promotional_messages_per_second,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Sender identifier of your messages.
+	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
+
+	// The Short Code registered with the phone provider.
+	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
 
 	// Transactional messages per second that can be sent.
 	TransactionalMessagesPerSecond *float64 `json:"transactionalMessagesPerSecond,omitempty" tf:"transactional_messages_per_second,omitempty"`

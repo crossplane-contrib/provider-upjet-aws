@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lags.directconnect.aws.upbound.io
 spec:
@@ -101,11 +101,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - connectionsBandwidth
-                - location
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -277,6 +283,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: connectionsBandwidth is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionsBandwidth)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: LagStatus defines the observed state of Lag.
             properties:
@@ -285,6 +298,21 @@ spec:
                   arn:
                     description: The ARN of the LAG.
                     type: string
+                  connectionId:
+                    description: The ID of an existing dedicated connection to migrate
+                      to the LAG.
+                    type: string
+                  connectionsBandwidth:
+                    description: 'The bandwidth of the individual physical connections
+                      bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps.
+                      Case sensitive.'
+                    type: string
+                  forceDestroy:
+                    description: A boolean that indicates all connections associated
+                      with the LAG should be deleted so that the LAG can be destroyed
+                      without error. These objects are not recoverable.
+                    type: boolean
                   hasLogicalRedundancy:
                     description: Indicates whether the LAG supports a secondary BGP
                       peer in the same address family (IPv4/IPv6).
@@ -295,9 +323,30 @@ spec:
                   jumboFrameCapable:
                     description: Indicates whether jumbo frames (9001 MTU) are supported.
                     type: boolean
+                  location:
+                    description: The AWS Direct Connect location in which the LAG
+                      should be allocated. See DescribeLocations for the list of AWS
+                      Direct Connect locations. Use locationCode.
+                    type: string
+                  name:
+                    description: The name of the LAG.
+                    type: string
                   ownerAccountId:
                     description: The ID of the AWS account that owns the LAG.
                     type: string
+                  providerName:
+                    description: The name of the service provider associated with
+                      the LAG.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -347,9 +396,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

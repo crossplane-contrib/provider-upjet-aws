@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: tableitems.dynamodb.aws.upbound.io
 spec:
@@ -159,10 +159,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - hashKey
-                - item
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -334,12 +341,38 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: hashKey is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hashKey)
+            - message: item is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.item)
           status:
             description: TableItemStatus defines the observed state of TableItem.
             properties:
               atProvider:
                 properties:
+                  hashKey:
+                    description: Hash key to use for lookups and identification of
+                      the item
+                    type: string
                   id:
+                    type: string
+                  item:
+                    description: JSON representation of a map of attribute name/value
+                      pairs, one for each attribute. Only the primary key attributes
+                      are required; you can optionally provide other attribute name-value
+                      pairs for the item.
+                    type: string
+                  rangeKey:
+                    description: Range key to use for lookups and identification of
+                      the item. Required if there is range key defined in the table.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tableName:
+                    description: Name of the table to contain the item.
                     type: string
                 type: object
               conditions:
@@ -383,9 +416,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

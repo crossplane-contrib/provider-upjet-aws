@@ -15,8 +15,18 @@ import (
 
 type BusPolicyObservation struct {
 
+	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
 	// The name of the EventBridge event bus.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The text of the policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BusPolicyParameters struct {
@@ -35,8 +45,8 @@ type BusPolicyParameters struct {
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The text of the policy.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -68,8 +78,9 @@ type BusPolicyStatus struct {
 type BusPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BusPolicySpec   `json:"spec"`
-	Status            BusPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   BusPolicySpec   `json:"spec"`
+	Status BusPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

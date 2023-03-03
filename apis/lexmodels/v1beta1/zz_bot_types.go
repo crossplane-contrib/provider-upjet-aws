@@ -14,6 +14,16 @@ import (
 )
 
 type AbortStatementObservation struct {
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
+	Message []MessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type AbortStatementParameters struct {
@@ -32,22 +42,63 @@ type AbortStatementParameters struct {
 }
 
 type BotObservation struct {
+
+	// The message that Amazon Lex uses to abort a conversation. Attributes are documented under statement.
+	AbortStatement []AbortStatementObservation `json:"abortStatement,omitempty" tf:"abort_statement,omitempty"`
+
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Checksum identifying the version of the bot that was created. The checksum is not
 	// included as an argument because the resource will add it automatically when updating the bot.
 	Checksum *string `json:"checksum,omitempty" tf:"checksum,omitempty"`
 
+	// By specifying true, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. For more information see the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
+	ChildDirected *bool `json:"childDirected,omitempty" tf:"child_directed,omitempty"`
+
+	// The message that Amazon Lex uses when it doesn't understand the user's request. Attributes are documented under prompt.
+	ClarificationPrompt []ClarificationPromptObservation `json:"clarificationPrompt,omitempty" tf:"clarification_prompt,omitempty"`
+
+	// Determines if a new bot version is created when the initial resource is created and on each update. Defaults to false.
+	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
+
 	// The date when the bot version was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
+
+	// A description of the bot. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// When set to true user utterances are sent to Amazon Comprehend for sentiment analysis. If you don't specify detectSentiment, the default is false.
+	DetectSentiment *bool `json:"detectSentiment,omitempty" tf:"detect_sentiment,omitempty"`
+
+	// Set to true to enable access to natural language understanding improvements. When you set the enable_model_improvements parameter to true you can use the nlu_intent_confidence_threshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enable_model_improvements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. For more information see the Amazon Lex Bot PutBot API Docs.
+	EnableModelImprovements *bool `json:"enableModelImprovements,omitempty" tf:"enable_model_improvements,omitempty"`
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build the bot.
 	FailureReason *string `json:"failureReason,omitempty" tf:"failure_reason,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
+	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
+
+	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
+	Intent []IntentObservation `json:"intent,omitempty" tf:"intent,omitempty"`
+
 	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
+
+	// Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. For available locales, see Amazon Lex Bot PutBot API Docs. Default is en-US.
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
+
+	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For more information see Amazon Lex Bot PutBot API Docs This value requires enable_model_improvements to be set to true and the default is 0. Must be a float between 0 and 1.
+	NluIntentConfidenceThreshold *float64 `json:"nluIntentConfidenceThreshold,omitempty" tf:"nlu_intent_confidence_threshold,omitempty"`
+
+	// If you set the process_behavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it. Default is SAVE.
+	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// When you send a request to create or update a bot, Amazon Lex sets the status response
 	// element to BUILDING. After Amazon Lex builds the bot, it sets status to READY. If Amazon Lex can't
@@ -57,17 +108,20 @@ type BotObservation struct {
 
 	// The version of the bot.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Available Voices in the Amazon Polly Developer Guide.
+	VoiceID *string `json:"voiceId,omitempty" tf:"voice_id,omitempty"`
 }
 
 type BotParameters struct {
 
 	// The message that Amazon Lex uses to abort a conversation. Attributes are documented under statement.
-	// +kubebuilder:validation:Required
-	AbortStatement []AbortStatementParameters `json:"abortStatement" tf:"abort_statement,omitempty"`
+	// +kubebuilder:validation:Optional
+	AbortStatement []AbortStatementParameters `json:"abortStatement,omitempty" tf:"abort_statement,omitempty"`
 
 	// By specifying true, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. For more information see the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
-	// +kubebuilder:validation:Required
-	ChildDirected *bool `json:"childDirected" tf:"child_directed,omitempty"`
+	// +kubebuilder:validation:Optional
+	ChildDirected *bool `json:"childDirected,omitempty" tf:"child_directed,omitempty"`
 
 	// The message that Amazon Lex uses when it doesn't understand the user's request. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
@@ -94,8 +148,8 @@ type BotParameters struct {
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
 	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
-	// +kubebuilder:validation:Required
-	Intent []IntentParameters `json:"intent" tf:"intent,omitempty"`
+	// +kubebuilder:validation:Optional
+	Intent []IntentParameters `json:"intent,omitempty" tf:"intent,omitempty"`
 
 	// Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. For available locales, see Amazon Lex Bot PutBot API Docs. Default is en-US.
 	// +kubebuilder:validation:Optional
@@ -120,6 +174,16 @@ type BotParameters struct {
 }
 
 type ClarificationPromptMessageObservation struct {
+
+	// The text of the message.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ClarificationPromptMessageParameters struct {
@@ -139,6 +203,19 @@ type ClarificationPromptMessageParameters struct {
 }
 
 type ClarificationPromptObservation struct {
+
+	// The number of times to prompt the user for information.
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
+	Message []ClarificationPromptMessageObservation `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
 }
 
 type ClarificationPromptParameters struct {
@@ -161,6 +238,12 @@ type ClarificationPromptParameters struct {
 }
 
 type IntentObservation struct {
+
+	// The name of the intent. Must be less than or equal to 100 characters in length.
+	IntentName *string `json:"intentName,omitempty" tf:"intent_name,omitempty"`
+
+	// The version of the intent. Must be less than or equal to 64 characters in length.
+	IntentVersion *string `json:"intentVersion,omitempty" tf:"intent_version,omitempty"`
 }
 
 type IntentParameters struct {
@@ -175,6 +258,16 @@ type IntentParameters struct {
 }
 
 type MessageObservation struct {
+
+	// The text of the message.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type MessageParameters struct {
@@ -217,8 +310,11 @@ type BotStatus struct {
 type Bot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotSpec   `json:"spec"`
-	Status            BotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.abortStatement)",message="abortStatement is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.childDirected)",message="childDirected is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.intent)",message="intent is a required parameter"
+	Spec   BotSpec   `json:"spec"`
+	Status BotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,25 @@ import (
 
 type BucketReplicationConfigurationObservation struct {
 
+	// The name of the source S3 bucket you want Amazon S3 to monitor.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
 	// The S3 source bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the IAM role for Amazon S3 to assume when replicating the objects.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// List of configuration blocks describing the rules managing the replication documented below.
+	Rule []BucketReplicationConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// A token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
+	// For more details, see Using S3 Object Lock with replication.
+	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketReplicationConfigurationParameters struct {
@@ -55,8 +72,8 @@ type BucketReplicationConfigurationParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// List of configuration blocks describing the rules managing the replication documented below.
-	// +kubebuilder:validation:Required
-	Rule []BucketReplicationConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketReplicationConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// A token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// For more details, see Using S3 Object Lock with replication.
@@ -65,6 +82,15 @@ type BucketReplicationConfigurationParameters struct {
 }
 
 type BucketReplicationConfigurationRuleFilterObservation struct {
+
+	// A configuration block for specifying rule filters. This element is required only if you specify more than one filter. See and below for more details.
+	And []FilterAndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// A configuration block for specifying a tag key and value documented below.
+	Tag []FilterTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type BucketReplicationConfigurationRuleFilterParameters struct {
@@ -83,6 +109,33 @@ type BucketReplicationConfigurationRuleFilterParameters struct {
 }
 
 type BucketReplicationConfigurationRuleObservation struct {
+
+	// Whether delete markers are replicated. This argument is only valid with V2 replication configurations (i.e., when filter is used)documented below.
+	DeleteMarkerReplication []DeleteMarkerReplicationObservation `json:"deleteMarkerReplication,omitempty" tf:"delete_marker_replication,omitempty"`
+
+	// Specifies the destination for the rule documented below.
+	Destination []RuleDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Replicate existing objects in the source bucket according to the rule configurations documented below.
+	ExistingObjectReplication []ExistingObjectReplicationObservation `json:"existingObjectReplication,omitempty" tf:"existing_object_replication,omitempty"`
+
+	// Filter that identifies subset of objects to which the replication rule applies documented below. If not specified, the rule will default to using prefix.
+	Filter []BucketReplicationConfigurationRuleFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The priority associated with the rule. Priority should only be set if filter is configured. If not provided, defaults to 0. Priority must be unique between multiple rules.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Specifies special object selection criteria documented below.
+	SourceSelectionCriteria []RuleSourceSelectionCriteriaObservation `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
+
+	// The status of the rule. Either "Enabled" or "Disabled". The rule is ignored if status is not "Enabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type BucketReplicationConfigurationRuleParameters struct {
@@ -125,6 +178,9 @@ type BucketReplicationConfigurationRuleParameters struct {
 }
 
 type DeleteMarkerReplicationObservation struct {
+
+	// Whether delete markers should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type DeleteMarkerReplicationParameters struct {
@@ -135,6 +191,9 @@ type DeleteMarkerReplicationParameters struct {
 }
 
 type DestinationAccessControlTranslationObservation struct {
+
+	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type DestinationAccessControlTranslationParameters struct {
@@ -145,6 +204,12 @@ type DestinationAccessControlTranslationParameters struct {
 }
 
 type DestinationMetricsObservation struct {
+
+	// A configuration block that specifies the time threshold for emitting the s3:Replication:OperationMissedThreshold event documented below.
+	EventThreshold []EventThresholdObservation `json:"eventThreshold,omitempty" tf:"event_threshold,omitempty"`
+
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type DestinationMetricsParameters struct {
@@ -159,6 +224,12 @@ type DestinationMetricsParameters struct {
 }
 
 type DestinationReplicationTimeObservation struct {
+
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// A configuration block specifying the time by which replication should be complete for all objects and operations on objects documented below.
+	Time []TimeObservation `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type DestinationReplicationTimeParameters struct {
@@ -173,6 +244,9 @@ type DestinationReplicationTimeParameters struct {
 }
 
 type EncryptionConfigurationObservation struct {
+
+	// The ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
@@ -183,6 +257,9 @@ type EncryptionConfigurationParameters struct {
 }
 
 type EventThresholdObservation struct {
+
+	// Time in minutes. Valid values: 15.
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type EventThresholdParameters struct {
@@ -193,6 +270,9 @@ type EventThresholdParameters struct {
 }
 
 type ExistingObjectReplicationObservation struct {
+
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ExistingObjectReplicationParameters struct {
@@ -203,6 +283,12 @@ type ExistingObjectReplicationParameters struct {
 }
 
 type FilterAndObservation struct {
+
+	// Object key name prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length. Defaults to an empty string ("") if filter is not specified.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// A map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FilterAndParameters struct {
@@ -217,6 +303,12 @@ type FilterAndParameters struct {
 }
 
 type FilterTagObservation struct {
+
+	// Name of the object key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Value of the tag.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FilterTagParameters struct {
@@ -231,6 +323,9 @@ type FilterTagParameters struct {
 }
 
 type ReplicaModificationsObservation struct {
+
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ReplicaModificationsParameters struct {
@@ -241,6 +336,27 @@ type ReplicaModificationsParameters struct {
 }
 
 type RuleDestinationObservation struct {
+
+	// A configuration block that specifies the overrides to use for object owners on replication documented below. Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object. Must be used in conjunction with account owner override configuration.
+	AccessControlTranslation []DestinationAccessControlTranslationObservation `json:"accessControlTranslation,omitempty" tf:"access_control_translation,omitempty"`
+
+	// The Account ID to specify the replica ownership. Must be used in conjunction with access_control_translation override configuration.
+	Account *string `json:"account,omitempty" tf:"account,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store the results.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// A configuration block that provides information about encryption documented below. If source_selection_criteria is specified, you must specify this element.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// A configuration block that specifies replication metrics-related settings enabling replication metrics and events documented below.
+	Metrics []DestinationMetricsObservation `json:"metrics,omitempty" tf:"metrics,omitempty"`
+
+	// A configuration block that specifies S3 Replication Time Control (S3 RTC), including whether S3 RTC is enabled and the time when all objects and operations on objects must be replicated documented below. Replication Time Control must be used in conjunction with metrics.
+	ReplicationTime []DestinationReplicationTimeObservation `json:"replicationTime,omitempty" tf:"replication_time,omitempty"`
+
+	// The storage class used to store the object. By default, Amazon S3 uses the storage class of the source object to create the object replica.
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
 type RuleDestinationParameters struct {
@@ -285,6 +401,12 @@ type RuleDestinationParameters struct {
 }
 
 type RuleSourceSelectionCriteriaObservation struct {
+
+	// A configuration block that you can specify for selections for modifications on replicas. Amazon S3 doesn't replicate replica modifications by default. In the latest version of replication configuration (when filter is specified), you can specify this element and set the status to Enabled to replicate modifications on replicas.
+	ReplicaModifications []ReplicaModificationsObservation `json:"replicaModifications,omitempty" tf:"replica_modifications,omitempty"`
+
+	// A configuration block for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. If specified, replica_kms_key_id in destination encryption_configuration must be specified as well.
+	SseKMSEncryptedObjects []SourceSelectionCriteriaSseKMSEncryptedObjectsObservation `json:"sseKmsEncryptedObjects,omitempty" tf:"sse_kms_encrypted_objects,omitempty"`
 }
 
 type RuleSourceSelectionCriteriaParameters struct {
@@ -299,6 +421,9 @@ type RuleSourceSelectionCriteriaParameters struct {
 }
 
 type SourceSelectionCriteriaSseKMSEncryptedObjectsObservation struct {
+
+	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type SourceSelectionCriteriaSseKMSEncryptedObjectsParameters struct {
@@ -309,6 +434,9 @@ type SourceSelectionCriteriaSseKMSEncryptedObjectsParameters struct {
 }
 
 type TimeObservation struct {
+
+	// Time in minutes. Valid values: 15.
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type TimeParameters struct {
@@ -342,8 +470,9 @@ type BucketReplicationConfigurationStatus struct {
 type BucketReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketReplicationConfigurationSpec   `json:"spec"`
-	Status            BucketReplicationConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   BucketReplicationConfigurationSpec   `json:"spec"`
+	Status BucketReplicationConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

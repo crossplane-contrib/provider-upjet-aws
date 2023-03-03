@@ -14,6 +14,12 @@ import (
 )
 
 type DataLocationObservation struct {
+
+	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 }
 
 type DataLocationParameters struct {
@@ -38,6 +44,12 @@ type DataLocationParameters struct {
 }
 
 type DatabaseObservation struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  Name of the database resource. Unique to the Data Catalog.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type DatabaseParameters struct {
@@ -61,6 +73,12 @@ type DatabaseParameters struct {
 }
 
 type ExpressionObservation struct {
+
+	// name of an LF-Tag.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A list of possible values of an LF-Tag.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ExpressionParameters struct {
@@ -75,6 +93,15 @@ type ExpressionParameters struct {
 }
 
 type LfTagObservation struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// name for the tag.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A list of possible values an attribute can take.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type LfTagParameters struct {
@@ -93,6 +120,15 @@ type LfTagParameters struct {
 }
 
 type LfTagPolicyObservation struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// A list of tag conditions that apply to the resource's tag policy. Configuration block for tag conditions that apply to the policy. See expression below.
+	Expression []ExpressionObservation `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// –  The resource type for which the tag policy applies. Valid values are DATABASE and TABLE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
 type LfTagPolicyParameters struct {
@@ -111,7 +147,45 @@ type LfTagPolicyParameters struct {
 }
 
 type PermissionsObservation struct {
+
+	// –  Identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
+	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
+
+	// Configuration block for a data location resource. Detailed below.
+	DataLocation []DataLocationObservation `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
+
+	// Configuration block for a database resource. Detailed below.
+	Database []DatabaseObservation `json:"database,omitempty" tf:"database,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration block for an LF-tag resource. Detailed below.
+	LfTag []LfTagObservation `json:"lfTag,omitempty" tf:"lf_tag,omitempty"`
+
+	// Configuration block for an LF-tag policy resource. Detailed below.
+	LfTagPolicy []LfTagPolicyObservation `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
+
+	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Subset of permissions which the principal can pass.
+	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
+
+	// account permissions. For more information, see Lake Formation Permissions Reference.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block for a table resource. Detailed below.
+	Table []TableObservation `json:"table,omitempty" tf:"table,omitempty"`
+
+	// Configuration block for a table with columns resource. Detailed below.
+	TableWithColumns []TableWithColumnsObservation `json:"tableWithColumns,omitempty" tf:"table_with_columns,omitempty"`
 }
 
 type PermissionsParameters struct {
@@ -141,16 +215,16 @@ type PermissionsParameters struct {
 	LfTagPolicy []LfTagPolicyParameters `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
 
 	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
-	// +kubebuilder:validation:Required
-	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Subset of permissions which the principal can pass.
 	// +kubebuilder:validation:Optional
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
 	// account permissions. For more information, see Lake Formation Permissions Reference.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -167,6 +241,18 @@ type PermissionsParameters struct {
 }
 
 type TableObservation struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  Name of the database for the table. Unique to a Data Catalog.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Name of the table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to use a wildcard representing every table under a database. Defaults to false.
+	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
 }
 
 type TableParameters struct {
@@ -189,6 +275,24 @@ type TableParameters struct {
 }
 
 type TableWithColumnsObservation struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Set of column names for the table.
+	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
+
+	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Set of column names for the table to exclude.
+	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
+
+	// –  Name of the table resource.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to use a column wildcard.
+	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
 }
 
 type TableWithColumnsParameters struct {
@@ -251,8 +355,10 @@ type PermissionsStatus struct {
 type Permissions struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionsSpec   `json:"spec"`
-	Status            PermissionsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissions)",message="permissions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   PermissionsSpec   `json:"spec"`
+	Status PermissionsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

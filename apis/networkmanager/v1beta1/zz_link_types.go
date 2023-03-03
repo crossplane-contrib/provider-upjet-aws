@@ -14,6 +14,12 @@ import (
 )
 
 type BandwidthObservation struct {
+
+	// Download speed in Mbps.
+	DownloadSpeed *float64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
+
+	// Upload speed in Mbps.
+	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
 }
 
 type BandwidthParameters struct {
@@ -32,17 +38,42 @@ type LinkObservation struct {
 	// Link Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The upload speed and download speed in Mbps. Documented below.
+	Bandwidth []BandwidthObservation `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+
+	// A description of the link.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the global network.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The provider of the link.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the site.
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of the link.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinkParameters struct {
 
 	// The upload speed and download speed in Mbps. Documented below.
-	// +kubebuilder:validation:Required
-	Bandwidth []BandwidthParameters `json:"bandwidth" tf:"bandwidth,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bandwidth []BandwidthParameters `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// A description of the link.
 	// +kubebuilder:validation:Optional
@@ -117,8 +148,9 @@ type LinkStatus struct {
 type Link struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkSpec   `json:"spec"`
-	Status            LinkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bandwidth)",message="bandwidth is a required parameter"
+	Spec   LinkSpec   `json:"spec"`
+	Status LinkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

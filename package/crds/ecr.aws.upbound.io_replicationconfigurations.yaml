@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: replicationconfigurations.ecr.aws.upbound.io
 spec:
@@ -127,6 +127,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -306,10 +315,59 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: A Region to replicate to. Region is the region you'd
+                      like your resource to be created in.
+                    type: string
                   registryId:
                     description: The account ID of the destination registry to replicate
                       to.
                     type: string
+                  replicationConfiguration:
+                    description: Replication configuration for a registry. See Replication
+                      Configuration.
+                    items:
+                      properties:
+                        rule:
+                          description: The replication rules for a replication configuration.
+                            A maximum of 10 are allowed per replication_configuration.
+                            See Rule
+                          items:
+                            properties:
+                              destination:
+                                description: the details of a replication destination.
+                                  A maximum of 25 are allowed per rule. See Destination.
+                                items:
+                                  properties:
+                                    region:
+                                      description: A Region to replicate to.
+                                      type: string
+                                    registryId:
+                                      description: The account ID of the destination
+                                        registry to replicate to.
+                                      type: string
+                                  type: object
+                                type: array
+                              repositoryFilter:
+                                description: filters for a replication rule. See Repository
+                                  Filter.
+                                items:
+                                  properties:
+                                    filter:
+                                      description: The repository filter details.
+                                      type: string
+                                    filterType:
+                                      description: The repository filter type. The
+                                        only supported value is PREFIX_MATCH, which
+                                        is a repository name prefix specified with
+                                        the filter parameter.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -352,9 +410,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

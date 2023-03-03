@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcipampools.ec2.aws.upbound.io
 spec:
@@ -282,9 +282,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - addressFamily
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -456,24 +464,98 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: addressFamily is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)
           status:
             description: VPCIpamPoolStatus defines the observed state of VPCIpamPool.
             properties:
               atProvider:
                 properties:
+                  addressFamily:
+                    description: The IP protocol assigned to this pool. You must choose
+                      either IPv4 or IPv6 protocol for a pool.
+                    type: string
+                  allocationDefaultNetmaskLength:
+                    description: A default netmask length for allocations added to
+                      this pool. If, for example, the CIDR assigned to this pool is
+                      10.0.0.0/8 and you enter 16 here, new allocations will default
+                      to 10.0.0.0/16 (unless you provide a different netmask value
+                      when you create the new allocation).
+                    type: number
+                  allocationMaxNetmaskLength:
+                    description: The maximum netmask length that will be required
+                      for CIDR allocations in this pool.
+                    type: number
+                  allocationMinNetmaskLength:
+                    description: The minimum netmask length that will be required
+                      for CIDR allocations in this pool.
+                    type: number
+                  allocationResourceTags:
+                    additionalProperties:
+                      type: string
+                    description: Tags that are required for resources that use CIDRs
+                      from this IPAM pool. Resources that do not have these tags will
+                      not be allowed to allocate space from the pool. If the resources
+                      have their tags changed after they have allocated space or if
+                      the allocation tagging requirements are changed on the pool,
+                      the resource may be marked as noncompliant.
+                    type: object
                   arn:
                     description: Amazon Resource Name (ARN) of IPAM
+                    type: string
+                  autoImport:
+                    description: If you include this argument, IPAM automatically
+                      imports any VPCs you have in your scope that fall within the
+                      CIDR range in the pool.
+                    type: boolean
+                  awsService:
+                    description: 'Limits which AWS service the pool can be used in.
+                      Only useable on public scopes. Valid Values: ec2.'
+                    type: string
+                  description:
+                    description: A description for the IPAM pool.
                     type: string
                   id:
                     description: The ID of the IPAM
                     type: string
+                  ipamScopeId:
+                    description: The ID of the scope in which you would like to create
+                      the IPAM pool.
+                    type: string
                   ipamScopeType:
+                    type: string
+                  locale:
+                    description: 'The locale in which you would like to create the
+                      IPAM pool. Locale is the Region where you want to make an IPAM
+                      pool available for allocations. You can only create pools with
+                      locales that match the operating Regions of the IPAM. You can
+                      only create VPCs from a pool whose locale matches the VPC''s
+                      Region. Possible values: Any AWS region, such as us-east-1.'
                     type: string
                   poolDepth:
                     type: number
+                  publiclyAdvertisable:
+                    description: Defines whether or not IPv6 pool space is publicly
+                      advertisable over the internet. This option is not available
+                      for IPv4 pool space.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sourceIpamPoolId:
+                    description: The ID of the source IPAM pool. Use this argument
+                      to create a child pool within an existing pool.
+                    type: string
                   state:
                     description: The ID of the IPAM
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -523,9 +605,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

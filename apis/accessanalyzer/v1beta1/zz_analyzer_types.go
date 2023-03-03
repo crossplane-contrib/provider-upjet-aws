@@ -21,8 +21,18 @@ type AnalyzerObservation struct {
 	// Analyzer name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION. Defaults to ACCOUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AnalyzerParameters struct {

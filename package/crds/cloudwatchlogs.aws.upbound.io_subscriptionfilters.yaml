@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: subscriptionfilters.cloudwatchlogs.aws.upbound.io
 spec:
@@ -246,11 +246,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - filterPattern
-                - logGroupName
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -422,12 +428,54 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: filterPattern is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterPattern)
+            - message: logGroupName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logGroupName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: SubscriptionFilterStatus defines the observed state of SubscriptionFilter.
             properties:
               atProvider:
                 properties:
+                  destinationArn:
+                    description: The ARN of the destination to deliver matching log
+                      events to. Kinesis stream or Lambda function ARN.
+                    type: string
+                  distribution:
+                    description: The method used to distribute log data to the destination.
+                      By default log data is grouped by log stream, but the grouping
+                      can be set to random for a more even distribution. This property
+                      is only applicable when the destination is an Amazon Kinesis
+                      stream. Valid values are "Random" and "ByLogStream".
+                    type: string
+                  filterPattern:
+                    description: A valid CloudWatch Logs filter pattern for subscribing
+                      to a filtered stream of log events. Use empty string "" to match
+                      everything. For more information, see the Amazon CloudWatch
+                      Logs User Guide.
+                    type: string
                   id:
+                    type: string
+                  logGroupName:
+                    description: The name of the log group to associate the subscription
+                      filter with
+                    type: string
+                  name:
+                    description: A name for the subscription filter
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: The ARN of an IAM role that grants Amazon CloudWatch
+                      Logs permissions to deliver ingested log events to the destination.
+                      If you use Lambda as a destination, you should skip this argument
+                      and use aws_lambda_permission resource for granting access from
+                      CloudWatch logs to the destination Lambda function.
                     type: string
                 type: object
               conditions:
@@ -471,9 +519,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

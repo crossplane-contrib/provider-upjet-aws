@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: endpointgroups.globalaccelerator.aws.upbound.io
 spec:
@@ -228,6 +228,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -407,9 +416,94 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the endpoint group.
                     type: string
+                  endpointConfiguration:
+                    description: The list of endpoint objects. Fields documented below.
+                    items:
+                      properties:
+                        clientIpPreservationEnabled:
+                          description: Indicates whether client IP address preservation
+                            is enabled for an Application Load Balancer endpoint.
+                            See the AWS documentation for more details. The default
+                            value is false.
+                          type: boolean
+                        endpointId:
+                          description: An ID for the endpoint. If the endpoint is
+                            a Network Load Balancer or Application Load Balancer,
+                            this is the Amazon Resource Name (ARN) of the resource.
+                            If the endpoint is an Elastic IP address, this is the
+                            Elastic IP address allocation ID.
+                          type: string
+                        weight:
+                          description: The weight associated with the endpoint. When
+                            you add weights to endpoints, you configure AWS Global
+                            Accelerator to route traffic based on proportions that
+                            you specify.
+                          type: number
+                      type: object
+                    type: array
+                  endpointGroupRegion:
+                    description: The name of the AWS Region where the endpoint group
+                      is located.
+                    type: string
+                  healthCheckIntervalSeconds:
+                    description: The time—10 seconds or 30 seconds—between each health
+                      check for an endpoint. The default value is 30.
+                    type: number
+                  healthCheckPath:
+                    description: If the protocol is HTTP/S, then this specifies the
+                      path that is the destination for health check targets. The default
+                      value is slash (/).
+                    type: string
+                  healthCheckPort:
+                    description: The port that AWS Global Accelerator uses to check
+                      the health of endpoints that are part of this endpoint group.
+                      The default port is the listener port that this endpoint group
+                      is associated with. If listener port is a list of ports, Global
+                      Accelerator uses the first port in the list.
+                    type: number
+                  healthCheckProtocol:
+                    description: The protocol that AWS Global Accelerator uses to
+                      check the health of endpoints that are part of this endpoint
+                      group. The default value is TCP.
+                    type: string
                   id:
                     description: The Amazon Resource Name (ARN) of the endpoint group.
                     type: string
+                  listenerArn:
+                    description: The Amazon Resource Name (ARN) of the listener.
+                    type: string
+                  portOverride:
+                    description: Override specific listener ports used to route traffic
+                      to endpoints that are part of this endpoint group. Fields documented
+                      below.
+                    items:
+                      properties:
+                        endpointPort:
+                          description: The endpoint port that you want a listener
+                            port to be mapped to. This is the port on the endpoint,
+                            such as the Application Load Balancer or Amazon EC2 instance.
+                          type: number
+                        listenerPort:
+                          description: The listener port that you want to map to a
+                            specific endpoint port. This is the port that user traffic
+                            arrives to the Global Accelerator on.
+                          type: number
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  thresholdCount:
+                    description: The number of consecutive health checks required
+                      to set the state of a healthy endpoint to unhealthy, or to set
+                      an unhealthy endpoint to healthy. The default value is 3.
+                    type: number
+                  trafficDialPercentage:
+                    description: The percentage of traffic to send to an AWS Region.
+                      Additional traffic is distributed to other endpoint groups for
+                      this listener. The default value is 100.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -452,9 +546,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

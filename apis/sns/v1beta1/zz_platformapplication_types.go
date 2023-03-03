@@ -15,11 +15,51 @@ import (
 
 type PlatformApplicationObservation struct {
 
+	// The bundle identifier that's assigned to your iOS app. May only include alphanumeric characters, hyphens (-), and periods (.).
+	ApplePlatformBundleID *string `json:"applePlatformBundleId,omitempty" tf:"apple_platform_bundle_id,omitempty"`
+
+	// The identifier that's assigned to your Apple developer account team. Must be 10 alphanumeric characters.
+	ApplePlatformTeamID *string `json:"applePlatformTeamId,omitempty" tf:"apple_platform_team_id,omitempty"`
+
 	// The ARN of the SNS platform application
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ARN of the SNS Topic triggered when a delivery to any of the platform endpoints associated with your platform application encounters a permanent failure.
+	EventDeliveryFailureTopicArn *string `json:"eventDeliveryFailureTopicArn,omitempty" tf:"event_delivery_failure_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when a new platform endpoint is added to your platform application.
+	EventEndpointCreatedTopicArn *string `json:"eventEndpointCreatedTopicArn,omitempty" tf:"event_endpoint_created_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is deleted from your platform application.
+	EventEndpointDeletedTopicArn *string `json:"eventEndpointDeletedTopicArn,omitempty" tf:"event_endpoint_deleted_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is changed from your platform application.
+	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
+
+	// The IAM role ARN permitted to receive failure feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
+	FailureFeedbackRoleArn *string `json:"failureFeedbackRoleArn,omitempty" tf:"failure_feedback_role_arn,omitempty"`
+
 	// The ARN of the SNS platform application
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The platform that the app is registered with. See Platform for supported platforms.
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Application Platform credential. See Credential for type of credential required for platform.
+	PlatformCredentialSecretRef v1.SecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
+
+	// Application Platform principal. See Principal for type of principal required for platform.
+	PlatformPrincipalSecretRef *v1.SecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
+	SuccessFeedbackRoleArn *string `json:"successFeedbackRoleArn,omitempty" tf:"success_feedback_role_arn,omitempty"`
+
+	// The sample rate percentage (0-100) of successfully delivered messages.
+	SuccessFeedbackSampleRate *string `json:"successFeedbackSampleRate,omitempty" tf:"success_feedback_sample_rate,omitempty"`
 }
 
 type PlatformApplicationParameters struct {
@@ -63,11 +103,11 @@ type PlatformApplicationParameters struct {
 	FailureFeedbackRoleArnSelector *v1.Selector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The platform that the app is registered with. See Platform for supported platforms.
-	// +kubebuilder:validation:Required
-	Platform *string `json:"platform" tf:"platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Application Platform credential. See Credential for type of credential required for platform.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PlatformCredentialSecretRef v1.SecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
 
 	// Application Platform principal. See Principal for type of principal required for platform.
@@ -122,8 +162,10 @@ type PlatformApplicationStatus struct {
 type PlatformApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PlatformApplicationSpec   `json:"spec"`
-	Status            PlatformApplicationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platform)",message="platform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platformCredentialSecretRef)",message="platformCredentialSecretRef is a required parameter"
+	Spec   PlatformApplicationSpec   `json:"spec"`
+	Status PlatformApplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

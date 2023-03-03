@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: deliverychannels.configservice.aws.upbound.io
 spec:
@@ -172,6 +172,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -351,6 +360,38 @@ spec:
                   id:
                     description: The name of the delivery channel.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  s3BucketName:
+                    description: The name of the S3 bucket used to store the configuration
+                      history.
+                    type: string
+                  s3KeyPrefix:
+                    description: The prefix for the specified S3 bucket.
+                    type: string
+                  s3KmsKeyArn:
+                    description: The ARN of the AWS KMS key used to encrypt objects
+                      delivered by AWS Config. Must belong to the same Region as the
+                      destination S3 bucket.
+                    type: string
+                  snapshotDeliveryProperties:
+                    description: Options for how AWS Config delivers configuration
+                      snapshots. See below
+                    items:
+                      properties:
+                        deliveryFrequency:
+                          description: '- The frequency with which AWS Config recurringly
+                            delivers configuration snapshotsE.g., One_Hour or Three_Hours.
+                            Valid values are listed here.'
+                          type: string
+                      type: object
+                    type: array
+                  snsTopicArn:
+                    description: The ARN of the SNS topic that AWS Config delivers
+                      notifications to.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -393,9 +434,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

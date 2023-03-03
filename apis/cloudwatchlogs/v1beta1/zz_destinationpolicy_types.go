@@ -14,14 +14,25 @@ import (
 )
 
 type DestinationPolicyObservation struct {
+
+	// The policy document. This is a JSON formatted string.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual AWS accounts.
+	ForceUpdate *bool `json:"forceUpdate,omitempty" tf:"force_update,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DestinationPolicyParameters struct {
 
 	// The policy document. This is a JSON formatted string.
-	// +kubebuilder:validation:Required
-	AccessPolicy *string `json:"accessPolicy" tf:"access_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual AWS accounts.
 	// +kubebuilder:validation:Optional
@@ -57,8 +68,9 @@ type DestinationPolicyStatus struct {
 type DestinationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DestinationPolicySpec   `json:"spec"`
-	Status            DestinationPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessPolicy)",message="accessPolicy is a required parameter"
+	Spec   DestinationPolicySpec   `json:"spec"`
+	Status DestinationPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

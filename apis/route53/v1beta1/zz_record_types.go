@@ -14,6 +14,15 @@ import (
 )
 
 type AliasObservation struct {
+
+	// Set to true if you want Route 53 to determine whether to respond to DNS queries using this resource record set by checking the health of the resource record set. Some resources have special requirements, see related part of documentation.
+	EvaluateTargetHealth *bool `json:"evaluateTargetHealth,omitempty" tf:"evaluate_target_health,omitempty"`
+
+	// The name of the record.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the hosted zone to contain this record.
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type AliasParameters struct {
@@ -32,6 +41,9 @@ type AliasParameters struct {
 }
 
 type FailoverRoutingPolicyObservation struct {
+
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FailoverRoutingPolicyParameters struct {
@@ -42,6 +54,15 @@ type FailoverRoutingPolicyParameters struct {
 }
 
 type GeolocationRoutingPolicyObservation struct {
+
+	// A two-letter continent code. See http://docs.aws.amazon.com/Route53/latest/APIReference/API_GetGeoLocation.html for code details. Either continent or country must be specified.
+	Continent *string `json:"continent,omitempty" tf:"continent,omitempty"`
+
+	// A two-character country code or * to indicate a default resource record set.
+	Country *string `json:"country,omitempty" tf:"country,omitempty"`
+
+	// A subdivision code for a country.
+	Subdivision *string `json:"subdivision,omitempty" tf:"subdivision,omitempty"`
 }
 
 type GeolocationRoutingPolicyParameters struct {
@@ -60,6 +81,9 @@ type GeolocationRoutingPolicyParameters struct {
 }
 
 type LatencyRoutingPolicyObservation struct {
+
+	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LatencyRoutingPolicyParameters struct {
@@ -71,10 +95,58 @@ type LatencyRoutingPolicyParameters struct {
 
 type RecordObservation struct {
 
+	// An alias block. Conflicts with ttl & records.
+	// Documented below.
+	Alias []AliasObservation `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// false by default. This configuration is not recommended for most environments.
+	AllowOverwrite *bool `json:"allowOverwrite,omitempty" tf:"allow_overwrite,omitempty"`
+
+	// A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below.
+	FailoverRoutingPolicy []FailoverRoutingPolicyObservation `json:"failoverRoutingPolicy,omitempty" tf:"failover_routing_policy,omitempty"`
+
 	// FQDN built using the zone domain and name.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.
+	GeolocationRoutingPolicy []GeolocationRoutingPolicyObservation `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
+
+	// The health check the record should be associated with.
+	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below.
+	LatencyRoutingPolicy []LatencyRoutingPolicyObservation `json:"latencyRoutingPolicy,omitempty" tf:"latency_routing_policy,omitempty"`
+
+	// Set to true to indicate a multivalue answer routing policy. Conflicts with any other routing policy.
+	MultivalueAnswerRoutingPolicy *bool `json:"multivalueAnswerRoutingPolicy,omitempty" tf:"multivalue_answer_routing_policy,omitempty"`
+
+	// The name of the record.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A string list of records.g., "first255characters\"\"morecharacters").
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Unique identifier to differentiate records with routing policies from one another. Required if using failover, geolocation, latency, multivalue_answer, or weighted routing policies documented below.
+	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
+
+	// The TTL of the record.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
+	WeightedRoutingPolicy []WeightedRoutingPolicyObservation `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
+
+	// The ID of the hosted zone to contain this record.
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type RecordParameters struct {
@@ -118,8 +190,8 @@ type RecordParameters struct {
 	MultivalueAnswerRoutingPolicy *bool `json:"multivalueAnswerRoutingPolicy,omitempty" tf:"multivalue_answer_routing_policy,omitempty"`
 
 	// The name of the record.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
 	// +kubebuilder:validation:Optional
@@ -140,8 +212,8 @@ type RecordParameters struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
 	// +kubebuilder:validation:Optional
@@ -162,6 +234,9 @@ type RecordParameters struct {
 }
 
 type WeightedRoutingPolicyObservation struct {
+
+	// A numeric value indicating the relative weight of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type WeightedRoutingPolicyParameters struct {
@@ -195,8 +270,10 @@ type RecordStatus struct {
 type Record struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RecordSpec   `json:"spec"`
-	Status            RecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   RecordSpec   `json:"spec"`
+	Status RecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

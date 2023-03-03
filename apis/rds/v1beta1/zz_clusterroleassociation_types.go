@@ -15,8 +15,21 @@ import (
 
 type ClusterRoleAssociationObservation struct {
 
+	// DB Cluster Identifier to associate with the IAM Role.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
+
 	// DB Cluster Identifier and IAM Role ARN separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Cluster.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ClusterRoleAssociationParameters struct {
@@ -36,8 +49,8 @@ type ClusterRoleAssociationParameters struct {
 	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
-	// +kubebuilder:validation:Required
-	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +96,9 @@ type ClusterRoleAssociationStatus struct {
 type ClusterRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterRoleAssociationSpec   `json:"spec"`
-	Status            ClusterRoleAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureName)",message="featureName is a required parameter"
+	Spec   ClusterRoleAssociationSpec   `json:"spec"`
+	Status ClusterRoleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

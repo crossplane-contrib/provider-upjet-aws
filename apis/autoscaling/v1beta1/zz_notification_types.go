@@ -14,19 +14,34 @@ import (
 )
 
 type NotificationObservation struct {
+
+	// List of AutoScaling Group Names
+	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of Notification Types that trigger
+	// notifications. Acceptable values are documented in the AWS documentation here
+	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Topic ARN for notifications to be sent through
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type NotificationParameters struct {
 
 	// List of AutoScaling Group Names
-	// +kubebuilder:validation:Required
-	GroupNames []*string `json:"groupNames" tf:"group_names,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
-	// +kubebuilder:validation:Required
-	Notifications []*string `json:"notifications" tf:"notifications,omitempty"`
+	// +kubebuilder:validation:Optional
+	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +87,10 @@ type NotificationStatus struct {
 type Notification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationSpec   `json:"spec"`
-	Status            NotificationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupNames)",message="groupNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notifications)",message="notifications is a required parameter"
+	Spec   NotificationSpec   `json:"spec"`
+	Status NotificationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

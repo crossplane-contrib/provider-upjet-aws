@@ -14,14 +14,25 @@ import (
 )
 
 type RuleGroupNamespaceObservation struct {
+
+	// the rule group namespace data that you want to be applied. See more in AWS Docs.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the prometheus workspace the rule group namespace should be linked to
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type RuleGroupNamespaceParameters struct {
 
 	// the rule group namespace data that you want to be applied. See more in AWS Docs.
-	// +kubebuilder:validation:Required
-	Data *string `json:"data" tf:"data,omitempty"`
+	// +kubebuilder:validation:Optional
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -67,8 +78,9 @@ type RuleGroupNamespaceStatus struct {
 type RuleGroupNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RuleGroupNamespaceSpec   `json:"spec"`
-	Status            RuleGroupNamespaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.data)",message="data is a required parameter"
+	Spec   RuleGroupNamespaceSpec   `json:"spec"`
+	Status RuleGroupNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

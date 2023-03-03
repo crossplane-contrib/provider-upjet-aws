@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: standardssubscriptions.securityhub.aws.upbound.io
 spec:
@@ -73,8 +73,16 @@ spec:
                     type: string
                 required:
                 - region
-                - standardsArn
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -246,6 +254,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: standardsArn is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.standardsArn)
           status:
             description: StandardsSubscriptionStatus defines the observed state of
               StandardsSubscription.
@@ -255,6 +266,13 @@ spec:
                   id:
                     description: The ARN of a resource that represents your subscription
                       to a supported standard.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  standardsArn:
+                    description: The ARN of a standard - see below.
                     type: string
                 type: object
               conditions:
@@ -298,9 +316,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

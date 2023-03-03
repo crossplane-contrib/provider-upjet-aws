@@ -18,8 +18,21 @@ type TemplateObservation struct {
 	// The ARN of the SES template
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
+	HTML *string `json:"html,omitempty" tf:"html,omitempty"`
+
 	// The name of the SES template
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The subject line of the email.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TemplateParameters struct {

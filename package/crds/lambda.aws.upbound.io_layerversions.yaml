@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: layerversions.lambda.aws.upbound.io
 spec:
@@ -123,9 +123,17 @@ spec:
                       archive.
                     type: string
                 required:
-                - layerName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -297,6 +305,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: layerName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.layerName)
           status:
             description: LayerVersionStatus defines the observed state of LayerVersion.
             properties:
@@ -305,19 +316,76 @@ spec:
                   arn:
                     description: ARN of the Lambda Layer with version.
                     type: string
+                  compatibleArchitectures:
+                    description: List of Architectures this layer is compatible with.
+                      Currently x86_64 and arm64 can be specified.
+                    items:
+                      type: string
+                    type: array
+                  compatibleRuntimes:
+                    description: List of Runtimes this layer is compatible with. Up
+                      to 5 runtimes can be specified.
+                    items:
+                      type: string
+                    type: array
                   createdDate:
                     description: Date this resource was created.
+                    type: string
+                  description:
+                    description: Description of what your Lambda Layer does.
+                    type: string
+                  filename:
+                    description: prefixed options cannot be used.
                     type: string
                   id:
                     type: string
                   layerArn:
                     description: ARN of the Lambda Layer without version.
                     type: string
+                  layerName:
+                    description: Unique name for your Lambda Layer
+                    type: string
+                  licenseInfo:
+                    description: License info for your Lambda Layer. See License Info.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  s3Bucket:
+                    description: S3 bucket location containing the function's deployment
+                      package. Conflicts with filename. This bucket must reside in
+                      the same AWS region where you are creating the Lambda function.
+                    type: string
+                  s3Key:
+                    description: S3 key of an object containing the function's deployment
+                      package. Conflicts with filename.
+                    type: string
+                  s3ObjectVersion:
+                    description: Object version containing the function's deployment
+                      package. Conflicts with filename.
+                    type: string
                   signingJobArn:
                     description: ARN of a signing job.
                     type: string
                   signingProfileVersionArn:
                     description: ARN for a signing profile version.
+                    type: string
+                  skipDestroy:
+                    description: Whether to retain the old version of a previously
+                      deployed Lambda Layer. Default is false. When this is not set
+                      to true, changing any of compatible_architectures, compatible_runtimes,
+                      description, filename, layer_name, license_info, s3_bucket,
+                      s3_key, s3_object_version, or source_code_hash forces deletion
+                      of the existing layer version and creation of a new layer version.
+                    type: boolean
+                  sourceCodeHash:
+                    description: Used to trigger updates. Must be set to a base64-encoded
+                      SHA256 hash of the package file specified with either filename
+                      or s3_key. The usual way to set this is ${filebase64sha256("file.11.12
+                      or later) or ${base64sha256(file("file.11.11 and earlier), where
+                      "file.zip" is the local filename of the lambda layer source
+                      archive.
                     type: string
                   sourceCodeSize:
                     description: Size in bytes of the function .zip file.
@@ -367,9 +435,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

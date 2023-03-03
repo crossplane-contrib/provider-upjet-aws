@@ -15,6 +15,22 @@ import (
 
 type CognitoIdentityPoolProviderPrincipalTagObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity pool ID.
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// The name of the identity provider.
+	IdentityProviderName *string `json:"identityProviderName,omitempty" tf:"identity_provider_name,omitempty"`
+
+	// String to string map of variables.
+	PrincipalTags map[string]*string `json:"principalTags,omitempty" tf:"principal_tags,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// :  use default (username and clientID) attribute mappings.
+	UseDefaults *bool `json:"useDefaults,omitempty" tf:"use_defaults,omitempty"`
 }
 
 type CognitoIdentityPoolProviderPrincipalTagParameters struct {

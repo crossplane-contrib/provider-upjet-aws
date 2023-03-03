@@ -18,18 +18,58 @@ type EBSVolumeObservation struct {
 	// The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The AZ where the EBS volume will exist.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// If true, the disk will be encrypted.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// If true, snapshot will be created before volume deletion. Any tags on the volume will be migrated to the snapshot. By default set to false
+	FinalSnapshot *bool `json:"finalSnapshot,omitempty" tf:"final_snapshot,omitempty"`
+
 	// The volume ID (e.g., vol-59fcb34e).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The amount of IOPS to provision for the disk. Only valid for type of io1, io2 or gp3.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Specifies whether to enable Amazon EBS Multi-Attach. Multi-Attach is supported on io1 and io2 volumes.
+	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Outpost.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The size of the drive in GiBs.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// A snapshot to base the EBS volume off of.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The throughput that the volume supports, in MiB/s. Only valid for type of gp3.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// The type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EBSVolumeParameters struct {
 
 	// The AZ where the EBS volume will exist.
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// If true, the disk will be encrypted.
 	// +kubebuilder:validation:Optional
@@ -114,8 +154,9 @@ type EBSVolumeStatus struct {
 type EBSVolume struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EBSVolumeSpec   `json:"spec"`
-	Status            EBSVolumeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	Spec   EBSVolumeSpec   `json:"spec"`
+	Status EBSVolumeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

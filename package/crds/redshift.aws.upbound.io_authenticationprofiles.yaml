@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: authenticationprofiles.redshift.aws.upbound.io
 spec:
@@ -74,9 +74,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - authenticationProfileContent
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -248,14 +256,26 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: authenticationProfileContent is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationProfileContent)
           status:
             description: AuthenticationProfileStatus defines the observed state of
               AuthenticationProfile.
             properties:
               atProvider:
                 properties:
+                  authenticationProfileContent:
+                    description: The content of the authentication profile in JSON
+                      format. The maximum length of the JSON string is determined
+                      by a quota for your account.
+                    type: string
                   id:
                     description: The name of the authentication profile.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -299,9 +319,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

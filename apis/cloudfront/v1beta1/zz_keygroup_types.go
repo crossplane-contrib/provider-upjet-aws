@@ -15,11 +15,24 @@ import (
 
 type KeyGroupObservation struct {
 
+	// A comment to describe the key group..
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
 	// The identifier for this version of the key group.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// The identifier for the key group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of the identifiers of the public keys in the key group.
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
+
+	// A name to identify the key group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type KeyGroupParameters struct {
@@ -44,8 +57,8 @@ type KeyGroupParameters struct {
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 
 	// A name to identify the key group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,8 +90,9 @@ type KeyGroupStatus struct {
 type KeyGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeyGroupSpec   `json:"spec"`
-	Status            KeyGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   KeyGroupSpec   `json:"spec"`
+	Status KeyGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

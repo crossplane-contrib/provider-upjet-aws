@@ -21,14 +21,25 @@ type BucketObservation struct {
 	// The resource Availability Zone. Follows the format us-east-2a (case-sensitive).
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
+
 	// The timestamp when the bucket was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// The name used for this bucket (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Amazon Web Services Region name.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The support code for the resource. Include this code in your email to support when you have questions about a resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -39,8 +50,8 @@ type BucketObservation struct {
 type BucketParameters struct {
 
 	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
-	// +kubebuilder:validation:Required
-	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The Amazon Web Services Region name.
 	// Region is the region you'd like your resource to be created in.
@@ -77,8 +88,9 @@ type BucketStatus struct {
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketSpec   `json:"spec"`
-	Status            BucketStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bundleId)",message="bundleId is a required parameter"
+	Spec   BucketSpec   `json:"spec"`
+	Status BucketStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

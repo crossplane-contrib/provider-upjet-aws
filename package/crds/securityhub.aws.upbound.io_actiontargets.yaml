@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: actiontargets.securityhub.aws.upbound.io
 spec:
@@ -75,10 +75,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - description
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -250,6 +257,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: description is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ActionTargetStatus defines the observed state of ActionTarget.
             properties:
@@ -259,7 +271,17 @@ spec:
                     description: Amazon Resource Name (ARN) of the Security Hub custom
                       action target.
                     type: string
+                  description:
+                    description: The name of the custom action target.
+                    type: string
                   id:
+                    type: string
+                  name:
+                    description: The description for the custom action target.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -303,9 +325,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

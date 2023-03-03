@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: groups.resourcegroups.aws.upbound.io
 spec:
@@ -126,6 +126,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,8 +314,61 @@ spec:
                   arn:
                     description: The ARN assigned by AWS for this resource group.
                     type: string
+                  configuration:
+                    description: A configuration associates the resource group with
+                      an AWS service and specifies how the service can interact with
+                      the resources in the group. See below for details.
+                    items:
+                      properties:
+                        parameters:
+                          description: A collection of parameters for this group configuration
+                            item. See below for details.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the group configuration parameter.
+                                type: string
+                              values:
+                                description: The value or values to be used for the
+                                  specified parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        type:
+                          description: Specifies the type of group configuration item.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the resource group.
+                    type: string
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceQuery:
+                    description: A resource_query block. Resource queries are documented
+                      below.
+                    items:
+                      properties:
+                        query:
+                          description: The resource query as a JSON string.
+                          type: string
+                        type:
+                          description: The type of the resource query. Defaults to
+                            TAG_FILTERS_1_0.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -356,9 +418,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: connections.directconnect.aws.upbound.io
 spec:
@@ -106,11 +106,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - bandwidth
-                - location
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -282,6 +288,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: bandwidth is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bandwidth)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ConnectionStatus defines the observed state of Connection.
             properties:
@@ -294,6 +307,17 @@ spec:
                     description: The Direct Connect endpoint on which the physical
                       connection terminates.
                     type: string
+                  bandwidth:
+                    description: 'The bandwidth of the connection. Valid values for
+                      dedicated connections: 1Gbps, 10Gbps. Valid values for hosted
+                      connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps,
+                      1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.'
+                    type: string
+                  encryptionMode:
+                    description: The connection MAC Security (MACsec) encryption mode.
+                      MAC Security (MACsec) is only available on dedicated connections.
+                      Valid values are no_encrypt, should_encrypt, and must_encrypt.
+                    type: string
                   hasLogicalRedundancy:
                     description: Indicates whether the connection supports a secondary
                       BGP peer in the same address family (IPv4/IPv6).
@@ -305,10 +329,18 @@ spec:
                     description: Boolean value representing if jumbo frames have been
                       enabled for this connection.
                     type: boolean
+                  location:
+                    description: The AWS Direct Connect location where the connection
+                      is located. See DescribeLocations for the list of AWS Direct
+                      Connect locations. Use locationCode.
+                    type: string
                   macsecCapable:
                     description: Boolean value indicating whether the connection supports
                       MAC Security (MACsec).
                     type: boolean
+                  name:
+                    description: The name of the connection.
+                    type: string
                   ownerAccountId:
                     description: The ID of the AWS account that owns the connection.
                     type: string
@@ -316,6 +348,28 @@ spec:
                     description: The MAC Security (MACsec) port link status of the
                       connection.
                     type: string
+                  providerName:
+                    description: The name of the service provider associated with
+                      the connection.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  requestMacsec:
+                    description: 'Boolean value indicating whether you want the connection
+                      to support MAC Security (MACsec). MAC Security (MACsec) is only
+                      available on dedicated connections. See MACsec prerequisites
+                      for more information about MAC Security (MACsec) prerequisites.
+                      Default value: false.'
+                    type: boolean
+                  skipDestroy:
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -368,9 +422,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: organizations.organizations.aws.upbound.io
 spec:
@@ -93,6 +93,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -295,6 +304,28 @@ spec:
                   arn:
                     description: ARN of the account
                     type: string
+                  awsServiceAccessPrincipals:
+                    description: List of AWS service principal names for which you
+                      want to enable integration with your organization. This is typically
+                      in the form of a URL, such as service-abbreviation.amazonaws.com.
+                      Organization must have feature_set set to ALL. Some services
+                      do not support enablement via this endpoint, see warning in
+                      aws docs.
+                    items:
+                      type: string
+                    type: array
+                  enabledPolicyTypes:
+                    description: List of Organizations policy types to enable in the
+                      Organization Root. Organization must have feature_set set to
+                      ALL. For additional information about valid policy types (e.g.,
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY,
+                      and TAG_POLICY), see the AWS Organizations API Reference.
+                    items:
+                      type: string
+                    type: array
+                  featureSet:
+                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+                    type: string
                   id:
                     description: Identifier of the account
                     type: string
@@ -330,6 +361,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   roots:
                     description: 'List of organization roots. All elements have these
                       attributes:'
@@ -400,9 +435,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

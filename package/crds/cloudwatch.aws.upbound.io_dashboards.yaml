@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: dashboards.cloudwatch.aws.upbound.io
 spec:
@@ -74,9 +74,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - dashboardBody
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -248,6 +256,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: dashboardBody is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dashboardBody)
           status:
             description: DashboardStatus defines the observed state of Dashboard.
             properties:
@@ -256,7 +267,16 @@ spec:
                   dashboardArn:
                     description: The Amazon Resource Name (ARN) of the dashboard.
                     type: string
+                  dashboardBody:
+                    description: The detailed information about the dashboard, including
+                      what widgets are included and their location on the dashboard.
+                      You can read more about the body structure in the documentation.
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -300,9 +320,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

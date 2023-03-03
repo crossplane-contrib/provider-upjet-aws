@@ -15,22 +15,32 @@ import (
 
 type GatewayObservation struct {
 
+	// The ASN to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294.
+	AmazonSideAsn *string `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+
 	// The ID of the gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// AWS Account ID of the gateway.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type GatewayParameters struct {
 
 	// The ASN to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294.
-	// +kubebuilder:validation:Required
-	AmazonSideAsn *string `json:"amazonSideAsn" tf:"amazon_side_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	AmazonSideAsn *string `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// The name of the connection.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -62,8 +72,10 @@ type GatewayStatus struct {
 type Gateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GatewaySpec   `json:"spec"`
-	Status            GatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.amazonSideAsn)",message="amazonSideAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   GatewaySpec   `json:"spec"`
+	Status GatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,7 +14,30 @@ import (
 )
 
 type SubscriptionFilterObservation struct {
+
+	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
+	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
+
+	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
+	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the log group to associate the subscription filter with
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// A name for the subscription filter
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type SubscriptionFilterParameters struct {
@@ -38,16 +61,16 @@ type SubscriptionFilterParameters struct {
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
 	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
-	// +kubebuilder:validation:Required
-	FilterPattern *string `json:"filterPattern" tf:"filter_pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
 	// The name of the log group to associate the subscription filter with
-	// +kubebuilder:validation:Required
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// A name for the subscription filter
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +116,11 @@ type SubscriptionFilterStatus struct {
 type SubscriptionFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionFilterSpec   `json:"spec"`
-	Status            SubscriptionFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterPattern)",message="filterPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logGroupName)",message="logGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SubscriptionFilterSpec   `json:"spec"`
+	Status SubscriptionFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

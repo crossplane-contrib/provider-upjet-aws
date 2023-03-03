@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: delegatedadministrators.organizations.aws.upbound.io
 spec:
@@ -153,8 +153,16 @@ spec:
                     type: string
                 required:
                 - region
-                - servicePrincipal
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -326,12 +334,19 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: servicePrincipal is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.servicePrincipal)
           status:
             description: DelegatedAdministratorStatus defines the observed state of
               DelegatedAdministrator.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: The account ID number of the member account in the
+                      organization to register as a delegated administrator.
+                    type: string
                   arn:
                     description: The Amazon Resource Name (ARN) of the delegated administrator's
                       account.
@@ -357,6 +372,14 @@ spec:
                   name:
                     description: The friendly name of the delegated administrator's
                       account.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  servicePrincipal:
+                    description: The service principal of the AWS service for which
+                      you want to make the member account a delegated administrator.
                     type: string
                   status:
                     description: The status of the delegated administrator's account
@@ -404,9 +427,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

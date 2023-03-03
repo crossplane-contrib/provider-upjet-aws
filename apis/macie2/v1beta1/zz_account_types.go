@@ -18,11 +18,21 @@ type AccountObservation struct {
 	// The date and time, in UTC and extended RFC 3339 format, when the Amazon Macie account was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are FIFTEEN_MINUTES, ONE_HOUR or SIX_HOURS.
+	FindingPublishingFrequency *string `json:"findingPublishingFrequency,omitempty" tf:"finding_publishing_frequency,omitempty"`
+
 	// The unique identifier (ID) of the macie account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
+
+	// Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED. Valid values are ENABLED or PAUSED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The date and time, in UTC and extended RFC 3339 format, of the most recent change to the status of the Macie account.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`

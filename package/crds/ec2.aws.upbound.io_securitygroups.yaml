@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: securitygroups.ec2.aws.upbound.io
 spec:
@@ -169,6 +169,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +357,12 @@ spec:
                   arn:
                     description: ARN of the security group.
                     type: string
+                  description:
+                    description: 'Security group description. Cannot be "". NOTE:
+                      This field maps to the AWS GroupDescription attribute, for which
+                      there is no Update API. If you''d like to classify your security
+                      groups in a way that can be updated, use tags.'
+                    type: string
                   egress:
                     description: Configuration block for egress rules. Can be specified
                       multiple times for each egress rule. Each egress block supports
@@ -463,9 +478,29 @@ spec:
                           type: number
                       type: object
                     type: array
+                  name:
+                    description: Name of the security group.
+                    type: string
                   ownerId:
                     description: Owner ID.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  revokeRulesOnDelete:
+                    description: This is normally not needed, however certain AWS
+                      services such as Elastic Map Reduce may automatically add required
+                      rules to security groups used with the service, and those rules
+                      may contain a cyclic dependency that prevent the security groups
+                      from being destroyed without removing the dependency first.
+                      Default false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -473,6 +508,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcId:
+                    description: VPC ID. Defaults to the region's default VPC.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -515,9 +553,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

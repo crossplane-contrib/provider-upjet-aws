@@ -15,11 +15,27 @@ import (
 
 type UserGroupObservation struct {
 
+	// The ARN that identifies the user group.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The current supported value is REDIS.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
 	// The user group identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The list of user IDs that belong to the user group.
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type UserGroupParameters struct {
@@ -29,8 +45,8 @@ type UserGroupParameters struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The current supported value is REDIS.
-	// +kubebuilder:validation:Required
-	Engine *string `json:"engine" tf:"engine,omitempty"`
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +97,9 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserGroupSpec   `json:"spec"`
-	Status            UserGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engine)",message="engine is a required parameter"
+	Spec   UserGroupSpec   `json:"spec"`
+	Status UserGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

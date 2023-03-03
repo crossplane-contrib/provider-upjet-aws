@@ -15,17 +15,45 @@ import (
 
 type ConfigurationProfileObservation struct {
 
+	// Application ID. Must be between 4 and 7 characters in length.
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
 	// ARN of the AppConfig Configuration Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The configuration profile ID.
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
+	// Description of the configuration profile. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// AppConfig configuration profile ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
+
+	// Name for the configuration profile. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
+	RetrievalRoleArn *string `json:"retrievalRoleArn,omitempty" tf:"retrieval_role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	Validator []ValidatorObservation `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
 type ConfigurationProfileParameters struct {
@@ -49,12 +77,12 @@ type ConfigurationProfileParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
-	// +kubebuilder:validation:Required
-	LocationURI *string `json:"locationUri" tf:"location_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
 	// Name for the configuration profile. Must be between 1 and 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -89,6 +117,12 @@ type ConfigurationProfileParameters struct {
 }
 
 type ValidatorObservation struct {
+
+	// Either the JSON Schema content or the ARN of an AWS Lambda function.
+	ContentSecretRef *v1.SecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
+
+	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ValidatorParameters struct {
@@ -126,8 +160,10 @@ type ConfigurationProfileStatus struct {
 type ConfigurationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationProfileSpec   `json:"spec"`
-	Status            ConfigurationProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.locationUri)",message="locationUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ConfigurationProfileSpec   `json:"spec"`
+	Status ConfigurationProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

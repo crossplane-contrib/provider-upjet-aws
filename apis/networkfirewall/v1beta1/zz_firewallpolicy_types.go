@@ -14,6 +14,9 @@ import (
 )
 
 type ActionDefinitionObservation struct {
+
+	// A configuration block describing the stateless inspection criteria that publishes the specified metrics to Amazon CloudWatch for the matching packet. You can pair this custom action with any of the standard stateless rule actions. See Publish Metric Action below for details.
+	PublishMetricAction []PublishMetricActionObservation `json:"publishMetricAction,omitempty" tf:"publish_metric_action,omitempty"`
 }
 
 type ActionDefinitionParameters struct {
@@ -24,6 +27,9 @@ type ActionDefinitionParameters struct {
 }
 
 type DimensionObservation struct {
+
+	// The string value to use in the custom metric dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DimensionParameters struct {
@@ -34,6 +40,12 @@ type DimensionParameters struct {
 }
 
 type FirewallPolicyEncryptionConfigurationObservation struct {
+
+	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FirewallPolicyEncryptionConfigurationParameters struct {
@@ -48,6 +60,29 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 }
 
 type FirewallPolicyFirewallPolicyObservation struct {
+
+	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
+	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
+
+	// A configuration block that defines options on how the policy handles stateful rules. See Stateful Engine Options below for details.
+	StatefulEngineOptions []StatefulEngineOptionsObservation `json:"statefulEngineOptions,omitempty" tf:"stateful_engine_options,omitempty"`
+
+	// Set of configuration blocks containing references to the stateful rule groups that are used in the policy. See Stateful Rule Group Reference below for details.
+	StatefulRuleGroupReference []StatefulRuleGroupReferenceObservation `json:"statefulRuleGroupReference,omitempty" tf:"stateful_rule_group_reference,omitempty"`
+
+	// Set of configuration blocks describing the custom action definitions that are available for use in the firewall policy's stateless_default_actions. See Stateless Custom Action below for details.
+	StatelessCustomAction []StatelessCustomActionObservation `json:"statelessCustomAction,omitempty" tf:"stateless_custom_action,omitempty"`
+
+	// Set of actions to take on a packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
+	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	StatelessDefaultActions []*string `json:"statelessDefaultActions,omitempty" tf:"stateless_default_actions,omitempty"`
+
+	// Set of actions to take on a fragmented packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
+	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions,omitempty" tf:"stateless_fragment_default_actions,omitempty"`
+
+	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
+	StatelessRuleGroupReference []StatelessRuleGroupReferenceObservation `json:"statelessRuleGroupReference,omitempty" tf:"stateless_rule_group_reference,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
@@ -88,8 +123,24 @@ type FirewallPolicyObservation struct {
 	// The Amazon Resource Name (ARN) that identifies the firewall policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A friendly description of the firewall policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// KMS encryption configuration settings. See Encryption Configuration below for details.
+	EncryptionConfiguration []FirewallPolicyEncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
+	FirewallPolicy []FirewallPolicyFirewallPolicyObservation `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
+
 	// The Amazon Resource Name (ARN) that identifies the firewall policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -109,8 +160,8 @@ type FirewallPolicyParameters struct {
 	EncryptionConfiguration []FirewallPolicyEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
-	// +kubebuilder:validation:Required
-	FirewallPolicy []FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy" tf:"firewall_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	FirewallPolicy []FirewallPolicyFirewallPolicyParameters `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -123,6 +174,9 @@ type FirewallPolicyParameters struct {
 }
 
 type OverrideObservation struct {
+
+	// The action that changes the rule group from DROP to ALERT . This only applies to managed rule groups.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type OverrideParameters struct {
@@ -133,6 +187,9 @@ type OverrideParameters struct {
 }
 
 type PublishMetricActionObservation struct {
+
+	// Set of configuration blocks describing dimension settings to use for Amazon CloudWatch custom metrics. See Dimension below for more details.
+	Dimension []DimensionObservation `json:"dimension,omitempty" tf:"dimension,omitempty"`
 }
 
 type PublishMetricActionParameters struct {
@@ -143,6 +200,9 @@ type PublishMetricActionParameters struct {
 }
 
 type StatefulEngineOptionsObservation struct {
+
+	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
+	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
 }
 
 type StatefulEngineOptionsParameters struct {
@@ -153,6 +213,15 @@ type StatefulEngineOptionsParameters struct {
 }
 
 type StatefulRuleGroupReferenceObservation struct {
+
+	// Configuration block for override values
+	Override []OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
+
+	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the stateless rule group.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type StatefulRuleGroupReferenceParameters struct {
@@ -171,6 +240,12 @@ type StatefulRuleGroupReferenceParameters struct {
 }
 
 type StatelessCustomActionObservation struct {
+
+	// A configuration block describing the custom action associated with the action_name. See Action Definition below for details.
+	ActionDefinition []ActionDefinitionObservation `json:"actionDefinition,omitempty" tf:"action_definition,omitempty"`
+
+	// A friendly name of the custom action.
+	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
 }
 
 type StatelessCustomActionParameters struct {
@@ -185,6 +260,12 @@ type StatelessCustomActionParameters struct {
 }
 
 type StatelessRuleGroupReferenceObservation struct {
+
+	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the stateless rule group.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type StatelessRuleGroupReferenceParameters struct {
@@ -232,8 +313,9 @@ type FirewallPolicyStatus struct {
 type FirewallPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallPolicySpec   `json:"spec"`
-	Status            FirewallPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.firewallPolicy)",message="firewallPolicy is a required parameter"
+	Spec   FirewallPolicySpec   `json:"spec"`
+	Status FirewallPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

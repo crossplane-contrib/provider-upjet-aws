@@ -14,16 +14,51 @@ import (
 )
 
 type ReplicationTaskObservation struct {
+
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
+
+	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
+	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the replication instance.
+	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the replication task.
 	ReplicationTaskArn *string `json:"replicationTaskArn,omitempty" tf:"replication_task_arn,omitempty"`
 
+	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
+	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
+	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
+
+	// Whether to run or stop the replication task.
+	StartReplicationTask *bool `json:"startReplicationTask,omitempty" tf:"start_replication_task,omitempty"`
+
 	// Replication Task status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// An escaped JSON string that contains the table mappings. For information on table mapping see Using Table Mapping with an AWS Database Migration Service Task to Select and Filter Data
+	TableMappings *string `json:"tableMappings,omitempty" tf:"table_mappings,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint.
+	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 }
 
 type ReplicationTaskParameters struct {
@@ -37,8 +72,8 @@ type ReplicationTaskParameters struct {
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
-	// +kubebuilder:validation:Required
-	MigrationType *string `json:"migrationType" tf:"migration_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +117,8 @@ type ReplicationTaskParameters struct {
 	StartReplicationTask *bool `json:"startReplicationTask,omitempty" tf:"start_replication_task,omitempty"`
 
 	// An escaped JSON string that contains the table mappings. For information on table mapping see Using Table Mapping with an AWS Database Migration Service Task to Select and Filter Data
-	// +kubebuilder:validation:Required
-	TableMappings *string `json:"tableMappings" tf:"table_mappings,omitempty"`
+	// +kubebuilder:validation:Optional
+	TableMappings *string `json:"tableMappings,omitempty" tf:"table_mappings,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -128,8 +163,10 @@ type ReplicationTaskStatus struct {
 type ReplicationTask struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationTaskSpec   `json:"spec"`
-	Status            ReplicationTaskStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.migrationType)",message="migrationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tableMappings)",message="tableMappings is a required parameter"
+	Spec   ReplicationTaskSpec   `json:"spec"`
+	Status ReplicationTaskStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

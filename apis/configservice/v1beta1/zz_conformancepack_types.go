@@ -18,7 +18,26 @@ type ConformancePackObservation struct {
 	// Amazon Resource Name (ARN) of the conformance pack.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Amazon S3 bucket where AWS Config stores conformance pack templates. Maximum length of 63.
+	DeliveryS3Bucket *string `json:"deliveryS3Bucket,omitempty" tf:"delivery_s3_bucket,omitempty"`
+
+	// The prefix for the Amazon S3 bucket. Maximum length of 1024.
+	DeliveryS3KeyPrefix *string `json:"deliveryS3KeyPrefix,omitempty" tf:"delivery_s3_key_prefix,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Set of configuration blocks describing input parameters passed to the conformance pack template. Documented below. When configured, the parameters must also be included in the template_body or in the template stored in Amazon S3 if using template_s3_uri.
+	InputParameter []InputParameterObservation `json:"inputParameter,omitempty" tf:"input_parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A string containing full conformance pack template body. Maximum length of 51200. Drift detection is not possible with this argument.
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// Location of file, e.g., s3://bucketname/prefix, containing the template body. The uri must point to the conformance pack template that is located in an Amazon S3 bucket in the same region as the conformance pack. Maximum length of 1024. Drift detection is not possible with this argument.
+	TemplateS3URI *string `json:"templateS3Uri,omitempty" tf:"template_s3_uri,omitempty"`
 }
 
 type ConformancePackParameters struct {
@@ -50,6 +69,12 @@ type ConformancePackParameters struct {
 }
 
 type InputParameterObservation struct {
+
+	// The input key.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+
+	// The input value.
+	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
 }
 
 type InputParameterParameters struct {

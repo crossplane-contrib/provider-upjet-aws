@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: mounttargets.efs.aws.upbound.io
 spec:
@@ -313,6 +313,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -503,8 +512,17 @@ spec:
                   fileSystemArn:
                     description: Amazon Resource Name of the file system.
                     type: string
+                  fileSystemId:
+                    description: The ID of the file system for which the mount target
+                      is intended.
+                    type: string
                   id:
                     description: The ID of the mount target.
+                    type: string
+                  ipAddress:
+                    description: The address (within the address range of the specified
+                      subnet) at which the file system may be mounted via the mount
+                      target.
                     type: string
                   mountTargetDnsName:
                     description: The DNS name for the given subnet/AZ per documented
@@ -516,6 +534,20 @@ spec:
                     type: string
                   ownerId:
                     description: AWS account ID that owns the resource.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  securityGroups:
+                    description: A list of up to 5 VPC security group IDs (that must
+                      be for the same VPC as subnet specified) in effect for the mount
+                      target.
+                    items:
+                      type: string
+                    type: array
+                  subnetId:
+                    description: The ID of the subnet to add the mount target in.
                     type: string
                 type: object
               conditions:
@@ -559,9 +591,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

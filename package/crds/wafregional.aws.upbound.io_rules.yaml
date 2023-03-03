@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: rules.wafregional.aws.upbound.io
 spec:
@@ -181,10 +181,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - metricName
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -356,6 +363,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: metricName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: RuleStatus defines the observed state of Rule.
             properties:
@@ -367,6 +379,41 @@ spec:
                   id:
                     description: The ID of the WAF Regional Rule.
                     type: string
+                  metricName:
+                    description: The name or description for the Amazon CloudWatch
+                      metric of this rule.
+                    type: string
+                  name:
+                    description: The name or description of the rule.
+                    type: string
+                  predicate:
+                    description: The objects to include in a rule (documented below).
+                    items:
+                      properties:
+                        dataId:
+                          description: The unique identifier of a predicate, such
+                            as the ID of a ByteMatchSet or IPSet.
+                          type: string
+                        negated:
+                          description: Whether to use the settings or the negated
+                            settings that you specified in the objects.
+                          type: boolean
+                        type:
+                          description: 'The type of predicate in a rule. Valid values:
+                            ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint,
+                            SqlInjectionMatch, or XssMatch'
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -416,9 +463,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

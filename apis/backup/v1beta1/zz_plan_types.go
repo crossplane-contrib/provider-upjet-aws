@@ -14,6 +14,12 @@ import (
 )
 
 type AdvancedBackupSettingObservation struct {
+
+	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
+
+	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
 type AdvancedBackupSettingParameters struct {
@@ -28,6 +34,12 @@ type AdvancedBackupSettingParameters struct {
 }
 
 type CopyActionObservation struct {
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
+	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
+
+	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	Lifecycle []LifecycleObservation `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 }
 
 type CopyActionParameters struct {
@@ -42,6 +54,12 @@ type CopyActionParameters struct {
 }
 
 type LifecycleObservation struct {
+
+	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+
+	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type LifecycleParameters struct {
@@ -57,11 +75,27 @@ type LifecycleParameters struct {
 
 type PlanObservation struct {
 
+	// An object that specifies backup options for each resource type.
+	AdvancedBackupSetting []AdvancedBackupSettingObservation `json:"advancedBackupSetting,omitempty" tf:"advanced_backup_setting,omitempty"`
+
 	// The ARN of the backup plan.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The id of the backup plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The display name of a backup plan.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
+	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -77,8 +111,8 @@ type PlanParameters struct {
 	AdvancedBackupSetting []AdvancedBackupSettingParameters `json:"advancedBackupSetting,omitempty" tf:"advanced_backup_setting,omitempty"`
 
 	// The display name of a backup plan.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -86,8 +120,8 @@ type PlanParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A rule object that specifies a scheduled task that is used to back up a selection of resources.
-	// +kubebuilder:validation:Required
-	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -95,6 +129,12 @@ type PlanParameters struct {
 }
 
 type RuleLifecycleObservation struct {
+
+	// Specifies the number of days after creation that a recovery point is moved to cold storage.
+	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+
+	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
+	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type RuleLifecycleParameters struct {
@@ -109,6 +149,33 @@ type RuleLifecycleParameters struct {
 }
 
 type RuleObservation struct {
+
+	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
+	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
+
+	// Configuration block(s) with copy operation settings. Detailed below.
+	CopyAction []CopyActionObservation `json:"copyAction,omitempty" tf:"copy_action,omitempty"`
+
+	// Enable continuous backups for supported resources.
+	EnableContinuousBackup *bool `json:"enableContinuousBackup,omitempty" tf:"enable_continuous_backup,omitempty"`
+
+	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
+	Lifecycle []RuleLifecycleObservation `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
+
+	// Metadata that you can assign to help organize the resources that you create.
+	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
+
+	// An display name for a backup rule.
+	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
+
+	// A CRON expression specifying when AWS Backup initiates a backup job.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The amount of time in minutes before beginning a backup.
+	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+
+	// The name of a logical container where backups are stored.
+	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
 }
 
 type RuleParameters struct {
@@ -183,8 +250,10 @@ type PlanStatus struct {
 type Plan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PlanSpec   `json:"spec"`
-	Status            PlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   PlanSpec   `json:"spec"`
+	Status PlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

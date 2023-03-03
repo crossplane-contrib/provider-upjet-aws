@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: filesystempolicies.efs.aws.upbound.io
 spec:
@@ -159,9 +159,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -333,13 +341,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: policy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)
           status:
             description: FileSystemPolicyStatus defines the observed state of FileSystemPolicy.
             properties:
               atProvider:
                 properties:
+                  bypassPolicyLockoutSafetyCheck:
+                    description: A flag to indicate whether to bypass the aws_efs_file_system_policy
+                      lockout safety check. The policy lockout safety check determines
+                      whether the policy in the request will prevent the principal
+                      making the request will be locked out from making future PutFileSystemPolicy
+                      requests on the file system. Set bypass_policy_lockout_safety_check
+                      to true only when you intend to prevent the principal that is
+                      making the request from making a subsequent PutFileSystemPolicy
+                      request on the file system. The default value is false.
+                    type: boolean
+                  fileSystemId:
+                    description: The ID of the EFS file system.
+                    type: string
                   id:
                     description: The ID that identifies the file system (e.g., fs-ccfc0d65).
+                    type: string
+                  policy:
+                    description: The JSON formatted file system policy for the EFS
+                      file system. see Docs for more info.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -383,9 +415,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

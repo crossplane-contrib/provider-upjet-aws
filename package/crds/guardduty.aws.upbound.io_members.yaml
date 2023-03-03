@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: members.guardduty.aws.upbound.io
 spec:
@@ -240,9 +240,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - email
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -414,13 +422,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: email is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)
           status:
             description: MemberStatus defines the observed state of Member.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: AWS account ID for member account.
+                    type: string
+                  detectorId:
+                    description: The detector ID of the GuardDuty account where you
+                      want to create member accounts.
+                    type: string
+                  disableEmailNotification:
+                    description: Boolean whether an email notification is sent to
+                      the accounts. Defaults to false.
+                    type: boolean
+                  email:
+                    description: Email address for member account.
+                    type: string
                   id:
                     description: The ID of the GuardDuty member
+                    type: string
+                  invitationMessage:
+                    description: Message for invitation.
+                    type: string
+                  invite:
+                    description: Boolean whether to invite the account to GuardDuty
+                      as a member. Defaults to false.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   relationshipStatus:
                     description: The status of the relationship between the member
@@ -469,9 +505,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

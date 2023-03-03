@@ -23,21 +23,34 @@ type ObservabilityConfigurationObservation struct {
 	// Whether the observability configuration has the highest observability_configuration_revision among all configurations that share the same observability_configuration_name.
 	Latest *bool `json:"latest,omitempty" tf:"latest,omitempty"`
 
+	// Name of the observability configuration.
+	ObservabilityConfigurationName *string `json:"observabilityConfigurationName,omitempty" tf:"observability_configuration_name,omitempty"`
+
 	// The revision of this observability configuration.
 	ObservabilityConfigurationRevision *float64 `json:"observabilityConfigurationRevision,omitempty" tf:"observability_configuration_revision,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Current state of the observability configuration. An INACTIVE configuration revision has been deleted and can't be used. It is permanently removed some time after deletion.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing. See Trace Configuration below for more details.
+	TraceConfiguration []TraceConfigurationObservation `json:"traceConfiguration,omitempty" tf:"trace_configuration,omitempty"`
 }
 
 type ObservabilityConfigurationParameters struct {
 
 	// Name of the observability configuration.
-	// +kubebuilder:validation:Required
-	ObservabilityConfigurationName *string `json:"observabilityConfigurationName" tf:"observability_configuration_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationName *string `json:"observabilityConfigurationName,omitempty" tf:"observability_configuration_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -54,6 +67,9 @@ type ObservabilityConfigurationParameters struct {
 }
 
 type TraceConfigurationObservation struct {
+
+	// Implementation provider chosen for tracing App Runner services. Valid values: AWSXRAY.
+	Vendor *string `json:"vendor,omitempty" tf:"vendor,omitempty"`
 }
 
 type TraceConfigurationParameters struct {
@@ -87,8 +103,9 @@ type ObservabilityConfigurationStatus struct {
 type ObservabilityConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ObservabilityConfigurationSpec   `json:"spec"`
-	Status            ObservabilityConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.observabilityConfigurationName)",message="observabilityConfigurationName is a required parameter"
+	Spec   ObservabilityConfigurationSpec   `json:"spec"`
+	Status ObservabilityConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

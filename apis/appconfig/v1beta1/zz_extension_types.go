@@ -14,6 +14,18 @@ import (
 )
 
 type ActionObservation struct {
+
+	// Information about the action.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The action name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The extension URI associated to the action point in the extension definition. The URI can be an Amazon Resource Name (ARN) for one of the following: an Lambda function, an Amazon Simple Queue Service queue, an Amazon Simple Notification Service topic, or the Amazon EventBridge default event bus.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ActionParameters struct {
@@ -56,6 +68,12 @@ type ActionParameters struct {
 }
 
 type ActionPointObservation struct {
+
+	// An action defines the tasks the extension performs during the AppConfig workflow. Detailed below.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The point at which to perform the defined actions. Valid points are PRE_CREATE_HOSTED_CONFIGURATION_VERSION, PRE_START_DEPLOYMENT, ON_DEPLOYMENT_START, ON_DEPLOYMENT_STEP, ON_DEPLOYMENT_BAKING, ON_DEPLOYMENT_COMPLETE, ON_DEPLOYMENT_ROLLED_BACK.
+	Point *string `json:"point,omitempty" tf:"point,omitempty"`
 }
 
 type ActionPointParameters struct {
@@ -71,11 +89,30 @@ type ActionPointParameters struct {
 
 type ExtensionObservation struct {
 
+	// The action points defined in the extension. Detailed below.
+	ActionPoint []ActionPointObservation `json:"actionPoint,omitempty" tf:"action_point,omitempty"`
+
 	// ARN of the AppConfig Extension.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Information about the extension.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// AppConfig Extension ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A name for the extension. Each extension name in your account must be unique. Extension versions use the same name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters accepted by the extension. You specify parameter values when you associate the extension to an AppConfig resource by using the CreateExtensionAssociation API action. For Lambda extension actions, these parameters are included in the Lambda request object. Detailed below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -86,16 +123,16 @@ type ExtensionObservation struct {
 type ExtensionParameters struct {
 
 	// The action points defined in the extension. Detailed below.
-	// +kubebuilder:validation:Required
-	ActionPoint []ActionPointParameters `json:"actionPoint" tf:"action_point,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionPoint []ActionPointParameters `json:"actionPoint,omitempty" tf:"action_point,omitempty"`
 
 	// Information about the extension.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A name for the extension. Each extension name in your account must be unique. Extension versions use the same name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The parameters accepted by the extension. You specify parameter values when you associate the extension to an AppConfig resource by using the CreateExtensionAssociation API action. For Lambda extension actions, these parameters are included in the Lambda request object. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -112,6 +149,15 @@ type ExtensionParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// Information about the parameter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The parameter name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Determines if a parameter value must be specified in the extension association.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -153,8 +199,10 @@ type ExtensionStatus struct {
 type Extension struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExtensionSpec   `json:"spec"`
-	Status            ExtensionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionPoint)",message="actionPoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ExtensionSpec   `json:"spec"`
+	Status ExtensionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: securityconfigurations.glue.aws.upbound.io
 spec:
@@ -364,9 +364,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - encryptionConfiguration
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -538,14 +546,72 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: encryptionConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encryptionConfiguration)
           status:
             description: SecurityConfigurationStatus defines the observed state of
               SecurityConfiguration.
             properties:
               atProvider:
                 properties:
+                  encryptionConfiguration:
+                    description: –  Configuration block containing encryption configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        cloudwatchEncryption:
+                          items:
+                            properties:
+                              cloudwatchEncryptionMode:
+                                description: 'Encryption mode to use for CloudWatch
+                                  data. Valid values: DISABLED, SSE-KMS. Default value:
+                                  DISABLED.'
+                                type: string
+                              kmsKeyArn:
+                                description: Amazon Resource Name (ARN) of the KMS
+                                  key to be used to encrypt the data.
+                                type: string
+                            type: object
+                          type: array
+                        jobBookmarksEncryption:
+                          items:
+                            properties:
+                              jobBookmarksEncryptionMode:
+                                description: 'Encryption mode to use for job bookmarks
+                                  data. Valid values: CSE-KMS, DISABLED. Default value:
+                                  DISABLED.'
+                                type: string
+                              kmsKeyArn:
+                                description: Amazon Resource Name (ARN) of the KMS
+                                  key to be used to encrypt the data.
+                                type: string
+                            type: object
+                          type: array
+                        s3Encryption:
+                          description: A s3_encryption  block as described below,
+                            which contains encryption configuration for S3 data.
+                          items:
+                            properties:
+                              kmsKeyArn:
+                                description: Amazon Resource Name (ARN) of the KMS
+                                  key to be used to encrypt the data.
+                                type: string
+                              s3EncryptionMode:
+                                description: 'Encryption mode to use for S3 data.
+                                  Valid values: DISABLED, SSE-KMS, SSE-S3. Default
+                                  value: DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: Glue security configuration name
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -589,9 +655,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

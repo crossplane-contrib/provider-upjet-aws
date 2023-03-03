@@ -15,8 +15,27 @@ import (
 
 type BucketNotificationObservation struct {
 
+	// Name of the bucket for notification configuration.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Whether to enable Amazon EventBridge notifications.
+	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
+
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Used to configure notifications to a Lambda Function. See below.
+	LambdaFunction []LambdaFunctionObservation `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
+
+	// Notification configuration to SQS Queue. See below.
+	Queue []QueueObservation `json:"queue,omitempty" tf:"queue,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Notification configuration to SNS Topic. See below.
+	Topic []TopicObservation `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type BucketNotificationParameters struct {
@@ -58,6 +77,21 @@ type BucketNotificationParameters struct {
 }
 
 type LambdaFunctionObservation struct {
+
+	// Event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lambda function ARN.
+	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
 }
 
 type LambdaFunctionParameters struct {
@@ -84,6 +118,21 @@ type LambdaFunctionParameters struct {
 }
 
 type QueueObservation struct {
+
+	// Specifies event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// SQS queue ARN.
+	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 }
 
 type QueueParameters struct {
@@ -120,6 +169,21 @@ type QueueParameters struct {
 }
 
 type TopicObservation struct {
+
+	// Event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// SNS topic ARN.
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type TopicParameters struct {

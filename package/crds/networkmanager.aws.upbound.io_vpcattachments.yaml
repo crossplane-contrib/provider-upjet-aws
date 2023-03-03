@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcattachments.networkmanager.aws.upbound.io
 spec:
@@ -324,6 +324,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -512,14 +521,36 @@ spec:
                   coreNetworkArn:
                     description: The ARN of a core network.
                     type: string
+                  coreNetworkId:
+                    description: The ID of a core network for the VPC attachment.
+                    type: string
                   edgeLocation:
                     description: The Region where the edge is located.
                     type: string
                   id:
                     description: The ID of the attachment.
                     type: string
+                  options:
+                    description: Options for the VPC attachment.
+                    items:
+                      properties:
+                        applianceModeSupport:
+                          description: Indicates whether appliance mode is supported.
+                            If enabled, traffic flow between a source and destination
+                            use the same Availability Zone for the VPC attachment
+                            for the lifetime of that flow.
+                          type: boolean
+                        ipv6Support:
+                          description: Indicates whether IPv6 is supported.
+                          type: boolean
+                      type: object
+                    type: array
                   ownerAccountId:
                     description: The ID of the attachment account owner.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   resourceArn:
                     description: The attachment resource ARN.
@@ -530,6 +561,16 @@ spec:
                   state:
                     description: The state of the attachment.
                     type: string
+                  subnetArns:
+                    description: The subnet ARN of the VPC attachment.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -537,6 +578,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcArn:
+                    description: The ARN of the VPC.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -579,9 +623,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

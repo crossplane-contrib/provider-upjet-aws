@@ -15,8 +15,30 @@ import (
 
 type MemberObservation struct {
 
+	// AWS account ID for member account.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The detector ID of the GuardDuty account where you want to create member accounts.
+	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
+
+	// Boolean whether an email notification is sent to the accounts. Defaults to false.
+	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
+
+	// Email address for member account.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	// The ID of the GuardDuty member
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Message for invitation.
+	InvitationMessage *string `json:"invitationMessage,omitempty" tf:"invitation_message,omitempty"`
+
+	// Boolean whether to invite the account to GuardDuty as a member. Defaults to false.
+	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The status of the relationship between the member account and its primary account. More information can be found in Amazon GuardDuty API Reference.
 	RelationshipStatus *string `json:"relationshipStatus,omitempty" tf:"relationship_status,omitempty"`
@@ -57,8 +79,8 @@ type MemberParameters struct {
 	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
 
 	// Email address for member account.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Message for invitation.
 	// +kubebuilder:validation:Optional
@@ -98,8 +120,9 @@ type MemberStatus struct {
 type Member struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MemberSpec   `json:"spec"`
-	Status            MemberStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	Spec   MemberSpec   `json:"spec"`
+	Status MemberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

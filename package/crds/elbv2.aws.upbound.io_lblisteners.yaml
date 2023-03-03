@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lblisteners.elbv2.aws.upbound.io
 spec:
@@ -579,9 +579,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - defaultAction
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -753,17 +761,282 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: defaultAction is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)
           status:
             description: LBListenerStatus defines the observed state of LBListener.
             properties:
               atProvider:
                 properties:
+                  alpnPolicy:
+                    description: Name of the Application-Layer Protocol Negotiation
+                      (ALPN) policy. Can be set if protocol is TLS. Valid values are
+                      HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
+                    type: string
                   arn:
                     description: ARN of the listener (matches id).
                     type: string
+                  certificateArn:
+                    description: ARN of the default SSL server certificate. Exactly
+                      one certificate is required if the protocol is HTTPS. For adding
+                      additional SSL certificates, see the aws_lb_listener_certificate
+                      resource.
+                    type: string
+                  defaultAction:
+                    description: Configuration block for default actions. Detailed
+                      below.
+                    items:
+                      properties:
+                        authenticateCognito:
+                          description: Configuration block for using Amazon Cognito
+                            to authenticate users. Specify only when type is authenticate-cognito.
+                            Detailed below.
+                          items:
+                            properties:
+                              authenticationRequestExtraParams:
+                                additionalProperties:
+                                  type: string
+                                description: 'Query parameters to include in the redirect
+                                  request to the authorization endpoint. Max: 10.
+                                  Detailed below.'
+                                type: object
+                              onUnauthenticatedRequest:
+                                description: Behavior if the user is not authenticated.
+                                  Valid values are deny, allow and authenticate.
+                                type: string
+                              scope:
+                                description: Set of user claims to be requested from
+                                  the IdP.
+                                type: string
+                              sessionCookieName:
+                                description: Name of the cookie used to maintain session
+                                  information.
+                                type: string
+                              sessionTimeout:
+                                description: Maximum duration of the authentication
+                                  session, in seconds.
+                                type: number
+                              userPoolArn:
+                                description: ARN of the Cognito user pool.
+                                type: string
+                              userPoolClientId:
+                                description: ID of the Cognito user pool client.
+                                type: string
+                              userPoolDomain:
+                                description: Domain prefix or fully-qualified domain
+                                  name of the Cognito user pool.
+                                type: string
+                            type: object
+                          type: array
+                        authenticateOidc:
+                          description: Configuration block for an identity provider
+                            that is compliant with OpenID Connect (OIDC). Specify
+                            only when type is authenticate-oidc. Detailed below.
+                          items:
+                            properties:
+                              authenticationRequestExtraParams:
+                                additionalProperties:
+                                  type: string
+                                description: 'Query parameters to include in the redirect
+                                  request to the authorization endpoint. Max: 10.'
+                                type: object
+                              authorizationEndpoint:
+                                description: Authorization endpoint of the IdP.
+                                type: string
+                              clientId:
+                                description: OAuth 2.0 client identifier.
+                                type: string
+                              clientSecretSecretRef:
+                                description: OAuth 2.0 client secret.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              issuer:
+                                description: OIDC issuer identifier of the IdP.
+                                type: string
+                              onUnauthenticatedRequest:
+                                description: 'Behavior if the user is not authenticated.
+                                  Valid values: deny, allow and authenticate'
+                                type: string
+                              scope:
+                                description: Set of user claims to be requested from
+                                  the IdP.
+                                type: string
+                              sessionCookieName:
+                                description: Name of the cookie used to maintain session
+                                  information.
+                                type: string
+                              sessionTimeout:
+                                description: Maximum duration of the authentication
+                                  session, in seconds.
+                                type: number
+                              tokenEndpoint:
+                                description: Token endpoint of the IdP.
+                                type: string
+                              userInfoEndpoint:
+                                description: User info endpoint of the IdP.
+                                type: string
+                            required:
+                            - clientSecretSecretRef
+                            type: object
+                          type: array
+                        fixedResponse:
+                          description: Information for creating an action that returns
+                            a custom HTTP response. Required if type is fixed-response.
+                          items:
+                            properties:
+                              contentType:
+                                description: Content type. Valid values are text/plain,
+                                  text/css, text/html, application/javascript and
+                                  application/json.
+                                type: string
+                              messageBody:
+                                description: Message body.
+                                type: string
+                              statusCode:
+                                description: HTTP response code. Valid values are
+                                  2XX, 4XX, or 5XX.
+                                type: string
+                            type: object
+                          type: array
+                        forward:
+                          description: Configuration block for creating an action
+                            that distributes requests among one or more target groups.
+                            Specify only if type is forward. If you specify both forward
+                            block and target_group_arn attribute, you can specify
+                            only one target group using forward and it must be the
+                            same target group specified in target_group_arn. Detailed
+                            below.
+                          items:
+                            properties:
+                              stickiness:
+                                description: Configuration block for target group
+                                  stickiness for the rule. Detailed below.
+                                items:
+                                  properties:
+                                    duration:
+                                      description: Time period, in seconds, during
+                                        which requests from a client should be routed
+                                        to the same target group. The range is 1-604800
+                                        seconds (7 days).
+                                      type: number
+                                    enabled:
+                                      description: Whether target group stickiness
+                                        is enabled. Default is false.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              targetGroup:
+                                description: Set of 1-5 target group blocks. Detailed
+                                  below.
+                                items:
+                                  properties:
+                                    arn:
+                                      description: ARN of the target group.
+                                      type: string
+                                    weight:
+                                      description: Weight. The range is 0 to 999.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        order:
+                          description: Order for the action. This value is required
+                            for rules with multiple actions. The action with the lowest
+                            value for order is performed first. Valid values are between
+                            1 and 50000.
+                          type: number
+                        redirect:
+                          description: Configuration block for creating a redirect
+                            action. Required if type is redirect. Detailed below.
+                          items:
+                            properties:
+                              host:
+                                description: 'Hostname. This component is not percent-encoded.
+                                  The hostname can contain #{host}. Defaults to #{host}.'
+                                type: string
+                              path:
+                                description: 'Absolute path, starting with the leading
+                                  "/". This component is not percent-encoded. The
+                                  path can contain #{host}, #{path}, and #{port}.
+                                  Defaults to /#{path}.'
+                                type: string
+                              port:
+                                description: 'Port. Specify a value from 1 to 65535
+                                  or #{port}. Defaults to #{port}.'
+                                type: string
+                              protocol:
+                                description: 'Protocol. Valid values are HTTP, HTTPS,
+                                  or #{protocol}. Defaults to #{protocol}.'
+                                type: string
+                              query:
+                                description: 'Query parameters, URL-encoded when necessary,
+                                  but not percent-encoded. Do not include the leading
+                                  "?". Defaults to #{query}.'
+                                type: string
+                              statusCode:
+                                description: HTTP redirect code. The redirect is either
+                                  permanent (HTTP_301) or temporary (HTTP_302).
+                                type: string
+                            type: object
+                          type: array
+                        targetGroupArn:
+                          description: ARN of the Target Group to which to route traffic.
+                            Specify only if type is forward and you want to route
+                            to a single target group. To route to one or more target
+                            groups, use a forward block instead.
+                          type: string
+                        type:
+                          description: Type of routing action. Valid values are forward,
+                            redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: ARN of the listener (matches arn).
                     type: string
+                  loadBalancerArn:
+                    description: ARN of the load balancer.
+                    type: string
+                  port:
+                    description: Port on which the load balancer is listening. Not
+                      valid for Gateway Load Balancers.
+                    type: number
+                  protocol:
+                    description: Protocol for connections from clients to the load
+                      balancer. For Application Load Balancers, valid values are HTTP
+                      and HTTPS, with a default of HTTP. For Network Load Balancers,
+                      valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use
+                      UDP or TCP_UDP if dual-stack mode is enabled. Not valid for
+                      Gateway Load Balancers.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sslPolicy:
+                    description: Name of the SSL Policy for the listener. Required
+                      if protocol is HTTPS or TLS.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -813,9 +1086,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

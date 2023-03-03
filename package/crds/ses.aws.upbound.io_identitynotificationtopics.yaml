@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: identitynotificationtopics.ses.aws.upbound.io
 spec:
@@ -236,9 +236,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - notificationType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -410,6 +418,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: notificationType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)
           status:
             description: IdentityNotificationTopicStatus defines the observed state
               of IdentityNotificationTopic.
@@ -417,6 +428,28 @@ spec:
               atProvider:
                 properties:
                   id:
+                    type: string
+                  identity:
+                    description: The identity for which the Amazon SNS topic will
+                      be set. You can specify an identity by using its name or by
+                      using its Amazon Resource Name (ARN).
+                    type: string
+                  includeOriginalHeaders:
+                    description: Whether SES should include original email headers
+                      in SNS notifications of this type. false by default.
+                    type: boolean
+                  notificationType:
+                    description: 'The type of notifications that will be published
+                      to the specified Amazon SNS topic. Valid Values: Bounce, Complaint
+                      or Delivery.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  topicArn:
+                    description: The Amazon Resource Name (ARN) of the Amazon SNS
+                      topic. Can be set to "" (an empty string) to disable publishing.
                     type: string
                 type: object
               conditions:
@@ -460,9 +493,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

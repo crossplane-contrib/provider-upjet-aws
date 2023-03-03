@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: models.apigateway.aws.upbound.io
 spec:
@@ -159,10 +159,17 @@ spec:
                     description: Schema of the model in a JSON form
                     type: string
                 required:
-                - contentType
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -334,13 +341,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: contentType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentType)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ModelStatus defines the observed state of Model.
             properties:
               atProvider:
                 properties:
+                  contentType:
+                    description: Content type of the model
+                    type: string
+                  description:
+                    description: Description of the model
+                    type: string
                   id:
                     description: ID of the model
+                    type: string
+                  name:
+                    description: Name of the model
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  restApiId:
+                    description: ID of the associated REST API
+                    type: string
+                  schema:
+                    description: Schema of the model in a JSON form
                     type: string
                 type: object
               conditions:
@@ -384,9 +415,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

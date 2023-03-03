@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: voiceconnectororiginations.chime.aws.upbound.io
 spec:
@@ -190,8 +190,16 @@ spec:
                     type: object
                 required:
                 - region
-                - route
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -363,13 +371,58 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: route is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.route)
           status:
             description: VoiceConnectorOriginationStatus defines the observed state
               of VoiceConnectorOrigination.
             properties:
               atProvider:
                 properties:
+                  disabled:
+                    description: When origination settings are disabled, inbound calls
+                      are not enabled for your Amazon Chime Voice Connector.
+                    type: boolean
                   id:
+                    description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  route:
+                    description: Set of call distribution properties defined for your
+                      SIP hosts. See route below for more details. Minimum of 1. Maximum
+                      of 20.
+                    items:
+                      properties:
+                        host:
+                          description: The FQDN or IP address to contact for origination
+                            traffic.
+                          type: string
+                        port:
+                          description: The designated origination route port. Defaults
+                            to 5060.
+                          type: number
+                        priority:
+                          description: The priority associated with the host, with
+                            1 being the highest priority. Higher priority hosts are
+                            attempted first.
+                          type: number
+                        protocol:
+                          description: The protocol to use for the origination route.
+                            Encryption-enabled Amazon Chime Voice Connectors use TCP
+                            protocol by default.
+                          type: string
+                        weight:
+                          description: The weight associated with the host. If hosts
+                            are equal in priority, calls are redistributed among them
+                            based on their relative weight.
+                          type: number
+                      type: object
+                    type: array
+                  voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
                 type: object
@@ -414,9 +467,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

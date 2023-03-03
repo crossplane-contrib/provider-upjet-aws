@@ -15,8 +15,18 @@ import (
 
 type ParameterGroupObservation struct {
 
+	// A description of the parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of the parameter group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  The parameters of the parameter group.
+	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ParameterGroupParameters struct {
@@ -36,6 +46,12 @@ type ParameterGroupParameters struct {
 }
 
 type ParametersObservation struct {
+
+	// The name of the parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value for the parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParametersParameters struct {

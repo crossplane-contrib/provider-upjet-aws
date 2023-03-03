@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: permissions.opsworks.aws.upbound.io
 spec:
@@ -229,6 +229,15 @@ spec:
                         type: object
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -405,10 +414,28 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowSsh:
+                    description: Whether the user is allowed to use SSH to communicate
+                      with the instance
+                    type: boolean
+                  allowSudo:
+                    description: Whether the user is allowed to use sudo to elevate
+                      privileges
+                    type: boolean
                   id:
                     description: The computed id of the permission. Please note that
                       this is only used internally to identify the permission. This
                       value is not used in aws.
+                    type: string
+                  level:
+                    description: The users permission level. Mus be one of deny, show,
+                      deploy, manage, iam_only
+                    type: string
+                  stackId:
+                    description: The stack to set the permissions for
+                    type: string
+                  userArn:
+                    description: The user's IAM ARN to set permissions for
                     type: string
                 type: object
               conditions:
@@ -452,9 +479,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

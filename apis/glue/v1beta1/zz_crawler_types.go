@@ -14,6 +14,21 @@ import (
 )
 
 type CatalogTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Glue database where results are written.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The ARN of the dead-letter SQS queue.
+	DlqEventQueueArn *string `json:"dlqEventQueueArn,omitempty" tf:"dlq_event_queue_arn,omitempty"`
+
+	// The ARN of the SQS queue to receive S3 notifications from.
+	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
+
+	// A list of catalog tables to be synchronized.
+	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type CatalogTargetParameters struct {
@@ -53,8 +68,67 @@ type CrawlerObservation struct {
 	// The ARN of the crawler
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	CatalogTarget []CatalogTargetObservation `json:"catalogTarget,omitempty" tf:"catalog_target,omitempty"`
+
+	// List of custom classifiers. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+	Classifiers []*string `json:"classifiers,omitempty" tf:"classifiers,omitempty"`
+
+	// JSON string of configuration information. For more details see Setting Crawler Configuration Options.
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Glue database where results are written.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	DeltaTarget []DeltaTargetObservation `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
+
+	// Description of the crawler.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// List of nested DynamoDB target arguments. See Dynamodb Target below.
+	DynamodbTarget []DynamodbTargetObservation `json:"dynamodbTarget,omitempty" tf:"dynamodb_target,omitempty"`
+
 	// Crawler name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of nested JBDC target arguments. See JDBC Target below.
+	JdbcTarget []JdbcTargetObservation `json:"jdbcTarget,omitempty" tf:"jdbc_target,omitempty"`
+
+	// Specifies Lake Formation configuration settings for the crawler. See Lake Formation Configuration below.
+	LakeFormationConfiguration []LakeFormationConfigurationObservation `json:"lakeFormationConfiguration,omitempty" tf:"lake_formation_configuration,omitempty"`
+
+	// Specifies data lineage configuration settings for the crawler. See Lineage Configuration below.
+	LineageConfiguration []LineageConfigurationObservation `json:"lineageConfiguration,omitempty" tf:"lineage_configuration,omitempty"`
+
+	// List nested MongoDB target arguments. See MongoDB Target below.
+	MongodbTarget []MongodbTargetObservation `json:"mongodbTarget,omitempty" tf:"mongodb_target,omitempty"`
+
+	// A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.. See Recrawl Policy below.
+	RecrawlPolicy []RecrawlPolicyObservation `json:"recrawlPolicy,omitempty" tf:"recrawl_policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The IAM role friendly name (including path without leading slash), or ARN of an IAM role, used by the crawler to access other resources.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// List nested Amazon S3 target arguments. See S3 Target below.
+	S3Target []S3TargetObservation `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
+
+	// Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Policy for the crawler's update and deletion behavior. See Schema Change Policy below.
+	SchemaChangePolicy []SchemaChangePolicyObservation `json:"schemaChangePolicy,omitempty" tf:"schema_change_policy,omitempty"`
+
+	// The name of Security Configuration to be used by the crawler
+	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
+
+	// The table prefix used for catalog tables that are created.
+	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -162,6 +236,15 @@ type CrawlerParameters struct {
 }
 
 type DeltaTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of the Amazon S3 paths to the Delta tables.
+	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
+
+	// Specifies whether to write the manifest files to the Delta table path.
+	WriteManifest *bool `json:"writeManifest,omitempty" tf:"write_manifest,omitempty"`
 }
 
 type DeltaTargetParameters struct {
@@ -180,6 +263,15 @@ type DeltaTargetParameters struct {
 }
 
 type DynamodbTargetObservation struct {
+
+	// The name of the DynamoDB table to crawl.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.  defaults to true.
+	ScanAll *bool `json:"scanAll,omitempty" tf:"scan_all,omitempty"`
+
+	// The percentage of the configured read capacity units to use by the AWS Glue crawler. The valid values are null or a value between 0.1 to 1.5.
+	ScanRate *float64 `json:"scanRate,omitempty" tf:"scan_rate,omitempty"`
 }
 
 type DynamodbTargetParameters struct {
@@ -198,6 +290,18 @@ type DynamodbTargetParameters struct {
 }
 
 type JdbcTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
+	EnableAdditionalMetadata []*string `json:"enableAdditionalMetadata,omitempty" tf:"enable_additional_metadata,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The name of the DynamoDB table to crawl.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type JdbcTargetParameters struct {
@@ -229,6 +333,12 @@ type JdbcTargetParameters struct {
 }
 
 type LakeFormationConfigurationObservation struct {
+
+	// Required for cross account crawls. For same account crawls as the target data, this can omitted.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Specifies whether to use Lake Formation credentials for the crawler instead of the IAM role credentials.
+	UseLakeFormationCredentials *bool `json:"useLakeFormationCredentials,omitempty" tf:"use_lake_formation_credentials,omitempty"`
 }
 
 type LakeFormationConfigurationParameters struct {
@@ -243,6 +353,9 @@ type LakeFormationConfigurationParameters struct {
 }
 
 type LineageConfigurationObservation struct {
+
+	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is Disable.
+	CrawlerLineageSettings *string `json:"crawlerLineageSettings,omitempty" tf:"crawler_lineage_settings,omitempty"`
 }
 
 type LineageConfigurationParameters struct {
@@ -253,6 +366,15 @@ type LineageConfigurationParameters struct {
 }
 
 type MongodbTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// The name of the DynamoDB table to crawl.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.  defaults to true.
+	ScanAll *bool `json:"scanAll,omitempty" tf:"scan_all,omitempty"`
 }
 
 type MongodbTargetParameters struct {
@@ -280,6 +402,9 @@ type MongodbTargetParameters struct {
 }
 
 type RecrawlPolicyObservation struct {
+
+	// Specifies whether to crawl the entire dataset again, crawl only folders that were added since the last crawler run, or crawl what S3 notifies the crawler of via SQS. Valid Values are: CRAWL_EVENT_MODE, CRAWL_EVERYTHING and CRAWL_NEW_FOLDERS_ONLY. Default value is CRAWL_EVERYTHING.
+	RecrawlBehavior *string `json:"recrawlBehavior,omitempty" tf:"recrawl_behavior,omitempty"`
 }
 
 type RecrawlPolicyParameters struct {
@@ -290,6 +415,24 @@ type RecrawlPolicyParameters struct {
 }
 
 type S3TargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// The ARN of the dead-letter SQS queue.
+	DlqEventQueueArn *string `json:"dlqEventQueueArn,omitempty" tf:"dlq_event_queue_arn,omitempty"`
+
+	// The ARN of the SQS queue to receive S3 notifications from.
+	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The name of the DynamoDB table to crawl.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
+	SampleSize *float64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
 }
 
 type S3TargetParameters struct {
@@ -320,6 +463,12 @@ type S3TargetParameters struct {
 }
 
 type SchemaChangePolicyObservation struct {
+
+	// The deletion behavior when the crawler finds a deleted object. Valid values: LOG, DELETE_FROM_DATABASE, or DEPRECATE_IN_DATABASE. Defaults to DEPRECATE_IN_DATABASE.
+	DeleteBehavior *string `json:"deleteBehavior,omitempty" tf:"delete_behavior,omitempty"`
+
+	// The update behavior when the crawler finds a changed schema. Valid values: LOG or UPDATE_IN_DATABASE. Defaults to UPDATE_IN_DATABASE.
+	UpdateBehavior *string `json:"updateBehavior,omitempty" tf:"update_behavior,omitempty"`
 }
 
 type SchemaChangePolicyParameters struct {

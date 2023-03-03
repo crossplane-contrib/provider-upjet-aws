@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: alternatecontacts.account.aws.upbound.io
 spec:
@@ -90,12 +90,17 @@ spec:
                     type: string
                 required:
                 - alternateContactType
-                - emailAddress
-                - name
-                - phoneNumber
                 - region
-                - title
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -267,12 +272,45 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: emailAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddress)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: phoneNumber is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.phoneNumber)
+            - message: title is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.title)
           status:
             description: AlternateContactStatus defines the observed state of AlternateContact.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: ID of the target account when managing member accounts.
+                      Will manage current user's account by default if omitted.
+                    type: string
+                  alternateContactType:
+                    description: 'Type of the alternate contact. Allowed values are:
+                      BILLING, OPERATIONS, SECURITY.'
+                    type: string
+                  emailAddress:
+                    description: An email address for the alternate contact.
+                    type: string
                   id:
+                    type: string
+                  name:
+                    description: Name of the alternate contact.
+                    type: string
+                  phoneNumber:
+                    description: Phone number for the alternate contact.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  title:
+                    description: Title for the alternate contact.
                     type: string
                 type: object
               conditions:
@@ -316,9 +354,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

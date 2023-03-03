@@ -18,19 +18,32 @@ type DirectoryConfigObservation struct {
 	// Date and time, in UTC and extended RFC 3339 format, when the directory config was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Fully qualified name of the directory.
+	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
+
 	// Unique identifier (ID) of the appstream directory config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Distinguished names of the organizational units for computer accounts.
+	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
+	ServiceAccountCredentials []ServiceAccountCredentialsObservation `json:"serviceAccountCredentials,omitempty" tf:"service_account_credentials,omitempty"`
 }
 
 type DirectoryConfigParameters struct {
 
 	// Fully qualified name of the directory.
-	// +kubebuilder:validation:Required
-	DirectoryName *string `json:"directoryName" tf:"directory_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
 
 	// Distinguished names of the organizational units for computer accounts.
-	// +kubebuilder:validation:Required
-	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames" tf:"organizational_unit_distinguished_names,omitempty"`
+	// +kubebuilder:validation:Optional
+	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -38,11 +51,17 @@ type DirectoryConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
-	// +kubebuilder:validation:Required
-	ServiceAccountCredentials []ServiceAccountCredentialsParameters `json:"serviceAccountCredentials" tf:"service_account_credentials,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceAccountCredentials []ServiceAccountCredentialsParameters `json:"serviceAccountCredentials,omitempty" tf:"service_account_credentials,omitempty"`
 }
 
 type ServiceAccountCredentialsObservation struct {
+
+	// User name of the account. This account must have the following privileges: create computer objects, join computers to the domain, and change/reset the password on descendant computer objects for the organizational units specified.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Password for the account.
+	AccountPasswordSecretRef v1.SecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
 }
 
 type ServiceAccountCredentialsParameters struct {
@@ -80,8 +99,11 @@ type DirectoryConfigStatus struct {
 type DirectoryConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DirectoryConfigSpec   `json:"spec"`
-	Status            DirectoryConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.directoryName)",message="directoryName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.organizationalUnitDistinguishedNames)",message="organizationalUnitDistinguishedNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceAccountCredentials)",message="serviceAccountCredentials is a required parameter"
+	Spec   DirectoryConfigSpec   `json:"spec"`
+	Status DirectoryConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

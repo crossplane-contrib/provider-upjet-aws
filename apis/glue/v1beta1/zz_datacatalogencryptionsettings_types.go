@@ -14,6 +14,12 @@ import (
 )
 
 type ConnectionPasswordEncryptionObservation struct {
+
+	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
+	AwsKMSKeyID *string `json:"awsKmsKeyId,omitempty" tf:"aws_kms_key_id,omitempty"`
+
+	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
+	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
 }
 
 type ConnectionPasswordEncryptionParameters struct {
@@ -38,6 +44,12 @@ type ConnectionPasswordEncryptionParameters struct {
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation struct {
+
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
+	ConnectionPasswordEncryption []ConnectionPasswordEncryptionObservation `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
+
+	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
+	EncryptionAtRest []EncryptionAtRestObservation `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct {
@@ -53,8 +65,18 @@ type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct
 
 type DataCatalogEncryptionSettingsObservation struct {
 
+	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  The security configuration to set. see Data Catalog Encryption Settings.
+	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
+
 	// The ID of the Data Catalog to set the security configuration for.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DataCatalogEncryptionSettingsParameters struct {
@@ -64,8 +86,8 @@ type DataCatalogEncryptionSettingsParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// –  The security configuration to set. see Data Catalog Encryption Settings.
-	// +kubebuilder:validation:Required
-	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings" tf:"data_catalog_encryption_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -74,6 +96,12 @@ type DataCatalogEncryptionSettingsParameters struct {
 }
 
 type EncryptionAtRestObservation struct {
+
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
+	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+
+	// The ARN of the AWS KMS key to use for encryption at rest.
+	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
 }
 
 type EncryptionAtRestParameters struct {
@@ -121,8 +149,9 @@ type DataCatalogEncryptionSettingsStatus struct {
 type DataCatalogEncryptionSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataCatalogEncryptionSettingsSpec   `json:"spec"`
-	Status            DataCatalogEncryptionSettingsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataCatalogEncryptionSettings)",message="dataCatalogEncryptionSettings is a required parameter"
+	Spec   DataCatalogEncryptionSettingsSpec   `json:"spec"`
+	Status DataCatalogEncryptionSettingsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

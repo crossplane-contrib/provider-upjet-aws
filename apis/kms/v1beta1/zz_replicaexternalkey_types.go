@@ -18,6 +18,22 @@ type ReplicaExternalKeyObservation struct {
 	// The Amazon Resource Name (ARN) of the replica key. The key ARNs of related multi-Region keys differ only in the Region value.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A flag to indicate whether to bypass the key policy lockout safety check.
+	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// The default value is false.
+	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
+
+	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
+	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+
+	// A description of the KMS key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. Keys pending import can only be false. Imported keys default to true unless expired.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// Whether the key material expires. Empty when pending key material import, otherwise KEY_MATERIAL_EXPIRES or KEY_MATERIAL_DOES_NOT_EXPIRE.
 	ExpirationModel *string `json:"expirationModel,omitempty" tf:"expiration_model,omitempty"`
 
@@ -26,14 +42,33 @@ type ReplicaExternalKeyObservation struct {
 	// The key ID of the replica key. Related multi-Region keys have the same key ID.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
+	// Base64 encoded 256-bit symmetric encryption key material to import. The KMS key is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
+	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+
 	// The state of the replica key.
 	KeyState *string `json:"keyState,omitempty" tf:"key_state,omitempty"`
 
 	// The cryptographic operations for which you can use the KMS key. This is a shared property of multi-Region keys.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
+	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
+	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the key becomes unusable. If not specified, key material does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
+	ValidTo *string `json:"validTo,omitempty" tf:"valid_to,omitempty"`
 }
 
 type ReplicaExternalKeyParameters struct {

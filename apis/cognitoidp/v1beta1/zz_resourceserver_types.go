@@ -16,19 +16,34 @@ import (
 type ResourceServerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identifier for the resource server.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// A name for the resource server.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of Authorization Scope.
+	Scope []ScopeObservation `json:"scope,omitempty" tf:"scope,omitempty"`
+
 	// A list of all scopes configured for this resource server in the format identifier/scope_name.
 	ScopeIdentifiers []*string `json:"scopeIdentifiers,omitempty" tf:"scope_identifiers,omitempty"`
+
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type ResourceServerParameters struct {
 
 	// An identifier for the resource server.
-	// +kubebuilder:validation:Required
-	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// A name for the resource server.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -53,6 +68,12 @@ type ResourceServerParameters struct {
 }
 
 type ScopeObservation struct {
+
+	// The scope description.
+	ScopeDescription *string `json:"scopeDescription,omitempty" tf:"scope_description,omitempty"`
+
+	// The scope name.
+	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
 }
 
 type ScopeParameters struct {
@@ -90,8 +111,10 @@ type ResourceServerStatus struct {
 type ResourceServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceServerSpec   `json:"spec"`
-	Status            ResourceServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identifier)",message="identifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ResourceServerSpec   `json:"spec"`
+	Status ResourceServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

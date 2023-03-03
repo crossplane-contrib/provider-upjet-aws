@@ -18,22 +18,77 @@ type ClusterObservation struct {
 	// The ARN of the DAX cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of Availability Zones in which the
+	// nodes will be created
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
 	// The DNS name of the DAX cluster without the port appended
 	ClusterAddress *string `json:"clusterAddress,omitempty" tf:"cluster_address,omitempty"`
+
+	// –  The type of encryption the
+	// cluster's endpoint should support. Valid values are: NONE and TLS.
+	// Default value is NONE.
+	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
 
 	// The configuration endpoint for this DAX cluster,
 	// consisting of a DNS name and a port number
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
+	// –  Description for the cluster
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A valid Amazon Resource Name (ARN) that identifies
+	// an IAM role. At runtime, DAX will assume this role and use the role's
+	// permissions to access DynamoDB on your behalf
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ddd:hh24:mi
+	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
+	// sun:05:00-sun:09:00
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// –  The compute and memory capacity of the nodes. See
+	// Nodes for supported node types
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// List of node objects including id, address, port and
 	// availability_zone. Referenceable e.g., as
 	// ${aws_dax_cluster.test.nodes.0.address}
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
+	// east-1:012345678999:my_sns_topic
+	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
+
+	// –  Name of the parameter group to associate
+	// with this DAX cluster
+	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
 	// The port used by the configuration endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// node cluster, without any read
+	// replicas
+	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
+
+	// –  One or more VPC security groups associated
+	// with the cluster
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Encrypt at rest options
+	ServerSideEncryption []ServerSideEncryptionObservation `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
+
+	// –  Name of the subnet group to be used for the
+	// cluster
+	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -80,8 +135,8 @@ type ClusterParameters struct {
 
 	// –  The compute and memory capacity of the nodes. See
 	// Nodes for supported node types
-	// +kubebuilder:validation:Required
-	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// east-1:012345678999:my_sns_topic
 	// +kubebuilder:validation:Optional
@@ -99,8 +154,8 @@ type ClusterParameters struct {
 
 	// node cluster, without any read
 	// replicas
-	// +kubebuilder:validation:Required
-	ReplicationFactor *float64 `json:"replicationFactor" tf:"replication_factor,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -147,6 +202,9 @@ type NodesParameters struct {
 }
 
 type ServerSideEncryptionObservation struct {
+
+	// Whether to enable encryption at rest. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type ServerSideEncryptionParameters struct {
@@ -180,8 +238,10 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationFactor)",message="replicationFactor is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

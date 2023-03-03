@@ -14,6 +14,9 @@ import (
 )
 
 type ActionObservation struct {
+
+	// Target that traffic is routed to when a request matches the gateway route.
+	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ActionParameters struct {
@@ -24,6 +27,12 @@ type ActionParameters struct {
 }
 
 type ActionRewriteObservation struct {
+
+	// Host name to rewrite.
+	Hostname []RewriteHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	Prefix []RewritePrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type ActionRewriteParameters struct {
@@ -38,6 +47,9 @@ type ActionRewriteParameters struct {
 }
 
 type ActionTargetObservation struct {
+
+	// Virtual service gateway route target.
+	VirtualService []TargetVirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type ActionTargetParameters struct {
@@ -48,6 +60,9 @@ type ActionTargetParameters struct {
 }
 
 type ActionTargetVirtualServiceObservation struct {
+
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 }
 
 type ActionTargetVirtualServiceParameters struct {
@@ -68,6 +83,12 @@ type ActionTargetVirtualServiceParameters struct {
 }
 
 type GRPCRouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining a request match.
+	Match []MatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type GRPCRouteParameters struct {
@@ -95,26 +116,48 @@ type GatewayRouteObservation struct {
 	// Last update date of the gateway route.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the gateway route. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
+	// Gateway route specification to apply.
+	Spec []SpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Name of the virtual gateway to associate the gateway route with. Must be between 1 and 255 characters in length.
+	VirtualGatewayName *string `json:"virtualGatewayName,omitempty" tf:"virtual_gateway_name,omitempty"`
 }
 
 type GatewayRouteParameters struct {
 
 	// Name of the service mesh in which to create the gateway route. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	MeshName *string `json:"meshName" tf:"mesh_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	// +kubebuilder:validation:Optional
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the gateway route. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -122,8 +165,8 @@ type GatewayRouteParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Gateway route specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []SpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []SpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -145,6 +188,12 @@ type GatewayRouteParameters struct {
 }
 
 type HTTPRouteActionObservation struct {
+
+	// Gateway route action to rewrite.
+	Rewrite []ActionRewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+
+	// Target that traffic is routed to when a request matches the gateway route.
+	Target []HTTPRouteActionTargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type HTTPRouteActionParameters struct {
@@ -159,6 +208,9 @@ type HTTPRouteActionParameters struct {
 }
 
 type HTTPRouteActionTargetObservation struct {
+
+	// Virtual service gateway route target.
+	VirtualService []ActionTargetVirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type HTTPRouteActionTargetParameters struct {
@@ -169,6 +221,12 @@ type HTTPRouteActionTargetParameters struct {
 }
 
 type HTTPRouteMatchHostnameObservation struct {
+
+	// Exact host name to match on.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Specified ending characters of the host name to match on.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type HTTPRouteMatchHostnameParameters struct {
@@ -183,6 +241,15 @@ type HTTPRouteMatchHostnameParameters struct {
 }
 
 type HTTPRouteMatchObservation struct {
+
+	// Host name to rewrite.
+	Hostname []HTTPRouteMatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type HTTPRouteMatchParameters struct {
@@ -201,6 +268,12 @@ type HTTPRouteMatchParameters struct {
 }
 
 type HTTPRouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []HTTPRouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining a request match.
+	Match []HTTPRouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type HTTPRouteParameters struct {
@@ -215,6 +288,9 @@ type HTTPRouteParameters struct {
 }
 
 type HostnameObservation struct {
+
+	// Default target host name to write to. Valid values: ENABLED, DISABLED.
+	DefaultTargetHostname *string `json:"defaultTargetHostname,omitempty" tf:"default_target_hostname,omitempty"`
 }
 
 type HostnameParameters struct {
@@ -225,6 +301,12 @@ type HostnameParameters struct {
 }
 
 type Http2RouteActionObservation struct {
+
+	// Gateway route action to rewrite.
+	Rewrite []RewriteObservation `json:"rewrite,omitempty" tf:"rewrite,omitempty"`
+
+	// Target that traffic is routed to when a request matches the gateway route.
+	Target []ActionTargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type Http2RouteActionParameters struct {
@@ -239,6 +321,15 @@ type Http2RouteActionParameters struct {
 }
 
 type Http2RouteMatchObservation struct {
+
+	// Host name to rewrite.
+	Hostname []MatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type Http2RouteMatchParameters struct {
@@ -257,6 +348,12 @@ type Http2RouteMatchParameters struct {
 }
 
 type Http2RouteObservation struct {
+
+	// Action to take if a match is determined.
+	Action []Http2RouteActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Criteria for determining a request match.
+	Match []Http2RouteMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type Http2RouteParameters struct {
@@ -271,6 +368,12 @@ type Http2RouteParameters struct {
 }
 
 type MatchHostnameObservation struct {
+
+	// Exact host name to match on.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Specified ending characters of the host name to match on.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type MatchHostnameParameters struct {
@@ -285,6 +388,12 @@ type MatchHostnameParameters struct {
 }
 
 type MatchObservation struct {
+
+	// The port number to match from the request.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Fully qualified domain name for the service to match from the request.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
 type MatchParameters struct {
@@ -299,6 +408,12 @@ type MatchParameters struct {
 }
 
 type PrefixObservation struct {
+
+	// Default prefix used to replace the incoming route prefix when rewritten. Valid values: ENABLED, DISABLED.
+	DefaultPrefix *string `json:"defaultPrefix,omitempty" tf:"default_prefix,omitempty"`
+
+	// Value used to replace the incoming route prefix when rewritten.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PrefixParameters struct {
@@ -313,6 +428,9 @@ type PrefixParameters struct {
 }
 
 type RewriteHostnameObservation struct {
+
+	// Default target host name to write to. Valid values: ENABLED, DISABLED.
+	DefaultTargetHostname *string `json:"defaultTargetHostname,omitempty" tf:"default_target_hostname,omitempty"`
 }
 
 type RewriteHostnameParameters struct {
@@ -323,6 +441,12 @@ type RewriteHostnameParameters struct {
 }
 
 type RewriteObservation struct {
+
+	// Host name to rewrite.
+	Hostname []HostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Specified beginning characters to rewrite.
+	Prefix []PrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type RewriteParameters struct {
@@ -337,6 +461,12 @@ type RewriteParameters struct {
 }
 
 type RewritePrefixObservation struct {
+
+	// Default prefix used to replace the incoming route prefix when rewritten. Valid values: ENABLED, DISABLED.
+	DefaultPrefix *string `json:"defaultPrefix,omitempty" tf:"default_prefix,omitempty"`
+
+	// Value used to replace the incoming route prefix when rewritten.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RewritePrefixParameters struct {
@@ -351,6 +481,15 @@ type RewritePrefixParameters struct {
 }
 
 type SpecObservation struct {
+
+	// Specification of a gRPC gateway route.
+	GRPCRoute []GRPCRouteObservation `json:"grpcRoute,omitempty" tf:"grpc_route,omitempty"`
+
+	// Specification of an HTTP gateway route.
+	HTTPRoute []HTTPRouteObservation `json:"httpRoute,omitempty" tf:"http_route,omitempty"`
+
+	// Specification of an HTTP/2 gateway route.
+	Http2Route []Http2RouteObservation `json:"http2Route,omitempty" tf:"http2_route,omitempty"`
 }
 
 type SpecParameters struct {
@@ -369,6 +508,9 @@ type SpecParameters struct {
 }
 
 type TargetObservation struct {
+
+	// Virtual service gateway route target.
+	VirtualService []VirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type TargetParameters struct {
@@ -379,6 +521,9 @@ type TargetParameters struct {
 }
 
 type TargetVirtualServiceObservation struct {
+
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 }
 
 type TargetVirtualServiceParameters struct {
@@ -389,6 +534,9 @@ type TargetVirtualServiceParameters struct {
 }
 
 type VirtualServiceObservation struct {
+
+	// Name of the virtual service that traffic is routed to. Must be between 1 and 255 characters in length.
+	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 }
 
 type VirtualServiceParameters struct {
@@ -422,8 +570,11 @@ type GatewayRouteStatus struct {
 type GatewayRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GatewayRouteSpec   `json:"spec"`
-	Status            GatewayRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.meshName)",message="meshName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   GatewayRouteSpec   `json:"spec"`
+	Status GatewayRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: streams.kinesisvideo.aws.upbound.io
 spec:
@@ -174,9 +174,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +356,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StreamStatus defines the observed state of Stream.
             properties:
@@ -360,9 +371,45 @@ spec:
                   creationTime:
                     description: A time stamp that indicates when the stream was created.
                     type: string
+                  dataRetentionInHours:
+                    description: –  The number of hours that you want to retain the
+                      data in the stream. Kinesis Video Streams retains the data in
+                      a data store that is associated with the stream. The default
+                      value is 0, indicating that the stream does not persist data.
+                    type: number
+                  deviceName:
+                    description: The name of the device that is writing to the stream.
+                      In the current implementation, Kinesis Video Streams does not
+                      use this name.
+                    type: string
                   id:
                     description: The unique Stream id
                     type: string
+                  kmsKeyId:
+                    description: The ID of the AWS Key Management Service (AWS KMS)
+                      key that you want Kinesis Video Streams to use to encrypt stream
+                      data. If no key ID is specified, the default, Kinesis Video-managed
+                      key (aws/kinesisvideo) is used.
+                    type: string
+                  mediaType:
+                    description: The media type of the stream. Consumers of the stream
+                      can use this information when processing the stream. For more
+                      information about media types, see Media Types. If you choose
+                      to specify the MediaType, see Naming Requirements for guidelines.
+                    type: string
+                  name:
+                    description: A name to identify the stream. This is unique to
+                      the AWS account and region the Stream is created in.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -415,9 +462,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

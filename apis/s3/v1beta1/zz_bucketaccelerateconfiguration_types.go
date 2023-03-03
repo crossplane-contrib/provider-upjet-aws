@@ -15,8 +15,21 @@ import (
 
 type BucketAccelerateConfigurationObservation struct {
 
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type BucketAccelerateConfigurationParameters struct {
@@ -44,8 +57,8 @@ type BucketAccelerateConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
-	// +kubebuilder:validation:Required
-	Status *string `json:"status" tf:"status,omitempty"`
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 // BucketAccelerateConfigurationSpec defines the desired state of BucketAccelerateConfiguration
@@ -72,8 +85,9 @@ type BucketAccelerateConfigurationStatus struct {
 type BucketAccelerateConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketAccelerateConfigurationSpec   `json:"spec"`
-	Status            BucketAccelerateConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.status)",message="status is a required parameter"
+	Spec   BucketAccelerateConfigurationSpec   `json:"spec"`
+	Status BucketAccelerateConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

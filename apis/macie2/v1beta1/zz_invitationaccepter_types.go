@@ -15,18 +15,25 @@ import (
 
 type InvitationAccepterObservation struct {
 
+	// The AWS account ID for the account that sent the invitation.
+	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
+
 	// The unique identifier (ID) of the macie invitation accepter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The unique identifier for the invitation.
 	InvitationID *string `json:"invitationId,omitempty" tf:"invitation_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InvitationAccepterParameters struct {
 
 	// The AWS account ID for the account that sent the invitation.
-	// +kubebuilder:validation:Required
-	AdministratorAccountID *string `json:"administratorAccountId" tf:"administrator_account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -58,8 +65,9 @@ type InvitationAccepterStatus struct {
 type InvitationAccepter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InvitationAccepterSpec   `json:"spec"`
-	Status            InvitationAccepterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.administratorAccountId)",message="administratorAccountId is a required parameter"
+	Spec   InvitationAccepterSpec   `json:"spec"`
+	Status InvitationAccepterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

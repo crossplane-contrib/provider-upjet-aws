@@ -24,7 +24,23 @@ type DomainObservation struct {
 	// An internally generated unique identifier for the domain.
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
+	// Domain endpoint options. Documented below.
+	EndpointOptions []EndpointOptionsObservation `json:"endpointOptions,omitempty" tf:"endpoint_options,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The index fields for documents added to the domain. Documented below.
+	IndexField []IndexFieldObservation `json:"indexField,omitempty" tf:"index_field,omitempty"`
+
+	// Whether or not to maintain extra instances for the domain in a second Availability Zone to ensure high availability.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Domain scaling parameters. Documented below.
+	ScalingParameters []ScalingParametersObservation `json:"scalingParameters,omitempty" tf:"scaling_parameters,omitempty"`
 
 	// The service endpoint for requesting search results from a search domain.
 	SearchServiceEndpoint *string `json:"searchServiceEndpoint,omitempty" tf:"search_service_endpoint,omitempty"`
@@ -55,6 +71,12 @@ type DomainParameters struct {
 }
 
 type EndpointOptionsObservation struct {
+
+	// Enables or disables the requirement that all requests to the domain arrive over HTTPS.
+	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
+
+	// The minimum required TLS version. See the AWS documentation for valid values.
+	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
 type EndpointOptionsParameters struct {
@@ -69,6 +91,36 @@ type EndpointOptionsParameters struct {
 }
 
 type IndexFieldObservation struct {
+
+	// The analysis scheme you want to use for a text field. The analysis scheme specifies the language-specific text processing options that are used during indexing.
+	AnalysisScheme *string `json:"analysisScheme,omitempty" tf:"analysis_scheme,omitempty"`
+
+	// The default value for the field. This value is used when no value is specified for the field in the document data.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// You can get facet information by enabling this.
+	Facet *bool `json:"facet,omitempty" tf:"facet,omitempty"`
+
+	// You can highlight information.
+	Highlight *bool `json:"highlight,omitempty" tf:"highlight,omitempty"`
+
+	// The name of the CloudSearch domain.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// You can enable returning the value of all searchable fields.
+	Return *bool `json:"return,omitempty" tf:"return,omitempty"`
+
+	// You can set whether this index should be searchable or not.
+	Search *bool `json:"search,omitempty" tf:"search,omitempty"`
+
+	// You can enable the property to be sortable.
+	Sort *bool `json:"sort,omitempty" tf:"sort,omitempty"`
+
+	// A comma-separated list of source fields to map to the field. Specifying a source field copies data from one field to another, enabling you to use the same source data in different ways by configuring different options for the fields.
+	SourceFields *string `json:"sourceFields,omitempty" tf:"source_fields,omitempty"`
+
+	// The field type. Valid values: date, date-array, double, double-array, int, int-array, literal, literal-array, text, text-array.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IndexFieldParameters struct {
@@ -115,6 +167,15 @@ type IndexFieldParameters struct {
 }
 
 type ScalingParametersObservation struct {
+
+	// The instance type that you want to preconfigure for your domain. See the AWS documentation for valid values.
+	DesiredInstanceType *string `json:"desiredInstanceType,omitempty" tf:"desired_instance_type,omitempty"`
+
+	// The number of partitions you want to preconfigure for your domain. Only valid when you select search.2xlarge as the instance type.
+	DesiredPartitionCount *float64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
+
+	// The number of replicas you want to preconfigure for each index partition.
+	DesiredReplicationCount *float64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
 }
 
 type ScalingParametersParameters struct {

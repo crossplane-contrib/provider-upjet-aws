@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: functions.cloudfront.aws.upbound.io
 spec:
@@ -99,10 +99,17 @@ spec:
                       cloudfront-js-1.0 is valid.
                     type: string
                 required:
-                - codeSecretRef
                 - region
-                - runtime
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -274,6 +281,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: codeSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.codeSecretRef)
+            - message: runtime is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.runtime)
           status:
             description: FunctionStatus defines the observed state of Function.
             properties:
@@ -282,6 +294,26 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) identifying your CloudFront
                       Function.
+                    type: string
+                  codeSecretRef:
+                    description: Source code of the function
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  comment:
+                    description: Comment.
                     type: string
                   etag:
                     description: ETag hash of the function. This is the value for
@@ -292,10 +324,24 @@ spec:
                   liveStageEtag:
                     description: ETag hash of any LIVE stage of the function.
                     type: string
+                  publish:
+                    description: Whether to publish creation/change as Live CloudFront
+                      Function Version. Defaults to true.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  runtime:
+                    description: Identifier of the function's runtime. Currently only
+                      cloudfront-js-1.0 is valid.
+                    type: string
                   status:
                     description: Status of the function. Can be UNPUBLISHED, UNASSOCIATED
                       or ASSOCIATED.
                     type: string
+                required:
+                - codeSecretRef
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -338,9 +384,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

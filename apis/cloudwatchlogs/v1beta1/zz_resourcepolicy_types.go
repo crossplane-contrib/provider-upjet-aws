@@ -17,13 +17,20 @@ type ResourcePolicyObservation struct {
 
 	// The name of the CloudWatch log resource policy
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
+	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ResourcePolicyParameters struct {
 
 	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
-	// +kubebuilder:validation:Required
-	PolicyDocument *string `json:"policyDocument" tf:"policy_document,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -55,8 +62,9 @@ type ResourcePolicyStatus struct {
 type ResourcePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourcePolicySpec   `json:"spec"`
-	Status            ResourcePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyDocument)",message="policyDocument is a required parameter"
+	Spec   ResourcePolicySpec   `json:"spec"`
+	Status ResourcePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

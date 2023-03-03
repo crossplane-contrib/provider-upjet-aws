@@ -18,8 +18,39 @@ type EnvironmentEC2Observation struct {
 	// The ARN of the environment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The number of minutes until the running instance is shut down after the environment has last been used.
+	AutomaticStopTimeMinutes *float64 `json:"automaticStopTimeMinutes,omitempty" tf:"automatic_stop_time_minutes,omitempty"`
+
+	// The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT_SSH and CONNECT_SSM. For more information please refer AWS documentation for Cloud9.
+	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
+
+	// The description of the environment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. Valid values are
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// The type of instance to connect to the environment, e.g., t2.micro.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The name of the environment.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the environment owner. This can be ARN of any AWS IAM principal. Defaults to the environment's creator.
+	OwnerArn *string `json:"ownerArn,omitempty" tf:"owner_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -47,12 +78,12 @@ type EnvironmentEC2Parameters struct {
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// The type of instance to connect to the environment, e.g., t2.micro.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The name of the environment.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the environment owner. This can be ARN of any AWS IAM principal. Defaults to the environment's creator.
 	// +kubebuilder:validation:Optional
@@ -105,8 +136,10 @@ type EnvironmentEC2Status struct {
 type EnvironmentEC2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EnvironmentEC2Spec   `json:"spec"`
-	Status            EnvironmentEC2Status `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   EnvironmentEC2Spec   `json:"spec"`
+	Status EnvironmentEC2Status `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

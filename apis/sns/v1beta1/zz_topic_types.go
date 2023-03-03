@@ -15,14 +15,84 @@ import (
 
 type TopicObservation struct {
 
+	// IAM role for failure feedback
+	ApplicationFailureFeedbackRoleArn *string `json:"applicationFailureFeedbackRoleArn,omitempty" tf:"application_failure_feedback_role_arn,omitempty"`
+
+	// The IAM role permitted to receive success feedback for this topic
+	ApplicationSuccessFeedbackRoleArn *string `json:"applicationSuccessFeedbackRoleArn,omitempty" tf:"application_success_feedback_role_arn,omitempty"`
+
+	// Percentage of success to sample
+	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
+
 	// The ARN of the SNS topic, as a more obvious property (clone of id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
+	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
+
+	// The SNS delivery policy. More on AWS documentation
+	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
+
+	// The display name for the topic
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
+	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
+
+	// IAM role for failure feedback
+	FirehoseFailureFeedbackRoleArn *string `json:"firehoseFailureFeedbackRoleArn,omitempty" tf:"firehose_failure_feedback_role_arn,omitempty"`
+
+	// The IAM role permitted to receive success feedback for this topic
+	FirehoseSuccessFeedbackRoleArn *string `json:"firehoseSuccessFeedbackRoleArn,omitempty" tf:"firehose_success_feedback_role_arn,omitempty"`
+
+	// Percentage of success to sample
+	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
+
+	// IAM role for failure feedback
+	HTTPFailureFeedbackRoleArn *string `json:"httpFailureFeedbackRoleArn,omitempty" tf:"http_failure_feedback_role_arn,omitempty"`
+
+	// The IAM role permitted to receive success feedback for this topic
+	HTTPSuccessFeedbackRoleArn *string `json:"httpSuccessFeedbackRoleArn,omitempty" tf:"http_success_feedback_role_arn,omitempty"`
+
+	// Percentage of success to sample
+	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
 	// The ARN of the SNS topic
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
+	// IAM role for failure feedback
+	LambdaFailureFeedbackRoleArn *string `json:"lambdaFailureFeedbackRoleArn,omitempty" tf:"lambda_failure_feedback_role_arn,omitempty"`
+
+	// The IAM role permitted to receive success feedback for this topic
+	LambdaSuccessFeedbackRoleArn *string `json:"lambdaSuccessFeedbackRoleArn,omitempty" tf:"lambda_success_feedback_role_arn,omitempty"`
+
+	// Percentage of success to sample
+	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+
 	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The fully-formed AWS policy as JSON.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// IAM role for failure feedback
+	SqsFailureFeedbackRoleArn *string `json:"sqsFailureFeedbackRoleArn,omitempty" tf:"sqs_failure_feedback_role_arn,omitempty"`
+
+	// The IAM role permitted to receive success feedback for this topic
+	SqsSuccessFeedbackRoleArn *string `json:"sqsSuccessFeedbackRoleArn,omitempty" tf:"sqs_success_feedback_role_arn,omitempty"`
+
+	// Percentage of success to sample
+	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

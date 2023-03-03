@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resourcedatasyncs.ssm.aws.upbound.io
 spec:
@@ -248,8 +248,16 @@ spec:
                     type: array
                 required:
                 - region
-                - s3Destination
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -421,6 +429,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: s3Destination is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Destination)
           status:
             description: ResourceDataSyncStatus defines the observed state of ResourceDataSync.
             properties:
@@ -428,6 +439,36 @@ spec:
                 properties:
                   id:
                     type: string
+                  region:
+                    description: Region with the bucket targeted by the Resource Data
+                      Sync. Region is the region you'd like your resource to be created
+                      in.
+                    type: string
+                  s3Destination:
+                    description: Amazon S3 configuration details for the sync.
+                    items:
+                      properties:
+                        bucketName:
+                          description: Name of S3 bucket where the aggregated data
+                            is stored.
+                          type: string
+                        kmsKeyArn:
+                          description: ARN of an encryption key for a destination
+                            in Amazon S3.
+                          type: string
+                        prefix:
+                          description: Prefix for the bucket.
+                          type: string
+                        region:
+                          description: Region with the bucket targeted by the Resource
+                            Data Sync.
+                          type: string
+                        syncFormat:
+                          description: A supported sync format. Only JsonSerDe is
+                            currently supported. Defaults to JsonSerDe.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -470,9 +511,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

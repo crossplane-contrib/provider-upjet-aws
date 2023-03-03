@@ -17,6 +17,19 @@ type VPCAssociationAuthorizationObservation struct {
 
 	// The calculated unique identifier for the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The VPC to authorize for association with the private hosted zone.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// The VPC's region. Defaults to the region of the AWS provider.
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
+
+	// The ID of the private hosted zone that you want to authorize associating a VPC with.
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type VPCAssociationAuthorizationParameters struct {

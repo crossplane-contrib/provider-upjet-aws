@@ -18,11 +18,26 @@ type ExternalKeyObservation struct {
 	// The Amazon Resource Name (ARN) of the key.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide. Defaults to false.
+	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
+
+	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+
+	// Description of the key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies whether the key is enabled. Keys pending import can only be false. Imported keys default to true unless expired.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// Whether the key material expires. Empty when pending key material import, otherwise KEY_MATERIAL_EXPIRES or KEY_MATERIAL_DOES_NOT_EXPIRE.
 	ExpirationModel *string `json:"expirationModel,omitempty" tf:"expiration_model,omitempty"`
 
 	// The unique identifier for the key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
+	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
 
 	// The state of the CMK.
 	KeyState *string `json:"keyState,omitempty" tf:"key_state,omitempty"`
@@ -30,8 +45,24 @@ type ExternalKeyObservation struct {
 	// The cryptographic operations for which you can use the CMK.
 	KeyUsage *string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
+	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
+	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
+
+	// A key policy JSON document. If you do not provide a key policy, AWS KMS attaches a default key policy to the CMK.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. If not specified, key material does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
+	ValidTo *string `json:"validTo,omitempty" tf:"valid_to,omitempty"`
 }
 
 type ExternalKeyParameters struct {

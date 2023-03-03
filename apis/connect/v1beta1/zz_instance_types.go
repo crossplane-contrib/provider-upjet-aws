@@ -18,11 +18,45 @@ type InstanceObservation struct {
 	// Amazon Resource Name (ARN) of the instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies whether auto resolve best voices is enabled. Defaults to true.
+	AutoResolveBestVoicesEnabled *bool `json:"autoResolveBestVoicesEnabled,omitempty" tf:"auto_resolve_best_voices_enabled,omitempty"`
+
+	// Specifies whether contact flow logs are enabled. Defaults to false.
+	ContactFlowLogsEnabled *bool `json:"contactFlowLogsEnabled,omitempty" tf:"contact_flow_logs_enabled,omitempty"`
+
+	// Specifies whether contact lens is enabled. Defaults to true.
+	ContactLensEnabled *bool `json:"contactLensEnabled,omitempty" tf:"contact_lens_enabled,omitempty"`
+
 	// When the instance was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// The identifier for the directory if identity_management_type is EXISTING_DIRECTORY.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Specifies whether early media for outbound calls is enabled . Defaults to true if outbound calls is enabled.
+	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
+
 	// The identifier of the instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identity management type attached to the instance. Allowed Values are: SAML, CONNECT_MANAGED, EXISTING_DIRECTORY.
+	IdentityManagementType *string `json:"identityManagementType,omitempty" tf:"identity_management_type,omitempty"`
+
+	// Specifies whether inbound calls are enabled.
+	InboundCallsEnabled *bool `json:"inboundCallsEnabled,omitempty" tf:"inbound_calls_enabled,omitempty"`
+
+	// Specifies the name of the instance. Required if directory_id not specified.
+	InstanceAlias *string `json:"instanceAlias,omitempty" tf:"instance_alias,omitempty"`
+
+	// Specifies whether multi-party calls/conference is enabled. Defaults to false.
+	MultiPartyConferenceEnabled *bool `json:"multiPartyConferenceEnabled,omitempty" tf:"multi_party_conference_enabled,omitempty"`
+
+	// Specifies whether outbound calls are enabled.
+	OutboundCallsEnabled *bool `json:"outboundCallsEnabled,omitempty" tf:"outbound_calls_enabled,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The service role of the instance.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
@@ -64,12 +98,12 @@ type InstanceParameters struct {
 	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
 
 	// Specifies the identity management type attached to the instance. Allowed Values are: SAML, CONNECT_MANAGED, EXISTING_DIRECTORY.
-	// +kubebuilder:validation:Required
-	IdentityManagementType *string `json:"identityManagementType" tf:"identity_management_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityManagementType *string `json:"identityManagementType,omitempty" tf:"identity_management_type,omitempty"`
 
 	// Specifies whether inbound calls are enabled.
-	// +kubebuilder:validation:Required
-	InboundCallsEnabled *bool `json:"inboundCallsEnabled" tf:"inbound_calls_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	InboundCallsEnabled *bool `json:"inboundCallsEnabled,omitempty" tf:"inbound_calls_enabled,omitempty"`
 
 	// Specifies the name of the instance. Required if directory_id not specified.
 	// +kubebuilder:validation:Optional
@@ -80,8 +114,8 @@ type InstanceParameters struct {
 	MultiPartyConferenceEnabled *bool `json:"multiPartyConferenceEnabled,omitempty" tf:"multi_party_conference_enabled,omitempty"`
 
 	// Specifies whether outbound calls are enabled.
-	// +kubebuilder:validation:Required
-	OutboundCallsEnabled *bool `json:"outboundCallsEnabled" tf:"outbound_calls_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutboundCallsEnabled *bool `json:"outboundCallsEnabled,omitempty" tf:"outbound_calls_enabled,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -113,8 +147,11 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityManagementType)",message="identityManagementType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inboundCallsEnabled)",message="inboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outboundCallsEnabled)",message="outboundCallsEnabled is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -24,6 +24,9 @@ type DirectoryObservation struct {
 	// The IP addresses of the DNS servers for the directory.
 	DNSIPAddresses []*string `json:"dnsIpAddresses,omitempty" tf:"dns_ip_addresses,omitempty"`
 
+	// The directory identifier for registration in WorkSpaces service.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
 	// The name of the directory.
 	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
 
@@ -36,11 +39,33 @@ type DirectoryObservation struct {
 	// The WorkSpaces directory identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The identifiers of the IP access control groups associated with the directory.
+	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
 	RegistrationCode *string `json:"registrationCode,omitempty" tf:"registration_code,omitempty"`
 
+	// service capabilities. Defined below.
+	SelfServicePermissions []SelfServicePermissionsObservation `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
+
+	// The identifiers of the subnets where the directory resides.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
+	WorkspaceAccessProperties []WorkspaceAccessPropertiesObservation `json:"workspaceAccessProperties,omitempty" tf:"workspace_access_properties,omitempty"`
+
+	// –  Default properties that are used for creating WorkSpaces. Defined below.
+	WorkspaceCreationProperties []WorkspaceCreationPropertiesObservation `json:"workspaceCreationProperties,omitempty" tf:"workspace_creation_properties,omitempty"`
 
 	// The identifier of the security group that is assigned to new WorkSpaces.
 	WorkspaceSecurityGroupID *string `json:"workspaceSecurityGroupId,omitempty" tf:"workspace_security_group_id,omitempty"`
@@ -104,6 +129,21 @@ type DirectoryParameters struct {
 }
 
 type SelfServicePermissionsObservation struct {
+
+	// –  Whether WorkSpaces directory users can change the compute type (bundle) for their workspace. Default false.
+	ChangeComputeType *bool `json:"changeComputeType,omitempty" tf:"change_compute_type,omitempty"`
+
+	// –  Whether WorkSpaces directory users can increase the volume size of the drives on their workspace. Default false.
+	IncreaseVolumeSize *bool `json:"increaseVolumeSize,omitempty" tf:"increase_volume_size,omitempty"`
+
+	// –  Whether WorkSpaces directory users can rebuild the operating system of a workspace to its original state. Default false.
+	RebuildWorkspace *bool `json:"rebuildWorkspace,omitempty" tf:"rebuild_workspace,omitempty"`
+
+	// –  Whether WorkSpaces directory users can restart their workspace. Default true.
+	RestartWorkspace *bool `json:"restartWorkspace,omitempty" tf:"restart_workspace,omitempty"`
+
+	// –  Whether WorkSpaces directory users can switch the running mode of their workspace. Default false.
+	SwitchRunningMode *bool `json:"switchRunningMode,omitempty" tf:"switch_running_mode,omitempty"`
 }
 
 type SelfServicePermissionsParameters struct {
@@ -130,6 +170,30 @@ type SelfServicePermissionsParameters struct {
 }
 
 type WorkspaceAccessPropertiesObservation struct {
+
+	// –  Indicates whether users can use Android devices to access their WorkSpaces.
+	DeviceTypeAndroid *string `json:"deviceTypeAndroid,omitempty" tf:"device_type_android,omitempty"`
+
+	// –  Indicates whether users can use Chromebooks to access their WorkSpaces.
+	DeviceTypeChromeos *string `json:"deviceTypeChromeos,omitempty" tf:"device_type_chromeos,omitempty"`
+
+	// –  Indicates whether users can use iOS devices to access their WorkSpaces.
+	DeviceTypeIos *string `json:"deviceTypeIos,omitempty" tf:"device_type_ios,omitempty"`
+
+	// –  Indicates whether users can use Linux clients to access their WorkSpaces.
+	DeviceTypeLinux *string `json:"deviceTypeLinux,omitempty" tf:"device_type_linux,omitempty"`
+
+	// –  Indicates whether users can use macOS clients to access their WorkSpaces.
+	DeviceTypeOsx *string `json:"deviceTypeOsx,omitempty" tf:"device_type_osx,omitempty"`
+
+	// –  Indicates whether users can access their WorkSpaces through a web browser.
+	DeviceTypeWeb *string `json:"deviceTypeWeb,omitempty" tf:"device_type_web,omitempty"`
+
+	// –  Indicates whether users can use Windows clients to access their WorkSpaces.
+	DeviceTypeWindows *string `json:"deviceTypeWindows,omitempty" tf:"device_type_windows,omitempty"`
+
+	// –  Indicates whether users can use zero client devices to access their WorkSpaces.
+	DeviceTypeZeroclient *string `json:"deviceTypeZeroclient,omitempty" tf:"device_type_zeroclient,omitempty"`
 }
 
 type WorkspaceAccessPropertiesParameters struct {
@@ -168,6 +232,21 @@ type WorkspaceAccessPropertiesParameters struct {
 }
 
 type WorkspaceCreationPropertiesObservation struct {
+
+	// –  The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
+
+	// –  The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
+	DefaultOu *string `json:"defaultOu,omitempty" tf:"default_ou,omitempty"`
+
+	// –  Indicates whether internet access is enabled for your WorkSpaces.
+	EnableInternetAccess *bool `json:"enableInternetAccess,omitempty" tf:"enable_internet_access,omitempty"`
+
+	// –  Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see WorkSpace Maintenance..
+	EnableMaintenanceMode *bool `json:"enableMaintenanceMode,omitempty" tf:"enable_maintenance_mode,omitempty"`
+
+	// –  Indicates whether users are local administrators of their WorkSpaces.
+	UserEnabledAsLocalAdministrator *bool `json:"userEnabledAsLocalAdministrator,omitempty" tf:"user_enabled_as_local_administrator,omitempty"`
 }
 
 type WorkspaceCreationPropertiesParameters struct {

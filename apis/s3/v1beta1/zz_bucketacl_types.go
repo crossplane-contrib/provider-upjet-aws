@@ -16,8 +16,10 @@ import (
 type AccessControlPolicyGrantObservation struct {
 
 	// Configuration block for the person being granted permissions documented below.
-	// +kubebuilder:validation:Optional
 	Grantee []GranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Logging permissions assigned to the grantee for the bucket.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type AccessControlPolicyGrantParameters struct {
@@ -34,8 +36,10 @@ type AccessControlPolicyGrantParameters struct {
 type AccessControlPolicyObservation struct {
 
 	// Set of grant configuration blocks documented below.
-	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
+
+	// Configuration block of the bucket owner's display name and ID documented below.
+	Owner []OwnerObservation `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type AccessControlPolicyParameters struct {
@@ -55,11 +59,20 @@ type BucketACLObservation struct {
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// A configuration block that sets the ACL permissions for an object per grantee documented below.
-	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
+
+	// The name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
 	// The bucket, expected_bucket_owner (if configured), and acl (if configured) separated by commas (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BucketACLParameters struct {
@@ -96,6 +109,18 @@ type GranteeObservation struct {
 
 	// The display name of the owner.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// The ID of the owner.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// URI of the grantee group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GranteeParameters struct {
@@ -118,6 +143,12 @@ type GranteeParameters struct {
 }
 
 type OwnerObservation struct {
+
+	// The display name of the owner.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The ID of the owner.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type OwnerParameters struct {

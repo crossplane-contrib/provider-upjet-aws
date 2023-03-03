@@ -14,6 +14,12 @@ import (
 )
 
 type AutoDeploymentObservation struct {
+
+	// Whether or not auto-deployment is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether or not to retain stacks when the account is removed.
+	RetainStacksOnAccountRemoval *bool `json:"retainStacksOnAccountRemoval,omitempty" tf:"retain_stacks_on_account_removal,omitempty"`
 }
 
 type AutoDeploymentParameters struct {
@@ -28,6 +34,24 @@ type AutoDeploymentParameters struct {
 }
 
 type OperationPreferencesObservation struct {
+
+	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
+	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
+
+	// The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region.
+	FailureTolerancePercentage *float64 `json:"failureTolerancePercentage,omitempty" tf:"failure_tolerance_percentage,omitempty"`
+
+	// The maximum number of accounts in which to perform this operation at one time.
+	MaxConcurrentCount *float64 `json:"maxConcurrentCount,omitempty" tf:"max_concurrent_count,omitempty"`
+
+	// The maximum percentage of accounts in which to perform this operation at one time.
+	MaxConcurrentPercentage *float64 `json:"maxConcurrentPercentage,omitempty" tf:"max_concurrent_percentage,omitempty"`
+
+	// The concurrency type of deploying StackSets operations in Regions, could be in parallel or one Region at a time.
+	RegionConcurrencyType *string `json:"regionConcurrencyType,omitempty" tf:"region_concurrency_type,omitempty"`
+
+	// The order of the Regions in where you want to perform the stack operation.
+	RegionOrder []*string `json:"regionOrder,omitempty" tf:"region_order,omitempty"`
 }
 
 type OperationPreferencesParameters struct {
@@ -59,17 +83,57 @@ type OperationPreferencesParameters struct {
 
 type StackSetObservation struct {
 
+	// Amazon Resource Number (ARN) of the IAM Role in the administrator account. This must be defined when using the SELF_MANAGED permission model.
+	AdministrationRoleArn *string `json:"administrationRoleArn,omitempty" tf:"administration_role_arn,omitempty"`
+
 	// Amazon Resource Name (ARN) of the StackSet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
+	AutoDeployment []AutoDeploymentObservation `json:"autoDeployment,omitempty" tf:"auto_deployment,omitempty"`
+
+	// Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED_ADMIN.
+	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
+
+	// A list of capabilities. Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND.
+	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
+
+	// Description of the StackSet.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of the IAM Role in all target accounts for StackSet operations. Defaults to AWSCloudFormationStackSetExecutionRole when using the SELF_MANAGED permission model. This should not be defined when using the SERVICE_MANAGED permission model.
+	ExecutionRoleName *string `json:"executionRoleName,omitempty" tf:"execution_role_name,omitempty"`
 
 	// Name of the StackSet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Preferences for how AWS CloudFormation performs a stack set update.
+	OperationPreferences []OperationPreferencesObservation `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
+
+	// Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore_changes argument.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Describes how the IAM roles required for your StackSet are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.
+	PermissionModel *string `json:"permissionModel,omitempty" tf:"permission_model,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Unique identifier of the StackSet.
 	StackSetID *string `json:"stackSetId,omitempty" tf:"stack_set_id,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// String containing the CloudFormation template body. Maximum size: 51,200 bytes. Conflicts with template_url.
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// String containing the location of a file containing the CloudFormation template body. The URL must point to a template that is located in an Amazon S3 bucket. Maximum location file size: 460,800 bytes. Conflicts with template_body.
+	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 }
 
 type StackSetParameters struct {

@@ -18,8 +18,14 @@ type ApprovalRuleTemplateObservation struct {
 	// The ID of the approval rule template
 	ApprovalRuleTemplateID *string `json:"approvalRuleTemplateId,omitempty" tf:"approval_rule_template_id,omitempty"`
 
+	// The content of the approval rule template. Maximum of 3000 characters.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
 	// The date the approval rule template was created, in RFC3339 format.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
+
+	// The description of the approval rule template. Maximum of 1000 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -29,6 +35,10 @@ type ApprovalRuleTemplateObservation struct {
 	// The Amazon Resource Name (ARN) of the user who made the most recent changes to the approval rule template.
 	LastModifiedUser *string `json:"lastModifiedUser,omitempty" tf:"last_modified_user,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// The SHA-256 hash signature for the content of the approval rule template.
 	RuleContentSha256 *string `json:"ruleContentSha256,omitempty" tf:"rule_content_sha256,omitempty"`
 }
@@ -36,8 +46,8 @@ type ApprovalRuleTemplateObservation struct {
 type ApprovalRuleTemplateParameters struct {
 
 	// The content of the approval rule template. Maximum of 3000 characters.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The description of the approval rule template. Maximum of 1000 characters.
 	// +kubebuilder:validation:Optional
@@ -73,8 +83,9 @@ type ApprovalRuleTemplateStatus struct {
 type ApprovalRuleTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApprovalRuleTemplateSpec   `json:"spec"`
-	Status            ApprovalRuleTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	Spec   ApprovalRuleTemplateSpec   `json:"spec"`
+	Status ApprovalRuleTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

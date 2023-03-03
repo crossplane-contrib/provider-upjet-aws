@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: queueredrivepolicies.sqs.aws.upbound.io
 spec:
@@ -150,9 +150,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - redrivePolicy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -324,12 +332,27 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: redrivePolicy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.redrivePolicy)
           status:
             description: QueueRedrivePolicyStatus defines the observed state of QueueRedrivePolicy.
             properties:
               atProvider:
                 properties:
                   id:
+                    type: string
+                  queueUrl:
+                    description: The URL of the SQS Queue to which to attach the policy
+                    type: string
+                  redrivePolicy:
+                    description: 'The JSON redrive policy for the SQS queue. Accepts
+                      two key/val pairs: deadLetterTargetArn and maxReceiveCount.
+                      Learn more in the Amazon SQS dead-letter queues documentation.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -373,9 +396,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

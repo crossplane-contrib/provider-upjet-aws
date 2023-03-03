@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: configurationaggregators.configservice.aws.upbound.io
 spec:
@@ -197,6 +197,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -374,11 +383,62 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountAggregationSource:
+                    description: The account(s) to aggregate config data from as documented
+                      below.
+                    items:
+                      properties:
+                        accountIds:
+                          description: List of 12-digit account IDs of the account(s)
+                            being aggregated.
+                          items:
+                            type: string
+                          type: array
+                        allRegions:
+                          description: If true, aggregate existing AWS Config regions
+                            and future regions.
+                          type: boolean
+                        regions:
+                          description: List of source regions being aggregated.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   arn:
                     description: The ARN of the aggregator
                     type: string
                   id:
                     type: string
+                  organizationAggregationSource:
+                    description: The organization to aggregate config data from as
+                      documented below.
+                    items:
+                      properties:
+                        allRegions:
+                          description: If true, aggregate existing AWS Config regions
+                            and future regions.
+                          type: boolean
+                        regions:
+                          description: List of source regions being aggregated.
+                          items:
+                            type: string
+                          type: array
+                        roleArn:
+                          description: ARN of the IAM role used to retrieve AWS Organization
+                            details associated with the aggregator account.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -428,9 +488,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

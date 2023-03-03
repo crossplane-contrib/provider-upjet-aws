@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: documentationparts.apigateway.aws.upbound.io
 spec:
@@ -181,10 +181,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - location
-                - properties
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -356,6 +363,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: properties is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.properties)
           status:
             description: DocumentationPartStatus defines the observed state of DocumentationPart.
             properties:
@@ -363,6 +375,45 @@ spec:
                 properties:
                   id:
                     description: Unique ID of the Documentation Part
+                    type: string
+                  location:
+                    description: Location of the targeted API entity of the to-be-created
+                      documentation part. See below.
+                    items:
+                      properties:
+                        method:
+                          description: HTTP verb of a method. The default value is
+                            * for any method.
+                          type: string
+                        name:
+                          description: Name of the targeted API entity.
+                          type: string
+                        path:
+                          description: URL path of the target. The default value is
+                            / for the root resource.
+                          type: string
+                        statusCode:
+                          description: HTTP status code of a response. The default
+                            value is * for any status code.
+                          type: string
+                        type:
+                          description: Type of API entity to which the documentation
+                            content appliesE.g., API, METHOD or REQUEST_BODY
+                          type: string
+                      type: object
+                    type: array
+                  properties:
+                    description: 'Content map of API-specific key-value pairs describing
+                      the targeted API entity. The map must be encoded as a JSON string,
+                      e.g., "{ "description": "The API does ..." }". Only Swagger-compliant
+                      key-value pairs can be exported and, hence, published.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  restApiId:
+                    description: ID of the associated Rest API
                     type: string
                 type: object
               conditions:
@@ -406,9 +457,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

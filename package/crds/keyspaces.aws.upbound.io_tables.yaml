@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: tables.keyspaces.aws.upbound.io
 spec:
@@ -300,9 +300,16 @@ spec:
                     type: array
                 required:
                 - region
-                - schemaDefinition
-                - tableName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -474,6 +481,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: schemaDefinition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaDefinition)
+            - message: tableName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tableName)
           status:
             description: TableStatus defines the observed state of Table.
             properties:
@@ -482,8 +494,141 @@ spec:
                   arn:
                     description: The ARN of the table.
                     type: string
+                  capacitySpecification:
+                    description: Specifies the read/write throughput capacity mode
+                      for the table.
+                    items:
+                      properties:
+                        readCapacityUnits:
+                          description: The throughput capacity specified for read
+                            operations defined in read capacity units (RCUs).
+                          type: number
+                        throughputMode:
+                          description: 'The read/write throughput capacity mode for
+                            a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The
+                            default value is PAY_PER_REQUEST.'
+                          type: string
+                        writeCapacityUnits:
+                          description: The throughput capacity specified for write
+                            operations defined in write capacity units (WCUs).
+                          type: number
+                      type: object
+                    type: array
+                  comment:
+                    description: A description of the table.
+                    items:
+                      properties:
+                        message:
+                          description: A description of the table.
+                          type: string
+                      type: object
+                    type: array
+                  defaultTimeToLive:
+                    description: The default Time to Live setting in seconds for the
+                      table. More information can be found in the Developer Guide.
+                    type: number
+                  encryptionSpecification:
+                    description: Specifies how the encryption key for encryption at
+                      rest is managed for the table. More information can be found
+                      in the Developer Guide.
+                    items:
+                      properties:
+                        kmsKeyIdentifier:
+                          description: The Amazon Resource Name (ARN) of the customer
+                            managed KMS key.
+                          type: string
+                        type:
+                          description: 'The encryption option specified for the table.
+                            Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY.
+                            The default value is AWS_OWNED_KMS_KEY.'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  keyspaceName:
+                    description: The name of the keyspace that the table is going
+                      to be created in.
+                    type: string
+                  pointInTimeRecovery:
+                    description: Specifies if point-in-time recovery is enabled or
+                      disabled for the table. More information can be found in the
+                      Developer Guide.
+                    items:
+                      properties:
+                        status:
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  schemaDefinition:
+                    description: Describes the schema of the table.
+                    items:
+                      properties:
+                        clusteringKey:
+                          description: The columns that are part of the clustering
+                            key of the table.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                              orderBy:
+                                description: 'The order modifier. Valid values: ASC,
+                                  DESC.'
+                                type: string
+                            type: object
+                          type: array
+                        column:
+                          description: The regular columns of the table.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                              type:
+                                description: 'The encryption option specified for
+                                  the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY.
+                                  The default value is AWS_OWNED_KMS_KEY.'
+                                type: string
+                            type: object
+                          type: array
+                        partitionKey:
+                          description: The columns that are part of the partition
+                            key of the table .
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                            type: object
+                          type: array
+                        staticColumn:
+                          description: The columns that have been defined as STATIC.
+                            Static columns store values that are shared by all rows
+                            in the same partition.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tableName:
+                    description: The name of the table.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -491,6 +636,17 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  ttl:
+                    description: Enables Time to Live custom settings for the table.
+                      More information can be found in the Developer Guide.
+                    items:
+                      properties:
+                        status:
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -533,9 +689,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

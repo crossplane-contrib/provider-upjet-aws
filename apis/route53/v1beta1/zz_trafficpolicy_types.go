@@ -15,8 +15,21 @@ import (
 
 type TrafficPolicyObservation struct {
 
+	// Comment for the traffic policy.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
+	Document *string `json:"document,omitempty" tf:"document,omitempty"`
+
 	// ID of the traffic policy
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the traffic policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// DNS type of the resource record sets that Amazon Route 53 creates when you use a traffic policy to create a traffic policy instance.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -32,12 +45,12 @@ type TrafficPolicyParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
-	// +kubebuilder:validation:Required
-	Document *string `json:"document" tf:"document,omitempty"`
+	// +kubebuilder:validation:Optional
+	Document *string `json:"document,omitempty" tf:"document,omitempty"`
 
 	// Name of the traffic policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,8 +82,10 @@ type TrafficPolicyStatus struct {
 type TrafficPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficPolicySpec   `json:"spec"`
-	Status            TrafficPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.document)",message="document is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   TrafficPolicySpec   `json:"spec"`
+	Status TrafficPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: patchgroups.ssm.aws.upbound.io
 spec:
@@ -150,9 +150,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - patchGroup
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -324,14 +332,29 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: patchGroup is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.patchGroup)
           status:
             description: PatchGroupStatus defines the observed state of PatchGroup.
             properties:
               atProvider:
                 properties:
+                  baselineId:
+                    description: The ID of the patch baseline to register the patch
+                      group with.
+                    type: string
                   id:
                     description: The name of the patch group and ID of the patch baseline
                       separated by a comma (,).
+                    type: string
+                  patchGroup:
+                    description: The name of the patch group that should be registered
+                      with the patch baseline.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -375,9 +398,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

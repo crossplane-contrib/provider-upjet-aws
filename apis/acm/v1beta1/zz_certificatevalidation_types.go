@@ -15,8 +15,18 @@ import (
 
 type CertificateValidationObservation struct {
 
+	// ARN of the certificate that is being validated.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
 	// Time at which the certificate was issued
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 
 type CertificateValidationParameters struct {

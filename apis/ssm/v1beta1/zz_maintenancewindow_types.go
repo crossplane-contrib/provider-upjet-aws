@@ -15,8 +15,48 @@ import (
 
 type MaintenanceWindowObservation struct {
 
+	// Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+	AllowUnassociatedTargets *bool `json:"allowUnassociatedTargets,omitempty" tf:"allow_unassociated_targets,omitempty"`
+
+	// The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+	Cutoff *float64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
+
+	// A description for the maintenance window.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The duration of the Maintenance Window in hours.
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Whether the maintenance window is enabled. Default: true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Timestamp in ISO-8601 extended format when to no longer run the maintenance window.
+	EndDate *string `json:"endDate,omitempty" tf:"end_date,omitempty"`
+
 	// The ID of the maintenance window.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the maintenance window.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
+	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+
+	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
+	ScheduleTimezone *string `json:"scheduleTimezone,omitempty" tf:"schedule_timezone,omitempty"`
+
+	// Timestamp in ISO-8601 extended format when to begin the maintenance window.
+	StartDate *string `json:"startDate,omitempty" tf:"start_date,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -29,16 +69,16 @@ type MaintenanceWindowParameters struct {
 	AllowUnassociatedTargets *bool `json:"allowUnassociatedTargets,omitempty" tf:"allow_unassociated_targets,omitempty"`
 
 	// The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
-	// +kubebuilder:validation:Required
-	Cutoff *float64 `json:"cutoff" tf:"cutoff,omitempty"`
+	// +kubebuilder:validation:Optional
+	Cutoff *float64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
 
 	// A description for the maintenance window.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The duration of the Maintenance Window in hours.
-	// +kubebuilder:validation:Required
-	Duration *float64 `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Whether the maintenance window is enabled. Default: true.
 	// +kubebuilder:validation:Optional
@@ -49,8 +89,8 @@ type MaintenanceWindowParameters struct {
 	EndDate *string `json:"endDate,omitempty" tf:"end_date,omitempty"`
 
 	// The name of the maintenance window.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -58,8 +98,8 @@ type MaintenanceWindowParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
-	// +kubebuilder:validation:Required
-	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
 	// +kubebuilder:validation:Optional
@@ -102,8 +142,12 @@ type MaintenanceWindowStatus struct {
 type MaintenanceWindow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MaintenanceWindowSpec   `json:"spec"`
-	Status            MaintenanceWindowStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cutoff)",message="cutoff is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.duration)",message="duration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	Spec   MaintenanceWindowSpec   `json:"spec"`
+	Status MaintenanceWindowStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

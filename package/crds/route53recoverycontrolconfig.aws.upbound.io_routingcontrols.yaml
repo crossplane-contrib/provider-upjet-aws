@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: routingcontrols.route53recoverycontrolconfig.aws.upbound.io
 spec:
@@ -230,9 +230,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -404,6 +412,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: RoutingControlStatus defines the observed state of RoutingControl.
             properties:
@@ -412,7 +423,22 @@ spec:
                   arn:
                     description: ARN of the routing control.
                     type: string
+                  clusterArn:
+                    description: ARN of the cluster in which this routing control
+                      will reside.
+                    type: string
+                  controlPanelArn:
+                    description: ARN of the control panel in which this routing control
+                      will reside.
+                    type: string
                   id:
+                    type: string
+                  name:
+                    description: The name describing the routing control.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   status:
                     description: Status of routing control. PENDING when it is being
@@ -461,9 +487,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

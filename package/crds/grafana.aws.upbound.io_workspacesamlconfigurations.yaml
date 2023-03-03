@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: workspacesamlconfigurations.grafana.aws.upbound.io
 spec:
@@ -190,9 +190,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - editorRoleValues
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -364,16 +372,70 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: editorRoleValues is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.editorRoleValues)
           status:
             description: WorkspaceSAMLConfigurationStatus defines the observed state
               of WorkspaceSAMLConfiguration.
             properties:
               atProvider:
                 properties:
+                  adminRoleValues:
+                    description: The admin role values.
+                    items:
+                      type: string
+                    type: array
+                  allowedOrganizations:
+                    description: The allowed organizations.
+                    items:
+                      type: string
+                    type: array
+                  editorRoleValues:
+                    description: The editor role values.
+                    items:
+                      type: string
+                    type: array
+                  emailAssertion:
+                    description: The email assertion.
+                    type: string
+                  groupsAssertion:
+                    description: The groups assertion.
+                    type: string
                   id:
+                    type: string
+                  idpMetadataUrl:
+                    description: The IDP Metadata URL. Note that either idp_metadata_url
+                      or idp_metadata_xml (but not both) must be specified.
+                    type: string
+                  idpMetadataXml:
+                    description: The IDP Metadata XML. Note that either idp_metadata_url
+                      or idp_metadata_xml (but not both) must be specified.
+                    type: string
+                  loginAssertion:
+                    description: The login assertion.
+                    type: string
+                  loginValidityDuration:
+                    description: The login validity duration.
+                    type: number
+                  nameAssertion:
+                    description: The name assertion.
+                    type: string
+                  orgAssertion:
+                    description: The org assertion.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleAssertion:
+                    description: The role assertion.
                     type: string
                   status:
                     description: The status of the SAML configuration.
+                    type: string
+                  workspaceId:
+                    description: The workspace id.
                     type: string
                 type: object
               conditions:
@@ -417,9 +479,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

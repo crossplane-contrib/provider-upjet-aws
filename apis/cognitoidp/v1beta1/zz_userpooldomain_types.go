@@ -18,13 +18,26 @@ type UserPoolDomainObservation struct {
 	// The AWS account ID for the user pool owner.
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
+	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
 	// The URL of the CloudFront distribution. This is required to generate the ALIAS aws_route53_record
 	CloudfrontDistributionArn *string `json:"cloudfrontDistributionArn,omitempty" tf:"cloudfront_distribution_arn,omitempty"`
 
+	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The S3 bucket where the static files for this domain are stored.
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// The user pool ID.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// The app version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -47,8 +60,8 @@ type UserPoolDomainParameters struct {
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
-	// +kubebuilder:validation:Required
-	Domain *string `json:"domain" tf:"domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +106,9 @@ type UserPoolDomainStatus struct {
 type UserPoolDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserPoolDomainSpec   `json:"spec"`
-	Status            UserPoolDomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domain)",message="domain is a required parameter"
+	Spec   UserPoolDomainSpec   `json:"spec"`
+	Status UserPoolDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

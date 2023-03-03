@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: members.detective.aws.upbound.io
 spec:
@@ -163,10 +163,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - accountId
-                - emailAddress
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -338,15 +345,36 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: accountId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountId)
+            - message: emailAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddress)
           status:
             description: MemberStatus defines the observed state of Member.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: AWS account ID for the account.
+                    type: string
                   administratorId:
                     description: AWS account ID for the administrator account.
                     type: string
+                  disableEmailNotification:
+                    description: If set to true, then the root user of the invited
+                      account will not receive an email notification. This notification
+                      is in addition to an alert that the root user receives in AWS
+                      Personal Health Dashboard. By default, this is set to false.
+                    type: boolean
                   disabledReason:
+                    type: string
+                  emailAddress:
+                    description: Email address for the account.
+                    type: string
+                  graphArn:
+                    description: ARN of the behavior graph to invite the member accounts
+                      to contribute their data to.
                     type: string
                   id:
                     description: Unique identifier (ID) of the Detective.
@@ -355,6 +383,15 @@ spec:
                     description: Date and time, in UTC and extended RFC 3339 format,
                       when an Amazon Detective membership invitation was last sent
                       to the account.
+                    type: string
+                  message:
+                    description: A custom message to include in the invitation. Amazon
+                      Detective adds this message to the standard content that it
+                      sends for an invitation.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   status:
                     description: Current membership status of the member account.
@@ -408,9 +445,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

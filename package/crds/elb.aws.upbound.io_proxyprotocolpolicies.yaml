@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: proxyprotocolpolicies.elb.aws.upbound.io
 spec:
@@ -153,9 +153,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - instancePorts
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -327,6 +335,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: instancePorts is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePorts)
           status:
             description: ProxyProtocolPolicyStatus defines the observed state of ProxyProtocolPolicy.
             properties:
@@ -334,6 +345,20 @@ spec:
                 properties:
                   id:
                     description: The ID of the policy.
+                    type: string
+                  instancePorts:
+                    description: List of instance ports to which the policy should
+                      be applied. This can be specified if the protocol is SSL or
+                      TCP.
+                    items:
+                      type: string
+                    type: array
+                  loadBalancer:
+                    description: The load balancer to which the policy should be attached.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -377,9 +402,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

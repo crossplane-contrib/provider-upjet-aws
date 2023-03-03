@@ -14,7 +14,15 @@ import (
 )
 
 type EmailIdentityFeedbackAttributesObservation struct {
+
+	// Sets the feedback forwarding configuration for the identity.
+	EmailForwardingEnabled *bool `json:"emailForwardingEnabled,omitempty" tf:"email_forwarding_enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type EmailIdentityFeedbackAttributesParameters struct {

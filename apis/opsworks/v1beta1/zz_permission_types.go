@@ -15,8 +15,23 @@ import (
 
 type PermissionObservation struct {
 
+	// Whether the user is allowed to use SSH to communicate with the instance
+	AllowSSH *bool `json:"allowSsh,omitempty" tf:"allow_ssh,omitempty"`
+
+	// Whether the user is allowed to use sudo to elevate privileges
+	AllowSudo *bool `json:"allowSudo,omitempty" tf:"allow_sudo,omitempty"`
+
 	// The computed id of the permission. Please note that this is only used internally to identify the permission. This value is not used in aws.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The users permission level. Mus be one of deny, show, deploy, manage, iam_only
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The stack to set the permissions for
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// The user's IAM ARN to set permissions for
+	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 }
 
 type PermissionParameters struct {

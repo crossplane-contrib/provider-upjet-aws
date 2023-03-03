@@ -14,6 +14,12 @@ import (
 )
 
 type ProviderObservation struct {
+
+	// Virtual node associated with a virtual service.
+	VirtualNode []ProviderVirtualNodeObservation `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Virtual router associated with a virtual service.
+	VirtualRouter []ProviderVirtualRouterObservation `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
 }
 
 type ProviderParameters struct {
@@ -28,6 +34,9 @@ type ProviderParameters struct {
 }
 
 type ProviderVirtualNodeObservation struct {
+
+	// Name of the virtual node that is acting as a service provider. Must be between 1 and 255 characters in length.
+	VirtualNodeName *string `json:"virtualNodeName,omitempty" tf:"virtual_node_name,omitempty"`
 }
 
 type ProviderVirtualNodeParameters struct {
@@ -48,6 +57,9 @@ type ProviderVirtualNodeParameters struct {
 }
 
 type ProviderVirtualRouterObservation struct {
+
+	// Name of the virtual router that is acting as a service provider. Must be between 1 and 255 characters in length.
+	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
 }
 
 type ProviderVirtualRouterParameters struct {
@@ -81,8 +93,27 @@ type VirtualServiceObservation_2 struct {
 	// Last update date of the virtual service.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the virtual service. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the virtual service. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Virtual service specification to apply.
+	Spec []VirtualServiceSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -109,8 +140,8 @@ type VirtualServiceParameters_2 struct {
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the virtual service. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -118,8 +149,8 @@ type VirtualServiceParameters_2 struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Virtual service specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []VirtualServiceSpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []VirtualServiceSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -127,6 +158,9 @@ type VirtualServiceParameters_2 struct {
 }
 
 type VirtualServiceSpecObservation struct {
+
+	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
+	Provider []ProviderObservation `json:"provider,omitempty" tf:"provider,omitempty"`
 }
 
 type VirtualServiceSpecParameters struct {
@@ -160,8 +194,10 @@ type VirtualServiceStatus struct {
 type VirtualService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualServiceSpec   `json:"spec"`
-	Status            VirtualServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   VirtualServiceSpec   `json:"spec"`
+	Status VirtualServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

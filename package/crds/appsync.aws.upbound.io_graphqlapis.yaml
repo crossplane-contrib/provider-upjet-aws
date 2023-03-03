@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: graphqlapis.appsync.aws.upbound.io
 spec:
@@ -438,10 +438,17 @@ spec:
                       false.
                     type: boolean
                 required:
-                - authenticationType
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -613,17 +620,199 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: authenticationType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationType)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: GraphQLAPIStatus defines the observed state of GraphQLAPI.
             properties:
               atProvider:
                 properties:
+                  additionalAuthenticationProvider:
+                    description: One or more additional authentication providers for
+                      the GraphqlApi. Defined below.
+                    items:
+                      properties:
+                        authenticationType:
+                          description: 'Authentication type. Valid values: API_KEY,
+                            AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
+                          type: string
+                        lambdaAuthorizerConfig:
+                          description: Nested argument containing Lambda authorizer
+                            configuration. Defined below.
+                          items:
+                            properties:
+                              authorizerResultTtlInSeconds:
+                                description: Number of seconds a response should be
+                                  cached for. The default is 5 minutes (300 seconds).
+                                  The Lambda function can override this by returning
+                                  a ttlOverride key in its response. A value of 0
+                                  disables caching of responses. Minimum value of
+                                  0. Maximum value of 3600.
+                                type: number
+                              authorizerUri:
+                                description: 'ARN of the Lambda function to be called
+                                  for authorization. Note: This Lambda function must
+                                  have a resource-based policy assigned to it, to
+                                  allow lambda:InvokeFunction from service principal
+                                  appsync.amazonaws.com.'
+                                type: string
+                              identityValidationExpression:
+                                description: Regular expression for validation of
+                                  tokens before the Lambda function is called.
+                                type: string
+                            type: object
+                          type: array
+                        openidConnectConfig:
+                          description: Nested argument containing OpenID Connect configuration.
+                            Defined below.
+                          items:
+                            properties:
+                              authTtl:
+                                description: Number of milliseconds a token is valid
+                                  after being authenticated.
+                                type: number
+                              clientId:
+                                description: Client identifier of the Relying party
+                                  at the OpenID identity provider. This identifier
+                                  is typically obtained when the Relying party is
+                                  registered with the OpenID identity provider. You
+                                  can specify a regular expression so the AWS AppSync
+                                  can validate against multiple client identifiers
+                                  at a time.
+                                type: string
+                              iatTtl:
+                                description: Number of milliseconds a token is valid
+                                  after being issued to a user.
+                                type: number
+                              issuer:
+                                description: Issuer for the OpenID Connect configuration.
+                                  The issuer returned by discovery MUST exactly match
+                                  the value of iss in the ID Token.
+                                type: string
+                            type: object
+                          type: array
+                        userPoolConfig:
+                          description: Amazon Cognito User Pool configuration. Defined
+                            below.
+                          items:
+                            properties:
+                              appIdClientRegex:
+                                description: Regular expression for validating the
+                                  incoming Amazon Cognito User Pool app client ID.
+                                type: string
+                              awsRegion:
+                                description: AWS region in which the user pool was
+                                  created.
+                                type: string
+                              userPoolId:
+                                description: User pool ID.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   arn:
                     description: ARN
+                    type: string
+                  authenticationType:
+                    description: 'Authentication type. Valid values: API_KEY, AWS_IAM,
+                      AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                     type: string
                   id:
                     description: API ID
                     type: string
+                  lambdaAuthorizerConfig:
+                    description: Nested argument containing Lambda authorizer configuration.
+                      Defined below.
+                    items:
+                      properties:
+                        authorizerResultTtlInSeconds:
+                          description: Number of seconds a response should be cached
+                            for. The default is 5 minutes (300 seconds). The Lambda
+                            function can override this by returning a ttlOverride
+                            key in its response. A value of 0 disables caching of
+                            responses. Minimum value of 0. Maximum value of 3600.
+                          type: number
+                        authorizerUri:
+                          description: 'ARN of the Lambda function to be called for
+                            authorization. Note: This Lambda function must have a
+                            resource-based policy assigned to it, to allow lambda:InvokeFunction
+                            from service principal appsync.amazonaws.com.'
+                          type: string
+                        identityValidationExpression:
+                          description: Regular expression for validation of tokens
+                            before the Lambda function is called.
+                          type: string
+                      type: object
+                    type: array
+                  logConfig:
+                    description: Nested argument containing logging configuration.
+                      Defined below.
+                    items:
+                      properties:
+                        cloudwatchLogsRoleArn:
+                          description: Amazon Resource Name of the service role that
+                            AWS AppSync will assume to publish to Amazon CloudWatch
+                            logs in your account.
+                          type: string
+                        excludeVerboseContent:
+                          description: 'Set to TRUE to exclude sections that contain
+                            information such as headers, context, and evaluated mapping
+                            templates, regardless of logging  level. Valid values:
+                            true, false. Default value: false'
+                          type: boolean
+                        fieldLogLevel:
+                          description: 'Field logging level. Valid values: ALL, ERROR,
+                            NONE.'
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: User-supplied name for the GraphqlApi.
+                    type: string
+                  openidConnectConfig:
+                    description: Nested argument containing OpenID Connect configuration.
+                      Defined below.
+                    items:
+                      properties:
+                        authTtl:
+                          description: Number of milliseconds a token is valid after
+                            being authenticated.
+                          type: number
+                        clientId:
+                          description: Client identifier of the Relying party at the
+                            OpenID identity provider. This identifier is typically
+                            obtained when the Relying party is registered with the
+                            OpenID identity provider. You can specify a regular expression
+                            so the AWS AppSync can validate against multiple client
+                            identifiers at a time.
+                          type: string
+                        iatTtl:
+                          description: Number of milliseconds a token is valid after
+                            being issued to a user.
+                          type: number
+                        issuer:
+                          description: Issuer for the OpenID Connect configuration.
+                            The issuer returned by discovery MUST exactly match the
+                            value of iss in the ID Token.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  schema:
+                    description: Schema definition, in GraphQL schema language format.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -636,6 +825,32 @@ spec:
                     description: Map of URIs associated with the APIE.g., uris["GRAPHQL"]
                       = https://ID.appsync-api.REGION.amazonaws.com/graphql
                     type: object
+                  userPoolConfig:
+                    description: Amazon Cognito User Pool configuration. Defined below.
+                    items:
+                      properties:
+                        appIdClientRegex:
+                          description: Regular expression for validating the incoming
+                            Amazon Cognito User Pool app client ID.
+                          type: string
+                        awsRegion:
+                          description: AWS region in which the user pool was created.
+                          type: string
+                        defaultAction:
+                          description: 'Action that you want your GraphQL API to take
+                            when a request that uses Amazon Cognito User Pool authentication
+                            doesn''t match the Amazon Cognito User Pool configuration.
+                            Valid: ALLOW and DENY'
+                          type: string
+                        userPoolId:
+                          description: User pool ID.
+                          type: string
+                      type: object
+                    type: array
+                  xrayEnabled:
+                    description: Whether tracing with X-ray is enabled. Defaults to
+                      false.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -678,9 +893,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

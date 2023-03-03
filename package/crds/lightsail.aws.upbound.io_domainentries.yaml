@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: domainentries.lightsail.aws.upbound.io
 spec:
@@ -156,9 +156,17 @@ spec:
                     type: string
                 required:
                 - region
-                - target
                 - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -330,14 +338,34 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: target is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)
           status:
             description: DomainEntryStatus defines the observed state of DomainEntry.
             properties:
               atProvider:
                 properties:
+                  domainName:
+                    description: The name of the Lightsail domain in which to create
+                      the entry
+                    type: string
                   id:
                     description: 'A combination of attributes to create a unique id:
                       name_domain_name_type_target'
+                    type: string
+                  isAlias:
+                    description: If the entry should be an alias Defaults to false
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  target:
+                    description: Target of the domain entry
+                    type: string
+                  type:
+                    description: Type of record
                     type: string
                 type: object
               conditions:
@@ -381,9 +409,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

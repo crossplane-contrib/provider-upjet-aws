@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: domainidentities.ses.aws.upbound.io
 spec:
@@ -72,9 +72,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - domain
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -246,6 +254,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: domain is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domain)
           status:
             description: DomainIdentityStatus defines the observed state of DomainIdentity.
             properties:
@@ -254,7 +265,14 @@ spec:
                   arn:
                     description: The ARN of the domain identity.
                     type: string
+                  domain:
+                    description: The domain name to assign to SES
+                    type: string
                   id:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   verificationToken:
                     description: A code which when added to the domain as a TXT record
@@ -305,9 +323,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

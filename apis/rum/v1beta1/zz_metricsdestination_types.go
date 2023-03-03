@@ -16,7 +16,23 @@ import (
 type MetricsDestinationObservation struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
+	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
+
+	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// The name of the CloudWatch RUM app monitor that will send the metrics.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type MetricsDestinationParameters struct {
@@ -35,8 +51,8 @@ type MetricsDestinationParameters struct {
 	AppMonitorNameSelector *v1.Selector `json:"appMonitorNameSelector,omitempty" tf:"-"`
 
 	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
-	// +kubebuilder:validation:Required
-	Destination *string `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
 	// +kubebuilder:validation:Optional
@@ -86,8 +102,9 @@ type MetricsDestinationStatus struct {
 type MetricsDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricsDestinationSpec   `json:"spec"`
-	Status            MetricsDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	Spec   MetricsDestinationSpec   `json:"spec"`
+	Status MetricsDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clusters.ecs.aws.upbound.io
 spec:
@@ -185,6 +185,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,9 +380,121 @@ spec:
                     items:
                       type: string
                     type: array
+                  configuration:
+                    description: The execute command configuration for the cluster.
+                      Detailed below.
+                    items:
+                      properties:
+                        executeCommandConfiguration:
+                          description: The details of the execute command configuration.
+                            Detailed below.
+                          items:
+                            properties:
+                              kmsKeyId:
+                                description: The AWS Key Management Service key ID
+                                  to encrypt the data between the local client and
+                                  the container.
+                                type: string
+                              logConfiguration:
+                                description: The log configuration for the results
+                                  of the execute command actions Required when logging
+                                  is OVERRIDE. Detailed below.
+                                items:
+                                  properties:
+                                    cloudWatchEncryptionEnabled:
+                                      description: Whether or not to enable encryption
+                                        on the CloudWatch logs. If not specified,
+                                        encryption will be disabled.
+                                      type: boolean
+                                    cloudWatchLogGroupName:
+                                      description: The name of the CloudWatch log
+                                        group to send logs to.
+                                      type: string
+                                    s3BucketEncryptionEnabled:
+                                      description: Whether or not to enable encryption
+                                        on the logs sent to S3. If not specified,
+                                        encryption will be disabled.
+                                      type: boolean
+                                    s3BucketName:
+                                      description: The name of the S3 bucket to send
+                                        logs to.
+                                      type: string
+                                    s3KeyPrefix:
+                                      description: An optional folder in the S3 bucket
+                                        to place logs in.
+                                      type: string
+                                  type: object
+                                type: array
+                              logging:
+                                description: The log setting to use for redirecting
+                                  logs for your execute command results. Valid values
+                                  are NONE, DEFAULT, and OVERRIDE.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  defaultCapacityProviderStrategy:
+                    description: Configuration block for capacity provider strategy
+                      to use by default for the cluster. Can be one or more. Detailed
+                      below.
+                    items:
+                      properties:
+                        base:
+                          description: The number of tasks, at a minimum, to run on
+                            the specified capacity provider. Only one capacity provider
+                            in a capacity provider strategy can have a base defined.
+                          type: number
+                        capacityProvider:
+                          description: The short name of the capacity provider.
+                          type: string
+                        weight:
+                          description: The relative percentage of the total number
+                            of launched tasks that should use the specified capacity
+                            provider.
+                          type: number
+                      type: object
+                    type: array
                   id:
                     description: ARN that identifies the cluster.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  serviceConnectDefaults:
+                    description: Configures a default Service Connect namespace. Detailed
+                      below.
+                    items:
+                      properties:
+                        namespace:
+                          description: The ARN of the aws_service_discovery_http_namespace
+                            that's used when you create a service and don't specify
+                            a Service Connect configuration.
+                          type: string
+                      type: object
+                    type: array
+                  setting:
+                    description: Configuration block(s) with cluster settings. For
+                      example, this can be used to enable CloudWatch Container Insights
+                      for a cluster. Detailed below.
+                    items:
+                      properties:
+                        name:
+                          description: 'Name of the setting to manage. Valid values:
+                            containerInsights.'
+                          type: string
+                        value:
+                          description: The value to assign to the setting. Valid values
+                            are enabled and disabled.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -422,9 +543,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

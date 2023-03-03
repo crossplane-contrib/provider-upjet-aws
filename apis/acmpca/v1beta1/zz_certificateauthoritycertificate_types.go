@@ -14,7 +14,21 @@ import (
 )
 
 type CertificateAuthorityCertificateObservation struct {
+
+	// ARN of the Certificate Authority.
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
+	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
+
+	// PEM-encoded certificate for the Certificate Authority.
+	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type CertificateAuthorityCertificateParameters struct {
@@ -37,7 +51,7 @@ type CertificateAuthorityCertificateParameters struct {
 	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
 	// PEM-encoded certificate for the Certificate Authority.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -70,8 +84,9 @@ type CertificateAuthorityCertificateStatus struct {
 type CertificateAuthorityCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateAuthorityCertificateSpec   `json:"spec"`
-	Status            CertificateAuthorityCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateSecretRef)",message="certificateSecretRef is a required parameter"
+	Spec   CertificateAuthorityCertificateSpec   `json:"spec"`
+	Status CertificateAuthorityCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

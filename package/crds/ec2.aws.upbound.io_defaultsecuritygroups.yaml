@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: defaultsecuritygroups.ec2.aws.upbound.io
 spec:
@@ -255,6 +255,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -438,15 +447,126 @@ spec:
                   description:
                     description: Description of this rule.
                     type: string
+                  egress:
+                    description: Configuration block. Detailed below.
+                    items:
+                      properties:
+                        cidrBlocks:
+                          description: List of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: Description of this rule.
+                          type: string
+                        fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp)
+                          type: number
+                        ipv6CidrBlocks:
+                          description: List of IPv6 CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          description: List of prefix list IDs (for allowing access
+                            to VPC endpoints)
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: Protocol. If you select a protocol of "-1"
+                            (semantically equivalent to all, which is not a valid
+                            value here), you must specify a from_port and to_port
+                            equal to 0. If not icmp, tcp, udp, or -1 use the protocol
+                            number.
+                          type: string
+                        securityGroups:
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
+                          items:
+                            type: string
+                          type: array
+                        self:
+                          description: Whether the security group itself will be added
+                            as a source to this egress rule.
+                          type: boolean
+                        toPort:
+                          description: End range port (or ICMP code if protocol is
+                            icmp).
+                          type: number
+                      type: object
+                    type: array
                   id:
                     description: ID of the security group.
                     type: string
+                  ingress:
+                    description: Configuration block. Detailed below.
+                    items:
+                      properties:
+                        cidrBlocks:
+                          description: List of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: Description of this rule.
+                          type: string
+                        fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp)
+                          type: number
+                        ipv6CidrBlocks:
+                          description: List of IPv6 CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          description: List of prefix list IDs (for allowing access
+                            to VPC endpoints)
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: Protocol. If you select a protocol of "-1"
+                            (semantically equivalent to all, which is not a valid
+                            value here), you must specify a from_port and to_port
+                            equal to 0. If not icmp, tcp, udp, or -1 use the protocol
+                            number.
+                          type: string
+                        securityGroups:
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
+                          items:
+                            type: string
+                          type: array
+                        self:
+                          description: Whether the security group itself will be added
+                            as a source to this egress rule.
+                          type: boolean
+                        toPort:
+                          description: End range port (or ICMP code if protocol is
+                            icmp).
+                          type: number
+                      type: object
+                    type: array
                   name:
                     description: Name of the security group.
                     type: string
                   ownerId:
                     description: Owner ID.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  revokeRulesOnDelete:
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -454,6 +574,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcId:
+                    description: VPC ID. Note that changing the  It will be left in
+                      its current state.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -496,9 +620,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

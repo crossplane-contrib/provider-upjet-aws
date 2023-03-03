@@ -33,6 +33,16 @@ type DefaultVPCDHCPOptionsObservation struct {
 
 	NtpServers *string `json:"ntpServers,omitempty" tf:"ntp_servers,omitempty"`
 
+	// The ID of the AWS account that owns the DHCP options set.
+	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 

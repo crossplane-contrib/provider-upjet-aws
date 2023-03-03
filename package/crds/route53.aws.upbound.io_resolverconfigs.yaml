@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resolverconfigs.route53.aws.upbound.io
 spec:
@@ -150,9 +150,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - autodefinedReverseFlag
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -324,17 +332,32 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: autodefinedReverseFlag is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autodefinedReverseFlag)
           status:
             description: ResolverConfigStatus defines the observed state of ResolverConfig.
             properties:
               atProvider:
                 properties:
+                  autodefinedReverseFlag:
+                    description: 'Indicates whether or not the Resolver will create
+                      autodefined rules for reverse DNS lookups. Valid values: ENABLE,
+                      DISABLE.'
+                    type: string
                   id:
                     description: The ID of the resolver configuration.
                     type: string
                   ownerId:
                     description: The AWS account ID of the owner of the VPC that this
                       resolver configuration applies to.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceId:
+                    description: The ID of the VPC that the configuration is for.
                     type: string
                 type: object
               conditions:
@@ -378,9 +401,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

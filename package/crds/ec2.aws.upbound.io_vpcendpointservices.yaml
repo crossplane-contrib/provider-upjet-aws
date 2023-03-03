@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcendpointservices.ec2.aws.upbound.io
 spec:
@@ -100,9 +100,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - acceptanceRequired
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -274,11 +282,19 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: acceptanceRequired is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptanceRequired)
           status:
             description: VPCEndpointServiceStatus defines the observed state of VPCEndpointService.
             properties:
               atProvider:
                 properties:
+                  acceptanceRequired:
+                    description: Whether or not VPC endpoint connection requests to
+                      the service must be accepted by the service owner - true or
+                      false.
+                    type: boolean
                   allowedPrincipals:
                     description: The ARNs of one or more principals allowed to discover
                       the endpoint service.
@@ -300,6 +316,12 @@ spec:
                     items:
                       type: string
                     type: array
+                  gatewayLoadBalancerArns:
+                    description: Amazon Resource Names (ARNs) of one or more Gateway
+                      Load Balancers for the endpoint service.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the VPC endpoint service.
                     type: string
@@ -307,6 +329,15 @@ spec:
                     description: Whether or not the service manages its VPC endpoints
                       - true or false.
                     type: boolean
+                  networkLoadBalancerArns:
+                    description: Amazon Resource Names (ARNs) of one or more Network
+                      Load Balancers for the endpoint service.
+                    items:
+                      type: string
+                    type: array
+                  privateDnsName:
+                    description: The private DNS name for the service.
+                    type: string
                   privateDnsNameConfiguration:
                     description: List of objects containing information about the
                       endpoint service private DNS name configuration.
@@ -329,6 +360,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   serviceName:
                     description: The service name.
                     type: string
@@ -338,6 +373,17 @@ spec:
                   state:
                     description: The state of the VPC endpoint service.
                     type: string
+                  supportedIpAddressTypes:
+                    description: The supported IP address types. The possible values
+                      are ipv4 and ipv6.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -387,9 +433,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

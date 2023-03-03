@@ -15,6 +15,16 @@ import (
 
 type ThingPrincipalAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The name of the thing.
+	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 }
 
 type ThingPrincipalAttachmentParameters struct {

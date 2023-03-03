@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: customdataidentifiers.macie2.aws.upbound.io
 spec:
@@ -115,6 +115,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -300,10 +309,58 @@ spec:
                     description: The date and time, in UTC and extended RFC 3339 format,
                       when the Amazon Macie account was created.
                     type: string
+                  description:
+                    description: A custom description of the custom data identifier.
+                      The description can contain as many as 512 characters.
+                    type: string
                   id:
                     description: The unique identifier (ID) of the macie custom data
                       identifier.
                     type: string
+                  ignoreWords:
+                    description: An array that lists specific character sequences
+                      (ignore words) to exclude from the results. If the text matched
+                      by the regular expression is the same as any string in this
+                      array, Amazon Macie ignores it. The array can contain as many
+                      as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+                      Ignore words are case sensitive.
+                    items:
+                      type: string
+                    type: array
+                  keywords:
+                    description: An array that lists specific character sequences
+                      (keywords), one of which must be within proximity (maximum_match_distance)
+                      of the regular expression to match. The array can contain as
+                      many as 50 keywords. Each keyword can contain 3 - 90 characters.
+                      Keywords aren't case sensitive.
+                    items:
+                      type: string
+                    type: array
+                  maximumMatchDistance:
+                    description: The maximum number of characters that can exist between
+                      text that matches the regex pattern and the character sequences
+                      specified by the keywords array. Macie includes or excludes
+                      a result based on the proximity of a keyword to text that matches
+                      the regex pattern. The distance can be 1 - 300 characters. The
+                      default value is 50.
+                    type: number
+                  name:
+                    description: A custom name for the custom data identifier. The
+                      name can contain as many as 128 characters. Conflicts with name_prefix.
+                    type: string
+                  regex:
+                    description: The regular expression (regex) that defines the pattern
+                      to match. The expression can contain as many as 512 characters.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -350,9 +407,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

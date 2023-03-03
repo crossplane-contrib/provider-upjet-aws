@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clusters.dax.aws.upbound.io
 spec:
@@ -280,10 +280,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - nodeType
                 - region
-                - replicationFactor
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -455,6 +462,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: nodeType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)
+            - message: replicationFactor is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationFactor)
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:
@@ -463,15 +475,42 @@ spec:
                   arn:
                     description: The ARN of the DAX cluster
                     type: string
+                  availabilityZones:
+                    description: List of Availability Zones in which the nodes will
+                      be created
+                    items:
+                      type: string
+                    type: array
                   clusterAddress:
                     description: The DNS name of the DAX cluster without the port
                       appended
+                    type: string
+                  clusterEndpointEncryptionType:
+                    description: '–  The type of encryption the cluster''s endpoint
+                      should support. Valid values are: NONE and TLS. Default value
+                      is NONE.'
                     type: string
                   configurationEndpoint:
                     description: The configuration endpoint for this DAX cluster,
                       consisting of a DNS name and a port number
                     type: string
+                  description:
+                    description: –  Description for the cluster
+                    type: string
+                  iamRoleArn:
+                    description: A valid Amazon Resource Name (ARN) that identifies
+                      an IAM role. At runtime, DAX will assume this role and use the
+                      role's permissions to access DynamoDB on your behalf
+                    type: string
                   id:
+                    type: string
+                  maintenanceWindow:
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
+                    type: string
+                  nodeType:
+                    description: –  The compute and memory capacity of the nodes.
+                      See Nodes for supported node types
                     type: string
                   nodes:
                     description: List of node objects including id, address, port
@@ -489,9 +528,47 @@ spec:
                           type: number
                       type: object
                     type: array
+                  notificationTopicArn:
+                    description: east-1:012345678999:my_sns_topic
+                    type: string
+                  parameterGroupName:
+                    description: –  Name of the parameter group to associate with
+                      this DAX cluster
+                    type: string
                   port:
                     description: The port used by the configuration endpoint
                     type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  replicationFactor:
+                    description: node cluster, without any read replicas
+                    type: number
+                  securityGroupIds:
+                    description: –  One or more VPC security groups associated with
+                      the cluster
+                    items:
+                      type: string
+                    type: array
+                  serverSideEncryption:
+                    description: Encrypt at rest options
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether to enable encryption at rest. Defaults
+                            to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  subnetGroupName:
+                    description: –  Name of the subnet group to be used for the cluster
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -541,9 +618,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

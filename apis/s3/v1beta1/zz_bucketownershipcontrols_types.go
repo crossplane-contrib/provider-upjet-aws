@@ -15,8 +15,18 @@ import (
 
 type BucketOwnershipControlsObservation struct {
 
+	// The name of the bucket that you want to associate this access point with.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
 	// S3 Bucket name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block(s) with Ownership Controls rules. Detailed below.
+	Rule []BucketOwnershipControlsRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketOwnershipControlsParameters struct {
@@ -41,11 +51,14 @@ type BucketOwnershipControlsParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Configuration block(s) with Ownership Controls rules. Detailed below.
-	// +kubebuilder:validation:Required
-	Rule []BucketOwnershipControlsRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []BucketOwnershipControlsRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketOwnershipControlsRuleObservation struct {
+
+	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
+	ObjectOwnership *string `json:"objectOwnership,omitempty" tf:"object_ownership,omitempty"`
 }
 
 type BucketOwnershipControlsRuleParameters struct {
@@ -79,8 +92,9 @@ type BucketOwnershipControlsStatus struct {
 type BucketOwnershipControls struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketOwnershipControlsSpec   `json:"spec"`
-	Status            BucketOwnershipControlsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   BucketOwnershipControlsSpec   `json:"spec"`
+	Status BucketOwnershipControlsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

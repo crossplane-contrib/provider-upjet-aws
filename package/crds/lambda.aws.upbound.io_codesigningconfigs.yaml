@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: codesigningconfigs.lambda.aws.upbound.io
 spec:
@@ -186,9 +186,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - allowedPublishers
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -360,11 +368,28 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: allowedPublishers is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allowedPublishers)
           status:
             description: CodeSigningConfigStatus defines the observed state of CodeSigningConfig.
             properties:
               atProvider:
                 properties:
+                  allowedPublishers:
+                    description: A configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. Detailed below.
+                    items:
+                      properties:
+                        signingProfileVersionArns:
+                          description: The Amazon Resource Name (ARN) for each of
+                            the signing profiles. A signing profile defines a trusted
+                            user who can sign a code package.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) of the code signing
                       configuration.
@@ -372,11 +397,34 @@ spec:
                   configId:
                     description: Unique identifier for the code signing configuration.
                     type: string
+                  description:
+                    description: Descriptive name for this code signing configuration.
+                    type: string
                   id:
                     type: string
                   lastModified:
                     description: The date and time that the code signing configuration
                       was last modified.
+                    type: string
+                  policies:
+                    description: A configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. Detailed
+                      below.
+                    items:
+                      properties:
+                        untrustedArtifactOnDeployment:
+                          description: 'Code signing configuration policy for deployment
+                            validation failure. If you set the policy to Enforce,
+                            Lambda blocks the deployment request if code-signing validation
+                            checks fail. If you set the policy to Warn, Lambda allows
+                            the deployment and creates a CloudWatch log. Valid values:
+                            Warn, Enforce. Default value: Warn.'
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -420,9 +468,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

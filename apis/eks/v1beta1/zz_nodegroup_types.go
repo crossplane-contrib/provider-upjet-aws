@@ -23,6 +23,15 @@ type AutoscalingGroupsParameters struct {
 }
 
 type LaunchTemplateObservation struct {
+
+	// Identifier of the EC2 Launch Template. Conflicts with name.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the EC2 Launch Template. Conflicts with id.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type LaunchTemplateParameters struct {
@@ -42,20 +51,74 @@ type LaunchTemplateParameters struct {
 
 type NodeGroupObservation struct {
 
+	// Type of Amazon Machine Image (AMI) associated with the EKS Node Group. See the AWS documentation for valid values.
+	AMIType *string `json:"amiType,omitempty" tf:"ami_type,omitempty"`
+
 	// Amazon Resource Name (ARN) of the EKS Node Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT.
+	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
+
+	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
+	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+
+	// Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
+	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
 
 	// EKS Cluster name and EKS Node Group name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of instance types associated with the EKS Node Group. Defaults to ["t3.medium"].
+	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
+
+	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// Configuration block with Launch Template settings. Detailed below.
+	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
+	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
+	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
+
+	// Configuration block with remote access settings. Detailed below.
+	RemoteAccess []RemoteAccessObservation `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
+
 	// List of objects containing information about underlying resources.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// Configuration block with scaling settings. Detailed below.
+	ScalingConfig []ScalingConfigObservation `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// Status of the EKS Node Group.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// –  Identifiers of EC2 Subnets to associate with the EKS Node Group. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
+	Taint []TaintObservation `json:"taint,omitempty" tf:"taint,omitempty"`
+
+	UpdateConfig []UpdateConfigObservation `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
+
+	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type NodeGroupParameters struct {
@@ -130,8 +193,8 @@ type NodeGroupParameters struct {
 	RemoteAccess []RemoteAccessParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
 	// Configuration block with scaling settings. Detailed below.
-	// +kubebuilder:validation:Required
-	ScalingConfig []ScalingConfigParameters `json:"scalingConfig" tf:"scaling_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScalingConfig []ScalingConfigParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
@@ -175,6 +238,12 @@ type NodeGroupParameters struct {
 }
 
 type RemoteAccessObservation struct {
+
+	// EC2 Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, either port 3389 for Windows, or port 22 for all other operating systems is opened on the worker nodes to the Internet (0.0.0.0/0). For Windows nodes, this will allow you to use RDP, for all others this allows you to SSH into the worker nodes.
+	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
+
+	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
+	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 
 type RemoteAccessParameters struct {
@@ -212,6 +281,15 @@ type ResourcesParameters struct {
 }
 
 type ScalingConfigObservation struct {
+
+	// Desired number of worker nodes.
+	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+
+	// Maximum number of worker nodes.
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// Minimum number of worker nodes.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 }
 
 type ScalingConfigParameters struct {
@@ -230,6 +308,15 @@ type ScalingConfigParameters struct {
 }
 
 type TaintObservation struct {
+
+	// The effect of the taint. Valid values: NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE.
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// The key of the taint. Maximum length of 63.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the taint. Maximum length of 63.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TaintParameters struct {
@@ -248,6 +335,12 @@ type TaintParameters struct {
 }
 
 type UpdateConfigObservation struct {
+
+	// Desired max number of unavailable worker nodes during node group update.
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+
+	// Desired max percentage of unavailable worker nodes during node group update.
+	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
 }
 
 type UpdateConfigParameters struct {
@@ -285,8 +378,9 @@ type NodeGroupStatus struct {
 type NodeGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NodeGroupSpec   `json:"spec"`
-	Status            NodeGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scalingConfig)",message="scalingConfig is a required parameter"
+	Spec   NodeGroupSpec   `json:"spec"`
+	Status NodeGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

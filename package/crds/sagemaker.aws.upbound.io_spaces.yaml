@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: spaces.sagemaker.aws.upbound.io
 spec:
@@ -273,8 +273,16 @@ spec:
                     type: object
                 required:
                 - region
-                - spaceName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -446,6 +454,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spaceName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spaceName)
           status:
             description: SpaceStatus defines the observed state of Space.
             properties:
@@ -454,6 +465,9 @@ spec:
                   arn:
                     description: The space's Amazon Resource Name (ARN).
                     type: string
+                  domainId:
+                    description: The ID of the associated Domain.
+                    type: string
                   homeEfsFileSystemUid:
                     description: The ID of the space's profile in the Amazon Elastic
                       File System volume.
@@ -461,6 +475,128 @@ spec:
                   id:
                     description: The space's Amazon Resource Name (ARN).
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  spaceName:
+                    description: The name of the space.
+                    type: string
+                  spaceSettings:
+                    description: A collection of space settings. See Space Settings
+                      below.
+                    items:
+                      properties:
+                        jupyterServerAppSettings:
+                          description: The Jupyter server's app settings. See Jupyter
+                            Server App Settings below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see Code Repository below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        kernelGatewayAppSettings:
+                          description: The kernel gateway app settings. See Kernel
+                            Gateway App Settings below.
+                          items:
+                            properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  Custom Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -510,9 +646,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -14,6 +14,9 @@ import (
 )
 
 type DestinationObservation struct {
+
+	// A configuration block describing the S3 Source object: See S3 Source below for details.
+	S3 []S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type DestinationParameters struct {
@@ -35,6 +38,12 @@ type RevocationRecordParameters struct {
 }
 
 type S3Observation struct {
+
+	// Name of the S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// An Amazon S3 object key prefix that you can use to limit signed objects keys to begin with the specified prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3Parameters struct {
@@ -77,7 +86,13 @@ type SigningJobObservation struct {
 	// Date and time in RFC3339 format that the signing job was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// The S3 bucket in which to save your signed object. See Destination below for details.
+	Destination []DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Set this argument to true to ignore signing job failures and retrieve failed status and reason. Default false.
+	IgnoreSigningJobFailure *bool `json:"ignoreSigningJobFailure,omitempty" tf:"ignore_signing_job_failure,omitempty"`
 
 	// The ID of the signing job on output.
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
@@ -94,8 +109,15 @@ type SigningJobObservation struct {
 	// The platform to which your signed code image will be distributed.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
+	// The name of the profile to initiate the signing operation.
+	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
+
 	// The version of the signing profile used to initiate the signing job.
 	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The IAM principal that requested the signing job.
 	RequestedBy *string `json:"requestedBy,omitempty" tf:"requested_by,omitempty"`
@@ -109,6 +131,9 @@ type SigningJobObservation struct {
 	// Name of the S3 bucket where the signed code image is saved by code signing.
 	SignedObject []SignedObjectObservation `json:"signedObject,omitempty" tf:"signed_object,omitempty"`
 
+	// The S3 bucket that contains the object to sign. See Source below for details.
+	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+
 	// Status of the signing job.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -119,8 +144,8 @@ type SigningJobObservation struct {
 type SigningJobParameters struct {
 
 	// The S3 bucket in which to save your signed object. See Destination below for details.
-	// +kubebuilder:validation:Required
-	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Set this argument to true to ignore signing job failures and retrieve failed status and reason. Default false.
 	// +kubebuilder:validation:Optional
@@ -145,11 +170,14 @@ type SigningJobParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The S3 bucket that contains the object to sign. See Source below for details.
-	// +kubebuilder:validation:Required
-	Source []SourceParameters `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type SourceObservation struct {
+
+	// A configuration block describing the S3 Source object: See S3 Source below for details.
+	S3 []SourceS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 }
 
 type SourceParameters struct {
@@ -160,6 +188,15 @@ type SourceParameters struct {
 }
 
 type SourceS3Observation struct {
+
+	// Name of the S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Key name of the object that contains your unsigned code.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Version of your source image in your version enabled S3 bucket.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SourceS3Parameters struct {
@@ -201,8 +238,10 @@ type SigningJobStatus struct {
 type SigningJob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningJobSpec   `json:"spec"`
-	Status            SigningJobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	Spec   SigningJobSpec   `json:"spec"`
+	Status SigningJobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bucketownershipcontrols.s3.aws.upbound.io
 spec:
@@ -161,8 +161,16 @@ spec:
                     type: array
                 required:
                 - region
-                - rule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -334,15 +342,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: rule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)
           status:
             description: BucketOwnershipControlsStatus defines the observed state
               of BucketOwnershipControls.
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: The name of the bucket that you want to associate
+                      this access point with.
+                    type: string
                   id:
                     description: S3 Bucket name.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  rule:
+                    description: Configuration block(s) with Ownership Controls rules.
+                      Detailed below.
+                    items:
+                      properties:
+                        objectOwnership:
+                          description: 'Object ownership. Valid values: BucketOwnerPreferred,
+                            ObjectWriter or BucketOwnerEnforced'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -385,9 +415,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -23,6 +23,9 @@ type OriginAccessIdentityObservation struct {
 	// origin access identity to use in CloudFront, see below.
 	CloudfrontAccessIdentityPath *string `json:"cloudfrontAccessIdentityPath,omitempty" tf:"cloudfront_access_identity_path,omitempty"`
 
+	// An optional comment for the origin access identity.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
 	// The current version of the origin access identity's information.
 	// For example: E2QWRUHAPOMQZL.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
@@ -33,6 +36,10 @@ type OriginAccessIdentityObservation struct {
 
 	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The Amazon S3 canonical user ID for the origin
 	// access identity, which you use when giving the origin access identity read

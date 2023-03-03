@@ -18,19 +18,29 @@ type ReceiptFilterObservation struct {
 	// The SES receipt filter ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The IP address or address range to filter, in CIDR notation
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
 	// The SES receipt filter name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Block or Allow
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ReceiptFilterParameters struct {
 
 	// The IP address or address range to filter, in CIDR notation
-	// +kubebuilder:validation:Required
-	Cidr *string `json:"cidr" tf:"cidr,omitempty"`
+	// +kubebuilder:validation:Optional
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
 	// Block or Allow
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -62,8 +72,10 @@ type ReceiptFilterStatus struct {
 type ReceiptFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReceiptFilterSpec   `json:"spec"`
-	Status            ReceiptFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cidr)",message="cidr is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   ReceiptFilterSpec   `json:"spec"`
+	Status ReceiptFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

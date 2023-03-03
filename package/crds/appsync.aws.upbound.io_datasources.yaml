@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: datasources.appsync.aws.upbound.io
 spec:
@@ -441,8 +441,16 @@ spec:
                     type: string
                 required:
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -614,15 +622,156 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: DatasourceStatus defines the observed state of Datasource.
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: API ID for the GraphQL API for the data source.
+                    type: string
                   arn:
                     description: ARN
                     type: string
+                  description:
+                    description: Description of the data source.
+                    type: string
+                  dynamodbConfig:
+                    description: DynamoDB settings. See below
+                    items:
+                      properties:
+                        deltaSyncConfig:
+                          items:
+                            properties:
+                              baseTableTtl:
+                                type: number
+                              deltaSyncTableName:
+                                description: User-supplied name for the data source.
+                                type: string
+                              deltaSyncTableTtl:
+                                type: number
+                            type: object
+                          type: array
+                        region:
+                          description: AWS region of the DynamoDB table. Defaults
+                            to current region.
+                          type: string
+                        tableName:
+                          description: Name of the DynamoDB table.
+                          type: string
+                        useCallerCredentials:
+                          description: Set to true to use Amazon Cognito credentials
+                            with this data source.
+                          type: boolean
+                        versioned:
+                          type: boolean
+                      type: object
+                    type: array
+                  elasticsearchConfig:
+                    description: Amazon Elasticsearch settings. See below
+                    items:
+                      properties:
+                        endpoint:
+                          description: HTTP endpoint of the Elasticsearch domain.
+                          type: string
+                        region:
+                          description: AWS region of Elasticsearch domain. Defaults
+                            to current region.
+                          type: string
+                      type: object
+                    type: array
+                  httpConfig:
+                    description: HTTP settings. See below
+                    items:
+                      properties:
+                        authorizationConfig:
+                          description: Authorization configuration in case the HTTP
+                            endpoint requires authorization. See Authorization Config.
+                          items:
+                            properties:
+                              authorizationType:
+                                description: Authorization type that the HTTP endpoint
+                                  requires. Default values is AWS_IAM.
+                                type: string
+                              awsIamConfig:
+                                description: Identity and Access Management (IAM)
+                                  settings. See AWS IAM Config.
+                                items:
+                                  properties:
+                                    signingRegion:
+                                      description: Signing Amazon Web Services Region
+                                        for IAM authorization.
+                                      type: string
+                                    signingServiceName:
+                                      description: Signing service name for IAM authorization.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        endpoint:
+                          description: HTTP URL.
+                          type: string
+                      type: object
+                    type: array
                   id:
+                    type: string
+                  lambdaConfig:
+                    description: AWS Lambda settings. See below
+                    items:
+                      properties:
+                        functionArn:
+                          description: ARN for the Lambda function.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: AWS Region for RDS HTTP endpoint. Defaults to current
+                      region. Region is the region you'd like your resource to be
+                      created in.
+                    type: string
+                  relationalDatabaseConfig:
+                    description: AWS RDS settings. See Relational Database Config
+                    items:
+                      properties:
+                        httpEndpointConfig:
+                          description: Amazon RDS HTTP endpoint configuration. See
+                            HTTP Endpoint Config.
+                          items:
+                            properties:
+                              awsSecretStoreArn:
+                                description: AWS secret store ARN for database credentials.
+                                type: string
+                              databaseName:
+                                description: Logical database name.
+                                type: string
+                              dbClusterIdentifier:
+                                description: Amazon RDS cluster identifier.
+                                type: string
+                              region:
+                                description: AWS Region for RDS HTTP endpoint. Defaults
+                                  to current region.
+                                type: string
+                              schema:
+                                description: Logical schema name.
+                                type: string
+                            type: object
+                          type: array
+                        sourceType:
+                          description: 'Source type for the relational database. Valid
+                            values: RDS_HTTP_ENDPOINT.'
+                          type: string
+                      type: object
+                    type: array
+                  serviceRoleArn:
+                    description: IAM service role ARN for the data source.
+                    type: string
+                  type:
+                    description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
+                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.'
                     type: string
                 type: object
               conditions:
@@ -666,9 +815,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

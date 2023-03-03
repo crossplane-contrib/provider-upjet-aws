@@ -18,6 +18,9 @@ type ImageVersionObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Image Version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The registry path of the container image on which this image version is based.
+	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
+
 	// The registry path of the container image that contains this image version.
 	ContainerImage *string `json:"containerImage,omitempty" tf:"container_image,omitempty"`
 
@@ -27,14 +30,21 @@ type ImageVersionObservation struct {
 	// The Amazon Resource Name (ARN) of the image the version is based on.
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
+	// The name of the image. Must be unique to your account.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ImageVersionParameters struct {
 
 	// The registry path of the container image on which this image version is based.
-	// +kubebuilder:validation:Required
-	BaseImage *string `json:"baseImage" tf:"base_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
 
 	// The name of the image. Must be unique to your account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Image
@@ -80,8 +90,9 @@ type ImageVersionStatus struct {
 type ImageVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageVersionSpec   `json:"spec"`
-	Status            ImageVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.baseImage)",message="baseImage is a required parameter"
+	Spec   ImageVersionSpec   `json:"spec"`
+	Status ImageVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

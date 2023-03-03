@@ -15,8 +15,38 @@ import (
 
 type BrokerObservation struct {
 
+	// Specifies whether any broker modifications are applied immediately, or during the next maintenance window. Default is false.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
 	// ARN of the broker.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Authentication strategy used to secure the broker. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
+	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
+
+	// Whether to automatically upgrade to new minor versions of brokers as Amazon MQ makes releases available.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// Name of the broker.
+	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
+
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
+	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
+
+	// Configuration block containing encryption options. Detailed below.
+	EncryptionOptions []EncryptionOptionsObservation `json:"encryptionOptions,omitempty" tf:"encryption_options,omitempty"`
+
+	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
+	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
+
+	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// Broker's instance type. For example, mq.t3.micro, mq.m5.large.
+	HostInstanceType *string `json:"hostInstanceType,omitempty" tf:"host_instance_type,omitempty"`
 
 	// Unique ID that Amazon MQ generates for the broker.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -24,8 +54,39 @@ type BrokerObservation struct {
 	// List of information about allocated brokers (both active & standby).
 	Instances []InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
+	// Configuration block for the LDAP server used to authenticate and authorize connections to the broker. Not supported for engine_type RabbitMQ. Detailed below. (Currently, AWS may not process changes to LDAP server metadata.)
+	LdapServerMetadata []LdapServerMetadataObservation `json:"ldapServerMetadata,omitempty" tf:"ldap_server_metadata,omitempty"`
+
+	// Configuration block for the logging configuration of the broker. Detailed below.
+	Logs []LogsObservation `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Configuration block for the maintenance window start time. Detailed below.
+	MaintenanceWindowStartTime []MaintenanceWindowStartTimeObservation `json:"maintenanceWindowStartTime,omitempty" tf:"maintenance_window_start_time,omitempty"`
+
+	// Whether to enable connections from applications outside of the VPC that hosts the broker's subnets.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// List of security group IDs assigned to the broker.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Storage type of the broker. For engine_type ActiveMQ, the valid values are efs and ebs, and the AWS-default is efs. For engine_type RabbitMQ, only ebs is supported. When using ebs, only the mq.m5 broker instance type family is supported.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block for broker users. For engine_type of RabbitMQ, Amazon MQ does not return broker users preventing this resource from making user updates and drift detection. Detailed below.
+	User []UserObservation `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type BrokerParameters struct {
@@ -43,8 +104,8 @@ type BrokerParameters struct {
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
 	// Name of the broker.
-	// +kubebuilder:validation:Required
-	BrokerName *string `json:"brokerName" tf:"broker_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
 	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -59,16 +120,16 @@ type BrokerParameters struct {
 	EncryptionOptions []EncryptionOptionsParameters `json:"encryptionOptions,omitempty" tf:"encryption_options,omitempty"`
 
 	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
-	// +kubebuilder:validation:Required
-	EngineType *string `json:"engineType" tf:"engine_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
 	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
-	// +kubebuilder:validation:Required
-	EngineVersion *string `json:"engineVersion" tf:"engine_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Broker's instance type. For example, mq.t3.micro, mq.m5.large.
-	// +kubebuilder:validation:Required
-	HostInstanceType *string `json:"hostInstanceType" tf:"host_instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	HostInstanceType *string `json:"hostInstanceType,omitempty" tf:"host_instance_type,omitempty"`
 
 	// Configuration block for the LDAP server used to authenticate and authorize connections to the broker. Not supported for engine_type RabbitMQ. Detailed below. (Currently, AWS may not process changes to LDAP server metadata.)
 	// +kubebuilder:validation:Optional
@@ -119,11 +180,17 @@ type BrokerParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for broker users. For engine_type of RabbitMQ, Amazon MQ does not return broker users preventing this resource from making user updates and drift detection. Detailed below.
-	// +kubebuilder:validation:Required
-	User []UserParameters `json:"user" tf:"user,omitempty"`
+	// +kubebuilder:validation:Optional
+	User []UserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type ConfigurationObservation struct {
+
+	// The Configuration ID.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Revision of the Configuration.
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -148,6 +215,12 @@ type ConfigurationParameters struct {
 }
 
 type EncryptionOptionsObservation struct {
+
+	// Amazon Resource Name (ARN) of Key Management Service (KMS) Customer Master Key (CMK) to use for encryption at rest. Requires setting use_aws_owned_key to false. To perform drift detection when AWS-managed CMKs or customer-managed CMKs are in use, this value must be configured.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Whether to enable an AWS-owned KMS CMK that is not in your account. Defaults to true. Setting to false without configuring kms_key_id will create an AWS-managed CMK aliased to aws/mq in your account.
+	UseAwsOwnedKey *bool `json:"useAwsOwnedKey,omitempty" tf:"use_aws_owned_key,omitempty"`
 }
 
 type EncryptionOptionsParameters struct {
@@ -177,6 +250,39 @@ type InstancesParameters struct {
 }
 
 type LdapServerMetadataObservation struct {
+
+	// List of a fully qualified domain name of the LDAP server and an optional failover server.
+	Hosts []*string `json:"hosts,omitempty" tf:"hosts,omitempty"`
+
+	// Fully qualified name of the directory to search for a user’s groups.
+	RoleBase *string `json:"roleBase,omitempty" tf:"role_base,omitempty"`
+
+	// Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// Search criteria for groups.
+	RoleSearchMatching *string `json:"roleSearchMatching,omitempty" tf:"role_search_matching,omitempty"`
+
+	// Whether the directory search scope is the entire sub-tree.
+	RoleSearchSubtree *bool `json:"roleSearchSubtree,omitempty" tf:"role_search_subtree,omitempty"`
+
+	// Service account password.
+	ServiceAccountPasswordSecretRef *v1.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+
+	// Service account username.
+	ServiceAccountUsername *string `json:"serviceAccountUsername,omitempty" tf:"service_account_username,omitempty"`
+
+	// Fully qualified name of the directory where you want to search for users.
+	UserBase *string `json:"userBase,omitempty" tf:"user_base,omitempty"`
+
+	// Specifies the name of the LDAP attribute for the user group membership.
+	UserRoleName *string `json:"userRoleName,omitempty" tf:"user_role_name,omitempty"`
+
+	// Search criteria for users.
+	UserSearchMatching *string `json:"userSearchMatching,omitempty" tf:"user_search_matching,omitempty"`
+
+	// Whether the directory search scope is the entire sub-tree.
+	UserSearchSubtree *bool `json:"userSearchSubtree,omitempty" tf:"user_search_subtree,omitempty"`
 }
 
 type LdapServerMetadataParameters struct {
@@ -227,6 +333,12 @@ type LdapServerMetadataParameters struct {
 }
 
 type LogsObservation struct {
+
+	// Enables audit logging. Auditing is only possible for engine_type of ActiveMQ. User management action made using JMX or the ActiveMQ Web Console is logged. Defaults to false.
+	Audit *string `json:"audit,omitempty" tf:"audit,omitempty"`
+
+	// Enables general logging via CloudWatch. Defaults to false.
+	General *bool `json:"general,omitempty" tf:"general,omitempty"`
 }
 
 type LogsParameters struct {
@@ -241,6 +353,15 @@ type LogsParameters struct {
 }
 
 type MaintenanceWindowStartTimeObservation struct {
+
+	// Day of the week, e.g., MONDAY, TUESDAY, or WEDNESDAY.
+	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+
+	// Time, in 24-hour format, e.g., 02:00.
+	TimeOfDay *string `json:"timeOfDay,omitempty" tf:"time_of_day,omitempty"`
+
+	// Time zone in either the Country/City format or the UTC offset format, e.g., CET.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type MaintenanceWindowStartTimeParameters struct {
@@ -259,6 +380,18 @@ type MaintenanceWindowStartTimeParameters struct {
 }
 
 type UserObservation struct {
+
+	// Whether to enable access to the ActiveMQ Web Console for the user. Applies to engine_type of ActiveMQ only.
+	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
+
+	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
+	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Username of the user.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserParameters struct {
@@ -304,8 +437,13 @@ type BrokerStatus struct {
 type Broker struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BrokerSpec   `json:"spec"`
-	Status            BrokerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.brokerName)",message="brokerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineType)",message="engineType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineVersion)",message="engineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hostInstanceType)",message="hostInstanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.user)",message="user is a required parameter"
+	Spec   BrokerSpec   `json:"spec"`
+	Status BrokerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

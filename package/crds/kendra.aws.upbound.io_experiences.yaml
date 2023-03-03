@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: experiences.kendra.aws.upbound.io
 spec:
@@ -277,9 +277,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -451,6 +459,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ExperienceStatus defines the observed state of Experience.
             properties:
@@ -458,6 +469,54 @@ spec:
                 properties:
                   arn:
                     description: ARN of the Experience.
+                    type: string
+                  configuration:
+                    description: Configuration information for your Amazon Kendra
+                      experience. Detailed below.
+                    items:
+                      properties:
+                        contentSourceConfiguration:
+                          description: The identifiers of your data sources and FAQs.
+                            Or, you can specify that you want to use documents indexed
+                            via the BatchPutDocument API. Detailed below.
+                          items:
+                            properties:
+                              dataSourceIds:
+                                description: The identifiers of the data sources you
+                                  want to use for your Amazon Kendra experience. Maximum
+                                  number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                              directPutContent:
+                                description: Whether to use documents you indexed
+                                  directly using the BatchPutDocument API. Defaults
+                                  to false.
+                                type: boolean
+                              faqIds:
+                                description: The identifier of the FAQs that you want
+                                  to use for your Amazon Kendra experience. Maximum
+                                  number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        userIdentityConfiguration:
+                          description: The AWS SSO field name that contains the identifiers
+                            of your users, such as their emails. Detailed below.
+                          items:
+                            properties:
+                              identityAttributeName:
+                                description: The AWS SSO field name that contains
+                                  the identifiers of your users, such as their emails.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: A description for your Amazon Kendra experience.
                     type: string
                   endpoints:
                     description: Shows the endpoint URLs for your Amazon Kendra experiences.
@@ -479,6 +538,23 @@ spec:
                   id:
                     description: The unique identifiers of the experience and index
                       separated by a slash (/).
+                    type: string
+                  indexId:
+                    description: The identifier of the index for your Amazon Kendra
+                      experience.
+                    type: string
+                  name:
+                    description: A name for your Amazon Kendra experience.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: The Amazon Resource Name (ARN) of a role with permission
+                      to access Query API, QuerySuggestions API, SubmitFeedback API,
+                      and AWS SSO that stores your user and group information. For
+                      more information, see IAM roles for Amazon Kendra.
                     type: string
                   status:
                     description: The current processing status of your Amazon Kendra
@@ -526,9 +602,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

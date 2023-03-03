@@ -14,6 +14,12 @@ import (
 )
 
 type CognitoConfigObservation struct {
+
+	// The client ID for your Amazon Cognito user pool.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// ID for your Amazon Cognito user pool.
+	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`
 }
 
 type CognitoConfigParameters struct {
@@ -48,6 +54,30 @@ type CognitoConfigParameters struct {
 }
 
 type OidcConfigObservation struct {
+
+	// The OIDC IdP authorization endpoint used to configure your private workforce.
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+
+	// The client ID for your Amazon Cognito user pool.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OIDC IdP client secret used to configure your private workforce.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
+	// The OIDC IdP issuer used to configure your private workforce.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.
+	JwksURI *string `json:"jwksUri,omitempty" tf:"jwks_uri,omitempty"`
+
+	// The OIDC IdP logout endpoint used to configure your private workforce.
+	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+
+	// The OIDC IdP token endpoint used to configure your private workforce.
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+
+	// The OIDC IdP user information endpoint used to configure your private workforce.
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type OidcConfigParameters struct {
@@ -86,6 +116,9 @@ type OidcConfigParameters struct {
 }
 
 type SourceIPConfigObservation struct {
+
+	// A list of up to 10 CIDR values.
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 }
 
 type SourceIPConfigParameters struct {
@@ -100,14 +133,26 @@ type WorkforceObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Workforce.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Use this parameter to configure an Amazon Cognito private workforce. A single Cognito workforce is created using and corresponds to a single Amazon Cognito user pool. Conflicts with oidc_config. see Cognito Config details below.
+	CognitoConfig []CognitoConfigObservation `json:"cognitoConfig,omitempty" tf:"cognito_config,omitempty"`
+
 	// The name of the Workforce.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Use this parameter to configure a private workforce using your own OIDC Identity Provider. Conflicts with cognito_config. see OIDC Config details below.
+	OidcConfig []OidcConfigObservation `json:"oidcConfig,omitempty" tf:"oidc_config,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of IP address ranges Used to create an allow list of IP addresses for a private workforce. By default, a workforce isn't restricted to specific IP addresses. see Source Ip Config details below.
+	SourceIPConfig []SourceIPConfigObservation `json:"sourceIpConfig,omitempty" tf:"source_ip_config,omitempty"`
 
 	// The subdomain for your OIDC Identity Provider.
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
 	// configure a workforce using VPC. see Workforce VPC Config details below.
-	// +kubebuilder:validation:Optional
 	WorkforceVPCConfig []WorkforceVPCConfigObservation `json:"workforceVpcConfig,omitempty" tf:"workforce_vpc_config,omitempty"`
 }
 
@@ -137,8 +182,17 @@ type WorkforceParameters struct {
 
 type WorkforceVPCConfigObservation struct {
 
+	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The ID of the subnets in the VPC that you want to connect.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
 	// The IDs for the VPC service endpoints of your VPC workforce.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// The ID of the VPC that the workforce uses for communication.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type WorkforceVPCConfigParameters struct {

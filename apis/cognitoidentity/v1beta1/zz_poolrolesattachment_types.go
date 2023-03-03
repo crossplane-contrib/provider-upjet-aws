@@ -14,6 +14,18 @@ import (
 )
 
 type MappingRuleObservation struct {
+
+	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
+	Claim *string `json:"claim,omitempty" tf:"claim,omitempty"`
+
+	// The match condition that specifies how closely the claim value in the IdP token must match Value.
+	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
+
+	// The role ARN.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A brief string that the claim must match, for example, "paid" or "yes".
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MappingRuleParameters struct {
@@ -49,6 +61,19 @@ type PoolRolesAttachmentObservation struct {
 
 	// The identity pool ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity pool ID in the format REGION_GUID.
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A List of Role Mapping.
+	RoleMapping []RoleMappingObservation `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
+
+	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
+	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type PoolRolesAttachmentParameters struct {
@@ -77,11 +102,23 @@ type PoolRolesAttachmentParameters struct {
 	RoleMapping []RoleMappingParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
 	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
-	// +kubebuilder:validation:Required
-	Roles map[string]*string `json:"roles" tf:"roles,omitempty"`
+	// +kubebuilder:validation:Optional
+	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type RoleMappingObservation struct {
+
+	// Specifies the action to be taken if either no rules match the claim value for the Rules type, or there is no cognito:preferred_role claim and there are multiple cognito:roles matches for the Token type. Required if you specify Token or Rules as the Type.
+	AmbiguousRoleResolution *string `json:"ambiguousRoleResolution,omitempty" tf:"ambiguous_role_resolution,omitempty"`
+
+	// A string identifying the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Depends on cognito_identity_providers set on aws_cognito_identity_pool resource or a aws_cognito_identity_provider resource.
+	IdentityProvider *string `json:"identityProvider,omitempty" tf:"identity_provider,omitempty"`
+
+	// The Rules Configuration to be used for mapping users to roles. You can specify up to 25 rules per identity provider. Rules are evaluated in order. The first one to match specifies the role.
+	MappingRule []MappingRuleObservation `json:"mappingRule,omitempty" tf:"mapping_rule,omitempty"`
+
+	// The role mapping type.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RoleMappingParameters struct {
@@ -127,8 +164,9 @@ type PoolRolesAttachmentStatus struct {
 type PoolRolesAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PoolRolesAttachmentSpec   `json:"spec"`
-	Status            PoolRolesAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roles)",message="roles is a required parameter"
+	Spec   PoolRolesAttachmentSpec   `json:"spec"`
+	Status PoolRolesAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

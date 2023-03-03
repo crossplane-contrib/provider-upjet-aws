@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: pools.cognitoidentity.aws.upbound.io
 spec:
@@ -281,9 +281,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - identityPoolName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -455,17 +463,81 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: identityPoolName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityPoolName)
           status:
             description: PoolStatus defines the observed state of Pool.
             properties:
               atProvider:
                 properties:
+                  allowClassicFlow:
+                    description: Enables or disables the classic / basic authentication
+                      flow. Default is false.
+                    type: boolean
+                  allowUnauthenticatedIdentities:
+                    description: Whether the identity pool supports unauthenticated
+                      logins or not.
+                    type: boolean
                   arn:
                     description: The ARN of the identity pool.
+                    type: string
+                  cognitoIdentityProviders:
+                    description: An array of Amazon Cognito Identity user pools and
+                      their client IDs.
+                    items:
+                      properties:
+                        clientId:
+                          description: The client ID for the Amazon Cognito Identity
+                            User Pool.
+                          type: string
+                        providerName:
+                          description: The provider name for an Amazon Cognito Identity
+                            User Pool.
+                          type: string
+                        serverSideTokenCheck:
+                          description: Whether server-side token validation is enabled
+                            for the identity provider’s token or not.
+                          type: boolean
+                      type: object
+                    type: array
+                  developerProviderName:
+                    description: The "domain" by which Cognito will refer to your
+                      users. This name acts as a placeholder that allows your backend
+                      and the Cognito service to communicate about the developer provider.
                     type: string
                   id:
                     description: An identity pool ID, e.g. us-west-2_abc123.
                     type: string
+                  identityPoolName:
+                    description: The Cognito Identity Pool name.
+                    type: string
+                  openidConnectProviderArns:
+                    description: Set of OpendID Connect provider ARNs.
+                    items:
+                      type: string
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  samlProviderArns:
+                    description: An array of Amazon Resource Names (ARNs) of the SAML
+                      provider for your identity.
+                    items:
+                      type: string
+                    type: array
+                  supportedLoginProviders:
+                    additionalProperties:
+                      type: string
+                    description: Key-Value pairs mapping provider names to provider
+                      app IDs.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -515,9 +587,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

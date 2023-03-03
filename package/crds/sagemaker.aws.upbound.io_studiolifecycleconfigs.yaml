@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: studiolifecycleconfigs.sagemaker.aws.upbound.io
 spec:
@@ -83,9 +83,16 @@ spec:
                     type: object
                 required:
                 - region
-                - studioLifecycleConfigAppType
-                - studioLifecycleConfigContent
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -257,6 +264,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: studioLifecycleConfigAppType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.studioLifecycleConfigAppType)
+            - message: studioLifecycleConfigContent is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.studioLifecycleConfigContent)
           status:
             description: StudioLifecycleConfigStatus defines the observed state of
               StudioLifecycleConfig.
@@ -270,6 +282,23 @@ spec:
                   id:
                     description: The name of the Studio Lifecycle Config.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  studioLifecycleConfigAppType:
+                    description: The App type that the Lifecycle Configuration is
+                      attached to. Valid values are JupyterServer and KernelGateway.
+                    type: string
+                  studioLifecycleConfigContent:
+                    description: The content of your Studio Lifecycle Configuration
+                      script. This content must be base64 encoded.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -319,9 +348,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

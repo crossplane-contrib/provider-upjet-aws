@@ -15,8 +15,18 @@ import (
 
 type VPCDHCPOptionsAssociationObservation struct {
 
+	// The ID of the DHCP Options Set to associate to the VPC.
+	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
+
 	// The ID of the DHCP Options Set Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the VPC to which we would like to associate a DHCP Options Set.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCDHCPOptionsAssociationParameters struct {

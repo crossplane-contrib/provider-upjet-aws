@@ -15,11 +15,21 @@ import (
 
 type AccessPointPolicyObservation struct {
 
+	// The ARN of the access point that you want to associate with the specified policy.
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
 	// Indicates whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The policy that you want to apply to the specified access point.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AccessPointPolicyParameters struct {
@@ -39,8 +49,8 @@ type AccessPointPolicyParameters struct {
 	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
 
 	// The policy that you want to apply to the specified access point.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +82,9 @@ type AccessPointPolicyStatus struct {
 type AccessPointPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccessPointPolicySpec   `json:"spec"`
-	Status            AccessPointPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   AccessPointPolicySpec   `json:"spec"`
+	Status AccessPointPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

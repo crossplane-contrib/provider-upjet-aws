@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: globaltables.dynamodb.aws.upbound.io
 spec:
@@ -83,8 +83,16 @@ spec:
                     type: array
                 required:
                 - region
-                - replica
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -256,6 +264,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: replica is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replica)
           status:
             description: GlobalTableStatus defines the observed state of GlobalTable.
             properties:
@@ -267,6 +278,21 @@ spec:
                   id:
                     description: The name of the DynamoDB Global Table
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  replica:
+                    description: Underlying DynamoDB Table. At least 1 replica must
+                      be defined. See below.
+                    items:
+                      properties:
+                        regionName:
+                          description: AWS region name of replica DynamoDB TableE.g.,
+                            us-east-1
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -309,9 +335,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

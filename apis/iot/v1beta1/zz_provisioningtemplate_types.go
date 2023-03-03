@@ -14,6 +14,12 @@ import (
 )
 
 type PreProvisioningHookObservation struct {
+
+	// The version of the payload that was sent to the target function. The only valid (and the default) payload version is "2020-04-01".
+	PayloadVersion *string `json:"payloadVersion,omitempty" tf:"payload_version,omitempty"`
+
+	// The ARN of the target function.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 }
 
 type PreProvisioningHookParameters struct {
@@ -35,10 +41,32 @@ type ProvisioningTemplateObservation struct {
 	// The default version of the fleet provisioning template.
 	DefaultVersionID *float64 `json:"defaultVersionId,omitempty" tf:"default_version_id,omitempty"`
 
+	// The description of the fleet provisioning template.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// True to enable the fleet provisioning template, otherwise false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Creates a pre-provisioning hook template. Details below.
+	PreProvisioningHook []PreProvisioningHookObservation `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
+
+	// The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The JSON formatted contents of the fleet provisioning template.
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 }
 
 type ProvisioningTemplateParameters struct {
@@ -79,8 +107,8 @@ type ProvisioningTemplateParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The JSON formatted contents of the fleet provisioning template.
-	// +kubebuilder:validation:Required
-	TemplateBody *string `json:"templateBody" tf:"template_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 }
 
 // ProvisioningTemplateSpec defines the desired state of ProvisioningTemplate
@@ -107,8 +135,9 @@ type ProvisioningTemplateStatus struct {
 type ProvisioningTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProvisioningTemplateSpec   `json:"spec"`
-	Status            ProvisioningTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.templateBody)",message="templateBody is a required parameter"
+	Spec   ProvisioningTemplateSpec   `json:"spec"`
+	Status ProvisioningTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

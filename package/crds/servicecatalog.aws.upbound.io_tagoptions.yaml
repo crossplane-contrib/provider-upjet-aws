@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: tagoptions.servicecatalog.aws.upbound.io
 spec:
@@ -78,10 +78,17 @@ spec:
                     description: Tag option value.
                     type: string
                 required:
-                - key
                 - region
-                - value
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -253,15 +260,33 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: key is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.key)
+            - message: value is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)
           status:
             description: TagOptionStatus defines the observed state of TagOption.
             properties:
               atProvider:
                 properties:
+                  active:
+                    description: Whether tag option is active. Default is true.
+                    type: boolean
                   id:
                     description: Identifier (e.g., tag-pjtvagohlyo3m).
                     type: string
+                  key:
+                    description: Tag option key.
+                    type: string
                   owner:
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  value:
+                    description: Tag option value.
                     type: string
                 type: object
               conditions:
@@ -305,9 +330,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

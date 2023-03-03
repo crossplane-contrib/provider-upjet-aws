@@ -18,7 +18,29 @@ type EventSubscriptionObservation struct {
 	// Amazon Resource Name (ARN) of the DMS Event Subscription.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether the event subscription should be enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// SNS topic arn to send events on.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// Ids of sources to listen to.
+	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// Type of source for events. Valid values: replication-instance or replication-task
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -31,8 +53,8 @@ type EventSubscriptionParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
-	// +kubebuilder:validation:Required
-	EventCategories []*string `json:"eventCategories" tf:"event_categories,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +112,9 @@ type EventSubscriptionStatus struct {
 type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventSubscriptionSpec   `json:"spec"`
-	Status            EventSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventCategories)",message="eventCategories is a required parameter"
+	Spec   EventSubscriptionSpec   `json:"spec"`
+	Status EventSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

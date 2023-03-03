@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ipsets.waf.aws.upbound.io
 spec:
@@ -90,9 +90,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -264,6 +272,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:
@@ -274,6 +285,28 @@ spec:
                     type: string
                   id:
                     description: The ID of the WAF IPSet.
+                    type: string
+                  ipSetDescriptors:
+                    description: One or more pairs specifying the IP address type
+                      (IPV4 or IPV6) and the IP address range (in CIDR format) from
+                      which web requests originate.
+                    items:
+                      properties:
+                        type:
+                          description: Type of the IP address - IPV4 or IPV6.
+                          type: string
+                        value:
+                          description: An IPv4 or IPv6 address specified via CIDR
+                            notationE.g., 192.0.2.44/32 or 1111:0000:0000:0000:0000:0000:0000:0000/64
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name or description of the IPSet.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -317,9 +350,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

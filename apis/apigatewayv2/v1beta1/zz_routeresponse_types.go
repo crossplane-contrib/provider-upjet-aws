@@ -15,8 +15,27 @@ import (
 
 type RouteResponseObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// Route response identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The model selection expression for the route response.
+	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Response models for the route response.
+	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Identifier of the aws_apigatewayv2_route.
+	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
+
+	// Route response key.
+	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
 }
 
 type RouteResponseParameters struct {
@@ -61,8 +80,8 @@ type RouteResponseParameters struct {
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// Route response key.
-	// +kubebuilder:validation:Required
-	RouteResponseKey *string `json:"routeResponseKey" tf:"route_response_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
 }
 
 // RouteResponseSpec defines the desired state of RouteResponse
@@ -89,8 +108,9 @@ type RouteResponseStatus struct {
 type RouteResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteResponseSpec   `json:"spec"`
-	Status            RouteResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routeResponseKey)",message="routeResponseKey is a required parameter"
+	Spec   RouteResponseSpec   `json:"spec"`
+	Status RouteResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

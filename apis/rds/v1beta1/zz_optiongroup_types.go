@@ -18,8 +18,27 @@ type OptionGroupObservation struct {
 	// The ARN of the db option group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies the name of the engine that this option group should be associated with.
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
+
 	// The db option group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the major version of the engine that this option group should be associated with.
+	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
+
+	// A list of Options to apply.
+	Option []OptionObservation `json:"option,omitempty" tf:"option,omitempty"`
+
+	// The description of the option group.
+	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -28,12 +47,12 @@ type OptionGroupObservation struct {
 type OptionGroupParameters struct {
 
 	// Specifies the name of the engine that this option group should be associated with.
-	// +kubebuilder:validation:Required
-	EngineName *string `json:"engineName" tf:"engine_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Specifies the major version of the engine that this option group should be associated with.
-	// +kubebuilder:validation:Required
-	MajorEngineVersion *string `json:"majorEngineVersion" tf:"major_engine_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
 	// A list of Options to apply.
 	// +kubebuilder:validation:Optional
@@ -54,6 +73,24 @@ type OptionGroupParameters struct {
 }
 
 type OptionObservation struct {
+
+	// A list of DB Security Groups for which the option is enabled.
+	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
+
+	// The Name of the Option (e.g., MEMCACHED).
+	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
+
+	// A list of option settings to apply.
+	OptionSettings []OptionSettingsObservation `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
+
+	// The Port number when connecting to the Option (e.g., 11211).
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// A list of VPC Security Groups for which the option is enabled.
+	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
+
+	// The version of the option (e.g., 13.1.0.0).
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OptionParameters struct {
@@ -84,6 +121,12 @@ type OptionParameters struct {
 }
 
 type OptionSettingsObservation struct {
+
+	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Value of the setting.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type OptionSettingsParameters struct {
@@ -121,8 +164,10 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OptionGroupSpec   `json:"spec"`
-	Status            OptionGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
+	Spec   OptionGroupSpec   `json:"spec"`
+	Status OptionGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

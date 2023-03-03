@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: thinggroupmemberships.iot.aws.upbound.io
 spec:
@@ -83,9 +83,16 @@ spec:
                     type: string
                 required:
                 - region
-                - thingGroupName
-                - thingName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -257,6 +264,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: thingGroupName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingGroupName)
+            - message: thingName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingName)
           status:
             description: ThingGroupMembershipStatus defines the observed state of
               ThingGroupMembership.
@@ -265,6 +277,23 @@ spec:
                 properties:
                   id:
                     description: The membership ID.
+                    type: string
+                  overrideDynamicGroup:
+                    description: Override dynamic thing groups with static thing groups
+                      when 10-group limit is reached. If a thing belongs to 10 thing
+                      groups, and one or more of those groups are dynamic thing groups,
+                      adding a thing to a static group removes the thing from the
+                      last dynamic group.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  thingGroupName:
+                    description: The name of the group to which you are adding a thing.
+                    type: string
+                  thingName:
+                    description: The name of the thing to add to a group.
                     type: string
                 type: object
               conditions:
@@ -308,9 +337,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

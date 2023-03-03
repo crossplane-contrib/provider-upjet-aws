@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: queues.mediaconvert.aws.upbound.io
 spec:
@@ -111,6 +111,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -290,9 +299,49 @@ spec:
                   arn:
                     description: The Arn of the queue
                     type: string
+                  description:
+                    description: A description of the queue
+                    type: string
                   id:
                     description: The same as name
                     type: string
+                  pricingPlan:
+                    description: Specifies whether the pricing plan for the queue
+                      is on-demand or reserved. Valid values are ON_DEMAND or RESERVED.
+                      Default to ON_DEMAND.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  reservationPlanSettings:
+                    description: A detail pricing plan of the  reserved queue. See
+                      below.
+                    items:
+                      properties:
+                        commitment:
+                          description: The length of the term of your reserved queue
+                            pricing plan commitment. Valid value is ONE_YEAR.
+                          type: string
+                        renewalType:
+                          description: Specifies whether the term of your reserved
+                            queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+                          type: string
+                        reservedSlots:
+                          description: Specifies the number of reserved transcode
+                            slots (RTS) for queue.
+                          type: number
+                      type: object
+                    type: array
+                  status:
+                    description: A status of the queue. Valid values are ACTIVE or
+                      RESERVED. Default to PAUSED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -342,9 +391,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

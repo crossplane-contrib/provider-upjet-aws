@@ -18,8 +18,24 @@ type GroupObservation struct {
 	// The ARN of the Group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
+	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
+
+	// The name of the group.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
 	// The ARN of the Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration options for enabling insights.
+	InsightsConfiguration []InsightsConfigurationObservation `json:"insightsConfiguration,omitempty" tf:"insights_configuration,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -28,12 +44,12 @@ type GroupObservation struct {
 type GroupParameters struct {
 
 	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
-	// +kubebuilder:validation:Required
-	FilterExpression *string `json:"filterExpression" tf:"filter_expression,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
 
 	// The name of the group.
-	// +kubebuilder:validation:Required
-	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Configuration options for enabling insights.
 	// +kubebuilder:validation:Optional
@@ -50,6 +66,12 @@ type GroupParameters struct {
 }
 
 type InsightsConfigurationObservation struct {
+
+	// Specifies whether insights are enabled.
+	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
+
+	// Specifies whether insight notifications are enabled.
+	NotificationsEnabled *bool `json:"notificationsEnabled,omitempty" tf:"notifications_enabled,omitempty"`
 }
 
 type InsightsConfigurationParameters struct {
@@ -87,8 +109,10 @@ type GroupStatus struct {
 type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupSpec   `json:"spec"`
-	Status            GroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterExpression)",message="filterExpression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupName)",message="groupName is a required parameter"
+	Spec   GroupSpec   `json:"spec"`
+	Status GroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

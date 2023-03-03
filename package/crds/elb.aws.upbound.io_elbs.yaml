@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: elbs.elb.aws.upbound.io
 spec:
@@ -361,9 +361,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - listener
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -535,19 +543,141 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: listener is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.listener)
           status:
             description: ELBStatus defines the observed state of ELB.
             properties:
               atProvider:
                 properties:
+                  accessLogs:
+                    description: An Access Logs block. Access Logs documented below.
+                    items:
+                      properties:
+                        bucket:
+                          description: The S3 bucket name to store the logs in.
+                          type: string
+                        bucketPrefix:
+                          description: The S3 bucket prefix. Logs are stored in the
+                            root if not configured.
+                          type: string
+                        enabled:
+                          description: Boolean to enable / disable access_logs. Default
+                            is true
+                          type: boolean
+                        interval:
+                          description: 'The publishing interval in minutes. Valid
+                            values: 5 and 60. Default: 60'
+                          type: number
+                      type: object
+                    type: array
                   arn:
                     description: The ARN of the ELB
+                    type: string
+                  availabilityZones:
+                    description: The AZ's to serve traffic in.
+                    items:
+                      type: string
+                    type: array
+                  connectionDraining:
+                    description: 'Boolean to enable connection draining. Default:
+                      false'
+                    type: boolean
+                  connectionDrainingTimeout:
+                    description: 'The time in seconds to allow for connections to
+                      drain. Default: 300'
+                    type: number
+                  crossZoneLoadBalancing:
+                    description: 'Enable cross-zone load balancing. Default: true'
+                    type: boolean
+                  desyncMitigationMode:
+                    description: Determines how the load balancer handles requests
+                      that might pose a security risk to an application due to HTTP
+                      desync. Valid values are monitor, defensive (default), strictest.
                     type: string
                   dnsName:
                     description: The DNS name of the ELB
                     type: string
+                  healthCheck:
+                    description: A health_check block. Health Check documented below.
+                    items:
+                      properties:
+                        healthyThreshold:
+                          description: The number of checks before the instance is
+                            declared healthy.
+                          type: number
+                        interval:
+                          description: 'The publishing interval in minutes. Valid
+                            values: 5 and 60. Default: 60'
+                          type: number
+                        target:
+                          description: 'The target of the check. Valid pattern is
+                            "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL values are:'
+                          type: string
+                        timeout:
+                          description: The length of time before the check times out.
+                          type: number
+                        unhealthyThreshold:
+                          description: The number of checks before the instance is
+                            declared unhealthy.
+                          type: number
+                      type: object
+                    type: array
                   id:
                     description: The name of the ELB
+                    type: string
+                  idleTimeout:
+                    description: 'The time in seconds that the connection is allowed
+                      to be idle. Default: 60'
+                    type: number
+                  instances:
+                    description: A list of instance ids to place in the ELB pool.
+                    items:
+                      type: string
+                    type: array
+                  internal:
+                    description: If true, ELB will be an internal ELB.
+                    type: boolean
+                  listener:
+                    description: A list of listener blocks. Listeners documented below.
+                    items:
+                      properties:
+                        instancePort:
+                          description: The port on the instance to route to
+                          type: number
+                        instanceProtocol:
+                          description: The protocol to use to the instance. Valid
+                            values are HTTP, HTTPS, TCP, or SSL
+                          type: string
+                        lbPort:
+                          description: The port to listen on for the load balancer
+                          type: number
+                        lbProtocol:
+                          description: The protocol to listen on. Valid values are
+                            HTTP, HTTPS, TCP, or SSL
+                          type: string
+                        sslCertificateId:
+                          description: The ARN of an SSL certificate you have uploaded
+                            to AWS IAM. Note ECDSA-specific restrictions below.  Only
+                            valid when
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  securityGroups:
+                    description: A list of security group IDs to assign to the ELB.
+                      Only valid if creating an ELB within a VPC
+                    items:
+                      type: string
+                    type: array
+                  sourceSecurityGroup:
+                    description: The name of the security group that you can use as
+                      part of your inbound rules for your load balancer's back-end
+                      application instances. Use this for Classic or Default VPC only.
                     type: string
                   sourceSecurityGroupId:
                     description: The ID of the security group that you can use as
@@ -555,6 +685,16 @@ spec:
                       application instances. Only available on ELBs launched in a
                       VPC.
                     type: string
+                  subnets:
+                    description: A list of subnet IDs to attach to the ELB.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -608,9 +748,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

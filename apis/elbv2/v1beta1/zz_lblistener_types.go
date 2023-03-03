@@ -14,6 +14,30 @@ import (
 )
 
 type AuthenticateCognitoObservation struct {
+
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// Set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// Maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// ARN of the Cognito user pool.
+	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
+
+	// ID of the Cognito user pool client.
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+
+	// Domain prefix or fully-qualified domain name of the Cognito user pool.
+	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
 }
 
 type AuthenticateCognitoParameters struct {
@@ -52,6 +76,39 @@ type AuthenticateCognitoParameters struct {
 }
 
 type AuthenticateOidcObservation struct {
+
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// Authorization endpoint of the IdP.
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+
+	// OAuth 2.0 client identifier.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// OAuth 2.0 client secret.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
+	// OIDC issuer identifier of the IdP.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// Behavior if the user is not authenticated. Valid values: deny, allow and authenticate
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// Set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// Maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// Token endpoint of the IdP.
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+
+	// User info endpoint of the IdP.
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type AuthenticateOidcParameters struct {
@@ -102,6 +159,30 @@ type AuthenticateOidcParameters struct {
 }
 
 type DefaultActionObservation struct {
+
+	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. Detailed below.
+	AuthenticateCognito []AuthenticateCognitoObservation `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
+
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
+	AuthenticateOidc []AuthenticateOidcObservation `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
+
+	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
+	FixedResponse []FixedResponseObservation `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
+
+	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn. Detailed below.
+	Forward []ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	// Order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. Valid values are between 1 and 50000.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
+	Redirect []RedirectObservation `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DefaultActionParameters struct {
@@ -149,6 +230,15 @@ type DefaultActionParameters struct {
 }
 
 type FixedResponseObservation struct {
+
+	// Content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Message body.
+	MessageBody *string `json:"messageBody,omitempty" tf:"message_body,omitempty"`
+
+	// HTTP response code. Valid values are 2XX, 4XX, or 5XX.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type FixedResponseParameters struct {
@@ -167,6 +257,12 @@ type FixedResponseParameters struct {
 }
 
 type ForwardObservation struct {
+
+	// Configuration block for target group stickiness for the rule. Detailed below.
+	Stickiness []StickinessObservation `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
+
+	// Set of 1-5 target group blocks. Detailed below.
+	TargetGroup []TargetGroupObservation `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type ForwardParameters struct {
@@ -182,11 +278,39 @@ type ForwardParameters struct {
 
 type LBListenerObservation struct {
 
+	// Name of the Application-Layer Protocol Negotiation (ALPN) policy. Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
+	AlpnPolicy *string `json:"alpnPolicy,omitempty" tf:"alpn_policy,omitempty"`
+
 	// ARN of the listener (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. For adding additional SSL certificates, see the aws_lb_listener_certificate resource.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Configuration block for default actions. Detailed below.
+	DefaultAction []DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
 	// ARN of the listener (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ARN of the load balancer.
+	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
+
+	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
+	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -203,8 +327,8 @@ type LBListenerParameters struct {
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
 	// Configuration block for default actions. Detailed below.
-	// +kubebuilder:validation:Required
-	DefaultAction []DefaultActionParameters `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
 	// +crossplane:generate:reference:type=LB
@@ -242,6 +366,24 @@ type LBListenerParameters struct {
 }
 
 type RedirectObservation struct {
+
+	// Hostname. This component is not percent-encoded. The hostname can contain #{host}. Defaults to #{host}.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// Absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}. Defaults to /#{path}.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Port. Specify a value from 1 to 65535 or #{port}. Defaults to #{port}.
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol. Valid values are HTTP, HTTPS, or #{protocol}. Defaults to #{protocol}.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?". Defaults to #{query}.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type RedirectParameters struct {
@@ -272,6 +414,12 @@ type RedirectParameters struct {
 }
 
 type StickinessObservation struct {
+
+	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Whether target group stickiness is enabled. Default is false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type StickinessParameters struct {
@@ -286,6 +434,12 @@ type StickinessParameters struct {
 }
 
 type TargetGroupObservation struct {
+
+	// ARN of the target group.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Weight. The range is 0 to 999.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupParameters struct {
@@ -332,8 +486,9 @@ type LBListenerStatus struct {
 type LBListener struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBListenerSpec   `json:"spec"`
-	Status            LBListenerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	Spec   LBListenerSpec   `json:"spec"`
+	Status LBListenerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

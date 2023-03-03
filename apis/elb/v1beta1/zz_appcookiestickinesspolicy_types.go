@@ -15,15 +15,31 @@ import (
 
 type AppCookieStickinessPolicyObservation struct {
 
+	// Application cookie whose lifetime the ELB's cookie should follow.
+	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
+
 	// ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// Name of load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AppCookieStickinessPolicyParameters struct {
 
 	// Application cookie whose lifetime the ELB's cookie should follow.
-	// +kubebuilder:validation:Required
-	CookieName *string `json:"cookieName" tf:"cookie_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
 
 	// Load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
@@ -75,8 +91,9 @@ type AppCookieStickinessPolicyStatus struct {
 type AppCookieStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppCookieStickinessPolicySpec   `json:"spec"`
-	Status            AppCookieStickinessPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cookieName)",message="cookieName is a required parameter"
+	Spec   AppCookieStickinessPolicySpec   `json:"spec"`
+	Status AppCookieStickinessPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

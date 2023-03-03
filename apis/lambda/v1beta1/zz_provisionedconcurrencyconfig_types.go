@@ -15,23 +15,36 @@ import (
 
 type ProvisionedConcurrencyConfigObservation struct {
 
+	// Name or Amazon Resource Name (ARN) of the Lambda Function.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
 	// Lambda Function name and qualifier separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amount of capacity to allocate. Must be greater than or equal to 1.
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
+
+	// Lambda Function version or Lambda Alias name.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ProvisionedConcurrencyConfigParameters struct {
 
 	// Name or Amazon Resource Name (ARN) of the Lambda Function.
-	// +kubebuilder:validation:Required
-	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
-	// +kubebuilder:validation:Required
-	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions" tf:"provisioned_concurrent_executions,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
 
 	// Lambda Function version or Lambda Alias name.
-	// +kubebuilder:validation:Required
-	Qualifier *string `json:"qualifier" tf:"qualifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -63,8 +76,11 @@ type ProvisionedConcurrencyConfigStatus struct {
 type ProvisionedConcurrencyConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProvisionedConcurrencyConfigSpec   `json:"spec"`
-	Status            ProvisionedConcurrencyConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.provisionedConcurrentExecutions)",message="provisionedConcurrentExecutions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.qualifier)",message="qualifier is a required parameter"
+	Spec   ProvisionedConcurrencyConfigSpec   `json:"spec"`
+	Status ProvisionedConcurrencyConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

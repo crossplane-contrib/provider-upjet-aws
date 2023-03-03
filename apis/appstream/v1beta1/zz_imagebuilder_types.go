@@ -14,6 +14,12 @@ import (
 )
 
 type AccessEndpointObservation struct {
+
+	// Type of interface endpoint.
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+
+	// Identifier (ID) of the VPC in which the interface endpoint is used.
+	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
 }
 
 type AccessEndpointParameters struct {
@@ -28,6 +34,12 @@ type AccessEndpointParameters struct {
 }
 
 type ImageBuilderDomainJoinInfoObservation struct {
+
+	// Fully qualified name of the directory (for example, corp.example.com).
+	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
+
+	// Distinguished name of the organizational unit for computer accounts.
+	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 }
 
 type ImageBuilderDomainJoinInfoParameters struct {
@@ -43,23 +55,60 @@ type ImageBuilderDomainJoinInfoParameters struct {
 
 type ImageBuilderObservation struct {
 
+	// Set of interface VPC endpoint (interface endpoint) objects. Maximum of 4. See below.
+	AccessEndpoint []AccessEndpointObservation `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty"`
+
+	// Version of the AppStream 2.0 agent to use for this image builder.
+	AppstreamAgentVersion *string `json:"appstreamAgentVersion,omitempty" tf:"appstream_agent_version,omitempty"`
+
 	// ARN of the appstream image builder.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Date and time, in UTC and extended RFC 3339 format, when the image builder was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Description to display.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Human-readable friendly name for the AppStream image builder.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Configuration block for the name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. See below.
+	DomainJoinInfo []ImageBuilderDomainJoinInfoObservation `json:"domainJoinInfo,omitempty" tf:"domain_join_info,omitempty"`
+
+	// Enables or disables default internet access for the image builder.
+	EnableDefaultInternetAccess *bool `json:"enableDefaultInternetAccess,omitempty" tf:"enable_default_internet_access,omitempty"`
+
+	// ARN of the IAM role to apply to the image builder.
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
 	// Name of the image builder.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ARN of the public, private, or shared image to use.
+	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
 	// Name of the image used to create the image builder.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
+	// Instance type to use when launching the image builder.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// State of the image builder. Can be: PENDING, UPDATING_AGENT, RUNNING, STOPPING, STOPPED, REBOOTING, SNAPSHOTTING, DELETING, FAILED, UPDATING, PENDING_QUALIFICATION
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block for the VPC configuration for the image builder. See below.
+	VPCConfig []ImageBuilderVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ImageBuilderParameters struct {
@@ -107,8 +156,8 @@ type ImageBuilderParameters struct {
 	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
 
 	// Instance type to use when launching the image builder.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -125,6 +174,12 @@ type ImageBuilderParameters struct {
 }
 
 type ImageBuilderVPCConfigObservation struct {
+
+	// Identifiers of the security groups for the image builder or image builder.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Identifiers of the subnets to which a network interface is attached from the image builder instance or image builder instance.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type ImageBuilderVPCConfigParameters struct {
@@ -173,8 +228,9 @@ type ImageBuilderStatus struct {
 type ImageBuilder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImageBuilderSpec   `json:"spec"`
-	Status            ImageBuilderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   ImageBuilderSpec   `json:"spec"`
+	Status ImageBuilderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

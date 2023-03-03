@@ -18,10 +18,26 @@ type ConfigurationObservation struct {
 	// Amazon Resource Name (ARN) of the configuration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of Apache Kafka versions which can use this configuration.
+	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Latest revision of the configuration.
 	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
+
+	// Name of the configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
+	ServerProperties *string `json:"serverProperties,omitempty" tf:"server_properties,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -35,8 +51,8 @@ type ConfigurationParameters struct {
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Name of the configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -44,8 +60,8 @@ type ConfigurationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Contents of the server.properties file. Supported properties are documented in the MSK Developer Guide.
-	// +kubebuilder:validation:Required
-	ServerProperties *string `json:"serverProperties" tf:"server_properties,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServerProperties *string `json:"serverProperties,omitempty" tf:"server_properties,omitempty"`
 }
 
 // ConfigurationSpec defines the desired state of Configuration
@@ -72,8 +88,10 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSpec   `json:"spec"`
-	Status            ConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverProperties)",message="serverProperties is a required parameter"
+	Spec   ConfigurationSpec   `json:"spec"`
+	Status ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

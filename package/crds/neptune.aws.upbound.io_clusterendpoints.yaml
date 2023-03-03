@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clusterendpoints.neptune.aws.upbound.io
 spec:
@@ -169,9 +169,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - endpointType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -343,6 +351,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: endpointType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointType)
           status:
             description: ClusterEndpointStatus defines the observed state of ClusterEndpoint.
             properties:
@@ -352,12 +363,43 @@ spec:
                     description: The Neptune Cluster Endpoint Amazon Resource Name
                       (ARN).
                     type: string
+                  clusterIdentifier:
+                    description: The DB cluster identifier of the DB cluster associated
+                      with the endpoint.
+                    type: string
                   endpoint:
                     description: The DNS address of the endpoint.
                     type: string
+                  endpointType:
+                    description: 'The type of the endpoint. One of: READER, WRITER,
+                      ANY.'
+                    type: string
+                  excludedMembers:
+                    description: List of DB instance identifiers that aren't part
+                      of the custom endpoint group. All other eligible instances are
+                      reachable through the custom endpoint. Only relevant if the
+                      list of static members is empty.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The Neptune Cluster Endpoint Identifier.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  staticMembers:
+                    description: List of DB instance identifiers that are part of
+                      the custom endpoint group.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -407,9 +449,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

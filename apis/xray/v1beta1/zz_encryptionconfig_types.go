@@ -17,6 +17,16 @@ type EncryptionConfigObservation struct {
 
 	// Region name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An AWS KMS customer master key (CMK) ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigParameters struct {
@@ -41,8 +51,8 @@ type EncryptionConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // EncryptionConfigSpec defines the desired state of EncryptionConfig
@@ -69,8 +79,9 @@ type EncryptionConfigStatus struct {
 type EncryptionConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EncryptionConfigSpec   `json:"spec"`
-	Status            EncryptionConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   EncryptionConfigSpec   `json:"spec"`
+	Status EncryptionConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

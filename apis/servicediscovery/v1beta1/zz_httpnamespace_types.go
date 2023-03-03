@@ -18,11 +18,24 @@ type HTTPNamespaceObservation struct {
 	// The ARN that Amazon Route 53 assigns to the namespace when you create it.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description that you specify for the namespace when you create it.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of an HTTP namespace.
 	HTTPName *string `json:"httpName,omitempty" tf:"http_name,omitempty"`
 
 	// The ID of a namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the http namespace.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -35,8 +48,8 @@ type HTTPNamespaceParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the http namespace.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +85,9 @@ type HTTPNamespaceStatus struct {
 type HTTPNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HTTPNamespaceSpec   `json:"spec"`
-	Status            HTTPNamespaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   HTTPNamespaceSpec   `json:"spec"`
+	Status HTTPNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

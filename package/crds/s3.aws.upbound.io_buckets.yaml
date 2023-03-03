@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: buckets.s3.aws.upbound.io
 spec:
@@ -89,6 +89,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -326,6 +335,14 @@ spec:
                           type: number
                       type: object
                     type: array
+                  forceDestroy:
+                    description: A boolean that indicates all objects (including any
+                      locked objects) should be deleted from the bucket when the bucket
+                      is destroyed so that the bucket can be destroyed without error.
+                      These objects are not recoverable. This only deletes objects
+                      when the bucket is destroyed, not when setting this parameter
+                      to true.
+                    type: boolean
                   grant:
                     description: An ACL policy grant. See Grant below for details.
                       Conflicts with acl. Use the resource aws_s3_bucket_acl instead.
@@ -512,10 +529,19 @@ spec:
                           type: array
                       type: object
                     type: array
+                  objectLockEnabled:
+                    description: Indicates whether this bucket has an Object Lock
+                      configuration enabled. Valid values are true or false. This
+                      argument is not supported in all regions or partitions.
+                    type: boolean
                   policy:
                     description: A valid bucket policy JSON document. In this case,
                       please make sure you use the verbose/specific version of the
                       policy. Use the resource aws_s3_bucket_policy instead.
+                    type: string
+                  region:
+                    description: The AWS region this bucket resides in. Region is
+                      the region you'd like your resource to be created in.
                     type: string
                   replicationConfiguration:
                     description: A configuration of replication configuration. See
@@ -727,6 +753,11 @@ spec:
                           type: array
                       type: object
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -835,9 +866,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

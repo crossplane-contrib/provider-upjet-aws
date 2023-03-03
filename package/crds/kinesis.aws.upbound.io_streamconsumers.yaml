@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: streamconsumers.kinesis.aws.upbound.io
 spec:
@@ -149,9 +149,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -323,6 +331,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StreamConsumerStatus defines the observed state of StreamConsumer.
             properties:
@@ -337,6 +348,17 @@ spec:
                     type: string
                   id:
                     description: Amazon Resource Name (ARN) of the stream consumer.
+                    type: string
+                  name:
+                    description: Name of the stream consumer.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  streamArn:
+                    description: –  Amazon Resource Name (ARN) of the data stream
+                      the consumer is registered with.
                     type: string
                 type: object
               conditions:
@@ -380,9 +402,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

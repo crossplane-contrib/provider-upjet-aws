@@ -14,14 +14,25 @@ import (
 )
 
 type EnablerObservation struct {
+
+	// Set of account IDs.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Type of resources to scan. Valid values are EC2, ECR, and LAMBDA.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
 type EnablerParameters struct {
 
 	// Set of account IDs.
-	// +kubebuilder:validation:Required
-	AccountIds []*string `json:"accountIds" tf:"account_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -29,8 +40,8 @@ type EnablerParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Type of resources to scan. Valid values are EC2, ECR, and LAMBDA.
-	// +kubebuilder:validation:Required
-	ResourceTypes []*string `json:"resourceTypes" tf:"resource_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
 // EnablerSpec defines the desired state of Enabler
@@ -57,8 +68,10 @@ type EnablerStatus struct {
 type Enabler struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EnablerSpec   `json:"spec"`
-	Status            EnablerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountIds)",message="accountIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceTypes)",message="resourceTypes is a required parameter"
+	Spec   EnablerSpec   `json:"spec"`
+	Status EnablerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

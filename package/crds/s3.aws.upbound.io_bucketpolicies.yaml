@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: bucketpolicies.s3.aws.upbound.io
 spec:
@@ -151,9 +151,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - policy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -325,12 +333,28 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: policy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)
           status:
             description: BucketPolicyStatus defines the observed state of BucketPolicy.
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: The name of the bucket to which to apply the policy.
+                    type: string
                   id:
+                    type: string
+                  policy:
+                    description: 'The text of the policy. Although this is a bucket
+                      policy rather than an IAM policy, the aws_iam_policy_document
+                      data source may be used, so long as it specifies a principal.
+                      Note: Bucket policies are limited to 20 KB in size.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -374,9 +398,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

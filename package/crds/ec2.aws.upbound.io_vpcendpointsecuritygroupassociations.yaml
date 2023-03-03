@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: vpcendpointsecuritygroupassociations.ec2.aws.upbound.io
 spec:
@@ -234,6 +234,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -414,6 +423,25 @@ spec:
                   id:
                     description: The ID of the association.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  replaceDefaultAssociation:
+                    description: Whether this association should replace the association
+                      with the VPC's default security group that is created when no
+                      security groups are specified during VPC endpoint creation.
+                      At most 1 association per-VPC endpoint should be configured
+                      with replace_default_association = true.
+                    type: boolean
+                  securityGroupId:
+                    description: The ID of the security group to be associated with
+                      the VPC endpoint.
+                    type: string
+                  vpcEndpointId:
+                    description: The ID of the VPC endpoint with which the security
+                      group will be associated.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -456,9 +484,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accountpublicaccessblocks.s3control.aws.upbound.io
 spec:
@@ -102,6 +102,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -279,9 +288,43 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: AWS account ID to configure.
+                    type: string
+                  blockPublicAcls:
+                    description: 'Whether Amazon S3 should block public ACLs for buckets
+                      in this account. Defaults to false. Enabling this setting does
+                      not affect existing policies or ACLs. When set to true causes
+                      the following behavior:'
+                    type: boolean
+                  blockPublicPolicy:
+                    description: 'Whether Amazon S3 should block public bucket policies
+                      for buckets in this account. Defaults to false. Enabling this
+                      setting does not affect existing bucket policies. When set to
+                      true causes Amazon S3 to:'
+                    type: boolean
                   id:
                     description: AWS account ID
                     type: string
+                  ignorePublicAcls:
+                    description: 'Whether Amazon S3 should ignore public ACLs for
+                      buckets in this account. Defaults to false. Enabling this setting
+                      does not affect the persistence of any existing ACLs and doesn''t
+                      prevent new public ACLs from being set. When set to true causes
+                      Amazon S3 to:'
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  restrictPublicBuckets:
+                    description: 'Whether Amazon S3 should restrict public bucket
+                      policies for buckets in this account. Defaults to false. Enabling
+                      this setting does not affect previously stored bucket policies,
+                      except that public and cross-account access within any public
+                      bucket policy, including non-public delegation to specific accounts,
+                      is blocked. When set to true:'
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -324,9 +367,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

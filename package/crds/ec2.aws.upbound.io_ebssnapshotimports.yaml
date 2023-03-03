@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ebssnapshotimports.ec2.aws.upbound.io
 spec:
@@ -237,9 +237,17 @@ spec:
                       period.
                     type: number
                 required:
-                - diskContainer
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -411,6 +419,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: diskContainer is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.diskContainer)
           status:
             description: EBSSnapshotImportStatus defines the observed state of EBSSnapshotImport.
             properties:
@@ -419,11 +430,77 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the EBS Snapshot.
                     type: string
+                  clientData:
+                    description: The client-specific data. Detailed below.
+                    items:
+                      properties:
+                        comment:
+                          description: A user-defined comment about the disk upload.
+                          type: string
+                        uploadEnd:
+                          description: The time that the disk upload ends.
+                          type: string
+                        uploadSize:
+                          description: The size of the uploaded disk image, in GiB.
+                          type: number
+                        uploadStart:
+                          description: The time that the disk upload starts.
+                          type: string
+                      type: object
+                    type: array
                   dataEncryptionKeyId:
                     description: The data encryption key identifier for the snapshot.
                     type: string
+                  description:
+                    description: The description string for the import snapshot task.
+                    type: string
+                  diskContainer:
+                    description: Information about the disk container. Detailed below.
+                    items:
+                      properties:
+                        description:
+                          description: The description of the disk image being imported.
+                          type: string
+                        format:
+                          description: The format of the disk image being imported.
+                            One of VHD or VMDK.
+                          type: string
+                        url:
+                          description: The URL to the Amazon S3-based disk image being
+                            imported. It can either be a https URL (https://..) or
+                            an Amazon S3 URL (s3://..). One of url or user_bucket
+                            must be set.
+                          type: string
+                        userBucket:
+                          description: The Amazon S3 bucket for the disk image. One
+                            of url or user_bucket must be set. Detailed below.
+                          items:
+                            properties:
+                              s3Bucket:
+                                description: The name of the Amazon S3 bucket where
+                                  the disk image is located.
+                                type: string
+                              s3Key:
+                                description: The file name of the disk image.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  encrypted:
+                    description: Specifies whether the destination snapshot of the
+                      imported image should be encrypted. The default KMS key for
+                      EBS is used unless you specify a non-default KMS key using KmsKeyId.
+                    type: boolean
                   id:
                     description: The snapshot ID (e.g., snap-59fcb34e).
+                    type: string
+                  kmsKeyId:
+                    description: An identifier for the symmetric KMS key to use when
+                      creating the encrypted snapshot. This parameter is only required
+                      if you want to use a non-default KMS key; if this parameter
+                      is not specified, the default KMS key for EBS is used. If a
+                      KmsKeyId is specified, the Encrypted flag must also be set.
                     type: string
                   outpostArn:
                     description: Amazon Resource Name (ARN) of the EBS Snapshot.
@@ -435,6 +512,28 @@ spec:
                   ownerId:
                     description: The AWS account ID of the EBS snapshot owner.
                     type: string
+                  permanentRestore:
+                    description: Indicates whether to permanently restore an archived
+                      snapshot.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleName:
+                    description: 'The name of the IAM Role the VM Import/Export service
+                      will assume. This role needs certain permissions. See https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role.
+                      Default: vmimport'
+                    type: string
+                  storageTier:
+                    description: The name of the storage tier. Valid values are archive
+                      and standard. Default value is standard.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -442,6 +541,12 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  temporaryRestoreDays:
+                    description: Specifies the number of days for which to temporarily
+                      restore an archived snapshot. Required for temporary restores
+                      only. The snapshot will be automatically re-archived after this
+                      period.
+                    type: number
                   volumeId:
                     description: The snapshot ID (e.g., snap-59fcb34e).
                     type: string
@@ -490,9 +595,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

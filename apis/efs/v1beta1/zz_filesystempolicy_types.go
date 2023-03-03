@@ -15,8 +15,21 @@ import (
 
 type FileSystemPolicyObservation struct {
 
+	// A flag to indicate whether to bypass the aws_efs_file_system_policy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request will be locked out from making future PutFileSystemPolicy requests on the file system. Set bypass_policy_lockout_safety_check to true only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. The default value is false.
+	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
+
+	// The ID of the EFS file system.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
 	// The ID that identifies the file system (e.g., fs-ccfc0d65).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type FileSystemPolicyParameters struct {
@@ -39,8 +52,8 @@ type FileSystemPolicyParameters struct {
 	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
 
 	// The JSON formatted file system policy for the EFS file system. see Docs for more info.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +85,9 @@ type FileSystemPolicyStatus struct {
 type FileSystemPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FileSystemPolicySpec   `json:"spec"`
-	Status            FileSystemPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   FileSystemPolicySpec   `json:"spec"`
+	Status FileSystemPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

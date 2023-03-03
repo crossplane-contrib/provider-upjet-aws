@@ -14,6 +14,12 @@ import (
 )
 
 type ConnectorObservation struct {
+
+	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
 
 type ConnectorParameters struct {
@@ -39,8 +45,15 @@ type ConnectorParameters struct {
 
 type VoiceConnectorGroupObservation struct {
 
+	// The Amazon Chime Voice Connectors to route inbound calls to.
+	Connector []ConnectorObservation `json:"connector,omitempty" tf:"connector,omitempty"`
+
 	// Amazon Chime Voice Connector group ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type VoiceConnectorGroupParameters struct {

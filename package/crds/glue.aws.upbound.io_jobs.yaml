@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: jobs.glue.aws.upbound.io
 spec:
@@ -254,9 +254,17 @@ spec:
                       a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 required:
-                - command
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -428,6 +436,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: command is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.command)
           status:
             description: JobStatus defines the observed state of Job.
             properties:
@@ -436,9 +447,115 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of Glue Job
                     type: string
+                  command:
+                    description: –  The command of the job. Defined below.
+                    items:
+                      properties:
+                        name:
+                          description: –  The name you assign to this job. It must
+                            be unique in your account.
+                          type: string
+                        pythonVersion:
+                          description: The Python version being used to execute a
+                            Python shell job. Allowed values are 2, 3 or 3.9. Version
+                            3 refers to Python 3.6.
+                          type: string
+                        scriptLocation:
+                          description: Specifies the S3 path to a script that executes
+                            a job.
+                          type: string
+                      type: object
+                    type: array
+                  connections:
+                    description: –  The list of connections used for this job.
+                    items:
+                      type: string
+                    type: array
+                  defaultArguments:
+                    additionalProperties:
+                      type: string
+                    description: execution script consumes, as well as arguments that
+                      AWS Glue itself consumes. For information about how to specify
+                      and consume your own Job arguments, see the Calling AWS Glue
+                      APIs in Python topic in the developer guide. For information
+                      about the key-value pairs that AWS Glue consumes to set up your
+                      job, see the Special Parameters Used by AWS Glue topic in the
+                      developer guide.
+                    type: object
+                  description:
+                    description: –  Description of the job.
+                    type: string
+                  executionClass:
+                    description: 'Indicates whether the job is run with a standard
+                      or flexible execution class. The standard execution class is
+                      ideal for time-sensitive workloads that require fast job startup
+                      and dedicated resources. Valid value: FLEX, STANDARD.'
+                    type: string
+                  executionProperty:
+                    description: –  Execution property of the job. Defined below.
+                    items:
+                      properties:
+                        maxConcurrentRuns:
+                          description: The maximum number of concurrent runs allowed
+                            for a job. The default is 1.
+                          type: number
+                      type: object
+                    type: array
+                  glueVersion:
+                    description: The version of glue to use, for example "1.0". For
+                      information about available versions, see the AWS Glue Release
+                      Notes.
+                    type: string
                   id:
                     description: Job name
                     type: string
+                  maxCapacity:
+                    description: –  The maximum number of AWS Glue data processing
+                      units (DPUs) that can be allocated when this job runs. Required
+                      when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers
+                      and worker_type arguments instead with glue_version 2.0 and
+                      above.
+                    type: number
+                  maxRetries:
+                    description: –  The maximum number of times to retry this job
+                      if it fails.
+                    type: number
+                  nonOverridableArguments:
+                    additionalProperties:
+                      type: string
+                    description: overridable arguments for this job, specified as
+                      name-value pairs.
+                    type: object
+                  notificationProperty:
+                    description: Notification property of the job. Defined below.
+                    items:
+                      properties:
+                        notifyDelayAfter:
+                          description: After a job run starts, the number of minutes
+                            to wait before sending a job run delay notification.
+                          type: number
+                      type: object
+                    type: array
+                  numberOfWorkers:
+                    description: The number of workers of a defined workerType that
+                      are allocated when a job runs.
+                    type: number
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: –  The ARN of the IAM role associated with this job.
+                    type: string
+                  securityConfiguration:
+                    description: The name of the Security Configuration to be associated
+                      with the job.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -446,6 +563,15 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  timeout:
+                    description: –  The job timeout in minutes. The default is 2880
+                      minutes (48 hours) for glueetl and pythonshell jobs, and null
+                      (unlimited) for gluestreaming jobs.
+                    type: number
+                  workerType:
+                    description: The type of predefined worker that is allocated when
+                      a job runs. Accepts a value of Standard, G.1X, or G.2X.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -488,9 +614,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

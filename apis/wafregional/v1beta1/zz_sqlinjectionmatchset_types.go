@@ -17,13 +17,23 @@ type SQLInjectionMatchSetObservation struct {
 
 	// The ID of the WAF SqlInjectionMatchSet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or description of the SizeConstraintSet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The parts of web requests that you want AWS WAF to inspect for malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header.
+	SQLInjectionMatchTuple []SQLInjectionMatchTupleObservation `json:"sqlInjectionMatchTuple,omitempty" tf:"sql_injection_match_tuple,omitempty"`
 }
 
 type SQLInjectionMatchSetParameters struct {
 
 	// The name or description of the SizeConstraintSet.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -36,6 +46,16 @@ type SQLInjectionMatchSetParameters struct {
 }
 
 type SQLInjectionMatchTupleFieldToMatchObservation struct {
+
+	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
+	// If type is any other value, omit this field.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// The part of the web request that you want AWS WAF to search for a specified string.
+	// e.g., HEADER, METHOD or BODY.
+	// See docs
+	// for all supported values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SQLInjectionMatchTupleFieldToMatchParameters struct {
@@ -54,6 +74,16 @@ type SQLInjectionMatchTupleFieldToMatchParameters struct {
 }
 
 type SQLInjectionMatchTupleObservation struct {
+
+	// Specifies where in a web request to look for snippets of malicious SQL code.
+	FieldToMatch []SQLInjectionMatchTupleFieldToMatchObservation `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+
+	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
+	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
+	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
+	// See docs
+	// for all supported values.
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type SQLInjectionMatchTupleParameters struct {
@@ -95,8 +125,9 @@ type SQLInjectionMatchSetStatus struct {
 type SQLInjectionMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLInjectionMatchSetSpec   `json:"spec"`
-	Status            SQLInjectionMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SQLInjectionMatchSetSpec   `json:"spec"`
+	Status SQLInjectionMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

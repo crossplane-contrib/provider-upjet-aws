@@ -14,7 +14,18 @@ import (
 )
 
 type ConnectionAssociationObservation struct {
+
+	// The ID of the connection.
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the LAG with which to associate the connection.
+	LagID *string `json:"lagId,omitempty" tf:"lag_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type ConnectionAssociationParameters struct {

@@ -14,17 +14,34 @@ import (
 )
 
 type PermissionObservation struct {
+
+	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// ARN of the CA that grants the permissions.
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// IAM policy that is associated with the permission.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the calling account
+	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
 }
 
 type PermissionParameters struct {
 
 	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
-	// +kubebuilder:validation:Required
-	Actions []*string `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// ARN of the CA that grants the permissions.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acmpca/v1beta1.CertificateAuthority
@@ -41,8 +58,8 @@ type PermissionParameters struct {
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -78,8 +95,10 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSpec   `json:"spec"`
-	Status            PermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)",message="actions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   PermissionSpec   `json:"spec"`
+	Status PermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resources.cloudcontrol.aws.upbound.io
 spec:
@@ -180,10 +180,17 @@ spec:
                     description: Identifier of the CloudFormation resource type version.
                     type: string
                 required:
-                - desiredState
                 - region
-                - typeName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -355,11 +362,20 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: desiredState is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.desiredState)
+            - message: typeName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.typeName)
           status:
             description: ResourceStatus defines the observed state of Resource.
             properties:
               atProvider:
                 properties:
+                  desiredState:
+                    description: JSON string matching the CloudFormation resource
+                      type schema with desired configuration.
+                    type: string
                   id:
                     type: string
                   properties:
@@ -367,6 +383,44 @@ spec:
                       type schema with current configuration. Underlying attributes
                       can be referenced via the jsondecode() function, for example,
                       jsondecode(data.aws_cloudcontrolapi_resource.example.properties)["example"].
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: Amazon Resource Name (ARN) of the IAM Role to assume
+                      for operations.
+                    type: string
+                  schemaSecretRef:
+                    description: JSON string of the CloudFormation resource type schema
+                      which is used for plan time validation where possible. Automatically
+                      fetched if not provided. In large scale environments with multiple
+                      resources using the same type_name, it is recommended to fetch
+                      the schema once via the aws_cloudformation_type data source
+                      and use this argument to reduce DescribeType API operation throttling.
+                      This value is marked sensitive only to prevent large plan differences
+                      from showing.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  typeName:
+                    description: CloudFormation resource type name. For example, AWS::EC2::VPC.
+                    type: string
+                  typeVersionId:
+                    description: Identifier of the CloudFormation resource type version.
                     type: string
                 type: object
               conditions:
@@ -410,9 +464,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

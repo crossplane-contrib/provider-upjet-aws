@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: resourcegroups.inspector.aws.upbound.io
 spec:
@@ -75,8 +75,16 @@ spec:
                     type: object
                 required:
                 - region
-                - tags
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -248,6 +256,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: tags is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tags)
           status:
             description: ResourceGroupStatus defines the observed state of ResourceGroup.
             properties:
@@ -258,6 +269,15 @@ spec:
                     type: string
                   id:
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -300,9 +320,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

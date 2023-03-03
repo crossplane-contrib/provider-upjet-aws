@@ -15,11 +15,45 @@ import (
 
 type ProvisioningArtifactObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). The default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Whether the product version is active. Inactive provisioning artifacts are invisible to end users. End users cannot launch or update a provisioned product from an inactive provisioning artifact. Default is true.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+
 	// Time when the provisioning artifact was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Description of the provisioning artifact (i.e., version), including how it differs from the previous provisioning artifact.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether AWS Service Catalog stops validating the specified provisioning artifact template even if it is invalid.
+	DisableTemplateValidation *bool `json:"disableTemplateValidation,omitempty" tf:"disable_template_validation,omitempty"`
+
+	// Information set by the administrator to provide guidance to end users about which provisioning artifacts to use. Valid values are DEFAULT and DEPRECATED. The default is DEFAULT. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.
+	Guidance *string `json:"guidance,omitempty" tf:"guidance,omitempty"`
+
 	// Provisioning Artifact identifier and product identifier separated by a colon.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the provisioning artifact (for example, v1, v2beta). No spaces are allowed.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Identifier of the product.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
+	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
+
+	// Template source as URL of the CloudFormation template in Amazon S3.
+	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
+
+	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningArtifactParameters struct {

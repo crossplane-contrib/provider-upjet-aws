@@ -85,6 +85,46 @@ func (in *AnomalyMonitorObservation) DeepCopyInto(out *AnomalyMonitorObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.MonitorDimension != nil {
+		in, out := &in.MonitorDimension, &out.MonitorDimension
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitorSpecification != nil {
+		in, out := &in.MonitorSpecification, &out.MonitorSpecification
+		*out = new(string)
+		**out = **in
+	}
+	if in.MonitorType != nil {
+		in, out := &in.MonitorType, &out.MonitorType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))

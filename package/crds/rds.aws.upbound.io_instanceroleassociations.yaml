@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: instanceroleassociations.rds.aws.upbound.io
 spec:
@@ -230,9 +230,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - featureName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -404,15 +412,36 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: featureName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureName)
           status:
             description: InstanceRoleAssociationStatus defines the observed state
               of InstanceRoleAssociation.
             properties:
               atProvider:
                 properties:
+                  dbInstanceIdentifier:
+                    description: DB Instance Identifier to associate with the IAM
+                      Role.
+                    type: string
+                  featureName:
+                    description: Name of the feature for association. This can be
+                      found in the AWS documentation relevant to the integration or
+                      a full list is available in the SupportedFeatureNames list returned
+                      by AWS CLI rds describe-db-engine-versions.
+                    type: string
                   id:
                     description: DB Instance Identifier and IAM Role ARN separated
                       by a comma (,)
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleArn:
+                    description: Amazon Resource Name (ARN) of the IAM Role to associate
+                      with the DB Instance.
                     type: string
                 type: object
               conditions:
@@ -456,9 +485,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

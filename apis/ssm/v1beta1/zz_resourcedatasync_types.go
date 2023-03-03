@@ -15,6 +15,14 @@ import (
 
 type ResourceDataSyncObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region with the bucket targeted by the Resource Data Sync.
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon S3 configuration details for the sync.
+	S3Destination []S3DestinationObservation `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
 }
 
 type ResourceDataSyncParameters struct {
@@ -26,11 +34,26 @@ type ResourceDataSyncParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Amazon S3 configuration details for the sync.
-	// +kubebuilder:validation:Required
-	S3Destination []S3DestinationParameters `json:"s3Destination" tf:"s3_destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Destination []S3DestinationParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
 }
 
 type S3DestinationObservation struct {
+
+	// Name of S3 bucket where the aggregated data is stored.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// ARN of an encryption key for a destination in Amazon S3.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Prefix for the bucket.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Region with the bucket targeted by the Resource Data Sync.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// A supported sync format. Only JsonSerDe is currently supported. Defaults to JsonSerDe.
+	SyncFormat *string `json:"syncFormat,omitempty" tf:"sync_format,omitempty"`
 }
 
 type S3DestinationParameters struct {
@@ -99,8 +122,9 @@ type ResourceDataSyncStatus struct {
 type ResourceDataSync struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceDataSyncSpec   `json:"spec"`
-	Status            ResourceDataSyncStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Destination)",message="s3Destination is a required parameter"
+	Spec   ResourceDataSyncSpec   `json:"spec"`
+	Status ResourceDataSyncStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

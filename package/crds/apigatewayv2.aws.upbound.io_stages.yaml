@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: stages.apigatewayv2.aws.upbound.io
 spec:
@@ -327,6 +327,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -503,8 +512,72 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessLogSettings:
+                    description: Settings for logging access in this stage. Use the
+                      aws_api_gateway_account resource to configure permissions for
+                      CloudWatch Logging.
+                    items:
+                      properties:
+                        destinationArn:
+                          description: ARN of the CloudWatch Logs log group to receive
+                            access logs. Any trailing :* is trimmed from the ARN.
+                          type: string
+                        format:
+                          description: Single line format of the access logs of data.
+                            Refer to log settings for HTTP or Websocket.
+                          type: string
+                      type: object
+                    type: array
+                  apiId:
+                    description: API identifier.
+                    type: string
                   arn:
                     description: ARN of the stage.
+                    type: string
+                  autoDeploy:
+                    description: Whether updates to an API automatically trigger a
+                      new deployment. Defaults to false. Applicable for HTTP APIs.
+                    type: boolean
+                  clientCertificateId:
+                    description: Identifier of a client certificate for the stage.
+                      Use the aws_api_gateway_client_certificate resource to configure
+                      a client certificate. Supported only for WebSocket APIs.
+                    type: string
+                  defaultRouteSettings:
+                    description: Default route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            default route. Affects the log entries pushed to Amazon
+                            CloudWatch Logs. Defaults to false. Supported only for
+                            WebSocket APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            default route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the default route. Affects
+                            the log entries pushed to Amazon CloudWatch Logs. Valid
+                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
+                            for WebSocket APIs.'
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the default route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the default route.
+                          type: number
+                      type: object
+                    type: array
+                  deploymentId:
+                    description: Deployment identifier of the stage. Use the aws_apigatewayv2_deployment
+                      resource to configure a deployment.
+                    type: string
+                  description:
+                    description: Description for the stage. Must be less than or equal
+                      to 1024 characters in length.
                     type: string
                   executionArn:
                     description: ARN prefix to be used in an aws_lambda_permission's
@@ -521,6 +594,51 @@ spec:
                       wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage,
                       or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  routeSettings:
+                    description: Route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            route. Affects the log entries pushed to Amazon CloudWatch
+                            Logs. Defaults to false. Supported only for WebSocket
+                            APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the route. Affects the log
+                            entries pushed to Amazon CloudWatch Logs. Valid values:
+                            ERROR, INFO, OFF. Defaults to OFF. Supported only for
+                            WebSocket APIs.'
+                          type: string
+                        routeKey:
+                          description: Route key.
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the route.
+                          type: number
+                      type: object
+                    type: array
+                  stageVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map that defines the stage variables for the stage.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -569,9 +687,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

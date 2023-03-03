@@ -18,11 +18,24 @@ type DomainObservation struct {
 	// Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The domain description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of the domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Length of time that SWF will continue to retain information about the workflow execution after the workflow execution is complete, must be between 0 and 90 days.
+	WorkflowExecutionRetentionPeriodInDays *string `json:"workflowExecutionRetentionPeriodInDays,omitempty" tf:"workflow_execution_retention_period_in_days,omitempty"`
 }
 
 type DomainParameters struct {
@@ -41,8 +54,8 @@ type DomainParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Length of time that SWF will continue to retain information about the workflow execution after the workflow execution is complete, must be between 0 and 90 days.
-	// +kubebuilder:validation:Required
-	WorkflowExecutionRetentionPeriodInDays *string `json:"workflowExecutionRetentionPeriodInDays" tf:"workflow_execution_retention_period_in_days,omitempty"`
+	// +kubebuilder:validation:Optional
+	WorkflowExecutionRetentionPeriodInDays *string `json:"workflowExecutionRetentionPeriodInDays,omitempty" tf:"workflow_execution_retention_period_in_days,omitempty"`
 }
 
 // DomainSpec defines the desired state of Domain
@@ -69,8 +82,9 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec"`
-	Status            DomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.workflowExecutionRetentionPeriodInDays)",message="workflowExecutionRetentionPeriodInDays is a required parameter"
+	Spec   DomainSpec   `json:"spec"`
+	Status DomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

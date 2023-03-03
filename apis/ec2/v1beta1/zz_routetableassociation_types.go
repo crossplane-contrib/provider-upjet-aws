@@ -15,8 +15,21 @@ import (
 
 type RouteTableAssociationObservation struct {
 
+	// The gateway ID to create an association. Conflicts with subnet_id.
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
 	// The ID of the association
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ID of the routing table to associate with.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// The subnet ID to create an association. Conflicts with gateway_id.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type RouteTableAssociationParameters struct {

@@ -18,8 +18,26 @@ type TopicSubscriptionObservation struct {
 	// ARN of the subscription.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is 1.
+	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
+
 	// Whether the subscription confirmation request was authenticated.
 	ConfirmationWasAuthenticated *bool `json:"confirmationWasAuthenticated,omitempty" tf:"confirmation_was_authenticated,omitempty"`
+
+	// JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
+	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
+
+	// Endpoint to send data to. The contents vary with the protocol. See details below.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Whether the endpoint is capable of auto confirming subscription (e.g., PagerDuty). Default is false.
+	EndpointAutoConfirms *bool `json:"endpointAutoConfirms,omitempty" tf:"endpoint_auto_confirms,omitempty"`
+
+	// JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource. Refer to the SNS docs for more details.
+	FilterPolicy *string `json:"filterPolicy,omitempty" tf:"filter_policy,omitempty"`
+
+	// Whether the filter_policy applies to MessageAttributes (default) or MessageBody.
+	FilterPolicyScope *string `json:"filterPolicyScope,omitempty" tf:"filter_policy_scope,omitempty"`
 
 	// ARN of the subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -29,6 +47,25 @@ type TopicSubscriptionObservation struct {
 
 	// Whether the subscription has not been confirmed.
 	PendingConfirmation *bool `json:"pendingConfirmation,omitempty" tf:"pending_confirmation,omitempty"`
+
+	// Protocol to use. Valid values are: sqs, sms, lambda, firehose, and application. Protocols email, email-json, http and https are also valid but partially supported. See details below.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is false.
+	RawMessageDelivery *bool `json:"rawMessageDelivery,omitempty" tf:"raw_message_delivery,omitempty"`
+
+	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
+	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
+	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
+
+	// ARN of the SNS topic to subscribe to.
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type TopicSubscriptionParameters struct {
@@ -68,8 +105,8 @@ type TopicSubscriptionParameters struct {
 	FilterPolicyScope *string `json:"filterPolicyScope,omitempty" tf:"filter_policy_scope,omitempty"`
 
 	// Protocol to use. Valid values are: sqs, sms, lambda, firehose, and application. Protocols email, email-json, http and https are also valid but partially supported. See details below.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is false.
 	// +kubebuilder:validation:Optional
@@ -137,8 +174,9 @@ type TopicSubscriptionStatus struct {
 type TopicSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicSubscriptionSpec   `json:"spec"`
-	Status            TopicSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	Spec   TopicSubscriptionSpec   `json:"spec"`
+	Status TopicSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

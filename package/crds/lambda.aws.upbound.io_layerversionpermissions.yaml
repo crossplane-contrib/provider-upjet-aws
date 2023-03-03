@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: layerversionpermissions.lambda.aws.upbound.io
 spec:
@@ -97,13 +97,17 @@ spec:
                       of a layer.'
                     type: number
                 required:
-                - action
-                - layerName
-                - principal
                 - region
-                - statementId
-                - versionNumber
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -275,23 +279,66 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: layerName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.layerName)
+            - message: principal is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)
+            - message: statementId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statementId)
+            - message: versionNumber is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.versionNumber)
           status:
             description: LayerVersionPermissionStatus defines the observed state of
               LayerVersionPermission.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: Action, which will be allowed. lambda:GetLayerVersion
+                      value is suggested by AWS documantation.
+                    type: string
                   id:
                     description: The layer_name and version_number, separated by a
                       comma (,).
                     type: string
+                  layerName:
+                    description: The name or ARN of the Lambda Layer, which you want
+                      to grant access to.
+                    type: string
+                  organizationId:
+                    description: An identifier of AWS Organization, which should be
+                      able to use your Lambda Layer. principal should be equal to
+                      * if organization_id provided.
+                    type: string
                   policy:
                     description: Full Lambda Layer Permission policy.
+                    type: string
+                  principal:
+                    description: AWS account ID which should be able to use your Lambda
+                      Layer. * can be used here, if you want to share your Lambda
+                      Layer widely.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   revisionId:
                     description: A unique identifier for the current revision of the
                       policy.
                     type: string
+                  statementId:
+                    description: The name of Lambda Layer Permission, for example
+                      dev-account - human readable note about what is this permission
+                      for.
+                    type: string
+                  versionNumber:
+                    description: 'Version of Lambda Layer, which you want to grant
+                      access to. Note: permissions only apply to a single version
+                      of a layer.'
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -334,9 +381,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: workspaceapikeys.grafana.aws.upbound.io
 spec:
@@ -159,11 +159,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - keyName
-                - keyRole
                 - region
-                - secondsToLive
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -335,6 +341,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: keyName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyName)
+            - message: keyRole is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyRole)
+            - message: secondsToLive is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.secondsToLive)
           status:
             description: WorkspaceAPIKeyStatus defines the observed state of WorkspaceAPIKey.
             properties:
@@ -345,6 +358,26 @@ spec:
                   key:
                     description: The key token in JSON format. Use this value as a
                       bearer token to authenticate HTTP requests to the workspace.
+                    type: string
+                  keyName:
+                    description: Specifies the name of the API key. Key names must
+                      be unique to the workspace.
+                    type: string
+                  keyRole:
+                    description: Specifies the permission level of the API key. Valid
+                      values are VIEWER, EDITOR, or ADMIN.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  secondsToLive:
+                    description: Specifies the time in seconds until the API key expires.
+                      Keys can be valid for up to 30 days.
+                    type: number
+                  workspaceId:
+                    description: The ID of the workspace that the API key is valid
+                      for.
                     type: string
                 type: object
               conditions:
@@ -388,9 +421,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

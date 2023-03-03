@@ -66,11 +66,24 @@ type SnapshotObservation struct {
 	// The configuration of the cluster from which the snapshot was taken.
 	ClusterConfiguration []ClusterConfigurationObservation `json:"clusterConfiguration,omitempty" tf:"cluster_configuration,omitempty"`
 
+	// Name of the MemoryDB cluster to take a snapshot of.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
 	// The name of the snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ARN of the KMS key used to encrypt the snapshot at rest.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Indicates whether the snapshot is from an automatic backup (automated) or was created manually (manual).
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

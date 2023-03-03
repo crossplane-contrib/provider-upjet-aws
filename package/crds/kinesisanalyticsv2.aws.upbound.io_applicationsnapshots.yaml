@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: applicationsnapshots.kinesisanalyticsv2.aws.upbound.io
 spec:
@@ -151,6 +151,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -327,12 +336,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applicationName:
+                    description: The name of an existing  Kinesis Analytics v2 Application.
+                      Note that the application must be running for a snapshot to
+                      be created.
+                    type: string
                   applicationVersionId:
                     description: The current application version ID when the snapshot
                       was created.
                     type: number
                   id:
                     description: The application snapshot identifier.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   snapshotCreationTimestamp:
                     description: The timestamp of the application snapshot.
@@ -379,9 +397,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

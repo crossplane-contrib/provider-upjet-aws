@@ -14,6 +14,13 @@ import (
 )
 
 type TransitVirtualInterfaceObservation struct {
+
+	// The address family for the BGP peer. ipv4  or ipv6.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
+	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
+
 	AmazonSideAsn *string `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// The ARN of the virtual interface.
@@ -22,29 +29,63 @@ type TransitVirtualInterfaceObservation struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The authentication key for BGP configuration.
+	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
+
+	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
+	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
+
+	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
 	// The ID of the virtual interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Indicates whether jumbo frames (8500 MTU) are supported.
 	JumboFrameCapable *bool `json:"jumboFrameCapable,omitempty" tf:"jumbo_frame_capable,omitempty"`
 
+	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
+	// The MTU of a virtual transit interface can be either 1500 or 8500 (jumbo frames). Default is 1500.
+	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+
+	// The name for the virtual interface.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	SitelinkEnabled *bool `json:"sitelinkEnabled,omitempty" tf:"sitelink_enabled,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The VLAN ID.
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type TransitVirtualInterfaceParameters struct {
 
 	// The address family for the BGP peer. ipv4  or ipv6.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// The IPv4 CIDR address to use to send traffic to Amazon. Required for IPv4 BGP peers.
 	// +kubebuilder:validation:Optional
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	// +kubebuilder:validation:Required
-	BGPAsn *float64 `json:"bgpAsn" tf:"bgp_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -88,8 +129,8 @@ type TransitVirtualInterfaceParameters struct {
 	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// The name for the virtual interface.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -104,8 +145,8 @@ type TransitVirtualInterfaceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VLAN ID.
-	// +kubebuilder:validation:Required
-	Vlan *float64 `json:"vlan" tf:"vlan,omitempty"`
+	// +kubebuilder:validation:Optional
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 // TransitVirtualInterfaceSpec defines the desired state of TransitVirtualInterface
@@ -132,8 +173,12 @@ type TransitVirtualInterfaceStatus struct {
 type TransitVirtualInterface struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TransitVirtualInterfaceSpec   `json:"spec"`
-	Status            TransitVirtualInterfaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)",message="bgpAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vlan)",message="vlan is a required parameter"
+	Spec   TransitVirtualInterfaceSpec   `json:"spec"`
+	Status TransitVirtualInterfaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

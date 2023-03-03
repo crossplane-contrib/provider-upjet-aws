@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: identityproviderconfigs.eks.aws.upbound.io
 spec:
@@ -189,9 +189,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - oidc
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -363,6 +371,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: oidc is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.oidc)
           status:
             description: IdentityProviderConfigStatus defines the observed state of
               IdentityProviderConfig.
@@ -373,13 +384,61 @@ spec:
                     description: Amazon Resource Name (ARN) of the EKS Identity Provider
                       Configuration.
                     type: string
+                  clusterName:
+                    description: –  Name of the EKS Cluster.
+                    type: string
                   id:
                     description: EKS Cluster name and EKS Identity Provider Configuration
                       name separated by a colon (:).
                     type: string
+                  oidc:
+                    description: Nested attribute containing OpenID Connect identity
+                      provider information for the cluster. Detailed below.
+                    items:
+                      properties:
+                        clientId:
+                          description: –  Client ID for the OpenID Connect identity
+                            provider.
+                          type: string
+                        groupsClaim:
+                          description: The JWT claim that the provider will use to
+                            return groups.
+                          type: string
+                        groupsPrefix:
+                          description: A prefix that is prepended to group claims
+                            e.g., oidc:.
+                          type: string
+                        issuerUrl:
+                          description: Issuer URL for the OpenID Connect identity
+                            provider.
+                          type: string
+                        requiredClaims:
+                          additionalProperties:
+                            type: string
+                          description: The key value pairs that describe required
+                            claims in the identity token.
+                          type: object
+                        usernameClaim:
+                          description: The JWT claim that the provider will use as
+                            the username.
+                          type: string
+                        usernamePrefix:
+                          description: A prefix that is prepended to username claims.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   status:
                     description: Status of the EKS Identity Provider Configuration.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -429,9 +488,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

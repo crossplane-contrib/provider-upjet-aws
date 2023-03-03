@@ -18,14 +18,41 @@ type ClusterParameterGroupObservation struct {
 	// The ARN of the db cluster parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the DB cluster parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The family of the DB cluster parameter group.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
 	// The db cluster parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group.
+	Parameter []ClusterParameterGroupParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ClusterParameterGroupParameterObservation struct {
+
+	// "immediate" (default), or "pending-reboot". Some
+	// engines can't apply some parameters without a reboot, and you will need to
+	// specify "pending-reboot" here.
+	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
+
+	// The name of the DB cluster parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the DB parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ClusterParameterGroupParameterParameters struct {
@@ -52,8 +79,8 @@ type ClusterParameterGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The family of the DB cluster parameter group.
-	// +kubebuilder:validation:Required
-	Family *string `json:"family" tf:"family,omitempty"`
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-cluster-parameters after initial creation of the group.
 	// +kubebuilder:validation:Optional
@@ -93,8 +120,9 @@ type ClusterParameterGroupStatus struct {
 type ClusterParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterParameterGroupSpec   `json:"spec"`
-	Status            ClusterParameterGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
+	Spec   ClusterParameterGroupSpec   `json:"spec"`
+	Status ClusterParameterGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

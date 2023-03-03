@@ -14,6 +14,12 @@ import (
 )
 
 type CredentialsObservation struct {
+
+	// RFC2617 compliant password associated with the SIP credentials.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// RFC2617 compliant username associated with the SIP credentials.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type CredentialsParameters struct {
@@ -29,15 +35,25 @@ type CredentialsParameters struct {
 
 type VoiceConnectorTerminationCredentialsObservation struct {
 
+	// List of termination SIP credentials.
+	Credentials []CredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
 	// Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Chime Voice Connector ID.
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
 
 type VoiceConnectorTerminationCredentialsParameters struct {
 
 	// List of termination SIP credentials.
-	// +kubebuilder:validation:Required
-	Credentials []CredentialsParameters `json:"credentials" tf:"credentials,omitempty"`
+	// +kubebuilder:validation:Optional
+	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +99,9 @@ type VoiceConnectorTerminationCredentialsStatus struct {
 type VoiceConnectorTerminationCredentials struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VoiceConnectorTerminationCredentialsSpec   `json:"spec"`
-	Status            VoiceConnectorTerminationCredentialsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.credentials)",message="credentials is a required parameter"
+	Spec   VoiceConnectorTerminationCredentialsSpec   `json:"spec"`
+	Status VoiceConnectorTerminationCredentialsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

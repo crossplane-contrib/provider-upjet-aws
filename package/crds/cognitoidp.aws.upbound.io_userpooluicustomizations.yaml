@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: userpooluicustomizations.cognitoidp.aws.upbound.io
 spec:
@@ -236,6 +236,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -413,13 +422,28 @@ spec:
             properties:
               atProvider:
                 properties:
+                  clientId:
+                    description: The client ID for the client app. Defaults to ALL.
+                      If ALL is specified, the css and/or image_file settings will
+                      be used for every client that has no UI customization set previously.
+                    type: string
                   creationDate:
                     description: The creation date in RFC3339 format for the UI customization.
+                    type: string
+                  css:
+                    description: The CSS values in the UI customization, provided
+                      as a String. At least one of css or image_file is required.
                     type: string
                   cssVersion:
                     description: The CSS version number.
                     type: string
                   id:
+                    type: string
+                  imageFile:
+                    description: The uploaded logo image for the UI customization,
+                      provided as a base64-encoded String. Drift detection is not
+                      possible for this argument. At least one of css or image_file
+                      is required.
                     type: string
                   imageUrl:
                     description: The logo image URL for the UI customization.
@@ -427,6 +451,13 @@ spec:
                   lastModifiedDate:
                     description: The last-modified date in RFC3339 format for the
                       UI customization.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  userPoolId:
+                    description: The user pool ID for the user pool.
                     type: string
                 type: object
               conditions:
@@ -470,9 +501,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

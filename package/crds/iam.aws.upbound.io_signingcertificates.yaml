@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: signingcertificates.iam.aws.upbound.io
 spec:
@@ -77,10 +77,16 @@ spec:
                     description: –  The name of the user the signing certificate is
                       for.
                     type: string
-                required:
-                - certificateBody
-                - userName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -252,16 +258,34 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: certificateBody is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateBody)
+            - message: userName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userName)
           status:
             description: SigningCertificateStatus defines the observed state of SigningCertificate.
             properties:
               atProvider:
                 properties:
+                  certificateBody:
+                    description: encoded format.
+                    type: string
                   certificateId:
                     description: The ID for the signing certificate.
                     type: string
                   id:
                     description: The certificate_id:user_name
+                    type: string
+                  status:
+                    description: –   The status you want to assign to the certificate.
+                      Active means that the certificate can be used for programmatic
+                      calls to Amazon Web Services Inactive means that the certificate
+                      cannot be used.
+                    type: string
+                  userName:
+                    description: –  The name of the user the signing certificate is
+                      for.
                     type: string
                 type: object
               conditions:
@@ -305,9 +329,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

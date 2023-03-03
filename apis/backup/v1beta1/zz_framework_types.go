@@ -14,6 +14,15 @@ import (
 )
 
 type ControlObservation struct {
+
+	// One or more input parameter blocks. An example of a control with two parameters is: "backup plan frequency is at least daily and the retention period is at least 1 year". The first parameter is daily. The second parameter is 1 year. Detailed below.
+	InputParameter []InputParameterObservation `json:"inputParameter,omitempty" tf:"input_parameter,omitempty"`
+
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. Detailed below.
+	Scope []ScopeObservation `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type ControlParameters struct {
@@ -36,17 +45,33 @@ type FrameworkObservation struct {
 	// The ARN of the backup framework.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// One or more control blocks that make up the framework. Each control in the list has a name, input parameters, and scope. Detailed below.
+	Control []ControlObservation `json:"control,omitempty" tf:"control,omitempty"`
+
 	// The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC).
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// The deployment status of a framework. The statuses are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED.
 	DeploymentStatus *string `json:"deploymentStatus,omitempty" tf:"deployment_status,omitempty"`
 
+	// The description of the framework with a maximum of 1,024 characters
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The id of the backup framework.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. For more information refer to the AWS documentation for Framework Status
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -55,16 +80,16 @@ type FrameworkObservation struct {
 type FrameworkParameters struct {
 
 	// One or more control blocks that make up the framework. Each control in the list has a name, input parameters, and scope. Detailed below.
-	// +kubebuilder:validation:Required
-	Control []ControlParameters `json:"control" tf:"control,omitempty"`
+	// +kubebuilder:validation:Optional
+	Control []ControlParameters `json:"control,omitempty" tf:"control,omitempty"`
 
 	// The description of the framework with a maximum of 1,024 characters
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,6 +102,12 @@ type FrameworkParameters struct {
 }
 
 type InputParameterObservation struct {
+
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of parameter, for example, hourly.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type InputParameterParameters struct {
@@ -91,6 +122,15 @@ type InputParameterParameters struct {
 }
 
 type ScopeObservation struct {
+
+	// The ID of the only AWS resource that you want your control scope to contain. Minimum number of 1 item. Maximum number of 100 items.
+	ComplianceResourceIds []*string `json:"complianceResourceIds,omitempty" tf:"compliance_resource_ids,omitempty"`
+
+	// Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
+	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ScopeParameters struct {
@@ -132,8 +172,10 @@ type FrameworkStatus struct {
 type Framework struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrameworkSpec   `json:"spec"`
-	Status            FrameworkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.control)",message="control is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FrameworkSpec   `json:"spec"`
+	Status FrameworkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

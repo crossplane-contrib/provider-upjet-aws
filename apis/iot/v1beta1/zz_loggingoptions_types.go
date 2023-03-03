@@ -14,14 +14,28 @@ import (
 )
 
 type LoggingOptionsObservation struct {
+
+	// The default logging level. Valid Values: "DEBUG", "INFO", "ERROR", "WARN", "DISABLED".
+	DefaultLogLevel *string `json:"defaultLogLevel,omitempty" tf:"default_log_level,omitempty"`
+
+	// If true all logs are disabled. The default is false.
+	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type LoggingOptionsParameters struct {
 
 	// The default logging level. Valid Values: "DEBUG", "INFO", "ERROR", "WARN", "DISABLED".
-	// +kubebuilder:validation:Required
-	DefaultLogLevel *string `json:"defaultLogLevel" tf:"default_log_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultLogLevel *string `json:"defaultLogLevel,omitempty" tf:"default_log_level,omitempty"`
 
 	// If true all logs are disabled. The default is false.
 	// +kubebuilder:validation:Optional
@@ -71,8 +85,9 @@ type LoggingOptionsStatus struct {
 type LoggingOptions struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoggingOptionsSpec   `json:"spec"`
-	Status            LoggingOptionsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultLogLevel)",message="defaultLogLevel is a required parameter"
+	Spec   LoggingOptionsSpec   `json:"spec"`
+	Status LoggingOptionsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

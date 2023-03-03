@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: botassociations.connect.aws.upbound.io
 spec:
@@ -238,9 +238,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - lexBot
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -412,6 +420,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: lexBot is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lexBot)
           status:
             description: BotAssociationStatus defines the observed state of BotAssociation.
             properties:
@@ -420,6 +431,28 @@ spec:
                   id:
                     description: The Amazon Connect instance ID, Lex (V1) bot name,
                       and Lex (V1) bot region separated by colons (:).
+                    type: string
+                  instanceId:
+                    description: The identifier of the Amazon Connect instance. You
+                      can find the instanceId in the ARN of the instance.
+                    type: string
+                  lexBot:
+                    description: Configuration information of an Amazon Lex (V1) bot.
+                      Detailed below.
+                    items:
+                      properties:
+                        lexRegion:
+                          description: The Region that the Amazon Lex (V1) bot was
+                            created in. Defaults to current region.
+                          type: string
+                        name:
+                          description: The name of the Amazon Lex (V1) bot.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -463,9 +496,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

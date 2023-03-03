@@ -24,6 +24,14 @@ type DelegationSetObservation struct {
 	// A list of authoritative name servers for the hosted zone
 	// (effectively a list of NS records).
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
+
+	// This is a reference name used in Caller Reference
+	// (helpful for identifying single delegation set amongst others)
+	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DelegationSetParameters struct {

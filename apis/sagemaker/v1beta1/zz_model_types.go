@@ -14,6 +14,25 @@ import (
 )
 
 type ContainerObservation struct {
+
+	// The DNS host name for the container.
+	ContainerHostname *string `json:"containerHostname,omitempty" tf:"container_hostname,omitempty"`
+
+	// Environment variables for the Docker container.
+	// A list of key value pairs.
+	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// The registry path where the inference code image is stored in Amazon ECR.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	ImageConfig []ImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
+
+	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The URL for the S3 location where model artifacts are stored.
+	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 }
 
 type ContainerParameters struct {
@@ -45,6 +64,12 @@ type ContainerParameters struct {
 }
 
 type ImageConfigObservation struct {
+
+	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
+
+	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
+	RepositoryAuthConfig []RepositoryAuthConfigObservation `json:"repositoryAuthConfig,omitempty" tf:"repository_auth_config,omitempty"`
 }
 
 type ImageConfigParameters struct {
@@ -59,6 +84,9 @@ type ImageConfigParameters struct {
 }
 
 type ImageConfigRepositoryAuthConfigObservation struct {
+
+	// The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type ImageConfigRepositoryAuthConfigParameters struct {
@@ -69,6 +97,9 @@ type ImageConfigRepositoryAuthConfigParameters struct {
 }
 
 type InferenceExecutionConfigObservation struct {
+
+	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type InferenceExecutionConfigParameters struct {
@@ -83,10 +114,35 @@ type ModelObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this model.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies containers in the inference pipeline. If not specified, the primary_container argument is required. Fields are documented below.
+	Container []ContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
+	EnableNetworkIsolation *bool `json:"enableNetworkIsolation,omitempty" tf:"enable_network_isolation,omitempty"`
+
+	// A role that SageMaker can assume to access model artifacts and docker images for deployment.
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies details of how containers in a multi-container endpoint are called. see Inference Execution Config.
+	InferenceExecutionConfig []InferenceExecutionConfigObservation `json:"inferenceExecutionConfig,omitempty" tf:"inference_execution_config,omitempty"`
+
+	// The primary docker image containing inference code that is used when the model is deployed for predictions.  If not specified, the container argument is required. Fields are documented below.
+	PrimaryContainer []PrimaryContainerObservation `json:"primaryContainer,omitempty" tf:"primary_container,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Specifies the VPC that you want your model to connect to. VpcConfig is used in hosting services and in batch transform.
+	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ModelParameters struct {
@@ -136,6 +192,12 @@ type ModelParameters struct {
 }
 
 type PrimaryContainerImageConfigObservation struct {
+
+	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
+	RepositoryAccessMode *string `json:"repositoryAccessMode,omitempty" tf:"repository_access_mode,omitempty"`
+
+	// Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified Vpc as the value for the RepositoryAccessMode field, and the private Docker registry where the model image is hosted requires authentication. see Repository Auth Config.
+	RepositoryAuthConfig []ImageConfigRepositoryAuthConfigObservation `json:"repositoryAuthConfig,omitempty" tf:"repository_auth_config,omitempty"`
 }
 
 type PrimaryContainerImageConfigParameters struct {
@@ -150,6 +212,25 @@ type PrimaryContainerImageConfigParameters struct {
 }
 
 type PrimaryContainerObservation struct {
+
+	// The DNS host name for the container.
+	ContainerHostname *string `json:"containerHostname,omitempty" tf:"container_hostname,omitempty"`
+
+	// Environment variables for the Docker container.
+	// A list of key value pairs.
+	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// The registry path where the inference code image is stored in Amazon ECR.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
+	ImageConfig []PrimaryContainerImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
+
+	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The URL for the S3 location where model artifacts are stored.
+	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
 }
 
 type PrimaryContainerParameters struct {
@@ -181,6 +262,9 @@ type PrimaryContainerParameters struct {
 }
 
 type RepositoryAuthConfigObservation struct {
+
+	// The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
+	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn,omitempty" tf:"repository_credentials_provider_arn,omitempty"`
 }
 
 type RepositoryAuthConfigParameters struct {
@@ -191,6 +275,9 @@ type RepositoryAuthConfigParameters struct {
 }
 
 type VPCConfigObservation struct {
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type VPCConfigParameters struct {

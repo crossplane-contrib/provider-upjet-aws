@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: provisioningartifacts.servicecatalog.aws.upbound.io
 spec:
@@ -194,6 +194,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,12 +380,64 @@ spec:
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). The default value is en.'
+                    type: string
+                  active:
+                    description: Whether the product version is active. Inactive provisioning
+                      artifacts are invisible to end users. End users cannot launch
+                      or update a provisioned product from an inactive provisioning
+                      artifact. Default is true.
+                    type: boolean
                   createdTime:
                     description: Time when the provisioning artifact was created.
+                    type: string
+                  description:
+                    description: Description of the provisioning artifact (i.e., version),
+                      including how it differs from the previous provisioning artifact.
+                    type: string
+                  disableTemplateValidation:
+                    description: Whether AWS Service Catalog stops validating the
+                      specified provisioning artifact template even if it is invalid.
+                    type: boolean
+                  guidance:
+                    description: Information set by the administrator to provide guidance
+                      to end users about which provisioning artifacts to use. Valid
+                      values are DEFAULT and DEPRECATED. The default is DEFAULT. Users
+                      are able to make updates to a provisioned product of a deprecated
+                      version but cannot launch new provisioned products using a deprecated
+                      version.
                     type: string
                   id:
                     description: Provisioning Artifact identifier and product identifier
                       separated by a colon.
+                    type: string
+                  name:
+                    description: Name of the provisioning artifact (for example, v1,
+                      v2beta). No spaces are allowed.
+                    type: string
+                  productId:
+                    description: Identifier of the product.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  templatePhysicalId:
+                    description: Template source as the physical ID of the resource
+                      that contains the template. Currently only supports CloudFormation
+                      stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account
+                      ID]:stack/[stack name]/[resource ID].
+                    type: string
+                  templateUrl:
+                    description: Template source as URL of the CloudFormation template
+                      in Amazon S3.
+                    type: string
+                  type:
+                    description: 'Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE,
+                      MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS
+                      Resources).'
                     type: string
                 type: object
               conditions:
@@ -420,9 +481,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

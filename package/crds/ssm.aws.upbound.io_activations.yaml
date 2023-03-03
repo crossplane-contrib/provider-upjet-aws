@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: activations.ssm.aws.upbound.io
 spec:
@@ -169,6 +169,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -349,16 +358,44 @@ spec:
                     description: The code the system generates when it processes the
                       activation.
                     type: string
+                  description:
+                    description: The description of the resource that you want to
+                      register.
+                    type: string
+                  expirationDate:
+                    description: UTC timestamp in RFC3339 format by which this activation
+                      request should expire. The default value is 24 hours from resource
+                      creation time.
+                    type: string
                   expired:
                     description: If the current activation has expired.
                     type: boolean
+                  iamRole:
+                    description: The IAM Role to attach to the managed instance.
+                    type: string
                   id:
                     description: The activation ID.
+                    type: string
+                  name:
+                    description: The default name of the registered managed instance.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                   registrationCount:
                     description: The number of managed instances that are currently
                       registered using this activation.
                     type: number
+                  registrationLimit:
+                    description: The maximum number of managed instances you want
+                      to register. The default value is 1 instance.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -408,9 +445,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

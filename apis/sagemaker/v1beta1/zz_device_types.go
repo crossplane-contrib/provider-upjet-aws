@@ -14,6 +14,15 @@ import (
 )
 
 type DeviceDeviceObservation struct {
+
+	// A description for the device.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the device.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Amazon Web Services Internet of Things (IoT) object name.
+	IotThingName *string `json:"iotThingName,omitempty" tf:"iot_thing_name,omitempty"`
 }
 
 type DeviceDeviceParameters struct {
@@ -37,15 +46,25 @@ type DeviceObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The device to register with SageMaker Edge Manager. See Device details below.
+	Device []DeviceDeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	// The name of the Device Fleet.
+	DeviceFleetName *string `json:"deviceFleetName,omitempty" tf:"device_fleet_name,omitempty"`
+
 	// The id is constructed from device-fleet-name/device-name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type DeviceParameters struct {
 
 	// The device to register with SageMaker Edge Manager. See Device details below.
-	// +kubebuilder:validation:Required
-	Device []DeviceDeviceParameters `json:"device" tf:"device,omitempty"`
+	// +kubebuilder:validation:Optional
+	Device []DeviceDeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.DeviceFleet
@@ -90,8 +109,9 @@ type DeviceStatus struct {
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceSpec   `json:"spec"`
-	Status            DeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.device)",message="device is a required parameter"
+	Spec   DeviceSpec   `json:"spec"`
+	Status DeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

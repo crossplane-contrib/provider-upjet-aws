@@ -14,6 +14,15 @@ import (
 )
 
 type AccessLogsObservation struct {
+
+	// The S3 bucket name to store the logs in.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean to enable / disable access_logs. Defaults to false, even when bucket is specified.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type AccessLogsParameters struct {
@@ -42,21 +51,78 @@ type AccessLogsParameters struct {
 
 type LBObservation struct {
 
+	// An Access Logs block. Access Logs documented below.
+	AccessLogs []AccessLogsObservation `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
+
 	// The ARN of the load balancer (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ARN suffix for use with CloudWatch Metrics.
 	ArnSuffix *string `json:"arnSuffix,omitempty" tf:"arn_suffix,omitempty"`
 
+	// The ID of the customer owned ipv4 pool to use for this load balancer.
+	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
 	// The DNS name of the load balancer.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
+	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
+
+	// Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer (true) or routed to targets (false). The default is false. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens. Only valid for Load Balancers of type application.
+	DropInvalidHeaderFields *bool `json:"dropInvalidHeaderFields,omitempty" tf:"drop_invalid_header_fields,omitempty"`
+
+	// If true, cross-zone load balancing of the load balancer will be enabled. This is a network load balancer feature. Defaults to false.
+	EnableCrossZoneLoadBalancing *bool `json:"enableCrossZoneLoadBalancing,omitempty" tf:"enable_cross_zone_load_balancing,omitempty"`
+
+	// If true, deletion of the load balancer will be disabled via the AWS API. Defaults to false.
+	EnableDeletionProtection *bool `json:"enableDeletionProtection,omitempty" tf:"enable_deletion_protection,omitempty"`
+
+	// Indicates whether HTTP/2 is enabled in application load balancers. Defaults to true.
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+
+	// Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. Defaults to false.
+	EnableWafFailOpen *bool `json:"enableWafFailOpen,omitempty" tf:"enable_waf_fail_open,omitempty"`
 
 	// The ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
+	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+
+	// If true, the LB will be internal.
+	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
+
+	// The type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
+	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
+
+	// The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters,
+	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
+	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	// A subnet mapping block as documented below.
-	// +kubebuilder:validation:Optional
 	SubnetMapping []SubnetMappingObservation `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
+
+	// A list of subnet IDs to attach to the LB. Subnets
+	// cannot be updated for Load Balancers of type network. Changing this value
+	// for load balancers of type network will force a recreation of the resource.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -175,8 +241,20 @@ type LBParameters struct {
 
 type SubnetMappingObservation struct {
 
+	// The allocation ID of the Elastic IP address for an internet-facing load balancer.
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// The IPv6 address. You associate IPv6 CIDR blocks with your VPC and choose the subnets where you launch both internet-facing and internal Application Load Balancers or Network Load Balancers.
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+
 	// ID of the Outpost containing the load balancer.
 	OutpostID *string `json:"outpostId,omitempty" tf:"outpost_id,omitempty"`
+
+	// The private IPv4 address for an internal load balancer.
+	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
+
+	// ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetMappingParameters struct {

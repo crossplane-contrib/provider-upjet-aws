@@ -14,14 +14,28 @@ import (
 )
 
 type ConditionalForwarderObservation struct {
+
+	// A list of forwarder IP addresses.
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
+
+	// ID of directory.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The fully qualified domain name of the remote domain for which forwarders will be used.
+	RemoteDomainName *string `json:"remoteDomainName,omitempty" tf:"remote_domain_name,omitempty"`
 }
 
 type ConditionalForwarderParameters struct {
 
 	// A list of forwarder IP addresses.
-	// +kubebuilder:validation:Required
-	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
+	// +kubebuilder:validation:Optional
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// ID of directory.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
@@ -71,8 +85,9 @@ type ConditionalForwarderStatus struct {
 type ConditionalForwarder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConditionalForwarderSpec   `json:"spec"`
-	Status            ConditionalForwarderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dnsIps)",message="dnsIps is a required parameter"
+	Spec   ConditionalForwarderSpec   `json:"spec"`
+	Status ConditionalForwarderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

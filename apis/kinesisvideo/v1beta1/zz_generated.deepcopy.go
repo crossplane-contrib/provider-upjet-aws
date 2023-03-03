@@ -86,10 +86,55 @@ func (in *StreamObservation) DeepCopyInto(out *StreamObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DataRetentionInHours != nil {
+		in, out := &in.DataRetentionInHours, &out.DataRetentionInHours
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DeviceName != nil {
+		in, out := &in.DeviceName, &out.DeviceName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.MediaType != nil {
+		in, out := &in.MediaType, &out.MediaType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll

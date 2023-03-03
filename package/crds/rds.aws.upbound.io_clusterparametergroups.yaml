@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clusterparametergroups.rds.aws.upbound.io
 spec:
@@ -103,9 +103,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - family
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -277,6 +285,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: family is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)
           status:
             description: ClusterParameterGroupStatus defines the observed state of
               ClusterParameterGroup.
@@ -286,9 +297,44 @@ spec:
                   arn:
                     description: The ARN of the db cluster parameter group.
                     type: string
+                  description:
+                    description: The description of the DB cluster parameter group.
+                    type: string
+                  family:
+                    description: The family of the DB cluster parameter group.
+                    type: string
                   id:
                     description: The db cluster parameter group name.
                     type: string
+                  parameter:
+                    description: A list of DB parameters to apply. Note that parameters
+                      may differ from a family to an other. Full list of all parameters
+                      can be discovered via aws rds describe-db-cluster-parameters
+                      after initial creation of the group.
+                    items:
+                      properties:
+                        applyMethod:
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
+                          type: string
+                        name:
+                          description: The name of the DB cluster parameter group.
+                          type: string
+                        value:
+                          description: The value of the DB parameter.
+                          type: string
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -338,9 +384,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

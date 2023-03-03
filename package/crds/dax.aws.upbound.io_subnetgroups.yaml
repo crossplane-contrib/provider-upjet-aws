@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: subnetgroups.dax.aws.upbound.io
 spec:
@@ -156,6 +156,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -332,9 +341,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: A description of the subnet group.
+                    type: string
                   id:
                     description: The name of the subnet group.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  subnetIds:
+                    description: –  A list of VPC subnet IDs for the subnet group.
+                    items:
+                      type: string
+                    type: array
                   vpcId:
                     description: – VPC ID of the subnet group.
                     type: string
@@ -380,9 +401,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

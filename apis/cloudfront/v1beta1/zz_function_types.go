@@ -18,6 +18,12 @@ type FunctionObservation struct {
 	// Amazon Resource Name (ARN) identifying your CloudFront Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Source code of the function
+	CodeSecretRef v1.SecretKeySelector `json:"codeSecretRef" tf:"-"`
+
+	// Comment.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
 	// ETag hash of the function. This is the value for the DEVELOPMENT stage of the function.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
@@ -26,6 +32,16 @@ type FunctionObservation struct {
 	// ETag hash of any LIVE stage of the function.
 	LiveStageEtag *string `json:"liveStageEtag,omitempty" tf:"live_stage_etag,omitempty"`
 
+	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
 	// Status of the function. Can be UNPUBLISHED, UNASSOCIATED or ASSOCIATED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -33,7 +49,7 @@ type FunctionObservation struct {
 type FunctionParameters struct {
 
 	// Source code of the function
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CodeSecretRef v1.SecretKeySelector `json:"codeSecretRef" tf:"-"`
 
 	// Comment.
@@ -50,8 +66,8 @@ type FunctionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
-	// +kubebuilder:validation:Required
-	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
+	// +kubebuilder:validation:Optional
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
 // FunctionSpec defines the desired state of Function
@@ -78,8 +94,10 @@ type FunctionStatus struct {
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionSpec   `json:"spec"`
-	Status            FunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.codeSecretRef)",message="codeSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.runtime)",message="runtime is a required parameter"
+	Spec   FunctionSpec   `json:"spec"`
+	Status FunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

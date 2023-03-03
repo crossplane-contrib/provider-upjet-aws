@@ -18,6 +18,9 @@ type AutoScalingConfigurationVersionObservation struct {
 	// ARN of this auto scaling configuration version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name of the auto scaling configuration.
+	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName,omitempty" tf:"auto_scaling_configuration_name,omitempty"`
+
 	// The revision of this auto scaling configuration.
 	AutoScalingConfigurationRevision *float64 `json:"autoScalingConfigurationRevision,omitempty" tf:"auto_scaling_configuration_revision,omitempty"`
 
@@ -26,8 +29,24 @@ type AutoScalingConfigurationVersionObservation struct {
 	// Whether the auto scaling configuration has the highest auto_scaling_configuration_revision among all configurations that share the same auto_scaling_configuration_name.
 	Latest *bool `json:"latest,omitempty" tf:"latest,omitempty"`
 
+	// Maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// Maximal number of instances that App Runner provisions for your service.
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// Minimal number of instances that App Runner provisions for your service.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
 	// Current state of the auto scaling configuration. An INACTIVE configuration revision has been deleted and can't be used. It is permanently removed some time after deletion.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -36,8 +55,8 @@ type AutoScalingConfigurationVersionObservation struct {
 type AutoScalingConfigurationVersionParameters struct {
 
 	// Name of the auto scaling configuration.
-	// +kubebuilder:validation:Required
-	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName" tf:"auto_scaling_configuration_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName,omitempty" tf:"auto_scaling_configuration_name,omitempty"`
 
 	// Maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
 	// +kubebuilder:validation:Optional
@@ -85,8 +104,9 @@ type AutoScalingConfigurationVersionStatus struct {
 type AutoScalingConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AutoScalingConfigurationVersionSpec   `json:"spec"`
-	Status            AutoScalingConfigurationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoScalingConfigurationName)",message="autoScalingConfigurationName is a required parameter"
+	Spec   AutoScalingConfigurationVersionSpec   `json:"spec"`
+	Status AutoScalingConfigurationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

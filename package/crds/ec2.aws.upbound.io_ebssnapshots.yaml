@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: ebssnapshots.ec2.aws.upbound.io
 spec:
@@ -173,6 +173,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -355,6 +364,9 @@ spec:
                   dataEncryptionKeyId:
                     description: The data encryption key identifier for the snapshot.
                     type: string
+                  description:
+                    description: A description of what the snapshot is.
+                    type: string
                   encrypted:
                     description: Whether the snapshot is encrypted.
                     type: boolean
@@ -364,6 +376,10 @@ spec:
                   kmsKeyId:
                     description: The ARN for the KMS encryption key.
                     type: string
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost on
+                      which to create a local snapshot.
+                    type: string
                   ownerAlias:
                     description: Value from an Amazon-maintained list (amazon, aws-marketplace,
                       microsoft) of snapshot owners.
@@ -371,6 +387,23 @@ spec:
                   ownerId:
                     description: The AWS account ID of the EBS snapshot owner.
                     type: string
+                  permanentRestore:
+                    description: Indicates whether to permanently restore an archived
+                      snapshot.
+                    type: boolean
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  storageTier:
+                    description: The name of the storage tier. Valid values are archive
+                      and standard. Default value is standard.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -378,6 +411,15 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  temporaryRestoreDays:
+                    description: Specifies the number of days for which to temporarily
+                      restore an archived snapshot. Required for temporary restores
+                      only. The snapshot will be automatically re-archived after this
+                      period.
+                    type: number
+                  volumeId:
+                    description: The Volume ID of which to make a snapshot.
+                    type: string
                   volumeSize:
                     description: The size of the drive in GiBs.
                     type: number
@@ -423,9 +465,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

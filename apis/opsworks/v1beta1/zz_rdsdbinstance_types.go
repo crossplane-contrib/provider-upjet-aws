@@ -15,19 +15,31 @@ import (
 
 type RDSDBInstanceObservation struct {
 
+	// A db password
+	DBPasswordSecretRef v1.SecretKeySelector `json:"dbPasswordSecretRef" tf:"-"`
+
+	// A db username
+	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
+
 	// The computed id. Please note that this is only used internally to identify the stack <-> instance relation. This value is not used in aws.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The db instance to register for this stack. Changing this will force a new resource.
+	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
+
+	// The stack to register a db instance for. Changing this will force a new resource.
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 }
 
 type RDSDBInstanceParameters struct {
 
 	// A db password
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	DBPasswordSecretRef v1.SecretKeySelector `json:"dbPasswordSecretRef" tf:"-"`
 
 	// A db username
-	// +kubebuilder:validation:Required
-	DBUser *string `json:"dbUser" tf:"db_user,omitempty"`
+	// +kubebuilder:validation:Optional
+	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The db instance to register for this stack. Changing this will force a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
@@ -82,8 +94,10 @@ type RDSDBInstanceStatus struct {
 type RDSDBInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RDSDBInstanceSpec   `json:"spec"`
-	Status            RDSDBInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbPasswordSecretRef)",message="dbPasswordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbUser)",message="dbUser is a required parameter"
+	Spec   RDSDBInstanceSpec   `json:"spec"`
+	Status RDSDBInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

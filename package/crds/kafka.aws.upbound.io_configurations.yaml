@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: configurations.kafka.aws.upbound.io
 spec:
@@ -86,10 +86,17 @@ spec:
                       properties are documented in the MSK Developer Guide.
                     type: string
                 required:
-                - name
                 - region
-                - serverProperties
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -261,6 +268,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: serverProperties is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverProperties)
           status:
             description: ConfigurationStatus defines the observed state of Configuration.
             properties:
@@ -269,11 +281,31 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the configuration.
                     type: string
+                  description:
+                    description: Description of the configuration.
+                    type: string
                   id:
                     type: string
+                  kafkaVersions:
+                    description: List of Apache Kafka versions which can use this
+                      configuration.
+                    items:
+                      type: string
+                    type: array
                   latestRevision:
                     description: Latest revision of the configuration.
                     type: number
+                  name:
+                    description: Name of the configuration.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  serverProperties:
+                    description: Contents of the server.properties file. Supported
+                      properties are documented in the MSK Developer Guide.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -316,9 +348,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

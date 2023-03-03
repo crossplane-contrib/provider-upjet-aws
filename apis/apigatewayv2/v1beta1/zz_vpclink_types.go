@@ -21,6 +21,22 @@ type VPCLinkObservation struct {
 	// VPC Link identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the VPC Link. Must be between 1 and 128 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Security group IDs for the VPC Link.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Subnet IDs for the VPC Link.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -28,8 +44,8 @@ type VPCLinkObservation struct {
 type VPCLinkParameters struct {
 
 	// Name of the VPC Link. Must be between 1 and 128 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -95,8 +111,9 @@ type VPCLinkStatus struct {
 type VPCLink struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCLinkSpec   `json:"spec"`
-	Status            VPCLinkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   VPCLinkSpec   `json:"spec"`
+	Status VPCLinkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,12 @@ import (
 )
 
 type BucketMetricFilterObservation struct {
+
+	// Object prefix for filtering (singular).
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BucketMetricFilterParameters struct {
@@ -28,7 +34,21 @@ type BucketMetricFilterParameters struct {
 }
 
 type BucketMetricObservation struct {
+
+	// The name of the bucket to put metric configuration.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	Filter []BucketMetricFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type BucketMetricParameters struct {
@@ -51,8 +71,8 @@ type BucketMetricParameters struct {
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -84,8 +104,9 @@ type BucketMetricStatus struct {
 type BucketMetric struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketMetricSpec   `json:"spec"`
-	Status            BucketMetricStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   BucketMetricSpec   `json:"spec"`
+	Status BucketMetricStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

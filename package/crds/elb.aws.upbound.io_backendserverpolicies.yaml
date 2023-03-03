@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: backendserverpolicies.elb.aws.upbound.io
 spec:
@@ -153,9 +153,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - instancePort
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -327,6 +335,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: instancePort is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePort)
           status:
             description: BackendServerPolicyStatus defines the observed state of BackendServerPolicy.
             properties:
@@ -334,6 +345,21 @@ spec:
                 properties:
                   id:
                     description: The ID of the policy.
+                    type: string
+                  instancePort:
+                    description: The instance port to apply the policy to.
+                    type: number
+                  loadBalancerName:
+                    description: The load balancer to attach the policy to.
+                    type: string
+                  policyNames:
+                    description: List of Policy Names to apply to the backend server.
+                    items:
+                      type: string
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -377,9 +403,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

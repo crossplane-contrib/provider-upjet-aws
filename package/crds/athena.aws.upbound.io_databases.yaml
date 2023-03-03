@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: databases.athena.aws.upbound.io
 spec:
@@ -196,6 +196,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -372,8 +381,60 @@ spec:
             properties:
               atProvider:
                 properties:
+                  aclConfiguration:
+                    description: That an Amazon S3 canned ACL should be set to control
+                      ownership of stored query results. See ACL Configuration below.
+                    items:
+                      properties:
+                        s3AclOption:
+                          description: Amazon S3 canned ACL that Athena should specify
+                            when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+                          type: string
+                      type: object
+                    type: array
+                  bucket:
+                    description: Name of S3 bucket to save the results of the query
+                      execution.
+                    type: string
+                  comment:
+                    description: Description of the database.
+                    type: string
+                  encryptionConfiguration:
+                    description: Encryption key block AWS Athena uses to decrypt the
+                      data in S3, such as an AWS Key Management Service (AWS KMS)
+                      key. See Encryption Configuration below.
+                    items:
+                      properties:
+                        encryptionOption:
+                          description: Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+                          type: string
+                        kmsKey:
+                          description: KMS key ARN or ID; required for key types SSE_KMS
+                            and CSE_KMS.
+                          type: string
+                      type: object
+                    type: array
+                  expectedBucketOwner:
+                    description: AWS account ID that you expect to be the owner of
+                      the Amazon S3 bucket.
+                    type: string
+                  forceDestroy:
+                    description: Boolean that indicates all tables should be deleted
+                      from the database so that the database can be destroyed without
+                      error. The tables are not recoverable.
+                    type: boolean
                   id:
                     description: Database name
+                    type: string
+                  properties:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of custom metadata properties for the
+                      database definition.
+                    type: object
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -417,9 +478,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

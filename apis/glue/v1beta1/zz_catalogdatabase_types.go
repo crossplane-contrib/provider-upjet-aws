@@ -18,8 +18,30 @@ type CatalogDatabaseObservation struct {
 	// ARN of the Glue Catalog Database.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
+	CreateTableDefaultPermission []CreateTableDefaultPermissionObservation `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
+
+	// Description of the database.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Catalog ID and name of the database
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Location of the database (for example, an HDFS path).
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
+
+	// List of key-value pairs that define parameters and properties of the database.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block for a target database for resource linking. See target_database below.
+	TargetDatabase []TargetDatabaseObservation `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
 
 type CatalogDatabaseParameters struct {
@@ -55,6 +77,12 @@ type CatalogDatabaseParameters struct {
 }
 
 type CreateTableDefaultPermissionObservation struct {
+
+	// The permissions that are granted to the principal.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The principal who is granted permissions.. See principal below.
+	Principal []PrincipalObservation `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
 type CreateTableDefaultPermissionParameters struct {
@@ -69,6 +97,9 @@ type CreateTableDefaultPermissionParameters struct {
 }
 
 type PrincipalObservation struct {
+
+	// An identifier for the Lake Formation principal.
+	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
 }
 
 type PrincipalParameters struct {
@@ -79,6 +110,12 @@ type PrincipalParameters struct {
 }
 
 type TargetDatabaseObservation struct {
+
+	// ID of the Data Catalog in which the database resides.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Name of the catalog database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 }
 
 type TargetDatabaseParameters struct {

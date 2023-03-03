@@ -18,8 +18,18 @@ type CodeRepositoryObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Code Repository.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies details about the repository. see Git Config details below.
+	GitConfig []GitConfigObservation `json:"gitConfig,omitempty" tf:"git_config,omitempty"`
+
 	// The name of the Code Repository.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -28,8 +38,8 @@ type CodeRepositoryObservation struct {
 type CodeRepositoryParameters struct {
 
 	// Specifies details about the repository. see Git Config details below.
-	// +kubebuilder:validation:Required
-	GitConfig []GitConfigParameters `json:"gitConfig" tf:"git_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	GitConfig []GitConfigParameters `json:"gitConfig,omitempty" tf:"git_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -42,6 +52,15 @@ type CodeRepositoryParameters struct {
 }
 
 type GitConfigObservation struct {
+
+	// The default branch for the Git repository.
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// The URL where the Git repository is located.
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of AWSCURRENT and must be in the following format: {"username": UserName, "password": Password}
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type GitConfigParameters struct {
@@ -93,8 +112,9 @@ type CodeRepositoryStatus struct {
 type CodeRepository struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CodeRepositorySpec   `json:"spec"`
-	Status            CodeRepositoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gitConfig)",message="gitConfig is a required parameter"
+	Spec   CodeRepositorySpec   `json:"spec"`
+	Status CodeRepositoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

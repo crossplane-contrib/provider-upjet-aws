@@ -15,14 +15,51 @@ import (
 
 type FunctionObservation struct {
 
+	// ID of the associated AppSync API.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// ARN of the Function object.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Function data source name.
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// Function description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Unique ID representing the Function object.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
+	// Version of the request mapping template. Currently the supported value is 2018-05-29. Does not apply when specifying code.
+	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
+
 	// API Function ID (Formatted as ApiId-FunctionId)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
+	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+
+	// Function name. The function name does not have to be unique.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+	RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty" tf:"request_mapping_template,omitempty"`
+
+	// Function response mapping template.
+	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	Runtime []RuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Describes a Sync configuration for a resolver. See Sync Config.
+	SyncConfig []SyncConfigObservation `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
 type FunctionParameters struct {
@@ -71,8 +108,8 @@ type FunctionParameters struct {
 	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
 	// Function name. The function name does not have to be unique.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,6 +134,9 @@ type FunctionParameters struct {
 }
 
 type LambdaConflictHandlerConfigObservation struct {
+
+	// ARN for the Lambda function to use as the Conflict Handler.
+	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
 }
 
 type LambdaConflictHandlerConfigParameters struct {
@@ -107,6 +147,12 @@ type LambdaConflictHandlerConfigParameters struct {
 }
 
 type RuntimeObservation struct {
+
+	// Function name. The function name does not have to be unique.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 }
 
 type RuntimeParameters struct {
@@ -121,6 +167,15 @@ type RuntimeParameters struct {
 }
 
 type SyncConfigObservation struct {
+
+	// Conflict Detection strategy to use. Valid values are NONE and VERSION.
+	ConflictDetection *string `json:"conflictDetection,omitempty" tf:"conflict_detection,omitempty"`
+
+	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
+	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
+
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	LambdaConflictHandlerConfig []LambdaConflictHandlerConfigObservation `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
 
 type SyncConfigParameters struct {
@@ -162,8 +217,9 @@ type FunctionStatus struct {
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionSpec   `json:"spec"`
-	Status            FunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FunctionSpec   `json:"spec"`
+	Status FunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

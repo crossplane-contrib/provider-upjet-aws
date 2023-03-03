@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: portfolioshares.servicecatalog.aws.upbound.io
 spec:
@@ -175,10 +175,17 @@ spec:
                       to be accepted. Organizational shares are automatically accepted.
                     type: boolean
                 required:
-                - principalId
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,11 +357,20 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: principalId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: PortfolioShareStatus defines the observed state of PortfolioShare.
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
                   accepted:
                     description: Whether the shared portfolio is imported by the recipient
                       account. If the recipient is organizational, the share is automatically
@@ -362,6 +378,37 @@ spec:
                     type: boolean
                   id:
                     type: string
+                  portfolioId:
+                    description: Portfolio identifier.
+                    type: string
+                  principalId:
+                    description: Identifier of the principal with whom you will share
+                      the portfolio. Valid values AWS account IDs and ARNs of AWS
+                      Organizations and organizational units.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sharePrincipals:
+                    description: Enables or disables Principal sharing when creating
+                      the portfolio share. If this flag is not provided, principal
+                      sharing is disabled.
+                    type: boolean
+                  shareTagOptions:
+                    description: Whether to enable sharing of aws_servicecatalog_tag_option
+                      resources when creating the portfolio share.
+                    type: boolean
+                  type:
+                    description: Type of portfolio share. Valid values are ACCOUNT
+                      (an external account), ORGANIZATION (a share to every account
+                      in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
+                      (a share to an account in an organization).
+                    type: string
+                  waitForAcceptance:
+                    description: Whether to wait (up to the timeout) for the share
+                      to be accepted. Organizational shares are automatically accepted.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -404,9 +451,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -27,23 +27,36 @@ type ServiceQuotaObservation struct {
 	// Service code and quota code, separated by a front slash (/)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Code of the service quota to track. For example: L-F678F1CE. Available values can be found with the AWS CLI service-quotas list-service-quotas command.
+	QuotaCode *string `json:"quotaCode,omitempty" tf:"quota_code,omitempty"`
+
 	// Name of the quota.
 	QuotaName *string `json:"quotaName,omitempty" tf:"quota_name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// Service code and quota code, separated by a front slash (/)
 	RequestID *string `json:"requestId,omitempty" tf:"request_id,omitempty"`
 
 	RequestStatus *string `json:"requestStatus,omitempty" tf:"request_status,omitempty"`
 
+	// Code of the service to track. For example: vpc. Available values can be found with the AWS CLI service-quotas list-services command.
+	ServiceCode *string `json:"serviceCode,omitempty" tf:"service_code,omitempty"`
+
 	// Name of the service.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// Float specifying the desired value for the service quota. If the desired value is higher than the current value, a quota increase request is submitted. When a known request is submitted and pending, the value reflects the desired value of the pending request.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ServiceQuotaParameters struct {
 
 	// Code of the service quota to track. For example: L-F678F1CE. Available values can be found with the AWS CLI service-quotas list-service-quotas command.
-	// +kubebuilder:validation:Required
-	QuotaCode *string `json:"quotaCode" tf:"quota_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	QuotaCode *string `json:"quotaCode,omitempty" tf:"quota_code,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -51,12 +64,12 @@ type ServiceQuotaParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Code of the service to track. For example: vpc. Available values can be found with the AWS CLI service-quotas list-services command.
-	// +kubebuilder:validation:Required
-	ServiceCode *string `json:"serviceCode" tf:"service_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceCode *string `json:"serviceCode,omitempty" tf:"service_code,omitempty"`
 
 	// Float specifying the desired value for the service quota. If the desired value is higher than the current value, a quota increase request is submitted. When a known request is submitted and pending, the value reflects the desired value of the pending request.
-	// +kubebuilder:validation:Required
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // ServiceQuotaSpec defines the desired state of ServiceQuota
@@ -83,8 +96,11 @@ type ServiceQuotaStatus struct {
 type ServiceQuota struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceQuotaSpec   `json:"spec"`
-	Status            ServiceQuotaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.quotaCode)",message="quotaCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceCode)",message="serviceCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   ServiceQuotaSpec   `json:"spec"`
+	Status ServiceQuotaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

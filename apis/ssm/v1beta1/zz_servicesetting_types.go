@@ -20,6 +20,16 @@ type ServiceSettingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// ID of the service setting.
+	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
+
+	// Value of the service setting.
+	SettingValue *string `json:"settingValue,omitempty" tf:"setting_value,omitempty"`
+
 	// Status of the service setting. Value can be Default, Customized or PendingUpdate.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -32,12 +42,12 @@ type ServiceSettingParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ID of the service setting.
-	// +kubebuilder:validation:Required
-	SettingID *string `json:"settingId" tf:"setting_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SettingID *string `json:"settingId,omitempty" tf:"setting_id,omitempty"`
 
 	// Value of the service setting.
-	// +kubebuilder:validation:Required
-	SettingValue *string `json:"settingValue" tf:"setting_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	SettingValue *string `json:"settingValue,omitempty" tf:"setting_value,omitempty"`
 }
 
 // ServiceSettingSpec defines the desired state of ServiceSetting
@@ -64,8 +74,10 @@ type ServiceSettingStatus struct {
 type ServiceSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceSettingSpec   `json:"spec"`
-	Status            ServiceSettingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settingId)",message="settingId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settingValue)",message="settingValue is a required parameter"
+	Spec   ServiceSettingSpec   `json:"spec"`
+	Status ServiceSettingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

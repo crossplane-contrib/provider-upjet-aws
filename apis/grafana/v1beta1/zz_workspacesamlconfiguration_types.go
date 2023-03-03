@@ -14,10 +14,54 @@ import (
 )
 
 type WorkspaceSAMLConfigurationObservation struct {
+
+	// The admin role values.
+	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
+
+	// The allowed organizations.
+	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
+
+	// The editor role values.
+	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
+
+	// The email assertion.
+	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
+
+	// The groups assertion.
+	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
+
+	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
+
+	// The login assertion.
+	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
+
+	// The login validity duration.
+	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
+
+	// The name assertion.
+	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
+
+	// The org assertion.
+	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The role assertion.
+	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
 	// The status of the SAML configuration.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The workspace id.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceSAMLConfigurationParameters struct {
@@ -31,8 +75,8 @@ type WorkspaceSAMLConfigurationParameters struct {
 	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
 
 	// The editor role values.
-	// +kubebuilder:validation:Required
-	EditorRoleValues []*string `json:"editorRoleValues" tf:"editor_role_values,omitempty"`
+	// +kubebuilder:validation:Optional
+	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
 
 	// The email assertion.
 	// +kubebuilder:validation:Optional
@@ -113,8 +157,9 @@ type WorkspaceSAMLConfigurationStatus struct {
 type WorkspaceSAMLConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSAMLConfigurationSpec   `json:"spec"`
-	Status            WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.editorRoleValues)",message="editorRoleValues is a required parameter"
+	Spec   WorkspaceSAMLConfigurationSpec   `json:"spec"`
+	Status WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: globalclusters.docdb.aws.upbound.io
 spec:
@@ -173,9 +173,17 @@ spec:
                       and encrypted.
                     type: boolean
                 required:
-                - globalClusterIdentifier
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,6 +355,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: globalClusterIdentifier is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.globalClusterIdentifier)
           status:
             description: GlobalClusterStatus defines the observed state of GlobalCluster.
             properties:
@@ -354,6 +365,28 @@ spec:
                 properties:
                   arn:
                     description: Global Cluster Amazon Resource Name (ARN)
+                    type: string
+                  databaseName:
+                    description: Name for an automatically created database on cluster
+                      creation.
+                    type: string
+                  deletionProtection:
+                    description: If the Global Cluster should have deletion protection
+                      enabled. The database can't be deleted when this value is set
+                      to true. The default is false.
+                    type: boolean
+                  engine:
+                    description: 'Name of the database engine to be used for this
+                      DB cluster. Current Valid values: docdb. Defaults to docdb.
+                      Conflicts with source_db_cluster_identifier.'
+                    type: string
+                  engineVersion:
+                    description: Engine version of the global database. Upgrading
+                      the engine version will result in all cluster members being
+                      immediately updated and will.
+                    type: string
+                  globalClusterIdentifier:
+                    description: The global cluster identifier.
                     type: string
                   globalClusterMembers:
                     description: Set of objects containing Global Cluster members.
@@ -375,8 +408,21 @@ spec:
                   id:
                     description: DocDB Global Cluster.
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  sourceDbClusterIdentifier:
+                    description: Amazon Resource Name (ARN) to use as the primary
+                      DB Cluster of the Global Cluster on creation.
+                    type: string
                   status:
                     type: string
+                  storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted. The
+                      default is false unless source_db_cluster_identifier is specified
+                      and encrypted.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -419,9 +465,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

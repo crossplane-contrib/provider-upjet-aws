@@ -20,11 +20,27 @@ type VPCConnectorObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// List of IDs of security groups that App Runner should use for access to AWS resources under the specified subnets. If not specified, App Runner uses the default security group of the Amazon VPC. The default security group allows all outbound traffic.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	// Current state of the VPC connector. If the status of a connector revision is INACTIVE, it was deleted and can't be used. Inactive connector revisions are permanently removed some time after they are deleted.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// List of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Name for the VPC connector.
+	VPCConnectorName *string `json:"vpcConnectorName,omitempty" tf:"vpc_connector_name,omitempty"`
 
 	// The revision of VPC connector. It's unique among all the active connectors ("Status": "ACTIVE") that share the same Name.
 	VPCConnectorRevision *float64 `json:"vpcConnectorRevision,omitempty" tf:"vpc_connector_revision,omitempty"`
@@ -72,8 +88,8 @@ type VPCConnectorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Name for the VPC connector.
-	// +kubebuilder:validation:Required
-	VPCConnectorName *string `json:"vpcConnectorName" tf:"vpc_connector_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCConnectorName *string `json:"vpcConnectorName,omitempty" tf:"vpc_connector_name,omitempty"`
 }
 
 // VPCConnectorSpec defines the desired state of VPCConnector
@@ -100,8 +116,9 @@ type VPCConnectorStatus struct {
 type VPCConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCConnectorSpec   `json:"spec"`
-	Status            VPCConnectorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
+	Spec   VPCConnectorSpec   `json:"spec"`
+	Status VPCConnectorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

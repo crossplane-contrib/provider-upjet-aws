@@ -14,6 +14,12 @@ import (
 )
 
 type BucketIntelligentTieringConfigurationFilterObservation struct {
+
+	// An object key name prefix that identifies the subset of objects to which the configuration applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BucketIntelligentTieringConfigurationFilterParameters struct {
@@ -28,7 +34,27 @@ type BucketIntelligentTieringConfigurationFilterParameters struct {
 }
 
 type BucketIntelligentTieringConfigurationObservation struct {
+
+	// The name of the bucket this intelligent tiering configuration is associated with.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// A bucket filter. The configuration only includes objects that meet the filter's criteria (documented below).
+	Filter []BucketIntelligentTieringConfigurationFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Specifies the status of the configuration. Valid values: Enabled, Disabled.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
+	Tiering []TieringObservation `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }
 
 type BucketIntelligentTieringConfigurationParameters struct {
@@ -51,8 +77,8 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	Filter []BucketIntelligentTieringConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The unique name used to identify the S3 Intelligent-Tiering configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -64,11 +90,17 @@ type BucketIntelligentTieringConfigurationParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The S3 Intelligent-Tiering storage class tiers of the configuration (documented below).
-	// +kubebuilder:validation:Required
-	Tiering []TieringParameters `json:"tiering" tf:"tiering,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tiering []TieringParameters `json:"tiering,omitempty" tf:"tiering,omitempty"`
 }
 
 type TieringObservation struct {
+
+	// S3 Intelligent-Tiering access tier. Valid values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
+	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+
+	// The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type TieringParameters struct {
@@ -106,8 +138,10 @@ type BucketIntelligentTieringConfigurationStatus struct {
 type BucketIntelligentTieringConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketIntelligentTieringConfigurationSpec   `json:"spec"`
-	Status            BucketIntelligentTieringConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tiering)",message="tiering is a required parameter"
+	Spec   BucketIntelligentTieringConfigurationSpec   `json:"spec"`
+	Status BucketIntelligentTieringConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

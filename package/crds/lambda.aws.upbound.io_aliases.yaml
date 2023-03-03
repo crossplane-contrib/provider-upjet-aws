@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: aliases.lambda.aws.upbound.io
 spec:
@@ -166,9 +166,17 @@ spec:
                       type: object
                     type: array
                 required:
-                - functionVersion
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -340,6 +348,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: functionVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionVersion)
           status:
             description: AliasStatus defines the observed state of Alias.
             properties:
@@ -349,12 +360,40 @@ spec:
                     description: The Amazon Resource Name (ARN) identifying your Lambda
                       function alias.
                     type: string
+                  description:
+                    description: Description of the alias.
+                    type: string
+                  functionName:
+                    description: Lambda Function name or ARN.
+                    type: string
+                  functionVersion:
+                    description: 'Lambda function version for which you are creating
+                      the alias. Pattern: (\$LATEST|[0-9]+).'
+                    type: string
                   id:
                     type: string
                   invokeArn:
                     description: The ARN to be used for invoking Lambda Function from
                       API Gateway - to be used in aws_api_gateway_integration's uri
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  routingConfig:
+                    description: The Lambda alias' route configuration settings. Fields
+                      documented below
+                    items:
+                      properties:
+                        additionalVersionWeights:
+                          additionalProperties:
+                            type: number
+                          description: A map that defines the proportion of events
+                            that should be sent to different versions of a lambda
+                            function.
+                          type: object
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -397,9 +436,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: originrequestpolicies.cloudfront.aws.upbound.io
 spec:
@@ -138,11 +138,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - cookiesConfig
-                - headersConfig
-                - queryStringsConfig
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -314,16 +320,91 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: cookiesConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cookiesConfig)
+            - message: headersConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.headersConfig)
+            - message: queryStringsConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryStringsConfig)
           status:
             description: OriginRequestPolicyStatus defines the observed state of OriginRequestPolicy.
             properties:
               atProvider:
                 properties:
+                  comment:
+                    description: Comment to describe the origin request policy.
+                    type: string
+                  cookiesConfig:
+                    description: Object that determines whether any cookies in viewer
+                      requests (and if so, which cookies) are included in the origin
+                      request key and automatically included in requests that CloudFront
+                      sends to the origin. See Cookies Config for more information.
+                    items:
+                      properties:
+                        cookieBehavior:
+                          type: string
+                        cookies:
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   etag:
                     description: The current version of the origin request policy.
                     type: string
+                  headersConfig:
+                    description: Object that determines whether any HTTP headers (and
+                      if so, which headers) are included in the origin request key
+                      and automatically included in requests that CloudFront sends
+                      to the origin. See Headers Config for more information.
+                    items:
+                      properties:
+                        headerBehavior:
+                          type: string
+                        headers:
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The identifier for the origin request policy.
+                    type: string
+                  queryStringsConfig:
+                    description: Object that determines whether any URL query strings
+                      in viewer requests (and if so, which query strings) are included
+                      in the origin request key and automatically included in requests
+                      that CloudFront sends to the origin. See Query String Config
+                      for more information.
+                    items:
+                      properties:
+                        queryStringBehavior:
+                          type: string
+                        queryStrings:
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -367,9 +448,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -30,6 +30,21 @@ type GlobalClusterObservation struct {
 	// Global Cluster Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name for an automatically created database on cluster creation.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// If the Global Cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
+	// Name of the database engine to be used for this DB cluster. Current Valid values: docdb. Defaults to docdb. Conflicts with source_db_cluster_identifier.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Engine version of the global database. Upgrading the engine version will result in all cluster members being immediately updated and will.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// The global cluster identifier.
+	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
+
 	// Set of objects containing Global Cluster members.
 	GlobalClusterMembers []GlobalClusterMembersObservation `json:"globalClusterMembers,omitempty" tf:"global_cluster_members,omitempty"`
 
@@ -39,7 +54,17 @@ type GlobalClusterObservation struct {
 	// DocDB Global Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
+
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }
 
 type GlobalClusterParameters struct {
@@ -61,8 +86,8 @@ type GlobalClusterParameters struct {
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The global cluster identifier.
-	// +kubebuilder:validation:Required
-	GlobalClusterIdentifier *string `json:"globalClusterIdentifier" tf:"global_cluster_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -112,8 +137,9 @@ type GlobalClusterStatus struct {
 type GlobalCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GlobalClusterSpec   `json:"spec"`
-	Status            GlobalClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.globalClusterIdentifier)",message="globalClusterIdentifier is a required parameter"
+	Spec   GlobalClusterSpec   `json:"spec"`
+	Status GlobalClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

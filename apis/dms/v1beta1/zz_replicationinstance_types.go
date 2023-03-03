@@ -14,10 +14,48 @@ import (
 )
 
 type ReplicationInstanceObservation struct {
+
+	// The amount of storage (in gigabytes) to be initially allocated for the replication instance.
+	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+
+	// Indicates that major version upgrades are allowed.
+	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
+
+	// Indicates whether the changes should be applied immediately or during the next maintenance window. Only used when updating an existing resource.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
+	// Indicates that minor engine upgrades will be applied automatically to the replication instance during the maintenance window.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// The EC2 Availability Zone that the replication instance will be created in.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The engine version number of the replication instance.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
+	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
+
+	// The compute and memory capacity of the replication instance as specified by the replication instance class. See AWS DMS User Guide for available instance sizes and advice on which one to choose.
+	ReplicationInstanceClass *string `json:"replicationInstanceClass,omitempty" tf:"replication_instance_class,omitempty"`
 
 	// A list of the private IP addresses of the replication instance.
 	ReplicationInstancePrivateIps []*string `json:"replicationInstancePrivateIps,omitempty" tf:"replication_instance_private_ips,omitempty"`
@@ -25,8 +63,17 @@ type ReplicationInstanceObservation struct {
 	// A list of the public IP addresses of the replication instance.
 	ReplicationInstancePublicIps []*string `json:"replicationInstancePublicIps,omitempty" tf:"replication_instance_public_ips,omitempty"`
 
+	// A subnet group to associate with the replication instance.
+	ReplicationSubnetGroupID *string `json:"replicationSubnetGroupId,omitempty" tf:"replication_subnet_group_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// A list of VPC security group IDs to be used with the replication instance. The VPC security groups must work with the VPC containing the replication instance.
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
 type ReplicationInstanceParameters struct {
@@ -86,8 +133,8 @@ type ReplicationInstanceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The compute and memory capacity of the replication instance as specified by the replication instance class. See AWS DMS User Guide for available instance sizes and advice on which one to choose.
-	// +kubebuilder:validation:Required
-	ReplicationInstanceClass *string `json:"replicationInstanceClass" tf:"replication_instance_class,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationInstanceClass *string `json:"replicationInstanceClass,omitempty" tf:"replication_instance_class,omitempty"`
 
 	// A subnet group to associate with the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationSubnetGroup
@@ -147,8 +194,9 @@ type ReplicationInstanceStatus struct {
 type ReplicationInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationInstanceSpec   `json:"spec"`
-	Status            ReplicationInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationInstanceClass)",message="replicationInstanceClass is a required parameter"
+	Spec   ReplicationInstanceSpec   `json:"spec"`
+	Status ReplicationInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

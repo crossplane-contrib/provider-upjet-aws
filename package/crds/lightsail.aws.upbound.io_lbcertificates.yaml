@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lbcertificates.lightsail.aws.upbound.io
 spec:
@@ -159,6 +159,15 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -341,6 +350,10 @@ spec:
                   createdAt:
                     description: The timestamp when the instance was created.
                     type: string
+                  domainName:
+                    description: The domain name (e.g., example.com) for your SSL/TLS
+                      certificate.
+                    type: string
                   domainValidationRecords:
                     items:
                       properties:
@@ -361,6 +374,21 @@ spec:
                     description: 'A combination of attributes to create a unique id:
                       lb_name,name'
                     type: string
+                  lbName:
+                    description: The load balancer name where you want to create the
+                      SSL/TLS certificate.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  subjectAlternativeNames:
+                    description: Set of domains that should be SANs in the issued
+                      certificate. domain_name attribute is automatically added as
+                      a Subject Alternative Name.
+                    items:
+                      type: string
+                    type: array
                   supportCode:
                     type: string
                 type: object
@@ -405,9 +433,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

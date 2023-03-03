@@ -15,8 +15,15 @@ import (
 
 type InvitationAccepterObservation struct {
 
+	// ARN of the behavior graph that the member account is accepting the invitation for.
+	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
+
 	// Unique identifier (ID) of the Detective invitation accepter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type InvitationAccepterParameters struct {

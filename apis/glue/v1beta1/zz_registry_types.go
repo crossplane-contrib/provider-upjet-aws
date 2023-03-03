@@ -18,8 +18,18 @@ type RegistryObservation struct {
 	// Amazon Resource Name (ARN) of Glue Registry.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  A description of the registry.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Amazon Resource Name (ARN) of Glue Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -15,14 +15,30 @@ import (
 
 type GatewayAssociationProposalObservation struct {
 
+	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
+	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
+
+	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
+	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
+
 	// The ID of the AWS account that owns the VGW or transit gateway with which to associate the Direct Connect gateway.
 	AssociatedGatewayOwnerAccountID *string `json:"associatedGatewayOwnerAccountId,omitempty" tf:"associated_gateway_owner_account_id,omitempty"`
 
 	// The type of the associated gateway, transitGateway or virtualPrivateGateway.
 	AssociatedGatewayType *string `json:"associatedGatewayType,omitempty" tf:"associated_gateway_type,omitempty"`
 
+	// Direct Connect Gateway identifier.
+	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// AWS Account identifier of the Direct Connect Gateway's owner.
+	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
+
 	// Direct Connect Gateway Association Proposal identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type GatewayAssociationProposalParameters struct {

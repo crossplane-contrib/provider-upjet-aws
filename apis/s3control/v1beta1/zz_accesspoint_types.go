@@ -15,11 +15,20 @@ import (
 
 type AccessPointObservation struct {
 
+	// AWS account ID for the owner of the bucket for which you want to create an access point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// The alias of the S3 Access Point.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// Amazon Resource Name (ARN) of the S3 Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Name of an AWS Partition S3 Bucket or the Amazon Resource Name (ARN) of S3 on Outposts Bucket that you want to associate this access point with.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The AWS account ID associated with the S3 bucket associated with this access point.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
 	// The DNS domain name of the S3 Access Point in the format name-account_id.s3-accesspoint.region.amazonaws.com.
 	// Note: S3 access points only support secure access by HTTPS. HTTP isn't supported.
@@ -34,8 +43,24 @@ type AccessPointObservation struct {
 	// For Access Point of an AWS Partition S3 Bucket, the AWS account ID and access point name separated by a colon (:). For S3 on Outposts Bucket, the Amazon Resource Name (ARN) of the Access Point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name you want to assign to this access point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Indicates whether this access point allows access from the public Internet. Values are VPC (the access point doesn't allow access from the public Internet) and Internet (the access point allows access from the public Internet, subject to the access point and bucket access policies).
 	NetworkOrigin *string `json:"networkOrigin,omitempty" tf:"network_origin,omitempty"`
+
+	// Valid JSON document that specifies the policy that you want to apply to this access point. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_s3control_access_point_policy. To remove the policy, set it to "{}" (an empty JSON document).
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. Detailed below.
+	PublicAccessBlockConfiguration []PublicAccessBlockConfigurationObservation `json:"publicAccessBlockConfiguration,omitempty" tf:"public_access_block_configuration,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
+	VPCConfiguration []VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 type AccessPointParameters struct {
@@ -63,8 +88,8 @@ type AccessPointParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Name you want to assign to this access point.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Valid JSON document that specifies the policy that you want to apply to this access point. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_s3control_access_point_policy. To remove the policy, set it to "{}" (an empty JSON document).
 	// +kubebuilder:validation:Optional
@@ -85,6 +110,18 @@ type AccessPointParameters struct {
 }
 
 type PublicAccessBlockConfigurationObservation struct {
+
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
+
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
+
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
+
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
 type PublicAccessBlockConfigurationParameters struct {
@@ -107,6 +144,9 @@ type PublicAccessBlockConfigurationParameters struct {
 }
 
 type VPCConfigurationObservation struct {
+
+	// This access point will only allow connections from the specified VPC ID.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCConfigurationParameters struct {
@@ -150,8 +190,9 @@ type AccessPointStatus struct {
 type AccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccessPointSpec   `json:"spec"`
-	Status            AccessPointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AccessPointSpec   `json:"spec"`
+	Status AccessPointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

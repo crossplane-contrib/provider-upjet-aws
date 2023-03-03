@@ -15,6 +15,19 @@ import (
 
 type IdentityPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// JSON string of the policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type IdentityPolicyParameters struct {
@@ -34,12 +47,12 @@ type IdentityPolicyParameters struct {
 	IdentitySelector *v1.Selector `json:"identitySelector,omitempty" tf:"-"`
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// JSON string of the policy.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -71,8 +84,10 @@ type IdentityPolicyStatus struct {
 type IdentityPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityPolicySpec   `json:"spec"`
-	Status            IdentityPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   IdentityPolicySpec   `json:"spec"`
+	Status IdentityPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

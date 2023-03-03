@@ -21,6 +21,9 @@ type ClientCertificateObservation struct {
 	// Date when the client certificate was created.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// Description of the client certificate.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Date when the client certificate will expire.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
@@ -29,6 +32,13 @@ type ClientCertificateObservation struct {
 
 	// The PEM-encoded public key of the client certificate.
 	PemEncodedCertificate *string `json:"pemEncodedCertificate,omitempty" tf:"pem_encoded_certificate,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

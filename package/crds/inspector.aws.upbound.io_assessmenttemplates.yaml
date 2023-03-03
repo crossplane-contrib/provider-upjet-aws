@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: assessmenttemplates.inspector.aws.upbound.io
 spec:
@@ -260,11 +260,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - duration
-                - name
                 - region
-                - rulesPackageArns
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -436,6 +442,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: duration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.duration)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: rulesPackageArns is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rulesPackageArns)
           status:
             description: AssessmentTemplateStatus defines the observed state of AssessmentTemplate.
             properties:
@@ -444,8 +457,46 @@ spec:
                   arn:
                     description: The template assessment ARN.
                     type: string
+                  duration:
+                    description: The duration of the inspector run.
+                    type: number
+                  eventSubscription:
+                    description: A block that enables sending notifications about
+                      a specified assessment template event to a designated SNS topic.
+                      See Event Subscriptions for details.
+                    items:
+                      properties:
+                        event:
+                          description: The event for which you want to receive SNS
+                            notifications. Valid values are ASSESSMENT_RUN_STARTED,
+                            ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED,
+                            and FINDING_REPORTED.
+                          type: string
+                        topicArn:
+                          description: The ARN of the SNS topic to which notifications
+                            are sent.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  name:
+                    description: The name of the assessment template.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  rulesPackageArns:
+                    description: The rules to be used during the run.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -453,6 +504,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetArn:
+                    description: The assessment target ARN to attach the template
+                      to.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -495,9 +550,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

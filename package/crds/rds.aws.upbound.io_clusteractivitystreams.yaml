@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: clusteractivitystreams.rds.aws.upbound.io
 spec:
@@ -236,9 +236,17 @@ spec:
                         type: object
                     type: object
                 required:
-                - mode
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -410,18 +418,46 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: mode is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mode)
           status:
             description: ClusterActivityStreamStatus defines the observed state of
               ClusterActivityStream.
             properties:
               atProvider:
                 properties:
+                  engineNativeAuditFieldsIncluded:
+                    description: Specifies whether the database activity stream includes
+                      engine-native audit fields. This option only applies to an Oracle
+                      DB instance. By default, no engine-native audit fields are included.
+                      Defaults false.
+                    type: boolean
                   id:
                     description: The Amazon Resource Name (ARN) of the DB cluster.
                     type: string
                   kinesisStreamName:
                     description: The name of the Amazon Kinesis data stream to be
                       used for the database activity stream.
+                    type: string
+                  kmsKeyId:
+                    description: The AWS KMS key identifier for encrypting messages
+                      in the database activity stream. The AWS KMS key identifier
+                      is the key ARN, key ID, alias ARN, or alias name for the KMS
+                      key.
+                    type: string
+                  mode:
+                    description: 'Specifies the mode of the database activity stream.
+                      Database events such as a change or access generate an activity
+                      stream event. The database session can handle these events either
+                      synchronously or asynchronously. One of: sync, async.'
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  resourceArn:
+                    description: The Amazon Resource Name (ARN) of the DB cluster.
                     type: string
                 type: object
               conditions:
@@ -465,9 +501,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

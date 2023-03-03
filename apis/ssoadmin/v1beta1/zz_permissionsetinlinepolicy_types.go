@@ -17,13 +17,26 @@ type PermissionSetInlinePolicyObservation struct {
 
 	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IAM inline policy to attach to a Permission Set.
+	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Permission Set.
+	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type PermissionSetInlinePolicyParameters struct {
 
 	// The IAM inline policy to attach to a Permission Set.
-	// +kubebuilder:validation:Required
-	InlinePolicy *string `json:"inlinePolicy" tf:"inline_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
@@ -83,8 +96,9 @@ type PermissionSetInlinePolicyStatus struct {
 type PermissionSetInlinePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSetInlinePolicySpec   `json:"spec"`
-	Status            PermissionSetInlinePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inlinePolicy)",message="inlinePolicy is a required parameter"
+	Spec   PermissionSetInlinePolicySpec   `json:"spec"`
+	Status PermissionSetInlinePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

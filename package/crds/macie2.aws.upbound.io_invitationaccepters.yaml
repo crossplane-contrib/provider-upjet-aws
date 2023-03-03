@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: invitationaccepters.macie2.aws.upbound.io
 spec:
@@ -73,9 +73,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - administratorAccountId
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -247,17 +255,28 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: administratorAccountId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.administratorAccountId)
           status:
             description: InvitationAccepterStatus defines the observed state of InvitationAccepter.
             properties:
               atProvider:
                 properties:
+                  administratorAccountId:
+                    description: The AWS account ID for the account that sent the
+                      invitation.
+                    type: string
                   id:
                     description: The unique identifier (ID) of the macie invitation
                       accepter.
                     type: string
                   invitationId:
                     description: The unique identifier for the invitation.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -301,9 +320,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

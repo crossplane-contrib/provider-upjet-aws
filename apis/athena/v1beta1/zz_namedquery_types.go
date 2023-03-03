@@ -15,8 +15,27 @@ import (
 
 type NamedQueryObservation struct {
 
+	// Database to which the query belongs.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Brief explanation of the query. Maximum length of 1024.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Unique ID of the query.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Plain language name for the query. Maximum length of 128.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Workgroup to which the query belongs. Defaults to primary
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
 }
 
 type NamedQueryParameters struct {
@@ -39,12 +58,12 @@ type NamedQueryParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Plain language name for the query. Maximum length of 128.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
-	// +kubebuilder:validation:Required
-	Query *string `json:"query" tf:"query,omitempty"`
+	// +kubebuilder:validation:Optional
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +109,10 @@ type NamedQueryStatus struct {
 type NamedQuery struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NamedQuerySpec   `json:"spec"`
-	Status            NamedQueryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)",message="query is a required parameter"
+	Spec   NamedQuerySpec   `json:"spec"`
+	Status NamedQueryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

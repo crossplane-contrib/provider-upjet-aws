@@ -18,7 +18,23 @@ type TrackerObservation struct {
 	// The timestamp for when the tracker resource was created in ISO 8601 format.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
+	// The optional description for the tracker resource.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The position filtering method of the tracker resource. Valid values: TimeBased, DistanceBased, AccuracyBased. Default: TimeBased.
+	PositionFiltering *string `json:"positionFiltering,omitempty" tf:"position_filtering,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

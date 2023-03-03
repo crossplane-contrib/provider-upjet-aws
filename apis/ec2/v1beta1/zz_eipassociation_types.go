@@ -14,7 +14,39 @@ import (
 )
 
 type EIPAssociationObservation struct {
+
+	// The allocation ID. This is required for EC2-VPC.
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// Whether to allow an Elastic IP to
+	// be re-associated. Defaults to true in VPC.
+	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the instance. This is required for
+	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
+	// network interface ID, but not both. The operation fails if you specify an
+	// instance ID unless exactly one network interface is attached.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// The ID of the network interface. If the
+	// instance has more than one network interface, you must specify a network
+	// interface ID.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// The primary or secondary private IP address
+	// to associate with the Elastic IP address. If no private IP address is
+	// specified, the Elastic IP address is associated with the primary private IP
+	// address.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The Elastic IP address. This is required for EC2-Classic.
+	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type EIPAssociationParameters struct {

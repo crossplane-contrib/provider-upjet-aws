@@ -30,11 +30,24 @@ type ConnectAttachmentObservation struct {
 	// The ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
 
+	// The ID of a core network where you want to create the attachment.
+	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
+
+	// The Region where the edge is located.
+	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
+
 	// The ID of the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Options for creating an attachment.
+	Options []OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
+
 	// The ID of the attachment account owner.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 
 	// The attachment resource ARN.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -45,8 +58,14 @@ type ConnectAttachmentObservation struct {
 	// The state of the attachment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The ID of the attachment between the two connections.
+	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
 }
 
 type ConnectAttachmentParameters struct {
@@ -79,8 +98,8 @@ type ConnectAttachmentParameters struct {
 	EdgeLocationSelector *v1.Selector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
 	// Options for creating an attachment.
-	// +kubebuilder:validation:Required
-	Options []OptionsParameters `json:"options" tf:"options,omitempty"`
+	// +kubebuilder:validation:Optional
+	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -107,6 +126,7 @@ type ConnectAttachmentParameters struct {
 }
 
 type OptionsObservation struct {
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type OptionsParameters struct {
@@ -139,8 +159,9 @@ type ConnectAttachmentStatus struct {
 type ConnectAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectAttachmentSpec   `json:"spec"`
-	Status            ConnectAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.options)",message="options is a required parameter"
+	Spec   ConnectAttachmentSpec   `json:"spec"`
+	Status ConnectAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

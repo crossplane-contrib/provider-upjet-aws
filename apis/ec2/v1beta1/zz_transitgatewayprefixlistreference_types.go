@@ -15,11 +15,27 @@ import (
 
 type TransitGatewayPrefixListReferenceObservation struct {
 
+	// Indicates whether to drop traffic that matches the Prefix List. Defaults to false.
+	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
+
 	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Identifier of EC2 Prefix List.
+	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
+
 	// EC2 Transit Gateway Route Table identifier and EC2 Prefix List identifier, separated by an underscore (_)
 	PrefixListOwnerID *string `json:"prefixListOwnerId,omitempty" tf:"prefix_list_owner_id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Identifier of EC2 Transit Gateway Attachment.
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 }
 
 type TransitGatewayPrefixListReferenceParameters struct {

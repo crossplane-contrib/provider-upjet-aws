@@ -20,8 +20,21 @@ type DestinationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The ARN of the target Amazon Kinesis stream resource for the destination.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 }
 
 type DestinationParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: poolrolesattachments.cognitoidentity.aws.upbound.io
 spec:
@@ -289,8 +289,16 @@ spec:
                     type: object
                 required:
                 - region
-                - roles
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -462,6 +470,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: roles is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roles)
           status:
             description: PoolRolesAttachmentStatus defines the observed state of PoolRolesAttachment.
             properties:
@@ -470,6 +481,67 @@ spec:
                   id:
                     description: The identity pool ID.
                     type: string
+                  identityPoolId:
+                    description: An identity pool ID in the format REGION_GUID.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  roleMapping:
+                    description: A List of Role Mapping.
+                    items:
+                      properties:
+                        ambiguousRoleResolution:
+                          description: Specifies the action to be taken if either
+                            no rules match the claim value for the Rules type, or
+                            there is no cognito:preferred_role claim and there are
+                            multiple cognito:roles matches for the Token type. Required
+                            if you specify Token or Rules as the Type.
+                          type: string
+                        identityProvider:
+                          description: A string identifying the identity provider,
+                            for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+                            Depends on cognito_identity_providers set on aws_cognito_identity_pool
+                            resource or a aws_cognito_identity_provider resource.
+                          type: string
+                        mappingRule:
+                          description: The Rules Configuration to be used for mapping
+                            users to roles. You can specify up to 25 rules per identity
+                            provider. Rules are evaluated in order. The first one
+                            to match specifies the role.
+                          items:
+                            properties:
+                              claim:
+                                description: The claim name that must be present in
+                                  the token, for example, "isAdmin" or "paid".
+                                type: string
+                              matchType:
+                                description: The match condition that specifies how
+                                  closely the claim value in the IdP token must match
+                                  Value.
+                                type: string
+                              roleArn:
+                                description: The role ARN.
+                                type: string
+                              value:
+                                description: A brief string that the claim must match,
+                                  for example, "paid" or "yes".
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The role mapping type.
+                          type: string
+                      type: object
+                    type: array
+                  roles:
+                    additionalProperties:
+                      type: string
+                    description: The map of roles associated with this pool. For a
+                      given role, the key will be either "authenticated" or "unauthenticated"
+                      and the value will be the Role ARN.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -512,9 +584,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: lbs.lightsail.aws.upbound.io
 spec:
@@ -82,9 +82,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - instancePort
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -256,6 +264,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: instancePort is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePort)
           status:
             description: LBStatus defines the observed state of LB.
             properties:
@@ -270,8 +281,17 @@ spec:
                   dnsName:
                     description: The DNS name of the load balancer.
                     type: string
+                  healthCheckPath:
+                    description: The health check path of the load balancer. Default
+                      value "/".
+                    type: string
                   id:
                     description: The name used for this load balancer (matches name).
+                    type: string
+                  instancePort:
+                    description: The instance port the load balancer will connect.
+                    type: number
+                  ipAddressType:
                     type: string
                   protocol:
                     description: The protocol of the load balancer.
@@ -281,12 +301,21 @@ spec:
                     items:
                       type: number
                     type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   supportCode:
                     description: The support code for the database. Include this code
                       in your email to support when you have questions about a database
                       in Lightsail. This code enables our support team to look up
                       your Lightsail information more easily.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -336,9 +365,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

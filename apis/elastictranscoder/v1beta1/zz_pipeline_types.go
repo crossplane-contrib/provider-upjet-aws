@@ -14,6 +14,12 @@ import (
 )
 
 type ContentConfigObservation struct {
+
+	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
 type ContentConfigParameters struct {
@@ -37,6 +43,15 @@ type ContentConfigParameters struct {
 }
 
 type ContentConfigPermissionsObservation struct {
+
+	// The permission that you want to give to the AWS user that you specified in content_config_permissions.grantee. Valid values are Read, ReadAcp, WriteAcp or FullControl.
+	Access []*string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// The AWS user or group that you want to have access to transcoded files and playlists.
+	Grantee *string `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Specify the type of value that appears in the content_config_permissions.grantee object. Valid values are Canonical, Email or Group.
+	GranteeType *string `json:"granteeType,omitempty" tf:"grantee_type,omitempty"`
 }
 
 type ContentConfigPermissionsParameters struct {
@@ -55,6 +70,18 @@ type ContentConfigPermissionsParameters struct {
 }
 
 type NotificationsObservation struct {
+
+	// The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job in this pipeline.
+	Completed *string `json:"completed,omitempty" tf:"completed,omitempty"`
+
+	// The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition while processing a job in this pipeline.
+	Error *string `json:"error,omitempty" tf:"error,omitempty"`
+
+	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process a job in this pipeline.
+	Progressing *string `json:"progressing,omitempty" tf:"progressing,omitempty"`
+
+	// The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition while processing a job in this pipeline.
+	Warning *string `json:"warning,omitempty" tf:"warning,omitempty"`
 }
 
 type NotificationsParameters struct {
@@ -81,8 +108,42 @@ type PipelineObservation struct {
 	// The ARN of the Elastictranscoder pipeline.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
+	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
+
+	// The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below)
+	ContentConfig []ContentConfigObservation `json:"contentConfig,omitempty" tf:"content_config,omitempty"`
+
+	// The permissions for the content_config object. (documented below)
+	ContentConfigPermissions []ContentConfigPermissionsObservation `json:"contentConfigPermissions,omitempty" tf:"content_config_permissions,omitempty"`
+
 	// The ID of the Elastictranscoder pipeline.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Amazon S3 bucket in which you saved the media files that you want to transcode and the graphics that you want to use as watermarks.
+	InputBucket *string `json:"inputBucket,omitempty" tf:"input_bucket,omitempty"`
+
+	// The name of the pipeline. Maximum 40 characters
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. (documented below)
+	Notifications []NotificationsObservation `json:"notifications,omitempty" tf:"notifications,omitempty"`
+
+	// The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded files.
+	OutputBucket *string `json:"outputBucket,omitempty" tf:"output_bucket,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to use to transcode jobs for this pipeline.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The ThumbnailConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files. (documented below)
+	ThumbnailConfig []ThumbnailConfigObservation `json:"thumbnailConfig,omitempty" tf:"thumbnail_config,omitempty"`
+
+	// The permissions for the thumbnail_config object. (documented below)
+	ThumbnailConfigPermissions []ThumbnailConfigPermissionsObservation `json:"thumbnailConfigPermissions,omitempty" tf:"thumbnail_config_permissions,omitempty"`
 }
 
 type PipelineParameters struct {
@@ -153,6 +214,12 @@ type PipelineParameters struct {
 }
 
 type ThumbnailConfigObservation struct {
+
+	// The Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign to the files and playlists that it stores in your Amazon S3 bucket.
+	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 }
 
 type ThumbnailConfigParameters struct {
@@ -176,6 +243,15 @@ type ThumbnailConfigParameters struct {
 }
 
 type ThumbnailConfigPermissionsObservation struct {
+
+	// The permission that you want to give to the AWS user that you specified in content_config_permissions.grantee. Valid values are Read, ReadAcp, WriteAcp or FullControl.
+	Access []*string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// The AWS user or group that you want to have access to transcoded files and playlists.
+	Grantee *string `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Specify the type of value that appears in the content_config_permissions.grantee object. Valid values are Canonical, Email or Group.
+	GranteeType *string `json:"granteeType,omitempty" tf:"grantee_type,omitempty"`
 }
 
 type ThumbnailConfigPermissionsParameters struct {

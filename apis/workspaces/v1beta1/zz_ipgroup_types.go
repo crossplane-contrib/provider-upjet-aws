@@ -15,8 +15,24 @@ import (
 
 type IPGroupObservation struct {
 
+	// The description of the IP group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The IP group identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IP group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// One or more pairs specifying the IP group rule (in CIDR format) from which web requests originate.
+	Rules []RulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -29,8 +45,8 @@ type IPGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the IP group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -47,6 +63,12 @@ type IPGroupParameters struct {
 }
 
 type RulesObservation struct {
+
+	// The description of the IP group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The IP address range, in CIDR notation, e.g., 10.0.0.0/16
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type RulesParameters struct {
@@ -84,8 +106,9 @@ type IPGroupStatus struct {
 type IPGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IPGroupSpec   `json:"spec"`
-	Status            IPGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   IPGroupSpec   `json:"spec"`
+	Status IPGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

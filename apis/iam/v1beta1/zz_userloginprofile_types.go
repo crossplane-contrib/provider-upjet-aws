@@ -25,6 +25,18 @@ type UserLoginProfileObservation struct {
 
 	// The plain text password, only available when pgp_key is not provided.
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
+
+	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
+	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
+
+	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
+	PasswordResetRequired *bool `json:"passwordResetRequired,omitempty" tf:"password_reset_required,omitempty"`
+
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
+	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+
+	// The IAM user's name.
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type UserLoginProfileParameters struct {

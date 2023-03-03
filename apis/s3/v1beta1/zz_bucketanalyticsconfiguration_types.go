@@ -14,6 +14,12 @@ import (
 )
 
 type BucketAnalyticsConfigurationFilterObservation struct {
+
+	// Object prefix for filtering.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BucketAnalyticsConfigurationFilterParameters struct {
@@ -28,7 +34,24 @@ type BucketAnalyticsConfigurationFilterParameters struct {
 }
 
 type BucketAnalyticsConfigurationObservation struct {
+
+	// The name of the bucket this analytics configuration is associated with.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	Filter []BucketAnalyticsConfigurationFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Unique identifier of the analytics configuration for the bucket.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Configuration for the analytics data export (documented below).
+	StorageClassAnalysis []StorageClassAnalysisObservation `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
 
 type BucketAnalyticsConfigurationParameters struct {
@@ -51,8 +74,8 @@ type BucketAnalyticsConfigurationParameters struct {
 	Filter []BucketAnalyticsConfigurationFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Unique identifier of the analytics configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -65,6 +88,9 @@ type BucketAnalyticsConfigurationParameters struct {
 }
 
 type DataExportDestinationObservation struct {
+
+	// Analytics data export currently only supports an S3 bucket destination (documented below).
+	S3BucketDestination []S3BucketDestinationObservation `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
 }
 
 type DataExportDestinationParameters struct {
@@ -75,6 +101,12 @@ type DataExportDestinationParameters struct {
 }
 
 type DataExportObservation struct {
+
+	// Specifies the destination for the exported analytics data (documented below).
+	Destination []DataExportDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// The schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
+	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
 }
 
 type DataExportParameters struct {
@@ -89,6 +121,18 @@ type DataExportParameters struct {
 }
 
 type S3BucketDestinationObservation struct {
+
+	// The account ID that owns the destination bucket.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
+	// The ARN of the destination bucket.
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// The output format of exported analytics data. Allowed values: CSV. Default value: CSV.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Object prefix for filtering.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3BucketDestinationParameters struct {
@@ -121,6 +165,9 @@ type S3BucketDestinationParameters struct {
 }
 
 type StorageClassAnalysisObservation struct {
+
+	// Data export configuration (documented below).
+	DataExport []DataExportObservation `json:"dataExport,omitempty" tf:"data_export,omitempty"`
 }
 
 type StorageClassAnalysisParameters struct {
@@ -154,8 +201,9 @@ type BucketAnalyticsConfigurationStatus struct {
 type BucketAnalyticsConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketAnalyticsConfigurationSpec   `json:"spec"`
-	Status            BucketAnalyticsConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   BucketAnalyticsConfigurationSpec   `json:"spec"`
+	Status BucketAnalyticsConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: webacls.waf.aws.upbound.io
 spec:
@@ -343,11 +343,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - defaultAction
-                - metricName
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -519,6 +525,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: defaultAction is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)
+            - message: metricName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: WebACLStatus defines the observed state of WebACL.
             properties:
@@ -527,9 +540,121 @@ spec:
                   arn:
                     description: The ARN of the WAF WebACL.
                     type: string
+                  defaultAction:
+                    description: Configuration block with action that you want AWS
+                      WAF to take when a request doesn't match the criteria in any
+                      of the rules that are associated with the web ACL. Detailed
+                      below.
+                    items:
+                      properties:
+                        type:
+                          description: Specifies how you want AWS WAF to respond to
+                            requests that don't match the criteria in any of the rules.
+                            e.g., ALLOW or BLOCK
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the WAF WebACL.
                     type: string
+                  loggingConfiguration:
+                    description: Configuration block to enable WAF logging. Detailed
+                      below.
+                    items:
+                      properties:
+                        logDestination:
+                          description: Amazon Resource Name (ARN) of Kinesis Firehose
+                            Delivery Stream
+                          type: string
+                        redactedFields:
+                          description: Configuration block containing parts of the
+                            request that you want redacted from the logs. Detailed
+                            below.
+                          items:
+                            properties:
+                              fieldToMatch:
+                                description: Set of configuration blocks for fields
+                                  to redact. Detailed below.
+                                items:
+                                  properties:
+                                    data:
+                                      description: When the value of type is HEADER,
+                                        enter the name of the header that you want
+                                        the WAF to search, for example, User-Agent
+                                        or Referer. If the value of type is any other
+                                        value, omit data.
+                                      type: string
+                                    type:
+                                      description: 'valid values are: BLOCK, ALLOW,
+                                        or COUNT'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  metricName:
+                    description: The name or description for the Amazon CloudWatch
+                      metric of this web ACL.
+                    type: string
+                  name:
+                    description: The name or description of the web ACL.
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  rules:
+                    description: Configuration blocks containing rules to associate
+                      with the web ACL and the settings for each rule. Detailed below.
+                    items:
+                      properties:
+                        action:
+                          description: The action that CloudFront or AWS WAF takes
+                            when a web request matches the conditions in the rule.
+                            Not used if type is GROUP.
+                          items:
+                            properties:
+                              type:
+                                description: 'valid values are: BLOCK, ALLOW, or COUNT'
+                                type: string
+                            type: object
+                          type: array
+                        overrideAction:
+                          description: Override the action that a group requests CloudFront
+                            or AWS WAF takes when a web request matches the conditions
+                            in the rule. Only used if type is GROUP.
+                          items:
+                            properties:
+                              type:
+                                description: 'valid values are: BLOCK, ALLOW, or COUNT'
+                                type: string
+                            type: object
+                          type: array
+                        priority:
+                          description: Specifies the order in which the rules in a
+                            WebACL are evaluated. Rules with a lower value are evaluated
+                            before rules with a higher value.
+                          type: number
+                        ruleId:
+                          description: ID of the associated WAF (Global) rule (e.g.,
+                            aws_waf_rule). WAF (Regional) rules cannot be used.
+                          type: string
+                        type:
+                          description: The rule type, either REGULAR, as defined by
+                            Rule, RATE_BASED, as defined by RateBasedRule, or GROUP,
+                            as defined by RuleGroup. The default is REGULAR. If you
+                            add a RATE_BASED rule, you need to set type as RATE_BASED.
+                            If you add a GROUP rule, you need to set type as GROUP.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -579,9 +704,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

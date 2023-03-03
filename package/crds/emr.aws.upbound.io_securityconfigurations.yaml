@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: securityconfigurations.emr.aws.upbound.io
 spec:
@@ -72,9 +72,17 @@ spec:
                       be created in.
                     type: string
                 required:
-                - configuration
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -246,18 +254,28 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: configuration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)
           status:
             description: SecurityConfigurationStatus defines the observed state of
               SecurityConfiguration.
             properties:
               atProvider:
                 properties:
+                  configuration:
+                    description: A JSON formatted Security Configuration
+                    type: string
                   creationDate:
                     description: Date the Security Configuration was created
                     type: string
                   id:
                     description: The ID of the EMR Security Configuration (Same as
                       the name)
+                    type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
                     type: string
                 type: object
               conditions:
@@ -301,9 +319,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

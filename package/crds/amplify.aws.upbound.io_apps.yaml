@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: apps.amplify.aws.upbound.io
 spec:
@@ -336,9 +336,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -510,19 +518,206 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AppStatus defines the observed state of App.
             properties:
               atProvider:
                 properties:
+                  accessTokenSecretRef:
+                    description: Personal access token for a third-party source control
+                      system for an Amplify app. The personal access token is used
+                      to create a webhook and a read-only deploy key. The token is
+                      not stored.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   arn:
                     description: ARN of the Amplify app.
                     type: string
+                  autoBranchCreationConfig:
+                    description: Automated branch creation configuration for an Amplify
+                      app. An auto_branch_creation_config block is documented below.
+                    items:
+                      properties:
+                        basicAuthCredentialsSecretRef:
+                          description: Basic authorization credentials for the autocreated
+                            branch.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        buildSpec:
+                          description: Build specification (build spec) for the autocreated
+                            branch.
+                          type: string
+                        enableAutoBuild:
+                          description: Enables auto building for the autocreated branch.
+                          type: boolean
+                        enableBasicAuth:
+                          description: Enables basic authorization for the autocreated
+                            branch.
+                          type: boolean
+                        enablePerformanceMode:
+                          description: Enables performance mode for the branch.
+                          type: boolean
+                        enablePullRequestPreview:
+                          description: Enables pull request previews for the autocreated
+                            branch.
+                          type: boolean
+                        environmentVariables:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables for the autocreated branch.
+                          type: object
+                        framework:
+                          description: Framework for the autocreated branch.
+                          type: string
+                        pullRequestEnvironmentName:
+                          description: Amplify environment name for the pull request.
+                          type: string
+                        stage:
+                          description: 'Describes the current stage for the autocreated
+                            branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL,
+                            PULL_REQUEST.'
+                          type: string
+                      type: object
+                    type: array
+                  autoBranchCreationPatterns:
+                    description: Automated branch creation glob patterns for an Amplify
+                      app.
+                    items:
+                      type: string
+                    type: array
+                  basicAuthCredentialsSecretRef:
+                    description: Credentials for basic authorization for an Amplify
+                      app.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  buildSpec:
+                    description: The build specification (build spec) for an Amplify
+                      app.
+                    type: string
+                  customRule:
+                    description: Custom rewrite and redirect rules for an Amplify
+                      app. A custom_rule block is documented below.
+                    items:
+                      properties:
+                        condition:
+                          description: Condition for a URL rewrite or redirect rule,
+                            such as a country code.
+                          type: string
+                        source:
+                          description: Source pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                        status:
+                          description: 'Status code for a URL rewrite or redirect
+                            rule. Valid values: 200, 301, 302, 404, 404-200.'
+                          type: string
+                        target:
+                          description: Target pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                      type: object
+                    type: array
                   defaultDomain:
                     description: Default domain for the Amplify app.
                     type: string
+                  description:
+                    description: Description for an Amplify app.
+                    type: string
+                  enableAutoBranchCreation:
+                    description: Enables automated branch creation for an Amplify
+                      app.
+                    type: boolean
+                  enableBasicAuth:
+                    description: Enables basic authorization for an Amplify app. This
+                      will apply to all branches that are part of this app.
+                    type: boolean
+                  enableBranchAutoBuild:
+                    description: Enables auto-building of branches for the Amplify
+                      App.
+                    type: boolean
+                  enableBranchAutoDeletion:
+                    description: Automatically disconnects a branch in the Amplify
+                      Console when you delete a branch from your Git repository.
+                    type: boolean
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Environment variables map for an Amplify app.
+                    type: object
+                  iamServiceRoleArn:
+                    description: AWS Identity and Access Management (IAM) service
+                      role for an Amplify app.
+                    type: string
                   id:
                     description: Unique ID of the Amplify app.
+                    type: string
+                  name:
+                    description: Name for an Amplify app.
+                    type: string
+                  oauthTokenSecretRef:
+                    description: OAuth token for a third-party source control system
+                      for an Amplify app. The OAuth token is used to create a webhook
+                      and a read-only deploy key. The OAuth token is not stored.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  platform:
+                    description: 'Platform or framework for an Amplify app. Valid
+                      values: WEB, WEB_COMPUTE. Default value: WEB.'
                     type: string
                   productionBranch:
                     description: Describes the information about a production branch
@@ -544,6 +739,18 @@ spec:
                           type: string
                       type: object
                     type: array
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
+                  repository:
+                    description: Repository for an Amplify app.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -592,9 +799,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

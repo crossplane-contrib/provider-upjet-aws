@@ -14,7 +14,18 @@ import (
 )
 
 type AttachmentObservation struct {
+
+	// The name of the ELB.
+	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Instance ID to place in the ELB pool.
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
 }
 
 type AttachmentParameters struct {

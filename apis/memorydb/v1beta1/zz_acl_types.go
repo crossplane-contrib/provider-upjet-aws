@@ -24,8 +24,18 @@ type ACLObservation struct {
 	// The minimum engine version supported by the ACL.
 	MinimumEngineVersion *string `json:"minimumEngineVersion,omitempty" tf:"minimum_engine_version,omitempty"`
 
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Set of MemoryDB user names to be included in this ACL.
+	UserNames []*string `json:"userNames,omitempty" tf:"user_names,omitempty"`
 }
 
 type ACLParameters struct {

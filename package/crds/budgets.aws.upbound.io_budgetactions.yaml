@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: budgetactions.budgets.aws.upbound.io
 spec:
@@ -430,14 +430,17 @@ spec:
                       type: object
                     type: array
                 required:
-                - actionThreshold
-                - actionType
-                - approvalModel
-                - definition
-                - notificationType
                 - region
-                - subscriber
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: ManagementPolicy specifies how this managed resource
+                  should be managed.
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -609,23 +612,162 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: actionThreshold is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionThreshold)
+            - message: actionType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionType)
+            - message: approvalModel is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.approvalModel)
+            - message: definition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)
+            - message: notificationType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)
+            - message: subscriber is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriber)
           status:
             description: BudgetActionStatus defines the observed state of BudgetAction.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: The ID of the target account for budget. Will use
+                      current user's account_id by default if omitted.
+                    type: string
                   actionId:
                     description: The id of the budget action.
+                    type: string
+                  actionThreshold:
+                    description: The trigger threshold of the action. See Action Threshold.
+                    items:
+                      properties:
+                        actionThresholdType:
+                          description: The type of threshold for a notification. Valid
+                            values are PERCENTAGE or ABSOLUTE_VALUE.
+                          type: string
+                        actionThresholdValue:
+                          description: The threshold of a notification.
+                          type: number
+                      type: object
+                    type: array
+                  actionType:
+                    description: The type of action. This defines the type of tasks
+                      that can be carried out by this action. This field also determines
+                      the format for definition. Valid values are APPLY_IAM_POLICY,
+                      APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
+                    type: string
+                  approvalModel:
+                    description: This specifies if the action needs manual or automatic
+                      approval. Valid values are AUTOMATIC and MANUAL.
                     type: string
                   arn:
                     description: The ARN of the budget action.
                     type: string
+                  budgetName:
+                    description: The name of a budget.
+                    type: string
+                  definition:
+                    description: Specifies all of the type-specific parameters. See
+                      Definition.
+                    items:
+                      properties:
+                        iamActionDefinition:
+                          description: The AWS Identity and Access Management (IAM)
+                            action definition details. See IAM Action Definition.
+                          items:
+                            properties:
+                              groups:
+                                description: A list of groups to be attached. There
+                                  must be at least one group.
+                                items:
+                                  type: string
+                                type: array
+                              policyArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  policy to be attached.
+                                type: string
+                              roles:
+                                description: A list of roles to be attached. There
+                                  must be at least one role.
+                                items:
+                                  type: string
+                                type: array
+                              users:
+                                description: A list of users to be attached. There
+                                  must be at least one user.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        scpActionDefinition:
+                          description: The service control policies (SCPs) action
+                            definition details. See SCP Action Definition.
+                          items:
+                            properties:
+                              policyId:
+                                description: The policy ID attached.
+                                type: string
+                              targetIds:
+                                description: A list of target IDs.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        ssmActionDefinition:
+                          description: The AWS Systems Manager (SSM) action definition
+                            details. See SSM Action Definition.
+                          items:
+                            properties:
+                              actionSubType:
+                                description: The action subType. Valid values are
+                                  STOP_EC2_INSTANCES or STOP_RDS_INSTANCES.
+                                type: string
+                              instanceIds:
+                                description: The EC2 and RDS instance IDs.
+                                items:
+                                  type: string
+                                type: array
+                              region:
+                                description: The Region to run the SSM document.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  executionRoleArn:
+                    description: The role passed for action execution and reversion.
+                      Roles and actions must be in the same account.
+                    type: string
                   id:
                     description: ID of resource.
+                    type: string
+                  notificationType:
+                    description: The type of a notification. Valid values are ACTUAL
+                      or FORECASTED.
+                    type: string
+                  region:
+                    description: The Region to run the SSM document. Region is the
+                      region you'd like your resource to be created in.
                     type: string
                   status:
                     description: The status of the budget action.
                     type: string
+                  subscriber:
+                    description: A list of subscribers. See Subscriber.
+                    items:
+                      properties:
+                        address:
+                          description: The address that AWS sends budget notifications
+                            to, either an SNS topic or an email.
+                          type: string
+                        subscriptionType:
+                          description: The type of notification that AWS sends to
+                            a subscriber. Valid values are SNS or EMAIL.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -668,9 +810,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

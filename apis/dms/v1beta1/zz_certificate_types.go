@@ -18,7 +18,20 @@ type CertificateObservation struct {
 	// The Amazon Resource Name (ARN) for the certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
+	// The contents of the .pem X.509 certificate file for the certificate. Either certificate_pem or certificate_wallet must be set.
+	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+
+	// The contents of the Oracle Wallet certificate for use with SSL, provided as a base64-encoded String. Either certificate_pem or certificate_wallet must be set.
+	CertificateWalletSecretRef *v1.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Region is the region you'd like your resource to be created in.
+	// +upjet:crd:field:TFTag=-
+	Region *string `json:"region,omitempty" tf:"-"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

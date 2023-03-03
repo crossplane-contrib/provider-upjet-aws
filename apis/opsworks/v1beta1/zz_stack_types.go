@@ -14,6 +14,24 @@ import (
 )
 
 type CustomCookbooksSourceObservation struct {
+
+	// Password to use when authenticating to the source.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// For sources that are version-aware, the revision to use.
+	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
+
+	// SSH key to use when authenticating to the source.
+	SSHKeySecretRef *v1.SecretKeySelector `json:"sshKeySecretRef,omitempty" tf:"-"`
+
+	// The type of source to use. For example, "archive".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The URL where the cookbooks resource can be found.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Username to use when authenticating to the source.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type CustomCookbooksSourceParameters struct {
@@ -44,15 +62,85 @@ type CustomCookbooksSourceParameters struct {
 }
 
 type StackObservation struct {
+
+	// If set to "LATEST", OpsWorks will automatically install the latest version.
+	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
+
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// If manage_berkshelf is enabled, the version of Berkshelf to use.
+	BerkshelfVersion *string `json:"berkshelfVersion,omitempty" tf:"berkshelf_version,omitempty"`
+
+	// Color to paint next to the stack's resources in the OpsWorks console.
+	Color *string `json:"color,omitempty" tf:"color,omitempty"`
+
+	// Name of the configuration manager to use. Defaults to "Chef".
+	ConfigurationManagerName *string `json:"configurationManagerName,omitempty" tf:"configuration_manager_name,omitempty"`
+
+	// Version of the configuration manager to use. Defaults to "11.4".
+	ConfigurationManagerVersion *string `json:"configurationManagerVersion,omitempty" tf:"configuration_manager_version,omitempty"`
+
+	// When use_custom_cookbooks is set, provide this sub-object as described below.
+	CustomCookbooksSource []CustomCookbooksSourceObservation `json:"customCookbooksSource,omitempty" tf:"custom_cookbooks_source,omitempty"`
+
+	// User defined JSON passed to "Chef". Use a "here doc" for multiline JSON.
+	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
+
+	// Name of the availability zone where instances will be created by default.
+	// Cannot be set when vpc_id is set.
+	DefaultAvailabilityZone *string `json:"defaultAvailabilityZone,omitempty" tf:"default_availability_zone,omitempty"`
+
+	// The ARN of an IAM Instance Profile that created instances will have by default.
+	DefaultInstanceProfileArn *string `json:"defaultInstanceProfileArn,omitempty" tf:"default_instance_profile_arn,omitempty"`
+
+	// Name of OS that will be installed on instances by default.
+	DefaultOs *string `json:"defaultOs,omitempty" tf:"default_os,omitempty"`
+
+	// Name of the type of root device instances will have by default.
+	DefaultRootDeviceType *string `json:"defaultRootDeviceType,omitempty" tf:"default_root_device_type,omitempty"`
+
+	// Name of the SSH keypair that instances will have by default.
+	DefaultSSHKeyName *string `json:"defaultSshKeyName,omitempty" tf:"default_ssh_key_name,omitempty"`
+
+	// ID of the subnet in which instances will be created by default.
+	// Required if vpc_id is set to a VPC other than the default VPC, and forbidden if it isn't.
+	DefaultSubnetID *string `json:"defaultSubnetId,omitempty" tf:"default_subnet_id,omitempty"`
+
+	// Keyword representing the naming scheme that will be used for instance hostnames within this stack.
+	HostnameTheme *string `json:"hostnameTheme,omitempty" tf:"hostname_theme,omitempty"`
 
 	// The id of the stack.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Boolean value controlling whether Opsworks will run Berkshelf for this stack.
+	ManageBerkshelf *bool `json:"manageBerkshelf,omitempty" tf:"manage_berkshelf,omitempty"`
+
+	// The name of the stack.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the region where the stack will exist.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The ARN of an IAM role that the OpsWorks service will act as.
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
 	StackEndpoint *string `json:"stackEndpoint,omitempty" tf:"stack_endpoint,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Boolean value controlling whether the custom cookbook settings are enabled.
+	UseCustomCookbooks *bool `json:"useCustomCookbooks,omitempty" tf:"use_custom_cookbooks,omitempty"`
+
+	// Boolean value controlling whether the standard OpsWorks security groups apply to created instances.
+	UseOpsworksSecurityGroups *bool `json:"useOpsworksSecurityGroups,omitempty" tf:"use_opsworks_security_groups,omitempty"`
+
+	// ID of the VPC that this stack belongs to.
+	// Defaults to the region's default VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type StackParameters struct {
@@ -139,8 +227,8 @@ type StackParameters struct {
 	ManageBerkshelf *bool `json:"manageBerkshelf,omitempty" tf:"manage_berkshelf,omitempty"`
 
 	// The name of the stack.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the region where the stack will exist.
 	// +kubebuilder:validation:Required
@@ -211,8 +299,9 @@ type StackStatus struct {
 type Stack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StackSpec   `json:"spec"`
-	Status            StackStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   StackSpec   `json:"spec"`
+	Status StackStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
