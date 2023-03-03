@@ -17,6 +17,11 @@ func (mg *AWSConfigurationRecorderStatus) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AWSConfigurationRecorderStatus.
+func (mg *AWSConfigurationRecorderStatus) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AWSConfigurationRecorderStatus.
 func (mg *AWSConfigurationRecorderStatus) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AWSConfigurationRecorderStatus) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AWSConfigurationRecorderStatus.
 func (mg *AWSConfigurationRecorderStatus) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AWSConfigurationRecorderStatus.
+func (mg *AWSConfigurationRecorderStatus) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AWSConfigurationRecorderStatus.
@@ -83,6 +93,11 @@ func (mg *ConfigRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConfigRule.
+func (mg *ConfigRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConfigRule.
 func (mg *ConfigRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ConfigRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConfigRule.
 func (mg *ConfigRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConfigRule.
+func (mg *ConfigRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConfigRule.
@@ -149,6 +169,11 @@ func (mg *ConfigurationAggregator) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConfigurationAggregator.
+func (mg *ConfigurationAggregator) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConfigurationAggregator.
 func (mg *ConfigurationAggregator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *ConfigurationAggregator) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConfigurationAggregator.
 func (mg *ConfigurationAggregator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConfigurationAggregator.
+func (mg *ConfigurationAggregator) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConfigurationAggregator.
@@ -215,6 +245,11 @@ func (mg *ConfigurationRecorder) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConfigurationRecorder.
+func (mg *ConfigurationRecorder) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConfigurationRecorder.
 func (mg *ConfigurationRecorder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ConfigurationRecorder) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConfigurationRecorder.
 func (mg *ConfigurationRecorder) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConfigurationRecorder.
+func (mg *ConfigurationRecorder) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConfigurationRecorder.
@@ -281,6 +321,11 @@ func (mg *ConformancePack) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConformancePack.
+func (mg *ConformancePack) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConformancePack.
 func (mg *ConformancePack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *ConformancePack) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConformancePack.
 func (mg *ConformancePack) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConformancePack.
+func (mg *ConformancePack) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConformancePack.
@@ -347,6 +397,11 @@ func (mg *DeliveryChannel) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DeliveryChannel.
+func (mg *DeliveryChannel) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DeliveryChannel.
 func (mg *DeliveryChannel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *DeliveryChannel) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DeliveryChannel.
 func (mg *DeliveryChannel) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DeliveryChannel.
+func (mg *DeliveryChannel) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DeliveryChannel.
@@ -413,6 +473,11 @@ func (mg *RemediationConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RemediationConfiguration.
+func (mg *RemediationConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RemediationConfiguration.
 func (mg *RemediationConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *RemediationConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RemediationConfiguration.
 func (mg *RemediationConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RemediationConfiguration.
+func (mg *RemediationConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RemediationConfiguration.

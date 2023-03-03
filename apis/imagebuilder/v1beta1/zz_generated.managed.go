@@ -17,6 +17,11 @@ func (mg *Component) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Component.
+func (mg *Component) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Component.
 func (mg *Component) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Component) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Component.
 func (mg *Component) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Component.
+func (mg *Component) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Component.
@@ -83,6 +93,11 @@ func (mg *ContainerRecipe) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ContainerRecipe.
+func (mg *ContainerRecipe) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ContainerRecipe.
 func (mg *ContainerRecipe) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ContainerRecipe) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ContainerRecipe.
 func (mg *ContainerRecipe) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ContainerRecipe.
+func (mg *ContainerRecipe) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ContainerRecipe.
@@ -149,6 +169,11 @@ func (mg *DistributionConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DistributionConfiguration.
+func (mg *DistributionConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DistributionConfiguration.
 func (mg *DistributionConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *DistributionConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DistributionConfiguration.
 func (mg *DistributionConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DistributionConfiguration.
+func (mg *DistributionConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DistributionConfiguration.
@@ -215,6 +245,11 @@ func (mg *Image) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Image.
+func (mg *Image) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Image.
 func (mg *Image) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *Image) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Image.
 func (mg *Image) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Image.
+func (mg *Image) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Image.
@@ -281,6 +321,11 @@ func (mg *ImagePipeline) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ImagePipeline.
+func (mg *ImagePipeline) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ImagePipeline.
 func (mg *ImagePipeline) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *ImagePipeline) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ImagePipeline.
 func (mg *ImagePipeline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ImagePipeline.
+func (mg *ImagePipeline) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ImagePipeline.
@@ -347,6 +397,11 @@ func (mg *ImageRecipe) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ImageRecipe.
+func (mg *ImageRecipe) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ImageRecipe.
 func (mg *ImageRecipe) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *ImageRecipe) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ImageRecipe.
 func (mg *ImageRecipe) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ImageRecipe.
+func (mg *ImageRecipe) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ImageRecipe.
@@ -413,6 +473,11 @@ func (mg *InfrastructureConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this InfrastructureConfiguration.
+func (mg *InfrastructureConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this InfrastructureConfiguration.
 func (mg *InfrastructureConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *InfrastructureConfiguration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this InfrastructureConfiguration.
 func (mg *InfrastructureConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this InfrastructureConfiguration.
+func (mg *InfrastructureConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this InfrastructureConfiguration.

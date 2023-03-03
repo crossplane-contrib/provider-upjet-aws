@@ -17,6 +17,11 @@ func (mg *ByteMatchSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ByteMatchSet.
+func (mg *ByteMatchSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ByteMatchSet.
 func (mg *ByteMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ByteMatchSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ByteMatchSet.
 func (mg *ByteMatchSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ByteMatchSet.
+func (mg *ByteMatchSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ByteMatchSet.
@@ -83,6 +93,11 @@ func (mg *GeoMatchSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this GeoMatchSet.
+func (mg *GeoMatchSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this GeoMatchSet.
 func (mg *GeoMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *GeoMatchSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this GeoMatchSet.
 func (mg *GeoMatchSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this GeoMatchSet.
+func (mg *GeoMatchSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this GeoMatchSet.
@@ -149,6 +169,11 @@ func (mg *IPSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IPSet.
+func (mg *IPSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IPSet.
 func (mg *IPSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *IPSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IPSet.
 func (mg *IPSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IPSet.
+func (mg *IPSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IPSet.
@@ -215,6 +245,11 @@ func (mg *RateBasedRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RateBasedRule.
+func (mg *RateBasedRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RateBasedRule.
 func (mg *RateBasedRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *RateBasedRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RateBasedRule.
 func (mg *RateBasedRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RateBasedRule.
+func (mg *RateBasedRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RateBasedRule.
@@ -281,6 +321,11 @@ func (mg *RegexMatchSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RegexMatchSet.
+func (mg *RegexMatchSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RegexMatchSet.
 func (mg *RegexMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *RegexMatchSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RegexMatchSet.
 func (mg *RegexMatchSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RegexMatchSet.
+func (mg *RegexMatchSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RegexMatchSet.
@@ -347,6 +397,11 @@ func (mg *RegexPatternSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RegexPatternSet.
+func (mg *RegexPatternSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RegexPatternSet.
 func (mg *RegexPatternSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *RegexPatternSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RegexPatternSet.
 func (mg *RegexPatternSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RegexPatternSet.
+func (mg *RegexPatternSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RegexPatternSet.
@@ -413,6 +473,11 @@ func (mg *Rule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Rule.
+func (mg *Rule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Rule.
 func (mg *Rule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *Rule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Rule.
 func (mg *Rule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Rule.
+func (mg *Rule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Rule.
@@ -479,6 +549,11 @@ func (mg *SQLInjectionMatchSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SQLInjectionMatchSet.
+func (mg *SQLInjectionMatchSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SQLInjectionMatchSet.
 func (mg *SQLInjectionMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *SQLInjectionMatchSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SQLInjectionMatchSet.
 func (mg *SQLInjectionMatchSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SQLInjectionMatchSet.
+func (mg *SQLInjectionMatchSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SQLInjectionMatchSet.
@@ -545,6 +625,11 @@ func (mg *SizeConstraintSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SizeConstraintSet.
+func (mg *SizeConstraintSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SizeConstraintSet.
 func (mg *SizeConstraintSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *SizeConstraintSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SizeConstraintSet.
 func (mg *SizeConstraintSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SizeConstraintSet.
+func (mg *SizeConstraintSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SizeConstraintSet.
@@ -611,6 +701,11 @@ func (mg *WebACL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this WebACL.
+func (mg *WebACL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this WebACL.
 func (mg *WebACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *WebACL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this WebACL.
 func (mg *WebACL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this WebACL.
+func (mg *WebACL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this WebACL.
@@ -677,6 +777,11 @@ func (mg *XSSMatchSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this XSSMatchSet.
+func (mg *XSSMatchSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this XSSMatchSet.
 func (mg *XSSMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *XSSMatchSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this XSSMatchSet.
 func (mg *XSSMatchSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this XSSMatchSet.
+func (mg *XSSMatchSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this XSSMatchSet.
