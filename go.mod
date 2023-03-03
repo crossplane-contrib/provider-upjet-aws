@@ -160,3 +160,5 @@ require (
 replace github.com/crossplane/crossplane-tools => github.com/turkenh/crossplane-tools v0.0.0-20230223100459-350d1d88b4d0
 
 replace github.com/crossplane/crossplane-runtime => github.com/turkenh/crossplane-runtime v0.0.0-20230223190736-8624ec9a37f8
+
+replace github.com/upbound/upjet => ../upjet
