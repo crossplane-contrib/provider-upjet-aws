@@ -332,6 +332,7 @@ import (
 	spotinstancerequest "github.com/upbound/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/provider-aws/internal/controller/ec2/subnet"
 	subnetcidrreservation "github.com/upbound/provider-aws/internal/controller/ec2/subnetcidrreservation"
+	tagec2 "github.com/upbound/provider-aws/internal/controller/ec2/tag"
 	trafficmirrorfilter "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilter"
 	trafficmirrorfilterrule "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilterrule"
 	transitgateway "github.com/upbound/provider-aws/internal/controller/ec2/transitgateway"
@@ -1229,6 +1230,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		spotinstancerequest.Setup,
 		subnet.Setup,
 		subnetcidrreservation.Setup,
+		tagec2.Setup,
 		trafficmirrorfilter.Setup,
 		trafficmirrorfilterrule.Setup,
 		transitgateway.Setup,
