@@ -239,6 +239,16 @@ func CredentialsIDSecret(data []byte, profile string) (aws.Credentials, error) {
 // AuthMethod is a method of authenticating to the AWS API
 type AuthMethod func(context.Context, []byte, string, string) (*aws.Config, error)
 
+// stsRegionOrDefault sets the STS client region to the passed region, or
+// defaults to the global region.
+func stsRegionOrDefault(region string) func(*sts.Options) {
+	return func(o *sts.Options) {
+		if region == "" {
+			o.Region = GlobalRegion
+		}
+	}
+}
+
 // UseProviderSecret - AWS configuration which can be used to issue requests against AWS API
 func UseProviderSecret(ctx context.Context, data []byte, profile, region string) (*aws.Config, error) {
 	creds, err := CredentialsIDSecret(data, profile)
@@ -264,14 +274,9 @@ func UseProviderSecret(ctx context.Context, data []byte, profile, region string)
 // AssumeRoleWithWebIdentity & AssumeRoles.
 func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
 	pCfg := cfg
-	regionOpt := func(o *sts.Options) {
-		if cfg.Region == "" {
-			o.Region = GlobalRegion
-		}
-	}
 	for _, aro := range pcs.AssumeRoleChain {
 		stsAssume := stscreds.NewAssumeRoleProvider(
-			sts.NewFromConfig(*pCfg, regionOpt), //nolint:contextcheck
+			sts.NewFromConfig(*pCfg, stsRegionOrDefault(cfg.Region)), //nolint:contextcheck
 			aws.ToString(aro.RoleARN),
 			SetAssumeRoleOptions(aro),
 		)
@@ -292,7 +297,7 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 // GetAssumeRoleWithWebIdentityConfig returns an aws.Config capable of doing
 // AssumeRoleWithWebIdentity.
 func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, webID v1beta1.AssumeRoleWithWebIdentityOptions, tokenFile string) (*aws.Config, error) {
-	stsclient := sts.NewFromConfig(*cfg) //nolint:contextcheck
+	stsclient := sts.NewFromConfig(*cfg, stsRegionOrDefault(cfg.Region)) //nolint:contextcheck
 	awsConfig, err := config.LoadDefaultConfig(
 		ctx,
 		userAgentV2,
