@@ -98,7 +98,7 @@ func main() {
 			Features:                &feature.Flags{},
 		},
 		Provider:       config.GetProvider(),
-		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithProviderRunner(runner)),
+		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithProviderRunner(runner), terraform.WithProcessReportInterval(*pollInterval)),
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
 	}
 
