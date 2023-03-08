@@ -132,6 +132,7 @@ metadata:
   name: codepipeline-bucket-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: codepipeline_bucket

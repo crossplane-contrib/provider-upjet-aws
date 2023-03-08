@@ -130,6 +130,7 @@ metadata:
   name: b-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: b
