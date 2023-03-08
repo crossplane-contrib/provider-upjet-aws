@@ -8,16 +8,6 @@ on:
   pull_request: {}
   workflow_dispatch: {}
 
-env:
-  # Common versions
-  GO_VERSION: '1.19'
-  GOLANGCI_VERSION: 'v1.51.1'
-  DOCKER_BUILDX_VERSION: 'v0.8.2'
-
-  # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
-  # step 'if env.XXX' != ""', so we copy these to succinctly test whether
-  # credentials have been provided before trying to run steps that need them.
-  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
 jobs:
   ci:
     uses: upbound/uptest/.github/workflows/provider-ci.yml@main
