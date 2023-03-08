@@ -32,7 +32,9 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_acl", func(r *config.Resource) {
-		config.MoveToStatus(r.TerraformResource, "acl")
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"acl", "access_control_policy"},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_metrics", func(r *config.Resource) {

@@ -51,9 +51,6 @@ type AccessControlPolicyParameters struct {
 
 type BucketACLObservation struct {
 
-	// Canned ACL to apply to the bucket.
-	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
-
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
@@ -63,6 +60,10 @@ type BucketACLObservation struct {
 }
 
 type BucketACLParameters struct {
+
+	// Canned ACL to apply to the bucket.
+	// +kubebuilder:validation:Optional
+	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	// +kubebuilder:validation:Optional
