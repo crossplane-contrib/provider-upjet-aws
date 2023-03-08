@@ -59,7 +59,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 	// +kubebuilder:validation:Optional
 	IpamPoolIDSelector *v1.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
 
-	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-32.
+	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	// +kubebuilder:validation:Optional
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 

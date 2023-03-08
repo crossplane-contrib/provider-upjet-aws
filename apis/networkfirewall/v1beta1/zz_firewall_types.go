@@ -138,6 +138,10 @@ type SubnetMappingObservation struct {
 
 type SubnetMappingParameters struct {
 
+	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// The unique identifier for the subnet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()

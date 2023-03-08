@@ -21,8 +21,9 @@ type BucketAccelerateConfigurationObservation struct {
 
 type BucketAccelerateConfigurationParameters struct {
 
-	// The name of the bucket.
+	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -34,7 +35,7 @@ type BucketAccelerateConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -43,7 +44,7 @@ type BucketAccelerateConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
+	// Transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 }

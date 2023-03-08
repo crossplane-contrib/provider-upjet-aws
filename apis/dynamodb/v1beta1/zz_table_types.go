@@ -129,10 +129,14 @@ type TableObservation struct {
 	// Name of the table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
+	// +kubebuilder:validation:Optional
+	Replica []TableReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
+
 	// ARN of the Table Stream. Only available when stream_enabled = true
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
-	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true
+	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
 	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
@@ -224,6 +228,15 @@ type TableParameters struct {
 }
 
 type TableReplicaObservation struct {
+
+	// ARN of the replica
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// ARN of the Table Stream. Only available when stream_enabled = true
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
+	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 }
 
 type TableReplicaParameters struct {

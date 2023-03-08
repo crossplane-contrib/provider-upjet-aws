@@ -46,6 +46,10 @@ type ListenerPolicyParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger an update.
+	// +kubebuilder:validation:Optional
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
 // ListenerPolicySpec defines the desired state of ListenerPolicy

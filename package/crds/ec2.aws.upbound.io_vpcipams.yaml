@@ -282,6 +282,12 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of IPAM
                     type: string
+                  defaultResourceDiscoveryAssociationId:
+                    description: The ID of the IPAM
+                    type: string
+                  defaultResourceDiscoveryId:
+                    description: The ID of the IPAM
+                    type: string
                   id:
                     description: The ID of the IPAM
                     type: string

@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the source bucket that inventory lists
-                      the objects for.
+                    description: Name of the source bucket that inventory lists the
+                      objects for.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -147,17 +147,17 @@ spec:
                     items:
                       properties:
                         bucket:
-                          description: The name of the source bucket that inventory
-                            lists the objects for.
+                          description: Name of the source bucket that inventory lists
+                            the objects for.
                           items:
                             properties:
                               accountId:
-                                description: The ID of the account that owns the destination
+                                description: ID of the account that owns the destination
                                   bucket. Recommended to be set to prevent problems
                                   if the destination bucket ownership changes.
                                 type: string
                               bucketArn:
-                                description: The Amazon S3 bucket ARN of the destination.
+                                description: Amazon S3 bucket ARN of the destination.
                                 type: string
                               bucketArnRef:
                                 description: Reference to a Bucket in s3 to populate
@@ -251,9 +251,9 @@ spec:
                                       items:
                                         properties:
                                           keyId:
-                                            description: The ARN of the KMS customer
-                                              master key (CMK) used to encrypt the
-                                              inventory file.
+                                            description: ARN of the KMS customer master
+                                              key (CMK) used to encrypt the inventory
+                                              file.
                                             type: string
                                         required:
                                         - keyId
@@ -273,8 +273,8 @@ spec:
                                   results. Can be CSV, ORC or Parquet.
                                 type: string
                               prefix:
-                                description: The prefix that an object must have to
-                                  be included in the inventory results.
+                                description: Prefix that an object must have to be
+                                  included in the inventory results.
                                 type: string
                             required:
                             - format
@@ -294,7 +294,7 @@ spec:
                     items:
                       properties:
                         prefix:
-                          description: The prefix that an object must have to be included
+                          description: Prefix that an object must have to be included
                             in the inventory results.
                           type: string
                       type: object

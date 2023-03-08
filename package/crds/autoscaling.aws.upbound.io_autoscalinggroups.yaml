@@ -426,7 +426,8 @@ spec:
                             properties:
                               onDemandAllocationStrategy:
                                 description: 'Strategy to use when launching on-demand
-                                  instances. Valid values: prioritized. Default: prioritized.'
+                                  instances. Valid values: prioritized, lowest-price.
+                                  Default: prioritized.'
                                 type: string
                               onDemandBaseCapacity:
                                 description: 'Absolute minimum amount of desired capacity

@@ -36,11 +36,11 @@ spec:
                   rateMode: CBR
               extension: m2ts
               nameModifier: _1
-          videoDescriptionName: example-vidoe
+          videoDescriptionName: example-video
       timecodeConfig:
       - source: EMBEDDED
       videoDescriptions:
-      - name: example-vidoe
+      - name: example-video
     inputAttachments:
     - inputAttachmentName: example-input
       inputIdSelector:

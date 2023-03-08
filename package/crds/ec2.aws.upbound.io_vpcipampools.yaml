@@ -190,10 +190,17 @@ spec:
                       only create VPCs from a pool whose locale matches the VPC''s
                       Region. Possible values: Any AWS region, such as us-east-1.'
                     type: string
+                  publicIpSource:
+                    description: The IP address source for pools in the public scope.
+                      Only used for provisioning IP address CIDRs to pools in the
+                      public scope. Valid values are byoip or amazon. Default is byoip.
+                    type: string
                   publiclyAdvertisable:
                     description: Defines whether or not IPv6 pool space is publicly
-                      advertisable over the internet. This option is not available
-                      for IPv4 pool space.
+                      advertisable over the internet. This argument is required if
+                      address_family = "ipv6" and public_ip_source = "byoip", default
+                      is false. This option is not available for IPv4 pool space or
+                      if public_ip_source = "amazon".
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to

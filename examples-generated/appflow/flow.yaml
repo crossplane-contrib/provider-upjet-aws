@@ -82,15 +82,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example_destination
-    policy: "\n{\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n
-      \           \"Sid\": \"AllowAppFlowDestinationActions\",\n            \"Principal\":
-      {\n                \"Service\": \"appflow.amazonaws.com\"\n            },\n
-      \           \"Action\": [\n                \"s3:PutObject\",\n                \"s3:AbortMultipartUpload\",\n
-      \               \"s3:ListMultipartUploadParts\",\n                \"s3:ListBucketMultipartUploads\",\n
-      \               \"s3:GetBucketAcl\",\n                \"s3:PutObjectAcl\"\n
-      \           ],\n            \"Resource\": [\n                \"arn:aws:s3:::example_destination\",\n
-      \               \"arn:aws:s3:::example_destination/*\"\n            ]\n        }\n
-      \   ],\n\t\"Version\": \"2012-10-17\"\n}\n"
+    policy: ${data.aws_iam_policy_document.example_destination.json}
     region: us-west-1
 
 ---
@@ -108,13 +100,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example_source
-    policy: "{\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n
-      \           \"Sid\": \"AllowAppFlowSourceActions\",\n            \"Principal\":
-      {\n                \"Service\": \"appflow.amazonaws.com\"\n            },\n
-      \           \"Action\": [\n                \"s3:ListBucket\",\n                \"s3:GetObject\"\n
-      \           ],\n            \"Resource\": [\n                \"arn:aws:s3:::example_source\",\n
-      \               \"arn:aws:s3:::example_source/*\"\n            ]\n        }\n
-      \   ],\n\t\"Version\": \"2012-10-17\"\n}\n"
+    policy: ${data.aws_iam_policy_document.example_source.json}
     region: us-west-1
 
 ---

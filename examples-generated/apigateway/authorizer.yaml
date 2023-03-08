@@ -47,20 +47,7 @@ metadata:
   name: invocation-role
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "apigateway.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_role_policy_document.assume_role.json}
     path: /
 
 ---
@@ -75,20 +62,7 @@ metadata:
   name: lambda
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "lambda.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.lambda_assume_role.json}
 
 ---
 

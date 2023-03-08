@@ -29,6 +29,12 @@ type VPCIpamObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The ID of the IPAM
+	DefaultResourceDiscoveryAssociationID *string `json:"defaultResourceDiscoveryAssociationId,omitempty" tf:"default_resource_discovery_association_id,omitempty"`
+
+	// The ID of the IPAM
+	DefaultResourceDiscoveryID *string `json:"defaultResourceDiscoveryId,omitempty" tf:"default_resource_discovery_id,omitempty"`
+
+	// The ID of the IPAM
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the IPAM's private scope. A scope is a top-level container in IPAM. Each scope represents an IP-independent network. Scopes enable you to represent networks where you have overlapping IP space. When you create an IPAM, IPAM automatically creates two scopes: public and private. The private scope is intended for private IP space. The public scope is intended for all internet-routable IP space.

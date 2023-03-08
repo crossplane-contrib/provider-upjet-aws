@@ -65,18 +65,17 @@ spec:
               forProvider:
                 properties:
                   accessControlPolicy:
-                    description: A configuration block that sets the ACL permissions
-                      for an object per grantee documented below.
+                    description: Configuration block that sets the ACL permissions
+                      for an object per grantee. See below.
                     items:
                       properties:
                         grant:
-                          description: Set of grant configuration blocks documented
-                            below.
+                          description: Set of grant configuration blocks. See below.
                           items:
                             properties:
                               grantee:
                                 description: Configuration block for the person being
-                                  granted permissions documented below.
+                                  granted permissions. See below.
                                 items:
                                   properties:
                                     emailAddress:
@@ -85,7 +84,7 @@ spec:
                                         where this argument can be specified.
                                       type: string
                                     id:
-                                      description: The ID of the owner.
+                                      description: ID of the owner.
                                       type: string
                                     type:
                                       description: 'Type of grantee. Valid values:
@@ -108,14 +107,14 @@ spec:
                           type: array
                         owner:
                           description: Configuration block of the bucket owner's display
-                            name and ID documented below.
+                            name and ID. See below.
                           items:
                             properties:
                               displayName:
-                                description: The display name of the owner.
+                                description: Display name of the owner.
                                 type: string
                               id:
-                                description: The ID of the owner.
+                                description: ID of the owner.
                                 type: string
                             required:
                             - id
@@ -126,7 +125,7 @@ spec:
                       type: object
                     type: array
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -202,7 +201,7 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -388,22 +387,21 @@ spec:
               atProvider:
                 properties:
                   accessControlPolicy:
-                    description: A configuration block that sets the ACL permissions
-                      for an object per grantee documented below.
+                    description: Configuration block that sets the ACL permissions
+                      for an object per grantee. See below.
                     items:
                       properties:
                         grant:
-                          description: Set of grant configuration blocks documented
-                            below.
+                          description: Set of grant configuration blocks. See below.
                           items:
                             properties:
                               grantee:
                                 description: Configuration block for the person being
-                                  granted permissions documented below.
+                                  granted permissions. See below.
                                 items:
                                   properties:
                                     displayName:
-                                      description: The display name of the owner.
+                                      description: Display name of the owner.
                                       type: string
                                   type: object
                                 type: array
@@ -412,7 +410,7 @@ spec:
                       type: object
                     type: array
                   acl:
-                    description: The canned ACL to apply to the bucket.
+                    description: Canned ACL to apply to the bucket.
                     type: string
                   id:
                     description: The bucket, expected_bucket_owner (if configured),

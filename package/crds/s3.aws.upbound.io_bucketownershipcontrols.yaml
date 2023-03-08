@@ -66,8 +66,8 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket that you want to associate
-                      this access point with.
+                    description: Name of the bucket that you want to associate this
+                      access point with.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.

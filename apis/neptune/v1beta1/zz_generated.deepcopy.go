@@ -970,6 +970,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.NeptuneInstanceParameterGroupName != nil {
+		in, out := &in.NeptuneInstanceParameterGroupName, &out.NeptuneInstanceParameterGroupName
+		*out = new(string)
+		**out = **in
+	}
 	if in.NeptuneSubnetGroupName != nil {
 		in, out := &in.NeptuneSubnetGroupName, &out.NeptuneSubnetGroupName
 		*out = new(string)
