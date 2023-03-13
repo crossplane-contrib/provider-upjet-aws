@@ -89,7 +89,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			// Account ID is not part of provider configuration schema, so it
 			// needs to be given separately.
 			ClientMetadata: map[string]string{
-				keyAccountId: AccountId,
+				keyAccountId: accountId,
 			},
 		}
 		return ps, err
