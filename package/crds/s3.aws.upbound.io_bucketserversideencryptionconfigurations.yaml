@@ -67,7 +67,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: ID (name) of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -143,7 +143,7 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -151,20 +151,20 @@ spec:
                     type: string
                   rule:
                     description: Set of server-side encryption configuration rules.
-                      documented below. Currently, only a single rule is supported.
+                      See below. Currently, only a single rule is supported.
                     items:
                       properties:
                         applyServerSideEncryptionByDefault:
-                          description: A single object for setting server-side encryption
-                            by default documented below
+                          description: Single object for setting server-side encryption
+                            by default. See below.
                           items:
                             properties:
                               kmsMasterKeyId:
-                                description: The AWS KMS master key ID used for the
-                                  SSE-KMS encryption. This can only be used when you
-                                  set the value of sse_algorithm as aws:kms. The default
-                                  aws/s3 AWS KMS master key is used if this element
-                                  is absent while the sse_algorithm is aws:kms.
+                                description: AWS KMS master key ID used for the SSE-KMS
+                                  encryption. This can only be used when you set the
+                                  value of sse_algorithm as aws:kms. The default aws/s3
+                                  AWS KMS master key is used if this element is absent
+                                  while the sse_algorithm is aws:kms.
                                 type: string
                               kmsMasterKeyIdRef:
                                 description: Reference to a Key in kms to populate
@@ -247,8 +247,8 @@ spec:
                                     type: object
                                 type: object
                               sseAlgorithm:
-                                description: The server-side encryption algorithm
-                                  to use. Valid values are AES256 and aws:kms
+                                description: Server-side encryption algorithm to use.
+                                  Valid values are AES256 and aws:kms
                                 type: string
                             required:
                             - sseAlgorithm

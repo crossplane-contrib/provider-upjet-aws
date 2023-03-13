@@ -1634,6 +1634,34 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReplaceSecurityGroupsOnDestroy != nil {
+		in, out := &in.ReplaceSecurityGroupsOnDestroy, &out.ReplaceSecurityGroupsOnDestroy
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ReplacementSecurityGroupIDRefs != nil {
+		in, out := &in.ReplacementSecurityGroupIDRefs, &out.ReplacementSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ReplacementSecurityGroupIDSelector != nil {
+		in, out := &in.ReplacementSecurityGroupIDSelector, &out.ReplacementSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ReplacementSecurityGroupIds != nil {
+		in, out := &in.ReplacementSecurityGroupIds, &out.ReplacementSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ReservedConcurrentExecutions != nil {
 		in, out := &in.ReservedConcurrentExecutions, &out.ReservedConcurrentExecutions
 		*out = new(float64)

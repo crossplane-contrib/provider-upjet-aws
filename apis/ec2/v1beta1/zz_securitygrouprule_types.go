@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SecurityGroupRuleObservation struct {
+type SecurityGroupRuleObservation_2 struct {
 
 	// ID of the security group rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -22,7 +22,7 @@ type SecurityGroupRuleObservation struct {
 	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
 }
 
-type SecurityGroupRuleParameters struct {
+type SecurityGroupRuleParameters_2 struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
 	// +kubebuilder:validation:Optional
@@ -96,13 +96,13 @@ type SecurityGroupRuleParameters struct {
 // SecurityGroupRuleSpec defines the desired state of SecurityGroupRule
 type SecurityGroupRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupRuleParameters `json:"forProvider"`
+	ForProvider     SecurityGroupRuleParameters_2 `json:"forProvider"`
 }
 
 // SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.
 type SecurityGroupRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupRuleObservation `json:"atProvider,omitempty"`
+	AtProvider        SecurityGroupRuleObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

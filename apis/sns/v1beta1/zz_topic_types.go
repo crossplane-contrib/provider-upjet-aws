@@ -187,6 +187,10 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// If SignatureVersion should be 1 (SHA1) or 2 (SHA256). The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
+	// +kubebuilder:validation:Optional
+	SignatureVersion *float64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
+
 	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -222,6 +226,10 @@ type TopicParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Tracing mode of an Amazon SNS topic. Valid values: "PassThrough", "Active".
+	// +kubebuilder:validation:Optional
+	TracingConfig *string `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
 }
 
 // TopicSpec defines the desired state of Topic

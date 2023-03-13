@@ -1,0 +1,39 @@
+apiVersion: evidently.aws.upbound.io/v1beta1
+kind: Feature
+metadata:
+  annotations:
+    meta.upbound.io/example-id: evidently/v1beta1/feature
+  labels:
+    testing.upbound.io/example-name: feature
+  name: feature
+spec:
+  forProvider:
+    description: example description
+    projectSelector:
+      matchLabels:
+        testing.upbound.io/example-name: feature
+    region: us-east-1
+    tags:
+      Key1: example Feature
+    variations:
+    - name: Variation1
+      value:
+      - stringValue: example
+
+---
+
+apiVersion: evidently.aws.upbound.io/v1beta1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: evidently/v1beta1/feature
+  labels:
+    testing.upbound.io/example-name: feature
+  name: feature
+spec:
+  forProvider:
+    description: Example Description
+    name: evidentlyproject
+    region: us-east-1
+    tags:
+      Key1: example Project

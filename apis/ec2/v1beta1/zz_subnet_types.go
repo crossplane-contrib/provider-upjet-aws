@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SubnetObservation struct {
+type SubnetObservation_2 struct {
 
 	// The ARN of the subnet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -31,7 +31,7 @@ type SubnetObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type SubnetParameters struct {
+type SubnetParameters_2 struct {
 
 	// Specify true to indicate
 	// that network interfaces created in the specified subnet should be
@@ -120,13 +120,13 @@ type SubnetParameters struct {
 // SubnetSpec defines the desired state of Subnet
 type SubnetSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SubnetParameters `json:"forProvider"`
+	ForProvider     SubnetParameters_2 `json:"forProvider"`
 }
 
 // SubnetStatus defines the observed state of Subnet.
 type SubnetStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SubnetObservation `json:"atProvider,omitempty"`
+	AtProvider        SubnetObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

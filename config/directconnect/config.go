@@ -74,4 +74,10 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			Type: "HostedTransitVirtualInterface",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_dx_connection", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"encryption_mode"},
+		}
+	})
 }

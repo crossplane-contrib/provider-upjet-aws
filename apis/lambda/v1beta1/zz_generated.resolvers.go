@@ -9,11 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta15 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/efs/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/signer/v1beta1"
 	v1beta17 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	v1beta16 "github.com/upbound/provider-aws/apis/sqs/v1beta1"
@@ -145,14 +145,30 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ReplacementSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.ReplacementSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.ReplacementSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta13.SecurityGroupList{},
+			Managed: &v1beta13.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ReplacementSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.ReplacementSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ReplacementSecurityGroupIDRefs = mrsp.ResolvedReferences
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Role),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleRef,
 		Selector:     mg.Spec.ForProvider.RoleSelector,
 		To: reference.To{
-			List:    &v1beta13.RoleList{},
-			Managed: &v1beta13.Role{},
+			List:    &v1beta14.RoleList{},
+			Managed: &v1beta14.Role{},
 		},
 	})
 	if err != nil {
@@ -167,8 +183,8 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.S3BucketRef,
 		Selector:     mg.Spec.ForProvider.S3BucketSelector,
 		To: reference.To{
-			List:    &v1beta14.BucketList{},
-			Managed: &v1beta14.Bucket{},
+			List:    &v1beta15.BucketList{},
+			Managed: &v1beta15.Bucket{},
 		},
 	})
 	if err != nil {
@@ -184,8 +200,8 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 			References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
 			To: reference.To{
-				List:    &v1beta15.SecurityGroupList{},
-				Managed: &v1beta15.SecurityGroup{},
+				List:    &v1beta13.SecurityGroupList{},
+				Managed: &v1beta13.SecurityGroup{},
 			},
 		})
 		if err != nil {
@@ -202,8 +218,8 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 			References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
 			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
 			To: reference.To{
-				List:    &v1beta15.SubnetList{},
-				Managed: &v1beta15.Subnet{},
+				List:    &v1beta13.SubnetList{},
+				Managed: &v1beta13.Subnet{},
 			},
 		})
 		if err != nil {

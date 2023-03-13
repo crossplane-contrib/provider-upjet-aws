@@ -14,6 +14,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this ConditionalForwarder.
+func (mg *ConditionalForwarder) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DirectoryIDRef,
+		Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &DirectoryList{},
+			Managed: &Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DirectoryID")
+	}
+	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Directory.
 func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

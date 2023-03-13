@@ -33,10 +33,10 @@ type DimensionParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type EncryptionConfigurationObservation struct {
+type FirewallPolicyEncryptionConfigurationObservation struct {
 }
 
-type EncryptionConfigurationParameters struct {
+type FirewallPolicyEncryptionConfigurationParameters struct {
 
 	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
 	// +kubebuilder:validation:Optional
@@ -106,7 +106,7 @@ type FirewallPolicyParameters struct {
 
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	// +kubebuilder:validation:Optional
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration []FirewallPolicyEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// A configuration block describing the rule groups and policy actions to use in the firewall policy. See Firewall Policy below for details.
 	// +kubebuilder:validation:Required

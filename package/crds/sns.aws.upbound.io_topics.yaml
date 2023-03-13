@@ -714,6 +714,13 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  signatureVersion:
+                    description: If SignatureVersion should be 1 (SHA1) or 2 (SHA256).
+                      The signature version corresponds to the hashing algorithm used
+                      while creating the signature of the notifications, subscription
+                      confirmations, or unsubscribe confirmation messages sent by
+                      Amazon SNS.
+                    type: number
                   sqsFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
                     type: string
@@ -875,6 +882,10 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  tracingConfig:
+                    description: 'Tracing mode of an Amazon SNS topic. Valid values:
+                      "PassThrough", "Active".'
+                    type: string
                 required:
                 - region
                 type: object

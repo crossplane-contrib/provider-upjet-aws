@@ -1,0 +1,27 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl-canned
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3-canned
+    acl: private
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl-canned
+  name: ${Rand.RFC1123Subdomain}-canned
+  labels:
+    testing.upbound.io/example-name: s3-canned
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: SampleBucketCannedAcl

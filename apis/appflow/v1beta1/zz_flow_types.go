@@ -906,9 +906,9 @@ type SourceConnectorPropertiesSapoDataObservation struct {
 
 type SourceConnectorPropertiesSapoDataParameters struct {
 
-	// Object specified in the flow destination.
+	// Object path specified in the SAPOData flow destination.
 	// +kubebuilder:validation:Required
-	Object *string `json:"object" tf:"object,omitempty"`
+	ObjectPath *string `json:"objectPath" tf:"object_path,omitempty"`
 }
 
 type SourceConnectorPropertiesZendeskObservation struct {

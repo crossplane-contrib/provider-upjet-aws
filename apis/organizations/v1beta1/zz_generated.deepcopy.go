@@ -1095,6 +1095,11 @@ func (in *PolicyAttachmentParameters) DeepCopyInto(out *PolicyAttachmentParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.TargetID != nil {
 		in, out := &in.TargetID, &out.TargetID
 		*out = new(string)
@@ -1239,6 +1244,11 @@ func (in *PolicyParameters) DeepCopyInto(out *PolicyParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {

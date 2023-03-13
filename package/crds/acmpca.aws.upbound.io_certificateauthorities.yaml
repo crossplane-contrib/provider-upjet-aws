@@ -170,7 +170,8 @@ spec:
                     type: array
                   enabled:
                     description: Whether the certificate authority is enabled or disabled.
-                      Defaults to true.
+                      Defaults to true. Can only be disabled if the CA is in an ACTIVE
+                      state.
                     type: boolean
                   permanentDeletionTimeInDays:
                     description: Number of days to make a CA restorable after it has
@@ -216,16 +217,13 @@ spec:
                                   the CRL Distribution Points extension of the issued
                                   certificate. You must specify a bucket policy that
                                   allows ACM PCA to write the CRL to your bucket.
-                                  Must be less than or equal to 255 characters in
-                                  length.
+                                  Must be between 3 and 255 characters in length.
                                 type: string
                               s3ObjectAcl:
                                 description: Determines whether the CRL will be publicly
                                   readable or privately held in the CRL Amazon S3
                                   bucket. Defaults to PUBLIC_READ.
                                 type: string
-                            required:
-                            - expirationInDays
                             type: object
                           type: array
                         ocspConfiguration:

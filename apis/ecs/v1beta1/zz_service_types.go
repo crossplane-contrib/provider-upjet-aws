@@ -199,8 +199,8 @@ type ServiceConnectConfigurationLogConfigurationObservation struct {
 type ServiceConnectConfigurationLogConfigurationParameters struct {
 
 	// The log driver to use for the container.
-	// +kubebuilder:validation:Optional
-	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
+	// +kubebuilder:validation:Required
+	LogDriver *string `json:"logDriver" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
 	// +kubebuilder:validation:Optional
@@ -239,8 +239,8 @@ type ServiceConnectConfigurationServiceObservation struct {
 type ServiceConnectConfigurationServiceParameters struct {
 
 	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
-	// +kubebuilder:validation:Required
-	ClientAlias []ClientAliasParameters `json:"clientAlias" tf:"client_alias,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientAlias []ClientAliasParameters `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
 
 	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
 	// +kubebuilder:validation:Optional
@@ -276,7 +276,6 @@ type ServiceParameters struct {
 
 	// ARN of an ECS cluster.
 	// +crossplane:generate:reference:type=Cluster
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
@@ -388,8 +387,17 @@ type ServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
+	// +crossplane:generate:reference:type=TaskDefinition
 	// +kubebuilder:validation:Optional
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
+
+	// Reference to a TaskDefinition to populate taskDefinition.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
+
+	// Selector for a TaskDefinition to populate taskDefinition.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
 	// +kubebuilder:validation:Optional

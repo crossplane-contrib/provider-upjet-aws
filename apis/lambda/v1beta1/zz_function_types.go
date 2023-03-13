@@ -148,7 +148,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageConfig []ImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
-	// ECR image URI containing the function's deployment package. Conflicts with filename, s3_bucket, s3_key, and s3_object_version.
+	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
@@ -186,6 +186,25 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// +kubebuilder:validation:Optional
+	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDRefs []v1.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
+
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
 	// +kubebuilder:validation:Optional
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
@@ -208,7 +227,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. This bucket must reside in the same AWS region where you are creating the Lambda function.
+	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
@@ -221,7 +240,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// S3 key of an object containing the function's deployment package. Conflicts with filename and image_uri.
+	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 

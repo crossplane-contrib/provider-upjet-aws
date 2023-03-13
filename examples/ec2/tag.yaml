@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Tag
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Requires a valid resourceId as ARN."
+  name: example
+spec:
+  forProvider:
+    key: karpenter.sh/discovery
+    region: us-west-1
+    resourceId: <resourceid-arn>
+    value: sample-eks-cluster

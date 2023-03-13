@@ -165,6 +165,7 @@ metadata:
   name: source-bucket-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: source

@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket to put metric configuration.
+                    description: Name of the bucket to put metric configuration.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.

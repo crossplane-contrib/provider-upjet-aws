@@ -59,6 +59,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -76,6 +77,7 @@ metadata:
   name: log-bucket-acl
 spec:
   forProvider:
+    acl: log-delivery-write
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: log_bucket

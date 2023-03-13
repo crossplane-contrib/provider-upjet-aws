@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type NATGatewayObservation struct {
+type NATGatewayObservation_2 struct {
 
 	// The ID of the NAT Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -28,7 +28,7 @@ type NATGatewayObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type NATGatewayParameters struct {
+type NATGatewayParameters_2 struct {
 
 	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
@@ -78,13 +78,13 @@ type NATGatewayParameters struct {
 // NATGatewaySpec defines the desired state of NATGateway
 type NATGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     NATGatewayParameters `json:"forProvider"`
+	ForProvider     NATGatewayParameters_2 `json:"forProvider"`
 }
 
 // NATGatewayStatus defines the observed state of NATGateway.
 type NATGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        NATGatewayObservation `json:"atProvider,omitempty"`
+	AtProvider        NATGatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

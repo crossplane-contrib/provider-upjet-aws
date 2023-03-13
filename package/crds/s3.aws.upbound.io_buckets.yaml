@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   forceDestroy:
-                    description: A boolean that indicates all objects (including any
+                    description: Boolean that indicates all objects (including any
                       locked objects) should be deleted from the bucket when the bucket
                       is destroyed so that the bucket can be destroyed without error.
                       These objects are not recoverable. This only deletes objects
@@ -78,8 +78,8 @@ spec:
                       argument is not supported in all regions or partitions.
                     type: boolean
                   region:
-                    description: The AWS region this bucket resides in. Region is
-                      the region you'd like your resource to be created in.
+                    description: AWS region this bucket resides in. Region is the
+                      region you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -278,21 +278,21 @@ spec:
                       grant. Use the resource aws_s3_bucket_acl instead.
                     type: string
                   arn:
-                    description: The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
+                    description: ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
                     type: string
                   bucketDomainName:
-                    description: The bucket domain name. Will be of format bucketname.s3.amazonaws.com.
+                    description: Bucket domain name. Will be of format bucketname.s3.amazonaws.com.
                     type: string
                   bucketRegionalDomainName:
-                    description: 'The bucket region-specific domain name. The bucket
-                      domain name including the region name, please refer here for
-                      format. Note: The AWS CloudFront allows specifying S3 region-specific
+                    description: 'Bucket region-specific domain name. The bucket domain
+                      name including the region name, please refer here for format.
+                      Note: The AWS CloudFront allows specifying S3 region-specific
                       endpoint when creating S3 origin, it will prevent redirect issues
                       from CloudFront to S3 Origin URL.'
                     type: string
                   corsRule:
-                    description: A rule of Cross-Origin Resource Sharing. See CORS
-                      rule below for details. Use the resource aws_s3_bucket_cors_configuration
+                    description: Rule of Cross-Origin Resource Sharing. See CORS rule
+                      below for details. Use the resource aws_s3_bucket_cors_configuration
                       instead.
                     items:
                       properties:
@@ -353,13 +353,13 @@ spec:
                       type: object
                     type: array
                   hostedZoneId:
-                    description: The Route 53 Hosted Zone ID for this bucket's region.
+                    description: Route 53 Hosted Zone ID for this bucket's region.
                     type: string
                   id:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   lifecycleRule:
-                    description: A configuration of object lifecycle management. See
+                    description: Configuration of object lifecycle management. See
                       Lifecycle Rule below for details. Use the resource aws_s3_bucket_lifecycle_configuration
                       instead.
                     items:
@@ -455,14 +455,14 @@ spec:
                       type: object
                     type: array
                   logging:
-                    description: A configuration of S3 bucket logging parameters.
-                      See Logging below for details. Use the resource aws_s3_bucket_logging
+                    description: Configuration of S3 bucket logging parameters. See
+                      Logging below for details. Use the resource aws_s3_bucket_logging
                       instead.
                     items:
                       properties:
                         targetBucket:
-                          description: The name of the bucket that will receive the
-                            log objects.
+                          description: Name of the bucket that will receive the log
+                            objects.
                           type: string
                         targetPrefix:
                           description: To specify a key prefix for log objects.
@@ -470,8 +470,8 @@ spec:
                       type: object
                     type: array
                   objectLockConfiguration:
-                    description: A configuration of S3 object locking. See Object
-                      Lock Configuration below for details. Use the object_lock_enabled
+                    description: Configuration of S3 object locking. See Object Lock
+                      Configuration below for details. Use the object_lock_enabled
                       parameter and the resource aws_s3_bucket_object_lock_configuration
                       instead.
                     items:
@@ -482,29 +482,29 @@ spec:
                             the top-level argument object_lock_enabled instead.
                           type: string
                         rule:
-                          description: The Object Lock rule in place for this bucket
-                            (documented below).
+                          description: Object Lock rule in place for this bucket (documented
+                            below).
                           items:
                             properties:
                               defaultRetention:
-                                description: The default retention period that you
-                                  want to apply to new objects placed in this bucket
-                                  (documented below).
+                                description: Default retention period that you want
+                                  to apply to new objects placed in this bucket (documented
+                                  below).
                                 items:
                                   properties:
                                     days:
-                                      description: The number of days that you want
-                                        to specify for the default retention period.
+                                      description: Number of days that you want to
+                                        specify for the default retention period.
                                       type: number
                                     mode:
-                                      description: The default Object Lock retention
-                                        mode you want to apply to new objects placed
-                                        in this bucket. Valid values are GOVERNANCE
-                                        and COMPLIANCE.
+                                      description: Default Object Lock retention mode
+                                        you want to apply to new objects placed in
+                                        this bucket. Valid values are GOVERNANCE and
+                                        COMPLIANCE.
                                       type: string
                                     years:
-                                      description: The number of years that you want
-                                        to specify for the default retention period.
+                                      description: Number of years that you want to
+                                        specify for the default retention period.
                                       type: number
                                   type: object
                                 type: array
@@ -513,18 +513,18 @@ spec:
                       type: object
                     type: array
                   policy:
-                    description: A valid bucket policy JSON document. In this case,
+                    description: Valid bucket policy JSON document. In this case,
                       please make sure you use the verbose/specific version of the
                       policy. Use the resource aws_s3_bucket_policy instead.
                     type: string
                   replicationConfiguration:
-                    description: A configuration of replication configuration. See
-                      Replication Configuration below for details. Use the resource
-                      aws_s3_bucket_replication_configuration instead.
+                    description: Configuration of replication configuration. See Replication
+                      Configuration below for details. Use the resource aws_s3_bucket_replication_configuration
+                      instead.
                     items:
                       properties:
                         role:
-                          description: The ARN of the IAM role for Amazon S3 to assume
+                          description: ARN of the IAM role for Amazon S3 to assume
                             when replicating the objects.
                           type: string
                         rules:
@@ -556,15 +556,15 @@ spec:
                                         type: object
                                       type: array
                                     accountId:
-                                      description: The Account ID to use for overriding
+                                      description: Account ID to use for overriding
                                         the object owner on replication. Must be used
                                         in conjunction with access_control_translation
                                         override configuration.
                                       type: string
                                     bucket:
-                                      description: The ARN of the S3 bucket where
-                                        you want Amazon S3 to store replicas of the
-                                        object identified by the rule.
+                                      description: ARN of the S3 bucket where you
+                                        want Amazon S3 to store replicas of the object
+                                        identified by the rule.
                                       type: string
                                     metrics:
                                       description: Enables replication metrics  (documented
@@ -577,7 +577,7 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: The status of the rule. Either
+                                            description: Status of the rule. Either
                                               Enabled or Disabled. The rule is ignored
                                               if status is not Enabled.
                                             type: string
@@ -600,7 +600,7 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: The status of the rule. Either
+                                            description: Status of the rule. Either
                                               Enabled or Disabled. The rule is ignored
                                               if status is not Enabled.
                                             type: string
@@ -644,10 +644,10 @@ spec:
                                   be less than or equal to 1024 characters in length.
                                 type: string
                               priority:
-                                description: The priority associated with the rule.
-                                  Priority should only be set if filter is configured.
-                                  If not provided, defaults to 0. Priority must be
-                                  unique between multiple rules.
+                                description: Priority associated with the rule. Priority
+                                  should only be set if filter is configured. If not
+                                  provided, defaults to 0. Priority must be unique
+                                  between multiple rules.
                                 type: number
                               sourceSelectionCriteria:
                                 description: Specifies special object selection criteria
@@ -672,9 +672,8 @@ spec:
                                   type: object
                                 type: array
                               status:
-                                description: The status of the rule. Either Enabled
-                                  or Disabled. The rule is ignored if status is not
-                                  Enabled.
+                                description: Status of the rule. Either Enabled or
+                                  Disabled. The rule is ignored if status is not Enabled.
                                 type: string
                             type: object
                           type: array
@@ -689,32 +688,32 @@ spec:
                       instead.
                     type: string
                   serverSideEncryptionConfiguration:
-                    description: A configuration of server-side encryption configuration.
+                    description: Configuration of server-side encryption configuration.
                       See Server Side Encryption Configuration below for details.
                       Use the resource aws_s3_bucket_server_side_encryption_configuration
                       instead.
                     items:
                       properties:
                         rule:
-                          description: A single object for server-side encryption
-                            by default configuration. (documented below)
+                          description: Single object for server-side encryption by
+                            default configuration. (documented below)
                           items:
                             properties:
                               applyServerSideEncryptionByDefault:
-                                description: A single object for setting server-side
+                                description: Single object for setting server-side
                                   encryption by default. (documented below)
                                 items:
                                   properties:
                                     kmsMasterKeyId:
-                                      description: The AWS KMS master key ID used
-                                        for the SSE-KMS encryption. This can only
-                                        be used when you set the value of sse_algorithm
-                                        as aws:kms. The default aws/s3 AWS KMS master
+                                      description: AWS KMS master key ID used for
+                                        the SSE-KMS encryption. This can only be used
+                                        when you set the value of sse_algorithm as
+                                        aws:kms. The default aws/s3 AWS KMS master
                                         key is used if this element is absent while
                                         the sse_algorithm is aws:kms.
                                       type: string
                                     sseAlgorithm:
-                                      description: The server-side encryption algorithm
+                                      description: Server-side encryption algorithm
                                         to use. Valid values are AES256 and aws:kms
                                       type: string
                                   type: object
@@ -730,12 +729,11 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   versioning:
-                    description: A configuration of the S3 bucket versioning state.
+                    description: Configuration of the S3 bucket versioning state.
                       See Versioning below for details. Use the resource aws_s3_bucket_versioning
                       instead.
                     items:
@@ -755,43 +753,42 @@ spec:
                       type: object
                     type: array
                   website:
-                    description: A configuration of the S3 bucket website. See Website
+                    description: Configuration of the S3 bucket website. See Website
                       below for details. Use the resource aws_s3_bucket_website_configuration
                       instead.
                     items:
                       properties:
                         errorDocument:
-                          description: An absolute path to the document to return
-                            in case of a 4XX error.
+                          description: Absolute path to the document to return in
+                            case of a 4XX error.
                           type: string
                         indexDocument:
                           description: Amazon S3 returns this index document when
                             requests are made to the root domain or any of the subfolders.
                           type: string
                         redirectAllRequestsTo:
-                          description: A hostname to redirect all website requests
-                            for this bucket to. Hostname can optionally be prefixed
-                            with a protocol (http:// or https://) to use when redirecting
+                          description: Hostname to redirect all website requests for
+                            this bucket to. Hostname can optionally be prefixed with
+                            a protocol (http:// or https://) to use when redirecting
                             requests. The default is the protocol that is used in
                             the original request.
                           type: string
                         routingRules:
-                          description: A json array containing routing rules describing
+                          description: JSON array containing routing rules describing
                             redirect behavior and when redirects are applied.
                           type: string
                       type: object
                     type: array
                   websiteDomain:
-                    description: (Deprecated) The domain of the website endpoint,
-                      if the bucket is configured with a website. If not, this will
-                      be an empty string. This is used to create Route 53 alias records.
+                    description: (Deprecated) Domain of the website endpoint, if the
+                      bucket is configured with a website. If not, this will be an
+                      empty string. This is used to create Route 53 alias records.
                       Use the resource aws_s3_bucket_website_configuration instead.
                     type: string
                   websiteEndpoint:
-                    description: (Deprecated) The website endpoint, if the bucket
-                      is configured with a website. If not, this will be an empty
-                      string. Use the resource aws_s3_bucket_website_configuration
-                      instead.
+                    description: (Deprecated) Website endpoint, if the bucket is configured
+                      with a website. If not, this will be an empty string. Use the
+                      resource aws_s3_bucket_website_configuration instead.
                     type: string
                 type: object
               conditions:

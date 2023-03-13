@@ -271,6 +271,7 @@ import (
 	eventsubscriptiondocdb "github.com/upbound/provider-aws/internal/controller/docdb/eventsubscription"
 	globalcluster "github.com/upbound/provider-aws/internal/controller/docdb/globalcluster"
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
+	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/ds/conditionalforwarder"
 	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
@@ -303,6 +304,7 @@ import (
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instancestate "github.com/upbound/provider-aws/internal/controller/ec2/instancestate"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
 	launchtemplate "github.com/upbound/provider-aws/internal/controller/ec2/launchtemplate"
@@ -312,6 +314,7 @@ import (
 	natgateway "github.com/upbound/provider-aws/internal/controller/ec2/natgateway"
 	networkacl "github.com/upbound/provider-aws/internal/controller/ec2/networkacl"
 	networkaclrule "github.com/upbound/provider-aws/internal/controller/ec2/networkaclrule"
+	networkinsightsanalysis "github.com/upbound/provider-aws/internal/controller/ec2/networkinsightsanalysis"
 	networkinsightspath "github.com/upbound/provider-aws/internal/controller/ec2/networkinsightspath"
 	networkinterface "github.com/upbound/provider-aws/internal/controller/ec2/networkinterface"
 	networkinterfaceattachment "github.com/upbound/provider-aws/internal/controller/ec2/networkinterfaceattachment"
@@ -329,6 +332,7 @@ import (
 	spotinstancerequest "github.com/upbound/provider-aws/internal/controller/ec2/spotinstancerequest"
 	subnet "github.com/upbound/provider-aws/internal/controller/ec2/subnet"
 	subnetcidrreservation "github.com/upbound/provider-aws/internal/controller/ec2/subnetcidrreservation"
+	tagec2 "github.com/upbound/provider-aws/internal/controller/ec2/tag"
 	trafficmirrorfilter "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilter"
 	trafficmirrorfilterrule "github.com/upbound/provider-aws/internal/controller/ec2/trafficmirrorfilterrule"
 	transitgateway "github.com/upbound/provider-aws/internal/controller/ec2/transitgateway"
@@ -340,6 +344,7 @@ import (
 	transitgatewaymulticastgroupsource "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaymulticastgroupsource"
 	transitgatewaypeeringattachment "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachment"
 	transitgatewaypeeringattachmentaccepter "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypeeringattachmentaccepter"
+	transitgatewaypolicytable "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewaypolicytable"
 	transitgatewayprefixlistreference "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayprefixlistreference"
 	transitgatewayroute "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroute"
 	transitgatewayroutetable "github.com/upbound/provider-aws/internal/controller/ec2/transitgatewayroutetable"
@@ -405,8 +410,11 @@ import (
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
 	applicationelasticbeanstalk "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/application"
+	applicationversion "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/applicationversion"
 	configurationtemplate "github.com/upbound/provider-aws/internal/controller/elasticbeanstalk/configurationtemplate"
 	domainelasticsearch "github.com/upbound/provider-aws/internal/controller/elasticsearch/domain"
+	domainpolicy "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainpolicy"
+	domainsamloptions "github.com/upbound/provider-aws/internal/controller/elasticsearch/domainsamloptions"
 	pipelineelastictranscoder "github.com/upbound/provider-aws/internal/controller/elastictranscoder/pipeline"
 	preset "github.com/upbound/provider-aws/internal/controller/elastictranscoder/preset"
 	appcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/appcookiestickinesspolicy"
@@ -424,7 +432,11 @@ import (
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
+	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
+	projectevidently "github.com/upbound/provider-aws/internal/controller/evidently/project"
+	segment "github.com/upbound/provider-aws/internal/controller/evidently/segment"
 	deliverystream "github.com/upbound/provider-aws/internal/controller/firehose/deliverystream"
+	experimenttemplate "github.com/upbound/provider-aws/internal/controller/fis/experimenttemplate"
 	backup "github.com/upbound/provider-aws/internal/controller/fsx/backup"
 	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/fsx/datarepositoryassociation"
 	lustrefilesystem "github.com/upbound/provider-aws/internal/controller/fsx/lustrefilesystem"
@@ -450,6 +462,7 @@ import (
 	job "github.com/upbound/provider-aws/internal/controller/glue/job"
 	registry "github.com/upbound/provider-aws/internal/controller/glue/registry"
 	resourcepolicyglue "github.com/upbound/provider-aws/internal/controller/glue/resourcepolicy"
+	schema "github.com/upbound/provider-aws/internal/controller/glue/schema"
 	securityconfigurationglue "github.com/upbound/provider-aws/internal/controller/glue/securityconfiguration"
 	triggerglue "github.com/upbound/provider-aws/internal/controller/glue/trigger"
 	userdefinedfunction "github.com/upbound/provider-aws/internal/controller/glue/userdefinedfunction"
@@ -457,6 +470,7 @@ import (
 	licenseassociation "github.com/upbound/provider-aws/internal/controller/grafana/licenseassociation"
 	roleassociation "github.com/upbound/provider-aws/internal/controller/grafana/roleassociation"
 	workspacegrafana "github.com/upbound/provider-aws/internal/controller/grafana/workspace"
+	workspaceapikey "github.com/upbound/provider-aws/internal/controller/grafana/workspaceapikey"
 	workspacesamlconfiguration "github.com/upbound/provider-aws/internal/controller/grafana/workspacesamlconfiguration"
 	detector "github.com/upbound/provider-aws/internal/controller/guardduty/detector"
 	filter "github.com/upbound/provider-aws/internal/controller/guardduty/filter"
@@ -483,6 +497,7 @@ import (
 	userpolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/provider-aws/internal/controller/iam/virtualmfadevice"
+	component "github.com/upbound/provider-aws/internal/controller/imagebuilder/component"
 	containerrecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/containerrecipe"
 	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/distributionconfiguration"
 	image "github.com/upbound/provider-aws/internal/controller/imagebuilder/image"
@@ -492,6 +507,7 @@ import (
 	assessmenttarget "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttarget"
 	assessmenttemplate "github.com/upbound/provider-aws/internal/controller/inspector/assessmenttemplate"
 	resourcegroup "github.com/upbound/provider-aws/internal/controller/inspector/resourcegroup"
+	enabler "github.com/upbound/provider-aws/internal/controller/inspector2/enabler"
 	certificateiot "github.com/upbound/provider-aws/internal/controller/iot/certificate"
 	indexingconfiguration "github.com/upbound/provider-aws/internal/controller/iot/indexingconfiguration"
 	loggingoptions "github.com/upbound/provider-aws/internal/controller/iot/loggingoptions"
@@ -505,8 +521,15 @@ import (
 	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
 	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
+	channel "github.com/upbound/provider-aws/internal/controller/ivs/channel"
+	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	datasourcekendra "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
+	experience "github.com/upbound/provider-aws/internal/controller/kendra/experience"
+	index "github.com/upbound/provider-aws/internal/controller/kendra/index"
+	querysuggestionsblocklist "github.com/upbound/provider-aws/internal/controller/kendra/querysuggestionsblocklist"
+	thesaurus "github.com/upbound/provider-aws/internal/controller/kendra/thesaurus"
 	keyspace "github.com/upbound/provider-aws/internal/controller/keyspaces/keyspace"
 	tablekeyspaces "github.com/upbound/provider-aws/internal/controller/keyspaces/table"
 	streamkinesis "github.com/upbound/provider-aws/internal/controller/kinesis/stream"
@@ -542,10 +565,20 @@ import (
 	slottype "github.com/upbound/provider-aws/internal/controller/lexmodels/slottype"
 	association "github.com/upbound/provider-aws/internal/controller/licensemanager/association"
 	licenseconfiguration "github.com/upbound/provider-aws/internal/controller/licensemanager/licenseconfiguration"
+	bucket "github.com/upbound/provider-aws/internal/controller/lightsail/bucket"
+	certificatelightsail "github.com/upbound/provider-aws/internal/controller/lightsail/certificate"
+	containerservice "github.com/upbound/provider-aws/internal/controller/lightsail/containerservice"
+	disk "github.com/upbound/provider-aws/internal/controller/lightsail/disk"
+	diskattachment "github.com/upbound/provider-aws/internal/controller/lightsail/diskattachment"
 	domainlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/domain"
+	domainentry "github.com/upbound/provider-aws/internal/controller/lightsail/domainentry"
 	instancelightsail "github.com/upbound/provider-aws/internal/controller/lightsail/instance"
 	instancepublicports "github.com/upbound/provider-aws/internal/controller/lightsail/instancepublicports"
 	keypairlightsail "github.com/upbound/provider-aws/internal/controller/lightsail/keypair"
+	lblightsail "github.com/upbound/provider-aws/internal/controller/lightsail/lb"
+	lbattachment "github.com/upbound/provider-aws/internal/controller/lightsail/lbattachment"
+	lbcertificate "github.com/upbound/provider-aws/internal/controller/lightsail/lbcertificate"
+	lbstickinesspolicy "github.com/upbound/provider-aws/internal/controller/lightsail/lbstickinesspolicy"
 	staticip "github.com/upbound/provider-aws/internal/controller/lightsail/staticip"
 	staticipattachment "github.com/upbound/provider-aws/internal/controller/lightsail/staticipattachment"
 	geofencecollection "github.com/upbound/provider-aws/internal/controller/location/geofencecollection"
@@ -560,7 +593,11 @@ import (
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
-	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
+	channelmedialive "github.com/upbound/provider-aws/internal/controller/medialive/channel"
+	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
+	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
+	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
+	channelmediapackage "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
 	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
 	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
 	acl "github.com/upbound/provider-aws/internal/controller/memorydb/acl"
@@ -576,11 +613,16 @@ import (
 	clusterparametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/clusterparametergroup"
 	clustersnapshotneptune "github.com/upbound/provider-aws/internal/controller/neptune/clustersnapshot"
 	eventsubscriptionneptune "github.com/upbound/provider-aws/internal/controller/neptune/eventsubscription"
+	globalclusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/globalcluster"
 	parametergroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/parametergroup"
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
+	firewall "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewallpolicy"
 	rulegroup "github.com/upbound/provider-aws/internal/controller/networkfirewall/rulegroup"
+	attachmentaccepter "github.com/upbound/provider-aws/internal/controller/networkmanager/attachmentaccepter"
+	connectattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/connectattachment"
 	connectionnetworkmanager "github.com/upbound/provider-aws/internal/controller/networkmanager/connection"
+	corenetwork "github.com/upbound/provider-aws/internal/controller/networkmanager/corenetwork"
 	customergatewayassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/customergatewayassociation"
 	device "github.com/upbound/provider-aws/internal/controller/networkmanager/device"
 	globalnetwork "github.com/upbound/provider-aws/internal/controller/networkmanager/globalnetwork"
@@ -589,9 +631,10 @@ import (
 	site "github.com/upbound/provider-aws/internal/controller/networkmanager/site"
 	transitgatewayconnectpeerassociation "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayconnectpeerassociation"
 	transitgatewayregistration "github.com/upbound/provider-aws/internal/controller/networkmanager/transitgatewayregistration"
+	vpcattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/vpcattachment"
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
-	domainpolicy "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
-	domainsamloptions "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	domainpolicyopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
+	domainsamloptionsopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
 	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
 	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
 	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
@@ -645,19 +688,25 @@ import (
 	securitygrouprds "github.com/upbound/provider-aws/internal/controller/rds/securitygroup"
 	snapshotrds "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
+	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
 	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
+	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
+	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
 	parametergroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
 	scheduledactionredshift "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
 	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/redshift/snapshotcopygrant"
 	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
+	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
+	profile "github.com/upbound/provider-aws/internal/controller/rolesanywhere/profile"
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
 	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
 	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/route53/hostedzonednssec"
 	record "github.com/upbound/provider-aws/internal/controller/route53/record"
+	resolverconfig "github.com/upbound/provider-aws/internal/controller/route53/resolverconfig"
 	trafficpolicy "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicy"
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
@@ -673,7 +722,9 @@ import (
 	endpointroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/endpoint"
 	ruleroute53resolver "github.com/upbound/provider-aws/internal/controller/route53resolver/rule"
 	ruleassociation "github.com/upbound/provider-aws/internal/controller/route53resolver/ruleassociation"
-	bucket "github.com/upbound/provider-aws/internal/controller/s3/bucket"
+	appmonitor "github.com/upbound/provider-aws/internal/controller/rum/appmonitor"
+	metricsdestination "github.com/upbound/provider-aws/internal/controller/rum/metricsdestination"
+	buckets3 "github.com/upbound/provider-aws/internal/controller/s3/bucket"
 	bucketaccelerateconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketaccelerateconfiguration"
 	bucketacl "github.com/upbound/provider-aws/internal/controller/s3/bucketacl"
 	bucketanalyticsconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketanalyticsconfiguration"
@@ -703,6 +754,7 @@ import (
 	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspointpolicy"
 	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspoint"
 	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
+	storagelensconfiguration "github.com/upbound/provider-aws/internal/controller/s3control/storagelensconfiguration"
 	appsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/app"
 	appimageconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/appimageconfig"
 	coderepository "github.com/upbound/provider-aws/internal/controller/sagemaker/coderepository"
@@ -718,13 +770,17 @@ import (
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
 	notebookinstance "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstance"
 	notebookinstancelifecycleconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/notebookinstancelifecycleconfiguration"
+	servicecatalogportfoliostatus "github.com/upbound/provider-aws/internal/controller/sagemaker/servicecatalogportfoliostatus"
+	space "github.com/upbound/provider-aws/internal/controller/sagemaker/space"
 	studiolifecycleconfig "github.com/upbound/provider-aws/internal/controller/sagemaker/studiolifecycleconfig"
 	userprofilesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/userprofile"
 	workforce "github.com/upbound/provider-aws/internal/controller/sagemaker/workforce"
 	workteam "github.com/upbound/provider-aws/internal/controller/sagemaker/workteam"
+	schedulescheduler "github.com/upbound/provider-aws/internal/controller/scheduler/schedule"
+	schedulegroup "github.com/upbound/provider-aws/internal/controller/scheduler/schedulegroup"
 	discoverer "github.com/upbound/provider-aws/internal/controller/schemas/discoverer"
 	registryschemas "github.com/upbound/provider-aws/internal/controller/schemas/registry"
-	schema "github.com/upbound/provider-aws/internal/controller/schemas/schema"
+	schemaschemas "github.com/upbound/provider-aws/internal/controller/schemas/schema"
 	secret "github.com/upbound/provider-aws/internal/controller/secretsmanager/secret"
 	secretpolicy "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretpolicy"
 	secretrotation "github.com/upbound/provider-aws/internal/controller/secretsmanager/secretrotation"
@@ -767,6 +823,12 @@ import (
 	receiptrule "github.com/upbound/provider-aws/internal/controller/ses/receiptrule"
 	receiptruleset "github.com/upbound/provider-aws/internal/controller/ses/receiptruleset"
 	template "github.com/upbound/provider-aws/internal/controller/ses/template"
+	configurationsetsesv2 "github.com/upbound/provider-aws/internal/controller/sesv2/configurationset"
+	configurationseteventdestination "github.com/upbound/provider-aws/internal/controller/sesv2/configurationseteventdestination"
+	dedicatedippool "github.com/upbound/provider-aws/internal/controller/sesv2/dedicatedippool"
+	emailidentitysesv2 "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentity"
+	emailidentityfeedbackattributes "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentityfeedbackattributes"
+	emailidentitymailfromattributes "github.com/upbound/provider-aws/internal/controller/sesv2/emailidentitymailfromattributes"
 	activity "github.com/upbound/provider-aws/internal/controller/sfn/activity"
 	statemachine "github.com/upbound/provider-aws/internal/controller/sfn/statemachine"
 	signingjob "github.com/upbound/provider-aws/internal/controller/signer/signingjob"
@@ -780,8 +842,11 @@ import (
 	topicsubscription "github.com/upbound/provider-aws/internal/controller/sns/topicsubscription"
 	queuesqs "github.com/upbound/provider-aws/internal/controller/sqs/queue"
 	queuepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queuepolicy"
+	queueredriveallowpolicy "github.com/upbound/provider-aws/internal/controller/sqs/queueredriveallowpolicy"
+	queueredrivepolicy "github.com/upbound/provider-aws/internal/controller/sqs/queueredrivepolicy"
 	activation "github.com/upbound/provider-aws/internal/controller/ssm/activation"
 	associationssm "github.com/upbound/provider-aws/internal/controller/ssm/association"
+	defaultpatchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/defaultpatchbaseline"
 	document "github.com/upbound/provider-aws/internal/controller/ssm/document"
 	maintenancewindow "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindow"
 	maintenancewindowtarget "github.com/upbound/provider-aws/internal/controller/ssm/maintenancewindowtarget"
@@ -790,6 +855,7 @@ import (
 	patchbaseline "github.com/upbound/provider-aws/internal/controller/ssm/patchbaseline"
 	patchgroup "github.com/upbound/provider-aws/internal/controller/ssm/patchgroup"
 	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
+	servicesetting "github.com/upbound/provider-aws/internal/controller/ssm/servicesetting"
 	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
 	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
 	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
@@ -797,10 +863,15 @@ import (
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
+	languagemodel "github.com/upbound/provider-aws/internal/controller/transcribe/languagemodel"
+	vocabularytranscribe "github.com/upbound/provider-aws/internal/controller/transcribe/vocabulary"
+	vocabularyfilter "github.com/upbound/provider-aws/internal/controller/transcribe/vocabularyfilter"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
+	tagtransfer "github.com/upbound/provider-aws/internal/controller/transfer/tag"
 	usertransfer "github.com/upbound/provider-aws/internal/controller/transfer/user"
 	workflowtransfer "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
+	networkperformancemetricsubscription "github.com/upbound/provider-aws/internal/controller/vpc/networkperformancemetricsubscription"
 	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
 	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
 	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
@@ -1098,6 +1169,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventsubscriptiondocdb.Setup,
 		globalcluster.Setup,
 		subnetgroupdocdb.Setup,
+		conditionalforwarder.Setup,
 		directory.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
@@ -1130,6 +1202,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		flowlog.Setup,
 		hostec2.Setup,
 		instanceec2.Setup,
+		instancestate.Setup,
 		internetgateway.Setup,
 		keypair.Setup,
 		launchtemplate.Setup,
@@ -1139,6 +1212,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		natgateway.Setup,
 		networkacl.Setup,
 		networkaclrule.Setup,
+		networkinsightsanalysis.Setup,
 		networkinsightspath.Setup,
 		networkinterface.Setup,
 		networkinterfaceattachment.Setup,
@@ -1156,6 +1230,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		spotinstancerequest.Setup,
 		subnet.Setup,
 		subnetcidrreservation.Setup,
+		tagec2.Setup,
 		trafficmirrorfilter.Setup,
 		trafficmirrorfilterrule.Setup,
 		transitgateway.Setup,
@@ -1167,6 +1242,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		transitgatewaymulticastgroupsource.Setup,
 		transitgatewaypeeringattachment.Setup,
 		transitgatewaypeeringattachmentaccepter.Setup,
+		transitgatewaypolicytable.Setup,
 		transitgatewayprefixlistreference.Setup,
 		transitgatewayroute.Setup,
 		transitgatewayroutetable.Setup,
@@ -1232,8 +1308,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
 		applicationelasticbeanstalk.Setup,
+		applicationversion.Setup,
 		configurationtemplate.Setup,
 		domainelasticsearch.Setup,
+		domainpolicy.Setup,
+		domainsamloptions.Setup,
 		pipelineelastictranscoder.Setup,
 		preset.Setup,
 		appcookiestickinesspolicy.Setup,
@@ -1251,7 +1330,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
 		securityconfiguration.Setup,
+		feature.Setup,
+		projectevidently.Setup,
+		segment.Setup,
 		deliverystream.Setup,
+		experimenttemplate.Setup,
 		backup.Setup,
 		datarepositoryassociation.Setup,
 		lustrefilesystem.Setup,
@@ -1277,6 +1360,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		registry.Setup,
 		resourcepolicyglue.Setup,
+		schema.Setup,
 		securityconfigurationglue.Setup,
 		triggerglue.Setup,
 		userdefinedfunction.Setup,
@@ -1284,6 +1368,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		licenseassociation.Setup,
 		roleassociation.Setup,
 		workspacegrafana.Setup,
+		workspaceapikey.Setup,
 		workspacesamlconfiguration.Setup,
 		detector.Setup,
 		filter.Setup,
@@ -1310,6 +1395,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		component.Setup,
 		containerrecipe.Setup,
 		distributionconfiguration.Setup,
 		image.Setup,
@@ -1319,6 +1405,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		assessmenttarget.Setup,
 		assessmenttemplate.Setup,
 		resourcegroup.Setup,
+		enabler.Setup,
 		certificateiot.Setup,
 		indexingconfiguration.Setup,
 		loggingoptions.Setup,
@@ -1332,8 +1419,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		thingprincipalattachment.Setup,
 		thingtype.Setup,
 		topicrule.Setup,
+		channel.Setup,
+		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		datasourcekendra.Setup,
+		experience.Setup,
+		index.Setup,
+		querysuggestionsblocklist.Setup,
+		thesaurus.Setup,
 		keyspace.Setup,
 		tablekeyspaces.Setup,
 		streamkinesis.Setup,
@@ -1369,10 +1463,20 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		slottype.Setup,
 		association.Setup,
 		licenseconfiguration.Setup,
+		bucket.Setup,
+		certificatelightsail.Setup,
+		containerservice.Setup,
+		disk.Setup,
+		diskattachment.Setup,
 		domainlightsail.Setup,
+		domainentry.Setup,
 		instancelightsail.Setup,
 		instancepublicports.Setup,
 		keypairlightsail.Setup,
+		lblightsail.Setup,
+		lbattachment.Setup,
+		lbcertificate.Setup,
+		lbstickinesspolicy.Setup,
 		staticip.Setup,
 		staticipattachment.Setup,
 		geofencecollection.Setup,
@@ -1387,7 +1491,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		invitationacceptermacie2.Setup,
 		membermacie2.Setup,
 		queuemediaconvert.Setup,
-		channel.Setup,
+		channelmedialive.Setup,
+		input.Setup,
+		inputsecuritygroup.Setup,
+		multiplex.Setup,
+		channelmediapackage.Setup,
 		container.Setup,
 		containerpolicy.Setup,
 		acl.Setup,
@@ -1403,11 +1511,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterparametergroupneptune.Setup,
 		clustersnapshotneptune.Setup,
 		eventsubscriptionneptune.Setup,
+		globalclusterneptune.Setup,
 		parametergroupneptune.Setup,
 		subnetgroupneptune.Setup,
+		firewall.Setup,
 		firewallpolicy.Setup,
 		rulegroup.Setup,
+		attachmentaccepter.Setup,
+		connectattachment.Setup,
 		connectionnetworkmanager.Setup,
+		corenetwork.Setup,
 		customergatewayassociation.Setup,
 		device.Setup,
 		globalnetwork.Setup,
@@ -1416,9 +1529,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		site.Setup,
 		transitgatewayconnectpeerassociation.Setup,
 		transitgatewayregistration.Setup,
+		vpcattachment.Setup,
 		domainopensearch.Setup,
-		domainpolicy.Setup,
-		domainsamloptions.Setup,
+		domainpolicyopensearch.Setup,
+		domainsamloptionsopensearch.Setup,
 		applicationopsworks.Setup,
 		customlayer.Setup,
 		ecsclusterlayer.Setup,
@@ -1472,19 +1586,25 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygrouprds.Setup,
 		snapshotrds.Setup,
 		subnetgrouprds.Setup,
+		authenticationprofile.Setup,
 		clusterredshift.Setup,
 		eventsubscriptionredshift.Setup,
+		hsmclientcertificate.Setup,
+		hsmconfiguration.Setup,
 		parametergroupredshift.Setup,
 		scheduledactionredshift.Setup,
 		snapshotcopygrant.Setup,
 		snapshotschedule.Setup,
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,
+		usagelimit.Setup,
 		groupresourcegroups.Setup,
+		profile.Setup,
 		delegationset.Setup,
 		healthcheck.Setup,
 		hostedzonednssec.Setup,
 		record.Setup,
+		resolverconfig.Setup,
 		trafficpolicy.Setup,
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
@@ -1500,7 +1620,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		endpointroute53resolver.Setup,
 		ruleroute53resolver.Setup,
 		ruleassociation.Setup,
-		bucket.Setup,
+		appmonitor.Setup,
+		metricsdestination.Setup,
+		buckets3.Setup,
 		bucketaccelerateconfiguration.Setup,
 		bucketacl.Setup,
 		bucketanalyticsconfiguration.Setup,
@@ -1530,6 +1652,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		multiregionaccesspointpolicy.Setup,
 		objectlambdaaccesspoint.Setup,
 		objectlambdaaccesspointpolicy.Setup,
+		storagelensconfiguration.Setup,
 		appsagemaker.Setup,
 		appimageconfig.Setup,
 		coderepository.Setup,
@@ -1545,13 +1668,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		modelpackagegrouppolicy.Setup,
 		notebookinstance.Setup,
 		notebookinstancelifecycleconfiguration.Setup,
+		servicecatalogportfoliostatus.Setup,
+		space.Setup,
 		studiolifecycleconfig.Setup,
 		userprofilesagemaker.Setup,
 		workforce.Setup,
 		workteam.Setup,
+		schedulescheduler.Setup,
+		schedulegroup.Setup,
 		discoverer.Setup,
 		registryschemas.Setup,
-		schema.Setup,
+		schemaschemas.Setup,
 		secret.Setup,
 		secretpolicy.Setup,
 		secretrotation.Setup,
@@ -1594,6 +1721,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		receiptrule.Setup,
 		receiptruleset.Setup,
 		template.Setup,
+		configurationsetsesv2.Setup,
+		configurationseteventdestination.Setup,
+		dedicatedippool.Setup,
+		emailidentitysesv2.Setup,
+		emailidentityfeedbackattributes.Setup,
+		emailidentitymailfromattributes.Setup,
 		activity.Setup,
 		statemachine.Setup,
 		signingjob.Setup,
@@ -1607,8 +1740,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topicsubscription.Setup,
 		queuesqs.Setup,
 		queuepolicy.Setup,
+		queueredriveallowpolicy.Setup,
+		queueredrivepolicy.Setup,
 		activation.Setup,
 		associationssm.Setup,
+		defaultpatchbaseline.Setup,
 		document.Setup,
 		maintenancewindow.Setup,
 		maintenancewindowtarget.Setup,
@@ -1617,6 +1753,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		patchbaseline.Setup,
 		patchgroup.Setup,
 		resourcedatasync.Setup,
+		servicesetting.Setup,
 		accountassignment.Setup,
 		managedpolicyattachment.Setup,
 		permissionset.Setup,
@@ -1624,10 +1761,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domainswf.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
+		languagemodel.Setup,
+		vocabularytranscribe.Setup,
+		vocabularyfilter.Setup,
 		server.Setup,
 		sshkey.Setup,
+		tagtransfer.Setup,
 		usertransfer.Setup,
 		workflowtransfer.Setup,
+		networkperformancemetricsubscription.Setup,
 		bytematchset.Setup,
 		geomatchset.Setup,
 		ipset.Setup,

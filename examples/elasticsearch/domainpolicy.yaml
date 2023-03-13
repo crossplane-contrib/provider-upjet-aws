@@ -1,0 +1,50 @@
+apiVersion: elasticsearch.aws.upbound.io/v1beta1
+kind: DomainPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticsearch/v1beta1/domainpolicy
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    accessPolicies: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Action": "es:*",
+                  "Principal": "*",
+                  "Effect": "Allow",
+                  "Condition": {
+                      "IpAddress": {"aws:SourceIp": "127.0.0.1/32"}
+                  },
+                  "Resource": "arn:aws:es:us-west-1:domain/example/*"
+              }
+          ]
+      }
+    domainNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: elasticsearch.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticsearch/v1beta1/domainpolicy
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-domainpolicy
+spec:
+  forProvider:
+    clusterConfig:
+    - instanceType: r4.large.elasticsearch
+    ebsOptions:
+    - ebsEnabled: true
+      volumeSize: 30
+    elasticsearchVersion: "5.3"
+    region: us-west-1

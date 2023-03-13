@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type VPNGatewayObservation struct {
+type VPNGatewayObservation_2 struct {
 
 	// Amazon Resource Name (ARN) of the VPN Gateway.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -25,7 +25,7 @@ type VPNGatewayObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type VPNGatewayParameters struct {
+type VPNGatewayParameters_2 struct {
 
 	// The Autonomous System Number (ASN) for the Amazon side of the gateway. If you don't specify an ASN, the virtual private gateway is created with the default ASN.
 	// +kubebuilder:validation:Optional
@@ -61,13 +61,13 @@ type VPNGatewayParameters struct {
 // VPNGatewaySpec defines the desired state of VPNGateway
 type VPNGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNGatewayParameters `json:"forProvider"`
+	ForProvider     VPNGatewayParameters_2 `json:"forProvider"`
 }
 
 // VPNGatewayStatus defines the observed state of VPNGateway.
 type VPNGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNGatewayObservation `json:"atProvider,omitempty"`
+	AtProvider        VPNGatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

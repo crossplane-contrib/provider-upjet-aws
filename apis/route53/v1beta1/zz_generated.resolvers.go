@@ -109,6 +109,32 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this ResolverConfig.
+func (mg *ResolverConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ResourceIDRef,
+		Selector:     mg.Spec.ForProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceID")
+	}
+	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this TrafficPolicyInstance.
 func (mg *TrafficPolicyInstance) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

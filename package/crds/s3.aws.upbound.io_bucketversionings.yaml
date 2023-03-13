@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the S3 bucket.
+                    description: Name of the S3 bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -141,20 +141,20 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   mfa:
-                    description: The concatenation of the authentication device's
-                      serial number, a space, and the value that is displayed on your
-                      authentication device.
+                    description: Concatenation of the authentication device's serial
+                      number, a space, and the value that is displayed on your authentication
+                      device.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   versioningConfiguration:
-                    description: Configuration block for the versioning parameters
-                      detailed below.
+                    description: Configuration block for the versioning parameters.
+                      See below.
                     items:
                       properties:
                         mfaDelete:
@@ -163,10 +163,10 @@ spec:
                             or Disabled.'
                           type: string
                         status:
-                          description: 'The versioning state of the bucket. Valid
-                            values: Enabled, Suspended, or Disabled. Disabled should
-                            only be used when creating or importing resources that
-                            correspond to unversioned S3 buckets.'
+                          description: 'Versioning state of the bucket. Valid values:
+                            Enabled, Suspended, or Disabled. Disabled should only
+                            be used when creating or importing resources that correspond
+                            to unversioned S3 buckets.'
                           type: string
                       required:
                       - status

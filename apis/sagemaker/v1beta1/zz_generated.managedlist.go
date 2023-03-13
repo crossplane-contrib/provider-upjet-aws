@@ -142,6 +142,24 @@ func (l *NotebookInstanceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ServicecatalogPortfolioStatusList.
+func (l *ServicecatalogPortfolioStatusList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpaceList.
+func (l *SpaceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this StudioLifecycleConfigList.
 func (l *StudioLifecycleConfigList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

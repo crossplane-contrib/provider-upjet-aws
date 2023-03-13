@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -142,14 +142,14 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   status:
-                    description: 'The transfer acceleration state of the bucket. Valid
+                    description: 'Transfer acceleration state of the bucket. Valid
                       values: Enabled, Suspended.'
                     type: string
                 required:

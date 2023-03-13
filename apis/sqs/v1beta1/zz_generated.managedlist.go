@@ -24,3 +24,21 @@ func (l *QueuePolicyList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this QueueRedriveAllowPolicyList.
+func (l *QueueRedriveAllowPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this QueueRedrivePolicyList.
+func (l *QueueRedrivePolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

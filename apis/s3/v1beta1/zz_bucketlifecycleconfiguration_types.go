@@ -18,7 +18,7 @@ type AbortIncompleteMultipartUploadObservation struct {
 
 type AbortIncompleteMultipartUploadParameters struct {
 
-	// The number of days after which Amazon S3 aborts an incomplete multipart upload.
+	// Number of days after which Amazon S3 aborts an incomplete multipart upload.
 	// +kubebuilder:validation:Optional
 	DaysAfterInitiation *float64 `json:"daysAfterInitiation,omitempty" tf:"days_after_initiation,omitempty"`
 }
@@ -53,7 +53,7 @@ type BucketLifecycleConfigurationObservation struct {
 
 type BucketLifecycleConfigurationParameters struct {
 
-	// The name of the source S3 bucket you want Amazon S3 to monitor.
+	// Name of the source S3 bucket you want Amazon S3 to monitor.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -67,7 +67,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
+	// Account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -76,7 +76,7 @@ type BucketLifecycleConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of configuration blocks describing the rules managing the replication documented below.
+	// List of configuration blocks describing the rules managing the replication. See below.
 	// +kubebuilder:validation:Required
 	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -86,15 +86,15 @@ type BucketLifecycleConfigurationRuleObservation struct {
 
 type BucketLifecycleConfigurationRuleParameters struct {
 
-	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload documented below.
+	// Configuration block that specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload. See below.
 	// +kubebuilder:validation:Optional
 	AbortIncompleteMultipartUpload []AbortIncompleteMultipartUploadParameters `json:"abortIncompleteMultipartUpload,omitempty" tf:"abort_incomplete_multipart_upload,omitempty"`
 
-	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker documented below.
+	// Configuration block that specifies the expiration for the lifecycle of the object in the form of date, days and, whether the object has a delete marker. See below.
 	// +kubebuilder:validation:Optional
 	Expiration []RuleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// Configuration block used to identify objects that a Lifecycle Rule applies to documented below. If not specified, the rule will default to using prefix.
+	// Configuration block used to identify objects that a Lifecycle Rule applies to. See below. If not specified, the rule will default to using prefix.
 	// +kubebuilder:validation:Optional
 	Filter []RuleFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -102,11 +102,11 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// Configuration block that specifies when noncurrent object versions expire documented below.
+	// Configuration block that specifies when noncurrent object versions expire. See below.
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionExpiration []RuleNoncurrentVersionExpirationParameters `json:"noncurrentVersionExpiration,omitempty" tf:"noncurrent_version_expiration,omitempty"`
 
-	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class documented below.
+	// Set of configuration blocks that specify the transition rule for the lifecycle rule that describes when noncurrent objects transition to a specific storage class. See below.
 	// +kubebuilder:validation:Optional
 	NoncurrentVersionTransition []RuleNoncurrentVersionTransitionParameters `json:"noncurrentVersionTransition,omitempty" tf:"noncurrent_version_transition,omitempty"`
 
@@ -118,7 +118,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Status *string `json:"status" tf:"status,omitempty"`
 
-	// Set of configuration blocks that specify when an Amazon S3 object transitions to a specified storage class documented below.
+	// Set of configuration blocks that specify when an Amazon S3 object transitions to a specified storage class. See below.
 	// +kubebuilder:validation:Optional
 	Transition []RuleTransitionParameters `json:"transition,omitempty" tf:"transition,omitempty"`
 }
@@ -128,11 +128,11 @@ type RuleExpirationObservation struct {
 
 type RuleExpirationParameters struct {
 
-	// The date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
-	// The number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
+	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
@@ -146,7 +146,7 @@ type RuleFilterObservation struct {
 
 type RuleFilterParameters struct {
 
-	// Configuration block used to apply a logical AND to two or more predicates documented below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
+	// Configuration block used to apply a logical AND to two or more predicates. See below. The Lifecycle Rule will apply to any object matching all the predicates configured inside the and block.
 	// +kubebuilder:validation:Optional
 	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
 
@@ -162,7 +162,7 @@ type RuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// A configuration block for specifying a tag key and value documented below.
+	// Configuration block for specifying a tag key and value. See below.
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
@@ -172,11 +172,11 @@ type RuleNoncurrentVersionExpirationObservation struct {
 
 type RuleNoncurrentVersionExpirationParameters struct {
 
-	// The number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
+	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
 	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
-	// The number of days an object is noncurrent before Amazon S3 can perform the associated action.
+	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 }
@@ -186,15 +186,15 @@ type RuleNoncurrentVersionTransitionObservation struct {
 
 type RuleNoncurrentVersionTransitionParameters struct {
 
-	// The number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
+	// Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer.
 	// +kubebuilder:validation:Optional
 	NewerNoncurrentVersions *string `json:"newerNoncurrentVersions,omitempty" tf:"newer_noncurrent_versions,omitempty"`
 
-	// The number of days an object is noncurrent before Amazon S3 can perform the associated action.
+	// Number of days an object is noncurrent before Amazon S3 can perform the associated action.
 	// +kubebuilder:validation:Optional
 	NoncurrentDays *float64 `json:"noncurrentDays,omitempty" tf:"noncurrent_days,omitempty"`
 
-	// The class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Required
 	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }
@@ -204,15 +204,15 @@ type RuleTransitionObservation struct {
 
 type RuleTransitionParameters struct {
 
-	// The date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
-	// The number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
+	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Required
 	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }

@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type VPCObservation struct {
+type VPCObservation_2 struct {
 
 	// Amazon Resource Name (ARN) of VPC
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -48,7 +48,7 @@ type VPCObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type VPCParameters struct {
+type VPCParameters_2 struct {
 
 	// Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block. Default is false. Conflicts with ipv6_ipam_pool_id
 	// +kubebuilder:validation:Optional
@@ -132,13 +132,13 @@ type VPCParameters struct {
 // VPCSpec defines the desired state of VPC
 type VPCSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCParameters `json:"forProvider"`
+	ForProvider     VPCParameters_2 `json:"forProvider"`
 }
 
 // VPCStatus defines the observed state of VPC.
 type VPCStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCObservation `json:"atProvider,omitempty"`
+	AtProvider        VPCObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

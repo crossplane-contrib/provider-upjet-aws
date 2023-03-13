@@ -175,8 +175,10 @@ spec:
                     type: boolean
                   enableCrossZoneLoadBalancing:
                     description: If true, cross-zone load balancing of the load balancer
-                      will be enabled. This is a network load balancer feature. Defaults
-                      to false.
+                      will be enabled. For network and gateway type load balancers,
+                      this feature is disabled by default (false). For application
+                      load balancer this feature is always enabled (true) and cannot
+                      be disabled. Defaults to false.
                     type: boolean
                   enableDeletionProtection:
                     description: If true, deletion of the load balancer will be disabled

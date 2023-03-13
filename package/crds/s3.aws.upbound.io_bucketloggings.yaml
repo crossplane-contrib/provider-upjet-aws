@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -141,15 +141,15 @@ spec:
                         type: object
                     type: object
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   targetBucket:
-                    description: The name of the bucket where you want Amazon S3 to
-                      store server access logs.
+                    description: Name of the bucket where you want Amazon S3 to store
+                      server access logs.
                     type: string
                   targetBucketRef:
                     description: Reference to a Bucket in s3 to populate targetBucket.
@@ -226,12 +226,12 @@ spec:
                     type: object
                   targetGrant:
                     description: Set of configuration blocks with information for
-                      granting permissions documented below.
+                      granting permissions. See below.
                     items:
                       properties:
                         grantee:
-                          description: A configuration block for the person being
-                            granted permissions documented below.
+                          description: Configuration block for the person being granted
+                            permissions. See below.
                           items:
                             properties:
                               emailAddress:
@@ -240,7 +240,7 @@ spec:
                                   argument can be specified.
                                 type: string
                               id:
-                                description: The canonical user ID of the grantee.
+                                description: Canonical user ID of the grantee.
                                 type: string
                               type:
                                 description: 'Type of grantee. Valid values: CanonicalUser,
@@ -263,7 +263,7 @@ spec:
                       type: object
                     type: array
                   targetPrefix:
-                    description: A prefix for all log object keys.
+                    description: Prefix for all log object keys.
                     type: string
                 required:
                 - region
@@ -451,12 +451,12 @@ spec:
                     type: string
                   targetGrant:
                     description: Set of configuration blocks with information for
-                      granting permissions documented below.
+                      granting permissions. See below.
                     items:
                       properties:
                         grantee:
-                          description: A configuration block for the person being
-                            granted permissions documented below.
+                          description: Configuration block for the person being granted
+                            permissions. See below.
                           items:
                             properties:
                               displayName:

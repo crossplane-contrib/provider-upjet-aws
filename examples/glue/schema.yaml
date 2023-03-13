@@ -1,0 +1,33 @@
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Schema
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/schema
+  labels:
+    testing.upbound.io/example-name: schema
+  name: schema
+spec:
+  forProvider:
+    compatibility: NONE
+    dataFormat: AVRO
+    region: us-east-1
+    registryArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: schema
+    schemaDefinition: '{"type": "record", "name": "r1", "fields": [ {"name": "f1",
+      "type": "int"}, {"name": "f2", "type": "string"} ]}'
+    schemaName: example
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/schema
+  labels:
+    testing.upbound.io/example-name: schema
+  name: schema
+spec:
+  forProvider:
+    region: us-east-1

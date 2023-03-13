@@ -22,10 +22,10 @@ type AccessControlTranslationParameters struct {
 
 type ApplyServerSideEncryptionByDefaultObservation struct {
 
-	// The AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms.
+	// AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms.
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
-	// The server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
@@ -41,44 +41,44 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_accelerate_configuration instead.
 	AccelerationStatus *string `json:"accelerationStatus,omitempty" tf:"acceleration_status,omitempty"`
 
-	// The ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
+	// ARN of the bucket. Will be of format arn:aws:s3:::bucketname.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The bucket domain name. Will be of format bucketname.s3.amazonaws.com.
+	// Bucket domain name. Will be of format bucketname.s3.amazonaws.com.
 	BucketDomainName *string `json:"bucketDomainName,omitempty" tf:"bucket_domain_name,omitempty"`
 
-	// The bucket region-specific domain name. The bucket domain name including the region name, please refer here for format. Note: The AWS CloudFront allows specifying S3 region-specific endpoint when creating S3 origin, it will prevent redirect issues from CloudFront to S3 Origin URL.
+	// Bucket region-specific domain name. The bucket domain name including the region name, please refer here for format. Note: The AWS CloudFront allows specifying S3 region-specific endpoint when creating S3 origin, it will prevent redirect issues from CloudFront to S3 Origin URL.
 	BucketRegionalDomainName *string `json:"bucketRegionalDomainName,omitempty" tf:"bucket_regional_domain_name,omitempty"`
 
-	// A rule of Cross-Origin Resource Sharing. See CORS rule below for details. Use the resource aws_s3_bucket_cors_configuration instead.
+	// Rule of Cross-Origin Resource Sharing. See CORS rule below for details. Use the resource aws_s3_bucket_cors_configuration instead.
 	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
 	// An ACL policy grant. See Grant below for details. Conflicts with acl. Use the resource aws_s3_bucket_acl instead.
 	Grant []GrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// The Route 53 Hosted Zone ID for this bucket's region.
+	// Route 53 Hosted Zone ID for this bucket's region.
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The name of the bucket.
+	// Name of the bucket.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A configuration of object lifecycle management. See Lifecycle Rule below for details.
+	// Configuration of object lifecycle management. See Lifecycle Rule below for details.
 	// Use the resource aws_s3_bucket_lifecycle_configuration instead.
 	LifecycleRule []LifecycleRuleObservation `json:"lifecycleRule,omitempty" tf:"lifecycle_rule,omitempty"`
 
-	// A configuration of S3 bucket logging parameters. See Logging below for details.
+	// Configuration of S3 bucket logging parameters. See Logging below for details.
 	// Use the resource aws_s3_bucket_logging instead.
 	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// A configuration of S3 object locking. See Object Lock Configuration below for details.
+	// Configuration of S3 object locking. See Object Lock Configuration below for details.
 	// Use the object_lock_enabled parameter and the resource aws_s3_bucket_object_lock_configuration instead.
 	ObjectLockConfiguration []ObjectLockConfigurationObservation `json:"objectLockConfiguration,omitempty" tf:"object_lock_configuration,omitempty"`
 
-	// A valid bucket policy JSON document. In this case, please make sure you use the verbose/specific version of the policy.
+	// Valid bucket policy JSON document. In this case, please make sure you use the verbose/specific version of the policy.
 	// Use the resource aws_s3_bucket_policy instead.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// A configuration of replication configuration. See Replication Configuration below for details.
+	// Configuration of replication configuration. See Replication Configuration below for details.
 	// Use the resource aws_s3_bucket_replication_configuration instead.
 	ReplicationConfiguration []ReplicationConfigurationObservation `json:"replicationConfiguration,omitempty" tf:"replication_configuration,omitempty"`
 
@@ -88,30 +88,30 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_request_payment_configuration instead.
 	RequestPayer *string `json:"requestPayer,omitempty" tf:"request_payer,omitempty"`
 
-	// A configuration of server-side encryption configuration. See Server Side Encryption Configuration below for details.
+	// Configuration of server-side encryption configuration. See Server Side Encryption Configuration below for details.
 	// Use the resource aws_s3_bucket_server_side_encryption_configuration instead.
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationObservation `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// A configuration of the S3 bucket versioning state. See Versioning below for details. Use the resource aws_s3_bucket_versioning instead.
+	// Configuration of the S3 bucket versioning state. See Versioning below for details. Use the resource aws_s3_bucket_versioning instead.
 	Versioning []VersioningObservation `json:"versioning,omitempty" tf:"versioning,omitempty"`
 
-	// A configuration of the S3 bucket website. See Website below for details.
+	// Configuration of the S3 bucket website. See Website below for details.
 	// Use the resource aws_s3_bucket_website_configuration instead.
 	Website []WebsiteObservation `json:"website,omitempty" tf:"website,omitempty"`
 
-	// (Deprecated) The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. Use the resource aws_s3_bucket_website_configuration instead.
+	// (Deprecated) Domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. Use the resource aws_s3_bucket_website_configuration instead.
 	WebsiteDomain *string `json:"websiteDomain,omitempty" tf:"website_domain,omitempty"`
 
-	// (Deprecated) The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. Use the resource aws_s3_bucket_website_configuration instead.
+	// (Deprecated) Website endpoint, if the bucket is configured with a website. If not, this will be an empty string. Use the resource aws_s3_bucket_website_configuration instead.
 	WebsiteEndpoint *string `json:"websiteEndpoint,omitempty" tf:"website_endpoint,omitempty"`
 }
 
 type BucketParameters struct {
 
-	// A boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true.
+	// Boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
@@ -119,7 +119,7 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// The AWS region this bucket resides in.
+	// AWS region this bucket resides in.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -153,13 +153,13 @@ type CorsRuleParameters struct {
 
 type DefaultRetentionObservation struct {
 
-	// The number of days that you want to specify for the default retention period.
+	// Number of days that you want to specify for the default retention period.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed in this bucket. Valid values are GOVERNANCE and COMPLIANCE.
+	// Default Object Lock retention mode you want to apply to new objects placed in this bucket. Valid values are GOVERNANCE and COMPLIANCE.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The number of years that you want to specify for the default retention period.
+	// Number of years that you want to specify for the default retention period.
 	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
@@ -171,10 +171,10 @@ type DestinationObservation struct {
 	// Specifies the overrides to use for object owners on replication. Must be used in conjunction with account_id owner override configuration.
 	AccessControlTranslation []AccessControlTranslationObservation `json:"accessControlTranslation,omitempty" tf:"access_control_translation,omitempty"`
 
-	// The Account ID to use for overriding the object owner on replication. Must be used in conjunction with access_control_translation override configuration.
+	// Account ID to use for overriding the object owner on replication. Must be used in conjunction with access_control_translation override configuration.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// The ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule.
+	// ARN of the S3 bucket where you want Amazon S3 to store replicas of the object identified by the rule.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Enables replication metrics  (documented below).
@@ -275,7 +275,7 @@ type LifecycleRuleParameters struct {
 
 type LoggingObservation struct {
 
-	// The name of the bucket that will receive the log objects.
+	// Name of the bucket that will receive the log objects.
 	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
 
 	// To specify a key prefix for log objects.
@@ -290,7 +290,7 @@ type MetricsObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// The status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
+	// Status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -323,7 +323,7 @@ type ObjectLockConfigurationObservation struct {
 	// Indicates whether this bucket has an Object Lock configuration enabled. Valid value is Enabled. Use the top-level argument object_lock_enabled instead.
 	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
 
-	// The Object Lock rule in place for this bucket (documented below).
+	// Object Lock rule in place for this bucket (documented below).
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -332,7 +332,7 @@ type ObjectLockConfigurationParameters struct {
 
 type ReplicationConfigurationObservation struct {
 
-	// The ARN of the IAM role for Amazon S3 to assume when replicating the objects.
+	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Specifies the rules managing the replication (documented below).
@@ -347,7 +347,7 @@ type ReplicationTimeObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// The status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
+	// Status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -356,7 +356,7 @@ type ReplicationTimeParameters struct {
 
 type RuleObservation struct {
 
-	// The default retention period that you want to apply to new objects placed in this bucket (documented below).
+	// Default retention period that you want to apply to new objects placed in this bucket (documented below).
 	DefaultRetention []DefaultRetentionObservation `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
 }
 
@@ -380,13 +380,13 @@ type RulesObservation struct {
 	// Object keyname prefix identifying one or more objects to which the rule applies. Must be less than or equal to 1024 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The priority associated with the rule. Priority should only be set if filter is configured. If not provided, defaults to 0. Priority must be unique between multiple rules.
+	// Priority associated with the rule. Priority should only be set if filter is configured. If not provided, defaults to 0. Priority must be unique between multiple rules.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies special object selection criteria (documented below).
 	SourceSelectionCriteria []SourceSelectionCriteriaObservation `json:"sourceSelectionCriteria,omitempty" tf:"source_selection_criteria,omitempty"`
 
-	// The status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
+	// Status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -395,7 +395,7 @@ type RulesParameters struct {
 
 type ServerSideEncryptionConfigurationObservation struct {
 
-	// A single object for server-side encryption by default configuration. (documented below)
+	// Single object for server-side encryption by default configuration. (documented below)
 	Rule []ServerSideEncryptionConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -404,7 +404,7 @@ type ServerSideEncryptionConfigurationParameters struct {
 
 type ServerSideEncryptionConfigurationRuleObservation struct {
 
-	// A single object for setting server-side encryption by default. (documented below)
+	// Single object for setting server-side encryption by default. (documented below)
 	ApplyServerSideEncryptionByDefault []ApplyServerSideEncryptionByDefaultObservation `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
 
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -462,16 +462,16 @@ type VersioningParameters struct {
 
 type WebsiteObservation struct {
 
-	// An absolute path to the document to return in case of a 4XX error.
+	// Absolute path to the document to return in case of a 4XX error.
 	ErrorDocument *string `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
 
 	// Amazon S3 returns this index document when requests are made to the root domain or any of the subfolders.
 	IndexDocument *string `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 
-	// A hostname to redirect all website requests for this bucket to. Hostname can optionally be prefixed with a protocol (http:// or https://) to use when redirecting requests. The default is the protocol that is used in the original request.
+	// Hostname to redirect all website requests for this bucket to. Hostname can optionally be prefixed with a protocol (http:// or https://) to use when redirecting requests. The default is the protocol that is used in the original request.
 	RedirectAllRequestsTo *string `json:"redirectAllRequestsTo,omitempty" tf:"redirect_all_requests_to,omitempty"`
 
-	// A json array containing routing rules
+	// JSON array containing routing rules
 	// describing redirect behavior and when redirects are applied.
 	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 }

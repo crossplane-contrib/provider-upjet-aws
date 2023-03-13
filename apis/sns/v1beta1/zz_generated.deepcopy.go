@@ -683,6 +683,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SignatureVersion != nil {
+		in, out := &in.SignatureVersion, &out.SignatureVersion
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SqsFailureFeedbackRoleArn != nil {
 		in, out := &in.SqsFailureFeedbackRoleArn, &out.SqsFailureFeedbackRoleArn
 		*out = new(string)
@@ -732,6 +737,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TracingConfig != nil {
+		in, out := &in.TracingConfig, &out.TracingConfig
+		*out = new(string)
+		**out = **in
 	}
 }
 

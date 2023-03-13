@@ -22,7 +22,7 @@ type ObjectCopyGrantParameters struct {
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// The canonical user ID of the grantee. Used only when type is CanonicalUser.
+	// Canonical user ID of the grantee. Used only when type is CanonicalUser.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -41,13 +41,13 @@ type ObjectCopyGrantParameters struct {
 
 type ObjectCopyObservation struct {
 
-	// The ETag generated for the object (an MD5 sum of the object content). For plaintext objects or objects encrypted with an AWS-managed key, the hash is an MD5 digest of the object data. For objects encrypted with a KMS key or objects created by either the Multipart Upload or Part Copy operation, the hash is not an MD5 digest, regardless of the method of encryption. More information on possible values can be found on Common Response Headers.
+	// ETag generated for the object (an MD5 sum of the object content). For plaintext objects or objects encrypted with an AWS-managed key, the hash is an MD5 digest of the object data. For objects encrypted with a KMS key or objects created by either the Multipart Upload or Part Copy operation, the hash is not an MD5 digest, regardless of the method of encryption. More information on possible values can be found on Common Response Headers.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// If the object expiration is configured, this attribute will be set.
 	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// The canonical user ID of the grantee. Used only when type is CanonicalUser.
+	// Canonical user ID of the grantee. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Returns the date that the object was last modified, in RFC3339 format.
@@ -59,7 +59,7 @@ type ObjectCopyObservation struct {
 	// Version of the copied object in the source bucket.
 	SourceVersionID *string `json:"sourceVersionId,omitempty" tf:"source_version_id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version ID of the newly created copy.
@@ -159,7 +159,7 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// A map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
+	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -171,11 +171,11 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockLegalHoldStatus *string `json:"objectLockLegalHoldStatus,omitempty" tf:"object_lock_legal_hold_status,omitempty"`
 
-	// The object lock retention mode that you want to apply to this object. Valid values are GOVERNANCE and COMPLIANCE.
+	// Object lock retention mode that you want to apply to this object. Valid values are GOVERNANCE and COMPLIANCE.
 	// +kubebuilder:validation:Optional
 	ObjectLockMode *string `json:"objectLockMode,omitempty" tf:"object_lock_mode,omitempty"`
 
-	// The date and time, in RFC3339 format, when this object's object lock will expire.
+	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	// +kubebuilder:validation:Optional
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
@@ -192,7 +192,7 @@ type ObjectCopyParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Specifies the source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
+	// Specifies the source object for the copy operation. You specify the value in one of two formats. For objects not accessed through an access point, specify the name of the source bucket and the key of the source object, separated by a slash (/). For example, testbucket/test1.json. For objects accessed through access points, specify the ARN of the object as accessed through the access point, in the format arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>. For example, arn:aws:s3:us-west-2:9999912999:accesspoint/my-access-point/object/testbucket/test1.json.
 	// +kubebuilder:validation:Required
 	Source *string `json:"source" tf:"source,omitempty"`
 

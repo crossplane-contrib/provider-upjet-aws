@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -143,8 +143,7 @@ spec:
                     type: object
                   corsRule:
                     description: Set of origins and methods (cross-origin access that
-                      you want to allow) documented below. You can configure up to
-                      100 rules.
+                      you want to allow). See below. You can configure up to 100 rules.
                     items:
                       properties:
                         allowedHeaders:
@@ -178,8 +177,8 @@ spec:
                             be longer than 255 characters.
                           type: string
                         maxAgeSeconds:
-                          description: The time in seconds that your browser is to
-                            cache the preflight response for the specified resource.
+                          description: Time in seconds that your browser is to cache
+                            the preflight response for the specified resource.
                           type: number
                       required:
                       - allowedMethods
@@ -187,7 +186,7 @@ spec:
                       type: object
                     type: array
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to

@@ -21,8 +21,9 @@ type BucketObjectLockConfigurationObservation struct {
 
 type BucketObjectLockConfigurationParameters struct {
 
-	// The name of the bucket.
+	// Name of the bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -34,7 +35,7 @@ type BucketObjectLockConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The account ID of the expected bucket owner.
+	// Account ID of the expected bucket owner.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -47,11 +48,11 @@ type BucketObjectLockConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block for specifying the Object Lock rule for the specified object detailed below.
+	// Configuration block for specifying the Object Lock rule for the specified object. See below.
 	// +kubebuilder:validation:Optional
 	Rule []BucketObjectLockConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// A token to allow Object Lock to be enabled for an existing bucket. You must contact AWS support for the bucket's "Object Lock token".
+	// Token to allow Object Lock to be enabled for an existing bucket. You must contact AWS support for the bucket's "Object Lock token".
 	// The token is generated in the back-end when versioning is enabled on a bucket. For more details on versioning, see the aws_s3_bucket_versioning resource.
 	// +kubebuilder:validation:Optional
 	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
@@ -62,7 +63,7 @@ type BucketObjectLockConfigurationRuleObservation struct {
 
 type BucketObjectLockConfigurationRuleParameters struct {
 
-	// A configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket detailed below.
+	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
 	// +kubebuilder:validation:Required
 	DefaultRetention []RuleDefaultRetentionParameters `json:"defaultRetention" tf:"default_retention,omitempty"`
 }
@@ -72,15 +73,15 @@ type RuleDefaultRetentionObservation struct {
 
 type RuleDefaultRetentionParameters struct {
 
-	// The number of days that you want to specify for the default retention period.
+	// Number of days that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
+	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The number of years that you want to specify for the default retention period.
+	// Number of years that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
 	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }

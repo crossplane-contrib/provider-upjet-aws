@@ -1,0 +1,79 @@
+apiVersion: kendra.aws.upbound.io/v1beta1
+kind: Thesaurus
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Uptest doesn't pick up successful resource status"
+    uptest.upbound.io/timeout: "7200" # two hours timeout
+    meta.upbound.io/example-id: kendra/v1beta1/thesaurus
+  labels:
+    testing.upbound.io/example-name: example
+  name: thesaurus
+spec:
+  forProvider:
+    indexIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: thesaurus
+    region: us-east-1
+    roleArn: arn:aws:iam::153891904029:role/thesaurus-kendra-role
+    sourceS3Path:
+      - bucketSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        keySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kendra.aws.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200" # two hours timeout
+    meta.upbound.io/example-id: kendra/v1beta1/thesaurus
+  labels:
+    testing.upbound.io/example-name: example
+  name: index-5
+spec:
+  forProvider:
+    name: index-5
+    region: us-east-1
+    roleArn: arn:aws:iam::153891904029:role/kendra-index-role
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200" # two hours timeout
+  labels:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-east-1
+    forceDestroy: true
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200" # two hours timeout
+  labels:
+    testing.upbound.io/example-name: example
+  name: objectname
+spec:
+  forProvider:
+    region: us-east-1
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    key: object_key
+    contentBase64: dGhpcyBpcyBhIHRleHQg
+  providerConfigRef:
+    name: default

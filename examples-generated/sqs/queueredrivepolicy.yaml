@@ -1,0 +1,57 @@
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: QueueRedrivePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: q
+  name: q
+spec:
+  forProvider:
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: q
+    redrivePolicy: |-
+      ${jsonencode({
+          deadLetterTargetArn = aws_sqs_queue.ddl.arn
+          maxReceiveCount     = 4
+        })}
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: ddl
+  name: ddl
+spec:
+  forProvider:
+    name: examplequeue-ddl
+    redriveAllowPolicy: |-
+      ${jsonencode({
+          redrivePermission = "byQueue",
+          sourceQueueArns   = [aws_sqs_queue.q.arn]
+        })}
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: q
+  name: q
+spec:
+  forProvider:
+    name: examplequeue
+    region: us-west-1
+
+---
+

@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TransitGatewayObservation struct {
+type TransitGatewayObservation_2 struct {
 
 	// EC2 Transit Gateway Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -34,7 +34,7 @@ type TransitGatewayObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type TransitGatewayParameters struct {
+type TransitGatewayParameters_2 struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	// +kubebuilder:validation:Optional
@@ -85,13 +85,13 @@ type TransitGatewayParameters struct {
 // TransitGatewaySpec defines the desired state of TransitGateway
 type TransitGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     TransitGatewayParameters `json:"forProvider"`
+	ForProvider     TransitGatewayParameters_2 `json:"forProvider"`
 }
 
 // TransitGatewayStatus defines the observed state of TransitGateway.
 type TransitGatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        TransitGatewayObservation `json:"atProvider,omitempty"`
+	AtProvider        TransitGatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

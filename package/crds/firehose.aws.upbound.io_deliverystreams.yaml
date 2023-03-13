@@ -1074,7 +1074,7 @@ spec:
                         dynamicPartitioningConfiguration:
                           description: The configuration for dynamic partitioning.
                             See Dynamic Partitioning Configuration below for more
-                            details.
+                            details. Required when using dynamic partitioning.
                           items:
                             properties:
                               enabled:

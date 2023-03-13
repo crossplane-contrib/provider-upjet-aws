@@ -1,0 +1,57 @@
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: QueueRedrivePolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "It requires a real queue arn to be specified."
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: qrpexample
+spec:
+  forProvider:
+    redrivePolicy: |-
+      ${jsonencode({
+          deadLetterTargetArn = "arn:aws:sqs:us-east-1:153891904029:examplequeue-ddl"
+          maxReceiveCount     = 4
+        })}
+    region: us-east-1
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: ddl
+  name: ddl
+spec:
+  forProvider:
+    name: examplequeue-ddl
+    redriveAllowPolicy: |-
+      ${jsonencode({
+          redrivePermission = "byQueue",
+          sourceQueueArns   = ["arn:aws:sqs:us-east-1:153891904029:examplequeue"]
+        })}
+    region: us-east-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sqs/v1beta1/queueredrivepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: qrpexample
+spec:
+  forProvider:
+    name: examplequeue
+    region: us-east-1
+
+

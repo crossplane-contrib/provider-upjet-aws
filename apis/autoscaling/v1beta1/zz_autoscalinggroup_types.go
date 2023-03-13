@@ -424,7 +424,7 @@ type InstancesDistributionObservation struct {
 
 type InstancesDistributionParameters struct {
 
-	// Strategy to use when launching on-demand instances. Valid values: prioritized. Default: prioritized.
+	// Strategy to use when launching on-demand instances. Valid values: prioritized, lowest-price. Default: prioritized.
 	// +kubebuilder:validation:Optional
 	OnDemandAllocationStrategy *string `json:"onDemandAllocationStrategy,omitempty" tf:"on_demand_allocation_strategy,omitempty"`
 

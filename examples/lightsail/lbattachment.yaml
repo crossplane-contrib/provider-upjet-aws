@@ -1,0 +1,52 @@
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: LBAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/lbattachment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    instanceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance
+    lbNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-east-1
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/lbattachment
+  labels:
+    testing.upbound.io/example-name: instance
+  name: instance
+spec:
+  forProvider:
+    availabilityZone: us-east-1c
+    blueprintId: "wordpress"
+    bundleId: "large_2_0"
+    region: us-east-1
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/lbattachment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    healthCheckPath: "/SYN"
+    instancePort: 80
+    region: us-east-1
+    tags:
+      foo: bar

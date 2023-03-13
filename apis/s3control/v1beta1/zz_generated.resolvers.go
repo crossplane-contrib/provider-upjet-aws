@@ -196,3 +196,36 @@ func (mg *ObjectLambdaAccessPointPolicy) ResolveReferences(ctx context.Context, 
 
 	return nil
 }
+
+// ResolveReferences of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLensConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnRef,
+					Selector:     mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn")
+				}
+				mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+
+	return nil
+}

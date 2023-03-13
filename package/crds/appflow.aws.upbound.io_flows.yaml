@@ -1082,11 +1082,12 @@ spec:
                                   more details.
                                 items:
                                   properties:
-                                    object:
-                                      description: Object specified in the flow destination.
+                                    objectPath:
+                                      description: Object path specified in the SAPOData
+                                        flow destination.
                                       type: string
                                   required:
-                                  - object
+                                  - objectPath
                                   type: object
                                 type: array
                               serviceNow:

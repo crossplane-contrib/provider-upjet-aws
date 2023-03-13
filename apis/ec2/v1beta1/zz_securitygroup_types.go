@@ -79,7 +79,7 @@ type SecurityGroupIngressObservation struct {
 type SecurityGroupIngressParameters struct {
 }
 
-type SecurityGroupObservation struct {
+type SecurityGroupObservation_2 struct {
 
 	// ARN of the security group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -100,7 +100,7 @@ type SecurityGroupObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type SecurityGroupParameters struct {
+type SecurityGroupParameters_2 struct {
 
 	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
 	// +kubebuilder:validation:Optional
@@ -141,13 +141,13 @@ type SecurityGroupParameters struct {
 // SecurityGroupSpec defines the desired state of SecurityGroup
 type SecurityGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     SecurityGroupParameters `json:"forProvider"`
+	ForProvider     SecurityGroupParameters_2 `json:"forProvider"`
 }
 
 // SecurityGroupStatus defines the observed state of SecurityGroup.
 type SecurityGroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        SecurityGroupObservation `json:"atProvider,omitempty"`
+	AtProvider        SecurityGroupObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -37,6 +37,11 @@ func (in *AuthParameters) DeepCopyInto(out *AuthParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientPasswordAuthType != nil {
+		in, out := &in.ClientPasswordAuthType, &out.ClientPasswordAuthType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

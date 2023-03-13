@@ -131,6 +131,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// +kubebuilder:validation:Optional
+	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
+
 	// A Neptune subnet group to associate with this Neptune instance.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
