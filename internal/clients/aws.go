@@ -58,7 +58,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot get the caller identity")
 			}
-			AccountId = *identity.Account
+			accountId = *identity.Account
 		}
 
 		if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
