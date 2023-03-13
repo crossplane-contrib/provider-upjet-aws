@@ -52,7 +52,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
-		AccountId := "000000000"
+		accountId := "000000000"
 		if !pc.Spec.SkipCredsValidation {
 			identity, err := GlobalCallerIdentityCache.GetCallerIdentity(ctx, *cfg, creds)
 			if err != nil {
