@@ -15,25 +15,25 @@ import (
 
 type DeploymentObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig Deployment.
+	// ARN of the AppConfig Deployment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The deployment number.
+	// Deployment number.
 	DeploymentNumber *float64 `json:"deploymentNumber,omitempty" tf:"deployment_number,omitempty"`
 
-	// The AppConfig application ID, environment ID, and deployment number separated by a slash (/).
+	// AppConfig application ID, environment ID, and deployment number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The state of the deployment.
+	// State of the deployment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type DeploymentParameters struct {
 
-	// The application ID. Must be between 4 and 7 characters in length.
+	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -47,7 +47,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The configuration profile ID. Must be between 4 and 7 characters in length.
+	// Configuration profile ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.ConfigurationProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	// +kubebuilder:validation:Optional
@@ -61,7 +61,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
-	// The configuration version to deploy. Can be at most 1024 characters.
+	// Configuration version to deploy. Can be at most 1024 characters.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.HostedConfigurationVersion
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("version_number",true)
 	// +kubebuilder:validation:Optional
@@ -75,7 +75,7 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationVersionSelector *v1.Selector `json:"configurationVersionSelector,omitempty" tf:"-"`
 
-	// The deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
+	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.DeploymentStrategy
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -89,11 +89,11 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentStrategyIDSelector *v1.Selector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
 
-	// The description of the deployment. Can be at most 1024 characters.
+	// Description of the deployment. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The environment ID. Must be between 4 and 7 characters in length.
+	// Environment ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("environment_id",true)
 	// +kubebuilder:validation:Optional

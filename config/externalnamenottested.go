@@ -140,8 +140,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ds
 	//
-	// Conditional forwarders can be imported using the directory id and remote_domain_name: d-1234567890:example.com
-	"aws_directory_service_conditional_forwarder": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}:{{ .parameters.remote_domain_name }}"),
 	// Directory Service Log Subscriptions can be imported using the directory id
 	"aws_directory_service_log_subscription": config.ParameterAsIdentifier("directory_id"),
 
@@ -284,32 +282,11 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// S3 Control Bucket Policies can be imported using the Amazon Resource Name (ARN)
 	// arn:aws:s3-outposts:us-east-1:123456789012:outpost/op-12345678/bucket/example
 	"aws_s3control_bucket_policy": config.IdentifierFromProvider,
-	// Multi-Region Access Points can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Multi-Region Access Point Policies can be imported using the account_id and name of the Multi-Region Access Point separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_multi_region_access_point_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.details.name }}"),
-	// Object Lambda Access Points can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
-	// Object Lambda Access Point policies can be imported using the account_id and name, separated by a colon (:)
-	// Example: 123456789012:example
-	"aws_s3control_object_lambda_access_point_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}:{{ .external_name }}"),
 
 	// elasticbeanstalk
 	//
-	// Elastic Beanstalk Applications can be imported using the name
-	"aws_elastic_beanstalk_application_version": config.NameAsIdentifier,
 	// Elastic Beanstalk Environments can be imported using the id
 	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
-
-	// elasticsearch
-	//
-	// No import
-	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
-	// Elasticsearch domains can be imported using the domain_name
-	"aws_elasticsearch_domain_saml_options": config.ParameterAsIdentifier("domain_name"),
 
 	// elbv2
 	//
@@ -388,54 +365,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Use the user_name to import a user
 	"aws_memorydb_user": config.ParameterAsIdentifier("user_name"),
 
-	// opsworks
-	//
-	// Opsworks Application can be imported using the id
-	"aws_opsworks_application": config.IdentifierFromProvider,
-	// OpsWorks Custom Layers can be imported using the id
-	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
-	// Opsworks Instances can be imported using the instance id
-	"aws_opsworks_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_permission": config.IdentifierFromProvider,
-	// OpsWorks PHP Application Layers can be imported using the id
-	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
-	// OpsWorks stacks can be imported using the id
-	"aws_opsworks_stack": config.IdentifierFromProvider,
-	// OpsWorks static web server Layers can be imported using the id
-	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_user_profile": config.IdentifierFromProvider,
-
 	// pinpoint
 	//
 	// Pinpoint ADM Channel can be imported using the application-id
@@ -485,33 +414,14 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// sagemaker
 	//
-	// SageMaker Apps can be imported using the id
-	"aws_sagemaker_app": config.IdentifierFromProvider,
-	// SageMaker Devices can be imported using the device-fleet-name/device-name
-	// my-fleet/my-device
-	"aws_sagemaker_device": FormattedIdentifierFromProvider("/", "device_fleet_name", "device.device_name"),
-	// SageMaker Device Fleets can be imported using the name
-	"aws_sagemaker_device_fleet": config.ParameterAsIdentifier("device_fleet_name"),
 	// Endpoints can be imported using the name
 	"aws_sagemaker_endpoint": config.NameAsIdentifier,
-	// Endpoint configurations can be imported using the name
-	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
 	"aws_sagemaker_human_task_ui": config.ParameterAsIdentifier("human_task_ui_name"),
-	// SageMaker Code Images can be imported using the name
-	"aws_sagemaker_image_version": config.ParameterAsIdentifier("image_name"),
-	// Models can be imported using the name
-	"aws_sagemaker_model": config.NameAsIdentifier,
-	// SageMaker Model Package Groups can be imported using the name
-	"aws_sagemaker_model_package_group_policy": config.ParameterAsIdentifier("model_package_group_name"),
 	// SageMaker Projects can be imported using the project_name
 	"aws_sagemaker_project": config.ParameterAsIdentifier("project_name"),
-	// SageMaker Workforces can be imported using the workforce_name
-	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
-	// SageMaker Workteams can be imported using the workteam_name
-	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
 
 	// storagegateway
 	//
@@ -583,22 +493,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// WAF Regional Web ACL Association can be imported using their web_acl_id:resource_arn
 	"aws_wafregional_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_id }}:{{ .parameters.resource_arn }}"),
 
-	// ssoadmin
-	//
-	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
-	// Example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6,GROUP,1234567890,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-0123456789abcdef/ps-0123456789abcdef,arn:aws:sso:::instance/ssoins-0123456789abcdef
-	"aws_ssoadmin_account_assignment": config.TemplatedStringAsIdentifier("", "{{ .parameters.principal_id }},{{ .parameters.principal_type }},{{ .parameters.target_id }},{{ .parameters.target_type }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
-	// SSO Managed Policy Attachments can be imported using the managed_policy_arn, permission_set_arn, and instance_arn separated by a comma (,)
-	// Example: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	"aws_ssoadmin_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_policy_arn }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn}}"),
-	// SSO Permission Sets can be imported using the arn and instance_arn separated by a comma (,)
-	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	// TODO: Normalize external_name while testing
-	"aws_ssoadmin_permission_set": config.IdentifierFromProvider,
-	// SSO Permission Set Inline Policies can be imported using the permission_set_arn and instance_arn separated by a comma (,)
-	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
-
 	// synthetics
 	//
 	// Synthetics Canaries can be imported using the name
@@ -631,20 +525,9 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// transfer
 	//
-	// Transfer SSH Public Key can be imported using the server_id and user_name and ssh_public_key_id separated by /
-	// Example: s-12345678/test-username/key-12345
-	"aws_transfer_ssh_key": config.IdentifierFromProvider,
-	// Transfer Workflows can be imported using the worflow_id
-	"aws_transfer_workflow": config.IdentifierFromProvider,
 	// Transfer Accesses can be imported using the server_id and external_id
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
-
-	// s3
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_s3_object_copy": config.IdentifierFromProvider,
 
 	// wafv2
 	//
@@ -668,25 +551,288 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// workspaces
 	//
-	// Workspaces directory can be imported using the directory ID
-	"aws_workspaces_directory": config.IdentifierFromProvider,
-	// WorkSpaces IP groups can be imported using their GroupID
-	"aws_workspaces_ip_group": config.IdentifierFromProvider,
 	// Workspaces can be imported using their ID
 	"aws_workspaces_workspace": config.IdentifierFromProvider,
 
-	// xray
+	// apprunner
 	//
-	// XRay Encryption Config can be imported using the region name
-	"aws_xray_encryption_config": config.IdentifierFromProvider,
-	// XRay Groups can be imported using the ARN
-	// Example: arn:aws:xray:us-west-2:1234567890:group/example-group/TNGX7SW5U6QY36T4ZMOUA3HVLBYCZTWDIOOXY3CJAXTHSS3YCWUA
-	"aws_xray_group": config.IdentifierFromProvider,
-	// XRay Sampling Rules can be imported using the name
-	"aws_xray_sampling_rule": config.ParameterAsIdentifier("rule_name"),
+	// App Runner VPC Ingress Connection can be imported by using the arn
+	// Example: arn:aws:apprunner:us-west-2:837424938642:vpcingressconnection/example/b379f86381d74825832c2e82080342fa
+	// TODO: We just normalized the external-name but still kept the naming argument spec.forProvider.name. Need further normalization.
+	"aws_apprunner_vpc_ingress_connection": TemplatedStringAsIdentifierWithNoName("arn:aws:apprunner:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:vpcingressconnection/{{ .parameters.name }}/{{ .external_name }}"),
 
-	// imagebuilder
+	// appsync
 	//
-	// aws_imagebuilder_components resources can be imported by using the Amazon Resource Name (ARN)
-	"aws_imagebuilder_component": config.IdentifierFromProvider,
+	// Appsync Types can be imported using the id (api-id:format:name)
+	// TODO: Need further normalization spec.forProvider
+	"aws_appsync_type": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_id }}:{{ .parameters.format }}:{{ .external_name }}"),
+
+	// auditmanager
+	//
+	// Audit Manager Account Registration resources can be imported using the id
+	"aws_auditmanager_account_registration": config.IdentifierFromProvider,
+	// Audit Manager Assessments can be imported using the assessment id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_assessment": config.IdentifierFromProvider,
+	// Audit Manager Assessment Reports can be imported using the assessment report id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_assessment_report": config.IdentifierFromProvider,
+	// An Audit Manager Control can be imported using the id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_control": config.IdentifierFromProvider,
+	// Audit Manager Framework can be imported using the framework id (abc123-de45)
+	// TODO: While testing check is name argument appear in the ID for these resource. If so, then normalize spec.forProvider.name.
+	"aws_auditmanager_framework": config.IdentifierFromProvider,
+
+	// ce
+	//
+	// aws_ce_anomaly_subscription can be imported using the id
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_ce_anomaly_subscription": config.IdentifierFromProvider,
+	// aws_ce_cost_allocation_tag can be imported using the id
+	"aws_ce_cost_allocation_tag": config.ParameterAsIdentifier("tag_key"),
+
+	// cloudwatch
+	//
+	// This resource can be imported using the log_group_name
+	"aws_cloudwatch_log_data_protection_policy": config.ParameterAsIdentifier("log_group_name"),
+
+	// comprehend
+	//
+	// Comprehend Document Classifier can be imported using the ARN
+	// Example: arn:aws:comprehend:us-west-2:123456789012:document_classifier/example
+	"aws_comprehend_document_classifier": config.TemplatedStringAsIdentifier("name", "arn:aws:comprehend:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:document_classifier/{{ .external_name }}"),
+	// Comprehend Entity Recognizer can be imported using the ARN
+	// Example: arn:aws:comprehend:us-west-2:123456789012:entity-recognizer/example
+	"aws_comprehend_entity_recognizer": config.TemplatedStringAsIdentifier("name", "arn:aws:comprehend:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:entity-recognizer/{{ .external_name }}"),
+
+	// controltower
+	//
+	// Control Tower Controls can be imported using their organizational_unit_arn/control_identifier
+	// Example: arn:aws:organizations::123456789101:ou/o-qqaejywet/ou-qg5o-ufbhdtv3,arn:aws:controltower:us-east-1::control/WTDSMKDKDNLE
+	"aws_controltower_control": config.TemplatedStringAsIdentifier("", "{{ .parameters.target_identifier }},{{ .external_name }}"),
+
+	// datasync
+	//
+	// aws_datasync_location_object_storage can be imported by using the Amazon Resource Name (ARN)
+	// Example: arn:aws:datasync:us-east-1:123456789012:location/loc-12345678901234567
+	"aws_datasync_location_object_storage": config.TemplatedStringAsIdentifier("", "arn:aws:datasync:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:location/{{ .external_name }}"),
+
+	// directory_service
+	//
+	// RADIUS settings can be imported using the directory ID
+	"aws_directory_service_radius_settings": config.IdentifierFromProvider,
+	// Replicated Regions can be imported using directory ID,Region name
+	"aws_directory_service_region": config.IdentifierFromProvider,
+	// Directory Service Shared Directories can be imported using the owner directory ID/shared directory ID
+	"aws_directory_service_shared_directory": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}/{{ .external_name }}"),
+	// Directory Service Shared Directories can be imported using the shared directory ID
+	"aws_directory_service_shared_directory_accepter": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_s3_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+
+	// dx
+	//
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_dx_macsec_key_association": config.IdentifierFromProvider,
+
+	// dynamodb
+	//
+	// DynamoDB table replicas can be imported using the table-name:main-region
+	"aws_dynamodb_table_replica": config.IdentifierFromProvider,
+
+	// ec2
+	//
+	// aws_ec2_transit_gateway_policy_table_association can be imported by using the EC2 Transit Gateway Policy Table identifier, an underscore, and the EC2 Transit Gateway Attachment identifier
+	"aws_ec2_transit_gateway_policy_table_association": config.IdentifierFromProvider,
+
+	// efs
+	//
+	// EFS Replication Configurations can be imported using the file system ID of either the source or destination file system
+	"aws_efs_replication_configuration": config.IdentifierFromProvider,
+
+	// emrserverless
+	//
+	// EMR Severless applications can be imported using the id
+	"aws_emrserverless_application": config.IdentifierFromProvider,
+
+	// fsx
+	//
+	// Amazon File Cache cache can be imported using the resource id
+	"aws_fsx_file_cache": config.IdentifierFromProvider,
+
+	// identitystore
+	//
+	// An Identity Store Group can be imported using the combination identity_store_id/group_id
+	"aws_identitystore_group": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
+	"aws_identitystore_group_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// An Identity Store User can be imported using the combination identity_store_id/user_id
+	"aws_identitystore_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+
+	// inspector2
+	//
+	// Inspector V2 Delegated Admin Account can be imported using the account_id
+	"aws_inspector2_delegated_admin_account": config.IdentifierFromProvider,
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	// TODO: Check if we need privilege to test this resource. If yes - split it with "Need privilege" label.
+	"aws_inspector2_organization_configuration": config.IdentifierFromProvider,
+
+	// ivs
+	//
+	// IVS (Interactive Video) Playback Key Pair can be imported using the ARN
+	// Example: arn:aws:ivs:us-west-2:326937407773:playback-key/KDJRJNQhiQzA
+	"aws_ivs_playback_key_pair": config.TemplatedStringAsIdentifier("", "arn:aws:ivs:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:playback-key/{{ .external_name }}"),
+
+	// ivschat
+	//
+	// IVS (Interactive Video) Chat Logging Configuration can be imported using the ARN
+	// Example: arn:aws:ivschat:us-west-2:326937407773:logging-configuration/MMUQc8wcqZmC
+	"aws_ivschat_logging_configuration": config.TemplatedStringAsIdentifier("", "arn:aws:ivschat:{{ .parameters.region }}:{{ .setup.configuration.account_id }}:logging-configuration/{{ .external_name }}"),
+	// IVS (Interactive Video) Chat Room can be imported using the ARN
+	// Example: arn:aws:ivschat:us-west-2:326937407773:room/GoXEXyB4VwHb
+	"aws_ivschat_room": config.TemplatedStringAsIdentifier("", "arn:aws:ivschat:{{ .parameters.region }}:{{ .setup.configuration.account_id }}:room/{{ .external_name }}"),
+
+	// kms
+	//
+	// KMS (Key Management) Custom Key Store can be imported using the id
+	"aws_kms_custom_key_store": config.IdentifierFromProvider,
+
+	// lakeformation
+	//
+	// Lake Formation LF-Tags can be imported using the catalog_id:key
+	"aws_lakeformation_lf_tag": config.TemplatedStringAsIdentifier("", "{{ .external_name }}:{{ .parameters.key }}}"),
+	// No import
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"aws_lakeformation_resource_lf_tags": config.IdentifierFromProvider,
+
+	// lightsail
+	//
+	// Lightsail Container Service Deployment Version can be imported using the service_name and version separated by a slash (/)
+	"aws_lightsail_container_service_deployment_version": config.TemplatedStringAsIdentifier("", "{{ .parameters.service_name }}/{{ .external_name }}"),
+	// aws_lightsail_lb_certificate_attachment can be imported by using the id attribute
+	// ID: lb_name,certificate_name
+	"aws_lightsail_lb_certificate_attachment": config.IdentifierFromProvider,
+	// aws_lightsail_lb_https_redirection_policy can be imported by using the lb_name attribute
+	"aws_lightsail_lb_https_redirection_policy": config.ParameterAsIdentifier("lb_name"),
+	// Lightsail Databases can be imported using their name
+	"aws_lightsail_database": config.IdentifierFromProvider,
+
+	// macie2
+	//
+	// aws_macie2_classification_export_configuration can be imported using the account ID and region
+	"aws_macie2_classification_export_configuration": config.IdentifierFromProvider,
+
+	// kendra
+	//
+	// aws_kendra_faq can be imported using the unique identifiers of the FAQ and index separated by a slash (/)
+	// "aws_kendra_faq": config.TemplatedStringAsIdentifier("", "{{ .external_name }}/{{ .parameters.index_id }}}"),
+	"aws_kendra_faq": config.IdentifierFromProvider,
+
+	// medialive
+	//
+	// MediaLive MultiplexProgram can be imported using the id, or a combination of "program_name/multiplex_id"
+	"aws_medialive_multiplex_program": config.IdentifierFromProvider,
+
+	// msk
+	//
+	// MSK serverless clusters can be imported using the cluster arn
+	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
+	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
+
+	// networkmanager
+	//
+	// aws_networkmanager_site_to_site_vpn_attachment can be imported using the attachment ID
+	"aws_networkmanager_site_to_site_vpn_attachment": config.IdentifierFromProvider,
+	// aws_networkmanager_transit_gateway_peering can be imported using the peering ID
+	"aws_networkmanager_transit_gateway_peering": config.IdentifierFromProvider,
+	// aws_networkmanager_transit_gateway_route_table_attachment can be imported using the attachment ID
+	"aws_networkmanager_transit_gateway_route_table_attachment": config.IdentifierFromProvider,
+
+	// opensearch
+	//
+	// AWS Opensearch Inbound Connection Accepters can be imported by using the Inbound Connection ID
+	"aws_opensearch_inbound_connection_accepter": config.ParameterAsIdentifier("connection_id"),
+	// AWS Opensearch Outbound Connections can be imported by using the Outbound Connection ID
+	"aws_opensearch_outbound_connection": config.IdentifierFromProvider,
+
+	// rds
+	//
+	// A RDS (Relational Database) Export Task can be imported using the export_task_identifier
+	"aws_rds_export_task": config.ParameterAsIdentifier("export_task_identifier"),
+	// Due to the expense of testing this resource, we move it to skiplist.
+	// RDS DB Instance Reservations can be imported using the instance_id
+	"aws_rds_reserved_instance": config.IdentifierFromProvider,
+
+	// redshift
+	//
+
+	// Redshift Cluster IAM Roless can be imported using the cluster_identifier
+	"aws_redshift_cluster_iam_roles": config.ParameterAsIdentifier("cluster_identifier"),
+	// Redshift endpoint access can be imported using the name
+	"aws_redshift_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
+	// Redshift endpoint authorization can be imported using the id
+	// Example: 01234567910:cluster-example-id
+	"aws_redshift_endpoint_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account }}:{{ .external_name }}"),
+	// Redshift usage limits can be imported using the id
+	// Example: 01234567910:cluster-example-id:example:example
+	"aws_redshift_partner": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.cluster_identifier }}:{{ .external_name }}"),
+	// Redshift Data Statements can be imported using the id
+	"aws_redshiftdata_statement": config.IdentifierFromProvider,
+	// Redshift Serverless Endpoint Access can be imported using the endpoint_name
+	"aws_redshiftserverless_endpoint_access": config.ParameterAsIdentifier("vpc_endpoint"),
+	// Redshift Serverless Namespaces can be imported using the namespace_name
+	"aws_redshiftserverless_namespace": config.ParameterAsIdentifier("namespace_name"),
+	// Redshift Serverless Resource Policies can be imported using the resource_arn
+	"aws_redshiftserverless_resource_policy": config.ParameterAsIdentifier("resource_arn"),
+	// Redshift Serverless Snapshots can be imported using the snapshot_name
+	"aws_redshiftserverless_snapshot": config.ParameterAsIdentifier("snapshot_name"),
+	// Redshift Serverless Usage Limits can be imported using the id
+	"aws_redshiftserverless_usage_limit": config.IdentifierFromProvider,
+	// Redshift Serverless Workgroups can be imported using the workgroup_name
+	"aws_redshiftserverless_workgroup": config.ParameterAsIdentifier("workgroup_name"),
+
+	// resourceexplorer2
+	//
+	// Resource Explorer indexes can be imported using the arn
+	// Example: arn:aws:resource-explorer-2:us-east-1:123456789012:index/6047ac4e-207e-4487-9bcf-cb53bb0ff5cc
+	"aws_resourceexplorer2_index": config.IdentifierFromProvider,
+	// Resource Explorer views can be imported using the arn
+	// Example: arn:aws:resource-explorer-2:us-west-2:123456789012:view/exampleview/e0914f6c-6c27-4b47-b5d4-6b28381a2421
+	"aws_resourceexplorer2_view": config.IdentifierFromProvider,
+
+	// rolesanywhere
+	//
+	// aws_rolesanywhere_trust_anchor can be imported using its id
+	"aws_rolesanywhere_trust_anchor": config.IdentifierFromProvider,
+
+	// schemas
+	//
+	// EventBridge Schema Registry Policy can be imported using the registry_name
+	"aws_schemas_registry_policy": config.ParameterAsIdentifier("registry_name"),
+
+	// sesv2
+	//
+	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
+	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
+
+	// ssoadmin
+	//
+	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_customer_managed_policy_attachment": config.IdentifierFromProvider,
+	// SSO Account Assignments can be imported using the instance_arn
+	"aws_ssoadmin_instance_access_control_attributes": config.ParameterAsIdentifier("instance_arn"),
+	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
+	"aws_ssoadmin_permissions_boundary_attachment": config.IdentifierFromProvider,
+
+	// transcribe
+	//
+	// Transcribe MedicalVocabulary can be imported using the vocabulary_name
+	"aws_transcribe_medical_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
 }

@@ -13,6 +13,7 @@ import (
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -24,6 +25,22 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultIAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.DefaultIAMRoleArnRef,
+		Selector:     mg.Spec.ForProvider.DefaultIAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultIAMRoleArn")
+	}
+	mg.Spec.ForProvider.DefaultIAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultIAMRoleArnRef = rsp.ResolvedReference
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IAMRoles),
@@ -218,6 +235,32 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this UsageLimit.
+func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterIdentifier),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.ForProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterIdentifier")
+	}
+	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }

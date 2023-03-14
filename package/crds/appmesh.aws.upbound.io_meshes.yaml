@@ -69,17 +69,16 @@ spec:
                       be created in.
                     type: string
                   spec:
-                    description: The service mesh specification to apply.
+                    description: Service mesh specification to apply.
                     items:
                       properties:
                         egressFilter:
-                          description: The egress filter rules for the service mesh.
+                          description: Egress filter rules for the service mesh.
                           items:
                             properties:
                               type:
-                                description: The egress filter type. By default, the
-                                  type is DROP_ALL. Valid values are ALLOW_ALL and
-                                  DROP_ALL.
+                                description: Egress filter type. By default, the type
+                                  is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
                                 type: string
                             type: object
                           type: array
@@ -270,29 +269,28 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the service mesh.
+                    description: ARN of the service mesh.
                     type: string
                   createdDate:
-                    description: The creation date of the service mesh.
+                    description: Creation date of the service mesh.
                     type: string
                   id:
-                    description: The ID of the service mesh.
+                    description: ID of the service mesh.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the service mesh.
+                    description: Last update date of the service mesh.
                     type: string
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner.
+                    description: AWS account ID of the service mesh's owner.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

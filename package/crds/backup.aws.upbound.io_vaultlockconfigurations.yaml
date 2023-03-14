@@ -142,7 +142,9 @@ spec:
                         type: object
                     type: object
                   changeableForDays:
-                    description: The number of days before the lock date.
+                    description: The number of days before the lock date. If omitted
+                      creates a vault lock in governance mode, otherwise it will create
+                      a vault lock in compliance mode.
                     type: number
                   maxRetentionDays:
                     description: The maximum retention period that the vault retains

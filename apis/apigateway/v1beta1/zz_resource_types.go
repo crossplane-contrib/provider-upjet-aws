@@ -15,16 +15,16 @@ import (
 
 type ResourceObservation struct {
 
-	// The resource's identifier.
+	// Resource's identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The complete path for this API resource, including all parent paths.
+	// Complete path for this API resource, including all parent paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type ResourceParameters struct {
 
-	// The ID of the parent API resource
+	// ID of the parent API resource
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
 	// +kubebuilder:validation:Optional
@@ -38,7 +38,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentIDSelector *v1.Selector `json:"parentIdSelector,omitempty" tf:"-"`
 
-	// The last path segment of this API resource.
+	// Last path segment of this API resource.
 	// +kubebuilder:validation:Required
 	PathPart *string `json:"pathPart" tf:"path_part,omitempty"`
 
@@ -47,7 +47,7 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated REST API
+	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

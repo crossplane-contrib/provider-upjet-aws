@@ -23,8 +23,8 @@ type DomainIdentityObservation struct {
 	// A code which when added to the domain as a TXT record
 	// will signal to SES that the owner of the domain has authorised SES to act on
 	// their behalf. The domain identity will be in state "verification pending"
-	// until this is done.  Find out
-	// more about verifying domains in Amazon SES in the AWS SES
+	// until this is done.  Find out more about verifying domains in Amazon
+	// SES in the AWS SES
 	// docs.
 	VerificationToken *string `json:"verificationToken,omitempty" tf:"verification_token,omitempty"`
 }

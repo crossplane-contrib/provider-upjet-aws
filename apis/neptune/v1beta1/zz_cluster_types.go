@@ -42,6 +42,10 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
+	// Specifies whether upgrades between different major versions are allowed. You must set it to true when providing an engine_version parameter that uses a different major version than the DB cluster's current version. Default is false.
+	// +kubebuilder:validation:Optional
+	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
+
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
@@ -77,6 +81,10 @@ type ClusterParameters struct {
 	// The name of your final Neptune snapshot when this Neptune cluster is deleted. If omitted, no final snapshot will be made.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
+
+	// The global cluster identifier specified on aws_neptune_global_cluster.
+	// +kubebuilder:validation:Optional
+	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
 	// +kubebuilder:validation:Optional
@@ -123,6 +131,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// +kubebuilder:validation:Optional
+	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
+
 	// A Neptune subnet group to associate with this Neptune instance.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
@@ -166,6 +178,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
+	// If set, create the Neptune cluster as a serverless one. See Serverless for example block attributes.
+	// +kubebuilder:validation:Optional
+	ServerlessV2ScalingConfiguration []ServerlessV2ScalingConfigurationParameters `json:"serverlessV2ScalingConfiguration,omitempty" tf:"serverless_v2_scaling_configuration,omitempty"`
+
 	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
@@ -205,6 +221,20 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+}
+
+type ServerlessV2ScalingConfigurationObservation struct {
+}
+
+type ServerlessV2ScalingConfigurationParameters struct {
+
+	// : (default: 128) The maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
+	// +kubebuilder:validation:Optional
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 2.5. See AWS Documentation for more details.
+	// +kubebuilder:validation:Optional
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

@@ -1,0 +1,111 @@
+apiVersion: networkmanager.aws.upbound.io/v1beta1
+kind: VPCAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/vpcattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: vpcattachment
+spec:
+  forProvider:
+    coreNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    subnetArnsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpcArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/vpcattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/vpcattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: subnet
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: vpc
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: networkmanager.aws.upbound.io/v1beta1
+kind: CoreNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/vpcattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: corenetworkname
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyDocument: |
+      {
+        "version": "2021.12",
+        "core-network-configuration": {
+          "vpn-ecmp-support": false,
+          "inside-cidr-blocks": [
+            "10.0.0.0/16"
+          ],
+          "asn-ranges": [
+            "64512-65534"
+          ],
+          "edge-locations": [
+            {
+              "location": "us-west-1"
+            }
+          ]
+        },
+        "segments": [
+          {
+            "name": "development",
+            "require-attachment-acceptance": false
+          }
+        ]
+      }
+    region: us-west-1
+
+---
+
+apiVersion: networkmanager.aws.upbound.io/v1beta1
+kind: GlobalNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta1/vpcattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: globalnetworkname
+spec:
+  forProvider:
+    description: example
+    region: us-west-1

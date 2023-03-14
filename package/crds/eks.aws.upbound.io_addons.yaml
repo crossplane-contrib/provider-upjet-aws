@@ -145,6 +145,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  configurationValues:
+                    description: custom configuration values for addons with single
+                      JSON string. This JSON string value must match the JSON schema
+                      derived from describe-addon-configuration.
+                    type: string
                   preserve:
                     description: Indicates if you want to preserve the created resources
                       when deleting the EKS add-on.
@@ -156,8 +161,9 @@ spec:
                   resolveConflicts:
                     description: Define how to resolve parameter value conflicts when
                       migrating an existing add-on to an Amazon EKS add-on or when
-                      applying version updates to the add-on. Valid values are NONE
-                      and OVERWRITE.
+                      applying version updates to the add-on. Valid values are NONE,
+                      OVERWRITE and PRESERVE. For more details check UpdateAddon API
+                      Docs.
                     type: string
                   serviceAccountRoleArn:
                     description: The Amazon Resource Name (ARN) of an existing IAM

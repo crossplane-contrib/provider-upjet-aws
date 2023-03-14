@@ -264,6 +264,9 @@ spec:
                     description: The ARN that Amazon Route 53 assigns to the namespace
                       when you create it.
                     type: string
+                  httpName:
+                    description: The name of an HTTP namespace.
+                    type: string
                   id:
                     description: The ID of a namespace.
                     type: string

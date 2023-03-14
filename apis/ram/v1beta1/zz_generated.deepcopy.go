@@ -125,6 +125,17 @@ func (in *ResourceShareParameters) DeepCopyInto(out *ResourceShareParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PermissionArns != nil {
+		in, out := &in.PermissionArns, &out.PermissionArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

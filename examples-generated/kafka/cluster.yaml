@@ -24,7 +24,7 @@ spec:
     - encryptionAtRestKmsKeyArnSelector:
         matchLabels:
           testing.upbound.io/example-name: kms
-    kafkaVersion: 2.4.1
+    kafkaVersion: 3.2.0
     loggingInfo:
     - brokerLogs:
       - cloudwatchLogs:
@@ -108,6 +108,7 @@ metadata:
 spec:
   forProvider:
     destination: s3
+    name: terraform-kinesis-firehose-msk-broker-logs-stream
     region: us-west-1
     s3Configuration:
     - bucketArnSelector:
@@ -161,6 +162,7 @@ metadata:
   name: bucket-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket

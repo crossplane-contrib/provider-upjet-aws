@@ -18,7 +18,7 @@ type AdditionalAuthenticationProviderObservation struct {
 
 type AdditionalAuthenticationProviderParameters struct {
 
-	// The authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	// +kubebuilder:validation:Required
 	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
@@ -30,7 +30,7 @@ type AdditionalAuthenticationProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig []OpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// The Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig []UserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
@@ -40,28 +40,28 @@ type GraphQLAPILambdaAuthorizerConfigObservation struct {
 
 type GraphQLAPILambdaAuthorizerConfigParameters struct {
 
-	// The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
+	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
 	// +kubebuilder:validation:Optional
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
-	// The ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
+	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Required
 	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
 
-	// A regular expression for validation of tokens before the Lambda function is called.
+	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 }
 
 type GraphQLAPIObservation struct {
 
-	// The ARN
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// API ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Map of URIs associated with the APIE.g., uris["GRAPHQL"] = https://ID.appsync-api.REGION.amazonaws.com/graphql
@@ -96,7 +96,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
-	// The authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	// +kubebuilder:validation:Required
 	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
@@ -108,7 +108,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	LogConfig []LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
-	// A user-supplied name for the GraphqlApi.
+	// User-supplied name for the GraphqlApi.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -121,7 +121,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The schema definition, in GraphQL schema language format.
+	// Schema definition, in GraphQL schema language format.
 	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
@@ -129,7 +129,7 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig []GraphQLAPIUserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 
@@ -143,19 +143,19 @@ type GraphQLAPIUserPoolConfigObservation struct {
 
 type GraphQLAPIUserPoolConfigParameters struct {
 
-	// A regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+	// Regular expression for validating the incoming Amazon Cognito User Pool app client ID.
 	// +kubebuilder:validation:Optional
 	AppIDClientRegex *string `json:"appIdClientRegex,omitempty" tf:"app_id_client_regex,omitempty"`
 
-	// The AWS region in which the user pool was created.
+	// AWS region in which the user pool was created.
 	// +kubebuilder:validation:Optional
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
 
-	// The action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
+	// Action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
 	// +kubebuilder:validation:Required
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// The user pool ID.
+	// User pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -175,15 +175,15 @@ type LambdaAuthorizerConfigObservation struct {
 
 type LambdaAuthorizerConfigParameters struct {
 
-	// The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
+	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
 	// +kubebuilder:validation:Optional
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
-	// The ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
+	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Required
 	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
 
-	// A regular expression for validation of tokens before the Lambda function is called.
+	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 }
@@ -243,15 +243,15 @@ type UserPoolConfigObservation struct {
 
 type UserPoolConfigParameters struct {
 
-	// A regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+	// Regular expression for validating the incoming Amazon Cognito User Pool app client ID.
 	// +kubebuilder:validation:Optional
 	AppIDClientRegex *string `json:"appIdClientRegex,omitempty" tf:"app_id_client_regex,omitempty"`
 
-	// The AWS region in which the user pool was created.
+	// AWS region in which the user pool was created.
 	// +kubebuilder:validation:Optional
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
 
-	// The user pool ID.
+	// User pool ID.
 	// +kubebuilder:validation:Required
 	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
 }

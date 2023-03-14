@@ -6,9 +6,9 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
-export TERRAFORM_PROVIDER_VERSION := 4.15.1
+export TERRAFORM_PROVIDER_VERSION := 4.56.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-aws
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-aws/releases/download/v4.15.1
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-aws/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
@@ -55,7 +55,7 @@ GO111MODULE = on
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.14.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.4.0
+UPTEST_VERSION = v0.5.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -206,7 +206,17 @@ crddiff: $(UPTEST)
 	done
 	@$(OK) Checking breaking CRD schema changes
 
-.PHONY: uptest e2e crddiff
+schema-version-diff:
+	@$(INFO) Checking for native state schema version changes
+	@export PREV_PROVIDER_VERSION=$$(git cat-file -p "${GITHUB_BASE_REF}:Makefile" | sed -nr 's/^export[[:space:]]*TERRAFORM_PROVIDER_VERSION[[:space:]]*:=[[:space:]]*(.+)/\1/p'); \
+	echo Detected previous Terraform provider version: $${PREV_PROVIDER_VERSION}; \
+	echo Current Terraform provider version: $${TERRAFORM_PROVIDER_VERSION}; \
+	mkdir -p $(WORK_DIR); \
+	git cat-file -p "$${GITHUB_BASE_REF}:config/schema.json" > "$(WORK_DIR)/schema.json.$${PREV_PROVIDER_VERSION}"; \
+	./scripts/version_diff.py config/generated.lst "$(WORK_DIR)/schema.json.$${PREV_PROVIDER_VERSION}" config/schema.json
+	@$(OK) Checking for native state schema version changes
+
+.PHONY: uptest e2e crddiff schema-version-diff
 
 # ====================================================================================
 # Special Targets

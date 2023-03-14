@@ -33,8 +33,9 @@ type BucketMetricObservation struct {
 
 type BucketMetricParameters struct {
 
-	// The name of the bucket to put metric configuration.
+	// Name of the bucket to put metric configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -50,7 +51,7 @@ type BucketMetricParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []BucketMetricFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Unique identifier of the metrics configuration for the bucket.
+	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

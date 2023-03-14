@@ -70,15 +70,14 @@ spec:
                     items:
                       properties:
                         destinationArn:
-                          description: The Amazon Resource Name (ARN) of the CloudWatch
-                            Logs log group or Kinesis Data Firehose delivery stream
-                            to receive access logs. If you specify a Kinesis Data
-                            Firehose delivery stream, the stream name must begin with
-                            amazon-apigateway-. Automatically removes trailing :*
-                            if present.
+                          description: ARN of the CloudWatch Logs log group or Kinesis
+                            Data Firehose delivery stream to receive access logs.
+                            If you specify a Kinesis Data Firehose delivery stream,
+                            the stream name must begin with amazon-apigateway-. Automatically
+                            removes trailing :* if present.
                           type: string
                         format:
-                          description: The formatting and values recorded in the logs.
+                          description: Formatting and values recorded in the logs.
                             For more information on configuring the log format rules
                             visit the AWS documentation
                           type: string
@@ -88,11 +87,10 @@ spec:
                       type: object
                     type: array
                   cacheClusterEnabled:
-                    description: Specifies whether a cache cluster is enabled for
-                      the stage
+                    description: Whether a cache cluster is enabled for the stage
                     type: boolean
                   cacheClusterSize:
-                    description: The size of the cache cluster for the stage, if enabled.
+                    description: Size of the cache cluster for the stage, if enabled.
                       Allowed values include 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118
                       and 237.
                     type: string
@@ -102,13 +100,13 @@ spec:
                     items:
                       properties:
                         percentTraffic:
-                          description: The percent 0.0 - 100.0 of traffic to divert
-                            to the canary deployment.
+                          description: Percent 0.0 - 100.0 of traffic to divert to
+                            the canary deployment.
                           type: number
                         stageVariableOverrides:
                           additionalProperties:
                             type: string
-                          description: A map of overridden stage variables (including
+                          description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
                         useStageCache:
@@ -118,10 +116,10 @@ spec:
                       type: object
                     type: array
                   clientCertificateId:
-                    description: The identifier of a client certificate for the stage.
+                    description: Identifier of a client certificate for the stage.
                     type: string
                   deploymentId:
-                    description: The ID of the deployment that the stage points to
+                    description: ID of the deployment that the stage points to
                     type: string
                   deploymentIdRef:
                     description: Reference to a Deployment in apigateway to populate
@@ -199,17 +197,17 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description of the stage.
+                    description: Description of the stage.
                     type: string
                   documentationVersion:
-                    description: The version of the associated API documentation
+                    description: Version of the associated API documentation
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the associated REST API
+                    description: ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -287,7 +285,7 @@ spec:
                         type: object
                     type: object
                   stageName:
-                    description: The name of the stage
+                    description: Name of the stage
                     type: string
                   tags:
                     additionalProperties:
@@ -297,7 +295,7 @@ spec:
                   variables:
                     additionalProperties:
                       type: string
-                    description: A map that defines the stage variables
+                    description: Map that defines the stage variables
                     type: object
                   xrayTracingEnabled:
                     description: Whether active tracing with X-ray is enabled. Defaults
@@ -484,29 +482,28 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN)
+                    description: ARN
                     type: string
                   executionArn:
-                    description: The execution ARN to be used in lambda_permission's
-                      source_arn when allowing API Gateway to invoke a Lambda function,
-                      e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod
+                    description: Execution ARN to be used in lambda_permission's source_arn
+                      when allowing API Gateway to invoke a Lambda function, e.g.,
+                      arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j/prod
                     type: string
                   id:
-                    description: The ID of the stage
+                    description: ID of the stage
                     type: string
                   invokeUrl:
-                    description: The URL to invoke the API pointing to the stage,
-                      e.g., https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod
+                    description: URL to invoke the API pointing to the stage, e.g.,
+                      https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/prod
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   webAclArn:
-                    description: The ARN of the WebAcl associated with the Stage.
+                    description: ARN of the WebAcl associated with the Stage.
                     type: string
                 type: object
               conditions:

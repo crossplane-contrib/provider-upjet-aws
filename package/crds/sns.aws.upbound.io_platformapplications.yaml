@@ -64,26 +64,36 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  applePlatformBundleId:
+                    description: The bundle identifier that's assigned to your iOS
+                      app. May only include alphanumeric characters, hyphens (-),
+                      and periods (.).
+                    type: string
+                  applePlatformTeamId:
+                    description: The identifier that's assigned to your Apple developer
+                      account team. Must be 10 alphanumeric characters.
+                    type: string
                   eventDeliveryFailureTopicArn:
-                    description: SNS Topic triggered when a delivery to any of the
-                      platform endpoints associated with your platform application
-                      encounters a permanent failure.
+                    description: The ARN of the SNS Topic triggered when a delivery
+                      to any of the platform endpoints associated with your platform
+                      application encounters a permanent failure.
                     type: string
                   eventEndpointCreatedTopicArn:
-                    description: SNS Topic triggered when a new platform endpoint
-                      is added to your platform application.
+                    description: The ARN of the SNS Topic triggered when a new platform
+                      endpoint is added to your platform application.
                     type: string
                   eventEndpointDeletedTopicArn:
-                    description: SNS Topic triggered when an existing platform endpoint
-                      is deleted from your platform application.
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is deleted from your platform application.
                     type: string
                   eventEndpointUpdatedTopicArn:
-                    description: SNS Topic triggered when an existing platform endpoint
-                      is changed from your platform application.
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is changed from your platform application.
                     type: string
                   failureFeedbackRoleArn:
-                    description: The IAM role permitted to receive failure feedback
-                      for this application.
+                    description: The IAM role ARN permitted to receive failure feedback
+                      for this application and give SNS write access to use CloudWatch
+                      logs on your behalf.
                     type: string
                   failureFeedbackRoleArnRef:
                     description: Reference to a Role in iam to populate failureFeedbackRoleArn.
@@ -203,8 +213,9 @@ spec:
                       be created in.
                     type: string
                   successFeedbackRoleArn:
-                    description: The IAM role permitted to receive success feedback
-                      for this application.
+                    description: The IAM role ARN permitted to receive success feedback
+                      for this application and give SNS write access to use CloudWatch
+                      logs on your behalf.
                     type: string
                   successFeedbackRoleArnRef:
                     description: Reference to a Role in iam to populate successFeedbackRoleArn.
@@ -280,7 +291,8 @@ spec:
                         type: object
                     type: object
                   successFeedbackSampleRate:
-                    description: The percentage of success to sample (0-100)
+                    description: The sample rate percentage (0-100) of successfully
+                      delivered messages.
                     type: string
                 required:
                 - platform

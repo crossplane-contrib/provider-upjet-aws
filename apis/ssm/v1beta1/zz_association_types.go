@@ -84,7 +84,7 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A cron expression when the association will be applied to the target(s).
+	// A cron or rate expression that specifies when the association runs.
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 

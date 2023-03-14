@@ -343,6 +343,11 @@ spec:
                   id:
                     description: The db subnet group name.
                     type: string
+                  supportedNetworkTypes:
+                    description: The network type of the db subnet group.
+                    items:
+                      type: string
+                    type: array
                   tagsAll:
                     additionalProperties:
                       type: string

@@ -197,7 +197,7 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The type of trigger. Valid values are CONDITIONAL, ON_DEMAND, and SCHEDULED.
+	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 

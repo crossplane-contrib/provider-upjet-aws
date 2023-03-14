@@ -64,6 +64,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: Specifies whether upgrades between different major
+                      versions are allowed. You must set it to true when providing
+                      an engine_version parameter that uses a different major version
+                      than the DB cluster's current version. Default is false.
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -105,6 +111,9 @@ spec:
                     description: The name of your final Neptune snapshot when this
                       Neptune cluster is deleted. If omitted, no final snapshot will
                       be made.
+                    type: string
+                  globalClusterIdentifier:
+                    description: The global cluster identifier specified on aws_neptune_global_cluster.
                     type: string
                   iamDatabaseAuthenticationEnabled:
                     description: Specifies whether or not mappings of AWS Identity
@@ -348,6 +357,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  neptuneInstanceParameterGroupName:
+                    description: The name of the DB parameter group to apply to all
+                      instances of the DB cluster.
+                    type: string
                   neptuneSubnetGroupName:
                     description: A Neptune subnet group to associate with this Neptune
                       instance.
@@ -520,6 +533,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  serverlessV2ScalingConfiguration:
+                    description: If set, create the Neptune cluster as a serverless
+                      one. See Serverless for example block attributes.
+                    items:
+                      properties:
+                        maxCapacity:
+                          description: ': (default: 128) The maximum Neptune Capacity
+                            Units (NCUs) for this cluster. Must be lower or equal
+                            than 128. See AWS Documentation for more details.'
+                          type: number
+                        minCapacity:
+                          description: ': (default: 2.5) The minimum Neptune Capacity
+                            Units (NCUs) for this cluster. Must be greater or equal
+                            than 2.5. See AWS Documentation for more details.'
+                          type: number
+                      type: object
+                    type: array
                   skipFinalSnapshot:
                     description: Determines whether a final Neptune snapshot is created
                       before the Neptune cluster is deleted. If true is specified,

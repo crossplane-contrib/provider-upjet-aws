@@ -81,7 +81,8 @@ spec:
                     type: string
                   severity:
                     description: The event severity to be published by the notification
-                      subscription. Valid options are INFO or ERROR.
+                      subscription. Valid options are INFO or ERROR. Default value
+                      of INFO.
                     type: string
                   snsTopicArn:
                     description: The ARN of the SNS topic to send events to.
@@ -170,8 +171,8 @@ spec:
                   sourceType:
                     description: The type of source that will be generating the events.
                       Valid options are cluster, cluster-parameter-group, cluster-security-group,
-                      or cluster-snapshot. If not set, all sources will be subscribed
-                      to.
+                      cluster-snapshot, or scheduled-action. If not set, all sources
+                      will be subscribed to.
                     type: string
                   tags:
                     additionalProperties:

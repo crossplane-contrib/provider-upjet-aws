@@ -70,6 +70,10 @@ type CapacityReservationParameters struct {
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation.
+	// +kubebuilder:validation:Optional
+	PlacementGroupArn *string `json:"placementGroupArn,omitempty" tf:"placement_group_arn,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required

@@ -86,13 +86,11 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	DropInvalidHeaderFields *bool `json:"dropInvalidHeaderFields,omitempty" tf:"drop_invalid_header_fields,omitempty"`
 
-	// If true, cross-zone load balancing of the load balancer will be enabled.
-	// This is a network load balancer feature. Defaults to false.
+	// If true, cross-zone load balancing of the load balancer will be enabled. For network and gateway type load balancers, this feature is disabled by default (false). For application load balancer this feature is always enabled (true) and cannot be disabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableCrossZoneLoadBalancing *bool `json:"enableCrossZoneLoadBalancing,omitempty" tf:"enable_cross_zone_load_balancing,omitempty"`
 
-	// If true, deletion of the load balancer will be disabled via
-	// the AWS API. Defaults to false.
+	// If true, deletion of the load balancer will be disabled via the AWS API. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableDeletionProtection *bool `json:"enableDeletionProtection,omitempty" tf:"enable_deletion_protection,omitempty"`
 
@@ -104,7 +102,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableWafFailOpen *bool `json:"enableWafFailOpen,omitempty" tf:"enable_waf_fail_open,omitempty"`
 
-	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack
+	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
@@ -124,6 +122,10 @@ type LBParameters struct {
 	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
+	// +kubebuilder:validation:Optional
+	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -179,19 +181,19 @@ type SubnetMappingObservation struct {
 
 type SubnetMappingParameters struct {
 
-	// The allocation ID of the Elastic IP address.
+	// The allocation ID of the Elastic IP address for an internet-facing load balancer.
 	// +kubebuilder:validation:Optional
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
-	// An ipv6 address within the subnet to assign to the internet-facing load balancer.
+	// The IPv6 address. You associate IPv6 CIDR blocks with your VPC and choose the subnets where you launch both internet-facing and internal Application Load Balancers or Network Load Balancers.
 	// +kubebuilder:validation:Optional
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
-	// A private ipv4 address within the subnet to assign to the internal-facing load balancer.
+	// The private IPv4 address for an internal load balancer.
 	// +kubebuilder:validation:Optional
 	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
 
-	// The id of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
+	// ID of the subnet of which to attach to the load balancer. You can specify only one subnet per Availability Zone.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

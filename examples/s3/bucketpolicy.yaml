@@ -1,9 +1,12 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPolicy
 metadata:
-  name: example
   annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpolicy
     upjet.upbound.io/manual-intervention: "The bucket ARN in policy should be changed manually."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
@@ -23,3 +26,21 @@ spec:
             }
           ]
         }
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpolicy
+    upjet.upbound.io/manual-intervention: "This resource is dependency of BucketPolicy. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: s3
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    objectLockEnabled: true
+    tags:
+      Name: SampleBucket

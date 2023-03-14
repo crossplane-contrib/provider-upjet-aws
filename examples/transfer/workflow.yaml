@@ -1,0 +1,16 @@
+apiVersion: transfer.aws.upbound.io/v1beta1
+kind: Workflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/workflow
+    upjet.upbound.io/manual-intervention: "This resource manual intervention due to Uptest failed without any errors."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    steps:
+    - deleteStepDetails:
+      - name: example
+      type: DELETE

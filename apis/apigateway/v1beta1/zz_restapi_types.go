@@ -18,7 +18,7 @@ type RestAPIEndpointConfigurationObservation struct {
 
 type RestAPIEndpointConfigurationParameters struct {
 
-	// A list of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. Must be declared as REGIONAL in non-Commercial partitions. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
+	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE, REGIONAL or PRIVATE. If unspecified, defaults to EDGE. If set to PRIVATE recommend to set put_rest_api_mode = merge to not cause the endpoints and associated Route53 records to be deleted. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
 	// +kubebuilder:validation:Required
 	Types []*string `json:"types" tf:"types,omitempty"`
 
@@ -29,27 +29,27 @@ type RestAPIEndpointConfigurationParameters struct {
 
 type RestAPIObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The creation date of the REST API
+	// Creation date of the REST API
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The execution ARN part to be used in lambda_permission's source_arn
+	// Execution ARN part to be used in lambda_permission's source_arn
 	// when allowing API Gateway to invoke a Lambda function,
 	// e.g., arn:aws:execute-api:eu-west-2:123456789012:z4675bid1j, which can be concatenated with allowed stage, method and resource path.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
-	// The ID of the REST API
+	// ID of the REST API
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// JSON formatted policy document that controls access to the API Gateway. It is recommended to use the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// JSON formatted policy document that controls access to the API Gateway. We recommend using the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The resource ID of the REST API's root
+	// Resource ID of the REST API's root
 	RootResourceID *string `json:"rootResourceId,omitempty" tf:"root_resource_id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -71,7 +71,7 @@ type RestAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// Whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint. Defaults to false. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension disableExecuteApiEndpoint property. If the argument value is true and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +kubebuilder:validation:Optional
 	DisableExecuteAPIEndpoint *bool `json:"disableExecuteApiEndpoint,omitempty" tf:"disable_execute_api_endpoint,omitempty"`
 
@@ -90,6 +90,10 @@ type RestAPIParameters struct {
 	// Map of customizations for importing the specification in the body argument. For example, to exclude DocumentationParts from an imported API, set ignore equal to documentation. Additional documentation, including other parameters such as basepath, can be found in the API Gateway Developer Guide.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// +kubebuilder:validation:Optional
+	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

@@ -4,17 +4,39 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/transitgatewayconnect
   labels:
+    testing.upbound.io/example-name: attachment
+  name: attachment
+spec:
+  forProvider:
+    region: us-west-1
+    transitGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    transportAttachmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayVPCAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewayconnect
+  labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
-    subnet_ids:
-    - ${aws_subnet.example.id}
+    subnetIdRefs:
+    - name: example
     transitGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    vpc_id: ${aws_vpc.example.id}
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

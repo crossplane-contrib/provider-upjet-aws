@@ -38,13 +38,13 @@ type QueueConfigsAssociatedObservation struct {
 	// Specifies the order in which contacts are to be handled for the queue.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// Specifies the ARN for the queue.
+	// ARN for the queue.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 
 	// Specifies the identifier for the queue.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Specifies the name for the queue.
+	// Name for the queue.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 }
 
@@ -53,10 +53,10 @@ type QueueConfigsAssociatedParameters struct {
 
 type QueueConfigsObservation struct {
 
-	// Specifies the ARN for the queue.
+	// ARN for the queue.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
 
-	// Specifies the name for the queue.
+	// Name for the queue.
 	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
 }
 

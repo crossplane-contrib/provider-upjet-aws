@@ -19,7 +19,7 @@ type MethodResponseObservation struct {
 
 type MethodResponseParameters struct {
 
-	// The HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
@@ -38,7 +38,7 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The API resource ID
+	// API resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,17 +52,17 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
-	// A map of the API models used for the response's content type
+	// Map of the API models used for the response's content type
 	// +kubebuilder:validation:Optional
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
-	// A map of response parameters that can be sent to the caller.
+	// Map of response parameters that can be sent to the caller.
 	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
 	// would define that the header X-Some-Header can be provided on the response.
 	// +kubebuilder:validation:Optional
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// The ID of the associated REST API
+	// ID of the associated REST API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -76,7 +76,7 @@ type MethodResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The HTTP status code
+	// HTTP status code
 	// +kubebuilder:validation:Required
 	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }

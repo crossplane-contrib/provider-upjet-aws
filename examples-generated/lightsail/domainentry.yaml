@@ -1,0 +1,34 @@
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: DomainEntry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/domainentry
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: domain_test
+    region: us-west-1
+    target: 127.0.0.1
+    type: A
+
+---
+
+apiVersion: lightsail.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lightsail/v1beta1/domainentry
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    domainName: mydomain.com
+    region: us-west-1
+
+---
+

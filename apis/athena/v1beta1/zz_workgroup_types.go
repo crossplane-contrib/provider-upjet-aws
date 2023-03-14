@@ -34,6 +34,10 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineVersion []EngineVersionParameters `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// Role used in a notebook session for accessing the user's resources.
+	// +kubebuilder:validation:Optional
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
 	// Boolean whether Amazon CloudWatch metrics are enabled for the workgroup. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublishCloudwatchMetricsEnabled *bool `json:"publishCloudwatchMetricsEnabled,omitempty" tf:"publish_cloudwatch_metrics_enabled,omitempty"`
@@ -55,7 +59,7 @@ type EngineVersionObservation struct {
 
 type EngineVersionParameters struct {
 
-	// The requested engine version. Defaults to AUTO.
+	// Requested engine version. Defaults to AUTO.
 	// +kubebuilder:validation:Optional
 	SelectedEngineVersion *string `json:"selectedEngineVersion,omitempty" tf:"selected_engine_version,omitempty"`
 }
@@ -65,7 +69,7 @@ type ResultConfigurationACLConfigurationObservation struct {
 
 type ResultConfigurationACLConfigurationParameters struct {
 
-	// The Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
 	// +kubebuilder:validation:Required
 	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
 }
@@ -75,11 +79,11 @@ type ResultConfigurationEncryptionConfigurationObservation struct {
 
 type ResultConfigurationEncryptionConfigurationParameters struct {
 
-	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
+	// Whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE_S3), server-side encryption with KMS-managed keys (SSE_KMS), or client-side encryption with KMS-managed keys (CSE_KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup.
 	// +kubebuilder:validation:Optional
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
-	// For SSE_KMS and CSE_KMS, this is the KMS key Amazon Resource Name (ARN).
+	// For SSE_KMS and CSE_KMS, this is the KMS key ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -99,7 +103,7 @@ type ResultConfigurationObservation struct {
 
 type ResultConfigurationParameters struct {
 
-	// Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
+	// That an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
 	// +kubebuilder:validation:Optional
 	ACLConfiguration []ResultConfigurationACLConfigurationParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
@@ -107,28 +111,28 @@ type ResultConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration []ResultConfigurationEncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The AWS account ID that you expect to be the owner of the Amazon S3 bucket.
+	// AWS account ID that you expect to be the owner of the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files.
+	// Location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files.
 	// +kubebuilder:validation:Optional
 	OutputLocation *string `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
 }
 
 type WorkgroupObservation struct {
 
-	// Amazon Resource Name (ARN) of the workgroup
+	// ARN of the workgroup
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Configuration block with various settings for the workgroup. Documented below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// The workgroup name
+	// Workgroup name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -142,7 +146,7 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+	// Option to delete the workgroup and its contents even if the workgroup contains any named queries.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

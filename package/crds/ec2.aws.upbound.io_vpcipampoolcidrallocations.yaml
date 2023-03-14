@@ -157,7 +157,7 @@ spec:
                     type: object
                   netmaskLength:
                     description: 'The netmask length of the CIDR you would like to
-                      allocate to the IPAM pool. Valid Values: 0-32.'
+                      allocate to the IPAM pool. Valid Values: 0-128.'
                     type: number
                   region:
                     description: Region is the region you'd like your resource to

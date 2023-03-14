@@ -69,13 +69,74 @@ spec:
                       the detector. See Data Sources below for more details.
                     items:
                       properties:
+                        kubernetes:
+                          description: Configures Kubernetes protection. See Kubernetes
+                            and Kubernetes Audit Logs below for more details.
+                          items:
+                            properties:
+                              auditLogs:
+                                description: Configures Kubernetes audit logs as a
+                                  data source for Kubernetes protection. See Kubernetes
+                                  Audit Logs below for more details.
+                                items:
+                                  properties:
+                                    enable:
+                                      description: If true, enables Malware Protection
+                                        as data source for the detector. Defaults
+                                        to true.
+                                      type: boolean
+                                  required:
+                                  - enable
+                                  type: object
+                                type: array
+                            required:
+                            - auditLogs
+                            type: object
+                          type: array
+                        malwareProtection:
+                          description: Configures Malware Protection. See Malware
+                            Protection, Scan EC2 instance with findings and EBS volumes
+                            below for more details.
+                          items:
+                            properties:
+                              scanEc2InstanceWithFindings:
+                                description: Configure whether Malware Protection
+                                  is enabled as data source for EC2 instances with
+                                  findings for the detector. See Scan EC2 instance
+                                  with findings below for more details.
+                                items:
+                                  properties:
+                                    ebsVolumes:
+                                      description: Configure whether scanning EBS
+                                        volumes is enabled as data source for the
+                                        detector for instances with findings. See
+                                        EBS volumes below for more details.
+                                      items:
+                                        properties:
+                                          enable:
+                                            description: If true, enables Malware
+                                              Protection as data source for the detector.
+                                              Defaults to true.
+                                            type: boolean
+                                        required:
+                                        - enable
+                                        type: object
+                                      type: array
+                                  required:
+                                  - ebsVolumes
+                                  type: object
+                                type: array
+                            required:
+                            - scanEc2InstanceWithFindings
+                            type: object
+                          type: array
                         s3Logs:
-                          description: Describes whether S3 data event logs are enabled
-                            as a data source. See S3 Logs below for more details.
+                          description: Configures S3 protection. See S3 Logs below
+                            for more details.
                           items:
                             properties:
                               enable:
-                                description: If true, enables S3 Protection. Defaults
+                                description: If true, enables S3 protection. Defaults
                                   to true.
                                 type: boolean
                             required:

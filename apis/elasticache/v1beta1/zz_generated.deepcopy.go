@@ -32,6 +32,11 @@ func (in *CacheNodesObservation) DeepCopyInto(out *CacheNodesObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.OutpostArn != nil {
+		in, out := &in.OutpostArn, &out.OutpostArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -263,6 +268,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
 		*out = make([]LogDeliveryConfigurationParameters, len(*in))
@@ -272,6 +282,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
 		**out = **in
 	}
@@ -288,6 +303,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.NumCacheNodes != nil {
 		in, out := &in.NumCacheNodes, &out.NumCacheNodes
 		*out = new(float64)
+		**out = **in
+	}
+	if in.OutpostMode != nil {
+		in, out := &in.OutpostMode, &out.OutpostMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -320,6 +340,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.PreferredOutpostArn != nil {
+		in, out := &in.PreferredOutpostArn, &out.PreferredOutpostArn
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

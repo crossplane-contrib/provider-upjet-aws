@@ -13,11 +13,6 @@ spec:
     messageRetentionSeconds: 86400
     name: terraform-example-queue
     receiveWaitTimeSeconds: 10
-    redriveAllowPolicy: |-
-      ${jsonencode({
-          redrivePermission = "byQueue",
-          sourceQueueArns   = [aws_sqs_queue.terraform_queue_deadletter.arn]
-        })}
     redrivePolicy: |-
       ${jsonencode({
           deadLetterTargetArn = aws_sqs_queue.terraform_queue_deadletter.arn

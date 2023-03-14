@@ -70,6 +70,48 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this DefaultPatchBaseline.
+func (mg *DefaultPatchBaseline) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BaselineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.BaselineIDRef,
+		Selector:     mg.Spec.ForProvider.BaselineIDSelector,
+		To: reference.To{
+			List:    &PatchBaselineList{},
+			Managed: &PatchBaseline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BaselineID")
+	}
+	mg.Spec.ForProvider.BaselineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BaselineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperatingSystem),
+		Extract:      resource.ExtractParamPath("operating_system", false),
+		Reference:    mg.Spec.ForProvider.OperatingSystemRef,
+		Selector:     mg.Spec.ForProvider.OperatingSystemSelector,
+		To: reference.To{
+			List:    &PatchBaselineList{},
+			Managed: &PatchBaseline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.OperatingSystem")
+	}
+	mg.Spec.ForProvider.OperatingSystem = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OperatingSystemRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MaintenanceWindowTarget.
 func (mg *MaintenanceWindowTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -161,7 +203,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3Bucket),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketRef,
 				Selector:     mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketSelector,
 				To: reference.To{

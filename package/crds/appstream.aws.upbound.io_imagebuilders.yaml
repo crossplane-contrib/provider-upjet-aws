@@ -81,8 +81,8 @@ spec:
                       type: object
                     type: array
                   appstreamAgentVersion:
-                    description: The version of the AppStream 2.0 agent to use for
-                      this image builder.
+                    description: Version of the AppStream 2.0 agent to use for this
+                      image builder.
                     type: string
                   description:
                     description: Description to display.
@@ -191,8 +191,7 @@ spec:
                     description: ARN of the public, private, or shared image to use.
                     type: string
                   instanceType:
-                    description: The instance type to use when launching the image
-                      builder.
+                    description: Instance type to use when launching the image builder.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -492,7 +491,7 @@ spec:
                       when the image builder was created.
                     type: string
                   id:
-                    description: The name of the image builder.
+                    description: Name of the image builder.
                     type: string
                   imageName:
                     description: Name of the image used to create the image builder.
@@ -505,9 +504,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

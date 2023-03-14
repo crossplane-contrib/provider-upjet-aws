@@ -662,7 +662,8 @@ spec:
                     items:
                       properties:
                         consoleUrl:
-                          description: The URL of the broker's ActiveMQ Web Console.
+                          description: The URL of the ActiveMQ Web Console or the
+                            RabbitMQ Management UI depending on engine_type.
                           type: string
                         endpoints:
                           description: 'Broker''s wire-level protocol endpoints in

@@ -58,7 +58,7 @@ type ContentSecurityPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	ContentSecurityPolicy *string `json:"contentSecurityPolicy" tf:"content_security_policy,omitempty"`
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -68,7 +68,7 @@ type ContentTypeOptionsObservation struct {
 
 type ContentTypeOptionsParameters struct {
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -116,7 +116,7 @@ type CustomHeadersConfigItemsParameters struct {
 	// +kubebuilder:validation:Required
 	Header *string `json:"header" tf:"header,omitempty"`
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
@@ -143,7 +143,7 @@ type FrameOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	FrameOption *string `json:"frameOption" tf:"frame_option,omitempty"`
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 }
@@ -153,7 +153,7 @@ type ReferrerPolicyObservation struct {
 
 type ReferrerPolicyParameters struct {
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
@@ -198,6 +198,10 @@ type ResponseHeadersPolicyParameters struct {
 	// A configuration for a set of security-related HTTP response headers. See Security Headers Config for more information.
 	// +kubebuilder:validation:Optional
 	SecurityHeadersConfig []SecurityHeadersConfigParameters `json:"securityHeadersConfig,omitempty" tf:"security_headers_config,omitempty"`
+
+	// A configuration for enabling the Server-Timing header in HTTP responses sent from CloudFront. See Server Timing Headers Config for more information.
+	// +kubebuilder:validation:Optional
+	ServerTimingHeadersConfig []ServerTimingHeadersConfigParameters `json:"serverTimingHeadersConfig,omitempty" tf:"server_timing_headers_config,omitempty"`
 }
 
 type SecurityHeadersConfigObservation struct {
@@ -230,6 +234,20 @@ type SecurityHeadersConfigParameters struct {
 	XSSProtection []XSSProtectionParameters `json:"xssProtection,omitempty" tf:"xss_protection,omitempty"`
 }
 
+type ServerTimingHeadersConfigObservation struct {
+}
+
+type ServerTimingHeadersConfigParameters struct {
+
+	// A Whether CloudFront adds the Server-Timing header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// A number 0–100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the Server-Timing header to. Valid range: Minimum value of 0.0. Maximum value of 100.0.
+	// +kubebuilder:validation:Required
+	SamplingRate *float64 `json:"samplingRate" tf:"sampling_rate,omitempty"`
+}
+
 type StrictTransportSecurityObservation struct {
 }
 
@@ -239,15 +257,15 @@ type StrictTransportSecurityParameters struct {
 	// +kubebuilder:validation:Required
 	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec" tf:"access_control_max_age_sec,omitempty"`
 
-	// A Boolean value that determines whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
+	// Whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
 	// +kubebuilder:validation:Optional
 	IncludeSubdomains *bool `json:"includeSubdomains,omitempty" tf:"include_subdomains,omitempty"`
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 
-	// A Boolean value that determines whether CloudFront includes the preload directive in the Strict-Transport-Security HTTP response header.
+	// Whether CloudFront includes the preload directive in the Strict-Transport-Security HTTP response header.
 	// +kubebuilder:validation:Optional
 	Preload *bool `json:"preload,omitempty" tf:"preload,omitempty"`
 }
@@ -257,11 +275,11 @@ type XSSProtectionObservation struct {
 
 type XSSProtectionParameters struct {
 
-	// A Boolean value that determines whether CloudFront includes the mode=block directive in the X-XSS-Protection header.
+	// Whether CloudFront includes the mode=block directive in the X-XSS-Protection header.
 	// +kubebuilder:validation:Optional
 	ModeBlock *bool `json:"modeBlock,omitempty" tf:"mode_block,omitempty"`
 
-	// A Boolean value that determines whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
+	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Required
 	Override *bool `json:"override" tf:"override,omitempty"`
 

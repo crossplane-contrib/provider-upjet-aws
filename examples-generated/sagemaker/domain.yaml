@@ -12,14 +12,14 @@ spec:
     defaultUserSettings:
     - executionRoleSelector:
         matchLabels:
-          testing.upbound.io/example-name: test
+          testing.upbound.io/example-name: example
     domainName: example
     region: us-west-1
     subnetIdRefs:
-    - name: test
+    - name: example
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
 
 ---
 

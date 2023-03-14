@@ -18,7 +18,7 @@ type EgressFilterObservation struct {
 
 type EgressFilterParameters struct {
 
-	// The egress filter type. By default, the type is DROP_ALL.
+	// Egress filter type. By default, the type is DROP_ALL.
 	// Valid values are ALLOW_ALL and DROP_ALL.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -26,25 +26,25 @@ type EgressFilterParameters struct {
 
 type MeshObservation struct {
 
-	// The ARN of the service mesh.
+	// ARN of the service mesh.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The creation date of the service mesh.
+	// Creation date of the service mesh.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
-	// The ID of the service mesh.
+	// ID of the service mesh.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The last update date of the service mesh.
+	// Last update date of the service mesh.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
-	// The AWS account ID of the service mesh's owner.
+	// AWS account ID of the service mesh's owner.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
-	// The resource owner's AWS account ID.
+	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -55,7 +55,7 @@ type MeshParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The service mesh specification to apply.
+	// Service mesh specification to apply.
 	// +kubebuilder:validation:Optional
 	Spec []MeshSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
@@ -69,7 +69,7 @@ type MeshSpecObservation struct {
 
 type MeshSpecParameters struct {
 
-	// The egress filter rules for the service mesh.
+	// Egress filter rules for the service mesh.
 	// +kubebuilder:validation:Optional
 	EgressFilter []EgressFilterParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
 }

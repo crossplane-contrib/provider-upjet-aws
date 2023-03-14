@@ -452,8 +452,18 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MacsecCapable != nil {
+		in, out := &in.MacsecCapable, &out.MacsecCapable
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OwnerAccountID != nil {
 		in, out := &in.OwnerAccountID, &out.OwnerAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PortEncryptionStatus != nil {
+		in, out := &in.PortEncryptionStatus, &out.PortEncryptionStatus
 		*out = new(string)
 		**out = **in
 	}
@@ -471,6 +481,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.VlanID != nil {
+		in, out := &in.VlanID, &out.VlanID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -492,6 +507,11 @@ func (in *ConnectionParameters) DeepCopyInto(out *ConnectionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EncryptionMode != nil {
+		in, out := &in.EncryptionMode, &out.EncryptionMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -510,6 +530,16 @@ func (in *ConnectionParameters) DeepCopyInto(out *ConnectionParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.RequestMacsec != nil {
+		in, out := &in.RequestMacsec, &out.RequestMacsec
+		*out = new(bool)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {

@@ -23,7 +23,7 @@ type EmailIdentityObservation struct {
 
 type EmailIdentityParameters struct {
 
-	// The email address to assign to SES
+	// The email address to assign to SES.
 	// +kubebuilder:validation:Required
 	Email *string `json:"email" tf:"email,omitempty"`
 

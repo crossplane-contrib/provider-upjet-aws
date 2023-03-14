@@ -81,7 +81,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Cluster),
-		Extract:      common.ARNExtractor(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ClusterRef,
 		Selector:     mg.Spec.ForProvider.ClusterSelector,
 		To: reference.To{
@@ -147,6 +147,21 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetRefs = mrsp.ResolvedReferences
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskDefinition),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TaskDefinitionRef,
+		Selector:     mg.Spec.ForProvider.TaskDefinitionSelector,
+		To: reference.To{
+			List:    &TaskDefinitionList{},
+			Managed: &TaskDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TaskDefinition")
+	}
+	mg.Spec.ForProvider.TaskDefinition = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TaskDefinitionRef = rsp.ResolvedReference
 
 	return nil
 }

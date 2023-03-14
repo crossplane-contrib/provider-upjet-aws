@@ -60,6 +60,56 @@ type DatabaseParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
+type ExpressionObservation struct {
+}
+
+type ExpressionParameters struct {
+
+	// name of an LF-Tag.
+	// +kubebuilder:validation:Required
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// A list of possible values of an LF-Tag.
+	// +kubebuilder:validation:Required
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type LfTagObservation struct {
+}
+
+type LfTagParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	// +kubebuilder:validation:Optional
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// name for the tag.
+	// +kubebuilder:validation:Required
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// A list of possible values an attribute can take.
+	// +kubebuilder:validation:Required
+	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type LfTagPolicyObservation struct {
+}
+
+type LfTagPolicyParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	// +kubebuilder:validation:Optional
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// A list of tag conditions that apply to the resource's tag policy. Configuration block for tag conditions that apply to the policy. See expression below.
+	// +kubebuilder:validation:Required
+	Expression []ExpressionParameters `json:"expression" tf:"expression,omitempty"`
+
+	// –  The resource type for which the tag policy applies. Valid values are DATABASE and TABLE.
+	// +kubebuilder:validation:Required
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+}
+
 type PermissionsObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -82,7 +132,15 @@ type PermissionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Database []DatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
+	// Configuration block for an LF-tag resource. Detailed below.
+	// +kubebuilder:validation:Optional
+	LfTag []LfTagParameters `json:"lfTag,omitempty" tf:"lf_tag,omitempty"`
+
+	// Configuration block for an LF-tag policy resource. Detailed below.
+	// +kubebuilder:validation:Optional
+	LfTagPolicy []LfTagPolicyParameters `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
+
+	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Required
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 

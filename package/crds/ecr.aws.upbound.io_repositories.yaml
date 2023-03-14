@@ -156,6 +156,10 @@ spec:
                           type: object
                       type: object
                     type: array
+                  forceDelete:
+                    description: If true, will delete the repository even if it contains
+                      images. Defaults to false.
+                    type: boolean
                   imageScanningConfiguration:
                     description: Configuration block that defines image scanning configuration
                       for the repository. By default, image scanning must be manually

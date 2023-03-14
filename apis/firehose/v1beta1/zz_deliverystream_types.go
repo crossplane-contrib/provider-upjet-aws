@@ -108,6 +108,10 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration []KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
+	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// Configuration options if redshift is the destination.
 	// Using redshift_configuration requires the user to also specify a
 	// s3_configuration block. More details are given below.
@@ -196,7 +200,7 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
-	// The ARN of the Amazon ES domain.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming RoleARN.  The pattern needs to be arn:.*. Conflicts with cluster_endpoint.
+	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticsearch/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -311,7 +315,7 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DataFormatConversionConfiguration []DataFormatConversionConfigurationParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details.
+	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details. Required when using dynamic partitioning.
 	// +kubebuilder:validation:Optional
 	DynamicPartitioningConfiguration []DynamicPartitioningConfigurationParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 

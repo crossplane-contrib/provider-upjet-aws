@@ -204,3 +204,333 @@ func (mg *AccountPublicAccessBlock) SetPublishConnectionDetailsTo(r *xpv1.Publis
 func (mg *AccountPublicAccessBlock) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MultiRegionAccessPoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MultiRegionAccessPoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MultiRegionAccessPoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MultiRegionAccessPoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MultiRegionAccessPointPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MultiRegionAccessPointPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MultiRegionAccessPointPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MultiRegionAccessPointPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ObjectLambdaAccessPoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ObjectLambdaAccessPoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ObjectLambdaAccessPoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ObjectLambdaAccessPoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ObjectLambdaAccessPointPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ObjectLambdaAccessPointPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ObjectLambdaAccessPointPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ObjectLambdaAccessPointPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this StorageLensConfiguration.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *StorageLensConfiguration) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this StorageLensConfiguration.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *StorageLensConfiguration) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

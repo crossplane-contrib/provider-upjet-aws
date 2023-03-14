@@ -13,12 +13,34 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuditLogsObservation struct {
+}
+
+type AuditLogsParameters struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	// +kubebuilder:validation:Required
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
+}
+
 type DatasourcesObservation struct {
 }
 
 type DatasourcesParameters struct {
 
-	// Describes whether S3 data event logs are enabled as a data source. See S3 Logs below for more details.
+	// Configures Kubernetes protection.
+	// See Kubernetes and Kubernetes Audit Logs below for more details.
+	// +kubebuilder:validation:Optional
+	Kubernetes []KubernetesParameters `json:"kubernetes,omitempty" tf:"kubernetes,omitempty"`
+
+	// Configures Malware Protection.
+	// See Malware Protection, Scan EC2 instance with findings and EBS volumes below for more details.
+	// +kubebuilder:validation:Optional
+	MalwareProtection []MalwareProtectionParameters `json:"malwareProtection,omitempty" tf:"malware_protection,omitempty"`
+
+	// Configures S3 protection.
+	// See S3 Logs below for more details.
 	// +kubebuilder:validation:Optional
 	S3Logs []S3LogsParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
 }
@@ -62,14 +84,59 @@ type DetectorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type EBSVolumesObservation struct {
+}
+
+type EBSVolumesParameters struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	// +kubebuilder:validation:Required
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
+}
+
+type KubernetesObservation struct {
+}
+
+type KubernetesParameters struct {
+
+	// Configures Kubernetes audit logs as a data source for Kubernetes protection.
+	// See Kubernetes Audit Logs below for more details.
+	// +kubebuilder:validation:Required
+	AuditLogs []AuditLogsParameters `json:"auditLogs" tf:"audit_logs,omitempty"`
+}
+
+type MalwareProtectionObservation struct {
+}
+
+type MalwareProtectionParameters struct {
+
+	// Configure whether Malware Protection is enabled as data source for EC2 instances with findings for the detector.
+	// See Scan EC2 instance with findings below for more details.
+	// +kubebuilder:validation:Required
+	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsParameters `json:"scanEc2InstanceWithFindings" tf:"scan_ec2_instance_with_findings,omitempty"`
+}
+
 type S3LogsObservation struct {
 }
 
 type S3LogsParameters struct {
 
-	// If true, enables S3 Protection. Defaults to true.
+	// If true, enables S3 protection.
+	// Defaults to true.
 	// +kubebuilder:validation:Required
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
+}
+
+type ScanEC2InstanceWithFindingsObservation struct {
+}
+
+type ScanEC2InstanceWithFindingsParameters struct {
+
+	// Configure whether scanning EBS volumes is enabled as data source for the detector for instances with findings.
+	// See EBS volumes below for more details.
+	// +kubebuilder:validation:Required
+	EBSVolumes []EBSVolumesParameters `json:"ebsVolumes" tf:"ebs_volumes,omitempty"`
 }
 
 // DetectorSpec defines the desired state of Detector

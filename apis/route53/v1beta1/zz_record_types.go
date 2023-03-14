@@ -31,6 +31,20 @@ type AliasParameters struct {
 	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
 
+type CidrRoutingPolicyObservation struct {
+}
+
+type CidrRoutingPolicyParameters struct {
+
+	// The CIDR collection ID. See the aws_route53_cidr_collection resource for more details.
+	// +kubebuilder:validation:Required
+	CollectionID *string `json:"collectionId" tf:"collection_id,omitempty"`
+
+	// The CIDR collection location name. See the aws_route53_cidr_location resource for more details. A location_name with an asterisk "*" can be used to create a default CIDR record. collection_id is still required for default record.
+	// +kubebuilder:validation:Required
+	LocationName *string `json:"locationName" tf:"location_name,omitempty"`
+}
+
 type FailoverRoutingPolicyObservation struct {
 }
 
@@ -80,13 +94,17 @@ type RecordObservation struct {
 type RecordParameters struct {
 
 	// An alias block. Conflicts with ttl & records.
-	// Alias record documented below.
+	// Documented below.
 	// +kubebuilder:validation:Optional
 	Alias []AliasParameters `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// false by default. This configuration is not recommended for most environments.
 	// +kubebuilder:validation:Optional
 	AllowOverwrite *bool `json:"allowOverwrite,omitempty" tf:"allow_overwrite,omitempty"`
+
+	// A block indicating a routing policy based on the IP network ranges of requestors. Conflicts with any other routing policy. Documented below.
+	// +kubebuilder:validation:Optional
+	CidrRoutingPolicy []CidrRoutingPolicyParameters `json:"cidrRoutingPolicy,omitempty" tf:"cidr_routing_policy,omitempty"`
 
 	// A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below.
 	// +kubebuilder:validation:Optional
@@ -131,7 +149,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Unique identifier to differentiate records with routing policies from one another. Required if using failover, geolocation, latency, multivalue_answer, or weighted routing policies documented below.
+	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	// +kubebuilder:validation:Optional
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
 

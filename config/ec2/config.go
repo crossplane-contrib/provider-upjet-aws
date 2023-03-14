@@ -376,4 +376,8 @@ func Configure(p *config.Provider) {
 			Type: "VPNGateway",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_ec2_tag", func(r *config.Resource) {
+		delete(r.References, "resource_id")
+	})
 }

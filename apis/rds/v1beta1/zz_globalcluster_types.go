@@ -30,6 +30,8 @@ type GlobalClusterObservation struct {
 	// RDS Global Cluster Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
+
 	// Set of objects containing Global Cluster members.
 	GlobalClusterMembers []GlobalClusterMembersObservation `json:"globalClusterMembers,omitempty" tf:"global_cluster_members,omitempty"`
 

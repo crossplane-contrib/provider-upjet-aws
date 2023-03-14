@@ -263,6 +263,32 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this Schema.
+func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegistryArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.RegistryArnRef,
+		Selector:     mg.Spec.ForProvider.RegistryArnSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RegistryArn")
+	}
+	mg.Spec.ForProvider.RegistryArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RegistryArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SecurityConfiguration.
 func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

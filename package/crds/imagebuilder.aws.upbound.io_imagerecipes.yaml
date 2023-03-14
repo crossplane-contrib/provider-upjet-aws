@@ -99,6 +99,10 @@ spec:
                               snapshotId:
                                 description: Identifier of the EC2 Volume Snapshot.
                                 type: string
+                              throughput:
+                                description: For GP3 volumes only. The throughput
+                                  in MiB/s that the volume supports.
+                                type: number
                               volumeSize:
                                 description: Size of the volume, in GiB.
                                 type: number
@@ -127,6 +131,84 @@ spec:
                           description: Amazon Resource Name (ARN) of the Image Builder
                             Component to associate.
                           type: string
+                        componentArnRef:
+                          description: Reference to a Component in imagebuilder to
+                            populate componentArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        componentArnSelector:
+                          description: Selector for a Component in imagebuilder to
+                            populate componentArn.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         parameter:
                           description: Configuration block(s) for parameters to configure
                             the component. Detailed below.
@@ -143,8 +225,6 @@ spec:
                             - value
                             type: object
                           type: array
-                      required:
-                      - componentArn
                       type: object
                     type: array
                   description:
@@ -154,7 +234,9 @@ spec:
                     description: Name of the image recipe.
                     type: string
                   parentImage:
-                    description: Platform of the image recipe.
+                    description: The image recipe uses this image as a base from which
+                      to build your customized image. The value can be the base image
+                      ARN or an AMI ID.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -183,7 +265,10 @@ spec:
                       or a command script to run when you launch your build instance.
                     type: string
                   version:
-                    description: Version of the image recipe.
+                    description: 'The semantic version of the image recipe, which
+                      specifies the version in the following format, with numeric
+                      values in each position to indicate a specific version: major.minor.patch.
+                      For example: 1.0.0.'
                     type: string
                   workingDirectory:
                     description: The working directory to be used during build and

@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   alias:
-                    description: An alias block. Conflicts with ttl & records. Alias
-                      record documented below.
+                    description: An alias block. Conflicts with ttl & records. Documented
+                      below.
                     items:
                       properties:
                         evaluateTargetHealth:
@@ -92,6 +92,28 @@ spec:
                     description: false by default. This configuration is not recommended
                       for most environments.
                     type: boolean
+                  cidrRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      IP network ranges of requestors. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        collectionId:
+                          description: The CIDR collection ID. See the aws_route53_cidr_collection
+                            resource for more details.
+                          type: string
+                        locationName:
+                          description: The CIDR collection location name. See the
+                            aws_route53_cidr_location resource for more details. A
+                            location_name with an asterisk "*" can be used to create
+                            a default CIDR record. collection_id is still required
+                            for default record.
+                          type: string
+                      required:
+                      - collectionId
+                      - locationName
+                      type: object
+                    type: array
                   failoverRoutingPolicy:
                     description: A block indicating the routing behavior when associated
                       health check fails. Conflicts with any other routing policy.
@@ -238,9 +260,9 @@ spec:
                     type: string
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
-                      policies from one another. Required if using failover, geolocation,
-                      latency, multivalue_answer, or weighted routing policies documented
-                      below.
+                      policies from one another. Required if using cidr_routing_policy,
+                      failover_routing_policy, geolocation_routing_policy, latency_routing_policy,
+                      multivalue_answer_routing_policy, or weighted_routing_policy.
                     type: string
                   ttl:
                     description: The TTL of the record.

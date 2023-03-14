@@ -15,18 +15,18 @@ import (
 
 type WebhookObservation struct {
 
-	// The Amazon Resource Name (ARN) for the webhook.
+	// ARN for the webhook.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The URL of the webhook.
+	// URL of the webhook.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type WebhookParameters struct {
 
-	// The unique ID for an Amplify app.
+	// Unique ID for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -40,7 +40,7 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
 
-	// The name for a branch that is part of the Amplify app.
+	// Name for a branch that is part of the Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.Branch
 	// +kubebuilder:validation:Optional
 	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
@@ -53,7 +53,7 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	BranchNameSelector *v1.Selector `json:"branchNameSelector,omitempty" tf:"-"`
 
-	// The description for a webhook.
+	// Description for a webhook.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

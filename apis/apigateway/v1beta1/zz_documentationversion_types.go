@@ -19,7 +19,7 @@ type DocumentationVersionObservation struct {
 
 type DocumentationVersionParameters struct {
 
-	// The description of the API documentation version.
+	// Description of the API documentation version.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -28,7 +28,7 @@ type DocumentationVersionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated Rest API
+	// ID of the associated Rest API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -42,7 +42,7 @@ type DocumentationVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
-	// The version identifier of the API documentation snapshot.
+	// Version identifier of the API documentation snapshot.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }

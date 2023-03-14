@@ -22,7 +22,7 @@ type CommandParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
@@ -70,6 +70,10 @@ type JobParameters struct {
 	// –  Description of the job.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. Valid value: FLEX, STANDARD.
+	// +kubebuilder:validation:Optional
+	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
 
 	// –  Execution property of the job. Defined below.
 	// +kubebuilder:validation:Optional
@@ -126,7 +130,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimted) for gluestreaming jobs.
+	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 

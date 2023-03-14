@@ -1,0 +1,20 @@
+apiVersion: s3control.aws.upbound.io/v1beta1
+kind: StorageLensConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3control/v1beta1/storagelensconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: slcexample
+spec:
+  forProvider:
+    configId: example-1
+    region: us-west-1
+    storageLensConfiguration:
+    - accountLevel:
+      - activityMetrics:
+        - enabled: true
+        bucketLevel:
+        - activityMetrics:
+          - enabled: true
+      enabled: false

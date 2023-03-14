@@ -8,25 +8,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "AWS": "*"
-            },
-            "Action": "execute-api:Invoke",
-            "Resource": "${aws_api_gateway_rest_api.test.execution_arn}",
-            "Condition": {
-              "IpAddress": {
-                "aws:SourceIp": "123.123.123.123/32"
-              }
-            }
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.test.json}
     region: us-west-1
     restApiIdSelector:
       matchLabels:

@@ -88,6 +88,7 @@ metadata:
 spec:
   forProvider:
     destination: s3
+    name: metric-stream-test-stream
     region: us-west-1
     s3Configuration:
     - bucketArnSelector:
@@ -124,6 +125,7 @@ metadata:
   name: bucket-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket

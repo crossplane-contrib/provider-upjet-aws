@@ -161,6 +161,80 @@ func (tr *Connection) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ObservabilityConfiguration
+func (mg *ObservabilityConfiguration) GetTerraformResourceType() string {
+	return "aws_apprunner_observability_configuration"
+}
+
+// GetConnectionDetailsMapping for this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ObservabilityConfiguration
+func (tr *ObservabilityConfiguration) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ObservabilityConfiguration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ObservabilityConfiguration) LateInitialize(attrs []byte) (bool, error) {
+	params := &ObservabilityConfigurationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ObservabilityConfiguration) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Service
 func (mg *Service) GetTerraformResourceType() string {
 	return "aws_apprunner_service"

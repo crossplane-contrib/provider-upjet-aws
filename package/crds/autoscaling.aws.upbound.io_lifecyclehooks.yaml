@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   autoscalingGroupName:
-                    description: The name of the Auto Scaling group to which you want
+                    description: Name of the Auto Scaling group to which you want
                       to assign the lifecycle hook
                     type: string
                   autoscalingGroupNameRef:
@@ -156,8 +156,8 @@ spec:
                       the DefaultResult parameter
                     type: number
                   lifecycleTransition:
-                    description: The instance state to which you want to attach the
-                      lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+                    description: Instance state to which you want to attach the lifecycle
+                      hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
                     type: string
                   notificationMetadata:
                     description: Contains additional information that you want to
@@ -165,7 +165,7 @@ spec:
                       target.
                     type: string
                   notificationTargetArn:
-                    description: The ARN of the notification target that Auto Scaling
+                    description: ARN of the notification target that Auto Scaling
                       will use to notify you when an instance is in the transition
                       state for the lifecycle hook. This ARN target can be either
                       an SQS queue or an SNS topic.
@@ -175,7 +175,7 @@ spec:
                       be created in.
                     type: string
                   roleArn:
-                    description: The ARN of the IAM role that allows the Auto Scaling
+                    description: ARN of the IAM role that allows the Auto Scaling
                       group to publish to the specified notification target.
                     type: string
                   roleArnRef:

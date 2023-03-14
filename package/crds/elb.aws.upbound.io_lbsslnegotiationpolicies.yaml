@@ -169,6 +169,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger a redeployment.
+                    type: object
                 required:
                 - lbPort
                 - name

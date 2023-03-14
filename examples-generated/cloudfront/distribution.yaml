@@ -82,11 +82,10 @@ spec:
       viewerProtocolPolicy: redirect-to-https
     origin:
     - domainName: ${aws_s3_bucket.b.bucket_regional_domain_name}
+      originAccessControlIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: default
       originId: ${local.s3_origin_id}
-      s3OriginConfig:
-      - originAccessIdentitySelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
     priceClass: PriceClass_200
     region: us-west-1
     restrictions:
@@ -131,6 +130,7 @@ metadata:
   name: b-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: b

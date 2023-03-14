@@ -1,0 +1,15 @@
+apiVersion: kendra.aws.upbound.io/v1beta1
+kind: Index
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Uptest doesn't pick up successful resource status"
+    uptest.upbound.io/timeout: "7200" # two hours timeout
+    meta.upbound.io/example-id: kendra/v1beta1/index
+  labels:
+    testing.upbound.io/example-name: example
+  name: index-2
+spec:
+  forProvider:
+    name: index-2
+    region: us-west-2
+    roleArn: arn:aws:iam::153891904029:role/kendra-index-role

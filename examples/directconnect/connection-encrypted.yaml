@@ -1,0 +1,15 @@
+apiVersion: directconnect.aws.upbound.io/v1beta1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: directconnect/v1beta1/connection-encrypted
+  labels:
+    testing.upbound.io/example-name: hoge-encryption
+  name: hoge-encryption
+spec:
+  forProvider:
+    bandwidth: 1Gbps
+    encryptionMode: no_encrypt
+    location: EqDC2
+    name: tf-dx-connection-encryption
+    region: us-east-1

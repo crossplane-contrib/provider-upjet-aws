@@ -43,9 +43,13 @@ type AcceleratorParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The value for the address type. Defaults to IPV4. Valid values: IPV4.
+	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	// +kubebuilder:validation:Optional
+	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the accelerator.
 	// +kubebuilder:validation:Required
@@ -81,7 +85,7 @@ type AttributesParameters struct {
 
 type IPSetsObservation struct {
 
-	// A list of IP addresses in the IP address set.
+	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The type of IP addresses included in this IP set.

@@ -62,6 +62,9 @@ type DefaultVPCParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableDNSSupport *bool `json:"enableDnsSupport,omitempty" tf:"enable_dns_support,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	EnableNetworkAddressUsageMetrics *bool `json:"enableNetworkAddressUsageMetrics,omitempty" tf:"enable_network_address_usage_metrics,omitempty"`
+
 	// Whether destroying the resource deletes the default VPC. Default: false
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`

@@ -15,21 +15,21 @@ import (
 
 type APIObservation struct {
 
-	// The URI of the API, of the form https://{api-id}.execute-api.{region}.amazonaws.com for HTTP APIs and wss://{api-id}.execute-api.{region}.amazonaws.com for WebSocket APIs.
+	// URI of the API, of the form https://{api-id}.execute-api.{region}.amazonaws.com for HTTP APIs and wss://{api-id}.execute-api.{region}.amazonaws.com for WebSocket APIs.
 	APIEndpoint *string `json:"apiEndpoint,omitempty" tf:"api_endpoint,omitempty"`
 
-	// The ARN of the API.
+	// ARN of the API.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ARN prefix to be used in an aws_lambda_permission's source_arn attribute
+	// ARN prefix to be used in an aws_lambda_permission's source_arn attribute
 	// or in an aws_iam_policy to authorize access to the @connections API.
 	// See the Amazon API Gateway Developer Guide for details.
 	ExecutionArn *string `json:"executionArn,omitempty" tf:"execution_arn,omitempty"`
 
-	// The API identifier.
+	// API identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -45,7 +45,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
-	// The cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
+	// Cross-origin resource sharing (CORS) configuration. Applicable for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	CorsConfiguration []CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
@@ -53,7 +53,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
 
-	// The description of the API. Must be less than or equal to 1024 characters in length.
+	// Description of the API. Must be less than or equal to 1024 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -67,11 +67,11 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	FailOnWarnings *bool `json:"failOnWarnings,omitempty" tf:"fail_on_warnings,omitempty"`
 
-	// The name of the API. Must be less than or equal to 128 characters in length.
+	// Name of the API. Must be less than or equal to 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The API protocol. Valid values: HTTP, WEBSOCKET.
+	// API protocol. Valid values: HTTP, WEBSOCKET.
 	// +kubebuilder:validation:Required
 	ProtocolType *string `json:"protocolType" tf:"protocol_type,omitempty"`
 
@@ -99,7 +99,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// A version identifier for the API. Must be between 1 and 64 characters in length.
+	// Version identifier for the API. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -113,23 +113,23 @@ type CorsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
-	// The set of allowed HTTP headers.
+	// Set of allowed HTTP headers.
 	// +kubebuilder:validation:Optional
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
-	// The set of allowed HTTP methods.
+	// Set of allowed HTTP methods.
 	// +kubebuilder:validation:Optional
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
-	// The set of allowed origins.
+	// Set of allowed origins.
 	// +kubebuilder:validation:Optional
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
-	// The set of exposed HTTP headers.
+	// Set of exposed HTTP headers.
 	// +kubebuilder:validation:Optional
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
-	// The number of seconds that the browser should cache preflight request results.
+	// Number of seconds that the browser should cache preflight request results.
 	// +kubebuilder:validation:Optional
 	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }

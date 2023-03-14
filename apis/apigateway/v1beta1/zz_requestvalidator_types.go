@@ -15,13 +15,13 @@ import (
 
 type RequestValidatorObservation struct {
 
-	// The unique ID of the request validator
+	// Unique ID of the request validator
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RequestValidatorParameters struct {
 
-	// The name of the request validator
+	// Name of the request validator
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -30,7 +30,7 @@ type RequestValidatorParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated Rest API
+	// ID of the associated Rest API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

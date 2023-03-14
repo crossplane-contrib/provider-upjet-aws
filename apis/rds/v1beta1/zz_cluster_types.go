@@ -58,7 +58,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// A list of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. It is recommended to specify 3 AZs or use the  if necessary.
+	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured.
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -171,6 +171,10 @@ type ClusterParameters struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
+
+	// The network type of the cluster. Valid values: IPV4, DUAL.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The port on which the DB accepts connections
 	// +kubebuilder:validation:Optional

@@ -21,7 +21,7 @@ import (
 // does not have a region notion.
 func RegionAddition() config.ResourceOption {
 	return func(r *config.Resource) {
-		if r.ShortGroup == "iam" {
+		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
 			return
 		}
 		c := "Region is the region you'd like your resource to be created in.\n"

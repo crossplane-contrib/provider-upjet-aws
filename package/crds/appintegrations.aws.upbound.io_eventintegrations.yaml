@@ -65,22 +65,22 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Specifies the description of the Event Integration.
+                    description: Description of the Event Integration.
                     type: string
                   eventFilter:
-                    description: A block that defines the configuration information
+                    description: Block that defines the configuration information
                       for the event filter. The Event Filter block is documented below.
                     items:
                       properties:
                         source:
-                          description: The source of the events.
+                          description: Source of the events.
                           type: string
                       required:
                       - source
                       type: object
                     type: array
                   eventbridgeBus:
-                    description: Specifies the EventBridge bus.
+                    description: EventBridge bus.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -273,18 +273,17 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Event Integration.
+                    description: ARN of the Event Integration.
                     type: string
                   id:
-                    description: The identifier of the Event Integration which is
-                      the name of the Event Integration.
+                    description: Identifier of the Event Integration which is the
+                      name of the Event Integration.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

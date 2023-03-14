@@ -15,19 +15,19 @@ import (
 
 type HostedConfigurationVersionObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig  hosted configuration version.
+	// ARN of the AppConfig  hosted configuration version.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AppConfig application ID, configuration profile ID, and version number separated by a slash (/).
+	// AppConfig application ID, configuration profile ID, and version number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The version number of the hosted configuration.
+	// Version number of the hosted configuration.
 	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type HostedConfigurationVersionParameters struct {
 
-	// The application ID.
+	// Application ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -41,7 +41,7 @@ type HostedConfigurationVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The configuration profile ID.
+	// Configuration profile ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.ConfigurationProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
 	// +kubebuilder:validation:Optional
@@ -55,15 +55,15 @@ type HostedConfigurationVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
-	// The content of the configuration or the configuration data.
+	// Content of the configuration or the configuration data.
 	// +kubebuilder:validation:Required
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
-	// A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
 	// +kubebuilder:validation:Required
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
-	// A description of the configuration.
+	// Description of the configuration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

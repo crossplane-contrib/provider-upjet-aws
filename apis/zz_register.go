@@ -22,6 +22,7 @@ import (
 	v1beta1appconfig "github.com/upbound/provider-aws/apis/appconfig/v1beta1"
 	v1beta1appflow "github.com/upbound/provider-aws/apis/appflow/v1beta1"
 	v1beta1appintegrations "github.com/upbound/provider-aws/apis/appintegrations/v1beta1"
+	v1beta1applicationinsights "github.com/upbound/provider-aws/apis/applicationinsights/v1beta1"
 	v1beta1appmesh "github.com/upbound/provider-aws/apis/appmesh/v1beta1"
 	v1beta1apprunner "github.com/upbound/provider-aws/apis/apprunner/v1beta1"
 	v1beta1appstream "github.com/upbound/provider-aws/apis/appstream/v1beta1"
@@ -32,6 +33,7 @@ import (
 	v1beta1backup "github.com/upbound/provider-aws/apis/backup/v1beta1"
 	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
+	v1beta1ce "github.com/upbound/provider-aws/apis/ce/v1beta1"
 	v1beta1chime "github.com/upbound/provider-aws/apis/chime/v1beta1"
 	v1beta1cloud9 "github.com/upbound/provider-aws/apis/cloud9/v1beta1"
 	v1beta1cloudcontrol "github.com/upbound/provider-aws/apis/cloudcontrol/v1beta1"
@@ -76,7 +78,9 @@ import (
 	v1beta1elb "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1elbv2 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
 	v1beta1emr "github.com/upbound/provider-aws/apis/emr/v1beta1"
+	v1beta1evidently "github.com/upbound/provider-aws/apis/evidently/v1beta1"
 	v1beta1firehose "github.com/upbound/provider-aws/apis/firehose/v1beta1"
+	v1beta1fis "github.com/upbound/provider-aws/apis/fis/v1beta1"
 	v1beta1fsx "github.com/upbound/provider-aws/apis/fsx/v1beta1"
 	v1beta1gamelift "github.com/upbound/provider-aws/apis/gamelift/v1beta1"
 	v1beta1glacier "github.com/upbound/provider-aws/apis/glacier/v1beta1"
@@ -87,8 +91,11 @@ import (
 	v1beta1iam "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1imagebuilder "github.com/upbound/provider-aws/apis/imagebuilder/v1beta1"
 	v1beta1inspector "github.com/upbound/provider-aws/apis/inspector/v1beta1"
+	v1beta1inspector2 "github.com/upbound/provider-aws/apis/inspector2/v1beta1"
 	v1beta1iot "github.com/upbound/provider-aws/apis/iot/v1beta1"
+	v1beta1ivs "github.com/upbound/provider-aws/apis/ivs/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
+	v1beta1kendra "github.com/upbound/provider-aws/apis/kendra/v1beta1"
 	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
 	v1beta1kinesis "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	v1beta1kinesisanalytics "github.com/upbound/provider-aws/apis/kinesisanalytics/v1beta1"
@@ -100,8 +107,10 @@ import (
 	v1beta1lexmodels "github.com/upbound/provider-aws/apis/lexmodels/v1beta1"
 	v1beta1licensemanager "github.com/upbound/provider-aws/apis/licensemanager/v1beta1"
 	v1beta1lightsail "github.com/upbound/provider-aws/apis/lightsail/v1beta1"
+	v1beta1location "github.com/upbound/provider-aws/apis/location/v1beta1"
 	v1beta1macie2 "github.com/upbound/provider-aws/apis/macie2/v1beta1"
 	v1beta1mediaconvert "github.com/upbound/provider-aws/apis/mediaconvert/v1beta1"
+	v1beta1medialive "github.com/upbound/provider-aws/apis/medialive/v1beta1"
 	v1beta1mediapackage "github.com/upbound/provider-aws/apis/mediapackage/v1beta1"
 	v1beta1mediastore "github.com/upbound/provider-aws/apis/mediastore/v1beta1"
 	v1beta1memorydb "github.com/upbound/provider-aws/apis/memorydb/v1beta1"
@@ -110,6 +119,7 @@ import (
 	v1beta1networkfirewall "github.com/upbound/provider-aws/apis/networkfirewall/v1beta1"
 	v1beta1networkmanager "github.com/upbound/provider-aws/apis/networkmanager/v1beta1"
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
+	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta1qldb "github.com/upbound/provider-aws/apis/qldb/v1beta1"
@@ -118,13 +128,16 @@ import (
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
 	v1beta1resourcegroups "github.com/upbound/provider-aws/apis/resourcegroups/v1beta1"
+	v1beta1rolesanywhere "github.com/upbound/provider-aws/apis/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/apis/route53/v1beta1"
 	v1beta1route53recoverycontrolconfig "github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1"
 	v1beta1route53recoveryreadiness "github.com/upbound/provider-aws/apis/route53recoveryreadiness/v1beta1"
 	v1beta1route53resolver "github.com/upbound/provider-aws/apis/route53resolver/v1beta1"
+	v1beta1rum "github.com/upbound/provider-aws/apis/rum/v1beta1"
 	v1beta1s3 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta1s3control "github.com/upbound/provider-aws/apis/s3control/v1beta1"
 	v1beta1sagemaker "github.com/upbound/provider-aws/apis/sagemaker/v1beta1"
+	v1beta1scheduler "github.com/upbound/provider-aws/apis/scheduler/v1beta1"
 	v1beta1schemas "github.com/upbound/provider-aws/apis/schemas/v1beta1"
 	v1beta1secretsmanager "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	v1beta1securityhub "github.com/upbound/provider-aws/apis/securityhub/v1beta1"
@@ -133,20 +146,26 @@ import (
 	v1beta1servicediscovery "github.com/upbound/provider-aws/apis/servicediscovery/v1beta1"
 	v1beta1servicequotas "github.com/upbound/provider-aws/apis/servicequotas/v1beta1"
 	v1beta1ses "github.com/upbound/provider-aws/apis/ses/v1beta1"
+	v1beta1sesv2 "github.com/upbound/provider-aws/apis/sesv2/v1beta1"
 	v1beta1sfn "github.com/upbound/provider-aws/apis/sfn/v1beta1"
 	v1beta1signer "github.com/upbound/provider-aws/apis/signer/v1beta1"
 	v1beta1simpledb "github.com/upbound/provider-aws/apis/simpledb/v1beta1"
 	v1beta1sns "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	v1beta1sqs "github.com/upbound/provider-aws/apis/sqs/v1beta1"
 	v1beta1ssm "github.com/upbound/provider-aws/apis/ssm/v1beta1"
+	v1beta1ssoadmin "github.com/upbound/provider-aws/apis/ssoadmin/v1beta1"
 	v1beta1swf "github.com/upbound/provider-aws/apis/swf/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1"
+	v1beta1transcribe "github.com/upbound/provider-aws/apis/transcribe/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/apis/transfer/v1beta1"
 	v1alpha1 "github.com/upbound/provider-aws/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-aws/apis/v1beta1"
+	v1beta1vpc "github.com/upbound/provider-aws/apis/vpc/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
 	v1beta1wafv2 "github.com/upbound/provider-aws/apis/wafv2/v1beta1"
+	v1beta1workspaces "github.com/upbound/provider-aws/apis/workspaces/v1beta1"
+	v1beta1xray "github.com/upbound/provider-aws/apis/xray/v1beta1"
 )
 
 func init() {
@@ -164,6 +183,7 @@ func init() {
 		v1beta1appconfig.SchemeBuilder.AddToScheme,
 		v1beta1appflow.SchemeBuilder.AddToScheme,
 		v1beta1appintegrations.SchemeBuilder.AddToScheme,
+		v1beta1applicationinsights.SchemeBuilder.AddToScheme,
 		v1beta1appmesh.SchemeBuilder.AddToScheme,
 		v1beta1apprunner.SchemeBuilder.AddToScheme,
 		v1beta1appstream.SchemeBuilder.AddToScheme,
@@ -174,6 +194,7 @@ func init() {
 		v1beta1backup.SchemeBuilder.AddToScheme,
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
+		v1beta1ce.SchemeBuilder.AddToScheme,
 		v1beta1chime.SchemeBuilder.AddToScheme,
 		v1beta1cloud9.SchemeBuilder.AddToScheme,
 		v1beta1cloudcontrol.SchemeBuilder.AddToScheme,
@@ -218,7 +239,9 @@ func init() {
 		v1beta1elb.SchemeBuilder.AddToScheme,
 		v1beta1elbv2.SchemeBuilder.AddToScheme,
 		v1beta1emr.SchemeBuilder.AddToScheme,
+		v1beta1evidently.SchemeBuilder.AddToScheme,
 		v1beta1firehose.SchemeBuilder.AddToScheme,
+		v1beta1fis.SchemeBuilder.AddToScheme,
 		v1beta1fsx.SchemeBuilder.AddToScheme,
 		v1beta1gamelift.SchemeBuilder.AddToScheme,
 		v1beta1glacier.SchemeBuilder.AddToScheme,
@@ -229,8 +252,11 @@ func init() {
 		v1beta1iam.SchemeBuilder.AddToScheme,
 		v1beta1imagebuilder.SchemeBuilder.AddToScheme,
 		v1beta1inspector.SchemeBuilder.AddToScheme,
+		v1beta1inspector2.SchemeBuilder.AddToScheme,
 		v1beta1iot.SchemeBuilder.AddToScheme,
+		v1beta1ivs.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
+		v1beta1kendra.SchemeBuilder.AddToScheme,
 		v1beta1keyspaces.SchemeBuilder.AddToScheme,
 		v1beta1kinesis.SchemeBuilder.AddToScheme,
 		v1beta1kinesisanalytics.SchemeBuilder.AddToScheme,
@@ -242,8 +268,10 @@ func init() {
 		v1beta1lexmodels.SchemeBuilder.AddToScheme,
 		v1beta1licensemanager.SchemeBuilder.AddToScheme,
 		v1beta1lightsail.SchemeBuilder.AddToScheme,
+		v1beta1location.SchemeBuilder.AddToScheme,
 		v1beta1macie2.SchemeBuilder.AddToScheme,
 		v1beta1mediaconvert.SchemeBuilder.AddToScheme,
+		v1beta1medialive.SchemeBuilder.AddToScheme,
 		v1beta1mediapackage.SchemeBuilder.AddToScheme,
 		v1beta1mediastore.SchemeBuilder.AddToScheme,
 		v1beta1memorydb.SchemeBuilder.AddToScheme,
@@ -252,6 +280,7 @@ func init() {
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
 		v1beta1networkmanager.SchemeBuilder.AddToScheme,
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
+		v1beta1opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
 		v1beta1qldb.SchemeBuilder.AddToScheme,
@@ -260,13 +289,16 @@ func init() {
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
+		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,
 		v1beta1route53recoverycontrolconfig.SchemeBuilder.AddToScheme,
 		v1beta1route53recoveryreadiness.SchemeBuilder.AddToScheme,
 		v1beta1route53resolver.SchemeBuilder.AddToScheme,
+		v1beta1rum.SchemeBuilder.AddToScheme,
 		v1beta1s3.SchemeBuilder.AddToScheme,
 		v1beta1s3control.SchemeBuilder.AddToScheme,
 		v1beta1sagemaker.SchemeBuilder.AddToScheme,
+		v1beta1scheduler.SchemeBuilder.AddToScheme,
 		v1beta1schemas.SchemeBuilder.AddToScheme,
 		v1beta1secretsmanager.SchemeBuilder.AddToScheme,
 		v1beta1securityhub.SchemeBuilder.AddToScheme,
@@ -275,20 +307,26 @@ func init() {
 		v1beta1servicediscovery.SchemeBuilder.AddToScheme,
 		v1beta1servicequotas.SchemeBuilder.AddToScheme,
 		v1beta1ses.SchemeBuilder.AddToScheme,
+		v1beta1sesv2.SchemeBuilder.AddToScheme,
 		v1beta1sfn.SchemeBuilder.AddToScheme,
 		v1beta1signer.SchemeBuilder.AddToScheme,
 		v1beta1simpledb.SchemeBuilder.AddToScheme,
 		v1beta1sns.SchemeBuilder.AddToScheme,
 		v1beta1sqs.SchemeBuilder.AddToScheme,
 		v1beta1ssm.SchemeBuilder.AddToScheme,
+		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
+		v1beta1transcribe.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
+		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
 		v1beta1wafv2.SchemeBuilder.AddToScheme,
+		v1beta1workspaces.SchemeBuilder.AddToScheme,
+		v1beta1xray.SchemeBuilder.AddToScheme,
 	)
 }
 

@@ -18,34 +18,34 @@ type EventFilterObservation struct {
 
 type EventFilterParameters struct {
 
-	// The source of the events.
+	// Source of the events.
 	// +kubebuilder:validation:Required
 	Source *string `json:"source" tf:"source,omitempty"`
 }
 
 type EventIntegrationObservation struct {
 
-	// The Amazon Resource Name (ARN) of the Event Integration.
+	// ARN of the Event Integration.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The identifier of the Event Integration which is the name of the Event Integration.
+	// Identifier of the Event Integration which is the name of the Event Integration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EventIntegrationParameters struct {
 
-	// Specifies the description of the Event Integration.
+	// Description of the Event Integration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A block that defines the configuration information for the event filter. The Event Filter block is documented below.
+	// Block that defines the configuration information for the event filter. The Event Filter block is documented below.
 	// +kubebuilder:validation:Required
 	EventFilter []EventFilterParameters `json:"eventFilter" tf:"event_filter,omitempty"`
 
-	// Specifies the EventBridge bus.
+	// EventBridge bus.
 	// +kubebuilder:validation:Required
 	EventbridgeBus *string `json:"eventbridgeBus" tf:"eventbridge_bus,omitempty"`
 

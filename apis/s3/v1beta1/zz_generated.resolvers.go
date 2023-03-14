@@ -52,7 +52,7 @@ func (mg *BucketAccelerateConfiguration) ResolveReferences(ctx context.Context, 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -78,7 +78,7 @@ func (mg *BucketAnalyticsConfiguration) ResolveReferences(ctx context.Context, c
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -129,7 +129,7 @@ func (mg *BucketCorsConfiguration) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -155,7 +155,7 @@ func (mg *BucketIntelligentTieringConfiguration) ResolveReferences(ctx context.C
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -296,7 +296,7 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -427,7 +427,7 @@ func (mg *BucketObjectLockConfiguration) ResolveReferences(ctx context.Context, 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -594,7 +594,7 @@ func (mg *BucketRequestPaymentConfiguration) ResolveReferences(ctx context.Conte
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -620,7 +620,7 @@ func (mg *BucketServerSideEncryptionConfiguration) ResolveReferences(ctx context
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{
@@ -693,7 +693,7 @@ func (mg *BucketWebsiteConfiguration) ResolveReferences(ctx context.Context, c c
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Bucket),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.BucketRef,
 		Selector:     mg.Spec.ForProvider.BucketSelector,
 		To: reference.To{

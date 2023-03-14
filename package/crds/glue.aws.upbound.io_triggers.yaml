@@ -506,7 +506,7 @@ spec:
                     type: object
                   type:
                     description: –  The type of trigger. Valid values are CONDITIONAL,
-                      ON_DEMAND, and SCHEDULED.
+                      EVENT, ON_DEMAND, and SCHEDULED.
                     type: string
                   workflowName:
                     description: A workflow to which the trigger should be associated

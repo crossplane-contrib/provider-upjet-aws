@@ -23,6 +23,7 @@ spec:
       roleArnSelector:
         matchLabels:
           testing.upbound.io/example-name: firehose_role
+    name: terraform-kinesis-firehose-extended-s3-test-stream
     region: us-west-1
 
 ---
@@ -97,7 +98,7 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: lambda_iam
-    runtime: nodejs12.x
+    runtime: nodejs16.x
 
 ---
 
@@ -126,6 +127,7 @@ metadata:
   name: bucket-acl
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket

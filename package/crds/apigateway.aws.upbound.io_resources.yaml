@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   parentId:
-                    description: The ID of the parent API resource
+                    description: ID of the parent API resource
                     type: string
                   parentIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -143,14 +143,14 @@ spec:
                         type: object
                     type: object
                   pathPart:
-                    description: The last path segment of this API resource.
+                    description: Last path segment of this API resource.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the associated REST API
+                    description: ID of the associated REST API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -408,11 +408,11 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The resource's identifier.
+                    description: Resource's identifier.
                     type: string
                   path:
-                    description: The complete path for this API resource, including
-                      all parent paths.
+                    description: Complete path for this API resource, including all
+                      parent paths.
                     type: string
                 type: object
               conditions:

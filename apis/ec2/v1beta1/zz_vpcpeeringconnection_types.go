@@ -53,7 +53,7 @@ type RequesterObservation struct {
 type RequesterParameters struct {
 }
 
-type VPCPeeringConnectionObservation struct {
+type VPCPeeringConnectionObservation_2 struct {
 
 	// The status of the VPC Peering Connection request.
 	AcceptStatus *string `json:"acceptStatus,omitempty" tf:"accept_status,omitempty"`
@@ -73,7 +73,7 @@ type VPCPeeringConnectionObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type VPCPeeringConnectionParameters struct {
+type VPCPeeringConnectionParameters_2 struct {
 
 	// Accept the peering (both VPCs need to be in the same AWS account and region).
 	// +kubebuilder:validation:Optional
@@ -128,13 +128,13 @@ type VPCPeeringConnectionParameters struct {
 // VPCPeeringConnectionSpec defines the desired state of VPCPeeringConnection
 type VPCPeeringConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCPeeringConnectionParameters `json:"forProvider"`
+	ForProvider     VPCPeeringConnectionParameters_2 `json:"forProvider"`
 }
 
 // VPCPeeringConnectionStatus defines the observed state of VPCPeeringConnection.
 type VPCPeeringConnectionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCPeeringConnectionObservation `json:"atProvider,omitempty"`
+	AtProvider        VPCPeeringConnectionObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

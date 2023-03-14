@@ -160,6 +160,10 @@ spec:
                       in the subscription to filter messages seen by the target resource.
                       Refer to the SNS docs for more details.
                     type: string
+                  filterPolicyScope:
+                    description: Whether the filter_policy applies to MessageAttributes
+                      (default) or MessageBody.
+                    type: string
                   protocol:
                     description: 'Protocol to use. Valid values are: sqs, sms, lambda,
                       firehose, and application. Protocols email, email-json, http

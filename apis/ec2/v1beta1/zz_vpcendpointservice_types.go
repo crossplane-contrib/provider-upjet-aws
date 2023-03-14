@@ -101,6 +101,10 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// +kubebuilder:validation:Optional
+	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

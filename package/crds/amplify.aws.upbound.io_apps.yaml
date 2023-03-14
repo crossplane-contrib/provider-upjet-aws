@@ -64,10 +64,10 @@ spec:
               forProvider:
                 properties:
                   accessTokenSecretRef:
-                    description: The personal access token for a third-party source
-                      control system for an Amplify app. The personal access token
-                      is used to create a webhook and a read-only deploy key. The
-                      token is not stored.
+                    description: Personal access token for a third-party source control
+                      system for an Amplify app. The personal access token is used
+                      to create a webhook and a read-only deploy key. The token is
+                      not stored.
                     properties:
                       key:
                         description: The key to select.
@@ -84,14 +84,13 @@ spec:
                     - namespace
                     type: object
                   autoBranchCreationConfig:
-                    description: The automated branch creation configuration for an
-                      Amplify app. An auto_branch_creation_config block is documented
-                      below.
+                    description: Automated branch creation configuration for an Amplify
+                      app. An auto_branch_creation_config block is documented below.
                     items:
                       properties:
                         basicAuthCredentialsSecretRef:
-                          description: The basic authorization credentials for the
-                            autocreated branch.
+                          description: Basic authorization credentials for the autocreated
+                            branch.
                           properties:
                             key:
                               description: The key to select.
@@ -108,8 +107,8 @@ spec:
                           - namespace
                           type: object
                         buildSpec:
-                          description: The build specification (build spec) for the
-                            autocreated branch.
+                          description: Build specification (build spec) for the autocreated
+                            branch.
                           type: string
                         enableAutoBuild:
                           description: Enables auto building for the autocreated branch.
@@ -128,14 +127,13 @@ spec:
                         environmentVariables:
                           additionalProperties:
                             type: string
-                          description: The environment variables for the autocreated
-                            branch.
+                          description: Environment variables for the autocreated branch.
                           type: object
                         framework:
-                          description: The framework for the autocreated branch.
+                          description: Framework for the autocreated branch.
                           type: string
                         pullRequestEnvironmentName:
-                          description: The Amplify environment name for the pull request.
+                          description: Amplify environment name for the pull request.
                           type: string
                         stage:
                           description: 'Describes the current stage for the autocreated
@@ -145,13 +143,13 @@ spec:
                       type: object
                     type: array
                   autoBranchCreationPatterns:
-                    description: The automated branch creation glob patterns for an
-                      Amplify app.
+                    description: Automated branch creation glob patterns for an Amplify
+                      app.
                     items:
                       type: string
                     type: array
                   basicAuthCredentialsSecretRef:
-                    description: The credentials for basic authorization for an Amplify
+                    description: Credentials for basic authorization for an Amplify
                       app.
                     properties:
                       key:
@@ -173,24 +171,24 @@ spec:
                       app.
                     type: string
                   customRule:
-                    description: The custom rewrite and redirect rules for an Amplify
+                    description: Custom rewrite and redirect rules for an Amplify
                       app. A custom_rule block is documented below.
                     items:
                       properties:
                         condition:
-                          description: The condition for a URL rewrite or redirect
-                            rule, such as a country code.
+                          description: Condition for a URL rewrite or redirect rule,
+                            such as a country code.
                           type: string
                         source:
-                          description: The source pattern for a URL rewrite or redirect
+                          description: Source pattern for a URL rewrite or redirect
                             rule.
                           type: string
                         status:
-                          description: 'The status code for a URL rewrite or redirect
+                          description: 'Status code for a URL rewrite or redirect
                             rule. Valid values: 200, 301, 302, 404, 404-200.'
                           type: string
                         target:
-                          description: The target pattern for a URL rewrite or redirect
+                          description: Target pattern for a URL rewrite or redirect
                             rule.
                           type: string
                       required:
@@ -199,7 +197,7 @@ spec:
                       type: object
                     type: array
                   description:
-                    description: The description for an Amplify app.
+                    description: Description for an Amplify app.
                     type: string
                   enableAutoBranchCreation:
                     description: Enables automated branch creation for an Amplify
@@ -220,10 +218,10 @@ spec:
                   environmentVariables:
                     additionalProperties:
                       type: string
-                    description: The environment variables map for an Amplify app.
+                    description: Environment variables map for an Amplify app.
                     type: object
                   iamServiceRoleArn:
-                    description: The AWS Identity and Access Management (IAM) service
+                    description: AWS Identity and Access Management (IAM) service
                       role for an Amplify app.
                     type: string
                   iamServiceRoleArnRef:
@@ -300,13 +298,12 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name for an Amplify app.
+                    description: Name for an Amplify app.
                     type: string
                   oauthTokenSecretRef:
-                    description: The OAuth token for a third-party source control
-                      system for an Amplify app. The OAuth token is used to create
-                      a webhook and a read-only deploy key. The OAuth token is not
-                      stored.
+                    description: OAuth token for a third-party source control system
+                      for an Amplify app. The OAuth token is used to create a webhook
+                      and a read-only deploy key. The OAuth token is not stored.
                     properties:
                       key:
                         description: The key to select.
@@ -323,15 +320,15 @@ spec:
                     - namespace
                     type: object
                   platform:
-                    description: 'The platform or framework for an Amplify app. Valid
-                      values: WEB.'
+                    description: 'Platform or framework for an Amplify app. Valid
+                      values: WEB, WEB_COMPUTE. Default value: WEB.'
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   repository:
-                    description: The repository for an Amplify app.
+                    description: Repository for an Amplify app.
                     type: string
                   tags:
                     additionalProperties:
@@ -519,13 +516,13 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) of the Amplify app.
+                    description: ARN of the Amplify app.
                     type: string
                   defaultDomain:
-                    description: The default domain for the Amplify app.
+                    description: Default domain for the Amplify app.
                     type: string
                   id:
-                    description: The unique ID of the Amplify app.
+                    description: Unique ID of the Amplify app.
                     type: string
                   productionBranch:
                     description: Describes the information about a production branch
@@ -534,25 +531,24 @@ spec:
                     items:
                       properties:
                         branchName:
-                          description: The branch name for the production branch.
+                          description: Branch name for the production branch.
                           type: string
                         lastDeployTime:
-                          description: The last deploy time of the production branch.
+                          description: Last deploy time of the production branch.
                           type: string
                         status:
-                          description: The status of the production branch.
+                          description: Status of the production branch.
                           type: string
                         thumbnailUrl:
-                          description: The thumbnail URL for the production branch.
+                          description: Thumbnail URL for the production branch.
                           type: string
                       type: object
                     type: array
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

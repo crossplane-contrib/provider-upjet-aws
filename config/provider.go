@@ -66,14 +66,17 @@ import (
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
+	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
+	"github.com/upbound/provider-aws/config/rolesanywhere"
 	"github.com/upbound/provider-aws/config/route53"
 	"github.com/upbound/provider-aws/config/route53recoverycontrolconfig"
 	"github.com/upbound/provider-aws/config/route53resolver"
 	"github.com/upbound/provider-aws/config/s3"
+	"github.com/upbound/provider-aws/config/sagemaker"
 	"github.com/upbound/provider-aws/config/secretsmanager"
 	"github.com/upbound/provider-aws/config/servicecatalog"
 	"github.com/upbound/provider-aws/config/servicediscovery"
@@ -122,6 +125,7 @@ var skipList = []string{
 	"aws_iot_authorizer$",              // failure with unknown reason.
 	"aws_location_map$",                // failure with unknown reason.
 	"aws_appflow_connector_profile$",   // failure with unknown reason.
+	"aws_rds_reserved_instance",        // Expense of testing
 }
 
 // GetProvider returns provider configuration
@@ -202,6 +206,7 @@ func GetProvider() *config.Provider {
 		opensearch.Configure,
 		rds.Configure,
 		redshift.Configure,
+		rolesanywhere.Configure,
 		route53.Configure,
 		route53resolver.Configure,
 		route53recoverycontrolconfig.Configure,
@@ -221,6 +226,8 @@ func GetProvider() *config.Provider {
 		qldb.Configure,
 		fsx.Configure,
 		networkmanager.Configure,
+		opsworks.Configure,
+		sagemaker.Configure,
 	} {
 		configure(pc)
 	}

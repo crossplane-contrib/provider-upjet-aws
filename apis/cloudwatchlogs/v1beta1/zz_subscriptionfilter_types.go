@@ -37,7 +37,7 @@ type SubscriptionFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
-	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events.
+	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
 	// +kubebuilder:validation:Required
 	FilterPattern *string `json:"filterPattern" tf:"filter_pattern,omitempty"`
 

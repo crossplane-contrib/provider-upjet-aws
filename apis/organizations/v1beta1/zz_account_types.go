@@ -48,7 +48,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Required
 	Email *string `json:"email" tf:"email,omitempty"`
 
-	// If set to ALLOW, the new account enables IAM users to access account billing information if they have the required permissions. If set to DENY, then only the root user of the new account can access account billing information.
+	// If set to ALLOW, the new account enables IAM users and roles to access account billing information if they have the required permissions. If set to DENY, then only the root user (and no roles) of the new account can access account billing information. If this is unset, the AWS API will default this to ALLOW. If the resource is created and this option is changed, it will try to recreate the account.
 	// +kubebuilder:validation:Optional
 	IAMUserAccessToBilling *string `json:"iamUserAccessToBilling,omitempty" tf:"iam_user_access_to_billing,omitempty"`
 

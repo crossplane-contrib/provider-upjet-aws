@@ -4193,6 +4193,11 @@ func (in *RestAPIParameters) DeepCopyInto(out *RestAPIParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.PutRestAPIMode != nil {
+		in, out := &in.PutRestAPIMode, &out.PutRestAPIMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)

@@ -383,6 +383,80 @@ func (tr *Instance) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this InstanceStorageConfig
+func (mg *InstanceStorageConfig) GetTerraformResourceType() string {
+	return "aws_connect_instance_storage_config"
+}
+
+// GetConnectionDetailsMapping for this InstanceStorageConfig
+func (tr *InstanceStorageConfig) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this InstanceStorageConfig
+func (tr *InstanceStorageConfig) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this InstanceStorageConfig
+func (tr *InstanceStorageConfig) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this InstanceStorageConfig
+func (tr *InstanceStorageConfig) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this InstanceStorageConfig
+func (tr *InstanceStorageConfig) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this InstanceStorageConfig
+func (tr *InstanceStorageConfig) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this InstanceStorageConfig using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *InstanceStorageConfig) LateInitialize(attrs []byte) (bool, error) {
+	params := &InstanceStorageConfigParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *InstanceStorageConfig) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this LambdaFunctionAssociation
 func (mg *LambdaFunctionAssociation) GetTerraformResourceType() string {
 	return "aws_connect_lambda_function_association"
@@ -454,6 +528,80 @@ func (tr *LambdaFunctionAssociation) LateInitialize(attrs []byte) (bool, error) 
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *LambdaFunctionAssociation) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PhoneNumber
+func (mg *PhoneNumber) GetTerraformResourceType() string {
+	return "aws_connect_phone_number"
+}
+
+// GetConnectionDetailsMapping for this PhoneNumber
+func (tr *PhoneNumber) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PhoneNumber
+func (tr *PhoneNumber) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PhoneNumber
+func (tr *PhoneNumber) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PhoneNumber
+func (tr *PhoneNumber) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PhoneNumber
+func (tr *PhoneNumber) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PhoneNumber
+func (tr *PhoneNumber) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PhoneNumber using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PhoneNumber) LateInitialize(attrs []byte) (bool, error) {
+	params := &PhoneNumberParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PhoneNumber) GetTerraformSchemaVersion() int {
 	return 0
 }
 
@@ -753,6 +901,80 @@ func (tr *SecurityProfile) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this User
+func (mg *User) GetTerraformResourceType() string {
+	return "aws_connect_user"
+}
+
+// GetConnectionDetailsMapping for this User
+func (tr *User) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this User
+func (tr *User) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this User
+func (tr *User) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this User
+func (tr *User) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this User
+func (tr *User) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this User
+func (tr *User) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this User using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *User) LateInitialize(attrs []byte) (bool, error) {
+	params := &UserParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *User) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this UserHierarchyStructure
 func (mg *UserHierarchyStructure) GetTerraformResourceType() string {
 	return "aws_connect_user_hierarchy_structure"
@@ -824,5 +1046,79 @@ func (tr *UserHierarchyStructure) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *UserHierarchyStructure) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Vocabulary
+func (mg *Vocabulary) GetTerraformResourceType() string {
+	return "aws_connect_vocabulary"
+}
+
+// GetConnectionDetailsMapping for this Vocabulary
+func (tr *Vocabulary) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Vocabulary
+func (tr *Vocabulary) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Vocabulary
+func (tr *Vocabulary) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Vocabulary
+func (tr *Vocabulary) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Vocabulary
+func (tr *Vocabulary) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Vocabulary
+func (tr *Vocabulary) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Vocabulary using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Vocabulary) LateInitialize(attrs []byte) (bool, error) {
+	params := &VocabularyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Vocabulary) GetTerraformSchemaVersion() int {
 	return 0
 }

@@ -25,7 +25,17 @@ type DNSEntryObservation struct {
 type DNSEntryParameters struct {
 }
 
-type VPCEndpointObservation struct {
+type DNSOptionsObservation struct {
+}
+
+type DNSOptionsParameters struct {
+
+	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	// +kubebuilder:validation:Optional
+	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+}
+
+type VPCEndpointObservation_2 struct {
 
 	// The Amazon Resource Name (ARN) of the VPC endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -68,11 +78,19 @@ type VPCEndpointObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type VPCEndpointParameters struct {
+type VPCEndpointParameters_2 struct {
 
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
+	// The DNS options for the endpoint. See dns_options below.
+	// +kubebuilder:validation:Optional
+	DNSOptions []DNSOptionsParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
+	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	// +kubebuilder:validation:Optional
@@ -127,13 +145,13 @@ type VPCEndpointParameters struct {
 // VPCEndpointSpec defines the desired state of VPCEndpoint
 type VPCEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCEndpointParameters `json:"forProvider"`
+	ForProvider     VPCEndpointParameters_2 `json:"forProvider"`
 }
 
 // VPCEndpointStatus defines the observed state of VPCEndpoint.
 type VPCEndpointStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCEndpointObservation `json:"atProvider,omitempty"`
+	AtProvider        VPCEndpointObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

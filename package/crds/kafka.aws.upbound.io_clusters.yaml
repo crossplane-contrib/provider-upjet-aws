@@ -35,8 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API. Upbound official
-          provider resource for managing an aws managed streaming for kafka cluster
+        description: Cluster is the Schema for the Clusters API.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -863,6 +862,10 @@ spec:
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
+                    type: string
+                  storageMode:
+                    description: 'Controls storage mode for supported storage tiers.
+                      Valid values are: LOCAL or TIERED.'
                     type: string
                   tags:
                     additionalProperties:

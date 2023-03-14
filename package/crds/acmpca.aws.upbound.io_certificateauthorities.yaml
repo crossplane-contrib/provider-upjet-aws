@@ -120,9 +120,9 @@ spec:
                                   to 5 characters in length.
                                 type: string
                               locality:
-                                description: The locality (such as a city or town)
-                                  in which the certificate subject is located. Must
-                                  be less than or equal to 128 characters in length.
+                                description: Locality (such as a city or town) in
+                                  which the certificate subject is located. Must be
+                                  less than or equal to 128 characters in length.
                                 type: string
                               organization:
                                 description: Legal name of the organization with which
@@ -130,7 +130,7 @@ spec:
                                   than or equal to 64 characters in length.
                                 type: string
                               organizationalUnit:
-                                description: A subdivision or unit of the organization
+                                description: Subdivision or unit of the organization
                                   (such as sales or finance) with which the certificate
                                   subject is affiliated. Must be less than or equal
                                   to 64 characters in length.
@@ -155,7 +155,7 @@ spec:
                                   characters in length.
                                 type: string
                               title:
-                                description: A title such as Mr. or Ms. which is pre-pended
+                                description: Title such as Mr. or Ms. which is pre-pended
                                   to the name to refer formally to the certificate
                                   subject. Must be less than or equal to 64 characters
                                   in length.
@@ -170,12 +170,13 @@ spec:
                     type: array
                   enabled:
                     description: Whether the certificate authority is enabled or disabled.
-                      Defaults to true.
+                      Defaults to true. Can only be disabled if the CA is in an ACTIVE
+                      state.
                     type: boolean
                   permanentDeletionTimeInDays:
-                    description: The number of days to make a CA restorable after
-                      it has been deleted, must be between 7 to 30 days, with default
-                      to 30 days.
+                    description: Number of days to make a CA restorable after it has
+                      been deleted, must be between 7 to 30 days, with default to
+                      30 days.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -216,16 +217,31 @@ spec:
                                   the CRL Distribution Points extension of the issued
                                   certificate. You must specify a bucket policy that
                                   allows ACM PCA to write the CRL to your bucket.
-                                  Must be less than or equal to 255 characters in
-                                  length.
+                                  Must be between 3 and 255 characters in length.
                                 type: string
                               s3ObjectAcl:
                                 description: Determines whether the CRL will be publicly
                                   readable or privately held in the CRL Amazon S3
                                   bucket. Defaults to PUBLIC_READ.
                                 type: string
+                            type: object
+                          type: array
+                        ocspConfiguration:
+                          description: Nested argument containing configuration of
+                            the custom OCSP responder endpoint. Defined below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Boolean value that specifies whether
+                                  a custom OCSP responder is enabled.
+                                type: boolean
+                              ocspCustomCname:
+                                description: 'CNAME specifying a customized OCSP domain.
+                                  Note: The value of the CNAME must not include a
+                                  protocol prefix such as "http://" or "https://".'
+                                type: string
                             required:
-                            - expirationInDays
+                            - enabled
                             type: object
                           type: array
                       type: object
@@ -236,8 +252,16 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: 'The type of the certificate authority. Defaults
-                      to SUBORDINATE. Valid values: ROOT and SUBORDINATE.'
+                    description: 'Type of the certificate authority. Defaults to SUBORDINATE.
+                      Valid values: ROOT and SUBORDINATE.'
+                    type: string
+                  usageMode:
+                    description: 'Specifies whether the CA issues general-purpose
+                      certificates that typically require a revocation mechanism,
+                      or short-lived certificates that may optionally omit revocation
+                      because they expire quickly. Short-lived certificate validity
+                      is limited to seven days. Defaults to GENERAL_PURPOSE. Valid
+                      values: GENERAL_PURPOSE and SHORT_LIVED_CERTIFICATE.'
                     type: string
                 required:
                 - certificateAuthorityConfiguration
@@ -421,7 +445,7 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: Amazon Resource Name (ARN) of the certificate authority.
+                    description: ARN of the certificate authority.
                     type: string
                   certificate:
                     description: Base64-encoded certificate authority (CA) certificate.
@@ -441,7 +465,7 @@ spec:
                       (CSR) for your private CA certificate.
                     type: string
                   id:
-                    description: Amazon Resource Name (ARN) of the certificate authority.
+                    description: ARN of the certificate authority.
                     type: string
                   notAfter:
                     description: Date and time after which the certificate authority
@@ -465,9 +489,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

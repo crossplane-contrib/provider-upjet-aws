@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -104,6 +105,32 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ResolverConfig.
+func (mg *ResolverConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ResourceIDRef,
+		Selector:     mg.Spec.ForProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceID")
+	}
+	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -214,6 +241,25 @@ func (mg *Zone) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.DelegationSetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegationSetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPC); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPC[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.VPC[i3].VPCIDRef,
+			Selector:     mg.Spec.ForProvider.VPC[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta11.VPCList{},
+				Managed: &v1beta11.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPC[i3].VPCID")
+		}
+		mg.Spec.ForProvider.VPC[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.VPC[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

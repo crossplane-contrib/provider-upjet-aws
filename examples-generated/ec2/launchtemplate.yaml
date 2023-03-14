@@ -19,6 +19,7 @@ spec:
       threadsPerCore: 2
     creditSpecification:
     - cpuCredits: standard
+    disableApiStop: true
     disableApiTermination: true
     ebsOptimized: true
     elasticGpuSpecifications:

@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiId:
-                    description: The id of the API to connect.
+                    description: ID of the API to connect.
                     type: string
                   apiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -148,8 +148,8 @@ spec:
                       at the root of the given domain.
                     type: string
                   domainName:
-                    description: The already-registered domain name to connect the
-                      API to.
+                    description: Already-registered domain name to connect the API
+                      to.
                     type: string
                   domainNameRef:
                     description: Reference to a DomainName in apigateway to populate
@@ -231,9 +231,9 @@ spec:
                       be created in.
                     type: string
                   stageName:
-                    description: The name of a specific deployment stage to expose
-                      at the given path. If omitted, callers may select any stage
-                      by including its name as a path element after the base path.
+                    description: Name of a specific deployment stage to expose at
+                      the given path. If omitted, callers may select any stage by
+                      including its name as a path element after the base path.
                     type: string
                   stageNameRef:
                     description: Reference to a Stage in apigateway to populate stageName.

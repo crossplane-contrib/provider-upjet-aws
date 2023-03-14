@@ -41,6 +41,24 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ObservabilityConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef,
+			Selector:     mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnSelector,
+			To: reference.To{
+				List:    &ObservabilityConfigurationList{},
+				Managed: &ObservabilityConfiguration{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn")
+		}
+		mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SourceConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

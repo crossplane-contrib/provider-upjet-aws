@@ -15,30 +15,30 @@ import (
 
 type BranchObservation struct {
 
-	// The Amazon Resource Name (ARN) for the branch.
+	// ARN for the branch.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A list of custom resources that are linked to this branch.
 	AssociatedResources []*string `json:"associatedResources,omitempty" tf:"associated_resources,omitempty"`
 
-	// The custom domains for the branch.
+	// Custom domains for the branch.
 	CustomDomains []*string `json:"customDomains,omitempty" tf:"custom_domains,omitempty"`
 
-	// The destination branch if the branch is a pull request branch.
+	// Destination branch if the branch is a pull request branch.
 	DestinationBranch *string `json:"destinationBranch,omitempty" tf:"destination_branch,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The source branch if the branch is a pull request branch.
+	// Source branch if the branch is a pull request branch.
 	SourceBranch *string `json:"sourceBranch,omitempty" tf:"source_branch,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type BranchParameters struct {
 
-	// The unique ID for an Amplify app.
+	// Unique ID for an Amplify app.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,19 +52,19 @@ type BranchParameters struct {
 	// +kubebuilder:validation:Optional
 	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
 
-	// The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app.
+	// ARN for a backend environment that is part of an Amplify app.
 	// +kubebuilder:validation:Optional
 	BackendEnvironmentArn *string `json:"backendEnvironmentArn,omitempty" tf:"backend_environment_arn,omitempty"`
 
-	// The basic authorization credentials for the branch.
+	// Basic authorization credentials for the branch.
 	// +kubebuilder:validation:Optional
 	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
-	// The description for the branch.
+	// Description for the branch.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The display name for a branch. This is used as the default domain prefix.
+	// Display name for a branch. This is used as the default domain prefix.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -88,15 +88,15 @@ type BranchParameters struct {
 	// +kubebuilder:validation:Optional
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
 
-	// The environment variables for the branch.
+	// Environment variables for the branch.
 	// +kubebuilder:validation:Optional
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
-	// The framework for the branch.
+	// Framework for the branch.
 	// +kubebuilder:validation:Optional
 	Framework *string `json:"framework,omitempty" tf:"framework,omitempty"`
 
-	// The Amplify environment name for the pull request.
+	// Amplify environment name for the pull request.
 	// +kubebuilder:validation:Optional
 	PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty" tf:"pull_request_environment_name,omitempty"`
 
@@ -109,7 +109,7 @@ type BranchParameters struct {
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
-	// The content Time To Live (TTL) for the website in seconds.
+	// Content Time To Live (TTL) for the website in seconds.
 	// +kubebuilder:validation:Optional
 	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
 

@@ -19,7 +19,7 @@ type CertificateAuthorityCertificateObservation struct {
 
 type CertificateAuthorityCertificateParameters struct {
 
-	// Amazon Resource Name (ARN) of the Certificate Authority.
+	// ARN of the Certificate Authority.
 	// +crossplane:generate:reference:type=CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
@@ -32,11 +32,11 @@ type CertificateAuthorityCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
-	// The PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
+	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
 	// +kubebuilder:validation:Optional
 	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
 
-	// The PEM-encoded certificate for the Certificate Authority.
+	// PEM-encoded certificate for the Certificate Authority.
 	// +kubebuilder:validation:Required
 	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 

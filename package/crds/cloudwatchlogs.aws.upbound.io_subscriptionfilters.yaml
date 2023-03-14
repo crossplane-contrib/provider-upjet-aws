@@ -150,7 +150,9 @@ spec:
                     type: string
                   filterPattern:
                     description: A valid CloudWatch Logs filter pattern for subscribing
-                      to a filtered stream of log events.
+                      to a filtered stream of log events. Use empty string "" to match
+                      everything. For more information, see the Amazon CloudWatch
+                      Logs User Guide.
                     type: string
                   logGroupName:
                     description: The name of the log group to associate the subscription

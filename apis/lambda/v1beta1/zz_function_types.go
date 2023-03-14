@@ -28,7 +28,7 @@ type EnvironmentObservation struct {
 
 type EnvironmentParameters struct {
 
-	// Map of environment variables that are accessible from the function code during execution.
+	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
 	// +kubebuilder:validation:Optional
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
@@ -83,11 +83,18 @@ type FunctionObservation struct {
 	// ARN identifying your Lambda Function Version (if versioning is enabled via publish = true).
 	QualifiedArn *string `json:"qualifiedArn,omitempty" tf:"qualified_arn,omitempty"`
 
+	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
+	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
+
 	// ARN of the signing job.
 	SigningJobArn *string `json:"signingJobArn,omitempty" tf:"signing_job_arn,omitempty"`
 
 	// ARN of the signing profile version.
 	SigningProfileVersionArn *string `json:"signingProfileVersionArn,omitempty" tf:"signing_profile_version_arn,omitempty"`
+
+	// Snap start settings block. Detailed below.
+	// +kubebuilder:validation:Optional
+	SnapStart []SnapStartObservation `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
 	// Size in bytes of the function .zip file.
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
@@ -141,7 +148,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageConfig []ImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
-	// ECR image URI containing the function's deployment package. Conflicts with filename, s3_bucket, s3_key, and s3_object_version.
+	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
 	// +kubebuilder:validation:Optional
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
@@ -179,6 +186,25 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// +kubebuilder:validation:Optional
+	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDRefs []v1.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
+
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
 	// +kubebuilder:validation:Optional
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
@@ -201,7 +227,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri. This bucket must reside in the same AWS region where you are creating the Lambda function.
+	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
@@ -214,13 +240,17 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
-	// S3 key of an object containing the function's deployment package. Conflicts with filename and image_uri.
+	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
 	// +kubebuilder:validation:Optional
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 
 	// Object version containing the function's deployment package. Conflicts with filename and image_uri.
 	// +kubebuilder:validation:Optional
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
+
+	// Snap start settings block. Detailed below.
+	// +kubebuilder:validation:Optional
+	SnapStart []SnapStartParameters `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
 	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 and later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda function source archive.
 	// +kubebuilder:validation:Optional
@@ -261,12 +291,25 @@ type ImageConfigParameters struct {
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
+type SnapStartObservation struct {
+
+	// Optimization status of the snap start configuration. Valid values are On and Off.
+	OptimizationStatus *string `json:"optimizationStatus,omitempty" tf:"optimization_status,omitempty"`
+}
+
+type SnapStartParameters struct {
+
+	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	// +kubebuilder:validation:Required
+	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
+}
+
 type TracingConfigObservation struct {
 }
 
 type TracingConfigParameters struct {
 
-	// Whether to to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
@@ -279,13 +322,35 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// List of security group IDs associated with the Lambda function.
-	// +kubebuilder:validation:Required
-	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +kubebuilder:validation:Optional
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs associated with the Lambda function.
-	// +kubebuilder:validation:Required
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +kubebuilder:validation:Optional
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 // FunctionSpec defines the desired state of Function

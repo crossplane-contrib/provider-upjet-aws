@@ -15,7 +15,9 @@ spec:
         volumeSize: 100
         volumeType: gp2
     component:
-    - componentArn: ${aws_imagebuilder_component.example.arn}
+    - componentArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       parameter:
       - name: Parameter1
         value: Value1

@@ -104,12 +104,15 @@ spec:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch,
                       kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle,
-                      postgres, redshift, s3, sqlserver, sybase.
+                      postgres, redshift, s3, sqlserver, sybase. Please note that
+                      some of engine names are available only for target endpoint
+                      type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
-                      For available attributes see Using Extra Connection Attributes
-                      with AWS Database Migration Service.
+                      For available attributes for a source Endpoint, see Sources
+                      for data migration. For available attributes for a target Endpoint,
+                      see Targets for data migration.
                     type: string
                   kafkaSettings:
                     description: Configuration block for Kafka settings. See below.
@@ -296,7 +299,11 @@ spec:
                       kms_key_arn, then AWS DMS will use your default encryption key.
                       AWS KMS creates the default encryption key for your AWS account.
                       Your AWS account has a different default encryption key for
-                      each AWS region.
+                      each AWS region. To encrypt an S3 target with a KMS Key, use
+                      the parameter s3_settings.server_side_encryption_kms_key_id.
+                      When engine_name is redshift, kms_key_arn is the KMS Key for
+                      the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id
+                      encrypts the S3 intermediate storage.
                     type: string
                   kmsKeyArnRef:
                     description: Reference to a Key in kms to populate kmsKeyArn.
@@ -423,6 +430,87 @@ spec:
                   port:
                     description: Port used by the endpoint database.
                     type: number
+                  redisSettings:
+                    items:
+                      properties:
+                        authPasswordSecretRef:
+                          description: The password provided with the auth-role and
+                            auth-token options of the AuthType setting for a Redis
+                            target endpoint.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        authType:
+                          description: Authentication type to access the MongoDB source
+                            endpoint. Default is password.
+                          type: string
+                        authUserName:
+                          description: The username provided with the auth-role option
+                            of the AuthType setting for a Redis target endpoint.
+                          type: string
+                        port:
+                          description: Port used by the endpoint database.
+                          type: number
+                        serverName:
+                          description: Host name of the server.
+                          type: string
+                        sslCaCertificateArn:
+                          description: The Amazon Resource Name (ARN) for the certificate
+                            authority (CA) that DMS uses to connect to your Redis
+                            target endpoint.
+                          type: string
+                        sslSecurityProtocol:
+                          description: The plaintext option doesn't provide Transport
+                            Layer Security (TLS) encryption for traffic between endpoint
+                            and database. Options include plaintext, ssl-encryption.
+                            The default is ssl-encryption.
+                          type: string
+                      required:
+                      - authType
+                      - port
+                      - serverName
+                      type: object
+                    type: array
+                  redshiftSettings:
+                    description: Configuration block for Redshift settings. See below.
+                    items:
+                      properties:
+                        bucketFolder:
+                          description: Custom S3 Bucket Object prefix for intermediate
+                            storage.
+                          type: string
+                        bucketName:
+                          description: Custom S3 Bucket name for intermediate storage.
+                          type: string
+                        encryptionMode:
+                          description: The server-side encryption mode that you want
+                            to encrypt your intermediate .csv object files copied
+                            to S3. Defaults to SSE_S3. Valid values are SSE_S3 and
+                            SSE_KMS.
+                          type: string
+                        serverSideEncryptionKmsKeyId:
+                          description: ARN or Id of KMS Key to use when encryption_mode
+                            is SSE_KMS.
+                          type: string
+                        serviceAccessRoleArn:
+                          description: Amazon Resource Name (ARN) of the IAM Role
+                            with permissions to read from or write to the S3 Bucket
+                            for intermediate storage.
+                          type: string
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -444,9 +532,9 @@ spec:
                         cannedAclForObjects:
                           description: Predefined (canned) access control list for
                             objects created in an S3 bucket. Valid values include
-                            NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,
-                            AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.
-                            Default is NONE.
+                            none, private, public-read, public-read-write, authenticated-read,
+                            aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
+                            Default is none.
                           type: string
                         cdcInsertsAndUpdates:
                           description: Whether to write insert and update operations
@@ -462,8 +550,10 @@ spec:
                             is 60.
                           type: number
                         cdcMinFileSize:
-                          description: Minimum file size, defined in megabytes, to
-                            reach for a file output. Default is 32.
+                          description: 'Minimum file size condition as defined in
+                            kilobytes to output a file to Amazon S3. Default is 32000.
+                            NOTE: Previously, this setting was measured in megabytes
+                            but now represents kilobytes. Update configurations accordingly.'
                           type: number
                         cdcPath:
                           description: Folder path of CDC files. For an S3 source,
@@ -537,9 +627,14 @@ spec:
                           description: JSON document that describes how AWS DMS should
                             interpret the data.
                           type: string
-                        ignoreHeadersRow:
+                        ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
+                          type: number
+                        ignoreHeadersRow:
+                          description: Deprecated. This setting has no effect. Will
+                            be removed in a future version. This setting has no effect,
+                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
@@ -576,8 +671,8 @@ spec:
                           description: Number of rows in a row group. Default is 10000.
                           type: number
                         serverSideEncryptionKmsKeyId:
-                          description: If you set encryptionMode to SSE_KMS, set this
-                            parameter to the ARN for the AWS KMS key.
+                          description: ARN or Id of KMS Key to use when encryption_mode
+                            is SSE_KMS.
                           type: string
                         serviceAccessRoleArn:
                           description: ARN of the IAM Role with permissions to read
@@ -590,6 +685,16 @@ spec:
                         useCsvNoSupValue:
                           description: Whether to use csv_no_sup_value for columns
                             not included in the supplemental log.
+                          type: boolean
+                        useTaskStartTimeForFullLoadTimestamp:
+                          description: When set to true, uses the task start time
+                            as the timestamp column value instead of the time data
+                            is written to target. For full load, when set to true,
+                            each row of the timestamp column contains the task start
+                            time. For CDC loads, each row of the timestamp column
+                            contains the transaction commit time. When set to false,
+                            the full load timestamp in the timestamp column increments
+                            with the time data arrives at the target. Default is false.
                           type: boolean
                       type: object
                     type: array
@@ -674,7 +779,8 @@ spec:
                   secretsManagerArn:
                     description: Full ARN, partial ARN, or friendly name of the SecretsManagerSecret
                       that contains the endpoint connection details. Supported only
-                      for engine_name as oracle and postgres.
+                      when engine_name is aurora, aurora-postgresql, mariadb, mongodb,
+                      mysql, oracle, postgres, redshift, or sqlserver.
                     type: string
                   serverName:
                     description: Host name of the server.

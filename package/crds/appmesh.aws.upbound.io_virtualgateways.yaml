@@ -65,57 +65,57 @@ spec:
               forProvider:
                 properties:
                   meshName:
-                    description: The name of the service mesh in which to create the
-                      virtual gateway. Must be between 1 and 255 characters in length.
+                    description: Name of the service mesh in which to create the virtual
+                      gateway. Must be between 1 and 255 characters in length.
                     type: string
                   meshOwner:
-                    description: The AWS account ID of the service mesh's owner. Defaults
+                    description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
                     type: string
                   name:
-                    description: The name to use for the virtual gateway. Must be
-                      between 1 and 255 characters in length.
+                    description: Name to use for the virtual gateway. Must be between
+                      1 and 255 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   spec:
-                    description: The virtual gateway specification to apply.
+                    description: Virtual gateway specification to apply.
                     items:
                       properties:
                         backendDefaults:
-                          description: The defaults for backends.
+                          description: Defaults for backends.
                           items:
                             properties:
                               clientPolicy:
-                                description: The default client policy for virtual
-                                  gateway backends.
+                                description: Default client policy for virtual gateway
+                                  backends.
                                 items:
                                   properties:
                                     tls:
-                                      description: The Transport Layer Security (TLS)
+                                      description: Transport Layer Security (TLS)
                                         client policy.
                                       items:
                                         properties:
                                           certificate:
-                                            description: The virtual gateway's client's
+                                            description: Virtual gateway's client's
                                               Transport Layer Security (TLS) certificate.
                                             items:
                                               properties:
                                                 file:
-                                                  description: A local file certificate.
+                                                  description: Local file certificate.
                                                   items:
                                                     properties:
                                                       certificateChain:
-                                                        description: The certificate
-                                                          chain for the certificate.
+                                                        description: Certificate chain
+                                                          for the certificate.
                                                         type: string
                                                       privateKey:
-                                                        description: The private key
-                                                          for a certificate stored
-                                                          on the file system of the
-                                                          mesh endpoint that the proxy
+                                                        description: Private key for
+                                                          a certificate stored on
+                                                          the file system of the mesh
+                                                          endpoint that the proxy
                                                           is running on.
                                                         type: string
                                                     required:
@@ -129,13 +129,13 @@ spec:
                                                   items:
                                                     properties:
                                                       secretName:
-                                                        description: The name of the
-                                                          secret secret requested
-                                                          from the Secret Discovery
-                                                          Service provider representing
-                                                          Transport Layer Security
-                                                          (TLS) materials like a certificate
-                                                          or certificate chain.
+                                                        description: Name of the secret
+                                                          secret requested from the
+                                                          Secret Discovery Service
+                                                          provider representing Transport
+                                                          Layer Security (TLS) materials
+                                                          like a certificate or certificate
+                                                          chain.
                                                         type: string
                                                     required:
                                                     - secretName
@@ -154,24 +154,23 @@ spec:
                                               type: number
                                             type: array
                                           validation:
-                                            description: The TLS validation context.
+                                            description: TLS validation context.
                                             items:
                                               properties:
                                                 subjectAlternativeNames:
-                                                  description: The SANs for a virtual
+                                                  description: SANs for a virtual
                                                     gateway's listener's Transport
                                                     Layer Security (TLS) validation
                                                     context.
                                                   items:
                                                     properties:
                                                       match:
-                                                        description: The criteria
-                                                          for determining a SAN's
-                                                          match.
+                                                        description: Criteria for
+                                                          determining a SAN's match.
                                                         items:
                                                           properties:
                                                             exact:
-                                                              description: The values
+                                                              description: Values
                                                                 sent must match the
                                                                 specified values exactly.
                                                               items:
@@ -186,12 +185,12 @@ spec:
                                                     type: object
                                                   type: array
                                                 trust:
-                                                  description: The TLS validation
-                                                    context trust.
+                                                  description: TLS validation context
+                                                    trust.
                                                   items:
                                                     properties:
                                                       acm:
-                                                        description: The TLS validation
+                                                        description: TLS validation
                                                           context trust for an AWS
                                                           Certificate Manager (ACM)
                                                           certificate.
@@ -199,8 +198,7 @@ spec:
                                                           properties:
                                                             certificateAuthorityArns:
                                                               description: One or
-                                                                more ACM Amazon Resource
-                                                                Name (ARN)s.
+                                                                more ACM ARNs.
                                                               items:
                                                                 type: string
                                                               type: array
@@ -209,12 +207,11 @@ spec:
                                                           type: object
                                                         type: array
                                                       file:
-                                                        description: A local file
-                                                          certificate.
+                                                        description: Local file certificate.
                                                         items:
                                                           properties:
                                                             certificateChain:
-                                                              description: The certificate
+                                                              description: Certificate
                                                                 chain for the certificate.
                                                               type: string
                                                           required:
@@ -227,8 +224,8 @@ spec:
                                                         items:
                                                           properties:
                                                             secretName:
-                                                              description: The name
-                                                                of the secret secret
+                                                              description: Name of
+                                                                the secret secret
                                                                 requested from the
                                                                 Secret Discovery Service
                                                                 provider representing
@@ -256,13 +253,12 @@ spec:
                             type: object
                           type: array
                         listener:
-                          description: The listeners that the mesh endpoint is expected
+                          description: Listeners that the mesh endpoint is expected
                             to receive inbound traffic from. You can specify one listener.
                           items:
                             properties:
                               connectionPool:
-                                description: The connection pool information for the
-                                  listener.
+                                description: Connection pool information for the listener.
                                 items:
                                   properties:
                                     grpc:
@@ -319,42 +315,39 @@ spec:
                                   type: object
                                 type: array
                               healthCheck:
-                                description: The health check information for the
-                                  listener.
+                                description: Health check information for the listener.
                                 items:
                                   properties:
                                     healthyThreshold:
-                                      description: The number of consecutive successful
+                                      description: Number of consecutive successful
                                         health checks that must occur before declaring
                                         listener healthy.
                                       type: number
                                     intervalMillis:
-                                      description: The time period in milliseconds
-                                        between each health check execution.
+                                      description: Time period in milliseconds between
+                                        each health check execution.
                                       type: number
                                     path:
-                                      description: The file path to write access logs
+                                      description: File path to write access logs
                                         to. You can use /dev/stdout to send access
                                         logs to standard out. Must be between 1 and
                                         255 characters in length.
                                       type: string
                                     port:
-                                      description: The port used for the port mapping.
+                                      description: Port used for the port mapping.
                                       type: number
                                     protocol:
-                                      description: The protocol used for the port
-                                        mapping. Valid values are http, http2, tcp
-                                        and grpc.
+                                      description: Protocol used for the port mapping.
+                                        Valid values are http, http2, tcp and grpc.
                                       type: string
                                     timeoutMillis:
-                                      description: The amount of time to wait when
-                                        receiving a response from the health check,
-                                        in milliseconds.
+                                      description: Amount of time to wait when receiving
+                                        a response from the health check, in milliseconds.
                                       type: number
                                     unhealthyThreshold:
-                                      description: The number of consecutive failed
-                                        health checks that must occur before declaring
-                                        a virtual gateway unhealthy.
+                                      description: Number of consecutive failed health
+                                        checks that must occur before declaring a
+                                        virtual gateway unhealthy.
                                       type: number
                                   required:
                                   - healthyThreshold
@@ -365,17 +358,15 @@ spec:
                                   type: object
                                 type: array
                               portMapping:
-                                description: The port mapping information for the
-                                  listener.
+                                description: Port mapping information for the listener.
                                 items:
                                   properties:
                                     port:
-                                      description: The port used for the port mapping.
+                                      description: Port used for the port mapping.
                                       type: number
                                     protocol:
-                                      description: The protocol used for the port
-                                        mapping. Valid values are http, http2, tcp
-                                        and grpc.
+                                      description: Protocol used for the port mapping.
+                                        Valid values are http, http2, tcp and grpc.
                                       type: string
                                   required:
                                   - port
@@ -383,24 +374,23 @@ spec:
                                   type: object
                                 type: array
                               tls:
-                                description: The Transport Layer Security (TLS) client
+                                description: Transport Layer Security (TLS) client
                                   policy.
                                 items:
                                   properties:
                                     certificate:
-                                      description: The virtual gateway's client's
-                                        Transport Layer Security (TLS) certificate.
+                                      description: Virtual gateway's client's Transport
+                                        Layer Security (TLS) certificate.
                                       items:
                                         properties:
                                           acm:
-                                            description: The TLS validation context
-                                              trust for an AWS Certificate Manager
-                                              (ACM) certificate.
+                                            description: TLS validation context trust
+                                              for an AWS Certificate Manager (ACM)
+                                              certificate.
                                             items:
                                               properties:
                                                 certificateArn:
-                                                  description: The Amazon Resource
-                                                    Name (ARN) for the certificate.
+                                                  description: ARN for the certificate.
                                                   type: string
                                                 certificateArnRef:
                                                   description: Reference to a Certificate
@@ -505,18 +495,18 @@ spec:
                                               type: object
                                             type: array
                                           file:
-                                            description: A local file certificate.
+                                            description: Local file certificate.
                                             items:
                                               properties:
                                                 certificateChain:
-                                                  description: The certificate chain
-                                                    for the certificate.
+                                                  description: Certificate chain for
+                                                    the certificate.
                                                   type: string
                                                 privateKey:
-                                                  description: The private key for
-                                                    a certificate stored on the file
-                                                    system of the mesh endpoint that
-                                                    the proxy is running on.
+                                                  description: Private key for a certificate
+                                                    stored on the file system of the
+                                                    mesh endpoint that the proxy is
+                                                    running on.
                                                   type: string
                                               required:
                                               - certificateChain
@@ -529,7 +519,7 @@ spec:
                                             items:
                                               properties:
                                                 secretName:
-                                                  description: The name of the secret
+                                                  description: Name of the secret
                                                     secret requested from the Secret
                                                     Discovery Service provider representing
                                                     Transport Layer Security (TLS)
@@ -543,28 +533,28 @@ spec:
                                         type: object
                                       type: array
                                     mode:
-                                      description: 'The listener''s TLS mode. Valid
-                                        values: DISABLED, PERMISSIVE, STRICT.'
+                                      description: 'Listener''s TLS mode. Valid values:
+                                        DISABLED, PERMISSIVE, STRICT.'
                                       type: string
                                     validation:
-                                      description: The TLS validation context.
+                                      description: TLS validation context.
                                       items:
                                         properties:
                                           subjectAlternativeNames:
-                                            description: The SANs for a virtual gateway's
+                                            description: SANs for a virtual gateway's
                                               listener's Transport Layer Security
                                               (TLS) validation context.
                                             items:
                                               properties:
                                                 match:
-                                                  description: The criteria for determining
+                                                  description: Criteria for determining
                                                     a SAN's match.
                                                   items:
                                                     properties:
                                                       exact:
-                                                        description: The values sent
-                                                          must match the specified
-                                                          values exactly.
+                                                        description: Values sent must
+                                                          match the specified values
+                                                          exactly.
                                                         items:
                                                           type: string
                                                         type: array
@@ -577,17 +567,16 @@ spec:
                                               type: object
                                             type: array
                                           trust:
-                                            description: The TLS validation context
-                                              trust.
+                                            description: TLS validation context trust.
                                             items:
                                               properties:
                                                 file:
-                                                  description: A local file certificate.
+                                                  description: Local file certificate.
                                                   items:
                                                     properties:
                                                       certificateChain:
-                                                        description: The certificate
-                                                          chain for the certificate.
+                                                        description: Certificate chain
+                                                          for the certificate.
                                                         type: string
                                                     required:
                                                     - certificateChain
@@ -599,13 +588,13 @@ spec:
                                                   items:
                                                     properties:
                                                       secretName:
-                                                        description: The name of the
-                                                          secret secret requested
-                                                          from the Secret Discovery
-                                                          Service provider representing
-                                                          Transport Layer Security
-                                                          (TLS) materials like a certificate
-                                                          or certificate chain.
+                                                        description: Name of the secret
+                                                          secret requested from the
+                                                          Secret Discovery Service
+                                                          provider representing Transport
+                                                          Layer Security (TLS) materials
+                                                          like a certificate or certificate
+                                                          chain.
                                                         type: string
                                                     required:
                                                     - secretName
@@ -627,21 +616,21 @@ spec:
                             type: object
                           type: array
                         logging:
-                          description: The inbound and outbound access logging information
+                          description: Inbound and outbound access logging information
                             for the virtual gateway.
                           items:
                             properties:
                               accessLog:
-                                description: The access log configuration for a virtual
+                                description: Access log configuration for a virtual
                                   gateway.
                                 items:
                                   properties:
                                     file:
-                                      description: A local file certificate.
+                                      description: Local file certificate.
                                       items:
                                         properties:
                                           path:
-                                            description: The file path to write access
+                                            description: File path to write access
                                               logs to. You can use /dev/stdout to
                                               send access logs to standard out. Must
                                               be between 1 and 255 characters in length.
@@ -846,26 +835,25 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the virtual gateway.
+                    description: ARN of the virtual gateway.
                     type: string
                   createdDate:
-                    description: The creation date of the virtual gateway.
+                    description: Creation date of the virtual gateway.
                     type: string
                   id:
-                    description: The ID of the virtual gateway.
+                    description: ID of the virtual gateway.
                     type: string
                   lastUpdatedDate:
-                    description: The last update date of the virtual gateway.
+                    description: Last update date of the virtual gateway.
                     type: string
                   resourceOwner:
-                    description: The resource owner's AWS account ID.
+                    description: Resource owner's AWS account ID.
                     type: string
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                 type: object
               conditions:

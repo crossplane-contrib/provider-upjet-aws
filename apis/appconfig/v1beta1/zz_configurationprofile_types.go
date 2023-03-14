@@ -15,22 +15,22 @@ import (
 
 type ConfigurationProfileObservation struct {
 
-	// The Amazon Resource Name (ARN) of the AppConfig Configuration Profile.
+	// ARN of the AppConfig Configuration Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The configuration profile ID.
 	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
 
-	// The AppConfig configuration profile ID and application ID separated by a colon (:).
+	// AppConfig configuration profile ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type ConfigurationProfileParameters struct {
 
-	// The application ID. Must be between 4 and 7 characters in length.
+	// Application ID. Must be between 4 and 7 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -44,15 +44,15 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// The description of the configuration profile. Can be at most 1024 characters.
+	// Description of the configuration profile. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
+	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
 	// +kubebuilder:validation:Required
 	LocationURI *string `json:"locationUri" tf:"location_uri,omitempty"`
 
-	// The name for the configuration profile. Must be between 1 and 64 characters in length.
+	// Name for the configuration profile. Must be between 1 and 64 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -61,7 +61,7 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
+	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -79,11 +79,11 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
+	// Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// A set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
 	// +kubebuilder:validation:Optional
 	Validator []ValidatorParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }
@@ -93,11 +93,11 @@ type ValidatorObservation struct {
 
 type ValidatorParameters struct {
 
-	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+	// Either the JSON Schema content or the ARN of an AWS Lambda function.
 	// +kubebuilder:validation:Optional
 	ContentSecretRef *v1.SecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
 
-	// The type of validator. Valid values: JSON_SCHEMA and LAMBDA.
+	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

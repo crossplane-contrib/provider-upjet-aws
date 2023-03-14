@@ -82,18 +82,8 @@ type ProductParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// Reference to a Subnet in ec2 to populate type.
-	// +kubebuilder:validation:Optional
-	TypeRef *v1.Reference `json:"typeRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in ec2 to populate type.
-	// +kubebuilder:validation:Optional
-	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ProvisioningArtifactParametersObservation struct {

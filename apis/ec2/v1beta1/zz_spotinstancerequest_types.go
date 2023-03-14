@@ -257,6 +257,9 @@ type SpotInstanceRequestParameters struct {
 	CreditSpecification []SpotInstanceRequestCreditSpecificationParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -280,6 +283,9 @@ type SpotInstanceRequestParameters struct {
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
 	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
@@ -328,6 +334,9 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrivateDNSNameOptions []SpotInstanceRequestPrivateDNSNameOptionsParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
 
 	// The private IP address assigned to the instance
 	// +kubebuilder:validation:Optional
@@ -416,6 +425,21 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
+}
+
+type SpotInstanceRequestPrivateDNSNameOptionsObservation struct {
+}
+
+type SpotInstanceRequestPrivateDNSNameOptionsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
 }
 
 type SpotInstanceRequestRootBlockDeviceObservation struct {

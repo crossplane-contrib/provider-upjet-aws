@@ -69,9 +69,13 @@ spec:
                       you want to create an access point.
                     type: string
                   bucket:
-                    description: Name of an AWS Partition S3 Bucket or the Amazon
-                      Resource Name (ARN) of S3 on Outposts Bucket that you want to
-                      associate this access point with.
+                    description: Name of an AWS Partition S3 Bucket or the ARN of
+                      S3 on Outposts Bucket that you want to associate this access
+                      point with.
+                    type: string
+                  bucketAccountId:
+                    description: AWS account ID associated with the S3 bucket associated
+                      with this access point.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -467,21 +471,21 @@ spec:
               atProvider:
                 properties:
                   alias:
-                    description: The alias of the S3 Access Point.
+                    description: Alias of the S3 Access Point.
                     type: string
                   arn:
-                    description: Amazon Resource Name (ARN) of the S3 Access Point.
+                    description: ARN of the S3 Access Point.
                     type: string
                   domainName:
-                    description: 'The DNS domain name of the S3 Access Point in the
-                      format name-account_id.s3-accesspoint.region.amazonaws.com.
-                      Note: S3 access points only support secure access by HTTPS.
-                      HTTP isn''t supported.'
+                    description: 'DNS domain name of the S3 Access Point in the format
+                      name-account_id.s3-accesspoint.region.amazonaws.com. Note: S3
+                      access points only support secure access by HTTPS. HTTP isn''t
+                      supported.'
                     type: string
                   endpoints:
                     additionalProperties:
                       type: string
-                    description: The VPC endpoints for the S3 Access Point.
+                    description: VPC endpoints for the S3 Access Point.
                     type: object
                   hasPublicAccessPolicy:
                     description: Indicates whether this access point currently has
@@ -490,8 +494,7 @@ spec:
                   id:
                     description: For Access Point of an AWS Partition S3 Bucket, the
                       AWS account ID and access point name separated by a colon (:).
-                      For S3 on Outposts Bucket, the Amazon Resource Name (ARN) of
-                      the Access Point.
+                      For S3 on Outposts Bucket, the ARN of the Access Point.
                     type: string
                   networkOrigin:
                     description: Indicates whether this access point allows access

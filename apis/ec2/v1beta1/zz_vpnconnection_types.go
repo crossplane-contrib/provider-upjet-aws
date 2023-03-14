@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudwatchLogOptionsObservation struct {
+}
+
+type CloudwatchLogOptionsParameters struct {
+
+	// Enable or disable VPN tunnel logging feature. The default is false.
+	// +kubebuilder:validation:Optional
+	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// +kubebuilder:validation:Optional
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+
+	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// +kubebuilder:validation:Optional
+	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
+}
+
 type RoutesObservation struct {
 
 	// The CIDR block associated with the local subnet of the customer data center.
@@ -28,7 +46,45 @@ type RoutesObservation struct {
 type RoutesParameters struct {
 }
 
-type VPNConnectionObservation struct {
+type Tunnel1LogOptionsObservation struct {
+}
+
+type Tunnel1LogOptionsParameters struct {
+
+	// Options for sending VPN tunnel logs to CloudWatch. See CloudWatch Log Options below for more details.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogOptions []CloudwatchLogOptionsParameters `json:"cloudwatchLogOptions,omitempty" tf:"cloudwatch_log_options,omitempty"`
+}
+
+type Tunnel2LogOptionsCloudwatchLogOptionsObservation struct {
+}
+
+type Tunnel2LogOptionsCloudwatchLogOptionsParameters struct {
+
+	// Enable or disable VPN tunnel logging feature. The default is false.
+	// +kubebuilder:validation:Optional
+	LogEnabled *bool `json:"logEnabled,omitempty" tf:"log_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	// +kubebuilder:validation:Optional
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+
+	// Set log format. Default format is json. Possible values are: json and text. The default is json.
+	// +kubebuilder:validation:Optional
+	LogOutputFormat *string `json:"logOutputFormat,omitempty" tf:"log_output_format,omitempty"`
+}
+
+type Tunnel2LogOptionsObservation struct {
+}
+
+type Tunnel2LogOptionsParameters struct {
+
+	// Options for sending VPN tunnel logs to CloudWatch. See CloudWatch Log Options below for more details.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogOptions []Tunnel2LogOptionsCloudwatchLogOptionsParameters `json:"cloudwatchLogOptions,omitempty" tf:"cloudwatch_log_options,omitempty"`
+}
+
+type VPNConnectionObservation_2 struct {
 
 	// Amazon Resource Name (ARN) of the VPN Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -85,7 +141,7 @@ type VPNConnectionObservation struct {
 	VgwTelemetry []VgwTelemetryObservation `json:"vgwTelemetry,omitempty" tf:"vgw_telemetry,omitempty"`
 }
 
-type VPNConnectionParameters struct {
+type VPNConnectionParameters_2 struct {
 
 	// The ID of the customer gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
@@ -112,6 +168,10 @@ type VPNConnectionParameters struct {
 	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	LocalIPv6NetworkCidr *string `json:"localIpv6NetworkCidr,omitempty" tf:"local_ipv6_network_cidr,omitempty"`
+
+	// Indicates if a Public S2S VPN or Private S2S VPN over AWS Direct Connect. Valid values are PublicIpv4 | PrivateIpv4
+	// +kubebuilder:validation:Optional
+	OutsideIPAddressType *string `json:"outsideIpAddressType,omitempty" tf:"outside_ip_address_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -148,6 +208,10 @@ type VPNConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
+	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
+	// +kubebuilder:validation:Optional
+	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
+
 	// The action to take after DPD timeout occurs for the first VPN tunnel. Specify restart to restart the IKE initiation. Specify clear to end the IKE session. Valid values are clear | none | restart.
 	// +kubebuilder:validation:Optional
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
@@ -167,6 +231,10 @@ type VPNConnectionParameters struct {
 	// The range of inside IPv6 addresses for the first VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	// +kubebuilder:validation:Optional
 	Tunnel1InsideIPv6Cidr *string `json:"tunnel1InsideIpv6Cidr,omitempty" tf:"tunnel1_inside_ipv6_cidr,omitempty"`
+
+	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// +kubebuilder:validation:Optional
+	Tunnel1LogOptions []Tunnel1LogOptionsParameters `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
@@ -239,6 +307,10 @@ type VPNConnectionParameters struct {
 	// The range of inside IPv6 addresses for the second VPN tunnel. Supports only EC2 Transit Gateway. Valid value is a size /126 CIDR block from the local fd00::/8 range.
 	// +kubebuilder:validation:Optional
 	Tunnel2InsideIPv6Cidr *string `json:"tunnel2InsideIpv6Cidr,omitempty" tf:"tunnel2_inside_ipv6_cidr,omitempty"`
+
+	// Options for logging VPN tunnel activity. See Log Options below for more details.
+	// +kubebuilder:validation:Optional
+	Tunnel2LogOptions []Tunnel2LogOptionsParameters `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
@@ -351,13 +423,13 @@ type VgwTelemetryParameters struct {
 // VPNConnectionSpec defines the desired state of VPNConnection
 type VPNConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPNConnectionParameters `json:"forProvider"`
+	ForProvider     VPNConnectionParameters_2 `json:"forProvider"`
 }
 
 // VPNConnectionStatus defines the observed state of VPNConnection.
 type VPNConnectionStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPNConnectionObservation `json:"atProvider,omitempty"`
+	AtProvider        VPNConnectionObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

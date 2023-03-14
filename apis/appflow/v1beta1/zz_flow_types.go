@@ -18,7 +18,7 @@ type AggregationConfigObservation struct {
 
 type AggregationConfigParameters struct {
 
-	// Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
+	// Whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
 	// +kubebuilder:validation:Optional
 	AggregationType *string `json:"aggregationType,omitempty" tf:"aggregation_type,omitempty"`
 }
@@ -28,7 +28,7 @@ type AmplitudeObservation struct {
 
 type AmplitudeParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -38,67 +38,67 @@ type ConnectorOperatorObservation struct {
 
 type ConnectorOperatorParameters struct {
 
-	// Specifies the information that is required for querying Amplitude. See Generic Source Properties for more details.
+	// Information that is required for querying Amplitude. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Amplitude *string `json:"amplitude,omitempty" tf:"amplitude,omitempty"`
 
-	// The properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
+	// Properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	CustomConnector *string `json:"customConnector,omitempty" tf:"custom_connector,omitempty"`
 
-	// Specifies the information that is required for querying Datadog. See Generic Source Properties for more details.
+	// Information that is required for querying Datadog. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Datadog *string `json:"datadog,omitempty" tf:"datadog,omitempty"`
 
-	// The operation to be performed on the provided Dynatrace source fields. Valid values are PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
+	// Operation to be performed on the provided Dynatrace source fields. Valid values are PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
 	// +kubebuilder:validation:Optional
 	Dynatrace *string `json:"dynatrace,omitempty" tf:"dynatrace,omitempty"`
 
-	// The operation to be performed on the provided Google Analytics source fields. Valid values are PROJECTION and BETWEEN.
+	// Operation to be performed on the provided Google Analytics source fields. Valid values are PROJECTION and BETWEEN.
 	// +kubebuilder:validation:Optional
 	GoogleAnalytics *string `json:"googleAnalytics,omitempty" tf:"google_analytics,omitempty"`
 
-	// Specifies the information that is required for querying Infor Nexus. See Generic Source Properties for more details.
+	// Information that is required for querying Infor Nexus. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	InforNexus *string `json:"inforNexus,omitempty" tf:"infor_nexus,omitempty"`
 
-	// The properties that are required to query Marketo. See Generic Destination Properties for more details.
+	// Properties that are required to query Marketo. See Generic Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Marketo *string `json:"marketo,omitempty" tf:"marketo,omitempty"`
 
-	// The properties that are required to query Amazon S3. See S3 Destination Properties for more details.
+	// Properties that are required to query Amazon S3. See S3 Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	S3 *string `json:"s3,omitempty" tf:"s3,omitempty"`
 
-	// The properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
+	// Properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Salesforce *string `json:"salesforce,omitempty" tf:"salesforce,omitempty"`
 
-	// The properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
+	// Properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	SapoData *string `json:"sapoData,omitempty" tf:"sapo_data,omitempty"`
 
-	// Specifies the information that is required for querying ServiceNow. See Generic Source Properties for more details.
+	// Information that is required for querying ServiceNow. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	ServiceNow *string `json:"serviceNow,omitempty" tf:"service_now,omitempty"`
 
-	// Specifies the information that is required for querying Singular. See Generic Source Properties for more details.
+	// Information that is required for querying Singular. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Singular *string `json:"singular,omitempty" tf:"singular,omitempty"`
 
-	// Specifies the information that is required for querying Slack. See Generic Source Properties for more details.
+	// Information that is required for querying Slack. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Slack *string `json:"slack,omitempty" tf:"slack,omitempty"`
 
-	// The operation to be performed on the provided Trend Micro source fields. Valid values are PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
+	// Operation to be performed on the provided Trend Micro source fields. Valid values are PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
 	// +kubebuilder:validation:Optional
 	Trendmicro *string `json:"trendmicro,omitempty" tf:"trendmicro,omitempty"`
 
-	// Specifies the information that is required for querying Veeva. See Veeva Source Properties for more details.
+	// Information that is required for querying Veeva. See Veeva Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Veeva *string `json:"veeva,omitempty" tf:"veeva,omitempty"`
 
-	// The properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
+	// Properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Zendesk *string `json:"zendesk,omitempty" tf:"zendesk,omitempty"`
 }
@@ -108,23 +108,23 @@ type CustomConnectorObservation struct {
 
 type CustomConnectorParameters struct {
 
-	// The custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
 	// +kubebuilder:validation:Optional
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
-	// The entity specified in the custom connector as a destination in the flow.
+	// Entity specified in the custom connector as a destination in the flow.
 	// +kubebuilder:validation:Required
 	EntityName *string `json:"entityName" tf:"entity_name,omitempty"`
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []ErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
+	// Name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
 	// +kubebuilder:validation:Optional
 	IDFieldNames []*string `json:"idFieldNames,omitempty" tf:"id_field_names,omitempty"`
 
-	// Specifies the type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
+	// Type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
 	// +kubebuilder:validation:Optional
 	WriteOperationType *string `json:"writeOperationType,omitempty" tf:"write_operation_type,omitempty"`
 }
@@ -134,11 +134,11 @@ type CustomerProfilesObservation struct {
 
 type CustomerProfilesParameters struct {
 
-	// The unique name of the Amazon Connect Customer Profiles domain.
+	// Unique name of the Amazon Connect Customer Profiles domain.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// The object specified in the Amazon Connect Customer Profiles flow destination.
+	// Object specified in the Amazon Connect Customer Profiles flow destination.
 	// +kubebuilder:validation:Optional
 	ObjectTypeName *string `json:"objectTypeName,omitempty" tf:"object_type_name,omitempty"`
 }
@@ -148,7 +148,7 @@ type DatadogObservation struct {
 
 type DatadogParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -158,54 +158,54 @@ type DestinationConnectorPropertiesObservation struct {
 
 type DestinationConnectorPropertiesParameters struct {
 
-	// The properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
+	// Properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	CustomConnector []CustomConnectorParameters `json:"customConnector,omitempty" tf:"custom_connector,omitempty"`
 
-	// The properties that are required to query Amazon Connect Customer Profiles. See Customer Profiles Destination Properties for more details.
+	// Properties that are required to query Amazon Connect Customer Profiles. See Customer Profiles Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	CustomerProfiles []CustomerProfilesParameters `json:"customerProfiles,omitempty" tf:"customer_profiles,omitempty"`
 
-	// The properties that are required to query Amazon EventBridge. See Generic Destination Properties for more details.
+	// Properties that are required to query Amazon EventBridge. See Generic Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	EventBridge []EventBridgeParameters `json:"eventBridge,omitempty" tf:"event_bridge,omitempty"`
 
-	// The properties that are required to query Amazon Honeycode. See Generic Destination Properties for more details.
+	// Properties that are required to query Amazon Honeycode. See Generic Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Honeycode []HoneycodeParameters `json:"honeycode,omitempty" tf:"honeycode,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LookoutMetrics []LookoutMetricsParameters `json:"lookoutMetrics,omitempty" tf:"lookout_metrics,omitempty"`
 
-	// The properties that are required to query Marketo. See Generic Destination Properties for more details.
+	// Properties that are required to query Marketo. See Generic Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Marketo []MarketoParameters `json:"marketo,omitempty" tf:"marketo,omitempty"`
 
-	// The properties that are required to query Amazon Redshift. See Redshift Destination Properties for more details.
+	// Properties that are required to query Amazon Redshift. See Redshift Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Redshift []RedshiftParameters `json:"redshift,omitempty" tf:"redshift,omitempty"`
 
-	// The properties that are required to query Amazon S3. See S3 Destination Properties for more details.
+	// Properties that are required to query Amazon S3. See S3 Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	S3 []S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
-	// The properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
+	// Properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Salesforce []SalesforceParameters `json:"salesforce,omitempty" tf:"salesforce,omitempty"`
 
-	// The properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
+	// Properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	SapoData []SapoDataParameters `json:"sapoData,omitempty" tf:"sapo_data,omitempty"`
 
-	// The properties that are required to query Snowflake. See Snowflake Destination Properties for more details.
+	// Properties that are required to query Snowflake. See Snowflake Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Snowflake []SnowflakeParameters `json:"snowflake,omitempty" tf:"snowflake,omitempty"`
 
-	// The properties that are required to query Upsolver. See Upsolver Destination Properties for more details.
+	// Properties that are required to query Upsolver. See Upsolver Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Upsolver []UpsolverParameters `json:"upsolver,omitempty" tf:"upsolver,omitempty"`
 
-	// The properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
+	// Properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Zendesk []ZendeskParameters `json:"zendesk,omitempty" tf:"zendesk,omitempty"`
 }
@@ -215,15 +215,15 @@ type DestinationFlowConfigObservation struct {
 
 type DestinationFlowConfigParameters struct {
 
-	// The API version that the destination connector uses.
+	// API version that the destination connector uses.
 	// +kubebuilder:validation:Optional
 	APIVersion *string `json:"apiVersion,omitempty" tf:"api_version,omitempty"`
 
-	// The name of the connector profile. This name must be unique for each connector profile in the AWS account.
+	// Name of the connector profile. This name must be unique for each connector profile in the AWS account.
 	// +kubebuilder:validation:Optional
 	ConnectorProfileName *string `json:"connectorProfileName,omitempty" tf:"connector_profile_name,omitempty"`
 
-	// The type of connector, such as Salesforce, Amplitude, and so on. Valid values are Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, and CustomConnector.
+	// Type of connector, such as Salesforce, Amplitude, and so on. Valid values are Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, and CustomConnector.
 	// +kubebuilder:validation:Required
 	ConnectorType *string `json:"connectorType" tf:"connector_type,omitempty"`
 
@@ -237,7 +237,7 @@ type DynatraceObservation struct {
 
 type DynatraceParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -247,15 +247,15 @@ type ErrorHandlingConfigObservation struct {
 
 type ErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -265,15 +265,15 @@ type EventBridgeErrorHandlingConfigObservation struct {
 
 type EventBridgeErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -283,18 +283,18 @@ type EventBridgeObservation struct {
 
 type EventBridgeParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []EventBridgeErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
 
 type FlowObservation struct {
 
-	// The flow's Amazon Resource Name (ARN).
+	// Flow's ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -305,7 +305,7 @@ type FlowObservation struct {
 
 type FlowParameters struct {
 
-	// A description of the flow you want to create.
+	// Description of the flow you want to create.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -313,7 +313,7 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationFlowConfig []DestinationFlowConfigParameters `json:"destinationFlowConfig" tf:"destination_flow_config,omitempty"`
 
-	// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.
+	// ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.
 	// +kubebuilder:validation:Optional
 	KMSArn *string `json:"kmsArn,omitempty" tf:"kms_arn,omitempty"`
 
@@ -344,7 +344,7 @@ type GoogleAnalyticsObservation struct {
 
 type GoogleAnalyticsParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -354,15 +354,15 @@ type HoneycodeErrorHandlingConfigObservation struct {
 
 type HoneycodeErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -372,11 +372,11 @@ type HoneycodeObservation struct {
 
 type HoneycodeParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []HoneycodeErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -386,7 +386,7 @@ type IncrementalPullConfigObservation struct {
 
 type IncrementalPullConfigParameters struct {
 
-	// A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
+	// Field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
 	// +kubebuilder:validation:Optional
 	DatetimeTypeFieldName *string `json:"datetimeTypeFieldName,omitempty" tf:"datetime_type_field_name,omitempty"`
 }
@@ -396,7 +396,7 @@ type InforNexusObservation struct {
 
 type InforNexusParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -412,15 +412,15 @@ type MarketoErrorHandlingConfigObservation struct {
 
 type MarketoErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -430,11 +430,11 @@ type MarketoObservation struct {
 
 type MarketoParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []MarketoErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -458,15 +458,15 @@ type RedshiftErrorHandlingConfigObservation struct {
 
 type RedshiftErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -476,19 +476,19 @@ type RedshiftObservation struct {
 
 type RedshiftParameters struct {
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []RedshiftErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
+	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
 	// +kubebuilder:validation:Required
 	IntermediateBucketName *string `json:"intermediateBucketName" tf:"intermediate_bucket_name,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -498,7 +498,7 @@ type S3InputFormatConfigObservation struct {
 
 type S3InputFormatConfigParameters struct {
 
-	// The file type that Amazon AppFlow gets from your Amazon S3 bucket. Valid values are CSV and JSON.
+	// File type that Amazon AppFlow gets from your Amazon S3 bucket. Valid values are CSV and JSON.
 	// +kubebuilder:validation:Optional
 	S3InputFileType *string `json:"s3InputFileType,omitempty" tf:"s3_input_file_type,omitempty"`
 }
@@ -511,7 +511,7 @@ type S3OutputFormatConfigAggregationConfigObservation struct {
 
 type S3OutputFormatConfigAggregationConfigParameters struct {
 
-	// Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
+	// Whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
 	// +kubebuilder:validation:Optional
 	AggregationType *string `json:"aggregationType,omitempty" tf:"aggregation_type,omitempty"`
 }
@@ -521,11 +521,11 @@ type S3OutputFormatConfigObservation struct {
 
 type S3OutputFormatConfigParameters struct {
 
-	// The aggregation settings that you can use to customize the output format of your flow data. See Aggregation Config for more details.
+	// Aggregation settings that you can use to customize the output format of your flow data. See Aggregation Config for more details.
 	// +kubebuilder:validation:Optional
 	AggregationConfig []AggregationConfigParameters `json:"aggregationConfig,omitempty" tf:"aggregation_config,omitempty"`
 
-	// Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. Valid values are CSV, JSON, and PARQUET.
+	// File type that Amazon AppFlow places in the Amazon S3 bucket. Valid values are CSV, JSON, and PARQUET.
 	// +kubebuilder:validation:Optional
 	FileType *string `json:"fileType,omitempty" tf:"file_type,omitempty"`
 
@@ -550,7 +550,7 @@ type S3OutputFormatConfigPrefixConfigParameters struct {
 
 type S3Parameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
@@ -564,11 +564,11 @@ type S3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// The configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. See S3 Output Format Config for more details.
+	// Configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. See S3 Output Format Config for more details.
 	// +kubebuilder:validation:Optional
 	S3OutputFormatConfig []S3OutputFormatConfigParameters `json:"s3OutputFormatConfig,omitempty" tf:"s3_output_format_config,omitempty"`
 }
@@ -578,15 +578,15 @@ type SalesforceErrorHandlingConfigObservation struct {
 
 type SalesforceErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -596,19 +596,19 @@ type SalesforceObservation struct {
 
 type SalesforceParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []SalesforceErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
+	// Name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
 	// +kubebuilder:validation:Optional
 	IDFieldNames []*string `json:"idFieldNames,omitempty" tf:"id_field_names,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 
-	// Specifies the type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
+	// Type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
 	// +kubebuilder:validation:Optional
 	WriteOperationType *string `json:"writeOperationType,omitempty" tf:"write_operation_type,omitempty"`
 }
@@ -618,15 +618,15 @@ type SapoDataErrorHandlingConfigObservation struct {
 
 type SapoDataErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -636,15 +636,15 @@ type SapoDataObservation struct {
 
 type SapoDataParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []SapoDataErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
+	// Name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
 	// +kubebuilder:validation:Optional
 	IDFieldNames []*string `json:"idFieldNames,omitempty" tf:"id_field_names,omitempty"`
 
-	// The object path specified in the SAPOData flow destination.
+	// Object path specified in the SAPOData flow destination.
 	// +kubebuilder:validation:Required
 	ObjectPath *string `json:"objectPath" tf:"object_path,omitempty"`
 
@@ -652,7 +652,7 @@ type SapoDataParameters struct {
 	// +kubebuilder:validation:Optional
 	SuccessResponseHandlingConfig []SuccessResponseHandlingConfigParameters `json:"successResponseHandlingConfig,omitempty" tf:"success_response_handling_config,omitempty"`
 
-	// Specifies the type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
+	// Type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
 	// +kubebuilder:validation:Optional
 	WriteOperationType *string `json:"writeOperationType,omitempty" tf:"write_operation_type,omitempty"`
 }
@@ -662,31 +662,31 @@ type ScheduledObservation struct {
 
 type ScheduledParameters struct {
 
-	// Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run. Valid values are Incremental and Complete.
+	// Whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run. Valid values are Incremental and Complete.
 	// +kubebuilder:validation:Optional
 	DataPullMode *string `json:"dataPullMode,omitempty" tf:"data_pull_mode,omitempty"`
 
-	// Specifies the date range for the records to import from the connector in the first flow run. Must be a valid RFC3339 timestamp.
+	// Date range for the records to import from the connector in the first flow run. Must be a valid RFC3339 timestamp.
 	// +kubebuilder:validation:Optional
 	FirstExecutionFrom *string `json:"firstExecutionFrom,omitempty" tf:"first_execution_from,omitempty"`
 
-	// Specifies the scheduled end time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
+	// Scheduled end time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
 	// +kubebuilder:validation:Optional
 	ScheduleEndTime *string `json:"scheduleEndTime,omitempty" tf:"schedule_end_time,omitempty"`
 
-	// The scheduling expression that determines the rate at which the schedule will run, for example rate(5minutes).
+	// Scheduling expression that determines the rate at which the schedule will run, for example rate(5minutes).
 	// +kubebuilder:validation:Required
 	ScheduleExpression *string `json:"scheduleExpression" tf:"schedule_expression,omitempty"`
 
-	// Specifies the optional offset that is added to the time interval for a schedule-triggered flow. Maximum value of 36000.
+	// Optional offset that is added to the time interval for a schedule-triggered flow. Maximum value of 36000.
 	// +kubebuilder:validation:Optional
 	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
-	// Specifies the scheduled start time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
+	// Scheduled start time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
 	// +kubebuilder:validation:Optional
 	ScheduleStartTime *string `json:"scheduleStartTime,omitempty" tf:"schedule_start_time,omitempty"`
 
-	// Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.
+	// Time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
@@ -696,7 +696,7 @@ type ServiceNowObservation struct {
 
 type ServiceNowParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -706,7 +706,7 @@ type SingularObservation struct {
 
 type SingularParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -716,7 +716,7 @@ type SlackObservation struct {
 
 type SlackParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -726,15 +726,15 @@ type SnowflakeErrorHandlingConfigObservation struct {
 
 type SnowflakeErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -744,19 +744,19 @@ type SnowflakeObservation struct {
 
 type SnowflakeParameters struct {
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []SnowflakeErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
+	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
 	// +kubebuilder:validation:Required
 	IntermediateBucketName *string `json:"intermediateBucketName" tf:"intermediate_bucket_name,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -766,11 +766,11 @@ type SourceConnectorPropertiesCustomConnectorObservation struct {
 
 type SourceConnectorPropertiesCustomConnectorParameters struct {
 
-	// The custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
 	// +kubebuilder:validation:Optional
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
-	// The entity specified in the custom connector as a destination in the flow.
+	// Entity specified in the custom connector as a destination in the flow.
 	// +kubebuilder:validation:Required
 	EntityName *string `json:"entityName" tf:"entity_name,omitempty"`
 }
@@ -780,7 +780,7 @@ type SourceConnectorPropertiesMarketoObservation struct {
 
 type SourceConnectorPropertiesMarketoParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -790,67 +790,67 @@ type SourceConnectorPropertiesObservation struct {
 
 type SourceConnectorPropertiesParameters struct {
 
-	// Specifies the information that is required for querying Amplitude. See Generic Source Properties for more details.
+	// Information that is required for querying Amplitude. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Amplitude []AmplitudeParameters `json:"amplitude,omitempty" tf:"amplitude,omitempty"`
 
-	// The properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
+	// Properties that are required to query the custom Connector. See Custom Connector Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	CustomConnector []SourceConnectorPropertiesCustomConnectorParameters `json:"customConnector,omitempty" tf:"custom_connector,omitempty"`
 
-	// Specifies the information that is required for querying Datadog. See Generic Source Properties for more details.
+	// Information that is required for querying Datadog. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Datadog []DatadogParameters `json:"datadog,omitempty" tf:"datadog,omitempty"`
 
-	// The operation to be performed on the provided Dynatrace source fields. Valid values are PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
+	// Operation to be performed on the provided Dynatrace source fields. Valid values are PROJECTION, BETWEEN, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
 	// +kubebuilder:validation:Optional
 	Dynatrace []DynatraceParameters `json:"dynatrace,omitempty" tf:"dynatrace,omitempty"`
 
-	// The operation to be performed on the provided Google Analytics source fields. Valid values are PROJECTION and BETWEEN.
+	// Operation to be performed on the provided Google Analytics source fields. Valid values are PROJECTION and BETWEEN.
 	// +kubebuilder:validation:Optional
 	GoogleAnalytics []GoogleAnalyticsParameters `json:"googleAnalytics,omitempty" tf:"google_analytics,omitempty"`
 
-	// Specifies the information that is required for querying Infor Nexus. See Generic Source Properties for more details.
+	// Information that is required for querying Infor Nexus. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	InforNexus []InforNexusParameters `json:"inforNexus,omitempty" tf:"infor_nexus,omitempty"`
 
-	// The properties that are required to query Marketo. See Generic Destination Properties for more details.
+	// Properties that are required to query Marketo. See Generic Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Marketo []SourceConnectorPropertiesMarketoParameters `json:"marketo,omitempty" tf:"marketo,omitempty"`
 
-	// The properties that are required to query Amazon S3. See S3 Destination Properties for more details.
+	// Properties that are required to query Amazon S3. See S3 Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	S3 []SourceConnectorPropertiesS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
-	// The properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
+	// Properties that are required to query Salesforce. See Salesforce Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Salesforce []SourceConnectorPropertiesSalesforceParameters `json:"salesforce,omitempty" tf:"salesforce,omitempty"`
 
-	// The properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
+	// Properties that are required to query SAPOData. See SAPOData Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	SapoData []SourceConnectorPropertiesSapoDataParameters `json:"sapoData,omitempty" tf:"sapo_data,omitempty"`
 
-	// Specifies the information that is required for querying ServiceNow. See Generic Source Properties for more details.
+	// Information that is required for querying ServiceNow. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	ServiceNow []ServiceNowParameters `json:"serviceNow,omitempty" tf:"service_now,omitempty"`
 
-	// Specifies the information that is required for querying Singular. See Generic Source Properties for more details.
+	// Information that is required for querying Singular. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Singular []SingularParameters `json:"singular,omitempty" tf:"singular,omitempty"`
 
-	// Specifies the information that is required for querying Slack. See Generic Source Properties for more details.
+	// Information that is required for querying Slack. See Generic Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Slack []SlackParameters `json:"slack,omitempty" tf:"slack,omitempty"`
 
-	// The operation to be performed on the provided Trend Micro source fields. Valid values are PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
+	// Operation to be performed on the provided Trend Micro source fields. Valid values are PROJECTION, EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, and NO_OP.
 	// +kubebuilder:validation:Optional
 	Trendmicro []TrendmicroParameters `json:"trendmicro,omitempty" tf:"trendmicro,omitempty"`
 
-	// Specifies the information that is required for querying Veeva. See Veeva Source Properties for more details.
+	// Information that is required for querying Veeva. See Veeva Source Properties for more details.
 	// +kubebuilder:validation:Optional
 	Veeva []VeevaParameters `json:"veeva,omitempty" tf:"veeva,omitempty"`
 
-	// The properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
+	// Properties that are required to query Zendesk. See Zendesk Destination Properties for more details.
 	// +kubebuilder:validation:Optional
 	Zendesk []SourceConnectorPropertiesZendeskParameters `json:"zendesk,omitempty" tf:"zendesk,omitempty"`
 }
@@ -860,7 +860,7 @@ type SourceConnectorPropertiesS3Observation struct {
 
 type SourceConnectorPropertiesS3Parameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.BucketPolicy
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
@@ -874,7 +874,7 @@ type SourceConnectorPropertiesS3Parameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -888,15 +888,15 @@ type SourceConnectorPropertiesSalesforceObservation struct {
 
 type SourceConnectorPropertiesSalesforceParameters struct {
 
-	// The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
+	// Flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
 	// +kubebuilder:validation:Optional
 	EnableDynamicFieldUpdate *bool `json:"enableDynamicFieldUpdate,omitempty" tf:"enable_dynamic_field_update,omitempty"`
 
-	// Indicates whether Amazon AppFlow includes deleted files in the flow run.
+	// Whether Amazon AppFlow includes deleted files in the flow run.
 	// +kubebuilder:validation:Optional
 	IncludeDeletedRecords *bool `json:"includeDeletedRecords,omitempty" tf:"include_deleted_records,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -906,9 +906,9 @@ type SourceConnectorPropertiesSapoDataObservation struct {
 
 type SourceConnectorPropertiesSapoDataParameters struct {
 
-	// The object specified in the flow destination.
+	// Object path specified in the SAPOData flow destination.
 	// +kubebuilder:validation:Required
-	Object *string `json:"object" tf:"object,omitempty"`
+	ObjectPath *string `json:"objectPath" tf:"object_path,omitempty"`
 }
 
 type SourceConnectorPropertiesZendeskObservation struct {
@@ -916,7 +916,7 @@ type SourceConnectorPropertiesZendeskObservation struct {
 
 type SourceConnectorPropertiesZendeskParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -926,15 +926,15 @@ type SourceFlowConfigObservation struct {
 
 type SourceFlowConfigParameters struct {
 
-	// The API version that the destination connector uses.
+	// API version that the destination connector uses.
 	// +kubebuilder:validation:Optional
 	APIVersion *string `json:"apiVersion,omitempty" tf:"api_version,omitempty"`
 
-	// The name of the connector profile. This name must be unique for each connector profile in the AWS account.
+	// Name of the connector profile. This name must be unique for each connector profile in the AWS account.
 	// +kubebuilder:validation:Optional
 	ConnectorProfileName *string `json:"connectorProfileName,omitempty" tf:"connector_profile_name,omitempty"`
 
-	// The type of connector, such as Salesforce, Amplitude, and so on. Valid values are Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, and CustomConnector.
+	// Type of connector, such as Salesforce, Amplitude, and so on. Valid values are Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, and CustomConnector.
 	// +kubebuilder:validation:Required
 	ConnectorType *string `json:"connectorType" tf:"connector_type,omitempty"`
 
@@ -942,7 +942,7 @@ type SourceFlowConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IncrementalPullConfig []IncrementalPullConfigParameters `json:"incrementalPullConfig,omitempty" tf:"incremental_pull_config,omitempty"`
 
-	// Specifies the information that is required to query a particular source connector. See Source Connector Properties for details.
+	// Information that is required to query a particular source connector. See Source Connector Properties for details.
 	// +kubebuilder:validation:Required
 	SourceConnectorProperties []SourceConnectorPropertiesParameters `json:"sourceConnectorProperties" tf:"source_connector_properties,omitempty"`
 }
@@ -952,11 +952,11 @@ type SuccessResponseHandlingConfigObservation struct {
 
 type SuccessResponseHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 }
@@ -966,23 +966,23 @@ type TaskObservation struct {
 
 type TaskParameters struct {
 
-	// The operation to be performed on the provided source fields. See Connector Operator for details.
+	// Operation to be performed on the provided source fields. See Connector Operator for details.
 	// +kubebuilder:validation:Optional
 	ConnectorOperator []ConnectorOperatorParameters `json:"connectorOperator,omitempty" tf:"connector_operator,omitempty"`
 
-	// A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.
+	// Field in a destination connector, or a field value against which Amazon AppFlow validates a source field.
 	// +kubebuilder:validation:Optional
 	DestinationField *string `json:"destinationField,omitempty" tf:"destination_field,omitempty"`
 
-	// The source fields to which a particular task is applied.
+	// Source fields to which a particular task is applied.
 	// +kubebuilder:validation:Required
 	SourceFields []*string `json:"sourceFields" tf:"source_fields,omitempty"`
 
-	// A map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
+	// Map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
 	// +kubebuilder:validation:Optional
 	TaskProperties map[string]*string `json:"taskProperties,omitempty" tf:"task_properties,omitempty"`
 
-	// Specifies the particular task implementation that Amazon AppFlow performs. Valid values are Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, and Validate.
+	// Particular task implementation that Amazon AppFlow performs. Valid values are Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, and Validate.
 	// +kubebuilder:validation:Required
 	TaskType *string `json:"taskType" tf:"task_type,omitempty"`
 }
@@ -992,7 +992,7 @@ type TrendmicroObservation struct {
 
 type TrendmicroParameters struct {
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -1002,11 +1002,11 @@ type TriggerConfigObservation struct {
 
 type TriggerConfigParameters struct {
 
-	// Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the Scheduled trigger type. See Scheduled Trigger Properties for details.
+	// Configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the Scheduled trigger type. See Scheduled Trigger Properties for details.
 	// +kubebuilder:validation:Optional
 	TriggerProperties []TriggerPropertiesParameters `json:"triggerProperties,omitempty" tf:"trigger_properties,omitempty"`
 
-	// Specifies the type of flow trigger. Valid values are Scheduled, Event, and OnDemand.
+	// Type of flow trigger. Valid values are Scheduled, Event, and OnDemand.
 	// +kubebuilder:validation:Required
 	TriggerType *string `json:"triggerType" tf:"trigger_type,omitempty"`
 }
@@ -1025,15 +1025,15 @@ type UpsolverObservation struct {
 
 type UpsolverParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Required
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// The configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. See S3 Output Format Config for more details.
+	// Configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. See S3 Output Format Config for more details.
 	// +kubebuilder:validation:Required
 	S3OutputFormatConfig []UpsolverS3OutputFormatConfigParameters `json:"s3OutputFormatConfig" tf:"s3_output_format_config,omitempty"`
 }
@@ -1043,11 +1043,11 @@ type UpsolverS3OutputFormatConfigObservation struct {
 
 type UpsolverS3OutputFormatConfigParameters struct {
 
-	// The aggregation settings that you can use to customize the output format of your flow data. See Aggregation Config for more details.
+	// Aggregation settings that you can use to customize the output format of your flow data. See Aggregation Config for more details.
 	// +kubebuilder:validation:Optional
 	AggregationConfig []S3OutputFormatConfigAggregationConfigParameters `json:"aggregationConfig,omitempty" tf:"aggregation_config,omitempty"`
 
-	// Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. Valid values are CSV, JSON, and PARQUET.
+	// File type that Amazon AppFlow places in the Amazon S3 bucket. Valid values are CSV, JSON, and PARQUET.
 	// +kubebuilder:validation:Optional
 	FileType *string `json:"fileType,omitempty" tf:"file_type,omitempty"`
 
@@ -1061,7 +1061,7 @@ type VeevaObservation struct {
 
 type VeevaParameters struct {
 
-	// The document type specified in the Veeva document extract flow.
+	// Document type specified in the Veeva document extract flow.
 	// +kubebuilder:validation:Optional
 	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
@@ -1077,7 +1077,7 @@ type VeevaParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeSourceFiles *bool `json:"includeSourceFiles,omitempty" tf:"include_source_files,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 }
@@ -1087,15 +1087,15 @@ type ZendeskErrorHandlingConfigObservation struct {
 
 type ZendeskErrorHandlingConfigParameters struct {
 
-	// The Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// The object key for the bucket in which Amazon AppFlow places the destination files.
+	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
-	// Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination.
+	// If the flow should fail after the first instance of a failure when attempting to place data in the destination.
 	// +kubebuilder:validation:Optional
 	FailOnFirstDestinationError *bool `json:"failOnFirstDestinationError,omitempty" tf:"fail_on_first_destination_error,omitempty"`
 }
@@ -1105,19 +1105,19 @@ type ZendeskObservation struct {
 
 type ZendeskParameters struct {
 
-	// The settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
+	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	// +kubebuilder:validation:Optional
 	ErrorHandlingConfig []ZendeskErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
-	// The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
+	// Name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.
 	// +kubebuilder:validation:Optional
 	IDFieldNames []*string `json:"idFieldNames,omitempty" tf:"id_field_names,omitempty"`
 
-	// The object specified in the flow destination.
+	// Object specified in the flow destination.
 	// +kubebuilder:validation:Required
 	Object *string `json:"object" tf:"object,omitempty"`
 
-	// Specifies the type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
+	// Type of write operation to be performed in the custom connector when it's used as destination. Valid values are INSERT, UPSERT, UPDATE, and DELETE.
 	// +kubebuilder:validation:Optional
 	WriteOperationType *string `json:"writeOperationType,omitempty" tf:"write_operation_type,omitempty"`
 }

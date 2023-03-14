@@ -1,0 +1,13 @@
+apiVersion: neptune.aws.upbound.io/v1beta1
+kind: GlobalCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: neptune/v1beta1/globalcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    engine: neptune
+    engineVersion: 1.2.0.0
+    region: us-west-1

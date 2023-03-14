@@ -15,17 +15,17 @@ import (
 
 type DocumentationPartObservation struct {
 
-	// The unique ID of the Documentation Part
+	// Unique ID of the Documentation Part
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DocumentationPartParameters struct {
 
-	// The location of the targeted API entity of the to-be-created documentation part. See below.
+	// Location of the targeted API entity of the to-be-created documentation part. See below.
 	// +kubebuilder:validation:Required
 	Location []LocationParameters `json:"location" tf:"location,omitempty"`
 
-	// A content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
+	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
 	// +kubebuilder:validation:Required
 	Properties *string `json:"properties" tf:"properties,omitempty"`
 
@@ -34,7 +34,7 @@ type DocumentationPartParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the associated Rest API
+	// ID of the associated Rest API
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -54,23 +54,23 @@ type LocationObservation struct {
 
 type LocationParameters struct {
 
-	// The HTTP verb of a method. The default value is * for any method.
+	// HTTP verb of a method. The default value is * for any method.
 	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
-	// The name of the targeted API entity.
+	// Name of the targeted API entity.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The URL path of the target. The default value is / for the root resource.
+	// URL path of the target. The default value is / for the root resource.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The HTTP status code of a response. The default value is * for any status code.
+	// HTTP status code of a response. The default value is * for any status code.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
-	// The type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
+	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

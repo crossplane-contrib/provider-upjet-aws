@@ -13,6 +13,17 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BlueGreenUpdateObservation struct {
+}
+
+type BlueGreenUpdateParameters struct {
+
+	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
+	// Default is false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type InstanceObservation struct {
 
 	// The hostname of the RDS instance. See also endpoint and port.
@@ -78,16 +89,24 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The days to retain backups for. Must be
-	// between 0 and 35. Must be greater than 0 if the database is used as a source for a Read Replica. See Read Replica.
+	// The days to retain backups for.
+	// Must be between 0 and 35.
+	// Default is 0.
+	// Must be greater than 0 if the database is used as a source for a Read Replica,
+	// uses low-downtime updates,
+	// or will use RDS Blue/Green deployments.
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// The daily time range (in UTC) during which
-	// automated backups are created if they are enabled. Example: "09:46-10:16". Must
-	// not overlap with maintenance_window.
+	// The daily time range (in UTC) during which automated backups are created if they are enabled.
+	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	// +kubebuilder:validation:Optional
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
+
+	// Enables low-downtime updates using RDS Blue/Green deployments.
+	// See blue_green_update below
+	// +kubebuilder:validation:Optional
+	BlueGreenUpdate []BlueGreenUpdateParameters `json:"blueGreenUpdate,omitempty" tf:"blue_green_update,omitempty"`
 
 	// The identifier of the CA certificate for the DB instance.
 	// +kubebuilder:validation:Optional
@@ -103,6 +122,10 @@ type InstanceParameters struct {
 	// –  Copy all Instance tags to snapshots. Default is false.
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+
+	// The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance.
+	// +kubebuilder:validation:Optional
+	CustomIAMInstanceProfile *string `json:"customIamInstanceProfile,omitempty" tf:"custom_iam_instance_profile,omitempty"`
 
 	// Indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance. See CoIP for RDS on Outposts for more information.
 	// +kubebuilder:validation:Optional
@@ -173,8 +196,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// Specifies whether or
-	// mappings of AWS Identity and Access Management (IAM) accounts to database
+	// Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
@@ -184,13 +206,16 @@ type InstanceParameters struct {
 	InstanceClass *string `json:"instanceClass" tf:"instance_class,omitempty"`
 
 	// The amount of provisioned IOPS. Setting this implies a
-	// storage_type of "io1".
+	// storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+	// Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
+	// See the RDS User Guide for details.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ARN for the KMS encryption key. If creating an
 	// encrypted replica, set this to the destination KMS ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -256,6 +281,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
 
+	// The network type of the DB instance. Valid values: IPV4, DUAL.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// Name of the DB option group to associate.
 	// +kubebuilder:validation:Optional
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
@@ -278,7 +307,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsKMSKeyID *string `json:"performanceInsightsKmsKeyId,omitempty" tf:"performance_insights_kms_key_id,omitempty"`
 
-	// The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
+	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
@@ -347,9 +376,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
+	// The storage throughput value for the DB instance. Can only be set when storage_type is "gp3". Cannot be specified if the allocated_storage value is below a per-engine threshold. See the RDS User Guide for details.
+	// +kubebuilder:validation:Optional
+	StorageThroughput *float64 `json:"storageThroughput,omitempty" tf:"storage_throughput,omitempty"`
+
 	// One of "standard" (magnetic), "gp2" (general
-	// purpose SSD), or "io1" (provisioned IOPS SSD). The default is "io1" if iops is
-	// specified, "gp2" if not.
+	// purpose SSD), "gp3" (general purpose SSD that needs iops independently)
+	// or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
+	// "gp2" if not.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 

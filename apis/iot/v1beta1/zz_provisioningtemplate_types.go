@@ -22,7 +22,7 @@ type PreProvisioningHookParameters struct {
 	// +kubebuilder:validation:Optional
 	PayloadVersion *string `json:"payloadVersion,omitempty" tf:"payload_version,omitempty"`
 
-	// The ARN that identifies the provisioning template.
+	// The ARN of the target function.
 	// +kubebuilder:validation:Required
 	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
 }

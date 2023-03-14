@@ -232,6 +232,15 @@ func (l *InstanceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this InstanceStateList.
+func (l *InstanceStateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this InternetGatewayList.
 func (l *InternetGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -306,6 +315,15 @@ func (l *NetworkACLList) GetItems() []resource.Managed {
 
 // GetItems of this NetworkACLRuleList.
 func (l *NetworkACLRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NetworkInsightsAnalysisList.
+func (l *NetworkInsightsAnalysisList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -466,6 +484,15 @@ func (l *SubnetList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this TagList.
+func (l *TagList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this TrafficMirrorFilterList.
 func (l *TrafficMirrorFilterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -558,6 +585,15 @@ func (l *TransitGatewayPeeringAttachmentAccepterList) GetItems() []resource.Mana
 
 // GetItems of this TransitGatewayPeeringAttachmentList.
 func (l *TransitGatewayPeeringAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TransitGatewayPolicyTableList.
+func (l *TransitGatewayPolicyTableList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -666,6 +702,15 @@ func (l *VPCEndpointList) GetItems() []resource.Managed {
 
 // GetItems of this VPCEndpointRouteTableAssociationList.
 func (l *VPCEndpointRouteTableAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCEndpointSecurityGroupAssociationList.
+func (l *VPCEndpointSecurityGroupAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

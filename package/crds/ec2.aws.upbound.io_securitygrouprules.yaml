@@ -260,8 +260,7 @@ spec:
                     type: number
                   type:
                     description: Type of rule being created. Valid options are ingress
-                      (inbound) or egress (outbound). Type of rule, ingress (inbound)
-                      or egress (outbound).
+                      (inbound) or egress (outbound).
                     type: string
                 required:
                 - fromPort
@@ -448,6 +447,11 @@ spec:
                 properties:
                   id:
                     description: ID of the security group rule.
+                    type: string
+                  securityGroupRuleId:
+                    description: If the aws_security_group_rule resource has a single
+                      source or destination then this is the AWS Security Group Rule
+                      resource ID. Otherwise it is empty.
                     type: string
                 type: object
               conditions:

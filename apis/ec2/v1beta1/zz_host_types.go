@@ -46,9 +46,13 @@ type HostParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceFamily *string `json:"instanceFamily,omitempty" tf:"instance_family,omitempty"`
 
-	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.  Exactly one of instance_family or instance_type must be specified.
+	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. Exactly one of instance_family or instance_type must be specified.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	// +kubebuilder:validation:Optional
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

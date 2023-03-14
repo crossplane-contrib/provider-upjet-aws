@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket.
+                    description: Name of the bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -142,29 +142,27 @@ spec:
                         type: object
                     type: object
                   errorDocument:
-                    description: The name of the error document for the website detailed
-                      below.
+                    description: Name of the error document for the website. See below.
                     items:
                       properties:
                         key:
-                          description: The object key name to use when a 4XX class
-                            error occurs.
+                          description: Object key name to use when a 4XX class error
+                            occurs.
                           type: string
                       required:
                       - key
                       type: object
                     type: array
                   expectedBucketOwner:
-                    description: The account ID of the expected bucket owner.
+                    description: Account ID of the expected bucket owner.
                     type: string
                   indexDocument:
-                    description: The name of the index document for the website detailed
-                      below.
+                    description: Name of the index document for the website. See below.
                     items:
                       properties:
                         suffix:
-                          description: A suffix that is appended to a request that
-                            is for a directory on the website endpoint. For example,
+                          description: Suffix that is appended to a request that is
+                            for a directory on the website endpoint. For example,
                             if the suffix is index.html and you make a request to
                             samplebucket/images/, the data that is returned will be
                             for the object with the key name images/index.html. The
@@ -176,8 +174,8 @@ spec:
                       type: object
                     type: array
                   redirectAllRequestsTo:
-                    description: The redirect behavior for every request to this bucket's
-                      website endpoint detailed below. Conflicts with error_document,
+                    description: Redirect behavior for every request to this bucket's
+                      website endpoint. See below. Conflicts with error_document,
                       index_document, and routing_rule.
                     items:
                       properties:
@@ -199,38 +197,37 @@ spec:
                     type: string
                   routingRule:
                     description: List of rules that define when a redirect is applied
-                      and the redirect behavior detailed below.
+                      and the redirect behavior. See below.
                     items:
                       properties:
                         condition:
-                          description: A configuration block for describing a condition
-                            that must be met for the specified redirect to apply detailed
-                            below.
+                          description: Configuration block for describing a condition
+                            that must be met for the specified redirect to apply.
+                            See below.
                           items:
                             properties:
                               httpErrorCodeReturnedEquals:
-                                description: The HTTP error code when the redirect
-                                  is applied. If specified with key_prefix_equals,
-                                  then both must be true for the redirect to be applied.
+                                description: HTTP error code when the redirect is
+                                  applied. If specified with key_prefix_equals, then
+                                  both must be true for the redirect to be applied.
                                 type: string
                               keyPrefixEquals:
-                                description: The object key name prefix when the redirect
+                                description: Object key name prefix when the redirect
                                   is applied. If specified with http_error_code_returned_equals,
                                   then both must be true for the redirect to be applied.
                                 type: string
                             type: object
                           type: array
                         redirect:
-                          description: A configuration block for redirect information
-                            detailed below.
+                          description: Configuration block for redirect information.
+                            See below.
                           items:
                             properties:
                               hostName:
                                 description: Name of the host where requests are redirected.
                                 type: string
                               httpRedirectCode:
-                                description: The HTTP redirect code to use on the
-                                  response.
+                                description: HTTP redirect code to use on the response.
                                 type: string
                               protocol:
                                 description: 'Protocol to use when redirecting requests.
@@ -238,7 +235,7 @@ spec:
                                   original request. Valid values: http, https.'
                                 type: string
                               replaceKeyPrefixWith:
-                                description: The object key prefix to use in the redirect
+                                description: Object key prefix to use in the redirect
                                   request. For example, to redirect requests for all
                                   pages with prefix docs/ (objects in the docs/ folder)
                                   to documents/, you can set a condition block with
@@ -246,9 +243,8 @@ spec:
                                   set replace_key_prefix_with to /documents.
                                 type: string
                               replaceKeyWith:
-                                description: The specific object key to use in the
-                                  redirect request. For example, redirect request
-                                  to error.html.
+                                description: Specific object key to use in the redirect
+                                  request. For example, redirect request to error.html.
                                 type: string
                             type: object
                           type: array
@@ -257,8 +253,8 @@ spec:
                       type: object
                     type: array
                   routingRules:
-                    description: A json array containing routing rules describing
-                      redirect behavior and when redirects are applied. Use this parameter
+                    description: JSON array containing routing rules describing redirect
+                      behavior and when redirects are applied. Use this parameter
                       when your routing rules contain empty String values ("") as
                       seen in the example above.
                     type: string
@@ -447,11 +443,11 @@ spec:
                       by a comma (,) if the latter is provided.
                     type: string
                   websiteDomain:
-                    description: The domain of the website endpoint. This is used
-                      to create Route 53 alias records.
+                    description: Domain of the website endpoint. This is used to create
+                      Route 53 alias records.
                     type: string
                   websiteEndpoint:
-                    description: The website endpoint.
+                    description: Website endpoint.
                     type: string
                 type: object
               conditions:

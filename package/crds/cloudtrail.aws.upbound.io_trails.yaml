@@ -92,10 +92,10 @@ spec:
                                   type: string
                                 type: array
                               field:
-                                description: 'Specifies a field in an event record
-                                  on which to filter events to be logged. You can
-                                  specify only the following values: readOnly, eventSource,
-                                  eventName, eventCategory, resources.type, resources.ARN.'
+                                description: 'Field in an event record on which to
+                                  filter events to be logged. You can specify only
+                                  the following values: readOnly, eventSource, eventName,
+                                  eventCategory, resources.type, resources.ARN.'
                                 type: string
                               notEndsWith:
                                 description: A list of values that excludes events

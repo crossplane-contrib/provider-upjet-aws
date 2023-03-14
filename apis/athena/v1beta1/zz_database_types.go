@@ -18,25 +18,26 @@ type ACLConfigurationObservation struct {
 
 type ACLConfigurationParameters struct {
 
-	// The Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
 	// +kubebuilder:validation:Required
 	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
 }
 
 type DatabaseObservation struct {
 
-	// The database name
+	// Database name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DatabaseParameters struct {
 
-	// Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
+	// That an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
 	// +kubebuilder:validation:Optional
 	ACLConfiguration []ACLConfigurationParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
 	// Name of S3 bucket to save the results of the query execution.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -52,19 +53,19 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// The encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service (AWS KMS) key. See Encryption Configuration below.
+	// Encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service (AWS KMS) key. See Encryption Configuration below.
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// The AWS account ID that you expect to be the owner of the Amazon S3 bucket.
+	// AWS account ID that you expect to be the owner of the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
-	// A boolean that indicates all tables should be deleted from the database so that the database can be destroyed without error. The tables are not recoverable.
+	// Boolean that indicates all tables should be deleted from the database so that the database can be destroyed without error. The tables are not recoverable.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// A key-value map of custom metadata properties for the database definition.
+	// Key-value map of custom metadata properties for the database definition.
 	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
@@ -79,11 +80,11 @@ type EncryptionConfigurationObservation struct {
 
 type EncryptionConfigurationParameters struct {
 
-	// The type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
 	// +kubebuilder:validation:Required
 	EncryptionOption *string `json:"encryptionOption" tf:"encryption_option,omitempty"`
 
-	// The KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
+	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }

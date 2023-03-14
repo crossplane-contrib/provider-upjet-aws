@@ -21,13 +21,13 @@ type ConfigurationSetObservation struct {
 	// SES configuration set name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a fresh start.
+	// Date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a fresh start.
 	LastFreshStart *string `json:"lastFreshStart,omitempty" tf:"last_fresh_start,omitempty"`
 }
 
 type ConfigurationSetParameters struct {
 
-	// Configuration block. Detailed below.
+	// Whether messages that use the configuration set are required to use TLS. See below.
 	// +kubebuilder:validation:Optional
 	DeliveryOptions []DeliveryOptionsParameters `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
 
@@ -43,6 +43,10 @@ type ConfigurationSetParameters struct {
 	// Whether email sending is enabled or disabled for the configuration set. The default value is true.
 	// +kubebuilder:validation:Optional
 	SendingEnabled *bool `json:"sendingEnabled,omitempty" tf:"sending_enabled,omitempty"`
+
+	// Domain that is used to redirect email recipients to an Amazon SES-operated domain. See below. NOTE: This functionality is best effort.
+	// +kubebuilder:validation:Optional
+	TrackingOptions []TrackingOptionsParameters `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 }
 
 type DeliveryOptionsObservation struct {
@@ -50,9 +54,19 @@ type DeliveryOptionsObservation struct {
 
 type DeliveryOptionsParameters struct {
 
-	// Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
+	// Whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
 	// +kubebuilder:validation:Optional
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
+}
+
+type TrackingOptionsObservation struct {
+}
+
+type TrackingOptionsParameters struct {
+
+	// Custom subdomain that is used to redirect email recipients to the Amazon SES event tracking domain.
+	// +kubebuilder:validation:Optional
+	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
 }
 
 // ConfigurationSetSpec defines the desired state of ConfigurationSet

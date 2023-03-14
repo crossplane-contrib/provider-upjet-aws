@@ -13,7 +13,9 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    ignorePublicAcls: true
     region: us-west-1
+    restrictPublicBuckets: true
 
 ---
 

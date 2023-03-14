@@ -953,6 +953,11 @@ func (in *KeyParameters) DeepCopyInto(out *KeyParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CustomKeyStoreID != nil {
+		in, out := &in.CustomKeyStoreID, &out.CustomKeyStoreID
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomerMasterKeySpec != nil {
 		in, out := &in.CustomerMasterKeySpec, &out.CustomerMasterKeySpec
 		*out = new(string)

@@ -70,8 +70,8 @@ spec:
                       a VPC.
                     type: boolean
                   ebsBlockDevice:
-                    description: Additional EBS block devices to attach to the instance.  See
-                      Block Devices below for details.
+                    description: Additional EBS block devices to attach to the instance.
+                      See Block Devices below for details.
                     items:
                       properties:
                         deleteOnTermination:
@@ -82,10 +82,8 @@ spec:
                           description: The name of the device to mount.
                           type: string
                         encrypted:
-                          description: 'Whether the volume should be encrypted or
-                            not. Do not use this option if you are using snapshot_id
-                            as the encrypted flag will be determined by the snapshot.
-                            (Default: false).'
+                          description: Whether the volume should be encrypted or not.
+                            Defaults to false.
                           type: boolean
                         iops:
                           description: The amount of provisioned IOPS. This must be
@@ -106,8 +104,8 @@ spec:
                           description: The size of the volume in gigabytes.
                           type: number
                         volumeType:
-                          description: 'The type of volume. Can be "standard", "gp2",
-                            "gp3", "st1", "sc1" or "io1". (Default: "standard").'
+                          description: The type of volume. Can be standard, gp2, gp3,
+                            st1, sc1 or io1.
                           type: string
                       required:
                       - deviceName
@@ -134,7 +132,7 @@ spec:
                             of the AMI is suppressed.
                           type: boolean
                         virtualName:
-                          description: The Instance Store Device Name (e.g., "ephemeral0")
+                          description: The Instance Store Device Name.
                           type: string
                       required:
                       - deviceName
@@ -172,9 +170,9 @@ spec:
                       type: object
                     type: array
                   placementTenancy:
-                    description: The tenancy of the instance. Valid values are "default"
-                      or "dedicated", see AWS's Create Launch Configuration for more
-                      details
+                    description: The tenancy of the instance. Valid values are default
+                      or dedicated, see AWS's Create Launch Configuration for more
+                      details.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -186,16 +184,16 @@ spec:
                     items:
                       properties:
                         deleteOnTermination:
-                          description: 'Whether the volume should be destroyed on
-                            instance termination (Default: true).'
+                          description: Whether the volume should be destroyed on instance
+                            termination. Defaults to true.
                           type: boolean
                         encrypted:
-                          description: 'Whether the volume should be encrypted or
-                            not. (Default: false).'
+                          description: Whether the volume should be encrypted or not.
+                            Defaults to false.
                           type: boolean
                         iops:
                           description: The amount of provisioned IOPS. This must be
-                            set with a volume_type of "io1".
+                            set with a volume_type of io1.
                           type: number
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
@@ -205,8 +203,8 @@ spec:
                           description: The size of the volume in gigabytes.
                           type: number
                         volumeType:
-                          description: 'The type of volume. Can be "standard", "gp2",
-                            "gp3", "st1", "sc1" or "io1". (Default: "standard").'
+                          description: The type of volume. Can be standard, gp2, gp3,
+                            st1, sc1 or io1.
                           type: string
                       type: object
                     type: array

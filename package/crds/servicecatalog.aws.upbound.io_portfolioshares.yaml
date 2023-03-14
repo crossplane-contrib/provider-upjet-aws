@@ -155,6 +155,11 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  sharePrincipals:
+                    description: Enables or disables Principal sharing when creating
+                      the portfolio share. If this flag is not provided, principal
+                      sharing is disabled.
+                    type: boolean
                   shareTagOptions:
                     description: Whether to enable sharing of aws_servicecatalog_tag_option
                       resources when creating the portfolio share.

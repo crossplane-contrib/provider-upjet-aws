@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   bucket:
-                    description: The name of the bucket this intelligent tiering configuration
+                    description: Name of the bucket this intelligent tiering configuration
                       is associated with.
                     type: string
                   bucketRef:
@@ -143,12 +143,12 @@ spec:
                         type: object
                     type: object
                   filter:
-                    description: A bucket filter. The configuration only includes
-                      objects that meet the filter's criteria (documented below).
+                    description: Bucket filter. The configuration only includes objects
+                      that meet the filter's criteria (documented below).
                     items:
                       properties:
                         prefix:
-                          description: An object key name prefix that identifies the
+                          description: Object key name prefix that identifies the
                             subset of objects to which the configuration applies.
                           type: string
                         tags:
@@ -159,7 +159,7 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The unique name used to identify the S3 Intelligent-Tiering
+                    description: Unique name used to identify the S3 Intelligent-Tiering
                       configuration for the bucket.
                     type: string
                   region:
@@ -171,8 +171,8 @@ spec:
                       values: Enabled, Disabled.'
                     type: string
                   tiering:
-                    description: The S3 Intelligent-Tiering storage class tiers of
-                      the configuration (documented below).
+                    description: S3 Intelligent-Tiering storage class tiers of the
+                      configuration (documented below).
                     items:
                       properties:
                         accessTier:
@@ -180,9 +180,9 @@ spec:
                             values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.'
                           type: string
                         days:
-                          description: The number of consecutive days of no access
-                            after which an object will be eligible to be transitioned
-                            to the corresponding tier.
+                          description: Number of consecutive days of no access after
+                            which an object will be eligible to be transitioned to
+                            the corresponding tier.
                           type: number
                       required:
                       - accessTier

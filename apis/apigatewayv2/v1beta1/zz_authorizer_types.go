@@ -15,13 +15,13 @@ import (
 
 type AuthorizerObservation struct {
 
-	// The authorizer identifier.
+	// Authorizer identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AuthorizerParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -34,29 +34,29 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The required credentials as an IAM role for API Gateway to invoke the authorizer.
+	// Required credentials as an IAM role for API Gateway to invoke the authorizer.
 	// Supported only for REQUEST authorizers.
 	// +kubebuilder:validation:Optional
 	AuthorizerCredentialsArn *string `json:"authorizerCredentialsArn,omitempty" tf:"authorizer_credentials_arn,omitempty"`
 
-	// The format of the payload sent to an HTTP API Lambda authorizer. Required for HTTP API Lambda authorizers.
+	// Format of the payload sent to an HTTP API Lambda authorizer. Required for HTTP API Lambda authorizers.
 	// Valid values: 1.0, 2.0.
 	// +kubebuilder:validation:Optional
 	AuthorizerPayloadFormatVersion *string `json:"authorizerPayloadFormatVersion,omitempty" tf:"authorizer_payload_format_version,omitempty"`
 
-	// The time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
+	// Time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
 	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
 	// Supported only for HTTP API Lambda authorizers.
 	// +kubebuilder:validation:Optional
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
-	// The authorizer type. Valid values: JWT, REQUEST.
+	// Authorizer type. Valid values: JWT, REQUEST.
 	// Specify REQUEST for a Lambda function using incoming request parameters.
 	// For HTTP APIs, specify JWT to use JSON Web Tokens.
 	// +kubebuilder:validation:Required
 	AuthorizerType *string `json:"authorizerType" tf:"authorizer_type,omitempty"`
 
-	// The authorizer's Uniform Resource Identifier (URI).
+	// Authorizer's Uniform Resource Identifier (URI).
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
@@ -77,18 +77,18 @@ type AuthorizerParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableSimpleResponses *bool `json:"enableSimpleResponses,omitempty" tf:"enable_simple_responses,omitempty"`
 
-	// The identity sources for which authorization is requested.
+	// Identity sources for which authorization is requested.
 	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
 	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
 	// +kubebuilder:validation:Optional
 	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
 
-	// The configuration of a JWT authorizer. Required for the JWT authorizer type.
+	// Configuration of a JWT authorizer. Required for the JWT authorizer type.
 	// Supported only for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	JwtConfiguration []JwtConfigurationParameters `json:"jwtConfiguration,omitempty" tf:"jwt_configuration,omitempty"`
 
-	// The name of the authorizer. Must be between 1 and 128 characters in length.
+	// Name of the authorizer. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -103,11 +103,11 @@ type JwtConfigurationObservation struct {
 
 type JwtConfigurationParameters struct {
 
-	// A list of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
+	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
 	// +kubebuilder:validation:Optional
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
-	// The base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.
+	// Base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }

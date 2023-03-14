@@ -106,7 +106,8 @@ spec:
                           additionalProperties:
                             type: string
                           description: Map of environment variables that are accessible
-                            from the function code during execution.
+                            from the function code during execution. If provided at
+                            least one key must be present.
                           type: object
                       type: object
                     type: array
@@ -244,7 +245,8 @@ spec:
                     type: array
                   imageUri:
                     description: ECR image URI containing the function's deployment
-                      package. Conflicts with filename, s3_bucket, s3_key, and s3_object_version.
+                      package. Exactly one of filename, image_uri,  or s3_bucket must
+                      be specified.
                     type: string
                   kmsKeyArn:
                     description: Amazon Resource Name (ARN) of the AWS Key Management
@@ -348,6 +350,100 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  replaceSecurityGroupsOnDestroy:
+                    description: Whether to replace the security groups on associated
+                      lambda network interfaces upon destruction. Removing these security
+                      groups from orphaned network interfaces can speed up security
+                      group deletion times by avoiding a dependency on AWS's internal
+                      cleanup operations. By default, the ENI security groups will
+                      be replaced with the default security group in the function's
+                      VPC. Set the replacement_security_group_ids attribute to use
+                      a custom list of security groups for replacement.
+                    type: boolean
+                  replacementSecurityGroupIdRefs:
+                    description: References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  replacementSecurityGroupIdSelector:
+                    description: Selector for a list of SecurityGroup in ec2 to populate
+                      replacementSecurityGroupIds.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  replacementSecurityGroupIds:
+                    description: List of security group IDs to assign to orphaned
+                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
+                      must be set to true to use this attribute.
+                    items:
+                      type: string
+                    type: array
                   reservedConcurrentExecutions:
                     description: Amount of reserved concurrent executions for this
                       lambda function. A value of 0 disables lambda from being triggered
@@ -438,9 +534,10 @@ spec:
                     type: string
                   s3Bucket:
                     description: S3 bucket location containing the function's deployment
-                      package. Conflicts with filename and image_uri. This bucket
-                      must reside in the same AWS region where you are creating the
-                      Lambda function.
+                      package. This bucket must reside in the same AWS region where
+                      you are creating the Lambda function. Exactly one of filename,
+                      image_uri, or s3_bucket must be specified. When s3_bucket is
+                      set, s3_key is required.
                     type: string
                   s3BucketRef:
                     description: Reference to a Bucket in s3 to populate s3Bucket.
@@ -517,12 +614,24 @@ spec:
                     type: object
                   s3Key:
                     description: S3 key of an object containing the function's deployment
-                      package. Conflicts with filename and image_uri.
+                      package. When s3_bucket is set, s3_key is required.
                     type: string
                   s3ObjectVersion:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename and image_uri.
                     type: string
+                  snapStart:
+                    description: Snap start settings block. Detailed below.
+                    items:
+                      properties:
+                        applyOn:
+                          description: Conditions where snap start is enabled. Valid
+                            values are PublishedVersions.
+                          type: string
+                      required:
+                      - applyOn
+                      type: object
+                    type: array
                   sourceCodeHash:
                     description: Used to trigger updates. Must be set to a base64-encoded
                       SHA256 hash of the package file specified with either filename
@@ -545,8 +654,8 @@ spec:
                     items:
                       properties:
                         mode:
-                          description: Whether to to sample and trace a subset of
-                            incoming requests with AWS X-Ray. Valid values are PassThrough
+                          description: Whether to sample and trace a subset of incoming
+                            requests with AWS X-Ray. Valid values are PassThrough
                             and Active. If PassThrough, Lambda will only trace the
                             request from an upstream service if it contains a tracing
                             header with "sampled=1". If Active, Lambda will respect
@@ -562,21 +671,181 @@ spec:
                     description: Configuration block. Detailed below.
                     items:
                       properties:
+                        securityGroupIdRefs:
+                          description: References to SecurityGroup in ec2 to populate
+                            securityGroupIds.
+                          items:
+                            description: A Reference to a named object.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: Resolution specifies whether resolution
+                                      of this reference is required. The default is
+                                      'Required', which means the reconcile will fail
+                                      if the reference cannot be resolved. 'Optional'
+                                      means this reference will be a no-op if it cannot
+                                      be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: Resolve specifies when this reference
+                                      should be resolved. The default is 'IfNotPresent',
+                                      which will attempt to resolve the reference
+                                      only when the corresponding field is not present.
+                                      Use 'Always' to resolve the reference on every
+                                      reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        securityGroupIdSelector:
+                          description: Selector for a list of SecurityGroup in ec2
+                            to populate securityGroupIds.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         securityGroupIds:
                           description: List of security group IDs associated with
                             the Lambda function.
                           items:
                             type: string
                           type: array
+                        subnetIdRefs:
+                          description: References to Subnet in ec2 to populate subnetIds.
+                          items:
+                            description: A Reference to a named object.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: Resolution specifies whether resolution
+                                      of this reference is required. The default is
+                                      'Required', which means the reconcile will fail
+                                      if the reference cannot be resolved. 'Optional'
+                                      means this reference will be a no-op if it cannot
+                                      be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: Resolve specifies when this reference
+                                      should be resolved. The default is 'IfNotPresent',
+                                      which will attempt to resolve the reference
+                                      only when the corresponding field is not present.
+                                      Use 'Always' to resolve the reference on every
+                                      reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        subnetIdSelector:
+                          description: Selector for a list of Subnet in ec2 to populate
+                            subnetIds.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         subnetIds:
                           description: List of subnet IDs associated with the Lambda
                             function.
                           items:
                             type: string
                           type: array
-                      required:
-                      - securityGroupIds
-                      - subnetIds
                       type: object
                     type: array
                 required:
@@ -775,12 +1044,27 @@ spec:
                     description: ARN identifying your Lambda Function Version (if
                       versioning is enabled via publish = true).
                     type: string
+                  qualifiedInvokeArn:
+                    description: Qualified ARN (ARN with lambda version number) to
+                      be used for invoking Lambda Function from API Gateway - to be
+                      used in aws_api_gateway_integration's uri.
+                    type: string
                   signingJobArn:
                     description: ARN of the signing job.
                     type: string
                   signingProfileVersionArn:
                     description: ARN of the signing profile version.
                     type: string
+                  snapStart:
+                    description: Snap start settings block. Detailed below.
+                    items:
+                      properties:
+                        optimizationStatus:
+                          description: Optimization status of the snap start configuration.
+                            Valid values are On and Off.
+                          type: string
+                      type: object
+                    type: array
                   sourceCodeSize:
                     description: Size in bytes of the function .zip file.
                     type: number

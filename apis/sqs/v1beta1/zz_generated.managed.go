@@ -138,3 +138,135 @@ func (mg *QueuePolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDe
 func (mg *QueuePolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this QueueRedriveAllowPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *QueueRedriveAllowPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this QueueRedriveAllowPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *QueueRedriveAllowPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this QueueRedriveAllowPolicy.
+func (mg *QueueRedriveAllowPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this QueueRedrivePolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *QueueRedrivePolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this QueueRedrivePolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *QueueRedrivePolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this QueueRedrivePolicy.
+func (mg *QueueRedrivePolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

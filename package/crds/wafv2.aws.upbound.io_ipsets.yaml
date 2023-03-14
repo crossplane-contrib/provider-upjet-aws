@@ -279,11 +279,10 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name (ARN) that identifies the
-                      cluster.
+                    description: The Amazon Resource Name (ARN) of the IP set.
                     type: string
                   id:
-                    description: A unique identifier for the set.
+                    description: A unique identifier for the IP set.
                     type: string
                   lockToken:
                     type: string

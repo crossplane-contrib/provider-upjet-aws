@@ -65,27 +65,27 @@ spec:
               forProvider:
                 properties:
                   location:
-                    description: The location of the targeted API entity of the to-be-created
+                    description: Location of the targeted API entity of the to-be-created
                       documentation part. See below.
                     items:
                       properties:
                         method:
-                          description: The HTTP verb of a method. The default value
-                            is * for any method.
+                          description: HTTP verb of a method. The default value is
+                            * for any method.
                           type: string
                         name:
-                          description: The name of the targeted API entity.
+                          description: Name of the targeted API entity.
                           type: string
                         path:
-                          description: The URL path of the target. The default value
-                            is / for the root resource.
+                          description: URL path of the target. The default value is
+                            / for the root resource.
                           type: string
                         statusCode:
-                          description: The HTTP status code of a response. The default
+                          description: HTTP status code of a response. The default
                             value is * for any status code.
                           type: string
                         type:
-                          description: The type of API entity to which the documentation
+                          description: Type of API entity to which the documentation
                             content appliesE.g., API, METHOD or REQUEST_BODY
                           type: string
                       required:
@@ -93,7 +93,7 @@ spec:
                       type: object
                     type: array
                   properties:
-                    description: 'A content map of API-specific key-value pairs describing
+                    description: 'Content map of API-specific key-value pairs describing
                       the targeted API entity. The map must be encoded as a JSON string,
                       e.g., "{ "description": "The API does ..." }". Only Swagger-compliant
                       key-value pairs can be exported and, hence, published.'
@@ -103,7 +103,7 @@ spec:
                       be created in.
                     type: string
                   restApiId:
-                    description: The ID of the associated Rest API
+                    description: ID of the associated Rest API
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -362,7 +362,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The unique ID of the Documentation Part
+                    description: Unique ID of the Documentation Part
                     type: string
                 type: object
               conditions:

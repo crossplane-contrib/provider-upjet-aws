@@ -15,10 +15,10 @@ import (
 
 type FunctionObservation struct {
 
-	// The ARN of the Function object.
+	// ARN of the Function object.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A unique ID representing the Function object.
+	// Unique ID representing the Function object.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// API Function ID (Formatted as ApiId-FunctionId)
@@ -27,7 +27,7 @@ type FunctionObservation struct {
 
 type FunctionParameters struct {
 
-	// The ID of the associated AppSync API.
+	// ID of the associated AppSync API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -41,7 +41,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The Function DataSource name.
+	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	// +kubebuilder:validation:Optional
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Function data source name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
@@ -54,19 +58,19 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
 
-	// The Function description.
+	// Function description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The version of the request mapping template. Currently the supported value is 2018-05-29.
+	// Version of the request mapping template. Currently the supported value is 2018-05-29. Does not apply when specifying code.
 	// +kubebuilder:validation:Optional
 	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
 
-	// The maximum batching size for a resolver. Valid values are between 0 and 2000.
+	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
 	// +kubebuilder:validation:Optional
 	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
-	// The Function name. The function name does not have to be unique.
+	// Function name. The function name does not have to be unique.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -75,13 +79,17 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
-	// +kubebuilder:validation:Required
-	RequestMappingTemplate *string `json:"requestMappingTemplate" tf:"request_mapping_template,omitempty"`
+	// Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+	// +kubebuilder:validation:Optional
+	RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty" tf:"request_mapping_template,omitempty"`
 
-	// The Function response mapping template.
-	// +kubebuilder:validation:Required
-	ResponseMappingTemplate *string `json:"responseMappingTemplate" tf:"response_mapping_template,omitempty"`
+	// Function response mapping template.
+	// +kubebuilder:validation:Optional
+	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	// +kubebuilder:validation:Optional
+	Runtime []RuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Describes a Sync configuration for a resolver. See Sync Config.
 	// +kubebuilder:validation:Optional
@@ -93,9 +101,23 @@ type LambdaConflictHandlerConfigObservation struct {
 
 type LambdaConflictHandlerConfigParameters struct {
 
-	// The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.
+	// ARN for the Lambda function to use as the Conflict Handler.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
+}
+
+type RuntimeObservation struct {
+}
+
+type RuntimeParameters struct {
+
+	// Function name. The function name does not have to be unique.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	// +kubebuilder:validation:Required
+	RuntimeVersion *string `json:"runtimeVersion" tf:"runtime_version,omitempty"`
 }
 
 type SyncConfigObservation struct {
@@ -103,15 +125,15 @@ type SyncConfigObservation struct {
 
 type SyncConfigParameters struct {
 
-	// The Conflict Detection strategy to use. Valid values are NONE and VERSION.
+	// Conflict Detection strategy to use. Valid values are NONE and VERSION.
 	// +kubebuilder:validation:Optional
 	ConflictDetection *string `json:"conflictDetection,omitempty" tf:"conflict_detection,omitempty"`
 
-	// The Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
+	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
 	// +kubebuilder:validation:Optional
 	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
 
-	// The Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerConfig []LambdaConflictHandlerConfigParameters `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }

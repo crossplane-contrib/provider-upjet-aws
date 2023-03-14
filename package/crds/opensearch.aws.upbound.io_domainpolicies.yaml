@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DomainPolicy is the Schema for the DomainPolicys API. <no value>
+        description: DomainPolicy is the Schema for the DomainPolicys API. Provides
+          an OpenSearch Domain Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   accessPolicies:
+                    description: IAM policy document specifying the access policies
+                      for the domain
                     type: string
                   domainName:
+                    description: Name of the domain.
                     type: string
                   domainNameRef:
                     description: Reference to a Domain to populate domainName.

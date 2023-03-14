@@ -40,7 +40,7 @@ type UserStackAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies whether a welcome email is sent to a user after the user is created in the user pool.
+	// Whether a welcome email is sent to a user after the user is created in the user pool.
 	// +kubebuilder:validation:Optional
 	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
 

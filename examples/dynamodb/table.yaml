@@ -2,6 +2,8 @@ apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/table
 spec:
   forProvider:
     region: us-west-1

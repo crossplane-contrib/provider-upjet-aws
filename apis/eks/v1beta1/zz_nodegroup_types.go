@@ -82,7 +82,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Disk size in GiB for worker nodes. Defaults to 20.
+	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
@@ -160,8 +160,18 @@ type NodeGroupParameters struct {
 	UpdateConfig []UpdateConfigParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
 	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("version",false)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Reference to a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type RemoteAccessObservation struct {
@@ -169,7 +179,7 @@ type RemoteAccessObservation struct {
 
 type RemoteAccessParameters struct {
 
-	// EC2 Key Pair name that provides access for SSH communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
+	// EC2 Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, either port 3389 for Windows, or port 22 for all other operating systems is opened on the worker nodes to the Internet (0.0.0.0/0). For Windows nodes, this will allow you to use RDP, for all others this allows you to SSH into the worker nodes.
 	// +kubebuilder:validation:Optional
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 

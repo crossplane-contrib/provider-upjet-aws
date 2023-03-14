@@ -15,7 +15,7 @@ import (
 
 type IntegrationObservation struct {
 
-	// The integration identifier.
+	// Integration identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The integration response selection expression for the integration.
@@ -24,7 +24,7 @@ type IntegrationObservation struct {
 
 type IntegrationParameters struct {
 
-	// The API identifier.
+	// API identifier.
 	// +crossplane:generate:reference:type=API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -37,7 +37,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
-	// The ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
+	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.VPCLink
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,7 +51,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
-	// The type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
+	// Type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
@@ -59,7 +59,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
-	// The credentials required for the integration, if any.
+	// Credentials required for the integration, if any.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -73,24 +73,24 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
-	// The description of the integration.
+	// Description of the integration.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The integration's HTTP method. Must be specified if integration_type is not MOCK.
+	// Integration's HTTP method. Must be specified if integration_type is not MOCK.
 	// +kubebuilder:validation:Optional
 	IntegrationMethod *string `json:"integrationMethod,omitempty" tf:"integration_method,omitempty"`
 
-	// Specifies the AWS service action to invoke. Supported only for HTTP APIs when integration_type is AWS_PROXY. See the AWS service integration reference documentation for supported values. Must be between 1 and 128 characters in length.
+	// AWS service action to invoke. Supported only for HTTP APIs when integration_type is AWS_PROXY. See the AWS service integration reference documentation for supported values. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Optional
 	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
 
-	// The integration type of an integration.
+	// Integration type of an integration.
 	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	// +kubebuilder:validation:Required
 	IntegrationType *string `json:"integrationType" tf:"integration_type,omitempty"`
 
-	// The URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
+	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
 	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
@@ -105,7 +105,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
-	// The pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
+	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
 	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
@@ -126,7 +126,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
-	// A map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
+	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
@@ -134,7 +134,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseParameters []ResponseParametersParameters `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
-	// The TLS configuration for a private integration. Supported only for HTTP APIs.
+	// TLS configuration for a private integration. Supported only for HTTP APIs.
 	// +kubebuilder:validation:Optional
 	TLSConfig []TLSConfigParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
@@ -153,12 +153,12 @@ type ResponseParametersObservation struct {
 
 type ResponseParametersParameters struct {
 
-	// A key-value map. The key of ths map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
+	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Required
 	Mappings map[string]*string `json:"mappings" tf:"mappings,omitempty"`
 
-	// The HTTP status code in the range 200-599.
+	// HTTP status code in the range 200-599.
 	// +kubebuilder:validation:Required
 	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }

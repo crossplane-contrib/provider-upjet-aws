@@ -30,11 +30,20 @@ type ConnectionObservation struct {
 	// Boolean value representing if jumbo frames have been enabled for this connection.
 	JumboFrameCapable *bool `json:"jumboFrameCapable,omitempty" tf:"jumbo_frame_capable,omitempty"`
 
+	// Boolean value indicating whether the connection supports MAC Security (MACsec).
+	MacsecCapable *bool `json:"macsecCapable,omitempty" tf:"macsec_capable,omitempty"`
+
 	// The ID of the AWS account that owns the connection.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
+	// The MAC Security (MACsec) port link status of the connection.
+	PortEncryptionStatus *string `json:"portEncryptionStatus,omitempty" tf:"port_encryption_status,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The VLAN ID.
+	VlanID *string `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 }
 
 type ConnectionParameters struct {
@@ -42,6 +51,10 @@ type ConnectionParameters struct {
 	// The bandwidth of the connection. Valid values for dedicated connections: 1Gbps, 10Gbps. Valid values for hosted connections: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps. Case sensitive.
 	// +kubebuilder:validation:Required
 	Bandwidth *string `json:"bandwidth" tf:"bandwidth,omitempty"`
+
+	// The connection MAC Security (MACsec) encryption mode. MAC Security (MACsec) is only available on dedicated connections. Valid values are no_encrypt, should_encrypt, and must_encrypt.
+	// +kubebuilder:validation:Optional
+	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
 
 	// The AWS Direct Connect location where the connection is located. See DescribeLocations for the list of AWS Direct Connect locations. Use locationCode.
 	// +kubebuilder:validation:Required
@@ -59,6 +72,13 @@ type ConnectionParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Boolean value indicating whether you want the connection to support MAC Security (MACsec). MAC Security (MACsec) is only available on dedicated connections. See MACsec prerequisites for more information about MAC Security (MACsec) prerequisites. Default value: false.
+	// +kubebuilder:validation:Optional
+	RequestMacsec *bool `json:"requestMacsec,omitempty" tf:"request_macsec,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

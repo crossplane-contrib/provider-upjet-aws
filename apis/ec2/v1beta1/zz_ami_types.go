@@ -15,42 +15,42 @@ import (
 
 type AMIObservation struct {
 
-	// The ARN of the AMI.
+	// ARN of the AMI.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The hypervisor type of the image.
+	// Hypervisor type of the image.
 	Hypervisor *string `json:"hypervisor,omitempty" tf:"hypervisor,omitempty"`
 
-	// The ID of the created AMI.
+	// ID of the created AMI.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The AWS account alias (for example, amazon, self) or the AWS account ID of the AMI owner.
+	// AWS account alias (for example, amazon, self) or the AWS account ID of the AMI owner.
 	ImageOwnerAlias *string `json:"imageOwnerAlias,omitempty" tf:"image_owner_alias,omitempty"`
 
-	// The type of image.
+	// Type of image.
 	ImageType *string `json:"imageType,omitempty" tf:"image_type,omitempty"`
 
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
 
-	// The AWS account ID of the image owner.
+	// AWS account ID of the image owner.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// This value is set to windows for Windows AMIs; otherwise, it is blank.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
-	// The platform details associated with the billing code of the AMI.
+	// Platform details associated with the billing code of the AMI.
 	PlatformDetails *string `json:"platformDetails,omitempty" tf:"platform_details,omitempty"`
 
-	// Indicates whether the image has public launch permissions.
+	// Whether the image has public launch permissions.
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
-	// The Snapshot ID for the root volume (for EBS-backed AMIs)
+	// Snapshot ID for the root volume (for EBS-backed AMIs)
 	RootSnapshotID *string `json:"rootSnapshotId,omitempty" tf:"root_snapshot_id,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The operation of the Amazon EC2 instance and the billing code that is associated with the AMI.
+	// Operation of the Amazon EC2 instance and the billing code that is associated with the AMI.
 	UsageOperation *string `json:"usageOperation,omitempty" tf:"usage_operation,omitempty"`
 }
 
@@ -60,15 +60,15 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Optional
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
-	// The boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+	// Boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
 	// +kubebuilder:validation:Optional
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
-	// The date and time to deprecate the AMI. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
+	// Date and time to deprecate the AMI. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
 	// +kubebuilder:validation:Optional
 	DeprecationTime *string `json:"deprecationTime,omitempty" tf:"deprecation_time,omitempty"`
 
-	// A longer, human-readable description for the AMI.
+	// Longer, human-readable description for the AMI.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -77,7 +77,7 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Optional
 	EBSBlockDevice []EBSBlockDeviceParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
-	// Specifies whether enhanced networking with ENA is enabled. Defaults to false.
+	// Whether enhanced networking with ENA is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnaSupport *bool `json:"enaSupport,omitempty" tf:"ena_support,omitempty"`
 
@@ -91,16 +91,20 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageLocation *string `json:"imageLocation,omitempty" tf:"image_location,omitempty"`
 
-	// The id of the kernel image (AKI) that will be used as the paravirtual
+	// If EC2 instances started from this image should require the use of the Instance Metadata Service V2 (IMDSv2), set this argument to v2.0. For more information, see Configure instance metadata options for new instances.
+	// +kubebuilder:validation:Optional
+	ImdsSupport *string `json:"imdsSupport,omitempty" tf:"imds_support,omitempty"`
+
+	// ID of the kernel image (AKI) that will be used as the paravirtual
 	// kernel in created instances.
 	// +kubebuilder:validation:Optional
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
-	// A region-unique name for the AMI.
+	// Region-unique name for the AMI.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The id of an initrd image (ARI) that will be used when booting the
+	// ID of an initrd image (ARI) that will be used when booting the
 	// created instances.
 	// +kubebuilder:validation:Optional
 	RamdiskID *string `json:"ramdiskId,omitempty" tf:"ramdisk_id,omitempty"`
@@ -110,7 +114,7 @@ type AMIParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The name of the root device (for example, /dev/sda1, or /dev/xvda).
+	// Name of the root device (for example, /dev/sda1, or /dev/xvda).
 	// +kubebuilder:validation:Optional
 	RootDeviceName *string `json:"rootDeviceName,omitempty" tf:"root_device_name,omitempty"`
 
@@ -122,6 +126,10 @@ type AMIParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+	// +kubebuilder:validation:Optional
+	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
 
 	// Keyword to choose what virtualization mode created instances
 	// will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
@@ -140,7 +148,7 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	// The path at which the device is exposed to created instances.
+	// Path at which the device is exposed to created instances.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
@@ -153,11 +161,11 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN of the Outpost on which the snapshot is stored.
+	// ARN of the Outpost on which the snapshot is stored.
 	// +kubebuilder:validation:Optional
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
-	// The id of an EBS snapshot that will be used to initialize the created
+	// ID of an EBS snapshot that will be used to initialize the created
 	// EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
 	// snapshot.
 	// +crossplane:generate:reference:type=EBSSnapshot
@@ -172,17 +180,17 @@ type EBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
-	// The throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
+	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// The size of created volumes in GiB.
+	// Size of created volumes in GiB.
 	// If snapshot_id is set and volume_size is omitted then the volume will have the same size
 	// as the selected snapshot.
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// The type of EBS volume to create. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: standard).
+	// Type of EBS volume to create. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: standard).
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -192,11 +200,11 @@ type EphemeralBlockDeviceObservation struct {
 
 type EphemeralBlockDeviceParameters struct {
 
-	// The path at which the device is exposed to created instances.
+	// Path at which the device is exposed to created instances.
 	// +kubebuilder:validation:Required
 	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
-	// A name for the ephemeral device, of the form "ephemeralN" where
+	// Name for the ephemeral device, of the form "ephemeralN" where
 	// N is a volume number starting from zero.
 	// +kubebuilder:validation:Required
 	VirtualName *string `json:"virtualName" tf:"virtual_name,omitempty"`

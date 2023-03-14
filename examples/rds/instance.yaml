@@ -1,9 +1,11 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: Instance
 metadata:
-  name: example-dbinstance
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a password secret reference."
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: example-dbinstance
+  name: example-dbinstance-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1
@@ -23,8 +25,42 @@ spec:
     maintenanceWindow: "Mon:00:00-Mon:03:00"
     publiclyAccessible: false
     skipFinalSnapshot: true
-    storageEncrypted: false
+    storageEncrypted: true
     storageType: gp2
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-key
   writeConnectionSecretToRef:
     name: example-dbinstance-out
     namespace: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: example-dbinstance
+  name: example-dbinstance
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upbound!"
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-key
+  name: sample-key-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7

@@ -18,12 +18,11 @@ type AttributeObservation struct {
 
 type AttributeParameters struct {
 
-	// The name of the table, this needs to be unique
-	// within a region.
+	// Name of the attribute
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Attribute type, which must be a scalar type: S, N, or B for (S)tring, (N)umber or (B)inary data
+	// Attribute type. Valid values are S (string), N (number), B (binary).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -33,38 +32,31 @@ type GlobalSecondaryIndexObservation struct {
 
 type GlobalSecondaryIndexParameters struct {
 
-	// The name of the hash key in the index; must be
-	// defined as an attribute in the resource.
+	// Name of the hash key in the index; must be defined as an attribute in the resource.
 	// +kubebuilder:validation:Required
 	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
 
-	// The name of the index
+	// Name of the index.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Only required with INCLUDE as a
-	// projection type; a list of attributes to project into the index. These
-	// do not need to be defined as attributes on the table.
+	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
-	// One of ALL, INCLUDE or KEYS_ONLY
-	// where ALL projects every attribute into the index, KEYS_ONLY
-	// projects just the hash and range key into the index, and INCLUDE
-	// projects only the keys specified in the non_key_attributes
-	// parameter.
+	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
-	// The name of the range key; must be defined
+	// Name of the range key; must be defined
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
-	// The number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
+	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
-	// The number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
+	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
@@ -74,25 +66,19 @@ type LocalSecondaryIndexObservation struct {
 
 type LocalSecondaryIndexParameters struct {
 
-	// The name of the index
+	// Name of the index
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Only required with INCLUDE as a
-	// projection type; a list of attributes to project into the index. These
-	// do not need to be defined as attributes on the table.
+	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
-	// One of ALL, INCLUDE or KEYS_ONLY
-	// where ALL projects every attribute into the index, KEYS_ONLY
-	// projects just the hash and range key into the index, and INCLUDE
-	// projects only the keys specified in the non_key_attributes
-	// parameter.
+	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	// +kubebuilder:validation:Required
 	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
-	// The name of the range key; must be defined
+	// Name of the range key.
 	// +kubebuilder:validation:Required
 	RangeKey *string `json:"rangeKey" tf:"range_key,omitempty"`
 }
@@ -102,7 +88,7 @@ type PointInTimeRecoveryObservation struct {
 
 type PointInTimeRecoveryParameters struct {
 
-	// Whether to enable point-in-time recovery - note that it can take up to 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided then this defaults to false.
+	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -112,12 +98,11 @@ type ServerSideEncryptionObservation struct {
 
 type ServerSideEncryptionParameters struct {
 
-	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK).
+	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK). If enabled is false then server-side encryption is set to AWS-owned key (shown as DEFAULT in the AWS console). Potentially confusingly, if enabled is true and no kms_key_arn is specified then server-side encryption is set to the default KMS-managed key (shown as KMS in the AWS console). The AWS KMS documentation explains the difference between AWS-owned and KMS-managed keys.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// The ARN of the CMK that should be used for the AWS KMS encryption.
-	// This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb.
+	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 }
@@ -127,39 +112,40 @@ type TTLObservation struct {
 
 type TTLParameters struct {
 
-	// The name of the table attribute to store the TTL timestamp in.
+	// Name of the table attribute to store the TTL timestamp in.
 	// +kubebuilder:validation:Required
 	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
 
-	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK).
+	// Whether TTL is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TableObservation struct {
 
-	// The arn of the table
+	// ARN of the table
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The name of the table
+	// Name of the table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ARN of the Table Stream. Only available when stream_enabled = true
+	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
+	// +kubebuilder:validation:Optional
+	Replica []TableReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
+
+	// ARN of the Table Stream. Only available when stream_enabled = true
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
-	// A timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not
-	// a unique identifier for the stream on its own. However, the combination of AWS customer ID,
-	// table name and this field is guaranteed to be unique.
-	// It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true
+	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
 	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TableParameters struct {
 
-	// List of nested attribute definitions. Only required for hash_key and range_key attributes. Each attribute has two properties:
+	// Set of nested attribute definitions. Only required for hash_key and range_key attributes. See below.
 	// +kubebuilder:validation:Optional
 	Attribute []AttributeParameters `json:"attribute,omitempty" tf:"attribute,omitempty"`
 
@@ -167,31 +153,27 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
 
-	// Describe a GSI for the table;
-	// subject to the normal limits on the number of GSIs, projected
-	// attributes, etc.
+	// Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. See below.
 	// +kubebuilder:validation:Optional
 	GlobalSecondaryIndex []GlobalSecondaryIndexParameters `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
-	// The attribute to use as the hash (partition) key. Must also be defined as an attribute, see below.
+	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	// +kubebuilder:validation:Optional
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
-	// Describe an LSI on the table;
-	// these can only be allocated at creation so you cannot change this
-	// definition after you have created the resource.
+	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	// +kubebuilder:validation:Optional
 	LocalSecondaryIndex []LocalSecondaryIndexParameters `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
 
-	// Enable point-in-time recovery options.
+	// Enable point-in-time recovery options. See below.
 	// +kubebuilder:validation:Optional
 	PointInTimeRecovery []PointInTimeRecoveryParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
-	// The attribute to use as the range (sort) key. Must also be defined as an attribute, see below.
+	// Attribute to use as the range (sort) key. Must also be defined as an attribute, see below.
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
-	// The number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
+	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
 	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
@@ -200,15 +182,15 @@ type TableParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. Detailed below.
+	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	// +kubebuilder:validation:Optional
 	Replica []TableReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
-	// The time of the point-in-time recovery point to restore.
+	// Time of the point-in-time recovery point to restore.
 	// +kubebuilder:validation:Optional
 	RestoreDateTime *string `json:"restoreDateTime,omitempty" tf:"restore_date_time,omitempty"`
 
-	// The name of the table to restore. Must match the name of an existing table.
+	// Name of the table to restore. Must match the name of an existing table.
 	// +kubebuilder:validation:Optional
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
@@ -216,11 +198,11 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
-	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS owned Customer Master Key if this argument isn't specified.
+	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. See below.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Indicates whether Streams are to be enabled (true) or disabled (false).
+	// Whether Streams are enabled.
 	// +kubebuilder:validation:Optional
 	StreamEnabled *bool `json:"streamEnabled,omitempty" tf:"stream_enabled,omitempty"`
 
@@ -228,11 +210,11 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamViewType *string `json:"streamViewType,omitempty" tf:"stream_view_type,omitempty"`
 
-	// Defines ttl, has two properties, and can only be specified once:
+	// Configuration block for TTL. See below.
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// The storage class of the table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+	// Storage class of the table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
 	// +kubebuilder:validation:Optional
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 
@@ -240,19 +222,36 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
+	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type TableReplicaObservation struct {
+
+	// ARN of the replica
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// ARN of the Table Stream. Only available when stream_enabled = true
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Timestamp, in ISO 8601 format, for this stream. Note that this timestamp is not a unique identifier for the stream on its own. However, the combination of AWS customer ID, table name and this field is guaranteed to be unique. It can be used for creating CloudWatch Alarms. Only available when stream_enabled = true.
+	StreamLabel *string `json:"streamLabel,omitempty" tf:"stream_label,omitempty"`
 }
 
 type TableReplicaParameters struct {
 
-	// The ARN of the CMK that should be used for the AWS KMS encryption.
+	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	// +kubebuilder:validation:Optional
+	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
+
+	// Whether to propagate the global table's tags to a replica. Default is false. Changes to tags only move in one direction: from global (source) to replica. In other words, tag drift on a replica will not trigger an update. Tag or replica changes on the global table, whether from drift or configuration changes, are propagated to replicas. Changing from true to false on a subsequent apply means replica tags are left as they were, unmanaged, not deleted.
+	// +kubebuilder:validation:Optional
+	PropagateTags *bool `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// Region name of the replica.
 	// +kubebuilder:validation:Required
