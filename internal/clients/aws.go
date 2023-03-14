@@ -61,8 +61,10 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			accountId = *identity.Account
 		}
 
-		if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-			return terraform.Setup{}, errors.Wrap(err, "endpoint is wrong")
+		if pc.Spec.Endpoint.URL.Static != nil {
+			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+				return terraform.Setup{}, errors.Wrap(err, "endpoint is wrong")
+			}
 		}
 		endpoints := make(map[string]string)
 		for _, service := range pc.Spec.Endpoint.Services {
