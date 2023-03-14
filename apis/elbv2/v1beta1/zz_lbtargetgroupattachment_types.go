@@ -35,21 +35,30 @@ type LBTargetGroupAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of the target group with which to register targets
-	// +crossplane:generate:reference:type=LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
-	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
-	// +kubebuilder:validation:Required
-	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LB
+	// +kubebuilder:validation:Optional
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
+
+	// Reference to a LB in elbv2 to populate targetId.
+	// +kubebuilder:validation:Optional
+	TargetIDRef *v1.Reference `json:"targetIdRef,omitempty" tf:"-"`
+
+	// Selector for a LB in elbv2 to populate targetId.
+	// +kubebuilder:validation:Optional
+	TargetIDSelector *v1.Selector `json:"targetIdSelector,omitempty" tf:"-"`
 }
 
 // LBTargetGroupAttachmentSpec defines the desired state of LBTargetGroupAttachment

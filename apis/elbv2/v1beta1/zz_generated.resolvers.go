@@ -336,5 +336,21 @@ func (mg *LBTargetGroupAttachment) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.TargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetGroupArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TargetIDRef,
+		Selector:     mg.Spec.ForProvider.TargetIDSelector,
+		To: reference.To{
+			List:    &LBList{},
+			Managed: &LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetID")
+	}
+	mg.Spec.ForProvider.TargetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetIDRef = rsp.ResolvedReference
+
 	return nil
 }

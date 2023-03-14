@@ -18,7 +18,7 @@ spec:
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBTargetGroupAttachment
 metadata:
-  name: test
+  name: test-instance
   labels:
     testing.upbound.io/example-name: elbv2
 spec:
@@ -29,3 +29,102 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: elbv2
     targetId: 172.16.10.25
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: elbv2-vpc
+  labels:
+    testing.upbound.io/example-name: elbv2
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: elbv2-subnet
+  labels:
+    testing.upbound.io/example-name: elbv2
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: elbv2-securitygroup
+  labels:
+    testing.upbound.io/example-name: elbv2
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  labels:
+    testing.upbound.io/example-name: test-alb
+  name: test
+spec:
+  forProvider:
+    enableDeletionProtection: false
+    internal: false
+    loadBalancerType: application
+    name: test-lb-tf
+    region: us-west-1
+    securityGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    subnetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+    tags:
+      Environment: production
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBTargetGroup
+metadata:
+  name: test-alb
+  labels:
+    testing.upbound.io/example-name: elbv2-alb
+spec:
+  forProvider:
+    name: example-lb-tg-alb
+    targetType: ip
+    port: 8080
+    protocol: HTTP
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBTargetGroupAttachment
+metadata:
+  name: test-alb
+spec:
+  forProvider:
+    port: 8080
+    region: us-west-1
+    targetGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: elbv2-alb
+    targetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test-alb
