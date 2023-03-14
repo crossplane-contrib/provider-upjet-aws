@@ -84,6 +84,7 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
+	"github.com/upbound/provider-aws/config/wafv2"
 )
 
 var (
@@ -228,6 +229,7 @@ func GetProvider() *config.Provider {
 		networkmanager.Configure,
 		opsworks.Configure,
 		sagemaker.Configure,
+		wafv2.Configure,
 	} {
 		configure(pc)
 	}

@@ -2309,6 +2309,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// WAFv2 Rule Group can be imported using ID/name/scope
 	// TODO(bump): Request entity too large: limit is 3145728
 	// "aws_wafv2_rule_group": config.IdentifierFromProvider,
+	// WAFv2 Web ACL Association can be imported using WEB_ACL_ARN,RESOURCE_ARN
+	// Example: arn:aws:wafv2:...7ce849ea,arn:aws:apigateway:...ages/name
+	"aws_wafv2_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_arn }},{{ .parameters.resource_arn }}"),
 
 	// elasticsearch
 	//
