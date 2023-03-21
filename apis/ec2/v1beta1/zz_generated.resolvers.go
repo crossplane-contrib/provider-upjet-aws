@@ -2277,12 +2277,12 @@ func (mg *TransitGatewayRoute) ResolveReferences(ctx context.Context, c client.R
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayRouteTableID),
-		Extract:      resource.ExtractParamPath("association_default_route_table_id", true),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.TransitGatewayRouteTableIDRef,
 		Selector:     mg.Spec.ForProvider.TransitGatewayRouteTableIDSelector,
 		To: reference.To{
-			List:    &TransitGatewayList{},
-			Managed: &TransitGateway{},
+			List:    &TransitGatewayRouteTableList{},
+			Managed: &TransitGatewayRouteTable{},
 		},
 	})
 	if err != nil {

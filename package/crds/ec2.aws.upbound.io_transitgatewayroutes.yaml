@@ -158,7 +158,7 @@ spec:
                     description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
-                    description: Reference to a TransitGateway in ec2 to populate
+                    description: Reference to a TransitGatewayRouteTable to populate
                       transitGatewayRouteTableId.
                     properties:
                       name:
@@ -193,7 +193,7 @@ spec:
                     - name
                     type: object
                   transitGatewayRouteTableIdSelector:
-                    description: Selector for a TransitGateway in ec2 to populate
+                    description: Selector for a TransitGatewayRouteTable to populate
                       transitGatewayRouteTableId.
                     properties:
                       matchControllerRef:
