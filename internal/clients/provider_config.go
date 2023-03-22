@@ -51,7 +51,6 @@ const (
 	errAWSConfigUpbound     = "failed to get AWS config using Upbound identity"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
-	defaultIdentityTokenFile         = "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
 )
 
 // GlobalRegion is the region name used for AWS services that do not have a notion

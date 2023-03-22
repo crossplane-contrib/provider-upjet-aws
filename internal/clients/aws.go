@@ -6,6 +6,7 @@ package clients
 
 import (
 	"context"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"k8s.io/apimachinery/pkg/types"
@@ -26,17 +27,20 @@ const (
 	keyAccessKeyID               = "access_key"
 	keySecretAccessKey           = "secret_key"
 	keyAssumeRoleWithWebIdentity = "assume_role_with_web_identity"
+	keyRoleArn                   = "role_arn"
+	keySessionName               = "session_name"
 	keyWebIdentityTokenFile      = "web_identity_token_file"
 	keyAssumeRole                = "assume_role"
 	keyTags                      = "tags"
 	keyTransitiveTagKeys         = "transitive_tag_keys"
+	keyExternalID                = "external_id"
 )
 
 func SelectTerraformSetup(version, providerSource, providerVersion string) terraform.SetupFn {
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "cannot get referenced Provider")
+			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
 		ps := terraform.Setup{
 			Version: version,
@@ -53,26 +57,30 @@ func SelectTerraformSetup(version, providerSource, providerVersion string) terra
 			keyAccountId: account,
 		}
 
-		var err2 error
-		if (len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil) && (pc.Spec.Credentials.Source == authKeyIRSA || pc.Spec.Credentials.Source == authKeyWebIdentity || pc.Spec.Credentials.Source == authKeyUpbound) {
-			ps, err2 = DefaultTerraformSetupBuilder(ctx, c, mg, ps)
-			if err2 != nil {
-				return terraform.Setup{}, errors.Wrap(err2, "cannot build terraform configuration")
+		if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+			err = DefaultTerraformSetupBuilder(ctx, c, mg, &ps)
+			if err != nil {
+				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
 		} else {
-			ps, err2 = OptimizedTerraformSetupBuilder(ctx, c, mg, pc, ps)
-			if err2 != nil {
-				return terraform.Setup{}, errors.Wrap(err2, "cannot build terraform configuration")
+			err = pushDownTerraformSetupBuilder(ctx, c, mg, pc, &ps)
+			if err != nil {
+				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
 		}
 		return ps, nil
 	}
 }
 
-func OptimizedTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps terraform.Setup) (terraform.Setup, error) { //nolint:gocyclo
+func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error { //nolint:gocyclo
+	if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+		return errors.New("shared scheduler cannot be used because the length of assume role chain array " +
+			"is more than 1 or endpoint configuration is not nil")
+	}
+
 	cfg, err := getAWSConfig(ctx, c, mg)
 	if err != nil {
-		return terraform.Setup{}, errors.Wrap(err, "cannot get AWS config")
+		return errors.Wrap(err, "cannot get AWS config")
 	}
 	ps.Configuration = map[string]any{
 		keyRegion: cfg.Region,
@@ -81,28 +89,40 @@ func OptimizedTerraformSetupBuilder(ctx context.Context, c client.Client, mg res
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 	case authKeyWebIdentity:
 		if pc.Spec.Credentials.WebIdentity == nil {
-			return terraform.Setup{}, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = pc.Spec.Credentials.WebIdentity.RoleARN
-		ps.Configuration[keyWebIdentityTokenFile] = defaultIdentityTokenFile
+		if pc.Spec.Credentials.WebIdentity.RoleARN == nil {
+			return errors.New(`spec.credentials.webIdentity.roleARN of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+			keyRoleArn:              pc.Spec.Credentials.WebIdentity.RoleARN,
+			keySessionName:          pc.Spec.Credentials.WebIdentity.RoleSessionName,
+			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
+		}
 	case authKeyUpbound:
 		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
-			return terraform.Setup{}, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
+			return errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = pc.Spec.Credentials.Upbound.WebIdentity.RoleARN
-		ps.Configuration[keyWebIdentityTokenFile] = upboundProviderIdentityTokenFile
+		if pc.Spec.Credentials.Upbound.WebIdentity.RoleARN == nil {
+			return errors.New(`spec.credentials.upbound.webIdentity.roleARN of ProviderConfig cannot be nil when the credential source is "Upbound"`)
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+			keyRoleArn:              pc.Spec.Credentials.Upbound.WebIdentity.RoleARN,
+			keySessionName:          pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName,
+			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
+		}
 	case authKeySecret:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
 		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "cannot get credentials")
+			return errors.Wrap(err, "cannot get credentials")
 		}
 		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
 		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, errAWSConfig)
+			return errors.Wrap(err, errAWSConfig)
 		}
 		creds, err := cfg.Credentials.Retrieve(ctx)
 		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
+			return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
 		ps.Configuration = map[string]any{
 			keyRegion:          cfg.Region,
@@ -113,21 +133,24 @@ func OptimizedTerraformSetupBuilder(ctx context.Context, c client.Client, mg res
 	}
 
 	if len(pc.Spec.AssumeRoleChain) != 0 {
-		ps.Configuration[keyAssumeRole] = pc.Spec.AssumeRoleChain[0].RoleARN
-		ps.Configuration[keyTags] = pc.Spec.AssumeRoleChain[0].Tags
-		ps.Configuration[keyTransitiveTagKeys] = pc.Spec.AssumeRoleChain[0].TransitiveTagKeys
+		ps.Configuration[keyAssumeRole] = map[string]any{
+			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
+			keyTags:              pc.Spec.AssumeRoleChain[0].Tags,
+			keyTransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
+			keyExternalID:        pc.Spec.AssumeRoleChain[0].ExternalID,
+		}
 	}
-	return ps, nil
+	return nil
 }
 
-func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, ps terraform.Setup) (terraform.Setup, error) {
+func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, ps *terraform.Setup) error {
 	cfg, err := getAWSConfig(ctx, c, mg)
 	if err != nil {
-		return terraform.Setup{}, errors.Wrap(err, "cannot get AWS config")
+		return errors.Wrap(err, "cannot get AWS config")
 	}
 	creds, err := cfg.Credentials.Retrieve(ctx)
 	if err != nil {
-		return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
+		return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 	}
 	ps.Configuration = map[string]any{
 		keyRegion:          cfg.Region,
@@ -135,7 +158,7 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 		keySecretAccessKey: creds.SecretAccessKey,
 		keySessionToken:    creds.SessionToken,
 	}
-	return ps, err
+	return err
 }
 
 func getAccountId(ctx context.Context, c client.Client, mg resource.Managed) (string, error) {
