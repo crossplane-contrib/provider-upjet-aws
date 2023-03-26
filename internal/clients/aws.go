@@ -96,8 +96,10 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		}
 		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
 			keyRoleArn:              pc.Spec.Credentials.WebIdentity.RoleARN,
-			keySessionName:          pc.Spec.Credentials.WebIdentity.RoleSessionName,
 			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
+		}
+		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
+			ps.Configuration[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
 		}
 	case authKeyUpbound:
 		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
@@ -108,8 +110,10 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		}
 		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
 			keyRoleArn:              pc.Spec.Credentials.Upbound.WebIdentity.RoleARN,
-			keySessionName:          pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName,
 			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
+		}
+		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
+			ps.Configuration[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
 		}
 	case authKeySecret:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
