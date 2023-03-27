@@ -5,11 +5,24 @@ Copyright 2021 Upbound Inc.
 package rds
 
 import (
+	"context"
+	"fmt"
+	"github.com/upbound/upjet/pkg/types/comments"
+
+	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
+	"github.com/crossplane/crossplane-runtime/pkg/password"
+	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
+	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/pkg/errors"
+	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/types"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
-
-	"fmt"
 )
 
 // Configure adds configurations for rds group.
@@ -100,6 +113,48 @@ func Configure(p *config.Provider) {
 
 			return conn, nil
 		}
+		desc, _ := comments.New("If true, the password will be auto-generated and"+
+			" stored in the Secret referenced by the passwordSecretRef field.",
+			comments.WithTFTag("-"))
+		r.TerraformResource.Schema["auto_generate_password"] = &schema.Schema{
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: desc.String(),
+		}
+		r.InitializerFns = append(r.InitializerFns, func(client client.Client) managed.Initializer {
+			return managed.InitializerFn(func(ctx context.Context, mg resource.Managed) error {
+				paved, err := fieldpath.PaveObject(mg)
+				if err != nil {
+					return err
+				}
+				sel := &v1.SecretKeySelector{}
+				if err := paved.GetValueInto("spec.forProvider.passwordSecretRef", sel); err != nil {
+					return errors.Wrap(err, "cannot unmarshal passwordSecretRef into a secret key selector")
+				}
+				s := &corev1.Secret{}
+				if err := client.Get(ctx, types.NamespacedName{Namespace: sel.Namespace, Name: sel.Name}, s); err != nil {
+					return errors.Wrap(err, "cannot get password secret")
+				}
+				if len(s.Data[sel.Key]) != 0 {
+					// Password is already set.
+					return nil
+				}
+				gen, err := paved.GetBool("spec.forProvider.autoGeneratePassword")
+				if err != nil {
+					return errors.Wrap(err, "cannot get autoGeneratePassword field value")
+				}
+				if !gen {
+					// Password is not set, and we don't want to generate one.
+					return nil
+				}
+				pw, err := password.Generate()
+				if err != nil {
+					return errors.Wrap(err, "cannot generate password")
+				}
+				s.Data[sel.Key] = []byte(pw)
+				return errors.Wrap(client.Update(ctx, s), "cannot update password secret")
+			})
+		})
 	})
 
 	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {

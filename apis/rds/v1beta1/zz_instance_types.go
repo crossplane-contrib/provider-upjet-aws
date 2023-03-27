@@ -79,6 +79,13 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// Password for the master DB user. Note that this may show up in
+	// logs, and it will be stored in the state file.
+	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
 	// Indicates that minor engine upgrades
 	// will be applied automatically to the DB instance during the maintenance window.
 	// Defaults to true.
