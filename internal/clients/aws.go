@@ -91,11 +91,8 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		if pc.Spec.Credentials.WebIdentity == nil {
 			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 		}
-		if pc.Spec.Credentials.WebIdentity.RoleARN == nil {
-			return errors.New(`spec.credentials.webIdentity.roleARN of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-		}
 		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
-			keyRoleArn:              pc.Spec.Credentials.WebIdentity.RoleARN,
+			keyRoleArn:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
 		}
 		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
@@ -105,11 +102,8 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
 			return errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
 		}
-		if pc.Spec.Credentials.Upbound.WebIdentity.RoleARN == nil {
-			return errors.New(`spec.credentials.upbound.webIdentity.roleARN of ProviderConfig cannot be nil when the credential source is "Upbound"`)
-		}
 		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
-			keyRoleArn:              pc.Spec.Credentials.Upbound.WebIdentity.RoleARN,
+			keyRoleArn:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
 		}
 		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
