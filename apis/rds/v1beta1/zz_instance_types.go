@@ -303,6 +303,7 @@ type InstanceParameters struct {
 
 	// Password for the master DB user. Note that this may show up in
 	// logs, and it will be stored in the state file.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 

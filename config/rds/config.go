@@ -132,13 +132,15 @@ func Configure(p *config.Provider) {
 					return errors.Wrap(err, "cannot unmarshal passwordSecretRef into a secret key selector")
 				}
 				s := &corev1.Secret{}
-				if err := client.Get(ctx, types.NamespacedName{Namespace: sel.Namespace, Name: sel.Name}, s); err != nil {
+				if err := client.Get(ctx, types.NamespacedName{Namespace: sel.Namespace, Name: sel.Name}, s); resource.IgnoreNotFound(err) != nil {
 					return errors.Wrap(err, "cannot get password secret")
 				}
-				if len(s.Data[sel.Key]) != 0 {
+				if err == nil && len(s.Data[sel.Key]) != 0 {
 					// Password is already set.
 					return nil
 				}
+				// At this point, either the secret doesn't exist, or it doesn't
+				// have the password filled.
 				gen, err := paved.GetBool("spec.forProvider.autoGeneratePassword")
 				if err != nil {
 					return errors.Wrap(err, "cannot get autoGeneratePassword field value")
@@ -151,10 +153,16 @@ func Configure(p *config.Provider) {
 				if err != nil {
 					return errors.Wrap(err, "cannot generate password")
 				}
+				s.SetName(sel.Name)
+				s.SetNamespace(sel.Namespace)
+				if s.Data == nil {
+					s.Data = make(map[string][]byte, 1)
+				}
 				s.Data[sel.Key] = []byte(pw)
-				return errors.Wrap(client.Update(ctx, s), "cannot update password secret")
+				return errors.Wrap(resource.NewAPIPatchingApplicator(client).Apply(ctx, s), "cannot apply password secret")
 			})
 		})
+		r.TerraformResource.Schema["password"].Description = "Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {
