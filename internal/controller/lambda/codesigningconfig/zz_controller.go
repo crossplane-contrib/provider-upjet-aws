@@ -31,7 +31,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	r := managed.NewReconciler(mgr,
 		xpresource.ManagedKind(v1beta1.CodeSigningConfig_GroupVersionKind),
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_lambda_code_signing_config"],
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_lambda_code_signing_config"], tjcontroller.WithLogger(o.Logger),
 			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.CodeSigningConfig_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),

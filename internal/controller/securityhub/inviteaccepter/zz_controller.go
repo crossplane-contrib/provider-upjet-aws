@@ -31,7 +31,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	r := managed.NewReconciler(mgr,
 		xpresource.ManagedKind(v1beta1.InviteAccepter_GroupVersionKind),
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_securityhub_invite_accepter"],
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_securityhub_invite_accepter"], tjcontroller.WithLogger(o.Logger),
 			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.InviteAccepter_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),

@@ -34,7 +34,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	r := managed.NewReconciler(mgr,
 		xpresource.ManagedKind(v1beta1.Environment_GroupVersionKind),
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_appconfig_environment"],
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_appconfig_environment"], tjcontroller.WithLogger(o.Logger),
 			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.Environment_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),

@@ -31,7 +31,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	r := managed.NewReconciler(mgr,
 		xpresource.ManagedKind(v1beta1.UserPoolClient_GroupVersionKind),
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_cognito_user_pool_client"],
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_cognito_user_pool_client"], tjcontroller.WithLogger(o.Logger),
 			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.UserPoolClient_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),

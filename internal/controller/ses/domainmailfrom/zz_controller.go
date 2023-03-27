@@ -31,7 +31,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	r := managed.NewReconciler(mgr,
 		xpresource.ManagedKind(v1beta1.DomainMailFrom_GroupVersionKind),
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_ses_domain_mail_from"],
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_ses_domain_mail_from"], tjcontroller.WithLogger(o.Logger),
 			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.DomainMailFrom_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),

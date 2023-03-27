@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"k8s.io/apimachinery/pkg/types"
 
+	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/terraform"
@@ -36,19 +37,29 @@ const (
 	keyExternalID                = "external_id"
 )
 
-func SelectTerraformSetup(version, providerSource, providerVersion string) terraform.SetupFn {
+type SetupConfig struct {
+	NativeProviderPath    *string
+	NativeProviderSource  *string
+	NativeProviderVersion *string
+	TerraformVersion      *string
+	DefaultScheduler      terraform.ProviderScheduler
+}
+
+func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn {
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
 		ps := terraform.Setup{
-			Version: version,
+			Version: *config.TerraformVersion,
 			Requirement: terraform.ProviderRequirement{
-				Source:  providerSource,
-				Version: providerVersion,
+				Source:  *config.NativeProviderSource,
+				Version: *config.NativeProviderVersion,
 			},
+			Scheduler: config.DefaultScheduler,
 		}
+
 		account, err := getAccountId(ctx, c, mg)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
@@ -61,6 +72,11 @@ func SelectTerraformSetup(version, providerSource, providerVersion string) terra
 			err = DefaultTerraformSetupBuilder(ctx, c, mg, &ps)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
+			}
+			// we cannot use the shared scheduler here.
+			// We will force a workspace scheduler if we can configure one.
+			if len(*config.NativeProviderPath) != 0 {
+				ps.Scheduler = terraform.NewWorkspaceProviderScheduler(log, terraform.WithNativeProviderPath(*config.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*config.NativeProviderSource))
 			}
 		} else {
 			err = pushDownTerraformSetupBuilder(ctx, c, mg, pc, &ps)
