@@ -99,7 +99,7 @@ func main() {
 		},
 		Provider:       config.GetProvider(),
 		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithProviderRunner(runner), terraform.WithProcessReportInterval(*pollInterval)),
-		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
+		SetupFn:        clients.SelectTerraformSetup(*terraformVersion, *providerSource, *providerVersion),
 	}
 
 	if *enableExternalSecretStores {
