@@ -17,6 +17,7 @@ spec:
     engine: postgres
     engineVersion: "13.7"
     username: adminuser
+    autoGeneratePassword: true
     passwordSecretRef:
       key: password
       name: example-dbinstance
@@ -33,21 +34,6 @@ spec:
   writeConnectionSecretToRef:
     name: example-dbinstance-out
     namespace: default
-
----
-
-apiVersion: v1
-kind: Secret
-metadata:
-  annotations:
-    meta.upbound.io/example-id: rds/v1beta1/instance
-  labels:
-    testing.upbound.io/example-name: example-dbinstance
-  name: example-dbinstance
-  namespace: upbound-system
-type: Opaque
-stringData:
-  password: "Upbound!"
 
 ---
 
