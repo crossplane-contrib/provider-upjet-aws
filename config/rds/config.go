@@ -7,7 +7,6 @@ package rds
 import (
 	"context"
 	"fmt"
-	"github.com/upbound/upjet/pkg/types/comments"
 
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
@@ -21,6 +20,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/types/comments"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -184,13 +184,8 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 			}
 			sel := &v1.SecretKeySelector{}
 			err = paved.GetValueInto(secretRefFieldPath, sel)
-			if fieldpath.IsNotFound(err) {
-				// No secret reference is given, user wants to submit empty
-				// password.
-				return nil
-			}
 			if err != nil {
-				return errors.Wrapf(err, "cannot unmarshal %s into a secret key selector", secretRefFieldPath)
+				return errors.Wrapf(resource.Ignore(fieldpath.IsNotFound, err), "cannot unmarshal %s into a secret key selector", secretRefFieldPath)
 			}
 			s := &corev1.Secret{}
 			if err := client.Get(ctx, types.NamespacedName{Namespace: sel.Namespace, Name: sel.Name}, s); resource.IgnoreNotFound(err) != nil {
