@@ -199,7 +199,7 @@ func Configure(p *config.Provider) {
 			Type: "SecurityGroup",
 		}
 		r.References["prefix_list_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList",
+			TerraformName:              "aws_ec2_managed_prefix_list",
 			RefFieldName:      "PrefixListIDRefs",
 			SelectorFieldName: "PrefixListIDSelector",
 		}
