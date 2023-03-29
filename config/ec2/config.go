@@ -64,6 +64,9 @@ func Configure(p *config.Provider) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
+		r.References["transit_gateway_route_table_id"] = config.Reference{
+			Type: "TransitGatewayRouteTable",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table", func(r *config.Resource) {

@@ -48,16 +48,15 @@ type TransitGatewayRouteParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
+	// +crossplane:generate:reference:type=TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
-	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// Reference to a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// Selector for a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
