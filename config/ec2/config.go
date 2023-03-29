@@ -247,7 +247,7 @@ func Configure(p *config.Provider) {
 			Type: "NATGateway",
 		}
 		r.References["destination_prefix_list_id"] = config.Reference{
-			Type: "ManagedPrefixList",
+			TerraformName: "aws_ec2_managed_prefix_list",
 		}
 		r.UseAsync = true
 	})
