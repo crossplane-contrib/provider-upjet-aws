@@ -617,15 +617,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_directory_service_radius_settings": config.IdentifierFromProvider,
 	// Replicated Regions can be imported using directory ID,Region name
 	"aws_directory_service_region": config.IdentifierFromProvider,
-	// Directory Service Shared Directories can be imported using the owner directory ID/shared directory ID
-	"aws_directory_service_shared_directory": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}/{{ .external_name }}"),
 	// Directory Service Shared Directories can be imported using the shared directory ID
 	"aws_directory_service_shared_directory_accepter": config.IdentifierFromProvider,
-
-	// dms
-	//
-	// Endpoints can be imported using the endpoint_id
-	"aws_dms_s3_endpoint": config.ParameterAsIdentifier("endpoint_id"),
 
 	// dx
 	//
@@ -633,25 +626,10 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_dx_macsec_key_association": config.IdentifierFromProvider,
 
-	// dynamodb
-	//
-	// DynamoDB table replicas can be imported using the table-name:main-region
-	"aws_dynamodb_table_replica": config.IdentifierFromProvider,
-
 	// ec2
 	//
 	// aws_ec2_transit_gateway_policy_table_association can be imported by using the EC2 Transit Gateway Policy Table identifier, an underscore, and the EC2 Transit Gateway Attachment identifier
 	"aws_ec2_transit_gateway_policy_table_association": config.IdentifierFromProvider,
-
-	// efs
-	//
-	// EFS Replication Configurations can be imported using the file system ID of either the source or destination file system
-	"aws_efs_replication_configuration": config.IdentifierFromProvider,
-
-	// emrserverless
-	//
-	// EMR Severless applications can be imported using the id
-	"aws_emrserverless_application": config.IdentifierFromProvider,
 
 	// fsx
 	//

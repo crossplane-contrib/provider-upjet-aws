@@ -60,3 +60,12 @@ func (l *ReplicationTaskList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this S3EndpointList.
+func (l *S3EndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
