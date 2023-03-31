@@ -1,8 +1,8 @@
 ---
 name: Feature Request
 about: Help us make Official AWS Provider more useful
-labels: enhancement
-title: "A new auth option"
+labels: enhancement,needs:triage
+title: 
 ---
 <!--
 Thank you for helping to improve Official AWS Provider!
