@@ -6,13 +6,13 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/addon
 spec:
   forProvider:
+    addonName: vpc-cni
     clusterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
 
 ---
-
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
@@ -33,7 +33,6 @@ spec:
           - name: sample-subnet2
 
 ---
-
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -57,7 +56,6 @@ spec:
       }
 
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
@@ -73,7 +71,6 @@ spec:
       Name: DemoVpc
 
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -90,7 +87,6 @@ spec:
     cidrBlock: 172.16.10.0/24
 
 ---
-
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
@@ -101,7 +97,20 @@ spec:
   forProvider:
     region: us-west-1
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1c
+    availabilityZone: us-west-1a
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: sample-cluster-policy
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/cluster
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: sample-eks-cluster
