@@ -18,6 +18,16 @@ func Configure(p *config.Provider) {
 				Type: "User",
 			},
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["id"].(string); ok {
+				conn["username"] = []byte(a)
+			}
+			if a, ok := attr["secret"].(string); ok {
+				conn["password"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_iam_role", func(r *config.Resource) {
