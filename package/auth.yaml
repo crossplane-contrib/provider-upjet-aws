@@ -1,0 +1,74 @@
+version: '2023-01-30'
+discriminant: spec.credentials.source
+sources:
+- name: Secret
+  docs: |
+    # Storing Credentials as a Kubernetes Secret
+
+    AWS credentials may be supplied as a Kubernetes `Secret`. Credentials will
+    be stored in this control plane and will only be accessible to installed
+    providers.
+
+    Credentials should be provided in the following format:
+    ```
+    [default]
+    aws_access_key_id = <aws_access_key>
+    aws_secret_access_key = <aws_secret_key>
+    ```
+
+    See the [AWS
+    documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds)
+    for more information on how to generate credentials.
+  additionalResources:
+  - type: Secret
+    ref: spec.credentials.secretRef
+  showFields:
+  - spec.credentials.secretRef
+- name: Upbound
+  docs: |
+    # OpenID Connect (OIDC)
+    
+    Using OIDC to authenticate to AWS eliminates the need to store credentials
+    in this control plane. Instead, you will need to add Upbound as an identity
+    provider in your AWS account, then create an IAM role that the AWS provider
+    in your control plane can assume. Go through the following steps to add the
+    identity provider.
+    1. Open the IAM console at [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam').
+    2. Navigate to **Identity Providers** > **Add Provider** and select **OpenID Connect**.
+    3. Use `https://proidc.upbound.io` as the **Provider URL** and `sts.amazonaws.com` as the **Audience**.
+    4. Select **Add Provider**.
+
+    With an identity provider created, multiple roles may be associated, each
+    with its own permissions and identity validation. Go through the following
+    steps to acquire the ARN for a role that allows the AWS provider your
+    control plane to assume its permissions.
+    1. Navigate to **Roles**.
+    2. Select an existing role or create a new one.
+    3. Select **Custom trust policy**.
+    4. Author a trust policy. An example is shown below.
+    ```
+    {
+       "Version":"2012-10-17",
+       "Statement":[
+          {
+             "Effect":"Allow",
+             "Principal":{
+                "Federated":"arn:aws:iam::YOUR_AWS_ACCOUNT_ID:oidc-provider/proidc.upbound.io"
+             },
+             "Action":"sts:AssumeRoleWithWebIdentity",
+             "Condition":{
+                "StringEquals":{
+                   "proidc.upbound.io:sub":"mcp:YOUR_UPBOUND_ACCOUNT/YOUR_CONTROL_PLANE:provider:provider-aws",
+                   "proidc.upbound.io:aud":"sts.amazonaws.com"
+                }
+             }
+          }
+       ]
+    }
+    ```
+    5. Add the desired permissions.
+    6. Create role.
+
+    Copy the ARN from the **Summary** section of the role into the input.
+  showFields:
+  - spec.credentials.upbound
