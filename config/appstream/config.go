@@ -17,6 +17,7 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			SelectorFieldName: "SubnetIDSelector",
 		}
 		r.UseAsync = true
+		r.Path = "fleet"
 	})
 	p.AddResourceConfigurator("aws_appstream_image_builder", func(r *config.Resource) {
 		r.References["vpc_config.subnet_ids"] = config.Reference{
