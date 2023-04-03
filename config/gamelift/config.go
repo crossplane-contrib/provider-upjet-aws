@@ -23,6 +23,7 @@ func Configure(p *config.Provider) {
 			Type: "Build",
 		}
 		r.UseAsync = true
+		r.Path = "fleet"
 	})
 
 	p.AddResourceConfigurator("aws_gamelift_game_server_group", func(r *config.Resource) {
