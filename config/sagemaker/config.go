@@ -11,4 +11,7 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"source_ip_config"},
 		}
 	})
+	p.AddResourceConfigurator("aws_sagemaker_device_fleet", func(r *config.Resource) {
+		r.Path = "devicefleet"
+	})
 }
