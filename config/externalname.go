@@ -152,7 +152,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No terraform import.
 	"aws_eip": config.IdentifierFromProvider,
 	// aws_ec2_tag can be imported by using the EC2 resource identifier and key, separated by a comma (,)
-	"aws_ec2_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_id }}_{{ .parameters.key }}"),
+	"aws_ec2_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_id }},{{ .parameters.key }}"),
 	// Imported by using the EC2 Transit Gateway identifier: tgw-12345678
 	"aws_ec2_transit_gateway": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table, an underscore,
