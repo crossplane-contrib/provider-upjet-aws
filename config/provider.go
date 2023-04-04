@@ -62,6 +62,7 @@ import (
 	"github.com/upbound/provider-aws/config/lakeformation"
 	"github.com/upbound/provider-aws/config/lambda"
 	"github.com/upbound/provider-aws/config/licensemanager"
+	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkmanager"
@@ -201,6 +202,7 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		lambda.Configure,
 		licensemanager.Configure,
+		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
 		opensearch.Configure,
