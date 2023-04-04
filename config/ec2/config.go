@@ -116,7 +116,8 @@ func Configure(p *config.Provider) {
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
 		r.References["block_device_mappings.ebs.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
 		}
 		r.References["iam_instance_profile.arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile",

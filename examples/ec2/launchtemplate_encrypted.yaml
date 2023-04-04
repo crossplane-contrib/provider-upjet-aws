@@ -1,0 +1,63 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: LaunchTemplate
+metadata:
+  name: example-encrypted
+spec:
+  forProvider:
+    region: us-west-1
+    blockDeviceMappings:
+    - deviceName: /dev/sda1
+      ebs:
+      - volumeSize: 20
+        encrypted: "true"
+        kmsKeyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: launchtemplate-key
+    capacityReservationSpecification:
+    - capacityReservationPreference: open
+    cpuOptions:
+    - coreCount: 4
+      threadsPerCore: 2
+    creditSpecification:
+    - cpuCredits: standard
+    disableApiTermination: true
+    ebsOptimized: "true"
+    elasticGpuSpecifications:
+    - type: test
+    elasticInferenceAccelerator:
+    - type: eia1.medium
+    instanceInitiatedShutdownBehavior: terminate
+    instanceMarketOptions:
+    - marketType: spot
+    instanceType: t2.micro
+    keyName: test
+    metadataOptions:
+    - httpEndpoint: enabled
+      httpPutResponseHopLimit: 1
+      httpTokens: required
+      instanceMetadataTags: enabled
+    monitoring:
+    - enabled: true
+    name: foo
+    networkInterfaces:
+    - associatePublicIpAddress: "true"
+    placement:
+    - availabilityZone: us-west-2a
+    tagSpecifications:
+    - resourceType: instance
+      tags:
+        Name: test
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: launchtemplate-key
+  name: launchtemplate-key
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7
