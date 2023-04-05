@@ -47,15 +47,15 @@ type RouteParameters_2 struct {
 	DestinationIPv6CidrBlock *string `json:"destinationIpv6CidrBlock,omitempty" tf:"destination_ipv6_cidr_block,omitempty"`
 
 	// The ID of a managed prefix list destination.
-	// +crossplane:generate:reference:type=ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +kubebuilder:validation:Optional
 	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id,omitempty"`
 
-	// Reference to a ManagedPrefixList to populate destinationPrefixListId.
+	// Reference to a ManagedPrefixList in ec2 to populate destinationPrefixListId.
 	// +kubebuilder:validation:Optional
 	DestinationPrefixListIDRef *v1.Reference `json:"destinationPrefixListIdRef,omitempty" tf:"-"`
 
-	// Selector for a ManagedPrefixList to populate destinationPrefixListId.
+	// Selector for a ManagedPrefixList in ec2 to populate destinationPrefixListId.
 	// +kubebuilder:validation:Optional
 	DestinationPrefixListIDSelector *v1.Selector `json:"destinationPrefixListIdSelector,omitempty" tf:"-"`
 

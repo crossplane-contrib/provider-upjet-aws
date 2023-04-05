@@ -82,7 +82,8 @@ spec:
                     description: The ID of a managed prefix list destination.
                     type: string
                   destinationPrefixListIdRef:
-                    description: Reference to a ManagedPrefixList to populate destinationPrefixListId.
+                    description: Reference to a ManagedPrefixList in ec2 to populate
+                      destinationPrefixListId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                     - name
                     type: object
                   destinationPrefixListIdSelector:
-                    description: Selector for a ManagedPrefixList to populate destinationPrefixListId.
+                    description: Selector for a ManagedPrefixList in ec2 to populate
+                      destinationPrefixListId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
