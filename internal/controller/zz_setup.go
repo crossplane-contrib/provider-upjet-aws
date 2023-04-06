@@ -623,6 +623,7 @@ import (
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
 	firewall "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewallpolicy"
+	loggingconfiguration "github.com/upbound/provider-aws/internal/controller/networkfirewall/loggingconfiguration"
 	rulegroup "github.com/upbound/provider-aws/internal/controller/networkfirewall/rulegroup"
 	attachmentaccepter "github.com/upbound/provider-aws/internal/controller/networkmanager/attachmentaccepter"
 	connectattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/connectattachment"
@@ -1527,6 +1528,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupneptune.Setup,
 		firewall.Setup,
 		firewallpolicy.Setup,
+		loggingconfiguration.Setup,
 		rulegroup.Setup,
 		attachmentaccepter.Setup,
 		connectattachment.Setup,

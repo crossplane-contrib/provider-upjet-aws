@@ -138,3 +138,43 @@ spec:
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: networkfirewall.aws.upbound.io/v1beta1
+kind: LoggingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/loggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    firewallArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    loggingConfiguration:
+    - logDestinationConfig:
+      - logDestination:
+          bucketName: uptest-networkfirewall-logging
+          prefix: /example
+        logDestinationType: S3
+        logType: FLOW
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: uptest-networkfirewall-logging
+  labels:
+    testing.upbound.io/example-name: s3-networkfirewall
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    region: us-west-1
+    objectLockEnabled: true
+    tags:
+      Name: uptest-networkfirewall-logging
