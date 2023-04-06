@@ -1,6 +1,37 @@
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/job
+  labels:
+    testing.upbound.io/example-name: glue-job-example
+  name: glue-job-example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "glue.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: Job
 metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta1/job
+  labels:
+    testing.upbound.io/example-name: glue-job-example
   name: example
 spec:
   forProvider:
@@ -8,4 +39,4 @@ spec:
     command:
     - scriptLocation: s3://somebucket/example.py
     roleArnRef:
-      name: example
+      name: glue-job-example
