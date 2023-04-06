@@ -2230,7 +2230,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_networkfirewall_firewall": config.IdentifierFromProvider,
 	// Network Firewall Policies can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall-policy/example
-	"aws_networkfirewall_firewall_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:firewall-policy/{{ .external_name }}"),
+	"aws_networkfirewall_firewall_policy": config.IdentifierFromProvider,
 	// Network Firewall Rule Groups can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:stateful-rulegroup/example
 	"aws_networkfirewall_rule_group": config.TemplatedStringAsIdentifier("", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateful-rulegroup/{{ .external_name }}"),

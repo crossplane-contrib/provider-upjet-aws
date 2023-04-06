@@ -82,10 +82,30 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FirewallPolicy); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef,
+				Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnSelector,
+				To: reference.To{
+					List:    &RuleGroupList{},
+					Managed: &RuleGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn")
+			}
+			mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FirewallPolicy); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnSelector,
 				To: reference.To{

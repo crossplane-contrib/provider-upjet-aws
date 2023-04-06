@@ -1061,6 +1061,11 @@ func (in *FirewallPolicyParameters) DeepCopyInto(out *FirewallPolicyParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -3120,6 +3125,16 @@ func (in *StatefulRuleGroupReferenceParameters) DeepCopyInto(out *StatefulRuleGr
 		in, out := &in.ResourceArn, &out.ResourceArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceArnRef != nil {
+		in, out := &in.ResourceArnRef, &out.ResourceArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceArnSelector != nil {
+		in, out := &in.ResourceArnSelector, &out.ResourceArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

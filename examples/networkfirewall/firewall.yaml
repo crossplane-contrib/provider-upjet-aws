@@ -38,6 +38,7 @@ metadata:
   name: firewallpolicy
 spec:
   forProvider:
+    name: firewallpolicy
     firewallPolicy:
       - statelessDefaultActions:
           - aws:pass
