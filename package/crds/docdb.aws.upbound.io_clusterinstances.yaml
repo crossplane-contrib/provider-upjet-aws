@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: clusterinstances.docdb.aws.upbound.io
 spec:
@@ -371,6 +371,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: instanceClass is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:
@@ -463,9 +466,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

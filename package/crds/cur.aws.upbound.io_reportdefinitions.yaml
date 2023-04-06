@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: reportdefinitions.cur.aws.upbound.io
 spec:
@@ -361,6 +361,17 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: additionalSchemaElements is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.additionalSchemaElements)
+            - message: compression is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.compression)
+            - message: format is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.format)
+            - message: s3Region is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Region)
+            - message: timeUnit is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeUnit)
           status:
             description: ReportDefinitionStatus defines the observed state of ReportDefinition.
             properties:
@@ -414,9 +425,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

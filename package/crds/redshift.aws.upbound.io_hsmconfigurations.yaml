@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: hsmconfigurations.redshift.aws.upbound.io
 spec:
@@ -282,6 +282,17 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: description is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)
+            - message: hsmIpAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmIpAddress)
+            - message: hsmPartitionName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmPartitionName)
+            - message: hsmPartitionPasswordSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmPartitionPasswordSecretRef)
+            - message: hsmServerPublicCertificate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hsmServerPublicCertificate)
           status:
             description: HSMConfigurationStatus defines the observed state of HSMConfiguration.
             properties:
@@ -341,9 +352,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

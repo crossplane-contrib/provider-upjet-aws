@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: streams.qldb.aws.upbound.io
 spec:
@@ -519,6 +519,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: inclusiveStartTime is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inclusiveStartTime)
+            - message: kinesisConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kinesisConfiguration)
+            - message: streamName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.streamName)
           status:
             description: StreamStatus defines the observed state of Stream.
             properties:
@@ -579,9 +586,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

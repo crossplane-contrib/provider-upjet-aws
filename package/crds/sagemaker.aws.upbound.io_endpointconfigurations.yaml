@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: endpointconfigurations.sagemaker.aws.upbound.io
 spec:
@@ -701,6 +701,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: productionVariants is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.productionVariants)
           status:
             description: EndpointConfigurationStatus defines the observed state of
               EndpointConfiguration.
@@ -762,9 +765,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

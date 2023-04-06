@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: taskdefinitions.ecs.aws.upbound.io
 spec:
@@ -624,6 +624,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: containerDefinitions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerDefinitions)
+            - message: family is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)
           status:
             description: TaskDefinitionStatus defines the observed state of TaskDefinition.
             properties:
@@ -686,9 +691,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

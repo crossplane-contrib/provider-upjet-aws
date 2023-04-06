@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: transitgatewayconnectpeers.ec2.aws.upbound.io
 spec:
@@ -358,6 +358,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: insideCidrBlocks is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.insideCidrBlocks)
+            - message: peerAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peerAddress)
           status:
             description: TransitGatewayConnectPeerStatus defines the observed state
               of TransitGatewayConnectPeer.
@@ -419,9 +424,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

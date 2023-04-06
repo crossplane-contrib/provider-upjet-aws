@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: metricalarms.cloudwatch.aws.upbound.io
 spec:
@@ -428,6 +428,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: comparisonOperator is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.comparisonOperator)
+            - message: evaluationPeriods is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.evaluationPeriods)
           status:
             description: MetricAlarmStatus defines the observed state of MetricAlarm.
             properties:
@@ -488,9 +493,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

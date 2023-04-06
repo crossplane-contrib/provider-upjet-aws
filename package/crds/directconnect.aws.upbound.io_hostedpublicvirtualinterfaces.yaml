@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: hostedpublicvirtualinterfaces.directconnect.aws.upbound.io
 spec:
@@ -353,6 +353,19 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: addressFamily is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)
+            - message: bgpAsn is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: ownerAccountId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerAccountId)
+            - message: routeFilterPrefixes is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routeFilterPrefixes)
+            - message: vlan is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vlan)
           status:
             description: HostedPublicVirtualInterfaceStatus defines the observed state
               of HostedPublicVirtualInterface.
@@ -413,9 +426,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

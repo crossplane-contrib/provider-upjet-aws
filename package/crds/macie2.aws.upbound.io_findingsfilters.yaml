@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: findingsfilters.macie2.aws.upbound.io
 spec:
@@ -326,6 +326,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: findingCriteria is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.findingCriteria)
           status:
             description: FindingsFilterStatus defines the observed state of FindingsFilter.
             properties:
@@ -384,9 +389,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: voiceconnectorterminations.chime.aws.upbound.io
 spec:
@@ -344,6 +344,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: callingRegions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.callingRegions)
+            - message: cidrAllowList is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cidrAllowList)
           status:
             description: VoiceConnectorTerminationStatus defines the observed state
               of VoiceConnectorTermination.
@@ -395,9 +400,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

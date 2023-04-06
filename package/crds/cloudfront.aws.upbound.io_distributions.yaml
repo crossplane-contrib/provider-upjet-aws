@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: distributions.cloudfront.aws.upbound.io
 spec:
@@ -1305,6 +1305,17 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: defaultCacheBehavior is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultCacheBehavior)
+            - message: enabled is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)
+            - message: origin is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.origin)
+            - message: restrictions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.restrictions)
+            - message: viewerCertificate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.viewerCertificate)
           status:
             description: DistributionStatus defines the observed state of Distribution.
             properties:
@@ -1449,9 +1460,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

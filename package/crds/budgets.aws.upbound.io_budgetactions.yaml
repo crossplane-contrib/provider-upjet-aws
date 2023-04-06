@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: budgetactions.budgets.aws.upbound.io
 spec:
@@ -603,6 +603,19 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: actionThreshold is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionThreshold)
+            - message: actionType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionType)
+            - message: approvalModel is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.approvalModel)
+            - message: definition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)
+            - message: notificationType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)
+            - message: subscriber is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriber)
           status:
             description: BudgetActionStatus defines the observed state of BudgetAction.
             properties:
@@ -662,9 +675,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

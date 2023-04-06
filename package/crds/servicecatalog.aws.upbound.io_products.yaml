@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: products.servicecatalog.aws.upbound.io
 spec:
@@ -312,6 +312,15 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: owner is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.owner)
+            - message: provisioningArtifactParameters is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.provisioningArtifactParameters)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ProductStatus defines the observed state of Product.
             properties:
@@ -385,9 +394,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

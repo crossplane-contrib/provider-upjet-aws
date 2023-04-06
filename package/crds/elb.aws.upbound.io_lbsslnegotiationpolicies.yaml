@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: lbsslnegotiationpolicies.elb.aws.upbound.io
 spec:
@@ -343,6 +343,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: lbPort is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lbPort)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: LBSSLNegotiationPolicyStatus defines the observed state of
               LBSSLNegotiationPolicy.
@@ -394,9 +399,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

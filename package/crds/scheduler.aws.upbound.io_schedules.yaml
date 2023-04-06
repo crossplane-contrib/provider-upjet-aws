@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: schedules.scheduler.aws.upbound.io
 spec:
@@ -790,6 +790,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: flexibleTimeWindow is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.flexibleTimeWindow)
+            - message: scheduleExpression is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scheduleExpression)
+            - message: target is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)
           status:
             description: ScheduleStatus defines the observed state of Schedule.
             properties:
@@ -844,9 +851,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: samplingrules.xray.aws.upbound.io
 spec:
@@ -289,6 +289,27 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: fixedRate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fixedRate)
+            - message: host is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.host)
+            - message: httpMethod is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)
+            - message: priority is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)
+            - message: reservoirSize is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reservoirSize)
+            - message: resourceArn is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceArn)
+            - message: serviceName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceName)
+            - message: serviceType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceType)
+            - message: urlPath is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.urlPath)
+            - message: version is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)
           status:
             description: SamplingRuleStatus defines the observed state of SamplingRule.
             properties:
@@ -349,9 +370,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: scheduledactions.redshift.aws.upbound.io
 spec:
@@ -397,6 +397,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: schedule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)
+            - message: targetAction is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)
           status:
             description: ScheduledActionStatus defines the observed state of ScheduledAction.
             properties:
@@ -447,9 +452,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
