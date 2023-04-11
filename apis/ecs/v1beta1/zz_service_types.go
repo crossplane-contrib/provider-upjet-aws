@@ -274,7 +274,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
-	// ARN of an ECS cluster.
+	// Name of an ECS cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
