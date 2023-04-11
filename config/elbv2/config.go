@@ -11,4 +11,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lb_target_group_attachment", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+	p.AddResourceConfigurator("aws_lb_target_group", func(r *config.Resource) {
+		r.LateInitializer.IgnoredFields = []string{"target_failover"}
+	})
 }
