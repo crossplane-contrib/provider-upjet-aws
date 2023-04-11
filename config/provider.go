@@ -44,7 +44,6 @@ import (
 	"github.com/upbound/provider-aws/config/efs"
 	"github.com/upbound/provider-aws/config/eks"
 	"github.com/upbound/provider-aws/config/elasticache"
-	"github.com/upbound/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/provider-aws/config/elb"
 	"github.com/upbound/provider-aws/config/elbv2"
 	"github.com/upbound/provider-aws/config/firehose"
@@ -185,7 +184,6 @@ func GetProvider() *config.Provider {
 		efs.Configure,
 		eks.Configure,
 		elasticache.Configure,
-		elasticloadbalancing.Configure,
 		elb.Configure,
 		elbv2.Configure,
 		firehose.Configure,
