@@ -70,6 +70,7 @@ import (
 	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
+	"github.com/upbound/provider-aws/config/ram"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
 	"github.com/upbound/provider-aws/config/rolesanywhere"
@@ -206,6 +207,7 @@ func GetProvider() *config.Provider {
 		mq.Configure,
 		neptune.Configure,
 		opensearch.Configure,
+		ram.Configure,
 		rds.Configure,
 		redshift.Configure,
 		rolesanywhere.Configure,

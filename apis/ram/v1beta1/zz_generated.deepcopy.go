@@ -106,16 +106,6 @@ func (in *ResourceAssociationParameters) DeepCopyInto(out *ResourceAssociationPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.ResourceArnRef != nil {
-		in, out := &in.ResourceArnRef, &out.ResourceArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ResourceArnSelector != nil {
-		in, out := &in.ResourceArnSelector, &out.ResourceArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.ResourceShareArn != nil {
 		in, out := &in.ResourceShareArn, &out.ResourceShareArn
 		*out = new(string)

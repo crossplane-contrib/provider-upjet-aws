@@ -9,9 +9,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    resourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    resourceArn: ${aws_subnet.example.arn}
     resourceShareArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

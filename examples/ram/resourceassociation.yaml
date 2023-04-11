@@ -3,16 +3,14 @@ kind: ResourceAssociation
 metadata:
   annotations:
     meta.upbound.io/example-id: ram/v1beta1/resourceassociation
-    upjet.upbound.io/manual-intervention: "This resource requires to enable resource sharing within your organization."
+    upjet.upbound.io/manual-intervention: "This resource requires to enable resource sharing within your organization and adding an resourceArn"
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     region: us-west-1
-    resourceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    resourceArn: ${arn}
     resourceShareArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
