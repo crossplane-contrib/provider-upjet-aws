@@ -27,18 +27,8 @@ type ResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +kubebuilder:validation:Optional
-	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
-
-	// Reference to a Subnet in ec2 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in ec2 to populate resourceArn.
-	// +kubebuilder:validation:Optional
-	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
 	// Amazon Resource Name (ARN) of the RAM Resource Share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.ResourceShare
