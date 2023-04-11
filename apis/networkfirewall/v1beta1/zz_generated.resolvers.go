@@ -105,6 +105,32 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this LoggingConfiguration.
+func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.FirewallArnRef,
+		Selector:     mg.Spec.ForProvider.FirewallArnSelector,
+		To: reference.To{
+			List:    &FirewallList{},
+			Managed: &Firewall{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FirewallArn")
+	}
+	mg.Spec.ForProvider.FirewallArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FirewallArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this RuleGroup.
 func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
