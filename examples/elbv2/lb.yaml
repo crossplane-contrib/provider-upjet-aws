@@ -57,7 +57,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    availabilityZone: us-west-1b
+    availabilityZone: us-west-1a
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -72,7 +72,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    availabilityZone: us-west-1c
+    availabilityZone: us-west-1b
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
