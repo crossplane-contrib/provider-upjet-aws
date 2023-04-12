@@ -1,162 +1,105 @@
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Alias
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
 spec:
   forProvider:
-    region: us-east-1
     description: a sample description
-    functionNameRef:
-      name: example
+    functionNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias
     functionVersion: "1"
+    region: us-west-1
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+spec: 
+  forProvider:
+    region: us-west-1
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+  labels:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels: 
+        testing.upbound.io/example-name: test_lambda_alias
+    key: lambda-alias-test.zip
+    contentBase64: |
+      UEsDBBQAAAAIAKtNjFYSV7EydQAAAKAAAAASABwAbGFtYmRhX2Z1bmN0aW9uLnB5VVQJAAOibzZkEHQ2ZHV4CwABBPUBAAAEFAAAAD1NQQrCQBC79xXjaSyUPqDg3T+IlNGdVWF2FmZHEUr/3rpWQy5JSBI4glC6BBrvpEHY9vxi9Q6uWZ3f3g4NrEhcCt0YDoBHFskwzSt32MdsifxbOmF8WPFRKTGeO9hMob/X1jFjf5rCVMUHuM0jDL+nms3NAlBLAQIeAxQAAAAIAKtNjFYSV7EydQAAAKAAAAASABgAAAAAAAEAAACkgQAAAABsYW1iZGFfZnVuY3Rpb24ucHlVVAUAA6JvNmR1eAsAAQT1AQAABBQAAABQSwUGAAAAAAEAAQBYAAAAwQAAAAAA
+    region: us-west-1
 ---
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: lambda/v1beta1/alias
   labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
+spec: 
   forProvider:
-    s3Bucket: upbound-provider-test-data
-    s3Key: hello-python.zip
-    handler: index.py
-    packageType: Zip
-    publish: true
-    region: us-east-1
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: role
     runtime: python3.9
-    timeout: 60
-    vpcConfig:
-    - securityGroupIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      subnetIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+    handler: lambda_function.lambda_handler
+    s3Bucket: test-lambda-alias
+    s3Key: lambda-alias-test.zip
+    publish: true
+    roleSelector:
+      matchLabels: 
+        testing.upbound.io/example-name: test_lambda_alias
+    region: us-west-1
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/alias
   labels:
-    testing.upbound.io/example-name: role
-  name: sample-role
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
 spec:
   forProvider:
     assumeRolePolicy: |
       {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": ["ec2.amazonaws.com", "lambda.amazonaws.com"]
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Principal": {
+                      "Service": "lambda.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+              }
+          ]
       }
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
-kind: Policy
+kind: RolePolicyAttachment 
 metadata:
   annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
+    meta.upbound.io/example-id: lambda/v1beta1/alias
   labels:
-    testing.upbound.io/example-name: policy
-  name: sample-user-policy
+    testing.upbound.io/example-name: test_lambda_alias
+  name: test-lambda-alias
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": [
-                "ec2:DescribeVpcEndpoints",
-                "ec2:DescribeRouteTables",
-                "ec2:CreateNetworkInterface",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcAttribute",
-                "ec2:DescribeNetworkInterfaces"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-          }
-        ]
-      }
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: RolePolicyAttachment
-metadata:
-  annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-  name: sample-user-policy-attachment
-  labels:
-    testing.upbound.io/example-name: policy-attachment
-spec:
-  forProvider:
-    policyArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: policy
+    policyArn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
     roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: role
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-  labels:
-    testing.upbound.io/example-name: example
-  name: sample-subnet1
-spec:
-  forProvider:
-    region: us-east-1
-    vpcIdRef:
-      name: sample-vpc
-    cidrBlock: 172.16.10.0/24
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: SecurityGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    description: Allow TLS inbound traffic
-    name: allow_tls
-    tags:
-      Name: allow_tls
-    region: us-east-1
-    vpcIdRef:
-      name: sample-vpc
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  annotations:
-    meta.upbound.io/example-id: lambda/v1beta1/function
-  labels:
-    testing.upbound.io/example-name: example
-  name: sample-vpc
-spec:
-  forProvider:
-    region: us-east-1
-    cidrBlock: 172.16.0.0/16
-    tags:
-      Name: DemoVpc
+      matchLabels: 
+        testing.upbound.io/example-name: test_lambda_alias
