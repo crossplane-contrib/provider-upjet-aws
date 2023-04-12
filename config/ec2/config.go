@@ -198,6 +198,11 @@ func Configure(p *config.Provider) {
 		r.References["source_security_group_id"] = config.Reference{
 			Type: "SecurityGroup",
 		}
+		r.References["prefix_list_ids"] = config.Reference{
+			TerraformName:     "aws_ec2_managed_prefix_list",
+			RefFieldName:      "PrefixListIDRefs",
+			SelectorFieldName: "PrefixListIDSelector",
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"cidr_blocks",
@@ -240,6 +245,9 @@ func Configure(p *config.Provider) {
 		}
 		r.References["nat_gateway_id"] = config.Reference{
 			Type: "NATGateway",
+		}
+		r.References["destination_prefix_list_id"] = config.Reference{
+			TerraformName: "aws_ec2_managed_prefix_list",
 		}
 		r.UseAsync = true
 	})

@@ -1350,6 +1350,22 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationPrefixListID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DestinationPrefixListIDRef,
+		Selector:     mg.Spec.ForProvider.DestinationPrefixListIDSelector,
+		To: reference.To{
+			List:    &ManagedPrefixListList{},
+			Managed: &ManagedPrefixList{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationPrefixListID")
+	}
+	mg.Spec.ForProvider.DestinationPrefixListID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DestinationPrefixListIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EgressOnlyGatewayID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.EgressOnlyGatewayIDRef,
@@ -1611,7 +1627,24 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrefixListIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.PrefixListIDRefs,
+		Selector:      mg.Spec.ForProvider.PrefixListIDSelector,
+		To: reference.To{
+			List:    &ManagedPrefixListList{},
+			Managed: &ManagedPrefixList{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrefixListIds")
+	}
+	mg.Spec.ForProvider.PrefixListIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.PrefixListIDRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityGroupID),

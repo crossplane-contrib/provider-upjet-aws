@@ -17622,6 +17622,16 @@ func (in *RouteParameters_2) DeepCopyInto(out *RouteParameters_2) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationPrefixListIDRef != nil {
+		in, out := &in.DestinationPrefixListIDRef, &out.DestinationPrefixListIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationPrefixListIDSelector != nil {
+		in, out := &in.DestinationPrefixListIDSelector, &out.DestinationPrefixListIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EgressOnlyGatewayID != nil {
 		in, out := &in.EgressOnlyGatewayID, &out.EgressOnlyGatewayID
 		*out = new(string)
@@ -19073,6 +19083,18 @@ func (in *SecurityGroupRuleParameters_2) DeepCopyInto(out *SecurityGroupRulePara
 				**out = **in
 			}
 		}
+	}
+	if in.PrefixListIDRefs != nil {
+		in, out := &in.PrefixListIDRefs, &out.PrefixListIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.PrefixListIDSelector != nil {
+		in, out := &in.PrefixListIDSelector, &out.PrefixListIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrefixListIds != nil {
 		in, out := &in.PrefixListIds, &out.PrefixListIds
