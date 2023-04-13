@@ -14,6 +14,24 @@ import (
 )
 
 type EBSBlockDeviceObservation struct {
+
+	// Whether the volume should be destroyed on instance termination. Default is true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Name of the device to mount.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Snapshot ID to mount.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Size of the volume in gigabytes.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type EBSBlockDeviceParameters struct {
@@ -44,6 +62,12 @@ type EBSBlockDeviceParameters struct {
 }
 
 type EphemeralBlockDeviceObservation struct {
+
+	// Name of the block device to mount on the instance.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// The Instance Store Device Name (e.g., ephemeral0).
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type EphemeralBlockDeviceParameters struct {
@@ -59,14 +83,74 @@ type EphemeralBlockDeviceParameters struct {
 
 type InstanceObservation struct {
 
+	// AMI to use for the instance.  If an AMI is specified, os must be Custom.
+	AMIID *string `json:"amiId,omitempty" tf:"ami_id,omitempty"`
+
+	// OpsWorks agent to install. Default is INHERIT.
+	AgentVersion *string `json:"agentVersion,omitempty" tf:"agent_version,omitempty"`
+
+	// Machine architecture for created instances.  Valid values are x86_64 or i386. The default is x86_64.
+	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
+
+	// Creates load-based or time-based instances.  Valid values are load, timer.
+	AutoScalingType *string `json:"autoScalingType,omitempty" tf:"auto_scaling_type,omitempty"`
+
+	// Name of the availability zone where instances will be created by default.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Time that the instance was created.
+	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
+
+	// Whether to delete EBS volume on deletion. Default is true.
+	DeleteEBS *bool `json:"deleteEbs,omitempty" tf:"delete_ebs,omitempty"`
+
+	// Whether to delete the Elastic IP on deletion.
+	DeleteEIP *bool `json:"deleteEip,omitempty" tf:"delete_eip,omitempty"`
+
+	// Configuration block for additional EBS block devices to attach to the instance. See Block Devices below.
+	EBSBlockDevice []EBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+
+	// Whether the launched EC2 instance will be EBS-optimized.
+	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
 	// EC2 instance ID.
 	EC2InstanceID *string `json:"ec2InstanceId,omitempty" tf:"ec2_instance_id,omitempty"`
+
+	// ECS cluster's ARN for container instances.
+	EcsClusterArn *string `json:"ecsClusterArn,omitempty" tf:"ecs_cluster_arn,omitempty"`
+
+	// Instance Elastic IP address.
+	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
+
+	// Configuration block for ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below.
+	EphemeralBlockDevice []EphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+
+	// Instance's host name.
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// ID of the OpsWorks instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// For registered instances, infrastructure class: ec2 or on-premises.
+	InfrastructureClass *string `json:"infrastructureClass,omitempty" tf:"infrastructure_class,omitempty"`
+
+	// Controls where to install OS and package updates when the instance boots.  Default is true.
+	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
+
+	// ARN of the instance's IAM profile.
+	InstanceProfileArn *string `json:"instanceProfileArn,omitempty" tf:"instance_profile_arn,omitempty"`
+
+	// Type of instance to start.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
 	// ID of the last service error.
 	LastServiceErrorID *string `json:"lastServiceErrorId,omitempty" tf:"last_service_error_id,omitempty"`
+
+	// List of the layers the instance will belong to.
+	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
+
+	// Name of operating system that will be installed.
+	Os *string `json:"os,omitempty" tf:"os,omitempty"`
 
 	// Instance's platform.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
@@ -98,6 +182,12 @@ type InstanceObservation struct {
 	// For registered instances, the reported operating system version.
 	ReportedOsVersion *string `json:"reportedOsVersion,omitempty" tf:"reported_os_version,omitempty"`
 
+	// Configuration block for the root block device of the instance. See Block Devices below.
+	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	// Name of the type of root device instances will have by default. Valid values are ebs or instance-store.
+	RootDeviceType *string `json:"rootDeviceType,omitempty" tf:"root_device_type,omitempty"`
+
 	// Root device volume ID.
 	RootDeviceVolumeID *string `json:"rootDeviceVolumeId,omitempty" tf:"root_device_volume_id,omitempty"`
 
@@ -106,6 +196,30 @@ type InstanceObservation struct {
 
 	// SSH key's RSA fingerprint.
 	SSHHostRsaKeyFingerprint *string `json:"sshHostRsaKeyFingerprint,omitempty" tf:"ssh_host_rsa_key_fingerprint,omitempty"`
+
+	// Name of the SSH keypair that instances will have by default.
+	SSHKeyName *string `json:"sshKeyName,omitempty" tf:"ssh_key_name,omitempty"`
+
+	// Associated security groups.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Identifier of the stack the instance will belong to.
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Desired state of the instance. Valid values are running or stopped.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Instance status. Will be one of booting, connection_lost, online, pending, rebooting, requested, running_setup, setup_failed, shutting_down, start_failed, stop_failed, stopped, stopping, terminated, or terminating.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Subnet ID to attach to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Instance tenancy to use. Valid values are default, dedicated or host.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+
+	// Keyword to choose what virtualization mode created instances will use. Valid values are paravirtual or hvm.
+	VirtualizationType *string `json:"virtualizationType,omitempty" tf:"virtualization_type,omitempty"`
 }
 
 type InstanceParameters struct {
@@ -271,6 +385,18 @@ type InstanceParameters struct {
 }
 
 type RootBlockDeviceObservation struct {
+
+	// Whether the volume should be destroyed on instance termination. Default is true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Size of the volume in gigabytes.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type RootBlockDeviceParameters struct {

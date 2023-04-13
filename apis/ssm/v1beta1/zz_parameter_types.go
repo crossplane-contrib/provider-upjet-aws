@@ -14,10 +14,41 @@ import (
 )
 
 type ParameterObservation_2 struct {
+
+	// Regular expression used to validate the parameter value.
+	AllowedPattern *string `json:"allowedPattern,omitempty" tf:"allowed_pattern,omitempty"`
+
+	// ARN of the parameter.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
+	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
+
+	// Description of the parameter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Value of the parameter. This argument is not valid with a type of SecureString.
+	InsecureValue *string `json:"insecureValue,omitempty" tf:"insecure_value,omitempty"`
+
+	// KMS key ID or ARN for encrypting a SecureString.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Overwrite an existing parameter.
+	Overwrite *bool `json:"overwrite,omitempty" tf:"overwrite,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Parameter tier to assign to the parameter. If not specified, will use the default parameter tier for the region. Valid tiers are Standard, Advanced, and Intelligent-Tiering. Downgrading an Advanced tier parameter to Standard will recreate the resource. For more information on parameter tiers, see the AWS SSM Parameter tier comparison and guide.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+
+	// Type of the parameter. Valid types are String, StringList and SecureString.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Version of the parameter.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
@@ -67,8 +98,8 @@ type ParameterParameters_2 struct {
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// Type of the parameter. Valid types are String, StringList and SecureString.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
 	// +kubebuilder:validation:Optional
@@ -99,8 +130,9 @@ type ParameterStatus struct {
 type Parameter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ParameterSpec   `json:"spec"`
-	Status            ParameterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ParameterSpec   `json:"spec"`
+	Status ParameterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

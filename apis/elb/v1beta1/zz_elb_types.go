@@ -14,6 +14,18 @@ import (
 )
 
 type AccessLogsObservation struct {
+
+	// The S3 bucket name to store the logs in.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
+
+	// Boolean to enable / disable access_logs. Default is true
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type AccessLogsParameters struct {
@@ -37,19 +49,67 @@ type AccessLogsParameters struct {
 
 type ELBObservation struct {
 
+	// An Access Logs block. Access Logs documented below.
+	AccessLogs []AccessLogsObservation `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
+
 	// The ARN of the ELB
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The AZ's to serve traffic in.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// Boolean to enable connection draining. Default: false
+	ConnectionDraining *bool `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty"`
+
+	// The time in seconds to allow for connections to drain. Default: 300
+	ConnectionDrainingTimeout *float64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
+
+	// Enable cross-zone load balancing. Default: true
+	CrossZoneLoadBalancing *bool `json:"crossZoneLoadBalancing,omitempty" tf:"cross_zone_load_balancing,omitempty"`
 
 	// The DNS name of the ELB
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
+	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
+
+	// A health_check block. Health Check documented below.
+	HealthCheck []HealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
 	// The name of the ELB
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The time in seconds that the connection is allowed to be idle. Default: 60
+	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+
+	// A list of instance ids to place in the ELB pool.
+	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
+
+	// If true, ELB will be an internal ELB.
+	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
+
+	// A list of listener blocks. Listeners documented below.
+	Listener []ListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
+
+	// A list of security group IDs to assign to the ELB.
+	// Only valid if creating an ELB within a VPC
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The name of the security group that you can use as
+	// part of your inbound rules for your load balancer's back-end application
+	// instances. Use this for Classic or Default VPC only.
+	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
 	// The ID of the security group that you can use as
 	// part of your inbound rules for your load balancer's back-end application
 	// instances. Only available on ELBs launched in a VPC.
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
+
+	// A list of subnet IDs to attach to the ELB.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -110,8 +170,8 @@ type ELBParameters struct {
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
 	// A list of listener blocks. Listeners documented below.
-	// +kubebuilder:validation:Required
-	Listener []ListenerParameters `json:"listener" tf:"listener,omitempty"`
+	// +kubebuilder:validation:Optional
+	Listener []ListenerParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -148,6 +208,22 @@ type ELBParameters struct {
 }
 
 type HealthCheckObservation struct {
+
+	// The number of checks before the instance is declared healthy.
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+
+	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The target of the check. Valid pattern is "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL
+	// values are:
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// The length of time before the check times out.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// The number of checks before the instance is declared unhealthy.
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckParameters struct {
@@ -175,6 +251,24 @@ type HealthCheckParameters struct {
 }
 
 type ListenerObservation struct {
+
+	// The port on the instance to route to
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+
+	// The protocol to use to the instance. Valid
+	// values are HTTP, HTTPS, TCP, or SSL
+	InstanceProtocol *string `json:"instanceProtocol,omitempty" tf:"instance_protocol,omitempty"`
+
+	// The port to listen on for the load balancer
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The protocol to listen on. Valid values are HTTP,
+	// HTTPS, TCP, or SSL
+	LBProtocol *string `json:"lbProtocol,omitempty" tf:"lb_protocol,omitempty"`
+
+	// The ARN of an SSL certificate you have
+	// uploaded to AWS IAM. Note ECDSA-specific restrictions below.  Only valid when
+	SSLCertificateID *string `json:"sslCertificateId,omitempty" tf:"ssl_certificate_id,omitempty"`
 }
 
 type ListenerParameters struct {
@@ -227,8 +321,9 @@ type ELBStatus struct {
 type ELB struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ELBSpec   `json:"spec"`
-	Status            ELBStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.listener)",message="listener is a required parameter"
+	Spec   ELBSpec   `json:"spec"`
+	Status ELBStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

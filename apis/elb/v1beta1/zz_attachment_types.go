@@ -14,7 +14,14 @@ import (
 )
 
 type AttachmentObservation struct {
+
+	// The name of the ELB.
+	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Instance ID to place in the ELB pool.
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 }
 
 type AttachmentParameters struct {

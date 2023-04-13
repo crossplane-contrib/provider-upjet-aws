@@ -14,14 +14,21 @@ import (
 )
 
 type DomainServiceAccessPolicyObservation struct {
+
+	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The CloudSearch domain name the policy applies to.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DomainServiceAccessPolicyParameters struct {
 
 	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
-	// +kubebuilder:validation:Required
-	AccessPolicy *string `json:"accessPolicy" tf:"access_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// The CloudSearch domain name the policy applies to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudsearch/v1beta1.Domain
@@ -67,8 +74,9 @@ type DomainServiceAccessPolicyStatus struct {
 type DomainServiceAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainServiceAccessPolicySpec   `json:"spec"`
-	Status            DomainServiceAccessPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessPolicy)",message="accessPolicy is a required parameter"
+	Spec   DomainServiceAccessPolicySpec   `json:"spec"`
+	Status DomainServiceAccessPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

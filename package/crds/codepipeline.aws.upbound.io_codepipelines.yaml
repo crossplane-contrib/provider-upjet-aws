@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -354,10 +358,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - artifactStore
                 - region
-                - stage
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -529,6 +546,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: artifactStore is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.artifactStore)
+            - message: stage is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stage)
           status:
             description: CodepipelineStatus defines the observed state of Codepipeline.
             properties:
@@ -537,9 +559,131 @@ spec:
                   arn:
                     description: The codepipeline ARN.
                     type: string
+                  artifactStore:
+                    description: One or more artifact_store blocks. Artifact stores
+                      are documented below.
+                    items:
+                      properties:
+                        encryptionKey:
+                          description: The encryption key block AWS CodePipeline uses
+                            to encrypt the data in the artifact store, such as an
+                            AWS Key Management Service (AWS KMS) key. If you don't
+                            specify a key, AWS CodePipeline uses the default key for
+                            Amazon Simple Storage Service (Amazon S3). An encryption_key
+                            block is documented below.
+                          items:
+                            properties:
+                              id:
+                                description: The KMS key ARN or ID
+                                type: string
+                              type:
+                                description: The type of key; currently only KMS is
+                                  supported
+                                type: string
+                            type: object
+                          type: array
+                        location:
+                          description: The location where AWS CodePipeline stores
+                            artifacts for a pipeline; currently only S3 is supported.
+                          type: string
+                        region:
+                          description: The region where the artifact store is located.
+                            Required for a cross-region CodePipeline, do not provide
+                            for a single-region CodePipeline.
+                          type: string
+                        type:
+                          description: The type of the artifact store, such as Amazon
+                            S3
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The codepipeline ID.
                     type: string
+                  roleArn:
+                    description: A service role Amazon Resource Name (ARN) that grants
+                      AWS CodePipeline permission to make calls to AWS services on
+                      your behalf.
+                    type: string
+                  stage:
+                    description: (Minimum of at least two stage blocks is required)
+                      A stage block. Stages are documented below.
+                    items:
+                      properties:
+                        action:
+                          description: The action(s) to include in the stage. Defined
+                            as an action block below
+                          items:
+                            properties:
+                              category:
+                                description: A category defines what kind of action
+                                  can be taken in the stage, and constrains the provider
+                                  type for the action. Possible values are Approval,
+                                  Build, Deploy, Invoke, Source and Test.
+                                type: string
+                              configuration:
+                                additionalProperties:
+                                  type: string
+                                description: A map of the action declaration's configuration.
+                                  Configurations options for action types and providers
+                                  can be found in the Pipeline Structure Reference
+                                  and Action Structure Reference documentation.
+                                type: object
+                              inputArtifacts:
+                                description: A list of artifact names to be worked
+                                  on.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The action declaration's name.
+                                type: string
+                              namespace:
+                                description: The namespace all output variables will
+                                  be accessed from.
+                                type: string
+                              outputArtifacts:
+                                description: A list of artifact names to output. Output
+                                  artifact names must be unique within a pipeline.
+                                items:
+                                  type: string
+                                type: array
+                              owner:
+                                description: The creator of the action being called.
+                                  Possible values are AWS, Custom and ThirdParty.
+                                type: string
+                              provider:
+                                description: The provider of the service being called
+                                  by the action. Valid providers are determined by
+                                  the action category. Provider names are listed in
+                                  the Action Structure Reference documentation.
+                                type: string
+                              region:
+                                description: The region in which to run the action.
+                                type: string
+                              roleArn:
+                                description: The ARN of the IAM service role that
+                                  will perform the declared action. This is assumed
+                                  through the roleArn for the pipeline.
+                                type: string
+                              runOrder:
+                                description: The order in which actions are run.
+                                type: number
+                              version:
+                                description: A string that identifies the action type.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The name of the stage.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

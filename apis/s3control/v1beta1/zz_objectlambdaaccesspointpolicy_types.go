@@ -15,11 +15,20 @@ import (
 
 type ObjectLambdaAccessPointPolicyObservation struct {
 
+	// The AWS account ID for the account that owns the Object Lambda Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// Indicates whether this access point currently has a policy that allows public access.
 	HasPublicAccessPolicy *bool `json:"hasPublicAccessPolicy,omitempty" tf:"has_public_access_policy,omitempty"`
 
 	// The AWS account ID and access point name separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Object Lambda Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Object Lambda Access Point resource policy document.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ObjectLambdaAccessPointPolicyParameters struct {
@@ -43,8 +52,8 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Object Lambda Access Point resource policy document.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -76,8 +85,9 @@ type ObjectLambdaAccessPointPolicyStatus struct {
 type ObjectLambdaAccessPointPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ObjectLambdaAccessPointPolicySpec   `json:"spec"`
-	Status            ObjectLambdaAccessPointPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   ObjectLambdaAccessPointPolicySpec   `json:"spec"`
+	Status ObjectLambdaAccessPointPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

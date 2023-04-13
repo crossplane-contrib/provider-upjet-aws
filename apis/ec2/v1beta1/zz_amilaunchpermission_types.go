@@ -15,8 +15,23 @@ import (
 
 type AMILaunchPermissionObservation struct {
 
+	// AWS account ID for the launch permission.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Name of the group for the launch permission. Valid values: "all".
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
 	// Launch permission ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the AMI.
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// ARN of an organization for the launch permission.
+	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
+
+	// ARN of an organizational unit for the launch permission.
+	OrganizationalUnitArn *string `json:"organizationalUnitArn,omitempty" tf:"organizational_unit_arn,omitempty"`
 }
 
 type AMILaunchPermissionParameters struct {

@@ -15,11 +15,20 @@ import (
 
 type DeploymentConfigObservation struct {
 
+	// The compute platform can be Server, Lambda, or ECS. Default is Server.
+	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
+
 	// The AWS Assigned deployment config id
 	DeploymentConfigID *string `json:"deploymentConfigId,omitempty" tf:"deployment_config_id,omitempty"`
 
 	// The deployment group's config name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A minimum_healthy_hosts block. Required for Server compute platform. Minimum Healthy Hosts are documented below.
+	MinimumHealthyHosts []MinimumHealthyHostsObservation `json:"minimumHealthyHosts,omitempty" tf:"minimum_healthy_hosts,omitempty"`
+
+	// A traffic_routing_config block. Traffic Routing Config is documented below.
+	TrafficRoutingConfig []TrafficRoutingConfigObservation `json:"trafficRoutingConfig,omitempty" tf:"traffic_routing_config,omitempty"`
 }
 
 type DeploymentConfigParameters struct {
@@ -43,6 +52,15 @@ type DeploymentConfigParameters struct {
 }
 
 type MinimumHealthyHostsObservation struct {
+
+	// The type can either be FLEET_PERCENT or HOST_COUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value when the type is FLEET_PERCENT represents the minimum number of healthy instances as
+	// a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the
+	// deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.
+	// When the type is HOST_COUNT, the value represents the minimum number of healthy instances as an absolute value.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MinimumHealthyHostsParameters struct {
@@ -60,6 +78,12 @@ type MinimumHealthyHostsParameters struct {
 }
 
 type TimeBasedCanaryObservation struct {
+
+	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
+	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedCanaryParameters struct {
@@ -74,6 +98,12 @@ type TimeBasedCanaryParameters struct {
 }
 
 type TimeBasedLinearObservation struct {
+
+	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
+	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedLinearParameters struct {
@@ -88,6 +118,15 @@ type TimeBasedLinearParameters struct {
 }
 
 type TrafficRoutingConfigObservation struct {
+
+	// The time based canary configuration information. If type is TimeBasedLinear, use time_based_linear instead.
+	TimeBasedCanary []TimeBasedCanaryObservation `json:"timeBasedCanary,omitempty" tf:"time_based_canary,omitempty"`
+
+	// The time based linear configuration information. If type is TimeBasedCanary, use time_based_canary instead.
+	TimeBasedLinear []TimeBasedLinearObservation `json:"timeBasedLinear,omitempty" tf:"time_based_linear,omitempty"`
+
+	// Type of traffic routing config. One of TimeBasedCanary, TimeBasedLinear, AllAtOnce.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TrafficRoutingConfigParameters struct {

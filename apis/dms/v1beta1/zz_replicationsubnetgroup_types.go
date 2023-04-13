@@ -18,6 +18,15 @@ type ReplicationSubnetGroupObservation struct {
 
 	ReplicationSubnetGroupArn *string `json:"replicationSubnetGroupArn,omitempty" tf:"replication_subnet_group_arn,omitempty"`
 
+	// Description for the subnet group.
+	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
+
+	// List of at least 2 EC2 subnet IDs for the subnet group. The subnets must cover at least 2 availability zones.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -33,8 +42,8 @@ type ReplicationSubnetGroupParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Description for the subnet group.
-	// +kubebuilder:validation:Required
-	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription" tf:"replication_subnet_group_description,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
@@ -80,8 +89,9 @@ type ReplicationSubnetGroupStatus struct {
 type ReplicationSubnetGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationSubnetGroupSpec   `json:"spec"`
-	Status            ReplicationSubnetGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicationSubnetGroupDescription)",message="replicationSubnetGroupDescription is a required parameter"
+	Spec   ReplicationSubnetGroupSpec   `json:"spec"`
+	Status ReplicationSubnetGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

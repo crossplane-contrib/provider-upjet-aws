@@ -80,10 +80,55 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AutoConfigEnabled != nil {
+		in, out := &in.AutoConfigEnabled, &out.AutoConfigEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AutoCreate != nil {
+		in, out := &in.AutoCreate, &out.AutoCreate
+		*out = new(bool)
+		**out = **in
+	}
+	if in.CweMonitorEnabled != nil {
+		in, out := &in.CweMonitorEnabled, &out.CweMonitorEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.GroupingType != nil {
+		in, out := &in.GroupingType, &out.GroupingType
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.OpsCenterEnabled != nil {
+		in, out := &in.OpsCenterEnabled, &out.OpsCenterEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.OpsItemSnsTopicArn != nil {
+		in, out := &in.OpsItemSnsTopicArn, &out.OpsItemSnsTopicArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll

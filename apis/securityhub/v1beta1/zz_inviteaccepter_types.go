@@ -18,6 +18,9 @@ type InviteAccepterObservation struct {
 
 	// The ID of the invitation.
 	InvitationID *string `json:"invitationId,omitempty" tf:"invitation_id,omitempty"`
+
+	// The account ID of the master Security Hub account whose invitation you're accepting.
+	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
 }
 
 type InviteAccepterParameters struct {

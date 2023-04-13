@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -105,8 +109,22 @@ spec:
                     type: string
                 required:
                 - region
-                - scanType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -278,6 +296,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: scanType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scanType)
           status:
             description: RegistryScanningConfigurationStatus defines the observed
               state of RegistryScanningConfiguration.
@@ -289,6 +310,34 @@ spec:
                   registryId:
                     description: The registry ID the scanning configuration applies
                       to.
+                    type: string
+                  rule:
+                    description: One or multiple blocks specifying scanning rules
+                      to determine which repository filters are used and at what frequency
+                      scanning will occur. See below for schema.
+                    items:
+                      properties:
+                        repositoryFilter:
+                          description: One or more repository filter blocks, containing
+                            a filter  and a filter_type .
+                          items:
+                            properties:
+                              filter:
+                                type: string
+                              filterType:
+                                type: string
+                            type: object
+                          type: array
+                        scanFrequency:
+                          description: The frequency that scans are performed at for
+                            a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN,
+                            or MANUAL.
+                          type: string
+                      type: object
+                    type: array
+                  scanType:
+                    description: the scanning type to set for the registry. Can be
+                      either ENHANCED or BASIC.
                     type: string
                 type: object
               conditions:

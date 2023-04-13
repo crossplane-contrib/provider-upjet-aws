@@ -17,6 +17,12 @@ type ConfigurationRecorderObservation struct {
 
 	// Name of the recorder
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Recording group - see below.
+	RecordingGroup []RecordingGroupObservation `json:"recordingGroup,omitempty" tf:"recording_group,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM role. Used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See AWS Docs for more details.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ConfigurationRecorderParameters struct {
@@ -46,6 +52,15 @@ type ConfigurationRecorderParameters struct {
 }
 
 type RecordingGroupObservation struct {
+
+	// Specifies whether AWS Config records configuration changes for every supported type of regional resource (which includes any new type that will become supported in the future). Conflicts with resource_types. Defaults to true.
+	AllSupported *bool `json:"allSupported,omitempty" tf:"all_supported,omitempty"`
+
+	// Specifies whether AWS Config includes all supported types of global resources with the resources that it records. Requires all_supported = true. Conflicts with resource_types.
+	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
+
+	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
 type RecordingGroupParameters struct {

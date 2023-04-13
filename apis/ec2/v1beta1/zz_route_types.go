@@ -15,17 +15,62 @@ import (
 
 type RouteObservation_2 struct {
 
+	// Identifier of a carrier gateway. This attribute can only be used when the VPC contains a subnet which is associated with a Wavelength Zone.
+	CarrierGatewayID *string `json:"carrierGatewayId,omitempty" tf:"carrier_gateway_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a core network.
+	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
+
+	// The destination CIDR block.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
+	// The destination IPv6 CIDR block.
+	DestinationIPv6CidrBlock *string `json:"destinationIpv6CidrBlock,omitempty" tf:"destination_ipv6_cidr_block,omitempty"`
+
+	// The ID of a managed prefix list destination.
+	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id,omitempty"`
+
+	// Identifier of a VPC Egress Only Internet Gateway.
+	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
+
+	// Identifier of a VPC internet gateway or a virtual private gateway.
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
 	// Route identifier computed from the routing table identifier and route destination.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Identifier of an EC2 instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// The AWS account ID of the owner of the EC2 instance.
 	InstanceOwnerID *string `json:"instanceOwnerId,omitempty" tf:"instance_owner_id,omitempty"`
 
+	// Identifier of a Outpost local gateway.
+	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
+
+	// Identifier of a VPC NAT gateway.
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// Identifier of an EC2 network interface.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
 	// How the route was created - CreateRouteTable, CreateRoute or EnableVgwRoutePropagation.
 	Origin *string `json:"origin,omitempty" tf:"origin,omitempty"`
 
+	// The ID of the routing table.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
 	// The state of the route - active or blackhole.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Identifier of an EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Identifier of a VPC Endpoint.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// Identifier of a VPC peering connection.
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
 type RouteParameters_2 struct {

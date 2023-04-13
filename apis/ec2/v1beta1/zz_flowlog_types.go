@@ -14,6 +14,15 @@ import (
 )
 
 type DestinationOptionsObservation struct {
+
+	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
+	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
+	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
+
+	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
+	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
 }
 
 type DestinationOptionsParameters struct {
@@ -36,11 +45,56 @@ type FlowLogObservation struct {
 	// The ARN of the Flow Log.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Describes the destination options for a flow log. More details below.
+	DestinationOptions []DestinationOptionsObservation `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
+
+	// Elastic Network Interface ID to attach to
+	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
+
+	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
 	// The Flow Log ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
+	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+
+	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+
+	// The fields to include in the flow log record, in the order in which they should appear.
+	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
+
+	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The maximum interval of time
+	// during which a flow of packets is captured and aggregated into a flow
+	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
+	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
+
+	// Subnet ID to attach to
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
+	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
+
+	// Transit Gateway Attachment ID to attach to
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Transit Gateway ID to attach to
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// VPC ID to attach to
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type FlowLogParameters struct {

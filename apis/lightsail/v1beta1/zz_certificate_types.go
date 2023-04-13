@@ -21,11 +21,20 @@ type CertificateObservation struct {
 	// The timestamp when the instance was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// A domain name for which the certificate should be issued.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// Set of domain validation objects which can be used to complete certificate validation. Can have more than one element, e.g., if SANs are defined.
 	DomainValidationOptions []DomainValidationOptionsObservation `json:"domainValidationOptions,omitempty" tf:"domain_validation_options,omitempty"`
 
 	// The name of the lightsail certificate (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
+	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

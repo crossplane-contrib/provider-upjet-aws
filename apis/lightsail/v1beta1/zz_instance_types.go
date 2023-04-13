@@ -14,6 +14,15 @@ import (
 )
 
 type AddOnObservation struct {
+
+	// The daily time when an automatic snapshot will be created. Must be in HH:00 format, and in an hourly increment and specified in Coordinated Universal Time (UTC). The snapshot will be automatically created between the time specified and up to 45 minutes after.
+	SnapshotTime *string `json:"snapshotTime,omitempty" tf:"snapshot_time,omitempty"`
+
+	// The status of the add on. Valid Values: Enabled, Disabled.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The add-on type. There is currently only one valid type AutoSnapshot.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AddOnParameters struct {
@@ -33,8 +42,21 @@ type AddOnParameters struct {
 
 type InstanceObservation struct {
 
+	// The add on configuration for the instance. Detailed below.
+	AddOn []AddOnObservation `json:"addOn,omitempty" tf:"add_on,omitempty"`
+
 	// The ARN of the Lightsail instance (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The Availability Zone in which to create your
+	// instance (see list below)
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
+	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
+
+	// The bundle of specification information (see list below)
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The number of vCPUs the instance has.
 	CPUCount *float64 `json:"cpuCount,omitempty" tf:"cpu_count,omitempty"`
@@ -45,6 +67,9 @@ type InstanceObservation struct {
 	// The ARN of the Lightsail instance (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// (Deprecated) The first IPv6 address of the Lightsail instance. Use ipv6_addresses attribute instead.
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
@@ -53,6 +78,10 @@ type InstanceObservation struct {
 
 	// A Boolean value indicating whether this instance has a static IP assigned to it.
 	IsStaticIP *bool `json:"isStaticIp,omitempty" tf:"is_static_ip,omitempty"`
+
+	// The name of your key pair. Created in the
+	// Lightsail console (cannot use aws_key_pair at this time)
+	KeyPairName *string `json:"keyPairName,omitempty" tf:"key_pair_name,omitempty"`
 
 	// The private IP address of the instance.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
@@ -63,8 +92,14 @@ type InstanceObservation struct {
 	// The amount of RAM in GB on the instance (e.g., 1.0).
 	RAMSize *float64 `json:"ramSize,omitempty" tf:"ram_size,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// launch script to configure server with additional user data
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// The user name for connecting to the instance (e.g., ec2-user).
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -78,16 +113,16 @@ type InstanceParameters struct {
 
 	// The Availability Zone in which to create your
 	// instance (see list below)
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
-	// +kubebuilder:validation:Required
-	BlueprintID *string `json:"blueprintId" tf:"blueprint_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
 
 	// The bundle of specification information (see list below)
-	// +kubebuilder:validation:Required
-	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
 	// +kubebuilder:validation:Optional
@@ -136,8 +171,11 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.blueprintId)",message="blueprintId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bundleId)",message="bundleId is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

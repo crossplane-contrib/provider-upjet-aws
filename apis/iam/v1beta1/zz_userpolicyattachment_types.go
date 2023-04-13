@@ -15,6 +15,12 @@ import (
 
 type UserPolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the policy you want to apply
+	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
+
+	// The user the policy should be applied to
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type UserPolicyAttachmentParameters struct {

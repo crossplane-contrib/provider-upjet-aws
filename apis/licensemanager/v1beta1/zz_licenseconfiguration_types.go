@@ -18,11 +18,32 @@ type LicenseConfigurationObservation struct {
 	// The license configuration ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the license configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The license configuration ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Number of licenses managed by the license configuration.
+	LicenseCount *float64 `json:"licenseCount,omitempty" tf:"license_count,omitempty"`
+
+	// Sets the number of available licenses as a hard limit.
+	LicenseCountHardLimit *bool `json:"licenseCountHardLimit,omitempty" tf:"license_count_hard_limit,omitempty"`
+
+	// Dimension to use to track license inventory. Specify either vCPU, Instance, Core or Socket.
+	LicenseCountingType *string `json:"licenseCountingType,omitempty" tf:"license_counting_type,omitempty"`
+
+	// Array of configured License Manager rules.
+	LicenseRules []*string `json:"licenseRules,omitempty" tf:"license_rules,omitempty"`
+
+	// Name of the license configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Account ID of the owner of the license configuration.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -43,16 +64,16 @@ type LicenseConfigurationParameters struct {
 	LicenseCountHardLimit *bool `json:"licenseCountHardLimit,omitempty" tf:"license_count_hard_limit,omitempty"`
 
 	// Dimension to use to track license inventory. Specify either vCPU, Instance, Core or Socket.
-	// +kubebuilder:validation:Required
-	LicenseCountingType *string `json:"licenseCountingType" tf:"license_counting_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LicenseCountingType *string `json:"licenseCountingType,omitempty" tf:"license_counting_type,omitempty"`
 
 	// Array of configured License Manager rules.
 	// +kubebuilder:validation:Optional
 	LicenseRules []*string `json:"licenseRules,omitempty" tf:"license_rules,omitempty"`
 
 	// Name of the license configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -88,8 +109,10 @@ type LicenseConfigurationStatus struct {
 type LicenseConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LicenseConfigurationSpec   `json:"spec"`
-	Status            LicenseConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.licenseCountingType)",message="licenseCountingType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   LicenseConfigurationSpec   `json:"spec"`
+	Status LicenseConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -189,9 +193,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -363,17 +381,98 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: RestAPIStatus defines the observed state of RestAPI.
             properties:
               atProvider:
                 properties:
+                  apiKeySource:
+                    description: Source of the API key for requests. Valid values
+                      are HEADER (default) and AUTHORIZER. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      x-amazon-apigateway-api-key-source extension. If the argument
+                      value is provided and is different than the OpenAPI value, the
+                      argument value will override the OpenAPI value.
+                    type: string
                   arn:
                     description: ARN
+                    type: string
+                  binaryMediaTypes:
+                    description: List of binary media types supported by the REST
+                      API. By default, the REST API supports only UTF-8-encoded text
+                      payloads. If importing an OpenAPI specification via the body
+                      argument, this corresponds to the x-amazon-apigateway-binary-media-types
+                      extension. If the argument value is provided and is different
+                      than the OpenAPI value, the argument value will override the
+                      OpenAPI value.
+                    items:
+                      type: string
+                    type: array
+                  body:
+                    description: OpenAPI specification that defines the set of routes
+                      and integrations to create as part of the REST API. This configuration,
+                      and any updates to it, will replace all REST API configuration
+                      except values overridden in this resource configuration and
+                      other resource updates applied after this resource but before
+                      any aws_api_gateway_deployment creation. More information about
+                      REST API OpenAPI support can be found in the API Gateway Developer
+                      Guide.
                     type: string
                   createdDate:
                     description: Creation date of the REST API
                     type: string
+                  description:
+                    description: Description of the REST API. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      info.description field. If the argument value is provided and
+                      is different than the OpenAPI value, the argument value will
+                      override the OpenAPI value.
+                    type: string
+                  disableExecuteApiEndpoint:
+                    description: Whether clients can invoke your API by using the
+                      default execute-api endpoint. By default, clients can invoke
+                      your API with the default https://{api_id}.execute-api.{region}.amazonaws.com
+                      endpoint. To require that clients use a custom domain name to
+                      invoke your API, disable the default endpoint. Defaults to false.
+                      If importing an OpenAPI specification via the body argument,
+                      this corresponds to the x-amazon-apigateway-endpoint-configuration
+                      extension disableExecuteApiEndpoint property. If the argument
+                      value is true and is different than the OpenAPI value, the argument
+                      value will override the OpenAPI value.
+                    type: boolean
+                  endpointConfiguration:
+                    description: Configuration block defining API endpoint configuration
+                      including endpoint type. Defined below.
+                    items:
+                      properties:
+                        types:
+                          description: 'List of endpoint types. This resource currently
+                            only supports managing a single value. Valid values: EDGE,
+                            REGIONAL or PRIVATE. If unspecified, defaults to EDGE.
+                            If set to PRIVATE recommend to set put_rest_api_mode =
+                            merge to not cause the endpoints and associated Route53
+                            records to be deleted. Refer to the documentation for
+                            more information on the difference between edge-optimized
+                            and regional APIs.'
+                          items:
+                            type: string
+                          type: array
+                        vpcEndpointIds:
+                          description: Set of VPC Endpoint identifiers. It is only
+                            supported for PRIVATE endpoint type. If importing an OpenAPI
+                            specification via the body argument, this corresponds
+                            to the x-amazon-apigateway-endpoint-configuration extension
+                            vpcEndpointIds property. If the argument value is provided
+                            and is different than the OpenAPI value, the argument
+                            value will override the OpenAPI value.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   executionArn:
                     description: Execution ARN part to be used in lambda_permission's
                       source_arn when allowing API Gateway to invoke a Lambda function,
@@ -384,6 +483,31 @@ spec:
                   id:
                     description: ID of the REST API
                     type: string
+                  minimumCompressionSize:
+                    description: Minimum response size to compress for the REST API.
+                      Integer between -1 and 10485760 (10MB). Setting a value greater
+                      than -1 will enable compression, -1 disables compression (default).
+                      If importing an OpenAPI specification via the body argument,
+                      this corresponds to the x-amazon-apigateway-minimum-compression-size
+                      extension. If the argument value (except -1) is provided and
+                      is different than the OpenAPI value, the argument value will
+                      override the OpenAPI value.
+                    type: number
+                  name:
+                    description: Name of the REST API. If importing an OpenAPI specification
+                      via the body argument, this corresponds to the info.title field.
+                      If the argument value is different than the OpenAPI value, the
+                      argument value will override the OpenAPI value.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of customizations for importing the specification
+                      in the body argument. For example, to exclude DocumentationParts
+                      from an imported API, set ignore equal to documentation. Additional
+                      documentation, including other parameters such as basepath,
+                      can be found in the API Gateway Developer Guide.
+                    type: object
                   policy:
                     description: JSON formatted policy document that controls access
                       to the API Gateway. We recommend using the aws_api_gateway_rest_api_policy
@@ -393,9 +517,24 @@ spec:
                       than the OpenAPI value, the argument value will override the
                       OpenAPI value.
                     type: string
+                  putRestApiMode:
+                    description: Mode of the PutRestApi operation when importing an
+                      OpenAPI specification via the body argument (create or update
+                      operation). Valid values are merge and overwrite. If unspecificed,
+                      defaults to overwrite (for backwards compatibility). This corresponds
+                      to the x-amazon-apigateway-put-integration-method extension.
+                      If the argument value is provided and is different than the
+                      OpenAPI value, the argument value will override the OpenAPI
+                      value.
+                    type: string
                   rootResourceId:
                     description: Resource ID of the REST API's root
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

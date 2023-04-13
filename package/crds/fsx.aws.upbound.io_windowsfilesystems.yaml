@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -560,8 +564,22 @@ spec:
                     type: string
                 required:
                 - region
-                - throughputCapacity
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -733,13 +751,84 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: throughputCapacity is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.throughputCapacity)
           status:
             description: WindowsFileSystemStatus defines the observed state of WindowsFileSystem.
             properties:
               atProvider:
                 properties:
+                  activeDirectoryId:
+                    description: The ID for an existing Microsoft Active Directory
+                      instance that the file system should join when it's created.
+                      Cannot be specified with self_managed_active_directory.
+                    type: string
+                  aliases:
+                    description: An array DNS alias names that you want to associate
+                      with the Amazon FSx file system.  For more information, see
+                      Working with DNS Aliases
+                    items:
+                      type: string
+                    type: array
                   arn:
                     description: Amazon Resource Name of the file system.
+                    type: string
+                  auditLogConfiguration:
+                    description: The configuration that Amazon FSx for Windows File
+                      Server uses to audit and log user accesses of files, folders,
+                      and file shares on the Amazon FSx for Windows File Server file
+                      system. See below.
+                    items:
+                      properties:
+                        auditLogDestination:
+                          description: The Amazon Resource Name (ARN) for the destination
+                            of the audit logs. The destination can be any Amazon CloudWatch
+                            Logs log group ARN or Amazon Kinesis Data Firehose delivery
+                            stream ARN. Can be specified when file_access_audit_log_level
+                            and file_share_access_audit_log_level are not set to DISABLED.
+                            The name of the Amazon CloudWatch Logs log group must
+                            begin with the /aws/fsx prefix. The name of the Amazon
+                            Kinesis Data Firehouse delivery stream must begin with
+                            the aws-fsx prefix. If you do not provide a destination
+                            in audit_log_destionation, Amazon FSx will create and
+                            use a log stream in the CloudWatch Logs /aws/fsx/windows
+                            log group.
+                          type: string
+                        fileAccessAuditLogLevel:
+                          description: Sets which attempt type is logged by Amazon
+                            FSx for file and folder accesses. Valid values are SUCCESS_ONLY,
+                            FAILURE_ONLY, SUCCESS_AND_FAILURE, and DISABLED. Default
+                            value is DISABLED.
+                          type: string
+                        fileShareAccessAuditLogLevel:
+                          description: Sets which attempt type is logged by Amazon
+                            FSx for file share accesses. Valid values are SUCCESS_ONLY,
+                            FAILURE_ONLY, SUCCESS_AND_FAILURE, and DISABLED. Default
+                            value is DISABLED.
+                          type: string
+                      type: object
+                    type: array
+                  automaticBackupRetentionDays:
+                    description: The number of days to retain automatic backups. Minimum
+                      of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
+                    type: number
+                  backupId:
+                    description: The ID of the source backup to create the filesystem
+                      from.
+                    type: string
+                  copyTagsToBackups:
+                    description: A boolean flag indicating whether tags on the file
+                      system should be copied to backups. Defaults to false.
+                    type: boolean
+                  dailyAutomaticBackupStartTime:
+                    description: The preferred time (in HH:MM format) to take daily
+                      automatic backups, in the UTC time zone.
+                    type: string
+                  deploymentType:
+                    description: Specifies the file system deployment type, valid
+                      values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default
+                      value is SINGLE_AZ_1.
                     type: string
                   dnsName:
                     description: DNS name for the file system, e.g., fs-12345678.corp.example.com
@@ -747,6 +836,10 @@ spec:
                     type: string
                   id:
                     description: Identifier of the file system, e.g., fs-12345678
+                    type: string
+                  kmsKeyId:
+                    description: ARN for the KMS Key to encrypt the file system at
+                      rest. Defaults to an AWS managed KMS Key.
                     type: string
                   networkInterfaceIds:
                     description: Set of Elastic Network Interface identifiers from
@@ -761,12 +854,98 @@ spec:
                     description: The IP address of the primary, or preferred, file
                       server.
                     type: string
+                  preferredSubnetId:
+                    description: Specifies the subnet in which you want the preferred
+                      file server to be located. Required for when deployment type
+                      is MULTI_AZ_1.
+                    type: string
                   remoteAdministrationEndpoint:
                     description: For MULTI_AZ_1 deployment types, use this endpoint
                       when performing administrative tasks on the file system using
                       Amazon FSx Remote PowerShell. For SINGLE_AZ_1 deployment types,
                       this is the DNS name of the file system.
                     type: string
+                  securityGroupIds:
+                    description: A list of IDs for the security groups that apply
+                      to the specified network interfaces created for file system
+                      access. These security groups will apply to all network interfaces.
+                    items:
+                      type: string
+                    type: array
+                  selfManagedActiveDirectory:
+                    description: Configuration block that Amazon FSx uses to join
+                      the Windows File Server instance to your self-managed (including
+                      on-premises) Microsoft Active Directory (AD) directory. Cannot
+                      be specified with active_directory_id. Detailed below.
+                    items:
+                      properties:
+                        dnsIps:
+                          description: A list of up to two IP addresses of DNS servers
+                            or domain controllers in the self-managed AD directory.
+                            The IP addresses need to be either in the same VPC CIDR
+                            range as the file system or in the private IP version
+                            4 (IPv4) address ranges as specified in RFC 1918.
+                          items:
+                            type: string
+                          type: array
+                        domainName:
+                          description: The fully qualified domain name of the self-managed
+                            AD directory. For example, corp.example.com.
+                          type: string
+                        fileSystemAdministratorsGroup:
+                          description: The name of the domain group whose members
+                            are granted administrative privileges for the file system.
+                            Administrative privileges include taking ownership of
+                            files and folders, and setting audit controls (audit ACLs)
+                            on files and folders. The group that you specify must
+                            already exist in your domain. Defaults to Domain Admins.
+                          type: string
+                        organizationalUnitDistinguishedName:
+                          description: The fully qualified distinguished name of the
+                            organizational unit within your self-managed AD directory
+                            that the Windows File Server instance will join. For example,
+                            OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as
+                            the direct parent of the file system. If none is provided,
+                            the FSx file system is created in the default location
+                            of your self-managed AD directory. To learn more, see
+                            RFC 2253.
+                          type: string
+                        username:
+                          description: The user name for the service account on your
+                            self-managed AD domain that Amazon FSx will use to join
+                            to your AD domain.
+                          type: string
+                      type: object
+                    type: array
+                  skipFinalBackup:
+                    description: When enabled, will skip the default final backup
+                      taken when the file system is deleted. This configuration must
+                      be applied separately before attempting to delete the resource
+                      to have the desired behavior. Defaults to false.
+                    type: boolean
+                  storageCapacity:
+                    description: Storage capacity (GiB) of the file system. Minimum
+                      of 32 and maximum of 65536. If the storage type is set to HDD
+                      the minimum value is 2000. Required when not creating filesystem
+                      for a backup.
+                    type: number
+                  storageType:
+                    description: Specifies the storage type, Valid values are SSD
+                      and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows
+                      file system deployment types. Default value is SSD.
+                    type: string
+                  subnetIds:
+                    description: A list of IDs for the subnets that the file system
+                      will be accessible from. To specify more than a single subnet
+                      set deployment_type to MULTI_AZ_1.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -774,9 +953,17 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  throughputCapacity:
+                    description: Throughput (megabytes per second) of the file system
+                      in power of 2 increments. Minimum of 8 and maximum of 2048.
+                    type: number
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file
                       system.
+                    type: string
+                  weeklyMaintenanceStartTime:
+                    description: The preferred start time (in d:HH:MM format) to perform
+                      weekly maintenance, in the UTC time zone.
                     type: string
                 type: object
               conditions:

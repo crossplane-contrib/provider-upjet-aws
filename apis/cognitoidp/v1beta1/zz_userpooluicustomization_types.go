@@ -15,19 +15,31 @@ import (
 
 type UserPoolUICustomizationObservation struct {
 
+	// The CSS values in the UI customization, provided as a String. At least one of css or image_file is required.
+	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
+
 	// The CSS version number.
 	CSSVersion *string `json:"cssVersion,omitempty" tf:"css_version,omitempty"`
+
+	// The client ID for the client app. Defaults to ALL. If ALL is specified, the css and/or image_file settings will be used for every client that has no UI customization set previously.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The creation date in RFC3339 format for the UI customization.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
+	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
+
 	// The logo image URL for the UI customization.
 	ImageURL *string `json:"imageUrl,omitempty" tf:"image_url,omitempty"`
 
 	// The last-modified date in RFC3339 format for the UI customization.
 	LastModifiedDate *string `json:"lastModifiedDate,omitempty" tf:"last_modified_date,omitempty"`
+
+	// The user pool ID for the user pool.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type UserPoolUICustomizationParameters struct {

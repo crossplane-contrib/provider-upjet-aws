@@ -15,8 +15,14 @@ import (
 
 type AcceleratorObservation struct {
 
+	// The attributes of the accelerator. Fields documented below.
+	Attributes []AttributesObservation `json:"attributes,omitempty" tf:"attributes,omitempty"`
+
 	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// -  The Global Accelerator Route 53 zone ID that can be used to
 	// route an Alias Resource Record Set to the Global Accelerator. This attribute
@@ -26,8 +32,20 @@ type AcceleratorObservation struct {
 	// The Amazon Resource Name (ARN) of the accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The value for the address type. Defaults to IPV4. Valid values: IPV4, DUAL_STACK.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
+
 	// IP address set associated with the accelerator.
 	IPSets []IPSetsObservation `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
+
+	// The name of the accelerator.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -52,8 +70,8 @@ type AcceleratorParameters struct {
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the accelerator.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -66,6 +84,15 @@ type AcceleratorParameters struct {
 }
 
 type AttributesObservation struct {
+
+	// Indicates whether flow logs are enabled. Defaults to false. Valid values: true, false.
+	FlowLogsEnabled *bool `json:"flowLogsEnabled,omitempty" tf:"flow_logs_enabled,omitempty"`
+
+	// The name of the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	FlowLogsS3Bucket *string `json:"flowLogsS3Bucket,omitempty" tf:"flow_logs_s3_bucket,omitempty"`
+
+	// The prefix for the location in the Amazon S3 bucket for the flow logs. Required if flow_logs_enabled is true.
+	FlowLogsS3Prefix *string `json:"flowLogsS3Prefix,omitempty" tf:"flow_logs_s3_prefix,omitempty"`
 }
 
 type AttributesParameters struct {
@@ -119,8 +146,9 @@ type AcceleratorStatus struct {
 type Accelerator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AcceleratorSpec   `json:"spec"`
-	Status            AcceleratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AcceleratorSpec   `json:"spec"`
+	Status AcceleratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

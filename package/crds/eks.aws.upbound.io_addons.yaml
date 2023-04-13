@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -256,9 +260,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - addonName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -430,13 +448,34 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: addonName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addonName)
           status:
             description: AddonStatus defines the observed state of Addon.
             properties:
               atProvider:
                 properties:
+                  addonName:
+                    description: on. The name must match one of the names returned
+                      by describe-addon-versions.
+                    type: string
+                  addonVersion:
+                    description: on. The version must match one of the versions returned
+                      by describe-addon-versions.
+                    type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the EKS add-on.
+                    type: string
+                  clusterName:
+                    description: 100 characters in length. Must begin with an alphanumeric
+                      character, and must only contain alphanumeric characters, dashes
+                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    type: string
+                  configurationValues:
+                    description: custom configuration values for addons with single
+                      JSON string. This JSON string value must match the JSON schema
+                      derived from describe-addon-configuration.
                     type: string
                   createdAt:
                     description: Date and time in RFC3339 format that the EKS add-on
@@ -450,6 +489,30 @@ spec:
                     description: Date and time in RFC3339 format that the EKS add-on
                       was updated.
                     type: string
+                  preserve:
+                    description: Indicates if you want to preserve the created resources
+                      when deleting the EKS add-on.
+                    type: boolean
+                  resolveConflicts:
+                    description: Define how to resolve parameter value conflicts when
+                      migrating an existing add-on to an Amazon EKS add-on or when
+                      applying version updates to the add-on. Valid values are NONE,
+                      OVERWRITE and PRESERVE. For more details check UpdateAddon API
+                      Docs.
+                    type: string
+                  serviceAccountRoleArn:
+                    description: The Amazon Resource Name (ARN) of an existing IAM
+                      role to bind to the add-on's service account. The role must
+                      be assigned the IAM permissions required by the add-on. If you
+                      don't specify an existing IAM role, then the add-on uses the
+                      permissions assigned to the node IAM role. For more information,
+                      see Amazon EKS node IAM role in the Amazon EKS User Guide.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

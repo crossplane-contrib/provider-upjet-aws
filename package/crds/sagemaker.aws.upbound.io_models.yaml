@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -333,6 +337,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -513,8 +532,165 @@ spec:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
                       this model.
                     type: string
+                  container:
+                    description: Specifies containers in the inference pipeline. If
+                      not specified, the primary_container argument is required. Fields
+                      are documented below.
+                    items:
+                      properties:
+                        containerHostname:
+                          description: The DNS host name for the container.
+                          type: string
+                        environment:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables for the Docker container.
+                            A list of key value pairs.
+                          type: object
+                        image:
+                          description: The registry path where the inference code
+                            image is stored in Amazon ECR.
+                          type: string
+                        imageConfig:
+                          description: Specifies whether the model container is in
+                            Amazon ECR or a private Docker registry accessible from
+                            your Amazon Virtual Private Cloud (VPC). For more information
+                            see Using a Private Docker Registry for Real-Time Inference
+                            Containers. see Image Config.
+                          items:
+                            properties:
+                              repositoryAccessMode:
+                                description: 'Specifies whether the model container
+                                  is in Amazon ECR or a private Docker registry accessible
+                                  from your Amazon Virtual Private Cloud (VPC). Allowed
+                                  values are: Platform and Vpc.'
+                                type: string
+                              repositoryAuthConfig:
+                                description: Specifies an authentication configuration
+                                  for the private docker registry where your model
+                                  image is hosted. Specify a value for this property
+                                  only if you specified Vpc as the value for the RepositoryAccessMode
+                                  field, and the private Docker registry where the
+                                  model image is hosted requires authentication. see
+                                  Repository Auth Config.
+                                items:
+                                  properties:
+                                    repositoryCredentialsProviderArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of an AWS Lambda function that provides credentials
+                                        to authenticate to the private Docker registry
+                                        where your model image is hosted. For information
+                                        about how to create an AWS Lambda function,
+                                        see Create a Lambda function with the console
+                                        in the AWS Lambda Developer Guide.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        mode:
+                          description: The container hosts value SingleModel/MultiModel.
+                            The default value is SingleModel.
+                          type: string
+                        modelDataUrl:
+                          description: The URL for the S3 location where model artifacts
+                            are stored.
+                          type: string
+                      type: object
+                    type: array
+                  enableNetworkIsolation:
+                    description: Isolates the model container. No inbound or outbound
+                      network calls can be made to or from the model container.
+                    type: boolean
+                  executionRoleArn:
+                    description: A role that SageMaker can assume to access model
+                      artifacts and docker images for deployment.
+                    type: string
                   id:
                     type: string
+                  inferenceExecutionConfig:
+                    description: Specifies details of how containers in a multi-container
+                      endpoint are called. see Inference Execution Config.
+                    items:
+                      properties:
+                        mode:
+                          description: The container hosts value SingleModel/MultiModel.
+                            The default value is SingleModel.
+                          type: string
+                      type: object
+                    type: array
+                  primaryContainer:
+                    description: The primary docker image containing inference code
+                      that is used when the model is deployed for predictions.  If
+                      not specified, the container argument is required. Fields are
+                      documented below.
+                    items:
+                      properties:
+                        containerHostname:
+                          description: The DNS host name for the container.
+                          type: string
+                        environment:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables for the Docker container.
+                            A list of key value pairs.
+                          type: object
+                        image:
+                          description: The registry path where the inference code
+                            image is stored in Amazon ECR.
+                          type: string
+                        imageConfig:
+                          description: Specifies whether the model container is in
+                            Amazon ECR or a private Docker registry accessible from
+                            your Amazon Virtual Private Cloud (VPC). For more information
+                            see Using a Private Docker Registry for Real-Time Inference
+                            Containers. see Image Config.
+                          items:
+                            properties:
+                              repositoryAccessMode:
+                                description: 'Specifies whether the model container
+                                  is in Amazon ECR or a private Docker registry accessible
+                                  from your Amazon Virtual Private Cloud (VPC). Allowed
+                                  values are: Platform and Vpc.'
+                                type: string
+                              repositoryAuthConfig:
+                                description: Specifies an authentication configuration
+                                  for the private docker registry where your model
+                                  image is hosted. Specify a value for this property
+                                  only if you specified Vpc as the value for the RepositoryAccessMode
+                                  field, and the private Docker registry where the
+                                  model image is hosted requires authentication. see
+                                  Repository Auth Config.
+                                items:
+                                  properties:
+                                    repositoryCredentialsProviderArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of an AWS Lambda function that provides credentials
+                                        to authenticate to the private Docker registry
+                                        where your model image is hosted. For information
+                                        about how to create an AWS Lambda function,
+                                        see Create a Lambda function with the console
+                                        in the AWS Lambda Developer Guide.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        mode:
+                          description: The container hosts value SingleModel/MultiModel.
+                            The default value is SingleModel.
+                          type: string
+                        modelDataUrl:
+                          description: The URL for the S3 location where model artifacts
+                            are stored.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -522,6 +698,21 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcConfig:
+                    description: Specifies the VPC that you want your model to connect
+                      to. VpcConfig is used in hosting services and in batch transform.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          items:
+                            type: string
+                          type: array
+                        subnets:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

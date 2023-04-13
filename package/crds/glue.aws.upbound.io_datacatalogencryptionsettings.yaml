@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -290,9 +294,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - dataCatalogEncryptionSettings
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -464,12 +482,68 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: dataCatalogEncryptionSettings is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataCatalogEncryptionSettings)
           status:
             description: DataCatalogEncryptionSettingsStatus defines the observed
               state of DataCatalogEncryptionSettings.
             properties:
               atProvider:
                 properties:
+                  catalogId:
+                    description: –  The ID of the Data Catalog to set the security
+                      configuration for. If none is provided, the AWS account ID is
+                      used by default.
+                    type: string
+                  dataCatalogEncryptionSettings:
+                    description: –  The security configuration to set. see Data Catalog
+                      Encryption Settings.
+                    items:
+                      properties:
+                        connectionPasswordEncryption:
+                          description: When connection password protection is enabled,
+                            the Data Catalog uses a customer-provided key to encrypt
+                            the password as part of CreateConnection or UpdateConnection
+                            and store it in the ENCRYPTED_PASSWORD field in the connection
+                            properties. You can enable catalog encryption or only
+                            password encryption. see Connection Password Encryption.
+                          items:
+                            properties:
+                              awsKmsKeyId:
+                                description: A KMS key ARN that is used to encrypt
+                                  the connection password. If connection password
+                                  protection is enabled, the caller of CreateConnection
+                                  and UpdateConnection needs at least kms:Encrypt
+                                  permission on the specified AWS KMS key, to encrypt
+                                  passwords before storing them in the Data Catalog.
+                                type: string
+                              returnConnectionPasswordEncrypted:
+                                description: When set to true, passwords remain encrypted
+                                  in the responses of GetConnection and GetConnections.
+                                  This encryption takes effect independently of the
+                                  catalog encryption.
+                                type: boolean
+                            type: object
+                          type: array
+                        encryptionAtRest:
+                          description: Specifies the encryption-at-rest configuration
+                            for the Data Catalog. see Encryption At Rest.
+                          items:
+                            properties:
+                              catalogEncryptionMode:
+                                description: The encryption-at-rest mode for encrypting
+                                  Data Catalog data. Valid values are DISABLED and
+                                  SSE-KMS.
+                                type: string
+                              sseAwsKmsKeyId:
+                                description: The ARN of the AWS KMS key to use for
+                                  encryption at rest.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Data Catalog to set the security configuration
                       for.

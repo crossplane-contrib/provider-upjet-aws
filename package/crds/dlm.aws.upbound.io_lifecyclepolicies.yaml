@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -697,10 +701,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - description
-                - policyDetails
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -872,6 +889,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: description is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)
+            - message: policyDetails is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyDetails)
           status:
             description: LifecyclePolicyStatus defines the observed state of LifecyclePolicy.
             properties:
@@ -880,9 +902,447 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the DLM Lifecycle Policy.
                     type: string
+                  description:
+                    description: A description for the DLM lifecycle policy.
+                    type: string
+                  executionRoleArn:
+                    description: The ARN of an IAM role that is able to be assumed
+                      by the DLM service.
+                    type: string
                   id:
                     description: Identifier of the DLM Lifecycle Policy.
                     type: string
+                  policyDetails:
+                    description: See the policy_details configuration block. Max of
+                      1.
+                    items:
+                      properties:
+                        action:
+                          description: The actions to be performed when the event-based
+                            policy is triggered. You can specify only one action per
+                            policy. This parameter is required for event-based policies
+                            only. If you are creating a snapshot or AMI policy, omit
+                            this parameter. See the action configuration block.
+                          items:
+                            properties:
+                              crossRegionCopy:
+                                description: The rule for copying shared snapshots
+                                  across Regions. See the cross_region_copy configuration
+                                  block.
+                                items:
+                                  properties:
+                                    encryptionConfiguration:
+                                      description: The encryption settings for the
+                                        copied snapshot. See the encryption_configuration
+                                        block. Max of 1 per action.
+                                      items:
+                                        properties:
+                                          cmkArn:
+                                            description: The Amazon Resource Name
+                                              (ARN) of the AWS KMS key to use for
+                                              EBS encryption. If this parameter is
+                                              not specified, the default KMS key for
+                                              the account is used.
+                                            type: string
+                                          encrypted:
+                                            description: To encrypt a copy of an unencrypted
+                                              snapshot when encryption by default
+                                              is not enabled, enable encryption using
+                                              this parameter. Copies of encrypted
+                                              snapshots are encrypted, even if this
+                                              parameter is false or when encryption
+                                              by default is not enabled.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    retainRule:
+                                      description: Specifies the retention rule for
+                                        cross-Region snapshot copies. See the retain_rule
+                                        block. Max of 1 per action.
+                                      items:
+                                        properties:
+                                          interval:
+                                            description: How often this lifecycle
+                                              policy should be evaluated. 1, 2,3,4,6,8,12
+                                              or 24 are valid values.
+                                            type: number
+                                          intervalUnit:
+                                            description: The unit for how often the
+                                              lifecycle policy should be evaluated.
+                                              HOURS is currently the only allowed
+                                              value and also the default value.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    target:
+                                      description: The target Region or the Amazon
+                                        Resource Name (ARN) of the target Outpost
+                                        for the snapshot copies.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: A descriptive name for the action.
+                                type: string
+                            type: object
+                          type: array
+                        eventSource:
+                          description: The event that triggers the event-based policy.
+                            This parameter is required for event-based policies only.
+                            If you are creating a snapshot or AMI policy, omit this
+                            parameter. See the event_source configuration block.
+                          items:
+                            properties:
+                              parameters:
+                                description: A set of optional parameters for snapshot
+                                  and AMI lifecycle policies. See the parameters configuration
+                                  block.
+                                items:
+                                  properties:
+                                    descriptionRegex:
+                                      description: The snapshot description that can
+                                        trigger the policy. The description pattern
+                                        is specified using a regular expression. The
+                                        policy runs only if a snapshot with a description
+                                        that matches the specified pattern is shared
+                                        with your account.
+                                      type: string
+                                    eventType:
+                                      description: The type of event. Currently, only
+                                        shareSnapshot events are supported.
+                                      type: string
+                                    snapshotOwner:
+                                      description: The IDs of the AWS accounts that
+                                        can trigger policy by sharing snapshots with
+                                        your account. The policy only runs if one
+                                        of the specified AWS accounts shares a snapshot
+                                        with your account.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: The source of the event. Currently only
+                                  managed CloudWatch Events rules are supported. Valid
+                                  values are MANAGED_CWE.
+                                type: string
+                            type: object
+                          type: array
+                        parameters:
+                          description: A set of optional parameters for snapshot and
+                            AMI lifecycle policies. See the parameters configuration
+                            block.
+                          items:
+                            properties:
+                              excludeBootVolume:
+                                description: Indicates whether to exclude the root
+                                  volume from snapshots created using CreateSnapshots.
+                                  The default is false.
+                                type: boolean
+                              noReboot:
+                                description: Applies to AMI lifecycle policies only.
+                                  Indicates whether targeted instances are rebooted
+                                  when the lifecycle policy runs. true indicates that
+                                  targeted instances are not rebooted when the policy
+                                  runs. false indicates that target instances are
+                                  rebooted when the policy runs. The default is true
+                                  (instances are not rebooted).
+                                type: boolean
+                            type: object
+                          type: array
+                        policyType:
+                          description: The valid target resource types and actions
+                            a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to
+                            create a lifecycle policy that manages the lifecycle of
+                            Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create
+                            a lifecycle policy that manages the lifecycle of EBS-backed
+                            AMIs. Specify EVENT_BASED_POLICY to create an event-based
+                            policy that performs specific actions when a defined event
+                            occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
+                          type: string
+                        resourceLocations:
+                          description: The location of the resources to backup. If
+                            the source resources are located in an AWS Region, specify
+                            CLOUD. If the source resources are located on an Outpost
+                            in your account, specify OUTPOST. If you specify OUTPOST,
+                            Amazon Data Lifecycle Manager backs up all resources of
+                            the specified type with matching target tags across all
+                            of the Outposts in your account. Valid values are CLOUD
+                            and OUTPOST.
+                          items:
+                            type: string
+                          type: array
+                        resourceTypes:
+                          description: A list of resource types that should be targeted
+                            by the lifecycle policy. Valid values are VOLUME and INSTANCE.
+                          items:
+                            type: string
+                          type: array
+                        schedule:
+                          description: See the schedule configuration block.
+                          items:
+                            properties:
+                              copyTags:
+                                description: Copy all user-defined tags on a source
+                                  volume to snapshots of the volume created by this
+                                  policy.
+                                type: boolean
+                              createRule:
+                                description: See the create_rule block. Max of 1 per
+                                  schedule.
+                                items:
+                                  properties:
+                                    cronExpression:
+                                      description: The schedule, as a Cron expression.
+                                        The schedule interval must be between 1 hour
+                                        and 1 year.
+                                      type: string
+                                    interval:
+                                      description: How often this lifecycle policy
+                                        should be evaluated. 1, 2,3,4,6,8,12 or 24
+                                        are valid values.
+                                      type: number
+                                    intervalUnit:
+                                      description: The unit for how often the lifecycle
+                                        policy should be evaluated. HOURS is currently
+                                        the only allowed value and also the default
+                                        value.
+                                      type: string
+                                    location:
+                                      description: Specifies the destination for snapshots
+                                        created by the policy. To create snapshots
+                                        in the same Region as the source resource,
+                                        specify CLOUD. To create snapshots on the
+                                        same Outpost as the source resource, specify
+                                        OUTPOST_LOCAL. If you omit this parameter,
+                                        CLOUD is used by default. If the policy targets
+                                        resources in an AWS Region, then you must
+                                        create snapshots in the same Region as the
+                                        source resource. If the policy targets resources
+                                        on an Outpost, then you can create snapshots
+                                        on the same Outpost as the source resource,
+                                        or in the Region of that Outpost. Valid values
+                                        are CLOUD and OUTPOST_LOCAL.
+                                      type: string
+                                    times:
+                                      description: A list of times in 24 hour clock
+                                        format that sets when the lifecycle policy
+                                        should be evaluated. Max of 1.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              crossRegionCopyRule:
+                                description: See the cross_region_copy_rule block.
+                                  Max of 3 per schedule.
+                                items:
+                                  properties:
+                                    cmkArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the AWS KMS key to use for EBS encryption.
+                                        If this parameter is not specified, the default
+                                        KMS key for the account is used.
+                                      type: string
+                                    copyTags:
+                                      description: Copy all user-defined tags on a
+                                        source volume to snapshots of the volume created
+                                        by this policy.
+                                      type: boolean
+                                    deprecateRule:
+                                      description: See the deprecate_rule block. Max
+                                        of 1 per schedule.
+                                      items:
+                                        properties:
+                                          interval:
+                                            description: How often this lifecycle
+                                              policy should be evaluated. 1, 2,3,4,6,8,12
+                                              or 24 are valid values.
+                                            type: number
+                                          intervalUnit:
+                                            description: The unit for how often the
+                                              lifecycle policy should be evaluated.
+                                              HOURS is currently the only allowed
+                                              value and also the default value.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    encrypted:
+                                      description: To encrypt a copy of an unencrypted
+                                        snapshot when encryption by default is not
+                                        enabled, enable encryption using this parameter.
+                                        Copies of encrypted snapshots are encrypted,
+                                        even if this parameter is false or when encryption
+                                        by default is not enabled.
+                                      type: boolean
+                                    retainRule:
+                                      description: Specifies the retention rule for
+                                        cross-Region snapshot copies. See the retain_rule
+                                        block. Max of 1 per action.
+                                      items:
+                                        properties:
+                                          interval:
+                                            description: How often this lifecycle
+                                              policy should be evaluated. 1, 2,3,4,6,8,12
+                                              or 24 are valid values.
+                                            type: number
+                                          intervalUnit:
+                                            description: The unit for how often the
+                                              lifecycle policy should be evaluated.
+                                              HOURS is currently the only allowed
+                                              value and also the default value.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    target:
+                                      description: The target Region or the Amazon
+                                        Resource Name (ARN) of the target Outpost
+                                        for the snapshot copies.
+                                      type: string
+                                  type: object
+                                type: array
+                              deprecateRule:
+                                description: See the deprecate_rule block. Max of
+                                  1 per schedule.
+                                items:
+                                  properties:
+                                    count:
+                                      description: Specifies the number of oldest
+                                        AMIs to deprecate. Must be an integer between
+                                        1 and 1000.
+                                      type: number
+                                    interval:
+                                      description: How often this lifecycle policy
+                                        should be evaluated. 1, 2,3,4,6,8,12 or 24
+                                        are valid values.
+                                      type: number
+                                    intervalUnit:
+                                      description: The unit for how often the lifecycle
+                                        policy should be evaluated. HOURS is currently
+                                        the only allowed value and also the default
+                                        value.
+                                      type: string
+                                  type: object
+                                type: array
+                              fastRestoreRule:
+                                description: See the fast_restore_rule block. Max
+                                  of 1 per schedule.
+                                items:
+                                  properties:
+                                    availabilityZones:
+                                      description: The Availability Zones in which
+                                        to enable fast snapshot restore.
+                                      items:
+                                        type: string
+                                      type: array
+                                    count:
+                                      description: Specifies the number of oldest
+                                        AMIs to deprecate. Must be an integer between
+                                        1 and 1000.
+                                      type: number
+                                    interval:
+                                      description: How often this lifecycle policy
+                                        should be evaluated. 1, 2,3,4,6,8,12 or 24
+                                        are valid values.
+                                      type: number
+                                    intervalUnit:
+                                      description: The unit for how often the lifecycle
+                                        policy should be evaluated. HOURS is currently
+                                        the only allowed value and also the default
+                                        value.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: A descriptive name for the action.
+                                type: string
+                              retainRule:
+                                description: Specifies the retention rule for cross-Region
+                                  snapshot copies. See the retain_rule block. Max
+                                  of 1 per action.
+                                items:
+                                  properties:
+                                    count:
+                                      description: Specifies the number of oldest
+                                        AMIs to deprecate. Must be an integer between
+                                        1 and 1000.
+                                      type: number
+                                    interval:
+                                      description: How often this lifecycle policy
+                                        should be evaluated. 1, 2,3,4,6,8,12 or 24
+                                        are valid values.
+                                      type: number
+                                    intervalUnit:
+                                      description: The unit for how often the lifecycle
+                                        policy should be evaluated. HOURS is currently
+                                        the only allowed value and also the default
+                                        value.
+                                      type: string
+                                  type: object
+                                type: array
+                              shareRule:
+                                description: See the share_rule block. Max of 1 per
+                                  schedule.
+                                items:
+                                  properties:
+                                    targetAccounts:
+                                      description: The IDs of the AWS accounts with
+                                        which to share the snapshots.
+                                      items:
+                                        type: string
+                                      type: array
+                                    unshareInterval:
+                                      description: How often this lifecycle policy
+                                        should be evaluated. 1, 2,3,4,6,8,12 or 24
+                                        are valid values.
+                                      type: number
+                                    unshareIntervalUnit:
+                                      description: The unit for how often the lifecycle
+                                        policy should be evaluated. HOURS is currently
+                                        the only allowed value and also the default
+                                        value.
+                                      type: string
+                                  type: object
+                                type: array
+                              tagsToAdd:
+                                additionalProperties:
+                                  type: string
+                                description: A map of tag keys and their values. DLM
+                                  lifecycle policies will already tag the snapshot
+                                  with the tags on the volume. This configuration
+                                  adds extra tags on top of these.
+                                type: object
+                              variableTags:
+                                additionalProperties:
+                                  type: string
+                                description: A map of tag keys and variable values,
+                                  where the values are determined when the policy
+                                  is executed. Only $(instance-id) or $(timestamp)
+                                  are valid values. Can only be used when resource_types
+                                  is INSTANCE.
+                                type: object
+                            type: object
+                          type: array
+                        targetTags:
+                          additionalProperties:
+                            type: string
+                          description: A map of tag keys and their values. Any resources
+                            that match the resource_types and are tagged with any
+                            of these tags will be targeted.
+                          type: object
+                      type: object
+                    type: array
+                  state:
+                    description: Whether the lifecycle policy should be enabled or
+                      disabled. ENABLED or DISABLED are valid values. Defaults to
+                      ENABLED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

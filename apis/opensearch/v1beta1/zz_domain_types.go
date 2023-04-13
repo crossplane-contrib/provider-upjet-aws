@@ -14,6 +14,18 @@ import (
 )
 
 type AdvancedSecurityOptionsObservation struct {
+
+	// Whether Anonymous auth is enabled. Enables fine-grained access control on an existing domain. Ignored unless advanced_security_options are enabled. Can only be enabled on an existing domain.
+	AnonymousAuthEnabled *bool `json:"anonymousAuthEnabled,omitempty" tf:"anonymous_auth_enabled,omitempty"`
+
+	// Whether advanced security is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether the internal user database is enabled. Default is false.
+	InternalUserDatabaseEnabled *bool `json:"internalUserDatabaseEnabled,omitempty" tf:"internal_user_database_enabled,omitempty"`
+
+	// Configuration block for the main user. Detailed below.
+	MasterUserOptions []MasterUserOptionsObservation `json:"masterUserOptions,omitempty" tf:"master_user_options,omitempty"`
 }
 
 type AdvancedSecurityOptionsParameters struct {
@@ -36,6 +48,15 @@ type AdvancedSecurityOptionsParameters struct {
 }
 
 type AutoTuneOptionsObservation struct {
+
+	// Auto-Tune desired state for the domain. Valid values: ENABLED or DISABLED.
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
+
+	// Configuration block for Auto-Tune maintenance windows. Can be specified multiple times for each maintenance window. Detailed below.
+	MaintenanceSchedule []MaintenanceScheduleObservation `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
+	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
+	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
 }
 
 type AutoTuneOptionsParameters struct {
@@ -54,6 +75,39 @@ type AutoTuneOptionsParameters struct {
 }
 
 type ClusterConfigObservation struct {
+
+	// Configuration block containing cold storage configuration. Detailed below.
+	ColdStorageOptions []ColdStorageOptionsObservation `json:"coldStorageOptions,omitempty" tf:"cold_storage_options,omitempty"`
+
+	// Number of dedicated main nodes in the cluster.
+	DedicatedMasterCount *float64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
+
+	// Whether dedicated main nodes are enabled for the cluster.
+	DedicatedMasterEnabled *bool `json:"dedicatedMasterEnabled,omitempty" tf:"dedicated_master_enabled,omitempty"`
+
+	// Instance type of the dedicated main nodes in the cluster.
+	DedicatedMasterType *string `json:"dedicatedMasterType,omitempty" tf:"dedicated_master_type,omitempty"`
+
+	// Number of instances in the cluster.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Instance type of data nodes in the cluster.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
+	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
+
+	// Whether to enable warm storage.
+	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
+
+	// Instance type for the OpenSearch cluster's warm nodes. Valid values are ultrawarm1.medium.search, ultrawarm1.large.search and ultrawarm1.xlarge.search. warm_type can be only and must be set when warm_enabled is set to true.
+	WarmType *string `json:"warmType,omitempty" tf:"warm_type,omitempty"`
+
+	// Configuration block containing zone awareness settings. Detailed below.
+	ZoneAwarenessConfig []ZoneAwarenessConfigObservation `json:"zoneAwarenessConfig,omitempty" tf:"zone_awareness_config,omitempty"`
+
+	// Whether zone awareness is enabled, set to true for multi-az deployment. To enable awareness with three Availability Zones, the availability_zone_count within the zone_awareness_config must be set to 3.
+	ZoneAwarenessEnabled *bool `json:"zoneAwarenessEnabled,omitempty" tf:"zone_awareness_enabled,omitempty"`
 }
 
 type ClusterConfigParameters struct {
@@ -104,6 +158,18 @@ type ClusterConfigParameters struct {
 }
 
 type CognitoOptionsObservation struct {
+
+	// Whether Amazon Cognito authentication with Kibana is enabled or not. Default is false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// ID of the Cognito Identity Pool to use.
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// ARN of the IAM role that has the AmazonOpenSearchServiceCognitoAccess policy attached.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// ID of the Cognito User Pool to use.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type CognitoOptionsParameters struct {
@@ -126,6 +192,9 @@ type CognitoOptionsParameters struct {
 }
 
 type ColdStorageOptionsObservation struct {
+
+	// Boolean to enable cold storage for an OpenSearch domain. Defaults to false. Master and ultrawarm nodes must be enabled for cold storage.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type ColdStorageOptionsParameters struct {
@@ -136,6 +205,21 @@ type ColdStorageOptionsParameters struct {
 }
 
 type DomainEndpointOptionsObservation struct {
+
+	// Fully qualified domain for your custom endpoint.
+	CustomEndpoint *string `json:"customEndpoint,omitempty" tf:"custom_endpoint,omitempty"`
+
+	// ACM certificate ARN for your custom endpoint.
+	CustomEndpointCertificateArn *string `json:"customEndpointCertificateArn,omitempty" tf:"custom_endpoint_certificate_arn,omitempty"`
+
+	// Whether to enable custom endpoint for the OpenSearch domain.
+	CustomEndpointEnabled *bool `json:"customEndpointEnabled,omitempty" tf:"custom_endpoint_enabled,omitempty"`
+
+	// Whether or not to require HTTPS. Defaults to true.
+	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
+
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
 type DomainEndpointOptionsParameters struct {
@@ -166,25 +250,66 @@ type DomainObservation struct {
 	// , are prefaced with es: for both.
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
+	// Key-value string pairs to specify advanced configuration options.
+	AdvancedOptions map[string]*string `json:"advancedOptions,omitempty" tf:"advanced_options,omitempty"`
+
+	// Configuration block for fine-grained access control. Detailed below.
+	AdvancedSecurityOptions []AdvancedSecurityOptionsObservation `json:"advancedSecurityOptions,omitempty" tf:"advanced_security_options,omitempty"`
+
 	// ARN of the domain.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Configuration block for the Auto-Tune options of the domain. Detailed below.
+	AutoTuneOptions []AutoTuneOptionsObservation `json:"autoTuneOptions,omitempty" tf:"auto_tune_options,omitempty"`
+
+	// Configuration block for the cluster of the domain. Detailed below.
+	ClusterConfig []ClusterConfigObservation `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+
+	// Configuration block for authenticating Kibana with Cognito. Detailed below.
+	CognitoOptions []CognitoOptionsObservation `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
+
+	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
+	DomainEndpointOptions []DomainEndpointOptionsObservation `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
 	// Unique identifier for the domain.
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
+	// Name of the domain.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Configuration block for EBS related options, may be required based on chosen instance size. Detailed below.
+	EBSOptions []EBSOptionsObservation `json:"ebsOptions,omitempty" tf:"ebs_options,omitempty"`
+
+	// Configuration block for encrypt at rest options. Only available for certain instance types. Detailed below.
+	EncryptAtRest []EncryptAtRestObservation `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
+
 	// Domain-specific endpoint used to submit index, search, and data upload requests.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// while Elasticsearch has elasticsearch_version
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Domain-specific endpoint for kibana without https scheme.
 	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
 
+	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
+	LogPublishingOptions []LogPublishingOptionsObservation `json:"logPublishingOptions,omitempty" tf:"log_publishing_options,omitempty"`
+
+	// Configuration block for node-to-node encryption options. Detailed below.
+	NodeToNodeEncryption []NodeToNodeEncryptionObservation `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
+
+	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
+	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for VPC related options. Adding or removing this configuration forces a new resource (documentation). Detailed below.
-	// +kubebuilder:validation:Optional
 	VPCOptions []VPCOptionsObservation `json:"vpcOptions,omitempty" tf:"vpc_options,omitempty"`
 }
 
@@ -215,8 +340,8 @@ type DomainParameters struct {
 	DomainEndpointOptions []DomainEndpointOptionsParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
 
 	// Name of the domain.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Configuration block for EBS related options, may be required based on chosen instance size. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -257,6 +382,12 @@ type DomainParameters struct {
 }
 
 type DurationObservation struct {
+
+	// Unit of time specifying the duration of an Auto-Tune maintenance window. Valid values: HOURS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DurationParameters struct {
@@ -271,6 +402,21 @@ type DurationParameters struct {
 }
 
 type EBSOptionsObservation struct {
+
+	// Whether EBS volumes are attached to data nodes in the domain.
+	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
+
+	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type. Valid values are between 125 and 1000.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of EBS volumes attached to data nodes (in GiB).
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of EBS volumes attached to data nodes.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type EBSOptionsParameters struct {
@@ -297,6 +443,12 @@ type EBSOptionsParameters struct {
 }
 
 type EncryptAtRestObservation struct {
+
+	// Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false. Enabling encryption on new domains requires an engine_version of OpenSearch_X.Y or Elasticsearch_5.1 or greater.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key. Note that KMS will accept a KMS key ID but will return the key ARN.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type EncryptAtRestParameters struct {
@@ -311,6 +463,15 @@ type EncryptAtRestParameters struct {
 }
 
 type LogPublishingOptionsObservation struct {
+
+	// ARN of the Cloudwatch log group to which log needs to be published.
+	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
+
+	// Whether given log publishing option is enabled or not.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Type of OpenSearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS, AUDIT_LOGS.
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 }
 
 type LogPublishingOptionsParameters struct {
@@ -339,6 +500,15 @@ type LogPublishingOptionsParameters struct {
 }
 
 type MaintenanceScheduleObservation struct {
+
+	// A cron expression specifying the recurrence pattern for an Auto-Tune maintenance schedule.
+	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence,omitempty" tf:"cron_expression_for_recurrence,omitempty"`
+
+	// Configuration block for the duration of the Auto-Tune maintenance window. Detailed below.
+	Duration []DurationObservation `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Date and time at which to start the Auto-Tune maintenance schedule in RFC3339 format.
+	StartAt *string `json:"startAt,omitempty" tf:"start_at,omitempty"`
 }
 
 type MaintenanceScheduleParameters struct {
@@ -357,6 +527,12 @@ type MaintenanceScheduleParameters struct {
 }
 
 type MasterUserOptionsObservation struct {
+
+	// ARN for the main user. Only specify if internal_user_database_enabled is not set or set to false.
+	MasterUserArn *string `json:"masterUserArn,omitempty" tf:"master_user_arn,omitempty"`
+
+	// Main user's username, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
+	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
 }
 
 type MasterUserOptionsParameters struct {
@@ -375,6 +551,9 @@ type MasterUserOptionsParameters struct {
 }
 
 type NodeToNodeEncryptionObservation struct {
+
+	// Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false. Enabling node-to-node encryption of a new domain requires an engine_version of OpenSearch_X.Y or Elasticsearch_6.0 or greater.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type NodeToNodeEncryptionParameters struct {
@@ -385,6 +564,9 @@ type NodeToNodeEncryptionParameters struct {
 }
 
 type SnapshotOptionsObservation struct {
+
+	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type SnapshotOptionsParameters struct {
@@ -398,6 +580,12 @@ type VPCOptionsObservation struct {
 
 	// If the domain was created inside a VPC, the names of the availability zones the configured subnet_ids were created inside.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// If the domain was created inside a VPC, the ID of the VPC.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -415,6 +603,9 @@ type VPCOptionsParameters struct {
 }
 
 type ZoneAwarenessConfigObservation struct {
+
+	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
+	AvailabilityZoneCount *float64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
 }
 
 type ZoneAwarenessConfigParameters struct {
@@ -448,8 +639,9 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec"`
-	Status            DomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainName)",message="domainName is a required parameter"
+	Spec   DomainSpec   `json:"spec"`
+	Status DomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

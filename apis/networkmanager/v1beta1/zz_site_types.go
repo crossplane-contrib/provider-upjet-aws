@@ -14,6 +14,15 @@ import (
 )
 
 type SiteLocationObservation struct {
+
+	// Address of the location.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Latitude of the location.
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	// Longitude of the location.
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
 }
 
 type SiteLocationParameters struct {
@@ -36,7 +45,19 @@ type SiteObservation struct {
 	// Site Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the Site.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the Global Network to create the site in.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The site location as documented below.
+	Location []SiteLocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

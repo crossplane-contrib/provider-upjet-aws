@@ -14,6 +14,9 @@ import (
 )
 
 type InstanceMetadataServiceConfigurationObservation struct {
+
+	// Indicates the minimum IMDS version that the notebook instance supports. When passed "1" is passed. This means that both IMDSv1 and IMDSv2 are supported. Valid values are 1 and 2.
+	MinimumInstanceMetadataServiceVersion *string `json:"minimumInstanceMetadataServiceVersion,omitempty" tf:"minimum_instance_metadata_service_version,omitempty"`
 }
 
 type InstanceMetadataServiceConfigurationParameters struct {
@@ -25,20 +28,66 @@ type InstanceMetadataServiceConfigurationParameters struct {
 
 type NotebookInstanceObservation struct {
 
+	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// An array of up to three Git repositories to associate with the notebook instance.
+	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
+	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
+
 	// The Amazon Resource Name (ARN) assigned by AWS to this notebook instance.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository.
+	DefaultCodeRepository *string `json:"defaultCodeRepository,omitempty" tf:"default_code_repository,omitempty"`
+
+	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
+	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
 
 	// The name of the notebook instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Information on the IMDS configuration of the notebook instance. Conflicts with instance_metadata_service_configuration. see details below.
+	InstanceMetadataServiceConfiguration []InstanceMetadataServiceConfigurationObservation `json:"instanceMetadataServiceConfiguration,omitempty" tf:"instance_metadata_service_configuration,omitempty"`
+
+	// The name of ML compute instance type.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The name of a lifecycle configuration to associate with the notebook instance.
+	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
+
 	// The network interface ID that Amazon SageMaker created at the time of creating the instance. Only available when setting subnet_id.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, or  notebook-al2-v2, depending on which version of Amazon Linux you require.
+	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
+
+	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker to call other services on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
+	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
+
+	// The associated security groups.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The VPC subnet ID.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The URL that you use to connect to the Jupyter notebook that is running in your notebook instance.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type NotebookInstanceParameters struct {
@@ -74,8 +123,8 @@ type NotebookInstanceParameters struct {
 	InstanceMetadataServiceConfiguration []InstanceMetadataServiceConfigurationParameters `json:"instanceMetadataServiceConfiguration,omitempty" tf:"instance_metadata_service_configuration,omitempty"`
 
 	// The name of ML compute instance type.
-	// +kubebuilder:validation:Required
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -171,8 +220,9 @@ type NotebookInstanceStatus struct {
 type NotebookInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotebookInstanceSpec   `json:"spec"`
-	Status            NotebookInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	Spec   NotebookInstanceSpec   `json:"spec"`
+	Status NotebookInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

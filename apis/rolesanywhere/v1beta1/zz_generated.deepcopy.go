@@ -81,10 +81,72 @@ func (in *ProfileObservation) DeepCopyInto(out *ProfileObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DurationSeconds != nil {
+		in, out := &in.DurationSeconds, &out.DurationSeconds
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Enabled != nil {
+		in, out := &in.Enabled, &out.Enabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ManagedPolicyArns != nil {
+		in, out := &in.ManagedPolicyArns, &out.ManagedPolicyArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.RequireInstanceProperties != nil {
+		in, out := &in.RequireInstanceProperties, &out.RequireInstanceProperties
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RoleArns != nil {
+		in, out := &in.RoleArns, &out.RoleArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SessionPolicy != nil {
+		in, out := &in.SessionPolicy, &out.SessionPolicy
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll

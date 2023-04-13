@@ -14,11 +14,18 @@ import (
 )
 
 type ApplicationObservation struct {
+	AppversionLifecycle []AppversionLifecycleObservation `json:"appversionLifecycle,omitempty" tf:"appversion_lifecycle,omitempty"`
 
 	// The ARN assigned by AWS for this Elastic Beanstalk Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Short description of the application
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -44,6 +51,18 @@ type ApplicationParameters struct {
 }
 
 type AppversionLifecycleObservation struct {
+
+	// Set to true to delete a version's source bundle from S3 when the application version is deleted.
+	DeleteSourceFromS3 *bool `json:"deleteSourceFromS3,omitempty" tf:"delete_source_from_s3,omitempty"`
+
+	// The number of days to retain an application version ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
+	MaxAgeInDays *float64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
+
+	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
+	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+
+	// The ARN of an IAM service role under which the application version is deleted.  Elastic Beanstalk must have permission to assume this role.
+	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 }
 
 type AppversionLifecycleParameters struct {

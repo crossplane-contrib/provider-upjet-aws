@@ -15,24 +15,36 @@ import (
 
 type UserSSHKeyObservation struct {
 
+	// Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
 	// The MD5 message digest of the SSH public key.
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
 	// The unique identifier for the SSH public key.
 	SSHPublicKeyID *string `json:"sshPublicKeyId,omitempty" tf:"ssh_public_key_id,omitempty"`
+
+	// The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is active.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The name of the IAM user to associate the SSH public key with.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type UserSSHKeyParameters struct {
 
 	// Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM.
-	// +kubebuilder:validation:Required
-	Encoding *string `json:"encoding" tf:"encoding,omitempty"`
+	// +kubebuilder:validation:Optional
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
-	// +kubebuilder:validation:Required
-	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is active.
 	// +kubebuilder:validation:Optional
@@ -76,8 +88,10 @@ type UserSSHKeyStatus struct {
 type UserSSHKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSSHKeySpec   `json:"spec"`
-	Status            UserSSHKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encoding)",message="encoding is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicKey)",message="publicKey is a required parameter"
+	Spec   UserSSHKeySpec   `json:"spec"`
+	Status UserSSHKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

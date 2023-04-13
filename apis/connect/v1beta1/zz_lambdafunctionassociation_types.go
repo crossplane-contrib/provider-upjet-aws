@@ -15,8 +15,14 @@ import (
 
 type LambdaFunctionAssociationObservation struct {
 
+	// Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
 	// The Amazon Connect instance ID and Lambda Function ARN separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 }
 
 type LambdaFunctionAssociationParameters struct {

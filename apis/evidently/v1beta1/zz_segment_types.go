@@ -21,6 +21,9 @@ type SegmentObservation struct {
 	// The date and time that the segment is created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Specifies the description of the segment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The number of experiments that this segment is used in. This count includes all current experiments, not just those that are currently running.
 	ExperimentCount *float64 `json:"experimentCount,omitempty" tf:"experiment_count,omitempty"`
 
@@ -33,6 +36,12 @@ type SegmentObservation struct {
 	// The number of launches that this segment is used in. This count includes all current launches, not just those that are currently running.
 	LaunchCount *float64 `json:"launchCount,omitempty" tf:"launch_count,omitempty"`
 
+	// The pattern to use for the segment. For more information about pattern syntax, see Segment rule pattern syntax.
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -44,8 +53,8 @@ type SegmentParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The pattern to use for the segment. For more information about pattern syntax, see Segment rule pattern syntax.
-	// +kubebuilder:validation:Required
-	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +90,9 @@ type SegmentStatus struct {
 type Segment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SegmentSpec   `json:"spec"`
-	Status            SegmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pattern)",message="pattern is a required parameter"
+	Spec   SegmentSpec   `json:"spec"`
+	Status SegmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

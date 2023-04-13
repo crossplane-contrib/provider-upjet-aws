@@ -14,6 +14,16 @@ import (
 )
 
 type AwsCloudMapObservation struct {
+
+	// String map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.
+	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
+
+	// Name of the AWS Cloud Map namespace to use.
+	// Use the aws_service_discovery_http_namespace resource to configure a Cloud Map namespace. Must be between 1 and 1024 characters in length.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// attribute of the dns object to hostname.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
 type AwsCloudMapParameters struct {
@@ -43,6 +53,9 @@ type AwsCloudMapParameters struct {
 }
 
 type BackendDefaultsClientPolicyObservation struct {
+
+	// Transport Layer Security (TLS) client policy.
+	TLS []BackendDefaultsClientPolicyTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type BackendDefaultsClientPolicyParameters struct {
@@ -53,6 +66,12 @@ type BackendDefaultsClientPolicyParameters struct {
 }
 
 type BackendDefaultsClientPolicyTLSCertificateObservation struct {
+
+	// Local file certificate.
+	File []ClientPolicyTLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []ClientPolicyTLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type BackendDefaultsClientPolicyTLSCertificateParameters struct {
@@ -67,6 +86,18 @@ type BackendDefaultsClientPolicyTLSCertificateParameters struct {
 }
 
 type BackendDefaultsClientPolicyTLSObservation struct {
+
+	// Virtual node's client's Transport Layer Security (TLS) certificate.
+	Certificate []BackendDefaultsClientPolicyTLSCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Whether the policy is enforced. Default is true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
+	// One or more ports that the policy is enforced for.
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+
+	// TLS validation context.
+	Validation []BackendDefaultsClientPolicyTLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type BackendDefaultsClientPolicyTLSParameters struct {
@@ -89,6 +120,12 @@ type BackendDefaultsClientPolicyTLSParameters struct {
 }
 
 type BackendDefaultsClientPolicyTLSValidationObservation struct {
+
+	// SANs for a TLS validation context.
+	SubjectAlternativeNames []ClientPolicyTLSValidationSubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// TLS validation context trust.
+	Trust []ClientPolicyTLSValidationTrustObservation `json:"trust,omitempty" tf:"trust,omitempty"`
 }
 
 type BackendDefaultsClientPolicyTLSValidationParameters struct {
@@ -103,6 +140,9 @@ type BackendDefaultsClientPolicyTLSValidationParameters struct {
 }
 
 type BackendObservation struct {
+
+	// Virtual service to use as a backend for a virtual node.
+	VirtualService []BackendVirtualServiceObservation `json:"virtualService,omitempty" tf:"virtual_service,omitempty"`
 }
 
 type BackendParameters struct {
@@ -113,6 +153,12 @@ type BackendParameters struct {
 }
 
 type BackendVirtualServiceObservation struct {
+
+	// Client policy for the backend.
+	ClientPolicy []VirtualServiceClientPolicyObservation `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
+
+	// Name of the virtual service that is acting as a virtual node backend. Must be between 1 and 255 characters in length.
+	VirtualServiceName *string `json:"virtualServiceName,omitempty" tf:"virtual_service_name,omitempty"`
 }
 
 type BackendVirtualServiceParameters struct {
@@ -127,6 +173,12 @@ type BackendVirtualServiceParameters struct {
 }
 
 type BaseEjectionDurationObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BaseEjectionDurationParameters struct {
@@ -141,6 +193,12 @@ type BaseEjectionDurationParameters struct {
 }
 
 type ClientPolicyTLSCertificateFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 }
 
 type ClientPolicyTLSCertificateFileParameters struct {
@@ -155,6 +213,12 @@ type ClientPolicyTLSCertificateFileParameters struct {
 }
 
 type ClientPolicyTLSCertificateObservation struct {
+
+	// Local file certificate.
+	File []TLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []TLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ClientPolicyTLSCertificateParameters struct {
@@ -169,6 +233,9 @@ type ClientPolicyTLSCertificateParameters struct {
 }
 
 type ClientPolicyTLSCertificateSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ClientPolicyTLSCertificateSdsParameters struct {
@@ -179,6 +246,18 @@ type ClientPolicyTLSCertificateSdsParameters struct {
 }
 
 type ClientPolicyTLSObservation struct {
+
+	// Virtual node's client's Transport Layer Security (TLS) certificate.
+	Certificate []ClientPolicyTLSCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Whether the policy is enforced. Default is true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
+	// One or more ports that the policy is enforced for.
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+
+	// TLS validation context.
+	Validation []ClientPolicyTLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type ClientPolicyTLSParameters struct {
@@ -201,6 +280,12 @@ type ClientPolicyTLSParameters struct {
 }
 
 type ClientPolicyTLSValidationObservation struct {
+
+	// SANs for a TLS validation context.
+	SubjectAlternativeNames []TLSValidationSubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// TLS validation context trust.
+	Trust []TLSValidationTrustObservation `json:"trust,omitempty" tf:"trust,omitempty"`
 }
 
 type ClientPolicyTLSValidationParameters struct {
@@ -215,6 +300,9 @@ type ClientPolicyTLSValidationParameters struct {
 }
 
 type ClientPolicyTLSValidationSubjectAlternativeNamesMatchObservation struct {
+
+	// Values sent must match the specified values exactly.
+	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ClientPolicyTLSValidationSubjectAlternativeNamesMatchParameters struct {
@@ -225,6 +313,9 @@ type ClientPolicyTLSValidationSubjectAlternativeNamesMatchParameters struct {
 }
 
 type ClientPolicyTLSValidationSubjectAlternativeNamesObservation struct {
+
+	// Criteria for determining a SAN's match.
+	Match []ClientPolicyTLSValidationSubjectAlternativeNamesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type ClientPolicyTLSValidationSubjectAlternativeNamesParameters struct {
@@ -235,6 +326,9 @@ type ClientPolicyTLSValidationSubjectAlternativeNamesParameters struct {
 }
 
 type ClientPolicyTLSValidationTrustFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type ClientPolicyTLSValidationTrustFileParameters struct {
@@ -245,6 +339,15 @@ type ClientPolicyTLSValidationTrustFileParameters struct {
 }
 
 type ClientPolicyTLSValidationTrustObservation struct {
+
+	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	Acm []ValidationTrustAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
+
+	// Local file certificate.
+	File []ClientPolicyTLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []ClientPolicyTLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ClientPolicyTLSValidationTrustParameters struct {
@@ -263,6 +366,9 @@ type ClientPolicyTLSValidationTrustParameters struct {
 }
 
 type ClientPolicyTLSValidationTrustSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ClientPolicyTLSValidationTrustSdsParameters struct {
@@ -273,6 +379,9 @@ type ClientPolicyTLSValidationTrustSdsParameters struct {
 }
 
 type ConnectionPoolGRPCObservation struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolGRPCParameters struct {
@@ -283,6 +392,12 @@ type ConnectionPoolGRPCParameters struct {
 }
 
 type ConnectionPoolHTTPObservation struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+
+	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
+	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type ConnectionPoolHTTPParameters struct {
@@ -297,6 +412,9 @@ type ConnectionPoolHTTPParameters struct {
 }
 
 type ConnectionPoolHttp2Observation struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolHttp2Parameters struct {
@@ -307,6 +425,9 @@ type ConnectionPoolHttp2Parameters struct {
 }
 
 type DNSObservation struct {
+
+	// DNS host name for your virtual node.
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 }
 
 type DNSParameters struct {
@@ -317,6 +438,12 @@ type DNSParameters struct {
 }
 
 type GRPCIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCIdleParameters struct {
@@ -331,6 +458,12 @@ type GRPCIdleParameters struct {
 }
 
 type GRPCPerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCPerRequestParameters struct {
@@ -345,6 +478,12 @@ type GRPCPerRequestParameters struct {
 }
 
 type HTTPIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPIdleParameters struct {
@@ -359,6 +498,12 @@ type HTTPIdleParameters struct {
 }
 
 type HTTPPerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPPerRequestParameters struct {
@@ -373,6 +518,12 @@ type HTTPPerRequestParameters struct {
 }
 
 type Http2IdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2IdleParameters struct {
@@ -387,6 +538,12 @@ type Http2IdleParameters struct {
 }
 
 type Http2PerRequestObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2PerRequestParameters struct {
@@ -401,6 +558,12 @@ type Http2PerRequestParameters struct {
 }
 
 type IntervalObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IntervalParameters struct {
@@ -415,6 +578,18 @@ type IntervalParameters struct {
 }
 
 type ListenerConnectionPoolObservation struct {
+
+	// Connection pool information for gRPC listeners.
+	GRPC []ConnectionPoolGRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
+
+	// Connection pool information for HTTP listeners.
+	HTTP []ConnectionPoolHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Connection pool information for HTTP2 listeners.
+	Http2 []ConnectionPoolHttp2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
+
+	// Connection pool information for TCP listeners.
+	TCP []TCPObservation `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerConnectionPoolParameters struct {
@@ -437,6 +612,27 @@ type ListenerConnectionPoolParameters struct {
 }
 
 type ListenerHealthCheckObservation struct {
+
+	// Number of consecutive successful health checks that must occur before declaring listener healthy.
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+
+	// Time period in milliseconds between each health check execution.
+	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+
+	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Port used for the port mapping.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Amount of time to wait when receiving a response from the health check, in milliseconds.
+	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+
+	// Number of consecutive failed health checks that must occur before declaring a virtual node unhealthy.
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerHealthCheckParameters struct {
@@ -471,6 +667,12 @@ type ListenerHealthCheckParameters struct {
 }
 
 type ListenerPortMappingObservation struct {
+
+	// Port used for the port mapping.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type ListenerPortMappingParameters struct {
@@ -485,6 +687,12 @@ type ListenerPortMappingParameters struct {
 }
 
 type ListenerTLSCertificateFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 }
 
 type ListenerTLSCertificateFileParameters struct {
@@ -499,6 +707,15 @@ type ListenerTLSCertificateFileParameters struct {
 }
 
 type ListenerTLSCertificateObservation struct {
+
+	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	Acm []TLSCertificateAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
+
+	// Local file certificate.
+	File []ListenerTLSCertificateFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []ListenerTLSCertificateSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ListenerTLSCertificateParameters struct {
@@ -517,6 +734,9 @@ type ListenerTLSCertificateParameters struct {
 }
 
 type ListenerTLSCertificateSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ListenerTLSCertificateSdsParameters struct {
@@ -527,6 +747,12 @@ type ListenerTLSCertificateSdsParameters struct {
 }
 
 type ListenerTLSValidationObservation struct {
+
+	// SANs for a TLS validation context.
+	SubjectAlternativeNames []ListenerTLSValidationSubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// TLS validation context trust.
+	Trust []ListenerTLSValidationTrustObservation `json:"trust,omitempty" tf:"trust,omitempty"`
 }
 
 type ListenerTLSValidationParameters struct {
@@ -541,6 +767,9 @@ type ListenerTLSValidationParameters struct {
 }
 
 type ListenerTLSValidationSubjectAlternativeNamesMatchObservation struct {
+
+	// Values sent must match the specified values exactly.
+	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ListenerTLSValidationSubjectAlternativeNamesMatchParameters struct {
@@ -551,6 +780,9 @@ type ListenerTLSValidationSubjectAlternativeNamesMatchParameters struct {
 }
 
 type ListenerTLSValidationSubjectAlternativeNamesObservation struct {
+
+	// Criteria for determining a SAN's match.
+	Match []ListenerTLSValidationSubjectAlternativeNamesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type ListenerTLSValidationSubjectAlternativeNamesParameters struct {
@@ -561,6 +793,9 @@ type ListenerTLSValidationSubjectAlternativeNamesParameters struct {
 }
 
 type ListenerTLSValidationTrustFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type ListenerTLSValidationTrustFileParameters struct {
@@ -571,6 +806,12 @@ type ListenerTLSValidationTrustFileParameters struct {
 }
 
 type ListenerTLSValidationTrustObservation struct {
+
+	// Local file certificate.
+	File []ListenerTLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []ListenerTLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type ListenerTLSValidationTrustParameters struct {
@@ -585,6 +826,9 @@ type ListenerTLSValidationTrustParameters struct {
 }
 
 type ListenerTLSValidationTrustSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ListenerTLSValidationTrustSdsParameters struct {
@@ -595,6 +839,18 @@ type ListenerTLSValidationTrustSdsParameters struct {
 }
 
 type ListenerTimeoutObservation struct {
+
+	// Connection pool information for gRPC listeners.
+	GRPC []TimeoutGRPCObservation `json:"grpc,omitempty" tf:"grpc,omitempty"`
+
+	// Connection pool information for HTTP listeners.
+	HTTP []TimeoutHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	// Connection pool information for HTTP2 listeners.
+	Http2 []TimeoutHttp2Observation `json:"http2,omitempty" tf:"http2,omitempty"`
+
+	// Connection pool information for TCP listeners.
+	TCP []TimeoutTCPObservation `json:"tcp,omitempty" tf:"tcp,omitempty"`
 }
 
 type ListenerTimeoutParameters struct {
@@ -617,6 +873,9 @@ type ListenerTimeoutParameters struct {
 }
 
 type LoggingAccessLogFileObservation struct {
+
+	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type LoggingAccessLogFileParameters struct {
@@ -627,6 +886,9 @@ type LoggingAccessLogFileParameters struct {
 }
 
 type LoggingAccessLogObservation struct {
+
+	// Local file certificate.
+	File []LoggingAccessLogFileObservation `json:"file,omitempty" tf:"file,omitempty"`
 }
 
 type LoggingAccessLogParameters struct {
@@ -637,6 +899,19 @@ type LoggingAccessLogParameters struct {
 }
 
 type OutlierDetectionObservation struct {
+
+	// Base amount of time for which a host is ejected.
+	BaseEjectionDuration []BaseEjectionDurationObservation `json:"baseEjectionDuration,omitempty" tf:"base_ejection_duration,omitempty"`
+
+	// Time interval between ejection sweep analysis.
+	Interval []IntervalObservation `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
+	// Minimum value of 0. Maximum value of 100.
+	MaxEjectionPercent *float64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
+
+	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
+	MaxServerErrors *float64 `json:"maxServerErrors,omitempty" tf:"max_server_errors,omitempty"`
 }
 
 type OutlierDetectionParameters struct {
@@ -660,6 +935,12 @@ type OutlierDetectionParameters struct {
 }
 
 type ServiceDiscoveryObservation struct {
+
+	// Any AWS Cloud Map information for the virtual node.
+	AwsCloudMap []AwsCloudMapObservation `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
+
+	// DNS service name for the virtual node.
+	DNS []DNSObservation `json:"dns,omitempty" tf:"dns,omitempty"`
 }
 
 type ServiceDiscoveryParameters struct {
@@ -674,6 +955,9 @@ type ServiceDiscoveryParameters struct {
 }
 
 type SpecBackendDefaultsObservation struct {
+
+	// Client policy for the backend.
+	ClientPolicy []BackendDefaultsClientPolicyObservation `json:"clientPolicy,omitempty" tf:"client_policy,omitempty"`
 }
 
 type SpecBackendDefaultsParameters struct {
@@ -684,6 +968,24 @@ type SpecBackendDefaultsParameters struct {
 }
 
 type SpecListenerObservation struct {
+
+	// Connection pool information for the listener.
+	ConnectionPool []ListenerConnectionPoolObservation `json:"connectionPool,omitempty" tf:"connection_pool,omitempty"`
+
+	// Health check information for the listener.
+	HealthCheck []ListenerHealthCheckObservation `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
+
+	// Outlier detection information for the listener.
+	OutlierDetection []OutlierDetectionObservation `json:"outlierDetection,omitempty" tf:"outlier_detection,omitempty"`
+
+	// Port mapping information for the listener.
+	PortMapping []ListenerPortMappingObservation `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
+
+	// Transport Layer Security (TLS) client policy.
+	TLS []SpecListenerTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// Timeouts for different protocols.
+	Timeout []ListenerTimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type SpecListenerParameters struct {
@@ -714,6 +1016,15 @@ type SpecListenerParameters struct {
 }
 
 type SpecListenerTLSObservation struct {
+
+	// Virtual node's client's Transport Layer Security (TLS) certificate.
+	Certificate []ListenerTLSCertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Listener's TLS mode. Valid values: DISABLED, PERMISSIVE, STRICT.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// TLS validation context.
+	Validation []ListenerTLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type SpecListenerTLSParameters struct {
@@ -732,6 +1043,9 @@ type SpecListenerTLSParameters struct {
 }
 
 type SpecLoggingObservation struct {
+
+	// Access log configuration for a virtual node.
+	AccessLog []LoggingAccessLogObservation `json:"accessLog,omitempty" tf:"access_log,omitempty"`
 }
 
 type SpecLoggingParameters struct {
@@ -742,6 +1056,12 @@ type SpecLoggingParameters struct {
 }
 
 type TCPIdleObservation struct {
+
+	// Unit of time. Valid values: ms, s.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// Number of time units. Minimum value of 0.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPIdleParameters struct {
@@ -756,6 +1076,9 @@ type TCPIdleParameters struct {
 }
 
 type TCPObservation struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 }
 
 type TCPParameters struct {
@@ -766,6 +1089,9 @@ type TCPParameters struct {
 }
 
 type TLSCertificateAcmObservation struct {
+
+	// ARN for the certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type TLSCertificateAcmParameters struct {
@@ -776,6 +1102,12 @@ type TLSCertificateAcmParameters struct {
 }
 
 type TLSCertificateFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+	PrivateKey *string `json:"privateKey,omitempty" tf:"private_key,omitempty"`
 }
 
 type TLSCertificateFileParameters struct {
@@ -790,6 +1122,9 @@ type TLSCertificateFileParameters struct {
 }
 
 type TLSCertificateSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type TLSCertificateSdsParameters struct {
@@ -800,6 +1135,9 @@ type TLSCertificateSdsParameters struct {
 }
 
 type TLSValidationSubjectAlternativeNamesMatchObservation struct {
+
+	// Values sent must match the specified values exactly.
+	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type TLSValidationSubjectAlternativeNamesMatchParameters struct {
@@ -810,6 +1148,9 @@ type TLSValidationSubjectAlternativeNamesMatchParameters struct {
 }
 
 type TLSValidationSubjectAlternativeNamesObservation struct {
+
+	// Criteria for determining a SAN's match.
+	Match []TLSValidationSubjectAlternativeNamesMatchObservation `json:"match,omitempty" tf:"match,omitempty"`
 }
 
 type TLSValidationSubjectAlternativeNamesParameters struct {
@@ -820,6 +1161,9 @@ type TLSValidationSubjectAlternativeNamesParameters struct {
 }
 
 type TLSValidationTrustFileObservation struct {
+
+	// Certificate chain for the certificate.
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 }
 
 type TLSValidationTrustFileParameters struct {
@@ -830,6 +1174,15 @@ type TLSValidationTrustFileParameters struct {
 }
 
 type TLSValidationTrustObservation struct {
+
+	// TLS validation context trust for an AWS Certificate Manager (ACM) certificate.
+	Acm []TrustAcmObservation `json:"acm,omitempty" tf:"acm,omitempty"`
+
+	// Local file certificate.
+	File []TLSValidationTrustFileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// A Secret Discovery Service certificate.
+	Sds []TLSValidationTrustSdsObservation `json:"sds,omitempty" tf:"sds,omitempty"`
 }
 
 type TLSValidationTrustParameters struct {
@@ -848,6 +1201,9 @@ type TLSValidationTrustParameters struct {
 }
 
 type TLSValidationTrustSdsObservation struct {
+
+	// Name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type TLSValidationTrustSdsParameters struct {
@@ -858,6 +1214,12 @@ type TLSValidationTrustSdsParameters struct {
 }
 
 type TimeoutGRPCObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []GRPCIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []GRPCPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutGRPCParameters struct {
@@ -872,6 +1234,12 @@ type TimeoutGRPCParameters struct {
 }
 
 type TimeoutHTTPObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []HTTPIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []HTTPPerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHTTPParameters struct {
@@ -886,6 +1254,12 @@ type TimeoutHTTPParameters struct {
 }
 
 type TimeoutHttp2Observation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []Http2IdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
+
+	// Per request timeout.
+	PerRequest []Http2PerRequestObservation `json:"perRequest,omitempty" tf:"per_request,omitempty"`
 }
 
 type TimeoutHttp2Parameters struct {
@@ -900,6 +1274,9 @@ type TimeoutHttp2Parameters struct {
 }
 
 type TimeoutTCPObservation struct {
+
+	// Idle timeout. An idle timeout bounds the amount of time that a connection may be idle.
+	Idle []TCPIdleObservation `json:"idle,omitempty" tf:"idle,omitempty"`
 }
 
 type TimeoutTCPParameters struct {
@@ -910,6 +1287,9 @@ type TimeoutTCPParameters struct {
 }
 
 type TrustAcmObservation struct {
+
+	// One or more ACM ARNs.
+	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type TrustAcmParameters struct {
@@ -920,6 +1300,9 @@ type TrustAcmParameters struct {
 }
 
 type ValidationTrustAcmObservation struct {
+
+	// One or more ACM ARNs.
+	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type ValidationTrustAcmParameters struct {
@@ -943,8 +1326,23 @@ type VirtualNodeObservation struct {
 	// Last update date of the virtual node.
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
 
+	// Name of the service mesh in which to create the virtual node. Must be between 1 and 255 characters in length.
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the virtual node. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
+
+	// Virtual node specification to apply.
+	Spec []VirtualNodeSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -971,8 +1369,8 @@ type VirtualNodeParameters struct {
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
 	// Name to use for the virtual node. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -980,8 +1378,8 @@ type VirtualNodeParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Virtual node specification to apply.
-	// +kubebuilder:validation:Required
-	Spec []VirtualNodeSpecParameters `json:"spec" tf:"spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	Spec []VirtualNodeSpecParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -989,6 +1387,21 @@ type VirtualNodeParameters struct {
 }
 
 type VirtualNodeSpecObservation struct {
+
+	// Backends to which the virtual node is expected to send outbound traffic.
+	Backend []BackendObservation `json:"backend,omitempty" tf:"backend,omitempty"`
+
+	// Defaults for backends.
+	BackendDefaults []SpecBackendDefaultsObservation `json:"backendDefaults,omitempty" tf:"backend_defaults,omitempty"`
+
+	// Listeners from which the virtual node is expected to receive inbound traffic.
+	Listener []SpecListenerObservation `json:"listener,omitempty" tf:"listener,omitempty"`
+
+	// Inbound and outbound access logging information for the virtual node.
+	Logging []SpecLoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// Service discovery information for the virtual node.
+	ServiceDiscovery []ServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualNodeSpecParameters struct {
@@ -1015,6 +1428,9 @@ type VirtualNodeSpecParameters struct {
 }
 
 type VirtualServiceClientPolicyObservation struct {
+
+	// Transport Layer Security (TLS) client policy.
+	TLS []ClientPolicyTLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type VirtualServiceClientPolicyParameters struct {
@@ -1048,8 +1464,10 @@ type VirtualNodeStatus struct {
 type VirtualNode struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNodeSpec   `json:"spec"`
-	Status            VirtualNodeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)",message="spec is a required parameter"
+	Spec   VirtualNodeSpec   `json:"spec"`
+	Status VirtualNodeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

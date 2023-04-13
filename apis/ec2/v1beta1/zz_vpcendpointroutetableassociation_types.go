@@ -17,6 +17,12 @@ type VPCEndpointRouteTableAssociationObservation struct {
 
 	// A hash of the EC2 Route Table and VPC Endpoint identifiers.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Identifier of the EC2 Route Table to be associated with the VPC Endpoint.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// Identifier of the VPC Endpoint with which the EC2 Route Table will be associated.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 }
 
 type VPCEndpointRouteTableAssociationParameters struct {

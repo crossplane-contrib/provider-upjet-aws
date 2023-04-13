@@ -14,6 +14,9 @@ import (
 )
 
 type CustomizedCapacityMetricSpecificationObservation struct {
+
+	// List of up to 10 structures that defines custom capacity metric in predictive scaling policy
+	MetricDataQueries []MetricDataQueriesObservation `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
 }
 
 type CustomizedCapacityMetricSpecificationParameters struct {
@@ -24,6 +27,21 @@ type CustomizedCapacityMetricSpecificationParameters struct {
 }
 
 type CustomizedLoadMetricSpecificationMetricDataQueriesObservation struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricDataQueriesMetricStatObservation `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default it true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
 type CustomizedLoadMetricSpecificationMetricDataQueriesParameters struct {
@@ -50,6 +68,9 @@ type CustomizedLoadMetricSpecificationMetricDataQueriesParameters struct {
 }
 
 type CustomizedLoadMetricSpecificationObservation struct {
+
+	// List of up to 10 structures that defines custom load metric in predictive scaling policy
+	MetricDataQueries []CustomizedLoadMetricSpecificationMetricDataQueriesObservation `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
 }
 
 type CustomizedLoadMetricSpecificationParameters struct {
@@ -60,6 +81,21 @@ type CustomizedLoadMetricSpecificationParameters struct {
 }
 
 type CustomizedMetricSpecificationObservation struct {
+
+	// Dimensions of the metric.
+	MetricDimension []MetricDimensionObservation `json:"metricDimension,omitempty" tf:"metric_dimension,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// Statistic of the metric.
+	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
+
+	// Unit of the metrics to return.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type CustomizedMetricSpecificationParameters struct {
@@ -86,6 +122,15 @@ type CustomizedMetricSpecificationParameters struct {
 }
 
 type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatObservation struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricDataQueriesMetricStatMetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metrics to return.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatParameters struct {
@@ -104,6 +149,21 @@ type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatParameters s
 }
 
 type CustomizedScalingMetricSpecificationMetricDataQueriesObservation struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatObservation `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default it true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
 type CustomizedScalingMetricSpecificationMetricDataQueriesParameters struct {
@@ -130,6 +190,9 @@ type CustomizedScalingMetricSpecificationMetricDataQueriesParameters struct {
 }
 
 type CustomizedScalingMetricSpecificationObservation struct {
+
+	// List of up to 10 structures that defines custom scaling metric in predictive scaling policy
+	MetricDataQueries []CustomizedScalingMetricSpecificationMetricDataQueriesObservation `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
 }
 
 type CustomizedScalingMetricSpecificationParameters struct {
@@ -140,6 +203,12 @@ type CustomizedScalingMetricSpecificationParameters struct {
 }
 
 type DimensionsObservation struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DimensionsParameters struct {
@@ -154,6 +223,15 @@ type DimensionsParameters struct {
 }
 
 type MetricDataQueriesMetricStatMetricObservation struct {
+
+	// Dimensions of the metric.
+	Dimensions []MetricStatMetricDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricDataQueriesMetricStatMetricParameters struct {
@@ -172,6 +250,15 @@ type MetricDataQueriesMetricStatMetricParameters struct {
 }
 
 type MetricDataQueriesMetricStatObservation struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricStatMetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metrics to return.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type MetricDataQueriesMetricStatParameters struct {
@@ -190,6 +277,21 @@ type MetricDataQueriesMetricStatParameters struct {
 }
 
 type MetricDataQueriesObservation struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricStatObservation `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default it true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
 type MetricDataQueriesParameters struct {
@@ -216,6 +318,12 @@ type MetricDataQueriesParameters struct {
 }
 
 type MetricDimensionObservation struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricDimensionParameters struct {
@@ -230,6 +338,12 @@ type MetricDimensionParameters struct {
 }
 
 type MetricDimensionsObservation struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricDimensionsParameters struct {
@@ -244,6 +358,15 @@ type MetricDimensionsParameters struct {
 }
 
 type MetricObservation struct {
+
+	// Dimensions of the metric.
+	Dimensions []DimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricParameters struct {
@@ -262,6 +385,27 @@ type MetricParameters struct {
 }
 
 type MetricSpecificationObservation struct {
+
+	// Customized capacity metric specification. The field is only valid when you use customized_load_metric_specification
+	CustomizedCapacityMetricSpecification []CustomizedCapacityMetricSpecificationObservation `json:"customizedCapacityMetricSpecification,omitempty" tf:"customized_capacity_metric_specification,omitempty"`
+
+	// Customized load metric specification.
+	CustomizedLoadMetricSpecification []CustomizedLoadMetricSpecificationObservation `json:"customizedLoadMetricSpecification,omitempty" tf:"customized_load_metric_specification,omitempty"`
+
+	// Customized scaling metric specification.
+	CustomizedScalingMetricSpecification []CustomizedScalingMetricSpecificationObservation `json:"customizedScalingMetricSpecification,omitempty" tf:"customized_scaling_metric_specification,omitempty"`
+
+	// Predefined load metric specification.
+	PredefinedLoadMetricSpecification []PredefinedLoadMetricSpecificationObservation `json:"predefinedLoadMetricSpecification,omitempty" tf:"predefined_load_metric_specification,omitempty"`
+
+	// Metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
+	PredefinedMetricPairSpecification []PredefinedMetricPairSpecificationObservation `json:"predefinedMetricPairSpecification,omitempty" tf:"predefined_metric_pair_specification,omitempty"`
+
+	// Predefined scaling metric specification.
+	PredefinedScalingMetricSpecification []PredefinedScalingMetricSpecificationObservation `json:"predefinedScalingMetricSpecification,omitempty" tf:"predefined_scaling_metric_specification,omitempty"`
+
+	// Target value for the metric.
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
 }
 
 type MetricSpecificationParameters struct {
@@ -296,6 +440,12 @@ type MetricSpecificationParameters struct {
 }
 
 type MetricStatMetricDimensionsObservation struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricStatMetricDimensionsParameters struct {
@@ -310,6 +460,15 @@ type MetricStatMetricDimensionsParameters struct {
 }
 
 type MetricStatMetricObservation struct {
+
+	// Dimensions of the metric.
+	Dimensions []MetricDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricStatMetricParameters struct {
@@ -328,6 +487,15 @@ type MetricStatMetricParameters struct {
 }
 
 type MetricStatObservation struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metrics to return.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type MetricStatParameters struct {
@@ -347,11 +515,48 @@ type MetricStatParameters struct {
 
 type PolicyObservation struct {
 
+	// Whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.
+	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
+
 	// ARN assigned by AWS to the scaling policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name of the autoscaling group.
+	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
+
+	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
+	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+
+	// Whether the scaling policy is enabled or disabled. Default: true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period.
+	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+
 	// Short name for the metric used in predictive scaling policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
+	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
+
+	// Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.
+	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+
+	// Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// Predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.
+	PredictiveScalingConfiguration []PredictiveScalingConfigurationObservation `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
+
+	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
+	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+
+	// Set of adjustments that manage
+	// group scaling. These have the following structure:
+	StepAdjustment []StepAdjustmentObservation `json:"stepAdjustment,omitempty" tf:"step_adjustment,omitempty"`
+
+	// Target tracking policy. These have the following structure:
+	TargetTrackingConfiguration []TargetTrackingConfigurationObservation `json:"targetTrackingConfiguration,omitempty" tf:"target_tracking_configuration,omitempty"`
 }
 
 type PolicyParameters struct {
@@ -421,6 +626,12 @@ type PolicyParameters struct {
 }
 
 type PredefinedLoadMetricSpecificationObservation struct {
+
+	// Metric type. Valid values are ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedLoadMetricSpecificationParameters struct {
@@ -435,6 +646,12 @@ type PredefinedLoadMetricSpecificationParameters struct {
 }
 
 type PredefinedMetricPairSpecificationObservation struct {
+
+	// Which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric. For example, if the metric type is ASGCPUUtilization, the Auto Scaling group's total CPU metric is used as the load metric, and the average CPU metric is used for the scaling metric. Valid values are ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedMetricPairSpecificationParameters struct {
@@ -449,6 +666,12 @@ type PredefinedMetricPairSpecificationParameters struct {
 }
 
 type PredefinedMetricSpecificationObservation struct {
+
+	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedMetricSpecificationParameters struct {
@@ -463,6 +686,12 @@ type PredefinedMetricSpecificationParameters struct {
 }
 
 type PredefinedScalingMetricSpecificationObservation struct {
+
+	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
 type PredefinedScalingMetricSpecificationParameters struct {
@@ -477,6 +706,21 @@ type PredefinedScalingMetricSpecificationParameters struct {
 }
 
 type PredictiveScalingConfigurationObservation struct {
+
+	// Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity of the Auto Scaling group. Valid values are HonorMaxCapacity or IncreaseMaxCapacity. Default is HonorMaxCapacity.
+	MaxCapacityBreachBehavior *string `json:"maxCapacityBreachBehavior,omitempty" tf:"max_capacity_breach_behavior,omitempty"`
+
+	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. Valid range is 0 to 100. If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but not exceed forecast capacity.
+	MaxCapacityBuffer *string `json:"maxCapacityBuffer,omitempty" tf:"max_capacity_buffer,omitempty"`
+
+	// This structure includes the metrics and target utilization to use for predictive scaling.
+	MetricSpecification []MetricSpecificationObservation `json:"metricSpecification,omitempty" tf:"metric_specification,omitempty"`
+
+	// Predictive scaling mode. Valid values are ForecastAndScale and ForecastOnly. Default is ForecastOnly.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Amount of time, in seconds, by which the instance launch time can be advanced. Minimum is 0.
+	SchedulingBufferTime *string `json:"schedulingBufferTime,omitempty" tf:"scheduling_buffer_time,omitempty"`
 }
 
 type PredictiveScalingConfigurationParameters struct {
@@ -503,6 +747,20 @@ type PredictiveScalingConfigurationParameters struct {
 }
 
 type StepAdjustmentObservation struct {
+
+	// Lower bound for the
+	// difference between the alarm threshold and the CloudWatch metric.
+	// Without a value, AWS will treat this bound as negative infinity.
+	MetricIntervalLowerBound *string `json:"metricIntervalLowerBound,omitempty" tf:"metric_interval_lower_bound,omitempty"`
+
+	// Upper bound for the
+	// difference between the alarm threshold and the CloudWatch metric.
+	// Without a value, AWS will treat this bound as positive infinity. The upper bound
+	// must be greater than the lower bound.
+	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
+
+	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
+	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentParameters struct {
@@ -526,6 +784,18 @@ type StepAdjustmentParameters struct {
 }
 
 type TargetTrackingConfigurationObservation struct {
+
+	// Customized metric. Conflicts with predefined_metric_specification.
+	CustomizedMetricSpecification []CustomizedMetricSpecificationObservation `json:"customizedMetricSpecification,omitempty" tf:"customized_metric_specification,omitempty"`
+
+	// Whether scale in by the target tracking policy is disabled.
+	DisableScaleIn *bool `json:"disableScaleIn,omitempty" tf:"disable_scale_in,omitempty"`
+
+	// Predefined metric. Conflicts with customized_metric_specification.
+	PredefinedMetricSpecification []PredefinedMetricSpecificationObservation `json:"predefinedMetricSpecification,omitempty" tf:"predefined_metric_specification,omitempty"`
+
+	// Target value for the metric.
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
 }
 
 type TargetTrackingConfigurationParameters struct {

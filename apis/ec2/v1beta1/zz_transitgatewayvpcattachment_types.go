@@ -15,11 +15,38 @@ import (
 
 type TransitGatewayVPCAttachmentObservation struct {
 
+	// Whether Appliance Mode support is enabled. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. Valid values: disable, enable. Default value: disable.
+	ApplianceModeSupport *string `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
+
+	// Whether DNS support is enabled. Valid values: disable, enable. Default value: enable.
+	DNSSupport *string `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
 	// EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether IPv6 support is enabled. Valid values: disable, enable. Default value: disable.
+	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
+
+	// Identifiers of EC2 Subnets.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Boolean whether the VPC Attachment should be associated with the EC2 Transit Gateway association default route table. This cannot be configured or perform drift detection with Resource Access Manager shared EC2 Transit Gateways. Default value: true.
+	TransitGatewayDefaultRouteTableAssociation *bool `json:"transitGatewayDefaultRouteTableAssociation,omitempty" tf:"transit_gateway_default_route_table_association,omitempty"`
+
+	// Boolean whether the VPC Attachment should propagate routes with the EC2 Transit Gateway propagation default route table. This cannot be configured or perform drift detection with Resource Access Manager shared EC2 Transit Gateways. Default value: true.
+	TransitGatewayDefaultRouteTablePropagation *bool `json:"transitGatewayDefaultRouteTablePropagation,omitempty" tf:"transit_gateway_default_route_table_propagation,omitempty"`
+
+	// Identifier of EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Identifier of EC2 VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 
 	// Identifier of the AWS account that owns the EC2 VPC.
 	VPCOwnerID *string `json:"vpcOwnerId,omitempty" tf:"vpc_owner_id,omitempty"`

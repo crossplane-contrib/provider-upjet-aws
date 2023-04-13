@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -169,6 +173,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -345,9 +364,99 @@ spec:
             properties:
               atProvider:
                 properties:
+                  csvClassifier:
+                    description: A classifier for Csv content. Defined below.
+                    items:
+                      properties:
+                        allowSingleColumn:
+                          description: Enables the processing of files that contain
+                            only one column.
+                          type: boolean
+                        containsHeader:
+                          description: Indicates whether the CSV file contains a header.
+                            This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
+                          type: string
+                        customDatatypeConfigured:
+                          description: A custom symbol to denote what combines content
+                            into a single column value. It must be different from
+                            the column delimiter.
+                          type: boolean
+                        customDatatypes:
+                          description: A list of supported custom datatypes. Valid
+                            values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT,
+                            INT, LONG, SHORT, STRING, TIMESTAMP.
+                          items:
+                            type: string
+                          type: array
+                        delimiter:
+                          description: The delimiter used in the Csv to separate columns.
+                          type: string
+                        disableValueTrimming:
+                          description: Specifies whether to trim column values.
+                          type: boolean
+                        header:
+                          description: A list of strings representing column names.
+                          items:
+                            type: string
+                          type: array
+                        quoteSymbol:
+                          description: A custom symbol to denote what combines content
+                            into a single column value. It must be different from
+                            the column delimiter.
+                          type: string
+                      type: object
+                    type: array
+                  grokClassifier:
+                    description: –  A classifier that uses grok patterns. Defined
+                      below.
+                    items:
+                      properties:
+                        classification:
+                          description: An identifier of the data format that the classifier
+                            matches, such as Twitter, JSON, Omniture logs, Amazon
+                            CloudWatch Logs, and so on.
+                          type: string
+                        customPatterns:
+                          description: Custom grok patterns used by this classifier.
+                          type: string
+                        grokPattern:
+                          description: The grok pattern used by this classifier.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: Name of the classifier
                     type: string
+                  jsonClassifier:
+                    description: –  A classifier for JSON content. Defined below.
+                    items:
+                      properties:
+                        jsonPath:
+                          description: A JsonPath string defining the JSON data for
+                            the classifier to classify. AWS Glue supports a subset
+                            of JsonPath, as described in Writing JsonPath Custom Classifiers.
+                          type: string
+                      type: object
+                    type: array
+                  xmlClassifier:
+                    description: –  A classifier for XML content. Defined below.
+                    items:
+                      properties:
+                        classification:
+                          description: An identifier of the data format that the classifier
+                            matches.
+                          type: string
+                        rowTag:
+                          description: The XML tag designating the element that contains
+                            each record in an XML document being parsed. Note that
+                            this cannot identify a self-closing element (closed by
+                            />). An empty row element that contains only attributes
+                            can be parsed as long as it ends with a closing tag (for
+                            example, <row item_a="A" item_b="B"></row> is okay, but
+                            <row item_a="A" item_b="B" /> is not).
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

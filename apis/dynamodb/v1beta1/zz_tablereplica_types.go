@@ -18,8 +18,23 @@ type TableReplicaObservation_2 struct {
 	// ARN of the table replica.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the main or global table which this resource will replicate.
+	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
+
 	// Name of the table and region of the main global table joined with a semicolon (e.g., TableName:us-east-1).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
+
+	// Storage class of the table replica. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS. If not used, the table replica will use the same class as the global table.
+	TableClassOverride *string `json:"tableClassOverride,omitempty" tf:"table_class_override,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

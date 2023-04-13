@@ -18,22 +18,55 @@ type ComponentObservation struct {
 	// Amazon Resource Name (ARN) of the component.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Change description of the component.
+	ChangeDescription *string `json:"changeDescription,omitempty" tf:"change_description,omitempty"`
+
+	// Inline YAML string with data of the component. Exactly one of data and uri can be specified.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
 	// Date the component was created.
 	DateCreated *string `json:"dateCreated,omitempty" tf:"date_created,omitempty"`
+
+	// Description of the component.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Encryption status of the component.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Name of the component.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Owner of the component.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Platform of the component.
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Whether to retain the old version when the resource is destroyed or replacement is necessary. Defaults to false.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Set of Operating Systems (OS) supported by the component.
+	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of the component.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// S3 URI with data of the component. Exactly one of data and uri can be specified.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Version of the component.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ComponentParameters struct {
@@ -64,12 +97,12 @@ type ComponentParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Name of the component.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Platform of the component.
-	// +kubebuilder:validation:Required
-	Platform *string `json:"platform" tf:"platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -93,8 +126,8 @@ type ComponentParameters struct {
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Version of the component.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // ComponentSpec defines the desired state of Component
@@ -121,8 +154,11 @@ type ComponentStatus struct {
 type Component struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComponentSpec   `json:"spec"`
-	Status            ComponentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platform)",message="platform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)",message="version is a required parameter"
+	Spec   ComponentSpec   `json:"spec"`
+	Status ComponentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

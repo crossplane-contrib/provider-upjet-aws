@@ -640,11 +640,17 @@ type NetworkInsightsAnalysisObservation struct {
 	// Explanation codes for an unreachable path. See the AWS documentation for details.
 	Explanations []ExplanationsObservation `json:"explanations,omitempty" tf:"explanations,omitempty"`
 
+	// A list of ARNs for resources the path must traverse.
+	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
+
 	// The components in the path from source to destination. See the AWS documentation for details.
 	ForwardPathComponents []ForwardPathComponentsObservation `json:"forwardPathComponents,omitempty" tf:"forward_path_components,omitempty"`
 
 	// ID of the Network Insights Analysis.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the Network Insights Path to run an analysis on.
+	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
 
 	// Set to true if the destination was reachable.
 	PathFound *bool `json:"pathFound,omitempty" tf:"path_found,omitempty"`
@@ -661,8 +667,14 @@ type NetworkInsightsAnalysisObservation struct {
 	// A message to provide more context when the status is failed.
 	StatusMessage *string `json:"statusMessage,omitempty" tf:"status_message,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// If enabled, the resource will wait for the Network Insights Analysis status to change to succeeded or failed. Setting this to false will skip the process. Default: true.
+	WaitForCompletion *bool `json:"waitForCompletion,omitempty" tf:"wait_for_completion,omitempty"`
 
 	// The warning message.
 	WarningMessage *string `json:"warningMessage,omitempty" tf:"warning_message,omitempty"`

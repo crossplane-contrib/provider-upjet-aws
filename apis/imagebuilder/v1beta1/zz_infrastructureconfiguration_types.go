@@ -24,11 +24,50 @@ type InfrastructureConfigurationObservation struct {
 	// Date when the configuration was updated.
 	DateUpdated *string `json:"dateUpdated,omitempty" tf:"date_updated,omitempty"`
 
+	// Description for the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Amazon Resource Name (ARN) of the configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Configuration block with instance metadata options for the HTTP requests that pipeline builds use to launch EC2 build and test instances. Detailed below.
+	InstanceMetadataOptions []InstanceMetadataOptionsObservation `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
+
+	// Name of IAM Instance Profile.
+	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
+
+	// Set of EC2 Instance Types.
+	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
+
+	// Name of EC2 Key Pair.
+	KeyPair *string `json:"keyPair,omitempty" tf:"key_pair,omitempty"`
+
+	// Configuration block with logging settings. Detailed below.
+	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// Name for the configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+
+	// Set of EC2 Security Group identifiers.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Amazon Resource Name (ARN) of SNS Topic.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// EC2 Subnet identifier. Also requires security_group_ids argument.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
+	TerminateInstanceOnFailure *bool `json:"terminateInstanceOnFailure,omitempty" tf:"terminate_instance_on_failure,omitempty"`
 }
 
 type InfrastructureConfigurationParameters struct {
@@ -76,8 +115,8 @@ type InfrastructureConfigurationParameters struct {
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
 	// Name for the configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -140,6 +179,12 @@ type InfrastructureConfigurationParameters struct {
 }
 
 type InstanceMetadataOptionsObservation struct {
+
+	// The number of hops that an instance can traverse to reach its destonation.
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+
+	// Whether a signed token is required for instance metadata retrieval requests. Valid values: required, optional.
+	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 }
 
 type InstanceMetadataOptionsParameters struct {
@@ -154,6 +199,9 @@ type InstanceMetadataOptionsParameters struct {
 }
 
 type LoggingObservation struct {
+
+	// Configuration block with S3 logging settings. Detailed below.
+	S3Logs []S3LogsObservation `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
 }
 
 type LoggingParameters struct {
@@ -164,6 +212,12 @@ type LoggingParameters struct {
 }
 
 type S3LogsObservation struct {
+
+	// Name of the S3 Bucket.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Prefix to use for S3 logs. Defaults to /.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type S3LogsParameters struct {
@@ -210,8 +264,9 @@ type InfrastructureConfigurationStatus struct {
 type InfrastructureConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InfrastructureConfigurationSpec   `json:"spec"`
-	Status            InfrastructureConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   InfrastructureConfigurationSpec   `json:"spec"`
+	Status InfrastructureConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

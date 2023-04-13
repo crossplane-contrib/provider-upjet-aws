@@ -14,7 +14,14 @@ import (
 )
 
 type SnapshotScheduleAssociationObservation struct {
+
+	// The cluster identifier.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The snapshot schedule identifier.
+	ScheduleIdentifier *string `json:"scheduleIdentifier,omitempty" tf:"schedule_identifier,omitempty"`
 }
 
 type SnapshotScheduleAssociationParameters struct {

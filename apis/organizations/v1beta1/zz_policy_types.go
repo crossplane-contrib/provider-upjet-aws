@@ -18,26 +18,44 @@ type PolicyObservation struct {
 	// Amazon Resource Name (ARN) of the policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The policy content to add to the new policy. For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see the Service Control Policy Syntax documentation and for more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// A description to assign to the policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The unique identifier (ID) of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The friendly name to assign to the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// If set to true, destroy will not delete the policy and instead just remove the resource from state. This can be useful in situations where the policies (and the associated attachment) must be preserved to meet the AWS minimum requirement of 1 attached policy.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PolicyParameters struct {
 
 	// The policy content to add to the new policy. For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see the Service Control Policy Syntax documentation and for more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A description to assign to the policy.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The friendly name to assign to the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +99,10 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySpec   `json:"spec"`
-	Status            PolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   PolicySpec   `json:"spec"`
+	Status PolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

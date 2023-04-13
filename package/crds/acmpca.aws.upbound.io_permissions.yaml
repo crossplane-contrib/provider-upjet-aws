@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -164,10 +168,23 @@ spec:
                     description: ID of the calling account
                     type: string
                 required:
-                - actions
-                - principal
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -339,15 +356,39 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: actions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)
+            - message: principal is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)
           status:
             description: PermissionStatus defines the observed state of Permission.
             properties:
               atProvider:
                 properties:
+                  actions:
+                    description: Actions that the specified AWS service principal
+                      can use. These include IssueCertificate, GetCertificate, and
+                      ListPermissions. Note that in order for ACM to automatically
+                      rotate certificates issued by a PCA, it must be granted permission
+                      on all 3 actions, as per the example above.
+                    items:
+                      type: string
+                    type: array
+                  certificateAuthorityArn:
+                    description: ARN of the CA that grants the permissions.
+                    type: string
                   id:
                     type: string
                   policy:
                     description: IAM policy that is associated with the permission.
+                    type: string
+                  principal:
+                    description: AWS service or identity that receives the permission.
+                      At this time, the only valid principal is acm.amazonaws.com.
+                    type: string
+                  sourceAccount:
+                    description: ID of the calling account
                     type: string
                 type: object
               conditions:

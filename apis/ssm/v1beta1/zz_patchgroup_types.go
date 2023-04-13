@@ -15,8 +15,14 @@ import (
 
 type PatchGroupObservation struct {
 
+	// The ID of the patch baseline to register the patch group with.
+	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
+
 	// The name of the patch group and ID of the patch baseline separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the patch group that should be registered with the patch baseline.
+	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
 }
 
 type PatchGroupParameters struct {
@@ -36,8 +42,8 @@ type PatchGroupParameters struct {
 	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
 
 	// The name of the patch group that should be registered with the patch baseline.
-	// +kubebuilder:validation:Required
-	PatchGroup *string `json:"patchGroup" tf:"patch_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,8 +75,9 @@ type PatchGroupStatus struct {
 type PatchGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PatchGroupSpec   `json:"spec"`
-	Status            PatchGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.patchGroup)",message="patchGroup is a required parameter"
+	Spec   PatchGroupSpec   `json:"spec"`
+	Status PatchGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

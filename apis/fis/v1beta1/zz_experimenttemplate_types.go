@@ -14,6 +14,24 @@ import (
 )
 
 type ActionObservation struct {
+
+	// ID of the action. To find out what actions are supported see AWS FIS actions reference.
+	ActionID *string `json:"actionId,omitempty" tf:"action_id,omitempty"`
+
+	// Description of the action.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Friendly name of the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Parameter(s) for the action, if applicable. See below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Set of action names that must complete before this action can be executed.
+	StartAfter []*string `json:"startAfter,omitempty" tf:"start_after,omitempty"`
+
+	// Action's target, if applicable. See below.
+	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ActionParameters struct {
@@ -45,21 +63,39 @@ type ActionParameters struct {
 
 type ExperimentTemplateObservation struct {
 
+	// Action to be performed during an experiment. See below.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Description for the experiment template.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Experiment Template ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ARN of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// When an ongoing experiment should be stopped. See below.
+	StopCondition []StopConditionObservation `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Target of an action. See below.
+	Target []ExperimentTemplateTargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ExperimentTemplateParameters struct {
 
 	// Action to be performed during an experiment. See below.
-	// +kubebuilder:validation:Required
-	Action []ActionParameters `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Description for the experiment template.
-	// +kubebuilder:validation:Required
-	Description *string `json:"description" tf:"description,omitempty"`
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -81,8 +117,8 @@ type ExperimentTemplateParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// When an ongoing experiment should be stopped. See below.
-	// +kubebuilder:validation:Required
-	StopCondition []StopConditionParameters `json:"stopCondition" tf:"stop_condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	StopCondition []StopConditionParameters `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -94,6 +130,24 @@ type ExperimentTemplateParameters struct {
 }
 
 type ExperimentTemplateTargetObservation struct {
+
+	// Filter(s) for the target. Filters can be used to select resources based on specific attributes returned by the respective describe action of the resource type. For more information, see Targets for AWS FIS. See below.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Friendly name given to the target.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
+	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
+
+	// Tag(s) the resources need to have to be considered a valid target for an action. Conflicts with resource_arns. See below.
+	ResourceTag []ResourceTagObservation `json:"resourceTag,omitempty" tf:"resource_tag,omitempty"`
+
+	// AWS resource type. The resource type must be supported for the specified action. To find out what resource types are supported, see Targets for AWS FIS.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Scopes the identified resources. Valid values are ALL (all identified resources), COUNT(n) (randomly select n of the identified resources), PERCENT(n) (randomly select n percent of the identified resources).
+	SelectionMode *string `json:"selectionMode,omitempty" tf:"selection_mode,omitempty"`
 }
 
 type ExperimentTemplateTargetParameters struct {
@@ -124,6 +178,12 @@ type ExperimentTemplateTargetParameters struct {
 }
 
 type FilterObservation struct {
+
+	// Attribute path for the filter.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Set of attribute values for the filter.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type FilterParameters struct {
@@ -138,6 +198,12 @@ type FilterParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// Parameter name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Parameter value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -152,6 +218,12 @@ type ParameterParameters struct {
 }
 
 type ResourceTagObservation struct {
+
+	// Tag key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Tag value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceTagParameters struct {
@@ -166,6 +238,12 @@ type ResourceTagParameters struct {
 }
 
 type StopConditionObservation struct {
+
+	// Source of the condition. One of none, aws:cloudwatch:alarm.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// ARN of the CloudWatch alarm. Required if the source is a CloudWatch alarm.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StopConditionParameters struct {
@@ -180,6 +258,12 @@ type StopConditionParameters struct {
 }
 
 type TargetObservation struct {
+
+	// Tag key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Target name, referencing a corresponding target.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TargetParameters struct {
@@ -217,8 +301,11 @@ type ExperimentTemplateStatus struct {
 type ExperimentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExperimentTemplateSpec   `json:"spec"`
-	Status            ExperimentTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stopCondition)",message="stopCondition is a required parameter"
+	Spec   ExperimentTemplateSpec   `json:"spec"`
+	Status ExperimentTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

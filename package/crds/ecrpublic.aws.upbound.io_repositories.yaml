@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -126,6 +130,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,6 +324,56 @@ spec:
                   arn:
                     description: Full ARN of the repository.
                     type: string
+                  catalogData:
+                    description: Catalog data configuration for the repository. See
+                      below for schema.
+                    items:
+                      properties:
+                        aboutText:
+                          description: A detailed description of the contents of the
+                            repository. It is publicly visible in the Amazon ECR Public
+                            Gallery. The text must be in markdown format.
+                          type: string
+                        architectures:
+                          description: 'The system architecture that the images in
+                            the repository are compatible with. On the Amazon ECR
+                            Public Gallery, the following supported architectures
+                            will appear as badges on the repository and are used as
+                            search filters: ARM, ARM 64, x86, x86-64'
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: A short description of the contents of the
+                            repository. This text appears in both the image details
+                            and also when searching for repositories on the Amazon
+                            ECR Public Gallery.
+                          type: string
+                        logoImageBlob:
+                          description: The base64-encoded repository logo payload.
+                            (Only visible for verified accounts) Note that drift detection
+                            is disabled for this attribute.
+                          type: string
+                        operatingSystems:
+                          description: 'The operating systems that the images in the
+                            repository are compatible with. On the Amazon ECR Public
+                            Gallery, the following supported operating systems will
+                            appear as badges on the repository and are used as search
+                            filters: Linux, Windows'
+                          items:
+                            type: string
+                          type: array
+                        usageText:
+                          description: Detailed information on how to use the contents
+                            of the repository. It is publicly visible in the Amazon
+                            ECR Public Gallery. The usage text provides context, support
+                            information, and additional usage details for users of
+                            the repository. The text must be in markdown format.
+                          type: string
+                      type: object
+                    type: array
+                  forceDestroy:
+                    type: boolean
                   id:
                     description: The repository name.
                     type: string
@@ -314,6 +383,11 @@ spec:
                   repositoryUri:
                     description: The URI of the repository.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

@@ -14,6 +14,12 @@ import (
 )
 
 type AwsLocationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the subnet that the device is located in.
+	SubnetArn *string `json:"subnetArn,omitempty" tf:"subnet_arn,omitempty"`
+
+	// The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type AwsLocationParameters struct {
@@ -32,10 +38,40 @@ type DeviceObservation struct {
 	// The Amazon Resource Name (ARN) of the device.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The AWS location of the device. Documented below.
+	AwsLocation []AwsLocationObservation `json:"awsLocation,omitempty" tf:"aws_location,omitempty"`
+
+	// A description of the device.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the global network.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the device. Documented below.
+	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The model of device.
+	Model *string `json:"model,omitempty" tf:"model,omitempty"`
+
+	// The serial number of the device.
+	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
+
+	// The ID of the site.
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of device.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The vendor of the device.
+	Vendor *string `json:"vendor,omitempty" tf:"vendor,omitempty"`
 }
 
 type DeviceParameters struct {
@@ -107,6 +143,15 @@ type DeviceParameters struct {
 }
 
 type LocationObservation struct {
+
+	// The physical address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The latitude.
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	// The longitude.
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
 }
 
 type LocationParameters struct {

@@ -14,6 +14,9 @@ import (
 )
 
 type CloudwatchLogsObservation struct {
+
+	// The name of the log group where the project stores evaluation events.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 }
 
 type CloudwatchLogsParameters struct {
@@ -24,6 +27,12 @@ type CloudwatchLogsParameters struct {
 }
 
 type DataDeliveryObservation struct {
+
+	// A block that defines the CloudWatch Log Group that stores the evaluation events. See below.
+	CloudwatchLogs []CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// A block that defines the S3 bucket and prefix that stores the evaluation events. See below.
+	S3Destination []S3DestinationObservation `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
 }
 
 type DataDeliveryParameters struct {
@@ -51,6 +60,12 @@ type ProjectObservation struct {
 	// The date and time that the project is created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// A block that contains information about where Evidently is to store evaluation events for longer term storage, if you choose to do so. If you choose not to store these events, Evidently deletes them after using them to produce metrics and other experiment results that you can view. See below.
+	DataDelivery []DataDeliveryObservation `json:"dataDelivery,omitempty" tf:"data_delivery,omitempty"`
+
+	// Specifies the description of the project.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The number of experiments currently in the project. This includes all experiments that have been created and not deleted, whether they are ongoing or not.
 	ExperimentCount *float64 `json:"experimentCount,omitempty" tf:"experiment_count,omitempty"`
 
@@ -66,8 +81,14 @@ type ProjectObservation struct {
 	// The number of launches currently in the project. This includes all launches that have been created and not deleted, whether they are ongoing or not.
 	LaunchCount *float64 `json:"launchCount,omitempty" tf:"launch_count,omitempty"`
 
+	// A name for the project.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The current state of the project. Valid values are AVAILABLE and UPDATING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -84,8 +105,8 @@ type ProjectParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A name for the project.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -98,6 +119,12 @@ type ProjectParameters struct {
 }
 
 type S3DestinationObservation struct {
+
+	// The name of the bucket in which Evidently stores evaluation events.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The bucket prefix in which Evidently stores evaluation events.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3DestinationParameters struct {
@@ -135,8 +162,9 @@ type ProjectStatus struct {
 type Project struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProjectSpec   `json:"spec"`
-	Status            ProjectStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ProjectSpec   `json:"spec"`
+	Status ProjectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

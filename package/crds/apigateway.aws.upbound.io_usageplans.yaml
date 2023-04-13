@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -311,9 +315,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -485,23 +503,107 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: UsagePlanStatus defines the observed state of UsagePlan.
             properties:
               atProvider:
                 properties:
+                  apiStages:
+                    description: Associated API stages of the usage plan.
+                    items:
+                      properties:
+                        apiId:
+                          description: API Id of the associated API stage in a usage
+                            plan.
+                          type: string
+                        stage:
+                          description: API stage name of the associated API stage
+                            in a usage plan.
+                          type: string
+                        throttle:
+                          description: The throttling limits of the usage plan.
+                          items:
+                            properties:
+                              burstLimit:
+                                description: The API request burst limit, the maximum
+                                  rate limit over a time ranging from one to a few
+                                  seconds, depending upon whether the underlying token
+                                  bucket is at its full capacity.
+                                type: number
+                              path:
+                                description: Method to apply the throttle settings
+                                  for. Specfiy the path and method, for example /test/GET.
+                                type: string
+                              rateLimit:
+                                description: The API request steady-state rate limit.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   arn:
                     description: ARN
+                    type: string
+                  description:
+                    description: Description of a usage plan.
                     type: string
                   id:
                     description: ID of the API resource
                     type: string
+                  name:
+                    description: Name of the usage plan.
+                    type: string
+                  productCode:
+                    description: AWS Marketplace product identifier to associate with
+                      the usage plan as a SaaS product on AWS Marketplace.
+                    type: string
+                  quotaSettings:
+                    description: The quota settings of the usage plan.
+                    items:
+                      properties:
+                        limit:
+                          description: Maximum number of requests that can be made
+                            in a given time period.
+                          type: number
+                        offset:
+                          description: Number of requests subtracted from the given
+                            limit in the initial time period.
+                          type: number
+                        period:
+                          description: Time period in which the limit applies. Valid
+                            values are "DAY", "WEEK" or "MONTH".
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  throttleSettings:
+                    description: The throttling limits of the usage plan.
+                    items:
+                      properties:
+                        burstLimit:
+                          description: The API request burst limit, the maximum rate
+                            limit over a time ranging from one to a few seconds, depending
+                            upon whether the underlying token bucket is at its full
+                            capacity.
+                          type: number
+                        rateLimit:
+                          description: The API request steady-state rate limit.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

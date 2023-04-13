@@ -17,6 +17,12 @@ type VPCEndpointSubnetAssociationObservation struct {
 
 	// The ID of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the subnet to be associated with the VPC endpoint.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The ID of the VPC endpoint with which the subnet will be associated.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 }
 
 type VPCEndpointSubnetAssociationParameters struct {

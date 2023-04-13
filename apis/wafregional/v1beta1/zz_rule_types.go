@@ -21,6 +21,18 @@ type RuleObservation struct {
 	// The ID of the WAF Regional Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name or description for the Amazon CloudWatch metric of this rule.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The name or description of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The objects to include in a rule (documented below).
+	Predicate []RulePredicateObservation `json:"predicate,omitempty" tf:"predicate,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -28,12 +40,12 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// The name or description for the Amazon CloudWatch metric of this rule.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// The name or description of the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The objects to include in a rule (documented below).
 	// +kubebuilder:validation:Optional
@@ -50,6 +62,15 @@ type RuleParameters struct {
 }
 
 type RulePredicateObservation struct {
+
+	// The unique identifier of a predicate, such as the ID of a ByteMatchSet or IPSet.
+	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
+
+	// Whether to use the settings or the negated settings that you specified in the objects.
+	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+
+	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RulePredicateParameters struct {
@@ -101,8 +122,10 @@ type RuleStatus struct {
 type Rule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RuleSpec   `json:"spec"`
-	Status            RuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricName)",message="metricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RuleSpec   `json:"spec"`
+	Status RuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

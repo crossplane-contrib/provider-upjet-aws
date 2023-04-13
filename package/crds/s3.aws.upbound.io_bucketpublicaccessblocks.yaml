@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -176,6 +180,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -353,10 +372,41 @@ spec:
             properties:
               atProvider:
                 properties:
+                  blockPublicAcls:
+                    description: 'Whether Amazon S3 should block public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      existing policies or ACLs. When set to true causes the following
+                      behavior:'
+                    type: boolean
+                  blockPublicPolicy:
+                    description: 'Whether Amazon S3 should block public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the existing bucket policy. When set to true causes
+                      Amazon S3 to:'
+                    type: boolean
+                  bucket:
+                    description: S3 Bucket to which this Public Access Block configuration
+                      should be applied.
+                    type: string
                   id:
                     description: Name of the S3 bucket the configuration is attached
                       to
                     type: string
+                  ignorePublicAcls:
+                    description: 'Whether Amazon S3 should ignore public ACLs for
+                      this bucket. Defaults to false. Enabling this setting does not
+                      affect the persistence of any existing ACLs and doesn''t prevent
+                      new public ACLs from being set. When set to true causes Amazon
+                      S3 to:'
+                    type: boolean
+                  restrictPublicBuckets:
+                    description: 'Whether Amazon S3 should restrict public bucket
+                      policies for this bucket. Defaults to false. Enabling this setting
+                      does not affect the previously stored bucket policy, except
+                      that public and cross-account access within the public bucket
+                      policy, including non-public delegation to specific accounts,
+                      is blocked. When set to true:'
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -801,8 +805,22 @@ spec:
                     type: object
                 required:
                 - region
-                - taskType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -974,6 +992,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: taskType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.taskType)
           status:
             description: MaintenanceWindowTaskStatus defines the observed state of
               MaintenanceWindowTask.
@@ -983,8 +1004,230 @@ spec:
                   arn:
                     description: The ARN of the maintenance window task.
                     type: string
+                  cutoffBehavior:
+                    description: Indicates whether tasks should continue to run after
+                      the cutoff time specified in the maintenance windows is reached.
+                      Valid values are CONTINUE_TASK and CANCEL_TASK.
+                    type: string
+                  description:
+                    description: The description of the maintenance window task.
+                    type: string
                   id:
                     description: The ID of the maintenance window task.
+                    type: string
+                  maxConcurrency:
+                    description: The maximum number of targets this task can be run
+                      for in parallel.
+                    type: string
+                  maxErrors:
+                    description: The maximum number of errors allowed before this
+                      task stops being scheduled.
+                    type: string
+                  name:
+                    description: The name of the maintenance window task.
+                    type: string
+                  priority:
+                    description: The priority of the task in the Maintenance Window,
+                      the lower the number the higher the priority. Tasks in a Maintenance
+                      Window are scheduled in priority order with tasks that have
+                      the same priority scheduled in parallel.
+                    type: number
+                  serviceRoleArn:
+                    description: The role that should be assumed when executing the
+                      task. If a role is not provided, Systems Manager uses your account's
+                      service-linked role. If no service-linked role for Systems Manager
+                      exists in your account, it is created for you.
+                    type: string
+                  targets:
+                    description: The targets (either instances or window target ids).
+                      Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2.
+                      Window target ids are specified using Key=WindowTargetIds,Values=window
+                      target id1, window target id2.
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        values:
+                          description: The array of strings.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  taskArn:
+                    description: The ARN of the task to execute.
+                    type: string
+                  taskInvocationParameters:
+                    description: Configuration block with parameters for task execution.
+                    items:
+                      properties:
+                        automationParameters:
+                          description: The parameters for an AUTOMATION task type.
+                            Documented below.
+                          items:
+                            properties:
+                              documentVersion:
+                                description: The version of an Automation document
+                                  to use during task execution.
+                                type: string
+                              parameter:
+                                description: The parameters for the RUN_COMMAND task
+                                  execution. Documented below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the maintenance window
+                                        task.
+                                      type: string
+                                    values:
+                                      description: The array of strings.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        lambdaParameters:
+                          description: The parameters for a LAMBDA task type. Documented
+                            below.
+                          items:
+                            properties:
+                              clientContext:
+                                description: Pass client-specific information to the
+                                  Lambda function that you are invoking.
+                                type: string
+                              qualifier:
+                                description: Specify a Lambda function version or
+                                  alias name.
+                                type: string
+                            type: object
+                          type: array
+                        runCommandParameters:
+                          description: The parameters for a RUN_COMMAND task type.
+                            Documented below.
+                          items:
+                            properties:
+                              cloudwatchConfig:
+                                description: Configuration options for sending command
+                                  output to CloudWatch Logs. Documented below.
+                                items:
+                                  properties:
+                                    cloudwatchLogGroupName:
+                                      description: 'The name of the CloudWatch log
+                                        group where you want to send command output.
+                                        If you don''t specify a group name, Systems
+                                        Manager automatically creates a log group
+                                        for you. The log group uses the following
+                                        naming format: aws/ssm/SystemsManagerDocumentName.'
+                                      type: string
+                                    cloudwatchOutputEnabled:
+                                      description: Enables Systems Manager to send
+                                        command output to CloudWatch Logs.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              comment:
+                                description: Information about the command(s) to execute.
+                                type: string
+                              documentHash:
+                                description: The SHA-256 or SHA-1 hash created by
+                                  the system when the document was created. SHA-1
+                                  hashes have been deprecated.
+                                type: string
+                              documentHashType:
+                                description: 'SHA-256 or SHA-1. SHA-1 hashes have
+                                  been deprecated. Valid values: Sha256 and Sha1'
+                                type: string
+                              documentVersion:
+                                description: The version of an Automation document
+                                  to use during task execution.
+                                type: string
+                              notificationConfig:
+                                description: Configurations for sending notifications
+                                  about command status changes on a per-instance basis.
+                                  Documented below.
+                                items:
+                                  properties:
+                                    notificationArn:
+                                      description: An Amazon Resource Name (ARN) for
+                                        a Simple Notification Service (SNS) topic.
+                                        Run Command pushes notifications about command
+                                        status changes to this topic.
+                                      type: string
+                                    notificationEvents:
+                                      description: 'The different events for which
+                                        you can receive notifications. Valid values:
+                                        All, InProgress, Success, TimedOut, Cancelled,
+                                        and Failed'
+                                      items:
+                                        type: string
+                                      type: array
+                                    notificationType:
+                                      description: 'When specified with Command, receive
+                                        notification when the status of a command
+                                        changes. When specified with Invocation, for
+                                        commands sent to multiple instances, receive
+                                        notification on a per-instance basis when
+                                        the status of a command changes. Valid values:
+                                        Command and Invocation'
+                                      type: string
+                                  type: object
+                                type: array
+                              outputS3Bucket:
+                                description: The name of the Amazon S3 bucket.
+                                type: string
+                              outputS3KeyPrefix:
+                                description: The Amazon S3 bucket subfolder.
+                                type: string
+                              parameter:
+                                description: The parameters for the RUN_COMMAND task
+                                  execution. Documented below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the maintenance window
+                                        task.
+                                      type: string
+                                    values:
+                                      description: The array of strings.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              serviceRoleArn:
+                                description: The role that should be assumed when
+                                  executing the task. If a role is not provided, Systems
+                                  Manager uses your account's service-linked role.
+                                  If no service-linked role for Systems Manager exists
+                                  in your account, it is created for you.
+                                type: string
+                              timeoutSeconds:
+                                description: If this time is reached and the command
+                                  has not already started executing, it doesn't run.
+                                type: number
+                            type: object
+                          type: array
+                        stepFunctionsParameters:
+                          description: The parameters for a STEP_FUNCTIONS task type.
+                            Documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the maintenance window task.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  taskType:
+                    description: 'The type of task being registered. Valid values:
+                      AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.'
+                    type: string
+                  windowId:
+                    description: The Id of the maintenance window to register the
+                      task with.
                     type: string
                   windowTaskId:
                     description: The ID of the maintenance window task.

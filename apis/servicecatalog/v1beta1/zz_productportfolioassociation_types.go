@@ -15,15 +15,27 @@ import (
 
 type ProductPortfolioAssociationObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Product identifier.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Identifier of the source portfolio.
+	SourcePortfolioID *string `json:"sourcePortfolioId,omitempty" tf:"source_portfolio_id,omitempty"`
 }
 
 type ProductPortfolioAssociationParameters struct {
 
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
-	// +kubebuilder:validation:Required
-	AcceptLanguage *string `json:"acceptLanguage" tf:"accept_language,omitempty"`
+	// +kubebuilder:validation:Optional
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=Portfolio
@@ -85,8 +97,9 @@ type ProductPortfolioAssociationStatus struct {
 type ProductPortfolioAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductPortfolioAssociationSpec   `json:"spec"`
-	Status            ProductPortfolioAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptLanguage)",message="acceptLanguage is a required parameter"
+	Spec   ProductPortfolioAssociationSpec   `json:"spec"`
+	Status ProductPortfolioAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

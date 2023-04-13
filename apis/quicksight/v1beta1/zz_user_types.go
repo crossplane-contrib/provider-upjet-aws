@@ -18,7 +18,31 @@ type UserObservation struct {
 	// Amazon Resource Name (ARN) of the user
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
+
+	// The email address of the user that you want to register.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
+	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
+	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
+
+	// The Amazon Quicksight namespace to create the user in. Defaults to default.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The name of the IAM session to use when assuming roles that can embed QuickSight dashboards. Only valid for registering users using an assumed IAM role. Additionally, if registering multiple users using the same IAM role, each user needs to have a unique session name.
+	SessionName *string `json:"sessionName,omitempty" tf:"session_name,omitempty"`
+
+	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
+
+	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
+	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 type UserParameters struct {
@@ -28,16 +52,16 @@ type UserParameters struct {
 	AwsAccountID *string `json:"awsAccountId,omitempty" tf:"aws_account_id,omitempty"`
 
 	// The email address of the user that you want to register.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
 	// +kubebuilder:validation:Optional
 	IAMArn *string `json:"iamArn,omitempty" tf:"iam_arn,omitempty"`
 
 	// Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts either  IAM or QUICKSIGHT. If IAM is specified, the iam_arn must also be specified.
-	// +kubebuilder:validation:Required
-	IdentityType *string `json:"identityType" tf:"identity_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// The Amazon Quicksight namespace to create the user in. Defaults to default.
 	// +kubebuilder:validation:Optional
@@ -57,8 +81,8 @@ type UserParameters struct {
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
-	// +kubebuilder:validation:Required
-	UserRole *string `json:"userRole" tf:"user_role,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -85,8 +109,11 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityType)",message="identityType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.userRole)",message="userRole is a required parameter"
+	Spec   UserSpec   `json:"spec"`
+	Status UserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

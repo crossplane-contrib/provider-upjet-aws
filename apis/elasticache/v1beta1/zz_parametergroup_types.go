@@ -18,8 +18,23 @@ type ParameterGroupObservation struct {
 	// The AWS ARN associated with the parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the ElastiCache parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The family of the ElastiCache parameter group.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
 	// The ElastiCache parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the ElastiCache parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of ElastiCache parameters to apply.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -32,12 +47,12 @@ type ParameterGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The family of the ElastiCache parameter group.
-	// +kubebuilder:validation:Required
-	Family *string `json:"family" tf:"family,omitempty"`
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// The name of the ElastiCache parameter group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of ElastiCache parameters to apply.
 	// +kubebuilder:validation:Optional
@@ -54,6 +69,12 @@ type ParameterGroupParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// The name of the ElastiCache parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the ElastiCache parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -91,8 +112,10 @@ type ParameterGroupStatus struct {
 type ParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ParameterGroupSpec   `json:"spec"`
-	Status            ParameterGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ParameterGroupSpec   `json:"spec"`
+	Status ParameterGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

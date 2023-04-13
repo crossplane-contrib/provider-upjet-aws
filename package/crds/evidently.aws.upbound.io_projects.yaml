@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -116,9 +120,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -290,6 +308,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ProjectStatus defines the observed state of Project.
             properties:
@@ -307,6 +328,45 @@ spec:
                     type: string
                   createdTime:
                     description: The date and time that the project is created.
+                    type: string
+                  dataDelivery:
+                    description: A block that contains information about where Evidently
+                      is to store evaluation events for longer term storage, if you
+                      choose to do so. If you choose not to store these events, Evidently
+                      deletes them after using them to produce metrics and other experiment
+                      results that you can view. See below.
+                    items:
+                      properties:
+                        cloudwatchLogs:
+                          description: A block that defines the CloudWatch Log Group
+                            that stores the evaluation events. See below.
+                          items:
+                            properties:
+                              logGroup:
+                                description: The name of the log group where the project
+                                  stores evaluation events.
+                                type: string
+                            type: object
+                          type: array
+                        s3Destination:
+                          description: A block that defines the S3 bucket and prefix
+                            that stores the evaluation events. See below.
+                          items:
+                            properties:
+                              bucket:
+                                description: The name of the bucket in which Evidently
+                                  stores evaluation events.
+                                type: string
+                              prefix:
+                                description: The bucket prefix in which Evidently
+                                  stores evaluation events.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies the description of the project.
                     type: string
                   experimentCount:
                     description: The number of experiments currently in the project.
@@ -328,10 +388,18 @@ spec:
                       This includes all launches that have been created and not deleted,
                       whether they are ongoing or not.
                     type: number
+                  name:
+                    description: A name for the project.
+                    type: string
                   status:
                     description: The current state of the project. Valid values are
                       AVAILABLE and UPDATING.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

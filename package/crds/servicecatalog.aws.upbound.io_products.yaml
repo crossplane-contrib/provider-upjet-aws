@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -139,12 +143,23 @@ spec:
                       MARKETPLACE.
                     type: string
                 required:
-                - name
-                - owner
-                - provisioningArtifactParameters
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -316,16 +331,35 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: owner is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.owner)
+            - message: provisioningArtifactParameters is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.provisioningArtifactParameters)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ProductStatus defines the observed state of Product.
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
                   arn:
                     description: ARN of the product.
                     type: string
                   createdTime:
                     description: Time when the product was created.
+                    type: string
+                  description:
+                    description: Description of the product.
+                    type: string
+                  distributor:
+                    description: Distributor (i.e., vendor) of the product.
                     type: string
                   hasDefaultPath:
                     description: Whether the product has a default path. If the product
@@ -337,9 +371,65 @@ spec:
                   id:
                     description: Product ID. For example, prod-dnigbtea24ste.
                     type: string
+                  name:
+                    description: Name of the product.
+                    type: string
+                  owner:
+                    description: Owner of the product.
+                    type: string
+                  provisioningArtifactParameters:
+                    description: Configuration block for provisioning artifact (i.e.,
+                      version) parameters. Detailed below.
+                    items:
+                      properties:
+                        description:
+                          description: Description of the provisioning artifact (i.e.,
+                            version), including how it differs from the previous provisioning
+                            artifact.
+                          type: string
+                        disableTemplateValidation:
+                          description: Whether AWS Service Catalog stops validating
+                            the specified provisioning artifact template even if it
+                            is invalid.
+                          type: boolean
+                        name:
+                          description: Name of the provisioning artifact (for example,
+                            v1, v2beta). No spaces are allowed.
+                          type: string
+                        templatePhysicalId:
+                          description: Template source as the physical ID of the resource
+                            that contains the template. Currently only supports CloudFormation
+                            stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account
+                            ID]:stack/[stack name]/[resource ID].
+                          type: string
+                        templateUrl:
+                          description: Template source as URL of the CloudFormation
+                            template in Amazon S3.
+                          type: string
+                        type:
+                          description: 'Type of provisioning artifact. Valid values:
+                            CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
+                            (Marketplace Clusters and AWS Resources).'
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: Status of the product.
                     type: string
+                  supportDescription:
+                    description: Support information about the product.
+                    type: string
+                  supportEmail:
+                    description: Contact email for product support.
+                    type: string
+                  supportUrl:
+                    description: Contact URL for product support.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -347,6 +437,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  type:
+                    description: Type of product. Valid values are CLOUD_FORMATION_TEMPLATE,
+                      MARKETPLACE.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

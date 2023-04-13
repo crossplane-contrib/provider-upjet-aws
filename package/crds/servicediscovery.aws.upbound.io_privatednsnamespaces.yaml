@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -158,9 +162,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -332,6 +350,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: PrivateDNSNamespaceStatus defines the observed state of PrivateDNSNamespace.
             properties:
@@ -341,6 +362,10 @@ spec:
                     description: The ARN that Amazon Route 53 assigns to the namespace
                       when you create it.
                     type: string
+                  description:
+                    description: The description that you specify for the namespace
+                      when you create it.
+                    type: string
                   hostedZone:
                     description: The ID for the hosted zone that Amazon Route 53 creates
                       when you create a namespace.
@@ -348,6 +373,14 @@ spec:
                   id:
                     description: The ID of a namespace.
                     type: string
+                  name:
+                    description: The name of the namespace.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -355,6 +388,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpc:
+                    description: The ID of VPC that you want to associate the namespace
+                      with.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

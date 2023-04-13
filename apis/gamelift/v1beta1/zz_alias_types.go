@@ -18,8 +18,20 @@ type AliasObservation struct {
 	// Alias ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the alias.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Alias ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the alias.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the fleet and/or routing type to use for the alias.
+	RoutingStrategy []RoutingStrategyObservation `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -32,8 +44,8 @@ type AliasParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the alias.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -41,8 +53,8 @@ type AliasParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the fleet and/or routing type to use for the alias.
-	// +kubebuilder:validation:Required
-	RoutingStrategy []RoutingStrategyParameters `json:"routingStrategy" tf:"routing_strategy,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoutingStrategy []RoutingStrategyParameters `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -50,6 +62,15 @@ type AliasParameters struct {
 }
 
 type RoutingStrategyObservation struct {
+
+	// ID of the GameLift Fleet to point the alias to.
+	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
+
+	// Message text to be used with the TERMINAL routing strategy.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// Type of routing strategyE.g., SIMPLE or TERMINAL
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RoutingStrategyParameters struct {
@@ -91,8 +112,10 @@ type AliasStatus struct {
 type Alias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AliasSpec   `json:"spec"`
-	Status            AliasStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routingStrategy)",message="routingStrategy is a required parameter"
+	Spec   AliasSpec   `json:"spec"`
+	Status AliasStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

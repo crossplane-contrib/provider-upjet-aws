@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -197,9 +201,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - autoScalingGroupProvider
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,6 +389,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: autoScalingGroupProvider is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoScalingGroupProvider)
           status:
             description: CapacityProviderStatus defines the observed state of CapacityProvider.
             properties:
@@ -379,9 +400,59 @@ spec:
                   arn:
                     description: ARN that identifies the capacity provider.
                     type: string
+                  autoScalingGroupProvider:
+                    description: Configuration block for the provider for the ECS
+                      auto scaling group. Detailed below.
+                    items:
+                      properties:
+                        autoScalingGroupArn:
+                          description: '- ARN of the associated auto scaling group.'
+                          type: string
+                        managedScaling:
+                          description: '- Configuration block defining the parameters
+                            of the auto scaling. Detailed below.'
+                          items:
+                            properties:
+                              instanceWarmupPeriod:
+                                description: Period of time, in seconds, after a newly
+                                  launched Amazon EC2 instance can contribute to CloudWatch
+                                  metrics for Auto Scaling group. If this parameter
+                                  is omitted, the default value of 300 seconds is
+                                  used.
+                                type: number
+                              maximumScalingStepSize:
+                                description: Maximum step adjustment size. A number
+                                  between 1 and 10,000.
+                                type: number
+                              minimumScalingStepSize:
+                                description: Minimum step adjustment size. A number
+                                  between 1 and 10,000.
+                                type: number
+                              status:
+                                description: Whether auto scaling is managed by ECS.
+                                  Valid values are ENABLED and DISABLED.
+                                type: string
+                              targetCapacity:
+                                description: Target utilization for the capacity provider.
+                                  A number between 1 and 100.
+                                type: number
+                            type: object
+                          type: array
+                        managedTerminationProtection:
+                          description: '- Enables or disables container-aware termination
+                            of instances in the auto scaling group when scale-in happens.
+                            Valid values are ENABLED and DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: ARN that identifies the capacity provider.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

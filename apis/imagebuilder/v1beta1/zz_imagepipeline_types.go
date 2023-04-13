@@ -14,6 +14,12 @@ import (
 )
 
 type ImagePipelineImageTestsConfigurationObservation struct {
+
+	// Whether image tests are enabled. Defaults to true.
+	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
+
+	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
+	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImagePipelineImageTestsConfigurationParameters struct {
@@ -32,6 +38,9 @@ type ImagePipelineObservation struct {
 	// Amazon Resource Name (ARN) of the image pipeline.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Amazon Resource Name (ARN) of the container recipe.
+	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
+
 	// Date the image pipeline was created.
 	DateCreated *string `json:"dateCreated,omitempty" tf:"date_created,omitempty"`
 
@@ -44,10 +53,40 @@ type ImagePipelineObservation struct {
 	// Date the image pipeline was updated.
 	DateUpdated *string `json:"dateUpdated,omitempty" tf:"date_updated,omitempty"`
 
+	// Description of the image pipeline.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
+
+	// Whether additional information about the image being created is collected. Defaults to true.
+	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the image recipe.
+	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Configuration block with image tests configuration. Detailed below.
+	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationObservation `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
+
+	// Name of the image pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Platform of the image pipeline.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Configuration block with schedule settings. Detailed below.
+	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Status of the image pipeline. Valid values are DISABLED and ENABLED. Defaults to ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -104,8 +143,8 @@ type ImagePipelineParameters struct {
 	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Name of the image pipeline.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -126,6 +165,15 @@ type ImagePipelineParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// Condition when the pipeline should trigger a new image build. Valid values are EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE and EXPRESSION_MATCH_ONLY. Defaults to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE.
+	PipelineExecutionStartCondition *string `json:"pipelineExecutionStartCondition,omitempty" tf:"pipeline_execution_start_condition,omitempty"`
+
+	// Cron expression of how often the pipeline start condition is evaluated. For example, cron(0 0 * * ? *) is evaluated every day at midnight UTC. Configurations using the five field syntax that was previously accepted by the API, such as cron(0 0 * * *), must be updated to the six field syntax. For more information, see the Image Builder User Guide.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// The timezone that applies to the scheduling expression. For example, "Etc/UTC", "America/Los_Angeles" in the IANA timezone format. If not specified this defaults to UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -167,8 +215,9 @@ type ImagePipelineStatus struct {
 type ImagePipeline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ImagePipelineSpec   `json:"spec"`
-	Status            ImagePipelineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ImagePipelineSpec   `json:"spec"`
+	Status ImagePipelineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -18,8 +18,17 @@ type ManagedPolicyAttachmentObservation struct {
 	// The Amazon Resource Names (ARNs) of the Managed Policy, Permission Set, and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// The IAM managed policy Amazon Resource Name (ARN) to be attached to the Permission Set.
+	ManagedPolicyArn *string `json:"managedPolicyArn,omitempty" tf:"managed_policy_arn,omitempty"`
+
 	// The name of the IAM Managed Policy.
 	ManagedPolicyName *string `json:"managedPolicyName,omitempty" tf:"managed_policy_name,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Permission Set.
+	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 }
 
 type ManagedPolicyAttachmentParameters struct {

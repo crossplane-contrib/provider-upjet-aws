@@ -14,6 +14,12 @@ import (
 )
 
 type CachingConfigObservation struct {
+
+	// The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
+	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
+
+	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type CachingConfigParameters struct {
@@ -28,6 +34,9 @@ type CachingConfigParameters struct {
 }
 
 type PipelineConfigObservation struct {
+
+	// A list of Function objects.
+	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 }
 
 type PipelineConfigParameters struct {
@@ -39,10 +48,49 @@ type PipelineConfigParameters struct {
 
 type ResolverObservation struct {
 
+	// API ID for the GraphQL API.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The Caching Config. See Caching Config.
+	CachingConfig []CachingConfigObservation `json:"cachingConfig,omitempty" tf:"caching_config,omitempty"`
+
+	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Data source name.
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// Field name from the schema defined in the GraphQL API.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Resolver type. Valid values are UNIT and PIPELINE.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
+	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+
+	// The caching configuration for the resolver. See Pipeline Config.
+	PipelineConfig []PipelineConfigObservation `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
+
+	// Request mapping template for UNIT resolver or 'before mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
+	RequestTemplate *string `json:"requestTemplate,omitempty" tf:"request_template,omitempty"`
+
+	// Response mapping template for UNIT resolver or 'after mapping template' for PIPELINE resolver. Required for non-Lambda resolvers.
+	ResponseTemplate *string `json:"responseTemplate,omitempty" tf:"response_template,omitempty"`
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	Runtime []ResolverRuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Describes a Sync configuration for a resolver. See Sync Config.
+	SyncConfig []ResolverSyncConfigObservation `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
+
+	// Type name from the schema defined in the GraphQL API.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ResolverParameters struct {
@@ -125,6 +173,12 @@ type ResolverParameters struct {
 }
 
 type ResolverRuntimeObservation struct {
+
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 }
 
 type ResolverRuntimeParameters struct {
@@ -139,6 +193,15 @@ type ResolverRuntimeParameters struct {
 }
 
 type ResolverSyncConfigObservation struct {
+
+	// Conflict Detection strategy to use. Valid values are NONE and VERSION.
+	ConflictDetection *string `json:"conflictDetection,omitempty" tf:"conflict_detection,omitempty"`
+
+	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
+	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
+
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	LambdaConflictHandlerConfig []SyncConfigLambdaConflictHandlerConfigObservation `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
 
 type ResolverSyncConfigParameters struct {
@@ -157,6 +220,9 @@ type ResolverSyncConfigParameters struct {
 }
 
 type SyncConfigLambdaConflictHandlerConfigObservation struct {
+
+	// ARN for the Lambda function to use as the Conflict Handler.
+	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
 }
 
 type SyncConfigLambdaConflictHandlerConfigParameters struct {

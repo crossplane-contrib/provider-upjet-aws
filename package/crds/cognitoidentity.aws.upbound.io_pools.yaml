@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -281,9 +285,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - identityPoolName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -455,17 +473,77 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: identityPoolName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identityPoolName)
           status:
             description: PoolStatus defines the observed state of Pool.
             properties:
               atProvider:
                 properties:
+                  allowClassicFlow:
+                    description: Enables or disables the classic / basic authentication
+                      flow. Default is false.
+                    type: boolean
+                  allowUnauthenticatedIdentities:
+                    description: Whether the identity pool supports unauthenticated
+                      logins or not.
+                    type: boolean
                   arn:
                     description: The ARN of the identity pool.
+                    type: string
+                  cognitoIdentityProviders:
+                    description: An array of Amazon Cognito Identity user pools and
+                      their client IDs.
+                    items:
+                      properties:
+                        clientId:
+                          description: The client ID for the Amazon Cognito Identity
+                            User Pool.
+                          type: string
+                        providerName:
+                          description: The provider name for an Amazon Cognito Identity
+                            User Pool.
+                          type: string
+                        serverSideTokenCheck:
+                          description: Whether server-side token validation is enabled
+                            for the identity provider’s token or not.
+                          type: boolean
+                      type: object
+                    type: array
+                  developerProviderName:
+                    description: The "domain" by which Cognito will refer to your
+                      users. This name acts as a placeholder that allows your backend
+                      and the Cognito service to communicate about the developer provider.
                     type: string
                   id:
                     description: An identity pool ID, e.g. us-west-2_abc123.
                     type: string
+                  identityPoolName:
+                    description: The Cognito Identity Pool name.
+                    type: string
+                  openidConnectProviderArns:
+                    description: Set of OpendID Connect provider ARNs.
+                    items:
+                      type: string
+                    type: array
+                  samlProviderArns:
+                    description: An array of Amazon Resource Names (ARNs) of the SAML
+                      provider for your identity.
+                    items:
+                      type: string
+                    type: array
+                  supportedLoginProviders:
+                    additionalProperties:
+                      type: string
+                    description: Key-Value pairs mapping provider names to provider
+                      app IDs.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

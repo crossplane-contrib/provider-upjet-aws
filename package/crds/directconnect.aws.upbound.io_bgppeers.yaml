@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -167,10 +171,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - addressFamily
-                - bgpAsn
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -342,14 +359,33 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: addressFamily is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)
+            - message: bgpAsn is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)
           status:
             description: BGPPeerStatus defines the observed state of BGPPeer.
             properties:
               atProvider:
                 properties:
+                  addressFamily:
+                    description: The address family for the BGP peer. ipv4  or ipv6.
+                    type: string
+                  amazonAddress:
+                    description: The IPv4 CIDR address to use to send traffic to Amazon.
+                      Required for IPv4 BGP peers on public virtual interfaces.
+                    type: string
                   awsDevice:
                     description: The Direct Connect endpoint on which the BGP peer
                       terminates.
+                    type: string
+                  bgpAsn:
+                    description: The autonomous system (AS) number for Border Gateway
+                      Protocol (BGP) configuration.
+                    type: number
+                  bgpAuthKey:
+                    description: The authentication key for BGP configuration.
                     type: string
                   bgpPeerId:
                     description: The ID of the BGP peer.
@@ -357,8 +393,17 @@ spec:
                   bgpStatus:
                     description: The Up/Down state of the BGP peer.
                     type: string
+                  customerAddress:
+                    description: The IPv4 CIDR destination address to which Amazon
+                      should send traffic. Required for IPv4 BGP peers on public virtual
+                      interfaces.
+                    type: string
                   id:
                     description: The ID of the BGP peer resource.
+                    type: string
+                  virtualInterfaceId:
+                    description: The ID of the Direct Connect virtual interface on
+                      which to create the BGP peer.
                     type: string
                 type: object
               conditions:

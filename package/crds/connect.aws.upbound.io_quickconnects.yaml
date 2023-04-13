@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -222,10 +226,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
-                - quickConnectConfig
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -397,6 +414,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: quickConnectConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.quickConnectConfig)
           status:
             description: QuickConnectStatus defines the observed state of QuickConnect.
             properties:
@@ -405,13 +427,83 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the Quick Connect.
                     type: string
+                  description:
+                    description: Specifies the description of the Quick Connect.
+                    type: string
                   id:
                     description: The identifier of the hosting Amazon Connect Instance
                       and identifier of the Quick Connect separated by a colon (:).
                     type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  name:
+                    description: Specifies the name of the Quick Connect.
+                    type: string
+                  quickConnectConfig:
+                    description: 'A block that defines the configuration information
+                      for the Quick Connect: quick_connect_type and one of phone_config,
+                      queue_config, user_config . The Quick Connect Config block is
+                      documented below.'
+                    items:
+                      properties:
+                        phoneConfig:
+                          description: Specifies the phone configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            PHONE_NUMBER. The phone_config block is documented below.
+                          items:
+                            properties:
+                              phoneNumber:
+                                description: Specifies the phone number in in E.164
+                                  format.
+                                type: string
+                            type: object
+                          type: array
+                        queueConfig:
+                          description: Specifies the queue configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            QUEUE. The queue_config block is documented below.
+                          items:
+                            properties:
+                              contactFlowId:
+                                description: Specifies the identifier of the contact
+                                  flow.
+                                type: string
+                              queueId:
+                                description: Specifies the identifier for the queue.
+                                type: string
+                            type: object
+                          type: array
+                        quickConnectType:
+                          description: Specifies the configuration type of the quick
+                            connect. valid values are PHONE_NUMBER, QUEUE, USER.
+                          type: string
+                        userConfig:
+                          description: Specifies the user configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            USER. The user_config block is documented below.
+                          items:
+                            properties:
+                              contactFlowId:
+                                description: Specifies the identifier of the contact
+                                  flow.
+                                type: string
+                              userId:
+                                description: Specifies the identifier for the user.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   quickConnectId:
                     description: The identifier for the Quick Connect.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

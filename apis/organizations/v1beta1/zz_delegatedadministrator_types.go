@@ -15,6 +15,9 @@ import (
 
 type DelegatedAdministratorObservation struct {
 
+	// The account ID number of the member account in the organization to register as a delegated administrator.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the delegated administrator's account.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -35,6 +38,9 @@ type DelegatedAdministratorObservation struct {
 
 	// The friendly name of the delegated administrator's account.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
+	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 
 	// The status of the delegated administrator's account in the organization.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -61,8 +67,8 @@ type DelegatedAdministratorParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
-	// +kubebuilder:validation:Required
-	ServicePrincipal *string `json:"servicePrincipal" tf:"service_principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 }
 
 // DelegatedAdministratorSpec defines the desired state of DelegatedAdministrator
@@ -89,8 +95,9 @@ type DelegatedAdministratorStatus struct {
 type DelegatedAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DelegatedAdministratorSpec   `json:"spec"`
-	Status            DelegatedAdministratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.servicePrincipal)",message="servicePrincipal is a required parameter"
+	Spec   DelegatedAdministratorSpec   `json:"spec"`
+	Status DelegatedAdministratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

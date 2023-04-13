@@ -15,18 +15,30 @@ import (
 
 type SubnetCidrReservationObservation struct {
 
+	// The CIDR block for the reservation.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// A brief description of the reservation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// ID of the CIDR reservation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ID of the AWS account that owns this CIDR reservation.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// The type of reservation to create. Valid values: explicit, prefix
+	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
+
+	// The ID of the subnet to create the reservation for.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetCidrReservationParameters struct {
 
 	// The CIDR block for the reservation.
-	// +kubebuilder:validation:Required
-	CidrBlock *string `json:"cidrBlock" tf:"cidr_block,omitempty"`
+	// +kubebuilder:validation:Optional
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	// A brief description of the reservation.
 	// +kubebuilder:validation:Optional
@@ -38,8 +50,8 @@ type SubnetCidrReservationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The type of reservation to create. Valid values: explicit, prefix
-	// +kubebuilder:validation:Required
-	ReservationType *string `json:"reservationType" tf:"reservation_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
 
 	// The ID of the subnet to create the reservation for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
@@ -79,8 +91,10 @@ type SubnetCidrReservationStatus struct {
 type SubnetCidrReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubnetCidrReservationSpec   `json:"spec"`
-	Status            SubnetCidrReservationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cidrBlock)",message="cidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reservationType)",message="reservationType is a required parameter"
+	Spec   SubnetCidrReservationSpec   `json:"spec"`
+	Status SubnetCidrReservationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

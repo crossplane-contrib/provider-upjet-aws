@@ -17,13 +17,22 @@ type BackendServerPolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The instance port to apply the policy to.
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+
+	// The load balancer to attach the policy to.
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// List of Policy Names to apply to the backend server.
+	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 }
 
 type BackendServerPolicyParameters struct {
 
 	// The instance port to apply the policy to.
-	// +kubebuilder:validation:Required
-	InstancePort *float64 `json:"instancePort" tf:"instance_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// The load balancer to attach the policy to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
@@ -72,8 +81,9 @@ type BackendServerPolicyStatus struct {
 type BackendServerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackendServerPolicySpec   `json:"spec"`
-	Status            BackendServerPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePort)",message="instancePort is a required parameter"
+	Spec   BackendServerPolicySpec   `json:"spec"`
+	Status BackendServerPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

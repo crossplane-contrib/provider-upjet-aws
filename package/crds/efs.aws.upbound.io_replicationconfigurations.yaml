@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -168,9 +172,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - destination
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -342,6 +360,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: destination is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)
           status:
             description: ReplicationConfigurationStatus defines the observed state
               of ReplicationConfiguration.
@@ -355,8 +376,23 @@ spec:
                     description: A destination configuration block (documented below).
                     items:
                       properties:
+                        availabilityZoneName:
+                          description: The availability zone in which the replica
+                            should be created. If specified, the replica will be created
+                            with One Zone storage. If omitted, regional storage will
+                            be used.
+                          type: string
                         fileSystemId:
                           description: The fs ID of the replica.
+                          type: string
+                        kmsKeyId:
+                          description: The Key ID, ARN, alias, or alias ARN of the
+                            KMS key that should be used to encrypt the replica file
+                            system. If omitted, the default KMS key for EFS /aws/elasticfilesystem
+                            will be used.
+                          type: string
+                        region:
+                          description: The region in which the replica should be created.
                           type: string
                         status:
                           description: The status of the replication.
@@ -372,6 +408,9 @@ spec:
                   sourceFileSystemArn:
                     description: The Amazon Resource Name (ARN) of the current source
                       file system in the replication configuration.
+                    type: string
+                  sourceFileSystemId:
+                    description: The ID of the file system that is to be replicated.
                     type: string
                   sourceFileSystemRegion:
                     description: The AWS Region in which the source Amazon EFS file

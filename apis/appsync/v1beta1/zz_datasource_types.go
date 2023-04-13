@@ -14,6 +14,12 @@ import (
 )
 
 type AuthorizationConfigObservation struct {
+
+	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// Identity and Access Management (IAM) settings. See AWS IAM Config.
+	AwsIAMConfig []AwsIAMConfigObservation `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
 
 type AuthorizationConfigParameters struct {
@@ -28,6 +34,12 @@ type AuthorizationConfigParameters struct {
 }
 
 type AwsIAMConfigObservation struct {
+
+	// Signing Amazon Web Services Region for IAM authorization.
+	SigningRegion *string `json:"signingRegion,omitempty" tf:"signing_region,omitempty"`
+
+	// Signing service name for IAM authorization.
+	SigningServiceName *string `json:"signingServiceName,omitempty" tf:"signing_service_name,omitempty"`
 }
 
 type AwsIAMConfigParameters struct {
@@ -43,10 +55,37 @@ type AwsIAMConfigParameters struct {
 
 type DatasourceObservation struct {
 
+	// API ID for the GraphQL API for the data source.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// ARN
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the data source.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// DynamoDB settings. See below
+	DynamodbConfig []DynamodbConfigObservation `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
+
+	// Amazon Elasticsearch settings. See below
+	ElasticsearchConfig []ElasticsearchConfigObservation `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
+
+	// HTTP settings. See below
+	HTTPConfig []HTTPConfigObservation `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// AWS Lambda settings. See below
+	LambdaConfig []LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+
+	// AWS RDS settings. See Relational Database Config
+	RelationalDatabaseConfig []RelationalDatabaseConfigObservation `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
+
+	// IAM service role ARN for the data source.
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DatasourceParameters struct {
@@ -110,11 +149,17 @@ type DatasourceParameters struct {
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DeltaSyncConfigObservation struct {
+	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
+
+	// User-supplied name for the data source.
+	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
+
+	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigParameters struct {
@@ -131,6 +176,18 @@ type DeltaSyncConfigParameters struct {
 }
 
 type DynamodbConfigObservation struct {
+	DeltaSyncConfig []DeltaSyncConfigObservation `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
+
+	// AWS region of the DynamoDB table. Defaults to current region.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Set to true to use Amazon Cognito credentials with this data source.
+	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
+
+	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
 
 type DynamodbConfigParameters struct {
@@ -164,6 +221,12 @@ type DynamodbConfigParameters struct {
 }
 
 type ElasticsearchConfigObservation struct {
+
+	// HTTP endpoint of the Elasticsearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// AWS region of Elasticsearch domain. Defaults to current region.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type ElasticsearchConfigParameters struct {
@@ -178,6 +241,12 @@ type ElasticsearchConfigParameters struct {
 }
 
 type HTTPConfigObservation struct {
+
+	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	AuthorizationConfig []AuthorizationConfigObservation `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
+
+	// HTTP URL.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type HTTPConfigParameters struct {
@@ -192,6 +261,21 @@ type HTTPConfigParameters struct {
 }
 
 type HTTPEndpointConfigObservation struct {
+
+	// AWS secret store ARN for database credentials.
+	AwsSecretStoreArn *string `json:"awsSecretStoreArn,omitempty" tf:"aws_secret_store_arn,omitempty"`
+
+	// Amazon RDS cluster identifier.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Logical database name.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Logical schema name.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type HTTPEndpointConfigParameters struct {
@@ -218,6 +302,9 @@ type HTTPEndpointConfigParameters struct {
 }
 
 type LambdaConfigObservation struct {
+
+	// ARN for the Lambda function.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 }
 
 type LambdaConfigParameters struct {
@@ -228,6 +315,12 @@ type LambdaConfigParameters struct {
 }
 
 type RelationalDatabaseConfigObservation struct {
+
+	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	HTTPEndpointConfig []HTTPEndpointConfigObservation `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
+
+	// Source type for the relational database. Valid values: RDS_HTTP_ENDPOINT.
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 }
 
 type RelationalDatabaseConfigParameters struct {
@@ -265,8 +358,9 @@ type DatasourceStatus struct {
 type Datasource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DatasourceSpec   `json:"spec"`
-	Status            DatasourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   DatasourceSpec   `json:"spec"`
+	Status DatasourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

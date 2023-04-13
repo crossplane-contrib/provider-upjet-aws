@@ -14,6 +14,15 @@ import (
 )
 
 type OutboundCallerConfigObservation struct {
+
+	// Specifies the caller ID name.
+	OutboundCallerIDName *string `json:"outboundCallerIdName,omitempty" tf:"outbound_caller_id_name,omitempty"`
+
+	// Specifies the caller ID number.
+	OutboundCallerIDNumberID *string `json:"outboundCallerIdNumberId,omitempty" tf:"outbound_caller_id_number_id,omitempty"`
+
+	// Specifies outbound whisper flow to be used during an outbound call.
+	OutboundFlowID *string `json:"outboundFlowId,omitempty" tf:"outbound_flow_id,omitempty"`
 }
 
 type OutboundCallerConfigParameters struct {
@@ -36,13 +45,40 @@ type QueueObservation struct {
 	// The Amazon Resource Name (ARN) of the Queue.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies the description of the Queue.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the identifier of the Hours of Operation.
+	HoursOfOperationID *string `json:"hoursOfOperationId,omitempty" tf:"hours_of_operation_id,omitempty"`
+
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Queue separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
+	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
+
+	// Specifies the name of the Queue.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that defines the outbound caller ID name, number, and outbound whisper flow. The Outbound Caller Config block is documented below.
+	OutboundCallerConfig []OutboundCallerConfigObservation `json:"outboundCallerConfig,omitempty" tf:"outbound_caller_config,omitempty"`
 
 	// The identifier for the Queue.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
+	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
+
 	QuickConnectIdsAssociated []*string `json:"quickConnectIdsAssociated,omitempty" tf:"quick_connect_ids_associated,omitempty"`
+
+	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -87,8 +123,8 @@ type QueueParameters struct {
 	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
 	// Specifies the name of the Queue.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that defines the outbound caller ID name, number, and outbound whisper flow. The Outbound Caller Config block is documented below.
 	// +kubebuilder:validation:Optional
@@ -136,8 +172,9 @@ type QueueStatus struct {
 type Queue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QueueSpec   `json:"spec"`
-	Status            QueueStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   QueueSpec   `json:"spec"`
+	Status QueueStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,17 @@ import (
 
 type VoiceConnectorLoggingObservation struct {
 
+	// When true, enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
+	EnableMediaMetricLogs *bool `json:"enableMediaMetricLogs,omitempty" tf:"enable_media_metric_logs,omitempty"`
+
+	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
+	EnableSIPLogs *bool `json:"enableSipLogs,omitempty" tf:"enable_sip_logs,omitempty"`
+
 	// The Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
 }
 
 type VoiceConnectorLoggingParameters struct {

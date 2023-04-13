@@ -15,6 +15,12 @@ import (
 
 type PolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the policy to attach.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The identity to which the policy is attached.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type PolicyAttachmentParameters struct {

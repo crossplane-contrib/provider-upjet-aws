@@ -18,7 +18,22 @@ type UserObservation struct {
 	// The ARN assigned by AWS for this user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// when destroying this user, destroy even if it
+	// has non-Upbound official provider-managed iam access keys, login profile or mfa devices. without force_destroy
+	// a user with non-Upbound official provider-managed access keys and login profile will fail to be destroyed.
+	// delete user even if it has non-Upbound official provider-managed iam access keys, login profile or mfa devices
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Path in which to create the user.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The ARN of the policy that is used to set the permissions boundary for the user.
+	PermissionsBoundary *string `json:"permissionsBoundary,omitempty" tf:"permissions_boundary,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

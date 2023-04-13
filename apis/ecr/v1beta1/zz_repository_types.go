@@ -14,6 +14,12 @@ import (
 )
 
 type EncryptionConfigurationObservation struct {
+
+	// The encryption type to use for the repository. Valid values are AES256 or KMS. Defaults to AES256.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The ARN of the KMS key to use when encryption_type is KMS. If not specified, uses the default AWS managed key for ECR.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {
@@ -38,6 +44,9 @@ type EncryptionConfigurationParameters struct {
 }
 
 type ImageScanningConfigurationObservation struct {
+
+	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
+	ScanOnPush *bool `json:"scanOnPush,omitempty" tf:"scan_on_push,omitempty"`
 }
 
 type ImageScanningConfigurationParameters struct {
@@ -52,13 +61,29 @@ type RepositoryObservation struct {
 	// Full ARN of the repository.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Encryption configuration for the repository. See below for schema.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// If true, will delete the repository even if it contains images.
+	// Defaults to false.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.
+	ImageScanningConfiguration []ImageScanningConfigurationObservation `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
+
+	// The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
+	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
 
 	// The registry ID where the repository was created.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
 	// The URL of the repository (in the form aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName).
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

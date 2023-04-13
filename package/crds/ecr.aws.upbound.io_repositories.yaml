@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -191,6 +195,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -370,7 +389,44 @@ spec:
                   arn:
                     description: Full ARN of the repository.
                     type: string
+                  encryptionConfiguration:
+                    description: Encryption configuration for the repository. See
+                      below for schema.
+                    items:
+                      properties:
+                        encryptionType:
+                          description: The encryption type to use for the repository.
+                            Valid values are AES256 or KMS. Defaults to AES256.
+                          type: string
+                        kmsKey:
+                          description: The ARN of the KMS key to use when encryption_type
+                            is KMS. If not specified, uses the default AWS managed
+                            key for ECR.
+                          type: string
+                      type: object
+                    type: array
+                  forceDelete:
+                    description: If true, will delete the repository even if it contains
+                      images. Defaults to false.
+                    type: boolean
                   id:
+                    type: string
+                  imageScanningConfiguration:
+                    description: Configuration block that defines image scanning configuration
+                      for the repository. By default, image scanning must be manually
+                      triggered. See the ECR User Guide for more information about
+                      image scanning.
+                    items:
+                      properties:
+                        scanOnPush:
+                          description: Indicates whether images are scanned after
+                            being pushed to the repository (true) or not scanned (false).
+                          type: boolean
+                      type: object
+                    type: array
+                  imageTagMutability:
+                    description: 'The tag mutability setting for the repository. Must
+                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
                     type: string
                   registryId:
                     description: The registry ID where the repository was created.
@@ -378,6 +434,11 @@ spec:
                   repositoryUrl:
                     description: The URL of the repository (in the form aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName).
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

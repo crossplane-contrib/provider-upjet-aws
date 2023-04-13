@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -86,10 +90,23 @@ spec:
                       Valid values: p50. Default: p50.'
                     type: string
                 required:
-                - destination
                 - region
-                - source
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -261,16 +278,37 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: destination is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)
+            - message: source is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)
           status:
             description: NetworkPerformanceMetricSubscriptionStatus defines the observed
               state of NetworkPerformanceMetricSubscription.
             properties:
               atProvider:
                 properties:
+                  destination:
+                    description: The target Region or Availability Zone that the metric
+                      subscription is enabled for. For example, eu-west-1.
+                    type: string
                   id:
+                    type: string
+                  metric:
+                    description: 'The metric used for the enabled subscription. Valid
+                      values: aggregate-latency. Default: aggregate-latency.'
                     type: string
                   period:
                     description: The data aggregation time for the subscription.
+                    type: string
+                  source:
+                    description: The source Region or Availability Zone that the metric
+                      subscription is enabled for. For example, us-east-1.
+                    type: string
+                  statistic:
+                    description: 'The statistic used for the enabled subscription.
+                      Valid values: p50. Default: p50.'
                     type: string
                 type: object
               conditions:

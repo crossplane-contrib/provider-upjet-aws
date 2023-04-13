@@ -33,8 +33,20 @@ type FeatureObservation struct {
 	// The date and time that the feature is created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// The name of the variation to use as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature. This variation must also be listed in the variations structure. If you omit default_variation, the first variation listed in the variations structure is used as the default variation.
+	DefaultVariation *string `json:"defaultVariation,omitempty" tf:"default_variation,omitempty"`
+
+	// Specifies the description of the feature.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.
+	EntityOverrides map[string]*string `json:"entityOverrides,omitempty" tf:"entity_overrides,omitempty"`
+
 	// One or more blocks that define the evaluation rules for the feature. Detailed below
 	EvaluationRules []EvaluationRulesObservation `json:"evaluationRules,omitempty" tf:"evaluation_rules,omitempty"`
+
+	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION to serve the default variation to all users instead.
+	EvaluationStrategy *string `json:"evaluationStrategy,omitempty" tf:"evaluation_strategy,omitempty"`
 
 	// The feature name and the project name or arn separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -42,14 +54,23 @@ type FeatureObservation struct {
 	// The date and time that the feature was most recently updated.
 	LastUpdatedTime *string `json:"lastUpdatedTime,omitempty" tf:"last_updated_time,omitempty"`
 
+	// The name or ARN of the project that is to contain the new feature.
+	Project *string `json:"project,omitempty" tf:"project,omitempty"`
+
 	// The current state of the feature. Valid values are AVAILABLE and UPDATING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Defines the type of value used to define the different feature variations. Valid Values: STRING, LONG, DOUBLE, BOOLEAN.
 	ValueType *string `json:"valueType,omitempty" tf:"value_type,omitempty"`
+
+	// One or more blocks that contain the configuration of the feature's different variations. Detailed below
+	Variations []VariationsObservation `json:"variations,omitempty" tf:"variations,omitempty"`
 }
 
 type FeatureParameters struct {
@@ -94,11 +115,23 @@ type FeatureParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more blocks that contain the configuration of the feature's different variations. Detailed below
-	// +kubebuilder:validation:Required
-	Variations []VariationsParameters `json:"variations" tf:"variations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Variations []VariationsParameters `json:"variations,omitempty" tf:"variations,omitempty"`
 }
 
 type ValueObservation struct {
+
+	// If this feature uses the Boolean variation type, this field contains the Boolean value of this variation.
+	BoolValue *string `json:"boolValue,omitempty" tf:"bool_value,omitempty"`
+
+	// If this feature uses the double integer variation type, this field contains the double integer value of this variation.
+	DoubleValue *string `json:"doubleValue,omitempty" tf:"double_value,omitempty"`
+
+	// If this feature uses the long variation type, this field contains the long value of this variation. Minimum value of -9007199254740991. Maximum value of 9007199254740991.
+	LongValue *string `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// If this feature uses the string variation type, this field contains the string value of this variation. Minimum length of 0. Maximum length of 512.
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type ValueParameters struct {
@@ -121,6 +154,12 @@ type ValueParameters struct {
 }
 
 type VariationsObservation struct {
+
+	// The name of the variation. Minimum length of 1. Maximum length of 127.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that specifies the value assigned to this variation. Detailed below
+	Value []ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type VariationsParameters struct {
@@ -158,8 +197,9 @@ type FeatureStatus struct {
 type Feature struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FeatureSpec   `json:"spec"`
-	Status            FeatureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.variations)",message="variations is a required parameter"
+	Spec   FeatureSpec   `json:"spec"`
+	Status FeatureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

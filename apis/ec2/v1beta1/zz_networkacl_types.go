@@ -102,8 +102,17 @@ type NetworkACLObservation struct {
 	// The ID of the AWS account that owns the network ACL.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// A list of Subnet IDs to apply the ACL to
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The ID of the associated VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type NetworkACLParameters struct {

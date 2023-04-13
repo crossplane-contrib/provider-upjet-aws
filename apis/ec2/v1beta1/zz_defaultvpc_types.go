@@ -17,6 +17,9 @@ type DefaultVPCObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// and instance_tenancy arguments become computed attributes
+	AssignGeneratedIPv6CidrBlock *bool `json:"assignGeneratedIpv6CidrBlock,omitempty" tf:"assign_generated_ipv6_cidr_block,omitempty"`
+
+	// and instance_tenancy arguments become computed attributes
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
@@ -27,11 +30,34 @@ type DefaultVPCObservation struct {
 
 	DefaultSecurityGroupID *string `json:"defaultSecurityGroupId,omitempty" tf:"default_security_group_id,omitempty"`
 
+	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
+
+	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
+
+	// is true
+	EnableDNSHostnames *bool `json:"enableDnsHostnames,omitempty" tf:"enable_dns_hostnames,omitempty"`
+
+	EnableDNSSupport *bool `json:"enableDnsSupport,omitempty" tf:"enable_dns_support,omitempty"`
+
+	EnableNetworkAddressUsageMetrics *bool `json:"enableNetworkAddressUsageMetrics,omitempty" tf:"enable_network_address_usage_metrics,omitempty"`
+
 	ExistingDefaultVPC *bool `json:"existingDefaultVpc,omitempty" tf:"existing_default_vpc,omitempty"`
+
+	// Whether destroying the resource deletes the default VPC. Default: false
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	IPv6AssociationID *string `json:"ipv6AssociationId,omitempty" tf:"ipv6_association_id,omitempty"`
+
+	// and instance_tenancy arguments become computed attributes
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	IPv6CidrBlockNetworkBorderGroup *string `json:"ipv6CidrBlockNetworkBorderGroup,omitempty" tf:"ipv6_cidr_block_network_border_group,omitempty"`
+
+	IPv6IpamPoolID *string `json:"ipv6IpamPoolId,omitempty" tf:"ipv6_ipam_pool_id,omitempty"`
+
+	IPv6NetmaskLength *float64 `json:"ipv6NetmaskLength,omitempty" tf:"ipv6_netmask_length,omitempty"`
 
 	// The allowed tenancy of instances launched into the VPC
 	InstanceTenancy *string `json:"instanceTenancy,omitempty" tf:"instance_tenancy,omitempty"`
@@ -39,6 +65,8 @@ type DefaultVPCObservation struct {
 	MainRouteTableID *string `json:"mainRouteTableId,omitempty" tf:"main_route_table_id,omitempty"`
 
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

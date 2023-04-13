@@ -15,8 +15,17 @@ import (
 
 type ManagedPrefixListEntryObservation struct {
 
+	// CIDR block of this entry.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// ID of the managed prefix list entry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// CIDR block of this entry.
+	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 }
 
 type ManagedPrefixListEntryParameters struct {

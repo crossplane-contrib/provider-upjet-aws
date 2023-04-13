@@ -17,6 +17,12 @@ type AssociationObservation struct {
 
 	// The license configuration ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ARN of the license configuration.
+	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
+
+	// ARN of the resource associated with the license configuration.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type AssociationParameters struct {

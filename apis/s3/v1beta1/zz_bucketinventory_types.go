@@ -14,6 +14,9 @@ import (
 )
 
 type BucketInventoryDestinationObservation struct {
+
+	// Name of the source bucket that inventory lists the objects for.
+	Bucket []DestinationBucketObservation `json:"bucket,omitempty" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryDestinationParameters struct {
@@ -24,6 +27,9 @@ type BucketInventoryDestinationParameters struct {
 }
 
 type BucketInventoryFilterObservation struct {
+
+	// Prefix that an object must have to be included in the inventory results.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type BucketInventoryFilterParameters struct {
@@ -34,7 +40,32 @@ type BucketInventoryFilterParameters struct {
 }
 
 type BucketInventoryObservation struct {
+
+	// Name of the source bucket that inventory lists the objects for.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Contains information about where to publish the inventory results (documented below).
+	Destination []BucketInventoryDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Specifies whether the inventory is enabled or disabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies an inventory filter. The inventory only includes objects that meet the filter's criteria (documented below).
+	Filter []BucketInventoryFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Object versions to include in the inventory list. Valid values: All, Current.
+	IncludedObjectVersions *string `json:"includedObjectVersions,omitempty" tf:"included_object_versions,omitempty"`
+
+	// Unique identifier of the inventory configuration for the bucket.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
+	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
+
+	// Specifies the schedule for generating inventory results (documented below).
+	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
 type BucketInventoryParameters struct {
@@ -54,8 +85,8 @@ type BucketInventoryParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Contains information about where to publish the inventory results (documented below).
-	// +kubebuilder:validation:Required
-	Destination []BucketInventoryDestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []BucketInventoryDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Specifies whether the inventory is enabled or disabled.
 	// +kubebuilder:validation:Optional
@@ -66,12 +97,12 @@ type BucketInventoryParameters struct {
 	Filter []BucketInventoryFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Object versions to include in the inventory list. Valid values: All, Current.
-	// +kubebuilder:validation:Required
-	IncludedObjectVersions *string `json:"includedObjectVersions" tf:"included_object_versions,omitempty"`
+	// +kubebuilder:validation:Optional
+	IncludedObjectVersions *string `json:"includedObjectVersions,omitempty" tf:"included_object_versions,omitempty"`
 
 	// Unique identifier of the inventory configuration for the bucket.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
 	// +kubebuilder:validation:Optional
@@ -83,11 +114,26 @@ type BucketInventoryParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the schedule for generating inventory results (documented below).
-	// +kubebuilder:validation:Required
-	Schedule []ScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
 type DestinationBucketObservation struct {
+
+	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Amazon S3 bucket ARN of the destination.
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Prefix that an object must have to be included in the inventory results.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type DestinationBucketParameters struct {
@@ -124,6 +170,12 @@ type DestinationBucketParameters struct {
 }
 
 type EncryptionObservation struct {
+
+	// Specifies to use server-side encryption with AWS KMS-managed keys to encrypt the inventory file (documented below).
+	SseKMS []SseKMSObservation `json:"sseKms,omitempty" tf:"sse_kms,omitempty"`
+
+	// Specifies to use server-side encryption with Amazon S3-managed keys (SSE-S3) to encrypt the inventory file.
+	SseS3 []SseS3Parameters `json:"sseS3,omitempty" tf:"sse_s3,omitempty"`
 }
 
 type EncryptionParameters struct {
@@ -138,6 +190,9 @@ type EncryptionParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -148,6 +203,9 @@ type ScheduleParameters struct {
 }
 
 type SseKMSObservation struct {
+
+	// ARN of the KMS customer master key (CMK) used to encrypt the inventory file.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 }
 
 type SseKMSParameters struct {
@@ -187,8 +245,12 @@ type BucketInventoryStatus struct {
 type BucketInventory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BucketInventorySpec   `json:"spec"`
-	Status            BucketInventoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.includedObjectVersions)",message="includedObjectVersions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	Spec   BucketInventorySpec   `json:"spec"`
+	Status BucketInventoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

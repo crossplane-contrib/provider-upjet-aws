@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -503,10 +507,22 @@ spec:
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean
-                required:
-                - name
-                - shortName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -678,6 +694,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: shortName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.shortName)
           status:
             description: CustomLayerStatus defines the observed state of CustomLayer.
             properties:
@@ -686,9 +707,288 @@ spec:
                   arn:
                     description: The Amazon Resource Name(ARN) of the layer.
                     type: string
+                  autoAssignElasticIps:
+                    description: Whether to automatically assign an elastic IP address
+                      to the layer's instances.
+                    type: boolean
+                  autoAssignPublicIps:
+                    description: For stacks belonging to a VPC, whether to automatically
+                      assign a public IP address to each of the layer's instances.
+                    type: boolean
+                  autoHealing:
+                    description: Whether to enable auto-healing for the layer.
+                    type: boolean
+                  cloudwatchConfiguration:
+                    description: Will create an EBS volume and connect it to the layer's
+                      instances. See Cloudwatch Configuration.
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        logStreams:
+                          description: A block the specifies how an opsworks logs
+                            look like. See Log Streams.
+                          items:
+                            properties:
+                              batchCount:
+                                description: Specifies the max number of log events
+                                  in a batch, up to 10000. The default value is 1000.
+                                type: number
+                              batchSize:
+                                description: Specifies the maximum size of log events
+                                  in a batch, in bytes, up to 1048576 bytes. The default
+                                  value is 32768 bytes.
+                                type: number
+                              bufferDuration:
+                                description: Specifies the time duration for the batching
+                                  of log events. The minimum value is 5000 and default
+                                  value is 5000.
+                                type: number
+                              datetimeFormat:
+                                description: Specifies how the timestamp is extracted
+                                  from logs. For more information, see the CloudWatch
+                                  Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+                                type: string
+                              encoding:
+                                description: Specifies the encoding of the log file
+                                  so that the file can be read correctly. The default
+                                  is utf_8.
+                                type: string
+                              file:
+                                description: Specifies log files that you want to
+                                  push to CloudWatch Logs. File can point to a specific
+                                  file or multiple files (by using wild card characters
+                                  such as /var/log/system.log*).
+                                type: string
+                              fileFingerprintLines:
+                                description: Specifies the range of lines for identifying
+                                  a file. The valid values are one number, or two
+                                  dash-delimited numbers, such as 1, 2-5. The default
+                                  value is 1.
+                                type: string
+                              initialPosition:
+                                description: Specifies where to start to read data
+                                  (start_of_file or end_of_file). The default is start_of_file.
+                                type: string
+                              logGroupName:
+                                description: Specifies the destination log group.
+                                  A log group is created automatically if it doesn't
+                                  already exist.
+                                type: string
+                              multilineStartPattern:
+                                description: Specifies the pattern for identifying
+                                  the start of a log message.
+                                type: string
+                              timeZone:
+                                description: Specifies the time zone of log event
+                                  time stamps.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  customConfigureRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customDeployRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customInstanceProfileArn:
+                    description: The ARN of an IAM profile that will be used for the
+                      layer's instances.
+                    type: string
+                  customJson:
+                    description: Custom JSON attributes to apply to the layer.
+                    type: string
+                  customSecurityGroupIds:
+                    description: Ids for a set of security groups to apply to the
+                      layer's instances.
+                    items:
+                      type: string
+                    type: array
+                  customSetupRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customShutdownRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customUndeployRecipes:
+                    items:
+                      type: string
+                    type: array
+                  drainElbOnShutdown:
+                    description: Whether to enable Elastic Load Balancing connection
+                      draining.
+                    type: boolean
+                  ebsVolume:
+                    description: Will create an EBS volume and connect it to the layer's
+                      instances. See EBS Volume.
+                    items:
+                      properties:
+                        encrypted:
+                          description: Encrypt the volume.
+                          type: boolean
+                        iops:
+                          description: For PIOPS volumes, the IOPS per disk.
+                          type: number
+                        mountPoint:
+                          description: The path to mount the EBS volume on the layer's
+                            instances.
+                          type: string
+                        numberOfDisks:
+                          description: The number of disks to use for the EBS volume.
+                          type: number
+                        raidLevel:
+                          description: The RAID level to use for the volume.
+                          type: string
+                        size:
+                          description: The size of the volume in gigabytes.
+                          type: number
+                        type:
+                          description: The type of volume to create. This may be standard
+                            (the default), io1 or gp2.
+                          type: string
+                      type: object
+                    type: array
+                  elasticLoadBalancer:
+                    description: Name of an Elastic Load Balancer to attach to this
+                      layer
+                    type: string
                   id:
                     description: The id of the layer.
                     type: string
+                  installUpdatesOnBoot:
+                    description: Whether to install OS and package updates on each
+                      instance when it boots.
+                    type: boolean
+                  instanceShutdownTimeout:
+                    description: The time, in seconds, that OpsWorks will wait for
+                      Chef to complete after triggering the Shutdown event.
+                    type: number
+                  loadBasedAutoScaling:
+                    description: Load-based auto scaling configuration. See Load Based
+                      AutoScaling
+                    items:
+                      properties:
+                        downscaling:
+                          description: The downscaling settings, as defined below,
+                            used for load-based autoscaling
+                          items:
+                            properties:
+                              alarms:
+                                description: Custom Cloudwatch auto scaling alarms,
+                                  to be used as thresholds. This parameter takes a
+                                  list of up to five alarm names, which are case sensitive
+                                  and must be in the same region as the stack.
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                description: The CPU utilization threshold, as a percent
+                                  of the available CPU. A value of -1 disables the
+                                  threshold.
+                                type: number
+                              ignoreMetricsTime:
+                                description: The amount of time (in minutes) after
+                                  a scaling event occurs that AWS OpsWorks Stacks
+                                  should ignore metrics and suppress additional scaling
+                                  events.
+                                type: number
+                              instanceCount:
+                                description: The number of instances to add or remove
+                                  when the load exceeds a threshold.
+                                type: number
+                              loadThreshold:
+                                description: The load threshold. A value of -1 disables
+                                  the threshold.
+                                type: number
+                              memoryThreshold:
+                                description: The memory utilization threshold, as
+                                  a percent of the available memory. A value of -1
+                                  disables the threshold.
+                                type: number
+                              thresholdsWaitTime:
+                                description: The amount of time, in minutes, that
+                                  the load must exceed a threshold before more instances
+                                  are added or removed.
+                                type: number
+                            type: object
+                          type: array
+                        enable:
+                          description: Whether load-based auto scaling is enabled
+                            for the layer.
+                          type: boolean
+                        upscaling:
+                          description: The upscaling settings, as defined below, used
+                            for load-based autoscaling
+                          items:
+                            properties:
+                              alarms:
+                                description: Custom Cloudwatch auto scaling alarms,
+                                  to be used as thresholds. This parameter takes a
+                                  list of up to five alarm names, which are case sensitive
+                                  and must be in the same region as the stack.
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                description: The CPU utilization threshold, as a percent
+                                  of the available CPU. A value of -1 disables the
+                                  threshold.
+                                type: number
+                              ignoreMetricsTime:
+                                description: The amount of time (in minutes) after
+                                  a scaling event occurs that AWS OpsWorks Stacks
+                                  should ignore metrics and suppress additional scaling
+                                  events.
+                                type: number
+                              instanceCount:
+                                description: The number of instances to add or remove
+                                  when the load exceeds a threshold.
+                                type: number
+                              loadThreshold:
+                                description: The load threshold. A value of -1 disables
+                                  the threshold.
+                                type: number
+                              memoryThreshold:
+                                description: The memory utilization threshold, as
+                                  a percent of the available memory. A value of -1
+                                  disables the threshold.
+                                type: number
+                              thresholdsWaitTime:
+                                description: The amount of time, in minutes, that
+                                  the load must exceed a threshold before more instances
+                                  are added or removed.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: A human-readable name for the layer.
+                    type: string
+                  shortName:
+                    description: A short, machine-readable name for the layer, which
+                      will be used to identify it in the Chef node JSON.
+                    type: string
+                  stackId:
+                    description: ID of the stack the layer will belong to.
+                    type: string
+                  systemPackages:
+                    description: Names of a set of system packages to install on the
+                      layer's instances.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -696,6 +996,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  useEbsOptimizedInstances:
+                    description: Whether to use EBS-optimized instances.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

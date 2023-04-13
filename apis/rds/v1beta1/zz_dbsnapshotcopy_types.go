@@ -21,8 +21,14 @@ type DBSnapshotCopyObservation struct {
 	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// Whether to copy existing tags. Defaults to false.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
 	// The Amazon Resource Name (ARN) for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
+
+	// The Destination region to place snapshot copy.
+	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
 
 	// Specifies whether the DB snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
@@ -39,12 +45,24 @@ type DBSnapshotCopyObservation struct {
 	// Specifies the Provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// KMS key ID.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// License model information for the restored DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
+	// The name of an option group to associate with the copy of the snapshot.
+	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
+
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// he URL that contains a Signature Version 4 signed request.
+	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
+
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
+
+	// Snapshot identifier of the source snapshot.
+	SourceDBSnapshotIdentifier *string `json:"sourceDbSnapshotIdentifier,omitempty" tf:"source_db_snapshot_identifier,omitempty"`
 
 	// The region that the DB snapshot was created in or copied from.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
@@ -52,8 +70,17 @@ type DBSnapshotCopyObservation struct {
 	// Specifies the storage type associated with DB snapshot.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The external custom Availability Zone.
+	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
+
+	// The Identifier for the snapshot.
+	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 
 	// Provides the VPC ID associated with the DB snapshot.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -118,8 +145,8 @@ type DBSnapshotCopyParameters struct {
 	TargetCustomAvailabilityZone *string `json:"targetCustomAvailabilityZone,omitempty" tf:"target_custom_availability_zone,omitempty"`
 
 	// The Identifier for the snapshot.
-	// +kubebuilder:validation:Required
-	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier" tf:"target_db_snapshot_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetDBSnapshotIdentifier *string `json:"targetDbSnapshotIdentifier,omitempty" tf:"target_db_snapshot_identifier,omitempty"`
 }
 
 // DBSnapshotCopySpec defines the desired state of DBSnapshotCopy
@@ -146,8 +173,9 @@ type DBSnapshotCopyStatus struct {
 type DBSnapshotCopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DBSnapshotCopySpec   `json:"spec"`
-	Status            DBSnapshotCopyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetDbSnapshotIdentifier)",message="targetDbSnapshotIdentifier is a required parameter"
+	Spec   DBSnapshotCopySpec   `json:"spec"`
+	Status DBSnapshotCopyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

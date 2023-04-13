@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -192,6 +196,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -371,8 +390,38 @@ spec:
                   arn:
                     description: Core Network Amazon Resource Name (ARN).
                     type: string
+                  basePolicyRegion:
+                    description: The base policy created by setting the create_base_policy
+                      argument to true requires a region to be set in the edge-locations,
+                      location key. If base_policy_region is not specified, the region
+                      used in the base policy defaults to the region specified in
+                      the provider block.
+                    type: string
+                  createBasePolicy:
+                    description: Specifies whether to create a base policy when a
+                      core network is created or updated. A base policy is created
+                      and set to LIVE to allow attachments to the core network (e.g.
+                      VPC Attachments) before applying a policy document provided
+                      using the aws_networkmanager_core_network_policy_attachment
+                      resource. This base policy is needed if your core network does
+                      not have any LIVE policies (e.g. a core network resource created
+                      without the policy_document argument) and your policy document
+                      has static routes pointing to VPC attachments and you want to
+                      attach your VPCs to the core network before applying the desired
+                      policy document. Valid values are true or false. Conflicts with
+                      policy_document. An example of a base policy created is shown
+                      below. The region specified in the location key can be configured
+                      using the base_policy_region argument. If base_policy_region
+                      is not specified, the region defaults to the region specified
+                      in the provider block. This base policy is overridden with the
+                      policy that you specify in the aws_networkmanager_core_network_policy_attachment
+                      resource.
+                    type: boolean
                   createdAt:
                     description: Timestamp when a core network was created.
+                    type: string
+                  description:
+                    description: Description of the Core Network.
                     type: string
                   edges:
                     description: One or more blocks detailing the edges within a core
@@ -392,8 +441,19 @@ spec:
                           type: array
                       type: object
                     type: array
+                  globalNetworkId:
+                    description: The ID of the global network that a core network
+                      will be a part of.
+                    type: string
                   id:
                     description: Core Network ID.
+                    type: string
+                  policyDocument:
+                    description: Policy document for creating a core network. Note
+                      that updating this argument will result in the new policy document
+                      version being set as the LATEST and LIVE policy document. Refer
+                      to the Core network policies documentation for more information.
+                      Conflicts with create_base_policy.
                     type: string
                   segments:
                     description: One or more blocks detailing the segments within
@@ -418,6 +478,11 @@ spec:
                   state:
                     description: Current state of a core network.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

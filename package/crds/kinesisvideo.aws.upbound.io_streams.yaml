@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -174,9 +178,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +366,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StreamStatus defines the observed state of Stream.
             properties:
@@ -360,9 +381,41 @@ spec:
                   creationTime:
                     description: A time stamp that indicates when the stream was created.
                     type: string
+                  dataRetentionInHours:
+                    description: –  The number of hours that you want to retain the
+                      data in the stream. Kinesis Video Streams retains the data in
+                      a data store that is associated with the stream. The default
+                      value is 0, indicating that the stream does not persist data.
+                    type: number
+                  deviceName:
+                    description: The name of the device that is writing to the stream.
+                      In the current implementation, Kinesis Video Streams does not
+                      use this name.
+                    type: string
                   id:
                     description: The unique Stream id
                     type: string
+                  kmsKeyId:
+                    description: The ID of the AWS Key Management Service (AWS KMS)
+                      key that you want Kinesis Video Streams to use to encrypt stream
+                      data. If no key ID is specified, the default, Kinesis Video-managed
+                      key (aws/kinesisvideo) is used.
+                    type: string
+                  mediaType:
+                    description: The media type of the stream. Consumers of the stream
+                      can use this information when processing the stream. For more
+                      information about media types, see Media Types. If you choose
+                      to specify the MediaType, see Naming Requirements for guidelines.
+                    type: string
+                  name:
+                    description: A name to identify the stream. This is unique to
+                      the AWS account and region the Stream is created in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

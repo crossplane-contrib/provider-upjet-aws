@@ -14,6 +14,18 @@ import (
 )
 
 type VPCPeeringConnectionAccepterAccepterObservation struct {
+
+	// Indicates whether a local ClassicLink connection can communicate
+	// with the peer VPC over the VPC Peering Connection.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Indicates whether a local VPC can resolve public DNS hostnames to
+	// private IP addresses when queried from instances in a peer VPC.
+	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Indicates whether a local VPC can communicate with a ClassicLink
+	// connection in the peer VPC over the VPC Peering Connection.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterAccepterParameters struct {
@@ -39,6 +51,13 @@ type VPCPeeringConnectionAccepterObservation struct {
 	// The status of the VPC Peering Connection request.
 	AcceptStatus *string `json:"acceptStatus,omitempty" tf:"accept_status,omitempty"`
 
+	// A configuration block that describes [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the accepter VPC.
+	Accepter []VPCPeeringConnectionAccepterAccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
+
+	// Whether or not to accept the peering request. Defaults to false.
+	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
 	// The ID of the VPC Peering Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -51,11 +70,21 @@ type VPCPeeringConnectionAccepterObservation struct {
 	// The ID of the requester VPC.
 	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
 
+	// A configuration block that describes [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the requester VPC.
+	Requester []VPCPeeringConnectionAccepterRequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the accepter VPC.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// The VPC Peering Connection ID to manage.
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterParameters struct {
@@ -99,6 +128,18 @@ type VPCPeeringConnectionAccepterParameters struct {
 }
 
 type VPCPeeringConnectionAccepterRequesterObservation struct {
+
+	// Indicates whether a local ClassicLink connection can communicate
+	// with the peer VPC over the VPC Peering Connection.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Indicates whether a local VPC can resolve public DNS hostnames to
+	// private IP addresses when queried from instances in a peer VPC.
+	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Indicates whether a local VPC can communicate with a ClassicLink
+	// connection in the peer VPC over the VPC Peering Connection.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterRequesterParameters struct {

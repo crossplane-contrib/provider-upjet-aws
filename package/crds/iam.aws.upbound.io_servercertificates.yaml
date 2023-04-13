@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -98,10 +102,22 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                required:
-                - certificateBody
-                - privateKeySecretRef
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -273,6 +289,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: certificateBody is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateBody)
+            - message: privateKeySecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateKeySecretRef)
           status:
             description: ServerCertificateStatus defines the observed state of ServerCertificate.
             properties:
@@ -282,6 +303,12 @@ spec:
                     description: The Amazon Resource Name (ARN) specifying the server
                       certificate.
                     type: string
+                  certificateBody:
+                    description: encoded format.
+                    type: string
+                  certificateChain:
+                    description: encoded public key certificates of the chain.
+                    type: string
                   expiration:
                     description: Date and time in RFC3339 format on which the certificate
                       is set to expire.
@@ -289,6 +316,17 @@ spec:
                   id:
                     description: The unique Server Certificate name
                     type: string
+                  path:
+                    description: The IAM path for the server certificate.  If it is
+                      not included, it defaults to a slash (/). If this certificate
+                      is for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+                      See IAM Identifiers for more details on IAM Paths.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

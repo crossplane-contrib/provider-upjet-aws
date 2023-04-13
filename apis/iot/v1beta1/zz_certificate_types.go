@@ -15,8 +15,18 @@ import (
 
 type CertificateObservation struct {
 
+	// Boolean flag to indicate if the certificate should be active
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+
 	// The ARN of the created certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The certificate signing request. Review
+	// CreateCertificateFromCsr
+	// for more information on generating a certificate from a certificate signing request (CSR).
+	// If none is specified both the certificate and keys will be generated, review CreateKeysAndCertificate
+	// for more information on generating keys and a certificate.
+	Csr *string `json:"csr,omitempty" tf:"csr,omitempty"`
 
 	// The internal ID assigned to this certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -25,8 +35,8 @@ type CertificateObservation struct {
 type CertificateParameters struct {
 
 	// Boolean flag to indicate if the certificate should be active
-	// +kubebuilder:validation:Required
-	Active *bool `json:"active" tf:"active,omitempty"`
+	// +kubebuilder:validation:Optional
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
 	// The CA certificate for the certificate to be registered. If this is set, the CA needs to be registered with AWS IoT beforehand.
 	// +kubebuilder:validation:Optional
@@ -78,8 +88,9 @@ type CertificateStatus struct {
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateSpec   `json:"spec"`
-	Status            CertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.active)",message="active is a required parameter"
+	Spec   CertificateSpec   `json:"spec"`
+	Status CertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

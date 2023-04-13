@@ -17,6 +17,15 @@ type RuleAssociationObservation struct {
 
 	// The ID of the resolver rule association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A name for the association that you're creating between a resolver rule and a VPC.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the resolver rule that you want to associate with the VPC.
+	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
+
+	// The ID of the VPC that you want to associate the resolver rule with.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type RuleAssociationParameters struct {

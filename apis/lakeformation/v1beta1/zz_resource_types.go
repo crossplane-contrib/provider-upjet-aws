@@ -14,17 +14,24 @@ import (
 )
 
 type ResourceObservation struct {
+
+	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The date and time the resource was last modified in RFC 3339 format.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
+
+	// linked role must exist and is used.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ResourceParameters struct {
 
 	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
-	// +kubebuilder:validation:Required
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -70,8 +77,9 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSpec   `json:"spec"`
-	Status            ResourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.arn)",message="arn is a required parameter"
+	Spec   ResourceSpec   `json:"spec"`
+	Status ResourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

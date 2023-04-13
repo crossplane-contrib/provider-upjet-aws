@@ -15,8 +15,41 @@ import (
 
 type NetworkACLRuleObservation struct {
 
+	// The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24 ).
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// Indicates whether this is an egress rule (rule is applied to traffic leaving the subnet). Default false.
+	Egress *bool `json:"egress,omitempty" tf:"egress,omitempty"`
+
+	// The from port to match.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
 	// The ID of the network ACL Rule
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IPv6 CIDR block to allow or deny.
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// ICMP protocol: The ICMP code. Required if specifying ICMP for the protocolE.g., -1
+	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// ICMP protocol: The ICMP type. Required if specifying ICMP for the protocolE.g., -1
+	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// The ID of the network ACL.
+	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
+
+	// The protocol. A value of -1 means all protocols.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Indicates whether to allow or deny the traffic that matches the rule. Accepted values: allow | deny
+	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
+
+	// The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.
+	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+
+	// The to port to match.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type NetworkACLRuleParameters struct {
@@ -60,8 +93,8 @@ type NetworkACLRuleParameters struct {
 	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
 
 	// The protocol. A value of -1 means all protocols.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,12 +102,12 @@ type NetworkACLRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule. Accepted values: allow | deny
-	// +kubebuilder:validation:Required
-	RuleAction *string `json:"ruleAction" tf:"rule_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
 	// The rule number for the entry (for example, 100). ACL entries are processed in ascending order by rule number.
-	// +kubebuilder:validation:Required
-	RuleNumber *float64 `json:"ruleNumber" tf:"rule_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 
 	// The to port to match.
 	// +kubebuilder:validation:Optional
@@ -105,8 +138,11 @@ type NetworkACLRuleStatus struct {
 type NetworkACLRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkACLRuleSpec   `json:"spec"`
-	Status            NetworkACLRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleAction)",message="ruleAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleNumber)",message="ruleNumber is a required parameter"
+	Spec   NetworkACLRuleSpec   `json:"spec"`
+	Status NetworkACLRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

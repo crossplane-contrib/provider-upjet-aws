@@ -17,6 +17,15 @@ type TagObservation struct {
 
 	// DynamoDB resource identifier and key, separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Tag name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Amazon Resource Name (ARN) of the DynamoDB resource to tag.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Tag value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagParameters struct {
@@ -35,8 +44,8 @@ type TagParameters struct {
 	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 
 	// Tag value.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // TagSpec defines the desired state of Tag
@@ -63,8 +72,9 @@ type TagStatus struct {
 type Tag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TagSpec   `json:"spec"`
-	Status            TagStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   TagSpec   `json:"spec"`
+	Status TagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

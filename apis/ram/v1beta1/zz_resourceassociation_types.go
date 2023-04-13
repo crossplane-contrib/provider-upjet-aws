@@ -17,6 +17,12 @@ type ResourceAssociationObservation struct {
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Amazon Resource Name (ARN) of the RAM Resource Share.
+	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
 }
 
 type ResourceAssociationParameters struct {
@@ -27,8 +33,8 @@ type ResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
-	// +kubebuilder:validation:Required
-	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
 	// Amazon Resource Name (ARN) of the RAM Resource Share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.ResourceShare
@@ -69,8 +75,9 @@ type ResourceAssociationStatus struct {
 type ResourceAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceAssociationSpec   `json:"spec"`
-	Status            ResourceAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceArn)",message="resourceArn is a required parameter"
+	Spec   ResourceAssociationSpec   `json:"spec"`
+	Status ResourceAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

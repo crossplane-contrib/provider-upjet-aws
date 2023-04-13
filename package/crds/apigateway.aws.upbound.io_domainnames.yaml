@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -337,9 +341,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - domainName
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -511,6 +529,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: domainName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.domainName)
           status:
             description: DomainNameStatus defines the observed state of DomainName.
             properties:
@@ -518,6 +539,32 @@ spec:
                 properties:
                   arn:
                     description: ARN of domain name.
+                    type: string
+                  certificateArn:
+                    description: ARN for an AWS-managed certificate. AWS Certificate
+                      Manager is the only supported source. Used when an edge-optimized
+                      domain name is desired. Conflicts with certificate_name, certificate_body,
+                      certificate_chain, certificate_private_key, regional_certificate_arn,
+                      and regional_certificate_name.
+                    type: string
+                  certificateBody:
+                    description: Certificate issued for the domain name being registered,
+                      in PEM format. Only valid for EDGE endpoint configuration type.
+                      Conflicts with certificate_arn, regional_certificate_arn, and
+                      regional_certificate_name.
+                    type: string
+                  certificateChain:
+                    description: Certificate for the CA that issued the certificate,
+                      along with any intermediate CA certificates required to create
+                      an unbroken chain to a certificate trusted by the intended API
+                      clients. Only valid for EDGE endpoint configuration type. Conflicts
+                      with certificate_arn, regional_certificate_arn, and regional_certificate_name.
+                    type: string
+                  certificateName:
+                    description: Unique name to use when registering this certificate
+                      as an IAM server certificate. Conflicts with certificate_arn,
+                      regional_certificate_arn, and regional_certificate_name. Required
+                      if certificate_arn is not set.
                     type: string
                   certificateUploadDate:
                     description: Upload date associated with the domain certificate.
@@ -530,9 +577,67 @@ spec:
                     description: For convenience, the hosted zone ID (Z2FDTNDATAQYW2)
                       that can be used to create a Route53 alias record for the distribution.
                     type: string
+                  domainName:
+                    description: Fully-qualified domain name to register.
+                    type: string
+                  endpointConfiguration:
+                    description: Configuration block defining API endpoint information
+                      including type. See below.
+                    items:
+                      properties:
+                        types:
+                          description: 'List of endpoint types. This resource currently
+                            only supports managing a single value. Valid values: EDGE
+                            or REGIONAL. If unspecified, defaults to EDGE. Must be
+                            declared as REGIONAL in non-Commercial partitions. Refer
+                            to the documentation for more information on the difference
+                            between edge-optimized and regional APIs.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: Internal identifier assigned to this domain name
                       by API Gateway.
+                    type: string
+                  mutualTlsAuthentication:
+                    description: Mutual TLS authentication configuration for the domain
+                      name. See below.
+                    items:
+                      properties:
+                        truststoreUri:
+                          description: Amazon S3 URL that specifies the truststore
+                            for mutual TLS authentication, for example, s3://bucket-name/key-name.
+                            The truststore can contain certificates from public or
+                            private certificate authorities. To update the truststore,
+                            upload a new version to S3, and then update your custom
+                            domain name to use the new version.
+                          type: string
+                        truststoreVersion:
+                          description: Version of the S3 object that contains the
+                            truststore. To specify a version, you must have versioning
+                            enabled for the S3 bucket.
+                          type: string
+                      type: object
+                    type: array
+                  ownershipVerificationCertificateArn:
+                    description: ARN of the AWS-issued certificate used to validate
+                      custom domain ownership (when certificate_arn is issued via
+                      an ACM Private CA or mutual_tls_authentication is configured
+                      with an ACM-imported certificate.)
+                    type: string
+                  regionalCertificateArn:
+                    description: ARN for an AWS-managed certificate. AWS Certificate
+                      Manager is the only supported source. Used when a regional domain
+                      name is desired. Conflicts with certificate_arn, certificate_name,
+                      certificate_body, certificate_chain, and certificate_private_key.
+                    type: string
+                  regionalCertificateName:
+                    description: User-friendly name of the certificate that will be
+                      used by regional endpoint for this domain name. Conflicts with
+                      certificate_arn, certificate_name, certificate_body, certificate_chain,
+                      and certificate_private_key.
                     type: string
                   regionalDomainName:
                     description: Hostname for the custom domain's regional endpoint.
@@ -541,6 +646,16 @@ spec:
                     description: Hosted zone ID that can be used to create a Route53
                       alias record for the regional endpoint.
                     type: string
+                  securityPolicy:
+                    description: Transport Layer Security (TLS) version + cipher suite
+                      for this DomainName. Valid values are TLS_1_0 and TLS_1_2. Must
+                      be configured to perform drift detection.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

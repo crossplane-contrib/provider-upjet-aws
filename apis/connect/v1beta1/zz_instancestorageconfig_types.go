@@ -14,6 +14,12 @@ import (
 )
 
 type EncryptionConfigObservation struct {
+
+	// The type of encryption. Valid Values: KMS.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 }
 
 type EncryptionConfigParameters struct {
@@ -44,6 +50,15 @@ type InstanceStorageConfigObservation struct {
 
 	// The identifier of the hosting Amazon Connect Instance, association_id, and resource_type separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Specifies the storage configuration options for the Connect Instance. Documented below.
+	StorageConfig []StorageConfigObservation `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 }
 
 type InstanceStorageConfigParameters struct {
@@ -68,15 +83,18 @@ type InstanceStorageConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
-	// +kubebuilder:validation:Required
-	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Specifies the storage configuration options for the Connect Instance. Documented below.
-	// +kubebuilder:validation:Required
-	StorageConfig []StorageConfigParameters `json:"storageConfig" tf:"storage_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageConfig []StorageConfigParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 }
 
 type KinesisFirehoseConfigObservation struct {
+
+	// The Amazon Resource Name (ARN) of the delivery stream.
+	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 }
 
 type KinesisFirehoseConfigParameters struct {
@@ -97,6 +115,9 @@ type KinesisFirehoseConfigParameters struct {
 }
 
 type KinesisStreamConfigObservation struct {
+
+	// The Amazon Resource Name (ARN) of the data stream.
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type KinesisStreamConfigParameters struct {
@@ -117,6 +138,15 @@ type KinesisStreamConfigParameters struct {
 }
 
 type KinesisVideoStreamConfigObservation struct {
+
+	// The encryption configuration. Documented below.
+	EncryptionConfig []EncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+
+	// The prefix of the video stream. Minimum length of 1. Maximum length of 128. When read from the state, the value returned is <prefix>-connect-<connect_instance_alias>-contact- since the API appends additional details to the prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. Minimum value of 0. Maximum value of 87600. A value of 0, indicates that the stream does not persist data.
+	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 }
 
 type KinesisVideoStreamConfigParameters struct {
@@ -135,6 +165,12 @@ type KinesisVideoStreamConfigParameters struct {
 }
 
 type S3ConfigEncryptionConfigObservation struct {
+
+	// The type of encryption. Valid Values: KMS.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 }
 
 type S3ConfigEncryptionConfigParameters struct {
@@ -159,6 +195,15 @@ type S3ConfigEncryptionConfigParameters struct {
 }
 
 type S3ConfigObservation struct {
+
+	// The S3 bucket name.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The S3 bucket prefix.
+	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
+
+	// The encryption configuration. Documented below.
+	EncryptionConfig []S3ConfigEncryptionConfigObservation `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
 }
 
 type S3ConfigParameters struct {
@@ -187,6 +232,21 @@ type S3ConfigParameters struct {
 }
 
 type StorageConfigObservation struct {
+
+	// A block that specifies the configuration of the Kinesis Firehose delivery stream. Documented below.
+	KinesisFirehoseConfig []KinesisFirehoseConfigObservation `json:"kinesisFirehoseConfig,omitempty" tf:"kinesis_firehose_config,omitempty"`
+
+	// A block that specifies the configuration of the Kinesis data stream. Documented below.
+	KinesisStreamConfig []KinesisStreamConfigObservation `json:"kinesisStreamConfig,omitempty" tf:"kinesis_stream_config,omitempty"`
+
+	// A block that specifies the configuration of the Kinesis video stream. Documented below.
+	KinesisVideoStreamConfig []KinesisVideoStreamConfigObservation `json:"kinesisVideoStreamConfig,omitempty" tf:"kinesis_video_stream_config,omitempty"`
+
+	// A block that specifies the configuration of S3 Bucket. Documented below.
+	S3Config []S3ConfigObservation `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
+
+	// A valid storage type. Valid Values: S3 | KINESIS_VIDEO_STREAM | KINESIS_STREAM | KINESIS_FIREHOSE.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
 
 type StorageConfigParameters struct {
@@ -236,8 +296,10 @@ type InstanceStorageConfigStatus struct {
 type InstanceStorageConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceStorageConfigSpec   `json:"spec"`
-	Status            InstanceStorageConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceType)",message="resourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageConfig)",message="storageConfig is a required parameter"
+	Spec   InstanceStorageConfigSpec   `json:"spec"`
+	Status InstanceStorageConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

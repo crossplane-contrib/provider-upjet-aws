@@ -14,6 +14,9 @@ import (
 )
 
 type ExcludeFilterObservation struct {
+
+	// Name of the metric namespace in the filter.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type ExcludeFilterParameters struct {
@@ -24,6 +27,9 @@ type ExcludeFilterParameters struct {
 }
 
 type IncludeFilterObservation struct {
+
+	// Name of the metric namespace in the filter.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type IncludeFilterParameters struct {
@@ -34,6 +40,12 @@ type IncludeFilterParameters struct {
 }
 
 type IncludeMetricObservation struct {
+
+	// The name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type IncludeMetricParameters struct {
@@ -55,13 +67,37 @@ type MetricStreamObservation struct {
 	// Date and time in RFC3339 format that the metric stream was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
+	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here. Conflicts with include_filter.
+	ExcludeFilter []ExcludeFilterObservation `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
+
+	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
+	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of inclusive metric filters. If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. Conflicts with exclude_filter.
+	IncludeFilter []IncludeFilterObservation `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
 	// Date and time in RFC3339 format that the metric stream was last updated.
 	LastUpdateDate *string `json:"lastUpdateDate,omitempty" tf:"last_update_date,omitempty"`
 
+	// Friendly name of the metric stream. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// ARN of the IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. For more information about role permissions, see Trust between CloudWatch and Kinesis Data Firehose.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
 	// State of the metric stream. Possible values are running and stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	StatisticsConfiguration []StatisticsConfigurationObservation `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -92,12 +128,12 @@ type MetricStreamParameters struct {
 	IncludeFilter []IncludeFilterParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
 	// Friendly name of the metric stream. Conflicts with name_prefix.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
-	// +kubebuilder:validation:Required
-	OutputFormat *string `json:"outputFormat" tf:"output_format,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -128,6 +164,12 @@ type MetricStreamParameters struct {
 }
 
 type StatisticsConfigurationObservation struct {
+
+	// The additional statistics to stream for the metrics listed in include_metrics.
+	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
+
+	// An array that defines the metrics that are to have additional statistics streamed. See details below.
+	IncludeMetric []IncludeMetricObservation `json:"includeMetric,omitempty" tf:"include_metric,omitempty"`
 }
 
 type StatisticsConfigurationParameters struct {
@@ -165,8 +207,10 @@ type MetricStreamStatus struct {
 type MetricStream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MetricStreamSpec   `json:"spec"`
-	Status            MetricStreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputFormat)",message="outputFormat is a required parameter"
+	Spec   MetricStreamSpec   `json:"spec"`
+	Status MetricStreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

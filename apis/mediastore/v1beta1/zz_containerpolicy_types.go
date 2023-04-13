@@ -14,7 +14,14 @@ import (
 )
 
 type ContainerPolicyObservation struct {
+
+	// The name of the container.
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The contents of the policy.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ContainerPolicyParameters struct {
@@ -33,8 +40,8 @@ type ContainerPolicyParameters struct {
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The contents of the policy.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -66,8 +73,9 @@ type ContainerPolicyStatus struct {
 type ContainerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContainerPolicySpec   `json:"spec"`
-	Status            ContainerPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   ContainerPolicySpec   `json:"spec"`
+	Status ContainerPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

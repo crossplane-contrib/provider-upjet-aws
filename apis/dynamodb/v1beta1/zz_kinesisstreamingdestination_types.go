@@ -17,6 +17,13 @@ type KinesisStreamingDestinationObservation struct {
 
 	// The table_name and stream_arn separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// The name of the DynamoDB table. There
+	// can only be one Kinesis streaming destination for a given DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type KinesisStreamingDestinationParameters struct {

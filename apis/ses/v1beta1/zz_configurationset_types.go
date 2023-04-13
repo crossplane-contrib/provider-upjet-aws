@@ -18,11 +18,23 @@ type ConfigurationSetObservation struct {
 	// SES configuration set ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether messages that use the configuration set are required to use TLS. See below.
+	DeliveryOptions []DeliveryOptionsObservation `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
+
 	// SES configuration set name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a fresh start.
 	LastFreshStart *string `json:"lastFreshStart,omitempty" tf:"last_fresh_start,omitempty"`
+
+	// Whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch. The default value is false.
+	ReputationMetricsEnabled *bool `json:"reputationMetricsEnabled,omitempty" tf:"reputation_metrics_enabled,omitempty"`
+
+	// Whether email sending is enabled or disabled for the configuration set. The default value is true.
+	SendingEnabled *bool `json:"sendingEnabled,omitempty" tf:"sending_enabled,omitempty"`
+
+	// Domain that is used to redirect email recipients to an Amazon SES-operated domain. See below. NOTE: This functionality is best effort.
+	TrackingOptions []TrackingOptionsObservation `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 }
 
 type ConfigurationSetParameters struct {
@@ -50,6 +62,9 @@ type ConfigurationSetParameters struct {
 }
 
 type DeliveryOptionsObservation struct {
+
+	// Whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established. Valid values: Require or Optional. Defaults to Optional.
+	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
 type DeliveryOptionsParameters struct {
@@ -60,6 +75,9 @@ type DeliveryOptionsParameters struct {
 }
 
 type TrackingOptionsObservation struct {
+
+	// Custom subdomain that is used to redirect email recipients to the Amazon SES event tracking domain.
+	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
 }
 
 type TrackingOptionsParameters struct {

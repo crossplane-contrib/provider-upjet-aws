@@ -17,6 +17,15 @@ type TransitGatewayMulticastDomainAssociationObservation struct {
 
 	// EC2 Transit Gateway Multicast Domain Association identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the subnet to associate with the transit gateway multicast domain.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The ID of the transit gateway attachment.
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainID *string `json:"transitGatewayMulticastDomainId,omitempty" tf:"transit_gateway_multicast_domain_id,omitempty"`
 }
 
 type TransitGatewayMulticastDomainAssociationParameters struct {

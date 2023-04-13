@@ -18,8 +18,23 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	// EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
+	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
+
+	// Region of EC2 Transit Gateway to peer with.
+	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
+
+	// Identifier of EC2 Transit Gateway to peer with.
+	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Identifier of EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type TransitGatewayPeeringAttachmentParameters struct {
@@ -29,8 +44,8 @@ type TransitGatewayPeeringAttachmentParameters struct {
 	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
 
 	// Region of EC2 Transit Gateway to peer with.
-	// +kubebuilder:validation:Required
-	PeerRegion *string `json:"peerRegion" tf:"peer_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
 	// Identifier of EC2 Transit Gateway to peer with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
@@ -94,8 +109,9 @@ type TransitGatewayPeeringAttachmentStatus struct {
 type TransitGatewayPeeringAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TransitGatewayPeeringAttachmentSpec   `json:"spec"`
-	Status            TransitGatewayPeeringAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peerRegion)",message="peerRegion is a required parameter"
+	Spec   TransitGatewayPeeringAttachmentSpec   `json:"spec"`
+	Status TransitGatewayPeeringAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

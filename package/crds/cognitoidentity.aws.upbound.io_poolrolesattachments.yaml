@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -289,8 +293,22 @@ spec:
                     type: object
                 required:
                 - region
-                - roles
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -462,6 +480,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: roles is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roles)
           status:
             description: PoolRolesAttachmentStatus defines the observed state of PoolRolesAttachment.
             properties:
@@ -470,6 +491,63 @@ spec:
                   id:
                     description: The identity pool ID.
                     type: string
+                  identityPoolId:
+                    description: An identity pool ID in the format REGION_GUID.
+                    type: string
+                  roleMapping:
+                    description: A List of Role Mapping.
+                    items:
+                      properties:
+                        ambiguousRoleResolution:
+                          description: Specifies the action to be taken if either
+                            no rules match the claim value for the Rules type, or
+                            there is no cognito:preferred_role claim and there are
+                            multiple cognito:roles matches for the Token type. Required
+                            if you specify Token or Rules as the Type.
+                          type: string
+                        identityProvider:
+                          description: A string identifying the identity provider,
+                            for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+                            Depends on cognito_identity_providers set on aws_cognito_identity_pool
+                            resource or a aws_cognito_identity_provider resource.
+                          type: string
+                        mappingRule:
+                          description: The Rules Configuration to be used for mapping
+                            users to roles. You can specify up to 25 rules per identity
+                            provider. Rules are evaluated in order. The first one
+                            to match specifies the role.
+                          items:
+                            properties:
+                              claim:
+                                description: The claim name that must be present in
+                                  the token, for example, "isAdmin" or "paid".
+                                type: string
+                              matchType:
+                                description: The match condition that specifies how
+                                  closely the claim value in the IdP token must match
+                                  Value.
+                                type: string
+                              roleArn:
+                                description: The role ARN.
+                                type: string
+                              value:
+                                description: A brief string that the claim must match,
+                                  for example, "paid" or "yes".
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The role mapping type.
+                          type: string
+                      type: object
+                    type: array
+                  roles:
+                    additionalProperties:
+                      type: string
+                    description: The map of roles associated with this pool. For a
+                      given role, the key will be either "authenticated" or "unauthenticated"
+                      and the value will be the Role ARN.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

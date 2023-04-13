@@ -14,7 +14,20 @@ import (
 )
 
 type CustomerGatewayAssociationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the customer gateway.
+	CustomerGatewayArn *string `json:"customerGatewayArn,omitempty" tf:"customer_gateway_arn,omitempty"`
+
+	// The ID of the device.
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// The ID of the global network.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the link.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }
 
 type CustomerGatewayAssociationParameters struct {

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -173,9 +177,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - monitoringSubscription
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,16 +365,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: monitoringSubscription is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.monitoringSubscription)
           status:
             description: MonitoringSubscriptionStatus defines the observed state of
               MonitoringSubscription.
             properties:
               atProvider:
                 properties:
+                  distributionId:
+                    description: The ID of the distribution that you are enabling
+                      metrics for.
+                    type: string
                   id:
                     description: The ID of the CloudFront monitoring subscription,
                       which corresponds to the distribution_id.
                     type: string
+                  monitoringSubscription:
+                    description: A monitoring subscription. This structure contains
+                      information about whether additional CloudWatch metrics are
+                      enabled for a given CloudFront distribution.
+                    items:
+                      properties:
+                        realtimeMetricsSubscriptionConfig:
+                          description: A subscription configuration for additional
+                            CloudWatch metrics. See below.
+                          items:
+                            properties:
+                              realtimeMetricsSubscriptionStatus:
+                                description: A flag that indicates whether additional
+                                  CloudWatch metrics are enabled for a given CloudFront
+                                  distribution. Valid values are Enabled and Disabled.
+                                  See below.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

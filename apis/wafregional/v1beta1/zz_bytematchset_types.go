@@ -15,8 +15,14 @@ import (
 
 type ByteMatchSetObservation struct {
 
+	// Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below.
+	ByteMatchTuples []ByteMatchTuplesObservation `json:"byteMatchTuples,omitempty" tf:"byte_match_tuples,omitempty"`
+
 	// The ID of the WAF ByteMatchSet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or description of the ByteMatchSet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ByteMatchSetParameters struct {
@@ -26,8 +32,8 @@ type ByteMatchSetParameters struct {
 	ByteMatchTuples []ByteMatchTuplesParameters `json:"byteMatchTuples,omitempty" tf:"byte_match_tuples,omitempty"`
 
 	// The name or description of the ByteMatchSet.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -36,6 +42,18 @@ type ByteMatchSetParameters struct {
 }
 
 type ByteMatchTuplesObservation struct {
+
+	// Settings for the ByteMatchTuple. FieldToMatch documented below.
+	FieldToMatch []FieldToMatchObservation `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+
+	// Within the portion of a web request that you want to search.
+	PositionalConstraint *string `json:"positionalConstraint,omitempty" tf:"positional_constraint,omitempty"`
+
+	// The value that you want AWS WAF to search for. The maximum length of the value is 50 bytes.
+	TargetString *string `json:"targetString,omitempty" tf:"target_string,omitempty"`
+
+	// The formatting way for web request.
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type ByteMatchTuplesParameters struct {
@@ -58,6 +76,12 @@ type ByteMatchTuplesParameters struct {
 }
 
 type FieldToMatchObservation struct {
+
+	// When the value of Type is HEADER, enter the name of the header that you want AWS WAF to search, for example, User-Agent or Referer. If the value of Type is any other value, omit Data.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// The part of the web request that you want AWS WAF to search for a specified string.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FieldToMatchParameters struct {
@@ -95,8 +119,9 @@ type ByteMatchSetStatus struct {
 type ByteMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ByteMatchSetSpec   `json:"spec"`
-	Status            ByteMatchSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ByteMatchSetSpec   `json:"spec"`
+	Status ByteMatchSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

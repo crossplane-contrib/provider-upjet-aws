@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -218,9 +222,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - hierarchyStructure
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -392,6 +410,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: hierarchyStructure is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hierarchyStructure)
           status:
             description: UserHierarchyStructureStatus defines the observed state of
               UserHierarchyStructure.
@@ -416,6 +437,10 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                         levelFour:
@@ -430,6 +455,10 @@ spec:
                               id:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
+                                type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
                                 type: string
                             type: object
                           type: array
@@ -446,6 +475,10 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                         levelThree:
@@ -460,6 +493,10 @@ spec:
                               id:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
+                                type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
                                 type: string
                             type: object
                           type: array
@@ -476,12 +513,20 @@ spec:
                                 description: The identifier of the hosting Amazon
                                   Connect Instance.
                                 type: string
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   id:
                     description: The identifier of the hosting Amazon Connect Instance.
+                    type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
                     type: string
                 type: object
               conditions:

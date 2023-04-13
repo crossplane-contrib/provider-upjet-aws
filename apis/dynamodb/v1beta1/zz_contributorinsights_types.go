@@ -15,6 +15,12 @@ import (
 
 type ContributorInsightsObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The global secondary index name
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// The name of the table to enable contributor insights
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type ContributorInsightsParameters struct {

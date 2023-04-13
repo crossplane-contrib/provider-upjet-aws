@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -237,11 +241,23 @@ spec:
                       zone.
                     type: number
                 required:
-                - name
                 - region
-                - trafficPolicyVersion
-                - ttl
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -413,15 +429,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: trafficPolicyVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trafficPolicyVersion)
+            - message: ttl is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)
           status:
             description: TrafficPolicyInstanceStatus defines the observed state of
               TrafficPolicyInstance.
             properties:
               atProvider:
                 properties:
+                  hostedZoneId:
+                    description: ID of the hosted zone that you want Amazon Route
+                      53 to create resource record sets in by using the configuration
+                      in a traffic policy.
+                    type: string
                   id:
                     description: ID of traffic policy instance.
                     type: string
+                  name:
+                    description: Domain name for which Amazon Route 53 responds to
+                      DNS queries by using the resource record sets that Route 53
+                      creates for this traffic policy instance.
+                    type: string
+                  trafficPolicyId:
+                    description: ID of the traffic policy that you want to use to
+                      create resource record sets in the specified hosted zone.
+                    type: string
+                  trafficPolicyVersion:
+                    description: Version of the traffic policy
+                    type: number
+                  ttl:
+                    description: TTL that you want Amazon Route 53 to assign to all
+                      the resource record sets that it creates in the specified hosted
+                      zone.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

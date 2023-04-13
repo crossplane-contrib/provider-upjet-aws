@@ -15,8 +15,14 @@ import (
 
 type EIPObservation struct {
 
+	// IP address from an EC2 BYOIP pool. This option is only available for VPC EIPs.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
 	// ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// User-specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
+	AssociateWithPrivateIP *string `json:"associateWithPrivateIp,omitempty" tf:"associate_with_private_ip,omitempty"`
 
 	// ID representing the association of the address with an instance in a VPC.
 	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
@@ -27,11 +33,23 @@ type EIPObservation struct {
 	// Customer owned IP.
 	CustomerOwnedIP *string `json:"customerOwnedIp,omitempty" tf:"customer_owned_ip,omitempty"`
 
+	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
+	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
 	// Indicates if this EIP is for use in VPC (vpc) or EC2-Classic (standard).
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Contains the EIP allocation ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// EC2 instance ID.
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
+	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
+
+	// Network interface ID to associate with.
+	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	// The Private DNS associated with the Elastic IP address (if in VPC).
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
@@ -45,8 +63,19 @@ type EIPObservation struct {
 	// Contains the public IP address.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
+	// EC2 IPv4 address pool identifier or amazon.
+	// This option is only available for VPC EIPs.
+	PublicIPv4Pool *string `json:"publicIpv4Pool,omitempty" tf:"public_ipv4_pool,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Boolean if the EIP is in a VPC or not.
+	// Defaults to true unless the region supports EC2-Classic.
+	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type EIPParameters struct {

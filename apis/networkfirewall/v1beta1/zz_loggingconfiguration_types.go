@@ -14,6 +14,15 @@ import (
 )
 
 type LogDestinationConfigObservation struct {
+
+	// A map describing the logging destination for the chosen log_destination_type.
+	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+
+	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+
+	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 }
 
 type LogDestinationConfigParameters struct {
@@ -32,6 +41,9 @@ type LogDestinationConfigParameters struct {
 }
 
 type LoggingConfigurationLoggingConfigurationObservation struct {
+
+	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
+	LogDestinationConfig []LogDestinationConfigObservation `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationLoggingConfigurationParameters struct {
@@ -43,8 +55,14 @@ type LoggingConfigurationLoggingConfigurationParameters struct {
 
 type LoggingConfigurationObservation struct {
 
+	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
+	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the associated firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
+	LoggingConfiguration []LoggingConfigurationLoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
@@ -64,8 +82,8 @@ type LoggingConfigurationParameters struct {
 	FirewallArnSelector *v1.Selector `json:"firewallArnSelector,omitempty" tf:"-"`
 
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
-	// +kubebuilder:validation:Required
-	LoggingConfiguration []LoggingConfigurationLoggingConfigurationParameters `json:"loggingConfiguration" tf:"logging_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	LoggingConfiguration []LoggingConfigurationLoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +115,9 @@ type LoggingConfigurationStatus struct {
 type LoggingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoggingConfigurationSpec   `json:"spec"`
-	Status            LoggingConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loggingConfiguration)",message="loggingConfiguration is a required parameter"
+	Spec   LoggingConfigurationSpec   `json:"spec"`
+	Status LoggingConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
