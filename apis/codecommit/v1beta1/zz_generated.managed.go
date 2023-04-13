@@ -17,6 +17,11 @@ func (mg *ApprovalRuleTemplate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApprovalRuleTemplate.
+func (mg *ApprovalRuleTemplate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApprovalRuleTemplate.
 func (mg *ApprovalRuleTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ApprovalRuleTemplate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApprovalRuleTemplate.
 func (mg *ApprovalRuleTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApprovalRuleTemplate.
+func (mg *ApprovalRuleTemplate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApprovalRuleTemplate.
@@ -83,6 +93,11 @@ func (mg *ApprovalRuleTemplateAssociation) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApprovalRuleTemplateAssociation.
 func (mg *ApprovalRuleTemplateAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ApprovalRuleTemplateAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApprovalRuleTemplateAssociation.
 func (mg *ApprovalRuleTemplateAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApprovalRuleTemplateAssociation.
@@ -149,6 +169,11 @@ func (mg *Repository) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Repository.
+func (mg *Repository) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Repository.
 func (mg *Repository) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *Repository) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Repository.
 func (mg *Repository) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Repository.
+func (mg *Repository) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Repository.
@@ -215,6 +245,11 @@ func (mg *Trigger) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Trigger.
+func (mg *Trigger) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Trigger.
 func (mg *Trigger) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *Trigger) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Trigger.
 func (mg *Trigger) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Trigger.
+func (mg *Trigger) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Trigger.

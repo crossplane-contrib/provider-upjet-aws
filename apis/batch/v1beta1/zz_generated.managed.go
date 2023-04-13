@@ -17,6 +17,11 @@ func (mg *SchedulingPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SchedulingPolicy.
+func (mg *SchedulingPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SchedulingPolicy.
 func (mg *SchedulingPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *SchedulingPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SchedulingPolicy.
 func (mg *SchedulingPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SchedulingPolicy.
+func (mg *SchedulingPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SchedulingPolicy.

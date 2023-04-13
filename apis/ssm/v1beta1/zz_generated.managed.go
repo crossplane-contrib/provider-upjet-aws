@@ -17,6 +17,11 @@ func (mg *Activation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Activation.
+func (mg *Activation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Activation.
 func (mg *Activation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Activation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Activation.
 func (mg *Activation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Activation.
+func (mg *Activation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Activation.
@@ -83,6 +93,11 @@ func (mg *Association) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Association.
+func (mg *Association) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Association.
 func (mg *Association) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Association) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Association.
 func (mg *Association) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Association.
+func (mg *Association) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Association.
@@ -149,6 +169,11 @@ func (mg *DefaultPatchBaseline) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DefaultPatchBaseline.
+func (mg *DefaultPatchBaseline) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DefaultPatchBaseline.
 func (mg *DefaultPatchBaseline) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *DefaultPatchBaseline) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DefaultPatchBaseline.
 func (mg *DefaultPatchBaseline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DefaultPatchBaseline.
+func (mg *DefaultPatchBaseline) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DefaultPatchBaseline.
@@ -215,6 +245,11 @@ func (mg *Document) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Document.
+func (mg *Document) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Document.
 func (mg *Document) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *Document) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Document.
 func (mg *Document) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Document.
+func (mg *Document) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Document.
@@ -281,6 +321,11 @@ func (mg *MaintenanceWindow) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MaintenanceWindow.
+func (mg *MaintenanceWindow) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MaintenanceWindow.
 func (mg *MaintenanceWindow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *MaintenanceWindow) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MaintenanceWindow.
 func (mg *MaintenanceWindow) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MaintenanceWindow.
+func (mg *MaintenanceWindow) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MaintenanceWindow.
@@ -347,6 +397,11 @@ func (mg *MaintenanceWindowTarget) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MaintenanceWindowTarget.
+func (mg *MaintenanceWindowTarget) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MaintenanceWindowTarget.
 func (mg *MaintenanceWindowTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *MaintenanceWindowTarget) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MaintenanceWindowTarget.
 func (mg *MaintenanceWindowTarget) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MaintenanceWindowTarget.
+func (mg *MaintenanceWindowTarget) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MaintenanceWindowTarget.
@@ -413,6 +473,11 @@ func (mg *MaintenanceWindowTask) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MaintenanceWindowTask.
+func (mg *MaintenanceWindowTask) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MaintenanceWindowTask.
 func (mg *MaintenanceWindowTask) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *MaintenanceWindowTask) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MaintenanceWindowTask.
 func (mg *MaintenanceWindowTask) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MaintenanceWindowTask.
+func (mg *MaintenanceWindowTask) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MaintenanceWindowTask.
@@ -479,6 +549,11 @@ func (mg *Parameter) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Parameter.
+func (mg *Parameter) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Parameter.
 func (mg *Parameter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *Parameter) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Parameter.
 func (mg *Parameter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Parameter.
+func (mg *Parameter) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Parameter.
@@ -545,6 +625,11 @@ func (mg *PatchBaseline) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this PatchBaseline.
+func (mg *PatchBaseline) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this PatchBaseline.
 func (mg *PatchBaseline) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *PatchBaseline) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this PatchBaseline.
 func (mg *PatchBaseline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this PatchBaseline.
+func (mg *PatchBaseline) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this PatchBaseline.
@@ -611,6 +701,11 @@ func (mg *PatchGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this PatchGroup.
+func (mg *PatchGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this PatchGroup.
 func (mg *PatchGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *PatchGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this PatchGroup.
 func (mg *PatchGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this PatchGroup.
+func (mg *PatchGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this PatchGroup.
@@ -677,6 +777,11 @@ func (mg *ResourceDataSync) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceDataSync.
+func (mg *ResourceDataSync) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceDataSync.
 func (mg *ResourceDataSync) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *ResourceDataSync) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceDataSync.
 func (mg *ResourceDataSync) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceDataSync.
+func (mg *ResourceDataSync) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceDataSync.
@@ -743,6 +853,11 @@ func (mg *ServiceSetting) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ServiceSetting.
+func (mg *ServiceSetting) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ServiceSetting.
 func (mg *ServiceSetting) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *ServiceSetting) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ServiceSetting.
 func (mg *ServiceSetting) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ServiceSetting.
+func (mg *ServiceSetting) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ServiceSetting.

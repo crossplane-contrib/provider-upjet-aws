@@ -17,6 +17,11 @@ func (mg *ExperimentTemplate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ExperimentTemplate.
+func (mg *ExperimentTemplate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ExperimentTemplate.
 func (mg *ExperimentTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ExperimentTemplate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ExperimentTemplate.
 func (mg *ExperimentTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ExperimentTemplate.
+func (mg *ExperimentTemplate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ExperimentTemplate.

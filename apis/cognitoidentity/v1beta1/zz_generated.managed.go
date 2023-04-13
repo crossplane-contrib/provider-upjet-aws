@@ -17,6 +17,11 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) SetConditions(c ...xpv1.Condi
 // SetDeletionPolicy of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this CognitoIdentityPoolProviderPrincipalTag.
+func (mg *CognitoIdentityPoolProviderPrincipalTag) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
@@ -83,6 +93,11 @@ func (mg *Pool) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Pool.
+func (mg *Pool) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Pool.
 func (mg *Pool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Pool) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Pool.
 func (mg *Pool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Pool.
+func (mg *Pool) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Pool.
@@ -149,6 +169,11 @@ func (mg *PoolRolesAttachment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *PoolRolesAttachment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this PoolRolesAttachment.
+func (mg *PoolRolesAttachment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this PoolRolesAttachment.

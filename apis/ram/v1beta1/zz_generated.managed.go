@@ -17,6 +17,11 @@ func (mg *ResourceAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceAssociation.
+func (mg *ResourceAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceAssociation.
 func (mg *ResourceAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ResourceAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceAssociation.
 func (mg *ResourceAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceAssociation.
+func (mg *ResourceAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceAssociation.
@@ -83,6 +93,11 @@ func (mg *ResourceShare) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceShare.
+func (mg *ResourceShare) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceShare.
 func (mg *ResourceShare) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ResourceShare) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceShare.
 func (mg *ResourceShare) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceShare.
+func (mg *ResourceShare) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceShare.
