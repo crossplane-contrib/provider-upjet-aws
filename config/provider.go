@@ -141,6 +141,7 @@ func GetProvider() *config.Provider {
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithBasePackages(BasePackages),
+		config.WithFeaturesPackage("internal/features"),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
