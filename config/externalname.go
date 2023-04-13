@@ -965,8 +965,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// lambda
 	//
-	// Lambda Function Aliases can be imported using the function_name/alias
-	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "{{ .parameters.function_name }}/{{ .external_name }}"),
+	// Lambda Function Aliases are identified by their ARN, like arn:aws:lambda:eu-west-1:123456789012:function:lambda-function:alias
+	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "arn:aws:lambda:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:function:{{ .parameters.function_name }}:{{ .external_name }}"),
 	// Code Signing Configs can be imported using their ARN that has a random
 	// substring in the end.
 	// arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0f6c334abcdea4d8b
