@@ -13,4 +13,4 @@ metadata:
       (AWS)](https://aws.amazon.com/) developed and supported by Upbound.
       If you encounter an issue please reach out on our support@upbound.io
       email address.
-    friendly-name.meta.crossplane.io: Provider AWS
+    auth.upbound.io/group: aws.upbound.io
