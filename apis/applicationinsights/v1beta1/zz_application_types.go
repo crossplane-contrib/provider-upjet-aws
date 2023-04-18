@@ -18,8 +18,29 @@ type ApplicationObservation struct {
 	// ARN of the Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Indicates whether Application Insights automatically configures unmonitored resources in the resource group.
+	AutoConfigEnabled *bool `json:"autoConfigEnabled,omitempty" tf:"auto_config_enabled,omitempty"`
+
+	// Configures all of the resources in the resource group by applying the recommended configurations.
+	AutoCreate *bool `json:"autoCreate,omitempty" tf:"auto_create,omitempty"`
+
+	// Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
+	CweMonitorEnabled *bool `json:"cweMonitorEnabled,omitempty" tf:"cwe_monitor_enabled,omitempty"`
+
+	// Application Insights can create applications based on a resource group or on an account. To create an account-based application using all of the resources in the account, set this parameter to ACCOUNT_BASED.
+	GroupingType *string `json:"groupingType,omitempty" tf:"grouping_type,omitempty"`
+
 	// Name of the resource group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// When set to true, creates opsItems for any problems detected on an application.
+	OpsCenterEnabled *bool `json:"opsCenterEnabled,omitempty" tf:"ops_center_enabled,omitempty"`
+
+	// SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.
+	OpsItemSnsTopicArn *string `json:"opsItemSnsTopicArn,omitempty" tf:"ops_item_sns_topic_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -276,11 +280,23 @@ spec:
                       any request against the target routing controls will fail.
                     type: number
                 required:
-                - name
                 - region
-                - ruleConfig
-                - waitPeriodMs
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -452,6 +468,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: ruleConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleConfig)
+            - message: waitPeriodMs is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.waitPeriodMs)
           status:
             description: SafetyRuleStatus defines the observed state of SafetyRule.
             properties:
@@ -460,13 +483,63 @@ spec:
                   arn:
                     description: ARN of the safety rule.
                     type: string
+                  assertedControls:
+                    description: Routing controls that are part of transactions that
+                      are evaluated to determine if a request to change a routing
+                      control state is allowed.
+                    items:
+                      type: string
+                    type: array
+                  controlPanelArn:
+                    description: ARN of the control panel in which this safety rule
+                      will reside.
+                    type: string
+                  gatingControls:
+                    description: Gating controls for the new gating rule. That is,
+                      routing controls that are evaluated by the rule configuration
+                      that you specify.
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
+                  name:
+                    description: Name describing the safety rule.
+                    type: string
+                  ruleConfig:
+                    description: Configuration block for safety rule criteria. See
+                      below.
+                    items:
+                      properties:
+                        inverted:
+                          description: Logical negation of the rule.
+                          type: boolean
+                        threshold:
+                          description: Number of controls that must be set when you
+                            specify an ATLEAST type rule.
+                          type: number
+                        type:
+                          description: Rule type. Valid values are ATLEAST, AND, and
+                            OR.
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: Status of the safety rule. PENDING when it is being
                       created/updated, PENDING_DELETION when it is being deleted,
                       and DEPLOYED otherwise.
                     type: string
+                  targetControls:
+                    description: Routing controls that can only be set or unset if
+                      the specified rule_config evaluates to true for the specified
+                      gating_controls.
+                    items:
+                      type: string
+                    type: array
+                  waitPeriodMs:
+                    description: Evaluation period, in milliseconds (ms), during which
+                      any request against the target routing controls will fail.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

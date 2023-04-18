@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -169,9 +173,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - endpointType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -343,6 +361,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: endpointType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointType)
           status:
             description: ClusterEndpointStatus defines the observed state of ClusterEndpoint.
             properties:
@@ -352,12 +373,39 @@ spec:
                     description: The Neptune Cluster Endpoint Amazon Resource Name
                       (ARN).
                     type: string
+                  clusterIdentifier:
+                    description: The DB cluster identifier of the DB cluster associated
+                      with the endpoint.
+                    type: string
                   endpoint:
                     description: The DNS address of the endpoint.
                     type: string
+                  endpointType:
+                    description: 'The type of the endpoint. One of: READER, WRITER,
+                      ANY.'
+                    type: string
+                  excludedMembers:
+                    description: List of DB instance identifiers that aren't part
+                      of the custom endpoint group. All other eligible instances are
+                      reachable through the custom endpoint. Only relevant if the
+                      list of static members is empty.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The Neptune Cluster Endpoint Identifier.
                     type: string
+                  staticMembers:
+                    description: List of DB instance identifiers that are part of
+                      the custom endpoint group.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

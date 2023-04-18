@@ -18,11 +18,26 @@ type ClusterEndpointObservation struct {
 	// Amazon Resource Name (ARN) of cluster
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The cluster identifier.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// The type of the endpoint. One of: READER , ANY .
+	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
+
 	// A custom endpoint for the Aurora cluster
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
+
 	// The RDS Cluster Endpoint Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -45,8 +60,8 @@ type ClusterEndpointParameters struct {
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The type of the endpoint. One of: READER , ANY .
-	// +kubebuilder:validation:Required
-	CustomEndpointType *string `json:"customEndpointType" tf:"custom_endpoint_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +kubebuilder:validation:Optional
@@ -90,8 +105,9 @@ type ClusterEndpointStatus struct {
 type ClusterEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterEndpointSpec   `json:"spec"`
-	Status            ClusterEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.customEndpointType)",message="customEndpointType is a required parameter"
+	Spec   ClusterEndpointSpec   `json:"spec"`
+	Status ClusterEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -207,6 +211,21 @@ spec:
                 - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -383,13 +402,63 @@ spec:
             properties:
               atProvider:
                 properties:
+                  capabilities:
+                    description: 'A list of capabilities. Valid values: CAPABILITY_IAM,
+                      CAPABILITY_NAMED_IAM, or CAPABILITY_AUTO_EXPAND'
+                    items:
+                      type: string
+                    type: array
+                  disableRollback:
+                    description: Set to true to disable rollback of the stack if stack
+                      creation failed. Conflicts with on_failure.
+                    type: boolean
+                  iamRoleArn:
+                    description: The ARN of an IAM role that AWS CloudFormation assumes
+                      to create the stack. If you don't specify a value, AWS CloudFormation
+                      uses the role that was previously associated with the stack.
+                      If no role is available, AWS CloudFormation uses a temporary
+                      session that is generated from your user credentials.
+                    type: string
                   id:
                     description: A unique identifier of the stack.
+                    type: string
+                  name:
+                    description: Stack name.
+                    type: string
+                  notificationArns:
+                    description: A list of SNS topic ARNs to publish stack related
+                      events.
+                    items:
+                      type: string
+                    type: array
+                  onFailure:
+                    description: 'Action to be taken if stack creation fails. This
+                      must be one of: DO_NOTHING, ROLLBACK, or DELETE. Conflicts with
+                      disable_rollback.'
                     type: string
                   outputs:
                     additionalProperties:
                       type: string
                     description: A map of outputs from the stack.
+                    type: object
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of Parameter structures that specify input
+                      parameters for the stack.
+                    type: object
+                  policyBody:
+                    description: Structure containing the stack policy body. Conflicts
+                      w/ policy_url.
+                    type: string
+                  policyUrl:
+                    description: Location of a file containing the stack policy. Conflicts
+                      w/ policy_body.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
                     type: object
                   tagsAll:
                     additionalProperties:
@@ -398,6 +467,18 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  templateBody:
+                    description: 'Structure containing the template body (max size:
+                      51,200 bytes).'
+                    type: string
+                  templateUrl:
+                    description: 'Location of a file containing the template body
+                      (max size: 460,800 bytes).'
+                    type: string
+                  timeoutInMinutes:
+                    description: The amount of time that can pass before the stack
+                      status becomes CREATE_FAILED.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -20,6 +20,9 @@ type GlobalTableObservation struct {
 
 	// The name of the DynamoDB Global Table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
+	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 }
 
 type GlobalTableParameters struct {
@@ -30,11 +33,14 @@ type GlobalTableParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Underlying DynamoDB Table. At least 1 replica must be defined. See below.
-	// +kubebuilder:validation:Required
-	Replica []ReplicaParameters `json:"replica" tf:"replica,omitempty"`
+	// +kubebuilder:validation:Optional
+	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 }
 
 type ReplicaObservation struct {
+
+	// AWS region name of replica DynamoDB TableE.g., us-east-1
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
 }
 
 type ReplicaParameters struct {
@@ -68,8 +74,9 @@ type GlobalTableStatus struct {
 type GlobalTable struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GlobalTableSpec   `json:"spec"`
-	Status            GlobalTableStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replica)",message="replica is a required parameter"
+	Spec   GlobalTableSpec   `json:"spec"`
+	Status GlobalTableStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

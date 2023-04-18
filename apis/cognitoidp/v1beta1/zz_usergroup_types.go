@@ -14,7 +14,23 @@ import (
 )
 
 type UserGroupObservation struct {
+
+	// The description of the user group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The precedence of the user group.
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+
+	// The ARN of the IAM role to be associated with the user group.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The user pool ID.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type UserGroupParameters struct {
@@ -24,8 +40,8 @@ type UserGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the user group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The precedence of the user group.
 	// +kubebuilder:validation:Optional
@@ -88,8 +104,9 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserGroupSpec   `json:"spec"`
-	Status            UserGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   UserGroupSpec   `json:"spec"`
+	Status UserGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

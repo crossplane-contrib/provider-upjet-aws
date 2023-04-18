@@ -14,6 +14,11 @@ import (
 )
 
 type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetObservation struct {
+
+	// The Spot Instance Request ID.
+	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
+
+	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
 
 type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetParameters struct {
@@ -27,6 +32,9 @@ type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTarge
 }
 
 type SpotInstanceRequestCapacityReservationSpecificationObservation struct {
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	CapacityReservationTarget []SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetObservation `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
 }
 
 type SpotInstanceRequestCapacityReservationSpecificationParameters struct {
@@ -39,6 +47,7 @@ type SpotInstanceRequestCapacityReservationSpecificationParameters struct {
 }
 
 type SpotInstanceRequestCreditSpecificationObservation struct {
+	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
 type SpotInstanceRequestCreditSpecificationParameters struct {
@@ -48,9 +57,31 @@ type SpotInstanceRequestCreditSpecificationParameters struct {
 }
 
 type SpotInstanceRequestEBSBlockDeviceObservation struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The Spot Instance Request ID.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The Spot Instance Request ID.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type SpotInstanceRequestEBSBlockDeviceParameters struct {
@@ -90,6 +121,7 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 }
 
 type SpotInstanceRequestEnclaveOptionsObservation struct {
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type SpotInstanceRequestEnclaveOptionsParameters struct {
@@ -99,6 +131,11 @@ type SpotInstanceRequestEnclaveOptionsParameters struct {
 }
 
 type SpotInstanceRequestEphemeralBlockDeviceObservation struct {
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type SpotInstanceRequestEphemeralBlockDeviceParameters struct {
@@ -114,6 +151,13 @@ type SpotInstanceRequestEphemeralBlockDeviceParameters struct {
 }
 
 type SpotInstanceRequestLaunchTemplateObservation struct {
+
+	// The Spot Instance Request ID.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SpotInstanceRequestLaunchTemplateParameters struct {
@@ -130,6 +174,7 @@ type SpotInstanceRequestLaunchTemplateParameters struct {
 }
 
 type SpotInstanceRequestMaintenanceOptionsObservation struct {
+	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
 }
 
 type SpotInstanceRequestMaintenanceOptionsParameters struct {
@@ -139,6 +184,14 @@ type SpotInstanceRequestMaintenanceOptionsParameters struct {
 }
 
 type SpotInstanceRequestMetadataOptionsObservation struct {
+	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
+
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+
+	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
+
+	// Key-value map of resource tags.
+	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type SpotInstanceRequestMetadataOptionsParameters struct {
@@ -158,6 +211,14 @@ type SpotInstanceRequestMetadataOptionsParameters struct {
 }
 
 type SpotInstanceRequestNetworkInterfaceObservation struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// The Spot Instance Request ID.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 }
 
 type SpotInstanceRequestNetworkInterfaceParameters struct {
@@ -177,19 +238,89 @@ type SpotInstanceRequestNetworkInterfaceParameters struct {
 }
 
 type SpotInstanceRequestObservation struct {
+	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
+
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// +kubebuilder:validation:Optional
+	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
+	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+
+	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+
+	CapacityReservationSpecification []SpotInstanceRequestCapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
+
+	CreditSpecification []SpotInstanceRequestCreditSpecificationObservation `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
+
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
+
+	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
+
 	EBSBlockDevice []SpotInstanceRequestEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+
+	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	EnclaveOptions []SpotInstanceRequestEnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
+
+	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+
+	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
+
+	Hibernation *bool `json:"hibernation,omitempty" tf:"hibernation,omitempty"`
+
+	// The Spot Instance Request ID.
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
 	// The Spot Instance Request ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+
+	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
+
+	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
+
+	// Indicates Spot instance behavior when it is interrupted. Valid values are terminate, stop, or hibernate. Default value is terminate.
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
 	InstanceState *string `json:"instanceState,omitempty" tf:"instance_state,omitempty"`
+
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// A launch group is a group of spot instances that launch together and terminate together.
+	// If left empty instances are launched and terminated individually.
+	LaunchGroup *string `json:"launchGroup,omitempty" tf:"launch_group,omitempty"`
+
+	LaunchTemplate []SpotInstanceRequestLaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	MaintenanceOptions []SpotInstanceRequestMaintenanceOptionsObservation `json:"maintenanceOptions,omitempty" tf:"maintenance_options,omitempty"`
+
+	MetadataOptions []SpotInstanceRequestMetadataOptionsObservation `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
+
+	NetworkInterface []SpotInstanceRequestNetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	PasswordData *string `json:"passwordData,omitempty" tf:"password_data,omitempty"`
+
+	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// The Spot Instance Request ID.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
@@ -199,6 +330,11 @@ type SpotInstanceRequestObservation struct {
 	// for your VPC
 	PrivateDNS *string `json:"privateDns,omitempty" tf:"private_dns,omitempty"`
 
+	PrivateDNSNameOptions []SpotInstanceRequestPrivateDNSNameOptionsObservation `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
+
+	// The private IP address assigned to the instance
+	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
 	// The public DNS name assigned to the instance. For EC2-VPC, this
 	// is only available if you've enabled DNS hostnames for your VPC
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`
@@ -206,8 +342,13 @@ type SpotInstanceRequestObservation struct {
 	// The public IP address assigned to the instance, if applicable.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
-	// +kubebuilder:validation:Optional
 	RootBlockDevice []SpotInstanceRequestRootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
+
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
 
 	// The current bid
 	// status
@@ -218,13 +359,47 @@ type SpotInstanceRequestObservation struct {
 	// the Spot Instance request.
 	SpotInstanceID *string `json:"spotInstanceId,omitempty" tf:"spot_instance_id,omitempty"`
 
+	// The maximum price to request on the spot market.
+	SpotPrice *string `json:"spotPrice,omitempty" tf:"spot_price,omitempty"`
+
 	// The current request
 	// state
 	// of the Spot Instance Request.
 	SpotRequestState *string `json:"spotRequestState,omitempty" tf:"spot_request_state,omitempty"`
 
+	// If set to one-time, after
+	// the instance is terminated, the spot request will be closed.
+	SpotType *string `json:"spotType,omitempty" tf:"spot_type,omitempty"`
+
+	// The Spot Instance Request ID.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
+
+	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
+
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// The start date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request immediately.
+	ValidFrom *string `json:"validFrom,omitempty" tf:"valid_from,omitempty"`
+
+	// The end date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request. The default end date is 7 days from the current date.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+
+	// Key-value map of resource tags.
+	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
+
+	WaitForFulfillment *bool `json:"waitForFulfillment,omitempty" tf:"wait_for_fulfillment,omitempty"`
 }
 
 type SpotInstanceRequestParameters struct {
@@ -428,6 +603,11 @@ type SpotInstanceRequestParameters struct {
 }
 
 type SpotInstanceRequestPrivateDNSNameOptionsObservation struct {
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
 }
 
 type SpotInstanceRequestPrivateDNSNameOptionsParameters struct {
@@ -443,10 +623,28 @@ type SpotInstanceRequestPrivateDNSNameOptionsParameters struct {
 }
 
 type SpotInstanceRequestRootBlockDeviceObservation struct {
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The Spot Instance Request ID.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type SpotInstanceRequestRootBlockDeviceParameters struct {

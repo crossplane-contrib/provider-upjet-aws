@@ -18,8 +18,20 @@ type LedgerObservation struct {
 	// The ARN of the QLDB Ledger
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The deletion protection for the QLDB Ledger instance. By default it is true.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
 	// The Name of the QLDB Ledger
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The key in AWS Key Management Service (AWS KMS) to use for encryption of data at rest in the ledger. For more information, see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that is owned and managed by AWS on your behalf, or the ARN of a valid symmetric customer managed KMS key.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
+	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -45,8 +57,8 @@ type LedgerParameters struct {
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
 	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
-	// +kubebuilder:validation:Required
-	PermissionsMode *string `json:"permissionsMode" tf:"permissions_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,8 +94,9 @@ type LedgerStatus struct {
 type Ledger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LedgerSpec   `json:"spec"`
-	Status            LedgerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissionsMode)",message="permissionsMode is a required parameter"
+	Spec   LedgerSpec   `json:"spec"`
+	Status LedgerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

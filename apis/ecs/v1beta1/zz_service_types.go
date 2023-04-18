@@ -14,6 +14,13 @@ import (
 )
 
 type AlarmsObservation struct {
+	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
+
+	// Determines whether to use the CloudWatch alarm option in the service deployment process.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
 }
 
 type AlarmsParameters struct {
@@ -31,6 +38,15 @@ type AlarmsParameters struct {
 }
 
 type CapacityProviderStrategyObservation struct {
+
+	// Number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Short name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// Relative percentage of the total number of launched tasks that should use the specified capacity provider.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyParameters struct {
@@ -49,6 +65,12 @@ type CapacityProviderStrategyParameters struct {
 }
 
 type ClientAliasObservation struct {
+
+	// The name that you use in the applications of client tasks to connect to this service.
+	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ClientAliasParameters struct {
@@ -63,6 +85,12 @@ type ClientAliasParameters struct {
 }
 
 type DeploymentCircuitBreakerObservation struct {
+
+	// Whether to enable the deployment circuit breaker logic for the service.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// Whether to enable Amazon ECS to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
 }
 
 type DeploymentCircuitBreakerParameters struct {
@@ -77,6 +105,9 @@ type DeploymentCircuitBreakerParameters struct {
 }
 
 type DeploymentControllerObservation struct {
+
+	// Type of deployment controller. Valid values: CODE_DEPLOY, ECS, EXTERNAL. Default: ECS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DeploymentControllerParameters struct {
@@ -87,6 +118,18 @@ type DeploymentControllerParameters struct {
 }
 
 type LoadBalancerObservation struct {
+
+	// Name of the container to associate with the load balancer (as it appears in a container definition).
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// Port on the container to associate with the load balancer.
+	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
+
+	// Name of the ELB (Classic) to associate with the service.
+	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
+
+	// ARN of the Load Balancer target group to associate with the service.
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 }
 
 type LoadBalancerParameters struct {
@@ -109,6 +152,15 @@ type LoadBalancerParameters struct {
 }
 
 type NetworkConfigurationObservation struct {
+
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Subnets associated with the task or service.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationParameters struct {
@@ -149,6 +201,15 @@ type NetworkConfigurationParameters struct {
 }
 
 type OrderedPlacementStrategyObservation struct {
+
+	// For the spread placement strategy, valid values are instanceId (or host,
+	// which has the same effect), or any platform or custom attribute that is applied to a container instance.
+	// For the binpack type, valid values are memory and cpu. For the random type, this attribute is not
+	// needed. For more information, see Placement Strategy.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// Type of placement strategy. Must be one of: binpack, random, or spread
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OrderedPlacementStrategyParameters struct {
@@ -166,6 +227,12 @@ type OrderedPlacementStrategyParameters struct {
 }
 
 type PlacementConstraintsObservation struct {
+
+	// Cluster Query Language expression to apply to the constraint. Does not need to be specified for the distinctInstance type. For more information, see Cluster Query Language in the Amazon EC2 Container Service Developer Guide.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementConstraintsParameters struct {
@@ -180,6 +247,12 @@ type PlacementConstraintsParameters struct {
 }
 
 type SecretOptionObservation struct {
+
+	// The name of the secret.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
+	ValueFrom *string `json:"valueFrom,omitempty" tf:"value_from,omitempty"`
 }
 
 type SecretOptionParameters struct {
@@ -194,6 +267,15 @@ type SecretOptionParameters struct {
 }
 
 type ServiceConnectConfigurationLogConfigurationObservation struct {
+
+	// The log driver to use for the container.
+	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
+
+	// The configuration options to send to the log driver.
+	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
+
+	// The secrets to pass to the log configuration. See below.
+	SecretOption []SecretOptionObservation `json:"secretOption,omitempty" tf:"secret_option,omitempty"`
 }
 
 type ServiceConnectConfigurationLogConfigurationParameters struct {
@@ -212,6 +294,18 @@ type ServiceConnectConfigurationLogConfigurationParameters struct {
 }
 
 type ServiceConnectConfigurationObservation struct {
+
+	// Specifies whether to use Service Connect with this service.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The log configuration for the container. See below.
+	LogConfiguration []ServiceConnectConfigurationLogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// The namespace name or ARN of the aws_service_discovery_http_namespace for use with Service Connect.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The list of Service Connect service objects. See below.
+	Service []ServiceConnectConfigurationServiceObservation `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ServiceConnectConfigurationParameters struct {
@@ -234,6 +328,18 @@ type ServiceConnectConfigurationParameters struct {
 }
 
 type ServiceConnectConfigurationServiceObservation struct {
+
+	// The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. See below.
+	ClientAlias []ClientAliasObservation `json:"clientAlias,omitempty" tf:"client_alias,omitempty"`
+
+	// The name of the new AWS Cloud Map service that Amazon ECS creates for this Amazon ECS service.
+	DiscoveryName *string `json:"discoveryName,omitempty" tf:"discovery_name,omitempty"`
+
+	// The port number for the Service Connect proxy to listen on.
+	IngressPortOverride *float64 `json:"ingressPortOverride,omitempty" tf:"ingress_port_override,omitempty"`
+
+	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
 }
 
 type ServiceConnectConfigurationServiceParameters struct {
@@ -257,11 +363,92 @@ type ServiceConnectConfigurationServiceParameters struct {
 
 type ServiceObservation struct {
 
+	// Information about the CloudWatch alarms. See below.
+	Alarms []AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
+	CapacityProviderStrategy []CapacityProviderStrategyObservation `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
+
+	// Name of an ECS cluster.
+	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
+
+	// Configuration block for deployment circuit breaker. See below.
+	DeploymentCircuitBreaker []DeploymentCircuitBreakerObservation `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
+
+	// Configuration block for deployment controller configuration. See below.
+	DeploymentController []DeploymentControllerObservation `json:"deploymentController,omitempty" tf:"deployment_controller,omitempty"`
+
+	// Upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment. Not valid when using the DAEMON scheduling strategy.
+	DeploymentMaximumPercent *float64 `json:"deploymentMaximumPercent,omitempty" tf:"deployment_maximum_percent,omitempty"`
+
+	// Lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment.
+	DeploymentMinimumHealthyPercent *float64 `json:"deploymentMinimumHealthyPercent,omitempty" tf:"deployment_minimum_healthy_percent,omitempty"`
+
+	// Number of instances of the task definition to place and keep running. Defaults to 0. Do not specify if using the DAEMON scheduling strategy.
+	DesiredCount *float64 `json:"desiredCount,omitempty" tf:"desired_count,omitempty"`
+
+	// Specifies whether to enable Amazon ECS managed tags for the tasks within the service.
+	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
+
+	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
+	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
+	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
+
+	// Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 2147483647. Only valid for services configured to use load balancers.
+	HealthCheckGracePeriodSeconds *float64 `json:"healthCheckGracePeriodSeconds,omitempty" tf:"health_check_grace_period_seconds,omitempty"`
+
+	// ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here.
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
+
 	// ARN that identifies the service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
+
+	// Configuration block for load balancers. See below.
+	LoadBalancer []LoadBalancerObservation `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. See below.
+	NetworkConfiguration []NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// Service level strategy rules that are taken into consideration during task placement. List from top to bottom in order of precedence. Updates to this configuration will take effect next task deployment unless force_new_deployment is enabled. The maximum number of ordered_placement_strategy blocks is 5. See below.
+	OrderedPlacementStrategy []OrderedPlacementStrategyObservation `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
+
+	// Rules that are taken into consideration during task placement. Updates to this configuration will take effect next task deployment unless force_new_deployment is enabled. Maximum number of placement_constraints is 10. See below.
+	PlacementConstraints []PlacementConstraintsObservation `json:"placementConstraints,omitempty" tf:"placement_constraints,omitempty"`
+
+	// Platform version on which to run your service. Only applicable for launch_type set to FARGATE. Defaults to LATEST. More information about Fargate platform versions can be found in the AWS ECS User Guide.
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
+
+	// Specifies whether to propagate the tags from the task definition or the service to the tasks. The valid values are SERVICE and TASK_DEFINITION.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// Scheduling strategy to use for the service. The valid values are REPLICA and DAEMON. Defaults to REPLICA. Note that Tasks using the Fargate launch type or the .
+	SchedulingStrategy *string `json:"schedulingStrategy,omitempty" tf:"scheduling_strategy,omitempty"`
+
+	// The ECS Service Connect configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. See below.
+	ServiceConnectConfiguration []ServiceConnectConfigurationObservation `json:"serviceConnectConfiguration,omitempty" tf:"service_connect_configuration,omitempty"`
+
+	// Service discovery registries for the service. The maximum number of service_registries blocks is 1. See below.
+	ServiceRegistries []ServiceRegistriesObservation `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
+	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
+	// Default false.
+	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
 }
 
 type ServiceParameters struct {
@@ -409,6 +596,18 @@ type ServiceParameters struct {
 }
 
 type ServiceRegistriesObservation struct {
+
+	// Container name value, already specified in the task definition, to be used for your service discovery service.
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// Port value, already specified in the task definition, to be used for your service discovery service.
+	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
+
+	// Port value used if your Service Discovery service specified an SRV record.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// ARN of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service(aws_service_discovery_service). For more information, see Service
+	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
 }
 
 type ServiceRegistriesParameters struct {

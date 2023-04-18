@@ -23,11 +23,20 @@ type VirtualMfaDeviceObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// –  The path for the virtual MFA device.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
 	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID otherwise), and Base32String is the seed in base32 format.
 	QrCodePng *string `json:"qrCodePng,omitempty" tf:"qr_code_png,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }
 
 type VirtualMfaDeviceParameters struct {
@@ -41,8 +50,8 @@ type VirtualMfaDeviceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
-	// +kubebuilder:validation:Required
-	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName" tf:"virtual_mfa_device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
 }
 
 // VirtualMfaDeviceSpec defines the desired state of VirtualMfaDevice
@@ -69,8 +78,9 @@ type VirtualMfaDeviceStatus struct {
 type VirtualMfaDevice struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualMfaDeviceSpec   `json:"spec"`
-	Status            VirtualMfaDeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMfaDeviceName)",message="virtualMfaDeviceName is a required parameter"
+	Spec   VirtualMfaDeviceSpec   `json:"spec"`
+	Status VirtualMfaDeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

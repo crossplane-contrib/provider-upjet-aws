@@ -15,6 +15,12 @@ import (
 
 type VPNGatewayAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// The ID of the Virtual Private Gateway.
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 type VPNGatewayAttachmentParameters struct {

@@ -18,8 +18,29 @@ type NetworkInsightsPathObservation struct {
 	// ARN of the Network Insights Path.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// IP address of the destination resource.
+	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
+
+	// Destination port to analyze access to.
+	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+
 	// ID of the Network Insights Path.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Protocol to use for analysis. Valid options are tcp or udp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// IP address of the source resource.
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -50,8 +71,8 @@ type NetworkInsightsPathParameters struct {
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 
 	// Protocol to use for analysis. Valid options are tcp or udp.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -105,8 +126,9 @@ type NetworkInsightsPathStatus struct {
 type NetworkInsightsPath struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInsightsPathSpec   `json:"spec"`
-	Status            NetworkInsightsPathStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	Spec   NetworkInsightsPathSpec   `json:"spec"`
+	Status NetworkInsightsPathStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

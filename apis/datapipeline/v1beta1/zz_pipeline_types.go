@@ -15,8 +15,17 @@ import (
 
 type PipelineObservation struct {
 
+	// The description of Pipeline.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The identifier of the client certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of Pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -29,8 +38,8 @@ type PipelineParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of Pipeline.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -66,8 +75,9 @@ type PipelineStatus struct {
 type Pipeline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PipelineSpec   `json:"spec"`
-	Status            PipelineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   PipelineSpec   `json:"spec"`
+	Status PipelineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

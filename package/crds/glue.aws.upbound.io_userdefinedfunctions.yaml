@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -178,11 +182,23 @@ spec:
                     type: array
                 required:
                 - catalogId
-                - className
-                - ownerName
-                - ownerType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -354,6 +370,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: className is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.className)
+            - message: ownerName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerName)
+            - message: ownerType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ownerType)
           status:
             description: UserDefinedFunctionStatus defines the observed state of UserDefinedFunction.
             properties:
@@ -362,12 +385,42 @@ spec:
                   arn:
                     description: The ARN of the Glue User Defined Function.
                     type: string
+                  catalogId:
+                    description: ID of the Glue Catalog to create the function in.
+                      If omitted, this defaults to the AWS Account ID.
+                    type: string
+                  className:
+                    description: The Java class that contains the function code.
+                    type: string
                   createTime:
                     description: The time at which the function was created.
+                    type: string
+                  databaseName:
+                    description: The name of the Database to create the Function.
                     type: string
                   id:
                     description: The id of the Glue User Defined Function.
                     type: string
+                  ownerName:
+                    description: The owner of the function.
+                    type: string
+                  ownerType:
+                    description: The owner type. can be one of USER, ROLE, and GROUP.
+                    type: string
+                  resourceUris:
+                    description: The configuration block for Resource URIs. See resource
+                      uris below for more details.
+                    items:
+                      properties:
+                        resourceType:
+                          description: The type of the resource. can be one of JAR,
+                            FILE, and ARCHIVE.
+                          type: string
+                        uri:
+                          description: The URI for accessing the resource.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

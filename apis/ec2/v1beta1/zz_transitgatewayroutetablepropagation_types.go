@@ -23,6 +23,12 @@ type TransitGatewayRouteTablePropagationObservation struct {
 
 	// Type of the resource
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Attachment.
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 }
 
 type TransitGatewayRouteTablePropagationParameters struct {

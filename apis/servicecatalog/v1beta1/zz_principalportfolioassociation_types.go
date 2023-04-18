@@ -15,15 +15,27 @@ import (
 
 type PrincipalPortfolioAssociationObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Principal ARN.
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }
 
 type PrincipalPortfolioAssociationParameters struct {
 
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
-	// +kubebuilder:validation:Required
-	AcceptLanguage *string `json:"acceptLanguage" tf:"accept_language,omitempty"`
+	// +kubebuilder:validation:Optional
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=Portfolio
@@ -86,8 +98,9 @@ type PrincipalPortfolioAssociationStatus struct {
 type PrincipalPortfolioAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrincipalPortfolioAssociationSpec   `json:"spec"`
-	Status            PrincipalPortfolioAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptLanguage)",message="acceptLanguage is a required parameter"
+	Spec   PrincipalPortfolioAssociationSpec   `json:"spec"`
+	Status PrincipalPortfolioAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

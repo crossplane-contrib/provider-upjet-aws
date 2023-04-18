@@ -33,6 +33,9 @@ type PrivateDNSNameConfigurationParameters struct {
 
 type VPCEndpointServiceObservation struct {
 
+	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
+	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
+
 	// The ARNs of one or more principals allowed to discover the endpoint service.
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
@@ -45,11 +48,20 @@ type VPCEndpointServiceObservation struct {
 	// A set of DNS names for the service.
 	BaseEndpointDNSNames []*string `json:"baseEndpointDnsNames,omitempty" tf:"base_endpoint_dns_names,omitempty"`
 
+	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
+
 	// The ID of the VPC endpoint service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether or not the service manages its VPC endpoints - true or false.
 	ManagesVPCEndpoints *bool `json:"managesVpcEndpoints,omitempty" tf:"manages_vpc_endpoints,omitempty"`
+
+	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
+
+	// The private DNS name for the service.
+	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
 	// List of objects containing information about the endpoint service private DNS name configuration.
 	PrivateDNSNameConfiguration []PrivateDNSNameConfigurationObservation `json:"privateDnsNameConfiguration,omitempty" tf:"private_dns_name_configuration,omitempty"`
@@ -63,6 +75,12 @@ type VPCEndpointServiceObservation struct {
 	// The state of the VPC endpoint service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The supported IP address types. The possible values are ipv4 and ipv6.
+	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -70,8 +88,8 @@ type VPCEndpointServiceObservation struct {
 type VPCEndpointServiceParameters struct {
 
 	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
-	// +kubebuilder:validation:Required
-	AcceptanceRequired *bool `json:"acceptanceRequired" tf:"acceptance_required,omitempty"`
+	// +kubebuilder:validation:Optional
+	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
@@ -123,8 +141,9 @@ type VPCEndpointServiceStatus struct {
 type VPCEndpointService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointServiceSpec   `json:"spec"`
-	Status            VPCEndpointServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptanceRequired)",message="acceptanceRequired is a required parameter"
+	Spec   VPCEndpointServiceSpec   `json:"spec"`
+	Status VPCEndpointServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

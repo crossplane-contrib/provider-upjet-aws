@@ -18,17 +18,29 @@ type WorkspaceAPIKeyObservation struct {
 
 	// The key token in JSON format. Use this value as a bearer token to authenticate HTTP requests to the workspace.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies the name of the API key. Key names must be unique to the workspace.
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
+
+	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
+
+	// The ID of the workspace that the API key is valid for.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceAPIKeyParameters struct {
 
 	// Specifies the name of the API key. Key names must be unique to the workspace.
-	// +kubebuilder:validation:Required
-	KeyName *string `json:"keyName" tf:"key_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
 	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
-	// +kubebuilder:validation:Required
-	KeyRole *string `json:"keyRole" tf:"key_role,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -36,8 +48,8 @@ type WorkspaceAPIKeyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
-	// +kubebuilder:validation:Required
-	SecondsToLive *float64 `json:"secondsToLive" tf:"seconds_to_live,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
 
 	// The ID of the workspace that the API key is valid for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/grafana/v1beta1.Workspace
@@ -78,8 +90,11 @@ type WorkspaceAPIKeyStatus struct {
 type WorkspaceAPIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceAPIKeySpec   `json:"spec"`
-	Status            WorkspaceAPIKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyName)",message="keyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyRole)",message="keyRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.secondsToLive)",message="secondsToLive is a required parameter"
+	Spec   WorkspaceAPIKeySpec   `json:"spec"`
+	Status WorkspaceAPIKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

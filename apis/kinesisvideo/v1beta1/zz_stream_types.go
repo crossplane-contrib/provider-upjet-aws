@@ -21,8 +21,27 @@ type StreamObservation struct {
 	// A time stamp that indicates when the stream was created.
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
+	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
+
+	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
 	// The unique Stream id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines.
+	MediaType *string `json:"mediaType,omitempty" tf:"media_type,omitempty"`
+
+	// A name to identify the stream. This is unique to the
+	// AWS account and region the Stream is created in.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -60,8 +79,8 @@ type StreamParameters struct {
 
 	// A name to identify the stream. This is unique to the
 	// AWS account and region the Stream is created in.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +116,9 @@ type StreamStatus struct {
 type Stream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamSpec   `json:"spec"`
-	Status            StreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   StreamSpec   `json:"spec"`
+	Status StreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

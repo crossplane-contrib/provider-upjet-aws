@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -141,6 +145,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -323,8 +342,79 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the PinPoint Application
                     type: string
+                  campaignHook:
+                    description: Specifies settings for invoking an AWS Lambda function
+                      that customizes a segment for a campaign
+                    items:
+                      properties:
+                        lambdaFunctionName:
+                          description: Lambda function name or ARN to be called for
+                            delivery. Conflicts with web_url
+                          type: string
+                        mode:
+                          description: What mode Lambda should be invoked in. Valid
+                            values for this parameter are DELIVERY, FILTER.
+                          type: string
+                        webUrl:
+                          description: Web URL to call for hook. If the URL has authentication
+                            specified it will be added as authentication to the request.
+                            Conflicts with lambda_function_name
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  limits:
+                    description: The default campaign limits for the app. These limits
+                      apply to each campaign for the app, unless the campaign overrides
+                      the default with limits of its own
+                    items:
+                      properties:
+                        daily:
+                          description: The maximum number of messages that the campaign
+                            can send daily.
+                          type: number
+                        maximumDuration:
+                          description: The length of time (in seconds) that the campaign
+                            can run before it ends and message deliveries stop. This
+                            duration begins at the scheduled start time for the campaign.
+                            The minimum value is 60.
+                          type: number
+                        messagesPerSecond:
+                          description: The number of messages that the campaign can
+                            send per second. The minimum value is 50, and the maximum
+                            is 20000.
+                          type: number
+                        total:
+                          description: The maximum total number of messages that the
+                            campaign can send.
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: The application name
+                    type: string
+                  quietTime:
+                    description: The default quiet time for the app. Each campaign
+                      for this app sends no messages during this time unless the campaign
+                      overrides the default with a quiet time of its own
+                    items:
+                      properties:
+                        end:
+                          description: The default end time for quiet time in ISO
+                            8601 format. Required if start is set
+                          type: string
+                        start:
+                          description: The default start time for quiet time in ISO
+                            8601 format. Required if end is set
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

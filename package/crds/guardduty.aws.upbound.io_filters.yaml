@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -212,11 +216,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - action
-                - findingCriteria
-                - rank
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -388,18 +404,89 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: findingCriteria is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.findingCriteria)
+            - message: rank is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rank)
           status:
             description: FilterStatus defines the observed state of Filter.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: Specifies the action that is to be applied to the
+                      findings that match the filter. Can be one of ARCHIVE or NOOP.
+                    type: string
                   arn:
                     description: The ARN of the GuardDuty filter.
                     type: string
+                  description:
+                    description: Description of the filter.
+                    type: string
+                  detectorId:
+                    description: ID of a GuardDuty detector, attached to your account.
+                    type: string
+                  findingCriteria:
+                    description: Represents the criteria to be used in the filter
+                      for querying findings. Contains one or more criterion blocks,
+                      documented below.
+                    items:
+                      properties:
+                        criterion:
+                          items:
+                            properties:
+                              equals:
+                                description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                              field:
+                                description: The name of the field to be evaluated.
+                                  The full list of field names can be found in AWS
+                                  documentation.
+                                type: string
+                              greaterThan:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              greaterThanOrEqual:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              lessThan:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              lessThanOrEqual:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              notEquals:
+                                description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: A compound field, consisting of the ID of the GuardDuty
                       detector and the name of the filter.
                     type: string
+                  rank:
+                    description: Specifies the position of the filter in the list
+                      of current filters. Also specifies the order in which this filter
+                      is applied to the findings.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -273,8 +277,22 @@ spec:
                     type: object
                 required:
                 - region
-                - source
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -446,6 +464,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: source is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)
           status:
             description: ConfigRuleStatus defines the observed state of ConfigRule.
             properties:
@@ -454,11 +475,131 @@ spec:
                   arn:
                     description: The ARN of the config rule
                     type: string
+                  description:
+                    description: Description of the rule
+                    type: string
                   id:
+                    type: string
+                  inputParameters:
+                    description: A string in JSON format that is passed to the AWS
+                      Config rule Lambda function.
+                    type: string
+                  maximumExecutionFrequency:
+                    description: The maximum frequency with which AWS Config runs
+                      evaluations for a rule.
                     type: string
                   ruleId:
                     description: The ID of the config rule
                     type: string
+                  scope:
+                    description: Scope defines which resources can trigger an evaluation
+                      for the rule. See Source Below.
+                    items:
+                      properties:
+                        complianceResourceId:
+                          description: The IDs of the only AWS resource that you want
+                            to trigger an evaluation for the rule. If you specify
+                            a resource ID, you must specify one resource type for
+                            compliance_resource_types.
+                          type: string
+                        complianceResourceTypes:
+                          description: A list of resource types of only those AWS
+                            resources that you want to trigger an evaluation for the
+                            ruleE.g., AWS::EC2::Instance. You can only specify one
+                            type if you also specify a resource ID for compliance_resource_id.
+                            See relevant part of AWS Docs for available types.
+                          items:
+                            type: string
+                          type: array
+                        tagKey:
+                          description: The tag key that is applied to only those AWS
+                            resources that you want you want to trigger an evaluation
+                            for the rule.
+                          type: string
+                        tagValue:
+                          description: The tag value applied to only those AWS resources
+                            that you want to trigger an evaluation for the rule.
+                          type: string
+                      type: object
+                    type: array
+                  source:
+                    description: Source specifies the rule owner, the rule identifier,
+                      and the notifications that cause the function to evaluate your
+                      AWS resources. See Scope Below.
+                    items:
+                      properties:
+                        customPolicyDetails:
+                          description: Provides the runtime system, policy definition,
+                            and whether debug logging is enabled. Required when owner
+                            is set to CUSTOM_POLICY. See Custom Policy Details Below.
+                          items:
+                            properties:
+                              enableDebugLogDelivery:
+                                description: The boolean expression for enabling debug
+                                  logging for your Config Custom Policy rule. The
+                                  default value is false.
+                                type: boolean
+                              policyRuntime:
+                                description: The runtime system for your Config Custom
+                                  Policy rule. Guard is a policy-as-code language
+                                  that allows you to write policies that are enforced
+                                  by Config Custom Policy rules. For more information
+                                  about Guard, see the Guard GitHub Repository.
+                                type: string
+                              policyText:
+                                description: The policy definition containing the
+                                  logic for your Config Custom Policy rule.
+                                type: string
+                            type: object
+                          type: array
+                        owner:
+                          description: Indicates whether AWS or the customer owns
+                            and manages the AWS Config rule. Valid values are AWS,
+                            CUSTOM_LAMBDA or CUSTOM_POLICY. For more information about
+                            managed rules, see the AWS Config Managed Rules documentation.
+                            For more information about custom rules, see the AWS Config
+                            Custom Rules documentation. Custom Lambda Functions require
+                            permissions to allow the AWS Config service to invoke
+                            them, e.g., via the aws_lambda_permission resource.
+                          type: string
+                        sourceDetail:
+                          description: Provides the source and type of the event that
+                            causes AWS Config to evaluate your AWS resources. Only
+                            valid if owner is CUSTOM_LAMBDA or CUSTOM_POLICY. See
+                            Source Detail Below.
+                          items:
+                            properties:
+                              eventSource:
+                                description: The source of the event, such as an AWS
+                                  service, that triggers AWS Config to evaluate your
+                                  AWSresources. This defaults to aws.config and is
+                                  the only valid value.
+                                type: string
+                              maximumExecutionFrequency:
+                                description: The maximum frequency with which AWS
+                                  Config runs evaluations for a rule.
+                                type: string
+                              messageType:
+                                description: 'The type of notification that triggers
+                                  AWS Config to run an evaluation for a rule. You
+                                  canspecify the following notification types:'
+                                type: string
+                            type: object
+                          type: array
+                        sourceIdentifier:
+                          description: For AWS Config managed rules, a predefined
+                            identifier, e.g IAM_PASSWORD_POLICY. For custom Lambda
+                            rules, the identifier is the ARN of the Lambda Function,
+                            such as arn:aws:lambda:us-east-1:123456789012:function:custom_rule_name
+                            or the arn attribute of the aws_lambda_function resource.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

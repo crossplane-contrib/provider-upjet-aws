@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -188,9 +192,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - loggingConfiguration
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -362,16 +380,57 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: loggingConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loggingConfiguration)
           status:
             description: LoggingConfigurationStatus defines the observed state of
               LoggingConfiguration.
             properties:
               atProvider:
                 properties:
+                  firewallArn:
+                    description: The Amazon Resource Name (ARN) of the Network Firewall
+                      firewall.
+                    type: string
                   id:
                     description: The Amazon Resource Name (ARN) of the associated
                       firewall.
                     type: string
+                  loggingConfiguration:
+                    description: A configuration block describing how AWS Network
+                      Firewall performs logging for a firewall. See Logging Configuration
+                      below for details.
+                    items:
+                      properties:
+                        logDestinationConfig:
+                          description: Set of configuration blocks describing the
+                            logging details for a firewall. See Log Destination Config
+                            below for details. At most, only two blocks can be specified;
+                            one for FLOW logs and one for ALERT logs.
+                          items:
+                            properties:
+                              logDestination:
+                                additionalProperties:
+                                  type: string
+                                description: A map describing the logging destination
+                                  for the chosen log_destination_type.
+                                type: object
+                              logDestinationType:
+                                description: 'The location to send logs to. Valid
+                                  values: S3, CloudWatchLogs, KinesisDataFirehose.'
+                                type: string
+                              logType:
+                                description: 'The type of log to send. Valid values:
+                                  ALERT or FLOW. Alert logs report traffic that matches
+                                  a StatefulRule with an action setting that sends
+                                  a log message. Flow logs are standard network traffic
+                                  flow logs.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

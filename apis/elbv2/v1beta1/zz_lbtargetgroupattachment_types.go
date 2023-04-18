@@ -15,8 +15,20 @@ import (
 
 type LBTargetGroupAttachmentObservation struct {
 
+	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
 	// A unique identifier for the attachment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The port on which targets receive traffic.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The ARN of the target group with which to register targets
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 type LBTargetGroupAttachmentParameters struct {
@@ -48,8 +60,8 @@ type LBTargetGroupAttachmentParameters struct {
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
-	// +kubebuilder:validation:Required
-	TargetID *string `json:"targetId" tf:"target_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 // LBTargetGroupAttachmentSpec defines the desired state of LBTargetGroupAttachment
@@ -76,8 +88,9 @@ type LBTargetGroupAttachmentStatus struct {
 type LBTargetGroupAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBTargetGroupAttachmentSpec   `json:"spec"`
-	Status            LBTargetGroupAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetId)",message="targetId is a required parameter"
+	Spec   LBTargetGroupAttachmentSpec   `json:"spec"`
+	Status LBTargetGroupAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

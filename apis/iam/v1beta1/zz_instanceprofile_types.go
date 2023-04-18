@@ -24,6 +24,15 @@ type InstanceProfileObservation struct {
 	// Instance profile's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Path to the instance profile. For more information about paths, see IAM Identifiers in the IAM User Guide. Can be a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. Can include any ASCII character from the ! (\u0021) through the DEL character (\u007F), including most punctuation characters, digits, and upper and lowercase letters.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Name of the role to add to the profile.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

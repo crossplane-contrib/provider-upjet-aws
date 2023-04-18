@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -158,9 +162,23 @@ spec:
                       will trigger a re-invocation.
                     type: object
                 required:
-                - input
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -332,16 +350,35 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: input is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)
           status:
             description: InvocationStatus defines the observed state of Invocation.
             properties:
               atProvider:
                 properties:
+                  functionName:
+                    description: Name of the lambda function.
+                    type: string
                   id:
+                    type: string
+                  input:
+                    description: JSON payload to the lambda function.
+                    type: string
+                  qualifier:
+                    description: Qualifier (i.e., version) of the lambda function.
+                      Defaults to $LATEST.
                     type: string
                   result:
                     description: String result of the lambda function invocation.
                     type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger a re-invocation.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

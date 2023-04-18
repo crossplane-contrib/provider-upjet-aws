@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -275,12 +279,23 @@ spec:
                       test workflows.
                     type: string
                 required:
-                - component
-                - name
-                - parentImage
                 - region
-                - version
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -452,6 +467,15 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: component is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.component)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: parentImage is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentImage)
+            - message: version is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)
           status:
             description: ImageRecipeStatus defines the observed state of ImageRecipe.
             properties:
@@ -460,17 +484,126 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the image recipe.
                     type: string
+                  blockDeviceMapping:
+                    description: Configuration block(s) with block device mappings
+                      for the image recipe. Detailed below.
+                    items:
+                      properties:
+                        deviceName:
+                          description: Name of the device. For example, /dev/sda or
+                            /dev/xvdb.
+                          type: string
+                        ebs:
+                          description: Configuration block with Elastic Block Storage
+                            (EBS) block device mapping settings. Detailed below.
+                          items:
+                            properties:
+                              deleteOnTermination:
+                                description: Whether to delete the volume on termination.
+                                  Defaults to unset, which is the value inherited
+                                  from the parent image.
+                                type: string
+                              encrypted:
+                                description: Whether to encrypt the volume. Defaults
+                                  to unset, which is the value inherited from the
+                                  parent image.
+                                type: string
+                              iops:
+                                description: Number of Input/Output (I/O) operations
+                                  per second to provision for an io1 or io2 volume.
+                                type: number
+                              kmsKeyId:
+                                description: Amazon Resource Name (ARN) of the Key
+                                  Management Service (KMS) Key for encryption.
+                                type: string
+                              snapshotId:
+                                description: Identifier of the EC2 Volume Snapshot.
+                                type: string
+                              throughput:
+                                description: For GP3 volumes only. The throughput
+                                  in MiB/s that the volume supports.
+                                type: number
+                              volumeSize:
+                                description: Size of the volume, in GiB.
+                                type: number
+                              volumeType:
+                                description: Type of the volume. For example, gp2
+                                  or io2.
+                                type: string
+                            type: object
+                          type: array
+                        noDevice:
+                          description: Set to true to remove a mapping from the parent
+                            image.
+                          type: boolean
+                        virtualName:
+                          description: Virtual device name. For example, ephemeral0.
+                            Instance store volumes are numbered starting from 0.
+                          type: string
+                      type: object
+                    type: array
+                  component:
+                    description: Ordered configuration block(s) with components for
+                      the image recipe. Detailed below.
+                    items:
+                      properties:
+                        componentArn:
+                          description: Amazon Resource Name (ARN) of the Image Builder
+                            Component to associate.
+                          type: string
+                        parameter:
+                          description: Configuration block(s) for parameters to configure
+                            the component. Detailed below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the component parameter.
+                                type: string
+                              value:
+                                description: The value for the named component parameter.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   dateCreated:
                     description: Date the image recipe was created.
                     type: string
+                  description:
+                    description: Description of the image recipe.
+                    type: string
                   id:
+                    type: string
+                  name:
+                    description: Name of the image recipe.
                     type: string
                   owner:
                     description: Owner of the image recipe.
                     type: string
+                  parentImage:
+                    description: The image recipe uses this image as a base from which
+                      to build your customized image. The value can be the base image
+                      ARN or an AMI ID.
+                    type: string
                   platform:
                     description: Platform of the image recipe.
                     type: string
+                  systemsManagerAgent:
+                    description: Configuration block for the Systems Manager Agent
+                      installed by default by Image Builder. Detailed below.
+                    items:
+                      properties:
+                        uninstallAfterBuild:
+                          description: Whether to remove the Systems Manager Agent
+                            after the image has been built. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -478,6 +611,20 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  userDataBase64:
+                    description: Base64 encoded user data. Use this to provide commands
+                      or a command script to run when you launch your build instance.
+                    type: string
+                  version:
+                    description: 'The semantic version of the image recipe, which
+                      specifies the version in the following format, with numeric
+                      values in each position to indicate a specific version: major.minor.patch.
+                      For example: 1.0.0.'
+                    type: string
+                  workingDirectory:
+                    description: The working directory to be used during build and
+                      test workflows.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

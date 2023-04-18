@@ -14,6 +14,15 @@ import (
 )
 
 type LoggingConfigurationObservation struct {
+
+	// Determines whether execution data is included in your log. When set to false, data is excluded.
+	IncludeExecutionData *bool `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
+
+	// Defines which category of execution history events are logged. Valid values: ALL, ERROR, FATAL, OFF
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 }
 
 type LoggingConfigurationParameters struct {
@@ -39,21 +48,39 @@ type StateMachineObservation struct {
 	// The date the state machine was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
+	// The Amazon States Language definition of the state machine.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
 	// The ARN of the state machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
+	LoggingConfiguration []LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The current status of the state machine. Either ACTIVE or DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Selects whether AWS X-Ray tracing is enabled.
+	TracingConfiguration []TracingConfigurationObservation `json:"tracingConfiguration,omitempty" tf:"tracing_configuration,omitempty"`
+
+	// Determines whether a Standard or Express state machine is created. The default is STANDARD. You cannot update the type of a state machine once it has been created. Valid values: STANDARD, EXPRESS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StateMachineParameters struct {
 
 	// The Amazon States Language definition of the state machine.
-	// +kubebuilder:validation:Required
-	Definition *string `json:"definition" tf:"definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	// +kubebuilder:validation:Optional
@@ -91,6 +118,9 @@ type StateMachineParameters struct {
 }
 
 type TracingConfigurationObservation struct {
+
+	// When set to true, AWS X-Ray tracing is enabled. Make sure the State Machine has the correct IAM policies for logging. See the AWS Step Functions Developer Guide for details.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TracingConfigurationParameters struct {
@@ -124,8 +154,9 @@ type StateMachineStatus struct {
 type StateMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StateMachineSpec   `json:"spec"`
-	Status            StateMachineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.definition)",message="definition is a required parameter"
+	Spec   StateMachineSpec   `json:"spec"`
+	Status StateMachineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

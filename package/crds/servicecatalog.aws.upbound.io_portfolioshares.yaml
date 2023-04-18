@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -175,10 +179,23 @@ spec:
                       to be accepted. Organizational shares are automatically accepted.
                     type: boolean
                 required:
-                - principalId
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,11 +367,20 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: principalId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: PortfolioShareStatus defines the observed state of PortfolioShare.
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
                   accepted:
                     description: Whether the shared portfolio is imported by the recipient
                       account. If the recipient is organizational, the share is automatically
@@ -362,6 +388,33 @@ spec:
                     type: boolean
                   id:
                     type: string
+                  portfolioId:
+                    description: Portfolio identifier.
+                    type: string
+                  principalId:
+                    description: Identifier of the principal with whom you will share
+                      the portfolio. Valid values AWS account IDs and ARNs of AWS
+                      Organizations and organizational units.
+                    type: string
+                  sharePrincipals:
+                    description: Enables or disables Principal sharing when creating
+                      the portfolio share. If this flag is not provided, principal
+                      sharing is disabled.
+                    type: boolean
+                  shareTagOptions:
+                    description: Whether to enable sharing of aws_servicecatalog_tag_option
+                      resources when creating the portfolio share.
+                    type: boolean
+                  type:
+                    description: Type of portfolio share. Valid values are ACCOUNT
+                      (an external account), ORGANIZATION (a share to every account
+                      in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
+                      (a share to an account in an organization).
+                    type: string
+                  waitForAcceptance:
+                    description: Whether to wait (up to the timeout) for the share
+                      to be accepted. Organizational shares are automatically accepted.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

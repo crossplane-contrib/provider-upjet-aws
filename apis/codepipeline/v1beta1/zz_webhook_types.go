@@ -14,6 +14,9 @@ import (
 )
 
 type AuthenticationConfigurationObservation struct {
+
+	// A valid CIDR block for IP filtering. Required for IP.
+	AllowedIPRange *string `json:"allowedIpRange,omitempty" tf:"allowed_ip_range,omitempty"`
 }
 
 type AuthenticationConfigurationParameters struct {
@@ -28,6 +31,12 @@ type AuthenticationConfigurationParameters struct {
 }
 
 type FilterObservation struct {
+
+	// The JSON path to filter on.
+	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
+
+	// The value to match on (e.g., refs/heads/{Branch}). See AWS docs for details.
+	MatchEquals *string `json:"matchEquals,omitempty" tf:"match_equals,omitempty"`
 }
 
 type FilterParameters struct {
@@ -46,11 +55,29 @@ type WebhookObservation struct {
 	// The CodePipeline webhook's ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The type of authentication  to use. One of IP, GITHUB_HMAC, or UNAUTHENTICATED.
+	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// An auth block. Required for IP and GITHUB_HMAC. Auth blocks are documented below.
+	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// One or more filter blocks. Filter blocks are documented below.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// The CodePipeline webhook's ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
+	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
+
+	// The name of the pipeline.
+	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
 
 	// The CodePipeline webhook's URL. POST events to this endpoint to trigger the target.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -59,16 +86,16 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// The type of authentication  to use. One of IP, GITHUB_HMAC, or UNAUTHENTICATED.
-	// +kubebuilder:validation:Required
-	Authentication *string `json:"authentication" tf:"authentication,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// An auth block. Required for IP and GITHUB_HMAC. Auth blocks are documented below.
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration []AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// One or more filter blocks. Filter blocks are documented below.
-	// +kubebuilder:validation:Required
-	Filter []FilterParameters `json:"filter" tf:"filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +107,8 @@ type WebhookParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
-	// +kubebuilder:validation:Required
-	TargetAction *string `json:"targetAction" tf:"target_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 
 	// The name of the pipeline.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
@@ -121,8 +148,11 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebhookSpec   `json:"spec"`
-	Status            WebhookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filter)",message="filter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)",message="targetAction is a required parameter"
+	Spec   WebhookSpec   `json:"spec"`
+	Status WebhookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

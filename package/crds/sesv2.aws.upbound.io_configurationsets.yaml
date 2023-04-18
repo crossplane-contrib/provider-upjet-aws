@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -145,6 +149,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -324,6 +343,23 @@ spec:
                   arn:
                     description: ARN of the Configuration Set.
                     type: string
+                  deliveryOptions:
+                    description: An object that defines the dedicated IP pool that
+                      is used to send emails that you send using the configuration
+                      set.
+                    items:
+                      properties:
+                        sendingPoolName:
+                          description: The name of the dedicated IP pool to associate
+                            with the configuration set.
+                          type: string
+                        tlsPolicy:
+                          description: 'Specifies whether messages that use the configuration
+                            set are required to use Transport Layer Security (TLS).
+                            Valid values: REQUIRE, OPTIONAL.'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
                   reputationOptions:
@@ -338,12 +374,60 @@ spec:
                             is given a fresh start, your reputation metrics are calculated
                             starting from the date of the fresh start.
                           type: string
+                        reputationMetricsEnabled:
+                          description: If true, tracking of reputation metrics is
+                            enabled for the configuration set. If false, tracking
+                            of reputation metrics is disabled for the configuration
+                            set.
+                          type: boolean
                       type: object
                     type: array
+                  sendingOptions:
+                    description: An object that defines whether or not Amazon SES
+                      can send email that you send using the configuration set.
+                    items:
+                      properties:
+                        sendingEnabled:
+                          description: If true, email sending is enabled for the configuration
+                            set. If false, email sending is disabled for the configuration
+                            set.
+                          type: boolean
+                      type: object
+                    type: array
+                  suppressionOptions:
+                    description: An object that contains information about the suppression
+                      list preferences for your account.
+                    items:
+                      properties:
+                        suppressedReasons:
+                          description: 'A list that contains the reasons that email
+                            addresses are automatically added to the suppression list
+                            for your account. Valid values: BOUNCE, COMPLAINT.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  trackingOptions:
+                    description: An object that defines the open and click tracking
+                      options for emails that you send using the configuration set.
+                    items:
+                      properties:
+                        customRedirectDomain:
+                          description: The domain to use for tracking open and click
+                            events.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

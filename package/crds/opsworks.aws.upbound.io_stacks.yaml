@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -503,9 +507,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -677,18 +695,115 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StackStatus defines the observed state of Stack.
             properties:
               atProvider:
                 properties:
+                  agentVersion:
+                    description: If set to "LATEST", OpsWorks will automatically install
+                      the latest version.
+                    type: string
                   arn:
+                    type: string
+                  berkshelfVersion:
+                    description: If manage_berkshelf is enabled, the version of Berkshelf
+                      to use.
+                    type: string
+                  color:
+                    description: Color to paint next to the stack's resources in the
+                      OpsWorks console.
+                    type: string
+                  configurationManagerName:
+                    description: Name of the configuration manager to use. Defaults
+                      to "Chef".
+                    type: string
+                  configurationManagerVersion:
+                    description: Version of the configuration manager to use. Defaults
+                      to "11.4".
+                    type: string
+                  customCookbooksSource:
+                    description: When use_custom_cookbooks is set, provide this sub-object
+                      as described below.
+                    items:
+                      properties:
+                        revision:
+                          description: For sources that are version-aware, the revision
+                            to use.
+                          type: string
+                        type:
+                          description: The type of source to use. For example, "archive".
+                          type: string
+                        url:
+                          description: The URL where the cookbooks resource can be
+                            found.
+                          type: string
+                        username:
+                          description: Username to use when authenticating to the
+                            source.
+                          type: string
+                      type: object
+                    type: array
+                  customJson:
+                    description: User defined JSON passed to "Chef". Use a "here doc"
+                      for multiline JSON.
+                    type: string
+                  defaultAvailabilityZone:
+                    description: Name of the availability zone where instances will
+                      be created by default. Cannot be set when vpc_id is set.
+                    type: string
+                  defaultInstanceProfileArn:
+                    description: The ARN of an IAM Instance Profile that created instances
+                      will have by default.
+                    type: string
+                  defaultOs:
+                    description: Name of OS that will be installed on instances by
+                      default.
+                    type: string
+                  defaultRootDeviceType:
+                    description: Name of the type of root device instances will have
+                      by default.
+                    type: string
+                  defaultSshKeyName:
+                    description: Name of the SSH keypair that instances will have
+                      by default.
+                    type: string
+                  defaultSubnetId:
+                    description: ID of the subnet in which instances will be created
+                      by default. Required if vpc_id is set to a VPC other than the
+                      default VPC, and forbidden if it isn't.
+                    type: string
+                  hostnameTheme:
+                    description: Keyword representing the naming scheme that will
+                      be used for instance hostnames within this stack.
                     type: string
                   id:
                     description: The id of the stack.
                     type: string
+                  manageBerkshelf:
+                    description: Boolean value controlling whether Opsworks will run
+                      Berkshelf for this stack.
+                    type: boolean
+                  name:
+                    description: The name of the stack.
+                    type: string
+                  region:
+                    description: The name of the region where the stack will exist.
+                    type: string
+                  serviceRoleArn:
+                    description: The ARN of an IAM role that the OpsWorks service
+                      will act as.
+                    type: string
                   stackEndpoint:
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -696,6 +811,18 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  useCustomCookbooks:
+                    description: Boolean value controlling whether the custom cookbook
+                      settings are enabled.
+                    type: boolean
+                  useOpsworksSecurityGroups:
+                    description: Boolean value controlling whether the standard OpsWorks
+                      security groups apply to created instances.
+                    type: boolean
+                  vpcId:
+                    description: ID of the VPC that this stack belongs to. Defaults
+                      to the region's default VPC.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

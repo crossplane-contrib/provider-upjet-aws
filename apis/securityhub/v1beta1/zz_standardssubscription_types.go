@@ -17,6 +17,9 @@ type StandardsSubscriptionObservation struct {
 
 	// The ARN of a resource that represents your subscription to a supported standard.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of a standard - see below.
+	StandardsArn *string `json:"standardsArn,omitempty" tf:"standards_arn,omitempty"`
 }
 
 type StandardsSubscriptionParameters struct {
@@ -27,8 +30,8 @@ type StandardsSubscriptionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of a standard - see below.
-	// +kubebuilder:validation:Required
-	StandardsArn *string `json:"standardsArn" tf:"standards_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	StandardsArn *string `json:"standardsArn,omitempty" tf:"standards_arn,omitempty"`
 }
 
 // StandardsSubscriptionSpec defines the desired state of StandardsSubscription
@@ -55,8 +58,9 @@ type StandardsSubscriptionStatus struct {
 type StandardsSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StandardsSubscriptionSpec   `json:"spec"`
-	Status            StandardsSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.standardsArn)",message="standardsArn is a required parameter"
+	Spec   StandardsSubscriptionSpec   `json:"spec"`
+	Status StandardsSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

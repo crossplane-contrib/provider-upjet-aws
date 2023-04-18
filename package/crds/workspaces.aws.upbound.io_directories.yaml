@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -418,6 +422,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -600,6 +619,10 @@ spec:
                   customerUserName:
                     description: The user name for the service account.
                     type: string
+                  directoryId:
+                    description: The directory identifier for registration in WorkSpaces
+                      service.
+                    type: string
                   directoryName:
                     description: The name of the directory.
                     type: string
@@ -619,11 +642,57 @@ spec:
                   id:
                     description: The WorkSpaces directory identifier.
                     type: string
+                  ipGroupIds:
+                    description: The identifiers of the IP access control groups associated
+                      with the directory.
+                    items:
+                      type: string
+                    type: array
                   registrationCode:
                     description: The registration code for the directory. This is
                       the code that users enter in their Amazon WorkSpaces client
                       application to connect to the directory.
                     type: string
+                  selfServicePermissions:
+                    description: service capabilities. Defined below.
+                    items:
+                      properties:
+                        changeComputeType:
+                          description: –  Whether WorkSpaces directory users can change
+                            the compute type (bundle) for their workspace. Default
+                            false.
+                          type: boolean
+                        increaseVolumeSize:
+                          description: –  Whether WorkSpaces directory users can increase
+                            the volume size of the drives on their workspace. Default
+                            false.
+                          type: boolean
+                        rebuildWorkspace:
+                          description: –  Whether WorkSpaces directory users can rebuild
+                            the operating system of a workspace to its original state.
+                            Default false.
+                          type: boolean
+                        restartWorkspace:
+                          description: –  Whether WorkSpaces directory users can restart
+                            their workspace. Default true.
+                          type: boolean
+                        switchRunningMode:
+                          description: –  Whether WorkSpaces directory users can switch
+                            the running mode of their workspace. Default false.
+                          type: boolean
+                      type: object
+                    type: array
+                  subnetIds:
+                    description: The identifiers of the subnets where the directory
+                      resides.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -631,6 +700,75 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  workspaceAccessProperties:
+                    description: –  Specifies which devices and operating systems
+                      users can use to access their WorkSpaces. Defined below.
+                    items:
+                      properties:
+                        deviceTypeAndroid:
+                          description: –  Indicates whether users can use Android
+                            devices to access their WorkSpaces.
+                          type: string
+                        deviceTypeChromeos:
+                          description: –  Indicates whether users can use Chromebooks
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeIos:
+                          description: –  Indicates whether users can use iOS devices
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeLinux:
+                          description: –  Indicates whether users can use Linux clients
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeOsx:
+                          description: –  Indicates whether users can use macOS clients
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeWeb:
+                          description: –  Indicates whether users can access their
+                            WorkSpaces through a web browser.
+                          type: string
+                        deviceTypeWindows:
+                          description: –  Indicates whether users can use Windows
+                            clients to access their WorkSpaces.
+                          type: string
+                        deviceTypeZeroclient:
+                          description: –  Indicates whether users can use zero client
+                            devices to access their WorkSpaces.
+                          type: string
+                      type: object
+                    type: array
+                  workspaceCreationProperties:
+                    description: –  Default properties that are used for creating
+                      WorkSpaces. Defined below.
+                    items:
+                      properties:
+                        customSecurityGroupId:
+                          description: –  The identifier of your custom security group.
+                            Should relate to the same VPC, where workspaces reside
+                            in.
+                          type: string
+                        defaultOu:
+                          description: –  The default organizational unit (OU) for
+                            your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
+                            pattern.
+                          type: string
+                        enableInternetAccess:
+                          description: –  Indicates whether internet access is enabled
+                            for your WorkSpaces.
+                          type: boolean
+                        enableMaintenanceMode:
+                          description: –  Indicates whether maintenance mode is enabled
+                            for your WorkSpaces. For more information, see WorkSpace
+                            Maintenance..
+                          type: boolean
+                        userEnabledAsLocalAdministrator:
+                          description: –  Indicates whether users are local administrators
+                            of their WorkSpaces.
+                          type: boolean
+                      type: object
+                    type: array
                   workspaceSecurityGroupId:
                     description: The identifier of the security group that is assigned
                       to new WorkSpaces.

@@ -18,6 +18,9 @@ type ProxyEndpointObservation struct {
 	// The Amazon Resource Name (ARN) for the proxy endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The name of the DB proxy associated with the DB proxy endpoint that you create.
+	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
+
 	// The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -27,10 +30,22 @@ type ProxyEndpointObservation struct {
 	// Indicates whether this endpoint is the default endpoint for the associated DB proxy.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is READ_WRITE. Valid values are READ_WRITE and READ_ONLY.
+	TargetRole *string `json:"targetRole,omitempty" tf:"target_role,omitempty"`
 
 	// The VPC ID of the DB proxy endpoint.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// One or more VPC security group IDs to associate with the new proxy.
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// One or more VPC subnet IDs to associate with the new proxy.
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 type ProxyEndpointParameters struct {
@@ -77,8 +92,8 @@ type ProxyEndpointParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
-	// +kubebuilder:validation:Required
-	VPCSubnetIds []*string `json:"vpcSubnetIds" tf:"vpc_subnet_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 // ProxyEndpointSpec defines the desired state of ProxyEndpoint
@@ -105,8 +120,9 @@ type ProxyEndpointStatus struct {
 type ProxyEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxyEndpointSpec   `json:"spec"`
-	Status            ProxyEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	Spec   ProxyEndpointSpec   `json:"spec"`
+	Status ProxyEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -117,12 +121,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - cutoff
-                - duration
-                - name
                 - region
-                - schedule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -294,14 +309,71 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: cutoff is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cutoff)
+            - message: duration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.duration)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: schedule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)
           status:
             description: MaintenanceWindowStatus defines the observed state of MaintenanceWindow.
             properties:
               atProvider:
                 properties:
+                  allowUnassociatedTargets:
+                    description: Whether targets must be registered with the Maintenance
+                      Window before tasks can be defined for those targets.
+                    type: boolean
+                  cutoff:
+                    description: The number of hours before the end of the Maintenance
+                      Window that Systems Manager stops scheduling new tasks for execution.
+                    type: number
+                  description:
+                    description: A description for the maintenance window.
+                    type: string
+                  duration:
+                    description: The duration of the Maintenance Window in hours.
+                    type: number
+                  enabled:
+                    description: 'Whether the maintenance window is enabled. Default:
+                      true.'
+                    type: boolean
+                  endDate:
+                    description: Timestamp in ISO-8601 extended format when to no
+                      longer run the maintenance window.
+                    type: string
                   id:
                     description: The ID of the maintenance window.
                     type: string
+                  name:
+                    description: The name of the maintenance window.
+                    type: string
+                  schedule:
+                    description: The schedule of the Maintenance Window in the form
+                      of a cron or rate expression.
+                    type: string
+                  scheduleOffset:
+                    description: The number of days to wait after the date and time
+                      specified by a CRON expression before running the maintenance
+                      window.
+                    type: number
+                  scheduleTimezone:
+                    description: 'Timezone for schedule in Internet Assigned Numbers
+                      Authority (IANA) Time Zone Database format. For example: America/Los_Angeles,
+                      etc/UTC, or Asia/Seoul.'
+                    type: string
+                  startDate:
+                    description: Timestamp in ISO-8601 extended format when to begin
+                      the maintenance window.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

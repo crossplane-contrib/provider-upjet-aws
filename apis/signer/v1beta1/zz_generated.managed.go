@@ -17,6 +17,11 @@ func (mg *SigningJob) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SigningJob.
+func (mg *SigningJob) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SigningJob.
 func (mg *SigningJob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *SigningJob) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SigningJob.
 func (mg *SigningJob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SigningJob.
+func (mg *SigningJob) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SigningJob.
@@ -83,6 +93,11 @@ func (mg *SigningProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SigningProfile.
+func (mg *SigningProfile) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SigningProfile.
 func (mg *SigningProfile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *SigningProfile) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SigningProfile.
 func (mg *SigningProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SigningProfile.
+func (mg *SigningProfile) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SigningProfile.
@@ -149,6 +169,11 @@ func (mg *SigningProfilePermission) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SigningProfilePermission.
+func (mg *SigningProfilePermission) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SigningProfilePermission.
 func (mg *SigningProfilePermission) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SigningProfilePermission) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SigningProfilePermission.
 func (mg *SigningProfilePermission) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SigningProfilePermission.
+func (mg *SigningProfilePermission) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SigningProfilePermission.

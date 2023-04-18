@@ -15,18 +15,61 @@ import (
 
 type VPCIpamPoolObservation struct {
 
+	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
+	AllocationDefaultNetmaskLength *float64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
+
+	// The maximum netmask length that will be required for CIDR allocations in this pool.
+	AllocationMaxNetmaskLength *float64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
+
+	// The minimum netmask length that will be required for CIDR allocations in this pool.
+	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
+
+	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
+
 	// Amazon Resource Name (ARN) of IPAM
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
+	// within the CIDR range in the pool.
+	AutoImport *bool `json:"autoImport,omitempty" tf:"auto_import,omitempty"`
+
+	// Limits which AWS service the pool can be used in. Only useable on public scopes. Valid Values: ec2.
+	AwsService *string `json:"awsService,omitempty" tf:"aws_service,omitempty"`
+
+	// A description for the IPAM pool.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the IPAM
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the scope in which you would like to create the IPAM pool.
+	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
+
 	IpamScopeType *string `json:"ipamScopeType,omitempty" tf:"ipam_scope_type,omitempty"`
+
+	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
 	PoolDepth *float64 `json:"poolDepth,omitempty" tf:"pool_depth,omitempty"`
 
+	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
+	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
+
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
+	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
+
+	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
+	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
+
 	// The ID of the IPAM
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -35,8 +78,8 @@ type VPCIpamPoolObservation struct {
 type VPCIpamPoolParameters struct {
 
 	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
 	// +kubebuilder:validation:Optional
@@ -140,8 +183,9 @@ type VPCIpamPoolStatus struct {
 type VPCIpamPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCIpamPoolSpec   `json:"spec"`
-	Status            VPCIpamPoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	Spec   VPCIpamPoolSpec   `json:"spec"`
+	Status VPCIpamPoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

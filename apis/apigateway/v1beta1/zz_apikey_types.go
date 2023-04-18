@@ -21,11 +21,23 @@ type APIKeyObservation struct {
 	// Creation date of the API key
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// API key description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether the API key can be used by callers. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// ID of the API key
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Last update date of the API key
 	LastUpdatedDate *string `json:"lastUpdatedDate,omitempty" tf:"last_updated_date,omitempty"`
+
+	// Name of the API key
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -42,8 +54,8 @@ type APIKeyParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Name of the API key
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +95,9 @@ type APIKeyStatus struct {
 type APIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APIKeySpec   `json:"spec"`
-	Status            APIKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   APIKeySpec   `json:"spec"`
+	Status APIKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

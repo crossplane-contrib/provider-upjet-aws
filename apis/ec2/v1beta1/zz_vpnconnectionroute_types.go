@@ -14,14 +14,21 @@ import (
 )
 
 type VPNConnectionRouteObservation struct {
+
+	// The CIDR block associated with the local subnet of the customer network.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the VPN connection.
+	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 }
 
 type VPNConnectionRouteParameters struct {
 
 	// The CIDR block associated with the local subnet of the customer network.
-	// +kubebuilder:validation:Required
-	DestinationCidrBlock *string `json:"destinationCidrBlock" tf:"destination_cidr_block,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -67,8 +74,9 @@ type VPNConnectionRouteStatus struct {
 type VPNConnectionRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPNConnectionRouteSpec   `json:"spec"`
-	Status            VPNConnectionRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	Spec   VPNConnectionRouteSpec   `json:"spec"`
+	Status VPNConnectionRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

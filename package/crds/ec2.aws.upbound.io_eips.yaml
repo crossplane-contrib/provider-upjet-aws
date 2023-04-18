@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -254,6 +258,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -430,9 +449,19 @@ spec:
             properties:
               atProvider:
                 properties:
+                  address:
+                    description: IP address from an EC2 BYOIP pool. This option is
+                      only available for VPC EIPs.
+                    type: string
                   allocationId:
                     description: ID that AWS assigns to represent the allocation of
                       the Elastic IP address for use with instances in a VPC.
+                    type: string
+                  associateWithPrivateIp:
+                    description: User-specified primary or secondary private IP address
+                      to associate with the Elastic IP address. If no private IP address
+                      is specified, the Elastic IP address is associated with the
+                      primary private IP address.
                     type: string
                   associationId:
                     description: ID representing the association of the address with
@@ -444,12 +473,27 @@ spec:
                   customerOwnedIp:
                     description: Customer owned IP.
                     type: string
+                  customerOwnedIpv4Pool:
+                    description: ID  of a customer-owned address pool. For more on
+                      customer owned IP addressed check out Customer-owned IP addresses
+                      guide.
+                    type: string
                   domain:
                     description: Indicates if this EIP is for use in VPC (vpc) or
                       EC2-Classic (standard).
                     type: string
                   id:
                     description: Contains the EIP allocation ID.
+                    type: string
+                  instance:
+                    description: EC2 instance ID.
+                    type: string
+                  networkBorderGroup:
+                    description: Location from which the IP address is advertised.
+                      Use this parameter to limit the address to this location.
+                    type: string
+                  networkInterface:
+                    description: Network interface ID to associate with.
                     type: string
                   privateDns:
                     description: The Private DNS associated with the Elastic IP address
@@ -464,6 +508,15 @@ spec:
                   publicIp:
                     description: Contains the public IP address.
                     type: string
+                  publicIpv4Pool:
+                    description: EC2 IPv4 address pool identifier or amazon. This
+                      option is only available for VPC EIPs.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -471,6 +524,10 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpc:
+                    description: Boolean if the EIP is in a VPC or not. Defaults to
+                      true unless the region supports EC2-Classic.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

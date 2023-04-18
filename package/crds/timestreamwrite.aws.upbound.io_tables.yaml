@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -229,6 +233,21 @@ spec:
                 - region
                 - tableName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -408,10 +427,89 @@ spec:
                   arn:
                     description: The ARN that uniquely identifies this table.
                     type: string
+                  databaseName:
+                    description: –  The name of the Timestream database.
+                    type: string
                   id:
                     description: The table_name and database_name separated by a colon
                       (:).
                     type: string
+                  magneticStoreWriteProperties:
+                    description: Contains properties to set on the table when enabling
+                      magnetic store writes. See Magnetic Store Write Properties below
+                      for more details.
+                    items:
+                      properties:
+                        enableMagneticStoreWrites:
+                          description: A flag to enable magnetic store writes.
+                          type: boolean
+                        magneticStoreRejectedDataLocation:
+                          description: The location to write error reports for records
+                            rejected asynchronously during magnetic store writes.
+                            See Magnetic Store Rejected Data Location below for more
+                            details.
+                          items:
+                            properties:
+                              s3Configuration:
+                                description: Configuration of an S3 location to write
+                                  error reports for records rejected, asynchronously,
+                                  during magnetic store writes. See S3 Configuration
+                                  below for more details.
+                                items:
+                                  properties:
+                                    bucketName:
+                                      description: Bucket name of the customer S3
+                                        bucket.
+                                      type: string
+                                    encryptionOption:
+                                      description: Encryption option for the customer
+                                        s3 location. Options are S3 server side encryption
+                                        with an S3-managed key or KMS managed key.
+                                        Valid values are SSE_KMS and SSE_S3.
+                                      type: string
+                                    kmsKeyId:
+                                      description: KMS key arn for the customer s3
+                                        location when encrypting with a KMS managed
+                                        key.
+                                      type: string
+                                    objectKeyPrefix:
+                                      description: Object key prefix for the customer
+                                        S3 location.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  retentionProperties:
+                    description: The retention duration for the memory store and magnetic
+                      store. See Retention Properties below for more details. If not
+                      provided, magnetic_store_retention_period_in_days default to
+                      73000 and memory_store_retention_period_in_hours defaults to
+                      6.
+                    items:
+                      properties:
+                        magneticStoreRetentionPeriodInDays:
+                          description: The duration for which data must be stored
+                            in the magnetic store. Minimum value of 1. Maximum value
+                            of 73000.
+                          type: number
+                        memoryStoreRetentionPeriodInHours:
+                          description: The duration for which data must be stored
+                            in the memory store. Minimum value of 1. Maximum value
+                            of 8766.
+                          type: number
+                      type: object
+                    type: array
+                  tableName:
+                    description: The name of the Timestream table.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

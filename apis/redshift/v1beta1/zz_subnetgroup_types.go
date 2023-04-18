@@ -18,8 +18,17 @@ type SubnetGroupObservation struct {
 	// Amazon Resource Name (ARN) of the Redshift Subnet group name
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the Redshift Subnet group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The Redshift Subnet group ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An array of VPC subnet IDs.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

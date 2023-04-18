@@ -15,17 +15,38 @@ import (
 
 type GatewayAssociationObservation struct {
 
+	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
+	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
+
+	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
+	// Used for single account Direct Connect gateway associations.
+	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
+
+	// The ID of the AWS account that owns the VGW or transit gateway with which to associate the Direct Connect gateway.
+	// Used for cross-account Direct Connect gateway associations.
+	AssociatedGatewayOwnerAccountID *string `json:"associatedGatewayOwnerAccountId,omitempty" tf:"associated_gateway_owner_account_id,omitempty"`
+
 	// The type of the associated gateway, transitGateway or virtualPrivateGateway.
 	AssociatedGatewayType *string `json:"associatedGatewayType,omitempty" tf:"associated_gateway_type,omitempty"`
 
 	// The ID of the Direct Connect gateway association.
 	DxGatewayAssociationID *string `json:"dxGatewayAssociationId,omitempty" tf:"dx_gateway_association_id,omitempty"`
 
+	// The ID of the Direct Connect gateway.
+	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
 	// The ID of the AWS account that owns the Direct Connect gateway.
 	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
 
 	// The ID of the Direct Connect gateway association resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Direct Connect gateway association proposal.
+	// Used for cross-account Direct Connect gateway associations.
+	ProposalID *string `json:"proposalId,omitempty" tf:"proposal_id,omitempty"`
+
+	// The ID of the Direct Connect gateway association resource.
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 type GatewayAssociationParameters struct {

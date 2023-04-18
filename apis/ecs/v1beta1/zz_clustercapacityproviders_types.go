@@ -14,6 +14,15 @@ import (
 )
 
 type ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
@@ -32,6 +41,15 @@ type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
 }
 
 type ClusterCapacityProvidersObservation struct {
+
+	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
+	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
+
+	// Name of the ECS cluster to manage capacity providers for.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
+	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
 	// Same as cluster_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

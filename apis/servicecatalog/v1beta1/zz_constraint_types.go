@@ -15,13 +15,31 @@ import (
 
 type ConstraintObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Description of the constraint.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Constraint identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Owner of the constraint.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
+	// Constraint parameters in JSON format. The syntax depends on the constraint type. See details below.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Product identifier.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Type of constraint. Valid values are LAUNCH, NOTIFICATION, RESOURCE_UPDATE, STACKSET, and TEMPLATE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ConstraintParameters struct {
@@ -35,8 +53,8 @@ type ConstraintParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Constraint parameters in JSON format. The syntax depends on the constraint type. See details below.
-	// +kubebuilder:validation:Required
-	Parameters *string `json:"parameters" tf:"parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Portfolio identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
@@ -72,8 +90,8 @@ type ConstraintParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Type of constraint. Valid values are LAUNCH, NOTIFICATION, RESOURCE_UPDATE, STACKSET, and TEMPLATE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ConstraintSpec defines the desired state of Constraint
@@ -100,8 +118,10 @@ type ConstraintStatus struct {
 type Constraint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConstraintSpec   `json:"spec"`
-	Status            ConstraintStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parameters)",message="parameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ConstraintSpec   `json:"spec"`
+	Status ConstraintStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

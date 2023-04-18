@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -97,11 +101,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - ipAddressVersion
-                - name
                 - region
-                - scope
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -273,19 +289,54 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: ipAddressVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipAddressVersion)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: scope is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:
               atProvider:
                 properties:
+                  addresses:
+                    description: Contains an array of strings that specify one or
+                      more IP addresses or blocks of IP addresses in Classless Inter-Domain
+                      Routing (CIDR) notation. AWS WAF supports all address ranges
+                      for IP versions IPv4 and IPv6.
+                    items:
+                      type: string
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) of the IP set.
+                    type: string
+                  description:
+                    description: A friendly description of the IP set.
                     type: string
                   id:
                     description: A unique identifier for the IP set.
                     type: string
+                  ipAddressVersion:
+                    description: Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
+                    type: string
                   lockToken:
                     type: string
+                  name:
+                    description: A friendly name of the IP set.
+                    type: string
+                  scope:
+                    description: Specifies whether this is for an AWS CloudFront distribution
+                      or for a regional application. Valid values are CLOUDFRONT or
+                      REGIONAL. To work with CloudFront, you must also specify the
+                      Region US East (N. Virginia).
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

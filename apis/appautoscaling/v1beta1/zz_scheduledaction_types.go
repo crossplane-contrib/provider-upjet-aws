@@ -14,6 +14,12 @@ import (
 )
 
 type ScalableTargetActionObservation struct {
+
+	// Maximum capacity. At least one of max_capacity or min_capacity must be set.
+	MaxCapacity *string `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Minimum capacity. At least one of min_capacity or max_capacity must be set.
+	MinCapacity *string `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type ScalableTargetActionParameters struct {
@@ -32,7 +38,34 @@ type ScheduledActionObservation struct {
 	// ARN of the scheduled action.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Date and time for the scheduled action to end in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the scheduled action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
+	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
+
+	// New minimum and maximum capacity. You can set both values or just one. See below
+	ScalableTargetAction []ScalableTargetActionObservation `json:"scalableTargetAction,omitempty" tf:"scalable_target_action,omitempty"`
+
+	// Schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the Timezone parameter at: AWS Application Auto Scaling API Reference
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
+	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Time zone used when setting a scheduled action by using an at or cron expression. Does not affect timezone for start_time and end_time. Valid values are the canonical names of the IANA time zones supported by Joda-Time, such as Etc/GMT+9 or Pacific/Tahiti. Default is UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type ScheduledActionParameters struct {
@@ -42,8 +75,8 @@ type ScheduledActionParameters struct {
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// Name of the scheduled action.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -79,12 +112,12 @@ type ScheduledActionParameters struct {
 	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// New minimum and maximum capacity. You can set both values or just one. See below
-	// +kubebuilder:validation:Required
-	ScalableTargetAction []ScalableTargetActionParameters `json:"scalableTargetAction" tf:"scalable_target_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScalableTargetAction []ScalableTargetActionParameters `json:"scalableTargetAction,omitempty" tf:"scalable_target_action,omitempty"`
 
 	// Schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the Timezone parameter at: AWS Application Auto Scaling API Reference
-	// +kubebuilder:validation:Required
-	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
@@ -133,8 +166,11 @@ type ScheduledActionStatus struct {
 type ScheduledAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduledActionSpec   `json:"spec"`
-	Status            ScheduledActionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scalableTargetAction)",message="scalableTargetAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	Spec   ScheduledActionSpec   `json:"spec"`
+	Status ScheduledActionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

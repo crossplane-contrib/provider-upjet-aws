@@ -18,7 +18,25 @@ type DevicePoolObservation struct {
 	// The Amazon Resource Name of this Device Pool
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The device pool's description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of devices that Device Farm can add to your device pool.
+	MaxDevices *float64 `json:"maxDevices,omitempty" tf:"max_devices,omitempty"`
+
+	// The name of the Device Pool
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the project for the device pool.
+	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
+
+	// The device pool's rules. See Rule.
+	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -37,8 +55,8 @@ type DevicePoolParameters struct {
 	MaxDevices *float64 `json:"maxDevices,omitempty" tf:"max_devices,omitempty"`
 
 	// The name of the Device Pool
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the project for the device pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
@@ -60,8 +78,8 @@ type DevicePoolParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The device pool's rules. See Rule.
-	// +kubebuilder:validation:Required
-	Rule []RuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -69,6 +87,15 @@ type DevicePoolParameters struct {
 }
 
 type RuleObservation struct {
+
+	// The rule's stringified attribute. Valid values are: APPIUM_VERSION, ARN, AVAILABILITY, FLEET_TYPE, FORM_FACTOR, INSTANCE_ARN, INSTANCE_LABELS, MANUFACTURER, MODEL, OS_VERSION, PLATFORM, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED.
+	Attribute *string `json:"attribute,omitempty" tf:"attribute,omitempty"`
+
+	// Specifies how Device Farm compares the rule's attribute to the value. For the operators that are supported by each attribute. Valid values are: EQUALS, NOT_IN, IN, GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, CONTAINS.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// The rule's value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RuleParameters struct {
@@ -110,8 +137,10 @@ type DevicePoolStatus struct {
 type DevicePool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DevicePoolSpec   `json:"spec"`
-	Status            DevicePoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   DevicePoolSpec   `json:"spec"`
+	Status DevicePoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

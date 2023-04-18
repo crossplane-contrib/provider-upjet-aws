@@ -16,11 +16,17 @@ import (
 type VPCIpamScopeObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description for the scope you're creating.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the IPAM Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN of the IPAM for which you're creating this scope.
 	IpamArn *string `json:"ipamArn,omitempty" tf:"ipam_arn,omitempty"`
+
+	// The ID of the IPAM for which you're creating this scope.
+	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 
 	IpamScopeType *string `json:"ipamScopeType,omitempty" tf:"ipam_scope_type,omitempty"`
 
@@ -29,6 +35,9 @@ type VPCIpamScopeObservation struct {
 
 	// Count of pools under this scope
 	PoolCount *float64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

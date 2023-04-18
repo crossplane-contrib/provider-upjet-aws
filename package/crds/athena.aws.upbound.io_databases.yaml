@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -196,6 +200,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -372,9 +391,57 @@ spec:
             properties:
               atProvider:
                 properties:
+                  aclConfiguration:
+                    description: That an Amazon S3 canned ACL should be set to control
+                      ownership of stored query results. See ACL Configuration below.
+                    items:
+                      properties:
+                        s3AclOption:
+                          description: Amazon S3 canned ACL that Athena should specify
+                            when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+                          type: string
+                      type: object
+                    type: array
+                  bucket:
+                    description: Name of S3 bucket to save the results of the query
+                      execution.
+                    type: string
+                  comment:
+                    description: Description of the database.
+                    type: string
+                  encryptionConfiguration:
+                    description: Encryption key block AWS Athena uses to decrypt the
+                      data in S3, such as an AWS Key Management Service (AWS KMS)
+                      key. See Encryption Configuration below.
+                    items:
+                      properties:
+                        encryptionOption:
+                          description: Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+                          type: string
+                        kmsKey:
+                          description: KMS key ARN or ID; required for key types SSE_KMS
+                            and CSE_KMS.
+                          type: string
+                      type: object
+                    type: array
+                  expectedBucketOwner:
+                    description: AWS account ID that you expect to be the owner of
+                      the Amazon S3 bucket.
+                    type: string
+                  forceDestroy:
+                    description: Boolean that indicates all tables should be deleted
+                      from the database so that the database can be destroyed without
+                      error. The tables are not recoverable.
+                    type: boolean
                   id:
                     description: Database name
                     type: string
+                  properties:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of custom metadata properties for the
+                      database definition.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -346,9 +350,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - firewallPolicy
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -520,6 +538,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: firewallPolicy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.firewallPolicy)
           status:
             description: FirewallPolicyStatus defines the observed state of FirewallPolicy.
             properties:
@@ -529,10 +550,187 @@ spec:
                     description: The Amazon Resource Name (ARN) that identifies the
                       firewall policy.
                     type: string
+                  description:
+                    description: A friendly description of the firewall policy.
+                    type: string
+                  encryptionConfiguration:
+                    description: KMS encryption configuration settings. See Encryption
+                      Configuration below for details.
+                    items:
+                      properties:
+                        keyId:
+                          description: The ID of the customer managed key. You can
+                            use any of the key identifiers that KMS supports, unless
+                            you're using a key that's managed by another account.
+                            If you're using a key managed by another account, then
+                            specify the key ARN.
+                          type: string
+                        type:
+                          description: The type of AWS KMS key to use for encryption
+                            of your Network Firewall resources. Valid values are CUSTOMER_KMS
+                            and AWS_OWNED_KMS_KEY.
+                          type: string
+                      type: object
+                    type: array
+                  firewallPolicy:
+                    description: A configuration block describing the rule groups
+                      and policy actions to use in the firewall policy. See Firewall
+                      Policy below for details.
+                    items:
+                      properties:
+                        statefulDefaultActions:
+                          description: Set of actions to take on a packet if it does
+                            not match any stateful rules in the policy. This can only
+                            be specified if the policy has a stateful_engine_options
+                            block with a rule_order value of STRICT_ORDER. You can
+                            specify one of either or neither values of aws:drop_strict
+                            or aws:drop_established, as well as any combination of
+                            aws:alert_strict and aws:alert_established.
+                          items:
+                            type: string
+                          type: array
+                        statefulEngineOptions:
+                          description: A configuration block that defines options
+                            on how the policy handles stateful rules. See Stateful
+                            Engine Options below for details.
+                          items:
+                            properties:
+                              ruleOrder:
+                                description: 'Indicates how to manage the order of
+                                  stateful rule evaluation for the policy. Default
+                                  value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER,
+                                  STRICT_ORDER.'
+                                type: string
+                            type: object
+                          type: array
+                        statefulRuleGroupReference:
+                          description: Set of configuration blocks containing references
+                            to the stateful rule groups that are used in the policy.
+                            See Stateful Rule Group Reference below for details.
+                          items:
+                            properties:
+                              override:
+                                description: Configuration block for override values
+                                items:
+                                  properties:
+                                    action:
+                                      description: The action that changes the rule
+                                        group from DROP to ALERT . This only applies
+                                        to managed rule groups.
+                                      type: string
+                                  type: object
+                                type: array
+                              priority:
+                                description: An integer setting that indicates the
+                                  order in which to run the stateless rule groups
+                                  in a single policy. AWS Network Firewall applies
+                                  each stateless rule group to a packet starting with
+                                  the group that has the lowest priority setting.
+                                type: number
+                              resourceArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  stateless rule group.
+                                type: string
+                            type: object
+                          type: array
+                        statelessCustomAction:
+                          description: Set of configuration blocks describing the
+                            custom action definitions that are available for use in
+                            the firewall policy's stateless_default_actions. See Stateless
+                            Custom Action below for details.
+                          items:
+                            properties:
+                              actionDefinition:
+                                description: A configuration block describing the
+                                  custom action associated with the action_name. See
+                                  Action Definition below for details.
+                                items:
+                                  properties:
+                                    publishMetricAction:
+                                      description: A configuration block describing
+                                        the stateless inspection criteria that publishes
+                                        the specified metrics to Amazon CloudWatch
+                                        for the matching packet. You can pair this
+                                        custom action with any of the standard stateless
+                                        rule actions. See Publish Metric Action below
+                                        for details.
+                                      items:
+                                        properties:
+                                          dimension:
+                                            description: Set of configuration blocks
+                                              describing dimension settings to use
+                                              for Amazon CloudWatch custom metrics.
+                                              See Dimension below for more details.
+                                            items:
+                                              properties:
+                                                value:
+                                                  description: The string value to
+                                                    use in the custom metric dimension.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              actionName:
+                                description: A friendly name of the custom action.
+                                type: string
+                            type: object
+                          type: array
+                        statelessDefaultActions:
+                          description: 'Set of actions to take on a packet if it does
+                            not match any of the stateless rules in the policy. You
+                            must specify one of the standard actions including: aws:drop,
+                            aws:pass, or aws:forward_to_sfe. In addition, you can
+                            specify custom actions that are compatible with your standard
+                            action choice. If you want non-matching packets to be
+                            forwarded for stateful inspection, specify aws:forward_to_sfe.'
+                          items:
+                            type: string
+                          type: array
+                        statelessFragmentDefaultActions:
+                          description: 'Set of actions to take on a fragmented packet
+                            if it does not match any of the stateless rules in the
+                            policy. You must specify one of the standard actions including:
+                            aws:drop, aws:pass, or aws:forward_to_sfe. In addition,
+                            you can specify custom actions that are compatible with
+                            your standard action choice. If you want non-matching
+                            packets to be forwarded for stateful inspection, specify
+                            aws:forward_to_sfe.'
+                          items:
+                            type: string
+                          type: array
+                        statelessRuleGroupReference:
+                          description: Set of configuration blocks containing references
+                            to the stateless rule groups that are used in the policy.
+                            See Stateless Rule Group Reference below for details.
+                          items:
+                            properties:
+                              priority:
+                                description: An integer setting that indicates the
+                                  order in which to run the stateless rule groups
+                                  in a single policy. AWS Network Firewall applies
+                                  each stateless rule group to a packet starting with
+                                  the group that has the lowest priority setting.
+                                type: number
+                              resourceArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  stateless rule group.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The Amazon Resource Name (ARN) that identifies the
                       firewall policy.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

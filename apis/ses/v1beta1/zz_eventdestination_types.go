@@ -14,6 +14,15 @@ import (
 )
 
 type CloudwatchDestinationObservation struct {
+
+	// The default value for the event
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The name for the dimension
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+
+	// The source for the value. May be any of "messageTag", "emailHeader" or "linkTag".
+	ValueSource *string `json:"valueSource,omitempty" tf:"value_source,omitempty"`
 }
 
 type CloudwatchDestinationParameters struct {
@@ -36,8 +45,26 @@ type EventDestinationObservation struct {
 	// The SES event destination ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// CloudWatch destination for the events
+	CloudwatchDestination []CloudwatchDestinationObservation `json:"cloudwatchDestination,omitempty" tf:"cloudwatch_destination,omitempty"`
+
+	// The name of the configuration set
+	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
+
+	// If true, the event destination will be enabled
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The SES event destination name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Send the events to a kinesis firehose destination
+	KinesisDestination []KinesisDestinationObservation `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
+
+	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
+
+	// Send the events to an SNS Topic destination
+	SnsDestination []SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationParameters struct {
@@ -68,8 +95,8 @@ type EventDestinationParameters struct {
 	KinesisDestination []KinesisDestinationParameters `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
-	// +kubebuilder:validation:Required
-	MatchingTypes []*string `json:"matchingTypes" tf:"matching_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,6 +109,12 @@ type EventDestinationParameters struct {
 }
 
 type KinesisDestinationObservation struct {
+
+	// The ARN of the role that has permissions to access the Kinesis Stream
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Kinesis Stream
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type KinesisDestinationParameters struct {
@@ -116,6 +149,9 @@ type KinesisDestinationParameters struct {
 }
 
 type SnsDestinationObservation struct {
+
+	// The ARN of the SNS topic
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type SnsDestinationParameters struct {
@@ -159,8 +195,9 @@ type EventDestinationStatus struct {
 type EventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventDestinationSpec   `json:"spec"`
-	Status            EventDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.matchingTypes)",message="matchingTypes is a required parameter"
+	Spec   EventDestinationSpec   `json:"spec"`
+	Status EventDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

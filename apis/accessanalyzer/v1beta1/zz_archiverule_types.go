@@ -15,6 +15,12 @@ import (
 
 type ArchiveRuleObservation struct {
 
+	// Analyzer name.
+	AnalyzerName *string `json:"analyzerName,omitempty" tf:"analyzer_name,omitempty"`
+
+	// Filter criteria for the archive rule. See Filter for more details.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Resource ID in the format: analyzer_name/rule_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -26,8 +32,8 @@ type ArchiveRuleParameters struct {
 	AnalyzerName *string `json:"analyzerName" tf:"analyzer_name,omitempty"`
 
 	// Filter criteria for the archive rule. See Filter for more details.
-	// +kubebuilder:validation:Required
-	Filter []FilterParameters `json:"filter" tf:"filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -36,6 +42,21 @@ type ArchiveRuleParameters struct {
 }
 
 type FilterObservation struct {
+
+	// Contains comparator.
+	Contains []*string `json:"contains,omitempty" tf:"contains,omitempty"`
+
+	// Filter criteria.
+	Criteria *string `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// Equals comparator.
+	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// Boolean comparator.
+	Exists *string `json:"exists,omitempty" tf:"exists,omitempty"`
+
+	// Not Equals comparator.
+	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
 type FilterParameters struct {
@@ -85,8 +106,9 @@ type ArchiveRuleStatus struct {
 type ArchiveRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ArchiveRuleSpec   `json:"spec"`
-	Status            ArchiveRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filter)",message="filter is a required parameter"
+	Spec   ArchiveRuleSpec   `json:"spec"`
+	Status ArchiveRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

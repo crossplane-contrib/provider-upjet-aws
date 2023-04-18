@@ -18,24 +18,42 @@ type PhoneNumberObservation struct {
 	// The ARN of the phone number.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ISO country code. For a list of Valid values, refer to PhoneNumberCountryCode.
+	CountryCode *string `json:"countryCode,omitempty" tf:"country_code,omitempty"`
+
+	// The description of the phone number.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The identifier of the phone number.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The phone number. Phone numbers are formatted [+] [country code] [subscriber number including area code].
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
+	// The prefix of the phone number that is used to filter available phone numbers. If provided, it must contain + as part of the country code. Do not specify this argument when importing the resource.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
 	// A block that specifies status of the phone number. Documented below.
 	Status []StatusObservation `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// The type of phone number. Valid Values: TOLL_FREE | DID.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PhoneNumberParameters struct {
 
 	// The ISO country code. For a list of Valid values, refer to PhoneNumberCountryCode.
-	// +kubebuilder:validation:Required
-	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	CountryCode *string `json:"countryCode,omitempty" tf:"country_code,omitempty"`
 
 	// The description of the phone number.
 	// +kubebuilder:validation:Optional
@@ -69,8 +87,8 @@ type PhoneNumberParameters struct {
 	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// The type of phone number. Valid Values: TOLL_FREE | DID.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StatusObservation struct {
@@ -109,8 +127,10 @@ type PhoneNumberStatus struct {
 type PhoneNumber struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PhoneNumberSpec   `json:"spec"`
-	Status            PhoneNumberStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.countryCode)",message="countryCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   PhoneNumberSpec   `json:"spec"`
+	Status PhoneNumberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

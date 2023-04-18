@@ -18,6 +18,9 @@ type ClusterSnapshotObservation struct {
 	// List of EC2 Availability Zones that instances in the DocDB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// The DocDB Cluster Identifier from which to take the snapshot.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
 	// The Amazon Resource Name (ARN) for the DocDB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 

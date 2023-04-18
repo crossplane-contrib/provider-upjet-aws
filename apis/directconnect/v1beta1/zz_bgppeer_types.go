@@ -15,8 +15,21 @@ import (
 
 type BGPPeerObservation struct {
 
+	// The address family for the BGP peer. ipv4  or ipv6.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// The IPv4 CIDR address to use to send traffic to Amazon.
+	// Required for IPv4 BGP peers on public virtual interfaces.
+	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
+
 	// The Direct Connect endpoint on which the BGP peer terminates.
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The authentication key for BGP configuration.
+	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the BGP peer.
 	BGPPeerID *string `json:"bgpPeerId,omitempty" tf:"bgp_peer_id,omitempty"`
@@ -24,15 +37,22 @@ type BGPPeerObservation struct {
 	// The Up/Down state of the BGP peer.
 	BGPStatus *string `json:"bgpStatus,omitempty" tf:"bgp_status,omitempty"`
 
+	// The IPv4 CIDR destination address to which Amazon should send traffic.
+	// Required for IPv4 BGP peers on public virtual interfaces.
+	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
+
 	// The ID of the BGP peer resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
+	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 }
 
 type BGPPeerParameters struct {
 
 	// The address family for the BGP peer. ipv4  or ipv6.
-	// +kubebuilder:validation:Required
-	AddressFamily *string `json:"addressFamily" tf:"address_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// The IPv4 CIDR address to use to send traffic to Amazon.
 	// Required for IPv4 BGP peers on public virtual interfaces.
@@ -40,8 +60,8 @@ type BGPPeerParameters struct {
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	// +kubebuilder:validation:Required
-	BGPAsn *float64 `json:"bgpAsn" tf:"bgp_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -96,8 +116,10 @@ type BGPPeerStatus struct {
 type BGPPeer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BGPPeerSpec   `json:"spec"`
-	Status            BGPPeerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bgpAsn)",message="bgpAsn is a required parameter"
+	Spec   BGPPeerSpec   `json:"spec"`
+	Status BGPPeerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

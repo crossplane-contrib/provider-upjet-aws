@@ -17,6 +17,11 @@ func (mg *ConditionalForwarder) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConditionalForwarder.
+func (mg *ConditionalForwarder) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConditionalForwarder.
 func (mg *ConditionalForwarder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ConditionalForwarder) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConditionalForwarder.
 func (mg *ConditionalForwarder) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConditionalForwarder.
+func (mg *ConditionalForwarder) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConditionalForwarder.
@@ -83,6 +93,11 @@ func (mg *Directory) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Directory.
+func (mg *Directory) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Directory.
 func (mg *Directory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Directory) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Directory.
 func (mg *Directory) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Directory.
+func (mg *Directory) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Directory.
@@ -149,6 +169,11 @@ func (mg *SharedDirectory) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SharedDirectory.
+func (mg *SharedDirectory) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SharedDirectory.
 func (mg *SharedDirectory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SharedDirectory) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SharedDirectory.
 func (mg *SharedDirectory) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SharedDirectory.
+func (mg *SharedDirectory) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SharedDirectory.

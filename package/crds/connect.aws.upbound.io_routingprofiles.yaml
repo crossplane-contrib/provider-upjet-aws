@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -289,11 +293,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - description
-                - mediaConcurrencies
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -465,6 +481,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: description is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)
+            - message: mediaConcurrencies is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mediaConcurrencies)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: RoutingProfileStatus defines the observed state of RoutingProfile.
             properties:
@@ -473,9 +496,44 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the Routing Profile.
                     type: string
+                  defaultOutboundQueueId:
+                    description: Specifies the default outbound queue for the Routing
+                      Profile.
+                    type: string
+                  description:
+                    description: Specifies the description of the Routing Profile.
+                    type: string
                   id:
                     description: The identifier of the hosting Amazon Connect Instance
                       and identifier of the Routing Profile separated by a colon (:).
+                    type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  mediaConcurrencies:
+                    description: One or more media_concurrencies blocks that specify
+                      the channels that agents can handle in the Contact Control Panel
+                      (CCP) for this Routing Profile. The media_concurrencies block
+                      is documented below.
+                    items:
+                      properties:
+                        channel:
+                          description: Specifies the channels that agents can handle
+                            in the Contact Control Panel (CCP). Valid values are VOICE,
+                            CHAT, TASK.
+                          type: string
+                        concurrency:
+                          description: 'Specifies the number of contacts an agent
+                            can have on a channel simultaneously. Valid Range for
+                            VOICE: Minimum value of 1. Maximum value of 1. Valid Range
+                            for CHAT: Minimum value of 1. Maximum value of 10. Valid
+                            Range for TASK: Minimum value of 1. Maximum value of 10.'
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: Specifies the name of the Routing Profile.
                     type: string
                   queueConfigs:
                     description: One or more queue_configs blocks that specify the
@@ -484,8 +542,25 @@ spec:
                       block is documented below.
                     items:
                       properties:
+                        channel:
+                          description: Specifies the channels agents can handle in
+                            the Contact Control Panel (CCP) for this routing profile.
+                            Valid values are VOICE, CHAT, TASK.
+                          type: string
+                        delay:
+                          description: Specifies the delay, in seconds, that a contact
+                            should be in the queue before they are routed to an available
+                            agent
+                          type: number
+                        priority:
+                          description: Specifies the order in which contacts are to
+                            be handled for the queue.
+                          type: number
                         queueArn:
                           description: ARN for the queue.
+                          type: string
+                        queueId:
+                          description: Specifies the identifier for the queue.
                           type: string
                         queueName:
                           description: Name for the queue.
@@ -523,6 +598,11 @@ spec:
                   routingProfileId:
                     description: The identifier for the Routing Profile.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

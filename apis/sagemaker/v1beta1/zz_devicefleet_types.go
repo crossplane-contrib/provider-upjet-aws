@@ -18,10 +18,25 @@ type DeviceFleetObservation struct {
 	// The Amazon Resource Name (ARN) assigned by AWS to this Device Fleet.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A description of the fleet.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".
+	EnableIotRoleAlias *bool `json:"enableIotRoleAlias,omitempty" tf:"enable_iot_role_alias,omitempty"`
+
 	// The name of the Device Fleet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	IotRoleAlias *string `json:"iotRoleAlias,omitempty" tf:"iot_role_alias,omitempty"`
+
+	// Specifies details about the repository. see Output Config details below.
+	OutputConfig []OutputConfigObservation `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+
+	// The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -38,8 +53,8 @@ type DeviceFleetParameters struct {
 	EnableIotRoleAlias *bool `json:"enableIotRoleAlias,omitempty" tf:"enable_iot_role_alias,omitempty"`
 
 	// Specifies details about the repository. see Output Config details below.
-	// +kubebuilder:validation:Required
-	OutputConfig []OutputConfigParameters `json:"outputConfig" tf:"output_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputConfig []OutputConfigParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -66,6 +81,12 @@ type DeviceFleetParameters struct {
 }
 
 type OutputConfigObservation struct {
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The Amazon Simple Storage (S3) bucker URI.
+	S3OutputLocation *string `json:"s3OutputLocation,omitempty" tf:"s3_output_location,omitempty"`
 }
 
 type OutputConfigParameters struct {
@@ -103,8 +124,9 @@ type DeviceFleetStatus struct {
 type DeviceFleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceFleetSpec   `json:"spec"`
-	Status            DeviceFleetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputConfig)",message="outputConfig is a required parameter"
+	Spec   DeviceFleetSpec   `json:"spec"`
+	Status DeviceFleetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

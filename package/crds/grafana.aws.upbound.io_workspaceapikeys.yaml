@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -159,11 +163,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - keyName
-                - keyRole
                 - region
-                - secondsToLive
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -335,6 +351,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: keyName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyName)
+            - message: keyRole is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyRole)
+            - message: secondsToLive is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.secondsToLive)
           status:
             description: WorkspaceAPIKeyStatus defines the observed state of WorkspaceAPIKey.
             properties:
@@ -345,6 +368,22 @@ spec:
                   key:
                     description: The key token in JSON format. Use this value as a
                       bearer token to authenticate HTTP requests to the workspace.
+                    type: string
+                  keyName:
+                    description: Specifies the name of the API key. Key names must
+                      be unique to the workspace.
+                    type: string
+                  keyRole:
+                    description: Specifies the permission level of the API key. Valid
+                      values are VIEWER, EDITOR, or ADMIN.
+                    type: string
+                  secondsToLive:
+                    description: Specifies the time in seconds until the API key expires.
+                      Keys can be valid for up to 30 days.
+                    type: number
+                  workspaceId:
+                    description: The ID of the workspace that the API key is valid
+                      for.
                     type: string
                 type: object
               conditions:

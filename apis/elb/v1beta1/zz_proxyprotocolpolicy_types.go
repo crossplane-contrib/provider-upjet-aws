@@ -17,14 +17,22 @@ type ProxyProtocolPolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of instance ports to which the policy
+	// should be applied. This can be specified if the protocol is SSL or TCP.
+	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
 }
 
 type ProxyProtocolPolicyParameters struct {
 
 	// List of instance ports to which the policy
 	// should be applied. This can be specified if the protocol is SSL or TCP.
-	// +kubebuilder:validation:Required
-	InstancePorts []*string `json:"instancePorts" tf:"instance_ports,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.
@@ -70,8 +78,9 @@ type ProxyProtocolPolicyStatus struct {
 type ProxyProtocolPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxyProtocolPolicySpec   `json:"spec"`
-	Status            ProxyProtocolPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instancePorts)",message="instancePorts is a required parameter"
+	Spec   ProxyProtocolPolicySpec   `json:"spec"`
+	Status ProxyProtocolPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,20 @@ import (
 
 type DomainEntryObservation struct {
 
+	// The name of the Lightsail domain in which to create the entry
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// A combination of attributes to create a unique id: name_domain_name_type_target
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// If the entry should be an alias Defaults to false
+	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
+
+	// Target of the domain entry
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Type of record
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DomainEntryParameters struct {
@@ -45,8 +57,8 @@ type DomainEntryParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Target of the domain entry
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Type of record
 	// +kubebuilder:validation:Required
@@ -77,8 +89,9 @@ type DomainEntryStatus struct {
 type DomainEntry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainEntrySpec   `json:"spec"`
-	Status            DomainEntryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)",message="target is a required parameter"
+	Spec   DomainEntrySpec   `json:"spec"`
+	Status DomainEntryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,11 +15,23 @@ import (
 
 type ClusterActivityStreamObservation struct {
 
+	// Specifies whether the database activity stream includes engine-native audit fields. This option only applies to an Oracle DB instance. By default, no engine-native audit fields are included. Defaults false.
+	EngineNativeAuditFieldsIncluded *bool `json:"engineNativeAuditFieldsIncluded,omitempty" tf:"engine_native_audit_fields_included,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the DB cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The AWS KMS key identifier for encrypting messages in the database activity stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// The name of the Amazon Kinesis data stream to be used for the database activity stream.
 	KinesisStreamName *string `json:"kinesisStreamName,omitempty" tf:"kinesis_stream_name,omitempty"`
+
+	// Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. One of: sync, async.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the DB cluster.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type ClusterActivityStreamParameters struct {
@@ -42,8 +54,8 @@ type ClusterActivityStreamParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. One of: sync, async.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -89,8 +101,9 @@ type ClusterActivityStreamStatus struct {
 type ClusterActivityStream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterActivityStreamSpec   `json:"spec"`
-	Status            ClusterActivityStreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.mode)",message="mode is a required parameter"
+	Spec   ClusterActivityStreamSpec   `json:"spec"`
+	Status ClusterActivityStreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

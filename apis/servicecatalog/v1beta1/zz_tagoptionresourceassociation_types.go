@@ -27,8 +27,14 @@ type TagOptionResourceAssociationObservation struct {
 	// Description of the resource.
 	ResourceDescription *string `json:"resourceDescription,omitempty" tf:"resource_description,omitempty"`
 
+	// Resource identifier.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
 	// Description of the resource.
 	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
+
+	// Tag Option identifier.
+	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 }
 
 type TagOptionResourceAssociationParameters struct {

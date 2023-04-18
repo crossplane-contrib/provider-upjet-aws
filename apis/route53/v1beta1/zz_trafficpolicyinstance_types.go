@@ -15,8 +15,23 @@ import (
 
 type TrafficPolicyInstanceObservation struct {
 
+	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
 	// ID of traffic policy instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// TTL that you want Amazon Route 53 to assign to all the resource record sets that it creates in the specified hosted zone.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
+	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
+
+	// Version of the traffic policy
+	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion,omitempty" tf:"traffic_policy_version,omitempty"`
 }
 
 type TrafficPolicyInstanceParameters struct {
@@ -35,8 +50,8 @@ type TrafficPolicyInstanceParameters struct {
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
 	// Domain name for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -44,8 +59,8 @@ type TrafficPolicyInstanceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// TTL that you want Amazon Route 53 to assign to all the resource record sets that it creates in the specified hosted zone.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
 	// +crossplane:generate:reference:type=TrafficPolicy
@@ -61,8 +76,8 @@ type TrafficPolicyInstanceParameters struct {
 	TrafficPolicyIDSelector *v1.Selector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 
 	// Version of the traffic policy
-	// +kubebuilder:validation:Required
-	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion" tf:"traffic_policy_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	TrafficPolicyVersion *float64 `json:"trafficPolicyVersion,omitempty" tf:"traffic_policy_version,omitempty"`
 }
 
 // TrafficPolicyInstanceSpec defines the desired state of TrafficPolicyInstance
@@ -89,8 +104,11 @@ type TrafficPolicyInstanceStatus struct {
 type TrafficPolicyInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficPolicyInstanceSpec   `json:"spec"`
-	Status            TrafficPolicyInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trafficPolicyVersion)",message="trafficPolicyVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   TrafficPolicyInstanceSpec   `json:"spec"`
+	Status TrafficPolicyInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

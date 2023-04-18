@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -252,9 +256,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - lifecycleTransition
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -426,12 +444,50 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: lifecycleTransition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lifecycleTransition)
           status:
             description: LifecycleHookStatus defines the observed state of LifecycleHook.
             properties:
               atProvider:
                 properties:
+                  autoscalingGroupName:
+                    description: Name of the Auto Scaling group to which you want
+                      to assign the lifecycle hook
+                    type: string
+                  defaultResult:
+                    description: Defines the action the Auto Scaling group should
+                      take when the lifecycle hook timeout elapses or if an unexpected
+                      failure occurs. The value for this parameter can be either CONTINUE
+                      or ABANDON. The default value for this parameter is ABANDON.
+                    type: string
+                  heartbeatTimeout:
+                    description: Defines the amount of time, in seconds, that can
+                      elapse before the lifecycle hook times out. When the lifecycle
+                      hook times out, Auto Scaling performs the action defined in
+                      the DefaultResult parameter
+                    type: number
                   id:
+                    type: string
+                  lifecycleTransition:
+                    description: Instance state to which you want to attach the lifecycle
+                      hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+                    type: string
+                  notificationMetadata:
+                    description: Contains additional information that you want to
+                      include any time Auto Scaling sends a message to the notification
+                      target.
+                    type: string
+                  notificationTargetArn:
+                    description: ARN of the notification target that Auto Scaling
+                      will use to notify you when an instance is in the transition
+                      state for the lifecycle hook. This ARN target can be either
+                      an SQS queue or an SNS topic.
+                    type: string
+                  roleArn:
+                    description: ARN of the IAM role that allows the Auto Scaling
+                      group to publish to the specified notification target.
                     type: string
                 type: object
               conditions:

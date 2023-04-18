@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -263,8 +267,22 @@ spec:
                     type: array
                 required:
                 - region
-                - trigger
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -436,6 +454,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: trigger is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trigger)
           status:
             description: TriggerStatus defines the observed state of Trigger.
             properties:
@@ -446,6 +467,45 @@ spec:
                     type: string
                   id:
                     type: string
+                  repositoryName:
+                    description: The name for the repository. This needs to be less
+                      than 100 characters.
+                    type: string
+                  trigger:
+                    items:
+                      properties:
+                        branches:
+                          description: The branches that will be included in the trigger
+                            configuration. If no branches are specified, the trigger
+                            will apply to all branches.
+                          items:
+                            type: string
+                          type: array
+                        customData:
+                          description: Any custom data associated with the trigger
+                            that will be included in the information sent to the target
+                            of the trigger.
+                          type: string
+                        destinationArn:
+                          description: The ARN of the resource that is the target
+                            for a trigger. For example, the ARN of a topic in Amazon
+                            Simple Notification Service (SNS).
+                          type: string
+                        events:
+                          description: 'The repository events that will cause the
+                            trigger to run actions in another service, such as sending
+                            a notification through Amazon Simple Notification Service
+                            (SNS). If no events are specified, the trigger will run
+                            for all repository events. Event types include: all, updateReference,
+                            createReference, deleteReference.'
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name of the trigger.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

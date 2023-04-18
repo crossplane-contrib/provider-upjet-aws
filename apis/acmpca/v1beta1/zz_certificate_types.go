@@ -21,10 +21,23 @@ type CertificateObservation struct {
 	// PEM-encoded certificate value.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
+	// ARN of the certificate authority.
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
 	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA.
+	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
+
+	// Template to use when issuing a certificate.
+	// See ACM PCA Documentation for more information.
+	TemplateArn *string `json:"templateArn,omitempty" tf:"template_arn,omitempty"`
+
+	// Configures end of the validity period for the certificate. See validity block below.
+	Validity []ValidityObservation `json:"validity,omitempty" tf:"validity,omitempty"`
 }
 
 type CertificateParameters struct {
@@ -43,7 +56,7 @@ type CertificateParameters struct {
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate Signing Request in PEM format.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CertificateSigningRequestSecretRef v1.SecretKeySelector `json:"certificateSigningRequestSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -52,8 +65,8 @@ type CertificateParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA.
-	// +kubebuilder:validation:Required
-	SigningAlgorithm *string `json:"signingAlgorithm" tf:"signing_algorithm,omitempty"`
+	// +kubebuilder:validation:Optional
+	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 
 	// Template to use when issuing a certificate.
 	// See ACM PCA Documentation for more information.
@@ -61,11 +74,17 @@ type CertificateParameters struct {
 	TemplateArn *string `json:"templateArn,omitempty" tf:"template_arn,omitempty"`
 
 	// Configures end of the validity period for the certificate. See validity block below.
-	// +kubebuilder:validation:Required
-	Validity []ValidityParameters `json:"validity" tf:"validity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Validity []ValidityParameters `json:"validity,omitempty" tf:"validity,omitempty"`
 }
 
 type ValidityObservation struct {
+
+	// Determines how value is interpreted. Valid values: DAYS, MONTHS, YEARS, ABSOLUTE, END_DATE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// If type is DAYS, MONTHS, or YEARS, the relative time until the certificate expires. If type is ABSOLUTE, the date in seconds since the Unix epoch. If type is END_DATE, the  date in RFC 3339 format.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ValidityParameters struct {
@@ -103,8 +122,11 @@ type CertificateStatus struct {
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateSpec   `json:"spec"`
-	Status            CertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateSigningRequestSecretRef)",message="certificateSigningRequestSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.signingAlgorithm)",message="signingAlgorithm is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.validity)",message="validity is a required parameter"
+	Spec   CertificateSpec   `json:"spec"`
+	Status CertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

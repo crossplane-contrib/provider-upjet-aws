@@ -17,6 +17,11 @@ func (mg *VoiceConnector) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnector.
+func (mg *VoiceConnector) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnector.
 func (mg *VoiceConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *VoiceConnector) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnector.
 func (mg *VoiceConnector) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnector.
+func (mg *VoiceConnector) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnector.
@@ -83,6 +93,11 @@ func (mg *VoiceConnectorGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorGroup.
+func (mg *VoiceConnectorGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *VoiceConnectorGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorGroup.
+func (mg *VoiceConnectorGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorGroup.
@@ -149,6 +169,11 @@ func (mg *VoiceConnectorLogging) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorLogging.
+func (mg *VoiceConnectorLogging) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *VoiceConnectorLogging) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorLogging.
+func (mg *VoiceConnectorLogging) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorLogging.
@@ -215,6 +245,11 @@ func (mg *VoiceConnectorOrigination) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorOrigination.
+func (mg *VoiceConnectorOrigination) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *VoiceConnectorOrigination) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorOrigination.
+func (mg *VoiceConnectorOrigination) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorOrigination.
@@ -281,6 +321,11 @@ func (mg *VoiceConnectorStreaming) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorStreaming.
+func (mg *VoiceConnectorStreaming) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *VoiceConnectorStreaming) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorStreaming.
+func (mg *VoiceConnectorStreaming) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorStreaming.
@@ -347,6 +397,11 @@ func (mg *VoiceConnectorTermination) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorTermination.
+func (mg *VoiceConnectorTermination) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *VoiceConnectorTermination) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorTermination.
+func (mg *VoiceConnectorTermination) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorTermination.
@@ -413,6 +473,11 @@ func (mg *VoiceConnectorTerminationCredentials) GetDeletionPolicy() xpv1.Deletio
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VoiceConnectorTerminationCredentials.
+func (mg *VoiceConnectorTerminationCredentials) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *VoiceConnectorTerminationCredentials) SetConditions(c ...xpv1.Conditio
 // SetDeletionPolicy of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VoiceConnectorTerminationCredentials.
+func (mg *VoiceConnectorTerminationCredentials) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VoiceConnectorTerminationCredentials.

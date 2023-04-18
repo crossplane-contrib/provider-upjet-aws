@@ -14,6 +14,12 @@ import (
 )
 
 type AttributeObservation struct {
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the attribute
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AttributeParameters struct {
@@ -29,8 +35,26 @@ type AttributeParameters struct {
 
 type LBSSLNegotiationPolicyObservation struct {
 
+	// An SSL Negotiation policy attribute. Each has two properties:
+	Attribute []AttributeObservation `json:"attribute,omitempty" tf:"attribute,omitempty"`
+
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger a redeployment.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
 type LBSSLNegotiationPolicyParameters struct {
@@ -42,8 +66,8 @@ type LBSSLNegotiationPolicyParameters struct {
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	// +kubebuilder:validation:Required
-	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.
@@ -61,8 +85,8 @@ type LBSSLNegotiationPolicyParameters struct {
 	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 
 	// The name of the SSL negotiation policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -98,8 +122,10 @@ type LBSSLNegotiationPolicyStatus struct {
 type LBSSLNegotiationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LBSSLNegotiationPolicySpec   `json:"spec"`
-	Status            LBSSLNegotiationPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lbPort)",message="lbPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   LBSSLNegotiationPolicySpec   `json:"spec"`
+	Status LBSSLNegotiationPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

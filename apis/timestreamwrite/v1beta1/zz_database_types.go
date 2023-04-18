@@ -21,8 +21,14 @@ type DatabaseObservation struct {
 	// The name of the Timestream database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ARN (not Alias ARN) of the KMS key to be used to encrypt the data stored in the database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. Refer to AWS managed KMS keys for more info.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// The total number of tables found within the Timestream database.
 	TableCount *float64 `json:"tableCount,omitempty" tf:"table_count,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

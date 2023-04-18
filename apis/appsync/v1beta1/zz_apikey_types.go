@@ -15,6 +15,15 @@ import (
 
 type APIKeyObservation struct {
 
+	// ID of the associated AppSync API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// API key description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// RFC3339 string representation of the expiry date. Rounded down to nearest hour. By default, it is 7 days from the date of creation.
+	Expires *string `json:"expires,omitempty" tf:"expires,omitempty"`
+
 	// API Key ID (Formatted as ApiId:Key)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }

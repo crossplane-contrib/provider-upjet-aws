@@ -14,6 +14,9 @@ import (
 )
 
 type AccessControlListConfigurationObservation struct {
+
+	// Path to the AWS S3 bucket that contains the ACL files.
+	KeyPath *string `json:"keyPath,omitempty" tf:"key_path,omitempty"`
 }
 
 type AccessControlListConfigurationParameters struct {
@@ -24,6 +27,9 @@ type AccessControlListConfigurationParameters struct {
 }
 
 type AuthenticationConfigurationObservation struct {
+
+	// The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host. Detailed below.
+	BasicAuthentication []BasicAuthenticationObservation `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
 }
 
 type AuthenticationConfigurationParameters struct {
@@ -34,6 +40,15 @@ type AuthenticationConfigurationParameters struct {
 }
 
 type BasicAuthenticationObservation struct {
+
+	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type BasicAuthenticationParameters struct {
@@ -62,9 +77,29 @@ type BasicAuthenticationParameters struct {
 }
 
 type ConditionObservation struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []ConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionOnValueObservation struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type ConditionOnValueParameters struct {
@@ -101,6 +136,12 @@ type ConditionParameters struct {
 }
 
 type ConfigurationObservation struct {
+
+	// A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
+	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
+	WebCrawlerConfiguration []WebCrawlerConfigurationObservation `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -115,6 +156,18 @@ type ConfigurationParameters struct {
 }
 
 type CustomDocumentEnrichmentConfigurationObservation struct {
+
+	// Configuration information to alter document attributes or metadata fields and content when ingesting documents into Amazon Kendra. Minimum number of 0 items. Maximum number of 100 items. Detailed below.
+	InlineConfigurations []InlineConfigurationsObservation `json:"inlineConfigurations,omitempty" tf:"inline_configurations,omitempty"`
+
+	// A block that specifies the configuration information for invoking a Lambda function in AWS Lambda on the structured documents with their metadata and text extracted. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
+	PostExtractionHookConfiguration []PostExtractionHookConfigurationObservation `json:"postExtractionHookConfiguration,omitempty" tf:"post_extraction_hook_configuration,omitempty"`
+
+	// Configuration information for invoking a Lambda function in AWS Lambda on the original or raw documents before extracting their metadata and text. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
+	PreExtractionHookConfiguration []PreExtractionHookConfigurationObservation `json:"preExtractionHookConfiguration,omitempty" tf:"pre_extraction_hook_configuration,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type CustomDocumentEnrichmentConfigurationParameters struct {
@@ -141,11 +194,20 @@ type DataSourceObservation struct {
 	// ARN of the Data Source.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration argument when the type parameter is set to CUSTOM. Detailed below.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// The Unix timestamp of when the Data Source was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// A block with the configuration information for altering document metadata and content during the document ingestion process. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process. Detailed below.
+	CustomDocumentEnrichmentConfiguration []CustomDocumentEnrichmentConfigurationObservation `json:"customDocumentEnrichmentConfiguration,omitempty" tf:"custom_document_enrichment_configuration,omitempty"`
+
 	// The unique identifiers of the Data Source.
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
+
+	// A description for the Data Source connector.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// When the Status field value is FAILED, the ErrorMessage field contains a description of the error that caused the Data Source to fail.
 	ErrorMessage *string `json:"errorMessage,omitempty" tf:"error_message,omitempty"`
@@ -153,11 +215,32 @@ type DataSourceObservation struct {
 	// The unique identifiers of the Data Source and index separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The identifier of the index for your Amazon Kendra data_source.
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// A name for your Data Source connector.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
 	// The current status of the Data Source. When the status is ACTIVE the Data Source is ready to use. When the status is FAILED, the error_message field contains the reason that the Data Source failed.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The Unix timestamp of when the Data Source was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
@@ -196,8 +279,8 @@ type DataSourceParameters struct {
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// A name for your Data Source connector.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -227,11 +310,14 @@ type DataSourceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DocumentsMetadataConfigurationObservation struct {
+
+	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use s3_prefix to include only the desired metadata files.
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 }
 
 type DocumentsMetadataConfigurationParameters struct {
@@ -242,6 +328,15 @@ type DocumentsMetadataConfigurationParameters struct {
 }
 
 type InlineConfigurationsObservation struct {
+
+	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See Document Attribute Condition.
+	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// TRUE to delete content if the condition used for the target attribute is met.
+	DocumentContentDeletion *bool `json:"documentContentDeletion,omitempty" tf:"document_content_deletion,omitempty"`
+
+	// Configuration of the target document attribute or metadata field when ingesting documents into Amazon Kendra. You can also include a value. Detailed below.
+	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type InlineConfigurationsParameters struct {
@@ -260,6 +355,17 @@ type InlineConfigurationsParameters struct {
 }
 
 type InvocationConditionConditionOnValueObservation struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type InvocationConditionConditionOnValueParameters struct {
@@ -281,6 +387,15 @@ type InvocationConditionConditionOnValueParameters struct {
 }
 
 type InvocationConditionObservation struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []InvocationConditionConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type InvocationConditionParameters struct {
@@ -299,6 +414,15 @@ type InvocationConditionParameters struct {
 }
 
 type PostExtractionHookConfigurationObservation struct {
+
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	InvocationCondition []InvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 }
 
 type PostExtractionHookConfigurationParameters struct {
@@ -317,6 +441,17 @@ type PostExtractionHookConfigurationParameters struct {
 }
 
 type PreExtractionHookConfigurationInvocationConditionConditionOnValueObservation struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters struct {
@@ -338,6 +473,15 @@ type PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters
 }
 
 type PreExtractionHookConfigurationInvocationConditionObservation struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type PreExtractionHookConfigurationInvocationConditionParameters struct {
@@ -356,6 +500,15 @@ type PreExtractionHookConfigurationInvocationConditionParameters struct {
 }
 
 type PreExtractionHookConfigurationObservation struct {
+
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	InvocationCondition []PreExtractionHookConfigurationInvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 }
 
 type PreExtractionHookConfigurationParameters struct {
@@ -374,6 +527,15 @@ type PreExtractionHookConfigurationParameters struct {
 }
 
 type ProxyConfigurationObservation struct {
+
+	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ProxyConfigurationParameters struct {
@@ -402,6 +564,24 @@ type ProxyConfigurationParameters struct {
 }
 
 type S3ConfigurationObservation struct {
+
+	// A block that provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see Access control for S3 data sources. Detailed below.
+	AccessControlListConfiguration []AccessControlListConfigurationObservation `json:"accessControlListConfiguration,omitempty" tf:"access_control_list_configuration,omitempty"`
+
+	// The name of the bucket that contains the documents.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// A block that defines the Ddcument metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
+	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationObservation `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
+
+	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
+	ExclusionPatterns []*string `json:"exclusionPatterns,omitempty" tf:"exclusion_patterns,omitempty"`
+
+	// A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Inclusion Patterns for more examples.
+	InclusionPatterns []*string `json:"inclusionPatterns,omitempty" tf:"inclusion_patterns,omitempty"`
+
+	// A list of S3 prefixes for the documents that should be included in the index.
+	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
 type S3ConfigurationParameters struct {
@@ -442,6 +622,12 @@ type S3ConfigurationParameters struct {
 }
 
 type SeedURLConfigurationObservation struct {
+
+	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
+	SeedUrls []*string `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
+
+	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
+	WebCrawlerMode *string `json:"webCrawlerMode,omitempty" tf:"web_crawler_mode,omitempty"`
 }
 
 type SeedURLConfigurationParameters struct {
@@ -456,6 +642,9 @@ type SeedURLConfigurationParameters struct {
 }
 
 type SiteMapsConfigurationObservation struct {
+
+	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
+	SiteMaps []*string `json:"siteMaps,omitempty" tf:"site_maps,omitempty"`
 }
 
 type SiteMapsConfigurationParameters struct {
@@ -466,6 +655,17 @@ type SiteMapsConfigurationParameters struct {
 }
 
 type TargetDocumentAttributeValueObservation struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type TargetDocumentAttributeValueParameters struct {
@@ -487,6 +687,16 @@ type TargetDocumentAttributeValueParameters struct {
 }
 
 type TargetObservation struct {
+
+	// The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
+	TargetDocumentAttributeKey *string `json:"targetDocumentAttributeKey,omitempty" tf:"target_document_attribute_key,omitempty"`
+
+	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'.
+	// See Document Attribute Value.
+	TargetDocumentAttributeValue []TargetDocumentAttributeValueObservation `json:"targetDocumentAttributeValue,omitempty" tf:"target_document_attribute_value,omitempty"`
+
+	// TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE. To create a target value (TargetDocumentAttributeValue), set this to FALSE.
+	TargetDocumentAttributeValueDeletion *bool `json:"targetDocumentAttributeValueDeletion,omitempty" tf:"target_document_attribute_value_deletion,omitempty"`
 }
 
 type TargetParameters struct {
@@ -506,6 +716,12 @@ type TargetParameters struct {
 }
 
 type UrlsObservation struct {
+
+	// A block that specifies the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs. Detailed below.
+	SeedURLConfiguration []SeedURLConfigurationObservation `json:"seedUrlConfiguration,omitempty" tf:"seed_url_configuration,omitempty"`
+
+	// A block that specifies the configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to 3 sitemap URLs. Detailed below.
+	SiteMapsConfiguration []SiteMapsConfigurationObservation `json:"siteMapsConfiguration,omitempty" tf:"site_maps_configuration,omitempty"`
 }
 
 type UrlsParameters struct {
@@ -520,6 +736,33 @@ type UrlsParameters struct {
 }
 
 type WebCrawlerConfigurationObservation struct {
+
+	// A block with the configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You use a secret in AWS Secrets Manager to store your authentication credentials. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Detailed below.
+	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
+	CrawlDepth *float64 `json:"crawlDepth,omitempty" tf:"crawl_depth,omitempty"`
+
+	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB. Minimum value of 1.0e-06. Maximum value of 50.
+	MaxContentSizePerPageInMegaBytes *float64 `json:"maxContentSizePerPageInMegaBytes,omitempty" tf:"max_content_size_per_page_in_mega_bytes,omitempty"`
+
+	// The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage. As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance. The default maximum links per page is 100. Minimum value of 1. Maximum value of 1000.
+	MaxLinksPerPage *float64 `json:"maxLinksPerPage,omitempty" tf:"max_links_per_page,omitempty"`
+
+	// The maximum number of URLs crawled per website host per minute. The default maximum number of URLs crawled per website host per minute is 300. Minimum value of 1. Maximum value of 300.
+	MaxUrlsPerMinuteCrawlRate *float64 `json:"maxUrlsPerMinuteCrawlRate,omitempty" tf:"max_urls_per_minute_crawl_rate,omitempty"`
+
+	// Configuration information required to connect to your internal websites via a web proxy. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in AWS Secrets Manager. Detailed below.
+	ProxyConfiguration []ProxyConfigurationObservation `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
+
+	// A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	URLExclusionPatterns []*string `json:"urlExclusionPatterns,omitempty" tf:"url_exclusion_patterns,omitempty"`
+
+	// A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
+
+	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
+	Urls []UrlsObservation `json:"urls,omitempty" tf:"urls,omitempty"`
 }
 
 type WebCrawlerConfigurationParameters struct {
@@ -585,8 +828,10 @@ type DataSourceStatus struct {
 type DataSource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataSourceSpec   `json:"spec"`
-	Status            DataSourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   DataSourceSpec   `json:"spec"`
+	Status DataSourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

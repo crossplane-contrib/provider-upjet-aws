@@ -18,14 +18,32 @@ type ActivationObservation struct {
 	// The code the system generates when it processes the activation.
 	ActivationCode *string `json:"activationCode,omitempty" tf:"activation_code,omitempty"`
 
+	// The description of the resource that you want to register.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// UTC timestamp in RFC3339 format by which this activation request should expire. The default value is 24 hours from resource creation time.
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
+
 	// If the current activation has expired.
 	Expired *bool `json:"expired,omitempty" tf:"expired,omitempty"`
+
+	// The IAM Role to attach to the managed instance.
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
 
 	// The activation ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The default name of the registered managed instance.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The number of managed instances that are currently registered using this activation.
 	RegistrationCount *float64 `json:"registrationCount,omitempty" tf:"registration_count,omitempty"`
+
+	// The maximum number of managed instances you want to register. The default value is 1 instance.
+	RegistrationLimit *float64 `json:"registrationLimit,omitempty" tf:"registration_limit,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

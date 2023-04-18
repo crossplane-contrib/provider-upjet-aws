@@ -15,15 +15,21 @@ import (
 
 type SnapshotCreateVolumePermissionObservation struct {
 
+	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
 	// A combination of "snapshot_id-account_id".
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A snapshot ID
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 }
 
 type SnapshotCreateVolumePermissionParameters struct {
 
 	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -69,8 +75,9 @@ type SnapshotCreateVolumePermissionStatus struct {
 type SnapshotCreateVolumePermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotCreateVolumePermissionSpec   `json:"spec"`
-	Status            SnapshotCreateVolumePermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountId)",message="accountId is a required parameter"
+	Spec   SnapshotCreateVolumePermissionSpec   `json:"spec"`
+	Status SnapshotCreateVolumePermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

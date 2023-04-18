@@ -21,6 +21,9 @@ type GroupObservation struct {
 	// The group's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Path in which to create the group.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
 	// The unique ID assigned by AWS.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 }

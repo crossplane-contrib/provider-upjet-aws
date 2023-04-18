@@ -18,11 +18,29 @@ type ThesaurusObservation struct {
 	// ARN of the thesaurus.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description for a thesaurus.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The unique identifiers of the thesaurus and index separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The identifier of the index for a thesaurus.
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// The name for the thesaurus.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	SourceS3Path []ThesaurusSourceS3PathObservation `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
+
 	// The current status of the thesaurus.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -52,8 +70,8 @@ type ThesaurusParameters struct {
 	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
 	// The name for the thesaurus.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -75,8 +93,8 @@ type ThesaurusParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 path where your thesaurus file sits in S3. Detailed below.
-	// +kubebuilder:validation:Required
-	SourceS3Path []ThesaurusSourceS3PathParameters `json:"sourceS3Path" tf:"source_s3_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceS3Path []ThesaurusSourceS3PathParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
@@ -84,6 +102,12 @@ type ThesaurusParameters struct {
 }
 
 type ThesaurusSourceS3PathObservation struct {
+
+	// The name of the S3 bucket that contains the file.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The name of the file.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ThesaurusSourceS3PathParameters struct {
@@ -141,8 +165,10 @@ type ThesaurusStatus struct {
 type Thesaurus struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ThesaurusSpec   `json:"spec"`
-	Status            ThesaurusStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
+	Spec   ThesaurusSpec   `json:"spec"`
+	Status ThesaurusStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

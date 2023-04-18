@@ -21,6 +21,9 @@ type EBSSnapshotObservation struct {
 	// The data encryption key identifier for the snapshot.
 	DataEncryptionKeyID *string `json:"dataEncryptionKeyId,omitempty" tf:"data_encryption_key_id,omitempty"`
 
+	// A description of what the snapshot is.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Whether the snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
@@ -30,14 +33,32 @@ type EBSSnapshotObservation struct {
 	// The ARN for the KMS encryption key.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the Outpost on which to create a local snapshot.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
 	// Value from an Amazon-maintained list (amazon, aws-marketplace, microsoft) of snapshot owners.
 	OwnerAlias *string `json:"ownerAlias,omitempty" tf:"owner_alias,omitempty"`
 
 	// The AWS account ID of the EBS snapshot owner.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Indicates whether to permanently restore an archived snapshot.
+	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
+
+	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
+	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
+
+	// The Volume ID of which to make a snapshot.
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
 	// The size of the drive in GiBs.
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`

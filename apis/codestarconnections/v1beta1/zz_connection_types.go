@@ -21,8 +21,20 @@ type ConnectionObservation struct {
 	// The codestar connection status. Possible values are PENDING, AVAILABLE and ERROR.
 	ConnectionStatus *string `json:"connectionStatus,omitempty" tf:"connection_status,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the host associated with the connection. Conflicts with provider_type
+	HostArn *string `json:"hostArn,omitempty" tf:"host_arn,omitempty"`
+
 	// The codestar connection ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the connection to be created. The name must be unique in the calling AWS account. Changing name will create a new resource.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub or GitHubEnterpriseServer. Changing provider_type will create a new resource. Conflicts with host_arn
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -35,8 +47,8 @@ type ConnectionParameters struct {
 	HostArn *string `json:"hostArn,omitempty" tf:"host_arn,omitempty"`
 
 	// The name of the connection to be created. The name must be unique in the calling AWS account. Changing name will create a new resource.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub or GitHubEnterpriseServer. Changing provider_type will create a new resource. Conflicts with host_arn
 	// +kubebuilder:validation:Optional
@@ -76,8 +88,9 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionSpec   `json:"spec"`
-	Status            ConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ConnectionSpec   `json:"spec"`
+	Status ConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

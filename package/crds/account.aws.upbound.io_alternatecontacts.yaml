@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -90,12 +94,23 @@ spec:
                     type: string
                 required:
                 - alternateContactType
-                - emailAddress
-                - name
-                - phoneNumber
                 - region
-                - title
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -267,12 +282,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: emailAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddress)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: phoneNumber is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.phoneNumber)
+            - message: title is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.title)
           status:
             description: AlternateContactStatus defines the observed state of AlternateContact.
             properties:
               atProvider:
                 properties:
+                  accountId:
+                    description: ID of the target account when managing member accounts.
+                      Will manage current user's account by default if omitted.
+                    type: string
+                  alternateContactType:
+                    description: 'Type of the alternate contact. Allowed values are:
+                      BILLING, OPERATIONS, SECURITY.'
+                    type: string
+                  emailAddress:
+                    description: An email address for the alternate contact.
+                    type: string
                   id:
+                    type: string
+                  name:
+                    description: Name of the alternate contact.
+                    type: string
+                  phoneNumber:
+                    description: Phone number for the alternate contact.
+                    type: string
+                  title:
+                    description: Title for the alternate contact.
                     type: string
                 type: object
               conditions:

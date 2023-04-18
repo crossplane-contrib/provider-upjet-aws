@@ -14,7 +14,14 @@ import (
 )
 
 type TrackerAssociationObservation struct {
+
+	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
+	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the tracker resource to be associated with a geofence collection.
+	TrackerName *string `json:"trackerName,omitempty" tf:"tracker_name,omitempty"`
 }
 
 type TrackerAssociationParameters struct {

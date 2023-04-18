@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -335,6 +339,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -511,9 +530,23 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applyImmediately:
+                    description: Specifies whether any cluster modifications are applied
+                      immediately, or during the next maintenance window. Default
+                      is false.
+                    type: boolean
                   arn:
                     description: Amazon Resource Name (ARN) of cluster
                     type: string
+                  availabilityZones:
+                    description: A list of EC2 Availability Zones that instances in
+                      the DB cluster can be created in.
+                    items:
+                      type: string
+                    type: array
+                  backupRetentionPeriod:
+                    description: The days to retain backups for. Default 1
+                    type: number
                   clusterMembers:
                     description: – List of DocDB Instances that are a part of this
                       cluster
@@ -523,8 +556,42 @@ spec:
                   clusterResourceId:
                     description: The DocDB Cluster Resource ID
                     type: string
+                  dbClusterParameterGroupName:
+                    description: A cluster parameter group to associate with the cluster.
+                    type: string
+                  dbSubnetGroupName:
+                    description: A DB subnet group to associate with this DB instance.
+                    type: string
+                  deletionProtection:
+                    description: A value that indicates whether the DB cluster has
+                      deletion protection enabled. The database can't be deleted when
+                      deletion protection is enabled. By default, deletion protection
+                      is disabled.
+                    type: boolean
+                  enabledCloudwatchLogsExports:
+                    description: 'List of log types to export to cloudwatch. If omitted,
+                      no logs will be exported. The following log types are supported:
+                      audit, profiler.'
+                    items:
+                      type: string
+                    type: array
                   endpoint:
                     description: The DNS address of the DocDB instance
+                    type: string
+                  engine:
+                    description: 'The name of the database engine to be used for this
+                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                    type: string
+                  engineVersion:
+                    description: The database engine version. Updating this argument
+                      results in an outage.
+                    type: string
+                  finalSnapshotIdentifier:
+                    description: The name of your final DB snapshot when this DB cluster
+                      is deleted. If omitted, no final snapshot will be made.
+                    type: string
+                  globalClusterIdentifier:
+                    description: The global cluster identifier specified on aws_docdb_global_cluster.
                     type: string
                   hostedZoneId:
                     description: The Route53 Hosted Zone ID of the endpoint
@@ -532,10 +599,51 @@ spec:
                   id:
                     description: The DocDB Cluster Identifier
                     type: string
+                  kmsKeyId:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_id, storage_encrypted needs to be set to true.
+                    type: string
+                  masterUsername:
+                    description: Username for the master DB user.
+                    type: string
+                  port:
+                    description: The port on which the DB accepts connections
+                    type: number
+                  preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled using the BackupRetentionPeriod
+                      parameter.Time in UTC Default: A 30-minute window selected at
+                      random from an 8-hour block of time per regionE.g., 04:00-09:00'
+                    type: string
+                  preferredMaintenanceWindow:
+                    description: The weekly time range during which system maintenance
+                      can occur, in (UTC) e.g., wed:04:00-wed:04:30
+                    type: string
                   readerEndpoint:
                     description: A read-only endpoint for the DocDB cluster, automatically
                       load-balanced across replicas
                     type: string
+                  skipFinalSnapshot:
+                    description: Determines whether a final DB snapshot is created
+                      before the DB cluster is deleted. If true is specified, no DB
+                      snapshot is created. If false is specified, a DB snapshot is
+                      created before the DB cluster is deleted, using the value from
+                      final_snapshot_identifier. Default is false.
+                    type: boolean
+                  snapshotIdentifier:
+                    description: Specifies whether or not to create this cluster from
+                      a snapshot. You can use either the name or ARN when specifying
+                      a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                    type: string
+                  storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted. The
+                      default is false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -543,6 +651,12 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcSecurityGroupIds:
+                    description: List of VPC security groups to associate with the
+                      Cluster
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

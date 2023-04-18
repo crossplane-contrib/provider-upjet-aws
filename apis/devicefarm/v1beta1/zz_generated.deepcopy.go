@@ -81,10 +81,52 @@ func (in *DevicePoolObservation) DeepCopyInto(out *DevicePoolObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.MaxDevices != nil {
+		in, out := &in.MaxDevices, &out.MaxDevices
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectArn != nil {
+		in, out := &in.ProjectArn, &out.ProjectArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Rule != nil {
+		in, out := &in.Rule, &out.Rule
+		*out = make([]RuleObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -291,10 +333,56 @@ func (in *InstanceProfileObservation) DeepCopyInto(out *InstanceProfileObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.ExcludeAppPackagesFromCleanup != nil {
+		in, out := &in.ExcludeAppPackagesFromCleanup, &out.ExcludeAppPackagesFromCleanup
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.PackageCleanup != nil {
+		in, out := &in.PackageCleanup, &out.PackageCleanup
+		*out = new(bool)
+		**out = **in
+	}
+	if in.RebootAfterUse != nil {
+		in, out := &in.RebootAfterUse, &out.RebootAfterUse
+		*out = new(bool)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -490,10 +578,60 @@ func (in *NetworkProfileObservation) DeepCopyInto(out *NetworkProfileObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.DownlinkBandwidthBits != nil {
+		in, out := &in.DownlinkBandwidthBits, &out.DownlinkBandwidthBits
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DownlinkDelayMs != nil {
+		in, out := &in.DownlinkDelayMs, &out.DownlinkDelayMs
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DownlinkJitterMs != nil {
+		in, out := &in.DownlinkJitterMs, &out.DownlinkJitterMs
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DownlinkLossPercent != nil {
+		in, out := &in.DownlinkLossPercent, &out.DownlinkLossPercent
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectArn != nil {
+		in, out := &in.ProjectArn, &out.ProjectArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -509,6 +647,31 @@ func (in *NetworkProfileObservation) DeepCopyInto(out *NetworkProfileObservation
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Type != nil {
+		in, out := &in.Type, &out.Type
+		*out = new(string)
+		**out = **in
+	}
+	if in.UplinkBandwidthBits != nil {
+		in, out := &in.UplinkBandwidthBits, &out.UplinkBandwidthBits
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UplinkDelayMs != nil {
+		in, out := &in.UplinkDelayMs, &out.UplinkDelayMs
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UplinkJitterMs != nil {
+		in, out := &in.UplinkJitterMs, &out.UplinkJitterMs
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UplinkLossPercent != nil {
+		in, out := &in.UplinkLossPercent, &out.UplinkLossPercent
+		*out = new(float64)
+		**out = **in
 	}
 }
 
@@ -728,10 +891,35 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultJobTimeoutMinutes != nil {
+		in, out := &in.DefaultJobTimeoutMinutes, &out.DefaultJobTimeoutMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -842,6 +1030,21 @@ func (in *ProjectStatus) DeepCopy() *ProjectStatus {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 	*out = *in
+	if in.Attribute != nil {
+		in, out := &in.Attribute, &out.Attribute
+		*out = new(string)
+		**out = **in
+	}
+	if in.Operator != nil {
+		in, out := &in.Operator, &out.Operator
+		*out = new(string)
+		**out = **in
+	}
+	if in.Value != nil {
+		in, out := &in.Value, &out.Value
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RuleObservation.
@@ -951,10 +1154,35 @@ func (in *TestGridProjectObservation) DeepCopyInto(out *TestGridProjectObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
 		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TagsAll != nil {
 		in, out := &in.TagsAll, &out.TagsAll
@@ -969,6 +1197,13 @@ func (in *TestGridProjectObservation) DeepCopyInto(out *TestGridProjectObservati
 				**out = **in
 			}
 			(*out)[key] = outVal
+		}
+	}
+	if in.VPCConfig != nil {
+		in, out := &in.VPCConfig, &out.VPCConfig
+		*out = make([]VPCConfigObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 }
@@ -1141,6 +1376,11 @@ func (in *UploadObservation) DeepCopyInto(out *UploadObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ContentType != nil {
+		in, out := &in.ContentType, &out.ContentType
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1148,6 +1388,21 @@ func (in *UploadObservation) DeepCopyInto(out *UploadObservation) {
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProjectArn != nil {
+		in, out := &in.ProjectArn, &out.ProjectArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Type != nil {
+		in, out := &in.Type, &out.Type
 		*out = new(string)
 		**out = **in
 	}
@@ -1255,6 +1510,33 @@ func (in *UploadStatus) DeepCopy() *UploadStatus {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *VPCConfigObservation) DeepCopyInto(out *VPCConfigObservation) {
 	*out = *in
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.VPCID != nil {
+		in, out := &in.VPCID, &out.VPCID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VPCConfigObservation.

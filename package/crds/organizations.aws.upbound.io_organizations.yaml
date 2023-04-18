@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -93,6 +97,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -294,6 +313,28 @@ spec:
                     type: array
                   arn:
                     description: ARN of the account
+                    type: string
+                  awsServiceAccessPrincipals:
+                    description: List of AWS service principal names for which you
+                      want to enable integration with your organization. This is typically
+                      in the form of a URL, such as service-abbreviation.amazonaws.com.
+                      Organization must have feature_set set to ALL. Some services
+                      do not support enablement via this endpoint, see warning in
+                      aws docs.
+                    items:
+                      type: string
+                    type: array
+                  enabledPolicyTypes:
+                    description: List of Organizations policy types to enable in the
+                      Organization Root. Organization must have feature_set set to
+                      ALL. For additional information about valid policy types (e.g.,
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY,
+                      and TAG_POLICY), see the AWS Organizations API Reference.
+                    items:
+                      type: string
+                    type: array
+                  featureSet:
+                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
                     type: string
                   id:
                     description: Identifier of the account

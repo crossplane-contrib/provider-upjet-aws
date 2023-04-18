@@ -14,6 +14,15 @@ import (
 )
 
 type AccountAggregationSourceObservation struct {
+
+	// List of 12-digit account IDs of the account(s) being aggregated.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// If true, aggregate existing AWS Config regions and future regions.
+	AllRegions *bool `json:"allRegions,omitempty" tf:"all_regions,omitempty"`
+
+	// List of source regions being aggregated.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
 type AccountAggregationSourceParameters struct {
@@ -33,10 +42,19 @@ type AccountAggregationSourceParameters struct {
 
 type ConfigurationAggregatorObservation struct {
 
+	// The account(s) to aggregate config data from as documented below.
+	AccountAggregationSource []AccountAggregationSourceObservation `json:"accountAggregationSource,omitempty" tf:"account_aggregation_source,omitempty"`
+
 	// The ARN of the aggregator
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The organization to aggregate config data from as documented below.
+	OrganizationAggregationSource []OrganizationAggregationSourceObservation `json:"organizationAggregationSource,omitempty" tf:"organization_aggregation_source,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -63,6 +81,15 @@ type ConfigurationAggregatorParameters struct {
 }
 
 type OrganizationAggregationSourceObservation struct {
+
+	// If true, aggregate existing AWS Config regions and future regions.
+	AllRegions *bool `json:"allRegions,omitempty" tf:"all_regions,omitempty"`
+
+	// List of source regions being aggregated.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+
+	// ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type OrganizationAggregationSourceParameters struct {

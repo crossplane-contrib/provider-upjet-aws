@@ -21,7 +21,16 @@ type RouteCalculatorObservation struct {
 	// The timestamp for when the route calculator resource was created in ISO 8601 format.
 	CreateTime *string `json:"createTime,omitempty" tf:"create_time,omitempty"`
 
+	// Specifies the data provider of traffic and road network data.
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// The optional description for the route calculator resource.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -33,8 +42,8 @@ type RouteCalculatorObservation struct {
 type RouteCalculatorParameters struct {
 
 	// Specifies the data provider of traffic and road network data.
-	// +kubebuilder:validation:Required
-	DataSource *string `json:"dataSource" tf:"data_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// The optional description for the route calculator resource.
 	// +kubebuilder:validation:Optional
@@ -74,8 +83,9 @@ type RouteCalculatorStatus struct {
 type RouteCalculator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteCalculatorSpec   `json:"spec"`
-	Status            RouteCalculatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataSource)",message="dataSource is a required parameter"
+	Spec   RouteCalculatorSpec   `json:"spec"`
+	Status RouteCalculatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

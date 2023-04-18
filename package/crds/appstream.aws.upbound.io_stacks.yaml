@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -176,9 +180,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,11 +368,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: StackStatus defines the observed state of Stack.
             properties:
               atProvider:
                 properties:
+                  accessEndpoints:
+                    description: Set of configuration blocks defining the interface
+                      VPC endpoints. Users of the stack can connect to AppStream 2.0
+                      only through the specified endpoints. See access_endpoints below.
+                    items:
+                      properties:
+                        endpointType:
+                          description: Type of the interface endpoint. See the AccessEndpoint
+                            AWS API documentation for valid values.
+                          type: string
+                        vpceId:
+                          description: ID of the VPC in which the interface endpoint
+                            is used.
+                          type: string
+                      type: object
+                    type: array
+                  applicationSettings:
+                    description: Settings for application settings persistence. See
+                      application_settings below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether application settings should be persisted.
+                          type: boolean
+                        settingsGroup:
+                          description: Name of the settings group. Required when enabled
+                            is true. Can be up to 100 characters.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: ARN of the appstream stack.
                     type: string
@@ -362,13 +413,81 @@ spec:
                     description: Date and time, in UTC and extended RFC 3339 format,
                       when the stack was created.
                     type: string
+                  description:
+                    description: Description for the AppStream stack.
+                    type: string
+                  displayName:
+                    description: Stack name to display.
+                    type: string
+                  embedHostDomains:
+                    description: Domains where AppStream 2.0 streaming sessions can
+                      be embedded in an iframe. You must approve the domains that
+                      you want to host embedded AppStream 2.0 streaming sessions.
+                    items:
+                      type: string
+                    type: array
+                  feedbackUrl:
+                    description: URL that users are redirected to after they click
+                      the Send Feedback link. If no URL is specified, no Send Feedback
+                      link is displayed. .
+                    type: string
                   id:
                     description: Unique ID of the appstream stack.
                     type: string
+                  name:
+                    description: Unique name for the AppStream stack.
+                    type: string
+                  redirectUrl:
+                    description: URL that users are redirected to after their streaming
+                      session ends.
+                    type: string
+                  storageConnectors:
+                    description: Configuration block for the storage connectors to
+                      enable. See storage_connectors below.
+                    items:
+                      properties:
+                        connectorType:
+                          description: Type of storage connector. Valid values are
+                            HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
+                          type: string
+                        domains:
+                          description: Names of the domains for the account.
+                          items:
+                            type: string
+                          type: array
+                        resourceIdentifier:
+                          description: ARN of the storage connector.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  userSettings:
+                    description: Configuration block for the actions that are enabled
+                      or disabled for users during their streaming sessions. If not
+                      provided, these settings are configured automatically by AWS.
+                      See user_settings below.
+                    items:
+                      properties:
+                        action:
+                          description: Action that is enabled or disabled. Valid values
+                            are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE,
+                            FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE,
+                            DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+                          type: string
+                        permission:
+                          description: Whether the action is enabled or disabled.
+                            Valid values are ENABLED or DISABLED.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

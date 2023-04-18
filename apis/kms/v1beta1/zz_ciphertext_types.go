@@ -18,7 +18,13 @@ type CiphertextObservation struct {
 	// Base64 encoded ciphertext
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
+	// An optional mapping that makes up the encryption context.
+	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Globally unique key ID for the customer master key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 }
 
 type CiphertextParameters struct {
@@ -41,7 +47,7 @@ type CiphertextParameters struct {
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
 	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -74,8 +80,9 @@ type CiphertextStatus struct {
 type Ciphertext struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CiphertextSpec   `json:"spec"`
-	Status            CiphertextStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.plaintextSecretRef)",message="plaintextSecretRef is a required parameter"
+	Spec   CiphertextSpec   `json:"spec"`
+	Status CiphertextStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

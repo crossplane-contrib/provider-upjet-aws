@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -159,8 +163,22 @@ spec:
                     type: object
                 required:
                 - region
-                - snapshotCopyGrantName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -332,6 +350,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: snapshotCopyGrantName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.snapshotCopyGrantName)
           status:
             description: SnapshotCopyGrantStatus defines the observed state of SnapshotCopyGrant.
             properties:
@@ -342,6 +363,21 @@ spec:
                     type: string
                   id:
                     type: string
+                  kmsKeyId:
+                    description: The unique identifier for the customer master key
+                      (CMK) that the grant applies to. Specify the key ID or the Amazon
+                      Resource Name (ARN) of the CMK. To specify a CMK in a different
+                      AWS account, you must use the key ARN. If not specified, the
+                      default key is used.
+                    type: string
+                  snapshotCopyGrantName:
+                    description: A friendly name for identifying the grant.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

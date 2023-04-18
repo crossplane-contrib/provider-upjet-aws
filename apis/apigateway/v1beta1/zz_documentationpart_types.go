@@ -17,17 +17,26 @@ type DocumentationPartObservation struct {
 
 	// Unique ID of the Documentation Part
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Location of the targeted API entity of the to-be-created documentation part. See below.
+	Location []LocationObservation `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
+	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// ID of the associated Rest API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type DocumentationPartParameters struct {
 
 	// Location of the targeted API entity of the to-be-created documentation part. See below.
-	// +kubebuilder:validation:Required
-	Location []LocationParameters `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location []LocationParameters `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
-	// +kubebuilder:validation:Required
-	Properties *string `json:"properties" tf:"properties,omitempty"`
+	// +kubebuilder:validation:Optional
+	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -50,6 +59,21 @@ type DocumentationPartParameters struct {
 }
 
 type LocationObservation struct {
+
+	// HTTP verb of a method. The default value is * for any method.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Name of the targeted API entity.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// URL path of the target. The default value is / for the root resource.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// HTTP status code of a response. The default value is * for any status code.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+
+	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LocationParameters struct {
@@ -99,8 +123,10 @@ type DocumentationPartStatus struct {
 type DocumentationPart struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DocumentationPartSpec   `json:"spec"`
-	Status            DocumentationPartStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.properties)",message="properties is a required parameter"
+	Spec   DocumentationPartSpec   `json:"spec"`
+	Status DocumentationPartStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

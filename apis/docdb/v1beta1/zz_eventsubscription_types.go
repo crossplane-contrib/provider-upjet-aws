@@ -21,8 +21,26 @@ type EventSubscriptionObservation struct {
 	// The AWS customer account associated with the DocDB event notification subscription
 	CustomerAwsID *string `json:"customerAwsId,omitempty" tf:"customer_aws_id,omitempty"`
 
+	// A boolean flag to enable/disable the subscription. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of event categories for a SourceType that you want to subscribe to. See https://docs.aws.amazon.com/documentdb/latest/developerguide/API_Event.html or run aws docdb describe-event-categories.
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
+
 	// The name of the DocDB event notification subscription
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Amazon Resource Name of the DocDB event notification subscription
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// The type of source that will be generating the events. Valid options are db-instance, db-cluster, db-parameter-group, db-security-group, db-cluster-snapshot. If not set, all sources will be subscribed to.
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

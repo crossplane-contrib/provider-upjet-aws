@@ -14,6 +14,12 @@ import (
 )
 
 type NotificationObservation struct {
+
+	// You can configure a vault to publish a notification for ArchiveRetrievalCompleted and InventoryRetrievalCompleted events.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The SNS Topic ARN.
+	SnsTopic *string `json:"snsTopic,omitempty" tf:"sns_topic,omitempty"`
 }
 
 type NotificationParameters struct {
@@ -39,6 +45,10 @@ type NotificationParameters struct {
 
 type VaultObservation struct {
 
+	// The policy document. This is a JSON formatted string.
+	// The heredoc syntax or file function is helpful here. Use the Glacier Developer Guide for more information on Glacier Vault Policy
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
 	// The ARN of the vault.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -46,6 +56,12 @@ type VaultObservation struct {
 
 	// The URI of the vault that was created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The notifications for the Vault. Fields documented below.
+	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

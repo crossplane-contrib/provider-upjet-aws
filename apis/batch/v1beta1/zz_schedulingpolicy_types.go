@@ -14,6 +14,14 @@ import (
 )
 
 type FairSharePolicyObservation struct {
+
+	// A value used to reserve some of the available maximum vCPU for fair share identifiers that have not yet been used. For more information, see FairsharePolicy.
+	ComputeReservation *float64 `json:"computeReservation,omitempty" tf:"compute_reservation,omitempty"`
+
+	ShareDecaySeconds *float64 `json:"shareDecaySeconds,omitempty" tf:"share_decay_seconds,omitempty"`
+
+	// One or more share distribution blocks which define the weights for the fair share identifiers for the fair share policy. For more information, see FairsharePolicy. The share_distribution block is documented below.
+	ShareDistribution []ShareDistributionObservation `json:"shareDistribution,omitempty" tf:"share_distribution,omitempty"`
 }
 
 type FairSharePolicyParameters struct {
@@ -35,7 +43,12 @@ type SchedulingPolicyObservation struct {
 	// The Amazon Resource Name of the scheduling policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	FairSharePolicy []FairSharePolicyObservation `json:"fairSharePolicy,omitempty" tf:"fair_share_policy,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -57,6 +70,12 @@ type SchedulingPolicyParameters struct {
 }
 
 type ShareDistributionObservation struct {
+
+	// A fair share identifier or fair share identifier prefix. For more information, see ShareAttributes.
+	ShareIdentifier *string `json:"shareIdentifier,omitempty" tf:"share_identifier,omitempty"`
+
+	// The weight factor for the fair share identifier. For more information, see ShareAttributes.
+	WeightFactor *float64 `json:"weightFactor,omitempty" tf:"weight_factor,omitempty"`
 }
 
 type ShareDistributionParameters struct {

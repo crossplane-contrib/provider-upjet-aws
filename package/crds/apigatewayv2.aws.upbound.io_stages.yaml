@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -327,6 +331,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -503,8 +522,72 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessLogSettings:
+                    description: Settings for logging access in this stage. Use the
+                      aws_api_gateway_account resource to configure permissions for
+                      CloudWatch Logging.
+                    items:
+                      properties:
+                        destinationArn:
+                          description: ARN of the CloudWatch Logs log group to receive
+                            access logs. Any trailing :* is trimmed from the ARN.
+                          type: string
+                        format:
+                          description: Single line format of the access logs of data.
+                            Refer to log settings for HTTP or Websocket.
+                          type: string
+                      type: object
+                    type: array
+                  apiId:
+                    description: API identifier.
+                    type: string
                   arn:
                     description: ARN of the stage.
+                    type: string
+                  autoDeploy:
+                    description: Whether updates to an API automatically trigger a
+                      new deployment. Defaults to false. Applicable for HTTP APIs.
+                    type: boolean
+                  clientCertificateId:
+                    description: Identifier of a client certificate for the stage.
+                      Use the aws_api_gateway_client_certificate resource to configure
+                      a client certificate. Supported only for WebSocket APIs.
+                    type: string
+                  defaultRouteSettings:
+                    description: Default route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            default route. Affects the log entries pushed to Amazon
+                            CloudWatch Logs. Defaults to false. Supported only for
+                            WebSocket APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            default route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the default route. Affects
+                            the log entries pushed to Amazon CloudWatch Logs. Valid
+                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
+                            for WebSocket APIs.'
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the default route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the default route.
+                          type: number
+                      type: object
+                    type: array
+                  deploymentId:
+                    description: Deployment identifier of the stage. Use the aws_apigatewayv2_deployment
+                      resource to configure a deployment.
+                    type: string
+                  description:
+                    description: Description for the stage. Must be less than or equal
+                      to 1024 characters in length.
                     type: string
                   executionArn:
                     description: ARN prefix to be used in an aws_lambda_permission's
@@ -521,6 +604,47 @@ spec:
                       wss://z4675bid1j.execute-api.eu-west-2.amazonaws.com/example-stage,
                       or https://z4675bid1j.execute-api.eu-west-2.amazonaws.com/
                     type: string
+                  routeSettings:
+                    description: Route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            route. Affects the log entries pushed to Amazon CloudWatch
+                            Logs. Defaults to false. Supported only for WebSocket
+                            APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the route. Affects the log
+                            entries pushed to Amazon CloudWatch Logs. Valid values:
+                            ERROR, INFO, OFF. Defaults to OFF. Supported only for
+                            WebSocket APIs.'
+                          type: string
+                        routeKey:
+                          description: Route key.
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the route.
+                          type: number
+                      type: object
+                    type: array
+                  stageVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map that defines the stage variables for the stage.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

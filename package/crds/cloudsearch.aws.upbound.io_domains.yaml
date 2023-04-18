@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -160,6 +164,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -347,8 +366,94 @@ spec:
                     description: An internally generated unique identifier for the
                       domain.
                     type: string
+                  endpointOptions:
+                    description: Domain endpoint options. Documented below.
+                    items:
+                      properties:
+                        enforceHttps:
+                          description: Enables or disables the requirement that all
+                            requests to the domain arrive over HTTPS.
+                          type: boolean
+                        tlsSecurityPolicy:
+                          description: The minimum required TLS version. See the AWS
+                            documentation for valid values.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  indexField:
+                    description: The index fields for documents added to the domain.
+                      Documented below.
+                    items:
+                      properties:
+                        analysisScheme:
+                          description: The analysis scheme you want to use for a text
+                            field. The analysis scheme specifies the language-specific
+                            text processing options that are used during indexing.
+                          type: string
+                        defaultValue:
+                          description: The default value for the field. This value
+                            is used when no value is specified for the field in the
+                            document data.
+                          type: string
+                        facet:
+                          description: You can get facet information by enabling this.
+                          type: boolean
+                        highlight:
+                          description: You can highlight information.
+                          type: boolean
+                        name:
+                          description: The name of the CloudSearch domain.
+                          type: string
+                        return:
+                          description: You can enable returning the value of all searchable
+                            fields.
+                          type: boolean
+                        search:
+                          description: You can set whether this index should be searchable
+                            or not.
+                          type: boolean
+                        sort:
+                          description: You can enable the property to be sortable.
+                          type: boolean
+                        sourceFields:
+                          description: A comma-separated list of source fields to
+                            map to the field. Specifying a source field copies data
+                            from one field to another, enabling you to use the same
+                            source data in different ways by configuring different
+                            options for the fields.
+                          type: string
+                        type:
+                          description: 'The field type. Valid values: date, date-array,
+                            double, double-array, int, int-array, literal, literal-array,
+                            text, text-array.'
+                          type: string
+                      type: object
+                    type: array
+                  multiAz:
+                    description: Whether or not to maintain extra instances for the
+                      domain in a second Availability Zone to ensure high availability.
+                    type: boolean
+                  scalingParameters:
+                    description: Domain scaling parameters. Documented below.
+                    items:
+                      properties:
+                        desiredInstanceType:
+                          description: The instance type that you want to preconfigure
+                            for your domain. See the AWS documentation for valid values.
+                          type: string
+                        desiredPartitionCount:
+                          description: The number of partitions you want to preconfigure
+                            for your domain. Only valid when you select search.2xlarge
+                            as the instance type.
+                          type: number
+                        desiredReplicationCount:
+                          description: The number of replicas you want to preconfigure
+                            for each index partition.
+                          type: number
+                      type: object
+                    type: array
                   searchServiceEndpoint:
                     description: The service endpoint for requesting search results
                       from a search domain.

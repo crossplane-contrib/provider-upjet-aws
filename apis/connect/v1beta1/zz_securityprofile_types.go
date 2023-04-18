@@ -18,14 +18,29 @@ type SecurityProfileObservation struct {
 	// The Amazon Resource Name (ARN) of the Security Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Specifies the description of the Security Profile.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Security Profile separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the name of the Security Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The organization resource identifier for the security profile.
 	OrganizationResourceID *string `json:"organizationResourceId,omitempty" tf:"organization_resource_id,omitempty"`
 
+	// Specifies a list of permissions assigned to the security profile.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
 	// The identifier for the Security Profile.
 	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -52,8 +67,8 @@ type SecurityProfileParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Security Profile.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
 	// +kubebuilder:validation:Optional
@@ -93,8 +108,9 @@ type SecurityProfileStatus struct {
 type SecurityProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityProfileSpec   `json:"spec"`
-	Status            SecurityProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SecurityProfileSpec   `json:"spec"`
+	Status SecurityProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

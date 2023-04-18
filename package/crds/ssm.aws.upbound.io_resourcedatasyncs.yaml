@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -248,8 +252,22 @@ spec:
                     type: array
                 required:
                 - region
-                - s3Destination
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -421,6 +439,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: s3Destination is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.s3Destination)
           status:
             description: ResourceDataSyncStatus defines the observed state of ResourceDataSync.
             properties:
@@ -428,6 +449,31 @@ spec:
                 properties:
                   id:
                     type: string
+                  s3Destination:
+                    description: Amazon S3 configuration details for the sync.
+                    items:
+                      properties:
+                        bucketName:
+                          description: Name of S3 bucket where the aggregated data
+                            is stored.
+                          type: string
+                        kmsKeyArn:
+                          description: ARN of an encryption key for a destination
+                            in Amazon S3.
+                          type: string
+                        prefix:
+                          description: Prefix for the bucket.
+                          type: string
+                        region:
+                          description: Region with the bucket targeted by the Resource
+                            Data Sync.
+                          type: string
+                        syncFormat:
+                          description: A supported sync format. Only JsonSerDe is
+                            currently supported. Defaults to JsonSerDe.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

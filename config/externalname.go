@@ -2853,6 +2853,11 @@ func ExternalNameConfigurations() config.ResourceOption {
 		if e, ok := ExternalNameConfigs[r.Name]; ok {
 			r.Version = common.VersionV1Beta1
 			r.ExternalName = e
+			// Note(turkenh): This is special to provider-aws. We had injected
+			// region as a parameter for all resources to be consistent with
+			// the native aws provider, and now, we need to add manually it to
+			// the identifier fields for all resources.
+			r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
 		}
 	}
 }

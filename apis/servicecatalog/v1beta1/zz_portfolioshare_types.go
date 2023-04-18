@@ -15,10 +15,31 @@ import (
 
 type PortfolioShareObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// Whether the shared portfolio is imported by the recipient account. If the recipient is organizational, the share is automatically imported, and the field is always set to true.
 	Accepted *bool `json:"accepted,omitempty" tf:"accepted,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Portfolio identifier.
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.
+	SharePrincipals *bool `json:"sharePrincipals,omitempty" tf:"share_principals,omitempty"`
+
+	// Whether to enable sharing of aws_servicecatalog_tag_option resources when creating the portfolio share.
+	ShareTagOptions *bool `json:"shareTagOptions,omitempty" tf:"share_tag_options,omitempty"`
+
+	// Type of portfolio share. Valid values are ACCOUNT (an external account), ORGANIZATION (a share to every account in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT (a share to an account in an organization).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Whether to wait (up to the timeout) for the share to be accepted. Organizational shares are automatically accepted.
+	WaitForAcceptance *bool `json:"waitForAcceptance,omitempty" tf:"wait_for_acceptance,omitempty"`
 }
 
 type PortfolioShareParameters struct {
@@ -42,8 +63,8 @@ type PortfolioShareParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
-	// +kubebuilder:validation:Required
-	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -59,8 +80,8 @@ type PortfolioShareParameters struct {
 	ShareTagOptions *bool `json:"shareTagOptions,omitempty" tf:"share_tag_options,omitempty"`
 
 	// Type of portfolio share. Valid values are ACCOUNT (an external account), ORGANIZATION (a share to every account in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT (a share to an account in an organization).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Whether to wait (up to the timeout) for the share to be accepted. Organizational shares are automatically accepted.
 	// +kubebuilder:validation:Optional
@@ -91,8 +112,10 @@ type PortfolioShareStatus struct {
 type PortfolioShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PortfolioShareSpec   `json:"spec"`
-	Status            PortfolioShareStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   PortfolioShareSpec   `json:"spec"`
+	Status PortfolioShareStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

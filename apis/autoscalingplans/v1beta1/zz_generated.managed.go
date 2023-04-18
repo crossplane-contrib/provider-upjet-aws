@@ -17,6 +17,11 @@ func (mg *ScalingPlan) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ScalingPlan.
+func (mg *ScalingPlan) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ScalingPlan.
 func (mg *ScalingPlan) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ScalingPlan) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ScalingPlan.
 func (mg *ScalingPlan) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ScalingPlan.
+func (mg *ScalingPlan) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ScalingPlan.

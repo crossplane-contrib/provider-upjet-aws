@@ -18,8 +18,32 @@ type DeploymentStrategyObservation struct {
 	// ARN of the AppConfig Deployment Strategy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
+	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+
+	// Description of the deployment strategy. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
+	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+
+	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
+	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
+
+	// Algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
+	GrowthType *string `json:"growthType,omitempty" tf:"growth_type,omitempty"`
+
 	// AppConfig deployment strategy ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
+	ReplicateTo *string `json:"replicateTo,omitempty" tf:"replicate_to,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -28,8 +52,8 @@ type DeploymentStrategyObservation struct {
 type DeploymentStrategyParameters struct {
 
 	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
-	// +kubebuilder:validation:Required
-	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes" tf:"deployment_duration_in_minutes,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
 
 	// Description of the deployment strategy. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
@@ -40,16 +64,16 @@ type DeploymentStrategyParameters struct {
 	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
 
 	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
-	// +kubebuilder:validation:Required
-	GrowthFactor *float64 `json:"growthFactor" tf:"growth_factor,omitempty"`
+	// +kubebuilder:validation:Optional
+	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
 
 	// Algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
 	// +kubebuilder:validation:Optional
 	GrowthType *string `json:"growthType,omitempty" tf:"growth_type,omitempty"`
 
 	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +81,8 @@ type DeploymentStrategyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
-	// +kubebuilder:validation:Required
-	ReplicateTo *string `json:"replicateTo" tf:"replicate_to,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReplicateTo *string `json:"replicateTo,omitempty" tf:"replicate_to,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -89,8 +113,12 @@ type DeploymentStrategyStatus struct {
 type DeploymentStrategy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeploymentStrategySpec   `json:"spec"`
-	Status            DeploymentStrategyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deploymentDurationInMinutes)",message="deploymentDurationInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.growthFactor)",message="growthFactor is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.replicateTo)",message="replicateTo is a required parameter"
+	Spec   DeploymentStrategySpec   `json:"spec"`
+	Status DeploymentStrategyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

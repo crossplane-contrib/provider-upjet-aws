@@ -15,8 +15,17 @@ import (
 
 type DestinationObservation struct {
 
+	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
+	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
+
 	// The fs ID of the replica.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The region in which the replica should be created.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The status of the replication.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -43,7 +52,6 @@ type ReplicationConfigurationObservation struct {
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// A destination configuration block (documented below).
-	// +kubebuilder:validation:Required
 	Destination []DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -54,6 +62,9 @@ type ReplicationConfigurationObservation struct {
 	// The Amazon Resource Name (ARN) of the current source file system in the replication configuration.
 	SourceFileSystemArn *string `json:"sourceFileSystemArn,omitempty" tf:"source_file_system_arn,omitempty"`
 
+	// The ID of the file system that is to be replicated.
+	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
+
 	// The AWS Region in which the source Amazon EFS file system is located.
 	SourceFileSystemRegion *string `json:"sourceFileSystemRegion,omitempty" tf:"source_file_system_region,omitempty"`
 }
@@ -61,8 +72,8 @@ type ReplicationConfigurationObservation struct {
 type ReplicationConfigurationParameters struct {
 
 	// A destination configuration block (documented below).
-	// +kubebuilder:validation:Required
-	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// The region in which the replica should be created.
 	// Region is the region you'd like your resource to be created in.
@@ -109,8 +120,9 @@ type ReplicationConfigurationStatus struct {
 type ReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationConfigurationSpec   `json:"spec"`
-	Status            ReplicationConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	Spec   ReplicationConfigurationSpec   `json:"spec"`
+	Status ReplicationConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

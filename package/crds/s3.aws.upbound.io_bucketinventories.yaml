@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -332,12 +336,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - destination
-                - includedObjectVersions
-                - name
                 - region
-                - schedule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -509,13 +524,124 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: destination is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)
+            - message: includedObjectVersions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.includedObjectVersions)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: schedule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)
           status:
             description: BucketInventoryStatus defines the observed state of BucketInventory.
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: Name of the source bucket that inventory lists the
+                      objects for.
+                    type: string
+                  destination:
+                    description: Contains information about where to publish the inventory
+                      results (documented below).
+                    items:
+                      properties:
+                        bucket:
+                          description: Name of the source bucket that inventory lists
+                            the objects for.
+                          items:
+                            properties:
+                              accountId:
+                                description: ID of the account that owns the destination
+                                  bucket. Recommended to be set to prevent problems
+                                  if the destination bucket ownership changes.
+                                type: string
+                              bucketArn:
+                                description: Amazon S3 bucket ARN of the destination.
+                                type: string
+                              encryption:
+                                description: Contains the type of server-side encryption
+                                  to use to encrypt the inventory (documented below).
+                                items:
+                                  properties:
+                                    sseKms:
+                                      description: Specifies to use server-side encryption
+                                        with AWS KMS-managed keys to encrypt the inventory
+                                        file (documented below).
+                                      items:
+                                        properties:
+                                          keyId:
+                                            description: ARN of the KMS customer master
+                                              key (CMK) used to encrypt the inventory
+                                              file.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    sseS3:
+                                      description: Specifies to use server-side encryption
+                                        with Amazon S3-managed keys (SSE-S3) to encrypt
+                                        the inventory file.
+                                      items:
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              format:
+                                description: Specifies the output format of the inventory
+                                  results. Can be CSV, ORC or Parquet.
+                                type: string
+                              prefix:
+                                description: Prefix that an object must have to be
+                                  included in the inventory results.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  enabled:
+                    description: Specifies whether the inventory is enabled or disabled.
+                    type: boolean
+                  filter:
+                    description: Specifies an inventory filter. The inventory only
+                      includes objects that meet the filter's criteria (documented
+                      below).
+                    items:
+                      properties:
+                        prefix:
+                          description: Prefix that an object must have to be included
+                            in the inventory results.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  includedObjectVersions:
+                    description: 'Object versions to include in the inventory list.
+                      Valid values: All, Current.'
+                    type: string
+                  name:
+                    description: Unique identifier of the inventory configuration
+                      for the bucket.
+                    type: string
+                  optionalFields:
+                    description: List of optional fields that are included in the
+                      inventory results. Please refer to the S3 documentation for
+                      more details.
+                    items:
+                      type: string
+                    type: array
+                  schedule:
+                    description: Specifies the schedule for generating inventory results
+                      (documented below).
+                    items:
+                      properties:
+                        frequency:
+                          description: 'Specifies how frequently inventory results
+                            are produced. Valid values: Daily, Weekly.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

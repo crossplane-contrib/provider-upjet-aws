@@ -14,10 +14,17 @@ import (
 )
 
 type TopicPolicyObservation struct {
+
+	// The ARN of the SNS topic
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The fully-formed AWS policy as JSON.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type TopicPolicyParameters struct {
@@ -37,8 +44,8 @@ type TopicPolicyParameters struct {
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// The fully-formed AWS policy as JSON.
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -70,8 +77,9 @@ type TopicPolicyStatus struct {
 type TopicPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicPolicySpec   `json:"spec"`
-	Status            TopicPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   TopicPolicySpec   `json:"spec"`
+	Status TopicPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -22,6 +22,9 @@ type AliasObservation struct {
 
 	// The Amazon Resource Name (ARN) of the target key identifier.
 	TargetKeyArn *string `json:"targetKeyArn,omitempty" tf:"target_key_arn,omitempty"`
+
+	// Identifier for the key for which the alias is for, can be either an ARN or key_id.
+	TargetKeyID *string `json:"targetKeyId,omitempty" tf:"target_key_id,omitempty"`
 }
 
 type AliasParameters struct {

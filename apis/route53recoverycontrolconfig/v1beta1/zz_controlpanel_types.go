@@ -18,10 +18,16 @@ type ControlPanelObservation struct {
 	// ARN of the control panel.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the cluster in which this control panel will reside.
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
 	// Whether a control panel is default.
 	DefaultControlPanel *bool `json:"defaultControlPanel,omitempty" tf:"default_control_panel,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name describing the control panel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Number routing controls in a control panel.
 	RoutingControlCount *float64 `json:"routingControlCount,omitempty" tf:"routing_control_count,omitempty"`
@@ -47,8 +53,8 @@ type ControlPanelParameters struct {
 	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// Name describing the control panel.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -80,8 +86,9 @@ type ControlPanelStatus struct {
 type ControlPanel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ControlPanelSpec   `json:"spec"`
-	Status            ControlPanelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ControlPanelSpec   `json:"spec"`
+	Status ControlPanelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

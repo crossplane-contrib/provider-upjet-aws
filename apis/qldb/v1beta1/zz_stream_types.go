@@ -14,6 +14,12 @@ import (
 )
 
 type KinesisConfigurationObservation struct {
+
+	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the number of records sent per API call. Default: true.
+	AggregationEnabled *bool `json:"aggregationEnabled,omitempty" tf:"aggregation_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type KinesisConfigurationParameters struct {
@@ -42,8 +48,29 @@ type StreamObservation struct {
 	// The ARN of the QLDB Stream.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The exclusive date and time that specifies when the stream ends. If you don't define this parameter, the stream runs indefinitely until you cancel it. It must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: "2019-06-13T21:36:34Z".
+	ExclusiveEndTime *string `json:"exclusiveEndTime,omitempty" tf:"exclusive_end_time,omitempty"`
+
 	// The ID of the QLDB Stream.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The inclusive start date and time from which to start streaming journal data. This parameter must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be in the future and must be before exclusive_end_time.  If you provide a value that is before the ledger's CreationDateTime, QLDB effectively defaults it to the ledger's CreationDateTime.
+	InclusiveStartTime *string `json:"inclusiveStartTime,omitempty" tf:"inclusive_start_time,omitempty"`
+
+	// The configuration settings of the Kinesis Data Streams destination for your stream request. Documented below.
+	KinesisConfiguration []KinesisConfigurationObservation `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
+
+	// The name of the QLDB ledger.
+	LedgerName *string `json:"ledgerName,omitempty" tf:"ledger_name,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -56,12 +83,12 @@ type StreamParameters struct {
 	ExclusiveEndTime *string `json:"exclusiveEndTime,omitempty" tf:"exclusive_end_time,omitempty"`
 
 	// The inclusive start date and time from which to start streaming journal data. This parameter must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: "2019-06-13T21:36:34Z".  This cannot be in the future and must be before exclusive_end_time.  If you provide a value that is before the ledger's CreationDateTime, QLDB effectively defaults it to the ledger's CreationDateTime.
-	// +kubebuilder:validation:Required
-	InclusiveStartTime *string `json:"inclusiveStartTime" tf:"inclusive_start_time,omitempty"`
+	// +kubebuilder:validation:Optional
+	InclusiveStartTime *string `json:"inclusiveStartTime,omitempty" tf:"inclusive_start_time,omitempty"`
 
 	// The configuration settings of the Kinesis Data Streams destination for your stream request. Documented below.
-	// +kubebuilder:validation:Required
-	KinesisConfiguration []KinesisConfigurationParameters `json:"kinesisConfiguration" tf:"kinesis_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	KinesisConfiguration []KinesisConfigurationParameters `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
 
 	// The name of the QLDB ledger.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/qldb/v1beta1.Ledger
@@ -97,8 +124,8 @@ type StreamParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
-	// +kubebuilder:validation:Required
-	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -129,8 +156,11 @@ type StreamStatus struct {
 type Stream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamSpec   `json:"spec"`
-	Status            StreamStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inclusiveStartTime)",message="inclusiveStartTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kinesisConfiguration)",message="kinesisConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.streamName)",message="streamName is a required parameter"
+	Spec   StreamSpec   `json:"spec"`
+	Status StreamStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

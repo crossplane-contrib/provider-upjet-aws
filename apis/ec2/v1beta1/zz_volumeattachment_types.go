@@ -14,15 +14,41 @@ import (
 )
 
 type VolumeAttachmentObservation struct {
+
+	// The device name to expose to the instance (for
+	// example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Set to true if you want to force the
+	// volume to detach. Useful if previous attempts failed, but use this option only
+	// as a last resort, as this can result in data loss. See
+	// Detaching an Amazon EBS Volume from an Instance for more information.
+	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the Instance to attach to
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// This is
+	// useful when destroying an instance which has volumes created by some other
+	// means attached.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Set this to true to ensure that the target instance is stopped
+	// before trying to detach the volume. Stops the instance, if it is not already stopped.
+	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
+
+	// ID of the Volume to be attached
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
 type VolumeAttachmentParameters struct {
 
 	// The device name to expose to the instance (for
 	// example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
-	// +kubebuilder:validation:Required
-	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Set to true if you want to force the
 	// volume to detach. Useful if previous attempts failed, but use this option only
@@ -100,8 +126,9 @@ type VolumeAttachmentStatus struct {
 type VolumeAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VolumeAttachmentSpec   `json:"spec"`
-	Status            VolumeAttachmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceName)",message="deviceName is a required parameter"
+	Spec   VolumeAttachmentSpec   `json:"spec"`
+	Status VolumeAttachmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

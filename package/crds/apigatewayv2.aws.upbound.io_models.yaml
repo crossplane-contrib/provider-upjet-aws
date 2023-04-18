@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -162,11 +166,23 @@ spec:
                       in length.
                     type: string
                 required:
-                - contentType
-                - name
                 - region
-                - schema
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -338,13 +354,40 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: contentType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentType)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: schema is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schema)
           status:
             description: ModelStatus defines the observed state of Model.
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: API identifier.
+                    type: string
+                  contentType:
+                    description: The content-type for the model, for example, application/json.
+                      Must be between 1 and 256 characters in length.
+                    type: string
+                  description:
+                    description: Description of the model. Must be between 1 and 128
+                      characters in length.
+                    type: string
                   id:
                     description: Model identifier.
+                    type: string
+                  name:
+                    description: Name of the model. Must be alphanumeric. Must be
+                      between 1 and 128 characters in length.
+                    type: string
+                  schema:
+                    description: Schema for the model. This should be a JSON schema
+                      draft 4 model. Must be less than or equal to 32768 characters
+                      in length.
                     type: string
                 type: object
               conditions:

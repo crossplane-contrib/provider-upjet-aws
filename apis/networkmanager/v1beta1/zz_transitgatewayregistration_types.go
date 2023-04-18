@@ -14,7 +14,14 @@ import (
 )
 
 type TransitGatewayRegistrationObservation struct {
+
+	// The ID of the Global Network to register to.
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the Transit Gateway to register.
+	TransitGatewayArn *string `json:"transitGatewayArn,omitempty" tf:"transit_gateway_arn,omitempty"`
 }
 
 type TransitGatewayRegistrationParameters struct {

@@ -15,8 +15,30 @@ import (
 
 type BucketWebsiteConfigurationObservation struct {
 
+	// Name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Name of the error document for the website. See below.
+	ErrorDocument []ErrorDocumentObservation `json:"errorDocument,omitempty" tf:"error_document,omitempty"`
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the index document for the website. See below.
+	IndexDocument []IndexDocumentObservation `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
+
+	// Redirect behavior for every request to this bucket's website endpoint. See below. Conflicts with error_document, index_document, and routing_rule.
+	RedirectAllRequestsTo []RedirectAllRequestsToObservation `json:"redirectAllRequestsTo,omitempty" tf:"redirect_all_requests_to,omitempty"`
+
+	// List of rules that define when a redirect is applied and the redirect behavior. See below.
+	RoutingRule []RoutingRuleObservation `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
+
+	// JSON array containing routing rules
+	// describing redirect behavior and when redirects are applied. Use this parameter when your routing rules contain empty String values ("") as seen in the example above.
+	RoutingRules *string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 
 	// Domain of the website endpoint. This is used to create Route 53 alias records.
 	WebsiteDomain *string `json:"websiteDomain,omitempty" tf:"website_domain,omitempty"`
@@ -73,6 +95,12 @@ type BucketWebsiteConfigurationParameters struct {
 }
 
 type ConditionObservation struct {
+
+	// HTTP error code when the redirect is applied. If specified with key_prefix_equals, then both must be true for the redirect to be applied.
+	HTTPErrorCodeReturnedEquals *string `json:"httpErrorCodeReturnedEquals,omitempty" tf:"http_error_code_returned_equals,omitempty"`
+
+	// Object key name prefix when the redirect is applied. If specified with http_error_code_returned_equals, then both must be true for the redirect to be applied.
+	KeyPrefixEquals *string `json:"keyPrefixEquals,omitempty" tf:"key_prefix_equals,omitempty"`
 }
 
 type ConditionParameters struct {
@@ -87,6 +115,9 @@ type ConditionParameters struct {
 }
 
 type ErrorDocumentObservation struct {
+
+	// Object key name to use when a 4XX class error occurs.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type ErrorDocumentParameters struct {
@@ -97,6 +128,11 @@ type ErrorDocumentParameters struct {
 }
 
 type IndexDocumentObservation struct {
+
+	// Suffix that is appended to a request that is for a directory on the website endpoint.
+	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
+	// The suffix must not be empty and must not include a slash character.
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type IndexDocumentParameters struct {
@@ -109,6 +145,12 @@ type IndexDocumentParameters struct {
 }
 
 type RedirectAllRequestsToObservation struct {
+
+	// Name of the host where requests are redirected.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// Protocol to use when redirecting requests. The default is the protocol that is used in the original request. Valid values: http, https.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type RedirectAllRequestsToParameters struct {
@@ -123,6 +165,21 @@ type RedirectAllRequestsToParameters struct {
 }
 
 type RedirectObservation struct {
+
+	// HTTP redirect code to use on the response.
+	HTTPRedirectCode *string `json:"httpRedirectCode,omitempty" tf:"http_redirect_code,omitempty"`
+
+	// Name of the host where requests are redirected.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// Protocol to use when redirecting requests. The default is the protocol that is used in the original request. Valid values: http, https.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with key_prefix_equals set to docs/ and in the redirect set replace_key_prefix_with to /documents.
+	ReplaceKeyPrefixWith *string `json:"replaceKeyPrefixWith,omitempty" tf:"replace_key_prefix_with,omitempty"`
+
+	// Specific object key to use in the redirect request. For example, redirect request to error.html.
+	ReplaceKeyWith *string `json:"replaceKeyWith,omitempty" tf:"replace_key_with,omitempty"`
 }
 
 type RedirectParameters struct {
@@ -149,6 +206,12 @@ type RedirectParameters struct {
 }
 
 type RoutingRuleObservation struct {
+
+	// Configuration block for describing a condition that must be met for the specified redirect to apply. See below.
+	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Configuration block for redirect information. See below.
+	Redirect []RedirectObservation `json:"redirect,omitempty" tf:"redirect,omitempty"`
 }
 
 type RoutingRuleParameters struct {

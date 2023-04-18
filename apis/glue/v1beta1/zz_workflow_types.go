@@ -18,8 +18,20 @@ type WorkflowObservation struct {
 	// Amazon Resource Name (ARN) of Glue Workflow
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+
+	// –  Description of the workflow.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Workflow name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

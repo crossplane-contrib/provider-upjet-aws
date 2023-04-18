@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -304,10 +308,22 @@ spec:
                     description: Opsworks application type. One of aws-flow-ruby,
                       java, rails, php, nodejs, static or other.
                     type: string
-                required:
-                - name
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -479,13 +495,124 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ApplicationStatus defines the observed state of Application.
             properties:
               atProvider:
                 properties:
+                  appSource:
+                    description: SCM configuration of the app as described below.
+                    items:
+                      properties:
+                        revision:
+                          description: For sources that are version-aware, the revision
+                            to use.
+                          type: string
+                        type:
+                          description: The type of source to use. For example, "archive".
+                          type: string
+                        url:
+                          description: The URL where the app resource can be found.
+                          type: string
+                        username:
+                          description: Username to use when authenticating to the
+                            source.
+                          type: string
+                      type: object
+                    type: array
+                  autoBundleOnDeploy:
+                    description: Run bundle install when deploying for application
+                      of type rails.
+                    type: string
+                  awsFlowRubySettings:
+                    description: Specify activity and workflow workers for your app
+                      using the aws-flow gem.
+                    type: string
+                  dataSourceArn:
+                    description: The data source's ARN.
+                    type: string
+                  dataSourceDatabaseName:
+                    description: The database name.
+                    type: string
+                  dataSourceType:
+                    description: The data source's type one of AutoSelectOpsworksMysqlInstance,
+                      OpsworksMysqlInstance, or RdsDbInstance.
+                    type: string
+                  description:
+                    description: A description of the app.
+                    type: string
+                  documentRoot:
+                    description: Subfolder for the document root for application of
+                      type rails.
+                    type: string
+                  domains:
+                    description: A list of virtual host alias.
+                    items:
+                      type: string
+                    type: array
+                  enableSsl:
+                    description: Whether to enable SSL for the app. This must be set
+                      in order to let ssl_configuration.private_key, ssl_configuration.certificate
+                      and ssl_configuration.chain take effect.
+                    type: boolean
+                  environment:
+                    description: Object to define environment variables.  Object is
+                      described below.
+                    items:
+                      properties:
+                        key:
+                          description: Variable name.
+                          type: string
+                        secure:
+                          description: Set visibility of the variable value to true
+                            or false.
+                          type: boolean
+                        value:
+                          description: Variable value.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The id of the application.
+                    type: string
+                  name:
+                    description: A human-readable name for the application.
+                    type: string
+                  railsEnv:
+                    description: The name of the Rails environment for application
+                      of type rails.
+                    type: string
+                  shortName:
+                    description: A short, machine-readable name for the application.
+                      This can only be defined on resource creation and ignored on
+                      resource update.
+                    type: string
+                  sslConfiguration:
+                    description: The SSL configuration of the app. Object is described
+                      below.
+                    items:
+                      properties:
+                        certificate:
+                          description: The contents of the certificate's domain.crt
+                            file.
+                          type: string
+                        chain:
+                          description: Can be used to specify an intermediate certificate
+                            authority key or client authentication.
+                          type: string
+                      type: object
+                    type: array
+                  stackId:
+                    description: ID of the stack the application will belong to.
+                    type: string
+                  type:
+                    description: Opsworks application type. One of aws-flow-ruby,
+                      java, rails, php, nodejs, static or other.
                     type: string
                 type: object
               conditions:

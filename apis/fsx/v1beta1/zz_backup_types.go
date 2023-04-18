@@ -18,6 +18,9 @@ type BackupObservation struct {
 	// Amazon Resource Name of the backup.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
 	// Identifier of the backup, e.g., fs-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -27,11 +30,17 @@ type BackupObservation struct {
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The type of the file system backup.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The ID of the volume to back up. Required if backing up a ONTAP Volume.
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 }
 
 type BackupParameters struct {

@@ -15,11 +15,20 @@ import (
 
 type SharedDirectoryObservation struct {
 
+	// Identifier of the Managed Microsoft AD directory that you want to share with other accounts.
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
 	// Identifier of the shared directory.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
 	// Identifier of the directory that is stored in the directory consumer account that corresponds to the shared directory in the owner account.
 	SharedDirectoryID *string `json:"sharedDirectoryId,omitempty" tf:"shared_directory_id,omitempty"`
+
+	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
+	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type SharedDirectoryParameters struct {
@@ -52,11 +61,17 @@ type SharedDirectoryParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
-	// +kubebuilder:validation:Required
-	Target []TargetParameters `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type TargetObservation struct {
+
+	// Identifier of the directory consumer account.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of identifier to be used in the id field. Valid value is ACCOUNT. Default is ACCOUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetParameters struct {
@@ -94,8 +109,9 @@ type SharedDirectoryStatus struct {
 type SharedDirectory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedDirectorySpec   `json:"spec"`
-	Status            SharedDirectoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)",message="target is a required parameter"
+	Spec   SharedDirectorySpec   `json:"spec"`
+	Status SharedDirectoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

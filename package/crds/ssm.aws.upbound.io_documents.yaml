@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -127,10 +131,23 @@ spec:
                       cannot be changed for an existing document version.
                     type: string
                 required:
-                - content
-                - documentType
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -302,12 +319,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: content is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)
+            - message: documentType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.documentType)
           status:
             description: DocumentStatus defines the observed state of Document.
             properties:
               atProvider:
                 properties:
                   arn:
+                    type: string
+                  attachmentsSource:
+                    description: One or more configuration blocks describing attachments
+                      sources to a version of a document. Defined below.
+                    items:
+                      properties:
+                        key:
+                          description: 'The key describing the location of an attachment
+                            to a document. Valid key types include: SourceUrl and
+                            S3FileUrl'
+                          type: string
+                        name:
+                          description: The name of the document attachment file
+                          type: string
+                        values:
+                          description: The value describing the location of an attachment
+                            to a document
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  content:
+                    description: The JSON or YAML content of the document.
                     type: string
                   createdDate:
                     description: The date the document was created.
@@ -317,6 +363,14 @@ spec:
                     type: string
                   description:
                     description: The description of the document.
+                    type: string
+                  documentFormat:
+                    description: 'The format of the document. Valid document types
+                      include: JSON and YAML'
+                    type: string
+                  documentType:
+                    description: 'The type of the document. Valid document types include:
+                      Automation, Command, Package, Policy, and Session'
                     type: string
                   documentVersion:
                     description: The document version.
@@ -355,6 +409,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  permissions:
+                    additionalProperties:
+                      type: string
+                    description: Additional Permissions to attach to the document.
+                      See Permissions below for details.
+                    type: object
                   platformTypes:
                     description: A list of OS platforms compatible with this SSM document,
                       either "Windows" or "Linux".
@@ -368,6 +428,11 @@ spec:
                     description: '"Creating", "Active" or "Deleting". The current
                       status of the document.'
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -375,6 +440,18 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetType:
+                    description: The target type which defines the kinds of resources
+                      the document can run on. For example, /AWS::EC2::Instance. For
+                      a list of valid resource types, see AWS Resource Types Reference
+                      (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+                    type: string
+                  versionName:
+                    description: A field specifying the version of the artifact you
+                      are creating with the document. For example, "Release 12, Update
+                      6". This value is unique across all versions of a document and
+                      cannot be changed for an existing document version.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

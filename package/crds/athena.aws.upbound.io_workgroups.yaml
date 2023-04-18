@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -274,6 +278,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -458,6 +477,17 @@ spec:
                       workgroup. Documented below.
                     items:
                       properties:
+                        bytesScannedCutoffPerQuery:
+                          description: Integer for the upper data usage limit (cutoff)
+                            for the amount of bytes a single query in a workgroup
+                            is allowed to scan. Must be at least 10485760.
+                          type: number
+                        enforceWorkgroupConfiguration:
+                          description: Boolean whether the settings for the workgroup
+                            override client-side settings. For more information, see
+                            Workgroup Settings Override Client-Side Settings. Defaults
+                            to true.
+                          type: boolean
                         engineVersion:
                           description: Configuration block for the Athena Engine Versioning.
                             For more information, see Athena Engine Versioning. See
@@ -469,13 +499,104 @@ spec:
                                   runs. If selected_engine_version is set to AUTO,
                                   the effective engine version is chosen by Athena.
                                 type: string
+                              selectedEngineVersion:
+                                description: Requested engine version. Defaults to
+                                  AUTO.
+                                type: string
+                            type: object
+                          type: array
+                        executionRole:
+                          description: Role used in a notebook session for accessing
+                            the user's resources.
+                          type: string
+                        publishCloudwatchMetricsEnabled:
+                          description: Boolean whether Amazon CloudWatch metrics are
+                            enabled for the workgroup. Defaults to true.
+                          type: boolean
+                        requesterPaysEnabled:
+                          description: If set to true , allows members assigned to
+                            a workgroup to reference Amazon S3 Requester Pays buckets
+                            in queries. If set to false , workgroup members cannot
+                            query data from Requester Pays buckets, and queries that
+                            retrieve data from Requester Pays buckets cause an error.
+                            The default is false . For more information about Requester
+                            Pays buckets, see Requester Pays Buckets in the Amazon
+                            Simple Storage Service Developer Guide.
+                          type: boolean
+                        resultConfiguration:
+                          description: Configuration block with result settings. See
+                            Result Configuration below.
+                          items:
+                            properties:
+                              aclConfiguration:
+                                description: That an Amazon S3 canned ACL should be
+                                  set to control ownership of stored query results.
+                                  See ACL Configuration below.
+                                items:
+                                  properties:
+                                    s3AclOption:
+                                      description: Amazon S3 canned ACL that Athena
+                                        should specify when storing query results.
+                                        Valid value is BUCKET_OWNER_FULL_CONTROL.
+                                      type: string
+                                  type: object
+                                type: array
+                              encryptionConfiguration:
+                                description: Configuration block with encryption settings.
+                                  See Encryption Configuration below.
+                                items:
+                                  properties:
+                                    encryptionOption:
+                                      description: Whether Amazon S3 server-side encryption
+                                        with Amazon S3-managed keys (SSE_S3), server-side
+                                        encryption with KMS-managed keys (SSE_KMS),
+                                        or client-side encryption with KMS-managed
+                                        keys (CSE_KMS) is used. If a query runs in
+                                        a workgroup and the workgroup overrides client-side
+                                        settings, then the workgroup's setting for
+                                        encryption is used. It specifies whether query
+                                        results must be encrypted, for all queries
+                                        that run in this workgroup.
+                                      type: string
+                                    kmsKeyArn:
+                                      description: For SSE_KMS and CSE_KMS, this is
+                                        the KMS key ARN.
+                                      type: string
+                                  type: object
+                                type: array
+                              expectedBucketOwner:
+                                description: AWS account ID that you expect to be
+                                  the owner of the Amazon S3 bucket.
+                                type: string
+                              outputLocation:
+                                description: Location in Amazon S3 where your query
+                                  results are stored, such as s3://path/to/query/bucket/.
+                                  For more information, see Queries and Query Result
+                                  Files.
+                                type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  description:
+                    description: Description of the workgroup.
+                    type: string
+                  forceDestroy:
+                    description: Option to delete the workgroup and its contents even
+                      if the workgroup contains any named queries.
+                    type: boolean
                   id:
                     description: Workgroup name
                     type: string
+                  state:
+                    description: State of the workgroup. Valid values are DISABLED
+                      or ENABLED. Defaults to ENABLED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string

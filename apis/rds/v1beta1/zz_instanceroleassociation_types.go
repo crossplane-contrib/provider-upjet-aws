@@ -15,8 +15,17 @@ import (
 
 type InstanceRoleAssociationObservation struct {
 
+	// DB Instance Identifier to associate with the IAM Role.
+	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
+
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
+
 	// DB Instance Identifier and IAM Role ARN separated by a comma (,)
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role to associate with the DB Instance.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type InstanceRoleAssociationParameters struct {
@@ -36,8 +45,8 @@ type InstanceRoleAssociationParameters struct {
 	DBInstanceIdentifierSelector *v1.Selector `json:"dbInstanceIdentifierSelector,omitempty" tf:"-"`
 
 	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
-	// +kubebuilder:validation:Required
-	FeatureName *string `json:"featureName" tf:"feature_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -83,8 +92,9 @@ type InstanceRoleAssociationStatus struct {
 type InstanceRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceRoleAssociationSpec   `json:"spec"`
-	Status            InstanceRoleAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureName)",message="featureName is a required parameter"
+	Spec   InstanceRoleAssociationSpec   `json:"spec"`
+	Status InstanceRoleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

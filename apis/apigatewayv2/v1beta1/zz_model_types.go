@@ -15,8 +15,23 @@ import (
 
 type ModelObservation struct {
 
+	// API identifier.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Description of the model. Must be between 1 and 128 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Model identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type ModelParameters struct {
@@ -35,16 +50,16 @@ type ModelParameters struct {
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The content-type for the model, for example, application/json. Must be between 1 and 256 characters in length.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Description of the model. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Name of the model. Must be alphanumeric. Must be between 1 and 128 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -52,8 +67,8 @@ type ModelParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Schema for the model. This should be a JSON schema draft 4 model. Must be less than or equal to 32768 characters in length.
-	// +kubebuilder:validation:Required
-	Schema *string `json:"schema" tf:"schema,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 // ModelSpec defines the desired state of Model
@@ -80,8 +95,11 @@ type ModelStatus struct {
 type Model struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ModelSpec   `json:"spec"`
-	Status            ModelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentType)",message="contentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schema)",message="schema is a required parameter"
+	Spec   ModelSpec   `json:"spec"`
+	Status ModelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

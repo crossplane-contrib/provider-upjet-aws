@@ -14,7 +14,29 @@ import (
 )
 
 type LifecycleHookObservation struct {
+
+	// Name of the Auto Scaling group to which you want to assign the lifecycle hook
+	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
+
+	// Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The value for this parameter can be either CONTINUE or ABANDON. The default value for this parameter is ABANDON.
+	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
+
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the DefaultResult parameter
+	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
+
+	// Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.
+	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
+
+	// ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic.
+	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
+
+	// ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type LifecycleHookParameters struct {
@@ -41,8 +63,8 @@ type LifecycleHookParameters struct {
 	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
-	// +kubebuilder:validation:Required
-	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
+	// +kubebuilder:validation:Optional
+	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
 	// Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.
 	// +kubebuilder:validation:Optional
@@ -96,8 +118,9 @@ type LifecycleHookStatus struct {
 type LifecycleHook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LifecycleHookSpec   `json:"spec"`
-	Status            LifecycleHookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lifecycleTransition)",message="lifecycleTransition is a required parameter"
+	Spec   LifecycleHookSpec   `json:"spec"`
+	Status LifecycleHookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

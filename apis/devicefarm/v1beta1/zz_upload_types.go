@@ -21,10 +21,22 @@ type UploadObservation struct {
 	// The upload's category.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
+	// The upload's content type (for example, application/octet-stream).
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The upload's metadata. For example, for Android, this contains information that is parsed from the manifest and is displayed in the AWS Device Farm console after the associated app is uploaded.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The upload's file name. The name should not contain any forward slashes (/). If you are uploading an iOS app, the file name must end with the .ipa extension. If you are uploading an Android app, the file name must end with the .apk extension. For all others, the file name must end with the .zip file extension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the project for the upload.
+	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
+
+	// The upload's upload type. See AWS Docs for valid list of values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The presigned Amazon S3 URL that was used to store a file using a PUT request.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -37,8 +49,8 @@ type UploadParameters struct {
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// The upload's file name. The name should not contain any forward slashes (/). If you are uploading an iOS app, the file name must end with the .ipa extension. If you are uploading an Android app, the file name must end with the .apk extension. For all others, the file name must end with the .zip file extension.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ARN of the project for the upload.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
@@ -60,8 +72,8 @@ type UploadParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The upload's upload type. See AWS Docs for valid list of values.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // UploadSpec defines the desired state of Upload
@@ -88,8 +100,10 @@ type UploadStatus struct {
 type Upload struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UploadSpec   `json:"spec"`
-	Status            UploadStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   UploadSpec   `json:"spec"`
+	Status UploadStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -125,9 +129,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -299,13 +317,66 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ByteMatchSetStatus defines the observed state of ByteMatchSet.
             properties:
               atProvider:
                 properties:
+                  byteMatchTuples:
+                    description: Specifies the bytes (typically a string that corresponds
+                      with ASCII characters) that you want to search for in web requests,
+                      the location in requests that you want to search, and other
+                      settings.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: The part of a web request that you want to
+                            search, such as a specified header or a query string.
+                          items:
+                            properties:
+                              data:
+                                description: When type is HEADER, enter the name of
+                                  the header that you want to search, e.g., User-Agent
+                                  or Referer. If type is any other value, omit this
+                                  field.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified string. e.g.,
+                                  HEADER, METHOD or BODY. See docs for all supported
+                                  values.
+                                type: string
+                            type: object
+                          type: array
+                        positionalConstraint:
+                          description: Within the portion of a web request that you
+                            want to search (for example, in the query string, if any),
+                            specify where you want to search. e.g., CONTAINS, CONTAINS_WORD
+                            or EXACTLY. See docs for all supported values.
+                          type: string
+                        targetString:
+                          description: The value that you want to search for within
+                            the field specified by field_to_match, e.g., badrefer1.
+                            See docs for all supported values.
+                          type: string
+                        textTransformation:
+                          description: Text transformations used to eliminate unusual
+                            formatting that attackers use in web requests in an effort
+                            to bypass AWS WAF. If you specify a transformation, AWS
+                            WAF performs the transformation on target_string before
+                            inspecting a request for a match. e.g., CMD_LINE, HTML_ENTITY_DECODE
+                            or NONE. See docs for all supported values.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the WAF Byte Match Set.
+                    type: string
+                  name:
+                    description: The name or description of the Byte Match Set.
                     type: string
                 type: object
               conditions:

@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -194,9 +198,23 @@ spec:
                       from 0 to 100 percent.
                     type: number
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -368,6 +386,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: NetworkProfileStatus defines the observed state of NetworkProfile.
             properties:
@@ -376,8 +397,38 @@ spec:
                   arn:
                     description: The Amazon Resource Name of this network profile.
                     type: string
+                  description:
+                    description: The description of the network profile.
+                    type: string
+                  downlinkBandwidthBits:
+                    description: The data throughput rate in bits per second, as an
+                      integer from 0 to 104857600. Default value is 104857600.
+                    type: number
+                  downlinkDelayMs:
+                    description: Delay time for all packets to destination in milliseconds
+                      as an integer from 0 to 2000.
+                    type: number
+                  downlinkJitterMs:
+                    description: Time variation in the delay of received packets in
+                      milliseconds as an integer from 0 to 2000.
+                    type: number
+                  downlinkLossPercent:
+                    description: Proportion of received packets that fail to arrive
+                      from 0 to 100 percent.
+                    type: number
                   id:
                     type: string
+                  name:
+                    description: The name for the network profile.
+                    type: string
+                  projectArn:
+                    description: The ARN of the project for the network profile.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -385,6 +436,26 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  type:
+                    description: The type of network profile to create. Valid values
+                      are listed are PRIVATE and CURATED.
+                    type: string
+                  uplinkBandwidthBits:
+                    description: The data throughput rate in bits per second, as an
+                      integer from 0 to 104857600. Default value is 104857600.
+                    type: number
+                  uplinkDelayMs:
+                    description: Delay time for all packets to destination in milliseconds
+                      as an integer from 0 to 2000.
+                    type: number
+                  uplinkJitterMs:
+                    description: Time variation in the delay of received packets in
+                      milliseconds as an integer from 0 to 2000.
+                    type: number
+                  uplinkLossPercent:
+                    description: Proportion of received packets that fail to arrive
+                      from 0 to 100 percent.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

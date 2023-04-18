@@ -21,19 +21,34 @@ type BuildObservation struct {
 	// GameLift Build ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the build
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
+
+	// Information indicating where your game build files are stored. See below.
+	StorageLocation []StorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Version that is associated with this build.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type BuildParameters struct {
 
 	// Name of the build
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
-	// +kubebuilder:validation:Required
-	OperatingSystem *string `json:"operatingSystem" tf:"operating_system,omitempty"`
+	// +kubebuilder:validation:Optional
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -41,8 +56,8 @@ type BuildParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Information indicating where your game build files are stored. See below.
-	// +kubebuilder:validation:Required
-	StorageLocation []StorageLocationParameters `json:"storageLocation" tf:"storage_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageLocation []StorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -54,6 +69,18 @@ type BuildParameters struct {
 }
 
 type StorageLocationObservation struct {
+
+	// Name of your S3 bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Name of the zip file containing your build files.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
+
+	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type StorageLocationParameters struct {
@@ -128,8 +155,11 @@ type BuildStatus struct {
 type Build struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BuildSpec   `json:"spec"`
-	Status            BuildStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operatingSystem)",message="operatingSystem is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageLocation)",message="storageLocation is a required parameter"
+	Spec   BuildSpec   `json:"spec"`
+	Status BuildStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
