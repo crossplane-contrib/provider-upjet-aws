@@ -15,11 +15,20 @@ import (
 
 type ProductObservation struct {
 
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
 	// ARN of the product.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Time when the product was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
+
+	// Description of the product.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Distributor (i.e., vendor) of the product.
+	Distributor *string `json:"distributor,omitempty" tf:"distributor,omitempty"`
 
 	// Whether the product has a default path. If the product does not have a default path, call ListLaunchPaths to disambiguate between paths.  Otherwise, ListLaunchPaths is not required, and the output of ProductViewSummary can be used directly with DescribeProvisioningParameters.
 	HasDefaultPath *bool `json:"hasDefaultPath,omitempty" tf:"has_default_path,omitempty"`
@@ -27,11 +36,35 @@ type ProductObservation struct {
 	// Product ID. For example, prod-dnigbtea24ste.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the product.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Owner of the product.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
+	ProvisioningArtifactParameters []ProvisioningArtifactParametersObservation `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
+
 	// Status of the product.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Support information about the product.
+	SupportDescription *string `json:"supportDescription,omitempty" tf:"support_description,omitempty"`
+
+	// Contact email for product support.
+	SupportEmail *string `json:"supportEmail,omitempty" tf:"support_email,omitempty"`
+
+	// Contact URL for product support.
+	SupportURL *string `json:"supportUrl,omitempty" tf:"support_url,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProductParameters struct {
@@ -49,16 +82,16 @@ type ProductParameters struct {
 	Distributor *string `json:"distributor,omitempty" tf:"distributor,omitempty"`
 
 	// Name of the product.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Owner of the product.
-	// +kubebuilder:validation:Required
-	Owner *string `json:"owner" tf:"owner,omitempty"`
+	// +kubebuilder:validation:Optional
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
-	// +kubebuilder:validation:Required
-	ProvisioningArtifactParameters []ProvisioningArtifactParametersParameters `json:"provisioningArtifactParameters" tf:"provisioning_artifact_parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProvisioningArtifactParameters []ProvisioningArtifactParametersParameters `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -82,11 +115,29 @@ type ProductParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningArtifactParametersObservation struct {
+
+	// Description of the provisioning artifact (i.e., version), including how it differs from the previous provisioning artifact.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether AWS Service Catalog stops validating the specified provisioning artifact template even if it is invalid.
+	DisableTemplateValidation *bool `json:"disableTemplateValidation,omitempty" tf:"disable_template_validation,omitempty"`
+
+	// Name of the provisioning artifact (for example, v1, v2beta). No spaces are allowed.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
+	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
+
+	// Template source as URL of the CloudFormation template in Amazon S3.
+	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
+
+	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningArtifactParametersParameters struct {
@@ -140,8 +191,12 @@ type ProductStatus struct {
 type Product struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductSpec   `json:"spec"`
-	Status            ProductStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.owner)",message="owner is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.provisioningArtifactParameters)",message="provisioningArtifactParameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ProductSpec   `json:"spec"`
+	Status ProductStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

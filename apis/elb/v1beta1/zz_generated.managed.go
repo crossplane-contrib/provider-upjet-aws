@@ -17,6 +17,11 @@ func (mg *AppCookieStickinessPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AppCookieStickinessPolicy.
+func (mg *AppCookieStickinessPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AppCookieStickinessPolicy.
 func (mg *AppCookieStickinessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AppCookieStickinessPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AppCookieStickinessPolicy.
 func (mg *AppCookieStickinessPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AppCookieStickinessPolicy.
+func (mg *AppCookieStickinessPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AppCookieStickinessPolicy.
@@ -83,6 +93,11 @@ func (mg *Attachment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Attachment.
+func (mg *Attachment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Attachment.
 func (mg *Attachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Attachment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Attachment.
 func (mg *Attachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Attachment.
+func (mg *Attachment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Attachment.
@@ -149,6 +169,11 @@ func (mg *BackendServerPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackendServerPolicy.
+func (mg *BackendServerPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackendServerPolicy.
 func (mg *BackendServerPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *BackendServerPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackendServerPolicy.
 func (mg *BackendServerPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackendServerPolicy.
+func (mg *BackendServerPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackendServerPolicy.
@@ -215,6 +245,11 @@ func (mg *ELB) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ELB.
+func (mg *ELB) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ELB.
 func (mg *ELB) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ELB) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ELB.
 func (mg *ELB) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ELB.
+func (mg *ELB) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ELB.
@@ -281,6 +321,11 @@ func (mg *LBCookieStickinessPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBCookieStickinessPolicy.
+func (mg *LBCookieStickinessPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBCookieStickinessPolicy.
 func (mg *LBCookieStickinessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *LBCookieStickinessPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBCookieStickinessPolicy.
 func (mg *LBCookieStickinessPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBCookieStickinessPolicy.
+func (mg *LBCookieStickinessPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBCookieStickinessPolicy.
@@ -347,6 +397,11 @@ func (mg *LBSSLNegotiationPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LBSSLNegotiationPolicy.
+func (mg *LBSSLNegotiationPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LBSSLNegotiationPolicy.
 func (mg *LBSSLNegotiationPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *LBSSLNegotiationPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LBSSLNegotiationPolicy.
 func (mg *LBSSLNegotiationPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LBSSLNegotiationPolicy.
+func (mg *LBSSLNegotiationPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LBSSLNegotiationPolicy.
@@ -413,6 +473,11 @@ func (mg *ListenerPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ListenerPolicy.
+func (mg *ListenerPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ListenerPolicy.
 func (mg *ListenerPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *ListenerPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ListenerPolicy.
 func (mg *ListenerPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ListenerPolicy.
+func (mg *ListenerPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ListenerPolicy.
@@ -479,6 +549,11 @@ func (mg *Policy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Policy.
+func (mg *Policy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Policy.
 func (mg *Policy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *Policy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Policy.
 func (mg *Policy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Policy.
+func (mg *Policy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Policy.
@@ -545,6 +625,11 @@ func (mg *ProxyProtocolPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ProxyProtocolPolicy.
+func (mg *ProxyProtocolPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ProxyProtocolPolicy.
 func (mg *ProxyProtocolPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *ProxyProtocolPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ProxyProtocolPolicy.
 func (mg *ProxyProtocolPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ProxyProtocolPolicy.
+func (mg *ProxyProtocolPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ProxyProtocolPolicy.

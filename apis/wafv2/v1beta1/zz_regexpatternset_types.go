@@ -18,10 +18,25 @@ type RegexPatternSetObservation struct {
 	// The Amazon Resource Name (ARN) that identifies the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A friendly description of the regular expression pattern set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// A unique identifier for the set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LockToken *string `json:"lockToken,omitempty" tf:"lock_token,omitempty"`
+
+	// A friendly name of the regular expression pattern set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details.
+	RegularExpression []RegularExpressionObservation `json:"regularExpression,omitempty" tf:"regular_expression,omitempty"`
+
+	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -34,8 +49,8 @@ type RegexPatternSetParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A friendly name of the regular expression pattern set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -47,8 +62,8 @@ type RegexPatternSetParameters struct {
 	RegularExpression []RegularExpressionParameters `json:"regularExpression,omitempty" tf:"regular_expression,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -56,6 +71,9 @@ type RegexPatternSetParameters struct {
 }
 
 type RegularExpressionObservation struct {
+
+	// The string representing the regular expression, see the AWS WAF documentation for more information.
+	RegexString *string `json:"regexString,omitempty" tf:"regex_string,omitempty"`
 }
 
 type RegularExpressionParameters struct {
@@ -89,8 +107,10 @@ type RegexPatternSetStatus struct {
 type RegexPatternSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RegexPatternSetSpec   `json:"spec"`
-	Status            RegexPatternSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	Spec   RegexPatternSetSpec   `json:"spec"`
+	Status RegexPatternSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

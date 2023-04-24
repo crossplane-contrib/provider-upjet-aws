@@ -24,7 +24,13 @@ type InputSecurityGroupObservation struct {
 	// The list of inputs currently using this InputSecurityGroup.
 	Inputs []*string `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Whitelist rules. See Whitelist Rules for more details.
+	WhitelistRules []WhitelistRulesObservation `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
 type InputSecurityGroupParameters struct {
@@ -39,11 +45,14 @@ type InputSecurityGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whitelist rules. See Whitelist Rules for more details.
-	// +kubebuilder:validation:Required
-	WhitelistRules []WhitelistRulesParameters `json:"whitelistRules" tf:"whitelist_rules,omitempty"`
+	// +kubebuilder:validation:Optional
+	WhitelistRules []WhitelistRulesParameters `json:"whitelistRules,omitempty" tf:"whitelist_rules,omitempty"`
 }
 
 type WhitelistRulesObservation struct {
+
+	// The IPv4 CIDR that's whitelisted.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 }
 
 type WhitelistRulesParameters struct {
@@ -77,8 +86,9 @@ type InputSecurityGroupStatus struct {
 type InputSecurityGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InputSecurityGroupSpec   `json:"spec"`
-	Status            InputSecurityGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.whitelistRules)",message="whitelistRules is a required parameter"
+	Spec   InputSecurityGroupSpec   `json:"spec"`
+	Status InputSecurityGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

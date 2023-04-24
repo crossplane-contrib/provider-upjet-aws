@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: transitgatewayroutes.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -158,7 +162,7 @@ spec:
                     description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
-                    description: Reference to a TransitGateway in ec2 to populate
+                    description: Reference to a TransitGatewayRouteTable to populate
                       transitGatewayRouteTableId.
                     properties:
                       name:
@@ -193,7 +197,7 @@ spec:
                     - name
                     type: object
                   transitGatewayRouteTableIdSelector:
-                    description: Selector for a TransitGateway in ec2 to populate
+                    description: Selector for a TransitGatewayRouteTable to populate
                       transitGatewayRouteTableId.
                     properties:
                       matchControllerRef:
@@ -233,9 +237,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - destinationCidrBlock
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -407,14 +425,31 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: destinationCidrBlock is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationCidrBlock)
           status:
             description: TransitGatewayRouteStatus defines the observed state of TransitGatewayRoute.
             properties:
               atProvider:
                 properties:
+                  blackhole:
+                    description: Indicates whether to drop traffic that matches this
+                      route (default to false).
+                    type: boolean
+                  destinationCidrBlock:
+                    description: IPv4 or IPv6 RFC1924 CIDR used for destination matches.
+                      Routing decisions are based on the most specific match.
+                    type: string
                   id:
                     description: EC2 Transit Gateway Route Table identifier combined
                       with destination
+                    type: string
+                  transitGatewayAttachmentId:
+                    description: Identifier of EC2 Transit Gateway Attachment .
+                    type: string
+                  transitGatewayRouteTableId:
+                    description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                 type: object
               conditions:
@@ -458,9 +493,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

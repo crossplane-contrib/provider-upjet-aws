@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: frameworks.backup.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -146,10 +150,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - control
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -321,6 +338,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: control is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.control)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: FrameworkStatus defines the observed state of Framework.
             properties:
@@ -329,6 +351,67 @@ spec:
                   arn:
                     description: The ARN of the backup framework.
                     type: string
+                  control:
+                    description: One or more control blocks that make up the framework.
+                      Each control in the list has a name, input parameters, and scope.
+                      Detailed below.
+                    items:
+                      properties:
+                        inputParameter:
+                          description: 'One or more input parameter blocks. An example
+                            of a control with two parameters is: "backup plan frequency
+                            is at least daily and the retention period is at least
+                            1 year". The first parameter is daily. The second parameter
+                            is 1 year. Detailed below.'
+                          items:
+                            properties:
+                              name:
+                                description: The unique name of the framework. The
+                                  name must be between 1 and 256 characters, starting
+                                  with a letter, and consisting of letters, numbers,
+                                  and underscores.
+                                type: string
+                              value:
+                                description: The value of parameter, for example,
+                                  hourly.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The unique name of the framework. The name
+                            must be between 1 and 256 characters, starting with a
+                            letter, and consisting of letters, numbers, and underscores.
+                          type: string
+                        scope:
+                          description: 'The scope of a control. The control scope
+                            defines what the control will evaluate. Three examples
+                            of control scopes are: a specific backup plan, all backup
+                            plans with a specific tag, or all backup plans. Detailed
+                            below.'
+                          items:
+                            properties:
+                              complianceResourceIds:
+                                description: The ID of the only AWS resource that
+                                  you want your control scope to contain. Minimum
+                                  number of 1 item. Maximum number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                              complianceResourceTypes:
+                                description: Describes whether the control scope includes
+                                  one or more types of resources, such as EFS or RDS.
+                                items:
+                                  type: string
+                                type: array
+                              tags:
+                                additionalProperties:
+                                  type: string
+                                description: Key-value map of resource tags.
+                                type: object
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   creationTime:
                     description: The date and time that a framework is created, in
                       Unix format and Coordinated Universal Time (UTC).
@@ -338,8 +421,17 @@ spec:
                       are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
                       | COMPLETED | FAILED.'
                     type: string
+                  description:
+                    description: The description of the framework with a maximum of
+                      1,024 characters
+                    type: string
                   id:
                     description: The id of the backup framework.
+                    type: string
+                  name:
+                    description: The unique name of the framework. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
                     type: string
                   status:
                     description: A framework consists of one or more controls. Each
@@ -348,6 +440,11 @@ spec:
                       recording on or off for each resource. For more information
                       refer to the AWS documentation for Framework Status
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -397,9 +494,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

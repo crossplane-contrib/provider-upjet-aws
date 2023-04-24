@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: branches.amplify.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -213,6 +217,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -389,6 +408,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  appId:
+                    description: Unique ID for an Amplify app.
+                    type: string
                   arn:
                     description: ARN for the branch.
                     type: string
@@ -398,26 +420,75 @@ spec:
                     items:
                       type: string
                     type: array
+                  backendEnvironmentArn:
+                    description: ARN for a backend environment that is part of an
+                      Amplify app.
+                    type: string
                   customDomains:
                     description: Custom domains for the branch.
                     items:
                       type: string
                     type: array
+                  description:
+                    description: Description for the branch.
+                    type: string
                   destinationBranch:
                     description: Destination branch if the branch is a pull request
                       branch.
                     type: string
+                  displayName:
+                    description: Display name for a branch. This is used as the default
+                      domain prefix.
+                    type: string
+                  enableAutoBuild:
+                    description: Enables auto building for the branch.
+                    type: boolean
+                  enableBasicAuth:
+                    description: Enables basic authorization for the branch.
+                    type: boolean
+                  enableNotification:
+                    description: Enables notifications for the branch.
+                    type: boolean
+                  enablePerformanceMode:
+                    description: Enables performance mode for the branch.
+                    type: boolean
+                  enablePullRequestPreview:
+                    description: Enables pull request previews for this branch.
+                    type: boolean
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Environment variables for the branch.
+                    type: object
+                  framework:
+                    description: Framework for the branch.
+                    type: string
                   id:
+                    type: string
+                  pullRequestEnvironmentName:
+                    description: Amplify environment name for the pull request.
                     type: string
                   sourceBranch:
                     description: Source branch if the branch is a pull request branch.
                     type: string
+                  stage:
+                    description: 'Describes the current stage for the branch. Valid
+                      values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  ttl:
+                    description: Content Time To Live (TTL) for the website in seconds.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -460,9 +531,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

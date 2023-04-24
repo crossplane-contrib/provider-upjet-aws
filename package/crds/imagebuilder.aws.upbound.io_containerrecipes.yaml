@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: containerrecipes.imagebuilder.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -452,14 +456,23 @@ spec:
                       test workflows.
                     type: string
                 required:
-                - component
-                - containerType
-                - name
-                - parentImage
                 - region
-                - targetRepository
-                - version
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -631,6 +644,19 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: component is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.component)
+            - message: containerType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerType)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: parentImage is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentImage)
+            - message: targetRepository is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRepository)
+            - message: version is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)
           status:
             description: ContainerRecipeStatus defines the observed state of ContainerRecipe.
             properties:
@@ -639,8 +665,47 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the container recipe.
                     type: string
+                  component:
+                    description: Ordered configuration block(s) with components for
+                      the container recipe. Detailed below.
+                    items:
+                      properties:
+                        componentArn:
+                          description: Amazon Resource Name (ARN) of the Image Builder
+                            Component to associate.
+                          type: string
+                        parameter:
+                          description: Configuration block(s) for parameters to configure
+                            the component. Detailed below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the component parameter.
+                                type: string
+                              value:
+                                description: The value for the named component parameter.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  containerType:
+                    description: 'The type of the container to create. Valid values:
+                      DOCKER.'
+                    type: string
                   dateCreated:
                     description: Date the container recipe was created.
+                    type: string
+                  description:
+                    description: The description of the container recipe.
+                    type: string
+                  dockerfileTemplateData:
+                    description: The Dockerfile template used to build the image as
+                      an inline data blob.
+                    type: string
+                  dockerfileTemplateUri:
+                    description: The Amazon S3 URI for the Dockerfile that will be
+                      used to build the container image.
                     type: string
                   encrypted:
                     description: A flag that indicates if the target container is
@@ -648,12 +713,99 @@ spec:
                     type: boolean
                   id:
                     type: string
+                  instanceConfiguration:
+                    description: Configuration block used to configure an instance
+                      for building and testing container images. Detailed below.
+                    items:
+                      properties:
+                        blockDeviceMapping:
+                          description: Configuration block(s) with block device mappings
+                            for the container recipe. Detailed below.
+                          items:
+                            properties:
+                              deviceName:
+                                description: Name of the device. For example, /dev/sda
+                                  or /dev/xvdb.
+                                type: string
+                              ebs:
+                                description: Configuration block with Elastic Block
+                                  Storage (EBS) block device mapping settings. Detailed
+                                  below.
+                                items:
+                                  properties:
+                                    deleteOnTermination:
+                                      description: Whether to delete the volume on
+                                        termination. Defaults to unset, which is the
+                                        value inherited from the parent image.
+                                      type: string
+                                    encrypted:
+                                      description: Whether to encrypt the volume.
+                                        Defaults to unset, which is the value inherited
+                                        from the parent image.
+                                      type: string
+                                    iops:
+                                      description: Number of Input/Output (I/O) operations
+                                        per second to provision for an io1 or io2
+                                        volume.
+                                      type: number
+                                    kmsKeyId:
+                                      description: Amazon Resource Name (ARN) of the
+                                        Key Management Service (KMS) Key for encryption.
+                                      type: string
+                                    snapshotId:
+                                      description: Identifier of the EC2 Volume Snapshot.
+                                      type: string
+                                    throughput:
+                                      description: For GP3 volumes only. The throughput
+                                        in MiB/s that the volume supports.
+                                      type: number
+                                    volumeSize:
+                                      description: Size of the volume, in GiB.
+                                      type: number
+                                    volumeType:
+                                      description: Type of the volume. For example,
+                                        gp2 or io2.
+                                      type: string
+                                  type: object
+                                type: array
+                              noDevice:
+                                description: Set to true to remove a mapping from
+                                  the parent image.
+                                type: boolean
+                              virtualName:
+                                description: Virtual device name. For example, ephemeral0.
+                                  Instance store volumes are numbered starting from
+                                  0.
+                                type: string
+                            type: object
+                          type: array
+                        image:
+                          description: The AMI ID to use as the base image for a container
+                            build and test instance. If not specified, Image Builder
+                            will use the appropriate ECS-optimized AMI as a base image.
+                          type: string
+                      type: object
+                    type: array
+                  kmsKeyId:
+                    description: The KMS key used to encrypt the container image.
+                    type: string
+                  name:
+                    description: The name of the container recipe.
+                    type: string
                   owner:
                     description: Owner of the container recipe.
+                    type: string
+                  parentImage:
+                    description: The base image for the container recipe.
                     type: string
                   platform:
                     description: Platform of the container recipe.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -661,6 +813,29 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetRepository:
+                    description: The destination repository for the container image.
+                      Detailed below.
+                    items:
+                      properties:
+                        repositoryName:
+                          description: The name of the container repository where
+                            the output container image is stored. This name is prefixed
+                            by the repository location.
+                          type: string
+                        service:
+                          description: 'The service in which this image is registered.
+                            Valid values: ECR.'
+                          type: string
+                      type: object
+                    type: array
+                  version:
+                    description: Version of the container recipe.
+                    type: string
+                  workingDirectory:
+                    description: The working directory to be used during build and
+                      test workflows.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -703,9 +878,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -14,6 +14,12 @@ import (
 )
 
 type HomeDirectoryMappingsObservation struct {
+
+	// Represents an entry and a target.
+	Entry *string `json:"entry,omitempty" tf:"entry,omitempty"`
+
+	// Represents the map target.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type HomeDirectoryMappingsParameters struct {
@@ -28,6 +34,15 @@ type HomeDirectoryMappingsParameters struct {
 }
 
 type PosixProfileObservation struct {
+
+	// The POSIX group ID used for all EFS operations by this user.
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
+
+	// The secondary POSIX group IDs used for all EFS operations by this user.
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+
+	// The POSIX user ID used for all EFS operations by this user.
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type PosixProfileParameters struct {
@@ -50,7 +65,31 @@ type UserObservation struct {
 	// Amazon Resource Name (ARN) of Transfer User
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The landing directory (folder) for a user when they log in to the server using their SFTP client.  It should begin with a /.  The first item in the path is the name of the home bucket (accessible as ${Transfer:HomeBucket} in the policy) and the rest is the home directory (accessible as ${Transfer:HomeDirectory} in the policy). For example, /example-bucket-1234/username would set the home bucket to example-bucket-1234 and the home directory to username.
+	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
+
+	// Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible. See Home Directory Mappings below.
+	HomeDirectoryMappings []HomeDirectoryMappingsObservation `json:"homeDirectoryMappings,omitempty" tf:"home_directory_mappings,omitempty"`
+
+	// The type of landing directory (folder) you mapped for your users' home directory. Valid values are PATH and LOGICAL.
+	HomeDirectoryType *string `json:"homeDirectoryType,omitempty" tf:"home_directory_type,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An IAM JSON policy document that scopes down user access to portions of their Amazon S3 bucket. IAM variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These are evaluated on-the-fly when navigating the bucket.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids), that controls your users' access to your Amazon EFS file systems. See Posix Profile below.
+	PosixProfile []PosixProfileObservation `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
+
+	// Amazon Resource Name (ARN) of an IAM role that allows the service to controls your user’s access to your Amazon S3 bucket.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The Server ID of the Transfer Server (e.g., s-12345678)
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

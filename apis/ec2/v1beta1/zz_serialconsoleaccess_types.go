@@ -14,6 +14,10 @@ import (
 )
 
 type SerialConsoleAccessObservation struct {
+
+	// Whether or not serial console access is enabled. Valid values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

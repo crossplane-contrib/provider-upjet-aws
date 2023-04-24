@@ -14,6 +14,15 @@ import (
 )
 
 type CertificateAuthorityConfigurationObservation struct {
+
+	// Type of the public key algorithm and size, in bits, of the key pair that your key pair creates when it issues a certificate. Valid values can be found in the ACM PCA Documentation.
+	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
+
+	// Name of the algorithm your private CA uses to sign certificate requests. Valid values can be found in the ACM PCA Documentation.
+	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
+
+	// Nested argument that contains X.500 distinguished name information. At least one nested attribute must be specified.
+	Subject []SubjectObservation `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type CertificateAuthorityConfigurationParameters struct {
@@ -39,11 +48,17 @@ type CertificateAuthorityObservation struct {
 	// Base64-encoded certificate authority (CA) certificate. Only available after the certificate authority certificate has been imported.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
+	// Nested argument containing algorithms and certificate subject information. Defined below.
+	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationObservation `json:"certificateAuthorityConfiguration,omitempty" tf:"certificate_authority_configuration,omitempty"`
+
 	// Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. Only available after the certificate authority certificate has been imported.
 	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
 
 	// The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
 	CertificateSigningRequest *string `json:"certificateSigningRequest,omitempty" tf:"certificate_signing_request,omitempty"`
+
+	// Whether the certificate authority is enabled or disabled. Defaults to true. Can only be disabled if the CA is in an ACTIVE state.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// ARN of the certificate authority.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -54,21 +69,36 @@ type CertificateAuthorityObservation struct {
 	// Date and time before which the certificate authority is not valid. Only available after the certificate authority certificate has been imported.
 	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
 
+	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
+	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
+
+	// Nested argument containing revocation configuration. Defined below.
+	RevocationConfiguration []RevocationConfigurationObservation `json:"revocationConfiguration,omitempty" tf:"revocation_configuration,omitempty"`
+
 	// Serial number of the certificate authority. Only available after the certificate authority certificate has been imported.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
 	// (Deprecated use the enabled attribute instead) Status of the certificate authority.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Type of the certificate authority. Defaults to SUBORDINATE. Valid values: ROOT and SUBORDINATE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days. Defaults to GENERAL_PURPOSE. Valid values: GENERAL_PURPOSE and SHORT_LIVED_CERTIFICATE.
+	UsageMode *string `json:"usageMode,omitempty" tf:"usage_mode,omitempty"`
 }
 
 type CertificateAuthorityParameters struct {
 
 	// Nested argument containing algorithms and certificate subject information. Defined below.
-	// +kubebuilder:validation:Required
-	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationParameters `json:"certificateAuthorityConfiguration" tf:"certificate_authority_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityConfiguration []CertificateAuthorityConfigurationParameters `json:"certificateAuthorityConfiguration,omitempty" tf:"certificate_authority_configuration,omitempty"`
 
 	// Whether the certificate authority is enabled or disabled. Defaults to true. Can only be disabled if the CA is in an ACTIVE state.
 	// +kubebuilder:validation:Optional
@@ -101,6 +131,21 @@ type CertificateAuthorityParameters struct {
 }
 
 type CrlConfigurationObservation struct {
+
+	// Name inserted into the certificate CRL Distribution Points extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public. Must be less than or equal to 253 characters in length.
+	CustomCname *string `json:"customCname,omitempty" tf:"custom_cname,omitempty"`
+
+	// Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Number of days until a certificate expires. Must be between 1 and 5000.
+	ExpirationInDays *float64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
+
+	// Name of the S3 bucket that contains the CRL. If you do not provide a value for the custom_cname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You must specify a bucket policy that allows ACM PCA to write the CRL to your bucket. Must be between 3 and 255 characters in length.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Determines whether the CRL will be publicly readable or privately held in the CRL Amazon S3 bucket. Defaults to PUBLIC_READ.
+	S3ObjectACL *string `json:"s3ObjectAcl,omitempty" tf:"s3_object_acl,omitempty"`
 }
 
 type CrlConfigurationParameters struct {
@@ -127,6 +172,12 @@ type CrlConfigurationParameters struct {
 }
 
 type OcspConfigurationObservation struct {
+
+	// Boolean value that specifies whether a custom OCSP responder is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://".
+	OcspCustomCname *string `json:"ocspCustomCname,omitempty" tf:"ocsp_custom_cname,omitempty"`
 }
 
 type OcspConfigurationParameters struct {
@@ -141,6 +192,13 @@ type OcspConfigurationParameters struct {
 }
 
 type RevocationConfigurationObservation struct {
+
+	// Nested argument containing configuration of the certificate revocation list (CRL), if any, maintained by the certificate authority. Defined below.
+	CrlConfiguration []CrlConfigurationObservation `json:"crlConfiguration,omitempty" tf:"crl_configuration,omitempty"`
+
+	// Nested argument containing configuration of
+	// the custom OCSP responder endpoint. Defined below.
+	OcspConfiguration []OcspConfigurationObservation `json:"ocspConfiguration,omitempty" tf:"ocsp_configuration,omitempty"`
 }
 
 type RevocationConfigurationParameters struct {
@@ -156,6 +214,45 @@ type RevocationConfigurationParameters struct {
 }
 
 type SubjectObservation struct {
+
+	// Fully qualified domain name (FQDN) associated with the certificate subject. Must be less than or equal to 64 characters in length.
+	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
+
+	// Two digit code that specifies the country in which the certificate subject located. Must be less than or equal to 2 characters in length.
+	Country *string `json:"country,omitempty" tf:"country,omitempty"`
+
+	// Disambiguating information for the certificate subject. Must be less than or equal to 64 characters in length.
+	DistinguishedNameQualifier *string `json:"distinguishedNameQualifier,omitempty" tf:"distinguished_name_qualifier,omitempty"`
+
+	// Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third. Must be less than or equal to 3 characters in length.
+	GenerationQualifier *string `json:"generationQualifier,omitempty" tf:"generation_qualifier,omitempty"`
+
+	// First name. Must be less than or equal to 16 characters in length.
+	GivenName *string `json:"givenName,omitempty" tf:"given_name,omitempty"`
+
+	// Concatenation that typically contains the first letter of the given_name, the first letter of the middle name if one exists, and the first letter of the surname. Must be less than or equal to 5 characters in length.
+	Initials *string `json:"initials,omitempty" tf:"initials,omitempty"`
+
+	// Locality (such as a city or town) in which the certificate subject is located. Must be less than or equal to 128 characters in length.
+	Locality *string `json:"locality,omitempty" tf:"locality,omitempty"`
+
+	// Legal name of the organization with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
+	Organization *string `json:"organization,omitempty" tf:"organization,omitempty"`
+
+	// Subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated. Must be less than or equal to 64 characters in length.
+	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
+
+	// Typically a shortened version of a longer given_name. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza. Must be less than or equal to 128 characters in length.
+	Pseudonym *string `json:"pseudonym,omitempty" tf:"pseudonym,omitempty"`
+
+	// State in which the subject of the certificate is located. Must be less than or equal to 128 characters in length.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Family name. In the US and the UK for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first. Must be less than or equal to 40 characters in length.
+	Surname *string `json:"surname,omitempty" tf:"surname,omitempty"`
+
+	// Title such as Mr. or Ms. which is pre-pended to the name to refer formally to the certificate subject. Must be less than or equal to 64 characters in length.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type SubjectParameters struct {
@@ -237,8 +334,9 @@ type CertificateAuthorityStatus struct {
 type CertificateAuthority struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateAuthoritySpec   `json:"spec"`
-	Status            CertificateAuthorityStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateAuthorityConfiguration)",message="certificateAuthorityConfiguration is a required parameter"
+	Spec   CertificateAuthoritySpec   `json:"spec"`
+	Status CertificateAuthorityStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

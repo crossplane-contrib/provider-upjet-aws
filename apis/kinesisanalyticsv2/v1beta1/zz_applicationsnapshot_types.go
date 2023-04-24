@@ -15,6 +15,9 @@ import (
 
 type ApplicationSnapshotObservation struct {
 
+	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
+	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
+
 	// The current application version ID when the snapshot was created.
 	ApplicationVersionID *float64 `json:"applicationVersionId,omitempty" tf:"application_version_id,omitempty"`
 

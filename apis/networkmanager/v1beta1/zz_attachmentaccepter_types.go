@@ -15,8 +15,14 @@ import (
 
 type AttachmentAccepterObservation struct {
 
+	// The ID of the attachment.
+	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
+
 	// The policy rule number associated with the attachment.
 	AttachmentPolicyRuleNumber *float64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
+
+	// The type of attachment. Valid values can be found in the AWS Documentation
+	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
 	// The ARN of a core network.
 	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`

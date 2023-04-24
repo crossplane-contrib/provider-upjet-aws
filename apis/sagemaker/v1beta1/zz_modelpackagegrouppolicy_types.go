@@ -17,6 +17,11 @@ type ModelPackageGroupPolicyObservation struct {
 
 	// The name of the Model Package Package Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the model package group.
+	ModelPackageGroupName *string `json:"modelPackageGroupName,omitempty" tf:"model_package_group_name,omitempty"`
+
+	ResourcePolicy *string `json:"resourcePolicy,omitempty" tf:"resource_policy,omitempty"`
 }
 
 type ModelPackageGroupPolicyParameters struct {
@@ -39,8 +44,8 @@ type ModelPackageGroupPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	ResourcePolicy *string `json:"resourcePolicy" tf:"resource_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourcePolicy *string `json:"resourcePolicy,omitempty" tf:"resource_policy,omitempty"`
 }
 
 // ModelPackageGroupPolicySpec defines the desired state of ModelPackageGroupPolicy
@@ -67,8 +72,9 @@ type ModelPackageGroupPolicyStatus struct {
 type ModelPackageGroupPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ModelPackageGroupPolicySpec   `json:"spec"`
-	Status            ModelPackageGroupPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourcePolicy)",message="resourcePolicy is a required parameter"
+	Spec   ModelPackageGroupPolicySpec   `json:"spec"`
+	Status ModelPackageGroupPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

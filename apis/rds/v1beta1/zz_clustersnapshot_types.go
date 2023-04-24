@@ -21,8 +21,14 @@ type ClusterSnapshotObservation struct {
 	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// The DB Cluster Identifier from which to take the snapshot.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
 	// The Amazon Resource Name (ARN) for the DB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
+
+	// The Identifier for the snapshot.
+	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// Name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -52,6 +58,9 @@ type ClusterSnapshotObservation struct {
 	// Whether the DB cluster snapshot is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -76,8 +85,8 @@ type ClusterSnapshotParameters struct {
 	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 
 	// The Identifier for the snapshot.
-	// +kubebuilder:validation:Required
-	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier" tf:"db_cluster_snapshot_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -113,8 +122,9 @@ type ClusterSnapshotStatus struct {
 type ClusterSnapshot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSnapshotSpec   `json:"spec"`
-	Status            ClusterSnapshotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbClusterSnapshotIdentifier)",message="dbClusterSnapshotIdentifier is a required parameter"
+	Spec   ClusterSnapshotSpec   `json:"spec"`
+	Status ClusterSnapshotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

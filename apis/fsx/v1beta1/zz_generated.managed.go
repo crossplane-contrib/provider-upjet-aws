@@ -17,6 +17,11 @@ func (mg *Backup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Backup.
+func (mg *Backup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Backup.
 func (mg *Backup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Backup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Backup.
 func (mg *Backup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Backup.
+func (mg *Backup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Backup.
@@ -83,6 +93,11 @@ func (mg *DataRepositoryAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DataRepositoryAssociation.
+func (mg *DataRepositoryAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *DataRepositoryAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DataRepositoryAssociation.
+func (mg *DataRepositoryAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DataRepositoryAssociation.
@@ -149,6 +169,11 @@ func (mg *LustreFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LustreFileSystem.
+func (mg *LustreFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LustreFileSystem.
 func (mg *LustreFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *LustreFileSystem) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LustreFileSystem.
 func (mg *LustreFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LustreFileSystem.
+func (mg *LustreFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LustreFileSystem.
@@ -215,6 +245,11 @@ func (mg *OntapFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OntapFileSystem.
+func (mg *OntapFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OntapFileSystem.
 func (mg *OntapFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *OntapFileSystem) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OntapFileSystem.
 func (mg *OntapFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OntapFileSystem.
+func (mg *OntapFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OntapFileSystem.
@@ -281,6 +321,11 @@ func (mg *OntapStorageVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *OntapStorageVirtualMachine) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OntapStorageVirtualMachine.
@@ -347,6 +397,11 @@ func (mg *WindowsFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this WindowsFileSystem.
+func (mg *WindowsFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this WindowsFileSystem.
 func (mg *WindowsFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *WindowsFileSystem) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this WindowsFileSystem.
 func (mg *WindowsFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this WindowsFileSystem.
+func (mg *WindowsFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this WindowsFileSystem.

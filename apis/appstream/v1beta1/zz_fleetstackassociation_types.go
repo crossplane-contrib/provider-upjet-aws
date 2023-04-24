@@ -15,8 +15,14 @@ import (
 
 type FleetStackAssociationObservation struct {
 
+	// Name of the fleet.
+	FleetName *string `json:"fleetName,omitempty" tf:"fleet_name,omitempty"`
+
 	// Unique ID of the appstream stack fleet association, composed of the fleet_name and stack_name separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the stack.
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 }
 
 type FleetStackAssociationParameters struct {

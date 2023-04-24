@@ -14,6 +14,24 @@ import (
 )
 
 type AuthObservation struct {
+
+	// The type of authentication that the proxy uses for connections from the proxy to the underlying database. One of SECRETS.
+	AuthScheme *string `json:"authScheme,omitempty" tf:"auth_scheme,omitempty"`
+
+	// The type of authentication the proxy uses for connections from clients. Valid values are MYSQL_NATIVE_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, and SQL_SERVER_AUTHENTICATION.
+	ClientPasswordAuthType *string `json:"clientPasswordAuthType,omitempty" tf:"client_password_auth_type,omitempty"`
+
+	// A user-specified description about the authentication used by a proxy to log in as a specific database user.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. One of DISABLED, REQUIRED.
+	IAMAuth *string `json:"iamAuth,omitempty" tf:"iam_auth,omitempty"`
+
+	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// The name of the database user to which the proxy connects.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AuthParameters struct {
@@ -58,29 +76,56 @@ type ProxyObservation struct {
 	// The Amazon Resource Name (ARN) for the proxy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Described below.
+	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
+	DebugLogging *bool `json:"debugLogging,omitempty" tf:"debug_logging,omitempty"`
+
 	// The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora. Valid values are MYSQL and POSTGRESQL.
+	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the proxy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
+	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
+
+	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
+	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// One or more VPC security group IDs to associate with the new proxy.
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+
+	// One or more VPC subnet IDs to associate with the new proxy.
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 type ProxyParameters struct {
 
 	// Configuration block(s) with authorization mechanisms to connect to the associated instances or clusters. Described below.
-	// +kubebuilder:validation:Required
-	Auth []AuthParameters `json:"auth" tf:"auth,omitempty"`
+	// +kubebuilder:validation:Optional
+	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Whether the proxy includes detailed information about SQL statements in its logs. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections. The debug information includes the text of SQL statements that you submit through the proxy. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs.
 	// +kubebuilder:validation:Optional
 	DebugLogging *bool `json:"debugLogging,omitempty" tf:"debug_logging,omitempty"`
 
 	// The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora. Valid values are MYSQL and POSTGRESQL.
-	// +kubebuilder:validation:Required
-	EngineFamily *string `json:"engineFamily" tf:"engine_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
 	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	// +kubebuilder:validation:Optional
@@ -129,8 +174,8 @@ type ProxyParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
-	// +kubebuilder:validation:Required
-	VPCSubnetIds []*string `json:"vpcSubnetIds" tf:"vpc_subnet_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
 // ProxySpec defines the desired state of Proxy
@@ -157,8 +202,11 @@ type ProxyStatus struct {
 type Proxy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProxySpec   `json:"spec"`
-	Status            ProxyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.auth)",message="auth is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineFamily)",message="engineFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	Spec   ProxySpec   `json:"spec"`
+	Status ProxyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

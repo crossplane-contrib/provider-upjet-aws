@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: apps.amplify.aws.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -336,9 +340,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -510,6 +528,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AppStatus defines the observed state of App.
             properties:
@@ -518,11 +539,120 @@ spec:
                   arn:
                     description: ARN of the Amplify app.
                     type: string
+                  autoBranchCreationConfig:
+                    description: Automated branch creation configuration for an Amplify
+                      app. An auto_branch_creation_config block is documented below.
+                    items:
+                      properties:
+                        buildSpec:
+                          description: Build specification (build spec) for the autocreated
+                            branch.
+                          type: string
+                        enableAutoBuild:
+                          description: Enables auto building for the autocreated branch.
+                          type: boolean
+                        enableBasicAuth:
+                          description: Enables basic authorization for the autocreated
+                            branch.
+                          type: boolean
+                        enablePerformanceMode:
+                          description: Enables performance mode for the branch.
+                          type: boolean
+                        enablePullRequestPreview:
+                          description: Enables pull request previews for the autocreated
+                            branch.
+                          type: boolean
+                        environmentVariables:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables for the autocreated branch.
+                          type: object
+                        framework:
+                          description: Framework for the autocreated branch.
+                          type: string
+                        pullRequestEnvironmentName:
+                          description: Amplify environment name for the pull request.
+                          type: string
+                        stage:
+                          description: 'Describes the current stage for the autocreated
+                            branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL,
+                            PULL_REQUEST.'
+                          type: string
+                      type: object
+                    type: array
+                  autoBranchCreationPatterns:
+                    description: Automated branch creation glob patterns for an Amplify
+                      app.
+                    items:
+                      type: string
+                    type: array
+                  buildSpec:
+                    description: The build specification (build spec) for an Amplify
+                      app.
+                    type: string
+                  customRule:
+                    description: Custom rewrite and redirect rules for an Amplify
+                      app. A custom_rule block is documented below.
+                    items:
+                      properties:
+                        condition:
+                          description: Condition for a URL rewrite or redirect rule,
+                            such as a country code.
+                          type: string
+                        source:
+                          description: Source pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                        status:
+                          description: 'Status code for a URL rewrite or redirect
+                            rule. Valid values: 200, 301, 302, 404, 404-200.'
+                          type: string
+                        target:
+                          description: Target pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                      type: object
+                    type: array
                   defaultDomain:
                     description: Default domain for the Amplify app.
                     type: string
+                  description:
+                    description: Description for an Amplify app.
+                    type: string
+                  enableAutoBranchCreation:
+                    description: Enables automated branch creation for an Amplify
+                      app.
+                    type: boolean
+                  enableBasicAuth:
+                    description: Enables basic authorization for an Amplify app. This
+                      will apply to all branches that are part of this app.
+                    type: boolean
+                  enableBranchAutoBuild:
+                    description: Enables auto-building of branches for the Amplify
+                      App.
+                    type: boolean
+                  enableBranchAutoDeletion:
+                    description: Automatically disconnects a branch in the Amplify
+                      Console when you delete a branch from your Git repository.
+                    type: boolean
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Environment variables map for an Amplify app.
+                    type: object
+                  iamServiceRoleArn:
+                    description: AWS Identity and Access Management (IAM) service
+                      role for an Amplify app.
+                    type: string
                   id:
                     description: Unique ID of the Amplify app.
+                    type: string
+                  name:
+                    description: Name for an Amplify app.
+                    type: string
+                  platform:
+                    description: 'Platform or framework for an Amplify app. Valid
+                      values: WEB, WEB_COMPUTE. Default value: WEB.'
                     type: string
                   productionBranch:
                     description: Describes the information about a production branch
@@ -544,6 +674,14 @@ spec:
                           type: string
                       type: object
                     type: array
+                  repository:
+                    description: Repository for an Amplify app.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -592,9 +730,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

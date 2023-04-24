@@ -14,6 +14,12 @@ import (
 )
 
 type VPCObservation struct {
+
+	// ID of the VPC to associate.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Region of the VPC to associate. Defaults to AWS provider region.
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
 
 type VPCParameters struct {
@@ -42,7 +48,18 @@ type ZoneObservation struct {
 	// The Amazon Resource Name (ARN) of the Hosted Zone.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A comment for the hosted zone.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts with vpc as delegation sets can only be used for public zones.
+	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
+
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// This is the name of the hosted zone.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of name servers in associated (or default) delegation set.
 	// Find more about delegation sets in AWS docs.
@@ -51,8 +68,14 @@ type ZoneObservation struct {
 	// The Route 53 name server that created the SOA record.
 	PrimaryNameServer *string `json:"primaryNameServer,omitempty" tf:"primary_name_server,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block(s) specifying VPC(s) to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
+	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 
 	// The Hosted Zone ID. This can be referenced by zone records.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
@@ -81,8 +104,8 @@ type ZoneParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// This is the name of the hosted zone.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -122,8 +145,9 @@ type ZoneStatus struct {
 type Zone struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ZoneSpec   `json:"spec"`
-	Status            ZoneStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ZoneSpec   `json:"spec"`
+	Status ZoneStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

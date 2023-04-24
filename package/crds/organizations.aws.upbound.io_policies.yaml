@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: policies.organizations.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -101,10 +105,23 @@ spec:
                       Defaults to SERVICE_CONTROL_POLICY.
                     type: string
                 required:
-                - content
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -276,6 +293,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: content is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:
@@ -284,9 +306,36 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the policy.
                     type: string
+                  content:
+                    description: The policy content to add to the new policy. For
+                      example, if you create a service control policy (SCP), this
+                      string must be JSON text that specifies the permissions that
+                      admins in attached accounts can delegate to their users, groups,
+                      and roles. For more information about the SCP syntax, see the
+                      Service Control Policy Syntax documentation and for more information
+                      on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+                    type: string
+                  description:
+                    description: A description to assign to the policy.
+                    type: string
                   id:
                     description: The unique identifier (ID) of the policy.
                     type: string
+                  name:
+                    description: The friendly name to assign to the policy.
+                    type: string
+                  skipDestroy:
+                    description: If set to true, destroy will not delete the policy
+                      and instead just remove the resource from state. This can be
+                      useful in situations where the policies (and the associated
+                      attachment) must be preserved to meet the AWS minimum requirement
+                      of 1 attached policy.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -294,6 +343,11 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  type:
+                    description: The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY,
+                      BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY.
+                      Defaults to SERVICE_CONTROL_POLICY.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -336,9 +390,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

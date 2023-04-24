@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: coderepositories.sagemaker.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -174,9 +178,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - gitConfig
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +366,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: gitConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gitConfig)
           status:
             description: CodeRepositoryStatus defines the observed state of CodeRepository.
             properties:
@@ -357,9 +378,34 @@ spec:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
                       this Code Repository.
                     type: string
+                  gitConfig:
+                    description: Specifies details about the repository. see Git Config
+                      details below.
+                    items:
+                      properties:
+                        branch:
+                          description: The default branch for the Git repository.
+                          type: string
+                        repositoryUrl:
+                          description: The URL where the Git repository is located.
+                          type: string
+                        secretArn:
+                          description: 'The Amazon Resource Name (ARN) of the AWS
+                            Secrets Manager secret that contains the credentials used
+                            to access the git repository. The secret must have a staging
+                            label of AWSCURRENT and must be in the following format:
+                            {"username": UserName, "password": Password}'
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The name of the Code Repository.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -409,9 +455,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

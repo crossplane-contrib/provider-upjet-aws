@@ -14,6 +14,9 @@ import (
 )
 
 type PauseClusterObservation struct {
+
+	// The identifier of the cluster to be paused.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 }
 
 type PauseClusterParameters struct {
@@ -24,6 +27,21 @@ type PauseClusterParameters struct {
 }
 
 type ResizeClusterObservation struct {
+
+	// A boolean value indicating whether the resize operation is using the classic resize process. Default: false.
+	Classic *bool `json:"classic,omitempty" tf:"classic,omitempty"`
+
+	// The unique identifier for the cluster to resize.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// The new cluster type for the specified cluster.
+	ClusterType *string `json:"clusterType,omitempty" tf:"cluster_type,omitempty"`
+
+	// The new node type for the nodes you are adding.
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// The new number of nodes for the cluster.
+	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 }
 
 type ResizeClusterParameters struct {
@@ -50,6 +68,9 @@ type ResizeClusterParameters struct {
 }
 
 type ResumeClusterObservation struct {
+
+	// The identifier of the cluster to be resumed.
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 }
 
 type ResumeClusterParameters struct {
@@ -61,8 +82,29 @@ type ResumeClusterParameters struct {
 
 type ScheduledActionObservation struct {
 
+	// The description of the scheduled action.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to enable the scheduled action. Default is true .
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The end time in UTC when the schedule is active, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// The IAM role to assume to run the scheduled action.
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
+
 	// The Redshift Scheduled Action name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The schedule of action. The schedule is defined format of "at expression" or "cron expression", for example at(2016-03-04T17:27:00) or cron(0 10 ? * MON *). See Scheduled Action for more information.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The start time in UTC when the schedule is active, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Target action. Documented below.
+	TargetAction []TargetActionObservation `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 }
 
 type ScheduledActionParameters struct {
@@ -99,19 +141,28 @@ type ScheduledActionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The schedule of action. The schedule is defined format of "at expression" or "cron expression", for example at(2016-03-04T17:27:00) or cron(0 10 ? * MON *). See Scheduled Action for more information.
-	// +kubebuilder:validation:Required
-	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The start time in UTC when the schedule is active, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// Target action. Documented below.
-	// +kubebuilder:validation:Required
-	TargetAction []TargetActionParameters `json:"targetAction" tf:"target_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetAction []TargetActionParameters `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 }
 
 type TargetActionObservation struct {
+
+	// An action that runs a PauseCluster API operation. Documented below.
+	PauseCluster []PauseClusterObservation `json:"pauseCluster,omitempty" tf:"pause_cluster,omitempty"`
+
+	// An action that runs a ResizeCluster API operation. Documented below.
+	ResizeCluster []ResizeClusterObservation `json:"resizeCluster,omitempty" tf:"resize_cluster,omitempty"`
+
+	// An action that runs a ResumeCluster API operation. Documented below.
+	ResumeCluster []ResumeClusterObservation `json:"resumeCluster,omitempty" tf:"resume_cluster,omitempty"`
 }
 
 type TargetActionParameters struct {
@@ -153,8 +204,10 @@ type ScheduledActionStatus struct {
 type ScheduledAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduledActionSpec   `json:"spec"`
-	Status            ScheduledActionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)",message="targetAction is a required parameter"
+	Spec   ScheduledActionSpec   `json:"spec"`
+	Status ScheduledActionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

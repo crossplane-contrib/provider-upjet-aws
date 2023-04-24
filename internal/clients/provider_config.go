@@ -41,6 +41,7 @@ const (
 	authKeyWebIdentity = "WebIdentity"
 	authKeyUpbound     = "Upbound"
 	// authKeySAML        = "SAML"
+	authKeySecret = "Secret"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
 	errRoleChainConfig      = "failed to load assumed role AWS config"

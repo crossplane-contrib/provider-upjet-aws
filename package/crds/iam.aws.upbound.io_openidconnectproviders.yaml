@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: openidconnectproviders.iam.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -88,11 +92,22 @@ spec:
                     description: The URL of the identity provider. Corresponds to
                       the iss claim.
                     type: string
-                required:
-                - clientIdList
-                - thumbprintList
-                - url
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -264,6 +279,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: clientIdList is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientIdList)
+            - message: thumbprintList is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thumbprintList)
+            - message: url is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)
           status:
             description: OpenIDConnectProviderStatus defines the observed state of
               OpenIDConnectProvider.
@@ -273,8 +295,22 @@ spec:
                   arn:
                     description: The ARN assigned by AWS for this provider.
                     type: string
+                  clientIdList:
+                    description: A list of client IDs (also known as audiences). When
+                      a mobile or web app registers with an OpenID Connect provider,
+                      they establish a value that identifies the application. (This
+                      is the value that's sent as the client_id parameter on OAuth
+                      requests.)
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -282,6 +318,16 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  thumbprintList:
+                    description: A list of server certificate thumbprints for the
+                      OpenID Connect (OIDC) identity provider's server certificate(s).
+                    items:
+                      type: string
+                    type: array
+                  url:
+                    description: The URL of the identity provider. Corresponds to
+                      the iss claim.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -324,9 +370,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

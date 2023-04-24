@@ -18,11 +18,23 @@ type DefaultRouteTableObservation struct {
 	// The ARN of the route table.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ID of the default route table.
+	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
+
 	// ID of the route table.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ID of the AWS account that owns the route table.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// List of virtual gateways for propagation.
+	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
+
+	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
+	Route []RouteObservation `json:"route,omitempty" tf:"route,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -66,6 +78,42 @@ type DefaultRouteTableParameters struct {
 }
 
 type RouteObservation struct {
+
+	// The CIDR block of the route.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a core network.
+	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn,omitempty"`
+
+	// The ID of a managed prefix list destination of the route.
+	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id,omitempty"`
+
+	// Identifier of a VPC Egress Only Internet Gateway.
+	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
+
+	// Identifier of a VPC internet gateway or a virtual private gateway.
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
+	// The Ipv6 CIDR block of the route
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// Identifier of an EC2 instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Identifier of a VPC NAT gateway.
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// Identifier of an EC2 network interface.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Identifier of an EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Identifier of a VPC Endpoint. This route must be removed prior to VPC Endpoint deletion.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// Identifier of a VPC peering connection.
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 }
 
 type RouteParameters struct {

@@ -21,8 +21,26 @@ type PermissionSetObservation struct {
 	// The date the Permission Set was created in RFC3339 format.
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
 
+	// The description of the Permission Set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// The name of the Permission Set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The relay state URL used to redirect users within the application during the federation authentication process.
+	RelayState *string `json:"relayState,omitempty" tf:"relay_state,omitempty"`
+
+	// The length of time that the application user sessions are valid in the ISO-8601 standard. Default: PT1H.
+	SessionDuration *string `json:"sessionDuration,omitempty" tf:"session_duration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -35,12 +53,12 @@ type PermissionSetParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
-	// +kubebuilder:validation:Required
-	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
 
 	// The name of the Permission Set.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -84,8 +102,10 @@ type PermissionSetStatus struct {
 type PermissionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSetSpec   `json:"spec"`
-	Status            PermissionSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceArn)",message="instanceArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   PermissionSetSpec   `json:"spec"`
+	Status PermissionSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: methodsettings.apigateway.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -280,10 +284,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - methodPath
                 - region
-                - settings
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -455,12 +472,80 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: methodPath is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.methodPath)
+            - message: settings is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settings)
           status:
             description: MethodSettingsStatus defines the observed state of MethodSettings.
             properties:
               atProvider:
                 properties:
                   id:
+                    type: string
+                  methodPath:
+                    description: Method path defined as {resource_path}/{http_method}
+                      for an individual method override, or */* for overriding all
+                      methods in the stage. Ensure to trim any leading forward slashes
+                      in the path (e.g., trimprefix(aws_api_gateway_resource.example.path,
+                      "/")).
+                    type: string
+                  restApiId:
+                    description: ID of the REST API
+                    type: string
+                  settings:
+                    description: Settings block, see below.
+                    items:
+                      properties:
+                        cacheDataEncrypted:
+                          description: Whether the cached responses are encrypted.
+                          type: boolean
+                        cacheTtlInSeconds:
+                          description: Time to live (TTL), in seconds, for cached
+                            responses. The higher the TTL, the longer the response
+                            will be cached.
+                          type: number
+                        cachingEnabled:
+                          description: Whether responses should be cached and returned
+                            for requests. A cache cluster must be enabled on the stage
+                            for responses to be cached.
+                          type: boolean
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for this
+                            method, which effects the log entries pushed to Amazon
+                            CloudWatch Logs.
+                          type: boolean
+                        loggingLevel:
+                          description: Logging level for this method, which effects
+                            the log entries pushed to Amazon CloudWatch Logs. The
+                            available levels are OFF, ERROR, and INFO.
+                          type: string
+                        metricsEnabled:
+                          description: Whether Amazon CloudWatch metrics are enabled
+                            for this method.
+                          type: boolean
+                        requireAuthorizationForCacheControl:
+                          description: Whether authorization is required for a cache
+                            invalidation request.
+                          type: boolean
+                        throttlingBurstLimit:
+                          description: 'Throttling burst limit. Default: -1 (throttling
+                            disabled).'
+                          type: number
+                        throttlingRateLimit:
+                          description: 'Throttling rate limit. Default: -1 (throttling
+                            disabled).'
+                          type: number
+                        unauthorizedCacheControlHeaderStrategy:
+                          description: How to handle unauthorized requests for cache
+                            invalidation. The available values are FAIL_WITH_403,
+                            SUCCEED_WITH_RESPONSE_HEADER, SUCCEED_WITHOUT_RESPONSE_HEADER.
+                          type: string
+                      type: object
+                    type: array
+                  stageName:
+                    description: Name of the stage
                     type: string
                 type: object
               conditions:
@@ -504,9 +589,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

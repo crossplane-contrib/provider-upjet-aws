@@ -49,6 +49,24 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConnectSettings); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ConnectSettings[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.ConnectSettings[i3].SubnetIdsRefs,
+			Selector:      mg.Spec.ForProvider.ConnectSettings[i3].SubnetIdsSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ConnectSettings[i3].SubnetIds")
+		}
+		mg.Spec.ForProvider.ConnectSettings[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.ConnectSettings[i3].SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConnectSettings); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectSettings[i3].VPCID),
 			Extract:      resource.ExtractResourceID(),
@@ -102,6 +120,32 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.VPCSettings[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+
+	return nil
+}
+
+// ResolveReferences of this SharedDirectory.
+func (mg *SharedDirectory) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DirectoryIDRef,
+		Selector:     mg.Spec.ForProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &DirectoryList{},
+			Managed: &Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DirectoryID")
+	}
+	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
 
 	return nil
 }

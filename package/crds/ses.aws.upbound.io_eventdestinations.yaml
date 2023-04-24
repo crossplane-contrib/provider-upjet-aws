@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: eventdestinations.ses.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -428,9 +432,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - matchingTypes
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -602,6 +620,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: matchingTypes is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.matchingTypes)
           status:
             description: EventDestinationStatus defines the observed state of EventDestination.
             properties:
@@ -610,9 +631,59 @@ spec:
                   arn:
                     description: The SES event destination ARN.
                     type: string
+                  cloudwatchDestination:
+                    description: CloudWatch destination for the events
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value for the event
+                          type: string
+                        dimensionName:
+                          description: The name for the dimension
+                          type: string
+                        valueSource:
+                          description: The source for the value. May be any of "messageTag",
+                            "emailHeader" or "linkTag".
+                          type: string
+                      type: object
+                    type: array
+                  configurationSetName:
+                    description: The name of the configuration set
+                    type: string
+                  enabled:
+                    description: If true, the event destination will be enabled
+                    type: boolean
                   id:
                     description: The SES event destination name.
                     type: string
+                  kinesisDestination:
+                    description: Send the events to a kinesis firehose destination
+                    items:
+                      properties:
+                        roleArn:
+                          description: The ARN of the role that has permissions to
+                            access the Kinesis Stream
+                          type: string
+                        streamArn:
+                          description: The ARN of the Kinesis Stream
+                          type: string
+                      type: object
+                    type: array
+                  matchingTypes:
+                    description: A list of matching types. May be any of "send", "reject",
+                      "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+                    items:
+                      type: string
+                    type: array
+                  snsDestination:
+                    description: Send the events to an SNS Topic destination
+                    items:
+                      properties:
+                        topicArn:
+                          description: The ARN of the SNS topic
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -655,9 +726,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

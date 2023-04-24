@@ -15,6 +15,12 @@ import (
 
 type VPNGatewayRoutePropagationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The id of the aws_route_table to propagate routes into.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// The id of the aws_vpn_gateway to propagate routes from.
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 }
 
 type VPNGatewayRoutePropagationParameters struct {

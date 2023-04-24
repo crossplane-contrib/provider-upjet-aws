@@ -15,8 +15,14 @@ import (
 
 type BudgetResourceAssociationObservation struct {
 
+	// Budget name.
+	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
+
 	// Identifier of the association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Resource identifier.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type BudgetResourceAssociationParameters struct {

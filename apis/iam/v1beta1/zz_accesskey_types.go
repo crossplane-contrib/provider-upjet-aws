@@ -29,6 +29,15 @@ type AccessKeyObservation struct {
 
 	// Fingerprint of the PGP key used to encrypt the secret. This attribute is not available for imported resources.
 	KeyFingerprint *string `json:"keyFingerprint,omitempty" tf:"key_fingerprint,omitempty"`
+
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:some_person_that_exists, for use in the encrypted_secret output attribute. If providing a base-64 encoded PGP public key, make sure to provide the "raw" version and not the "armored" one (e.g. avoid passing the -a option to gpg --export).
+	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+
+	// Access key status to apply. Defaults to Active. Valid values are Active and Inactive.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// IAM user to associate with this access key.
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type AccessKeyParameters struct {

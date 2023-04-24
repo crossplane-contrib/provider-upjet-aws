@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: scheduledactions.redshift.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -225,9 +229,22 @@ spec:
                     type: array
                 required:
                 - region
-                - schedule
-                - targetAction
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -399,14 +416,95 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: schedule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schedule)
+            - message: targetAction is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetAction)
           status:
             description: ScheduledActionStatus defines the observed state of ScheduledAction.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the scheduled action.
+                    type: string
+                  enable:
+                    description: Whether to enable the scheduled action. Default is
+                      true .
+                    type: boolean
+                  endTime:
+                    description: The end time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  iamRole:
+                    description: The IAM role to assume to run the scheduled action.
+                    type: string
                   id:
                     description: The Redshift Scheduled Action name.
                     type: string
+                  schedule:
+                    description: The schedule of action. The schedule is defined format
+                      of "at expression" or "cron expression", for example at(2016-03-04T17:27:00)
+                      or cron(0 10 ? * MON *). See Scheduled Action for more information.
+                    type: string
+                  startTime:
+                    description: The start time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  targetAction:
+                    description: Target action. Documented below.
+                    items:
+                      properties:
+                        pauseCluster:
+                          description: An action that runs a PauseCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be paused.
+                                type: string
+                            type: object
+                          type: array
+                        resizeCluster:
+                          description: An action that runs a ResizeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              classic:
+                                description: 'A boolean value indicating whether the
+                                  resize operation is using the classic resize process.
+                                  Default: false.'
+                                type: boolean
+                              clusterIdentifier:
+                                description: The unique identifier for the cluster
+                                  to resize.
+                                type: string
+                              clusterType:
+                                description: The new cluster type for the specified
+                                  cluster.
+                                type: string
+                              nodeType:
+                                description: The new node type for the nodes you are
+                                  adding.
+                                type: string
+                              numberOfNodes:
+                                description: The new number of nodes for the cluster.
+                                type: number
+                            type: object
+                          type: array
+                        resumeCluster:
+                          description: An action that runs a ResumeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be resumed.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -449,9 +547,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

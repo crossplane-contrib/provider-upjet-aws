@@ -14,6 +14,9 @@ import (
 )
 
 type SignatureValidityPeriodObservation struct {
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SignatureValidityPeriodParameters struct {
@@ -35,11 +38,20 @@ type SigningProfileObservation struct {
 	// A human-readable name for the signing platform associated with the signing profile.
 	PlatformDisplayName *string `json:"platformDisplayName,omitempty" tf:"platform_display_name,omitempty"`
 
+	// The ID of the platform that is used by the target signing profile.
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
+
 	// Revocation information for a signing profile.
 	RevocationRecord []SigningProfileRevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
 
+	// The validity period for a signing job.
+	SignatureValidityPeriod []SignatureValidityPeriodObservation `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
+
 	// The status of the target signing profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -54,8 +66,8 @@ type SigningProfileObservation struct {
 type SigningProfileParameters struct {
 
 	// The ID of the platform that is used by the target signing profile.
-	// +kubebuilder:validation:Required
-	PlatformID *string `json:"platformId" tf:"platform_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -106,8 +118,9 @@ type SigningProfileStatus struct {
 type SigningProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SigningProfileSpec   `json:"spec"`
-	Status            SigningProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.platformId)",message="platformId is a required parameter"
+	Spec   SigningProfileSpec   `json:"spec"`
+	Status SigningProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

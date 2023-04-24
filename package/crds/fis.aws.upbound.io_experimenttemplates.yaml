@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: experimenttemplates.fis.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -295,11 +299,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - action
-                - description
                 - region
-                - stopCondition
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -471,18 +487,157 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: description is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.description)
+            - message: stopCondition is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stopCondition)
           status:
             description: ExperimentTemplateStatus defines the observed state of ExperimentTemplate.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: Action to be performed during an experiment. See
+                      below.
+                    items:
+                      properties:
+                        actionId:
+                          description: ID of the action. To find out what actions
+                            are supported see AWS FIS actions reference.
+                          type: string
+                        description:
+                          description: Description of the action.
+                          type: string
+                        name:
+                          description: Friendly name of the action.
+                          type: string
+                        parameter:
+                          description: Parameter(s) for the action, if applicable.
+                            See below.
+                          items:
+                            properties:
+                              key:
+                                description: Parameter name.
+                                type: string
+                              value:
+                                description: Parameter value.
+                                type: string
+                            type: object
+                          type: array
+                        startAfter:
+                          description: Set of action names that must complete before
+                            this action can be executed.
+                          items:
+                            type: string
+                          type: array
+                        target:
+                          description: Action's target, if applicable. See below.
+                          items:
+                            properties:
+                              key:
+                                description: Tag key.
+                                type: string
+                              value:
+                                description: Target name, referencing a corresponding
+                                  target.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Description for the experiment template.
+                    type: string
                   id:
                     description: Experiment Template ID.
                     type: string
+                  roleArn:
+                    description: ARN of an IAM role that grants the AWS FIS service
+                      permission to perform service actions on your behalf.
+                    type: string
+                  stopCondition:
+                    description: When an ongoing experiment should be stopped. See
+                      below.
+                    items:
+                      properties:
+                        source:
+                          description: Source of the condition. One of none, aws:cloudwatch:alarm.
+                          type: string
+                        value:
+                          description: ARN of the CloudWatch alarm. Required if the
+                            source is a CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  target:
+                    description: Target of an action. See below.
+                    items:
+                      properties:
+                        filter:
+                          description: Filter(s) for the target. Filters can be used
+                            to select resources based on specific attributes returned
+                            by the respective describe action of the resource type.
+                            For more information, see Targets for AWS FIS. See below.
+                          items:
+                            properties:
+                              path:
+                                description: Attribute path for the filter.
+                                type: string
+                              values:
+                                description: Set of attribute values for the filter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Friendly name given to the target.
+                          type: string
+                        resourceArns:
+                          description: Set of ARNs of the resources to target with
+                            an action. Conflicts with resource_tag.
+                          items:
+                            type: string
+                          type: array
+                        resourceTag:
+                          description: Tag(s) the resources need to have to be considered
+                            a valid target for an action. Conflicts with resource_arns.
+                            See below.
+                          items:
+                            properties:
+                              key:
+                                description: Tag key.
+                                type: string
+                              value:
+                                description: Tag value.
+                                type: string
+                            type: object
+                          type: array
+                        resourceType:
+                          description: AWS resource type. The resource type must be
+                            supported for the specified action. To find out what resource
+                            types are supported, see Targets for AWS FIS.
+                          type: string
+                        selectionMode:
+                          description: Scopes the identified resources. Valid values
+                            are ALL (all identified resources), COUNT(n) (randomly
+                            select n of the identified resources), PERCENT(n) (randomly
+                            select n percent of the identified resources).
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -525,9 +680,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

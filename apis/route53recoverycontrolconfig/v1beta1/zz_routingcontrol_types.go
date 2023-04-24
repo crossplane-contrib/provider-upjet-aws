@@ -18,7 +18,16 @@ type RoutingControlObservation struct {
 	// ARN of the routing control.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the cluster in which this routing control will reside.
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
+	// ARN of the control panel in which this routing control will reside.
+	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name describing the routing control.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Status of routing control. PENDING when it is being created/updated, PENDING_DELETION when it is being deleted, and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -55,8 +64,8 @@ type RoutingControlParameters struct {
 	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// The name describing the routing control.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -88,8 +97,9 @@ type RoutingControlStatus struct {
 type RoutingControl struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoutingControlSpec   `json:"spec"`
-	Status            RoutingControlStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RoutingControlSpec   `json:"spec"`
+	Status RoutingControlStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

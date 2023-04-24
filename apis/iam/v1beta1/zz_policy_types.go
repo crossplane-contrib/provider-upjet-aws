@@ -18,11 +18,24 @@ type PolicyObservation struct {
 	// The ARN assigned by AWS to this policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the IAM policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ARN assigned by AWS to this policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Path in which to create the policy.
+	// See IAM Identifiers for more information.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The policy document. This is a JSON formatted string
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
 	// The policy's ID.
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -40,8 +53,8 @@ type PolicyParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The policy document. This is a JSON formatted string
-	// +kubebuilder:validation:Required
-	Policy *string `json:"policy" tf:"policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -72,8 +85,9 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySpec   `json:"spec"`
-	Status            PolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	Spec   PolicySpec   `json:"spec"`
+	Status PolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

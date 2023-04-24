@@ -152,7 +152,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// No terraform import.
 	"aws_eip": config.IdentifierFromProvider,
 	// aws_ec2_tag can be imported by using the EC2 resource identifier and key, separated by a comma (,)
-	"aws_ec2_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_id }}_{{ .parameters.key }}"),
+	"aws_ec2_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_id }},{{ .parameters.key }}"),
 	// Imported by using the EC2 Transit Gateway identifier: tgw-12345678
 	"aws_ec2_transit_gateway": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Route Table, an underscore,
@@ -391,7 +391,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// colon (:): my_cluster:my_node_group
 	"aws_eks_node_group": config.TemplatedStringAsIdentifier("node_group_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
-	"aws_eks_addon": FormattedIdentifierUserDefinedNameLast("addon_name", ":", "cluster_name"),
+	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
+	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
 	// It has a complex config, adding empty entry here just to enable it.
@@ -416,6 +417,21 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_lb_target_group": config.IdentifierFromProvider,
 	// No import.
 	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
+
+	// dynamodb
+	//
+	// DynamoDB table replicas can be imported using the table-name:main-region
+	"aws_dynamodb_table_replica": config.IdentifierFromProvider,
+
+	// efs
+	//
+	// EFS Replication Configurations can be imported using the file system ID of either the source or destination file system
+	"aws_efs_replication_configuration": config.IdentifierFromProvider,
+
+	// emrserverless
+	//
+	// EMR Severless applications can be imported using the id
+	"aws_emrserverless_application": config.IdentifierFromProvider,
 
 	// globalaccelerator
 	//
@@ -949,8 +965,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// lambda
 	//
-	// Lambda Function Aliases can be imported using the function_name/alias
-	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "{{ .parameters.function_name }}/{{ .external_name }}"),
+	// Lambda Function Aliases are identified by their ARN, like arn:aws:lambda:eu-west-1:123456789012:function:lambda-function:alias
+	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "arn:aws:lambda:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:function:{{ .parameters.function_name }}:{{ .external_name }}"),
 	// Code Signing Configs can be imported using their ARN that has a random
 	// substring in the end.
 	// arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0f6c334abcdea4d8b
@@ -1024,6 +1040,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// CloudWatch Logs subscription filter can be imported using the log group name and subscription filter name separated by |
 	"aws_cloudwatch_log_subscription_filter": config.IdentifierFromProvider,
 
+	// directory_service
+	//
+	// Directory Service Shared Directories can be imported using the owner directory ID/shared directory ID
+	// "aws_directory_service_shared_directory": config.TemplatedStringAsIdentifier("", "{{ .parameters.directory_id }}/{{ .external_name }}"),
+	"aws_directory_service_shared_directory": config.IdentifierFromProvider,
+
+	// dms
+	//
+	// Endpoints can be imported using the endpoint_id
+	"aws_dms_s3_endpoint": config.ParameterAsIdentifier("endpoint_id"),
+
 	// elb
 	//
 	// ELBs can be imported using the name
@@ -1058,13 +1085,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iot_policy": config.NameAsIdentifier,
 	// IOT Things can be imported using the name
 	"aws_iot_thing": config.NameAsIdentifier,
-
-	// networkfirewall
-	//
-	// Network Firewall Firewalls can be imported using their ARN
-	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
-	// "aws_networkfirewall_firewall": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:firewall/{{ .external_name }}"),
-	"aws_networkfirewall_firewall": config.IdentifierFromProvider,
 
 	// networkmanager
 	//
@@ -1104,6 +1124,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// ram
 	//
+	// RAM Resource Associations can be imported using their Resource Share ARN and Resource ARN separated by a comma:
+	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,arn:aws:ec2:eu-west-1:123456789012:subnet/subnet-12345678
+	"aws_ram_resource_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "resource_arn"),
 	// Resource shares can be imported using the id
 	"aws_ram_resource_share": config.IdentifierFromProvider,
 
@@ -2201,12 +2224,19 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// networkfirewall
 	//
+	// Network Firewall Firewalls can be imported using their ARN
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
+	// "aws_networkfirewall_firewall": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.configuration.account_id }}:firewall/{{ .external_name }}"),
+	"aws_networkfirewall_firewall": config.IdentifierFromProvider,
 	// Network Firewall Policies can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall-policy/example
 	"aws_networkfirewall_firewall_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:firewall-policy/{{ .external_name }}"),
 	// Network Firewall Rule Groups can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:stateful-rulegroup/example
 	"aws_networkfirewall_rule_group": config.TemplatedStringAsIdentifier("", "arn:aws:network-firewall:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:stateful-rulegroup/{{ .external_name }}"),
+	// Network Firewall Logging Configurations can be imported using the firewall_arn
+	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
+	"aws_networkfirewall_logging_configuration": config.IdentifierFromProvider,
 
 	// networkmanager
 	//
@@ -2823,6 +2853,11 @@ func ExternalNameConfigurations() config.ResourceOption {
 		if e, ok := ExternalNameConfigs[r.Name]; ok {
 			r.Version = common.VersionV1Beta1
 			r.ExternalName = e
+			// Note(turkenh): This is special to provider-aws. We had injected
+			// region as a parameter for all resources to be consistent with
+			// the native aws provider, and now, we need to add manually it to
+			// the identifier fields for all resources.
+			r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
 		}
 	}
 }

@@ -782,7 +782,7 @@ func (mg *LaunchTemplate) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS[i4].KMSKeyID),
-				Extract:      reference.ExternalName(),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS[i4].KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.BlockDeviceMappings[i3].EBS[i4].KMSKeyIDSelector,
 				To: reference.To{
@@ -1350,6 +1350,22 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationPrefixListID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DestinationPrefixListIDRef,
+		Selector:     mg.Spec.ForProvider.DestinationPrefixListIDSelector,
+		To: reference.To{
+			List:    &ManagedPrefixListList{},
+			Managed: &ManagedPrefixList{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationPrefixListID")
+	}
+	mg.Spec.ForProvider.DestinationPrefixListID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DestinationPrefixListIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EgressOnlyGatewayID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.EgressOnlyGatewayIDRef,
@@ -1611,7 +1627,24 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrefixListIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.PrefixListIDRefs,
+		Selector:      mg.Spec.ForProvider.PrefixListIDSelector,
+		To: reference.To{
+			List:    &ManagedPrefixListList{},
+			Managed: &ManagedPrefixList{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrefixListIds")
+	}
+	mg.Spec.ForProvider.PrefixListIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.PrefixListIDRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityGroupID),
@@ -2277,12 +2310,12 @@ func (mg *TransitGatewayRoute) ResolveReferences(ctx context.Context, c client.R
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransitGatewayRouteTableID),
-		Extract:      resource.ExtractParamPath("association_default_route_table_id", true),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.TransitGatewayRouteTableIDRef,
 		Selector:     mg.Spec.ForProvider.TransitGatewayRouteTableIDSelector,
 		To: reference.To{
-			List:    &TransitGatewayList{},
-			Managed: &TransitGateway{},
+			List:    &TransitGatewayRouteTableList{},
+			Managed: &TransitGatewayRouteTable{},
 		},
 	})
 	if err != nil {

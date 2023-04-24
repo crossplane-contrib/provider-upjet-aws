@@ -14,10 +14,23 @@ import (
 )
 
 type InvocationObservation struct {
+
+	// Name of the lambda function.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// JSON payload to the lambda function.
+	Input *string `json:"input,omitempty" tf:"input,omitempty"`
+
+	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// String result of the lambda function invocation.
 	Result *string `json:"result,omitempty" tf:"result,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
 type InvocationParameters struct {
@@ -36,8 +49,8 @@ type InvocationParameters struct {
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// JSON payload to the lambda function.
-	// +kubebuilder:validation:Required
-	Input *string `json:"input" tf:"input,omitempty"`
+	// +kubebuilder:validation:Optional
+	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
 	// Qualifier (i.e., version) of the lambda function. Defaults to $LATEST.
 	// +kubebuilder:validation:Optional
@@ -77,8 +90,9 @@ type InvocationStatus struct {
 type Invocation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InvocationSpec   `json:"spec"`
-	Status            InvocationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)",message="input is a required parameter"
+	Spec   InvocationSpec   `json:"spec"`
+	Status InvocationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

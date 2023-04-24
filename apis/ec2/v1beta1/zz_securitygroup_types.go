@@ -84,6 +84,9 @@ type SecurityGroupObservation_2 struct {
 	// ARN of the security group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Configuration block for egress rules. Can be specified multiple times for each egress rule. Each egress block supports fields documented below. This argument is processed in attribute-as-blocks mode.
 	Egress []SecurityGroupEgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
 
@@ -93,11 +96,24 @@ type SecurityGroupObservation_2 struct {
 	// Configuration block for ingress rules. Can be specified multiple times for each ingress rule. Each ingress block supports fields documented below. This argument is processed in attribute-as-blocks mode.
 	Ingress []SecurityGroupIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// Name of the security group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Owner ID.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default false.
+	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// VPC ID.
+	// Defaults to the region's default VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type SecurityGroupParameters_2 struct {

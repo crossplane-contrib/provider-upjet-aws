@@ -14,6 +14,12 @@ import (
 )
 
 type DiskIopsConfigurationObservation struct {
+
+	// - The total number of SSD IOPS provisioned for the file system.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type DiskIopsConfigurationParameters struct {
@@ -68,8 +74,23 @@ type OntapFileSystemObservation struct {
 	// Amazon Resource Name of the file system.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
+	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
+
 	// DNS name for the file system, e.g., fs-12345678.fsx.us-west-2.amazonaws.com
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
+	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
+
+	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
+	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
+
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
+	DiskIopsConfiguration []DiskIopsConfigurationObservation `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
+
+	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
+	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
 
 	// The endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror. See Endpoints below.
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
@@ -77,17 +98,47 @@ type OntapFileSystemObservation struct {
 	// Identifier of the file system, e.g., fs-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ARN for the KMS Key to encrypt the file system at rest, Defaults to an AWS managed KMS Key.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// Set of Elastic Network Interface identifiers from which the file system is accessible The first network interface returned is the primary network interface.
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
 	// AWS account identifier that created the file system.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private cloud (VPC).
+	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
+
+	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+
+	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
+	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
+
+	// - The filesystem storage type. defaults to SSD.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// A list of IDs for the subnets that the file system will be accessible from. Upto 2 subnets can be provided.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048.
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
 	// Identifier of the Virtual Private Cloud for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
 type OntapFileSystemParameters struct {
@@ -101,8 +152,8 @@ type OntapFileSystemParameters struct {
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
 	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
-	// +kubebuilder:validation:Required
-	DeploymentType *string `json:"deploymentType" tf:"deployment_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
 	// +kubebuilder:validation:Optional
@@ -195,8 +246,8 @@ type OntapFileSystemParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048.
-	// +kubebuilder:validation:Required
-	ThroughputCapacity *float64 `json:"throughputCapacity" tf:"throughput_capacity,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
@@ -227,8 +278,10 @@ type OntapFileSystemStatus struct {
 type OntapFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OntapFileSystemSpec   `json:"spec"`
-	Status            OntapFileSystemStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deploymentType)",message="deploymentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
+	Spec   OntapFileSystemSpec   `json:"spec"`
+	Status OntapFileSystemStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

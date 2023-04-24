@@ -18,11 +18,26 @@ type UserObservation struct {
 	// ARN of the appstream user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Authentication type for the user. You must specify USERPOOL. Valid values: API, SAML, USERPOOL
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
 	// Date and time, in UTC and extended RFC 3339 format, when the user was created.
 	CreatedTime *string `json:"createdTime,omitempty" tf:"created_time,omitempty"`
 
+	// Whether the user in the user pool is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// First name, or given name, of the user.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
 	// Unique ID of the appstream user.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Last name, or surname, of the user.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Send an email notification.
+	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
 }
 
 type UserParameters struct {

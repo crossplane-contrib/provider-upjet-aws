@@ -14,6 +14,12 @@ import (
 )
 
 type DestinationObservation struct {
+
+	// A Region to replicate to.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// The account ID of the destination registry to replicate to.
+	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type DestinationParameters struct {
@@ -32,6 +38,9 @@ type ReplicationConfigurationObservation struct {
 
 	// The account ID of the destination registry to replicate to.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// Replication configuration for a registry. See Replication Configuration.
+	ReplicationConfiguration []ReplicationConfigurationReplicationConfigurationObservation `json:"replicationConfiguration,omitempty" tf:"replication_configuration,omitempty"`
 }
 
 type ReplicationConfigurationParameters struct {
@@ -48,6 +57,9 @@ type ReplicationConfigurationParameters struct {
 }
 
 type ReplicationConfigurationReplicationConfigurationObservation struct {
+
+	// The replication rules for a replication configuration. A maximum of 10 are allowed per replication_configuration. See Rule
+	Rule []ReplicationConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type ReplicationConfigurationReplicationConfigurationParameters struct {
@@ -58,6 +70,12 @@ type ReplicationConfigurationReplicationConfigurationParameters struct {
 }
 
 type ReplicationConfigurationRuleObservation struct {
+
+	// the details of a replication destination. A maximum of 25 are allowed per rule. See Destination.
+	Destination []DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// filters for a replication rule. See Repository Filter.
+	RepositoryFilter []RuleRepositoryFilterObservation `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
 }
 
 type ReplicationConfigurationRuleParameters struct {
@@ -72,6 +90,12 @@ type ReplicationConfigurationRuleParameters struct {
 }
 
 type RuleRepositoryFilterObservation struct {
+
+	// The repository filter details.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The repository filter type. The only supported value is PREFIX_MATCH, which is a repository name prefix specified with the filter parameter.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
 }
 
 type RuleRepositoryFilterParameters struct {

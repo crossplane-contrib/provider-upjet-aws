@@ -15,8 +15,20 @@ import (
 
 type TransitGatewayRouteObservation struct {
 
+	// Indicates whether to drop traffic that matches this route (default to false).
+	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
+
+	// IPv4 or IPv6 RFC1924 CIDR used for destination matches. Routing decisions are based on the most specific match.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
 	// EC2 Transit Gateway Route Table identifier combined with destination
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Attachment .
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 }
 
 type TransitGatewayRouteParameters struct {
@@ -26,8 +38,8 @@ type TransitGatewayRouteParameters struct {
 	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
 
 	// IPv4 or IPv6 RFC1924 CIDR used for destination matches. Routing decisions are based on the most specific match.
-	// +kubebuilder:validation:Required
-	DestinationCidrBlock *string `json:"destinationCidrBlock" tf:"destination_cidr_block,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -48,16 +60,15 @@ type TransitGatewayRouteParameters struct {
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
+	// +crossplane:generate:reference:type=TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
-	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// Reference to a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// Selector for a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
@@ -86,8 +97,9 @@ type TransitGatewayRouteStatus struct {
 type TransitGatewayRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TransitGatewayRouteSpec   `json:"spec"`
-	Status            TransitGatewayRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	Spec   TransitGatewayRouteSpec   `json:"spec"`
+	Status TransitGatewayRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

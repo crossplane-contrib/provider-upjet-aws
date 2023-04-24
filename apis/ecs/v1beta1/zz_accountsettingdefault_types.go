@@ -18,14 +18,20 @@ type AccountSettingDefaultObservation struct {
 	// ARN that identifies the account setting.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// State of the setting. Valid values are enabled and disabled.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AccountSettingDefaultParameters struct {
 
 	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -33,8 +39,8 @@ type AccountSettingDefaultParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// State of the setting. Valid values are enabled and disabled.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // AccountSettingDefaultSpec defines the desired state of AccountSettingDefault
@@ -61,8 +67,10 @@ type AccountSettingDefaultStatus struct {
 type AccountSettingDefault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccountSettingDefaultSpec   `json:"spec"`
-	Status            AccountSettingDefaultStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   AccountSettingDefaultSpec   `json:"spec"`
+	Status AccountSettingDefaultStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

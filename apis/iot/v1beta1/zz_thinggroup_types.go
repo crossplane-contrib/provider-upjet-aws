@@ -14,6 +14,9 @@ import (
 )
 
 type AttributePayloadObservation struct {
+
+	// Key-value map.
+	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
 type AttributePayloadParameters struct {
@@ -36,6 +39,12 @@ type MetadataParameters struct {
 }
 
 type PropertiesObservation struct {
+
+	// The Thing Group attributes. Defined below.
+	AttributePayload []AttributePayloadObservation `json:"attributePayload,omitempty" tf:"attribute_payload,omitempty"`
+
+	// A description of the Thing Group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 
 type PropertiesParameters struct {
@@ -70,6 +79,15 @@ type ThingGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Metadata []MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the parent Thing Group.
+	ParentGroupName *string `json:"parentGroupName,omitempty" tf:"parent_group_name,omitempty"`
+
+	// The Thing Group properties. Defined below.
+	Properties []PropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

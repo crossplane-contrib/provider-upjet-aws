@@ -14,7 +14,14 @@ import (
 )
 
 type UserGroupMembershipObservation struct {
+
+	// A list of IAM Groups to add the user to
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IAM User to add to groups
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type UserGroupMembershipParameters struct {

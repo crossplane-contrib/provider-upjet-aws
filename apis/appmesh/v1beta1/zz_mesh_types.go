@@ -14,6 +14,10 @@ import (
 )
 
 type EgressFilterObservation struct {
+
+	// Egress filter type. By default, the type is DROP_ALL.
+	// Valid values are ALLOW_ALL and DROP_ALL.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EgressFilterParameters struct {
@@ -44,6 +48,12 @@ type MeshObservation struct {
 	// Resource owner's AWS account ID.
 	ResourceOwner *string `json:"resourceOwner,omitempty" tf:"resource_owner,omitempty"`
 
+	// Service mesh specification to apply.
+	Spec []MeshSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -65,6 +75,9 @@ type MeshParameters struct {
 }
 
 type MeshSpecObservation struct {
+
+	// Egress filter rules for the service mesh.
+	EgressFilter []EgressFilterObservation `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
 }
 
 type MeshSpecParameters struct {

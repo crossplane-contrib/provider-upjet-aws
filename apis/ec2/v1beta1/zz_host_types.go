@@ -18,11 +18,32 @@ type HostObservation struct {
 	// The ARN of the Dedicated Host.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. Valid values: on, off. Default: on.
+	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
+
+	// The Availability Zone in which to allocate the Dedicated Host.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Indicates whether to enable or disable host recovery for the Dedicated Host. Valid values: on, off. Default: off.
+	HostRecovery *string `json:"hostRecovery,omitempty" tf:"host_recovery,omitempty"`
+
 	// The ID of the allocated Dedicated Host. This is used to launch an instance onto a specific host.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family. Exactly one of instance_family or instance_type must be specified.
+	InstanceFamily *string `json:"instanceFamily,omitempty" tf:"instance_family,omitempty"`
+
+	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. Exactly one of instance_family or instance_type must be specified.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
 	// The ID of the AWS account that owns the Dedicated Host.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -35,8 +56,8 @@ type HostParameters struct {
 	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
 
 	// The Availability Zone in which to allocate the Dedicated Host.
-	// +kubebuilder:validation:Required
-	AvailabilityZone *string `json:"availabilityZone" tf:"availability_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Indicates whether to enable or disable host recovery for the Dedicated Host. Valid values: on, off. Default: off.
 	// +kubebuilder:validation:Optional
@@ -88,8 +109,9 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostSpec   `json:"spec"`
-	Status            HostStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	Spec   HostSpec   `json:"spec"`
+	Status HostStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

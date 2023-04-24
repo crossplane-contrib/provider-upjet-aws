@@ -14,6 +14,18 @@ import (
 )
 
 type CloudwatchAlarmObservation struct {
+
+	// The CloudWatch alarm name.
+	AlarmName *string `json:"alarmName,omitempty" tf:"alarm_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The reason for the alarm change.
+	StateReason *string `json:"stateReason,omitempty" tf:"state_reason,omitempty"`
+
+	// The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.
+	StateValue *string `json:"stateValue,omitempty" tf:"state_value,omitempty"`
 }
 
 type CloudwatchAlarmParameters struct {
@@ -36,6 +48,12 @@ type CloudwatchAlarmParameters struct {
 }
 
 type CloudwatchLogsObservation struct {
+
+	// The CloudWatch log group name.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type CloudwatchLogsParameters struct {
@@ -50,6 +68,24 @@ type CloudwatchLogsParameters struct {
 }
 
 type CloudwatchMetricObservation struct {
+
+	// The CloudWatch metric name.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The CloudWatch metric namespace name.
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
+
+	// An optional Unix timestamp (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
+	MetricTimestamp *string `json:"metricTimestamp,omitempty" tf:"metric_timestamp,omitempty"`
+
+	// The metric unit (supported units can be found here: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)
+	MetricUnit *string `json:"metricUnit,omitempty" tf:"metric_unit,omitempty"`
+
+	// The CloudWatch metric value.
+	MetricValue *string `json:"metricValue,omitempty" tf:"metric_value,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type CloudwatchMetricParameters struct {
@@ -80,6 +116,12 @@ type CloudwatchMetricParameters struct {
 }
 
 type DimensionObservation struct {
+
+	// The name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DimensionParameters struct {
@@ -94,6 +136,36 @@ type DimensionParameters struct {
 }
 
 type DynamodbObservation struct {
+
+	// The hash key name.
+	HashKeyField *string `json:"hashKeyField,omitempty" tf:"hash_key_field,omitempty"`
+
+	// The hash key type. Valid values are "STRING" or "NUMBER".
+	HashKeyType *string `json:"hashKeyType,omitempty" tf:"hash_key_type,omitempty"`
+
+	// The hash key value.
+	HashKeyValue *string `json:"hashKeyValue,omitempty" tf:"hash_key_value,omitempty"`
+
+	// The operation. Valid values are "INSERT", "UPDATE", or "DELETE".
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+	// The action payload.
+	PayloadField *string `json:"payloadField,omitempty" tf:"payload_field,omitempty"`
+
+	// The range key name.
+	RangeKeyField *string `json:"rangeKeyField,omitempty" tf:"range_key_field,omitempty"`
+
+	// The range key type. Valid values are "STRING" or "NUMBER".
+	RangeKeyType *string `json:"rangeKeyType,omitempty" tf:"range_key_type,omitempty"`
+
+	// The range key value.
+	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type DynamodbParameters struct {
@@ -140,6 +212,12 @@ type DynamodbParameters struct {
 }
 
 type Dynamodbv2Observation struct {
+
+	// Configuration block with DynamoDB Table to which the message will be written. Nested arguments below.
+	PutItem []PutItemObservation `json:"putItem,omitempty" tf:"put_item,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type Dynamodbv2Parameters struct {
@@ -154,6 +232,9 @@ type Dynamodbv2Parameters struct {
 }
 
 type Dynamodbv2PutItemObservation struct {
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type Dynamodbv2PutItemParameters struct {
@@ -164,6 +245,21 @@ type Dynamodbv2PutItemParameters struct {
 }
 
 type ElasticsearchObservation struct {
+
+	// The endpoint of your Elasticsearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The unique identifier for the document you are storing.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Elasticsearch index where you want to store your data.
+	Index *string `json:"index,omitempty" tf:"index,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The type of document you are storing.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ElasticsearchParameters struct {
@@ -190,6 +286,18 @@ type ElasticsearchParameters struct {
 }
 
 type ErrorActionCloudwatchAlarmObservation struct {
+
+	// The CloudWatch alarm name.
+	AlarmName *string `json:"alarmName,omitempty" tf:"alarm_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The reason for the alarm change.
+	StateReason *string `json:"stateReason,omitempty" tf:"state_reason,omitempty"`
+
+	// The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.
+	StateValue *string `json:"stateValue,omitempty" tf:"state_value,omitempty"`
 }
 
 type ErrorActionCloudwatchAlarmParameters struct {
@@ -212,6 +320,12 @@ type ErrorActionCloudwatchAlarmParameters struct {
 }
 
 type ErrorActionCloudwatchLogsObservation struct {
+
+	// The CloudWatch log group name.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ErrorActionCloudwatchLogsParameters struct {
@@ -226,6 +340,24 @@ type ErrorActionCloudwatchLogsParameters struct {
 }
 
 type ErrorActionCloudwatchMetricObservation struct {
+
+	// The CloudWatch metric name.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The CloudWatch metric namespace name.
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
+
+	// An optional Unix timestamp (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
+	MetricTimestamp *string `json:"metricTimestamp,omitempty" tf:"metric_timestamp,omitempty"`
+
+	// The metric unit (supported units can be found here: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)
+	MetricUnit *string `json:"metricUnit,omitempty" tf:"metric_unit,omitempty"`
+
+	// The CloudWatch metric value.
+	MetricValue *string `json:"metricValue,omitempty" tf:"metric_value,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ErrorActionCloudwatchMetricParameters struct {
@@ -256,6 +388,36 @@ type ErrorActionCloudwatchMetricParameters struct {
 }
 
 type ErrorActionDynamodbObservation struct {
+
+	// The hash key name.
+	HashKeyField *string `json:"hashKeyField,omitempty" tf:"hash_key_field,omitempty"`
+
+	// The hash key type. Valid values are "STRING" or "NUMBER".
+	HashKeyType *string `json:"hashKeyType,omitempty" tf:"hash_key_type,omitempty"`
+
+	// The hash key value.
+	HashKeyValue *string `json:"hashKeyValue,omitempty" tf:"hash_key_value,omitempty"`
+
+	// The operation. Valid values are "INSERT", "UPDATE", or "DELETE".
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+	// The action payload.
+	PayloadField *string `json:"payloadField,omitempty" tf:"payload_field,omitempty"`
+
+	// The range key name.
+	RangeKeyField *string `json:"rangeKeyField,omitempty" tf:"range_key_field,omitempty"`
+
+	// The range key type. Valid values are "STRING" or "NUMBER".
+	RangeKeyType *string `json:"rangeKeyType,omitempty" tf:"range_key_type,omitempty"`
+
+	// The range key value.
+	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type ErrorActionDynamodbParameters struct {
@@ -302,6 +464,12 @@ type ErrorActionDynamodbParameters struct {
 }
 
 type ErrorActionDynamodbv2Observation struct {
+
+	// Configuration block with DynamoDB Table to which the message will be written. Nested arguments below.
+	PutItem []Dynamodbv2PutItemObservation `json:"putItem,omitempty" tf:"put_item,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type ErrorActionDynamodbv2Parameters struct {
@@ -316,6 +484,21 @@ type ErrorActionDynamodbv2Parameters struct {
 }
 
 type ErrorActionElasticsearchObservation struct {
+
+	// The endpoint of your Elasticsearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The unique identifier for the document you are storing.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Elasticsearch index where you want to store your data.
+	Index *string `json:"index,omitempty" tf:"index,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The type of document you are storing.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ErrorActionElasticsearchParameters struct {
@@ -342,6 +525,43 @@ type ErrorActionElasticsearchParameters struct {
 }
 
 type ErrorActionObservation struct {
+	CloudwatchAlarm []ErrorActionCloudwatchAlarmObservation `json:"cloudwatchAlarm,omitempty" tf:"cloudwatch_alarm,omitempty"`
+
+	CloudwatchLogs []ErrorActionCloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	CloudwatchMetric []ErrorActionCloudwatchMetricObservation `json:"cloudwatchMetric,omitempty" tf:"cloudwatch_metric,omitempty"`
+
+	Dynamodb []ErrorActionDynamodbObservation `json:"dynamodb,omitempty" tf:"dynamodb,omitempty"`
+
+	Dynamodbv2 []ErrorActionDynamodbv2Observation `json:"dynamodbv2,omitempty" tf:"dynamodbv2,omitempty"`
+
+	Elasticsearch []ErrorActionElasticsearchObservation `json:"elasticsearch,omitempty" tf:"elasticsearch,omitempty"`
+
+	Firehose []FirehoseObservation `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	HTTP []HTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
+	IotAnalytics []IotAnalyticsObservation `json:"iotAnalytics,omitempty" tf:"iot_analytics,omitempty"`
+
+	IotEvents []IotEventsObservation `json:"iotEvents,omitempty" tf:"iot_events,omitempty"`
+
+	Kafka []KafkaObservation `json:"kafka,omitempty" tf:"kafka,omitempty"`
+
+	Kinesis []KinesisObservation `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
+
+	Lambda []LambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
+
+	Republish []RepublishObservation `json:"republish,omitempty" tf:"republish,omitempty"`
+
+	S3 []S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+
+	Sns []SnsObservation `json:"sns,omitempty" tf:"sns,omitempty"`
+
+	Sqs []SqsObservation `json:"sqs,omitempty" tf:"sqs,omitempty"`
+
+	StepFunctions []StepFunctionsObservation `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
+
+	Timestream []TimestreamObservation `json:"timestream,omitempty" tf:"timestream,omitempty"`
 }
 
 type ErrorActionParameters struct {
@@ -405,6 +625,15 @@ type ErrorActionParameters struct {
 }
 
 type FirehoseObservation struct {
+
+	// The delivery stream name.
+	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
 }
 
 type FirehoseParameters struct {
@@ -423,6 +652,12 @@ type FirehoseParameters struct {
 }
 
 type HTTPHTTPHeaderObservation struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPHTTPHeaderParameters struct {
@@ -437,6 +672,12 @@ type HTTPHTTPHeaderParameters struct {
 }
 
 type HTTPHeaderObservation struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPHeaderParameters struct {
@@ -451,6 +692,15 @@ type HTTPHeaderParameters struct {
 }
 
 type HTTPObservation struct {
+
+	// The HTTPS URL used to verify ownership of url.
+	ConfirmationURL *string `json:"confirmationUrl,omitempty" tf:"confirmation_url,omitempty"`
+
+	// Custom HTTP header IoT Core should send. It is possible to define more than one custom header.
+	HTTPHeader []HTTPHeaderObservation `json:"httpHeader,omitempty" tf:"http_header,omitempty"`
+
+	// The HTTPS URL.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type HTTPParameters struct {
@@ -469,6 +719,12 @@ type HTTPParameters struct {
 }
 
 type IotAnalyticsObservation struct {
+
+	// Name of AWS IOT Analytics channel.
+	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type IotAnalyticsParameters struct {
@@ -483,6 +739,15 @@ type IotAnalyticsParameters struct {
 }
 
 type IotEventsObservation struct {
+
+	// The name of the AWS IoT Events input.
+	InputName *string `json:"inputName,omitempty" tf:"input_name,omitempty"`
+
+	// Use this to ensure that only one input (message) with a given messageId is processed by an AWS IoT Events detector.
+	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type IotEventsParameters struct {
@@ -501,6 +766,21 @@ type IotEventsParameters struct {
 }
 
 type KafkaObservation struct {
+
+	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
+
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The Kafka message partition.
+	Partition *string `json:"partition,omitempty" tf:"partition,omitempty"`
+
+	// The Kafka topic for messages to be sent to the Kafka broker.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type KafkaParameters struct {
@@ -527,6 +807,15 @@ type KafkaParameters struct {
 }
 
 type KinesisObservation struct {
+
+	// The partition key.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Amazon Kinesis stream.
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type KinesisParameters struct {
@@ -545,6 +834,9 @@ type KinesisParameters struct {
 }
 
 type LambdaObservation struct {
+
+	// The ARN of the Lambda function.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 }
 
 type LambdaParameters struct {
@@ -555,6 +847,9 @@ type LambdaParameters struct {
 }
 
 type PutItemObservation struct {
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type PutItemParameters struct {
@@ -565,6 +860,15 @@ type PutItemParameters struct {
 }
 
 type RepublishObservation struct {
+
+	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
+	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The Kafka topic for messages to be sent to the Kafka broker.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type RepublishParameters struct {
@@ -583,6 +887,18 @@ type RepublishParameters struct {
 }
 
 type S3Observation struct {
+
+	// The Amazon S3 bucket name.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
+	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3Parameters struct {
@@ -605,6 +921,15 @@ type S3Parameters struct {
 }
 
 type SnsObservation struct {
+
+	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
+	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the SNS topic.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 }
 
 type SnsParameters struct {
@@ -643,6 +968,15 @@ type SnsParameters struct {
 }
 
 type SqsObservation struct {
+
+	// The URL of the Amazon SQS queue.
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Specifies whether to use Base64 encoding.
+	UseBase64 *bool `json:"useBase64,omitempty" tf:"use_base64,omitempty"`
 }
 
 type SqsParameters struct {
@@ -661,6 +995,15 @@ type SqsParameters struct {
 }
 
 type StepFunctionsObservation struct {
+
+	// The prefix used to generate, along with a UUID, the unique state machine execution name.
+	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Step Functions state machine whose execution will be started.
+	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
 }
 
 type StepFunctionsParameters struct {
@@ -679,6 +1022,12 @@ type StepFunctionsParameters struct {
 }
 
 type TimestampObservation struct {
+
+	// The precision of the timestamp value that results from the expression described in value. Valid values: SECONDS, MILLISECONDS, MICROSECONDS, NANOSECONDS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimestampParameters struct {
@@ -693,6 +1042,12 @@ type TimestampParameters struct {
 }
 
 type TimestreamDimensionObservation struct {
+
+	// The name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimestreamDimensionParameters struct {
@@ -707,6 +1062,21 @@ type TimestreamDimensionParameters struct {
 }
 
 type TimestreamObservation struct {
+
+	// The name of an Amazon Timestream database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
+	Dimension []DimensionObservation `json:"dimension,omitempty" tf:"dimension,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
+	Timestamp []TimestampObservation `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
 }
 
 type TimestreamParameters struct {
@@ -733,6 +1103,12 @@ type TimestreamParameters struct {
 }
 
 type TimestreamTimestampObservation struct {
+
+	// The precision of the timestamp value that results from the expression described in value. Valid values: SECONDS, MILLISECONDS, MICROSECONDS, NANOSECONDS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimestreamTimestampParameters struct {
@@ -747,6 +1123,15 @@ type TimestreamTimestampParameters struct {
 }
 
 type TopicRuleFirehoseObservation struct {
+
+	// The delivery stream name.
+	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
+	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
 }
 
 type TopicRuleFirehoseParameters struct {
@@ -765,6 +1150,15 @@ type TopicRuleFirehoseParameters struct {
 }
 
 type TopicRuleHTTPObservation struct {
+
+	// The HTTPS URL used to verify ownership of url.
+	ConfirmationURL *string `json:"confirmationUrl,omitempty" tf:"confirmation_url,omitempty"`
+
+	// Custom HTTP header IoT Core should send. It is possible to define more than one custom header.
+	HTTPHeader []HTTPHTTPHeaderObservation `json:"httpHeader,omitempty" tf:"http_header,omitempty"`
+
+	// The HTTPS URL.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type TopicRuleHTTPParameters struct {
@@ -783,6 +1177,12 @@ type TopicRuleHTTPParameters struct {
 }
 
 type TopicRuleIotAnalyticsObservation struct {
+
+	// Name of AWS IOT Analytics channel.
+	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TopicRuleIotAnalyticsParameters struct {
@@ -797,6 +1197,15 @@ type TopicRuleIotAnalyticsParameters struct {
 }
 
 type TopicRuleIotEventsObservation struct {
+
+	// The name of the AWS IoT Events input.
+	InputName *string `json:"inputName,omitempty" tf:"input_name,omitempty"`
+
+	// Use this to ensure that only one input (message) with a given messageId is processed by an AWS IoT Events detector.
+	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TopicRuleIotEventsParameters struct {
@@ -815,6 +1224,21 @@ type TopicRuleIotEventsParameters struct {
 }
 
 type TopicRuleKafkaObservation struct {
+
+	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
+
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The Kafka message partition.
+	Partition *string `json:"partition,omitempty" tf:"partition,omitempty"`
+
+	// The Kafka topic for messages to be sent to the Kafka broker.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type TopicRuleKafkaParameters struct {
@@ -841,6 +1265,15 @@ type TopicRuleKafkaParameters struct {
 }
 
 type TopicRuleKinesisObservation struct {
+
+	// The partition key.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Amazon Kinesis stream.
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type TopicRuleKinesisParameters struct {
@@ -859,6 +1292,9 @@ type TopicRuleKinesisParameters struct {
 }
 
 type TopicRuleLambdaObservation struct {
+
+	// The ARN of the Lambda function.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 }
 
 type TopicRuleLambdaParameters struct {
@@ -873,11 +1309,67 @@ type TopicRuleObservation struct {
 	// The ARN of the topic rule
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	CloudwatchAlarm []CloudwatchAlarmObservation `json:"cloudwatchAlarm,omitempty" tf:"cloudwatch_alarm,omitempty"`
+
+	CloudwatchLogs []CloudwatchLogsObservation `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	CloudwatchMetric []CloudwatchMetricObservation `json:"cloudwatchMetric,omitempty" tf:"cloudwatch_metric,omitempty"`
+
+	// The description of the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	Dynamodb []DynamodbObservation `json:"dynamodb,omitempty" tf:"dynamodb,omitempty"`
+
+	Dynamodbv2 []Dynamodbv2Observation `json:"dynamodbv2,omitempty" tf:"dynamodbv2,omitempty"`
+
+	Elasticsearch []ElasticsearchObservation `json:"elasticsearch,omitempty" tf:"elasticsearch,omitempty"`
+
+	// Specifies whether the rule is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block with error action to be associated with the rule. See the documentation for cloudwatch_alarm, cloudwatch_logs, cloudwatch_metric, dynamodb, dynamodbv2, elasticsearch, firehose, http, iot_analytics, iot_events, kafka, kinesis, lambda, republish, s3, sns, sqs, step_functions, timestream configuration blocks for further configuration details.
+	ErrorAction []ErrorActionObservation `json:"errorAction,omitempty" tf:"error_action,omitempty"`
+
+	Firehose []TopicRuleFirehoseObservation `json:"firehose,omitempty" tf:"firehose,omitempty"`
+
+	HTTP []TopicRuleHTTPObservation `json:"http,omitempty" tf:"http,omitempty"`
+
 	// The unique identifier for the document you are storing.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	IotAnalytics []TopicRuleIotAnalyticsObservation `json:"iotAnalytics,omitempty" tf:"iot_analytics,omitempty"`
+
+	IotEvents []TopicRuleIotEventsObservation `json:"iotEvents,omitempty" tf:"iot_events,omitempty"`
+
+	Kafka []TopicRuleKafkaObservation `json:"kafka,omitempty" tf:"kafka,omitempty"`
+
+	Kinesis []TopicRuleKinesisObservation `json:"kinesis,omitempty" tf:"kinesis,omitempty"`
+
+	Lambda []TopicRuleLambdaObservation `json:"lambda,omitempty" tf:"lambda,omitempty"`
+
+	Republish []TopicRuleRepublishObservation `json:"republish,omitempty" tf:"republish,omitempty"`
+
+	S3 []TopicRuleS3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
+
+	// The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference) in the AWS IoT Developer Guide.
+	SQL *string `json:"sql,omitempty" tf:"sql,omitempty"`
+
+	// The version of the SQL rules engine to use when evaluating the rule.
+	SQLVersion *string `json:"sqlVersion,omitempty" tf:"sql_version,omitempty"`
+
+	Sns []TopicRuleSnsObservation `json:"sns,omitempty" tf:"sns,omitempty"`
+
+	Sqs []TopicRuleSqsObservation `json:"sqs,omitempty" tf:"sqs,omitempty"`
+
+	StepFunctions []TopicRuleStepFunctionsObservation `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	Timestream []TopicRuleTimestreamObservation `json:"timestream,omitempty" tf:"timestream,omitempty"`
 }
 
 type TopicRuleParameters struct {
@@ -905,8 +1397,8 @@ type TopicRuleParameters struct {
 	Elasticsearch []ElasticsearchParameters `json:"elasticsearch,omitempty" tf:"elasticsearch,omitempty"`
 
 	// Specifies whether the rule is enabled.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Configuration block with error action to be associated with the rule. See the documentation for cloudwatch_alarm, cloudwatch_logs, cloudwatch_metric, dynamodb, dynamodbv2, elasticsearch, firehose, http, iot_analytics, iot_events, kafka, kinesis, lambda, republish, s3, sns, sqs, step_functions, timestream configuration blocks for further configuration details.
 	// +kubebuilder:validation:Optional
@@ -945,12 +1437,12 @@ type TopicRuleParameters struct {
 	S3 []TopicRuleS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
 	// The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference) in the AWS IoT Developer Guide.
-	// +kubebuilder:validation:Required
-	SQL *string `json:"sql" tf:"sql,omitempty"`
+	// +kubebuilder:validation:Optional
+	SQL *string `json:"sql,omitempty" tf:"sql,omitempty"`
 
 	// The version of the SQL rules engine to use when evaluating the rule.
-	// +kubebuilder:validation:Required
-	SQLVersion *string `json:"sqlVersion" tf:"sql_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	SQLVersion *string `json:"sqlVersion,omitempty" tf:"sql_version,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Sns []TopicRuleSnsParameters `json:"sns,omitempty" tf:"sns,omitempty"`
@@ -970,6 +1462,15 @@ type TopicRuleParameters struct {
 }
 
 type TopicRuleRepublishObservation struct {
+
+	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
+	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The Kafka topic for messages to be sent to the Kafka broker.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type TopicRuleRepublishParameters struct {
@@ -988,6 +1489,18 @@ type TopicRuleRepublishParameters struct {
 }
 
 type TopicRuleS3Observation struct {
+
+	// The Amazon S3 bucket name.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
+	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type TopicRuleS3Parameters struct {
@@ -1010,6 +1523,15 @@ type TopicRuleS3Parameters struct {
 }
 
 type TopicRuleSnsObservation struct {
+
+	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
+	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the SNS topic.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 }
 
 type TopicRuleSnsParameters struct {
@@ -1048,6 +1570,15 @@ type TopicRuleSnsParameters struct {
 }
 
 type TopicRuleSqsObservation struct {
+
+	// The URL of the Amazon SQS queue.
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Specifies whether to use Base64 encoding.
+	UseBase64 *bool `json:"useBase64,omitempty" tf:"use_base64,omitempty"`
 }
 
 type TopicRuleSqsParameters struct {
@@ -1066,6 +1597,15 @@ type TopicRuleSqsParameters struct {
 }
 
 type TopicRuleStepFunctionsObservation struct {
+
+	// The prefix used to generate, along with a UUID, the unique state machine execution name.
+	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Step Functions state machine whose execution will be started.
+	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
 }
 
 type TopicRuleStepFunctionsParameters struct {
@@ -1084,6 +1624,21 @@ type TopicRuleStepFunctionsParameters struct {
 }
 
 type TopicRuleTimestreamObservation struct {
+
+	// The name of an Amazon Timestream database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
+	Dimension []TimestreamDimensionObservation `json:"dimension,omitempty" tf:"dimension,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the DynamoDB table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
+	Timestamp []TimestreamTimestampObservation `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
 }
 
 type TopicRuleTimestreamParameters struct {
@@ -1133,8 +1688,11 @@ type TopicRuleStatus struct {
 type TopicRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicRuleSpec   `json:"spec"`
-	Status            TopicRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sql)",message="sql is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sqlVersion)",message="sqlVersion is a required parameter"
+	Spec   TopicRuleSpec   `json:"spec"`
+	Status TopicRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

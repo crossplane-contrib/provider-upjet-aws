@@ -14,7 +14,20 @@ import (
 )
 
 type BasePathMappingObservation struct {
+
+	// ID of the API to connect.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Path segment that must be prepended to the path when accessing the API via this mapping. If omitted, the API is exposed at the root of the given domain.
+	BasePath *string `json:"basePath,omitempty" tf:"base_path,omitempty"`
+
+	// Already-registered domain name to connect the API to.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of a specific deployment stage to expose at the given path. If omitted, callers may select any stage by including its name as a path element after the base path.
+	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 }
 
 type BasePathMappingParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: publickeys.cloudfront.aws.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -94,9 +98,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - encodedKeySecretRef
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -268,6 +286,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: encodedKeySecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encodedKeySecretRef)
           status:
             description: PublicKeyStatus defines the observed state of PublicKey.
             properties:
@@ -277,6 +298,9 @@ spec:
                     description: Internal value used by CloudFront to allow future
                       updates to the public key configuration.
                     type: string
+                  comment:
+                    description: An optional comment about the public key.
+                    type: string
                   etag:
                     description: 'The current version of the public key. For example:
                       E2QWRUHAPOMQZL.'
@@ -284,6 +308,9 @@ spec:
                   id:
                     description: 'The identifier for the public key. For example:
                       K3D5EWEUDCCXON.'
+                    type: string
+                  name:
+                    description: The name for the public key.
                     type: string
                 type: object
               conditions:
@@ -327,9 +354,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

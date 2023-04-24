@@ -17,6 +17,11 @@ func (mg *AlertManagerDefinition) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AlertManagerDefinition.
+func (mg *AlertManagerDefinition) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AlertManagerDefinition.
 func (mg *AlertManagerDefinition) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AlertManagerDefinition) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AlertManagerDefinition.
 func (mg *AlertManagerDefinition) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AlertManagerDefinition.
+func (mg *AlertManagerDefinition) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AlertManagerDefinition.
@@ -83,6 +93,11 @@ func (mg *RuleGroupNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RuleGroupNamespace.
+func (mg *RuleGroupNamespace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RuleGroupNamespace.
 func (mg *RuleGroupNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *RuleGroupNamespace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RuleGroupNamespace.
 func (mg *RuleGroupNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RuleGroupNamespace.
+func (mg *RuleGroupNamespace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RuleGroupNamespace.
@@ -149,6 +169,11 @@ func (mg *Workspace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Workspace.
+func (mg *Workspace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Workspace.
 func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *Workspace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Workspace.
 func (mg *Workspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Workspace.
+func (mg *Workspace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Workspace.

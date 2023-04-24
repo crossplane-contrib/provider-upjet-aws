@@ -1,0 +1,35 @@
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: TableReplica
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tablereplica
+  labels:
+    testing.upbound.io/example-name: example
+  name: tablereplica
+spec:
+  forProvider:
+    globalTableArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-2
+
+---
+
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dynamodb/v1beta1/tablereplica
+  labels:
+    testing.upbound.io/example-name: example
+  name: table
+spec:
+  forProvider:
+    attribute:
+      - name: myAttribute
+        type: S
+    hashKey: myAttribute
+    billingMode: PAY_PER_REQUEST
+    region: us-west-1
+    streamEnabled: true
+    streamViewType: NEW_AND_OLD_IMAGES

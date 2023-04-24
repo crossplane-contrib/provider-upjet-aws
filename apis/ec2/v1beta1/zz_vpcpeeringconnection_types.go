@@ -62,15 +62,35 @@ type VPCPeeringConnectionObservation_2 struct {
 	// the peering connection (a maximum of one).
 	Accepter []AccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
+	// Accept the peering (both VPCs need to be in the same AWS account and region).
+	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
 	// The ID of the VPC Peering Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The AWS account ID of the owner of the peer VPC.
+	// Defaults to the account ID the AWS provider is currently connected to.
+	PeerOwnerID *string `json:"peerOwnerId,omitempty" tf:"peer_owner_id,omitempty"`
+
+	// The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
+	// and use the aws_vpc_peering_connection_accepter to manage the accepter side.
+	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
+
+	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
 
 	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests
 	// the peering connection (a maximum of one).
 	Requester []RequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The ID of the requester VPC.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCPeeringConnectionParameters_2 struct {

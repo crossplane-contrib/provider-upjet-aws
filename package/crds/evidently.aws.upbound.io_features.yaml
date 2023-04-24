@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: features.evidently.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -220,8 +224,22 @@ spec:
                     type: array
                 required:
                 - region
-                - variations
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -393,6 +411,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: variations is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.variations)
           status:
             description: FeatureStatus defines the observed state of Feature.
             properties:
@@ -404,6 +425,26 @@ spec:
                   createdTime:
                     description: The date and time that the feature is created.
                     type: string
+                  defaultVariation:
+                    description: The name of the variation to use as the default variation.
+                      The default variation is served to users who are not allocated
+                      to any ongoing launches or experiments of this feature. This
+                      variation must also be listed in the variations structure. If
+                      you omit default_variation, the first variation listed in the
+                      variations structure is used as the default variation.
+                    type: string
+                  description:
+                    description: Specifies the description of the feature.
+                    type: string
+                  entityOverrides:
+                    additionalProperties:
+                      type: string
+                    description: Specify users that should always be served a specific
+                      variation of a feature. Each user is specified by a key-value
+                      pair . For each key, specify a user by entering their user ID,
+                      account ID, or some other identifier. For the value, specify
+                      the name of the variation that they are to be served.
+                    type: object
                   evaluationRules:
                     description: One or more blocks that define the evaluation rules
                       for the feature. Detailed below
@@ -419,6 +460,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  evaluationStrategy:
+                    description: Specify ALL_RULES to activate the traffic allocation
+                      specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION
+                      to serve the default variation to all users instead.
+                    type: string
                   id:
                     description: The feature name and the project name or arn separated
                       by a colon (:).
@@ -427,10 +473,19 @@ spec:
                     description: The date and time that the feature was most recently
                       updated.
                     type: string
+                  project:
+                    description: The name or ARN of the project that is to contain
+                      the new feature.
+                    type: string
                   status:
                     description: The current state of the feature. Valid values are
                       AVAILABLE and UPDATING.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -442,6 +497,46 @@ spec:
                     description: 'Defines the type of value used to define the different
                       feature variations. Valid Values: STRING, LONG, DOUBLE, BOOLEAN.'
                     type: string
+                  variations:
+                    description: One or more blocks that contain the configuration
+                      of the feature's different variations. Detailed below
+                    items:
+                      properties:
+                        name:
+                          description: The name of the variation. Minimum length of
+                            1. Maximum length of 127.
+                          type: string
+                        value:
+                          description: A block that specifies the value assigned to
+                            this variation. Detailed below
+                          items:
+                            properties:
+                              boolValue:
+                                description: If this feature uses the Boolean variation
+                                  type, this field contains the Boolean value of this
+                                  variation.
+                                type: string
+                              doubleValue:
+                                description: If this feature uses the double integer
+                                  variation type, this field contains the double integer
+                                  value of this variation.
+                                type: string
+                              longValue:
+                                description: If this feature uses the long variation
+                                  type, this field contains the long value of this
+                                  variation. Minimum value of -9007199254740991. Maximum
+                                  value of 9007199254740991.
+                                type: string
+                              stringValue:
+                                description: If this feature uses the string variation
+                                  type, this field contains the string value of this
+                                  variation. Minimum length of 0. Maximum length of
+                                  512.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -484,9 +579,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

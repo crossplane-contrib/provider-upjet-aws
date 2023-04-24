@@ -15,8 +15,14 @@ import (
 
 type EnvironmentObservation struct {
 
+	// AppConfig application ID. Must be between 4 and 7 characters in length.
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
 	// ARN of the AppConfig Environment.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Description of the environment. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// AppConfig environment ID.
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
@@ -24,9 +30,18 @@ type EnvironmentObservation struct {
 	// AppConfig environment ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Set of Amazon CloudWatch alarms to monitor during the deployment process. Maximum of 5. See Monitor below for more details.
+	Monitor []MonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
+
+	// Name for the environment. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// State of the environment. Possible values are READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK
 	// or ROLLED_BACK.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -57,8 +72,8 @@ type EnvironmentParameters struct {
 	Monitor []MonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
 	// Name for the environment. Must be between 1 and 64 characters in length.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -71,6 +86,12 @@ type EnvironmentParameters struct {
 }
 
 type MonitorObservation struct {
+
+	// ARN of the Amazon CloudWatch alarm.
+	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`
+
+	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
+	AlarmRoleArn *string `json:"alarmRoleArn,omitempty" tf:"alarm_role_arn,omitempty"`
 }
 
 type MonitorParameters struct {
@@ -128,8 +149,9 @@ type EnvironmentStatus struct {
 type Environment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EnvironmentSpec   `json:"spec"`
-	Status            EnvironmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   EnvironmentSpec   `json:"spec"`
+	Status EnvironmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: methods.apigateway.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -349,10 +353,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - authorization
-                - httpMethod
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -524,12 +541,72 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: authorization is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorization)
+            - message: httpMethod is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)
           status:
             description: MethodStatus defines the observed state of Method.
             properties:
               atProvider:
                 properties:
+                  apiKeyRequired:
+                    description: Specify if the method requires an API key
+                    type: boolean
+                  authorization:
+                    description: Type of authorization used for the method (NONE,
+                      CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
+                    type: string
+                  authorizationScopes:
+                    description: Authorization scopes used when the authorization
+                      is COGNITO_USER_POOLS
+                    items:
+                      type: string
+                    type: array
+                  authorizerId:
+                    description: Authorizer id to be used when the authorization is
+                      CUSTOM or COGNITO_USER_POOLS
+                    type: string
+                  httpMethod:
+                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
+                    type: string
                   id:
+                    type: string
+                  operationName:
+                    description: Function name that will be given to the method when
+                      generating an SDK through API Gateway. If omitted, API Gateway
+                      will generate a function name based on the resource path and
+                      HTTP verb.
+                    type: string
+                  requestModels:
+                    additionalProperties:
+                      type: string
+                    description: Map of the API models used for the request's content
+                      type where key is the content type (e.g., application/json)
+                      and value is either Error, Empty (built-in models) or aws_api_gateway_model's
+                      name.
+                    type: object
+                  requestParameters:
+                    additionalProperties:
+                      type: boolean
+                    description: 'Map of request parameters (from the path, query
+                      string and headers) that should be passed to the integration.
+                      The boolean value indicates whether the parameter is required
+                      (true) or optional (false). For example: request_parameters
+                      = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param"
+                      = true} would define that the header X-Some-Header and the query
+                      string some-query-param must be provided in the request.'
+                    type: object
+                  requestValidatorId:
+                    description: ID of a aws_api_gateway_request_validator
+                    type: string
+                  resourceId:
+                    description: API resource ID
+                    type: string
+                  restApiId:
+                    description: ID of the associated REST API
                     type: string
                 type: object
               conditions:
@@ -573,9 +650,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

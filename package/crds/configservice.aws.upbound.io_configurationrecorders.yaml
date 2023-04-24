@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: configurationrecorders.configservice.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -178,6 +182,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -358,6 +377,40 @@ spec:
                   id:
                     description: Name of the recorder
                     type: string
+                  recordingGroup:
+                    description: Recording group - see below.
+                    items:
+                      properties:
+                        allSupported:
+                          description: Specifies whether AWS Config records configuration
+                            changes for every supported type of regional resource
+                            (which includes any new type that will become supported
+                            in the future). Conflicts with resource_types. Defaults
+                            to true.
+                          type: boolean
+                        includeGlobalResourceTypes:
+                          description: Specifies whether AWS Config includes all supported
+                            types of global resources with the resources that it records.
+                            Requires all_supported = true. Conflicts with resource_types.
+                          type: boolean
+                        resourceTypes:
+                          description: A list that specifies the types of AWS resources
+                            for which AWS Config records configuration changes (for
+                            example, AWS::EC2::Instance or AWS::CloudTrail::Trail).
+                            See relevant part of AWS Docs for available types. In
+                            order to use this attribute, all_supported must be set
+                            to false.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  roleArn:
+                    description: Amazon Resource Name (ARN) of the IAM role. Used
+                      to make read or write requests to the delivery channel and to
+                      describe the AWS resources associated with the account. See
+                      AWS Docs for more details.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -400,9 +453,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

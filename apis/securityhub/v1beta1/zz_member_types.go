@@ -15,8 +15,17 @@ import (
 
 type MemberObservation struct {
 
+	// The ID of the member AWS account.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The email of the member AWS account.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	// The ID of the member AWS account (matches account_id).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Boolean whether to invite the account to Security Hub as a member. Defaults to false.
+	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
 
 	// The ID of the master Security Hub AWS account.
 	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
@@ -28,12 +37,12 @@ type MemberObservation struct {
 type MemberParameters struct {
 
 	// The ID of the member AWS account.
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// The email of the member AWS account.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Boolean whether to invite the account to Security Hub as a member. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -69,8 +78,10 @@ type MemberStatus struct {
 type Member struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MemberSpec   `json:"spec"`
-	Status            MemberStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountId)",message="accountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	Spec   MemberSpec   `json:"spec"`
+	Status MemberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

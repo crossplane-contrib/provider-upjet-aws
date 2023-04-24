@@ -14,7 +14,44 @@ import (
 )
 
 type MethodObservation struct {
+
+	// Specify if the method requires an API key
+	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
+
+	// Type of authorization used for the method (NONE, CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
+	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
+
+	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
+	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
+
+	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
+	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
+
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
+	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+
+	// Map of the API models used for the request's content type
+	// where key is the content type (e.g., application/json)
+	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
+
+	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
+	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
+
+	// ID of a aws_api_gateway_request_validator
+	RequestValidatorID *string `json:"requestValidatorId,omitempty" tf:"request_validator_id,omitempty"`
+
+	// API resource ID
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type MethodParameters struct {
@@ -24,8 +61,8 @@ type MethodParameters struct {
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Type of authorization used for the method (NONE, CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
-	// +kubebuilder:validation:Required
-	Authorization *string `json:"authorization" tf:"authorization,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
 	// +kubebuilder:validation:Optional
@@ -46,8 +83,8 @@ type MethodParameters struct {
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
-	// +kubebuilder:validation:Required
-	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
 	// +kubebuilder:validation:Optional
@@ -126,8 +163,10 @@ type MethodStatus struct {
 type Method struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodSpec   `json:"spec"`
-	Status            MethodStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorization)",message="authorization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
+	Spec   MethodSpec   `json:"spec"`
+	Status MethodStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

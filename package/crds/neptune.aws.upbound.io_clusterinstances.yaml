@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: clusterinstances.neptune.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -351,9 +355,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - instanceClass
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -525,6 +543,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: instanceClass is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceClass)
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:
@@ -534,8 +555,26 @@ spec:
                     description: The hostname of the instance. See also endpoint and
                       port.
                     type: string
+                  applyImmediately:
+                    description: Specifies whether any instance modifications are
+                      applied immediately, or during the next maintenance window.
+                      Default isfalse.
+                    type: boolean
                   arn:
                     description: Amazon Resource Name (ARN) of neptune instance
+                    type: string
+                  autoMinorVersionUpgrade:
+                    description: Indicates that minor engine upgrades will be applied
+                      automatically to the instance during the maintenance window.
+                      Default is true.
+                    type: boolean
+                  availabilityZone:
+                    description: The EC2 Availability Zone that the neptune instance
+                      is created in.
+                    type: string
+                  clusterIdentifier:
+                    description: The identifier of the aws_neptune_cluster in which
+                      to launch this instance.
                     type: string
                   dbiResourceId:
                     description: The region-unique, immutable identifier for the neptune
@@ -544,16 +583,61 @@ spec:
                   endpoint:
                     description: The connection endpoint in address:port format.
                     type: string
+                  engine:
+                    description: 'The name of the database engine to be used for the
+                      neptune instance. Defaults to neptune. Valid Values: neptune.'
+                    type: string
+                  engineVersion:
+                    description: The neptune engine version.
+                    type: string
                   id:
                     description: The Instance identifier
+                    type: string
+                  instanceClass:
+                    description: The instance class to use.
                     type: string
                   kmsKeyArn:
                     description: The ARN for the KMS encryption key if one is set
                       to the neptune cluster.
                     type: string
+                  neptuneParameterGroupName:
+                    description: The name of the neptune parameter group to associate
+                      with this instance.
+                    type: string
+                  neptuneSubnetGroupName:
+                    description: 'A subnet group to associate with this neptune instance.
+                      NOTE: This must match the neptune_subnet_group_name of the attached
+                      aws_neptune_cluster.'
+                    type: string
+                  port:
+                    description: The port on which the DB accepts connections. Defaults
+                      to 8182.
+                    type: number
+                  preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled. Eg: "04:00-09:00"'
+                    type: string
+                  preferredMaintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00".'
+                    type: string
+                  promotionTier:
+                    description: Default 0. Failover Priority setting on instance
+                      level. The reader who has lower tier has higher priority to
+                      get promoter to writer.
+                    type: number
+                  publiclyAccessible:
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
+                    type: boolean
                   storageEncrypted:
                     description: Specifies whether the neptune cluster is encrypted.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -607,9 +691,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

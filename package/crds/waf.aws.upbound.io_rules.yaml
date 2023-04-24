@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: rules.waf.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -186,10 +190,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - metricName
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -361,6 +378,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: metricName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metricName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: RuleStatus defines the observed state of Rule.
             properties:
@@ -372,6 +394,44 @@ spec:
                   id:
                     description: The ID of the WAF rule.
                     type: string
+                  metricName:
+                    description: The name or description for the Amazon CloudWatch
+                      metric of this rule. The name can contain only alphanumeric
+                      characters (A-Z, a-z, 0-9); the name can't contain whitespace.
+                    type: string
+                  name:
+                    description: The name or description of the rule.
+                    type: string
+                  predicates:
+                    description: The objects to include in a rule (documented below).
+                    items:
+                      properties:
+                        dataId:
+                          description: A unique identifier for a predicate in the
+                            rule, such as Byte Match Set ID or IPSet ID.
+                          type: string
+                        negated:
+                          description: Set this to false if you want to allow, block,
+                            or count requests based on the settings in the specified
+                            waf_byte_match_set, waf_ipset, aws_waf_size_constraint_set,
+                            aws_waf_sql_injection_match_set or aws_waf_xss_match_set.
+                            For example, if an IPSet includes the IP address 192.0.2.44,
+                            AWS WAF will allow or block requests based on that IP
+                            address. If set to true, AWS WAF will allow, block, or
+                            count requests based on all IP addresses except 192.0.2.44.
+                          type: boolean
+                        type:
+                          description: 'The type of predicate in a rule. Valid values:
+                            ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint,
+                            SqlInjectionMatch, or XssMatch.'
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -421,9 +481,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

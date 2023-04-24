@@ -14,14 +14,52 @@ import (
 )
 
 type PermissionObservation struct {
+
+	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Event Source Token to validate.  Used with Alexa Skills.
+	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
+
+	// Name of the Lambda function whose resource policy you are updating
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
+	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
+	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
+
+	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
+
+	// When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to.
+	// Without this, any resource from principal will be granted permission – even if that resource is from another account.
+	// For S3, this should be the ARN of the S3 Bucket.
+	// For EventBridge events, this should be the ARN of the EventBridge Rule.
+	// For API Gateway, this should be the ARN of the API, as described here.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+
+	// A unique statement identifier.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// A statement identifier prefix. Conflicts with statement_id.
+	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }
 
 type PermissionParameters struct {
 
 	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The Event Source Token to validate.  Used with Alexa Skills.
 	// +kubebuilder:validation:Optional
@@ -45,8 +83,8 @@ type PermissionParameters struct {
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
 	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
-	// +kubebuilder:validation:Required
-	Principal *string `json:"principal" tf:"principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
 	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
 	// +kubebuilder:validation:Optional
@@ -115,8 +153,10 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PermissionSpec   `json:"spec"`
-	Status            PermissionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principal)",message="principal is a required parameter"
+	Spec   PermissionSpec   `json:"spec"`
+	Status PermissionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

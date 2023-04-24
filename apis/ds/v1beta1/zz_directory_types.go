@@ -18,6 +18,18 @@ type ConnectSettingsObservation struct {
 
 	// The IP addresses of the AD Connector servers.
 	ConnectIps []*string `json:"connectIps,omitempty" tf:"connect_ips,omitempty"`
+
+	// The DNS IP addresses of the domain to connect to.
+	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
+
+	// The username corresponding to the password provided.
+	CustomerUsername *string `json:"customerUsername,omitempty" tf:"customer_username,omitempty"`
+
+	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// The identifier of the VPC that the directory is in.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type ConnectSettingsParameters struct {
@@ -31,8 +43,17 @@ type ConnectSettingsParameters struct {
 	CustomerUsername *string `json:"customerUsername" tf:"customer_username,omitempty"`
 
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
-	// +kubebuilder:validation:Required
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +kubebuilder:validation:Optional
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// The identifier of the VPC that the directory is in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
@@ -54,24 +75,52 @@ type DirectoryObservation struct {
 	// The access URL for the directory, such as http://alias.awsapps.com.
 	AccessURL *string `json:"accessUrl,omitempty" tf:"access_url,omitempty"`
 
+	// The alias for the directory (must be unique amongst all aliases in AWS). Required for enable_sso.
+	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
 	// Connector related information about the directory. Fields documented below.
-	// +kubebuilder:validation:Optional
 	ConnectSettings []ConnectSettingsObservation `json:"connectSettings,omitempty" tf:"connect_settings,omitempty"`
 
 	// A list of IP addresses of the DNS servers for the directory or connector.
 	DNSIPAddresses []*string `json:"dnsIpAddresses,omitempty" tf:"dns_ip_addresses,omitempty"`
 
+	// A textual description for the directory.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+
+	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
+	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// Whether to enable single-sign on for the directory. Requires alias. Defaults to false.
+	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
+
 	// The directory identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The fully qualified name for the directory, such as corp.example.com
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the security group created by the directory.
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
+	// The short name of the directory, such as CORP.
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
+
+	// (For SimpleAD and ADConnector types) The size of the directory (Small or Large are accepted values). Large by default.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// The directory type (SimpleAD, ADConnector or MicrosoftAD are accepted values). Defaults to SimpleAD.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
 	// VPC related information about the directory. Fields documented below.
-	// +kubebuilder:validation:Optional
 	VPCSettings []VPCSettingsObservation `json:"vpcSettings,omitempty" tf:"vpc_settings,omitempty"`
 }
 
@@ -102,11 +151,11 @@ type DirectoryParameters struct {
 	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
 
 	// The fully qualified name for the directory, such as corp.example.com
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The password for the directory administrator or connector user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -137,6 +186,12 @@ type DirectoryParameters struct {
 
 type VPCSettingsObservation struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// The identifier of the VPC that the directory is in.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCSettingsParameters struct {
@@ -193,8 +248,10 @@ type DirectoryStatus struct {
 type Directory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DirectorySpec   `json:"spec"`
-	Status            DirectoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	Spec   DirectorySpec   `json:"spec"`
+	Status DirectoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

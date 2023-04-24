@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: trails.cloudtrail.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -483,6 +487,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -659,15 +678,199 @@ spec:
             properties:
               atProvider:
                 properties:
+                  advancedEventSelector:
+                    description: Specifies an advanced event selector for enabling
+                      data event logging. Fields documented below. Conflicts with
+                      event_selector.
+                    items:
+                      properties:
+                        fieldSelector:
+                          description: Specifies the selector statements in an advanced
+                            event selector. Fields documented below.
+                          items:
+                            properties:
+                              endsWith:
+                                description: A list of values that includes events
+                                  that match the last few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              equals:
+                                description: A list of values that includes events
+                                  that match the exact value of the event record field
+                                  specified as the value of field. This is the only
+                                  valid operator that you can use with the readOnly,
+                                  eventCategory, and resources.type fields.
+                                items:
+                                  type: string
+                                type: array
+                              field:
+                                description: 'Field in an event record on which to
+                                  filter events to be logged. You can specify only
+                                  the following values: readOnly, eventSource, eventName,
+                                  eventCategory, resources.type, resources.ARN.'
+                                type: string
+                              notEndsWith:
+                                description: A list of values that excludes events
+                                  that match the last few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              notEquals:
+                                description: A list of values that excludes events
+                                  that match the exact value of the event record field
+                                  specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              notStartsWith:
+                                description: A list of values that excludes events
+                                  that match the first few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                              startsWith:
+                                description: A list of values that includes events
+                                  that match the first few characters of the event
+                                  record field specified as the value of field.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Name of the trail.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: ARN of the trail.
                     type: string
+                  cloudWatchLogsGroupArn:
+                    description: Log group name using an ARN that represents the log
+                      group to which CloudTrail logs will be delivered. Note that
+                      CloudTrail requires the Log Stream wildcard.
+                    type: string
+                  cloudWatchLogsRoleArn:
+                    description: Role for the CloudWatch Logs endpoint to assume to
+                      write to a user’s log group.
+                    type: string
+                  enableLogFileValidation:
+                    description: Whether log file integrity validation is enabled.
+                      Defaults to false.
+                    type: boolean
+                  enableLogging:
+                    description: Enables logging for the trail. Defaults to true.
+                      Setting this to false will pause logging.
+                    type: boolean
+                  eventSelector:
+                    description: Specifies an event selector for enabling data event
+                      logging. Fields documented below. Please note the CloudTrail
+                      limits when configuring these. Conflicts with advanced_event_selector.
+                    items:
+                      properties:
+                        dataResource:
+                          description: Configuration block for data events. See details
+                            below.
+                          items:
+                            properties:
+                              type:
+                                description: 'Resource type in which you want to log
+                                  data events. You can specify only the following
+                                  value: "AWS::S3::Object", "AWS::Lambda::Function"
+                                  and "AWS::DynamoDB::Table".'
+                                type: string
+                              values:
+                                description: List of ARN strings or partial ARN strings
+                                  to specify selectors for data audit events over
+                                  data resources. ARN list is specific to single-valued
+                                  type. For example, arn:aws:s3:::<bucket name>/ for
+                                  all objects in a bucket, arn:aws:s3:::<bucket name>/key
+                                  for specific objects, arn:aws:lambda for all lambda
+                                  events within an account, arn:aws:lambda:<region>:<account
+                                  number>:function:<function name> for a specific
+                                  Lambda function, arn:aws:dynamodb for all DDB events
+                                  for all tables within an account, or arn:aws:dynamodb:<region>:<account
+                                  number>:table/<table name> for a specific DynamoDB
+                                  table.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        excludeManagementEventSources:
+                          description: 'A set of event sources to exclude. Valid values
+                            include: kms.amazonaws.com and rdsdata.amazonaws.com.
+                            include_management_events must be set totrue to allow
+                            this.'
+                          items:
+                            type: string
+                          type: array
+                        includeManagementEvents:
+                          description: Whether to include management events for your
+                            trail. Defaults to true.
+                          type: boolean
+                        readWriteType:
+                          description: Type of events to log. Valid values are ReadOnly,
+                            WriteOnly, All. Default value is All.
+                          type: string
+                      type: object
+                    type: array
                   homeRegion:
                     description: Region in which the trail was created.
                     type: string
                   id:
                     description: Name of the trail.
                     type: string
+                  includeGlobalServiceEvents:
+                    description: Whether the trail is publishing events from global
+                      services such as IAM to the log files. Defaults to true.
+                    type: boolean
+                  insightSelector:
+                    description: Configuration block for identifying unusual operational
+                      activity. See details below.
+                    items:
+                      properties:
+                        insightType:
+                          description: 'Type of insights to log on a trail. Valid
+                            values are: ApiCallRateInsight and ApiErrorRateInsight.'
+                          type: string
+                      type: object
+                    type: array
+                  isMultiRegionTrail:
+                    description: Whether the trail is created in the current region
+                      or in all regions. Defaults to false.
+                    type: boolean
+                  isOrganizationTrail:
+                    description: Whether the trail is an AWS Organizations trail.
+                      Organization trails log events for the master account and all
+                      member accounts. Can only be created in the organization master
+                      account. Defaults to false.
+                    type: boolean
+                  kmsKeyId:
+                    description: KMS key ARN to use to encrypt the logs delivered
+                      by CloudTrail.
+                    type: string
+                  s3BucketName:
+                    description: Name of the S3 bucket designated for publishing log
+                      files.
+                    type: string
+                  s3KeyPrefix:
+                    description: S3 key prefix that follows the name of the bucket
+                      you have designated for log file delivery.
+                    type: string
+                  snsTopicName:
+                    description: Name of the Amazon SNS topic defined for notification
+                      of log file delivery.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -716,9 +919,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

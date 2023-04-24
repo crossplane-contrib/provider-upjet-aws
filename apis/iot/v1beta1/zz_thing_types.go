@@ -18,10 +18,16 @@ type ThingObservation struct {
 	// The ARN of the thing.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Map of attributes of the thing.
+	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
+
 	// The default client ID.
 	DefaultClientID *string `json:"defaultClientId,omitempty" tf:"default_client_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The thing type name.
+	ThingTypeName *string `json:"thingTypeName,omitempty" tf:"thing_type_name,omitempty"`
 
 	// The current version of the thing record in the registry.
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`

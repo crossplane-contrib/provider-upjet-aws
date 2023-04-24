@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: users.connect.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -335,11 +339,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
-                - phoneConfig
                 - region
-                - securityProfileIds
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -511,6 +527,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: phoneConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.phoneConfig)
+            - message: securityProfileIds is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.securityProfileIds)
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -519,10 +542,107 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the user.
                     type: string
+                  directoryUserId:
+                    description: The identifier of the user account in the directory
+                      used for identity management. If Amazon Connect cannot access
+                      the directory, you can specify this identifier to authenticate
+                      users. If you include the identifier, we assume that Amazon
+                      Connect cannot access the directory. Otherwise, the identity
+                      information is used to authenticate users from your directory.
+                      This parameter is required if you are using an existing directory
+                      for identity management in Amazon Connect when Amazon Connect
+                      cannot access your directory to authenticate users. If you are
+                      using SAML for identity management and include this parameter,
+                      an error is returned.
+                    type: string
+                  hierarchyGroupId:
+                    description: The identifier of the hierarchy group for the user.
+                    type: string
                   id:
                     description: The identifier of the hosting Amazon Connect Instance
                       and identifier of the user separated by a colon (:).
                     type: string
+                  identityInfo:
+                    description: A block that contains information about the identity
+                      of the user. Documented below.
+                    items:
+                      properties:
+                        email:
+                          description: The email address. If you are using SAML for
+                            identity management and include this parameter, an error
+                            is returned. Note that updates to the email is supported.
+                            From the UpdateUserIdentityInfo API documentation it is
+                            strongly recommended to limit who has the ability to invoke
+                            UpdateUserIdentityInfo. Someone with that ability can
+                            change the login credentials of other users by changing
+                            their email address. This poses a security risk to your
+                            organization. They can change the email address of a user
+                            to the attacker's email address, and then reset the password
+                            through email. For more information, see Best Practices
+                            for Security Profiles in the Amazon Connect Administrator
+                            Guide.
+                          type: string
+                        firstName:
+                          description: The first name. This is required if you are
+                            using Amazon Connect or SAML for identity management.
+                            Minimum length of 1. Maximum length of 100.
+                          type: string
+                        lastName:
+                          description: The last name. This is required if you are
+                            using Amazon Connect or SAML for identity management.
+                            Minimum length of 1. Maximum length of 100.
+                          type: string
+                      type: object
+                    type: array
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  name:
+                    description: The user name for the account. For instances not
+                      using SAML for identity management, the user name can include
+                      up to 20 characters. If you are using SAML for identity management,
+                      the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
+                    type: string
+                  phoneConfig:
+                    description: A block that contains information about the phone
+                      settings for the user. Documented below.
+                    items:
+                      properties:
+                        afterContactWorkTimeLimit:
+                          description: The After Call Work (ACW) timeout setting,
+                            in seconds. Minimum value of 0.
+                          type: number
+                        autoAccept:
+                          description: When Auto-Accept Call is enabled for an available
+                            agent, the agent connects to contacts automatically.
+                          type: boolean
+                        deskPhoneNumber:
+                          description: The phone number for the user's desk phone.
+                            Required if phone_type is set as DESK_PHONE.
+                          type: string
+                        phoneType:
+                          description: The phone type. Valid values are DESK_PHONE
+                            and SOFT_PHONE.
+                          type: string
+                      type: object
+                    type: array
+                  routingProfileId:
+                    description: The identifier of the routing profile for the user.
+                    type: string
+                  securityProfileIds:
+                    description: A list of identifiers for the security profiles for
+                      the user. Specify a minimum of 1 and maximum of 10 security
+                      profile ids. For more information, see Best Practices for Security
+                      Profiles in the Amazon Connect Administrator Guide.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -575,9 +695,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

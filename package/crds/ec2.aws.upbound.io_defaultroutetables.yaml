@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: defaultroutetables.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -362,6 +366,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -541,12 +560,74 @@ spec:
                   arn:
                     description: The ARN of the route table.
                     type: string
+                  defaultRouteTableId:
+                    description: ID of the default route table.
+                    type: string
                   id:
                     description: ID of the route table.
                     type: string
                   ownerId:
                     description: ID of the AWS account that owns the route table.
                     type: string
+                  propagatingVgws:
+                    description: List of virtual gateways for propagation.
+                    items:
+                      type: string
+                    type: array
+                  route:
+                    description: Configuration block of routes. Detailed below. This
+                      argument is processed in attribute-as-blocks mode. This means
+                      that omitting this argument is interpreted as ignoring any existing
+                      routes. To remove all managed routes an empty list should be
+                      specified. See the example above.
+                    items:
+                      properties:
+                        cidrBlock:
+                          description: The CIDR block of the route.
+                          type: string
+                        coreNetworkArn:
+                          description: The Amazon Resource Name (ARN) of a core network.
+                          type: string
+                        destinationPrefixListId:
+                          description: The ID of a managed prefix list destination
+                            of the route.
+                          type: string
+                        egressOnlyGatewayId:
+                          description: Identifier of a VPC Egress Only Internet Gateway.
+                          type: string
+                        gatewayId:
+                          description: Identifier of a VPC internet gateway or a virtual
+                            private gateway.
+                          type: string
+                        instanceId:
+                          description: Identifier of an EC2 instance.
+                          type: string
+                        ipv6CidrBlock:
+                          description: The Ipv6 CIDR block of the route
+                          type: string
+                        natGatewayId:
+                          description: Identifier of a VPC NAT gateway.
+                          type: string
+                        networkInterfaceId:
+                          description: Identifier of an EC2 network interface.
+                          type: string
+                        transitGatewayId:
+                          description: Identifier of an EC2 Transit Gateway.
+                          type: string
+                        vpcEndpointId:
+                          description: Identifier of a VPC Endpoint. This route must
+                            be removed prior to VPC Endpoint deletion.
+                          type: string
+                        vpcPeeringConnectionId:
+                          description: Identifier of a VPC peering connection.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -599,9 +680,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

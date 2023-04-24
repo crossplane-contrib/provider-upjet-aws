@@ -14,6 +14,21 @@ import (
 )
 
 type DNSTargetResourceObservation struct {
+
+	// DNS Name that acts as the ingress point to a portion of application.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
+	HostedZoneArn *string `json:"hostedZoneArn,omitempty" tf:"hosted_zone_arn,omitempty"`
+
+	// Route53 record set id to uniquely identify a record given a domain_name and a record_type.
+	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
+
+	// Type of DNS Record of target resource.
+	RecordType *string `json:"recordType,omitempty" tf:"record_type,omitempty"`
+
+	// Target resource the R53 record specified with the above params points to.
+	TargetResource []TargetResourceObservation `json:"targetResource,omitempty" tf:"target_resource,omitempty"`
 }
 
 type DNSTargetResourceParameters struct {
@@ -40,6 +55,9 @@ type DNSTargetResourceParameters struct {
 }
 
 type NlbResourceObservation struct {
+
+	// NLB resource ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type NlbResourceParameters struct {
@@ -50,6 +68,12 @@ type NlbResourceParameters struct {
 }
 
 type R53ResourceObservation struct {
+
+	// Domain name that is targeted.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Resource record set ID that is targeted.
+	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
 }
 
 type R53ResourceParameters struct {
@@ -70,9 +94,14 @@ type ResourceSetObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Type of the resources in the resource set.
+	ResourceSetType *string `json:"resourceSetType,omitempty" tf:"resource_set_type,omitempty"`
+
 	// List of resources to add to this resource set. See below.
-	// +kubebuilder:validation:Required
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -86,12 +115,12 @@ type ResourceSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Type of the resources in the resource set.
-	// +kubebuilder:validation:Required
-	ResourceSetType *string `json:"resourceSetType" tf:"resource_set_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceSetType *string `json:"resourceSetType,omitempty" tf:"resource_set_type,omitempty"`
 
 	// List of resources to add to this resource set. See below.
-	// +kubebuilder:validation:Required
-	Resources []ResourcesParameters `json:"resources" tf:"resources,omitempty"`
+	// +kubebuilder:validation:Optional
+	Resources []ResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -102,6 +131,15 @@ type ResourcesObservation struct {
 
 	// Unique identified for DNS Target Resources, use for readiness checks.
 	ComponentID *string `json:"componentId,omitempty" tf:"component_id,omitempty"`
+
+	// Component for DNS/Routing Control Readiness Checks.
+	DNSTargetResource []DNSTargetResourceObservation `json:"dnsTargetResource,omitempty" tf:"dns_target_resource,omitempty"`
+
+	// Recovery group ARN or cell ARN that contains this resource set.
+	ReadinessScopes []*string `json:"readinessScopes,omitempty" tf:"readiness_scopes,omitempty"`
+
+	// ARN of the resource.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type ResourcesParameters struct {
@@ -130,6 +168,12 @@ type ResourcesParameters struct {
 }
 
 type TargetResourceObservation struct {
+
+	// NLB resource a DNS Target Resource points to. Required if r53_resource is not set.
+	NlbResource []NlbResourceObservation `json:"nlbResource,omitempty" tf:"nlb_resource,omitempty"`
+
+	// Route53 resource a DNS Target Resource record points to.
+	R53Resource []R53ResourceObservation `json:"r53Resource,omitempty" tf:"r53_resource,omitempty"`
 }
 
 type TargetResourceParameters struct {
@@ -167,8 +211,10 @@ type ResourceSetStatus struct {
 type ResourceSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSetSpec   `json:"spec"`
-	Status            ResourceSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceSetType)",message="resourceSetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resources)",message="resources is a required parameter"
+	Spec   ResourceSetSpec   `json:"spec"`
+	Status ResourceSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

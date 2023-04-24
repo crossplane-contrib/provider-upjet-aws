@@ -15,15 +15,33 @@ import (
 
 type APICacheObservation struct {
 
+	// Caching behavior. Valid values are FULL_REQUEST_CACHING and PER_RESOLVER_CACHING.
+	APICachingBehavior *string `json:"apiCachingBehavior,omitempty" tf:"api_caching_behavior,omitempty"`
+
+	// GraphQL API ID.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// At-rest encryption flag for cache. You cannot update this setting after creation.
+	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
+
 	// AppSync API ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// TTL in seconds for cache entries.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// Transit encryption flag when connecting to cache. You cannot update this setting after creation.
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
+
+	// Cache instance type. Valid values are SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type APICacheParameters struct {
 
 	// Caching behavior. Valid values are FULL_REQUEST_CACHING and PER_RESOLVER_CACHING.
-	// +kubebuilder:validation:Required
-	APICachingBehavior *string `json:"apiCachingBehavior" tf:"api_caching_behavior,omitempty"`
+	// +kubebuilder:validation:Optional
+	APICachingBehavior *string `json:"apiCachingBehavior,omitempty" tf:"api_caching_behavior,omitempty"`
 
 	// GraphQL API ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
@@ -49,16 +67,16 @@ type APICacheParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// TTL in seconds for cache entries.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// Transit encryption flag when connecting to cache. You cannot update this setting after creation.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
 	// Cache instance type. Valid values are SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // APICacheSpec defines the desired state of APICache
@@ -85,8 +103,11 @@ type APICacheStatus struct {
 type APICache struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APICacheSpec   `json:"spec"`
-	Status            APICacheStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.apiCachingBehavior)",message="apiCachingBehavior is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   APICacheSpec   `json:"spec"`
+	Status APICacheStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,10 +15,28 @@ import (
 
 type ApplicationVersionObservation struct {
 
+	// Name of the Beanstalk Application the version is associated with.
+	Application *string `json:"application,omitempty" tf:"application,omitempty"`
+
 	// ARN assigned by AWS for this Elastic Beanstalk Application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// S3 bucket that contains the Application Version source bundle.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Short description of the Application Version.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// On delete, force an Application Version to be deleted when it may be in use by multiple Elastic Beanstalk Environments.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// S3 object that is the Application Version source bundle.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -27,8 +45,8 @@ type ApplicationVersionObservation struct {
 type ApplicationVersionParameters struct {
 
 	// Name of the Beanstalk Application the version is associated with.
-	// +kubebuilder:validation:Required
-	Application *string `json:"application" tf:"application,omitempty"`
+	// +kubebuilder:validation:Optional
+	Application *string `json:"application,omitempty" tf:"application,omitempty"`
 
 	// S3 bucket that contains the Application Version source bundle.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
@@ -100,8 +118,9 @@ type ApplicationVersionStatus struct {
 type ApplicationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationVersionSpec   `json:"spec"`
-	Status            ApplicationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.application)",message="application is a required parameter"
+	Spec   ApplicationVersionSpec   `json:"spec"`
+	Status ApplicationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

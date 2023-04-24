@@ -14,6 +14,15 @@ import (
 )
 
 type AlarmConfigurationObservation struct {
+
+	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from CloudWatch. The default value is false.
+	IgnorePollAlarmFailure *bool `json:"ignorePollAlarmFailure,omitempty" tf:"ignore_poll_alarm_failure,omitempty"`
 }
 
 type AlarmConfigurationParameters struct {
@@ -32,6 +41,12 @@ type AlarmConfigurationParameters struct {
 }
 
 type AutoRollbackConfigurationObservation struct {
+
+	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
 type AutoRollbackConfigurationParameters struct {
@@ -46,6 +61,15 @@ type AutoRollbackConfigurationParameters struct {
 }
 
 type BlueGreenDeploymentConfigObservation struct {
+
+	// Information about the action to take when newly provisioned instances are ready to receive traffic in a blue/green deployment (documented below).
+	DeploymentReadyOption []DeploymentReadyOptionObservation `json:"deploymentReadyOption,omitempty" tf:"deployment_ready_option,omitempty"`
+
+	// Information about how instances are provisioned for a replacement environment in a blue/green deployment (documented below).
+	GreenFleetProvisioningOption []GreenFleetProvisioningOptionObservation `json:"greenFleetProvisioningOption,omitempty" tf:"green_fleet_provisioning_option,omitempty"`
+
+	// Information about whether to terminate instances in the original fleet during a blue/green deployment (documented below).
+	TerminateBlueInstancesOnDeploymentSuccess []TerminateBlueInstancesOnDeploymentSuccessObservation `json:"terminateBlueInstancesOnDeploymentSuccess,omitempty" tf:"terminate_blue_instances_on_deployment_success,omitempty"`
 }
 
 type BlueGreenDeploymentConfigParameters struct {
@@ -65,20 +89,65 @@ type BlueGreenDeploymentConfigParameters struct {
 
 type DeploymentGroupObservation struct {
 
+	// Configuration block of alarms associated with the deployment group (documented below).
+	AlarmConfiguration []AlarmConfigurationObservation `json:"alarmConfiguration,omitempty" tf:"alarm_configuration,omitempty"`
+
+	// The name of the application.
+	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
+
 	// The ARN of the CodeDeploy deployment group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Configuration block of the automatic rollback configuration associated with the deployment group (documented below).
+	AutoRollbackConfiguration []AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
+
+	// Autoscaling groups associated with the deployment group.
+	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
+
+	// Configuration block of the blue/green deployment options for a deployment group (documented below).
+	BlueGreenDeploymentConfig []BlueGreenDeploymentConfigObservation `json:"blueGreenDeploymentConfig,omitempty" tf:"blue_green_deployment_config,omitempty"`
 
 	// The destination platform type for the deployment.
 	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
 
+	// The name of the group's deployment config. The default is "CodeDeployDefault.OneAtATime".
+	DeploymentConfigName *string `json:"deploymentConfigName,omitempty" tf:"deployment_config_name,omitempty"`
+
 	// The ID of the CodeDeploy deployment group.
 	DeploymentGroupID *string `json:"deploymentGroupId,omitempty" tf:"deployment_group_id,omitempty"`
+
+	// Configuration block of the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer (documented below).
+	DeploymentStyle []DeploymentStyleObservation `json:"deploymentStyle,omitempty" tf:"deployment_style,omitempty"`
+
+	// Tag filters associated with the deployment group. See the AWS docs for details.
+	EC2TagFilter []EC2TagFilterObservation `json:"ec2TagFilter,omitempty" tf:"ec2_tag_filter,omitempty"`
+
+	// Configuration block(s) of Tag filters associated with the deployment group, which are also referred to as tag groups (documented below). See the AWS docs for details.
+	EC2TagSet []EC2TagSetObservation `json:"ec2TagSet,omitempty" tf:"ec2_tag_set,omitempty"`
+
+	// Configuration block(s) of the ECS services for a deployment group (documented below).
+	EcsService []EcsServiceObservation `json:"ecsService,omitempty" tf:"ecs_service,omitempty"`
 
 	// Application name and deployment group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Single configuration block of the load balancer to use in a blue/green deployment (documented below).
+	LoadBalancerInfo []LoadBalancerInfoObservation `json:"loadBalancerInfo,omitempty" tf:"load_balancer_info,omitempty"`
+
+	// On premise tag filters associated with the group. See the AWS docs for details.
+	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterObservation `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
+
+	// The service role ARN that allows deployments.
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block(s) of the triggers for the deployment group (documented below).
+	TriggerConfiguration []TriggerConfigurationObservation `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
 }
 
 type DeploymentGroupParameters struct {
@@ -169,6 +238,12 @@ type DeploymentGroupParameters struct {
 }
 
 type DeploymentReadyOptionObservation struct {
+
+	// When to reroute traffic from an original environment to a replacement environment in a blue/green deployment.
+	ActionOnTimeout *string `json:"actionOnTimeout,omitempty" tf:"action_on_timeout,omitempty"`
+
+	// The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for action_on_timeout.
+	WaitTimeInMinutes *float64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
 }
 
 type DeploymentReadyOptionParameters struct {
@@ -183,6 +258,12 @@ type DeploymentReadyOptionParameters struct {
 }
 
 type DeploymentStyleObservation struct {
+
+	// Indicates whether to route deployment traffic behind a load balancer. Valid Values are WITH_TRAFFIC_CONTROL or WITHOUT_TRAFFIC_CONTROL. Default is WITHOUT_TRAFFIC_CONTROL.
+	DeploymentOption *string `json:"deploymentOption,omitempty" tf:"deployment_option,omitempty"`
+
+	// Indicates whether to run an in-place deployment or a blue/green deployment. Valid Values are IN_PLACE or BLUE_GREEN. Default is IN_PLACE.
+	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 }
 
 type DeploymentStyleParameters struct {
@@ -197,6 +278,15 @@ type DeploymentStyleParameters struct {
 }
 
 type EC2TagFilterObservation struct {
+
+	// The key of the tag filter.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The type of the tag filter, either KEY_ONLY, VALUE_ONLY, or KEY_AND_VALUE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of the tag filter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EC2TagFilterParameters struct {
@@ -215,6 +305,15 @@ type EC2TagFilterParameters struct {
 }
 
 type EC2TagSetEC2TagFilterObservation struct {
+
+	// The key of the tag filter.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The type of the tag filter, either KEY_ONLY, VALUE_ONLY, or KEY_AND_VALUE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of the tag filter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EC2TagSetEC2TagFilterParameters struct {
@@ -233,6 +332,9 @@ type EC2TagSetEC2TagFilterParameters struct {
 }
 
 type EC2TagSetObservation struct {
+
+	// Tag filters associated with the deployment group. See the AWS docs for details.
+	EC2TagFilter []EC2TagSetEC2TagFilterObservation `json:"ec2TagFilter,omitempty" tf:"ec2_tag_filter,omitempty"`
 }
 
 type EC2TagSetParameters struct {
@@ -243,6 +345,9 @@ type EC2TagSetParameters struct {
 }
 
 type ELBInfoObservation struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ELBInfoParameters struct {
@@ -262,6 +367,12 @@ type ELBInfoParameters struct {
 }
 
 type EcsServiceObservation struct {
+
+	// The name of the ECS cluster.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// The name of the ECS service.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 }
 
 type EcsServiceParameters struct {
@@ -294,6 +405,9 @@ type EcsServiceParameters struct {
 }
 
 type GreenFleetProvisioningOptionObservation struct {
+
+	// The method used to add instances to a replacement environment.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 }
 
 type GreenFleetProvisioningOptionParameters struct {
@@ -304,6 +418,15 @@ type GreenFleetProvisioningOptionParameters struct {
 }
 
 type LoadBalancerInfoObservation struct {
+
+	// The Classic Elastic Load Balancer to use in a deployment. Conflicts with target_group_info and target_group_pair_info.
+	ELBInfo []ELBInfoObservation `json:"elbInfo,omitempty" tf:"elb_info,omitempty"`
+
+	// The (Application/Network Load Balancer) target group to use in a deployment. Conflicts with elb_info and target_group_pair_info.
+	TargetGroupInfo []TargetGroupInfoObservation `json:"targetGroupInfo,omitempty" tf:"target_group_info,omitempty"`
+
+	// The (Application/Network Load Balancer) target group pair to use in a deployment. Conflicts with elb_info and target_group_info.
+	TargetGroupPairInfo []TargetGroupPairInfoObservation `json:"targetGroupPairInfo,omitempty" tf:"target_group_pair_info,omitempty"`
 }
 
 type LoadBalancerInfoParameters struct {
@@ -322,6 +445,15 @@ type LoadBalancerInfoParameters struct {
 }
 
 type OnPremisesInstanceTagFilterObservation struct {
+
+	// The key of the tag filter.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The type of the tag filter, either KEY_ONLY, VALUE_ONLY, or KEY_AND_VALUE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of the tag filter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type OnPremisesInstanceTagFilterParameters struct {
@@ -340,6 +472,9 @@ type OnPremisesInstanceTagFilterParameters struct {
 }
 
 type ProdTrafficRouteObservation struct {
+
+	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type ProdTrafficRouteParameters struct {
@@ -350,6 +485,9 @@ type ProdTrafficRouteParameters struct {
 }
 
 type TargetGroupInfoObservation struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TargetGroupInfoParameters struct {
@@ -360,9 +498,21 @@ type TargetGroupInfoParameters struct {
 }
 
 type TargetGroupObservation struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TargetGroupPairInfoObservation struct {
+
+	// Configuration block for the production traffic route (documented below).
+	ProdTrafficRoute []ProdTrafficRouteObservation `json:"prodTrafficRoute,omitempty" tf:"prod_traffic_route,omitempty"`
+
+	// Configuration blocks for a target group within a target group pair (documented below).
+	TargetGroup []TargetGroupObservation `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+
+	// Configuration block for the test traffic route (documented below).
+	TestTrafficRoute []TestTrafficRouteObservation `json:"testTrafficRoute,omitempty" tf:"test_traffic_route,omitempty"`
 }
 
 type TargetGroupPairInfoParameters struct {
@@ -398,6 +548,12 @@ type TargetGroupParameters struct {
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessObservation struct {
+
+	// The method used to add instances to a replacement environment.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
+	TerminationWaitTimeInMinutes *float64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
@@ -412,6 +568,9 @@ type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
 }
 
 type TestTrafficRouteObservation struct {
+
+	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type TestTrafficRouteParameters struct {
@@ -422,6 +581,15 @@ type TestTrafficRouteParameters struct {
 }
 
 type TriggerConfigurationObservation struct {
+
+	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
+	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
+
+	// The name of the notification trigger.
+	TriggerName *string `json:"triggerName,omitempty" tf:"trigger_name,omitempty"`
+
+	// The ARN of the SNS topic through which notifications are sent.
+	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
 }
 
 type TriggerConfigurationParameters struct {

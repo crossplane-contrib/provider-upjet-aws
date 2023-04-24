@@ -17,6 +17,11 @@ func (mg *Certificate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Certificate.
+func (mg *Certificate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Certificate.
 func (mg *Certificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Certificate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Certificate.
 func (mg *Certificate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Certificate.
+func (mg *Certificate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Certificate.
@@ -83,6 +93,11 @@ func (mg *Endpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Endpoint.
+func (mg *Endpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Endpoint.
 func (mg *Endpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Endpoint) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Endpoint.
 func (mg *Endpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Endpoint.
+func (mg *Endpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Endpoint.
@@ -149,6 +169,11 @@ func (mg *EventSubscription) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventSubscription.
+func (mg *EventSubscription) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventSubscription.
 func (mg *EventSubscription) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *EventSubscription) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventSubscription.
 func (mg *EventSubscription) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventSubscription.
+func (mg *EventSubscription) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventSubscription.
@@ -215,6 +245,11 @@ func (mg *ReplicationInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReplicationInstance.
+func (mg *ReplicationInstance) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReplicationInstance.
 func (mg *ReplicationInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ReplicationInstance) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ReplicationInstance.
 func (mg *ReplicationInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ReplicationInstance.
+func (mg *ReplicationInstance) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ReplicationInstance.
@@ -281,6 +321,11 @@ func (mg *ReplicationSubnetGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReplicationSubnetGroup.
+func (mg *ReplicationSubnetGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReplicationSubnetGroup.
 func (mg *ReplicationSubnetGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *ReplicationSubnetGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ReplicationSubnetGroup.
 func (mg *ReplicationSubnetGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ReplicationSubnetGroup.
+func (mg *ReplicationSubnetGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ReplicationSubnetGroup.
@@ -347,6 +397,11 @@ func (mg *ReplicationTask) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReplicationTask.
+func (mg *ReplicationTask) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReplicationTask.
 func (mg *ReplicationTask) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -380,6 +435,11 @@ func (mg *ReplicationTask) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
+// SetManagementPolicy of this ReplicationTask.
+func (mg *ReplicationTask) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
+}
+
 // SetProviderConfigReference of this ReplicationTask.
 func (mg *ReplicationTask) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
@@ -400,5 +460,81 @@ func (mg *ReplicationTask) SetPublishConnectionDetailsTo(r *xpv1.PublishConnecti
 
 // SetWriteConnectionSecretToReference of this ReplicationTask.
 func (mg *ReplicationTask) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this S3Endpoint.
+func (mg *S3Endpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this S3Endpoint.
+func (mg *S3Endpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicy of this S3Endpoint.
+func (mg *S3Endpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
+// GetProviderConfigReference of this S3Endpoint.
+func (mg *S3Endpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this S3Endpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *S3Endpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this S3Endpoint.
+func (mg *S3Endpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this S3Endpoint.
+func (mg *S3Endpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this S3Endpoint.
+func (mg *S3Endpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this S3Endpoint.
+func (mg *S3Endpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this S3Endpoint.
+func (mg *S3Endpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
+}
+
+// SetProviderConfigReference of this S3Endpoint.
+func (mg *S3Endpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this S3Endpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *S3Endpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this S3Endpoint.
+func (mg *S3Endpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this S3Endpoint.
+func (mg *S3Endpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

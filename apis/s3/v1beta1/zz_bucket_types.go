@@ -53,6 +53,9 @@ type BucketObservation struct {
 	// Rule of Cross-Origin Resource Sharing. See CORS rule below for details. Use the resource aws_s3_bucket_cors_configuration instead.
 	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
+	// Boolean that indicates all objects (including any locked objects) should be deleted from the bucket when the bucket is destroyed so that the bucket can be destroyed without error. These objects are not recoverable. This only deletes objects when the bucket is destroyed, not when setting this parameter to true.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// An ACL policy grant. See Grant below for details. Conflicts with acl. Use the resource aws_s3_bucket_acl instead.
 	Grant []GrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 
@@ -74,6 +77,9 @@ type BucketObservation struct {
 	// Use the object_lock_enabled parameter and the resource aws_s3_bucket_object_lock_configuration instead.
 	ObjectLockConfiguration []ObjectLockConfigurationObservation `json:"objectLockConfiguration,omitempty" tf:"object_lock_configuration,omitempty"`
 
+	// Indicates whether this bucket has an Object Lock configuration enabled. Valid values are true or false. This argument is not supported in all regions or partitions.
+	ObjectLockEnabled *bool `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
 	// Valid bucket policy JSON document. In this case, please make sure you use the verbose/specific version of the policy.
 	// Use the resource aws_s3_bucket_policy instead.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -91,6 +97,9 @@ type BucketObservation struct {
 	// Configuration of server-side encryption configuration. See Server Side Encryption Configuration below for details.
 	// Use the resource aws_s3_bucket_server_side_encryption_configuration instead.
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationObservation `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -15,8 +15,20 @@ import (
 
 type BucketObjectLockConfigurationObservation struct {
 
+	// Name of the bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
 	// The bucket or bucket and expected_bucket_owner separated by a comma (,) if the latter is provided.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// Configuration block for specifying the Object Lock rule for the specified object. See below.
+	Rule []BucketObjectLockConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type BucketObjectLockConfigurationParameters struct {
@@ -59,6 +71,9 @@ type BucketObjectLockConfigurationParameters struct {
 }
 
 type BucketObjectLockConfigurationRuleObservation struct {
+
+	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
+	DefaultRetention []RuleDefaultRetentionObservation `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
 }
 
 type BucketObjectLockConfigurationRuleParameters struct {
@@ -69,6 +84,15 @@ type BucketObjectLockConfigurationRuleParameters struct {
 }
 
 type RuleDefaultRetentionObservation struct {
+
+	// Number of days that you want to specify for the default retention period.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Number of years that you want to specify for the default retention period.
+	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type RuleDefaultRetentionParameters struct {

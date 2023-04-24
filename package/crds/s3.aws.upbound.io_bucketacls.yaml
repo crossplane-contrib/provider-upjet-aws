@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: bucketacls.s3.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -213,6 +217,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -406,12 +425,53 @@ spec:
                                     displayName:
                                       description: Display name of the owner.
                                       type: string
+                                    emailAddress:
+                                      description: Email address of the grantee. See
+                                        Regions and Endpoints for supported AWS regions
+                                        where this argument can be specified.
+                                      type: string
+                                    id:
+                                      description: ID of the owner.
+                                      type: string
+                                    type:
+                                      description: 'Type of grantee. Valid values:
+                                        CanonicalUser, AmazonCustomerByEmail, Group.'
+                                      type: string
+                                    uri:
+                                      description: URI of the grantee group.
+                                      type: string
                                   type: object
                                 type: array
+                              permission:
+                                description: Logging permissions assigned to the grantee
+                                  for the bucket.
+                                type: string
+                            type: object
+                          type: array
+                        owner:
+                          description: Configuration block of the bucket owner's display
+                            name and ID. See below.
+                          items:
+                            properties:
+                              displayName:
+                                description: Display name of the owner.
+                                type: string
+                              id:
+                                description: ID of the owner.
+                                type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  acl:
+                    description: Canned ACL to apply to the bucket.
+                    type: string
+                  bucket:
+                    description: Name of the bucket.
+                    type: string
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
                   id:
                     description: The bucket, expected_bucket_owner (if configured),
                       and acl (if configured) separated by commas (,).
@@ -458,9 +518,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

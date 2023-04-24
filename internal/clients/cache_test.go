@@ -35,8 +35,8 @@ func TestGetCallerIdentity(t *testing.T) {
 	}
 
 	sample := &sts.GetCallerIdentityOutput{
-		Account: pointer.StringPtr("123456789"),
-		Arn:     pointer.StringPtr("arn:aws:iam::123456789:role/S3Access"),
+		Account: pointer.String("123456789"),
+		Arn:     pointer.String("arn:aws:iam::123456789:role/S3Access"),
 	}
 	ti := time.Now()
 	cases := map[string]struct {

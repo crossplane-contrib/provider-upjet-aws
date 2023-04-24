@@ -21,23 +21,35 @@ type HostObservation struct {
 	// The CodeStar Host ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the host to be created. The name must be unique in the calling AWS account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The endpoint of the infrastructure to be represented by the host after it is created.
+	ProviderEndpoint *string `json:"providerEndpoint,omitempty" tf:"provider_endpoint,omitempty"`
+
+	// The name of the external provider where your third-party code repository is configured.
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
 	// The CodeStar Host status. Possible values are PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The VPC configuration to be provisioned for the host. A VPC must be configured, and the infrastructure to be represented by the host must already be connected to the VPC.
+	VPCConfiguration []VPCConfigurationObservation `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
 type HostParameters struct {
 
 	// The name of the host to be created. The name must be unique in the calling AWS account.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The endpoint of the infrastructure to be represented by the host after it is created.
-	// +kubebuilder:validation:Required
-	ProviderEndpoint *string `json:"providerEndpoint" tf:"provider_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderEndpoint *string `json:"providerEndpoint,omitempty" tf:"provider_endpoint,omitempty"`
 
 	// The name of the external provider where your third-party code repository is configured.
-	// +kubebuilder:validation:Required
-	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -50,6 +62,18 @@ type HostParameters struct {
 }
 
 type VPCConfigurationObservation struct {
+
+	// he ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
+
+	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type VPCConfigurationParameters struct {
@@ -95,8 +119,11 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HostSpec   `json:"spec"`
-	Status            HostStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerEndpoint)",message="providerEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.providerType)",message="providerType is a required parameter"
+	Spec   HostSpec   `json:"spec"`
+	Status HostStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

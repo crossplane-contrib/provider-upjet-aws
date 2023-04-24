@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: defaultnetworkacls.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -398,6 +402,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -577,13 +596,100 @@ spec:
                   arn:
                     description: ARN of the Default Network ACL
                     type: string
+                  defaultNetworkAclId:
+                    description: Network ACL ID to manage. This attribute is exported
+                      from aws_vpc, or manually found via the AWS Console.
+                    type: string
+                  egress:
+                    description: Configuration block for an egress rule. Detailed
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take.
+                          type: string
+                        cidrBlock:
+                          description: The CIDR block to match. This must be a valid
+                            network mask.
+                          type: string
+                        fromPort:
+                          description: The from port to match.
+                          type: number
+                        icmpCode:
+                          description: The ICMP type code to be used. Default 0.
+                          type: number
+                        icmpType:
+                          description: The ICMP type to be used. Default 0.
+                          type: number
+                        ipv6CidrBlock:
+                          description: The IPv6 CIDR block.
+                          type: string
+                        protocol:
+                          description: The protocol to match. If using the -1 'all'
+                            protocol, you must specify a from and to port of 0.
+                          type: string
+                        ruleNo:
+                          description: The rule number. Used for ordering.
+                          type: number
+                        toPort:
+                          description: The to port to match.
+                          type: number
+                      type: object
+                    type: array
                   id:
                     description: ID of the Default Network ACL
                     type: string
+                  ingress:
+                    description: Configuration block for an ingress rule. Detailed
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take.
+                          type: string
+                        cidrBlock:
+                          description: The CIDR block to match. This must be a valid
+                            network mask.
+                          type: string
+                        fromPort:
+                          description: The from port to match.
+                          type: number
+                        icmpCode:
+                          description: The ICMP type code to be used. Default 0.
+                          type: number
+                        icmpType:
+                          description: The ICMP type to be used. Default 0.
+                          type: number
+                        ipv6CidrBlock:
+                          description: The IPv6 CIDR block.
+                          type: string
+                        protocol:
+                          description: The protocol to match. If using the -1 'all'
+                            protocol, you must specify a from and to port of 0.
+                          type: string
+                        ruleNo:
+                          description: The rule number. Used for ordering.
+                          type: number
+                        toPort:
+                          description: The to port to match.
+                          type: number
+                      type: object
+                    type: array
                   ownerId:
                     description: ID of the AWS account that owns the Default Network
                       ACL
                     type: string
+                  subnetIds:
+                    description: List of Subnet IDs to apply the ACL to. See the notes
+                      above on Managing Subnets in the Default Network ACL
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -636,9 +742,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

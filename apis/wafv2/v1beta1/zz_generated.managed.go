@@ -17,6 +17,11 @@ func (mg *IPSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IPSet.
+func (mg *IPSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IPSet.
 func (mg *IPSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *IPSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IPSet.
 func (mg *IPSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IPSet.
+func (mg *IPSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IPSet.
@@ -83,6 +93,11 @@ func (mg *RegexPatternSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RegexPatternSet.
+func (mg *RegexPatternSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RegexPatternSet.
 func (mg *RegexPatternSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *RegexPatternSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RegexPatternSet.
 func (mg *RegexPatternSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RegexPatternSet.
+func (mg *RegexPatternSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RegexPatternSet.

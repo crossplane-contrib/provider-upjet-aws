@@ -15,6 +15,12 @@ import (
 
 type ThingPrincipalAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// The name of the thing.
+	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
 }
 
 type ThingPrincipalAttachmentParameters struct {

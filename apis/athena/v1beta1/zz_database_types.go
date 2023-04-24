@@ -14,6 +14,9 @@ import (
 )
 
 type ACLConfigurationObservation struct {
+
+	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+	S3ACLOption *string `json:"s3AclOption,omitempty" tf:"s3_acl_option,omitempty"`
 }
 
 type ACLConfigurationParameters struct {
@@ -25,8 +28,29 @@ type ACLConfigurationParameters struct {
 
 type DatabaseObservation struct {
 
+	// That an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
+	ACLConfiguration []ACLConfigurationObservation `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
+
+	// Name of S3 bucket to save the results of the query execution.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Description of the database.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service (AWS KMS) key. See Encryption Configuration below.
+	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// AWS account ID that you expect to be the owner of the Amazon S3 bucket.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Boolean that indicates all tables should be deleted from the database so that the database can be destroyed without error. The tables are not recoverable.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Database name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key-value map of custom metadata properties for the database definition.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
 type DatabaseParameters struct {
@@ -76,6 +100,12 @@ type DatabaseParameters struct {
 }
 
 type EncryptionConfigurationObservation struct {
+
+	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
+
+	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }
 
 type EncryptionConfigurationParameters struct {

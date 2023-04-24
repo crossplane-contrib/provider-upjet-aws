@@ -15,8 +15,20 @@ import (
 
 type UserStackAssociationObservation struct {
 
+	// Authentication type for the user.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
 	// Unique ID of the appstream User Stack association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether a welcome email is sent to a user after the user is created in the user pool.
+	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
+
+	// Name of the stack that is associated with the user.
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
+
+	// Email address of the user who is associated with the stack.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type UserStackAssociationParameters struct {

@@ -1,0 +1,70 @@
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: ResourceAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceassociation
+    upjet.upbound.io/manual-intervention: "This resource requires to enable resource sharing within your organization and adding an resourceArn"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceArn: ${arn}
+    resourceShareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceassociation
+    upjet.upbound.io/manual-intervention: "This resource is dependency of ResourceAssociation. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allowExternalPrincipals: true
+    name: example
+    region: us-west-1
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceassociation
+    upjet.upbound.io/manual-intervention: "This resource is dependency of ResourceAssociation. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: default
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceassociation
+    upjet.upbound.io/manual-intervention: "This resource is dependency of ResourceAssociation. This resource is skipping because parent resource was skipped."
+  name: default
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: default

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: indexingconfigurations.iot.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -165,6 +169,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -344,6 +363,96 @@ spec:
                 properties:
                   id:
                     type: string
+                  thingGroupIndexingConfiguration:
+                    description: Thing group indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: A list of thing group fields to index. This
+                            list cannot contain any managed fields. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        thingGroupIndexingMode:
+                          description: 'Thing group indexing mode. Valid values: OFF,
+                            ON.'
+                          type: string
+                      type: object
+                    type: array
+                  thingIndexingConfiguration:
+                    description: Thing indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: Contains custom field names and their data
+                            type. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        deviceDefenderIndexingMode:
+                          description: 'Device Defender indexing mode. Valid values:
+                            VIOLATIONS, OFF. Default: OFF.'
+                          type: string
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        namedShadowIndexingMode:
+                          description: 'Named shadow indexing mode. Valid values:
+                            ON, OFF. Default: OFF.'
+                          type: string
+                        thingConnectivityIndexingMode:
+                          description: 'Thing connectivity indexing mode. Valid values:
+                            STATUS, OFF. Default: OFF.'
+                          type: string
+                        thingIndexingMode:
+                          description: 'Thing indexing mode. Valid values: REGISTRY,
+                            REGISTRY_AND_SHADOW, OFF.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -386,9 +495,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

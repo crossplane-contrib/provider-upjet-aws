@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: topicsubscriptions.sns.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -337,9 +341,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - protocol
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -511,6 +529,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: protocol is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)
           status:
             description: TopicSubscriptionStatus defines the observed state of TopicSubscription.
             properties:
@@ -519,10 +540,37 @@ spec:
                   arn:
                     description: ARN of the subscription.
                     type: string
+                  confirmationTimeoutInMinutes:
+                    description: Integer indicating number of minutes to wait in retrying
+                      mode for fetching subscription arn before marking it as failure.
+                      Only applicable for http and https protocols. Default is 1.
+                    type: number
                   confirmationWasAuthenticated:
                     description: Whether the subscription confirmation request was
                       authenticated.
                     type: boolean
+                  deliveryPolicy:
+                    description: JSON String with the delivery policy (retries, backoff,
+                      etc.) that will be used in the subscription - this only applies
+                      to HTTP/S subscriptions. Refer to the SNS docs for more details.
+                    type: string
+                  endpoint:
+                    description: Endpoint to send data to. The contents vary with
+                      the protocol. See details below.
+                    type: string
+                  endpointAutoConfirms:
+                    description: Whether the endpoint is capable of auto confirming
+                      subscription (e.g., PagerDuty). Default is false.
+                    type: boolean
+                  filterPolicy:
+                    description: JSON String with the filter policy that will be used
+                      in the subscription to filter messages seen by the target resource.
+                      Refer to the SNS docs for more details.
+                    type: string
+                  filterPolicyScope:
+                    description: Whether the filter_policy applies to MessageAttributes
+                      (default) or MessageBody.
+                    type: string
                   id:
                     description: ARN of the subscription.
                     type: string
@@ -532,6 +580,28 @@ spec:
                   pendingConfirmation:
                     description: Whether the subscription has not been confirmed.
                     type: boolean
+                  protocol:
+                    description: 'Protocol to use. Valid values are: sqs, sms, lambda,
+                      firehose, and application. Protocols email, email-json, http
+                      and https are also valid but partially supported. See details
+                      below.'
+                    type: string
+                  rawMessageDelivery:
+                    description: Whether to enable raw message delivery (the original
+                      message is directly passed, not wrapped in JSON with the original
+                      message in the message property). Default is false.
+                    type: boolean
+                  redrivePolicy:
+                    description: JSON String with the redrive policy that will be
+                      used in the subscription. Refer to the SNS docs for more details.
+                    type: string
+                  subscriptionRoleArn:
+                    description: ARN of the IAM role to publish to Kinesis Data Firehose
+                      delivery stream. Refer to SNS docs.
+                    type: string
+                  topicArn:
+                    description: ARN of the SNS topic to subscribe to.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -574,9 +644,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: authorizers.apigatewayv2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -284,10 +288,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - authorizerType
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -459,13 +476,87 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: authorizerType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizerType)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AuthorizerStatus defines the observed state of Authorizer.
             properties:
               atProvider:
                 properties:
+                  apiId:
+                    description: API identifier.
+                    type: string
+                  authorizerCredentialsArn:
+                    description: Required credentials as an IAM role for API Gateway
+                      to invoke the authorizer. Supported only for REQUEST authorizers.
+                    type: string
+                  authorizerPayloadFormatVersion:
+                    description: 'Format of the payload sent to an HTTP API Lambda
+                      authorizer. Required for HTTP API Lambda authorizers. Valid
+                      values: 1.0, 2.0.'
+                    type: string
+                  authorizerResultTtlInSeconds:
+                    description: Time to live (TTL) for cached authorizer results,
+                      in seconds. If it equals 0, authorization caching is disabled.
+                      If it is greater than 0, API Gateway caches authorizer responses.
+                      The maximum value is 3600, or 1 hour. Defaults to 300. Supported
+                      only for HTTP API Lambda authorizers.
+                    type: number
+                  authorizerType:
+                    description: 'Authorizer type. Valid values: JWT, REQUEST. Specify
+                      REQUEST for a Lambda function using incoming request parameters.
+                      For HTTP APIs, specify JWT to use JSON Web Tokens.'
+                    type: string
+                  authorizerUri:
+                    description: Authorizer's Uniform Resource Identifier (URI). For
+                      REQUEST authorizers this must be a well-formed Lambda function
+                      URI, such as the invoke_arn attribute of the aws_lambda_function
+                      resource. Supported only for REQUEST authorizers. Must be between
+                      1 and 2048 characters in length.
+                    type: string
+                  enableSimpleResponses:
+                    description: Whether a Lambda authorizer returns a response in
+                      a simple format. If enabled, the Lambda authorizer can return
+                      a boolean value instead of an IAM policy. Supported only for
+                      HTTP APIs.
+                    type: boolean
                   id:
                     description: Authorizer identifier.
+                    type: string
+                  identitySources:
+                    description: Identity sources for which authorization is requested.
+                      For REQUEST authorizers the value is a list of one or more mapping
+                      expressions of the specified request parameters. For JWT authorizers
+                      the single entry specifies where to extract the JSON Web Token
+                      (JWT) from inbound requests.
+                    items:
+                      type: string
+                    type: array
+                  jwtConfiguration:
+                    description: Configuration of a JWT authorizer. Required for the
+                      JWT authorizer type. Supported only for HTTP APIs.
+                    items:
+                      properties:
+                        audience:
+                          description: List of the intended recipients of the JWT.
+                            A valid JWT must provide an aud that matches at least
+                            one entry in this list.
+                          items:
+                            type: string
+                          type: array
+                        issuer:
+                          description: Base domain of the identity provider that issues
+                            JSON Web Tokens, such as the endpoint attribute of the
+                            aws_cognito_user_pool resource.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: Name of the authorizer. Must be between 1 and 128
+                      characters in length.
                     type: string
                 type: object
               conditions:
@@ -509,9 +600,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

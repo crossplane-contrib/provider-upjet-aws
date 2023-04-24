@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: devicepools.devicefarm.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -184,10 +188,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
-                - rule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -359,6 +376,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: rule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)
           status:
             description: DevicePoolStatus defines the observed state of DevicePool.
             properties:
@@ -367,8 +389,48 @@ spec:
                   arn:
                     description: The Amazon Resource Name of this Device Pool
                     type: string
+                  description:
+                    description: The device pool's description.
+                    type: string
                   id:
                     type: string
+                  maxDevices:
+                    description: The number of devices that Device Farm can add to
+                      your device pool.
+                    type: number
+                  name:
+                    description: The name of the Device Pool
+                    type: string
+                  projectArn:
+                    description: The ARN of the project for the device pool.
+                    type: string
+                  rule:
+                    description: The device pool's rules. See Rule.
+                    items:
+                      properties:
+                        attribute:
+                          description: 'The rule''s stringified attribute. Valid values
+                            are: APPIUM_VERSION, ARN, AVAILABILITY, FLEET_TYPE, FORM_FACTOR,
+                            INSTANCE_ARN, INSTANCE_LABELS, MANUFACTURER, MODEL, OS_VERSION,
+                            PLATFORM, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED.'
+                          type: string
+                        operator:
+                          description: 'Specifies how Device Farm compares the rule''s
+                            attribute to the value. For the operators that are supported
+                            by each attribute. Valid values are: EQUALS, NOT_IN, IN,
+                            GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS,
+                            CONTAINS.'
+                          type: string
+                        value:
+                          description: The rule's value.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -420,9 +482,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

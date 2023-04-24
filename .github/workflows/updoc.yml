@@ -1,0 +1,10 @@
+name: Updoc
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  publish-docs:
+    uses: upbound/uptest/.github/workflows/provider-updoc.yml@main
+    secrets:
+      UPBOUND_CI_PROD_BUCKET_SA: ${{ secrets.UPBOUND_CI_PROD_BUCKET_SA }}

@@ -18,8 +18,20 @@ type ParameterGroupObservation struct {
 	// The ARN of the parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description for the parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The engine version that the parameter group can be used with.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Set of MemoryDB parameters to apply. Any parameters not specified will fall back to their family defaults. Detailed below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -32,8 +44,8 @@ type ParameterGroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The engine version that the parameter group can be used with.
-	// +kubebuilder:validation:Required
-	Family *string `json:"family" tf:"family,omitempty"`
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Set of MemoryDB parameters to apply. Any parameters not specified will fall back to their family defaults. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -50,6 +62,12 @@ type ParameterGroupParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// The name of the parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -87,8 +105,9 @@ type ParameterGroupStatus struct {
 type ParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ParameterGroupSpec   `json:"spec"`
-	Status            ParameterGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
+	Spec   ParameterGroupSpec   `json:"spec"`
+	Status ParameterGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

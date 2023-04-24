@@ -14,6 +14,10 @@ import (
 )
 
 type AccountObservation struct {
+
+	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
+	CloudwatchRoleArn *string `json:"cloudwatchRoleArn,omitempty" tf:"cloudwatch_role_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Account-Level throttle settings. See exported fields below.

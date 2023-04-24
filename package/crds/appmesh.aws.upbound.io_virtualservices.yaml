@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: virtualservices.appmesh.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -365,10 +369,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
-                - spec
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -540,6 +557,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: spec is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.spec)
           status:
             description: VirtualServiceStatus defines the observed state of VirtualService.
             properties:
@@ -557,9 +579,64 @@ spec:
                   lastUpdatedDate:
                     description: Last update date of the virtual service.
                     type: string
+                  meshName:
+                    description: Name of the service mesh in which to create the virtual
+                      service. Must be between 1 and 255 characters in length.
+                    type: string
+                  meshOwner:
+                    description: AWS account ID of the service mesh's owner. Defaults
+                      to the account ID the AWS provider is currently connected to.
+                    type: string
+                  name:
+                    description: Name to use for the virtual service. Must be between
+                      1 and 255 characters in length.
+                    type: string
                   resourceOwner:
                     description: Resource owner's AWS account ID.
                     type: string
+                  spec:
+                    description: Virtual service specification to apply.
+                    items:
+                      properties:
+                        provider:
+                          description: App Mesh object that is acting as the provider
+                            for a virtual service. You can specify a single virtual
+                            node or virtual router.
+                          items:
+                            properties:
+                              virtualNode:
+                                description: Virtual node associated with a virtual
+                                  service.
+                                items:
+                                  properties:
+                                    virtualNodeName:
+                                      description: Name of the virtual node that is
+                                        acting as a service provider. Must be between
+                                        1 and 255 characters in length.
+                                      type: string
+                                  type: object
+                                type: array
+                              virtualRouter:
+                                description: Virtual router associated with a virtual
+                                  service.
+                                items:
+                                  properties:
+                                    virtualRouterName:
+                                      description: Name of the virtual router that
+                                        is acting as a service provider. Must be between
+                                        1 and 255 characters in length.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -608,9 +685,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -80,8 +80,28 @@ func (in *GroupObservation) DeepCopyInto(out *GroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AwsAccountID != nil {
+		in, out := &in.AwsAccountID, &out.AwsAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.GroupName != nil {
+		in, out := &in.GroupName, &out.GroupName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Namespace != nil {
+		in, out := &in.Namespace, &out.Namespace
 		*out = new(string)
 		**out = **in
 	}
@@ -238,8 +258,48 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AwsAccountID != nil {
+		in, out := &in.AwsAccountID, &out.AwsAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Email != nil {
+		in, out := &in.Email, &out.Email
+		*out = new(string)
+		**out = **in
+	}
+	if in.IAMArn != nil {
+		in, out := &in.IAMArn, &out.IAMArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentityType != nil {
+		in, out := &in.IdentityType, &out.IdentityType
+		*out = new(string)
+		**out = **in
+	}
+	if in.Namespace != nil {
+		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.SessionName != nil {
+		in, out := &in.SessionName, &out.SessionName
+		*out = new(string)
+		**out = **in
+	}
+	if in.UserName != nil {
+		in, out := &in.UserName, &out.UserName
+		*out = new(string)
+		**out = **in
+	}
+	if in.UserRole != nil {
+		in, out := &in.UserRole, &out.UserRole
 		*out = new(string)
 		**out = **in
 	}

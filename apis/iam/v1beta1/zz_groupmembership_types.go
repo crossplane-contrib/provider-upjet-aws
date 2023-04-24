@@ -14,7 +14,17 @@ import (
 )
 
 type GroupMembershipObservation struct {
+
+	// –  The IAM Group name to attach the list of users to
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name to identify the Group Membership
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of IAM User names to associate with the Group
+	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
 type GroupMembershipParameters struct {
@@ -33,8 +43,8 @@ type GroupMembershipParameters struct {
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The name to identify the Group Membership
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// References to User to populate users.
 	// +kubebuilder:validation:Optional
@@ -76,8 +86,9 @@ type GroupMembershipStatus struct {
 type GroupMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GroupMembershipSpec   `json:"spec"`
-	Status            GroupMembershipStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   GroupMembershipSpec   `json:"spec"`
+	Status GroupMembershipStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

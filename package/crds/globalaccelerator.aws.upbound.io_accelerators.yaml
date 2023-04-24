@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: accelerators.globalaccelerator.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -112,9 +116,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -286,14 +304,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AcceleratorStatus defines the observed state of Accelerator.
             properties:
               atProvider:
                 properties:
+                  attributes:
+                    description: The attributes of the accelerator. Fields documented
+                      below.
+                    items:
+                      properties:
+                        flowLogsEnabled:
+                          description: 'Indicates whether flow logs are enabled. Defaults
+                            to false. Valid values: true, false.'
+                          type: boolean
+                        flowLogsS3Bucket:
+                          description: The name of the Amazon S3 bucket for the flow
+                            logs. Required if flow_logs_enabled is true.
+                          type: string
+                        flowLogsS3Prefix:
+                          description: The prefix for the location in the Amazon S3
+                            bucket for the flow logs. Required if flow_logs_enabled
+                            is true.
+                          type: string
+                      type: object
+                    type: array
                   dnsName:
                     description: The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
                     type: string
+                  enabled:
+                    description: 'Indicates whether the accelerator is enabled. Defaults
+                      to true. Valid values: true, false.'
+                    type: boolean
                   hostedZoneId:
                     description: '-  The Global Accelerator Route 53 zone ID that
                       can be used to route an Alias Resource Record Set to the Global
@@ -303,6 +348,17 @@ spec:
                   id:
                     description: The Amazon Resource Name (ARN) of the accelerator.
                     type: string
+                  ipAddressType:
+                    description: 'The value for the address type. Defaults to IPV4.
+                      Valid values: IPV4, DUAL_STACK.'
+                    type: string
+                  ipAddresses:
+                    description: 'The IP addresses to use for BYOIP accelerators.
+                      If not specified, the service assigns IP addresses. Valid values:
+                      1 or 2 IPv4 addresses.'
+                    items:
+                      type: string
+                    type: array
                   ipSets:
                     description: IP address set associated with the accelerator.
                     items:
@@ -320,6 +376,14 @@ spec:
                           type: string
                       type: object
                     type: array
+                  name:
+                    description: The name of the accelerator.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -369,9 +433,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

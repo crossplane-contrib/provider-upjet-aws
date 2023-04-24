@@ -14,7 +14,28 @@ import (
 )
 
 type MethodResponseObservation struct {
+
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// API resource ID
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Map of the API models used for the response's content type
+	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Map of response parameters that can be sent to the caller.
+	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
+	// would define that the header X-Some-Header can be provided on the response.
+	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// HTTP status code
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type MethodResponseParameters struct {
@@ -77,8 +98,8 @@ type MethodResponseParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// HTTP status code
-	// +kubebuilder:validation:Required
-	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 // MethodResponseSpec defines the desired state of MethodResponse
@@ -105,8 +126,9 @@ type MethodResponseStatus struct {
 type MethodResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodResponseSpec   `json:"spec"`
-	Status            MethodResponseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.statusCode)",message="statusCode is a required parameter"
+	Spec   MethodResponseSpec   `json:"spec"`
+	Status MethodResponseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

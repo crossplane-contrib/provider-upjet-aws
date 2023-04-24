@@ -15,8 +15,14 @@ import (
 
 type SubnetGroupObservation struct {
 
+	// A description of the subnet group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The name of the subnet group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  A list of VPC subnet IDs for the subnet group.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// – VPC ID of the subnet group.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

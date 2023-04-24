@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: voiceconnectorterminations.chime.aws.upbound.io
 spec:
@@ -57,9 +57,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -171,10 +175,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - callingRegions
-                - cidrAllowList
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -346,13 +363,43 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: callingRegions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.callingRegions)
+            - message: cidrAllowList is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cidrAllowList)
           status:
             description: VoiceConnectorTerminationStatus defines the observed state
               of VoiceConnectorTermination.
             properties:
               atProvider:
                 properties:
+                  callingRegions:
+                    description: The countries to which calls are allowed, in ISO
+                      3166-1 alpha-2 format.
+                    items:
+                      type: string
+                    type: array
+                  cidrAllowList:
+                    description: The IP addresses allowed to make calls, in CIDR format.
+                    items:
+                      type: string
+                    type: array
+                  cpsLimit:
+                    description: The limit on calls per second. Max value based on
+                      account service quota. Default value of 1.
+                    type: number
+                  defaultPhoneNumber:
+                    description: The default caller ID phone number.
+                    type: string
+                  disabled:
+                    description: When termination settings are disabled, outbound
+                      calls can not be made.
+                    type: boolean
                   id:
+                    description: The Amazon Chime Voice Connector ID.
+                    type: string
+                  voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
                 type: object
@@ -397,9 +444,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: indices.kendra.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -378,9 +382,23 @@ spec:
                       type: object
                     type: array
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -552,6 +570,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: IndexStatus defines the observed state of Index.
             properties:
@@ -560,8 +581,127 @@ spec:
                   arn:
                     description: The Amazon Resource Name (ARN) of the Index.
                     type: string
+                  capacityUnits:
+                    description: A block that sets the number of additional document
+                      storage and query capacity units that should be used by the
+                      index. Detailed below.
+                    items:
+                      properties:
+                        queryCapacityUnits:
+                          description: The amount of extra query capacity for an index
+                            and GetQuerySuggestions capacity. For more information,
+                            refer to QueryCapacityUnits.
+                          type: number
+                        storageCapacityUnits:
+                          description: The amount of extra storage capacity for an
+                            index. A single capacity unit provides 30 GB of storage
+                            space or 100,000 documents, whichever is reached first.
+                            Minimum value of 0.
+                          type: number
+                      type: object
+                    type: array
                   createdAt:
                     description: The Unix datetime that the index was created.
+                    type: string
+                  description:
+                    description: The description of the Index.
+                    type: string
+                  documentMetadataConfigurationUpdates:
+                    description: One or more blocks that specify the configuration
+                      settings for any metadata applied to the documents in the index.
+                      Minimum number of 0 items. Maximum number of 500 items. If specified,
+                      you must define all elements, including those that are provided
+                      by default. These index fields are documented at Amazon Kendra
+                      Index documentation. For an example resource that defines these
+                      default index fields, refer to the default example above. For
+                      an example resource that appends additional index fields, refer
+                      to the append example above. All arguments for each block must
+                      be specified. Note that blocks cannot be removed since index
+                      fields cannot be deleted. This argument is detailed below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the index field. Minimum length
+                            of 1. Maximum length of 30.
+                          type: string
+                        relevance:
+                          description: A block that provides manual tuning parameters
+                            to determine how the field affects the search results.
+                            Detailed below
+                          items:
+                            properties:
+                              duration:
+                                description: Specifies the time period that the boost
+                                  applies to. For more information, refer to Duration.
+                                type: string
+                              freshness:
+                                description: Indicates that this field determines
+                                  how "fresh" a document is. For more information,
+                                  refer to Freshness.
+                                type: boolean
+                              importance:
+                                description: The relative importance of the field
+                                  in the search. Larger numbers provide more of a
+                                  boost than smaller numbers. Minimum value of 1.
+                                  Maximum value of 10.
+                                type: number
+                              rankOrder:
+                                description: Determines how values should be interpreted.
+                                  For more information, refer to RankOrder.
+                                type: string
+                              valuesImportanceMap:
+                                additionalProperties:
+                                  type: number
+                                description: A list of values that should be given
+                                  a different boost when they appear in the result
+                                  list. For more information, refer to ValueImportanceMap.
+                                type: object
+                            type: object
+                          type: array
+                        search:
+                          description: A block that provides information about how
+                            the field is used during a search. Documented below. Detailed
+                            below
+                          items:
+                            properties:
+                              displayable:
+                                description: Determines whether the field is returned
+                                  in the query response. The default is true.
+                                type: boolean
+                              facetable:
+                                description: Indicates that the field can be used
+                                  to create search facets, a count of results for
+                                  each value in the field. The default is false.
+                                type: boolean
+                              searchable:
+                                description: Determines whether the field is used
+                                  in the search. If the Searchable field is true,
+                                  you can use relevance tuning to manually tune how
+                                  Amazon Kendra weights the field in the search. The
+                                  default is true for string fields and false for
+                                  number and date fields.
+                                type: boolean
+                              sortable:
+                                description: Determines whether the field can be used
+                                  to sort the results of a query. If you specify sorting
+                                  on a field that does not have Sortable set to true,
+                                  Amazon Kendra returns an exception. The default
+                                  is false.
+                                type: boolean
+                            type: object
+                          type: array
+                        type:
+                          description: The data type of the index field. Valid values
+                            are STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE.
+                          type: string
+                      type: object
+                    type: array
+                  edition:
+                    description: The Amazon Kendra edition to use for the index. Choose
+                      DEVELOPER_EDITION for indexes intended for development, testing,
+                      or proof of concept. Use ENTERPRISE_EDITION for your production
+                      databases. Once you set the edition for an index, it can't be
+                      changed. Defaults to ENTERPRISE_EDITION
                     type: string
                   errorMessage:
                     description: When the Status field value is FAILED, this contains
@@ -603,12 +743,40 @@ spec:
                           type: array
                       type: object
                     type: array
+                  name:
+                    description: Specifies the name of the Index.
+                    type: string
+                  roleArn:
+                    description: An AWS Identity and Access Management (IAM) role
+                      that gives Amazon Kendra permissions to access your Amazon CloudWatch
+                      logs and metrics. This is also the role you use when you call
+                      the BatchPutDocument API to index documents from an Amazon S3
+                      bucket.
+                    type: string
+                  serverSideEncryptionConfiguration:
+                    description: A block that specifies the identifier of the AWS
+                      KMS customer managed key (CMK) that's used to encrypt data indexed
+                      by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+                      Detailed below.
+                    items:
+                      properties:
+                        kmsKeyId:
+                          description: The identifier of the AWS KMScustomer master
+                            key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+                          type: string
+                      type: object
+                    type: array
                   status:
                     description: The current status of the index. When the value is
                       ACTIVE, the index is ready for use. If the Status field value
                       is FAILED, the error_message field contains a message that explains
                       why.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -619,6 +787,85 @@ spec:
                   updatedAt:
                     description: The Unix datetime that the index was last updated.
                     type: string
+                  userContextPolicy:
+                    description: The user context policy. Valid values are ATTRIBUTE_FILTER
+                      or USER_TOKEN. For more information, refer to UserContextPolicy.
+                      Defaults to ATTRIBUTE_FILTER.
+                    type: string
+                  userGroupResolutionConfiguration:
+                    description: A block that enables fetching access levels of groups
+                      and users from an AWS Single Sign-On identity source. To configure
+                      this, see UserGroupResolutionConfiguration. Detailed below.
+                    items:
+                      properties:
+                        userGroupResolutionMode:
+                          description: The identity store provider (mode) you want
+                            to use to fetch access levels of groups and users. AWS
+                            Single Sign-On is currently the only available mode. Your
+                            users and groups must exist in an AWS SSO identity source
+                            in order to use this mode. Valid Values are AWS_SSO or
+                            NONE.
+                          type: string
+                      type: object
+                    type: array
+                  userTokenConfigurations:
+                    description: A block that specifies the user token configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        jsonTokenTypeConfiguration:
+                          description: A block that specifies the information about
+                            the JSON token type configuration. Detailed below.
+                          items:
+                            properties:
+                              groupAttributeField:
+                                description: The group attribute field. Minimum length
+                                  of 1. Maximum length of 2048.
+                                type: string
+                              userNameAttributeField:
+                                description: The user name attribute field. Minimum
+                                  length of 1. Maximum length of 2048.
+                                type: string
+                            type: object
+                          type: array
+                        jwtTokenTypeConfiguration:
+                          description: A block that specifies the information about
+                            the JWT token type configuration. Detailed below.
+                          items:
+                            properties:
+                              claimRegex:
+                                description: The regular expression that identifies
+                                  the claim. Minimum length of 1. Maximum length of
+                                  100.
+                                type: string
+                              groupAttributeField:
+                                description: The group attribute field. Minimum length
+                                  of 1. Maximum length of 2048.
+                                type: string
+                              issuer:
+                                description: The issuer of the token. Minimum length
+                                  of 1. Maximum length of 65.
+                                type: string
+                              keyLocation:
+                                description: The location of the key. Valid values
+                                  are URL or SECRET_MANAGER
+                                type: string
+                              secretsManagerArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  secret.
+                                type: string
+                              url:
+                                description: The signing key URL. Valid pattern is
+                                  ^(https?|ftp|file):\/\/([^\s]*)
+                                type: string
+                              userNameAttributeField:
+                                description: The user name attribute field. Minimum
+                                  length of 1. Maximum length of 2048.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -661,9 +908,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

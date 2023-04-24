@@ -21,6 +21,21 @@ type AnomalyMonitorObservation struct {
 	// Unique ID of the anomaly monitor. Same as arn.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The dimensions to evaluate. Valid values: SERVICE.
+	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
+
+	// A valid JSON representation for the Expression object.
+	MonitorSpecification *string `json:"monitorSpecification,omitempty" tf:"monitor_specification,omitempty"`
+
+	// The possible type values. Valid values: DIMENSIONAL | CUSTOM.
+	MonitorType *string `json:"monitorType,omitempty" tf:"monitor_type,omitempty"`
+
+	// The name of the monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -36,12 +51,12 @@ type AnomalyMonitorParameters struct {
 	MonitorSpecification *string `json:"monitorSpecification,omitempty" tf:"monitor_specification,omitempty"`
 
 	// The possible type values. Valid values: DIMENSIONAL | CUSTOM.
-	// +kubebuilder:validation:Required
-	MonitorType *string `json:"monitorType" tf:"monitor_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	MonitorType *string `json:"monitorType,omitempty" tf:"monitor_type,omitempty"`
 
 	// The name of the monitor.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,8 +92,10 @@ type AnomalyMonitorStatus struct {
 type AnomalyMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AnomalyMonitorSpec   `json:"spec"`
-	Status            AnomalyMonitorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.monitorType)",message="monitorType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AnomalyMonitorSpec   `json:"spec"`
+	Status AnomalyMonitorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,6 +15,12 @@ import (
 
 type QueueRedriveAllowPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The URL of the SQS Queue to which to attach the policy
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
+	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
 }
 
 type QueueRedriveAllowPolicyParameters struct {
@@ -34,8 +40,8 @@ type QueueRedriveAllowPolicyParameters struct {
 	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
-	// +kubebuilder:validation:Required
-	RedriveAllowPolicy *string `json:"redriveAllowPolicy" tf:"redrive_allow_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -67,8 +73,9 @@ type QueueRedriveAllowPolicyStatus struct {
 type QueueRedriveAllowPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              QueueRedriveAllowPolicySpec   `json:"spec"`
-	Status            QueueRedriveAllowPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.redriveAllowPolicy)",message="redriveAllowPolicy is a required parameter"
+	Spec   QueueRedriveAllowPolicySpec   `json:"spec"`
+	Status QueueRedriveAllowPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: scripts.gamelift.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -335,9 +339,23 @@ spec:
                       files. Maximum size of a zip file is 5 MB.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -509,6 +527,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ScriptStatus defines the observed state of Script.
             properties:
@@ -520,6 +541,36 @@ spec:
                   id:
                     description: GameLift Script ID.
                     type: string
+                  name:
+                    description: Name of the script
+                    type: string
+                  storageLocation:
+                    description: Information indicating where your game script files
+                      are stored. See below.
+                    items:
+                      properties:
+                        bucket:
+                          description: Name of your S3 bucket.
+                          type: string
+                        key:
+                          description: Name of the zip file containing your script
+                            files.
+                          type: string
+                        objectVersion:
+                          description: A specific version of the file. If not set,
+                            the latest version of the file is retrieved.
+                          type: string
+                        roleArn:
+                          description: ARN of the access role that allows Amazon GameLift
+                            to access your S3 bucket.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -527,6 +578,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  version:
+                    description: Version that is associated with this script.
+                    type: string
+                  zipFile:
+                    description: A data object containing your Realtime scripts and
+                      dependencies as a zip  file. The zip file can have one or multiple
+                      files. Maximum size of a zip file is 5 MB.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -569,9 +628,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

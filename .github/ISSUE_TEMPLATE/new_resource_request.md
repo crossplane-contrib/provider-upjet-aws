@@ -2,7 +2,7 @@
 name: New Resource Request
 about: Help us know what resource you need is missing.
 labels: new-resource
-title: "Request for `aws_instance` resource"
+title: "Request for `INSERT RESOURCE NAME` resource"
 ---
 <!--
 Thank you for helping to improve Official AWS Provider!

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: botaliases.lexmodels.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -126,10 +130,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - botName
-                - botVersion
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -301,6 +318,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: botName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.botName)
+            - message: botVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.botVersion)
           status:
             description: BotAliasStatus defines the observed state of BotAlias.
             properties:
@@ -308,6 +330,12 @@ spec:
                 properties:
                   arn:
                     description: The ARN of the bot alias.
+                    type: string
+                  botName:
+                    description: The name of the bot.
+                    type: string
+                  botVersion:
+                    description: The name of the bot.
                     type: string
                   checksum:
                     description: Checksum of the bot alias.
@@ -317,12 +345,38 @@ spec:
                       logs for the alias. Attributes are documented under conversation_logs.
                     items:
                       properties:
+                        iamRoleArn:
+                          description: The Amazon Resource Name (ARN) of the IAM role
+                            used to write your logs to CloudWatch Logs or an S3 bucket.
+                            Must be between 20 and 2048 characters in length.
+                          type: string
                         logSettings:
                           description: The settings for your conversation logs. You
                             can log text, audio, or both. Attributes are documented
                             under log_settings.
                           items:
                             properties:
+                              destination:
+                                description: The destination where logs are delivered.
+                                  Options are CLOUDWATCH_LOGS or S3.
+                                type: string
+                              kmsKeyArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  key used to encrypt audio logs in an S3 bucket.
+                                  This can only be specified when destination is set
+                                  to S3. Must be between 20 and 2048 characters in
+                                  length.
+                                type: string
+                              logType:
+                                description: The type of logging that is enabled.
+                                  Options are AUDIO or TEXT.
+                                type: string
+                              resourceArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  CloudWatch Logs log group or S3 bucket where the
+                                  logs are delivered. Must be less than or equal to
+                                  2048 characters in length.
+                                type: string
                               resourcePrefix:
                                 description: (Computed) The prefix of the S3 object
                                   key for AUDIO logs or the log stream name for TEXT
@@ -334,6 +388,10 @@ spec:
                     type: array
                   createdDate:
                     description: The date that the bot alias was created.
+                    type: string
+                  description:
+                    description: A description of the alias. Must be less than or
+                      equal to 200 characters in length.
                     type: string
                   id:
                     type: string
@@ -384,9 +442,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

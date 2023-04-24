@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: fieldlevelencryptionconfigs.cloudfront.aws.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -247,10 +251,23 @@ spec:
                       be created in.
                     type: string
                 required:
-                - contentTypeProfileConfig
-                - queryArgProfileConfig
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -422,6 +439,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: contentTypeProfileConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentTypeProfileConfig)
+            - message: queryArgProfileConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.queryArgProfileConfig)
           status:
             description: FieldLevelEncryptionConfigStatus defines the observed state
               of FieldLevelEncryptionConfig.
@@ -432,6 +454,53 @@ spec:
                     description: Internal value used by CloudFront to allow future
                       updates to the Field Level Encryption Config.
                     type: string
+                  comment:
+                    description: An optional comment about the Field Level Encryption
+                      Config.
+                    type: string
+                  contentTypeProfileConfig:
+                    description: Content Type Profile Config specifies when to forward
+                      content if a content type isn't recognized and profiles to use
+                      as by default in a request if a query argument doesn't specify
+                      a profile to use.
+                    items:
+                      properties:
+                        contentTypeProfiles:
+                          description: Object that contains an attribute items that
+                            contains the list of configurations for a field-level
+                            encryption content type-profile. See Content Type Profile.
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  properties:
+                                    contentType:
+                                      description: he content type for a field-level
+                                        encryption content type-profile mapping. Valid
+                                        value is application/x-www-form-urlencoded.
+                                      type: string
+                                    format:
+                                      description: The format for a field-level encryption
+                                        content type-profile mapping. Valid value
+                                        is URLEncoded.
+                                      type: string
+                                    profileId:
+                                      description: The profile ID for a field-level
+                                        encryption content type-profile mapping.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        forwardWhenContentTypeIsUnknown:
+                          description: specifies what to do when an unknown content
+                            type is provided for the profile. If true, content is
+                            forwarded without being encrypted when the content type
+                            is unknown. If false (the default), an error is returned
+                            when the content type is unknown.
+                          type: boolean
+                      type: object
+                    type: array
                   etag:
                     description: 'The current version of the Field Level Encryption
                       Config. For example: E2QWRUHAPOMQZL.'
@@ -440,6 +509,40 @@ spec:
                     description: 'The identifier for the Field Level Encryption Config.
                       For example: K3D5EWEUDCCXON.'
                     type: string
+                  queryArgProfileConfig:
+                    description: Query Arg Profile Config that specifies when to forward
+                      content if a profile isn't found and the profile that can be
+                      provided as a query argument in a request.
+                    items:
+                      properties:
+                        forwardWhenQueryArgProfileIsUnknown:
+                          description: Flag to set if you want a request to be forwarded
+                            to the origin even if the profile specified by the field-level
+                            encryption query argument, fle-profile, is unknown.
+                          type: boolean
+                        queryArgProfiles:
+                          description: Object that contains an attribute items that
+                            contains the list ofrofiles specified for query argument-profile
+                            mapping for field-level encryption. see Query Arg Profile.
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  properties:
+                                    profileId:
+                                      description: The profile ID for a field-level
+                                        encryption content type-profile mapping.
+                                      type: string
+                                    queryArg:
+                                      description: Query argument for field-level
+                                        encryption query argument-profile mapping.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -482,9 +585,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

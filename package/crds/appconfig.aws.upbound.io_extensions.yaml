@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: extensions.appconfig.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -308,10 +312,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - actionPoint
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -483,17 +500,94 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: actionPoint is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actionPoint)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ExtensionStatus defines the observed state of Extension.
             properties:
               atProvider:
                 properties:
+                  actionPoint:
+                    description: The action points defined in the extension. Detailed
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: An action defines the tasks the extension performs
+                            during the AppConfig workflow. Detailed below.
+                          items:
+                            properties:
+                              description:
+                                description: Information about the action.
+                                type: string
+                              name:
+                                description: The action name.
+                                type: string
+                              roleArn:
+                                description: An Amazon Resource Name (ARN) for an
+                                  Identity and Access Management assume role.
+                                type: string
+                              uri:
+                                description: 'The extension URI associated to the
+                                  action point in the extension definition. The URI
+                                  can be an Amazon Resource Name (ARN) for one of
+                                  the following: an Lambda function, an Amazon Simple
+                                  Queue Service queue, an Amazon Simple Notification
+                                  Service topic, or the Amazon EventBridge default
+                                  event bus.'
+                                type: string
+                            type: object
+                          type: array
+                        point:
+                          description: The point at which to perform the defined actions.
+                            Valid points are PRE_CREATE_HOSTED_CONFIGURATION_VERSION,
+                            PRE_START_DEPLOYMENT, ON_DEPLOYMENT_START, ON_DEPLOYMENT_STEP,
+                            ON_DEPLOYMENT_BAKING, ON_DEPLOYMENT_COMPLETE, ON_DEPLOYMENT_ROLLED_BACK.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: ARN of the AppConfig Extension.
+                    type: string
+                  description:
+                    description: Information about the extension.
                     type: string
                   id:
                     description: AppConfig Extension ID.
                     type: string
+                  name:
+                    description: A name for the extension. Each extension name in
+                      your account must be unique. Extension versions use the same
+                      name.
+                    type: string
+                  parameter:
+                    description: The parameters accepted by the extension. You specify
+                      parameter values when you associate the extension to an AppConfig
+                      resource by using the CreateExtensionAssociation API action.
+                      For Lambda extension actions, these parameters are included
+                      in the Lambda request object. Detailed below.
+                    items:
+                      properties:
+                        description:
+                          description: Information about the parameter.
+                          type: string
+                        name:
+                          description: The parameter name.
+                          type: string
+                        required:
+                          description: Determines if a parameter value must be specified
+                            in the extension association.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -543,9 +637,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

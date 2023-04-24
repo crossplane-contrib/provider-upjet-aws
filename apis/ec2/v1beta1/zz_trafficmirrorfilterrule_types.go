@@ -14,6 +14,12 @@ import (
 )
 
 type DestinationPortRangeObservation struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type DestinationPortRangeParameters struct {
@@ -28,6 +34,12 @@ type DestinationPortRangeParameters struct {
 }
 
 type SourcePortRangeObservation struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SourcePortRangeParameters struct {
@@ -46,8 +58,38 @@ type TrafficMirrorFilterRuleObservation struct {
 	// ARN of the traffic mirror filter rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Description of the traffic mirror filter rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Destination CIDR block to assign to the Traffic Mirror rule.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
+	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
+	DestinationPortRange []DestinationPortRangeObservation `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
 	// Name of the traffic mirror filter rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
+	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
+	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
+
+	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
+	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+
+	// Source CIDR block to assign to the Traffic Mirror rule.
+	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
+
+	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
+	SourcePortRange []SourcePortRangeObservation `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+
+	// Direction of traffic to be captured. Valid values are ingress and egress
+	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
+
+	// ID of the traffic mirror filter to which this rule should be added
+	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
 }
 
 type TrafficMirrorFilterRuleParameters struct {
@@ -57,8 +99,8 @@ type TrafficMirrorFilterRuleParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Destination CIDR block to assign to the Traffic Mirror rule.
-	// +kubebuilder:validation:Required
-	DestinationCidrBlock *string `json:"destinationCidrBlock" tf:"destination_cidr_block,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
 	// +kubebuilder:validation:Optional
@@ -74,24 +116,24 @@ type TrafficMirrorFilterRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
-	// +kubebuilder:validation:Required
-	RuleAction *string `json:"ruleAction" tf:"rule_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
 	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
-	// +kubebuilder:validation:Required
-	RuleNumber *float64 `json:"ruleNumber" tf:"rule_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 
 	// Source CIDR block to assign to the Traffic Mirror rule.
-	// +kubebuilder:validation:Required
-	SourceCidrBlock *string `json:"sourceCidrBlock" tf:"source_cidr_block,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
 
 	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
 	// +kubebuilder:validation:Optional
 	SourcePortRange []SourcePortRangeParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// Direction of traffic to be captured. Valid values are ingress and egress
-	// +kubebuilder:validation:Required
-	TrafficDirection *string `json:"trafficDirection" tf:"traffic_direction,omitempty"`
+	// +kubebuilder:validation:Optional
+	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
 
 	// ID of the traffic mirror filter to which this rule should be added
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TrafficMirrorFilter
@@ -132,8 +174,13 @@ type TrafficMirrorFilterRuleStatus struct {
 type TrafficMirrorFilterRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficMirrorFilterRuleSpec   `json:"spec"`
-	Status            TrafficMirrorFilterRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleAction)",message="ruleAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ruleNumber)",message="ruleNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceCidrBlock)",message="sourceCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trafficDirection)",message="trafficDirection is a required parameter"
+	Spec   TrafficMirrorFilterRuleSpec   `json:"spec"`
+	Status TrafficMirrorFilterRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

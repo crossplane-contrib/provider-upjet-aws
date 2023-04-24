@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: conformancepacks.configservice.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -109,6 +113,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -288,7 +307,42 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the conformance pack.
                     type: string
+                  deliveryS3Bucket:
+                    description: Amazon S3 bucket where AWS Config stores conformance
+                      pack templates. Maximum length of 63.
+                    type: string
+                  deliveryS3KeyPrefix:
+                    description: The prefix for the Amazon S3 bucket. Maximum length
+                      of 1024.
+                    type: string
                   id:
+                    type: string
+                  inputParameter:
+                    description: Set of configuration blocks describing input parameters
+                      passed to the conformance pack template. Documented below. When
+                      configured, the parameters must also be included in the template_body
+                      or in the template stored in Amazon S3 if using template_s3_uri.
+                    items:
+                      properties:
+                        parameterName:
+                          description: The input key.
+                          type: string
+                        parameterValue:
+                          description: The input value.
+                          type: string
+                      type: object
+                    type: array
+                  templateBody:
+                    description: A string containing full conformance pack template
+                      body. Maximum length of 51200. Drift detection is not possible
+                      with this argument.
+                    type: string
+                  templateS3Uri:
+                    description: Location of file, e.g., s3://bucketname/prefix, containing
+                      the template body. The uri must point to the conformance pack
+                      template that is located in an Amazon S3 bucket in the same
+                      region as the conformance pack. Maximum length of 1024. Drift
+                      detection is not possible with this argument.
                     type: string
                 type: object
               conditions:
@@ -332,9 +386,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -15,8 +15,27 @@ import (
 
 type MaintenanceWindowTargetObservation struct {
 
+	// The description of the maintenance window target.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the maintenance window target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the maintenance window target.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+	OwnerInformation *string `json:"ownerInformation,omitempty" tf:"owner_information,omitempty"`
+
+	// The type of target being registered with the Maintenance Window. Possible values are INSTANCE and RESOURCE_GROUP.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs. You can specify targets using instance IDs, resource group names, or tags that have been applied to instances. For more information about these examples formats see
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
+	Targets []MaintenanceWindowTargetTargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// The Id of the maintenance window to register the target with.
+	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 }
 
 type MaintenanceWindowTargetParameters struct {
@@ -39,13 +58,13 @@ type MaintenanceWindowTargetParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The type of target being registered with the Maintenance Window. Possible values are INSTANCE and RESOURCE_GROUP.
-	// +kubebuilder:validation:Required
-	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs. You can specify targets using instance IDs, resource group names, or tags that have been applied to instances. For more information about these examples formats see
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
-	// +kubebuilder:validation:Required
-	Targets []MaintenanceWindowTargetTargetsParameters `json:"targets" tf:"targets,omitempty"`
+	// +kubebuilder:validation:Optional
+	Targets []MaintenanceWindowTargetTargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The Id of the maintenance window to register the target with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
@@ -63,6 +82,9 @@ type MaintenanceWindowTargetParameters struct {
 }
 
 type MaintenanceWindowTargetTargetsObservation struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MaintenanceWindowTargetTargetsParameters struct {
@@ -98,8 +120,10 @@ type MaintenanceWindowTargetStatus struct {
 type MaintenanceWindowTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MaintenanceWindowTargetSpec   `json:"spec"`
-	Status            MaintenanceWindowTargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceType)",message="resourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targets)",message="targets is a required parameter"
+	Spec   MaintenanceWindowTargetSpec   `json:"spec"`
+	Status MaintenanceWindowTargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -42,6 +42,15 @@ type OrganizationalUnitObservation struct {
 	// Identifier of the account
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name for the organizational unit
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the parent organizational unit, which may be the root
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -49,12 +58,12 @@ type OrganizationalUnitObservation struct {
 type OrganizationalUnitParameters struct {
 
 	// The name for the organizational unit
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ID of the parent organizational unit, which may be the root
-	// +kubebuilder:validation:Required
-	ParentID *string `json:"parentId" tf:"parent_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -90,8 +99,10 @@ type OrganizationalUnitStatus struct {
 type OrganizationalUnit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OrganizationalUnitSpec   `json:"spec"`
-	Status            OrganizationalUnitStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parentId)",message="parentId is a required parameter"
+	Spec   OrganizationalUnitSpec   `json:"spec"`
+	Status OrganizationalUnitStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

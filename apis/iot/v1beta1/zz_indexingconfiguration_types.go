@@ -14,6 +14,12 @@ import (
 )
 
 type CustomFieldObservation struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CustomFieldParameters struct {
@@ -29,6 +35,12 @@ type CustomFieldParameters struct {
 
 type IndexingConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Thing group indexing configuration. See below.
+	ThingGroupIndexingConfiguration []ThingGroupIndexingConfigurationObservation `json:"thingGroupIndexingConfiguration,omitempty" tf:"thing_group_indexing_configuration,omitempty"`
+
+	// Thing indexing configuration. See below.
+	ThingIndexingConfiguration []ThingIndexingConfigurationObservation `json:"thingIndexingConfiguration,omitempty" tf:"thing_indexing_configuration,omitempty"`
 }
 
 type IndexingConfigurationParameters struct {
@@ -48,6 +60,12 @@ type IndexingConfigurationParameters struct {
 }
 
 type ManagedFieldObservation struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ManagedFieldParameters struct {
@@ -62,6 +80,15 @@ type ManagedFieldParameters struct {
 }
 
 type ThingGroupIndexingConfigurationObservation struct {
+
+	// A list of thing group fields to index. This list cannot contain any managed fields. See below.
+	CustomField []CustomFieldObservation `json:"customField,omitempty" tf:"custom_field,omitempty"`
+
+	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
+	ManagedField []ManagedFieldObservation `json:"managedField,omitempty" tf:"managed_field,omitempty"`
+
+	// Thing group indexing mode. Valid values: OFF, ON.
+	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode,omitempty" tf:"thing_group_indexing_mode,omitempty"`
 }
 
 type ThingGroupIndexingConfigurationParameters struct {
@@ -80,6 +107,12 @@ type ThingGroupIndexingConfigurationParameters struct {
 }
 
 type ThingIndexingConfigurationCustomFieldObservation struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ThingIndexingConfigurationCustomFieldParameters struct {
@@ -94,6 +127,12 @@ type ThingIndexingConfigurationCustomFieldParameters struct {
 }
 
 type ThingIndexingConfigurationManagedFieldObservation struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ThingIndexingConfigurationManagedFieldParameters struct {
@@ -108,6 +147,24 @@ type ThingIndexingConfigurationManagedFieldParameters struct {
 }
 
 type ThingIndexingConfigurationObservation struct {
+
+	// Contains custom field names and their data type. See below.
+	CustomField []ThingIndexingConfigurationCustomFieldObservation `json:"customField,omitempty" tf:"custom_field,omitempty"`
+
+	// Device Defender indexing mode. Valid values: VIOLATIONS, OFF. Default: OFF.
+	DeviceDefenderIndexingMode *string `json:"deviceDefenderIndexingMode,omitempty" tf:"device_defender_indexing_mode,omitempty"`
+
+	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
+	ManagedField []ThingIndexingConfigurationManagedFieldObservation `json:"managedField,omitempty" tf:"managed_field,omitempty"`
+
+	// Named shadow indexing mode. Valid values: ON, OFF. Default: OFF.
+	NamedShadowIndexingMode *string `json:"namedShadowIndexingMode,omitempty" tf:"named_shadow_indexing_mode,omitempty"`
+
+	// Thing connectivity indexing mode. Valid values: STATUS, OFF. Default: OFF.
+	ThingConnectivityIndexingMode *string `json:"thingConnectivityIndexingMode,omitempty" tf:"thing_connectivity_indexing_mode,omitempty"`
+
+	// Thing indexing mode. Valid values: REGISTRY, REGISTRY_AND_SHADOW, OFF.
+	ThingIndexingMode *string `json:"thingIndexingMode,omitempty" tf:"thing_indexing_mode,omitempty"`
 }
 
 type ThingIndexingConfigurationParameters struct {

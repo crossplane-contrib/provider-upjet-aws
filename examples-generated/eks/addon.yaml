@@ -8,6 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    addonName: vpc-cni
     clusterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -81,6 +81,7 @@ func Configure(p *config.Provider) {
 				SelectorFieldName: "SecurityGroupSelector",
 			},
 		}
+		r.MetaResource.ArgumentDocs["cluster"] = `Name of an ECS cluster.`
 		r.UseAsync = true
 	})
 

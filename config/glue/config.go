@@ -56,6 +56,16 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_glue_job", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			//
+			IgnoredFields: []string{
+				"max_capacity", "number_of_workers", "worker_type",
+			},
+		}
+
+	})
+
 	p.AddResourceConfigurator("aws_glue_security_configuration", func(r *config.Resource) {
 		r.References["encryption_configuration.cloudwatch_encryption.kms_key_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",

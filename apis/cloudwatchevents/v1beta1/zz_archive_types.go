@@ -18,7 +18,19 @@ type ArchiveObservation struct {
 	// The Amazon Resource Name (ARN) of the event archive.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the new event archive.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
+	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// Event bus source ARN from where these events should be archived.
+	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type ArchiveParameters struct {

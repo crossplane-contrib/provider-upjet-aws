@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: ebsvolumes.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -187,9 +191,23 @@ spec:
                       io1, io2, sc1 or st1 (Default: gp2).'
                     type: string
                 required:
-                - availabilityZone
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -361,6 +379,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: availabilityZone is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZone)
           status:
             description: EBSVolumeStatus defines the observed state of EBSVolume.
             properties:
@@ -369,9 +390,46 @@ spec:
                   arn:
                     description: The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
                     type: string
+                  availabilityZone:
+                    description: The AZ where the EBS volume will exist.
+                    type: string
+                  encrypted:
+                    description: If true, the disk will be encrypted.
+                    type: boolean
+                  finalSnapshot:
+                    description: If true, snapshot will be created before volume deletion.
+                      Any tags on the volume will be migrated to the snapshot. By
+                      default set to false
+                    type: boolean
                   id:
                     description: The volume ID (e.g., vol-59fcb34e).
                     type: string
+                  iops:
+                    description: The amount of IOPS to provision for the disk. Only
+                      valid for type of io1, io2 or gp3.
+                    type: number
+                  kmsKeyId:
+                    description: The ARN for the KMS encryption key. When specifying
+                      kms_key_id, encrypted needs to be set to true.
+                    type: string
+                  multiAttachEnabled:
+                    description: Specifies whether to enable Amazon EBS Multi-Attach.
+                      Multi-Attach is supported on io1 and io2 volumes.
+                    type: boolean
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    type: string
+                  size:
+                    description: The size of the drive in GiBs.
+                    type: number
+                  snapshotId:
+                    description: A snapshot to base the EBS volume off of.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -379,6 +437,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  throughput:
+                    description: The throughput that the volume supports, in MiB/s.
+                      Only valid for type of gp3.
+                    type: number
+                  type:
+                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
+                      io1, io2, sc1 or st1 (Default: gp2).'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -421,9 +487,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

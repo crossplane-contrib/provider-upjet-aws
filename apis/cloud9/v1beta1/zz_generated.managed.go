@@ -17,6 +17,11 @@ func (mg *EnvironmentEC2) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EnvironmentEC2.
+func (mg *EnvironmentEC2) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EnvironmentEC2.
 func (mg *EnvironmentEC2) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *EnvironmentEC2) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EnvironmentEC2.
 func (mg *EnvironmentEC2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EnvironmentEC2.
+func (mg *EnvironmentEC2) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EnvironmentEC2.
@@ -83,6 +93,11 @@ func (mg *EnvironmentMembership) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EnvironmentMembership.
+func (mg *EnvironmentMembership) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EnvironmentMembership.
 func (mg *EnvironmentMembership) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *EnvironmentMembership) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EnvironmentMembership.
 func (mg *EnvironmentMembership) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EnvironmentMembership.
+func (mg *EnvironmentMembership) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EnvironmentMembership.

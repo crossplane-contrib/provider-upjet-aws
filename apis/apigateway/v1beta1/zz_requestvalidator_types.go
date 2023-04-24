@@ -17,13 +17,25 @@ type RequestValidatorObservation struct {
 
 	// Unique ID of the request validator
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the request validator
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the associated Rest API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Boolean whether to validate request body. Defaults to false.
+	ValidateRequestBody *bool `json:"validateRequestBody,omitempty" tf:"validate_request_body,omitempty"`
+
+	// Boolean whether to validate request parameters. Defaults to false.
+	ValidateRequestParameters *bool `json:"validateRequestParameters,omitempty" tf:"validate_request_parameters,omitempty"`
 }
 
 type RequestValidatorParameters struct {
 
 	// Name of the request validator
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -77,8 +89,9 @@ type RequestValidatorStatus struct {
 type RequestValidator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RequestValidatorSpec   `json:"spec"`
-	Status            RequestValidatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   RequestValidatorSpec   `json:"spec"`
+	Status RequestValidatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

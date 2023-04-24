@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: proxyendpoints.rds.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -246,8 +250,22 @@ spec:
                     type: array
                 required:
                 - region
-                - vpcSubnetIds
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -419,6 +437,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: vpcSubnetIds is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcSubnetIds)
           status:
             description: ProxyEndpointStatus defines the observed state of ProxyEndpoint.
             properties:
@@ -426,6 +447,10 @@ spec:
                 properties:
                   arn:
                     description: The Amazon Resource Name (ARN) for the proxy endpoint.
+                    type: string
+                  dbProxyName:
+                    description: The name of the DB proxy associated with the DB proxy
+                      endpoint that you create.
                     type: string
                   endpoint:
                     description: The endpoint that you can use to connect to the proxy.
@@ -440,13 +465,35 @@ spec:
                     description: Indicates whether this endpoint is the default endpoint
                       for the associated DB proxy.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                  targetRole:
+                    description: Indicates whether the DB proxy endpoint can be used
+                      for read/write or read-only operations. The default is READ_WRITE.
+                      Valid values are READ_WRITE and READ_ONLY.
+                    type: string
                   vpcId:
                     description: The VPC ID of the DB proxy endpoint.
                     type: string
+                  vpcSecurityGroupIds:
+                    description: One or more VPC security group IDs to associate with
+                      the new proxy.
+                    items:
+                      type: string
+                    type: array
+                  vpcSubnetIds:
+                    description: One or more VPC subnet IDs to associate with the
+                      new proxy.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -489,9 +536,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

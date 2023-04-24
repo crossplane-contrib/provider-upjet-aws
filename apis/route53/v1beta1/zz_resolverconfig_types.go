@@ -15,18 +15,24 @@ import (
 
 type ResolverConfigObservation struct {
 
+	// Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. Valid values: ENABLE, DISABLE.
+	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag,omitempty" tf:"autodefined_reverse_flag,omitempty"`
+
 	// The ID of the resolver configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The AWS account ID of the owner of the VPC that this resolver configuration applies to.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// The ID of the VPC that the configuration is for.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type ResolverConfigParameters struct {
 
 	// Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. Valid values: ENABLE, DISABLE.
-	// +kubebuilder:validation:Required
-	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag" tf:"autodefined_reverse_flag,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag,omitempty" tf:"autodefined_reverse_flag,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -72,8 +78,9 @@ type ResolverConfigStatus struct {
 type ResolverConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResolverConfigSpec   `json:"spec"`
-	Status            ResolverConfigStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autodefinedReverseFlag)",message="autodefinedReverseFlag is a required parameter"
+	Spec   ResolverConfigSpec   `json:"spec"`
+	Status ResolverConfigStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

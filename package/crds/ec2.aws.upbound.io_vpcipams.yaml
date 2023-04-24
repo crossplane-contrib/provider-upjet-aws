@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: vpcipams.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -100,9 +104,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - operatingRegions
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -274,6 +292,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: operatingRegions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operatingRegions)
           status:
             description: VPCIpamStatus defines the observed state of VPCIpam.
             properties:
@@ -282,15 +303,39 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of IPAM
                     type: string
+                  cascade:
+                    description: Enables you to quickly delete an IPAM, private scopes,
+                      pools in private scopes, and any allocations in the pools in
+                      private scopes.
+                    type: boolean
                   defaultResourceDiscoveryAssociationId:
                     description: The ID of the IPAM
                     type: string
                   defaultResourceDiscoveryId:
                     description: The ID of the IPAM
                     type: string
+                  description:
+                    description: A description for the IPAM.
+                    type: string
                   id:
                     description: The ID of the IPAM
                     type: string
+                  operatingRegions:
+                    description: Determines which locales can be chosen when you create
+                      pools. Locale is the Region where you want to make an IPAM pool
+                      available for allocations. You can only create pools with locales
+                      that match the operating Regions of the IPAM. You can only create
+                      VPCs from a pool whose locale matches the VPC's Region. You
+                      specify a region using the region_name parameter. You must set
+                      your provider block region as an operating_region.
+                    items:
+                      properties:
+                        regionName:
+                          description: The name of the Region you want to add to the
+                            IPAM.
+                          type: string
+                      type: object
+                    type: array
                   privateDefaultScopeId:
                     description: 'The ID of the IPAM''s private scope. A scope is
                       a top-level container in IPAM. Each scope represents an IP-independent
@@ -312,6 +357,11 @@ spec:
                   scopeCount:
                     description: The number of scopes in the IPAM.
                     type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -361,9 +411,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

@@ -18,11 +18,20 @@ type RevisionObservation struct {
 	// The Amazon Resource Name of this data set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// An optional comment about the revision.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The dataset id.
+	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
+
 	// The Id of the data set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Id of the revision.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

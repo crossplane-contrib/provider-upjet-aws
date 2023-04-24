@@ -228,3 +228,61 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 
 	return nil
 }
+
+// ResolveReferences of this S3Endpoint.
+func (mg *S3Endpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyArn")
+	}
+	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionKMSKeyID),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ServerSideEncryptionKMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.ServerSideEncryptionKMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryptionKMSKeyID")
+	}
+	mg.Spec.ForProvider.ServerSideEncryptionKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerSideEncryptionKMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceAccessRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.ServiceAccessRoleArnRef,
+		Selector:     mg.Spec.ForProvider.ServiceAccessRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceAccessRoleArn")
+	}
+	mg.Spec.ForProvider.ServiceAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceAccessRoleArnRef = rsp.ResolvedReference
+
+	return nil
+}

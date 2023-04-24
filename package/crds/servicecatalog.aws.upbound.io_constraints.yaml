@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: constraints.servicecatalog.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -240,10 +244,23 @@ spec:
                       RESOURCE_UPDATE, STACKSET, and TEMPLATE.
                     type: string
                 required:
-                - parameters
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -415,18 +432,44 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: parameters is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.parameters)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ConstraintStatus defines the observed state of Constraint.
             properties:
               atProvider:
                 properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
+                  description:
+                    description: Description of the constraint.
+                    type: string
                   id:
                     description: Constraint identifier.
                     type: string
                   owner:
                     description: Owner of the constraint.
                     type: string
+                  parameters:
+                    description: Constraint parameters in JSON format. The syntax
+                      depends on the constraint type. See details below.
+                    type: string
+                  portfolioId:
+                    description: Portfolio identifier.
+                    type: string
+                  productId:
+                    description: Product identifier.
+                    type: string
                   status:
+                    type: string
+                  type:
+                    description: Type of constraint. Valid values are LAUNCH, NOTIFICATION,
+                      RESOURCE_UPDATE, STACKSET, and TEMPLATE.
                     type: string
                 type: object
               conditions:
@@ -470,9 +513,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

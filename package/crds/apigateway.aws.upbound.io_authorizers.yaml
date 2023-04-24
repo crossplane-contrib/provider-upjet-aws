@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: authorizers.apigateway.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -335,9 +339,23 @@ spec:
                       Cognito user pool. Defaults to TOKEN.
                     type: string
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -509,6 +527,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AuthorizerStatus defines the observed state of Authorizer.
             properties:
@@ -517,8 +538,53 @@ spec:
                   arn:
                     description: ARN of the API Gateway Authorizer
                     type: string
+                  authorizerCredentials:
+                    description: Credentials required for the authorizer. To specify
+                      an IAM Role for API Gateway to assume, use the IAM Role ARN.
+                    type: string
+                  authorizerResultTtlInSeconds:
+                    description: TTL of cached authorizer results in seconds. Defaults
+                      to 300.
+                    type: number
+                  authorizerUri:
+                    description: Authorizer's Uniform Resource Identifier (URI). This
+                      must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
+                      e.g., arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:012345678912:function:my-function/invocations
+                    type: string
                   id:
                     description: Authorizer identifier.
+                    type: string
+                  identitySource:
+                    description: Source of the identity in an incoming request. Defaults
+                      to method.request.header.Authorization. For REQUEST type, this
+                      may be a comma-separated list of values, including headers,
+                      query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
+                    type: string
+                  identityValidationExpression:
+                    description: Validation expression for the incoming identity.
+                      For TOKEN type, this value should be a regular expression. The
+                      incoming token from the client is matched against this expression,
+                      and will proceed if the token matches. If the token doesn't
+                      match, the client receives a 401 Unauthorized response.
+                    type: string
+                  name:
+                    description: Name of the authorizer
+                    type: string
+                  providerArns:
+                    description: 'List of the Amazon Cognito user pool ARNs. Each
+                      element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.'
+                    items:
+                      type: string
+                    type: array
+                  restApiId:
+                    description: ID of the associated REST API
+                    type: string
+                  type:
+                    description: Type of the authorizer. Possible values are TOKEN
+                      for a Lambda function using a single authorization token submitted
+                      in a custom header, REQUEST for a Lambda function using incoming
+                      request parameters, or COGNITO_USER_POOLS for using an Amazon
+                      Cognito user pool. Defaults to TOKEN.
                     type: string
                 type: object
               conditions:
@@ -562,9 +628,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

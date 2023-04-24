@@ -14,6 +14,10 @@ import (
 )
 
 type EmailIdentityFeedbackAttributesObservation struct {
+
+	// Sets the feedback forwarding configuration for the identity.
+	EmailForwardingEnabled *bool `json:"emailForwardingEnabled,omitempty" tf:"email_forwarding_enabled,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

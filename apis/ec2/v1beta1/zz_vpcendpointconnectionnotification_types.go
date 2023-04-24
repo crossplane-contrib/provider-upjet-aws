@@ -15,6 +15,12 @@ import (
 
 type VPCEndpointConnectionNotificationObservation struct {
 
+	// One or more endpoint events for which to receive notifications.
+	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
+
+	// The ARN of the SNS topic for the notifications.
+	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
+
 	// The ID of the VPC connection notification.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -23,13 +29,19 @@ type VPCEndpointConnectionNotificationObservation struct {
 
 	// The state of the notification.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// The ID of the VPC Endpoint to receive notifications for.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// The ID of the VPC Endpoint Service to receive notifications for.
+	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
 }
 
 type VPCEndpointConnectionNotificationParameters struct {
 
 	// One or more endpoint events for which to receive notifications.
-	// +kubebuilder:validation:Required
-	ConnectionEvents []*string `json:"connectionEvents" tf:"connection_events,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
 	// The ARN of the SNS topic for the notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
@@ -93,8 +105,9 @@ type VPCEndpointConnectionNotificationStatus struct {
 type VPCEndpointConnectionNotification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VPCEndpointConnectionNotificationSpec   `json:"spec"`
-	Status            VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionEvents)",message="connectionEvents is a required parameter"
+	Spec   VPCEndpointConnectionNotificationSpec   `json:"spec"`
+	Status VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

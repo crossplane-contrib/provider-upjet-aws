@@ -44,7 +44,6 @@ import (
 	"github.com/upbound/provider-aws/config/efs"
 	"github.com/upbound/provider-aws/config/eks"
 	"github.com/upbound/provider-aws/config/elasticache"
-	"github.com/upbound/provider-aws/config/elasticloadbalancing"
 	"github.com/upbound/provider-aws/config/elb"
 	"github.com/upbound/provider-aws/config/elbv2"
 	"github.com/upbound/provider-aws/config/firehose"
@@ -62,6 +61,7 @@ import (
 	"github.com/upbound/provider-aws/config/lakeformation"
 	"github.com/upbound/provider-aws/config/lambda"
 	"github.com/upbound/provider-aws/config/licensemanager"
+	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkmanager"
@@ -69,6 +69,7 @@ import (
 	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
+	"github.com/upbound/provider-aws/config/ram"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
 	"github.com/upbound/provider-aws/config/rolesanywhere"
@@ -140,6 +141,7 @@ func GetProvider() *config.Provider {
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithBasePackages(BasePackages),
+		config.WithFeaturesPackage("internal/features"),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
@@ -184,7 +186,6 @@ func GetProvider() *config.Provider {
 		efs.Configure,
 		eks.Configure,
 		elasticache.Configure,
-		elasticloadbalancing.Configure,
 		elb.Configure,
 		elbv2.Configure,
 		firehose.Configure,
@@ -201,9 +202,11 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		lambda.Configure,
 		licensemanager.Configure,
+		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
 		opensearch.Configure,
+		ram.Configure,
 		rds.Configure,
 		redshift.Configure,
 		rolesanywhere.Configure,

@@ -18,10 +18,25 @@ type GameSessionQueueObservation struct {
 	// Game Session Queue ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of fleet/alias ARNs used by session queue for placing game sessions.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An SNS topic ARN that is set up to receive game session placement notifications.
+	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
+
+	// One or more policies used to choose fleet based on player latency. See below.
+	PlayerLatencyPolicy []PlayerLatencyPolicyObservation `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Maximum time a game session request can remain in the queue.
+	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
 }
 
 type GameSessionQueueParameters struct {
@@ -63,6 +78,12 @@ type GameSessionQueueParameters struct {
 }
 
 type PlayerLatencyPolicyObservation struct {
+
+	// Maximum latency value that is allowed for any player.
+	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds,omitempty" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
+
+	// Length of time that the policy is enforced while placing a new game session. Absence of value for this attribute means that the policy is enforced until the queue times out.
+	PolicyDurationSeconds *float64 `json:"policyDurationSeconds,omitempty" tf:"policy_duration_seconds,omitempty"`
 }
 
 type PlayerLatencyPolicyParameters struct {

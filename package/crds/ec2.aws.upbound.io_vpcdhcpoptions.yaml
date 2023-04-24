@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: vpcdhcpoptions.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -104,6 +108,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -283,13 +302,46 @@ spec:
                   arn:
                     description: The ARN of the DHCP Options Set.
                     type: string
+                  domainName:
+                    description: the suffix domain name to use by default when resolving
+                      non Fully Qualified Domain Names. In other words, this is what
+                      ends up being the search value in the /etc/resolv.conf file.
+                    type: string
+                  domainNameServers:
+                    description: List of name servers to configure in /etc/resolv.conf.
+                      If you want to use the default AWS nameservers you should set
+                      this to AmazonProvidedDNS.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the DHCP Options Set.
                     type: string
+                  netbiosNameServers:
+                    description: List of NETBIOS name servers.
+                    items:
+                      type: string
+                    type: array
+                  netbiosNodeType:
+                    description: The NetBIOS node type (1, 2, 4, or 8). AWS recommends
+                      to specify 2 since broadcast and multicast are not supported
+                      in their network. For more information about these node types,
+                      see RFC 2132.
+                    type: string
+                  ntpServers:
+                    description: List of NTP servers to configure.
+                    items:
+                      type: string
+                    type: array
                   ownerId:
                     description: The ID of the AWS account that owns the DHCP options
                       set.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -339,9 +391,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

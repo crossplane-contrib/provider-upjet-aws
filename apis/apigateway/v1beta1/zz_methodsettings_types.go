@@ -15,13 +15,25 @@ import (
 
 type MethodSettingsObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path (e.g., trimprefix(aws_api_gateway_resource.example.path, "/")).
+	MethodPath *string `json:"methodPath,omitempty" tf:"method_path,omitempty"`
+
+	// ID of the REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Settings block, see below.
+	Settings []SettingsObservation `json:"settings,omitempty" tf:"settings,omitempty"`
+
+	// Name of the stage
+	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 }
 
 type MethodSettingsParameters struct {
 
 	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path (e.g., trimprefix(aws_api_gateway_resource.example.path, "/")).
-	// +kubebuilder:validation:Required
-	MethodPath *string `json:"methodPath" tf:"method_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	MethodPath *string `json:"methodPath,omitempty" tf:"method_path,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -43,8 +55,8 @@ type MethodSettingsParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Settings block, see below.
-	// +kubebuilder:validation:Required
-	Settings []SettingsParameters `json:"settings" tf:"settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// Name of the stage
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Stage
@@ -62,6 +74,36 @@ type MethodSettingsParameters struct {
 }
 
 type SettingsObservation struct {
+
+	// Whether the cached responses are encrypted.
+	CacheDataEncrypted *bool `json:"cacheDataEncrypted,omitempty" tf:"cache_data_encrypted,omitempty"`
+
+	// Time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
+	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
+
+	// Whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
+	CachingEnabled *bool `json:"cachingEnabled,omitempty" tf:"caching_enabled,omitempty"`
+
+	// Whether data trace logging is enabled for this method, which effects the log entries pushed to Amazon CloudWatch Logs.
+	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
+
+	// Logging level for this method, which effects the log entries pushed to Amazon CloudWatch Logs. The available levels are OFF, ERROR, and INFO.
+	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
+
+	// Whether Amazon CloudWatch metrics are enabled for this method.
+	MetricsEnabled *bool `json:"metricsEnabled,omitempty" tf:"metrics_enabled,omitempty"`
+
+	// Whether authorization is required for a cache invalidation request.
+	RequireAuthorizationForCacheControl *bool `json:"requireAuthorizationForCacheControl,omitempty" tf:"require_authorization_for_cache_control,omitempty"`
+
+	// Throttling burst limit. Default: -1 (throttling disabled).
+	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+
+	// Throttling rate limit. Default: -1 (throttling disabled).
+	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
+
+	// How to handle unauthorized requests for cache invalidation. The available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER, SUCCEED_WITHOUT_RESPONSE_HEADER.
+	UnauthorizedCacheControlHeaderStrategy *string `json:"unauthorizedCacheControlHeaderStrategy,omitempty" tf:"unauthorized_cache_control_header_strategy,omitempty"`
 }
 
 type SettingsParameters struct {
@@ -131,8 +173,10 @@ type MethodSettingsStatus struct {
 type MethodSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MethodSettingsSpec   `json:"spec"`
-	Status            MethodSettingsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.methodPath)",message="methodPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settings)",message="settings is a required parameter"
+	Spec   MethodSettingsSpec   `json:"spec"`
+	Status MethodSettingsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -18,8 +18,17 @@ type DiscovererObservation struct {
 	// The Amazon Resource Name (ARN) of the discoverer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The description of the discoverer. Maximum of 256 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the discoverer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN of the event bus to discover event schemas on.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

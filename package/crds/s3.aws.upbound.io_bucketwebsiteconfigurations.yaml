@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: bucketwebsiteconfigurations.s3.aws.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -261,6 +265,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -438,9 +457,117 @@ spec:
             properties:
               atProvider:
                 properties:
+                  bucket:
+                    description: Name of the bucket.
+                    type: string
+                  errorDocument:
+                    description: Name of the error document for the website. See below.
+                    items:
+                      properties:
+                        key:
+                          description: Object key name to use when a 4XX class error
+                            occurs.
+                          type: string
+                      type: object
+                    type: array
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
                   id:
                     description: The bucket or bucket and expected_bucket_owner separated
                       by a comma (,) if the latter is provided.
+                    type: string
+                  indexDocument:
+                    description: Name of the index document for the website. See below.
+                    items:
+                      properties:
+                        suffix:
+                          description: Suffix that is appended to a request that is
+                            for a directory on the website endpoint. For example,
+                            if the suffix is index.html and you make a request to
+                            samplebucket/images/, the data that is returned will be
+                            for the object with the key name images/index.html. The
+                            suffix must not be empty and must not include a slash
+                            character.
+                          type: string
+                      type: object
+                    type: array
+                  redirectAllRequestsTo:
+                    description: Redirect behavior for every request to this bucket's
+                      website endpoint. See below. Conflicts with error_document,
+                      index_document, and routing_rule.
+                    items:
+                      properties:
+                        hostName:
+                          description: Name of the host where requests are redirected.
+                          type: string
+                        protocol:
+                          description: 'Protocol to use when redirecting requests.
+                            The default is the protocol that is used in the original
+                            request. Valid values: http, https.'
+                          type: string
+                      type: object
+                    type: array
+                  routingRule:
+                    description: List of rules that define when a redirect is applied
+                      and the redirect behavior. See below.
+                    items:
+                      properties:
+                        condition:
+                          description: Configuration block for describing a condition
+                            that must be met for the specified redirect to apply.
+                            See below.
+                          items:
+                            properties:
+                              httpErrorCodeReturnedEquals:
+                                description: HTTP error code when the redirect is
+                                  applied. If specified with key_prefix_equals, then
+                                  both must be true for the redirect to be applied.
+                                type: string
+                              keyPrefixEquals:
+                                description: Object key name prefix when the redirect
+                                  is applied. If specified with http_error_code_returned_equals,
+                                  then both must be true for the redirect to be applied.
+                                type: string
+                            type: object
+                          type: array
+                        redirect:
+                          description: Configuration block for redirect information.
+                            See below.
+                          items:
+                            properties:
+                              hostName:
+                                description: Name of the host where requests are redirected.
+                                type: string
+                              httpRedirectCode:
+                                description: HTTP redirect code to use on the response.
+                                type: string
+                              protocol:
+                                description: 'Protocol to use when redirecting requests.
+                                  The default is the protocol that is used in the
+                                  original request. Valid values: http, https.'
+                                type: string
+                              replaceKeyPrefixWith:
+                                description: Object key prefix to use in the redirect
+                                  request. For example, to redirect requests for all
+                                  pages with prefix docs/ (objects in the docs/ folder)
+                                  to documents/, you can set a condition block with
+                                  key_prefix_equals set to docs/ and in the redirect
+                                  set replace_key_prefix_with to /documents.
+                                type: string
+                              replaceKeyWith:
+                                description: Specific object key to use in the redirect
+                                  request. For example, redirect request to error.html.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  routingRules:
+                    description: JSON array containing routing rules describing redirect
+                      behavior and when redirects are applied. Use this parameter
+                      when your routing rules contain empty String values ("") as
+                      seen in the example above.
                     type: string
                   websiteDomain:
                     description: Domain of the website endpoint. This is used to create
@@ -491,9 +618,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

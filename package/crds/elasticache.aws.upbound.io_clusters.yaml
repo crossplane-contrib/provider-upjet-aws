@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: clusters.elasticache.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -400,6 +404,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -576,8 +595,34 @@ spec:
             properties:
               atProvider:
                 properties:
+                  applyImmediately:
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon ElastiCache Documentation for more information..
+                    type: boolean
                   arn:
                     description: The ARN of the created ElastiCache Cluster.
+                    type: string
+                  autoMinorVersionUpgrade:
+                    description: Specifies whether minor version engine upgrades will
+                      be applied automatically to the underlying Cache Cluster instances
+                      during the maintenance window. Only supported for engine type
+                      "redis" and if the engine version is 6 or higher. Defaults to
+                      true.
+                    type: string
+                  availabilityZone:
+                    description: 'Availability Zone for the cache cluster. If you
+                      want to create cache nodes in multi-az, use preferred_availability_zones
+                      instead. Default: System chosen Availability Zone. Changing
+                      this value will re-create the resource.'
+                    type: string
+                  azMode:
+                    description: Whether the nodes in this Memcached node group are
+                      created in a single Availability Zone or created across multiple
+                      Availability Zones in the cluster's region. Valid values for
+                      this parameter are single-az or cross-az, default is single-az.
+                      If you want to choose cross-az, num_cache_nodes must be greater
+                      than 1.
                     type: string
                   cacheNodes:
                     description: List of node objects including id, address, port
@@ -610,13 +655,165 @@ spec:
                     description: (Memcached only) Configuration endpoint to allow
                       host discovery.
                     type: string
+                  engine:
+                    description: –  Name of the cache engine to be used for this cache
+                      cluster. Valid values are memcached or redis.
+                    type: string
+                  engineVersion:
+                    description: –  Version number of the cache engine to be used.
+                      If not set, defaults to the latest version. See Describe Cache
+                      Engine Versions in the AWS Documentation for supported versions.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
+                    type: string
                   engineVersionActual:
                     description: Because ElastiCache pulls the latest minor or patch
                       for a version, this attribute returns the running version of
                       the cache engine.
                     type: string
+                  finalSnapshotIdentifier:
+                    description: Name of your final cluster snapshot. If omitted,
+                      no final snapshot will be made.
+                    type: string
                   id:
                     type: string
+                  ipDiscovery:
+                    description: The IP version to advertise in the discovery protocol.
+                      Valid values are ipv4 or ipv6.
+                    type: string
+                  logDeliveryConfiguration:
+                    description: Specifies the destination and format of Redis SLOWLOG
+                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
+                      See Log Delivery Configuration below for more details.
+                    items:
+                      properties:
+                        destination:
+                          description: Name of either the CloudWatch Logs LogGroup
+                            or Kinesis Data Firehose resource.
+                          type: string
+                        destinationType:
+                          description: For CloudWatch Logs use cloudwatch-logs or
+                            for Kinesis Data Firehose use kinesis-firehose.
+                          type: string
+                        logFormat:
+                          description: Valid values are json or text
+                          type: string
+                        logType:
+                          description: Valid values are  slow-log or engine-log. Max
+                            1 of each.
+                          type: string
+                      type: object
+                    type: array
+                  maintenanceWindow:
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00.'
+                    type: string
+                  networkType:
+                    description: The IP versions for cache cluster connections. IPv6
+                      is supported with Redis engine 6.2 onword or Memcached version
+                      1.6.6 for all Nitro system instances. Valid values are ipv4,
+                      ipv6 or dual_stack.
+                    type: string
+                  nodeType:
+                    description: create the resource.
+                    type: string
+                  notificationTopicArn:
+                    description: east-1:012345678999:my_sns_topic.
+                    type: string
+                  numCacheNodes:
+                    description: –  The initial number of cache nodes that the cache
+                      cluster will have. For Redis, this value must be 1. For Memcached,
+                      this value must be between 1 and 40. If this number is reduced
+                      on subsequent runs, the highest numbered nodes will be removed.
+                    type: number
+                  outpostMode:
+                    description: Specify the outpost mode that will apply to the cache
+                      cluster creation. Valid values are "single-outpost" and "cross-outpost",
+                      however AWS currently only supports "single-outpost" mode.
+                    type: string
+                  parameterGroupName:
+                    description: –  The name of the parameter group to associate with
+                      this cache cluster.
+                    type: string
+                  port:
+                    description: create the resource.
+                    type: number
+                  preferredAvailabilityZones:
+                    description: 'List of the Availability Zones in which cache nodes
+                      are created. If you are creating your cluster in an Amazon VPC
+                      you can only locate nodes in Availability Zones that are associated
+                      with the subnets in the selected subnet group. The number of
+                      Availability Zones listed must equal the value of num_cache_nodes.
+                      If you want all the nodes in the same Availability Zone, use
+                      availability_zone instead, or repeat the Availability Zone multiple
+                      times in the list. Default: System chosen Availability Zones.
+                      Detecting drift of existing node availability zone is not currently
+                      supported. Updating this argument by itself to migrate existing
+                      node availability zones is not currently supported and will
+                      show a perpetual difference.'
+                    items:
+                      type: string
+                    type: array
+                  preferredOutpostArn:
+                    description: The outpost ARN in which the cache cluster will be
+                      created.
+                    type: string
+                  replicationGroupId:
+                    description: ID of the replication group to which this cluster
+                      should belong. If this parameter is specified, the cluster is
+                      added to the specified replication group as a read replica;
+                      otherwise, the cluster is a standalone primary that is not part
+                      of any replication group.
+                    type: string
+                  securityGroupIds:
+                    description: –  One or more VPC security groups associated with
+                      the cache cluster
+                    items:
+                      type: string
+                    type: array
+                  securityGroupNames:
+                    description: create the resource.
+                    items:
+                      type: string
+                    type: array
+                  snapshotArns:
+                    description: element string list containing an Amazon Resource
+                      Name (ARN) of a Redis RDB snapshot file stored in Amazon S3.
+                      The object name cannot contain any commas. Changing snapshot_arns
+                      forces a new resource.
+                    items:
+                      type: string
+                    type: array
+                  snapshotName:
+                    description: Name of a snapshot from which to restore data into
+                      the new node group. Changing snapshot_name forces a new resource.
+                    type: string
+                  snapshotRetentionLimit:
+                    description: Number of days for which ElastiCache will retain
+                      automatic cache cluster snapshots before deleting them. For
+                      example, if you set SnapshotRetentionLimit to 5, then a snapshot
+                      that was taken today will be retained for 5 days before being
+                      deleted. If the value of SnapshotRetentionLimit is set to zero
+                      (0), backups are turned off. Please note that setting a snapshot_retention_limit
+                      is not supported on cache.t1.micro cache nodes
+                    type: number
+                  snapshotWindow:
+                    description: 'Daily time range (in UTC) during which ElastiCache
+                      will begin taking a daily snapshot of your cache cluster. Example:
+                      05:00-09:00'
+                    type: string
+                  subnetGroupName:
+                    description: create the resource.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -665,9 +862,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

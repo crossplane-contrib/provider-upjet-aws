@@ -14,6 +14,9 @@ import (
 )
 
 type PolicyAttributeObservation struct {
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PolicyAttributeParameters struct {
@@ -39,6 +42,18 @@ type PolicyObservation struct {
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The load balancer on which the policy is defined.
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// Policy attribute to apply to the policy.
+	PolicyAttribute []PolicyAttributeObservation `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`
+
+	// The name of the load balancer policy.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// The policy type.
+	PolicyTypeName *string `json:"policyTypeName,omitempty" tf:"policy_type_name,omitempty"`
 }
 
 type PolicyParameters struct {
@@ -61,12 +76,12 @@ type PolicyParameters struct {
 	PolicyAttribute []PolicyAttributeParameters `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`
 
 	// The name of the load balancer policy.
-	// +kubebuilder:validation:Required
-	PolicyName *string `json:"policyName" tf:"policy_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// The policy type.
-	// +kubebuilder:validation:Required
-	PolicyTypeName *string `json:"policyTypeName" tf:"policy_type_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyTypeName *string `json:"policyTypeName,omitempty" tf:"policy_type_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -98,8 +113,10 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySpec   `json:"spec"`
-	Status            PolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyName)",message="policyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyTypeName)",message="policyTypeName is a required parameter"
+	Spec   PolicySpec   `json:"spec"`
+	Status PolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

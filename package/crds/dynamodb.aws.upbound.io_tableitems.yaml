@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: tableitems.dynamodb.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -159,10 +163,23 @@ spec:
                         type: object
                     type: object
                 required:
-                - hashKey
-                - item
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -334,12 +351,34 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: hashKey is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hashKey)
+            - message: item is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.item)
           status:
             description: TableItemStatus defines the observed state of TableItem.
             properties:
               atProvider:
                 properties:
+                  hashKey:
+                    description: Hash key to use for lookups and identification of
+                      the item
+                    type: string
                   id:
+                    type: string
+                  item:
+                    description: JSON representation of a map of attribute name/value
+                      pairs, one for each attribute. Only the primary key attributes
+                      are required; you can optionally provide other attribute name-value
+                      pairs for the item.
+                    type: string
+                  rangeKey:
+                    description: Range key to use for lookups and identification of
+                      the item. Required if there is range key defined in the table.
+                    type: string
+                  tableName:
+                    description: Name of the table to contain the item.
                     type: string
                 type: object
               conditions:
@@ -383,9 +422,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

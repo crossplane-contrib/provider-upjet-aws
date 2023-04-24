@@ -18,14 +18,17 @@ type EmailIdentityObservation struct {
 	// The ARN of the email identity.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The email address to assign to SES.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type EmailIdentityParameters struct {
 
 	// The email address to assign to SES.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -57,8 +60,9 @@ type EmailIdentityStatus struct {
 type EmailIdentity struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EmailIdentitySpec   `json:"spec"`
-	Status            EmailIdentityStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	Spec   EmailIdentitySpec   `json:"spec"`
+	Status EmailIdentityStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

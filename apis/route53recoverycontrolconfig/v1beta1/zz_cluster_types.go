@@ -35,6 +35,9 @@ type ClusterObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Unique name describing the cluster.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Status of cluster. PENDING when it is being created, PENDING_DELETION when it is being deleted and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -42,8 +45,8 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// Unique name describing the cluster.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region of the endpoint.
 	// Region is the region you'd like your resource to be created in.
@@ -76,8 +79,9 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

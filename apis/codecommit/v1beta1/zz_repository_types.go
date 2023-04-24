@@ -24,10 +24,19 @@ type RepositoryObservation struct {
 	// The URL to use for cloning the repository over SSH.
 	CloneURLSSH *string `json:"cloneUrlSsh,omitempty" tf:"clone_url_ssh,omitempty"`
 
+	// The default branch of the repository. The branch specified here needs to exist.
+	DefaultBranch *string `json:"defaultBranch,omitempty" tf:"default_branch,omitempty"`
+
+	// The description of the repository. This needs to be less than 1000 characters
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the repository
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: datalakesettings.lakeformation.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -129,6 +133,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,8 +324,66 @@ spec:
             properties:
               atProvider:
                 properties:
+                  admins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles).
+                    items:
+                      type: string
+                    type: array
+                  catalogId:
+                    description: –  Identifier for the Data Catalog. By default, the
+                      account ID.
+                    type: string
+                  createDatabaseDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create database permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For
+                            more details, see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
+                  createTableDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create table permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, and DESCRIBE. For more details,
+                            see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
+                  trustedResourceOwners:
+                    description: owning account IDs that the caller's account can
+                      use to share their user access details (user ARNs).
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -349,9 +426,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

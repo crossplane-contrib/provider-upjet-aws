@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: dbsnapshotcopies.rds.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -247,8 +251,22 @@ spec:
                     type: string
                 required:
                 - region
-                - targetDbSnapshotIdentifier
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -420,6 +438,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: targetDbSnapshotIdentifier is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetDbSnapshotIdentifier)
           status:
             description: DBSnapshotCopyStatus defines the observed state of DBSnapshotCopy.
             properties:
@@ -433,8 +454,14 @@ spec:
                     description: Specifies the name of the Availability Zone the DB
                       instance was located in at the time of the DB snapshot.
                     type: string
+                  copyTags:
+                    description: Whether to copy existing tags. Defaults to false.
+                    type: boolean
                   dbSnapshotArn:
                     description: The Amazon Resource Name (ARN) for the DB snapshot.
+                    type: string
+                  destinationRegion:
+                    description: The Destination region to place snapshot copy.
                     type: string
                   encrypted:
                     description: Specifies whether the DB snapshot is encrypted.
@@ -452,12 +479,26 @@ spec:
                     description: Specifies the Provisioned IOPS (I/O operations per
                       second) value of the DB instance at the time of the snapshot.
                     type: number
+                  kmsKeyId:
+                    description: KMS key ID.
+                    type: string
                   licenseModel:
                     description: License model information for the restored DB instance.
                     type: string
+                  optionGroupName:
+                    description: The name of an option group to associate with the
+                      copy of the snapshot.
+                    type: string
                   port:
                     type: number
+                  presignedUrl:
+                    description: he URL that contains a Signature Version 4 signed
+                      request.
+                    type: string
                   snapshotType:
+                    type: string
+                  sourceDbSnapshotIdentifier:
+                    description: Snapshot identifier of the source snapshot.
                     type: string
                   sourceRegion:
                     description: The region that the DB snapshot was created in or
@@ -466,6 +507,11 @@ spec:
                   storageType:
                     description: Specifies the storage type associated with DB snapshot.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -473,6 +519,12 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  targetCustomAvailabilityZone:
+                    description: The external custom Availability Zone.
+                    type: string
+                  targetDbSnapshotIdentifier:
+                    description: The Identifier for the snapshot.
+                    type: string
                   vpcId:
                     description: Provides the VPC ID associated with the DB snapshot.
                     type: string
@@ -518,9 +570,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

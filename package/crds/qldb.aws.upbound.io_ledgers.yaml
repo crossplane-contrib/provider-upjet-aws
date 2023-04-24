@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: ledgers.qldb.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -163,9 +167,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - permissionsMode
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -337,6 +355,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: permissionsMode is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissionsMode)
           status:
             description: LedgerStatus defines the observed state of Ledger.
             properties:
@@ -345,9 +366,30 @@ spec:
                   arn:
                     description: The ARN of the QLDB Ledger
                     type: string
+                  deletionProtection:
+                    description: The deletion protection for the QLDB Ledger instance.
+                      By default it is true.
+                    type: boolean
                   id:
                     description: The Name of the QLDB Ledger
                     type: string
+                  kmsKey:
+                    description: The key in AWS Key Management Service (AWS KMS) to
+                      use for encryption of data at rest in the ledger. For more information,
+                      see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY"
+                      to use an AWS KMS key that is owned and managed by AWS on your
+                      behalf, or the ARN of a valid symmetric customer managed KMS
+                      key.
+                    type: string
+                  permissionsMode:
+                    description: The permissions mode for the QLDB ledger instance.
+                      Specify either ALLOW_ALL or STANDARD.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -397,9 +439,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

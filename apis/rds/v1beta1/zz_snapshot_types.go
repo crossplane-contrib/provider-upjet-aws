@@ -21,6 +21,9 @@ type SnapshotObservation struct {
 	// Specifies the name of the Availability Zone the DB instance was located in at the time of the DB snapshot.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The DB Instance Identifier from which to take the snapshot.
+	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
+
 	// The Amazon Resource Name (ARN) for the DB snapshot.
 	DBSnapshotArn *string `json:"dbSnapshotArn,omitempty" tf:"db_snapshot_arn,omitempty"`
 
@@ -62,6 +65,9 @@ type SnapshotObservation struct {
 
 	// Specifies the storage type associated with DB snapshot.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`

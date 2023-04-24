@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: networkinterfaces.ec2.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -315,6 +319,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -510,9 +529,62 @@ spec:
                           type: string
                       type: object
                     type: array
+                  description:
+                    description: Description for the network interface.
+                    type: string
                   id:
                     description: ID of the network interface.
                     type: string
+                  interfaceType:
+                    description: Type of network interface to create. Set to efa for
+                      Elastic Fabric Adapter. Changing interface_type will cause the
+                      resource to be destroyed and re-created.
+                    type: string
+                  ipv4PrefixCount:
+                    description: Number of IPv4 prefixes that AWS automatically assigns
+                      to the network interface.
+                    type: number
+                  ipv4Prefixes:
+                    description: One or more IPv4 prefixes assigned to the network
+                      interface.
+                    items:
+                      type: string
+                    type: array
+                  ipv6AddressCount:
+                    description: Number of IPv6 addresses to assign to a network interface.
+                      You can't use this option if specifying specific ipv6_addresses.
+                      If your subnet has the AssignIpv6AddressOnCreation attribute
+                      set to true, you can specify 0 to override this setting.
+                    type: number
+                  ipv6AddressList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order.
+                    items:
+                      type: string
+                    type: array
+                  ipv6AddressListEnabled:
+                    description: Whether ipv6_address_list is allowed and controls
+                      the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count
+                      become read-only. Default false.
+                    type: boolean
+                  ipv6Addresses:
+                    description: One or more specific IPv6 addresses from the IPv6
+                      CIDR block range of your subnet. Addresses are assigned without
+                      regard to order. You can't use this option if you're specifying
+                      ipv6_address_count.
+                    items:
+                      type: string
+                    type: array
+                  ipv6PrefixCount:
+                    description: Number of IPv6 prefixes that AWS automatically assigns
+                      to the network interface.
+                    type: number
+                  ipv6Prefixes:
+                    description: One or more IPv6 prefixes assigned to the network
+                      interface.
+                    items:
+                      type: string
+                    type: array
                   macAddress:
                     description: MAC address of the network interface.
                     type: string
@@ -525,6 +597,47 @@ spec:
                   privateDnsName:
                     description: Private DNS name of the network interface (IPv4).
                     type: string
+                  privateIp:
+                    type: string
+                  privateIpList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order. Requires setting private_ip_list_enabled to true.
+                    items:
+                      type: string
+                    type: array
+                  privateIpListEnabled:
+                    description: Whether private_ip_list is allowed and controls the
+                      IPs to assign to the ENI and private_ips and private_ips_count
+                      become read-only. Default false.
+                    type: boolean
+                  privateIps:
+                    description: List of private IPs to assign to the ENI without
+                      regard to order.
+                    items:
+                      type: string
+                    type: array
+                  privateIpsCount:
+                    description: Number of secondary private IPs to assign to the
+                      ENI. The total number of private IPs will be 1 + private_ips_count,
+                      as a primary private IP will be assiged to an ENI by default.
+                    type: number
+                  securityGroups:
+                    description: List of security group IDs to assign to the ENI.
+                    items:
+                      type: string
+                    type: array
+                  sourceDestCheck:
+                    description: Whether to enable source destination checking for
+                      the ENI. Default true.
+                    type: boolean
+                  subnetId:
+                    description: Subnet ID to create the ENI in.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -573,9 +686,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

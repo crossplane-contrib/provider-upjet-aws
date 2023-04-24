@@ -15,8 +15,14 @@ import (
 
 type ApprovalRuleTemplateAssociationObservation struct {
 
+	// The name for the approval rule template.
+	ApprovalRuleTemplateName *string `json:"approvalRuleTemplateName,omitempty" tf:"approval_rule_template_name,omitempty"`
+
 	// The name of the approval rule template and name of the repository, separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the repository that you want to associate with the template.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 }
 
 type ApprovalRuleTemplateAssociationParameters struct {

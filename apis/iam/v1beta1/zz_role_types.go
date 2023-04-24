@@ -30,8 +30,17 @@ type RoleObservation struct {
 	// Amazon Resource Name (ARN) specifying the role.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Policy that grants an entity permission to assume the role.
+	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
+
 	// Creation date of the IAM role.
 	CreateDate *string `json:"createDate,omitempty" tf:"create_date,omitempty"`
+
+	// Description of the role.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to force detaching any policies the role has before destroying it. Defaults to false.
+	ForceDetachPolicies *bool `json:"forceDetachPolicies,omitempty" tf:"force_detach_policies,omitempty"`
 
 	// Name of the role.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -41,6 +50,18 @@ type RoleObservation struct {
 
 	// Set of exclusive IAM managed policy ARNs to attach to the IAM role. Configuring an empty set (i.e.
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
+
+	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
+	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
+
+	// Path to the role. See IAM Identifiers for more information.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// ARN of the policy that is used to set the permissions boundary for the role.
+	PermissionsBoundary *string `json:"permissionsBoundary,omitempty" tf:"permissions_boundary,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -52,8 +73,8 @@ type RoleObservation struct {
 type RoleParameters struct {
 
 	// Policy that grants an entity permission to assume the role.
-	// +kubebuilder:validation:Required
-	AssumeRolePolicy *string `json:"assumeRolePolicy" tf:"assume_role_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	AssumeRolePolicy *string `json:"assumeRolePolicy,omitempty" tf:"assume_role_policy,omitempty"`
 
 	// Description of the role.
 	// +kubebuilder:validation:Optional
@@ -104,8 +125,9 @@ type RoleStatus struct {
 type Role struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleSpec   `json:"spec"`
-	Status            RoleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.assumeRolePolicy)",message="assumeRolePolicy is a required parameter"
+	Spec   RoleSpec   `json:"spec"`
+	Status RoleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

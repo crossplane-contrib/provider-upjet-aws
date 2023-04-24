@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: groups.resourcegroups.aws.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -126,6 +130,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -305,8 +324,57 @@ spec:
                   arn:
                     description: The ARN assigned by AWS for this resource group.
                     type: string
+                  configuration:
+                    description: A configuration associates the resource group with
+                      an AWS service and specifies how the service can interact with
+                      the resources in the group. See below for details.
+                    items:
+                      properties:
+                        parameters:
+                          description: A collection of parameters for this group configuration
+                            item. See below for details.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the group configuration parameter.
+                                type: string
+                              values:
+                                description: The value or values to be used for the
+                                  specified parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        type:
+                          description: Specifies the type of group configuration item.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the resource group.
+                    type: string
                   id:
                     type: string
+                  resourceQuery:
+                    description: A resource_query block. Resource queries are documented
+                      below.
+                    items:
+                      properties:
+                        query:
+                          description: The resource query as a JSON string.
+                          type: string
+                        type:
+                          description: The type of the resource query. Defaults to
+                            TAG_FILTERS_1_0.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -356,9 +424,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

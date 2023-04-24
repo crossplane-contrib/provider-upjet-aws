@@ -18,31 +18,49 @@ type NotificationRuleObservation struct {
 	// The codestar notification rule ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The level of detail to include in the notifications for this resource. Possible values are BASIC and FULL.
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
+
+	// A list of event types associated with this notification rule.
+	// For list of allowed events see here.
+	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
+
 	// The codestar notification rule ARN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of notification rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the resource to associate with the notification rule.
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
-	// +kubebuilder:validation:Optional
 	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type NotificationRuleParameters struct {
 
 	// The level of detail to include in the notifications for this resource. Possible values are BASIC and FULL.
-	// +kubebuilder:validation:Required
-	DetailType *string `json:"detailType" tf:"detail_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
-	// +kubebuilder:validation:Required
-	EventTypeIds []*string `json:"eventTypeIds" tf:"event_type_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -78,8 +96,14 @@ type NotificationRuleParameters struct {
 
 type TargetObservation struct {
 
+	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The type of the notification target. Default value is SNS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TargetParameters struct {
@@ -127,8 +151,11 @@ type NotificationRuleStatus struct {
 type NotificationRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationRuleSpec   `json:"spec"`
-	Status            NotificationRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.detailType)",message="detailType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTypeIds)",message="eventTypeIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   NotificationRuleSpec   `json:"spec"`
+	Status NotificationRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

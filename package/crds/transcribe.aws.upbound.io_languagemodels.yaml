@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: languagemodels.transcribe.aws.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -174,11 +178,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - baseModelName
-                - inputDataConfig
-                - languageCode
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,6 +366,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: baseModelName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.baseModelName)
+            - message: inputDataConfig is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputDataConfig)
+            - message: languageCode is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)
           status:
             description: LanguageModelStatus defines the observed state of LanguageModel.
             properties:
@@ -358,9 +381,37 @@ spec:
                   arn:
                     description: ARN of the LanguageModel.
                     type: string
+                  baseModelName:
+                    description: Name of reference base model.
+                    type: string
                   id:
                     description: LanguageModel name.
                     type: string
+                  inputDataConfig:
+                    description: The input data config for the LanguageModel. See
+                      Input Data Config for more details.
+                    items:
+                      properties:
+                        dataAccessRoleArn:
+                          description: IAM role with access to S3 bucket.
+                          type: string
+                        s3Uri:
+                          description: S3 URI where training data is located.
+                          type: string
+                        tuningDataS3Uri:
+                          description: S3 URI where tuning data is located.
+                          type: string
+                      type: object
+                    type: array
+                  languageCode:
+                    description: The language code you selected for your language
+                      model. Refer to the supported languages page for accepted codes.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -407,9 +458,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

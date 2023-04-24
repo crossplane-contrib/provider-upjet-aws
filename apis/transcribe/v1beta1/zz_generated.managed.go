@@ -17,6 +17,11 @@ func (mg *LanguageModel) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LanguageModel.
+func (mg *LanguageModel) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LanguageModel.
 func (mg *LanguageModel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *LanguageModel) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LanguageModel.
 func (mg *LanguageModel) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LanguageModel.
+func (mg *LanguageModel) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LanguageModel.
@@ -83,6 +93,11 @@ func (mg *Vocabulary) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Vocabulary.
+func (mg *Vocabulary) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Vocabulary.
 func (mg *Vocabulary) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Vocabulary) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Vocabulary.
 func (mg *Vocabulary) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Vocabulary.
+func (mg *Vocabulary) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Vocabulary.
@@ -149,6 +169,11 @@ func (mg *VocabularyFilter) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this VocabularyFilter.
+func (mg *VocabularyFilter) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this VocabularyFilter.
 func (mg *VocabularyFilter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *VocabularyFilter) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this VocabularyFilter.
 func (mg *VocabularyFilter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this VocabularyFilter.
+func (mg *VocabularyFilter) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this VocabularyFilter.

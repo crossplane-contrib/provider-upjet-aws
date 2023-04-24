@@ -21,8 +21,23 @@ type ClusterObservation struct {
 	// List of short names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
+	// The execute command configuration for the cluster. Detailed below.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
+	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyObservation `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
+
 	// ARN that identifies the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configures a default Service Connect namespace. Detailed below.
+	ServiceConnectDefaults []ServiceConnectDefaultsObservation `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
+
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	Setting []SettingObservation `json:"setting,omitempty" tf:"setting,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -57,6 +72,9 @@ type ClusterParameters struct {
 }
 
 type ConfigurationObservation struct {
+
+	// The details of the execute command configuration. Detailed below.
+	ExecuteCommandConfiguration []ExecuteCommandConfigurationObservation `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -67,6 +85,15 @@ type ConfigurationParameters struct {
 }
 
 type DefaultCapacityProviderStrategyObservation struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// The short name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DefaultCapacityProviderStrategyParameters struct {
@@ -85,6 +112,15 @@ type DefaultCapacityProviderStrategyParameters struct {
 }
 
 type ExecuteCommandConfigurationObservation struct {
+
+	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
+	LogConfiguration []LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
+	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type ExecuteCommandConfigurationParameters struct {
@@ -103,6 +139,21 @@ type ExecuteCommandConfigurationParameters struct {
 }
 
 type LogConfigurationObservation struct {
+
+	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
+
+	// The name of the CloudWatch log group to send logs to.
+	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
+
+	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
+	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
+
+	// The name of the S3 bucket to send logs to.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// An optional folder in the S3 bucket to place logs in.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type LogConfigurationParameters struct {
@@ -129,6 +180,9 @@ type LogConfigurationParameters struct {
 }
 
 type ServiceConnectDefaultsObservation struct {
+
+	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type ServiceConnectDefaultsParameters struct {
@@ -139,6 +193,12 @@ type ServiceConnectDefaultsParameters struct {
 }
 
 type SettingObservation struct {
+
+	// Name of the setting to manage. Valid values: containerInsights.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value to assign to the setting. Valid values are enabled and disabled.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SettingParameters struct {

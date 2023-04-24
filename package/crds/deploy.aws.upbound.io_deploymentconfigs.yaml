@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: deploymentconfigs.deploy.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -136,6 +140,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -312,12 +331,77 @@ spec:
             properties:
               atProvider:
                 properties:
+                  computePlatform:
+                    description: The compute platform can be Server, Lambda, or ECS.
+                      Default is Server.
+                    type: string
                   deploymentConfigId:
                     description: The AWS Assigned deployment config id
                     type: string
                   id:
                     description: The deployment group's config name.
                     type: string
+                  minimumHealthyHosts:
+                    description: A minimum_healthy_hosts block. Required for Server
+                      compute platform. Minimum Healthy Hosts are documented below.
+                    items:
+                      properties:
+                        type:
+                          description: The type can either be FLEET_PERCENT or HOST_COUNT.
+                          type: string
+                        value:
+                          description: The value when the type is FLEET_PERCENT represents
+                            the minimum number of healthy instances as a percentage
+                            of the total number of instances in the deployment. If
+                            you specify FLEET_PERCENT, at the start of the deployment,
+                            AWS CodeDeploy converts the percentage to the equivalent
+                            number of instance and rounds up fractional instances.
+                            When the type is HOST_COUNT, the value represents the
+                            minimum number of healthy instances as an absolute value.
+                          type: number
+                      type: object
+                    type: array
+                  trafficRoutingConfig:
+                    description: A traffic_routing_config block. Traffic Routing Config
+                      is documented below.
+                    items:
+                      properties:
+                        timeBasedCanary:
+                          description: The time based canary configuration information.
+                            If type is TimeBasedLinear, use time_based_linear instead.
+                          items:
+                            properties:
+                              interval:
+                                description: The number of minutes between the first
+                                  and second traffic shifts of a TimeBasedCanary deployment.
+                                type: number
+                              percentage:
+                                description: The percentage of traffic to shift in
+                                  the first increment of a TimeBasedCanary deployment.
+                                type: number
+                            type: object
+                          type: array
+                        timeBasedLinear:
+                          description: The time based linear configuration information.
+                            If type is TimeBasedCanary, use time_based_canary instead.
+                          items:
+                            properties:
+                              interval:
+                                description: The number of minutes between the first
+                                  and second traffic shifts of a TimeBasedCanary deployment.
+                                type: number
+                              percentage:
+                                description: The percentage of traffic to shift in
+                                  the first increment of a TimeBasedCanary deployment.
+                                type: number
+                            type: object
+                          type: array
+                        type:
+                          description: Type of traffic routing config. One of TimeBasedCanary,
+                            TimeBasedLinear, AllAtOnce.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -360,9 +444,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

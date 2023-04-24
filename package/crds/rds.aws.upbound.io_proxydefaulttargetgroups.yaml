@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: proxydefaulttargetgroups.rds.aws.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -200,6 +204,21 @@ spec:
                 required:
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -381,6 +400,61 @@ spec:
                     description: The Amazon Resource Name (ARN) representing the target
                       group.
                     type: string
+                  connectionPoolConfig:
+                    description: The settings that determine the size and behavior
+                      of the connection pool for the target group.
+                    items:
+                      properties:
+                        connectionBorrowTimeout:
+                          description: The number of seconds for a proxy to wait for
+                            a connection to become available in the connection pool.
+                            Only applies when the proxy has opened its maximum number
+                            of connections and all connections are busy with client
+                            sessions.
+                          type: number
+                        initQuery:
+                          description: One or more SQL statements for the proxy to
+                            run when opening each new database connection. Typically
+                            used with SET statements to make sure that each connection
+                            has identical settings such as time zone and character
+                            set. This setting is empty by default. For multiple statements,
+                            use semicolons as the separator. You can also include
+                            multiple variables in a single SET statement, such as
+                            SET x=1, y=2.
+                          type: string
+                        maxConnectionsPercent:
+                          description: The maximum size of the connection pool for
+                            each target in a target group. For Aurora MySQL, it is
+                            expressed as a percentage of the max_connections setting
+                            for the RDS DB instance or Aurora DB cluster used by the
+                            target group.
+                          type: number
+                        maxIdleConnectionsPercent:
+                          description: Controls how actively the proxy closes idle
+                            database connections in the connection pool. A high value
+                            enables the proxy to leave a high percentage of idle connections
+                            open. A low value causes the proxy to close idle client
+                            connections and return the underlying database connections
+                            to the connection pool. For Aurora MySQL, it is expressed
+                            as a percentage of the max_connections setting for the
+                            RDS DB instance or Aurora DB cluster used by the target
+                            group.
+                          type: number
+                        sessionPinningFilters:
+                          description: Each item in the list represents a class of
+                            SQL operations that normally cause all later statements
+                            in a session using a proxy to be pinned to the same underlying
+                            database connection. Including an item in the list exempts
+                            that class of SQL operations from the pinning behavior.
+                            Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  dbProxyName:
+                    description: Name of the RDS DB Proxy.
+                    type: string
                   id:
                     description: Name of the RDS DB Proxy.
                     type: string
@@ -429,9 +503,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

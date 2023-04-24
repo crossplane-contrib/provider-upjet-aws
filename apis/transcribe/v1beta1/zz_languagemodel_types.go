@@ -14,6 +14,15 @@ import (
 )
 
 type InputDataConfigObservation struct {
+
+	// IAM role with access to S3 bucket.
+	DataAccessRoleArn *string `json:"dataAccessRoleArn,omitempty" tf:"data_access_role_arn,omitempty"`
+
+	// S3 URI where training data is located.
+	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+
+	// S3 URI where tuning data is located.
+	TuningDataS3URI *string `json:"tuningDataS3Uri,omitempty" tf:"tuning_data_s3_uri,omitempty"`
 }
 
 type InputDataConfigParameters struct {
@@ -46,8 +55,20 @@ type LanguageModelObservation struct {
 	// ARN of the LanguageModel.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Name of reference base model.
+	BaseModelName *string `json:"baseModelName,omitempty" tf:"base_model_name,omitempty"`
+
 	// LanguageModel name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The input data config for the LanguageModel. See Input Data Config for more details.
+	InputDataConfig []InputDataConfigObservation `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
+
+	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -55,16 +76,16 @@ type LanguageModelObservation struct {
 type LanguageModelParameters struct {
 
 	// Name of reference base model.
-	// +kubebuilder:validation:Required
-	BaseModelName *string `json:"baseModelName" tf:"base_model_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BaseModelName *string `json:"baseModelName,omitempty" tf:"base_model_name,omitempty"`
 
 	// The input data config for the LanguageModel. See Input Data Config for more details.
-	// +kubebuilder:validation:Required
-	InputDataConfig []InputDataConfigParameters `json:"inputDataConfig" tf:"input_data_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputDataConfig []InputDataConfigParameters `json:"inputDataConfig,omitempty" tf:"input_data_config,omitempty"`
 
 	// The language code you selected for your language model. Refer to the supported languages page for accepted codes.
-	// +kubebuilder:validation:Required
-	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -100,8 +121,11 @@ type LanguageModelStatus struct {
 type LanguageModel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LanguageModelSpec   `json:"spec"`
-	Status            LanguageModelStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.baseModelName)",message="baseModelName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputDataConfig)",message="inputDataConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	Spec   LanguageModelSpec   `json:"spec"`
+	Status LanguageModelStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

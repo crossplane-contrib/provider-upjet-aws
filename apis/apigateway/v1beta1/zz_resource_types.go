@@ -18,8 +18,17 @@ type ResourceObservation struct {
 	// Resource's identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ID of the parent API resource
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
 	// Complete path for this API resource, including all parent paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Last path segment of this API resource.
+	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
+
+	// ID of the associated REST API
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 }
 
 type ResourceParameters struct {
@@ -39,8 +48,8 @@ type ResourceParameters struct {
 	ParentIDSelector *v1.Selector `json:"parentIdSelector,omitempty" tf:"-"`
 
 	// Last path segment of this API resource.
-	// +kubebuilder:validation:Required
-	PathPart *string `json:"pathPart" tf:"path_part,omitempty"`
+	// +kubebuilder:validation:Optional
+	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -86,8 +95,9 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSpec   `json:"spec"`
-	Status            ResourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pathPart)",message="pathPart is a required parameter"
+	Spec   ResourceSpec   `json:"spec"`
+	Status ResourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

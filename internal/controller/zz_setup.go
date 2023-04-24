@@ -264,6 +264,7 @@ import (
 	replicationinstance "github.com/upbound/provider-aws/internal/controller/dms/replicationinstance"
 	replicationsubnetgroup "github.com/upbound/provider-aws/internal/controller/dms/replicationsubnetgroup"
 	replicationtask "github.com/upbound/provider-aws/internal/controller/dms/replicationtask"
+	s3endpoint "github.com/upbound/provider-aws/internal/controller/dms/s3endpoint"
 	clusterdocdb "github.com/upbound/provider-aws/internal/controller/docdb/cluster"
 	clusterinstance "github.com/upbound/provider-aws/internal/controller/docdb/clusterinstance"
 	clusterparametergroup "github.com/upbound/provider-aws/internal/controller/docdb/clusterparametergroup"
@@ -273,11 +274,13 @@ import (
 	subnetgroupdocdb "github.com/upbound/provider-aws/internal/controller/docdb/subnetgroup"
 	conditionalforwarder "github.com/upbound/provider-aws/internal/controller/ds/conditionalforwarder"
 	directory "github.com/upbound/provider-aws/internal/controller/ds/directory"
+	shareddirectory "github.com/upbound/provider-aws/internal/controller/ds/shareddirectory"
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
+	tablereplica "github.com/upbound/provider-aws/internal/controller/dynamodb/tablereplica"
 	tag "github.com/upbound/provider-aws/internal/controller/dynamodb/tag"
 	ami "github.com/upbound/provider-aws/internal/controller/ec2/ami"
 	amicopy "github.com/upbound/provider-aws/internal/controller/ec2/amicopy"
@@ -397,6 +400,7 @@ import (
 	filesystem "github.com/upbound/provider-aws/internal/controller/efs/filesystem"
 	filesystempolicy "github.com/upbound/provider-aws/internal/controller/efs/filesystempolicy"
 	mounttarget "github.com/upbound/provider-aws/internal/controller/efs/mounttarget"
+	replicationconfigurationefs "github.com/upbound/provider-aws/internal/controller/efs/replicationconfiguration"
 	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/provider-aws/internal/controller/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
@@ -432,6 +436,7 @@ import (
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
+	applicationemrserverless "github.com/upbound/provider-aws/internal/controller/emrserverless/application"
 	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
 	projectevidently "github.com/upbound/provider-aws/internal/controller/evidently/project"
 	segment "github.com/upbound/provider-aws/internal/controller/evidently/segment"
@@ -618,6 +623,7 @@ import (
 	subnetgroupneptune "github.com/upbound/provider-aws/internal/controller/neptune/subnetgroup"
 	firewall "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewall"
 	firewallpolicy "github.com/upbound/provider-aws/internal/controller/networkfirewall/firewallpolicy"
+	loggingconfiguration "github.com/upbound/provider-aws/internal/controller/networkfirewall/loggingconfiguration"
 	rulegroup "github.com/upbound/provider-aws/internal/controller/networkfirewall/rulegroup"
 	attachmentaccepter "github.com/upbound/provider-aws/internal/controller/networkmanager/attachmentaccepter"
 	connectattachment "github.com/upbound/provider-aws/internal/controller/networkmanager/connectattachment"
@@ -665,6 +671,7 @@ import (
 	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
 	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
 	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
+	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
 	clusteractivitystream "github.com/upbound/provider-aws/internal/controller/rds/clusteractivitystream"
@@ -1162,6 +1169,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		replicationinstance.Setup,
 		replicationsubnetgroup.Setup,
 		replicationtask.Setup,
+		s3endpoint.Setup,
 		clusterdocdb.Setup,
 		clusterinstance.Setup,
 		clusterparametergroup.Setup,
@@ -1171,11 +1179,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupdocdb.Setup,
 		conditionalforwarder.Setup,
 		directory.Setup,
+		shareddirectory.Setup,
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
 		table.Setup,
 		tableitem.Setup,
+		tablereplica.Setup,
 		tag.Setup,
 		ami.Setup,
 		amicopy.Setup,
@@ -1295,6 +1305,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		filesystem.Setup,
 		filesystempolicy.Setup,
 		mounttarget.Setup,
+		replicationconfigurationefs.Setup,
 		addon.Setup,
 		clustereks.Setup,
 		clusterauth.Setup,
@@ -1330,6 +1341,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
 		securityconfiguration.Setup,
+		applicationemrserverless.Setup,
 		feature.Setup,
 		projectevidently.Setup,
 		segment.Setup,
@@ -1516,6 +1528,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetgroupneptune.Setup,
 		firewall.Setup,
 		firewallpolicy.Setup,
+		loggingconfiguration.Setup,
 		rulegroup.Setup,
 		attachmentaccepter.Setup,
 		connectattachment.Setup,
@@ -1563,6 +1576,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		streamqldb.Setup,
 		groupquicksight.Setup,
 		userquicksight.Setup,
+		resourceassociation.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,
 		clusteractivitystream.Setup,

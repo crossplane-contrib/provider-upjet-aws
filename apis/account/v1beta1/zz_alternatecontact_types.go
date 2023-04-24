@@ -14,7 +14,26 @@ import (
 )
 
 type AlternateContactObservation struct {
+
+	// ID of the target account when managing member accounts. Will manage current user's account by default if omitted.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Type of the alternate contact. Allowed values are: BILLING, OPERATIONS, SECURITY.
+	AlternateContactType *string `json:"alternateContactType,omitempty" tf:"alternate_contact_type,omitempty"`
+
+	// An email address for the alternate contact.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the alternate contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number for the alternate contact.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// Title for the alternate contact.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type AlternateContactParameters struct {
@@ -28,16 +47,16 @@ type AlternateContactParameters struct {
 	AlternateContactType *string `json:"alternateContactType" tf:"alternate_contact_type,omitempty"`
 
 	// An email address for the alternate contact.
-	// +kubebuilder:validation:Required
-	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// Name of the alternate contact.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Phone number for the alternate contact.
-	// +kubebuilder:validation:Required
-	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -45,8 +64,8 @@ type AlternateContactParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Title for the alternate contact.
-	// +kubebuilder:validation:Required
-	Title *string `json:"title" tf:"title,omitempty"`
+	// +kubebuilder:validation:Optional
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 // AlternateContactSpec defines the desired state of AlternateContact
@@ -73,8 +92,12 @@ type AlternateContactStatus struct {
 type AlternateContact struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AlternateContactSpec   `json:"spec"`
-	Status            AlternateContactStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddress)",message="emailAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.phoneNumber)",message="phoneNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.title)",message="title is a required parameter"
+	Spec   AlternateContactSpec   `json:"spec"`
+	Status AlternateContactStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

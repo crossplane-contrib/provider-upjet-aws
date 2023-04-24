@@ -60,12 +60,21 @@ type AMICopyObservation struct {
 
 	BootMode *string `json:"bootMode,omitempty" tf:"boot_mode,omitempty"`
 
-	// +kubebuilder:validation:Optional
+	DeprecationTime *string `json:"deprecationTime,omitempty" tf:"deprecation_time,omitempty"`
+
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// ARN of the Outpost to which to copy the AMI.
+	// Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost.
+	DestinationOutpostArn *string `json:"destinationOutpostArn,omitempty" tf:"destination_outpost_arn,omitempty"`
+
 	EBSBlockDevice []AMICopyEBSBlockDeviceObservation `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
 
 	EnaSupport *bool `json:"enaSupport,omitempty" tf:"ena_support,omitempty"`
 
-	// +kubebuilder:validation:Optional
+	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
 	Hypervisor *string `json:"hypervisor,omitempty" tf:"hypervisor,omitempty"`
@@ -81,10 +90,16 @@ type AMICopyObservation struct {
 
 	ImdsSupport *string `json:"imdsSupport,omitempty" tf:"imds_support,omitempty"`
 
+	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// ID of the created AMI.
 	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
 
 	ManageEBSSnapshots *bool `json:"manageEbsSnapshots,omitempty" tf:"manage_ebs_snapshots,omitempty"`
+
+	// Region-unique name for the AMI.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ID of the created AMI.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
@@ -104,7 +119,18 @@ type AMICopyObservation struct {
 	// ID of the created AMI.
 	RootSnapshotID *string `json:"rootSnapshotId,omitempty" tf:"root_snapshot_id,omitempty"`
 
+	// Id of the AMI to copy. This id must be valid in the region
+	// given by source_ami_region.
+	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
+
+	// Region from which the AMI will be copied. This may be the
+	// same as the AWS provider region in order to create a copy within the same region.
+	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
+
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -152,8 +178,8 @@ type AMICopyParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Region-unique name for the AMI.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -176,8 +202,8 @@ type AMICopyParameters struct {
 
 	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.
-	// +kubebuilder:validation:Required
-	SourceAMIRegion *string `json:"sourceAmiRegion" tf:"source_ami_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -208,8 +234,10 @@ type AMICopyStatus struct {
 type AMICopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AMICopySpec   `json:"spec"`
-	Status            AMICopyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceAmiRegion)",message="sourceAmiRegion is a required parameter"
+	Spec   AMICopySpec   `json:"spec"`
+	Status AMICopyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

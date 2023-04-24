@@ -15,8 +15,17 @@ import (
 
 type InstanceStateObservation struct {
 
+	// Whether to request a forced stop when state is stopped. Otherwise (i.e., state is running), ignored. When an instance is forced to stop, it does not flush file system caches or file system metadata, and you must subsequently perform file system check and repair. Not recommended for Windows instances. Defaults to false.
+	Force *bool `json:"force,omitempty" tf:"force,omitempty"`
+
 	// ID of the instance (matches instance_id).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// ID of the instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// - State of the instance. Valid values are stopped, running.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type InstanceStateParameters struct {
@@ -45,8 +54,8 @@ type InstanceStateParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// - State of the instance. Valid values are stopped, running.
-	// +kubebuilder:validation:Required
-	State *string `json:"state" tf:"state,omitempty"`
+	// +kubebuilder:validation:Optional
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 // InstanceStateSpec defines the desired state of InstanceState
@@ -73,8 +82,9 @@ type InstanceStateStatus struct {
 type InstanceState struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceStateSpec   `json:"spec"`
-	Status            InstanceStateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.state)",message="state is a required parameter"
+	Spec   InstanceStateSpec   `json:"spec"`
+	Status InstanceStateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,18 @@ import (
 )
 
 type MultiplexMultiplexSettingsObservation struct {
+
+	// Maximum video buffer delay.
+	MaximumVideoBufferDelayMilliseconds *float64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *float64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *float64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
 }
 
 type MultiplexMultiplexSettingsParameters struct {
@@ -40,7 +52,22 @@ type MultiplexObservation struct {
 	// ARN of the Multiplex.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// A list of availability zones. You must specify exactly two.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Multiplex settings. See Multiplex Settings for more details.
+	MultiplexSettings []MultiplexMultiplexSettingsObservation `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+
+	// name of Multiplex.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to start the Multiplex. Defaults to false.
+	StartMultiplex *bool `json:"startMultiplex,omitempty" tf:"start_multiplex,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
@@ -48,16 +75,16 @@ type MultiplexObservation struct {
 type MultiplexParameters struct {
 
 	// A list of availability zones. You must specify exactly two.
-	// +kubebuilder:validation:Required
-	AvailabilityZones []*string `json:"availabilityZones" tf:"availability_zones,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Multiplex settings. See Multiplex Settings for more details.
 	// +kubebuilder:validation:Optional
 	MultiplexSettings []MultiplexMultiplexSettingsParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -97,8 +124,10 @@ type MultiplexStatus struct {
 type Multiplex struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MultiplexSpec   `json:"spec"`
-	Status            MultiplexStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.availabilityZones)",message="availabilityZones is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   MultiplexSpec   `json:"spec"`
+	Status MultiplexStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -18,11 +18,26 @@ type DefaultNetworkACLObservation struct {
 	// ARN of the Default Network ACL
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Network ACL ID to manage. This attribute is exported from aws_vpc, or manually found via the AWS Console.
+	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
+
+	// Configuration block for an egress rule. Detailed below.
+	Egress []EgressObservation `json:"egress,omitempty" tf:"egress,omitempty"`
+
 	// ID of the Default Network ACL
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Configuration block for an ingress rule. Detailed below.
+	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
+
 	// ID of the AWS account that owns the Default Network ACL
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
@@ -81,6 +96,33 @@ type DefaultNetworkACLParameters struct {
 }
 
 type EgressObservation struct {
+
+	// The action to take.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The CIDR block to match. This must be a valid network mask.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// The from port to match.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The IPv6 CIDR block.
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// The ICMP type code to be used. Default 0.
+	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// The ICMP type to be used. Default 0.
+	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// The protocol to match. If using the -1 'all' protocol, you must specify a from and to port of 0.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The rule number. Used for ordering.
+	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+
+	// The to port to match.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type EgressParameters struct {
@@ -123,6 +165,33 @@ type EgressParameters struct {
 }
 
 type IngressObservation struct {
+
+	// The action to take.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The CIDR block to match. This must be a valid network mask.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// The from port to match.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The IPv6 CIDR block.
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
+
+	// The ICMP type code to be used. Default 0.
+	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+
+	// The ICMP type to be used. Default 0.
+	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+
+	// The protocol to match. If using the -1 'all' protocol, you must specify a from and to port of 0.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The rule number. Used for ordering.
+	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+
+	// The to port to match.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type IngressParameters struct {

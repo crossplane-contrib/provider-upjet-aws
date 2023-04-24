@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: patchbaselines.ssm.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -213,9 +217,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -387,17 +405,152 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: PatchBaselineStatus defines the observed state of PatchBaseline.
             properties:
               atProvider:
                 properties:
+                  approvalRule:
+                    description: A set of rules used to include patches in the baseline.
+                      Up to 10 approval rules can be specified. See approval_rule
+                      below.
+                    items:
+                      properties:
+                        approveAfterDays:
+                          description: 'The number of days after the release date
+                            of each patch matched by the rule the patch is marked
+                            as approved in the patch baseline. Valid Range: 0 to 100.
+                            Conflicts with approve_until_date.'
+                          type: number
+                        approveUntilDate:
+                          description: The cutoff date for auto approval of released
+                            patches. Any patches released on or before this date are
+                            installed automatically. Date is formatted as YYYY-MM-DD.
+                            Conflicts with approve_after_days
+                          type: string
+                        complianceLevel:
+                          description: The compliance level for patches approved by
+                            this rule. Valid values are CRITICAL, HIGH, MEDIUM, LOW,
+                            INFORMATIONAL, and UNSPECIFIED. The default value is UNSPECIFIED.
+                          type: string
+                        enableNonSecurity:
+                          description: Boolean enabling the application of non-security
+                            updates. The default value is false. Valid for Linux instances
+                            only.
+                          type: boolean
+                        patchFilter:
+                          description: The patch filter group that defines the criteria
+                            for the rule. Up to 5 patch filters can be specified per
+                            approval rule using Key/Value pairs. Valid combinations
+                            of these Keys and the operating_system value can be found
+                            in the SSM DescribePatchProperties API Reference. Valid
+                            Values are exact values for the patch property given as
+                            the key, or a wildcard *, which matches all values.
+                          items:
+                            properties:
+                              key:
+                                type: string
+                              values:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  approvedPatches:
+                    description: A list of explicitly approved patches for the baseline.
+                      Cannot be specified with approval_rule.
+                    items:
+                      type: string
+                    type: array
+                  approvedPatchesComplianceLevel:
+                    description: The compliance level for approved patches. This means
+                      that if an approved patch is reported as missing, this is the
+                      severity of the compliance violation. Valid values are CRITICAL,
+                      HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value
+                      is UNSPECIFIED.
+                    type: string
+                  approvedPatchesEnableNonSecurity:
+                    description: Indicates whether the list of approved patches includes
+                      non-security updates that should be applied to the instances.
+                      Applies to Linux instances only.
+                    type: boolean
                   arn:
                     description: The ARN of the patch baseline.
                     type: string
+                  description:
+                    description: The description of the patch baseline.
+                    type: string
+                  globalFilter:
+                    description: A set of global filters used to exclude patches from
+                      the baseline. Up to 4 global filters can be specified using
+                      Key/Value pairs. Valid Keys are PRODUCT, CLASSIFICATION, MSRC_SEVERITY,
+                      and PATCH_ID.
+                    items:
+                      properties:
+                        key:
+                          type: string
+                        values:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The ID of the patch baseline.
                     type: string
+                  name:
+                    description: The name of the patch baseline.
+                    type: string
+                  operatingSystem:
+                    description: The operating system the patch baseline applies to.
+                      Valid values are AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
+                      CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN, REDHAT_ENTERPRISE_LINUX,
+                      ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS. The default value is
+                      WINDOWS.
+                    type: string
+                  rejectedPatches:
+                    description: A list of rejected patches.
+                    items:
+                      type: string
+                    type: array
+                  rejectedPatchesAction:
+                    description: The action for Patch Manager to take on patches included
+                      in the rejected_patches list. Valid values are ALLOW_AS_DEPENDENCY
+                      and BLOCK.
+                    type: string
+                  source:
+                    description: Configuration block with alternate sources for patches.
+                      Applies to Linux instances only. See source below.
+                    items:
+                      properties:
+                        configuration:
+                          description: The value of the yum repo configuration. For
+                            information about other options available for your yum
+                            repository configuration, see the dnf.conf documentation
+                          type: string
+                        name:
+                          description: The name specified to identify the patch source.
+                          type: string
+                        products:
+                          description: The specific operating system versions a patch
+                            repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09",
+                            "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of
+                            supported product values, see PatchFilter.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -447,9 +600,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

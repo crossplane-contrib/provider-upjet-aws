@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: contactflowmodules.connect.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -174,9 +178,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -348,6 +366,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ContactFlowModuleStatus defines the observed state of ContactFlowModule.
             properties:
@@ -360,11 +381,43 @@ spec:
                   contactFlowModuleId:
                     description: The identifier of the Contact Flow Module.
                     type: string
+                  content:
+                    description: Specifies the content of the Contact Flow Module,
+                      provided as a JSON string, written in Amazon Connect Contact
+                      Flow Language. If defined, the filename argument cannot be used.
+                    type: string
+                  contentHash:
+                    description: Used to trigger updates. Must be set to a base64-encoded
+                      SHA256 hash of the Contact Flow Module source specified with
+                      filename. The usual way to set this is filebase64sha256("contact_flow_module.11.12
+                      and later) or base64sha256(file("contact_flow_module.11.11 and
+                      earlier), where "contact_flow_module.json" is the local filename
+                      of the Contact Flow Module source.
+                    type: string
+                  description:
+                    description: Specifies the description of the Contact Flow Module.
+                    type: string
+                  filename:
+                    description: The path to the Contact Flow Module source within
+                      the local filesystem. Conflicts with content.
+                    type: string
                   id:
                     description: The identifier of the hosting Amazon Connect Instance
                       and identifier of the Contact Flow Module separated by a colon
                       (:).
                     type: string
+                  instanceId:
+                    description: Specifies the identifier of the hosting Amazon Connect
+                      Instance.
+                    type: string
+                  name:
+                    description: Specifies the name of the Contact Flow Module.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -414,9 +467,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

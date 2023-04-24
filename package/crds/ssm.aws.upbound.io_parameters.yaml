@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: parameters.ssm.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -131,8 +135,22 @@ spec:
                     type: object
                 required:
                 - region
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -304,19 +322,64 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ParameterStatus defines the observed state of Parameter.
             properties:
               atProvider:
                 properties:
+                  allowedPattern:
+                    description: Regular expression used to validate the parameter
+                      value.
+                    type: string
+                  arn:
+                    description: ARN of the parameter.
+                    type: string
+                  dataType:
+                    description: 'Data type of the parameter. Valid values: text,
+                      aws:ssm:integration and aws:ec2:image for AMI format, see the
+                      Native parameter support for Amazon Machine Image IDs.'
+                    type: string
+                  description:
+                    description: Description of the parameter.
+                    type: string
                   id:
                     type: string
+                  insecureValue:
+                    description: Value of the parameter. This argument is not valid
+                      with a type of SecureString.
+                    type: string
+                  keyId:
+                    description: KMS key ID or ARN for encrypting a SecureString.
+                    type: string
+                  overwrite:
+                    description: Overwrite an existing parameter.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  tier:
+                    description: Parameter tier to assign to the parameter. If not
+                      specified, will use the default parameter tier for the region.
+                      Valid tiers are Standard, Advanced, and Intelligent-Tiering.
+                      Downgrading an Advanced tier parameter to Standard will recreate
+                      the resource. For more information on parameter tiers, see the
+                      AWS SSM Parameter tier comparison and guide.
+                    type: string
+                  type:
+                    description: Type of the parameter. Valid types are String, StringList
+                      and SecureString.
+                    type: string
                   version:
                     description: Version of the parameter.
                     type: number
@@ -362,9 +425,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

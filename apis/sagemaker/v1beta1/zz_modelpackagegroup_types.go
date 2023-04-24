@@ -21,6 +21,12 @@ type ModelPackageGroupObservation struct {
 	// The name of the Model Package Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A description for the model group.
+	ModelPackageGroupDescription *string `json:"modelPackageGroupDescription,omitempty" tf:"model_package_group_description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }

@@ -14,6 +14,15 @@ import (
 )
 
 type ConfigObservation struct {
+
+	// Specifies the day that the hours of operation applies to.
+	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+
+	// A end time block specifies the time that your contact center closes. The end_time is documented below.
+	EndTime []EndTimeObservation `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// A start time block specifies the time that your contact center opens. The start_time is documented below.
+	StartTime []StartTimeObservation `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type ConfigParameters struct {
@@ -32,6 +41,12 @@ type ConfigParameters struct {
 }
 
 type EndTimeObservation struct {
+
+	// Specifies the hour of closing.
+	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Specifies the minute of closing.
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type EndTimeParameters struct {
@@ -50,6 +65,12 @@ type HoursOfOperationObservation struct {
 	// The Amazon Resource Name (ARN) of the Hours of Operation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// One or more config blocks which define the configuration information for the hours of operation: day, start time, and end time . Config blocks are documented below.
+	Config []ConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
+
+	// Specifies the description of the Hours of Operation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// (Deprecated) The Amazon Resource Name (ARN) of the Hours of Operation.
 	HoursOfOperationArn *string `json:"hoursOfOperationArn,omitempty" tf:"hours_of_operation_arn,omitempty"`
 
@@ -59,15 +80,27 @@ type HoursOfOperationObservation struct {
 	// The identifier of the hosting Amazon Connect Instance and identifier of the Hours of Operation separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Specifies the name of the Hours of Operation.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Specifies the time zone of the Hours of Operation.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type HoursOfOperationParameters struct {
 
 	// One or more config blocks which define the configuration information for the hours of operation: day, start time, and end time . Config blocks are documented below.
-	// +kubebuilder:validation:Required
-	Config []ConfigParameters `json:"config" tf:"config,omitempty"`
+	// +kubebuilder:validation:Optional
+	Config []ConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
 
 	// Specifies the description of the Hours of Operation.
 	// +kubebuilder:validation:Optional
@@ -88,8 +121,8 @@ type HoursOfOperationParameters struct {
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Hours of Operation.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -101,11 +134,17 @@ type HoursOfOperationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the time zone of the Hours of Operation.
-	// +kubebuilder:validation:Required
-	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type StartTimeObservation struct {
+
+	// Specifies the hour of opening.
+	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Specifies the minute of opening.
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type StartTimeParameters struct {
@@ -143,8 +182,11 @@ type HoursOfOperationStatus struct {
 type HoursOfOperation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HoursOfOperationSpec   `json:"spec"`
-	Status            HoursOfOperationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.config)",message="config is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeZone)",message="timeZone is a required parameter"
+	Spec   HoursOfOperationSpec   `json:"spec"`
+	Status HoursOfOperationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

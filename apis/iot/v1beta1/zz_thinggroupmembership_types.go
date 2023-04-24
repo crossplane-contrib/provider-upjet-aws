@@ -17,6 +17,15 @@ type ThingGroupMembershipObservation struct {
 
 	// The membership ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+	OverrideDynamicGroup *bool `json:"overrideDynamicGroup,omitempty" tf:"override_dynamic_group,omitempty"`
+
+	// The name of the group to which you are adding a thing.
+	ThingGroupName *string `json:"thingGroupName,omitempty" tf:"thing_group_name,omitempty"`
+
+	// The name of the thing to add to a group.
+	ThingName *string `json:"thingName,omitempty" tf:"thing_name,omitempty"`
 }
 
 type ThingGroupMembershipParameters struct {
@@ -31,12 +40,12 @@ type ThingGroupMembershipParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the group to which you are adding a thing.
-	// +kubebuilder:validation:Required
-	ThingGroupName *string `json:"thingGroupName" tf:"thing_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingGroupName *string `json:"thingGroupName,omitempty" tf:"thing_group_name,omitempty"`
 
 	// The name of the thing to add to a group.
-	// +kubebuilder:validation:Required
-	ThingName *string `json:"thingName" tf:"thing_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingName *string `json:"thingName,omitempty" tf:"thing_name,omitempty"`
 }
 
 // ThingGroupMembershipSpec defines the desired state of ThingGroupMembership
@@ -63,8 +72,10 @@ type ThingGroupMembershipStatus struct {
 type ThingGroupMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ThingGroupMembershipSpec   `json:"spec"`
-	Status            ThingGroupMembershipStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingGroupName)",message="thingGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.thingName)",message="thingName is a required parameter"
+	Spec   ThingGroupMembershipSpec   `json:"spec"`
+	Status ThingGroupMembershipStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

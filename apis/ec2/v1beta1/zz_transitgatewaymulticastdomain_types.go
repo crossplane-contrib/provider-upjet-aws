@@ -18,14 +18,29 @@ type TransitGatewayMulticastDomainObservation struct {
 	// EC2 Transit Gateway Multicast Domain Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Whether to automatically accept cross-account subnet associations that are associated with the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	AutoAcceptSharedAssociations *string `json:"autoAcceptSharedAssociations,omitempty" tf:"auto_accept_shared_associations,omitempty"`
+
 	// EC2 Transit Gateway Multicast Domain identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether to enable Internet Group Management Protocol (IGMP) version 2 for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	Igmpv2Support *string `json:"igmpv2Support,omitempty" tf:"igmpv2_support,omitempty"`
 
 	// Identifier of the AWS account that owns the EC2 Transit Gateway Multicast Domain.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
+	// Whether to enable support for statically configuring multicast group sources for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// EC2 Transit Gateway identifier. The EC2 Transit Gateway must have multicast_support enabled.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type TransitGatewayMulticastDomainParameters struct {

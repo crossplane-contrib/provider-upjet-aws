@@ -64,6 +64,9 @@ func Configure(p *config.Provider) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
 			Type: "TransitGatewayVPCAttachment",
 		}
+		r.References["transit_gateway_route_table_id"] = config.Reference{
+			Type: "TransitGatewayRouteTable",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table", func(r *config.Resource) {
@@ -113,7 +116,8 @@ func Configure(p *config.Provider) {
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
 		r.References["block_device_mappings.ebs.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
 		}
 		r.References["iam_instance_profile.arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile",
@@ -194,6 +198,11 @@ func Configure(p *config.Provider) {
 		r.References["source_security_group_id"] = config.Reference{
 			Type: "SecurityGroup",
 		}
+		r.References["prefix_list_ids"] = config.Reference{
+			TerraformName:     "aws_ec2_managed_prefix_list",
+			RefFieldName:      "PrefixListIDRefs",
+			SelectorFieldName: "PrefixListIDSelector",
+		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"cidr_blocks",
@@ -236,6 +245,9 @@ func Configure(p *config.Provider) {
 		}
 		r.References["nat_gateway_id"] = config.Reference{
 			Type: "NATGateway",
+		}
+		r.References["destination_prefix_list_id"] = config.Reference{
+			TerraformName: "aws_ec2_managed_prefix_list",
 		}
 		r.UseAsync = true
 	})

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: reportplans.backup.aws.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -137,11 +141,23 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-                - name
                 - region
-                - reportDeliveryChannel
-                - reportSetting
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -313,6 +329,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: reportDeliveryChannel is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reportDeliveryChannel)
+            - message: reportSetting is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reportSetting)
           status:
             description: ReportPlanStatus defines the observed state of ReportPlan.
             properties:
@@ -330,9 +353,73 @@ spec:
                       are: CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS
                       | COMPLETED.'
                     type: string
+                  description:
+                    description: The description of the report plan with a maximum
+                      of 1,024 characters
+                    type: string
                   id:
                     description: The id of the backup report plan.
                     type: string
+                  name:
+                    description: The unique name of the report plan. The name must
+                      be between 1 and 256 characters, starting with a letter, and
+                      consisting of letters, numbers, and underscores.
+                    type: string
+                  reportDeliveryChannel:
+                    description: An object that contains information about where and
+                      how to deliver your reports, specifically your Amazon S3 bucket
+                      name, S3 key prefix, and the formats of your reports. Detailed
+                      below.
+                    items:
+                      properties:
+                        formats:
+                          description: 'A list of the format of your reports: CSV,
+                            JSON, or both. If not specified, the default format is
+                            CSV.'
+                          items:
+                            type: string
+                          type: array
+                        s3BucketName:
+                          description: The unique name of the S3 bucket that receives
+                            your reports.
+                          type: string
+                        s3KeyPrefix:
+                          description: 'The prefix for where Backup Audit Manager
+                            delivers your reports to Amazon S3. The prefix is this
+                            part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name.
+                            If not specified, there is no prefix.'
+                          type: string
+                      type: object
+                    type: array
+                  reportSetting:
+                    description: An object that identifies the report template for
+                      the report. Reports are built using a report template. Detailed
+                      below.
+                    items:
+                      properties:
+                        frameworkArns:
+                          description: Specifies the Amazon Resource Names (ARNs)
+                            of the frameworks a report covers.
+                          items:
+                            type: string
+                          type: array
+                        numberOfFrameworks:
+                          description: Specifies the number of frameworks a report
+                            covers.
+                          type: number
+                        reportTemplate:
+                          description: 'Identifies the report template for the report.
+                            Reports are built using a report template. The report
+                            templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT
+                            | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.'
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -382,9 +469,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
