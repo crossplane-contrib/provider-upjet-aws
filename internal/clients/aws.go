@@ -63,11 +63,16 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			},
 			Scheduler: config.DefaultScheduler,
 		}
-
-		account, err := getAccountId(ctx, c, mg)
-		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
+		
+		if !pc.Spec.SkipCredsValidation {
+			account, err := getAccountId(ctx, c, mg)
+			if err != nil {
+				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
+			}
+		} else {
+			account := "000000000"
 		}
+
 		ps.ClientMetadata = map[string]string{
 			keyAccountId: account,
 		}
@@ -142,49 +147,18 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		if err != nil {
 			return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
-		accountId := "000000000"
-		if !pc.Spec.SkipCredsValidation {
-			identity, err := GlobalCallerIdentityCache.GetCallerIdentity(ctx, *cfg, creds)
-			if err != nil {
-				return terraform.Setup{}, errors.Wrap(err, "cannot get the caller identity")
-			}
-			accountId = *identity.Account
-		}
+	}
 
-		if pc.Spec.Endpoint.URL.Static != nil {
-			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-				return terraform.Setup{}, errors.Wrap(err, "endpoint is wrong")
-			}
+	if pc.Spec.Endpoint.URL.Static != nil {
+		if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+			return terraform.Setup{}, errors.Wrap(err, "endpoint is wrong")
 		}
+	} else {
 		endpoints := make(map[string]string)
 		for _, service := range pc.Spec.Endpoint.Services {
 			endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
 		}
-		ps := terraform.Setup{
-			Version: version,
-			Requirement: terraform.ProviderRequirement{
-				Source:  providerSource,
-				Version: providerVersion,
-			},
-			Configuration: map[string]any{
-				keyRegion:               cfg.Region,
-				keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
-				keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
-				keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
-				keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
-				keyAccessKeyID:          creds.AccessKeyID,
-				keySecretAccessKey:      creds.SecretAccessKey,
-				keySessionToken:         creds.SessionToken,
-				keyEndpoints:            endpoints,
-			},
-
-			// Account ID is not part of provider configuration schema, so it
-			// needs to be given separately.
-			ClientMetadata: map[string]string{
-				keyAccountId: accountId,
-			},
-		}
-		return ps, err
+		ps.Configuration[keyEndpoints] = endpoints
 	}
 
 	if len(pc.Spec.AssumeRoleChain) != 0 {
@@ -212,6 +186,10 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 		keyAccessKeyID:     creds.AccessKeyID,
 		keySecretAccessKey: creds.SecretAccessKey,
 		keySessionToken:    creds.SessionToken,
+		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
+		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
+		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
+		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}
 	return err
 }
