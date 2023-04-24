@@ -15,12 +15,9 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/terraform"
-	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/provider-aws/apis/v1beta1"
-
-	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 const (
