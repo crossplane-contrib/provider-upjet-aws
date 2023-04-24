@@ -21,6 +21,7 @@ import (
 )
 
 const (
+	// Terraform provider configuration keys for AWS credentials.
 	keyRegion                    = "region"
 	keyAccountId                 = "account_id"
 	keySessionToken              = "token"
@@ -34,11 +35,11 @@ const (
 	keyTags                      = "tags"
 	keyTransitiveTagKeys         = "transitive_tag_keys"
 	keyExternalID                = "external_id"
-	keySkipCredsValidation  = "skip_credentials_validation"
-	keyS3UsePathStyle       = "s3_use_path_style"
-	keySkipMetadataApiCheck = "skip_metadata_api_check"
-	keySkipReqAccountId     = "skip_requesting_account_id"
-	keyEndpoints            = "endpoints"
+	keySkipCredsValidation       = "skip_credentials_validation"
+	keyS3UsePathStyle            = "s3_use_path_style"
+	keySkipMetadataApiCheck      = "skip_metadata_api_check"
+	keySkipReqAccountId          = "skip_requesting_account_id"
+	keyEndpoints                 = "endpoints"
 )
 
 type SetupConfig struct {
@@ -147,6 +148,12 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		if err != nil {
 			return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
+		ps.Configuration = map[string]any{
+			keyRegion:          cfg.Region,
+			keyAccessKeyID:     creds.AccessKeyID,
+			keySecretAccessKey: creds.SecretAccessKey,
+			keySessionToken:    creds.SessionToken,
+		}
 	}
 
 	if pc.Spec.Endpoint.URL.Static != nil {
@@ -159,13 +166,6 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 			endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
 		}
 		ps.Configuration[keyEndpoints] = endpoints
-	}
-
-	ps.Configuration = map[string]any{
-		keyRegion:          cfg.Region,
-		keyAccessKeyID:     creds.AccessKeyID,
-		keySecretAccessKey: creds.SecretAccessKey,
-		keySessionToken:    creds.SessionToken,
 	}
 
 	if len(pc.Spec.AssumeRoleChain) != 0 {
