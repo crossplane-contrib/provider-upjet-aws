@@ -53,7 +53,8 @@ type SetupConfig struct {
 func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn {
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
-		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
+		var err error
+		if err = c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
 		ps := terraform.Setup{
@@ -64,14 +65,12 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			},
 			Scheduler: config.DefaultScheduler,
 		}
-		
+		account := "000000000"
 		if !pc.Spec.SkipCredsValidation {
-			account, err := getAccountId(ctx, c, mg)
+			account, err = getAccountId(ctx, c, mg)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
 			}
-		} else {
-			account := "000000000"
 		}
 
 		ps.ClientMetadata = map[string]string{
@@ -158,7 +157,7 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 
 	if pc.Spec.Endpoint.URL.Static != nil {
 		if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-			return terraform.Setup{}, errors.Wrap(err, "endpoint is wrong")
+			return errors.Wrap(err, "endpoint is wrong")
 		}
 	} else {
 		endpoints := make(map[string]string)
