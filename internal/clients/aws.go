@@ -161,6 +161,13 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		ps.Configuration[keyEndpoints] = endpoints
 	}
 
+	ps.Configuration = map[string]any{
+		keyRegion:          cfg.Region,
+		keyAccessKeyID:     creds.AccessKeyID,
+		keySecretAccessKey: creds.SecretAccessKey,
+		keySessionToken:    creds.SessionToken,
+	}
+
 	if len(pc.Spec.AssumeRoleChain) != 0 {
 		ps.Configuration[keyAssumeRole] = map[string]any{
 			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
