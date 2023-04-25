@@ -93,7 +93,7 @@ func Configure(p *config.Provider) {
 				conn["reader_endpoint_address"] = []byte(a)
 			}
 			if a, ok := attr["auth_token"].(string); ok {
-				conn["reader_endpoint_address"] = []byte(a)
+				conn["auth_token"] = []byte(a)
 			}
 			return conn, nil
 		}
