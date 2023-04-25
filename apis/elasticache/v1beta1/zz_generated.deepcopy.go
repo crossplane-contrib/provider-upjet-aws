@@ -1478,6 +1478,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
+	if in.AutoGenerateAuthtoken != nil {
+		in, out := &in.AutoGenerateAuthtoken, &out.AutoGenerateAuthtoken
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(string)
