@@ -92,6 +92,9 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["reader_endpoint_address"].(string); ok {
 				conn["reader_endpoint_address"] = []byte(a)
 			}
+			if a, ok := attr["auth_token"].(string); ok {
+				conn["reader_endpoint_address"] = []byte(a)
+			}
 			return conn, nil
 		}
 		desc, _ := comments.New("If true, the auth_token will be auto-generated and"+

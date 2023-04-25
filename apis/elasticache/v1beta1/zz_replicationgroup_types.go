@@ -235,7 +235,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
-	// If true, the password will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
+	// If true, the auth_token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Optional
 	AutoGenerateAuthtoken *bool `json:"autoGenerateAuthtoken,omitempty" tf:"-"`

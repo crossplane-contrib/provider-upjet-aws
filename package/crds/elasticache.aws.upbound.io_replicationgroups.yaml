@@ -97,7 +97,7 @@ spec:
                     - namespace
                     type: object
                   autoGenerateAuthtoken:
-                    description: If true, the password will be auto-generated and
+                    description: If true, the auth_token will be auto-generated and
                       stored in the Secret referenced by the authTokenSecretRef field.
                     type: boolean
                   autoMinorVersionUpgrade:
