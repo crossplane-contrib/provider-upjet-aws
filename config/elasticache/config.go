@@ -18,13 +18,33 @@ func Configure(p *config.Provider) {
 			"subnet_group_name": config.Reference{
 				Type: "SubnetGroup",
 			},
+			"security_group_ids": config.Reference{
+				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+				RefFieldName:      "SecurityGroupIDRefs",
+				SelectorFieldName: "SecurityGroupIDSelector",
+			},
 		}
 		r.UseAsync = true
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["cluster_address"].(string); ok {
+				conn["cluster_address"] = []byte(a)
+			}
+			if a, ok := attr["configuration_endpoint"].(string); ok {
+				conn["configuration_endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_replication_group", func(r *config.Resource) {
 		r.References["subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
+		}
+		r.References["security_group_ids"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			RefFieldName:      "SecurityGroupIDRefs",
+			SelectorFieldName: "SecurityGroupIDSelector",
 		}
 		r.References["kms_key_id"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
@@ -42,6 +62,19 @@ func Configure(p *config.Provider) {
 		}
 		delete(r.References, "log_delivery_configuration.destination")
 		r.UseAsync = true
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["configuration_endpoint_address"].(string); ok {
+				conn["configuration_endpoint_address"] = []byte(a)
+			}
+			if a, ok := attr["primary_endpoint_address"].(string); ok {
+				conn["primary_endpoint_address"] = []byte(a)
+			}
+			if a, ok := attr["reader_endpoint_address"].(string); ok {
+				conn["reader_endpoint_address"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
