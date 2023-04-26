@@ -45,7 +45,7 @@ export GOPRIVATE = github.com/upbound/*
 
 GO_REQUIRED_VERSION ?= 1.19
 GOLANGCILINT_VERSION ?= 1.50.0
-SUBPACKAGES ?= $(shell find cmd/provider -type d -depth 1 | cut -d/ -f3)
+SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
@@ -65,6 +65,8 @@ XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
 
 export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
 export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
+
+-include build/makelib/xpkg.mk
 
 # ====================================================================================
 # Setup Kubernetes tools
@@ -182,9 +184,9 @@ uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)
+local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-monolith
 	@$(INFO) running locally built provider
-	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME) --for condition=Healthy --timeout 5m
+	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-monolith --for condition=Healthy --timeout 5m
 	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
 	@$(OK) running locally built provider
 

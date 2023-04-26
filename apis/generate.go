@@ -18,7 +18,7 @@ Copyright 2021 Upbound Inc.
 //go:generate bash -c "find ../internal/controller -type d -empty -delete"
 //go:generate rm -rf ../examples-generated
 //go:generate bash -c "find ../cmd/provider -name 'zz_*' -type f -delete"
-//go:generate bash -c "find ../cmd/provider -type d -depth 1 -empty -delete"
+//go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
 // Scrape metadata from Terraform registry
 //go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-aws -r ../.work/terraform-provider-aws/website/docs/r -o ../config/provider-metadata.yaml

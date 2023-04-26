@@ -47,7 +47,7 @@ img.build.shared: $(UP)
 	@mkdir -p $(IMAGE_TEMP_DIR)/package/crds || $(FAIL)
 	@mkdir $(IMAGE_TEMP_DIR)/examples || $(FAIL)
 	@if [[ $(APIGROUP) == "config" ]]; then \
-		sed -E "s/{{ APIGROUP }}/$(APIGROUP)/g" $(ROOT_DIR)/package/crossplane-config.yaml > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
+		sed -e "s/{{ APIGROUP }}/$(APIGROUP)/g" $(ROOT_DIR)/package/crossplane-config.yaml > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
 		cp $(ROOT_DIR)/package/crds/aws.* $(IMAGE_TEMP_DIR)/package/crds/ && \
 		cp -r $(ROOT_DIR)/examples/providerconfig $(IMAGE_TEMP_DIR)/examples/; \
 	elif [[ $(APIGROUP) == "monolith" ]]; then \
@@ -55,7 +55,7 @@ img.build.shared: $(UP)
 		cp -r $(ROOT_DIR)/package/crds $(IMAGE_TEMP_DIR)/package/ && \
 		cp -r $(ROOT_DIR)/examples $(IMAGE_TEMP_DIR)/; \
 	else \
-		sed -E "s|{{ APIGROUP }}|$(APIGROUP)|g" $(ROOT_DIR)/package/crossplane.yaml | sed -E "s|{{ XPKG_REG_ORGS }}|$(XPKG_REG_ORGS)|g" | sed -E "s|{{ VERSION }}|$(VERSION)|g" > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
+		sed -e "s|{{ APIGROUP }}|$(APIGROUP)|g" $(ROOT_DIR)/package/crossplane.yaml | sed -e "s|{{ XPKG_REG_ORGS }}|$(XPKG_REG_ORGS)|g" | sed -e "s|{{ VERSION }}|$(VERSION)|g" > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
 		cp $(ROOT_DIR)/package/crds/$(APIGROUP).* $(IMAGE_TEMP_DIR)/package/crds/ && \
 		cp -r $(ROOT_DIR)/examples/$(APIGROUP) $(IMAGE_TEMP_DIR)/examples/; \
   	fi || $(FAIL)
