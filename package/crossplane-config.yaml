@@ -19,7 +19,3 @@ metadata:
       address. This is a subpackage for the {{ APIGROUP }} API group.
     friendly-name.meta.crossplane.io: Provider AWS ({{ APIGROUP }})
     auth.upbound.io/group: aws.upbound.io
-spec:
-  dependsOn:
-    - provider: {{ XPKG_REG_ORGS }}/provider-aws-config
-      version: ">={{ VERSION }}"

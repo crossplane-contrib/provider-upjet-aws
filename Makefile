@@ -14,6 +14,8 @@ export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
+export PROJECT_NAME := $(PROJECT_NAME)
+
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
 # "include" was used, the make command would fail and refuse
@@ -43,27 +45,15 @@ export GOPRIVATE = github.com/upbound/*
 
 GO_REQUIRED_VERSION ?= 1.19
 GOLANGCILINT_VERSION ?= 1.50.0
-GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
+SUBPACKAGES ?= $(shell find cmd/provider -type d -depth 1 | cut -d/ -f3)
+GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
 GO111MODULE = on
+
+export SUBPACKAGES := $(SUBPACKAGES)
+
 -include build/makelib/golang.mk
-
-# ====================================================================================
-# Setup Kubernetes tools
-
-KIND_VERSION = v0.15.0
-UP_VERSION = v0.16.1
-UP_CHANNEL = stable
-UPTEST_VERSION = v0.5.0
--include build/makelib/k8s_tools.mk
-
-# ====================================================================================
-# Setup Images
-
-REGISTRY_ORGS ?= xpkg.upbound.io/upbound
-IMAGES = provider-aws
--include build/makelib/imagelight.mk
 
 # ====================================================================================
 # Setup XPKG
@@ -72,12 +62,29 @@ XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
 XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
-XPKGS = provider-aws
--include build/makelib/xpkg.mk
 
-# NOTE(hasheddan): we force image building to happen prior to xpkg build so that
-# we ensure image is present in daemon.
-xpkg.build.provider-aws: do.build.images
+export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
+export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
+
+# ====================================================================================
+# Setup Kubernetes tools
+
+KIND_VERSION = v0.15.0
+UP_VERSION = v0.16.1
+UP_CHANNEL = stable
+UPTEST_VERSION = v0.5.0
+
+export UP_VERSION := $(UP_VERSION)
+export UP_CHANNEL := $(UP_CHANNEL)
+
+-include build/makelib/k8s_tools.mk
+
+# ====================================================================================
+# Setup Images
+
+REGISTRY_ORGS ?= xpkg.upbound.io/upbound
+IMAGES = provider-aws
+-include build/makelib/imagelight.mk
 
 # ====================================================================================
 # Targets

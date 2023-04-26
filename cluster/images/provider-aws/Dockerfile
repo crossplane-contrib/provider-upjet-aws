@@ -3,6 +3,7 @@ RUN apk --no-cache add ca-certificates bash
 
 ARG TARGETOS
 ARG TARGETARCH
+ARG APIGROUP
 
 ENV USER_ID=65532
 
@@ -47,6 +48,6 @@ ENV TERRAFORM_NATIVE_PROVIDER_PATH ${PLUGIN_DIR}/${TERRAFORM_PROVIDER_DOWNLOAD_N
 USER ${USER_ID}
 EXPOSE 8080
 
-ADD "bin/${TARGETOS}_${TARGETARCH}/provider" /usr/local/bin/provider
+ADD "bin/${TARGETOS}_${TARGETARCH}/${APIGROUP}" /usr/local/bin/provider
 
 ENTRYPOINT ["provider"]
