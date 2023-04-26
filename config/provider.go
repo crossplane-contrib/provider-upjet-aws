@@ -85,6 +85,7 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
+	"github.com/upbound/provider-aws/hack"
 )
 
 var (
@@ -154,6 +155,7 @@ func GetProvider() *config.Provider {
 			NamePrefixRemoval(),
 			DocumentationForTags(),
 		),
+		config.WithMainTemplate(hack.MainTemplate),
 	)
 
 	for _, configure := range []func(provider *config.Provider){
