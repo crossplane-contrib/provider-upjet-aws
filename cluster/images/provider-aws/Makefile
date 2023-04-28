@@ -43,6 +43,11 @@ ifneq (,$(filter $(APIGROUP),monolith config))
     ARG_XPKG_AUTH_EXT := "XPKG_AUTH_EXT=$(ROOT_DIR)/package/auth.yaml"
 endif
 
+DEP_CONSTRAINT := >= 0.0.0
+ifeq (-,$(findstring -,$(VERSION)))
+    DEP_CONSTRAINT = >= 0.0.0-0
+endif
+
 img.build.shared: $(UP)
 	@mkdir -p $(IMAGE_TEMP_DIR)/package/crds || $(FAIL)
 	@mkdir $(IMAGE_TEMP_DIR)/examples || $(FAIL)
@@ -55,7 +60,7 @@ img.build.shared: $(UP)
 		cp -r $(ROOT_DIR)/package/crds $(IMAGE_TEMP_DIR)/package/ && \
 		cp -r $(ROOT_DIR)/examples $(IMAGE_TEMP_DIR)/; \
 	else \
-		sed -e "s|{{ APIGROUP }}|$(APIGROUP)|g" $(ROOT_DIR)/package/crossplane.yaml | sed -e "s|{{ XPKG_REG_ORGS }}|$(XPKG_REG_ORGS)|g" | sed -e "s|{{ VERSION }}|$(VERSION)|g" > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
+		sed -e "s|{{ APIGROUP }}|$(APIGROUP)|g" $(ROOT_DIR)/package/crossplane.yaml | sed -e "s|{{ XPKG_REG_ORGS }}|$(XPKG_REG_ORGS)|g" | sed -e "s|{{ VERSION }}|$(VERSION)|g" | sed -e "s|{{ DEP_CONSTRAINT }}|$(DEP_CONSTRAINT)|g" > $(IMAGE_TEMP_DIR)/package/crossplane.yaml && \
 		cp $(ROOT_DIR)/package/crds/$(APIGROUP).* $(IMAGE_TEMP_DIR)/package/crds/ && \
 		cp -r $(ROOT_DIR)/examples/$(APIGROUP) $(IMAGE_TEMP_DIR)/examples/; \
   	fi || $(FAIL)

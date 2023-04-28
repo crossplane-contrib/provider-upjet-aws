@@ -22,4 +22,4 @@ metadata:
 spec:
   dependsOn:
     - provider: {{ XPKG_REG_ORGS }}/provider-aws-config
-      version: "*"
+      version: "{{ DEP_CONSTRAINT }}"
