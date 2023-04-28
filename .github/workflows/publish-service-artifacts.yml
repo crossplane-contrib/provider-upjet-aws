@@ -1,0 +1,17 @@
+name: Publish Service Artifacts
+
+on:
+  workflow_dispatch: 
+    inputs:
+      subpackages:
+        description: 'Subpackages to be built individually (e.g. monolith config ec2)'
+        required: true
+
+jobs:
+  publish-service-artifacts:
+    uses: upbound/uptest/.github/workflows/provider-publish-service-artifacts.yml@main
+    with:
+      subpackages: ${{ github.event.inputs.subpackages }}
+    secrets:
+      UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+      UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
