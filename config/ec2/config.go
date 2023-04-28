@@ -46,6 +46,8 @@ func Configure(p *config.Provider) {
 				"source_dest_check",
 				"vpc_security_group_ids",
 				"associate_public_ip_address",
+				"ipv6_addresses",
+				"ipv6_address_count",
 			},
 		}
 		config.MoveToStatus(r.TerraformResource, "security_groups")
@@ -173,7 +175,7 @@ func Configure(p *config.Provider) {
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"interface_type", "private_ip_list", "private_ips",
+				"interface_type", "private_ip_list", "private_ips", "ipv6_address_count",
 			},
 		}
 		// Mutually exclusive with aws_network_interface_attachment
