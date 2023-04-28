@@ -18,7 +18,6 @@ spec:
         resourceArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-    name: example
     region: us-west-1
     tags:
       Tag1: Value1

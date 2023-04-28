@@ -2,7 +2,7 @@ apiVersion: networkfirewall.aws.upbound.io/v1beta1
 kind: FirewallPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy-complex
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
   labels:
     testing.upbound.io/example-name: example-default-policy
   name: example-default-policy
@@ -25,7 +25,6 @@ spec:
           - resourceArnSelector:
               matchLabels:
                 testing.upbound.io/example-name: example-deny
-    name: example-default-policy
     region: us-west-1
 
 ---
@@ -34,7 +33,7 @@ apiVersion: networkfirewall.aws.upbound.io/v1beta1
 kind: RuleGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy-complex
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
   labels:
     testing.upbound.io/example-name: example-forward-all
   name: example-forward-all
@@ -64,7 +63,7 @@ apiVersion: networkfirewall.aws.upbound.io/v1beta1
 kind: RuleGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy-complex
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
   labels:
     testing.upbound.io/example-name: example-allow-domainlist
   name: example-allow-domainlist
@@ -96,7 +95,7 @@ apiVersion: networkfirewall.aws.upbound.io/v1beta1
 kind: RuleGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy-complex
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewallpolicy
   labels:
     testing.upbound.io/example-name: example-deny
   name: example-deny

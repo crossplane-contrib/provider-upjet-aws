@@ -154,8 +154,8 @@ spec:
                                   stateless rule group.
                                 type: string
                               resourceArnRef:
-                                description: Reference to a RuleGroup to populate
-                                  resourceArn.
+                                description: Reference to a RuleGroup in networkfirewall
+                                  to populate resourceArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -191,8 +191,8 @@ spec:
                                 - name
                                 type: object
                               resourceArnSelector:
-                                description: Selector for a RuleGroup to populate
-                                  resourceArn.
+                                description: Selector for a RuleGroup in networkfirewall
+                                  to populate resourceArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -330,8 +330,8 @@ spec:
                                   stateless rule group.
                                 type: string
                               resourceArnRef:
-                                description: Reference to a RuleGroup to populate
-                                  resourceArn.
+                                description: Reference to a RuleGroup in networkfirewall
+                                  to populate resourceArn.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -367,8 +367,8 @@ spec:
                                 - name
                                 type: object
                               resourceArnSelector:
-                                description: Selector for a RuleGroup to populate
-                                  resourceArn.
+                                description: Selector for a RuleGroup in networkfirewall
+                                  to populate resourceArn.
                                 properties:
                                   matchControllerRef:
                                     description: MatchControllerRef ensures an object
@@ -418,9 +418,6 @@ spec:
                       - statelessFragmentDefaultActions
                       type: object
                     type: array
-                  name:
-                    description: A friendly name of the firewall policy.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -431,11 +428,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 required:
-<<<<<<< HEAD
-=======
-                - firewallPolicy
-                - name
->>>>>>> 91f315c8 (fix(networkfirewall): fixed import for networkfirewall firewallpolicy and rulegroup and implemented more ref/selectors in firewallpolicy for embedded rulegroup)
                 - region
                 type: object
               managementPolicy:

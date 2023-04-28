@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -85,7 +86,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn),
-				Extract:      reference.ExternalName(),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnSelector,
 				To: reference.To{
@@ -105,7 +106,7 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn),
-				Extract:      reference.ExternalName(),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef,
 				Selector:     mg.Spec.ForProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnSelector,
 				To: reference.To{
