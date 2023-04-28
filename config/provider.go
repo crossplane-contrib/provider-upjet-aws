@@ -64,6 +64,7 @@ import (
 	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
+	"github.com/upbound/provider-aws/config/networkfirewall"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
 	"github.com/upbound/provider-aws/config/opsworks"
@@ -205,6 +206,7 @@ func GetProvider() *config.Provider {
 		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
+		networkfirewall.Configure,
 		opensearch.Configure,
 		ram.Configure,
 		rds.Configure,
