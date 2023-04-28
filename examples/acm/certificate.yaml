@@ -5,6 +5,8 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
+  annotations:
+    meta.upbound.io/example-id: acm/v1beta1/certificate
   name: example-dns
   labels:
     testing.upbound.io/example-name: certificate
