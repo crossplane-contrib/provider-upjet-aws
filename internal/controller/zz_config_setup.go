@@ -9,7 +9,6 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 )
 
@@ -17,7 +16,6 @@ import (
 // the supplied manager.
 func Setup_config(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		clusterauth.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
