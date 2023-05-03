@@ -116,7 +116,8 @@ type CPUOptionsObservation struct {
 	// The number of CPU cores for the instance.
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
-	// The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
+	// The number of threads per CPU core.
+	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
 	// Otherwise, specify the default value of 2.
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
@@ -127,7 +128,8 @@ type CPUOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
-	// The number of threads per CPU core. To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
+	// The number of threads per CPU core.
+	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
 	// Otherwise, specify the default value of 2.
 	// +kubebuilder:validation:Optional
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
@@ -164,7 +166,7 @@ type EBSObservation struct {
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// The amount of provisioned IOPS.
-	// This must be set with a volume_type of "io1/io2".
+	// This must be set with a volume_type of "io1/io2/gp3".
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
@@ -198,7 +200,7 @@ type EBSParameters struct {
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// The amount of provisioned IOPS.
-	// This must be set with a volume_type of "io1/io2".
+	// This must be set with a volume_type of "io1/io2/gp3".
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
@@ -350,6 +352,9 @@ type InstanceRequirementsObservation struct {
 	// List of accelerator types. Default is any accelerator type.
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
@@ -362,7 +367,7 @@ type InstanceRequirementsObservation struct {
 	// List of CPU manufacturer names. Default is any manufacturer.
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
@@ -379,6 +384,9 @@ type InstanceRequirementsObservation struct {
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	MemoryMib []MemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []NetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	NetworkInterfaceCount []NetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
@@ -421,6 +429,10 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +kubebuilder:validation:Optional
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
@@ -437,7 +449,7 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
@@ -460,6 +472,10 @@ type InstanceRequirementsParameters struct {
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Required
 	MemoryMib []MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkBandwidthGbps []NetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -508,13 +524,19 @@ type LaunchTemplateCapacityReservationSpecificationParameters struct {
 
 type LaunchTemplateCreditSpecificationObservation struct {
 
-	// The credit option for CPU usage. Can be "standard" or "unlimited". T3 instances are launched as unlimited by default. T2 instances are launched as standard by default.
+	// The credit option for CPU usage.
+	// Can be standard or unlimited.
+	// T3 instances are launched as unlimited by default.
+	// T2 instances are launched as standard by default.
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
 type LaunchTemplateCreditSpecificationParameters struct {
 
-	// The credit option for CPU usage. Can be "standard" or "unlimited". T3 instances are launched as unlimited by default. T2 instances are launched as standard by default.
+	// The credit option for CPU usage.
+	// Can be standard or unlimited.
+	// T3 instances are launched as unlimited by default.
+	// T2 instances are launched as standard by default.
 	// +kubebuilder:validation:Optional
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
@@ -547,16 +569,16 @@ type LaunchTemplateMaintenanceOptionsParameters struct {
 
 type LaunchTemplateMetadataOptionsObservation struct {
 
-	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
+	// Whether the metadata service is available. Can be enabled or disabled.
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
 	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
 	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
@@ -565,7 +587,7 @@ type LaunchTemplateMetadataOptionsObservation struct {
 
 type LaunchTemplateMetadataOptionsParameters struct {
 
-	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
+	// Whether the metadata service is available. Can be enabled or disabled.
 	// +kubebuilder:validation:Optional
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
@@ -573,11 +595,11 @@ type LaunchTemplateMetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
@@ -992,6 +1014,26 @@ type MonitoringParameters struct {
 	// If true, the launched EC2 instance will have detailed monitoring enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NetworkBandwidthGbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type NetworkBandwidthGbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkInterfaceCountObservation struct {

@@ -36,11 +36,9 @@ type MetricAlarmObservation struct {
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Used only for alarms
-	// based on percentiles. If you specify ignore, the alarm state will not
-	// change during periods with too few data points to be statistically significant.
-	// If you specify evaluate or omit this parameter, the alarm will always be
-	// evaluated and possibly change state no matter how many data points are available.
+	// Used only for alarms based on percentiles.
+	// If you specify ignore, the alarm state will not change during periods with too few data points to be statistically significant.
+	// If you specify evaluate or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available.
 	// The following values are supported: ignore, and evaluate.
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
@@ -71,6 +69,7 @@ type MetricAlarmObservation struct {
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
+	// Valid values are 10, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
@@ -122,11 +121,9 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
-	// Used only for alarms
-	// based on percentiles. If you specify ignore, the alarm state will not
-	// change during periods with too few data points to be statistically significant.
-	// If you specify evaluate or omit this parameter, the alarm will always be
-	// evaluated and possibly change state no matter how many data points are available.
+	// Used only for alarms based on percentiles.
+	// If you specify ignore, the alarm state will not change during periods with too few data points to be statistically significant.
+	// If you specify evaluate or omit this parameter, the alarm will always be evaluated and possibly change state no matter how many data points are available.
 	// The following values are supported: ignore, and evaluate.
 	// +kubebuilder:validation:Optional
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
@@ -162,6 +159,7 @@ type MetricAlarmParameters struct {
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
+	// Valid values are 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
@@ -209,7 +207,9 @@ type MetricObservation struct {
 	// See docs for supported metrics.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The period in seconds over which the specified stat is applied.
+	// Granularity in seconds of returned data points.
+	// For metrics with regular resolution, valid values are any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
 	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
@@ -236,7 +236,9 @@ type MetricParameters struct {
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// The period in seconds over which the specified stat is applied.
+	// Granularity in seconds of returned data points.
+	// For metrics with regular resolution, valid values are any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Required
 	Period *float64 `json:"period" tf:"period,omitempty"`
 
@@ -267,6 +269,11 @@ type MetricQueryObservation struct {
 	// The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.
 	Metric []MetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
 
+	// Granularity in seconds of returned data points.
+	// For metrics with regular resolution, valid values are any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
@@ -292,6 +299,12 @@ type MetricQueryParameters struct {
 	// The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.
 	// +kubebuilder:validation:Optional
 	Metric []MetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Granularity in seconds of returned data points.
+	// For metrics with regular resolution, valid values are any multiple of 60.
+	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
+	// +kubebuilder:validation:Optional
+	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
 	// +kubebuilder:validation:Optional

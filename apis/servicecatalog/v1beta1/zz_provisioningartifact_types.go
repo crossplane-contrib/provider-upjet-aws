@@ -48,7 +48,7 @@ type ProvisioningArtifactObservation struct {
 	// Template source as URL of the CloudFormation template in Amazon S3.
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -105,7 +105,7 @@ type ProvisioningArtifactParameters struct {
 	// +kubebuilder:validation:Optional
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

@@ -9,12 +9,12 @@ metadata:
 spec:
   forProvider:
     description: Capture each AWS Console Sign In
-    eventPattern: |
-      {
-        "detail-type": [
-          "AWS Console Sign In via CloudTrail"
-        ]
-      }
+    eventPattern: |-
+      ${jsonencode({
+          detail-type = [
+            "AWS Console Sign In via CloudTrail"
+          ]
+        })}
     region: us-west-1
 
 ---

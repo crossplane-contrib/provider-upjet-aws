@@ -88,6 +88,11 @@ func (in *AcceleratorObservation) DeepCopyInto(out *AcceleratorObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DualStackDNSName != nil {
+		in, out := &in.DualStackDNSName, &out.DualStackDNSName
+		*out = new(string)
+		**out = **in
+	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)

@@ -13,6 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MetricDimensionsObservation struct {
+	Class *string `json:"class,omitempty" tf:"class,omitempty"`
+
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MetricDimensionsParameters struct {
+}
+
 type ServiceQuotaObservation struct {
 
 	// Whether the service quota can be increased.
@@ -44,6 +57,9 @@ type ServiceQuotaObservation struct {
 	// Name of the service.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
+	// Information about the measurement.
+	UsageMetric []UsageMetricObservation `json:"usageMetric,omitempty" tf:"usage_metric,omitempty"`
+
 	// Float specifying the desired value for the service quota. If the desired value is higher than the current value, a quota increase request is submitted. When a known request is submitted and pending, the value reflects the desired value of the pending request.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -66,6 +82,24 @@ type ServiceQuotaParameters struct {
 	// Float specifying the desired value for the service quota. If the desired value is higher than the current value, a quota increase request is submitted. When a known request is submitted and pending, the value reflects the desired value of the pending request.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type UsageMetricObservation struct {
+
+	// The metric dimensions.
+	MetricDimensions []MetricDimensionsObservation `json:"metricDimensions,omitempty" tf:"metric_dimensions,omitempty"`
+
+	// The name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The namespace of the metric.
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
+
+	// The metric statistic that AWS recommend you use when determining quota usage.
+	MetricStatisticRecommendation *string `json:"metricStatisticRecommendation,omitempty" tf:"metric_statistic_recommendation,omitempty"`
+}
+
+type UsageMetricParameters struct {
 }
 
 // ServiceQuotaSpec defines the desired state of ServiceQuota

@@ -172,8 +172,9 @@ spec:
                       type: object
                     type: array
                   eventBusName:
-                    description: The event bus to set the permissions on. If you omit
-                      this, the permissions are set on the default event bus.
+                    description: The name of the event bus to set the permissions
+                      on. If you omit this, the permissions are set on the default
+                      event bus.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus to populate eventBusName.
@@ -483,8 +484,9 @@ spec:
                       type: object
                     type: array
                   eventBusName:
-                    description: The event bus to set the permissions on. If you omit
-                      this, the permissions are set on the default event bus.
+                    description: The name of the event bus to set the permissions
+                      on. If you omit this, the permissions are set on the default
+                      event bus.
                     type: string
                   id:
                     description: The statement ID of the EventBridge permission.

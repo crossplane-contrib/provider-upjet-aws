@@ -60,6 +60,22 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
+		Extract:      resource.ExtractParamPath("key_id", true),
+		Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MasterUserSecretKMSKeyID")
+	}
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RestoreToPointInTime); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestoreToPointInTime[i3].SourceClusterIdentifier),
@@ -500,6 +516,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
+		Extract:      resource.ExtractParamPath("key_id", true),
+		Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MasterUserSecretKMSKeyID")
+	}
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MonitoringRoleArn),

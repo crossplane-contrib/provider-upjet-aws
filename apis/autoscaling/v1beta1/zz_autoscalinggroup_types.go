@@ -500,6 +500,9 @@ type InstanceRequirementsObservation struct {
 	// List of accelerator types. Default is any accelerator type.
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
@@ -512,7 +515,7 @@ type InstanceRequirementsObservation struct {
 	// List of CPU manufacturer names. Default is any manufacturer.
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
@@ -529,6 +532,9 @@ type InstanceRequirementsObservation struct {
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	MemoryMib []MemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []NetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	NetworkInterfaceCount []NetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
@@ -571,6 +577,10 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +kubebuilder:validation:Optional
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
@@ -587,7 +597,7 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
@@ -610,6 +620,10 @@ type InstanceRequirementsParameters struct {
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Optional
 	MemoryMib []MemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkBandwidthGbps []NetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -851,6 +865,26 @@ type MixedInstancesPolicyParameters struct {
 	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate" tf:"launch_template,omitempty"`
 }
 
+type NetworkBandwidthGbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type NetworkBandwidthGbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type NetworkInterfaceCountObservation struct {
 
 	// Maximum.
@@ -944,6 +978,9 @@ type OverrideParameters struct {
 
 type PreferencesObservation struct {
 
+	// Automatically rollback if instance refresh fails. Defaults to false.
+	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
+
 	// Number of seconds to wait after a checkpoint. Defaults to 3600.
 	CheckpointDelay *string `json:"checkpointDelay,omitempty" tf:"checkpoint_delay,omitempty"`
 
@@ -961,6 +998,10 @@ type PreferencesObservation struct {
 }
 
 type PreferencesParameters struct {
+
+	// Automatically rollback if instance refresh fails. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
 	// Number of seconds to wait after a checkpoint. Defaults to 3600.
 	// +kubebuilder:validation:Optional

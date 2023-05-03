@@ -63,7 +63,7 @@ type ProductObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
+	// Type of product. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -114,7 +114,7 @@ type ProductParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of product. Valid values are CLOUD_FORMATION_TEMPLATE, MARKETPLACE.
+	// Type of product. See AWS Docs for valid list of values.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -136,7 +136,7 @@ type ProvisioningArtifactParametersObservation struct {
 	// Template source as URL of the CloudFormation template in Amazon S3.
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -162,7 +162,7 @@ type ProvisioningArtifactParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

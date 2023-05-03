@@ -8,21 +8,7 @@ metadata:
   name: main
 spec:
   forProvider:
-    accessPolicies: |
-      {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Action": "es:*",
-                  "Principal": "*",
-                  "Effect": "Allow",
-                  "Condition": {
-                      "IpAddress": {"aws:SourceIp": "127.0.0.1/32"}
-                  },
-                  "Resource": "${aws_opensearch_domain.example.arn}/*"
-              }
-          ]
-      }
+    accessPolicies: ${data.aws_iam_policy_document.main.json}
     domainNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

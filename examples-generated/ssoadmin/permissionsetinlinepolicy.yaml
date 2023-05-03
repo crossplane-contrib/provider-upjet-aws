@@ -9,9 +9,7 @@ metadata:
 spec:
   forProvider:
     inlinePolicy: ${data.aws_iam_policy_document.example.json}
-    instanceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

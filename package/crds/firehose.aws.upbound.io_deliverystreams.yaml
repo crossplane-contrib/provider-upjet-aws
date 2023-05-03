@@ -74,7 +74,8 @@ spec:
                   destination:
                     description: –  This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
-                      extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
+                      extended_s3, redshift, elasticsearch, splunk, http_endpoint
+                      and opensearch.
                     type: string
                   destinationId:
                     type: string
@@ -1589,6 +1590,393 @@ spec:
                       for WAF logging, name must be prefixed with aws-waf-logs-. See
                       AWS Documentation for more details.
                     type: string
+                  opensearchConfiguration:
+                    description: Configuration options if opensearch is the destination.
+                      More details are given below.
+                    items:
+                      properties:
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 60 to 900, before delivering
+                            it to the destination.  The default value is 300s.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 100, before delivering it to the destination.  The
+                            default value is 5MB.
+                          type: number
+                        cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              logGroupName:
+                                description: The CloudWatch group name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                              logStreamName:
+                                description: The CloudWatch log stream name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
+                        clusterEndpoint:
+                          description: The endpoint to use when communicating with
+                            the cluster. Conflicts with domain_arn.
+                          type: string
+                        domainArn:
+                          description: The ARN of the Amazon ES domain.  The pattern
+                            needs to be arn:.*.  Conflicts with cluster_endpoint.
+                          type: string
+                        domainArnRef:
+                          description: Reference to a Domain in opensearch to populate
+                            domainArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        domainArnSelector:
+                          description: Selector for a Domain in opensearch to populate
+                            domainArn.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        indexName:
+                          description: The Elasticsearch index name.
+                          type: string
+                        indexRotationPeriod:
+                          description: The Elasticsearch index rotation period.  Index
+                            rotation appends a timestamp to the IndexName to facilitate
+                            expiration of old data.  Valid values are NoRotation,
+                            OneHour, OneDay, OneWeek, and OneMonth.  The default value
+                            is OneDay.
+                          type: string
+                        processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              processors:
+                                description: Array of data processors. More details
+                                  are given below
+                                items:
+                                  properties:
+                                    parameters:
+                                      description: Array of processor parameters.
+                                        More details are given below
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            description: 'Parameter name. Valid Values:
+                                              LambdaArn, NumberOfRetries, MetadataExtractionQuery,
+                                              JsonParsingEngine, RoleArn, BufferSizeInMBs,
+                                              BufferIntervalInSeconds, SubRecordType,
+                                              Delimiter. Validation is done against
+                                              AWS SDK constants; so that values not
+                                              explicitly listed may also work.'
+                                            type: string
+                                          parameterValue:
+                                            description: Parameter value. Must be
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
+                                            type: string
+                                        required:
+                                        - parameterName
+                                        - parameterValue
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: 'The type of processor. Valid Values:
+                                        RecordDeAggregation, Lambda, MetadataExtraction,
+                                        AppendDelimiterToRecord. Validation is done
+                                        against AWS SDK constants; so that values
+                                        not explicitly listed may also work.'
+                                      type: string
+                                  required:
+                                  - type
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
+                          type: number
+                        roleArn:
+                          description: The ARN of the AWS credentials.
+                          type: string
+                        roleArnRef:
+                          description: Reference to a Role in iam to populate roleArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        roleArnSelector:
+                          description: Selector for a Role in iam to populate roleArn.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
+                          type: string
+                        typeName:
+                          description: The Elasticsearch type name with maximum length
+                            of 100 characters.
+                          type: string
+                        vpcConfig:
+                          description: The VPC configuration for the delivery stream
+                            to connect to Elastic Search associated with the VPC.
+                            More details are given below
+                          items:
+                            properties:
+                              roleArn:
+                                description: The ARN of the AWS credentials.
+                                type: string
+                              roleArnRef:
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              roleArnSelector:
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              securityGroupIds:
+                                description: A list of security group IDs to associate
+                                  with Kinesis Firehose.
+                                items:
+                                  type: string
+                                type: array
+                              subnetIds:
+                                description: A list of subnet IDs to associate with
+                                  Kinesis Firehose.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - securityGroupIds
+                            - subnetIds
+                            type: object
+                          type: array
+                      required:
+                      - indexName
+                      type: object
+                    type: array
                   redshiftConfiguration:
                     description: Configuration options if redshift is the destination.
                       Using redshift_configuration requires the user to also specify
@@ -2610,7 +2998,8 @@ spec:
                   destination:
                     description: –  This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
-                      extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
+                      extended_s3, redshift, elasticsearch, splunk, http_endpoint
+                      and opensearch.
                     type: string
                   destinationId:
                     type: string
@@ -3439,6 +3828,151 @@ spec:
                       for WAF logging, name must be prefixed with aws-waf-logs-. See
                       AWS Documentation for more details.
                     type: string
+                  opensearchConfiguration:
+                    description: Configuration options if opensearch is the destination.
+                      More details are given below.
+                    items:
+                      properties:
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 60 to 900, before delivering
+                            it to the destination.  The default value is 300s.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 100, before delivering it to the destination.  The
+                            default value is 5MB.
+                          type: number
+                        cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. More details are given below
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              logGroupName:
+                                description: The CloudWatch group name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                              logStreamName:
+                                description: The CloudWatch log stream name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
+                        clusterEndpoint:
+                          description: The endpoint to use when communicating with
+                            the cluster. Conflicts with domain_arn.
+                          type: string
+                        domainArn:
+                          description: The ARN of the Amazon ES domain.  The pattern
+                            needs to be arn:.*.  Conflicts with cluster_endpoint.
+                          type: string
+                        indexName:
+                          description: The Elasticsearch index name.
+                          type: string
+                        indexRotationPeriod:
+                          description: The Elasticsearch index rotation period.  Index
+                            rotation appends a timestamp to the IndexName to facilitate
+                            expiration of old data.  Valid values are NoRotation,
+                            OneHour, OneDay, OneWeek, and OneMonth.  The default value
+                            is OneDay.
+                          type: string
+                        processingConfiguration:
+                          description: The data processing configuration.  More details
+                            are given below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              processors:
+                                description: Array of data processors. More details
+                                  are given below
+                                items:
+                                  properties:
+                                    parameters:
+                                      description: Array of processor parameters.
+                                        More details are given below
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            description: 'Parameter name. Valid Values:
+                                              LambdaArn, NumberOfRetries, MetadataExtractionQuery,
+                                              JsonParsingEngine, RoleArn, BufferSizeInMBs,
+                                              BufferIntervalInSeconds, SubRecordType,
+                                              Delimiter. Validation is done against
+                                              AWS SDK constants; so that values not
+                                              explicitly listed may also work.'
+                                            type: string
+                                          parameterValue:
+                                            description: Parameter value. Must be
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: 'The type of processor. Valid Values:
+                                        RecordDeAggregation, Lambda, MetadataExtraction,
+                                        AppendDelimiterToRecord. Validation is done
+                                        against AWS SDK constants; so that values
+                                        not explicitly listed may also work.'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          description: The length of time during which Firehose retries
+                            delivery after a failure, starting from the initial request
+                            and including the first attempt. The default value is
+                            3600 seconds (60 minutes). Firehose does not retry if
+                            the value of DurationInSeconds is 0 (zero) or if the first
+                            delivery attempt takes longer than the current value.
+                          type: number
+                        roleArn:
+                          description: The ARN of the AWS credentials.
+                          type: string
+                        s3BackupMode:
+                          description: The Amazon S3 backup mode.  Valid values are
+                            Disabled and Enabled.  Default value is Disabled.
+                          type: string
+                        typeName:
+                          description: The Elasticsearch type name with maximum length
+                            of 100 characters.
+                          type: string
+                        vpcConfig:
+                          description: The VPC configuration for the delivery stream
+                            to connect to Elastic Search associated with the VPC.
+                            More details are given below
+                          items:
+                            properties:
+                              roleArn:
+                                description: The ARN of the AWS credentials.
+                                type: string
+                              securityGroupIds:
+                                description: A list of security group IDs to associate
+                                  with Kinesis Firehose.
+                                items:
+                                  type: string
+                                type: array
+                              subnetIds:
+                                description: A list of subnet IDs to associate with
+                                  Kinesis Firehose.
+                                items:
+                                  type: string
+                                type: array
+                              vpcId:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   redshiftConfiguration:
                     description: Configuration options if redshift is the destination.
                       Using redshift_configuration requires the user to also specify

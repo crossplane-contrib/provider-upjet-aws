@@ -15,6 +15,9 @@ import (
 
 type CertificateObservation struct {
 
+	// Specifies X.509 certificate information to be included in the issued certificate. To use with API Passthrough templates
+	APIPassthrough *string `json:"apiPassthrough,omitempty" tf:"api_passthrough,omitempty"`
+
 	// ARN of the certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -41,6 +44,10 @@ type CertificateObservation struct {
 }
 
 type CertificateParameters struct {
+
+	// Specifies X.509 certificate information to be included in the issued certificate. To use with API Passthrough templates
+	// +kubebuilder:validation:Optional
+	APIPassthrough *string `json:"apiPassthrough,omitempty" tf:"api_passthrough,omitempty"`
 
 	// ARN of the certificate authority.
 	// +crossplane:generate:reference:type=CertificateAuthority

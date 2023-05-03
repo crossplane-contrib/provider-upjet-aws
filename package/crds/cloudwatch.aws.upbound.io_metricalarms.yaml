@@ -185,8 +185,11 @@ spec:
                                   metrics.
                                 type: string
                               period:
-                                description: The period in seconds over which the
-                                  specified stat is applied.
+                                description: Granularity in seconds of returned data
+                                  points. For metrics with regular resolution, valid
+                                  values are any multiple of 60. For high-resolution
+                                  metrics, valid values are 1, 5, 10, 30, or any multiple
+                                  of 60.
                                 type: number
                               stat:
                                 description: The statistic to apply to this metric.
@@ -201,6 +204,12 @@ spec:
                             - stat
                             type: object
                           type: array
+                        period:
+                          description: Granularity in seconds of returned data points.
+                            For metrics with regular resolution, valid values are
+                            any multiple of 60. For high-resolution metrics, valid
+                            values are 1, 5, 10, 30, or any multiple of 60.
+                          type: number
                         returnData:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
@@ -223,7 +232,7 @@ spec:
                     type: array
                   period:
                     description: The period in seconds over which the specified statistic
-                      is applied.
+                      is applied. Valid values are 10, 30, or any multiple of 60.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -580,8 +589,11 @@ spec:
                                   metrics.
                                 type: string
                               period:
-                                description: The period in seconds over which the
-                                  specified stat is applied.
+                                description: Granularity in seconds of returned data
+                                  points. For metrics with regular resolution, valid
+                                  values are any multiple of 60. For high-resolution
+                                  metrics, valid values are 1, 5, 10, 30, or any multiple
+                                  of 60.
                                 type: number
                               stat:
                                 description: The statistic to apply to this metric.
@@ -592,6 +604,12 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        period:
+                          description: Granularity in seconds of returned data points.
+                            For metrics with regular resolution, valid values are
+                            any multiple of 60. For high-resolution metrics, valid
+                            values are 1, 5, 10, 30, or any multiple of 60.
+                          type: number
                         returnData:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
@@ -612,7 +630,7 @@ spec:
                     type: array
                   period:
                     description: The period in seconds over which the specified statistic
-                      is applied.
+                      is applied. Valid values are 10, 30, or any multiple of 60.
                     type: number
                   statistic:
                     description: 'The statistic to apply to the alarm''s associated

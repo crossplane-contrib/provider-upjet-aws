@@ -434,9 +434,17 @@ spec:
                     description: The ARN of an ISSUED ACM certificate in us-east-1
                       for a custom domain.
                     type: string
+                  cloudfrontDistribution:
+                    description: The Amazon CloudFront endpoint (e.g. dpp0gtxikpq3y.cloudfront.net)
+                      that you use as the target of the alias that you set up with
+                      your Domain Name Service (DNS) provider.
+                    type: string
                   cloudfrontDistributionArn:
                     description: The URL of the CloudFront distribution. This is required
                       to generate the ALIAS aws_route53_record
+                    type: string
+                  cloudfrontDistributionZoneId:
+                    description: The Route 53 hosted zone ID of the CloudFront distribution.
                     type: string
                   domain:
                     description: For custom domains, this is the fully-qualified domain

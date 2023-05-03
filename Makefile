@@ -6,7 +6,7 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
-export TERRAFORM_PROVIDER_VERSION := 4.56.0
+export TERRAFORM_PROVIDER_VERSION := 4.65.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-aws
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-aws/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws

@@ -122,18 +122,10 @@ type InstanceObservation struct {
 	// The connection endpoint in address:port format.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The database engine to use.  For supported values, see the Engine parameter in API action CreateDBInstance. Cannot be specified for a replica.
-	// Note that for Amazon Aurora instances the engine must match the DB cluster's engine'.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// The database engine to use. For supported values, see the Engine parameter in API action CreateDBInstance. Note that for Amazon Aurora instances the engine must match the DB cluster's engine'. For information on the difference between the available Aurora MySQL engines see Comparison between Aurora MySQL 1 and Aurora MySQL 2 in the Amazon RDS User Guide.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The engine version to use. If auto_minor_version_upgrade
-	// is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10).
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
-	// For supported values, see the EngineVersion parameter in API action CreateDBInstance.
-	// Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'. Cannot be specified for a replica.
+	// The engine version to use. If auto_minor_version_upgrade is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below. For supported values, see the EngineVersion parameter in API action CreateDBInstance. Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The running version of the database.
@@ -174,12 +166,24 @@ type InstanceObservation struct {
 	// License model information for this DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
+	// Specifies the listener connection endpoint for SQL Server Always On. See endpoint below.
+	ListenerEndpoint []ListenerEndpointObservation `json:"listenerEndpoint,omitempty" tf:"listener_endpoint,omitempty"`
+
 	// The window to perform maintenance in.
 	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00". See RDS
 	// Maintenance Window
 	// docs
 	// for more information.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
+	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
+
+	// A block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
+	MasterUserSecret []MasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
+
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
+	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
 	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
@@ -334,7 +338,7 @@ type InstanceParameters struct {
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// Password for the master DB user. Note that this may show up in
-	// logs, and it will be stored in the state file.
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Optional
@@ -435,19 +439,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The database engine to use.  For supported values, see the Engine parameter in API action CreateDBInstance. Cannot be specified for a replica.
-	// Note that for Amazon Aurora instances the engine must match the DB cluster's engine'.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// The database engine to use. For supported values, see the Engine parameter in API action CreateDBInstance. Note that for Amazon Aurora instances the engine must match the DB cluster's engine'. For information on the difference between the available Aurora MySQL engines see Comparison between Aurora MySQL 1 and Aurora MySQL 2 in the Amazon RDS User Guide.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The engine version to use. If auto_minor_version_upgrade
-	// is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10).
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
-	// For supported values, see the EngineVersion parameter in API action CreateDBInstance.
-	// Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'. Cannot be specified for a replica.
+	// The engine version to use. If auto_minor_version_upgrade is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below. For supported values, see the EngineVersion parameter in API action CreateDBInstance. Note that for Amazon Aurora instances the engine version must match the DB cluster's engine version'.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -499,6 +495,24 @@ type InstanceParameters struct {
 	// for more information.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
+	// +kubebuilder:validation:Optional
+	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
+
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("key_id",true)
+	// +kubebuilder:validation:Optional
+	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
+	// +kubebuilder:validation:Optional
+	MasterUserSecretKMSKeyIDRef *v1.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
+	// +kubebuilder:validation:Optional
+	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
 	// +kubebuilder:validation:Optional
@@ -556,7 +570,7 @@ type InstanceParameters struct {
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// Password for the master DB user. Note that this may show up in
-	// logs, and it will be stored in the state file.
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
 	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
@@ -680,6 +694,37 @@ type InstanceParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+}
+
+type ListenerEndpointObservation struct {
+
+	// The hostname of the RDS instance. See also endpoint and port.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The canonical hosted zone ID of the DB instance (to be used
+	// in a Route 53 Alias record).
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
+	// The port on which the DB accepts connections.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
+type ListenerEndpointParameters struct {
+}
+
+type MasterUserSecretObservation struct {
+
+	// The Amazon Web Services KMS key identifier that is used to encrypt the secret.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the secret.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// The status of the secret. Valid Values: creating | active | rotating | impaired.
+	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
+}
+
+type MasterUserSecretParameters struct {
 }
 
 type RestoreToPointInTimeObservation struct {

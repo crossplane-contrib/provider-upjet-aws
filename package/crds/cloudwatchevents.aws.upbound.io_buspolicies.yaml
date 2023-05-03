@@ -69,8 +69,9 @@ spec:
               forProvider:
                 properties:
                   eventBusName:
-                    description: The event bus to set the permissions on. If you omit
-                      this, the permissions are set on the default event bus.
+                    description: The name of the event bus to set the permissions
+                      on. If you omit this, the permissions are set on the default
+                      event bus.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus in cloudwatchevents to populate
@@ -352,8 +353,9 @@ spec:
               atProvider:
                 properties:
                   eventBusName:
-                    description: The event bus to set the permissions on. If you omit
-                      this, the permissions are set on the default event bus.
+                    description: The name of the event bus to set the permissions
+                      on. If you omit this, the permissions are set on the default
+                      event bus.
                     type: string
                   id:
                     description: The name of the EventBridge event bus.

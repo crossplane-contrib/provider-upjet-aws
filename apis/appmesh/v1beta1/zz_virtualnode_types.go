@@ -177,7 +177,7 @@ type BaseEjectionDurationObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -187,7 +187,7 @@ type BaseEjectionDurationParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -428,6 +428,12 @@ type DNSObservation struct {
 
 	// DNS host name for your virtual node.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// The preferred IP version that this virtual node uses. Valid values: IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY.
+	IPPreference *string `json:"ipPreference,omitempty" tf:"ip_preference,omitempty"`
+
+	// The DNS response type for the virtual node. Valid values: LOADBALANCER, ENDPOINTS.
+	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 }
 
 type DNSParameters struct {
@@ -435,6 +441,54 @@ type DNSParameters struct {
 	// DNS host name for your virtual node.
 	// +kubebuilder:validation:Required
 	Hostname *string `json:"hostname" tf:"hostname,omitempty"`
+
+	// The preferred IP version that this virtual node uses. Valid values: IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, IPv6_ONLY.
+	// +kubebuilder:validation:Optional
+	IPPreference *string `json:"ipPreference,omitempty" tf:"ip_preference,omitempty"`
+
+	// The DNS response type for the virtual node. Valid values: LOADBALANCER, ENDPOINTS.
+	// +kubebuilder:validation:Optional
+	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
+}
+
+type FileFormatObservation struct {
+
+	// The logging format for JSON.
+	JSON []FormatJSONObservation `json:"json,omitempty" tf:"json,omitempty"`
+
+	// The logging format for text. Must be between 1 and 1000 characters in length.
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
+type FileFormatParameters struct {
+
+	// The logging format for JSON.
+	// +kubebuilder:validation:Optional
+	JSON []FormatJSONParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// The logging format for text. Must be between 1 and 1000 characters in length.
+	// +kubebuilder:validation:Optional
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
+type FormatJSONObservation struct {
+
+	// The specified key for the JSON. Must be between 1 and 100 characters in length.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type FormatJSONParameters struct {
+
+	// The specified key for the JSON. Must be between 1 and 100 characters in length.
+	// +kubebuilder:validation:Required
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type GRPCIdleObservation struct {
@@ -442,7 +496,7 @@ type GRPCIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -452,7 +506,7 @@ type GRPCIdleParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -462,7 +516,7 @@ type GRPCPerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -472,7 +526,7 @@ type GRPCPerRequestParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -482,7 +536,7 @@ type HTTPIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -492,7 +546,7 @@ type HTTPIdleParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -502,7 +556,7 @@ type HTTPPerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -512,7 +566,7 @@ type HTTPPerRequestParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -522,7 +576,7 @@ type Http2IdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -532,7 +586,7 @@ type Http2IdleParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -542,7 +596,7 @@ type Http2PerRequestObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -552,7 +606,7 @@ type Http2PerRequestParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -562,7 +616,7 @@ type IntervalObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -572,7 +626,7 @@ type IntervalParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
@@ -874,11 +928,18 @@ type ListenerTimeoutParameters struct {
 
 type LoggingAccessLogFileObservation struct {
 
+	// The specified format for the logs.
+	Format []FileFormatObservation `json:"format,omitempty" tf:"format,omitempty"`
+
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type LoggingAccessLogFileParameters struct {
+
+	// The specified format for the logs.
+	// +kubebuilder:validation:Optional
+	Format []FileFormatParameters `json:"format,omitempty" tf:"format,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
@@ -1060,7 +1121,7 @@ type TCPIdleObservation struct {
 	// Unit of time. Valid values: ms, s.
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1070,7 +1131,7 @@ type TCPIdleParameters struct {
 	// +kubebuilder:validation:Required
 	Unit *string `json:"unit" tf:"unit,omitempty"`
 
-	// Number of time units. Minimum value of 0.
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Required
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }

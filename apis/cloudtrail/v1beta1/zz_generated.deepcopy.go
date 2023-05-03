@@ -435,6 +435,11 @@ func (in *EventDataStoreObservation) DeepCopyInto(out *EventDataStoreObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.MultiRegionEnabled != nil {
 		in, out := &in.MultiRegionEnabled, &out.MultiRegionEnabled
 		*out = new(bool)
@@ -511,6 +516,21 @@ func (in *EventDataStoreParameters) DeepCopyInto(out *EventDataStoreParameters) 
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultiRegionEnabled != nil {
 		in, out := &in.MultiRegionEnabled, &out.MultiRegionEnabled

@@ -69,15 +69,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the Origin Access Control. It
-                      may be empty.
+                    description: The description of the Origin Access Control.
                     type: string
                   name:
                     description: A name that identifies the Origin Access Control.
                     type: string
                   originAccessControlOriginType:
                     description: The type of origin that this Origin Access Control
-                      is for. The only valid value is s3.
+                      is for. Valid values are s3, and mediastore.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -86,11 +85,11 @@ spec:
                   signingBehavior:
                     description: 'Specifies which requests CloudFront signs. Specify
                       always for the most common use case. Allowed values: always,
-                      never, no-override.'
+                      never, and no-override.'
                     type: string
                   signingProtocol:
-                    description: 'Determines how CloudFront signs (authenticates)
-                      requests. Valid values: sigv4.'
+                    description: Determines how CloudFront signs (authenticates) requests.
+                      The only valid value is sigv4.
                     type: string
                 required:
                 - region
@@ -296,8 +295,7 @@ spec:
               atProvider:
                 properties:
                   description:
-                    description: The description of the Origin Access Control. It
-                      may be empty.
+                    description: The description of the Origin Access Control.
                     type: string
                   etag:
                     description: The current version of this Origin Access Control.
@@ -310,16 +308,16 @@ spec:
                     type: string
                   originAccessControlOriginType:
                     description: The type of origin that this Origin Access Control
-                      is for. The only valid value is s3.
+                      is for. Valid values are s3, and mediastore.
                     type: string
                   signingBehavior:
                     description: 'Specifies which requests CloudFront signs. Specify
                       always for the most common use case. Allowed values: always,
-                      never, no-override.'
+                      never, and no-override.'
                     type: string
                   signingProtocol:
-                    description: 'Determines how CloudFront signs (authenticates)
-                      requests. Valid values: sigv4.'
+                    description: Determines how CloudFront signs (authenticates) requests.
+                      The only valid value is sigv4.
                     type: string
                 type: object
               conditions:

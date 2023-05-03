@@ -3330,7 +3330,7 @@ type MsSmoothGroupSettingsObservation struct {
 	// User-specified id. Ths is used in an output group or an output.
 	AcquisitionPointID *string `json:"acquisitionPointId,omitempty" tf:"acquisition_point_id,omitempty"`
 
-	AudioOnlyTimecodecControl *string `json:"audioOnlyTimecodecControl,omitempty" tf:"audio_only_timecodec_control,omitempty"`
+	AudioOnlyTimecodeControl *string `json:"audioOnlyTimecodeControl,omitempty" tf:"audio_only_timecode_control,omitempty"`
 
 	// Setting to allow self signed or verified RTMP certificates.
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
@@ -3342,7 +3342,7 @@ type MsSmoothGroupSettingsObservation struct {
 	Destination []MsSmoothGroupSettingsDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	EventID *float64 `json:"eventId,omitempty" tf:"event_id,omitempty"`
+	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 
 	EventIDMode *string `json:"eventIdMode,omitempty" tf:"event_id_mode,omitempty"`
 
@@ -3381,7 +3381,7 @@ type MsSmoothGroupSettingsParameters struct {
 	AcquisitionPointID *string `json:"acquisitionPointId,omitempty" tf:"acquisition_point_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	AudioOnlyTimecodecControl *string `json:"audioOnlyTimecodecControl,omitempty" tf:"audio_only_timecodec_control,omitempty"`
+	AudioOnlyTimecodeControl *string `json:"audioOnlyTimecodeControl,omitempty" tf:"audio_only_timecode_control,omitempty"`
 
 	// Setting to allow self signed or verified RTMP certificates.
 	// +kubebuilder:validation:Optional
@@ -3397,7 +3397,7 @@ type MsSmoothGroupSettingsParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	EventID *float64 `json:"eventId,omitempty" tf:"event_id,omitempty"`
+	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EventIDMode *string `json:"eventIdMode,omitempty" tf:"event_id_mode,omitempty"`
@@ -3922,7 +3922,9 @@ type RtmpOutputSettingsDestinationParameters struct {
 }
 
 type RtmpOutputSettingsObservation struct {
-	CertficateMode *string `json:"certficateMode,omitempty" tf:"certficate_mode,omitempty"`
+
+	// Setting to allow self signed or verified RTMP certificates.
+	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
@@ -3936,8 +3938,9 @@ type RtmpOutputSettingsObservation struct {
 
 type RtmpOutputSettingsParameters struct {
 
+	// Setting to allow self signed or verified RTMP certificates.
 	// +kubebuilder:validation:Optional
-	CertficateMode *string `json:"certficateMode,omitempty" tf:"certficate_mode,omitempty"`
+	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional

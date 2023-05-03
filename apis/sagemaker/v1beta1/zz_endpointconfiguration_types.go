@@ -275,6 +275,9 @@ type ProductionVariantsObservation struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []CoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
 
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -313,6 +316,10 @@ type ProductionVariantsParameters struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	CoreDumpConfig []CoreDumpConfigParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	// +kubebuilder:validation:Optional
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
@@ -407,6 +414,9 @@ type ShadowProductionVariantsObservation struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
 
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -445,6 +455,10 @@ type ShadowProductionVariantsParameters struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	// +kubebuilder:validation:Optional
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional

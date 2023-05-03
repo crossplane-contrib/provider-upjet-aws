@@ -1025,7 +1025,7 @@ spec:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
                                             type: string
-                                          audioOnlyTimecodecControl:
+                                          audioOnlyTimecodeControl:
                                             type: string
                                           certificateMode:
                                             description: Setting to allow self signed
@@ -1053,7 +1053,7 @@ spec:
                                           eventId:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
-                                            type: number
+                                            type: string
                                           eventIdMode:
                                             type: string
                                           eventStopBehavior:
@@ -1671,7 +1671,9 @@ spec:
                                               RTMP Output Settings for more details.
                                             items:
                                               properties:
-                                                certficateMode:
+                                                certificateMode:
+                                                  description: Setting to allow self
+                                                    signed or verified RTMP certificates.
                                                   type: string
                                                 connectionRetryInterval:
                                                   description: Number of seconds to
@@ -3942,7 +3944,7 @@ spec:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
                                             type: string
-                                          audioOnlyTimecodecControl:
+                                          audioOnlyTimecodeControl:
                                             type: string
                                           certificateMode:
                                             description: Setting to allow self signed
@@ -3968,7 +3970,7 @@ spec:
                                           eventId:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
-                                            type: number
+                                            type: string
                                           eventIdMode:
                                             type: string
                                           eventStopBehavior:
@@ -4571,7 +4573,9 @@ spec:
                                               RTMP Output Settings for more details.
                                             items:
                                               properties:
-                                                certficateMode:
+                                                certificateMode:
+                                                  description: Setting to allow self
+                                                    signed or verified RTMP certificates.
                                                   type: string
                                                 connectionRetryInterval:
                                                   description: Number of seconds to

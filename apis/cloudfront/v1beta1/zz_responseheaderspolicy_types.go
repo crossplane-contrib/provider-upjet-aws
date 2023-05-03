@@ -218,6 +218,29 @@ type ReferrerPolicyParameters struct {
 	ReferrerPolicy *string `json:"referrerPolicy" tf:"referrer_policy,omitempty"`
 }
 
+type RemoveHeadersConfigItemsObservation struct {
+
+	// The HTTP response header name.
+	Header *string `json:"header,omitempty" tf:"header,omitempty"`
+}
+
+type RemoveHeadersConfigItemsParameters struct {
+
+	// The HTTP response header name.
+	// +kubebuilder:validation:Required
+	Header *string `json:"header" tf:"header,omitempty"`
+}
+
+type RemoveHeadersConfigObservation struct {
+	Items []RemoveHeadersConfigItemsObservation `json:"items,omitempty" tf:"items,omitempty"`
+}
+
+type RemoveHeadersConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Items []RemoveHeadersConfigItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
+}
+
 type ResponseHeadersPolicyObservation struct {
 
 	// A comment to describe the response headers policy. The comment cannot be longer than 128 characters.
@@ -237,6 +260,9 @@ type ResponseHeadersPolicyObservation struct {
 
 	// A unique name to identify the response headers policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A configuration for a set of HTTP headers to remove from the HTTP response. Object that contains an attribute items that contains a list of headers. See Remove Header for more information.
+	RemoveHeadersConfig []RemoveHeadersConfigObservation `json:"removeHeadersConfig,omitempty" tf:"remove_headers_config,omitempty"`
 
 	// A configuration for a set of security-related HTTP response headers. See Security Headers Config for more information.
 	SecurityHeadersConfig []SecurityHeadersConfigObservation `json:"securityHeadersConfig,omitempty" tf:"security_headers_config,omitempty"`
@@ -271,6 +297,10 @@ type ResponseHeadersPolicyParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// A configuration for a set of HTTP headers to remove from the HTTP response. Object that contains an attribute items that contains a list of headers. See Remove Header for more information.
+	// +kubebuilder:validation:Optional
+	RemoveHeadersConfig []RemoveHeadersConfigParameters `json:"removeHeadersConfig,omitempty" tf:"remove_headers_config,omitempty"`
 
 	// A configuration for a set of security-related HTTP response headers. See Security Headers Config for more information.
 	// +kubebuilder:validation:Optional

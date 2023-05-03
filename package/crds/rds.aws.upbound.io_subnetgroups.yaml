@@ -387,6 +387,9 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                  vpcId:
+                    description: Provides the VPC ID of the DB subnet group.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

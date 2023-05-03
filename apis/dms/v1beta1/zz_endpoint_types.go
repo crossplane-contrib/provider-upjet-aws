@@ -64,22 +64,15 @@ type EndpointObservation struct {
 	// Type of endpoint. Valid values are source, target.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
-	// Additional attributes associated with the connection.
-	// For available attributes for a source Endpoint, see Sources for data migration.
-	// For available attributes for a target Endpoint, see Targets for data migration.
+	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
 	ExtraConnectionAttributes *string `json:"extraConnectionAttributes,omitempty" tf:"extra_connection_attributes,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ARN for the KMS key that will be used to encrypt the connection parameters.
-	// If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key.
-	// AWS KMS creates the default encryption key for your AWS account.
-	// Your AWS account has a different default encryption key for each AWS region.
-	// To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id.
-	// When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
+	// ARN for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id. When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Configuration block for Kafka settings. See below.
@@ -99,7 +92,8 @@ type EndpointObservation struct {
 	// Configuration block for Redshift settings. See below.
 	RedshiftSettings []RedshiftSettingsObservation `json:"redshiftSettings,omitempty" tf:"redshift_settings,omitempty"`
 
-	// Configuration block for S3 settings. See below.
+	// (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
+	// This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
 	S3Settings []S3SettingsObservation `json:"s3Settings,omitempty" tf:"s3_settings,omitempty"`
 
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
@@ -145,22 +139,15 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	// +kubebuilder:validation:Optional
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
-	// Additional attributes associated with the connection.
-	// For available attributes for a source Endpoint, see Sources for data migration.
-	// For available attributes for a target Endpoint, see Targets for data migration.
+	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
 	// +kubebuilder:validation:Optional
 	ExtraConnectionAttributes *string `json:"extraConnectionAttributes,omitempty" tf:"extra_connection_attributes,omitempty"`
 
-	// ARN for the KMS key that will be used to encrypt the connection parameters.
-	// If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key.
-	// AWS KMS creates the default encryption key for your AWS account.
-	// Your AWS account has a different default encryption key for each AWS region.
-	// To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id.
-	// When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
+	// ARN for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id. When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -205,7 +192,8 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configuration block for S3 settings. See below.
+	// (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
+	// This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
 	// +kubebuilder:validation:Optional
 	S3Settings []S3SettingsParameters `json:"s3Settings,omitempty" tf:"s3_settings,omitempty"`
 
@@ -698,9 +686,7 @@ type S3SettingsObservation struct {
 	// Whether to use csv_no_sup_value for columns not included in the supplemental log.
 	UseCsvNoSupValue *bool `json:"useCsvNoSupValue,omitempty" tf:"use_csv_no_sup_value,omitempty"`
 
-	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target.
-	// For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time.
-	// When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
+	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target. For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time. When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
 	UseTaskStartTimeForFullLoadTimestamp *bool `json:"useTaskStartTimeForFullLoadTimestamp,omitempty" tf:"use_task_start_time_for_full_load_timestamp,omitempty"`
 }
 
@@ -855,9 +841,7 @@ type S3SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	UseCsvNoSupValue *bool `json:"useCsvNoSupValue,omitempty" tf:"use_csv_no_sup_value,omitempty"`
 
-	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target.
-	// For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time.
-	// When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
+	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target. For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time. When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
 	// +kubebuilder:validation:Optional
 	UseTaskStartTimeForFullLoadTimestamp *bool `json:"useTaskStartTimeForFullLoadTimestamp,omitempty" tf:"use_task_start_time_for_full_load_timestamp,omitempty"`
 }

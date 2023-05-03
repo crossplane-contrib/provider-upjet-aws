@@ -103,7 +103,9 @@ type TokenValidityUnitsParameters struct {
 
 type UserPoolClientObservation struct {
 
-	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. This value will be overridden if you have entered a value in token_validity_units.
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.access_token.
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
 	// List of allowed OAuth flows (code, implicit, client_credentials).
@@ -142,7 +144,9 @@ type UserPoolClientObservation struct {
 	// ID of the user pool client.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. This value will be overridden if you have entered a value in token_validity_units.
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.id_token.
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
 	// List of allowed logout URLs for the identity providers.
@@ -157,7 +161,9 @@ type UserPoolClientObservation struct {
 	// List of user pool attributes the application client can read from.
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
-	// Time limit in days refresh tokens are valid for.
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
+	// By default, the unit is days.
+	// The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
 	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
@@ -175,7 +181,9 @@ type UserPoolClientObservation struct {
 
 type UserPoolClientParameters struct {
 
-	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. This value will be overridden if you have entered a value in token_validity_units.
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.access_token.
 	// +kubebuilder:validation:Optional
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
@@ -223,7 +231,9 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	GenerateSecret *bool `json:"generateSecret,omitempty" tf:"generate_secret,omitempty"`
 
-	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. This value will be overridden if you have entered a value in token_validity_units.
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.id_token.
 	// +kubebuilder:validation:Optional
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
@@ -243,7 +253,9 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
-	// Time limit in days refresh tokens are valid for.
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
+	// By default, the unit is days.
+	// The unit can be overridden by a value in token_validity_units.refresh_token.
 	// +kubebuilder:validation:Optional
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 

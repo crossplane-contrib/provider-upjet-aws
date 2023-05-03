@@ -2414,8 +2414,18 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableTLSVersionAndCipherSuiteHeaders != nil {
+		in, out := &in.EnableTLSVersionAndCipherSuiteHeaders, &out.EnableTLSVersionAndCipherSuiteHeaders
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnableWafFailOpen != nil {
 		in, out := &in.EnableWafFailOpen, &out.EnableWafFailOpen
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableXffClientPort != nil {
+		in, out := &in.EnableXffClientPort, &out.EnableXffClientPort
 		*out = new(bool)
 		**out = **in
 	}
@@ -2518,6 +2528,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.XffHeaderProcessingMode != nil {
+		in, out := &in.XffHeaderProcessingMode, &out.XffHeaderProcessingMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.ZoneID != nil {
 		in, out := &in.ZoneID, &out.ZoneID
 		*out = new(string)
@@ -2575,8 +2590,18 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableTLSVersionAndCipherSuiteHeaders != nil {
+		in, out := &in.EnableTLSVersionAndCipherSuiteHeaders, &out.EnableTLSVersionAndCipherSuiteHeaders
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnableWafFailOpen != nil {
 		in, out := &in.EnableWafFailOpen, &out.EnableWafFailOpen
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableXffClientPort != nil {
+		in, out := &in.EnableXffClientPort, &out.EnableXffClientPort
 		*out = new(bool)
 		**out = **in
 	}
@@ -2682,6 +2707,11 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.XffHeaderProcessingMode != nil {
+		in, out := &in.XffHeaderProcessingMode, &out.XffHeaderProcessingMode
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -3021,6 +3051,11 @@ func (in *LBTargetGroupObservation) DeepCopyInto(out *LBTargetGroupObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoadBalancingCrossZoneEnabled != nil {
+		in, out := &in.LoadBalancingCrossZoneEnabled, &out.LoadBalancingCrossZoneEnabled
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -3154,6 +3189,11 @@ func (in *LBTargetGroupParameters) DeepCopyInto(out *LBTargetGroupParameters) {
 	}
 	if in.LoadBalancingAlgorithmType != nil {
 		in, out := &in.LoadBalancingAlgorithmType, &out.LoadBalancingAlgorithmType
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoadBalancingCrossZoneEnabled != nil {
+		in, out := &in.LoadBalancingCrossZoneEnabled, &out.LoadBalancingCrossZoneEnabled
 		*out = new(string)
 		**out = **in
 	}

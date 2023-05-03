@@ -159,7 +159,7 @@ type ClusterConfigParameters struct {
 
 type CognitoOptionsObservation struct {
 
-	// Whether Amazon Cognito authentication with Kibana is enabled or not. Default is false.
+	// Whether Amazon Cognito authentication with Dashboard is enabled or not. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// ID of the Cognito Identity Pool to use.
@@ -174,7 +174,7 @@ type CognitoOptionsObservation struct {
 
 type CognitoOptionsParameters struct {
 
-	// Whether Amazon Cognito authentication with Kibana is enabled or not. Default is false.
+	// Whether Amazon Cognito authentication with Dashboard is enabled or not. Default is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -265,8 +265,11 @@ type DomainObservation struct {
 	// Configuration block for the cluster of the domain. Detailed below.
 	ClusterConfig []ClusterConfigObservation `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
-	// Configuration block for authenticating Kibana with Cognito. Detailed below.
+	// Configuration block for authenticating dashboard with Cognito. Detailed below.
 	CognitoOptions []CognitoOptionsObservation `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
+
+	// Domain-specific endpoint for Dashboard without https scheme.
+	DashboardEndpoint *string `json:"dashboardEndpoint,omitempty" tf:"dashboard_endpoint,omitempty"`
 
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions []DomainEndpointOptionsObservation `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
@@ -291,7 +294,7 @@ type DomainObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Domain-specific endpoint for kibana without https scheme.
+	// Domain-specific endpoint for kibana without https scheme. OpenSearch Dashboards do not use Kibana, so this attribute will be DEPRECATED in a future version.
 	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
 
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
@@ -331,7 +334,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterConfig []ClusterConfigParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
-	// Configuration block for authenticating Kibana with Cognito. Detailed below.
+	// Configuration block for authenticating dashboard with Cognito. Detailed below.
 	// +kubebuilder:validation:Optional
 	CognitoOptions []CognitoOptionsParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
 
@@ -409,7 +412,7 @@ type EBSOptionsObservation struct {
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type. Valid values are between 125 and 1000.
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of EBS volumes attached to data nodes (in GiB).
@@ -429,7 +432,7 @@ type EBSOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type. Valid values are between 125 and 1000.
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 

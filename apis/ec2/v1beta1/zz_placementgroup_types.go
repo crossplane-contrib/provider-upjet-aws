@@ -23,17 +23,17 @@ type PlacementGroupObservation struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// "partition".  Valid values are 1 - 7 (default is 2).
+	// partition.  Valid values are 1 - 7 (default is 2).
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
 	// Determines how placement groups spread instances. Can only be used
-	// when the strategy is set to "spread". Can be "host" or "rack". "host" can only be used for Outpost placement groups.
+	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
-	// The placement strategy. Can be "cluster", "partition" or "spread".
+	// The placement strategy. Can be cluster, partition or spread.
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -47,7 +47,7 @@ type PlacementGroupParameters struct {
 
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
-	// "partition".  Valid values are 1 - 7 (default is 2).
+	// partition.  Valid values are 1 - 7 (default is 2).
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
@@ -57,11 +57,11 @@ type PlacementGroupParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Determines how placement groups spread instances. Can only be used
-	// when the strategy is set to "spread". Can be "host" or "rack". "host" can only be used for Outpost placement groups.
+	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
 	// +kubebuilder:validation:Optional
 	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
 
-	// The placement strategy. Can be "cluster", "partition" or "spread".
+	// The placement strategy. Can be cluster, partition or spread.
 	// +kubebuilder:validation:Optional
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 

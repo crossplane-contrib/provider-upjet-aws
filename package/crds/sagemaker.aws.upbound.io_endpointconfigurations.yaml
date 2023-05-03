@@ -301,6 +301,13 @@ spec:
                             - destinationS3Uri
                             type: object
                           type: array
+                        enableSsmAccess:
+                          description: You can use this parameter to turn on native
+                            Amazon Web Services Systems Manager (SSM) access for a
+                            production variant behind an endpoint. By default, SSM
+                            access is disabled for all production variants behind
+                            an endpoints.
+                          type: boolean
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -474,6 +481,13 @@ spec:
                             - kmsKeyId
                             type: object
                           type: array
+                        enableSsmAccess:
+                          description: You can use this parameter to turn on native
+                            Amazon Web Services Systems Manager (SSM) access for a
+                            production variant behind an endpoint. By default, SSM
+                            access is disabled for all production variants behind
+                            an endpoints.
+                          type: boolean
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -883,6 +897,13 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        enableSsmAccess:
+                          description: You can use this parameter to turn on native
+                            Amazon Web Services Systems Manager (SSM) access for a
+                            production variant behind an endpoint. By default, SSM
+                            access is disabled for all production variants behind
+                            an endpoints.
+                          type: boolean
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -968,6 +989,13 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        enableSsmAccess:
+                          description: You can use this parameter to turn on native
+                            Amazon Web Services Systems Manager (SSM) access for a
+                            production variant behind an endpoint. By default, SSM
+                            access is disabled for all production variants behind
+                            an endpoints.
+                          type: boolean
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number

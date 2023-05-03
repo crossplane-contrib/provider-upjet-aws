@@ -2501,6 +2501,11 @@ func (in *DeltaTargetObservation) DeepCopyInto(out *DeltaTargetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CreateNativeDeltaTable != nil {
+		in, out := &in.CreateNativeDeltaTable, &out.CreateNativeDeltaTable
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeltaTables != nil {
 		in, out := &in.DeltaTables, &out.DeltaTables
 		*out = make([]*string, len(*in))
@@ -2535,6 +2540,11 @@ func (in *DeltaTargetParameters) DeepCopyInto(out *DeltaTargetParameters) {
 	if in.ConnectionName != nil {
 		in, out := &in.ConnectionName, &out.ConnectionName
 		*out = new(string)
+		**out = **in
+	}
+	if in.CreateNativeDeltaTable != nil {
+		in, out := &in.CreateNativeDeltaTable, &out.CreateNativeDeltaTable
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DeltaTables != nil {

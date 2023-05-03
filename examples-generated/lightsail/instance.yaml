@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     availabilityZone: us-east-1b
-    blueprintId: amazon_linux
+    blueprintId: amazon_linux_2
     bundleId: nano_1_0
     keyPairName: some_key_name
     region: us-west-1

@@ -49,8 +49,8 @@ type DeadLetterConfigObservation struct {
 type DeadLetterConfigParameters struct {
 
 	// ARN of the target of this schedule, such as a SQS queue or ECS cluster. For universal targets, this is a Service ARN specific to the target service.
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+	// +kubebuilder:validation:Required
+	Arn *string `json:"arn" tf:"arn,omitempty"`
 }
 
 type EcsParametersObservation struct {
@@ -212,7 +212,7 @@ type KinesisParametersParameters struct {
 
 type NetworkConfigurationObservation struct {
 
-	// Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when the launch_type is set to FARGATE. One of: ENABLED, DISABLED.
+	// Specifies whether the task's elastic network interface receives a public IP address. This attribute is a boolean type, where true maps to ENABLED and false to DISABLED. You can specify true only when the launch_type is set to FARGATE.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
@@ -224,7 +224,7 @@ type NetworkConfigurationObservation struct {
 
 type NetworkConfigurationParameters struct {
 
-	// Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when the launch_type is set to FARGATE. One of: ENABLED, DISABLED.
+	// Specifies whether the task's elastic network interface receives a public IP address. This attribute is a boolean type, where true maps to ENABLED and false to DISABLED. You can specify true only when the launch_type is set to FARGATE.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 

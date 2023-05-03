@@ -97,6 +97,30 @@ spec:
                   name:
                     description: The Grafana workspace name.
                     type: string
+                  networkAccessControl:
+                    description: Configuration for network access to your workspace.See
+                      Network Access Control below.
+                    items:
+                      properties:
+                        prefixListIds:
+                          description: '- An array of prefix list IDs.'
+                          items:
+                            type: string
+                          type: array
+                        vpceIds:
+                          description: '- An array of Amazon VPC endpoint IDs for
+                            the workspace. The only VPC endpoints that can be specified
+                            here are interface VPC endpoints for Grafana workspaces
+                            (using the com.amazonaws.[region].grafana-workspace service
+                            endpoint). Other VPC endpoints will be ignored.'
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - prefixListIds
+                      - vpceIds
+                      type: object
+                    type: array
                   notificationDestinations:
                     description: The notification destinations. If a data source is
                       specified here, Amazon Managed Grafana will create IAM roles
@@ -475,6 +499,27 @@ spec:
                   name:
                     description: The Grafana workspace name.
                     type: string
+                  networkAccessControl:
+                    description: Configuration for network access to your workspace.See
+                      Network Access Control below.
+                    items:
+                      properties:
+                        prefixListIds:
+                          description: '- An array of prefix list IDs.'
+                          items:
+                            type: string
+                          type: array
+                        vpceIds:
+                          description: '- An array of Amazon VPC endpoint IDs for
+                            the workspace. The only VPC endpoints that can be specified
+                            here are interface VPC endpoints for Grafana workspaces
+                            (using the com.amazonaws.[region].grafana-workspace service
+                            endpoint). Other VPC endpoints will be ignored.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   notificationDestinations:
                     description: The notification destinations. If a data source is
                       specified here, Amazon Managed Grafana will create IAM roles

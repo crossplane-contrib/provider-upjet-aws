@@ -78,6 +78,9 @@ type MetricStreamObservation struct {
 	// List of inclusive metric filters. If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. Conflicts with exclude_filter.
 	IncludeFilter []IncludeFilterObservation `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
+	// account observability.
+	IncludeLinkedAccountsMetrics *bool `json:"includeLinkedAccountsMetrics,omitempty" tf:"include_linked_accounts_metrics,omitempty"`
+
 	// Date and time in RFC3339 format that the metric stream was last updated.
 	LastUpdateDate *string `json:"lastUpdateDate,omitempty" tf:"last_update_date,omitempty"`
 
@@ -126,6 +129,10 @@ type MetricStreamParameters struct {
 	// List of inclusive metric filters. If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. Conflicts with exclude_filter.
 	// +kubebuilder:validation:Optional
 	IncludeFilter []IncludeFilterParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
+
+	// account observability.
+	// +kubebuilder:validation:Optional
+	IncludeLinkedAccountsMetrics *bool `json:"includeLinkedAccountsMetrics,omitempty" tf:"include_linked_accounts_metrics,omitempty"`
 
 	// Friendly name of the metric stream. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional

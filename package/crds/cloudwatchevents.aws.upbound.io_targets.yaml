@@ -194,6 +194,32 @@ spec:
                             - subnets
                             type: object
                           type: array
+                        orderedPlacementStrategy:
+                          description: An array of placement strategy objects to use
+                            for the task. You can specify a maximum of five strategy
+                            rules per task.
+                          items:
+                            properties:
+                              field:
+                                description: The field to apply the placement strategy
+                                  against. For the spread placement strategy, valid
+                                  values are instanceId (or host, which has the same
+                                  effect), or any platform or custom attribute that
+                                  is applied to a container instance, such as attribute:ecs.availability-zone.
+                                  For the binpack placement strategy, valid values
+                                  are cpu and memory. For the random placement strategy,
+                                  this field is not used. For more information, see
+                                  Amazon ECS task placement strategies.
+                                type: string
+                              type:
+                                description: Type of placement strategy. The only
+                                  valid values at this time are binpack, random and
+                                  spread.
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          type: array
                         placementConstraint:
                           description: An array of placement constraint objects to
                             use for the task. You can specify up to 10 constraints
@@ -324,8 +350,8 @@ spec:
                       type: object
                     type: array
                   eventBusName:
-                    description: The event bus to associate with the rule. If you
-                      omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      the rule. If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus to populate eventBusName.
@@ -1028,6 +1054,30 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        orderedPlacementStrategy:
+                          description: An array of placement strategy objects to use
+                            for the task. You can specify a maximum of five strategy
+                            rules per task.
+                          items:
+                            properties:
+                              field:
+                                description: The field to apply the placement strategy
+                                  against. For the spread placement strategy, valid
+                                  values are instanceId (or host, which has the same
+                                  effect), or any platform or custom attribute that
+                                  is applied to a container instance, such as attribute:ecs.availability-zone.
+                                  For the binpack placement strategy, valid values
+                                  are cpu and memory. For the random placement strategy,
+                                  this field is not used. For more information, see
+                                  Amazon ECS task placement strategies.
+                                type: string
+                              type:
+                                description: Type of placement strategy. The only
+                                  valid values at this time are binpack, random and
+                                  spread.
+                                type: string
+                            type: object
+                          type: array
                         placementConstraint:
                           description: An array of placement constraint objects to
                             use for the task. You can specify up to 10 constraints
@@ -1078,8 +1128,8 @@ spec:
                       type: object
                     type: array
                   eventBusName:
-                    description: The event bus to associate with the rule. If you
-                      omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      the rule. If you omit this, the default event bus is used.
                     type: string
                   httpTarget:
                     description: Parameters used when you are using the rule to invoke

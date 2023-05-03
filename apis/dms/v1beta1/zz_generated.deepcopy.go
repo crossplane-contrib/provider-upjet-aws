@@ -2656,6 +2656,11 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DetachTargetOnLobLookupFailureParquet != nil {
+		in, out := &in.DetachTargetOnLobLookupFailureParquet, &out.DetachTargetOnLobLookupFailureParquet
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
 		*out = new(float64)
@@ -2944,6 +2949,11 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	if in.DatePartitionTimezone != nil {
 		in, out := &in.DatePartitionTimezone, &out.DatePartitionTimezone
 		*out = new(string)
+		**out = **in
+	}
+	if in.DetachTargetOnLobLookupFailureParquet != nil {
+		in, out := &in.DetachTargetOnLobLookupFailureParquet, &out.DetachTargetOnLobLookupFailureParquet
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DictPageSizeLimit != nil {

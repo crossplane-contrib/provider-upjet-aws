@@ -399,7 +399,7 @@ type EBSOptionsObservation struct {
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type. Valid values are between 125 and 1000.
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of EBS volumes attached to data nodes (in GiB).
@@ -419,7 +419,7 @@ type EBSOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type. Valid values are between 125 and 1000.
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 

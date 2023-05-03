@@ -115,6 +115,11 @@ spec:
                       below.
                     items:
                       properties:
+                        accounts:
+                          description: Specifies the list of accounts a report covers.
+                          items:
+                            type: string
+                          type: array
                         frameworkArns:
                           description: Specifies the Amazon Resource Names (ARNs)
                             of the frameworks a report covers.
@@ -125,6 +130,17 @@ spec:
                           description: Specifies the number of frameworks a report
                             covers.
                           type: number
+                        organizationUnits:
+                          description: Specifies the list of Organizational Units
+                            a report covers.
+                          items:
+                            type: string
+                          type: array
+                        regions:
+                          description: Specifies the list of regions a report covers.
+                          items:
+                            type: string
+                          type: array
                         reportTemplate:
                           description: 'Identifies the report template for the report.
                             Reports are built using a report template. The report
@@ -397,6 +413,11 @@ spec:
                       below.
                     items:
                       properties:
+                        accounts:
+                          description: Specifies the list of accounts a report covers.
+                          items:
+                            type: string
+                          type: array
                         frameworkArns:
                           description: Specifies the Amazon Resource Names (ARNs)
                             of the frameworks a report covers.
@@ -407,6 +428,17 @@ spec:
                           description: Specifies the number of frameworks a report
                             covers.
                           type: number
+                        organizationUnits:
+                          description: Specifies the list of Organizational Units
+                            a report covers.
+                          items:
+                            type: string
+                          type: array
+                        regions:
+                          description: Specifies the list of regions a report covers.
+                          items:
+                            type: string
+                          type: array
                         reportTemplate:
                           description: 'Identifies the report template for the report.
                             Reports are built using a report template. The report

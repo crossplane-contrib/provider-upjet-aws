@@ -326,8 +326,7 @@ spec:
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
-                            the gp3 volume type. Valid values are between 125 and
-                            1000.
+                            the gp3 volume type.
                           type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
@@ -951,8 +950,7 @@ spec:
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
-                            the gp3 volume type. Valid values are between 125 and
-                            1000.
+                            the gp3 volume type.
                           type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes

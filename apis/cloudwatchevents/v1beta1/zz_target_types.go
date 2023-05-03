@@ -107,6 +107,9 @@ type EcsTargetObservation struct {
 	// Use this if the ECS task uses the awsvpc network mode. This specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. Required if launch_type is FARGATE because the awsvpc mode is required for Fargate tasks.
 	NetworkConfiguration []NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
+	// An array of placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.
+	OrderedPlacementStrategy []OrderedPlacementStrategyObservation `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
+
 	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See Below.
 	PlacementConstraint []PlacementConstraintObservation `json:"placementConstraint,omitempty" tf:"placement_constraint,omitempty"`
 
@@ -151,6 +154,10 @@ type EcsTargetParameters struct {
 	// Use this if the ECS task uses the awsvpc network mode. This specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. Required if launch_type is FARGATE because the awsvpc mode is required for Fargate tasks.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration []NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// An array of placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.
+	// +kubebuilder:validation:Optional
+	OrderedPlacementStrategy []OrderedPlacementStrategyParameters `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
 
 	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See Below.
 	// +kubebuilder:validation:Optional
@@ -272,6 +279,26 @@ type NetworkConfigurationParameters struct {
 	// The subnets associated with the task or service.
 	// +kubebuilder:validation:Required
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+}
+
+type OrderedPlacementStrategyObservation struct {
+
+	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. For more information, see Amazon ECS task placement strategies.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// Type of placement strategy. The only valid values at this time are binpack, random and spread.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type OrderedPlacementStrategyParameters struct {
+
+	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. For more information, see Amazon ECS task placement strategies.
+	// +kubebuilder:validation:Optional
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// Type of placement strategy. The only valid values at this time are binpack, random and spread.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PlacementConstraintObservation struct {
@@ -409,7 +436,8 @@ type TargetObservation struct {
 	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
 	EcsTarget []EcsTargetObservation `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
 
-	// The event bus to associate with the rule. If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with the rule.
+	// If you omit this, the default event bus is used.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
@@ -469,7 +497,8 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	EcsTarget []EcsTargetParameters `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
 
-	// The event bus to associate with the rule. If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with the rule.
+	// If you omit this, the default event bus is used.
 	// +crossplane:generate:reference:type=Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`

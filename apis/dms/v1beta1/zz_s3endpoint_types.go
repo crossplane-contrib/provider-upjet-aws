@@ -27,7 +27,7 @@ type S3EndpointObservation struct {
 	// S3 bucket name.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL. (AWS default is NONE.)
+	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
 	CannedACLForObjects *string `json:"cannedAclForObjects,omitempty" tf:"canned_acl_for_objects,omitempty"`
 
 	// Whether to write insert and update operations to .csv or .parquet output files. Default is false.
@@ -80,6 +80,9 @@ type S3EndpointObservation struct {
 
 	// Convert the current UTC time to a timezone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The timezone format is Area/Location (e.g., Europe/Paris). Use this when date_partition_enabled is true. (Ignored for source endpoints.)
 	DatePartitionTimezone *string `json:"datePartitionTimezone,omitempty" tf:"date_partition_timezone,omitempty"`
+
+	// Undocumented argument for use as directed by AWS Support.
+	DetachTargetOnLobLookupFailureParquet *bool `json:"detachTargetOnLobLookupFailureParquet,omitempty" tf:"detach_target_on_lob_lookup_failure_parquet,omitempty"`
 
 	// Maximum size in bytes of an encoded dictionary page of a column. (AWS default is 1 MiB, i.e., 1048576.)
 	DictPageSizeLimit *float64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
@@ -186,7 +189,7 @@ type S3EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL. (AWS default is NONE.)
+	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
 	// +kubebuilder:validation:Optional
 	CannedACLForObjects *string `json:"cannedAclForObjects,omitempty" tf:"canned_acl_for_objects,omitempty"`
 
@@ -257,6 +260,10 @@ type S3EndpointParameters struct {
 	// Convert the current UTC time to a timezone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The timezone format is Area/Location (e.g., Europe/Paris). Use this when date_partition_enabled is true. (Ignored for source endpoints.)
 	// +kubebuilder:validation:Optional
 	DatePartitionTimezone *string `json:"datePartitionTimezone,omitempty" tf:"date_partition_timezone,omitempty"`
+
+	// Undocumented argument for use as directed by AWS Support.
+	// +kubebuilder:validation:Optional
+	DetachTargetOnLobLookupFailureParquet *bool `json:"detachTargetOnLobLookupFailureParquet,omitempty" tf:"detach_target_on_lob_lookup_failure_parquet,omitempty"`
 
 	// Maximum size in bytes of an encoded dictionary page of a column. (AWS default is 1 MiB, i.e., 1048576.)
 	// +kubebuilder:validation:Optional

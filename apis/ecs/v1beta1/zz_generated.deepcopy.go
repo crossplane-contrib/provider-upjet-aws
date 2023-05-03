@@ -3449,6 +3449,11 @@ func (in *TaskDefinitionObservation) DeepCopyInto(out *TaskDefinitionObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.ArnWithoutRevision != nil {
+		in, out := &in.ArnWithoutRevision, &out.ArnWithoutRevision
+		*out = new(string)
+		**out = **in
+	}
 	if in.CPU != nil {
 		in, out := &in.CPU, &out.CPU
 		*out = new(string)

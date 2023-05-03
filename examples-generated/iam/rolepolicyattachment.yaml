@@ -28,19 +28,7 @@ metadata:
 spec:
   forProvider:
     description: A test policy
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": [
-              "ec2:Describe*"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.policy.json}
 
 ---
 
@@ -54,20 +42,7 @@ metadata:
   name: role
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "ec2.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

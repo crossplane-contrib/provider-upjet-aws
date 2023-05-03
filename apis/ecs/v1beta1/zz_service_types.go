@@ -14,6 +14,8 @@ import (
 )
 
 type AlarmsObservation struct {
+
+	// One or more CloudWatch alarm names.
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -25,6 +27,7 @@ type AlarmsObservation struct {
 
 type AlarmsParameters struct {
 
+	// One or more CloudWatch alarm names.
 	// +kubebuilder:validation:Required
 	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
 

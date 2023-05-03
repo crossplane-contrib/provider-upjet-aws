@@ -274,8 +274,6 @@ spec:
             x-kubernetes-validations:
             - message: accountId is a required parameter
               rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountId)
-            - message: email is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)
           status:
             description: MemberStatus defines the observed state of Member.
             properties:

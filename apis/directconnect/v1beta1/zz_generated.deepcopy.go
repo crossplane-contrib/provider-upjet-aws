@@ -522,6 +522,11 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PartnerName != nil {
+		in, out := &in.PartnerName, &out.PartnerName
+		*out = new(string)
+		**out = **in
+	}
 	if in.PortEncryptionStatus != nil {
 		in, out := &in.PortEncryptionStatus, &out.PortEncryptionStatus
 		*out = new(string)

@@ -9,13 +9,39 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this EventDataStore.
+func (mg *EventDataStore) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Trail.
 func (mg *Trail) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -30,8 +56,8 @@ func (mg *Trail) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.CloudWatchLogsRoleArnRef,
 		Selector:     mg.Spec.ForProvider.CloudWatchLogsRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
 		},
 	})
 	if err != nil {
@@ -46,8 +72,8 @@ func (mg *Trail) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
 		},
 	})
 	if err != nil {

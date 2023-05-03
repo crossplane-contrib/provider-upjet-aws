@@ -21,6 +21,9 @@ type AcceleratorObservation struct {
 	// The DNS name of the accelerator. For example, a5d53ff5ee6bca4ce.awsglobalaccelerator.com.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
+	// The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. For example, a1234567890abcdef.dualstack.awsglobalaccelerator.com.
+	DualStackDNSName *string `json:"dualStackDnsName,omitempty" tf:"dual_stack_dns_name,omitempty"`
+
 	// Indicates whether the accelerator is enabled. Defaults to true. Valid values: true, false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

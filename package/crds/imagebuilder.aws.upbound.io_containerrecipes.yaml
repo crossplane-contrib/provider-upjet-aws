@@ -343,6 +343,10 @@ spec:
                   parentImage:
                     description: The base image for the container recipe.
                     type: string
+                  platformOverride:
+                    description: Specifies the operating system platform when you
+                      use a custom base image.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -800,6 +804,10 @@ spec:
                     type: string
                   platform:
                     description: Platform of the container recipe.
+                    type: string
+                  platformOverride:
+                    description: Specifies the operating system platform when you
+                      use a custom base image.
                     type: string
                   tags:
                     additionalProperties:

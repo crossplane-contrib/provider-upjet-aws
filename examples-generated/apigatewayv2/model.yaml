@@ -14,15 +14,18 @@ spec:
     contentType: application/json
     name: example
     region: us-west-1
-    schema: |
-      {
-        "$schema": "http://json-schema.org/draft-04/schema#",
-        "title": "ExampleModel",
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" }
-        }
-      }
+    schema: |-
+      ${jsonencode({
+          "$schema" = "http://json-schema.org/draft-04/schema#"
+          title     = "ExampleModel"
+          type      = "object"
+
+          properties = {
+            id = {
+              type = "string"
+            }
+          }
+        })}
 
 ---
 

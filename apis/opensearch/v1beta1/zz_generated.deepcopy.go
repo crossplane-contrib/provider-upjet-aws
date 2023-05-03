@@ -605,6 +605,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DashboardEndpoint != nil {
+		in, out := &in.DashboardEndpoint, &out.DashboardEndpoint
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainEndpointOptions != nil {
 		in, out := &in.DomainEndpointOptions, &out.DomainEndpointOptions
 		*out = make([]DomainEndpointOptionsObservation, len(*in))

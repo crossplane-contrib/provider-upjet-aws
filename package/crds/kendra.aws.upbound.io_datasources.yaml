@@ -179,7 +179,7 @@ spec:
                                     type: object
                                 type: object
                               documentsMetadataConfiguration:
-                                description: A block that defines the Ddcument metadata
+                                description: A block that defines the Document metadata
                                   files that contain information such as the document
                                   access control information, source URI, document
                                   author, and custom attributes. Each metadata file
@@ -1358,7 +1358,7 @@ spec:
                                   the documents.
                                 type: string
                               documentsMetadataConfiguration:
-                                description: A block that defines the Ddcument metadata
+                                description: A block that defines the Document metadata
                                   files that contain information such as the document
                                   access control information, source URI, document
                                   author, and custom attributes. Each metadata file

@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/bucketacl
   labels:
-    testing.upbound.io/example-name: example_bucket_acl
-  name: example-bucket-acl
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     acl: private
@@ -28,6 +28,25 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketOwnershipControls
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    rule:
+    - objectOwnership: BucketOwnerPreferred
 
 ---
 

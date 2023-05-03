@@ -106,11 +106,11 @@ spec:
                     type: string
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
-                      aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch,
-                      kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle,
-                      postgres, redshift, s3, sqlserver, sybase. Please note that
-                      some of engine names are available only for target endpoint
-                      type (e.g. redshift).
+                      aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
+                      db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb,
+                      mongodb, mysql, opensearch, oracle, postgres, redshift, s3,
+                      sqlserver, sybase. Please note that some of engine names are
+                      available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -520,7 +520,10 @@ spec:
                       be created in.
                     type: string
                   s3Settings:
-                    description: Configuration block for S3 settings. See below.
+                    description: (Deprecated, use the aws_dms_s3_endpoint resource
+                      instead) Configuration block for S3 settings. See below. This
+                      argument is deprecated and will be removed in a future version;
+                      use aws_dms_s3_endpoint instead
                     items:
                       properties:
                         addColumnName:
@@ -1042,11 +1045,11 @@ spec:
                     type: string
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
-                      aurora, aurora-postgresql, azuredb, db2, docdb, dynamodb, elasticsearch,
-                      kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle,
-                      postgres, redshift, s3, sqlserver, sybase. Please note that
-                      some of engine names are available only for target endpoint
-                      type (e.g. redshift).
+                      aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
+                      db2, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb,
+                      mongodb, mysql, opensearch, oracle, postgres, redshift, s3,
+                      sqlserver, sybase. Please note that some of engine names are
+                      available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -1301,7 +1304,10 @@ spec:
                       type: object
                     type: array
                   s3Settings:
-                    description: Configuration block for S3 settings. See below.
+                    description: (Deprecated, use the aws_dms_s3_endpoint resource
+                      instead) Configuration block for S3 settings. See below. This
+                      argument is deprecated and will be removed in a future version;
+                      use aws_dms_s3_endpoint instead
                     items:
                       properties:
                         addColumnName:

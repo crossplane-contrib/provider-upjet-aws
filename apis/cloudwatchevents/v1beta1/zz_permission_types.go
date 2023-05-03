@@ -58,7 +58,8 @@ type PermissionObservation struct {
 	// Configuration block to limit the event bus permissions you are granting to only accounts that fulfill the condition. Specified below.
 	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	// The name of the event bus to set the permissions on.
+	// If you omit this, the permissions are set on the default event bus.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// The statement ID of the EventBridge permission.
@@ -81,7 +82,8 @@ type PermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	// The name of the event bus to set the permissions on.
+	// If you omit this, the permissions are set on the default event bus.
 	// +crossplane:generate:reference:type=Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`

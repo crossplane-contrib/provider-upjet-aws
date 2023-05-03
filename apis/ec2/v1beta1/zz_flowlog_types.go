@@ -45,6 +45,9 @@ type FlowLogObservation struct {
 	// The ARN of the Flow Log.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
+
 	// Describes the destination options for a flow log. More details below.
 	DestinationOptions []DestinationOptionsObservation `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
 
@@ -98,6 +101,10 @@ type FlowLogObservation struct {
 }
 
 type FlowLogParameters struct {
+
+	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	// +kubebuilder:validation:Optional
+	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
 
 	// Describes the destination options for a flow log. More details below.
 	// +kubebuilder:validation:Optional

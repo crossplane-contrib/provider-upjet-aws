@@ -46,7 +46,7 @@ type ClusterInstanceObservation struct {
 	// The DNS address for this instance. May not be writable
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The name of the database engine to be used for the DocDB instance. Defaults to docdb. Valid Values: docdb.
+	// The name of the database engine to be used for the DocumentDB instance. Defaults to docdb. Valid Values: docdb.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The database engine version
@@ -54,8 +54,9 @@ type ClusterInstanceObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
-	// supports the below instance classes. Please see AWS Documentation for complete details.
+	// The instance class to use. For details on CPU and memory, see Scaling for DocumentDB Instances.
+	// DocumentDB currently supports the below instance classes.
+	// Please see AWS Documentation for complete details.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The ARN for the KMS encryption key if one is set to the cluster.
@@ -128,12 +129,13 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
 
-	// The name of the database engine to be used for the DocDB instance. Defaults to docdb. Valid Values: docdb.
+	// The name of the database engine to be used for the DocumentDB instance. Defaults to docdb. Valid Values: docdb.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The instance class to use. For details on CPU and memory, see Scaling for DocDB Instances. DocDB currently
-	// supports the below instance classes. Please see AWS Documentation for complete details.
+	// The instance class to use. For details on CPU and memory, see Scaling for DocumentDB Instances.
+	// DocumentDB currently supports the below instance classes.
+	// Please see AWS Documentation for complete details.
 	// +kubebuilder:validation:Optional
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
@@ -174,7 +176,7 @@ type ClusterInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterInstance is the Schema for the ClusterInstances API. Provides an DocDB Cluster Resource Instance
+// ClusterInstance is the Schema for the ClusterInstances API. Provides an DocumentDB Cluster Resource Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

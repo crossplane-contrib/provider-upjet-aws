@@ -74,7 +74,7 @@ type CodeConfigurationValuesObservation struct {
 	// Runtime environment type for building and running an App Runner service. Represents a programming language runtime. Valid values: PYTHON_3, NODEJS_12, NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11, GO_1, DOTNET_6, PHP_81, RUBY_31.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
@@ -98,7 +98,7 @@ type CodeConfigurationValuesParameters struct {
 	// +kubebuilder:validation:Required
 	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
 
-	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
@@ -234,7 +234,7 @@ type ImageConfigurationObservation struct {
 	// Port that your application listens to in the container. Defaults to "8080".
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
@@ -250,7 +250,7 @@ type ImageConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Secrets and parameters available to your service as environment variables. A map of key/value pairs.
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
@@ -307,19 +307,19 @@ type IngressConfigurationParameters struct {
 
 type InstanceConfigurationObservation struct {
 
-	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 1024|2048|(1|2) vCPU.
+	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// ARN of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 
-	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 2048|3072|4096|(2|3|4) GB.
+	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type InstanceConfigurationParameters struct {
 
-	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 1024|2048|(1|2) vCPU.
+	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU.
 	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
@@ -327,7 +327,7 @@ type InstanceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 
-	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 2048|3072|4096|(2|3|4) GB.
+	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }

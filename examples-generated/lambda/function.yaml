@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: iam_for_lambda
     runtime: nodejs16.x
-    sourceCodeHash: ${filebase64sha256("lambda_function_payload.zip")}
+    sourceCodeHash: ${data.archive_file.lambda.output_base64sha256}
 
 ---
 
@@ -32,20 +32,7 @@ metadata:
   name: iam-for-lambda
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "lambda.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

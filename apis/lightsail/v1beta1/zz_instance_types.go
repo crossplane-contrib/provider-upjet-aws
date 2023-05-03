@@ -98,7 +98,7 @@ type InstanceObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// launch script to configure server with additional user data
+	// Single lined launch script as a string to configure server with additional user data
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// The user name for connecting to the instance (e.g., ec2-user).
@@ -142,7 +142,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// launch script to configure server with additional user data
+	// Single lined launch script as a string to configure server with additional user data
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }

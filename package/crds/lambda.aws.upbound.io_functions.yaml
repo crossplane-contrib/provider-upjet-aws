@@ -624,6 +624,8 @@ spec:
                     description: Object version containing the function's deployment
                       package. Conflicts with filename and image_uri.
                     type: string
+                  skipDestroy:
+                    type: boolean
                   snapStart:
                     description: Snap start settings block. Detailed below.
                     items:
@@ -1246,6 +1248,8 @@ spec:
                   signingProfileVersionArn:
                     description: ARN of the signing profile version.
                     type: string
+                  skipDestroy:
+                    type: boolean
                   snapStart:
                     description: Snap start settings block. Detailed below.
                     items:

@@ -633,6 +633,40 @@ spec:
                                       description: Local file certificate.
                                       items:
                                         properties:
+                                          format:
+                                            description: The specified format for
+                                              the logs.
+                                            items:
+                                              properties:
+                                                json:
+                                                  description: The logging format
+                                                    for JSON.
+                                                  items:
+                                                    properties:
+                                                      key:
+                                                        description: The specified
+                                                          key for the JSON. Must be
+                                                          between 1 and 100 characters
+                                                          in length.
+                                                        type: string
+                                                      value:
+                                                        description: The specified
+                                                          value for the JSON. Must
+                                                          be between 1 and 100 characters
+                                                          in length.
+                                                        type: string
+                                                    required:
+                                                    - key
+                                                    - value
+                                                    type: object
+                                                  type: array
+                                                text:
+                                                  description: The logging format
+                                                    for text. Must be between 1 and
+                                                    1000 characters in length.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           path:
                                             description: File path to write access
                                               logs to. You can use /dev/stdout to
@@ -1279,6 +1313,37 @@ spec:
                                       description: Local file certificate.
                                       items:
                                         properties:
+                                          format:
+                                            description: The specified format for
+                                              the logs.
+                                            items:
+                                              properties:
+                                                json:
+                                                  description: The logging format
+                                                    for JSON.
+                                                  items:
+                                                    properties:
+                                                      key:
+                                                        description: The specified
+                                                          key for the JSON. Must be
+                                                          between 1 and 100 characters
+                                                          in length.
+                                                        type: string
+                                                      value:
+                                                        description: The specified
+                                                          value for the JSON. Must
+                                                          be between 1 and 100 characters
+                                                          in length.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                text:
+                                                  description: The logging format
+                                                    for text. Must be between 1 and
+                                                    1000 characters in length.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           path:
                                             description: File path to write access
                                               logs to. You can use /dev/stdout to

@@ -149,6 +149,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -389,6 +395,12 @@ spec:
                     type: string
                   port:
                     type: number
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
                   snapshotType:
                     type: string
                   sourceDbSnapshotIdentifier:

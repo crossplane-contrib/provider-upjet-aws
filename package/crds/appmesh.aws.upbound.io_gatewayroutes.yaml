@@ -101,6 +101,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -129,8 +136,11 @@ spec:
                                 items:
                                   properties:
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     serviceName:
                                       description: Fully qualified domain name for
@@ -195,6 +205,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -222,28 +239,137 @@ spec:
                                 description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    header:
+                                      description: Client request headers to match
+                                        on.
+                                      items:
+                                        properties:
+                                          invert:
+                                            description: If true, the match is on
+                                              the opposite of the match method and
+                                              value. Default is false.
+                                            type: boolean
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                                prefix:
+                                                  description: Specified beginning
+                                                    characters to rewrite.
+                                                  type: string
+                                                range:
+                                                  description: Object that specifies
+                                                    the range of numbers that the
+                                                    header value sent by the client
+                                                    must be included in.
+                                                  items:
+                                                    properties:
+                                                      end:
+                                                        description: End of the range.
+                                                        type: number
+                                                      start:
+                                                        description: (Requited) Start
+                                                          of the range.
+                                                        type: number
+                                                    required:
+                                                    - end
+                                                    - start
+                                                    type: object
+                                                  type: array
+                                                regex:
+                                                  description: Header value sent by
+                                                    the client must include the specified
+                                                    characters.
+                                                  type: string
+                                                suffix:
+                                                  description: Header value sent by
+                                                    the client must end with the specified
+                                                    characters.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                     hostname:
                                       description: Host name to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Exact host name to match
-                                              on.
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
                                             type: string
                                           suffix:
-                                            description: Specified ending characters
-                                              of the host name to match on.
+                                            description: Header value sent by the
+                                              client must end with the specified characters.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Client request path to match on.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
+                                            type: string
+                                          regex:
+                                            description: Header value sent by the
+                                              client must include the specified characters.
                                             type: string
                                         type: object
                                       type: array
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
                                       type: string
+                                    queryParameter:
+                                      description: Client request query parameters
+                                        to match on.
+                                      items:
+                                        properties:
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             required:
@@ -301,6 +427,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -426,28 +559,137 @@ spec:
                                 description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    header:
+                                      description: Client request headers to match
+                                        on.
+                                      items:
+                                        properties:
+                                          invert:
+                                            description: If true, the match is on
+                                              the opposite of the match method and
+                                              value. Default is false.
+                                            type: boolean
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                                prefix:
+                                                  description: Specified beginning
+                                                    characters to rewrite.
+                                                  type: string
+                                                range:
+                                                  description: Object that specifies
+                                                    the range of numbers that the
+                                                    header value sent by the client
+                                                    must be included in.
+                                                  items:
+                                                    properties:
+                                                      end:
+                                                        description: End of the range.
+                                                        type: number
+                                                      start:
+                                                        description: (Requited) Start
+                                                          of the range.
+                                                        type: number
+                                                    required:
+                                                    - end
+                                                    - start
+                                                    type: object
+                                                  type: array
+                                                regex:
+                                                  description: Header value sent by
+                                                    the client must include the specified
+                                                    characters.
+                                                  type: string
+                                                suffix:
+                                                  description: Header value sent by
+                                                    the client must end with the specified
+                                                    characters.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                     hostname:
                                       description: Host name to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Exact host name to match
-                                              on.
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
                                             type: string
                                           suffix:
-                                            description: Specified ending characters
-                                              of the host name to match on.
+                                            description: Header value sent by the
+                                              client must end with the specified characters.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Client request path to match on.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
+                                            type: string
+                                          regex:
+                                            description: Header value sent by the
+                                              client must include the specified characters.
                                             type: string
                                         type: object
                                       type: array
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
                                       type: string
+                                    queryParameter:
+                                      description: Client request query parameters
+                                        to match on.
+                                      items:
+                                        properties:
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             required:
@@ -455,6 +697,10 @@ spec:
                             - match
                             type: object
                           type: array
+                        priority:
+                          description: Priority for the gateway route, between 0 and
+                            1000.
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -786,6 +1032,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -808,8 +1061,11 @@ spec:
                                 items:
                                   properties:
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     serviceName:
                                       description: Fully qualified domain name for
@@ -867,6 +1123,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -888,28 +1151,130 @@ spec:
                                 description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    header:
+                                      description: Client request headers to match
+                                        on.
+                                      items:
+                                        properties:
+                                          invert:
+                                            description: If true, the match is on
+                                              the opposite of the match method and
+                                              value. Default is false.
+                                            type: boolean
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                                prefix:
+                                                  description: Specified beginning
+                                                    characters to rewrite.
+                                                  type: string
+                                                range:
+                                                  description: Object that specifies
+                                                    the range of numbers that the
+                                                    header value sent by the client
+                                                    must be included in.
+                                                  items:
+                                                    properties:
+                                                      end:
+                                                        description: End of the range.
+                                                        type: number
+                                                      start:
+                                                        description: (Requited) Start
+                                                          of the range.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                regex:
+                                                  description: Header value sent by
+                                                    the client must include the specified
+                                                    characters.
+                                                  type: string
+                                                suffix:
+                                                  description: Header value sent by
+                                                    the client must end with the specified
+                                                    characters.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        type: object
+                                      type: array
                                     hostname:
                                       description: Host name to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Exact host name to match
-                                              on.
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
                                             type: string
                                           suffix:
-                                            description: Specified ending characters
-                                              of the host name to match on.
+                                            description: Header value sent by the
+                                              client must end with the specified characters.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Client request path to match on.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
+                                            type: string
+                                          regex:
+                                            description: Header value sent by the
+                                              client must include the specified characters.
                                             type: string
                                         type: object
                                       type: array
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
                                       type: string
+                                    queryParameter:
+                                      description: Client request query parameters
+                                        to match on.
+                                      items:
+                                        properties:
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             type: object
@@ -962,6 +1327,13 @@ spec:
                                         when a request matches the gateway route.
                                       items:
                                         properties:
+                                          port:
+                                            description: The port number that corresponds
+                                              to the target for Virtual Service provider
+                                              port. This is required when the provider
+                                              (router or node) of the Virtual Service
+                                              has multiple listeners.
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -983,32 +1355,138 @@ spec:
                                 description: Criteria for determining a request match.
                                 items:
                                   properties:
+                                    header:
+                                      description: Client request headers to match
+                                        on.
+                                      items:
+                                        properties:
+                                          invert:
+                                            description: If true, the match is on
+                                              the opposite of the match method and
+                                              value. Default is false.
+                                            type: boolean
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                                prefix:
+                                                  description: Specified beginning
+                                                    characters to rewrite.
+                                                  type: string
+                                                range:
+                                                  description: Object that specifies
+                                                    the range of numbers that the
+                                                    header value sent by the client
+                                                    must be included in.
+                                                  items:
+                                                    properties:
+                                                      end:
+                                                        description: End of the range.
+                                                        type: number
+                                                      start:
+                                                        description: (Requited) Start
+                                                          of the range.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                regex:
+                                                  description: Header value sent by
+                                                    the client must include the specified
+                                                    characters.
+                                                  type: string
+                                                suffix:
+                                                  description: Header value sent by
+                                                    the client must end with the specified
+                                                    characters.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        type: object
+                                      type: array
                                     hostname:
                                       description: Host name to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Exact host name to match
-                                              on.
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
                                             type: string
                                           suffix:
-                                            description: Specified ending characters
-                                              of the host name to match on.
+                                            description: Header value sent by the
+                                              client must end with the specified characters.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    path:
+                                      description: Client request path to match on.
+                                      items:
+                                        properties:
+                                          exact:
+                                            description: Header value sent by the
+                                              client must match the specified value
+                                              exactly.
+                                            type: string
+                                          regex:
+                                            description: Header value sent by the
+                                              client must include the specified characters.
                                             type: string
                                         type: object
                                       type: array
                                     port:
-                                      description: The port number to match from the
-                                        request.
+                                      description: The port number that corresponds
+                                        to the target for Virtual Service provider
+                                        port. This is required when the provider (router
+                                        or node) of the Virtual Service has multiple
+                                        listeners.
                                       type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
                                       type: string
+                                    queryParameter:
+                                      description: Client request query parameters
+                                        to match on.
+                                      items:
+                                        properties:
+                                          match:
+                                            description: Criteria for determining
+                                              a request match.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Header value sent by
+                                                    the client must match the specified
+                                                    value exactly.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          name:
+                                            description: Name to use for the gateway
+                                              route. Must be between 1 and 255 characters
+                                              in length.
+                                            type: string
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                             type: object
                           type: array
+                        priority:
+                          description: Priority for the gateway route, between 0 and
+                            1000.
+                          type: number
                       type: object
                     type: array
                   tags:

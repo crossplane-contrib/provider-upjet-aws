@@ -21,7 +21,8 @@ type RuleObservation struct {
 	// The description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The event bus to associate with this rule. If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule.
+	// If you omit this, the default event bus is used.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details.
@@ -52,7 +53,8 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The event bus to associate with this rule. If you omit this, the default event bus is used.
+	// The name or ARN of the event bus to associate with this rule.
+	// If you omit this, the default event bus is used.
 	// +crossplane:generate:reference:type=Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`

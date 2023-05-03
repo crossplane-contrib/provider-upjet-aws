@@ -657,6 +657,13 @@ spec:
                     description: Full ARN of the Task Definition (including both family
                       and revision).
                     type: string
+                  arnWithoutRevision:
+                    description: ARN of the Task Definition with the trailing revision
+                      removed. This may be useful for situations where the latest
+                      task definition is always desired. If a revision isn't specified,
+                      the latest ACTIVE revision is used. See the AWS documentation
+                      for details.
+                    type: string
                   containerDefinitions:
                     description: A list of valid container definitions provided as
                       a single valid JSON document. Please note that you should only

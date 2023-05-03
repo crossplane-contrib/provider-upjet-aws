@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MediaInsightsConfigurationObservation struct {
+
+	// The media insights configuration that will be invoked by the Voice Connector.
+	ConfigurationArn *string `json:"configurationArn,omitempty" tf:"configuration_arn,omitempty"`
+
+	// When true, the media insights configuration is not enabled. Defaults to false.
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+}
+
+type MediaInsightsConfigurationParameters struct {
+
+	// The media insights configuration that will be invoked by the Voice Connector.
+	// +kubebuilder:validation:Optional
+	ConfigurationArn *string `json:"configurationArn,omitempty" tf:"configuration_arn,omitempty"`
+
+	// When true, the media insights configuration is not enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+}
+
 type VoiceConnectorStreamingObservation struct {
 
 	// The retention period, in hours, for the Amazon Kinesis data.
@@ -23,6 +43,9 @@ type VoiceConnectorStreamingObservation struct {
 
 	// The Amazon Chime Voice Connector ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The media insights configuration. See media_insights_configuration.
+	MediaInsightsConfiguration []MediaInsightsConfigurationObservation `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
@@ -40,6 +63,10 @@ type VoiceConnectorStreamingParameters struct {
 	// When true, media streaming to Amazon Kinesis is turned off. Default: false
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
+	// The media insights configuration. See media_insights_configuration.
+	// +kubebuilder:validation:Optional
+	MediaInsightsConfiguration []MediaInsightsConfigurationParameters `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

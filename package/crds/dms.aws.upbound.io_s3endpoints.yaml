@@ -84,10 +84,10 @@ spec:
                     type: string
                   cannedAclForObjects:
                     description: Predefined (canned) access control list for objects
-                      created in an S3 bucket. Valid values include NONE, PRIVATE,
-                      PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ,
-                      BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL. (AWS default
-                      is NONE.)
+                      created in an S3 bucket. Valid values include none, private,
+                      public-read, public-read-write, authenticated-read, aws-exec-read,
+                      bucket-owner-read, and bucket-owner-full-control. Default is
+                      none.
                     type: string
                   cdcInsertsAndUpdates:
                     description: Whether to write insert and update operations to
@@ -169,6 +169,10 @@ spec:
                       Use this when date_partition_enabled is true. (Ignored for source
                       endpoints.)
                     type: string
+                  detachTargetOnLobLookupFailureParquet:
+                    description: Undocumented argument for use as directed by AWS
+                      Support.
+                    type: boolean
                   dictPageSizeLimit:
                     description: Maximum size in bytes of an encoded dictionary page
                       of a column. (AWS default is 1 MiB, i.e., 1048576.)
@@ -716,10 +720,10 @@ spec:
                     type: string
                   cannedAclForObjects:
                     description: Predefined (canned) access control list for objects
-                      created in an S3 bucket. Valid values include NONE, PRIVATE,
-                      PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ,
-                      BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL. (AWS default
-                      is NONE.)
+                      created in an S3 bucket. Valid values include none, private,
+                      public-read, public-read-write, authenticated-read, aws-exec-read,
+                      bucket-owner-read, and bucket-owner-full-control. Default is
+                      none.
                     type: string
                   cdcInsertsAndUpdates:
                     description: Whether to write insert and update operations to
@@ -801,6 +805,10 @@ spec:
                       Use this when date_partition_enabled is true. (Ignored for source
                       endpoints.)
                     type: string
+                  detachTargetOnLobLookupFailureParquet:
+                    description: Undocumented argument for use as directed by AWS
+                      Support.
+                    type: boolean
                   dictPageSizeLimit:
                     description: Maximum size in bytes of an encoded dictionary page
                       of a column. (AWS default is 1 MiB, i.e., 1048576.)

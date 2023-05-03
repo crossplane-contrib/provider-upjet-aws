@@ -299,7 +299,7 @@ type DomainObservation struct {
 	// Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly. Valid values are PublicInternetOnly and VpcOnly.
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
-	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.* domain_settings -  The domain settings. See Domain Settings below.
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
@@ -316,7 +316,7 @@ type DomainObservation struct {
 
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain's settings.
+	// The domain settings. See Domain Settings below.
 	DomainSettings []DomainSettingsObservation `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
@@ -359,7 +359,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
-	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.* domain_settings -  The domain settings. See Domain Settings below.
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
 	// +kubebuilder:validation:Optional
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
@@ -378,7 +378,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain's settings.
+	// The domain settings. See Domain Settings below.
 	// +kubebuilder:validation:Optional
 	DomainSettings []DomainSettingsParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 

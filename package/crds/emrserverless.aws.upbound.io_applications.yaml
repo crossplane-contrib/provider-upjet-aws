@@ -99,6 +99,18 @@ spec:
                           type: number
                       type: object
                     type: array
+                  imageConfiguration:
+                    description: –  The image configuration applied to all worker
+                      types.
+                    items:
+                      properties:
+                        imageUri:
+                          description: The image URI.
+                          type: string
+                      required:
+                      - imageUri
+                      type: object
+                    type: array
                   initialCapacity:
                     description: –  The capacity to initialize when the application
                       is created.
@@ -444,6 +456,16 @@ spec:
                   id:
                     description: The ID of the cluster.
                     type: string
+                  imageConfiguration:
+                    description: –  The image configuration applied to all worker
+                      types.
+                    items:
+                      properties:
+                        imageUri:
+                          description: The image URI.
+                          type: string
+                      type: object
+                    type: array
                   initialCapacity:
                     description: –  The capacity to initialize when the application
                       is created.

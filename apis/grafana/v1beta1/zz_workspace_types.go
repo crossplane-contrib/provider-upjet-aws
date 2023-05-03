@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkAccessControlObservation struct {
+
+	// - An array of prefix list IDs.
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
+	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
+	VpceIds []*string `json:"vpceIds,omitempty" tf:"vpce_ids,omitempty"`
+}
+
+type NetworkAccessControlParameters struct {
+
+	// - An array of prefix list IDs.
+	// +kubebuilder:validation:Required
+	PrefixListIds []*string `json:"prefixListIds" tf:"prefix_list_ids,omitempty"`
+
+	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
+	// +kubebuilder:validation:Required
+	VpceIds []*string `json:"vpceIds" tf:"vpce_ids,omitempty"`
+}
+
 type VPCConfigurationObservation struct {
 
 	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
@@ -63,6 +83,9 @@ type WorkspaceObservation struct {
 
 	// The Grafana workspace name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration for network access to your workspace.See Network Access Control below.
+	NetworkAccessControl []NetworkAccessControlObservation `json:"networkAccessControl,omitempty" tf:"network_access_control,omitempty"`
 
 	// The notification destinations. If a data source is specified here, Amazon Managed Grafana will create IAM roles and permissions needed to use these destinations. Must be set to SNS.
 	NotificationDestinations []*string `json:"notificationDestinations,omitempty" tf:"notification_destinations,omitempty"`
@@ -119,6 +142,10 @@ type WorkspaceParameters struct {
 	// The Grafana workspace name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration for network access to your workspace.See Network Access Control below.
+	// +kubebuilder:validation:Optional
+	NetworkAccessControl []NetworkAccessControlParameters `json:"networkAccessControl,omitempty" tf:"network_access_control,omitempty"`
 
 	// The notification destinations. If a data source is specified here, Amazon Managed Grafana will create IAM roles and permissions needed to use these destinations. Must be set to SNS.
 	// +kubebuilder:validation:Optional

@@ -309,10 +309,11 @@ spec:
                       private scopes.
                     type: boolean
                   defaultResourceDiscoveryAssociationId:
-                    description: The ID of the IPAM
+                    description: The IPAM's default resource discovery association
+                      ID.
                     type: string
                   defaultResourceDiscoveryId:
-                    description: The ID of the IPAM
+                    description: The IPAM's default resource discovery ID.
                     type: string
                   description:
                     description: A description for the IPAM.

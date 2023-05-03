@@ -15,7 +15,8 @@ import (
 
 type BusPolicyObservation struct {
 
-	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	// The name of the event bus to set the permissions on.
+	// If you omit this, the permissions are set on the default event bus.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
 	// The name of the EventBridge event bus.
@@ -27,7 +28,8 @@ type BusPolicyObservation struct {
 
 type BusPolicyParameters struct {
 
-	// The event bus to set the permissions on. If you omit this, the permissions are set on the default event bus.
+	// The name of the event bus to set the permissions on.
+	// If you omit this, the permissions are set on the default event bus.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`

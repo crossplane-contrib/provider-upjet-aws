@@ -300,6 +300,8 @@ spec:
                                   as a SQS queue or ECS cluster. For universal targets,
                                   this is a Service ARN specific to the target service.
                                 type: string
+                            required:
+                            - arn
                             type: object
                           type: array
                         ecsParameters:
@@ -361,11 +363,12 @@ spec:
                                 items:
                                   properties:
                                     assignPublicIp:
-                                      description: 'Specifies whether the task''s
-                                        elastic network interface receives a public
-                                        IP address. You can specify ENABLED only when
-                                        the launch_type is set to FARGATE. One of:
-                                        ENABLED, DISABLED.'
+                                      description: Specifies whether the task's elastic
+                                        network interface receives a public IP address.
+                                        This attribute is a boolean type, where true
+                                        maps to ENABLED and false to DISABLED. You
+                                        can specify true only when the launch_type
+                                        is set to FARGATE.
                                       type: boolean
                                     securityGroups:
                                       description: Set of 1 to 5 Security Group ID-s
@@ -964,11 +967,12 @@ spec:
                                 items:
                                   properties:
                                     assignPublicIp:
-                                      description: 'Specifies whether the task''s
-                                        elastic network interface receives a public
-                                        IP address. You can specify ENABLED only when
-                                        the launch_type is set to FARGATE. One of:
-                                        ENABLED, DISABLED.'
+                                      description: Specifies whether the task's elastic
+                                        network interface receives a public IP address.
+                                        This attribute is a boolean type, where true
+                                        maps to ENABLED and false to DISABLED. You
+                                        can specify true only when the launch_type
+                                        is set to FARGATE.
                                       type: boolean
                                     securityGroups:
                                       description: Set of 1 to 5 Security Group ID-s

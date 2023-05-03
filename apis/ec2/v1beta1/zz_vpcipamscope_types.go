@@ -14,6 +14,8 @@ import (
 )
 
 type VPCIpamScopeObservation struct {
+
+	// The Amazon Resource Name (ARN) of the scope.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A description for the scope you're creating.
@@ -28,12 +30,13 @@ type VPCIpamScopeObservation struct {
 	// The ID of the IPAM for which you're creating this scope.
 	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
 
+	// The type of the scope.
 	IpamScopeType *string `json:"ipamScopeType,omitempty" tf:"ipam_scope_type,omitempty"`
 
 	// Defines if the scope is the default scope or not.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// Count of pools under this scope
+	// The number of pools in the scope.
 	PoolCount *float64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
 
 	// Key-value map of resource tags.

@@ -343,20 +343,28 @@ type RiskConfigurationParameters struct {
 
 type RiskExceptionConfigurationObservation struct {
 
-	// Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	// Overrides the risk decision to always block the pre-authentication requests.
+	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	// Can contain a maximum of 200 items.
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
-	// Risk detection isn't performed on the IP addresses in this range list. The IP range is in CIDR notation.
+	// Risk detection isn't performed on the IP addresses in this range list.
+	// The IP range is in CIDR notation.
+	// Can contain a maximum of 200 items.
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
 type RiskExceptionConfigurationParameters struct {
 
-	// Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	// Overrides the risk decision to always block the pre-authentication requests.
+	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
-	// Risk detection isn't performed on the IP addresses in this range list. The IP range is in CIDR notation.
+	// Risk detection isn't performed on the IP addresses in this range list.
+	// The IP range is in CIDR notation.
+	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }

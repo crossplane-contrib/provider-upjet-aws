@@ -152,6 +152,20 @@ spec:
                       - connectorType
                       type: object
                     type: array
+                  streamingExperienceSettings:
+                    description: The streaming protocol you want your stack to prefer.
+                      This can be UDP or TCP. Currently, UDP is only supported in
+                      the Windows native client. See streaming_experience_settings
+                      below.
+                    items:
+                      properties:
+                        preferredProtocol:
+                          description: The preferred protocol that you want to use
+                            while streaming your application. Valid values are TCP
+                            and UDP.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -457,6 +471,20 @@ spec:
                           type: array
                         resourceIdentifier:
                           description: ARN of the storage connector.
+                          type: string
+                      type: object
+                    type: array
+                  streamingExperienceSettings:
+                    description: The streaming protocol you want your stack to prefer.
+                      This can be UDP or TCP. Currently, UDP is only supported in
+                      the Windows native client. See streaming_experience_settings
+                      below.
+                    items:
+                      properties:
+                        preferredProtocol:
+                          description: The preferred protocol that you want to use
+                            while streaming your application. Valid values are TCP
+                            and UDP.
                           type: string
                       type: object
                     type: array

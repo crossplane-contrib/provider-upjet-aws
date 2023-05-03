@@ -76,8 +76,7 @@ spec:
                   appSecurityGroupManagement:
                     description: The entity that creates and manages the required
                       security groups for inter-app communication in VPCOnly mode.
-                      Valid values are Service and Customer.* domain_settings -  The
-                      domain settings. See Domain Settings below.
+                      Valid values are Service and Customer.
                     type: string
                   authMode:
                     description: The mode of authentication that members use to access
@@ -729,7 +728,7 @@ spec:
                   domainName:
                     type: string
                   domainSettings:
-                    description: The domain's settings.
+                    description: The domain settings. See Domain Settings below.
                     items:
                       properties:
                         executionRoleIdentityConfig:
@@ -1214,8 +1213,7 @@ spec:
                   appSecurityGroupManagement:
                     description: The entity that creates and manages the required
                       security groups for inter-app communication in VPCOnly mode.
-                      Valid values are Service and Customer.* domain_settings -  The
-                      domain settings. See Domain Settings below.
+                      Valid values are Service and Customer.
                     type: string
                   arn:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
@@ -1615,7 +1613,7 @@ spec:
                   domainName:
                     type: string
                   domainSettings:
-                    description: The domain's settings.
+                    description: The domain settings. See Domain Settings below.
                     items:
                       properties:
                         executionRoleIdentityConfig:

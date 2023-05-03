@@ -72,8 +72,8 @@ spec:
                     description: The description of the rule.
                     type: string
                   eventBusName:
-                    description: The event bus to associate with this rule. If you
-                      omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      this rule. If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
                     description: Reference to a Bus to populate eventBusName.
@@ -451,8 +451,8 @@ spec:
                     description: The description of the rule.
                     type: string
                   eventBusName:
-                    description: The event bus to associate with this rule. If you
-                      omit this, the default event bus is used.
+                    description: The name or ARN of the event bus to associate with
+                      this rule. If you omit this, the default event bus is used.
                     type: string
                   eventPattern:
                     description: The event pattern described a JSON object. At least

@@ -68,9 +68,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  arn:
-                    description: The ARN that identifies the user group.
-                    type: string
                   engine:
                     description: The current supported value is REDIS.
                     type: string

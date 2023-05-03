@@ -126,6 +126,26 @@ type InstanceRequirementsMemoryMibParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type InstanceRequirementsNetworkBandwidthGbpsObservation struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type InstanceRequirementsNetworkBandwidthGbpsParameters struct {
+
+	// Maximum.
+	// +kubebuilder:validation:Optional
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type InstanceRequirementsNetworkInterfaceCountObservation struct {
 
 	// Maximum.
@@ -519,6 +539,9 @@ type OverridesInstanceRequirementsObservation struct {
 	// List of accelerator types. Default is any accelerator type.
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
 
@@ -531,7 +554,7 @@ type OverridesInstanceRequirementsObservation struct {
 	// List of CPU manufacturer names. Default is any manufacturer.
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
@@ -548,6 +571,9 @@ type OverridesInstanceRequirementsObservation struct {
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	MemoryMib []InstanceRequirementsMemoryMibObservation `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsObservation `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
@@ -590,6 +616,10 @@ type OverridesInstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +kubebuilder:validation:Optional
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
 	// +kubebuilder:validation:Optional
 	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
@@ -606,7 +636,7 @@ type OverridesInstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
-	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*). The following are examples: c5*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
@@ -629,6 +659,10 @@ type OverridesInstanceRequirementsParameters struct {
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Optional
 	MemoryMib []InstanceRequirementsMemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	// +kubebuilder:validation:Optional
+	NetworkBandwidthGbps []InstanceRequirementsNetworkBandwidthGbpsParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
 
 	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional

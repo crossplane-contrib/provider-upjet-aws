@@ -191,9 +191,8 @@ spec:
                       in Amazon S3.
                     type: string
                   type:
-                    description: 'Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS
-                      Resources).'
+                    description: Type of provisioning artifact. See AWS Docs for valid
+                      list of values.
                     type: string
                 required:
                 - region
@@ -441,9 +440,8 @@ spec:
                       in Amazon S3.
                     type: string
                   type:
-                    description: 'Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS
-                      Resources).'
+                    description: Type of provisioning artifact. See AWS Docs for valid
+                      list of values.
                     type: string
                 type: object
               conditions:

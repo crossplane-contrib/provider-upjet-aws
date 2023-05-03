@@ -148,6 +148,11 @@ spec:
                       - types
                       type: object
                     type: array
+                  failOnWarnings:
+                    description: Whether warnings while API Gateway is creating or
+                      updating the resource should return an error or not. Defaults
+                      to false
+                    type: boolean
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
                       Integer between -1 and 10485760 (10MB). Setting a value greater
@@ -480,6 +485,11 @@ spec:
                       which can be concatenated with allowed stage, method and resource
                       path.
                     type: string
+                  failOnWarnings:
+                    description: Whether warnings while API Gateway is creating or
+                      updating the resource should return an error or not. Defaults
+                      to false
+                    type: boolean
                   id:
                     description: ID of the REST API
                     type: string

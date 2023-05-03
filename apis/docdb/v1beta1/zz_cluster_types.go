@@ -30,10 +30,10 @@ type ClusterObservation struct {
 	// The days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// – List of DocDB Instances that are a part of this cluster
+	// – List of DocumentDB Instances that are a part of this cluster
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
-	// The DocDB Cluster Resource ID
+	// The DocumentDB Cluster Resource ID
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
@@ -49,7 +49,7 @@ type ClusterObservation struct {
 	// The following log types are supported: audit, profiler.
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The DNS address of the DocDB instance
+	// The DNS address of the DocumentDB instance
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid Values: docdb
@@ -69,7 +69,7 @@ type ClusterObservation struct {
 	// The Route53 Hosted Zone ID of the endpoint
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// The DocDB Cluster Identifier
+	// The DocumentDB Cluster Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
@@ -88,7 +88,7 @@ type ClusterObservation struct {
 	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// A read-only endpoint for the DocDB cluster, automatically load-balanced across replicas
+	// A read-only endpoint for the DocumentDB cluster, automatically load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
@@ -177,7 +177,7 @@ type ClusterParameters struct {
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may
-	// show up in logs, and it will be stored in the state file. Please refer to the DocDB Naming Constraints.
+	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
@@ -250,7 +250,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API. Manages a DocDB Aurora Cluster
+// Cluster is the Schema for the Clusters API. Manages a DocumentDB Aurora Cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

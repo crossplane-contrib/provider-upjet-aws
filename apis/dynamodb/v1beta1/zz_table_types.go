@@ -186,6 +186,9 @@ type TableObservation struct {
 	// Controls how you are charged for read and write throughput and how you manage capacity. The valid values are PROVISIONED and PAY_PER_REQUEST. Defaults to PROVISIONED.
 	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
 
+	// Enables deletion protection for table. Defaults to false.
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
+
 	// Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. See below.
 	GlobalSecondaryIndex []GlobalSecondaryIndexObservation `json:"globalSecondaryIndex,omitempty" tf:"global_secondary_index,omitempty"`
 
@@ -237,7 +240,9 @@ type TableObservation struct {
 	// Configuration block for TTL. See below.
 	TTL []TTLObservation `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// Storage class of the table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+	// Storage class of the table.
+	// Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+	// Default value is STANDARD.
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 
 	// Key-value map of resource tags.
@@ -259,6 +264,10 @@ type TableParameters struct {
 	// Controls how you are charged for read and write throughput and how you manage capacity. The valid values are PROVISIONED and PAY_PER_REQUEST. Defaults to PROVISIONED.
 	// +kubebuilder:validation:Optional
 	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
+
+	// Enables deletion protection for table. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DeletionProtectionEnabled *bool `json:"deletionProtectionEnabled,omitempty" tf:"deletion_protection_enabled,omitempty"`
 
 	// Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc. See below.
 	// +kubebuilder:validation:Optional
@@ -321,7 +330,9 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
-	// Storage class of the table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+	// Storage class of the table.
+	// Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
+	// Default value is STANDARD.
 	// +kubebuilder:validation:Optional
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 

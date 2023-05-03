@@ -189,6 +189,25 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  removeHeadersConfig:
+                    description: A configuration for a set of HTTP headers to remove
+                      from the HTTP response. Object that contains an attribute items
+                      that contains a list of headers. See Remove Header for more
+                      information.
+                    items:
+                      properties:
+                        items:
+                          items:
+                            properties:
+                              header:
+                                description: The HTTP response header name.
+                                type: string
+                            required:
+                            - header
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   securityHeadersConfig:
                     description: A configuration for a set of security-related HTTP
                       response headers. See Security Headers Config for more information.
@@ -671,6 +690,23 @@ spec:
                   name:
                     description: A unique name to identify the response headers policy.
                     type: string
+                  removeHeadersConfig:
+                    description: A configuration for a set of HTTP headers to remove
+                      from the HTTP response. Object that contains an attribute items
+                      that contains a list of headers. See Remove Header for more
+                      information.
+                    items:
+                      properties:
+                        items:
+                          items:
+                            properties:
+                              header:
+                                description: The HTTP response header name.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   securityHeadersConfig:
                     description: A configuration for a set of security-related HTTP
                       response headers. See Security Headers Config for more information.
