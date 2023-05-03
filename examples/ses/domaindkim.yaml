@@ -3,9 +3,10 @@ kind: DomainDKIM
 metadata:
   annotations:
     meta.upbound.io/example-id: ses/v1beta1/domaindkim
+    crossplane.io/external-name: testdomain.com
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: exampledkim
 spec:
   forProvider:
     region: us-east-1

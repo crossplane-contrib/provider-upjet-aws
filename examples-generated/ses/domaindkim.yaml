@@ -45,7 +45,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    domain: example.com
     region: us-west-1
 
 ---
