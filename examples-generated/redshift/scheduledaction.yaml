@@ -29,22 +29,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "redshift:PauseCluster",
-                    "redshift:ResumeCluster",
-                    "redshift:ResizeCluster"
-                ],
-                "Resource": "*"
-            }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.example.json}
 
 ---
 
@@ -58,22 +43,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": [
-                "scheduler.redshift.amazonaws.com"
-              ]
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

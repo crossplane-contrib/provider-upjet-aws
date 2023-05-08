@@ -58,6 +58,12 @@ type DataLakeSettingsObservation struct {
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
+	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
+	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
+
+	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
+	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
+
 	// –  Identifier for the Data Catalog. By default, the account ID.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -66,6 +72,9 @@ type DataLakeSettingsObservation struct {
 
 	// Up to three configuration blocks of principal permissions for default create table permissions. Detailed below.
 	CreateTableDefaultPermissions []CreateTableDefaultPermissionsObservation `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
+
+	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
+	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -79,6 +88,14 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
+	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
+	// +kubebuilder:validation:Optional
+	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
+
+	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
+	// +kubebuilder:validation:Optional
+	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
+
 	// –  Identifier for the Data Catalog. By default, the account ID.
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
@@ -90,6 +107,10 @@ type DataLakeSettingsParameters struct {
 	// Up to three configuration blocks of principal permissions for default create table permissions. Detailed below.
 	// +kubebuilder:validation:Optional
 	CreateTableDefaultPermissions []CreateTableDefaultPermissionsParameters `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
+
+	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
+	// +kubebuilder:validation:Optional
+	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

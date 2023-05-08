@@ -70,6 +70,9 @@ type DatasourceObservation struct {
 	// Amazon Elasticsearch settings. See below
 	ElasticsearchConfig []ElasticsearchConfigObservation `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
+	// AWS EventBridge settings. See below
+	EventBridgeConfig []EventBridgeConfigObservation `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
+
 	// HTTP settings. See below
 	HTTPConfig []HTTPConfigObservation `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
@@ -78,13 +81,16 @@ type DatasourceObservation struct {
 	// AWS Lambda settings. See below
 	LambdaConfig []LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
+	// Amazon OpenSearch Service settings. See below
+	OpensearchserviceConfig []OpensearchserviceConfigObservation `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
+
 	// AWS RDS settings. See Relational Database Config
 	RelationalDatabaseConfig []RelationalDatabaseConfigObservation `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
 	// IAM service role ARN for the data source.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
-	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -116,6 +122,10 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ElasticsearchConfig []ElasticsearchConfigParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
+	// AWS EventBridge settings. See below
+	// +kubebuilder:validation:Optional
+	EventBridgeConfig []EventBridgeConfigParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
+
 	// HTTP settings. See below
 	// +kubebuilder:validation:Optional
 	HTTPConfig []HTTPConfigParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
@@ -123,6 +133,10 @@ type DatasourceParameters struct {
 	// AWS Lambda settings. See below
 	// +kubebuilder:validation:Optional
 	LambdaConfig []LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+
+	// Amazon OpenSearch Service settings. See below
+	// +kubebuilder:validation:Optional
+	OpensearchserviceConfig []OpensearchserviceConfigParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
 	// AWS Region for RDS HTTP endpoint. Defaults to current region.
 	// Region is the region you'd like your resource to be created in.
@@ -148,7 +162,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -240,6 +254,19 @@ type ElasticsearchConfigParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
+type EventBridgeConfigObservation struct {
+
+	// ARN for the EventBridge bus.
+	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
+}
+
+type EventBridgeConfigParameters struct {
+
+	// ARN for the EventBridge bus.
+	// +kubebuilder:validation:Required
+	EventBusArn *string `json:"eventBusArn" tf:"event_bus_arn,omitempty"`
+}
+
 type HTTPConfigObservation struct {
 
 	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
@@ -312,6 +339,26 @@ type LambdaConfigParameters struct {
 	// ARN for the Lambda function.
 	// +kubebuilder:validation:Required
 	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+}
+
+type OpensearchserviceConfigObservation struct {
+
+	// HTTP endpoint of the OpenSearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// AWS region of the OpenSearch domain. Defaults to current region.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type OpensearchserviceConfigParameters struct {
+
+	// HTTP endpoint of the OpenSearch domain.
+	// +kubebuilder:validation:Required
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+
+	// AWS region of the OpenSearch domain. Defaults to current region.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RelationalDatabaseConfigObservation struct {

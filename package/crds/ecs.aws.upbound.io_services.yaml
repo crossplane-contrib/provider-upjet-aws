@@ -72,6 +72,7 @@ spec:
                     items:
                       properties:
                         alarmNames:
+                          description: One or more CloudWatch alarm names.
                           items:
                             type: string
                           type: array
@@ -1051,6 +1052,7 @@ spec:
                     items:
                       properties:
                         alarmNames:
+                          description: One or more CloudWatch alarm names.
                           items:
                             type: string
                           type: array

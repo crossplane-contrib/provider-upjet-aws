@@ -8,34 +8,10 @@ metadata:
   name: policy
 spec:
   forProvider:
-    bypassPolicyLockoutSafetyCheck: true
     fileSystemIdSelector:
       matchLabels:
         testing.upbound.io/example-name: fs
-    policy: |
-      {
-          "Version": "2012-10-17",
-          "Id": "ExamplePolicy01",
-          "Statement": [
-              {
-                  "Sid": "ExampleStatement01",
-                  "Effect": "Allow",
-                  "Principal": {
-                      "AWS": "*"
-                  },
-                  "Resource": "${aws_efs_file_system.fs.arn}",
-                  "Action": [
-                      "elasticfilesystem:ClientMount",
-                      "elasticfilesystem:ClientWrite"
-                  ],
-                  "Condition": {
-                      "Bool": {
-                          "aws:SecureTransport": "true"
-                      }
-                  }
-              }
-          ]
-      }
+    policy: ${data.aws_iam_policy_document.policy.json}
     region: us-west-1
 
 ---

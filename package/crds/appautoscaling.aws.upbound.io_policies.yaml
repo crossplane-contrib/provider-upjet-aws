@@ -405,6 +405,88 @@ spec:
                               metricName:
                                 description: Name of the metric.
                                 type: string
+                              metrics:
+                                description: Metrics to include, as a metric data
+                                  query.
+                                items:
+                                  properties:
+                                    expression:
+                                      description: Math expression used on the returned
+                                        metric. You must specify either expression
+                                        or metric_stat, but not both.
+                                      type: string
+                                    id:
+                                      description: Short name for the metric used
+                                        in target tracking scaling policy.
+                                      type: string
+                                    label:
+                                      description: Human-readable label for this metric
+                                        or expression.
+                                      type: string
+                                    metricStat:
+                                      description: Structure that defines CloudWatch
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
+                                      items:
+                                        properties:
+                                          metric:
+                                            description: Structure that defines the
+                                              CloudWatch metric to return, including
+                                              the metric name, namespace, and dimensions.
+                                            items:
+                                              properties:
+                                                dimensions:
+                                                  description: Configuration block(s)
+                                                    with the dimensions of the metric
+                                                    if the metric was published with
+                                                    dimensions. Detailed below.
+                                                  items:
+                                                    properties:
+                                                      name:
+                                                        description: Name of the dimension.
+                                                        type: string
+                                                      value:
+                                                        description: Value of the
+                                                          dimension.
+                                                        type: string
+                                                    required:
+                                                    - name
+                                                    - value
+                                                    type: object
+                                                  type: array
+                                                metricName:
+                                                  description: Name of the metric.
+                                                  type: string
+                                                namespace:
+                                                  description: Namespace of the metric.
+                                                  type: string
+                                              required:
+                                              - metricName
+                                              - namespace
+                                              type: object
+                                            type: array
+                                          stat:
+                                            description: Statistic of the metrics
+                                              to return.
+                                            type: string
+                                          unit:
+                                            description: Unit of the metric.
+                                            type: string
+                                        required:
+                                        - metric
+                                        - stat
+                                        type: object
+                                      type: array
+                                    returnData:
+                                      description: Boolean that indicates whether
+                                        to return the timestamps and raw data values
+                                        of this metric, the default is true
+                                      type: boolean
+                                  required:
+                                  - id
+                                  type: object
+                                type: array
                               namespace:
                                 description: Namespace of the metric.
                                 type: string
@@ -415,10 +497,6 @@ spec:
                               unit:
                                 description: Unit of the metric.
                                 type: string
-                            required:
-                            - metricName
-                            - namespace
-                            - statistic
                             type: object
                           type: array
                         disableScaleIn:
@@ -669,6 +747,8 @@ spec:
                     description: ARN assigned by AWS to the scaling policy.
                     type: string
                   id:
+                    description: Short name for the metric used in target tracking
+                      scaling policy.
                     type: string
                   policyType:
                     description: Policy type. Valid values are StepScaling and TargetTrackingScaling.
@@ -773,6 +853,77 @@ spec:
                               metricName:
                                 description: Name of the metric.
                                 type: string
+                              metrics:
+                                description: Metrics to include, as a metric data
+                                  query.
+                                items:
+                                  properties:
+                                    expression:
+                                      description: Math expression used on the returned
+                                        metric. You must specify either expression
+                                        or metric_stat, but not both.
+                                      type: string
+                                    id:
+                                      description: Short name for the metric used
+                                        in target tracking scaling policy.
+                                      type: string
+                                    label:
+                                      description: Human-readable label for this metric
+                                        or expression.
+                                      type: string
+                                    metricStat:
+                                      description: Structure that defines CloudWatch
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
+                                      items:
+                                        properties:
+                                          metric:
+                                            description: Structure that defines the
+                                              CloudWatch metric to return, including
+                                              the metric name, namespace, and dimensions.
+                                            items:
+                                              properties:
+                                                dimensions:
+                                                  description: Configuration block(s)
+                                                    with the dimensions of the metric
+                                                    if the metric was published with
+                                                    dimensions. Detailed below.
+                                                  items:
+                                                    properties:
+                                                      name:
+                                                        description: Name of the dimension.
+                                                        type: string
+                                                      value:
+                                                        description: Value of the
+                                                          dimension.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                metricName:
+                                                  description: Name of the metric.
+                                                  type: string
+                                                namespace:
+                                                  description: Namespace of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          stat:
+                                            description: Statistic of the metrics
+                                              to return.
+                                            type: string
+                                          unit:
+                                            description: Unit of the metric.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    returnData:
+                                      description: Boolean that indicates whether
+                                        to return the timestamps and raw data values
+                                        of this metric, the default is true
+                                      type: boolean
+                                  type: object
+                                type: array
                               namespace:
                                 description: Namespace of the metric.
                                 type: string

@@ -27,7 +27,7 @@ type CatalogDatabaseObservation struct {
 	// Description of the database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Catalog ID and name of the database
+	// Catalog ID and name of the database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Location of the database (for example, an HDFS path).
@@ -35,6 +35,12 @@ type CatalogDatabaseObservation struct {
 
 	// List of key-value pairs that define parameters and properties of the database.
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for a target database for resource linking. See target_database below.
 	TargetDatabase []TargetDatabaseObservation `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
@@ -66,6 +72,10 @@ type CatalogDatabaseParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for a target database for resource linking. See target_database below.
 	// +kubebuilder:validation:Optional

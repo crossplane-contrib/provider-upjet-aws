@@ -1178,6 +1178,11 @@ func (in *MetricQueryObservation) DeepCopyInto(out *MetricQueryObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ReturnData != nil {
 		in, out := &in.ReturnData, &out.ReturnData
 		*out = new(bool)
@@ -1224,6 +1229,11 @@ func (in *MetricQueryParameters) DeepCopyInto(out *MetricQueryParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Period != nil {
+		in, out := &in.Period, &out.Period
+		*out = new(float64)
+		**out = **in
 	}
 	if in.ReturnData != nil {
 		in, out := &in.ReturnData, &out.ReturnData
@@ -1338,6 +1348,11 @@ func (in *MetricStreamObservation) DeepCopyInto(out *MetricStreamObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IncludeLinkedAccountsMetrics != nil {
+		in, out := &in.IncludeLinkedAccountsMetrics, &out.IncludeLinkedAccountsMetrics
+		*out = new(bool)
+		**out = **in
+	}
 	if in.LastUpdateDate != nil {
 		in, out := &in.LastUpdateDate, &out.LastUpdateDate
 		*out = new(string)
@@ -1443,6 +1458,11 @@ func (in *MetricStreamParameters) DeepCopyInto(out *MetricStreamParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.IncludeLinkedAccountsMetrics != nil {
+		in, out := &in.IncludeLinkedAccountsMetrics, &out.IncludeLinkedAccountsMetrics
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

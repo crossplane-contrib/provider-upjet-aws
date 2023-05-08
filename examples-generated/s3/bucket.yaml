@@ -5,32 +5,14 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     meta.upbound.io/example-id: s3/v1beta1/bucket
   labels:
-    testing.upbound.io/example-name: b
-  name: b
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1
     tags:
       Environment: Dev
       Name: My bucket
-
----
-
-apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketACL
-metadata:
-  annotations:
-    meta.upbound.io/example-id: s3/v1beta1/bucket
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    acl: private
-    bucketSelector:
-      matchLabels:
-        testing.upbound.io/example-name: b
-    region: us-west-1
 
 ---
 

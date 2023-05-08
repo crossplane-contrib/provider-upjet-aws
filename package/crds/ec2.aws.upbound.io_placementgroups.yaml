@@ -70,7 +70,7 @@ spec:
                 properties:
                   partitionCount:
                     description: The number of partitions to create in the placement
-                      group.  Can only be specified when the strategy is set to "partition".  Valid
+                      group.  Can only be specified when the strategy is set to partition.  Valid
                       values are 1 - 7 (default is 2).
                     type: number
                   region:
@@ -79,13 +79,13 @@ spec:
                     type: string
                   spreadLevel:
                     description: Determines how placement groups spread instances.
-                      Can only be used when the strategy is set to "spread". Can be
-                      "host" or "rack". "host" can only be used for Outpost placement
-                      groups.
+                      Can only be used when the strategy is set to spread. Can be
+                      host or rack. host can only be used for Outpost placement groups.
+                      Defaults to rack.
                     type: string
                   strategy:
-                    description: The placement strategy. Can be "cluster", "partition"
-                      or "spread".
+                    description: The placement strategy. Can be cluster, partition
+                      or spread.
                     type: string
                   tags:
                     additionalProperties:
@@ -297,7 +297,7 @@ spec:
                     type: string
                   partitionCount:
                     description: The number of partitions to create in the placement
-                      group.  Can only be specified when the strategy is set to "partition".  Valid
+                      group.  Can only be specified when the strategy is set to partition.  Valid
                       values are 1 - 7 (default is 2).
                     type: number
                   placementGroupId:
@@ -305,13 +305,13 @@ spec:
                     type: string
                   spreadLevel:
                     description: Determines how placement groups spread instances.
-                      Can only be used when the strategy is set to "spread". Can be
-                      "host" or "rack". "host" can only be used for Outpost placement
-                      groups.
+                      Can only be used when the strategy is set to spread. Can be
+                      host or rack. host can only be used for Outpost placement groups.
+                      Defaults to rack.
                     type: string
                   strategy:
-                    description: The placement strategy. Can be "cluster", "partition"
-                      or "spread".
+                    description: The placement strategy. Can be cluster, partition
+                      or spread.
                     type: string
                   tags:
                     additionalProperties:

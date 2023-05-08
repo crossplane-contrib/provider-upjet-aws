@@ -36,10 +36,6 @@ type UserGroupObservation struct {
 
 type UserGroupParameters struct {
 
-	// The ARN that identifies the user group.
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
 	// The current supported value is REDIS.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`

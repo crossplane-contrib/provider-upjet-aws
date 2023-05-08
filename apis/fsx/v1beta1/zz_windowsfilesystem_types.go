@@ -117,7 +117,7 @@ type WindowsFileSystemObservation struct {
 	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// Identifier of the file system, e.g., fs-12345678
+	// Identifier of the file system (e.g. fs-12345678).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.

@@ -18,6 +18,9 @@ type NATGatewayObservation_2 struct {
 	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
+	// The association ID of the Elastic IP address that's associated with the NAT gateway. Only available when connectivity_type is public.
+	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
+
 	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 

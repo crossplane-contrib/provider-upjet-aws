@@ -116,6 +116,32 @@ spec:
                       Type - specifying this option for unsupported instance types
                       will return an error from the EC2 API.
                     type: number
+                  cpuOptions:
+                    description: The CPU options for the instance. See CPU Options
+                      below for more details.
+                    items:
+                      properties:
+                        amdSevSnp:
+                          description: Indicates whether to enable the instance for
+                            AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and
+                            C6a instance types only. Valid values are enabled and
+                            disabled.
+                          type: string
+                        coreCount:
+                          description: Sets the number of CPU cores for an instance.
+                            This option is only supported on creation of instance
+                            type that support CPU Options CPU Cores and Threads Per
+                            CPU Core Per Instance Type - specifying this option for
+                            unsupported instance types will return an error from the
+                            EC2 API.
+                          type: number
+                        threadsPerCore:
+                          description: If set to 1, hyperthreading is disabled on
+                            the launched instance. Defaults to 2 if not set. See Optimizing
+                            CPU Options for more information.
+                          type: number
+                      type: object
+                    type: array
                   cpuThreadsPerCore:
                     description: If set to 1, hyperthreading is disabled on the launched
                       instance. Defaults to 2 if not set. See Optimizing CPU Options
@@ -1153,6 +1179,32 @@ spec:
                       Type - specifying this option for unsupported instance types
                       will return an error from the EC2 API.
                     type: number
+                  cpuOptions:
+                    description: The CPU options for the instance. See CPU Options
+                      below for more details.
+                    items:
+                      properties:
+                        amdSevSnp:
+                          description: Indicates whether to enable the instance for
+                            AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and
+                            C6a instance types only. Valid values are enabled and
+                            disabled.
+                          type: string
+                        coreCount:
+                          description: Sets the number of CPU cores for an instance.
+                            This option is only supported on creation of instance
+                            type that support CPU Options CPU Cores and Threads Per
+                            CPU Core Per Instance Type - specifying this option for
+                            unsupported instance types will return an error from the
+                            EC2 API.
+                          type: number
+                        threadsPerCore:
+                          description: If set to 1, hyperthreading is disabled on
+                            the launched instance. Defaults to 2 if not set. See Optimizing
+                            CPU Options for more information.
+                          type: number
+                      type: object
+                    type: array
                   cpuThreadsPerCore:
                     description: If set to 1, hyperthreading is disabled on the launched
                       instance. Defaults to 2 if not set. See Optimizing CPU Options

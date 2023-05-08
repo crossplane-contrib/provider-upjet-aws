@@ -47,22 +47,6 @@ func (mg *PermissionSetInlinePolicy) ResolveReferences(ctx context.Context, c cl
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceArn),
-		Extract:      resource.ExtractParamPath("instance_arn", false),
-		Reference:    mg.Spec.ForProvider.InstanceArnRef,
-		Selector:     mg.Spec.ForProvider.InstanceArnSelector,
-		To: reference.To{
-			List:    &PermissionSetList{},
-			Managed: &PermissionSet{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.InstanceArn")
-	}
-	mg.Spec.ForProvider.InstanceArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.InstanceArnRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
 		Extract:      resource.ExtractParamPath("arn", true),
 		Reference:    mg.Spec.ForProvider.PermissionSetArnRef,

@@ -180,7 +180,7 @@ spec:
                       type: object
                     type: array
                   spaceName:
-                    description: The name of the space. At least on of user_profile_name
+                    description: The name of the space. At least one of user_profile_name
                       or space_name required.
                     type: string
                   tags:
@@ -189,7 +189,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   userProfileName:
-                    description: The user profile name. At least on of user_profile_name
+                    description: The user profile name. At least one of user_profile_name
                       or space_name required.
                     type: string
                   userProfileNameRef:
@@ -507,7 +507,7 @@ spec:
                       type: object
                     type: array
                   spaceName:
-                    description: The name of the space. At least on of user_profile_name
+                    description: The name of the space. At least one of user_profile_name
                       or space_name required.
                     type: string
                   tags:
@@ -523,7 +523,7 @@ spec:
                       block.
                     type: object
                   userProfileName:
-                    description: The user profile name. At least on of user_profile_name
+                    description: The user profile name. At least one of user_profile_name
                       or space_name required.
                     type: string
                 type: object

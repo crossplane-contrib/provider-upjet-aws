@@ -15,7 +15,7 @@ import (
 
 type OriginAccessControlObservation struct {
 
-	// The description of the Origin Access Control. It may be empty.
+	// The description of the Origin Access Control.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The current version of this Origin Access Control.
@@ -27,19 +27,19 @@ type OriginAccessControlObservation struct {
 	// A name that identifies the Origin Access Control.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of origin that this Origin Access Control is for. The only valid value is s3.
+	// The type of origin that this Origin Access Control is for. Valid values are s3, and mediastore.
 	OriginAccessControlOriginType *string `json:"originAccessControlOriginType,omitempty" tf:"origin_access_control_origin_type,omitempty"`
 
-	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, no-override.
+	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, and no-override.
 	SigningBehavior *string `json:"signingBehavior,omitempty" tf:"signing_behavior,omitempty"`
 
-	// Determines how CloudFront signs (authenticates) requests. Valid values: sigv4.
+	// Determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
 	SigningProtocol *string `json:"signingProtocol,omitempty" tf:"signing_protocol,omitempty"`
 }
 
 type OriginAccessControlParameters struct {
 
-	// The description of the Origin Access Control. It may be empty.
+	// The description of the Origin Access Control.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -47,7 +47,7 @@ type OriginAccessControlParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The type of origin that this Origin Access Control is for. The only valid value is s3.
+	// The type of origin that this Origin Access Control is for. Valid values are s3, and mediastore.
 	// +kubebuilder:validation:Optional
 	OriginAccessControlOriginType *string `json:"originAccessControlOriginType,omitempty" tf:"origin_access_control_origin_type,omitempty"`
 
@@ -56,11 +56,11 @@ type OriginAccessControlParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, no-override.
+	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, and no-override.
 	// +kubebuilder:validation:Optional
 	SigningBehavior *string `json:"signingBehavior,omitempty" tf:"signing_behavior,omitempty"`
 
-	// Determines how CloudFront signs (authenticates) requests. Valid values: sigv4.
+	// Determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
 	// +kubebuilder:validation:Optional
 	SigningProtocol *string `json:"signingProtocol,omitempty" tf:"signing_protocol,omitempty"`
 }

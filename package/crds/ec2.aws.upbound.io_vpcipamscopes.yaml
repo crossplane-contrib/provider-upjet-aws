@@ -352,6 +352,7 @@ spec:
               atProvider:
                 properties:
                   arn:
+                    description: The Amazon Resource Name (ARN) of the scope.
                     type: string
                   description:
                     description: A description for the scope you're creating.
@@ -368,12 +369,13 @@ spec:
                       scope.
                     type: string
                   ipamScopeType:
+                    description: The type of the scope.
                     type: string
                   isDefault:
                     description: Defines if the scope is the default scope or not.
                     type: boolean
                   poolCount:
-                    description: Count of pools under this scope
+                    description: The number of pools in the scope.
                     type: number
                   tags:
                     additionalProperties:

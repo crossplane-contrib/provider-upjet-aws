@@ -153,8 +153,16 @@ spec:
                       Balancer Target Groups. The value is round_robin or least_outstanding_requests.
                       The default is round_robin.
                     type: string
+                  loadBalancingCrossZoneEnabled:
+                    description: Indicates whether cross zone load balancing is enabled.
+                      The value is "true", "false" or "use_load_balancer_configuration".
+                      The default is "use_load_balancer_configuration".
+                    type: string
                   name:
-                    description: Name of the target group.
+                    description: Name of the target group. This name must be unique
+                      per region per account, can have a maximum of 32 characters,
+                      must contain only alphanumeric characters or hyphens, and must
+                      not begin or end with a hyphen.
                     type: string
                   port:
                     description: (May be required, Forces new resource) Port on which
@@ -625,8 +633,16 @@ spec:
                       Balancer Target Groups. The value is round_robin or least_outstanding_requests.
                       The default is round_robin.
                     type: string
+                  loadBalancingCrossZoneEnabled:
+                    description: Indicates whether cross zone load balancing is enabled.
+                      The value is "true", "false" or "use_load_balancer_configuration".
+                      The default is "use_load_balancer_configuration".
+                    type: string
                   name:
-                    description: Name of the target group.
+                    description: Name of the target group. This name must be unique
+                      per region per account, can have a maximum of 32 characters,
+                      must contain only alphanumeric characters or hyphens, and must
+                      not begin or end with a hyphen.
                     type: string
                   port:
                     description: (May be required, Forces new resource) Port on which

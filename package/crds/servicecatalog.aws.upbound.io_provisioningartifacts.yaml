@@ -191,9 +191,8 @@ spec:
                       in Amazon S3.
                     type: string
                   type:
-                    description: 'Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS
-                      Resources).'
+                    description: Type of provisioning artifact. See AWS Docs for valid
+                      list of values.
                     type: string
                 required:
                 - region
@@ -420,7 +419,7 @@ spec:
                       version.
                     type: string
                   id:
-                    description: Provisioning Artifact identifier and product identifier
+                    description: Provisioning artifact identifier and product identifier
                       separated by a colon.
                     type: string
                   name:
@@ -429,6 +428,9 @@ spec:
                     type: string
                   productId:
                     description: Identifier of the product.
+                    type: string
+                  provisioningArtifactId:
+                    description: Provisioning artifact identifier.
                     type: string
                   templatePhysicalId:
                     description: Template source as the physical ID of the resource
@@ -441,9 +443,8 @@ spec:
                       in Amazon S3.
                     type: string
                   type:
-                    description: 'Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS
-                      Resources).'
+                    description: Type of provisioning artifact. See AWS Docs for valid
+                      list of values.
                     type: string
                 type: object
               conditions:

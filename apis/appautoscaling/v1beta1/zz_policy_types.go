@@ -21,6 +21,9 @@ type CustomizedMetricSpecificationObservation struct {
 	// Name of the metric.
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
+	// Metrics to include, as a metric data query.
+	Metrics []MetricsObservation `json:"metrics,omitempty" tf:"metrics,omitempty"`
+
 	// Namespace of the metric.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
@@ -38,16 +41,20 @@ type CustomizedMetricSpecificationParameters struct {
 	Dimensions []DimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Metrics to include, as a metric data query.
+	// +kubebuilder:validation:Optional
+	Metrics []MetricsParameters `json:"metrics,omitempty" tf:"metrics,omitempty"`
 
 	// Namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Statistic of the metric. Valid values: Average, Minimum, Maximum, SampleCount, and Sum.
-	// +kubebuilder:validation:Required
-	Statistic *string `json:"statistic" tf:"statistic,omitempty"`
+	// +kubebuilder:validation:Optional
+	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -74,6 +81,121 @@ type DimensionsParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
+type MetricDimensionsObservation struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricDimensionsParameters struct {
+
+	// Name of the dimension.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type MetricObservation struct {
+
+	// Configuration block(s) with the dimensions of the metric if the metric was published with dimensions. Detailed below.
+	Dimensions []MetricDimensionsObservation `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type MetricParameters struct {
+
+	// Configuration block(s) with the dimensions of the metric if the metric was published with dimensions. Detailed below.
+	// +kubebuilder:validation:Optional
+	Dimensions []MetricDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	// +kubebuilder:validation:Required
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	// +kubebuilder:validation:Required
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+}
+
+type MetricStatObservation struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricObservation `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricStatParameters struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	// +kubebuilder:validation:Required
+	Metric []MetricParameters `json:"metric" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	// +kubebuilder:validation:Required
+	Stat *string `json:"stat" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	// +kubebuilder:validation:Optional
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricsObservation struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in target tracking scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in target tracking scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricStatObservation `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
+type MetricsParameters struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	// +kubebuilder:validation:Optional
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in target tracking scaling policy.
+	// +kubebuilder:validation:Required
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in target tracking scaling policy. You must specify either expression or metric_stat, but not both.
+	// +kubebuilder:validation:Optional
+	MetricStat []MetricStatParameters `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	// +kubebuilder:validation:Optional
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
 type PolicyObservation struct {
 
 	// List of CloudWatch alarm ARNs associated with the scaling policy.
@@ -82,6 +204,7 @@ type PolicyObservation struct {
 	// ARN assigned by AWS to the scaling policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Short name for the metric used in target tracking scaling policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Policy type. Valid values are StepScaling and TargetTrackingScaling. Defaults to StepScaling. Certain services only support only one policy type. For more information see the Target Tracking Scaling Policies and Step Scaling Policies documentation.

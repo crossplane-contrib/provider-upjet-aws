@@ -240,7 +240,8 @@ spec:
                     type: object
                   gatewayId:
                     description: Identifier of a VPC internet gateway or a virtual
-                      private gateway.
+                      private gateway. Specify local when updating a previously imported
+                      local route.
                     type: string
                   gatewayIdRef:
                     description: Reference to a InternetGateway to populate gatewayId.
@@ -1070,7 +1071,8 @@ spec:
                     type: string
                   gatewayId:
                     description: Identifier of a VPC internet gateway or a virtual
-                      private gateway.
+                      private gateway. Specify local when updating a previously imported
+                      local route.
                     type: string
                   id:
                     description: Route identifier computed from the routing table

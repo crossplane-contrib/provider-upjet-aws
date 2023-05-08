@@ -133,6 +133,10 @@ spec:
                             - s3Uri
                             type: object
                           type: array
+                        tableFormat:
+                          description: Format for the offline store table. Supported
+                            formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/).
+                          type: string
                       required:
                       - s3StorageConfig
                       type: object
@@ -522,6 +526,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        tableFormat:
+                          description: Format for the offline store table. Supported
+                            formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/).
+                          type: string
                       type: object
                     type: array
                   onlineStoreConfig:

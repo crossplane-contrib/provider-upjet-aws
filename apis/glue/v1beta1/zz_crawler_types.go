@@ -236,6 +236,9 @@ type DeltaTargetObservation struct {
 	// The name of the connection to use to connect to the JDBC target.
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
+	// Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.
+	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
+
 	// A list of the Amazon S3 paths to the Delta tables.
 	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
 
@@ -248,6 +251,10 @@ type DeltaTargetParameters struct {
 	// The name of the connection to use to connect to the JDBC target.
 	// +kubebuilder:validation:Optional
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.
+	// +kubebuilder:validation:Optional
+	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
 	// +kubebuilder:validation:Required

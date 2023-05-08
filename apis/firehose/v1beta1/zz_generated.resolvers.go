@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/provider-aws/apis/elasticsearch/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/glue/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -178,6 +179,62 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArnRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArnRef,
+			Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArnSelector,
+			To: reference.To{
+				List:    &v1beta14.DomainList{},
+				Managed: &v1beta14.Domain{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArn")
+		}
+		mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

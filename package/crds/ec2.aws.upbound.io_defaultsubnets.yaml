@@ -320,6 +320,8 @@ spec:
                     type: string
                   enableDns64:
                     type: boolean
+                  enableLniAtDeviceIndex:
+                    type: number
                   enableResourceNameDnsARecordOnLaunch:
                     type: boolean
                   enableResourceNameDnsAaaaRecordOnLaunch:

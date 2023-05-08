@@ -275,6 +275,17 @@ spec:
                       - endpoint
                       type: object
                     type: array
+                  eventBridgeConfig:
+                    description: AWS EventBridge settings. See below
+                    items:
+                      properties:
+                        eventBusArn:
+                          description: ARN for the EventBridge bus.
+                          type: string
+                      required:
+                      - eventBusArn
+                      type: object
+                    type: array
                   httpConfig:
                     description: HTTP settings. See below
                     items:
@@ -320,6 +331,21 @@ spec:
                           type: string
                       required:
                       - functionArn
+                      type: object
+                    type: array
+                  opensearchserviceConfig:
+                    description: Amazon OpenSearch Service settings. See below
+                    items:
+                      properties:
+                        endpoint:
+                          description: HTTP endpoint of the OpenSearch domain.
+                          type: string
+                        region:
+                          description: AWS region of the OpenSearch domain. Defaults
+                            to current region.
+                          type: string
+                      required:
+                      - endpoint
                       type: object
                     type: array
                   region:
@@ -441,7 +467,8 @@ spec:
                     type: object
                   type:
                     description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
-                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.'
+                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
+                      AMAZON_EVENTBRIDGE.'
                     type: string
                 required:
                 - region
@@ -693,6 +720,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  eventBridgeConfig:
+                    description: AWS EventBridge settings. See below
+                    items:
+                      properties:
+                        eventBusArn:
+                          description: ARN for the EventBridge bus.
+                          type: string
+                      type: object
+                    type: array
                   httpConfig:
                     description: HTTP settings. See below
                     items:
@@ -738,6 +774,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  opensearchserviceConfig:
+                    description: Amazon OpenSearch Service settings. See below
+                    items:
+                      properties:
+                        endpoint:
+                          description: HTTP endpoint of the OpenSearch domain.
+                          type: string
+                        region:
+                          description: AWS region of the OpenSearch domain. Defaults
+                            to current region.
+                          type: string
+                      type: object
+                    type: array
                   relationalDatabaseConfig:
                     description: AWS RDS settings. See Relational Database Config
                     items:
@@ -776,7 +825,8 @@ spec:
                     type: string
                   type:
                     description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
-                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE.'
+                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
+                      AMAZON_EVENTBRIDGE.'
                     type: string
                 type: object
               conditions:

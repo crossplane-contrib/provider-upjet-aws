@@ -185,8 +185,6 @@ spec:
                             - portMapping
                             type: object
                           type: array
-                      required:
-                      - listener
                       type: object
                     type: array
                   tags:

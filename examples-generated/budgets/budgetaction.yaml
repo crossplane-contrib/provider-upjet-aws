@@ -64,19 +64,7 @@ metadata:
 spec:
   forProvider:
     description: My example policy
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": [
-              "ec2:Describe*"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.example.json}
 
 ---
 
@@ -90,23 +78,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "Service": [
-                "budgets.${data.aws_partition.current.dns_suffix}"
-              ]
-            },
-            "Action": [
-              "sts:AssumeRole"
-            ]
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

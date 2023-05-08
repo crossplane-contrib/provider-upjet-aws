@@ -111,7 +111,10 @@ type LBTargetGroupObservation struct {
 	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin or least_outstanding_requests. The default is round_robin.
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
 
-	// Name of the target group.
+	// Indicates whether cross zone load balancing is enabled. The value is "true", "false" or "use_load_balancer_configuration". The default is "use_load_balancer_configuration".
+	LoadBalancingCrossZoneEnabled *string `json:"loadBalancingCrossZoneEnabled,omitempty" tf:"load_balancing_cross_zone_enabled,omitempty"`
+
+	// Name of the target group. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
@@ -177,7 +180,11 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
 
-	// Name of the target group.
+	// Indicates whether cross zone load balancing is enabled. The value is "true", "false" or "use_load_balancer_configuration". The default is "use_load_balancer_configuration".
+	// +kubebuilder:validation:Optional
+	LoadBalancingCrossZoneEnabled *string `json:"loadBalancingCrossZoneEnabled,omitempty" tf:"load_balancing_cross_zone_enabled,omitempty"`
+
+	// Name of the target group. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

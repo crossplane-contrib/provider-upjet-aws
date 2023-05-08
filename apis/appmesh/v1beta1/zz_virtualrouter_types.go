@@ -129,8 +129,8 @@ type VirtualRouterSpecObservation struct {
 type VirtualRouterSpecParameters struct {
 
 	// configuration block to the spec argument.
-	// +kubebuilder:validation:Required
-	Listener []VirtualRouterSpecListenerParameters `json:"listener" tf:"listener,omitempty"`
+	// +kubebuilder:validation:Optional
+	Listener []VirtualRouterSpecListenerParameters `json:"listener,omitempty" tf:"listener,omitempty"`
 }
 
 // VirtualRouterSpec defines the desired state of VirtualRouter

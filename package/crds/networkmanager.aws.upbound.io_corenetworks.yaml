@@ -75,6 +75,16 @@ spec:
                       used in the base policy defaults to the region specified in
                       the provider block.
                     type: string
+                  basePolicyRegions:
+                    description: A list of regions to add to the base policy. The
+                      base policy created by setting the create_base_policy argument
+                      to true requires one or more regions to be set in the edge-locations,
+                      location key. If base_policy_regions is not specified, the region
+                      used in the base policy defaults to the region specified in
+                      the provider block.
+                    items:
+                      type: string
+                    type: array
                   createBasePolicy:
                     description: Specifies whether to create a base policy when a
                       core network is created or updated. A base policy is created
@@ -87,13 +97,9 @@ spec:
                       has static routes pointing to VPC attachments and you want to
                       attach your VPCs to the core network before applying the desired
                       policy document. Valid values are true or false. Conflicts with
-                      policy_document. An example of a base policy created is shown
-                      below. The region specified in the location key can be configured
-                      using the base_policy_region argument. If base_policy_region
-                      is not specified, the region defaults to the region specified
-                      in the provider block. This base policy is overridden with the
-                      policy that you specify in the aws_networkmanager_core_network_policy_attachment
-                      resource.
+                      policy_document. An example base policy is shown below. This
+                      base policy is overridden with the policy that you specify in
+                      the aws_networkmanager_core_network_policy_attachment resource.
                     type: boolean
                   description:
                     description: Description of the Core Network.
@@ -397,6 +403,16 @@ spec:
                       used in the base policy defaults to the region specified in
                       the provider block.
                     type: string
+                  basePolicyRegions:
+                    description: A list of regions to add to the base policy. The
+                      base policy created by setting the create_base_policy argument
+                      to true requires one or more regions to be set in the edge-locations,
+                      location key. If base_policy_regions is not specified, the region
+                      used in the base policy defaults to the region specified in
+                      the provider block.
+                    items:
+                      type: string
+                    type: array
                   createBasePolicy:
                     description: Specifies whether to create a base policy when a
                       core network is created or updated. A base policy is created
@@ -409,13 +425,9 @@ spec:
                       has static routes pointing to VPC attachments and you want to
                       attach your VPCs to the core network before applying the desired
                       policy document. Valid values are true or false. Conflicts with
-                      policy_document. An example of a base policy created is shown
-                      below. The region specified in the location key can be configured
-                      using the base_policy_region argument. If base_policy_region
-                      is not specified, the region defaults to the region specified
-                      in the provider block. This base policy is overridden with the
-                      policy that you specify in the aws_networkmanager_core_network_policy_attachment
-                      resource.
+                      policy_document. An example base policy is shown below. This
+                      base policy is overridden with the policy that you specify in
+                      the aws_networkmanager_core_network_policy_attachment resource.
                     type: boolean
                   createdAt:
                     description: Timestamp when a core network was created.

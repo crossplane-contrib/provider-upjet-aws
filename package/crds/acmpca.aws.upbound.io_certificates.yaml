@@ -69,6 +69,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  apiPassthrough:
+                    description: Specifies X.509 certificate information to be included
+                      in the issued certificate. To use with API Passthrough templates
+                    type: string
                   certificateAuthorityArn:
                     description: ARN of the certificate authority.
                     type: string
@@ -396,6 +400,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiPassthrough:
+                    description: Specifies X.509 certificate information to be included
+                      in the issued certificate. To use with API Passthrough templates
+                    type: string
                   arn:
                     description: ARN of the certificate.
                     type: string

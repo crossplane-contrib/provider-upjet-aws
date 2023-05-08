@@ -297,6 +297,36 @@ func (in *CatalogDatabaseObservation) DeepCopyInto(out *CatalogDatabaseObservati
 			(*out)[key] = outVal
 		}
 	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.TargetDatabase != nil {
 		in, out := &in.TargetDatabase, &out.TargetDatabase
 		*out = make([]TargetDatabaseObservation, len(*in))
@@ -360,6 +390,21 @@ func (in *CatalogDatabaseParameters) DeepCopyInto(out *CatalogDatabaseParameters
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.TargetDatabase != nil {
 		in, out := &in.TargetDatabase, &out.TargetDatabase
@@ -2501,6 +2546,11 @@ func (in *DeltaTargetObservation) DeepCopyInto(out *DeltaTargetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CreateNativeDeltaTable != nil {
+		in, out := &in.CreateNativeDeltaTable, &out.CreateNativeDeltaTable
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeltaTables != nil {
 		in, out := &in.DeltaTables, &out.DeltaTables
 		*out = make([]*string, len(*in))
@@ -2535,6 +2585,11 @@ func (in *DeltaTargetParameters) DeepCopyInto(out *DeltaTargetParameters) {
 	if in.ConnectionName != nil {
 		in, out := &in.ConnectionName, &out.ConnectionName
 		*out = new(string)
+		**out = **in
+	}
+	if in.CreateNativeDeltaTable != nil {
+		in, out := &in.CreateNativeDeltaTable, &out.CreateNativeDeltaTable
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DeltaTables != nil {

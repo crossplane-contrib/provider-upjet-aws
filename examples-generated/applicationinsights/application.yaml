@@ -24,9 +24,21 @@ spec:
   forProvider:
     region: us-west-1
     resourceQuery:
-    - query: "\t{\n\t\t\"ResourceTypeFilters\": [\n\t\t  \"AWS::EC2::Instance\"\n\t\t],\n\t\t\"TagFilters\":
-        [\n\t\t  {\n\t\t\t\"Key\": \"Stage\",\n\t\t\t\"Values\": [\n\t\t\t  \"Test\"\n\t\t\t]\n\t\t
-        \ }\n\t\t]\n\t  }\n"
+    - query: |-
+        ${jsonencode({
+              ResourceTypeFilters = [
+                "AWS::EC2::Instance"
+              ]
+
+              TagFilters = [
+                {
+                  Key = "Stage"
+                  Values = [
+                    "Test"
+                  ]
+                }
+              ]
+            })}
 
 ---
 

@@ -16,17 +16,21 @@ import (
 type EnablerObservation struct {
 
 	// Set of account IDs.
+	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of resources to scan. Valid values are EC2, ECR, and LAMBDA.
+	// Type of resources to scan.
+	// Valid values are EC2, ECR, and LAMBDA.
+	// At least one item is required.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
 type EnablerParameters struct {
 
 	// Set of account IDs.
+	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
 	// +kubebuilder:validation:Optional
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
@@ -35,7 +39,9 @@ type EnablerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Type of resources to scan. Valid values are EC2, ECR, and LAMBDA.
+	// Type of resources to scan.
+	// Valid values are EC2, ECR, and LAMBDA.
+	// At least one item is required.
 	// +kubebuilder:validation:Optional
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }

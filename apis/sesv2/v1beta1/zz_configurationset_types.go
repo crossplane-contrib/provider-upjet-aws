@@ -39,6 +39,9 @@ type ConfigurationSetObservation struct {
 
 	// An object that defines the open and click tracking options for emails that you send using the configuration set.
 	TrackingOptions []TrackingOptionsObservation `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
+
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	VdmOptions []VdmOptionsObservation `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
 }
 
 type ConfigurationSetParameters struct {
@@ -71,6 +74,23 @@ type ConfigurationSetParameters struct {
 	// An object that defines the open and click tracking options for emails that you send using the configuration set.
 	// +kubebuilder:validation:Optional
 	TrackingOptions []TrackingOptionsParameters `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
+
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	// +kubebuilder:validation:Optional
+	VdmOptions []VdmOptionsParameters `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
+}
+
+type DashboardOptionsObservation struct {
+
+	// Specifies the status of your VDM engagement metrics collection. Valid values: ENABLED, DISABLED.
+	EngagementMetrics *string `json:"engagementMetrics,omitempty" tf:"engagement_metrics,omitempty"`
+}
+
+type DashboardOptionsParameters struct {
+
+	// Specifies the status of your VDM engagement metrics collection. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Optional
+	EngagementMetrics *string `json:"engagementMetrics,omitempty" tf:"engagement_metrics,omitempty"`
 }
 
 type DeliveryOptionsObservation struct {
@@ -91,6 +111,19 @@ type DeliveryOptionsParameters struct {
 	// Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). Valid values: REQUIRE, OPTIONAL.
 	// +kubebuilder:validation:Optional
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
+}
+
+type GuardianOptionsObservation struct {
+
+	// Specifies the status of your VDM optimized shared delivery. Valid values: ENABLED, DISABLED.
+	OptimizedSharedDelivery *string `json:"optimizedSharedDelivery,omitempty" tf:"optimized_shared_delivery,omitempty"`
+}
+
+type GuardianOptionsParameters struct {
+
+	// Specifies the status of your VDM optimized shared delivery. Valid values: ENABLED, DISABLED.
+	// +kubebuilder:validation:Optional
+	OptimizedSharedDelivery *string `json:"optimizedSharedDelivery,omitempty" tf:"optimized_shared_delivery,omitempty"`
 }
 
 type ReputationOptionsObservation struct {
@@ -146,6 +179,26 @@ type TrackingOptionsParameters struct {
 	// The domain to use for tracking open and click events.
 	// +kubebuilder:validation:Required
 	CustomRedirectDomain *string `json:"customRedirectDomain" tf:"custom_redirect_domain,omitempty"`
+}
+
+type VdmOptionsObservation struct {
+
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	DashboardOptions []DashboardOptionsObservation `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
+
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	GuardianOptions []GuardianOptionsObservation `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
+}
+
+type VdmOptionsParameters struct {
+
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	// +kubebuilder:validation:Optional
+	DashboardOptions []DashboardOptionsParameters `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
+
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	// +kubebuilder:validation:Optional
+	GuardianOptions []GuardianOptionsParameters `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
 }
 
 // ConfigurationSetSpec defines the desired state of ConfigurationSet

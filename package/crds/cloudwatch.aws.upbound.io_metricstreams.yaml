@@ -174,6 +174,9 @@ spec:
                       - namespace
                       type: object
                     type: array
+                  includeLinkedAccountsMetrics:
+                    description: account observability.
+                    type: boolean
                   name:
                     description: Friendly name of the metric stream. Conflicts with
                       name_prefix.
@@ -544,6 +547,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  includeLinkedAccountsMetrics:
+                    description: account observability.
+                    type: boolean
                   lastUpdateDate:
                     description: Date and time in RFC3339 format that the metric stream
                       was last updated.

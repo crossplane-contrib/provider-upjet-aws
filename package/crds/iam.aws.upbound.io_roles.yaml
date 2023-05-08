@@ -345,6 +345,19 @@ spec:
                     description: ARN of the policy that is used to set the permissions
                       boundary for the role.
                     type: string
+                  roleLastUsed:
+                    description: Contains information about the last time that an
+                      IAM role was used. See role_last_used for details.
+                    items:
+                      properties:
+                        lastUsedDate:
+                          type: string
+                        region:
+                          description: The name of the AWS Region in which the role
+                            was last used.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

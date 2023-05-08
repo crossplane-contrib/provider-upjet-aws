@@ -145,7 +145,8 @@ spec:
                         type: object
                     type: object
                   apiMappingKey:
-                    description: The API mapping key.
+                    description: The API mapping key. Refer to REST API, HTTP API
+                      or WebSocket API.
                     type: string
                   domainName:
                     description: Domain name. Use the aws_apigatewayv2_domain_name
@@ -503,7 +504,8 @@ spec:
                     description: API identifier.
                     type: string
                   apiMappingKey:
-                    description: The API mapping key.
+                    description: The API mapping key. Refer to REST API, HTTP API
+                      or WebSocket API.
                     type: string
                   domainName:
                     description: Domain name. Use the aws_apigatewayv2_domain_name

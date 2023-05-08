@@ -22,8 +22,8 @@ type AccountRecoverySettingObservation struct {
 type AccountRecoverySettingParameters struct {
 
 	// List of Account Recovery Options of the following structure:
-	// +kubebuilder:validation:Required
-	RecoveryMechanism []RecoveryMechanismParameters `json:"recoveryMechanism" tf:"recovery_mechanism,omitempty"`
+	// +kubebuilder:validation:Optional
+	RecoveryMechanism []RecoveryMechanismParameters `json:"recoveryMechanism,omitempty" tf:"recovery_mechanism,omitempty"`
 }
 
 type AdminCreateUserConfigObservation struct {

@@ -99,6 +99,9 @@ type EventDataStoreObservation struct {
 	// Name of the event data store.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the AWS KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
 	// Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created. Default: true.
 	MultiRegionEnabled *bool `json:"multiRegionEnabled,omitempty" tf:"multi_region_enabled,omitempty"`
 
@@ -126,6 +129,19 @@ type EventDataStoreParameters struct {
 	// The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
 	// +kubebuilder:validation:Optional
 	AdvancedEventSelector []EventDataStoreAdvancedEventSelectorParameters `json:"advancedEventSelector,omitempty" tf:"advanced_event_selector,omitempty"`
+
+	// Specifies the AWS KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created. Default: true.
 	// +kubebuilder:validation:Optional

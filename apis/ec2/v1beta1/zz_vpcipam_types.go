@@ -34,10 +34,10 @@ type VPCIpamObservation struct {
 	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
 	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
 
-	// The ID of the IPAM
+	// The IPAM's default resource discovery association ID.
 	DefaultResourceDiscoveryAssociationID *string `json:"defaultResourceDiscoveryAssociationId,omitempty" tf:"default_resource_discovery_association_id,omitempty"`
 
-	// The ID of the IPAM
+	// The IPAM's default resource discovery ID.
 	DefaultResourceDiscoveryID *string `json:"defaultResourceDiscoveryId,omitempty" tf:"default_resource_discovery_id,omitempty"`
 
 	// A description for the IPAM.

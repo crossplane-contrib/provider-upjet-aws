@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CanvasAppSettingsModelRegisterSettingsObservation struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type CanvasAppSettingsModelRegisterSettingsParameters struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type CanvasAppSettingsTimeSeriesForecastingSettingsObservation struct {
 
 	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
@@ -110,11 +130,18 @@ type UserProfileParameters struct {
 
 type UserSettingsCanvasAppSettingsObservation struct {
 
+	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	ModelRegisterSettings []CanvasAppSettingsModelRegisterSettingsObservation `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
+
 	// Time series forecast settings for the Canvas app. see Time Series Forecasting Settings below.
 	TimeSeriesForecastingSettings []CanvasAppSettingsTimeSeriesForecastingSettingsObservation `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 }
 
 type UserSettingsCanvasAppSettingsParameters struct {
+
+	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	// +kubebuilder:validation:Optional
+	ModelRegisterSettings []CanvasAppSettingsModelRegisterSettingsParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
 	// Time series forecast settings for the Canvas app. see Time Series Forecasting Settings below.
 	// +kubebuilder:validation:Optional
@@ -300,6 +327,9 @@ type UserSettingsObservation struct {
 	// The RSession app settings. See RSession App Settings below.
 	RSessionAppSettings []UserSettingsRSessionAppSettingsObservation `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudio Server Pro App Settings below.
+	RStudioServerProAppSettings []UserSettingsRStudioServerProAppSettingsObservation `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
+
 	// The security groups.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -331,6 +361,10 @@ type UserSettingsParameters struct {
 	// The RSession app settings. See RSession App Settings below.
 	// +kubebuilder:validation:Optional
 	RSessionAppSettings []UserSettingsRSessionAppSettingsParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
+
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudio Server Pro App Settings below.
+	// +kubebuilder:validation:Optional
+	RStudioServerProAppSettings []UserSettingsRStudioServerProAppSettingsParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// The security groups.
 	// +kubebuilder:validation:Optional
@@ -424,6 +458,26 @@ type UserSettingsRSessionAppSettingsParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []UserSettingsRSessionAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+}
+
+type UserSettingsRStudioServerProAppSettingsObservation struct {
+
+	// Indicates whether the current user has access to the RStudioServerPro app. Valid values are ENABLED and DISABLED.
+	AccessStatus *string `json:"accessStatus,omitempty" tf:"access_status,omitempty"`
+
+	// The level of permissions that the user has within the RStudioServerPro app. This value defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value allows the user access to the RStudio Administrative Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
+}
+
+type UserSettingsRStudioServerProAppSettingsParameters struct {
+
+	// Indicates whether the current user has access to the RStudioServerPro app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	AccessStatus *string `json:"accessStatus,omitempty" tf:"access_status,omitempty"`
+
+	// The level of permissions that the user has within the RStudioServerPro app. This value defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value allows the user access to the RStudio Administrative Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+	// +kubebuilder:validation:Optional
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
 }
 
 type UserSettingsSharingSettingsObservation struct {

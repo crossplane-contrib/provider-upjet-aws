@@ -33,7 +33,7 @@ type ProvisioningArtifactObservation struct {
 	// Information set by the administrator to provide guidance to end users about which provisioning artifacts to use. Valid values are DEFAULT and DEPRECATED. The default is DEFAULT. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.
 	Guidance *string `json:"guidance,omitempty" tf:"guidance,omitempty"`
 
-	// Provisioning Artifact identifier and product identifier separated by a colon.
+	// Provisioning artifact identifier and product identifier separated by a colon.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Name of the provisioning artifact (for example, v1, v2beta). No spaces are allowed.
@@ -42,13 +42,16 @@ type ProvisioningArtifactObservation struct {
 	// Identifier of the product.
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
+	// Provisioning artifact identifier.
+	ProvisioningArtifactID *string `json:"provisioningArtifactId,omitempty" tf:"provisioning_artifact_id,omitempty"`
+
 	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
 	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
 
 	// Template source as URL of the CloudFormation template in Amazon S3.
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -105,7 +108,7 @@ type ProvisioningArtifactParameters struct {
 	// +kubebuilder:validation:Optional
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
-	// Type of provisioning artifact. Valid values: CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR (Marketplace Clusters and AWS Resources).
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

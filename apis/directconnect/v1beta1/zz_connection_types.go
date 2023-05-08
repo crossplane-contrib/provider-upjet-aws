@@ -48,6 +48,9 @@ type ConnectionObservation struct {
 	// The ID of the AWS account that owns the connection.
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
+	// The name of the AWS Direct Connect service provider associated with the connection.
+	PartnerName *string `json:"partnerName,omitempty" tf:"partner_name,omitempty"`
+
 	// The MAC Security (MACsec) port link status of the connection.
 	PortEncryptionStatus *string `json:"portEncryptionStatus,omitempty" tf:"port_encryption_status,omitempty"`
 

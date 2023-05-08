@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ClusterInstance is the Schema for the ClusterInstances API. Provides
-          an DocDB Cluster Resource Instance
+          an DocumentDB Cluster Resource Instance
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -169,13 +169,13 @@ spec:
                     type: boolean
                   engine:
                     description: 'The name of the database engine to be used for the
-                      DocDB instance. Defaults to docdb. Valid Values: docdb.'
+                      DocumentDB instance. Defaults to docdb. Valid Values: docdb.'
                     type: string
                   instanceClass:
                     description: The instance class to use. For details on CPU and
-                      memory, see Scaling for DocDB Instances. DocDB currently supports
-                      the below instance classes. Please see AWS Documentation for
-                      complete details.
+                      memory, see Scaling for DocumentDB Instances. DocumentDB currently
+                      supports the below instance classes. Please see AWS Documentation
+                      for complete details.
                     type: string
                   performanceInsightsKmsKeyId:
                     description: The KMS key identifier is the key ARN, key ID, alias
@@ -439,7 +439,7 @@ spec:
                     type: string
                   engine:
                     description: 'The name of the database engine to be used for the
-                      DocDB instance. Defaults to docdb. Valid Values: docdb.'
+                      DocumentDB instance. Defaults to docdb. Valid Values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version
@@ -448,9 +448,9 @@ spec:
                     type: string
                   instanceClass:
                     description: The instance class to use. For details on CPU and
-                      memory, see Scaling for DocDB Instances. DocDB currently supports
-                      the below instance classes. Please see AWS Documentation for
-                      complete details.
+                      memory, see Scaling for DocumentDB Instances. DocumentDB currently
+                      supports the below instance classes. Please see AWS Documentation
+                      for complete details.
                     type: string
                   kmsKeyId:
                     description: The ARN for the KMS encryption key if one is set

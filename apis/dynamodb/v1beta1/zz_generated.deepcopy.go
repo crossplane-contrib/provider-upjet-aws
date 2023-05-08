@@ -1188,6 +1188,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeletionProtectionEnabled != nil {
+		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GlobalSecondaryIndex != nil {
 		in, out := &in.GlobalSecondaryIndex, &out.GlobalSecondaryIndex
 		*out = make([]GlobalSecondaryIndexObservation, len(*in))
@@ -1350,6 +1355,11 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	if in.BillingMode != nil {
 		in, out := &in.BillingMode, &out.BillingMode
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeletionProtectionEnabled != nil {
+		in, out := &in.DeletionProtectionEnabled, &out.DeletionProtectionEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.GlobalSecondaryIndex != nil {

@@ -15,19 +15,19 @@ import (
 
 type ClusterParameterGroupObservation struct {
 
-	// The ARN of the documentDB cluster parameter group.
+	// The ARN of the DocumentDB cluster parameter group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description of the documentDB cluster parameter group.
+	// The description of the DocumentDB cluster parameter group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the documentDB cluster parameter group.
+	// The family of the DocumentDB cluster parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The documentDB cluster parameter group name.
+	// The DocumentDB cluster parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of documentDB parameters to apply. Setting parameters to system default values may show a difference on imported resources.
+	// A list of DocumentDB parameters to apply. Setting parameters to system default values may show a difference on imported resources.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
@@ -39,15 +39,15 @@ type ClusterParameterGroupObservation struct {
 
 type ClusterParameterGroupParameters struct {
 
-	// The description of the documentDB cluster parameter group.
+	// The description of the DocumentDB cluster parameter group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The family of the documentDB cluster parameter group.
+	// The family of the DocumentDB cluster parameter group.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// A list of documentDB parameters to apply. Setting parameters to system default values may show a difference on imported resources.
+	// A list of DocumentDB parameters to apply. Setting parameters to system default values may show a difference on imported resources.
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
@@ -66,10 +66,10 @@ type ParameterObservation struct {
 	// Valid values are immediate and pending-reboot. Defaults to pending-reboot.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the documentDB cluster parameter group.
+	// The name of the DocumentDB cluster parameter group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value of the documentDB parameter.
+	// The value of the DocumentDB parameter.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -79,11 +79,11 @@ type ParameterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the documentDB cluster parameter group.
+	// The name of the DocumentDB cluster parameter group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value of the documentDB parameter.
+	// The value of the DocumentDB parameter.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }

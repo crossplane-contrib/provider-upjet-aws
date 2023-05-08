@@ -57,6 +57,7 @@ type PrivateVirtualInterfaceObservation struct {
 	// The name for the virtual interface.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Indicates whether to enable or disable SiteLink.
 	SitelinkEnabled *bool `json:"sitelinkEnabled,omitempty" tf:"sitelink_enabled,omitempty"`
 
 	// Key-value map of resource tags.
@@ -125,6 +126,7 @@ type PrivateVirtualInterfaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Indicates whether to enable or disable SiteLink.
 	// +kubebuilder:validation:Optional
 	SitelinkEnabled *bool `json:"sitelinkEnabled,omitempty" tf:"sitelink_enabled,omitempty"`
 

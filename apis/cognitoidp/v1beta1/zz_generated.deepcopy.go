@@ -3999,8 +3999,18 @@ func (in *UserPoolDomainObservation) DeepCopyInto(out *UserPoolDomainObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.CloudfrontDistribution != nil {
+		in, out := &in.CloudfrontDistribution, &out.CloudfrontDistribution
+		*out = new(string)
+		**out = **in
+	}
 	if in.CloudfrontDistributionArn != nil {
 		in, out := &in.CloudfrontDistributionArn, &out.CloudfrontDistributionArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.CloudfrontDistributionZoneID != nil {
+		in, out := &in.CloudfrontDistributionZoneID, &out.CloudfrontDistributionZoneID
 		*out = new(string)
 		**out = **in
 	}

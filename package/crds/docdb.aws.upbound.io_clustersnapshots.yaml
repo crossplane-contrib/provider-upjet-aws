@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ClusterSnapshot is the Schema for the ClusterSnapshots API. Manages
-          a DocDB database cluster snapshot.
+          a DocumentDB database cluster snapshot.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -69,8 +69,8 @@ spec:
               forProvider:
                 properties:
                   dbClusterIdentifier:
-                    description: The DocDB Cluster Identifier from which to take the
-                      snapshot.
+                    description: The DocumentDB Cluster Identifier from which to take
+                      the snapshot.
                     type: string
                   dbClusterIdentifierRef:
                     description: Reference to a Cluster in docdb to populate dbClusterIdentifier.
@@ -345,49 +345,51 @@ spec:
                 properties:
                   availabilityZones:
                     description: List of EC2 Availability Zones that instances in
-                      the DocDB cluster snapshot can be restored in.
+                      the DocumentDB cluster snapshot can be restored in.
                     items:
                       type: string
                     type: array
                   dbClusterIdentifier:
-                    description: The DocDB Cluster Identifier from which to take the
-                      snapshot.
+                    description: The DocumentDB Cluster Identifier from which to take
+                      the snapshot.
                     type: string
                   dbClusterSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DocDB Cluster
-                      Snapshot.
+                    description: The Amazon Resource Name (ARN) for the DocumentDB
+                      Cluster Snapshot.
                     type: string
                   engine:
                     description: Specifies the name of the database engine.
                     type: string
                   engineVersion:
-                    description: Version of the database engine for this DocDB cluster
-                      snapshot.
+                    description: Version of the database engine for this DocumentDB
+                      cluster snapshot.
                     type: string
                   id:
                     type: string
                   kmsKeyId:
                     description: If storage_encrypted is true, the AWS KMS key identifier
-                      for the encrypted DocDB cluster snapshot.
+                      for the encrypted DocumentDB cluster snapshot.
                     type: string
                   port:
-                    description: Port that the DocDB cluster was listening on at the
-                      time of the snapshot.
+                    description: Port that the DocumentDB cluster was listening on
+                      at the time of the snapshot.
                     type: number
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:
-                    description: The Amazon Resource Name (ARN) for the DocDB Cluster
-                      Snapshot.
+                    description: The Amazon Resource Name (ARN) for the DocumentDB
+                      Cluster Snapshot.
                     type: string
                   status:
-                    description: The status of this DocDB Cluster Snapshot.
+                    description: The status of this DocumentDB Cluster Snapshot.
                     type: string
                   storageEncrypted:
-                    description: Specifies whether the DocDB cluster snapshot is encrypted.
+                    description: Specifies whether the DocumentDB cluster snapshot
+                      is encrypted.
                     type: boolean
                   vpcId:
-                    description: The VPC ID associated with the DocDB cluster snapshot.
+                    description: The VPC ID associated with the DocumentDB cluster
+                      snapshot.
                     type: string
                 type: object
               conditions:

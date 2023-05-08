@@ -261,13 +261,13 @@ spec:
                       type: object
                     type: array
                   cognitoOptions:
-                    description: Configuration block for authenticating Kibana with
-                      Cognito. Detailed below.
+                    description: Configuration block for authenticating dashboard
+                      with Cognito. Detailed below.
                     items:
                       properties:
                         enabled:
                           description: Whether Amazon Cognito authentication with
-                            Kibana is enabled or not. Default is false.
+                            Dashboard is enabled or not. Default is false.
                           type: boolean
                         identityPoolId:
                           description: ID of the Cognito Identity Pool to use.
@@ -331,8 +331,7 @@ spec:
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
-                            the gp3 volume type. Valid values are between 125 and
-                            1000.
+                            the gp3 volume type.
                           type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
@@ -899,13 +898,13 @@ spec:
                       type: object
                     type: array
                   cognitoOptions:
-                    description: Configuration block for authenticating Kibana with
-                      Cognito. Detailed below.
+                    description: Configuration block for authenticating dashboard
+                      with Cognito. Detailed below.
                     items:
                       properties:
                         enabled:
                           description: Whether Amazon Cognito authentication with
-                            Kibana is enabled or not. Default is false.
+                            Dashboard is enabled or not. Default is false.
                           type: boolean
                         identityPoolId:
                           description: ID of the Cognito Identity Pool to use.
@@ -919,6 +918,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  dashboardEndpoint:
+                    description: Domain-specific endpoint for Dashboard without https
+                      scheme.
+                    type: string
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -968,8 +971,7 @@ spec:
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
-                            the gp3 volume type. Valid values are between 125 and
-                            1000.
+                            the gp3 volume type.
                           type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
@@ -1011,7 +1013,8 @@ spec:
                     type: string
                   kibanaEndpoint:
                     description: Domain-specific endpoint for kibana without https
-                      scheme.
+                      scheme. OpenSearch Dashboards do not use Kibana, so this attribute
+                      will be DEPRECATED in a future version.
                     type: string
                   logPublishingOptions:
                     description: Configuration block for publishing slow and application

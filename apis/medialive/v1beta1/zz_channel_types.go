@@ -879,6 +879,53 @@ type CodecSettingsParameters struct {
 	WavSettings []WavSettingsParameters `json:"wavSettings,omitempty" tf:"wav_settings,omitempty"`
 }
 
+type ColorSpacePassthroughSettingsObservation struct {
+}
+
+type ColorSpacePassthroughSettingsParameters struct {
+}
+
+type ColorSpaceSettingsObservation struct {
+
+	// Sets the colorspace metadata to be passed through.
+	ColorSpacePassthroughSettings []ColorSpacePassthroughSettingsParameters `json:"colorSpacePassthroughSettings,omitempty" tf:"color_space_passthrough_settings,omitempty"`
+
+	// Set the colorspace to Dolby Vision81.
+	DolbyVision81Settings []DolbyVision81SettingsParameters `json:"dolbyVision81Settings,omitempty" tf:"dolby_vision81_settings,omitempty"`
+
+	// Set the colorspace to be HDR10. See H265 HDR10 Settings for more details.
+	Hdr10Settings []Hdr10SettingsObservation `json:"hdr10Settings,omitempty" tf:"hdr10_settings,omitempty"`
+
+	// Set the colorspace to Rec. 601.
+	Rec601Settings []Rec601SettingsParameters `json:"rec601Settings,omitempty" tf:"rec601_settings,omitempty"`
+
+	// Set the colorspace to Rec. 709.
+	Rec709Settings []Rec709SettingsParameters `json:"rec709Settings,omitempty" tf:"rec709_settings,omitempty"`
+}
+
+type ColorSpaceSettingsParameters struct {
+
+	// Sets the colorspace metadata to be passed through.
+	// +kubebuilder:validation:Optional
+	ColorSpacePassthroughSettings []ColorSpacePassthroughSettingsParameters `json:"colorSpacePassthroughSettings,omitempty" tf:"color_space_passthrough_settings,omitempty"`
+
+	// Set the colorspace to Dolby Vision81.
+	// +kubebuilder:validation:Optional
+	DolbyVision81Settings []DolbyVision81SettingsParameters `json:"dolbyVision81Settings,omitempty" tf:"dolby_vision81_settings,omitempty"`
+
+	// Set the colorspace to be HDR10. See H265 HDR10 Settings for more details.
+	// +kubebuilder:validation:Optional
+	Hdr10Settings []Hdr10SettingsParameters `json:"hdr10Settings,omitempty" tf:"hdr10_settings,omitempty"`
+
+	// Set the colorspace to Rec. 601.
+	// +kubebuilder:validation:Optional
+	Rec601Settings []Rec601SettingsParameters `json:"rec601Settings,omitempty" tf:"rec601_settings,omitempty"`
+
+	// Set the colorspace to Rec. 709.
+	// +kubebuilder:validation:Optional
+	Rec709Settings []Rec709SettingsParameters `json:"rec709Settings,omitempty" tf:"rec709_settings,omitempty"`
+}
+
 type ContainerSettingsM2TsSettingsObservation struct {
 	AbsentInputAudioBehavior *string `json:"absentInputAudioBehavior,omitempty" tf:"absent_input_audio_behavior,omitempty"`
 
@@ -1216,6 +1263,12 @@ type DestinationsParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
+}
+
+type DolbyVision81SettingsObservation struct {
+}
+
+type DolbyVision81SettingsParameters struct {
 }
 
 type DvbNitSettingsObservation struct {
@@ -1615,6 +1668,26 @@ type FilterSettingsParameters struct {
 	TemporalFilterSettings []TemporalFilterSettingsParameters `json:"temporalFilterSettings,omitempty" tf:"temporal_filter_settings,omitempty"`
 }
 
+type FilterSettingsTemporalFilterSettingsObservation struct {
+
+	// Post filter sharpening.
+	PostFilterSharpening *string `json:"postFilterSharpening,omitempty" tf:"post_filter_sharpening,omitempty"`
+
+	// Filter strength.
+	Strength *string `json:"strength,omitempty" tf:"strength,omitempty"`
+}
+
+type FilterSettingsTemporalFilterSettingsParameters struct {
+
+	// Post filter sharpening.
+	// +kubebuilder:validation:Optional
+	PostFilterSharpening *string `json:"postFilterSharpening,omitempty" tf:"post_filter_sharpening,omitempty"`
+
+	// Filter strength.
+	// +kubebuilder:validation:Optional
+	Strength *string `json:"strength,omitempty" tf:"strength,omitempty"`
+}
+
 type Fmp4HlsSettingsObservation struct {
 	AudioRenditionSets *string `json:"audioRenditionSets,omitempty" tf:"audio_rendition_sets,omitempty"`
 
@@ -2011,6 +2084,251 @@ type H264SettingsParameters struct {
 	// Determines how timecodes should be inserted into the video elementary stream.
 	// +kubebuilder:validation:Optional
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+}
+
+type H265SettingsFilterSettingsObservation struct {
+
+	// Temporal filter settings. See Temporal Filter Settings
+	TemporalFilterSettings []FilterSettingsTemporalFilterSettingsObservation `json:"temporalFilterSettings,omitempty" tf:"temporal_filter_settings,omitempty"`
+}
+
+type H265SettingsFilterSettingsParameters struct {
+
+	// Temporal filter settings. See Temporal Filter Settings
+	// +kubebuilder:validation:Optional
+	TemporalFilterSettings []FilterSettingsTemporalFilterSettingsParameters `json:"temporalFilterSettings,omitempty" tf:"temporal_filter_settings,omitempty"`
+}
+
+type H265SettingsObservation struct {
+
+	// Enables or disables adaptive quantization.
+	AdaptiveQuantization *string `json:"adaptiveQuantization,omitempty" tf:"adaptive_quantization,omitempty"`
+
+	// Indicates that AFD values will be written into the output stream.
+	AfdSignaling *string `json:"afdSignaling,omitempty" tf:"afd_signaling,omitempty"`
+
+	// Whether or not EML should insert an Alternative Transfer Function SEI message.
+	AlternativeTransferFunction *string `json:"alternativeTransferFunction,omitempty" tf:"alternative_transfer_function,omitempty"`
+
+	// Average bitrate in bits/second.
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// Size of buffer in bits.
+	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+
+	// Includes color space metadata in the output.
+	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
+
+	// Define the color metadata for the output. H265 Color Space Settings for more details.
+	ColorSpaceSettings []ColorSpaceSettingsObservation `json:"colorSpaceSettings,omitempty" tf:"color_space_settings,omitempty"`
+
+	// Filters to apply to an encode. See H264 Filter Settings for more details.
+	FilterSettings []H265SettingsFilterSettingsObservation `json:"filterSettings,omitempty" tf:"filter_settings,omitempty"`
+
+	// Four bit AFD value to write on all frames of video in the output stream.
+	FixedAfd *string `json:"fixedAfd,omitempty" tf:"fixed_afd,omitempty"`
+
+	FlickerAq *string `json:"flickerAq,omitempty" tf:"flicker_aq,omitempty"`
+
+	// Framerate denominator.
+	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+
+	// Framerate numerator.
+	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+
+	// Frequency of closed GOPs.
+	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+
+	// GOP size in units of either frames of seconds per gop_size_units.
+	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
+
+	// Indicates if the gop_size is specified in frames or seconds.
+	GopSizeUnits *string `json:"gopSizeUnits,omitempty" tf:"gop_size_units,omitempty"`
+
+	// H264 level.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amount of lookahead.
+	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
+
+	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+
+	// Pixel Aspect Ratio denominator.
+	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+
+	// Pixel Aspect Ratio numerator.
+	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+
+	// AAC profile.
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// Controls the target quality for the video encode.
+	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+
+	// The rate control mode.
+	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
+
+	// Sets the scan type of the output.
+	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
+
+	// Scene change detection.
+	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
+
+	// Number of slices per picture.
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// Set the H265 tier in the output.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+
+	// Apply a burned in timecode. See H265 Timecode Burnin Settings for more details.
+	TimecodeBurninSettings []TimecodeBurninSettingsObservation `json:"timecodeBurninSettings,omitempty" tf:"timecode_burnin_settings,omitempty"`
+
+	// Determines how timecodes should be inserted into the video elementary stream.
+	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+}
+
+type H265SettingsParameters struct {
+
+	// Enables or disables adaptive quantization.
+	// +kubebuilder:validation:Optional
+	AdaptiveQuantization *string `json:"adaptiveQuantization,omitempty" tf:"adaptive_quantization,omitempty"`
+
+	// Indicates that AFD values will be written into the output stream.
+	// +kubebuilder:validation:Optional
+	AfdSignaling *string `json:"afdSignaling,omitempty" tf:"afd_signaling,omitempty"`
+
+	// Whether or not EML should insert an Alternative Transfer Function SEI message.
+	// +kubebuilder:validation:Optional
+	AlternativeTransferFunction *string `json:"alternativeTransferFunction,omitempty" tf:"alternative_transfer_function,omitempty"`
+
+	// Average bitrate in bits/second.
+	// +kubebuilder:validation:Required
+	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
+
+	// Size of buffer in bits.
+	// +kubebuilder:validation:Optional
+	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+
+	// Includes color space metadata in the output.
+	// +kubebuilder:validation:Optional
+	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
+
+	// Define the color metadata for the output. H265 Color Space Settings for more details.
+	// +kubebuilder:validation:Optional
+	ColorSpaceSettings []ColorSpaceSettingsParameters `json:"colorSpaceSettings,omitempty" tf:"color_space_settings,omitempty"`
+
+	// Filters to apply to an encode. See H264 Filter Settings for more details.
+	// +kubebuilder:validation:Optional
+	FilterSettings []H265SettingsFilterSettingsParameters `json:"filterSettings,omitempty" tf:"filter_settings,omitempty"`
+
+	// Four bit AFD value to write on all frames of video in the output stream.
+	// +kubebuilder:validation:Optional
+	FixedAfd *string `json:"fixedAfd,omitempty" tf:"fixed_afd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	FlickerAq *string `json:"flickerAq,omitempty" tf:"flicker_aq,omitempty"`
+
+	// Framerate denominator.
+	// +kubebuilder:validation:Required
+	FramerateDenominator *float64 `json:"framerateDenominator" tf:"framerate_denominator,omitempty"`
+
+	// Framerate numerator.
+	// +kubebuilder:validation:Required
+	FramerateNumerator *float64 `json:"framerateNumerator" tf:"framerate_numerator,omitempty"`
+
+	// Frequency of closed GOPs.
+	// +kubebuilder:validation:Optional
+	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+
+	// GOP size in units of either frames of seconds per gop_size_units.
+	// +kubebuilder:validation:Optional
+	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
+
+	// Indicates if the gop_size is specified in frames or seconds.
+	// +kubebuilder:validation:Optional
+	GopSizeUnits *string `json:"gopSizeUnits,omitempty" tf:"gop_size_units,omitempty"`
+
+	// H264 level.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amount of lookahead.
+	// +kubebuilder:validation:Optional
+	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
+
+	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
+	// +kubebuilder:validation:Optional
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+
+	// Pixel Aspect Ratio denominator.
+	// +kubebuilder:validation:Optional
+	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+
+	// Pixel Aspect Ratio numerator.
+	// +kubebuilder:validation:Optional
+	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+
+	// AAC profile.
+	// +kubebuilder:validation:Optional
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// Controls the target quality for the video encode.
+	// +kubebuilder:validation:Optional
+	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+
+	// The rate control mode.
+	// +kubebuilder:validation:Optional
+	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
+
+	// Sets the scan type of the output.
+	// +kubebuilder:validation:Optional
+	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
+
+	// Scene change detection.
+	// +kubebuilder:validation:Optional
+	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
+
+	// Number of slices per picture.
+	// +kubebuilder:validation:Optional
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// Set the H265 tier in the output.
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+
+	// Apply a burned in timecode. See H265 Timecode Burnin Settings for more details.
+	// +kubebuilder:validation:Optional
+	TimecodeBurninSettings []TimecodeBurninSettingsParameters `json:"timecodeBurninSettings,omitempty" tf:"timecode_burnin_settings,omitempty"`
+
+	// Determines how timecodes should be inserted into the video elementary stream.
+	// +kubebuilder:validation:Optional
+	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+}
+
+type Hdr10SettingsObservation struct {
+
+	// Sets the MaxCLL value for HDR10.
+	MaxCll *float64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
+
+	// Sets the MaxFALL value for HDR10.
+	MaxFall *float64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
+}
+
+type Hdr10SettingsParameters struct {
+
+	// Sets the MaxCLL value for HDR10.
+	// +kubebuilder:validation:Optional
+	MaxCll *float64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
+
+	// Sets the MaxFALL value for HDR10.
+	// +kubebuilder:validation:Optional
+	MaxFall *float64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
 }
 
 type HlsAkamaiSettingsObservation struct {
@@ -3330,7 +3648,7 @@ type MsSmoothGroupSettingsObservation struct {
 	// User-specified id. Ths is used in an output group or an output.
 	AcquisitionPointID *string `json:"acquisitionPointId,omitempty" tf:"acquisition_point_id,omitempty"`
 
-	AudioOnlyTimecodecControl *string `json:"audioOnlyTimecodecControl,omitempty" tf:"audio_only_timecodec_control,omitempty"`
+	AudioOnlyTimecodeControl *string `json:"audioOnlyTimecodeControl,omitempty" tf:"audio_only_timecode_control,omitempty"`
 
 	// Setting to allow self signed or verified RTMP certificates.
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
@@ -3342,7 +3660,7 @@ type MsSmoothGroupSettingsObservation struct {
 	Destination []MsSmoothGroupSettingsDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	EventID *float64 `json:"eventId,omitempty" tf:"event_id,omitempty"`
+	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 
 	EventIDMode *string `json:"eventIdMode,omitempty" tf:"event_id_mode,omitempty"`
 
@@ -3381,7 +3699,7 @@ type MsSmoothGroupSettingsParameters struct {
 	AcquisitionPointID *string `json:"acquisitionPointId,omitempty" tf:"acquisition_point_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	AudioOnlyTimecodecControl *string `json:"audioOnlyTimecodecControl,omitempty" tf:"audio_only_timecodec_control,omitempty"`
+	AudioOnlyTimecodeControl *string `json:"audioOnlyTimecodeControl,omitempty" tf:"audio_only_timecode_control,omitempty"`
 
 	// Setting to allow self signed or verified RTMP certificates.
 	// +kubebuilder:validation:Optional
@@ -3397,7 +3715,7 @@ type MsSmoothGroupSettingsParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	EventID *float64 `json:"eventId,omitempty" tf:"event_id,omitempty"`
+	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EventIDMode *string `json:"eventIdMode,omitempty" tf:"event_id_mode,omitempty"`
@@ -3833,6 +4151,18 @@ type RawSettingsObservation struct {
 type RawSettingsParameters struct {
 }
 
+type Rec601SettingsObservation struct {
+}
+
+type Rec601SettingsParameters struct {
+}
+
+type Rec709SettingsObservation struct {
+}
+
+type Rec709SettingsParameters struct {
+}
+
 type RemixSettingsObservation struct {
 	ChannelMappings []ChannelMappingsObservation `json:"channelMappings,omitempty" tf:"channel_mappings,omitempty"`
 
@@ -3922,7 +4252,9 @@ type RtmpOutputSettingsDestinationParameters struct {
 }
 
 type RtmpOutputSettingsObservation struct {
-	CertficateMode *string `json:"certficateMode,omitempty" tf:"certficate_mode,omitempty"`
+
+	// Setting to allow self signed or verified RTMP certificates.
+	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
@@ -3936,8 +4268,9 @@ type RtmpOutputSettingsObservation struct {
 
 type RtmpOutputSettingsParameters struct {
 
+	// Setting to allow self signed or verified RTMP certificates.
 	// +kubebuilder:validation:Optional
-	CertficateMode *string `json:"certficateMode,omitempty" tf:"certficate_mode,omitempty"`
+	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
@@ -4127,6 +4460,33 @@ type TemporalFilterSettingsParameters struct {
 	Strength *string `json:"strength,omitempty" tf:"strength,omitempty"`
 }
 
+type TimecodeBurninSettingsObservation struct {
+
+	// Set a prefix on the burned in timecode.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Sets the size of the burned in timecode.
+	TimecodeBurninFontSize *string `json:"timecodeBurninFontSize,omitempty" tf:"timecode_burnin_font_size,omitempty"`
+
+	// Sets the position of the burned in timecode.
+	TimecodeBurninPosition *string `json:"timecodeBurninPosition,omitempty" tf:"timecode_burnin_position,omitempty"`
+}
+
+type TimecodeBurninSettingsParameters struct {
+
+	// Set a prefix on the burned in timecode.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Sets the size of the burned in timecode.
+	// +kubebuilder:validation:Optional
+	TimecodeBurninFontSize *string `json:"timecodeBurninFontSize,omitempty" tf:"timecode_burnin_font_size,omitempty"`
+
+	// Sets the position of the burned in timecode.
+	// +kubebuilder:validation:Optional
+	TimecodeBurninPosition *string `json:"timecodeBurninPosition,omitempty" tf:"timecode_burnin_position,omitempty"`
+}
+
 type TimecodeConfigObservation struct {
 
 	// The source for the timecode that will be associated with the events outputs.
@@ -4286,6 +4646,9 @@ type VideoDescriptionsCodecSettingsObservation struct {
 
 	// H264 settings. See H264 Settings for more details.
 	H264Settings []H264SettingsObservation `json:"h264Settings,omitempty" tf:"h264_settings,omitempty"`
+
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	H265Settings []H265SettingsObservation `json:"h265Settings,omitempty" tf:"h265_settings,omitempty"`
 }
 
 type VideoDescriptionsCodecSettingsParameters struct {
@@ -4297,6 +4660,10 @@ type VideoDescriptionsCodecSettingsParameters struct {
 	// H264 settings. See H264 Settings for more details.
 	// +kubebuilder:validation:Optional
 	H264Settings []H264SettingsParameters `json:"h264Settings,omitempty" tf:"h264_settings,omitempty"`
+
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// +kubebuilder:validation:Optional
+	H265Settings []H265SettingsParameters `json:"h265Settings,omitempty" tf:"h265_settings,omitempty"`
 }
 
 type VideoDescriptionsObservation struct {

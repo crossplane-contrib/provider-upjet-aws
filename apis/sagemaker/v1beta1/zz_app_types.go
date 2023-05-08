@@ -33,7 +33,7 @@ type AppObservation struct {
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.See Resource Spec below.
 	ResourceSpec []ResourceSpecObservation `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
-	// The name of the space. At least on of user_profile_name or space_name required.
+	// The name of the space. At least one of user_profile_name or space_name required.
 	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -42,7 +42,7 @@ type AppObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The user profile name. At least on of user_profile_name or space_name required.
+	// The user profile name. At least one of user_profile_name or space_name required.
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 }
 
@@ -79,7 +79,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceSpec []ResourceSpecParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
-	// The name of the space. At least on of user_profile_name or space_name required.
+	// The name of the space. At least one of user_profile_name or space_name required.
 	// +kubebuilder:validation:Optional
 	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
@@ -87,7 +87,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The user profile name. At least on of user_profile_name or space_name required.
+	// The user profile name. At least one of user_profile_name or space_name required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.UserProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
 	// +kubebuilder:validation:Optional

@@ -309,7 +309,7 @@ type ServerlessV2ScalingConfigurationObservation struct {
 	// : (default: 128) The maximum Neptune Capacity Units (NCUs) for this cluster. Must be lower or equal than 128. See AWS Documentation for more details.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 2.5. See AWS Documentation for more details.
+	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
@@ -319,7 +319,7 @@ type ServerlessV2ScalingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 2.5. See AWS Documentation for more details.
+	// : (default: 2.5) The minimum Neptune Capacity Units (NCUs) for this cluster. Must be greater or equal than 1. See AWS Documentation for more details.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }

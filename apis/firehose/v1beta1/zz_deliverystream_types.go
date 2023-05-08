@@ -99,7 +99,7 @@ type DeliveryStreamObservation struct {
 	// The Amazon Resource Name (ARN) specifying the Stream
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
+	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint and opensearch.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
@@ -120,6 +120,9 @@ type DeliveryStreamObservation struct {
 
 	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration options if opensearch is the destination. More details are given below.
+	OpensearchConfiguration []OpensearchConfigurationObservation `json:"opensearchConfiguration,omitempty" tf:"opensearch_configuration,omitempty"`
 
 	// Configuration options if redshift is the destination.
 	// Using redshift_configuration requires the user to also specify a
@@ -153,7 +156,7 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, and http_endpoint.
+	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint and opensearch.
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
@@ -179,6 +182,10 @@ type DeliveryStreamParameters struct {
 	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration options if opensearch is the destination. More details are given below.
+	// +kubebuilder:validation:Optional
+	OpensearchConfiguration []OpensearchConfigurationParameters `json:"opensearchConfiguration,omitempty" tf:"opensearch_configuration,omitempty"`
 
 	// Configuration options if redshift is the destination.
 	// Using redshift_configuration requires the user to also specify a
@@ -775,6 +782,249 @@ type OpenXJSONSerDeParameters struct {
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ConvertDotsInJSONKeysToUnderscores *bool `json:"convertDotsInJsonKeysToUnderscores,omitempty" tf:"convert_dots_in_json_keys_to_underscores,omitempty"`
+}
+
+type OpensearchConfigurationCloudwatchLoggingOptionsObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type OpensearchConfigurationCloudwatchLoggingOptionsParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type OpensearchConfigurationObservation struct {
+
+	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	CloudwatchLoggingOptions []OpensearchConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
+
+	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// The Elasticsearch index name.
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
+
+	// The data processing configuration.  More details are given below.
+	ProcessingConfiguration []OpensearchConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
+
+	// The Elasticsearch type name with maximum length of 100 characters.
+	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	VPCConfig []OpensearchConfigurationVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+}
+
+type OpensearchConfigurationParameters struct {
+
+	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// +kubebuilder:validation:Optional
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// +kubebuilder:validation:Optional
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// +kubebuilder:validation:Optional
+	CloudwatchLoggingOptions []OpensearchConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
+	// +kubebuilder:validation:Optional
+	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
+
+	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// Reference to a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnRef *v1.Reference `json:"domainArnRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnSelector *v1.Selector `json:"domainArnSelector,omitempty" tf:"-"`
+
+	// The Elasticsearch index name.
+	// +kubebuilder:validation:Required
+	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
+
+	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// +kubebuilder:validation:Optional
+	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
+
+	// The data processing configuration.  More details are given below.
+	// +kubebuilder:validation:Optional
+	ProcessingConfiguration []OpensearchConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// +kubebuilder:validation:Optional
+	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// +kubebuilder:validation:Optional
+	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
+
+	// The Elasticsearch type name with maximum length of 100 characters.
+	// +kubebuilder:validation:Optional
+	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// +kubebuilder:validation:Optional
+	VPCConfig []OpensearchConfigurationVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Array of data processors. More details are given below
+	Processors []OpensearchConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Array of data processors. More details are given below
+	// +kubebuilder:validation:Optional
+	Processors []OpensearchConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationProcessorsObservation struct {
+
+	// Array of processor parameters. More details are given below
+	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationProcessorsParameters struct {
+
+	// Array of processor parameters. More details are given below
+	// +kubebuilder:validation:Optional
+	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation struct {
+
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
+	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+}
+
+type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters struct {
+
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// +kubebuilder:validation:Required
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
+
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
+	// +kubebuilder:validation:Required
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
+}
+
+type OpensearchConfigurationVPCConfigObservation struct {
+
+	// The ARN of the AWS credentials.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A list of security group IDs to associate with Kinesis Firehose.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of subnet IDs to associate with Kinesis Firehose.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+}
+
+type OpensearchConfigurationVPCConfigParameters struct {
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// A list of security group IDs to associate with Kinesis Firehose.
+	// +kubebuilder:validation:Required
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
+
+	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +kubebuilder:validation:Required
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type OrcSerDeObservation struct {

@@ -441,7 +441,7 @@ type RuleGroupParameters struct {
 
 type RuleGroupRuleGroupObservation struct {
 
-	// A configuration block that defines the IP Set References for the rule group. See Reference Sets below for details.
+	// A configuration block that defines the IP Set References for the rule group. See Reference Sets below for details. Please notes that there can only be a maximum of 5 reference_sets in a rule_group. See the AWS documentation for details.
 	ReferenceSets []ReferenceSetsObservation `json:"referenceSets,omitempty" tf:"reference_sets,omitempty"`
 
 	// A configuration block that defines additional settings available to use in the rules defined in the rule group. Can only be specified for stateful rule groups. See Rule Variables below for details.
@@ -456,7 +456,7 @@ type RuleGroupRuleGroupObservation struct {
 
 type RuleGroupRuleGroupParameters struct {
 
-	// A configuration block that defines the IP Set References for the rule group. See Reference Sets below for details.
+	// A configuration block that defines the IP Set References for the rule group. See Reference Sets below for details. Please notes that there can only be a maximum of 5 reference_sets in a rule_group. See the AWS documentation for details.
 	// +kubebuilder:validation:Optional
 	ReferenceSets []ReferenceSetsParameters `json:"referenceSets,omitempty" tf:"reference_sets,omitempty"`
 

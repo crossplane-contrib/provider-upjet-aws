@@ -33,7 +33,7 @@ type RouteObservation_2 struct {
 	// Identifier of a VPC Egress Only Internet Gateway.
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
 
-	// Identifier of a VPC internet gateway or a virtual private gateway.
+	// Identifier of a VPC internet gateway or a virtual private gateway. Specify local when updating a previously imported local route.
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// Route identifier computed from the routing table identifier and route destination.
@@ -118,7 +118,7 @@ type RouteParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
-	// Identifier of a VPC internet gateway or a virtual private gateway.
+	// Identifier of a VPC internet gateway or a virtual private gateway. Specify local when updating a previously imported local route.
 	// +crossplane:generate:reference:type=InternetGateway
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`

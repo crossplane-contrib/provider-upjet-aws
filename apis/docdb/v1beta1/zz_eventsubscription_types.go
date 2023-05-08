@@ -15,10 +15,10 @@ import (
 
 type EventSubscriptionObservation struct {
 
-	// The Amazon Resource Name of the DocDB event notification subscription
+	// The Amazon Resource Name of the DocumentDB event notification subscription
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The AWS customer account associated with the DocDB event notification subscription
+	// The AWS customer account associated with the DocumentDB event notification subscription
 	CustomerAwsID *string `json:"customerAwsId,omitempty" tf:"customer_aws_id,omitempty"`
 
 	// A boolean flag to enable/disable the subscription. Defaults to true.
@@ -27,10 +27,10 @@ type EventSubscriptionObservation struct {
 	// A list of event categories for a SourceType that you want to subscribe to. See https://docs.aws.amazon.com/documentdb/latest/developerguide/API_Event.html or run aws docdb describe-event-categories.
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
-	// The name of the DocDB event notification subscription
+	// The name of the DocumentDB event notification subscription
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Amazon Resource Name of the DocDB event notification subscription
+	// The Amazon Resource Name of the DocumentDB event notification subscription
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
@@ -61,7 +61,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Amazon Resource Name of the DocDB event notification subscription
+	// The Amazon Resource Name of the DocumentDB event notification subscription
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

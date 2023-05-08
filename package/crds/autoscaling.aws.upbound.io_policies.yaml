@@ -246,7 +246,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -274,8 +274,7 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               required:
                                               - metric
@@ -285,7 +284,7 @@ spec:
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         required:
@@ -340,7 +339,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -368,8 +367,7 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               required:
                                               - metric
@@ -379,7 +377,7 @@ spec:
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         required:
@@ -434,7 +432,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -462,8 +460,7 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               required:
                                               - metric
@@ -473,7 +470,7 @@ spec:
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         required:
@@ -622,7 +619,7 @@ spec:
                                 items:
                                   properties:
                                     name:
-                                      description: Name of the dimension.
+                                      description: Name of the policy.
                                       type: string
                                     value:
                                       description: Value of the dimension.
@@ -635,6 +632,85 @@ spec:
                               metricName:
                                 description: Name of the metric.
                                 type: string
+                              metrics:
+                                description: Metrics to include, as a metric data
+                                  query.
+                                items:
+                                  properties:
+                                    expression:
+                                      description: Math expression used on the returned
+                                        metric. You must specify either expression
+                                        or metric_stat, but not both.
+                                      type: string
+                                    id:
+                                      description: Short name for the metric used
+                                        in predictive scaling policy.
+                                      type: string
+                                    label:
+                                      description: Human-readable label for this metric
+                                        or expression.
+                                      type: string
+                                    metricStat:
+                                      description: Structure that defines CloudWatch
+                                        metric to be used in predictive scaling policy.
+                                        You must specify either expression or metric_stat,
+                                        but not both.
+                                      items:
+                                        properties:
+                                          metric:
+                                            description: Structure that defines the
+                                              CloudWatch metric to return, including
+                                              the metric name, namespace, and dimensions.
+                                            items:
+                                              properties:
+                                                dimensions:
+                                                  description: Dimensions of the metric.
+                                                  items:
+                                                    properties:
+                                                      name:
+                                                        description: Name of the policy.
+                                                        type: string
+                                                      value:
+                                                        description: Value of the
+                                                          dimension.
+                                                        type: string
+                                                    required:
+                                                    - name
+                                                    - value
+                                                    type: object
+                                                  type: array
+                                                metricName:
+                                                  description: Name of the metric.
+                                                  type: string
+                                                namespace:
+                                                  description: Namespace of the metric.
+                                                  type: string
+                                              required:
+                                              - metricName
+                                              - namespace
+                                              type: object
+                                            type: array
+                                          stat:
+                                            description: Statistic of the metrics
+                                              to return.
+                                            type: string
+                                          unit:
+                                            description: Unit of the metric.
+                                            type: string
+                                        required:
+                                        - metric
+                                        - stat
+                                        type: object
+                                      type: array
+                                    returnData:
+                                      description: Boolean that indicates whether
+                                        to return the timestamps and raw data values
+                                        of this metric, the default is true
+                                      type: boolean
+                                  required:
+                                  - id
+                                  type: object
+                                type: array
                               namespace:
                                 description: Namespace of the metric.
                                 type: string
@@ -642,12 +718,8 @@ spec:
                                 description: Statistic of the metric.
                                 type: string
                               unit:
-                                description: Unit of the metrics to return.
+                                description: Unit of the metric.
                                 type: string
-                            required:
-                            - metricName
-                            - namespace
-                            - statistic
                             type: object
                           type: array
                         disableScaleIn:
@@ -984,7 +1056,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -1006,15 +1078,14 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               type: object
                                             type: array
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         type: object
@@ -1065,7 +1136,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -1087,15 +1158,14 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               type: object
                                             type: array
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         type: object
@@ -1146,7 +1216,7 @@ spec:
                                                           properties:
                                                             name:
                                                               description: Name of
-                                                                the dimension.
+                                                                the policy.
                                                               type: string
                                                             value:
                                                               description: Value of
@@ -1168,15 +1238,14 @@ spec:
                                                     to return.
                                                   type: string
                                                 unit:
-                                                  description: Unit of the metrics
-                                                    to return.
+                                                  description: Unit of the metric.
                                                   type: string
                                               type: object
                                             type: array
                                           returnData:
                                             description: Boolean that indicates whether
                                               to return the timestamps and raw data
-                                              values of this metric, the default it
+                                              values of this metric, the default is
                                               true
                                             type: boolean
                                         type: object
@@ -1305,7 +1374,7 @@ spec:
                                 items:
                                   properties:
                                     name:
-                                      description: Name of the dimension.
+                                      description: Name of the policy.
                                       type: string
                                     value:
                                       description: Value of the dimension.
@@ -1315,6 +1384,74 @@ spec:
                               metricName:
                                 description: Name of the metric.
                                 type: string
+                              metrics:
+                                description: Metrics to include, as a metric data
+                                  query.
+                                items:
+                                  properties:
+                                    expression:
+                                      description: Math expression used on the returned
+                                        metric. You must specify either expression
+                                        or metric_stat, but not both.
+                                      type: string
+                                    id:
+                                      description: Short name for the metric used
+                                        in predictive scaling policy.
+                                      type: string
+                                    label:
+                                      description: Human-readable label for this metric
+                                        or expression.
+                                      type: string
+                                    metricStat:
+                                      description: Structure that defines CloudWatch
+                                        metric to be used in predictive scaling policy.
+                                        You must specify either expression or metric_stat,
+                                        but not both.
+                                      items:
+                                        properties:
+                                          metric:
+                                            description: Structure that defines the
+                                              CloudWatch metric to return, including
+                                              the metric name, namespace, and dimensions.
+                                            items:
+                                              properties:
+                                                dimensions:
+                                                  description: Dimensions of the metric.
+                                                  items:
+                                                    properties:
+                                                      name:
+                                                        description: Name of the policy.
+                                                        type: string
+                                                      value:
+                                                        description: Value of the
+                                                          dimension.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                metricName:
+                                                  description: Name of the metric.
+                                                  type: string
+                                                namespace:
+                                                  description: Namespace of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          stat:
+                                            description: Statistic of the metrics
+                                              to return.
+                                            type: string
+                                          unit:
+                                            description: Unit of the metric.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    returnData:
+                                      description: Boolean that indicates whether
+                                        to return the timestamps and raw data values
+                                        of this metric, the default is true
+                                      type: boolean
+                                  type: object
+                                type: array
                               namespace:
                                 description: Namespace of the metric.
                                 type: string
@@ -1322,7 +1459,7 @@ spec:
                                 description: Statistic of the metric.
                                 type: string
                               unit:
-                                description: Unit of the metrics to return.
+                                description: Unit of the metric.
                                 type: string
                             type: object
                           type: array

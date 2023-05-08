@@ -8,25 +8,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Id": "sqspolicy",
-        "Statement": [
-          {
-            "Sid": "First",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "sqs:SendMessage",
-            "Resource": "${aws_sqs_queue.q.arn}",
-            "Condition": {
-              "ArnEquals": {
-                "aws:SourceArn": "${aws_sns_topic.example.arn}"
-              }
-            }
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.test.json}
     queueUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: q

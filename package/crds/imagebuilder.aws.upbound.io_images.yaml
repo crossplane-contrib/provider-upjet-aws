@@ -602,6 +602,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        containers:
+                          description: Set of objects with each container image created
+                            and stored in the output repository.
+                          items:
+                            properties:
+                              imageUris:
+                                description: Set of URIs for created containers.
+                                items:
+                                  type: string
+                                type: array
+                              region:
+                                description: Region of the AMI.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   platform:

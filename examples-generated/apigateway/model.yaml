@@ -15,10 +15,10 @@ spec:
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: MyDemoAPI
-    schema: |
-      {
-        "type": "object"
-      }
+    schema: |-
+      ${jsonencode({
+          type = "object"
+        })}
 
 ---
 

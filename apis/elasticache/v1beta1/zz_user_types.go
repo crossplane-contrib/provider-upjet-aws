@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationModeObservation struct {
+	PasswordCount *float64 `json:"passwordCount,omitempty" tf:"password_count,omitempty"`
+
+	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type AuthenticationModeParameters struct {
+
+	// Specifies the passwords to use for authentication if type is set to password.
+	// +kubebuilder:validation:Optional
+	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
+
+	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type UserObservation struct {
 
 	// Access permissions string used for this user. See Specifying Permissions Using an Access String for more details.
@@ -20,6 +38,9 @@ type UserObservation struct {
 
 	// The ARN of the created ElastiCache User.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Denotes the user's authentication properties. Detailed below.
+	AuthenticationMode []AuthenticationModeObservation `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The current supported value is REDIS.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
@@ -44,9 +65,9 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
-	// The ARN of the created ElastiCache User.
+	// Denotes the user's authentication properties. Detailed below.
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+	AuthenticationMode []AuthenticationModeParameters `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The current supported value is REDIS.
 	// +kubebuilder:validation:Optional

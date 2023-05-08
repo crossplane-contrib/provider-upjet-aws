@@ -137,7 +137,8 @@ spec:
                         cpu:
                           description: 'Number of CPU units reserved for each instance
                             of your App Runner service represented as a String. Defaults
-                            to 1024. Valid values: 1024|2048|(1|2) vCPU.'
+                            to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4)
+                            vCPU.'
                           type: string
                         instanceRoleArn:
                           description: ARN of an IAM role that provides permissions
@@ -147,7 +148,8 @@ spec:
                         memory:
                           description: 'Amount of memory, in MB or GB, reserved for
                             each instance of your App Runner service. Defaults to
-                            2048. Valid values: 2048|3072|4096|(2|3|4) GB.'
+                            2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12)
+                            GB.'
                           type: string
                       type: object
                     type: array
@@ -529,7 +531,15 @@ spec:
                                               type: string
                                             description: Secrets and parameters available
                                               to your service as environment variables.
-                                              A map of key/value pairs.
+                                              A map of key/value pairs, where the
+                                              key is the desired name of the Secret
+                                              in the environment (i.e. it does not
+                                              have to match the name of the secret
+                                              in Secrets Manager or SSM Parameter
+                                              Store), and the value is the ARN of
+                                              the secret from AWS Secrets Manager
+                                              or the ARN of the parameter in AWS SSM
+                                              Parameter Store.
                                             type: object
                                           runtimeEnvironmentVariables:
                                             additionalProperties:
@@ -609,7 +619,13 @@ spec:
                                         type: string
                                       description: Secrets and parameters available
                                         to your service as environment variables.
-                                        A map of key/value pairs.
+                                        A map of key/value pairs, where the key is
+                                        the desired name of the Secret in the environment
+                                        (i.e. it does not have to match the name of
+                                        the secret in Secrets Manager or SSM Parameter
+                                        Store), and the value is the ARN of the secret
+                                        from AWS Secrets Manager or the ARN of the
+                                        parameter in AWS SSM Parameter Store.
                                       type: object
                                     runtimeEnvironmentVariables:
                                       additionalProperties:
@@ -922,7 +938,8 @@ spec:
                         cpu:
                           description: 'Number of CPU units reserved for each instance
                             of your App Runner service represented as a String. Defaults
-                            to 1024. Valid values: 1024|2048|(1|2) vCPU.'
+                            to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4)
+                            vCPU.'
                           type: string
                         instanceRoleArn:
                           description: ARN of an IAM role that provides permissions
@@ -932,7 +949,8 @@ spec:
                         memory:
                           description: 'Amount of memory, in MB or GB, reserved for
                             each instance of your App Runner service. Defaults to
-                            2048. Valid values: 2048|3072|4096|(2|3|4) GB.'
+                            2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12)
+                            GB.'
                           type: string
                       type: object
                     type: array
@@ -1078,7 +1096,15 @@ spec:
                                               type: string
                                             description: Secrets and parameters available
                                               to your service as environment variables.
-                                              A map of key/value pairs.
+                                              A map of key/value pairs, where the
+                                              key is the desired name of the Secret
+                                              in the environment (i.e. it does not
+                                              have to match the name of the secret
+                                              in Secrets Manager or SSM Parameter
+                                              Store), and the value is the ARN of
+                                              the secret from AWS Secrets Manager
+                                              or the ARN of the parameter in AWS SSM
+                                              Parameter Store.
                                             type: object
                                           runtimeEnvironmentVariables:
                                             additionalProperties:
@@ -1148,7 +1174,13 @@ spec:
                                         type: string
                                       description: Secrets and parameters available
                                         to your service as environment variables.
-                                        A map of key/value pairs.
+                                        A map of key/value pairs, where the key is
+                                        the desired name of the Secret in the environment
+                                        (i.e. it does not have to match the name of
+                                        the secret in Secrets Manager or SSM Parameter
+                                        Store), and the value is the ARN of the secret
+                                        from AWS Secrets Manager or the ARN of the
+                                        parameter in AWS SSM Parameter Store.
                                       type: object
                                     runtimeEnvironmentVariables:
                                       additionalProperties:

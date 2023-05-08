@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AssessmentTemplate is the Schema for the AssessmentTemplates
-          API. Provides a Inspector assessment template.
+          API. Provides an Inspector Classic Assessment Template.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

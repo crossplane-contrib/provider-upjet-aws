@@ -1025,7 +1025,7 @@ spec:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
                                             type: string
-                                          audioOnlyTimecodecControl:
+                                          audioOnlyTimecodeControl:
                                             type: string
                                           certificateMode:
                                             description: Setting to allow self signed
@@ -1053,7 +1053,7 @@ spec:
                                           eventId:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
-                                            type: number
+                                            type: string
                                           eventIdMode:
                                             type: string
                                           eventStopBehavior:
@@ -1671,7 +1671,9 @@ spec:
                                               RTMP Output Settings for more details.
                                             items:
                                               properties:
-                                                certficateMode:
+                                                certificateMode:
+                                                  description: Setting to allow self
+                                                    signed or verified RTMP certificates.
                                                   type: string
                                                 connectionRetryInterval:
                                                   description: Number of seconds to
@@ -2187,6 +2189,201 @@ spec:
                                               should be inserted into the video elementary
                                               stream.
                                             type: string
+                                        type: object
+                                      type: array
+                                    h265Settings:
+                                      description: Destination settings for a standard
+                                        output; one destination for each redundant
+                                        encoder. See Settings for more details.
+                                      items:
+                                        properties:
+                                          adaptiveQuantization:
+                                            description: Enables or disables adaptive
+                                              quantization.
+                                            type: string
+                                          afdSignaling:
+                                            description: Indicates that AFD values
+                                              will be written into the output stream.
+                                            type: string
+                                          alternativeTransferFunction:
+                                            description: Whether or not EML should
+                                              insert an Alternative Transfer Function
+                                              SEI message.
+                                            type: string
+                                          bitrate:
+                                            description: Average bitrate in bits/second.
+                                            type: number
+                                          bufSize:
+                                            description: Size of buffer in bits.
+                                            type: number
+                                          colorMetadata:
+                                            description: Includes color space metadata
+                                              in the output.
+                                            type: string
+                                          colorSpaceSettings:
+                                            description: Define the color metadata
+                                              for the output. H265 Color Space Settings
+                                              for more details.
+                                            items:
+                                              properties:
+                                                colorSpacePassthroughSettings:
+                                                  description: Sets the colorspace
+                                                    metadata to be passed through.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                dolbyVision81Settings:
+                                                  description: Set the colorspace
+                                                    to Dolby Vision81.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                hdr10Settings:
+                                                  description: Set the colorspace
+                                                    to be HDR10. See H265 HDR10 Settings
+                                                    for more details.
+                                                  items:
+                                                    properties:
+                                                      maxCll:
+                                                        description: Sets the MaxCLL
+                                                          value for HDR10.
+                                                        type: number
+                                                      maxFall:
+                                                        description: Sets the MaxFALL
+                                                          value for HDR10.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                rec601Settings:
+                                                  description: Set the colorspace
+                                                    to Rec. 601.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                rec709Settings:
+                                                  description: Set the colorspace
+                                                    to Rec. 709.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          filterSettings:
+                                            description: Filters to apply to an encode.
+                                              See H264 Filter Settings for more details.
+                                            items:
+                                              properties:
+                                                temporalFilterSettings:
+                                                  description: Temporal filter settings.
+                                                    See Temporal Filter Settings
+                                                  items:
+                                                    properties:
+                                                      postFilterSharpening:
+                                                        description: Post filter sharpening.
+                                                        type: string
+                                                      strength:
+                                                        description: Filter strength.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          fixedAfd:
+                                            description: Four bit AFD value to write
+                                              on all frames of video in the output
+                                              stream.
+                                            type: string
+                                          flickerAq:
+                                            type: string
+                                          framerateDenominator:
+                                            description: Framerate denominator.
+                                            type: number
+                                          framerateNumerator:
+                                            description: Framerate numerator.
+                                            type: number
+                                          gopClosedCadence:
+                                            description: Frequency of closed GOPs.
+                                            type: number
+                                          gopSize:
+                                            description: GOP size in units of either
+                                              frames of seconds per gop_size_units.
+                                            type: number
+                                          gopSizeUnits:
+                                            description: Indicates if the gop_size
+                                              is specified in frames or seconds.
+                                            type: string
+                                          level:
+                                            description: H264 level.
+                                            type: string
+                                          lookAheadRateControl:
+                                            description: Amount of lookahead.
+                                            type: string
+                                          maxBitrate:
+                                            description: Set the maximum bitrate in
+                                              order to accommodate expected spikes
+                                              in the complexity of the video.
+                                            type: number
+                                          minIInterval:
+                                            type: number
+                                          parDenominator:
+                                            description: Pixel Aspect Ratio denominator.
+                                            type: number
+                                          parNumerator:
+                                            description: Pixel Aspect Ratio numerator.
+                                            type: number
+                                          profile:
+                                            description: AAC profile.
+                                            type: string
+                                          qvbrQualityLevel:
+                                            description: Controls the target quality
+                                              for the video encode.
+                                            type: number
+                                          rateControlMode:
+                                            description: The rate control mode.
+                                            type: string
+                                          scanType:
+                                            description: Sets the scan type of the
+                                              output.
+                                            type: string
+                                          sceneChangeDetect:
+                                            description: Scene change detection.
+                                            type: string
+                                          slices:
+                                            description: Number of slices per picture.
+                                            type: number
+                                          tier:
+                                            description: Set the H265 tier in the
+                                              output.
+                                            type: string
+                                          timecodeBurninSettings:
+                                            description: Apply a burned in timecode.
+                                              See H265 Timecode Burnin Settings for
+                                              more details.
+                                            items:
+                                              properties:
+                                                prefix:
+                                                  description: Set a prefix on the
+                                                    burned in timecode.
+                                                  type: string
+                                                timecodeBurninFontSize:
+                                                  description: Sets the size of the
+                                                    burned in timecode.
+                                                  type: string
+                                                timecodeBurninPosition:
+                                                  description: Sets the position of
+                                                    the burned in timecode.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          timecodeInsertion:
+                                            description: Determines how timecodes
+                                              should be inserted into the video elementary
+                                              stream.
+                                            type: string
+                                        required:
+                                        - bitrate
+                                        - framerateDenominator
+                                        - framerateNumerator
                                         type: object
                                       type: array
                                   type: object
@@ -3942,7 +4139,7 @@ spec:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
                                             type: string
-                                          audioOnlyTimecodecControl:
+                                          audioOnlyTimecodeControl:
                                             type: string
                                           certificateMode:
                                             description: Setting to allow self signed
@@ -3968,7 +4165,7 @@ spec:
                                           eventId:
                                             description: User-specified id. Ths is
                                               used in an output group or an output.
-                                            type: number
+                                            type: string
                                           eventIdMode:
                                             type: string
                                           eventStopBehavior:
@@ -4571,7 +4768,9 @@ spec:
                                               RTMP Output Settings for more details.
                                             items:
                                               properties:
-                                                certficateMode:
+                                                certificateMode:
+                                                  description: Setting to allow self
+                                                    signed or verified RTMP certificates.
                                                   type: string
                                                 connectionRetryInterval:
                                                   description: Number of seconds to
@@ -5063,6 +5262,197 @@ spec:
                                               each frame based on temporal variation
                                               of content complexity.
                                             type: string
+                                          timecodeInsertion:
+                                            description: Determines how timecodes
+                                              should be inserted into the video elementary
+                                              stream.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    h265Settings:
+                                      description: Destination settings for a standard
+                                        output; one destination for each redundant
+                                        encoder. See Settings for more details.
+                                      items:
+                                        properties:
+                                          adaptiveQuantization:
+                                            description: Enables or disables adaptive
+                                              quantization.
+                                            type: string
+                                          afdSignaling:
+                                            description: Indicates that AFD values
+                                              will be written into the output stream.
+                                            type: string
+                                          alternativeTransferFunction:
+                                            description: Whether or not EML should
+                                              insert an Alternative Transfer Function
+                                              SEI message.
+                                            type: string
+                                          bitrate:
+                                            description: Average bitrate in bits/second.
+                                            type: number
+                                          bufSize:
+                                            description: Size of buffer in bits.
+                                            type: number
+                                          colorMetadata:
+                                            description: Includes color space metadata
+                                              in the output.
+                                            type: string
+                                          colorSpaceSettings:
+                                            description: Define the color metadata
+                                              for the output. H265 Color Space Settings
+                                              for more details.
+                                            items:
+                                              properties:
+                                                colorSpacePassthroughSettings:
+                                                  description: Sets the colorspace
+                                                    metadata to be passed through.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                dolbyVision81Settings:
+                                                  description: Set the colorspace
+                                                    to Dolby Vision81.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                hdr10Settings:
+                                                  description: Set the colorspace
+                                                    to be HDR10. See H265 HDR10 Settings
+                                                    for more details.
+                                                  items:
+                                                    properties:
+                                                      maxCll:
+                                                        description: Sets the MaxCLL
+                                                          value for HDR10.
+                                                        type: number
+                                                      maxFall:
+                                                        description: Sets the MaxFALL
+                                                          value for HDR10.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                                rec601Settings:
+                                                  description: Set the colorspace
+                                                    to Rec. 601.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                                rec709Settings:
+                                                  description: Set the colorspace
+                                                    to Rec. 709.
+                                                  items:
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          filterSettings:
+                                            description: Filters to apply to an encode.
+                                              See H264 Filter Settings for more details.
+                                            items:
+                                              properties:
+                                                temporalFilterSettings:
+                                                  description: Temporal filter settings.
+                                                    See Temporal Filter Settings
+                                                  items:
+                                                    properties:
+                                                      postFilterSharpening:
+                                                        description: Post filter sharpening.
+                                                        type: string
+                                                      strength:
+                                                        description: Filter strength.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          fixedAfd:
+                                            description: Four bit AFD value to write
+                                              on all frames of video in the output
+                                              stream.
+                                            type: string
+                                          flickerAq:
+                                            type: string
+                                          framerateDenominator:
+                                            description: Framerate denominator.
+                                            type: number
+                                          framerateNumerator:
+                                            description: Framerate numerator.
+                                            type: number
+                                          gopClosedCadence:
+                                            description: Frequency of closed GOPs.
+                                            type: number
+                                          gopSize:
+                                            description: GOP size in units of either
+                                              frames of seconds per gop_size_units.
+                                            type: number
+                                          gopSizeUnits:
+                                            description: Indicates if the gop_size
+                                              is specified in frames or seconds.
+                                            type: string
+                                          level:
+                                            description: H264 level.
+                                            type: string
+                                          lookAheadRateControl:
+                                            description: Amount of lookahead.
+                                            type: string
+                                          maxBitrate:
+                                            description: Set the maximum bitrate in
+                                              order to accommodate expected spikes
+                                              in the complexity of the video.
+                                            type: number
+                                          minIInterval:
+                                            type: number
+                                          parDenominator:
+                                            description: Pixel Aspect Ratio denominator.
+                                            type: number
+                                          parNumerator:
+                                            description: Pixel Aspect Ratio numerator.
+                                            type: number
+                                          profile:
+                                            description: AAC profile.
+                                            type: string
+                                          qvbrQualityLevel:
+                                            description: Controls the target quality
+                                              for the video encode.
+                                            type: number
+                                          rateControlMode:
+                                            description: The rate control mode.
+                                            type: string
+                                          scanType:
+                                            description: Sets the scan type of the
+                                              output.
+                                            type: string
+                                          sceneChangeDetect:
+                                            description: Scene change detection.
+                                            type: string
+                                          slices:
+                                            description: Number of slices per picture.
+                                            type: number
+                                          tier:
+                                            description: Set the H265 tier in the
+                                              output.
+                                            type: string
+                                          timecodeBurninSettings:
+                                            description: Apply a burned in timecode.
+                                              See H265 Timecode Burnin Settings for
+                                              more details.
+                                            items:
+                                              properties:
+                                                prefix:
+                                                  description: Set a prefix on the
+                                                    burned in timecode.
+                                                  type: string
+                                                timecodeBurninFontSize:
+                                                  description: Sets the size of the
+                                                    burned in timecode.
+                                                  type: string
+                                                timecodeBurninPosition:
+                                                  description: Sets the position of
+                                                    the burned in timecode.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           timecodeInsertion:
                                             description: Determines how timecodes
                                               should be inserted into the video elementary

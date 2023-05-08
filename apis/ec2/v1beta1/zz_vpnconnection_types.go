@@ -182,6 +182,9 @@ type VPNConnectionObservation_2 struct {
 	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
+	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
+	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
+
 	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
@@ -250,6 +253,9 @@ type VPNConnectionObservation_2 struct {
 
 	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
+
+	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
+	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
@@ -394,6 +400,10 @@ type VPNConnectionParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
+	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
+	// +kubebuilder:validation:Optional
+	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
+
 	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
@@ -469,6 +479,10 @@ type VPNConnectionParameters_2 struct {
 	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	// +kubebuilder:validation:Optional
 	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
+
+	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
+	// +kubebuilder:validation:Optional
+	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional

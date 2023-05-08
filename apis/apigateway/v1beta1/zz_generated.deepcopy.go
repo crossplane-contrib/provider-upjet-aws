@@ -4971,6 +4971,11 @@ func (in *RestAPIObservation) DeepCopyInto(out *RestAPIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FailOnWarnings != nil {
+		in, out := &in.FailOnWarnings, &out.FailOnWarnings
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -5098,6 +5103,11 @@ func (in *RestAPIParameters) DeepCopyInto(out *RestAPIParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.FailOnWarnings != nil {
+		in, out := &in.FailOnWarnings, &out.FailOnWarnings
+		*out = new(bool)
+		**out = **in
 	}
 	if in.MinimumCompressionSize != nil {
 		in, out := &in.MinimumCompressionSize, &out.MinimumCompressionSize
