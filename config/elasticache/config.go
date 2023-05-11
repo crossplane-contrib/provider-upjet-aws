@@ -31,11 +31,6 @@ func Configure(p *config.Provider) {
 		r.References["subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
 		}
-		r.References["security_group_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-			RefFieldName:      "SecurityGroupIDRefs",
-			SelectorFieldName: "SecurityGroupIDSelector",
-		}
 		r.References["kms_key_id"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 		}
