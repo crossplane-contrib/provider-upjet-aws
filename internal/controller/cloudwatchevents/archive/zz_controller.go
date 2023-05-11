@@ -29,7 +29,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
 	if o.SecretStoreConfigGVK != nil {
-		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
+		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))
 	}
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_cloudwatch_event_archive"], tjcontroller.WithLogger(o.Logger),
