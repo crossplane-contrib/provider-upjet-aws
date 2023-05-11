@@ -231,14 +231,8 @@ type ReplicationGroupParameters struct {
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
-	// AuthToken for the connnection. If you set autoGenerateAuthToken to true, the AuthToken referenced here will be created or updated with generated auth_token if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
-
-	// If true, the auth_token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Optional
-	AutoGenerateAuthtoken *bool `json:"autoGenerateAuthtoken,omitempty" tf:"-"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.

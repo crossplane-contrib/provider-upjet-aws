@@ -78,9 +78,6 @@ spec:
                   authTokenSecretRef:
                     description: Password used to access a password protected server.
                       Can be specified only if transit_encryption_enabled = true.
-                      AuthToken for the connnection. If you set autoGenerateAuthToken
-                      to true, the AuthToken referenced here will be created or updated
-                      with generated auth_token if it does not already contain one.
                     properties:
                       key:
                         description: The key to select.
@@ -96,10 +93,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  autoGenerateAuthtoken:
-                    description: If true, the auth_token will be auto-generated and
-                      stored in the Secret referenced by the authTokenSecretRef field.
-                    type: boolean
                   autoMinorVersionUpgrade:
                     description: Specifies whether minor version engine upgrades will
                       be applied automatically to the underlying Cache Cluster instances
