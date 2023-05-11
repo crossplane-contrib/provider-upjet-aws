@@ -64,6 +64,7 @@ import (
 	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
+	"github.com/upbound/provider-aws/config/networkfirewall"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
 	"github.com/upbound/provider-aws/config/opsworks"
@@ -85,6 +86,7 @@ import (
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/transfer"
+	"github.com/upbound/provider-aws/hack"
 )
 
 var (
@@ -93,19 +95,6 @@ var (
 
 	//go:embed provider-metadata.yaml
 	providerMetadata []byte
-)
-
-var (
-	BasePackages = config.BasePackages{
-		APIVersion: []string{
-			"apis/v1alpha1",
-			"apis/v1beta1",
-		},
-		Controller: []string{
-			"internal/controller/providerconfig",
-			"internal/controller/eks/clusterauth",
-		},
-	}
 )
 
 var skipList = []string{
@@ -140,7 +129,6 @@ func GetProvider() *config.Provider {
 		config.WithIncludeList(ResourcesWithExternalNameConfig()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
-		config.WithBasePackages(BasePackages),
 		config.WithFeaturesPackage("internal/features"),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
@@ -154,7 +142,9 @@ func GetProvider() *config.Provider {
 			NamePrefixRemoval(),
 			DocumentationForTags(),
 		),
+		config.WithMainTemplate(hack.MainTemplate),
 	)
+	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
 
 	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
@@ -205,6 +195,7 @@ func GetProvider() *config.Provider {
 		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
+		networkfirewall.Configure,
 		opensearch.Configure,
 		ram.Configure,
 		rds.Configure,
