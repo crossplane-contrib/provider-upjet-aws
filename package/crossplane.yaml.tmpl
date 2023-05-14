@@ -1,0 +1,29 @@
+apiVersion: meta.pkg.crossplane.io/v1alpha1
+kind: Provider
+metadata:
+  name: {{ .Name }}
+{{ if ne .Service "monolith" }}
+  labels:
+    pkg.crossplane.io/provider-family: provider-{{ .ProviderName }}-config
+{{ end }}
+  annotations:
+    meta.crossplane.io/maintainer: Upbound <support@upbound.io>
+    meta.crossplane.io/source: github.com/upbound/provider-{{ .ProviderName }}
+    meta.crossplane.io/description: |
+      Upbound's official Crossplane provider to manage Amazon Web Services (AWS)
+      {{ .Service }} services in Kubernetes.
+    meta.crossplane.io/readme: |
+      Provider AWS is a Crossplane provider for [Amazon Web Services
+      (AWS)](https://aws.amazon.com/) developed and supported by Upbound.
+      Available resources and their fields can be found in the [Upbound
+      Marketplace](https://marketplace.upbound.io/providers/upbound/provider-{{ .ProviderName }}).
+      If you encounter an issue please reach out on support@upbound.io email
+      address. This is a subpackage for the {{ .Service }} API group.
+    friendly-name.meta.crossplane.io: Provider AWS ({{ .Service }})
+    auth.upbound.io/group: {{ .ProviderName }}.upbound.io
+{{ if and (ne .Service "config") (ne .Service "monolith") -}}
+spec:
+  dependsOn:
+    - provider: {{ .XpkgRegOrg }}/provider-{{ .ProviderName }}-config
+      version: "{{ .DepConstraint }}"
+{{ end }}

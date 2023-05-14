@@ -10,6 +10,14 @@ on:
       version:
         description: 'Provider version (e.g. v0.1.0)'
         required: true
+      size:
+        description: "Number of smaller provider packages to build and push with each build job"
+        default: '30'
+        required: true
+      concurrency:
+        description: "Number of parallel package builds within each build job"
+        default: '1'
+        required: false
 
 jobs:
   publish-service-artifacts:
@@ -17,6 +25,8 @@ jobs:
     with:
       subpackages: ${{ github.event.inputs.subpackages }}
       version: ${{ github.event.inputs.version }}
+      size: ${{ github.event.inputs.size }}
+      concurrency: ${{ github.event.inputs.concurrency }}
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW_RC }}
