@@ -79,6 +79,20 @@ spec:
                     description: 'When true, media streaming to Amazon Kinesis is
                       turned off. Default: false'
                     type: boolean
+                  mediaInsightsConfiguration:
+                    description: The media insights configuration. See media_insights_configuration.
+                    items:
+                      properties:
+                        configurationArn:
+                          description: The media insights configuration that will
+                            be invoked by the Voice Connector.
+                          type: string
+                        disabled:
+                          description: When true, the media insights configuration
+                            is not enabled. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -376,6 +390,20 @@ spec:
                   id:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
+                  mediaInsightsConfiguration:
+                    description: The media insights configuration. See media_insights_configuration.
+                    items:
+                      properties:
+                        configurationArn:
+                          description: The media insights configuration that will
+                            be invoked by the Voice Connector.
+                          type: string
+                        disabled:
+                          description: When true, the media insights configuration
+                            is not enabled. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   streamingNotificationTargets:
                     description: 'The streaming notification targets. Valid Values:
                       EventBridge | SNS | SQS'

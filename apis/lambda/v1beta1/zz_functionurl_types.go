@@ -80,6 +80,9 @@ type FunctionURLObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Determines how the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM. See more in Configuring a Lambda function to stream responses.
+	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
+
 	// The alias name or "$LATEST".
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
@@ -109,6 +112,10 @@ type FunctionURLParameters struct {
 	// Selector for a Function to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+
+	// Determines how the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM. See more in Configuring a Lambda function to stream responses.
+	// +kubebuilder:validation:Optional
+	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
 
 	// The alias name or "$LATEST".
 	// +kubebuilder:validation:Optional

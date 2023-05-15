@@ -111,8 +111,7 @@ type SecurityGroupObservation_2 struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// VPC ID.
-	// Defaults to the region's default VPC.
+	// VPC ID. Defaults to the region's default VPC.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
@@ -139,8 +138,7 @@ type SecurityGroupParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// VPC ID.
-	// Defaults to the region's default VPC.
+	// VPC ID. Defaults to the region's default VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`

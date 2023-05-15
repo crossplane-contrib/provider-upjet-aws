@@ -69,14 +69,14 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the documentDB cluster parameter
+                    description: The description of the DocumentDB cluster parameter
                       group.
                     type: string
                   family:
-                    description: The family of the documentDB cluster parameter group.
+                    description: The family of the DocumentDB cluster parameter group.
                     type: string
                   parameter:
-                    description: A list of documentDB parameters to apply. Setting
+                    description: A list of DocumentDB parameters to apply. Setting
                       parameters to system default values may show a difference on
                       imported resources.
                     items:
@@ -86,11 +86,11 @@ spec:
                             Defaults to pending-reboot.
                           type: string
                         name:
-                          description: The name of the documentDB cluster parameter
+                          description: The name of the DocumentDB cluster parameter
                             group.
                           type: string
                         value:
-                          description: The value of the documentDB parameter.
+                          description: The value of the DocumentDB parameter.
                           type: string
                       required:
                       - name
@@ -305,20 +305,20 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the documentDB cluster parameter group.
+                    description: The ARN of the DocumentDB cluster parameter group.
                     type: string
                   description:
-                    description: The description of the documentDB cluster parameter
+                    description: The description of the DocumentDB cluster parameter
                       group.
                     type: string
                   family:
-                    description: The family of the documentDB cluster parameter group.
+                    description: The family of the DocumentDB cluster parameter group.
                     type: string
                   id:
-                    description: The documentDB cluster parameter group name.
+                    description: The DocumentDB cluster parameter group name.
                     type: string
                   parameter:
-                    description: A list of documentDB parameters to apply. Setting
+                    description: A list of DocumentDB parameters to apply. Setting
                       parameters to system default values may show a difference on
                       imported resources.
                     items:
@@ -328,11 +328,11 @@ spec:
                             Defaults to pending-reboot.
                           type: string
                         name:
-                          description: The name of the documentDB cluster parameter
+                          description: The name of the DocumentDB cluster parameter
                             group.
                           type: string
                         value:
-                          description: The value of the documentDB parameter.
+                          description: The value of the DocumentDB parameter.
                           type: string
                       type: object
                     type: array

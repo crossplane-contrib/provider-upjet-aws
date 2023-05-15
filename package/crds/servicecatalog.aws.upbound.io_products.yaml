@@ -114,9 +114,8 @@ spec:
                             template in Amazon S3.
                           type: string
                         type:
-                          description: 'Type of provisioning artifact. Valid values:
-                            CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
-                            (Marketplace Clusters and AWS Resources).'
+                          description: Type of provisioning artifact. See AWS Docs
+                            for valid list of values.
                           type: string
                       type: object
                     type: array
@@ -139,8 +138,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: Type of product. Valid values are CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE.
+                    description: Type of product. See AWS Docs for valid list of values.
                     type: string
                 required:
                 - region
@@ -407,9 +405,8 @@ spec:
                             template in Amazon S3.
                           type: string
                         type:
-                          description: 'Type of provisioning artifact. Valid values:
-                            CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR
-                            (Marketplace Clusters and AWS Resources).'
+                          description: Type of provisioning artifact. See AWS Docs
+                            for valid list of values.
                           type: string
                       type: object
                     type: array
@@ -438,8 +435,7 @@ spec:
                       block.
                     type: object
                   type:
-                    description: Type of product. Valid values are CLOUD_FORMATION_TEMPLATE,
-                      MARKETPLACE.
+                    description: Type of product. See AWS Docs for valid list of values.
                     type: string
                 type: object
               conditions:

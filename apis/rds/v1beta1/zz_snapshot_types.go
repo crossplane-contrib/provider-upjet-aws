@@ -52,6 +52,9 @@ type SnapshotObservation struct {
 
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
+
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
 	// The DB snapshot Arn that the DB snapshot was copied from. It only has value in case of cross customer or cross region copy.
@@ -96,6 +99,10 @@ type SnapshotParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +kubebuilder:validation:Optional
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

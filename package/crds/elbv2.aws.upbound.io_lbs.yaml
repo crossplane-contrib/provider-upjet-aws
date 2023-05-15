@@ -192,10 +192,23 @@ spec:
                     description: Indicates whether HTTP/2 is enabled in application
                       load balancers. Defaults to true.
                     type: boolean
+                  enableTlsVersionAndCipherSuiteHeaders:
+                    description: Indicates whether the two headers (x-amzn-tls-version
+                      and x-amzn-tls-cipher-suite), which contain information about
+                      the negotiated TLS version and cipher suite, are added to the
+                      client request before sending it to the target. Only valid for
+                      Load Balancers of type application. Defaults to false
+                    type: boolean
                   enableWafFailOpen:
                     description: Indicates whether to allow a WAF-enabled load balancer
                       to route requests to targets if it is unable to forward the
                       request to AWS WAF. Defaults to false.
+                    type: boolean
+                  enableXffClientPort:
+                    description: Indicates whether the X-Forwarded-For header should
+                      preserve the source port that the client used to connect to
+                      the load balancer in application load balancers. Defaults to
+                      false.
                     type: boolean
                   idleTimeout:
                     description: 'The time in seconds that the connection is allowed
@@ -203,7 +216,7 @@ spec:
                       Default: 60.'
                     type: number
                   internal:
-                    description: If true, the LB will be internal.
+                    description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
                     description: The type of IP addresses used by the subnets for
@@ -502,6 +515,13 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  xffHeaderProcessingMode:
+                    description: Determines how the load balancer modifies the X-Forwarded-For
+                      header in the HTTP request before sending the request to the
+                      target. The possible values are append, preserve, and remove.
+                      Only valid for Load Balancers of type application. The default
+                      is append.
+                    type: string
                 required:
                 - region
                 type: object
@@ -754,10 +774,23 @@ spec:
                     description: Indicates whether HTTP/2 is enabled in application
                       load balancers. Defaults to true.
                     type: boolean
+                  enableTlsVersionAndCipherSuiteHeaders:
+                    description: Indicates whether the two headers (x-amzn-tls-version
+                      and x-amzn-tls-cipher-suite), which contain information about
+                      the negotiated TLS version and cipher suite, are added to the
+                      client request before sending it to the target. Only valid for
+                      Load Balancers of type application. Defaults to false
+                    type: boolean
                   enableWafFailOpen:
                     description: Indicates whether to allow a WAF-enabled load balancer
                       to route requests to targets if it is unable to forward the
                       request to AWS WAF. Defaults to false.
+                    type: boolean
+                  enableXffClientPort:
+                    description: Indicates whether the X-Forwarded-For header should
+                      preserve the source port that the client used to connect to
+                      the load balancer in application load balancers. Defaults to
+                      false.
                     type: boolean
                   id:
                     description: The ARN of the load balancer (matches arn).
@@ -768,7 +801,7 @@ spec:
                       Default: 60.'
                     type: number
                   internal:
-                    description: If true, the LB will be internal.
+                    description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
                     description: The type of IP addresses used by the subnets for
@@ -845,6 +878,13 @@ spec:
                     type: object
                   vpcId:
                     description: The ARN of the load balancer (matches arn).
+                    type: string
+                  xffHeaderProcessingMode:
+                    description: Determines how the load balancer modifies the X-Forwarded-For
+                      header in the HTTP request before sending the request to the
+                      target. The possible values are append, preserve, and remove.
+                      Only valid for Load Balancers of type application. The default
+                      is append.
                     type: string
                   zoneId:
                     description: The canonical hosted zone ID of the load balancer

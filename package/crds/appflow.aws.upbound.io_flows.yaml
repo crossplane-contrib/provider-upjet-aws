@@ -485,6 +485,11 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          preserveSourceDataTyping:
+                                            description: Whether the data types from
+                                              the source system need to be preserved
+                                              (Only valid for Parquet file type)
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -1918,6 +1923,11 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          preserveSourceDataTyping:
+                                            description: Whether the data types from
+                                              the source system need to be preserved
+                                              (Only valid for Parquet file type)
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object

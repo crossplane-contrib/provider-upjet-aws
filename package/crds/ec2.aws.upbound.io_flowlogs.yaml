@@ -68,6 +68,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  deliverCrossAccountRole:
+                    description: ARN of the IAM role that allows Amazon EC2 to publish
+                      flow logs across accounts.
+                    type: string
                   destinationOptions:
                     description: Describes the destination options for a flow log.
                       More details below.
@@ -635,6 +639,10 @@ spec:
                 properties:
                   arn:
                     description: The ARN of the Flow Log.
+                    type: string
+                  deliverCrossAccountRole:
+                    description: ARN of the IAM role that allows Amazon EC2 to publish
+                      flow logs across accounts.
                     type: string
                   destinationOptions:
                     description: Describes the destination options for a flow log.

@@ -8,15 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    content: |
-      {
-        "Version": "2012-10-17",
-        "Statement": {
-          "Effect": "Allow",
-          "Action": "*",
-          "Resource": "*"
-        }
-      }
+    content: ${data.aws_iam_policy_document.example.json}
     name: example
     region: us-west-1
 

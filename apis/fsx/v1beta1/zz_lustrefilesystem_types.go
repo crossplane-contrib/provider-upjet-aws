@@ -98,6 +98,9 @@ type LustreFileSystemObservation struct {
 	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
+	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user.
+	RootSquashConfiguration []RootSquashConfigurationObservation `json:"rootSquashConfiguration,omitempty" tf:"root_squash_configuration,omitempty"`
+
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -199,6 +202,10 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user.
+	// +kubebuilder:validation:Optional
+	RootSquashConfiguration []RootSquashConfigurationParameters `json:"rootSquashConfiguration,omitempty" tf:"root_squash_configuration,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -244,6 +251,26 @@ type LustreFileSystemParameters struct {
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
+}
+
+type RootSquashConfigurationObservation struct {
+
+	// When root squash is enabled, you can optionally specify an array of NIDs of clients for which root squash does not apply. A client NID is a Lustre Network Identifier used to uniquely identify a client. You can specify the NID as either a single address or a range of addresses: 1. A single address is described in standard Lustre NID format by specifying the client’s IP address followed by the Lustre network ID (for example, 10.0.1.6@tcp). 2. An address range is described using a dash to separate the range (for example, 10.0.[2-10].[1-255]@tcp).
+	NoSquashNids []*string `json:"noSquashNids,omitempty" tf:"no_squash_nids,omitempty"`
+
+	// You enable root squash by setting a user ID (UID) and group ID (GID) for the file system in the format UID:GID (for example, 365534:65534). The UID and GID values can range from 0 to 4294967294.
+	RootSquash *string `json:"rootSquash,omitempty" tf:"root_squash,omitempty"`
+}
+
+type RootSquashConfigurationParameters struct {
+
+	// When root squash is enabled, you can optionally specify an array of NIDs of clients for which root squash does not apply. A client NID is a Lustre Network Identifier used to uniquely identify a client. You can specify the NID as either a single address or a range of addresses: 1. A single address is described in standard Lustre NID format by specifying the client’s IP address followed by the Lustre network ID (for example, 10.0.1.6@tcp). 2. An address range is described using a dash to separate the range (for example, 10.0.[2-10].[1-255]@tcp).
+	// +kubebuilder:validation:Optional
+	NoSquashNids []*string `json:"noSquashNids,omitempty" tf:"no_squash_nids,omitempty"`
+
+	// You enable root squash by setting a user ID (UID) and group ID (GID) for the file system in the format UID:GID (for example, 365534:65534). The UID and GID values can range from 0 to 4294967294.
+	// +kubebuilder:validation:Optional
+	RootSquash *string `json:"rootSquash,omitempty" tf:"root_squash,omitempty"`
 }
 
 // LustreFileSystemSpec defines the desired state of LustreFileSystem

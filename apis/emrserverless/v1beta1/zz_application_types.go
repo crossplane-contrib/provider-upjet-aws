@@ -30,6 +30,9 @@ type ApplicationObservation struct {
 	// The ID of the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// –  The image configuration applied to all worker types.
+	ImageConfiguration []ImageConfigurationObservation `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
+
 	// –  The capacity to initialize when the application is created.
 	InitialCapacity []InitialCapacityObservation `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
 
@@ -68,6 +71,10 @@ type ApplicationParameters struct {
 	// –  The configuration for an application to automatically stop after a certain amount of time being idle.
 	// +kubebuilder:validation:Optional
 	AutoStopConfiguration []AutoStopConfigurationParameters `json:"autoStopConfiguration,omitempty" tf:"auto_stop_configuration,omitempty"`
+
+	// –  The image configuration applied to all worker types.
+	// +kubebuilder:validation:Optional
+	ImageConfiguration []ImageConfigurationParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
 
 	// –  The capacity to initialize when the application is created.
 	// +kubebuilder:validation:Optional
@@ -134,6 +141,19 @@ type AutoStopConfigurationParameters struct {
 	// The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
+}
+
+type ImageConfigurationObservation struct {
+
+	// The image URI.
+	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
+}
+
+type ImageConfigurationParameters struct {
+
+	// The image URI.
+	// +kubebuilder:validation:Required
+	ImageURI *string `json:"imageUri" tf:"image_uri,omitempty"`
 }
 
 type InitialCapacityConfigObservation struct {

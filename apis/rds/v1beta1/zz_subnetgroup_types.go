@@ -35,6 +35,9 @@ type SubnetGroupObservation struct {
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Provides the VPC ID of the DB subnet group.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type SubnetGroupParameters struct {

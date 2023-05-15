@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AssessmentTarget is the Schema for the AssessmentTargets API.
-          Provides a Inspector assessment target.
+          Provides an Inspector Classic Assessment Target.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

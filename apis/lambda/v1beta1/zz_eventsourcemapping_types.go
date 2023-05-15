@@ -39,6 +39,33 @@ type DestinationConfigParameters struct {
 	OnFailure []OnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 }
 
+type DocumentDBEventSourceConfigObservation struct {
+
+	// The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.
+	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
+
+	// The name of the database to consume within the DocumentDB cluster.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
+}
+
+type DocumentDBEventSourceConfigParameters struct {
+
+	// The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.
+	// +kubebuilder:validation:Optional
+	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
+
+	// The name of the database to consume within the DocumentDB cluster.
+	// +kubebuilder:validation:Required
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+
+	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	// +kubebuilder:validation:Optional
+	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
+}
+
 type EventSourceMappingObservation struct {
 
 	// Additional configuration block for Amazon Managed Kafka sources. Incompatible with "self_managed_event_source" and "self_managed_kafka_event_source_config". Detailed below.
@@ -53,10 +80,13 @@ type EventSourceMappingObservation struct {
 	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
 	DestinationConfig []DestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
+	// Configuration settings for a DocumentDB event source. Detailed below.
+	DocumentDBEventSourceConfig []DocumentDBEventSourceConfigObservation `json:"documentDbEventSourceConfig,omitempty" tf:"document_db_event_source_config,omitempty"`
+
 	// Determines if the mapping will be enabled on creation. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The event source ARN - this is required for Kinesis stream, DynamoDB stream, SQS queue, MQ broker or MSK cluster.  It is incompatible with a Self Managed Kafka source.
+	// The event source ARN - this is required for Kinesis stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or DocumentDB change stream.  It is incompatible with a Self Managed Kafka source.
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 
 	// The criteria to use for event filtering Kinesis stream, DynamoDB stream, SQS queue event sources. Detailed below.
@@ -146,11 +176,15 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationConfig []DestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
+	// Configuration settings for a DocumentDB event source. Detailed below.
+	// +kubebuilder:validation:Optional
+	DocumentDBEventSourceConfig []DocumentDBEventSourceConfigParameters `json:"documentDbEventSourceConfig,omitempty" tf:"document_db_event_source_config,omitempty"`
+
 	// Determines if the mapping will be enabled on creation. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The event source ARN - this is required for Kinesis stream, DynamoDB stream, SQS queue, MQ broker or MSK cluster.  It is incompatible with a Self Managed Kafka source.
+	// The event source ARN - this is required for Kinesis stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or DocumentDB change stream.  It is incompatible with a Self Managed Kafka source.
 	// +kubebuilder:validation:Optional
 	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
 

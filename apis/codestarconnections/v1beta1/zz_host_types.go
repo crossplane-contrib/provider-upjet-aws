@@ -63,7 +63,7 @@ type HostParameters struct {
 
 type VPCConfigurationObservation struct {
 
-	// he ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
@@ -78,7 +78,7 @@ type VPCConfigurationObservation struct {
 
 type VPCConfigurationParameters struct {
 
-	// he ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Required
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 

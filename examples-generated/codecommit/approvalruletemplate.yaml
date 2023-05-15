@@ -8,16 +8,16 @@ metadata:
   name: example
 spec:
   forProvider:
-    content: |
-      {
-          "Version": "2018-11-08",
-          "DestinationReferences": ["refs/heads/master"],
-          "Statements": [{
-              "Type": "Approvers",
-              "NumberOfApprovalsNeeded": 2,
-              "ApprovalPoolMembers": ["arn:aws:sts::123456789012:assumed-role/CodeCommitReview/*"]
+    content: |-
+      ${jsonencode({
+          Version               = "2018-11-08"
+          DestinationReferences = ["refs/heads/master"]
+          Statements = [{
+            Type                    = "Approvers"
+            NumberOfApprovalsNeeded = 2
+            ApprovalPoolMembers     = ["arn:aws:sts::123456789012:assumed-role/CodeCommitReview/*"]
           }]
-      }
+        })}
     description: This is an example approval rule template
     region: us-west-1
 

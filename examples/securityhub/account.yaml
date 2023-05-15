@@ -3,10 +3,9 @@ kind: Account
 metadata:
   annotations:
     meta.upbound.io/example-id: securityhub/v1beta1/account
-    uptest.upbound.io/pre-delete-hook: testhooks/delete-account-dependent-resources.sh
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1

@@ -44,19 +44,7 @@ metadata:
   name: pubsub
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": [
-              "iot:*"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.pubsub.json}
     region: us-west-1
 
 ---

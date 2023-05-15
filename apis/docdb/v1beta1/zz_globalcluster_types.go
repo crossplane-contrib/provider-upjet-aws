@@ -51,7 +51,7 @@ type GlobalClusterObservation struct {
 	// AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.
 	GlobalClusterResourceID *string `json:"globalClusterResourceId,omitempty" tf:"global_cluster_resource_id,omitempty"`
 
-	// DocDB Global Cluster.
+	// DocumentDB Global Cluster ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
@@ -123,7 +123,7 @@ type GlobalClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GlobalCluster is the Schema for the GlobalClusters API. Manages a DocDB Global Cluster
+// GlobalCluster is the Schema for the GlobalClusters API. Manages a DocumentDB Global Cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

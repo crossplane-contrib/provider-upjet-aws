@@ -72,9 +72,41 @@ spec:
                     description: Access permissions string used for this user. See
                       Specifying Permissions Using an Access String for more details.
                     type: string
-                  arn:
-                    description: The ARN of the created ElastiCache User.
-                    type: string
+                  authenticationMode:
+                    description: Denotes the user's authentication properties. Detailed
+                      below.
+                    items:
+                      properties:
+                        passwordsSecretRef:
+                          description: Specifies the passwords to use for authentication
+                            if type is set to password.
+                          items:
+                            description: A SecretKeySelector is a reference to a secret
+                              key in an arbitrary namespace.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          type: array
+                        type:
+                          description: 'Specifies the authentication type. Possible
+                            options are: password, no-password-required or iam.'
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
                   engine:
                     description: The current supported value is REDIS.
                     type: string
@@ -323,6 +355,19 @@ spec:
                   arn:
                     description: The ARN of the created ElastiCache User.
                     type: string
+                  authenticationMode:
+                    description: Denotes the user's authentication properties. Detailed
+                      below.
+                    items:
+                      properties:
+                        passwordCount:
+                          type: number
+                        type:
+                          description: 'Specifies the authentication type. Possible
+                            options are: password, no-password-required or iam.'
+                          type: string
+                      type: object
+                    type: array
                   engine:
                     description: The current supported value is REDIS.
                     type: string

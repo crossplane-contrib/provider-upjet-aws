@@ -252,6 +252,35 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  rootSquashConfiguration:
+                    description: The Lustre root squash configuration used when creating
+                      an Amazon FSx for Lustre file system. When enabled, root squash
+                      restricts root-level access from clients that try to access
+                      your file system as a root user.
+                    items:
+                      properties:
+                        noSquashNids:
+                          description: 'When root squash is enabled, you can optionally
+                            specify an array of NIDs of clients for which root squash
+                            does not apply. A client NID is a Lustre Network Identifier
+                            used to uniquely identify a client. You can specify the
+                            NID as either a single address or a range of addresses:
+                            1. A single address is described in standard Lustre NID
+                            format by specifying the client’s IP address followed
+                            by the Lustre network ID (for example, 10.0.1.6@tcp).
+                            2. An address range is described using a dash to separate
+                            the range (for example, 10.0.[2-10].[1-255]@tcp).'
+                          items:
+                            type: string
+                          type: array
+                        rootSquash:
+                          description: You enable root squash by setting a user ID
+                            (UID) and group ID (GID) for the file system in the format
+                            UID:GID (for example, 365534:65534). The UID and GID values
+                            can range from 0 to 4294967294.
+                          type: string
+                      type: object
+                    type: array
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -767,6 +796,35 @@ spec:
                       HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
                       and  SSD storage_type are 125, 250, 500, 1000.'
                     type: number
+                  rootSquashConfiguration:
+                    description: The Lustre root squash configuration used when creating
+                      an Amazon FSx for Lustre file system. When enabled, root squash
+                      restricts root-level access from clients that try to access
+                      your file system as a root user.
+                    items:
+                      properties:
+                        noSquashNids:
+                          description: 'When root squash is enabled, you can optionally
+                            specify an array of NIDs of clients for which root squash
+                            does not apply. A client NID is a Lustre Network Identifier
+                            used to uniquely identify a client. You can specify the
+                            NID as either a single address or a range of addresses:
+                            1. A single address is described in standard Lustre NID
+                            format by specifying the client’s IP address followed
+                            by the Lustre network ID (for example, 10.0.1.6@tcp).
+                            2. An address range is described using a dash to separate
+                            the range (for example, 10.0.[2-10].[1-255]@tcp).'
+                          items:
+                            type: string
+                          type: array
+                        rootSquash:
+                          description: You enable root squash by setting a user ID
+                            (UID) and group ID (GID) for the file system in the format
+                            UID:GID (for example, 365534:65534). The UID and GID values
+                            can range from 0 to 4294967294.
+                          type: string
+                      type: object
+                    type: array
                   securityGroupIds:
                     description: A list of IDs for the security groups that apply
                       to the specified network interfaces created for file system

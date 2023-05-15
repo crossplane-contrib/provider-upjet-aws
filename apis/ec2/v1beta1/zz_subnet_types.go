@@ -38,6 +38,9 @@ type SubnetObservation_2 struct {
 	// Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. Default: false.
 	EnableDns64 *bool `json:"enableDns64,omitempty" tf:"enable_dns64,omitempty"`
 
+	// Indicates the device position for local network interfaces in this subnet. For example, 1 indicates local network interfaces in this subnet are the secondary network interface (eth1). A local network interface cannot be the primary network interface (eth0).
+	EnableLniAtDeviceIndex *float64 `json:"enableLniAtDeviceIndex,omitempty" tf:"enable_lni_at_device_index,omitempty"`
+
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records. Default: false.
 	EnableResourceNameDNSARecordOnLaunch *bool `json:"enableResourceNameDnsARecordOnLaunch,omitempty" tf:"enable_resource_name_dns_a_record_on_launch,omitempty"`
 
@@ -111,6 +114,10 @@ type SubnetParameters_2 struct {
 	// Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. Default: false.
 	// +kubebuilder:validation:Optional
 	EnableDns64 *bool `json:"enableDns64,omitempty" tf:"enable_dns64,omitempty"`
+
+	// Indicates the device position for local network interfaces in this subnet. For example, 1 indicates local network interfaces in this subnet are the secondary network interface (eth1). A local network interface cannot be the primary network interface (eth0).
+	// +kubebuilder:validation:Optional
+	EnableLniAtDeviceIndex *float64 `json:"enableLniAtDeviceIndex,omitempty" tf:"enable_lni_at_device_index,omitempty"`
 
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records. Default: false.
 	// +kubebuilder:validation:Optional

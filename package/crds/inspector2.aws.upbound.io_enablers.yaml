@@ -68,7 +68,8 @@ spec:
               forProvider:
                 properties:
                   accountIds:
-                    description: Set of account IDs.
+                    description: 'Set of account IDs. Can contain one of: the Organization''s
+                      Administrator Account, or one or more Member Accounts.'
                     items:
                       type: string
                     type: array
@@ -78,7 +79,7 @@ spec:
                     type: string
                   resourceTypes:
                     description: Type of resources to scan. Valid values are EC2,
-                      ECR, and LAMBDA.
+                      ECR, and LAMBDA. At least one item is required.
                     items:
                       type: string
                     type: array
@@ -282,7 +283,8 @@ spec:
               atProvider:
                 properties:
                   accountIds:
-                    description: Set of account IDs.
+                    description: 'Set of account IDs. Can contain one of: the Organization''s
+                      Administrator Account, or one or more Member Accounts.'
                     items:
                       type: string
                     type: array
@@ -290,7 +292,7 @@ spec:
                     type: string
                   resourceTypes:
                     description: Type of resources to scan. Valid values are EC2,
-                      ECR, and LAMBDA.
+                      ECR, and LAMBDA. At least one item is required.
                     items:
                       type: string
                     type: array

@@ -325,6 +325,36 @@ spec:
                   serviceName:
                     description: Name of the service.
                     type: string
+                  usageMetric:
+                    description: Information about the measurement.
+                    items:
+                      properties:
+                        metricDimensions:
+                          description: The metric dimensions.
+                          items:
+                            properties:
+                              class:
+                                type: string
+                              resource:
+                                type: string
+                              service:
+                                type: string
+                              type:
+                                type: string
+                            type: object
+                          type: array
+                        metricName:
+                          description: The name of the metric.
+                          type: string
+                        metricNamespace:
+                          description: The namespace of the metric.
+                          type: string
+                        metricStatisticRecommendation:
+                          description: The metric statistic that AWS recommend you
+                            use when determining quota usage.
+                          type: string
+                      type: object
+                    type: array
                   value:
                     description: Float specifying the desired value for the service
                       quota. If the desired value is higher than the current value,

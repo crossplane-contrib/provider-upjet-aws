@@ -39,42 +39,7 @@ metadata:
   name: replication
 spec:
   forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": [
-              "s3:GetReplicationConfiguration",
-              "s3:ListBucket"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-              "${aws_s3_bucket.source.arn}"
-            ]
-          },
-          {
-            "Action": [
-              "s3:GetObjectVersionForReplication",
-              "s3:GetObjectVersionAcl",
-               "s3:GetObjectVersionTagging"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-              "${aws_s3_bucket.source.arn}/*"
-            ]
-          },
-          {
-            "Action": [
-              "s3:ReplicateObject",
-              "s3:ReplicateDelete",
-              "s3:ReplicateTags"
-            ],
-            "Effect": "Allow",
-            "Resource": "${aws_s3_bucket.destination.arn}/*"
-          }
-        ]
-      }
+    policy: ${data.aws_iam_policy_document.replication.json}
 
 ---
 
@@ -88,20 +53,7 @@ metadata:
   name: replication
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "s3.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

@@ -15,11 +15,18 @@ import (
 
 type AccessLogFileObservation struct {
 
+	// The specified format for the logs.
+	Format []FormatObservation `json:"format,omitempty" tf:"format,omitempty"`
+
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type AccessLogFileParameters struct {
+
+	// The specified format for the logs.
+	// +kubebuilder:validation:Optional
+	Format []FormatParameters `json:"format,omitempty" tf:"format,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Required
@@ -201,6 +208,26 @@ type FileParameters struct {
 	PrivateKey *string `json:"privateKey" tf:"private_key,omitempty"`
 }
 
+type FormatObservation struct {
+
+	// The logging format for JSON.
+	JSON []JSONObservation `json:"json,omitempty" tf:"json,omitempty"`
+
+	// The logging format for text. Must be between 1 and 1000 characters in length.
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
+type FormatParameters struct {
+
+	// The logging format for JSON.
+	// +kubebuilder:validation:Optional
+	JSON []JSONParameters `json:"json,omitempty" tf:"json,omitempty"`
+
+	// The logging format for text. Must be between 1 and 1000 characters in length.
+	// +kubebuilder:validation:Optional
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
 type GRPCObservation struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
@@ -300,6 +327,26 @@ type Http2Parameters struct {
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Required
 	MaxRequests *float64 `json:"maxRequests" tf:"max_requests,omitempty"`
+}
+
+type JSONObservation struct {
+
+	// The specified key for the JSON. Must be between 1 and 100 characters in length.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type JSONParameters struct {
+
+	// The specified key for the JSON. Must be between 1 and 100 characters in length.
+	// +kubebuilder:validation:Required
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The specified value for the JSON. Must be between 1 and 100 characters in length.
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ListenerObservation struct {

@@ -146,6 +146,35 @@ spec:
                       - customRedirectDomain
                       type: object
                     type: array
+                  vdmOptions:
+                    description: An object that defines the VDM settings that apply
+                      to emails that you send using the configuration set.
+                    items:
+                      properties:
+                        dashboardOptions:
+                          description: Specifies additional settings for your VDM
+                            configuration as applicable to the Dashboard.
+                          items:
+                            properties:
+                              engagementMetrics:
+                                description: 'Specifies the status of your VDM engagement
+                                  metrics collection. Valid values: ENABLED, DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                        guardianOptions:
+                          description: Specifies additional settings for your VDM
+                            configuration as applicable to the Guardian.
+                          items:
+                            properties:
+                              optimizedSharedDelivery:
+                                description: 'Specifies the status of your VDM optimized
+                                  shared delivery. Valid values: ENABLED, DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -426,6 +455,35 @@ spec:
                           description: The domain to use for tracking open and click
                             events.
                           type: string
+                      type: object
+                    type: array
+                  vdmOptions:
+                    description: An object that defines the VDM settings that apply
+                      to emails that you send using the configuration set.
+                    items:
+                      properties:
+                        dashboardOptions:
+                          description: Specifies additional settings for your VDM
+                            configuration as applicable to the Dashboard.
+                          items:
+                            properties:
+                              engagementMetrics:
+                                description: 'Specifies the status of your VDM engagement
+                                  metrics collection. Valid values: ENABLED, DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                        guardianOptions:
+                          description: Specifies additional settings for your VDM
+                            configuration as applicable to the Guardian.
+                          items:
+                            properties:
+                              optimizedSharedDelivery:
+                                description: 'Specifies the status of your VDM optimized
+                                  shared delivery. Valid values: ENABLED, DISABLED.'
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                 type: object

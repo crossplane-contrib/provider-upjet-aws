@@ -27,14 +27,18 @@ metadata:
     meta.upbound.io/example-id: ecs/v1beta1/capacityprovider
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: upbound-example-test
 spec:
   forProvider:
     region: us-west-1
     availabilityZones:
-    - us-west-1b
-    maxSize: 1
-    minSize: 1
+    - us-west-1a
+    waitForCapacityTimeout: "0"
+    maxSize: 5
+    minSize: 2
+    healthCheckGracePeriod: 300
+    healthCheckType: ELB
+    forceDelete: true
     launchConfigurationSelector:
       matchLabels:
         testing.upbound.io/example-name: as_conf
@@ -56,6 +60,6 @@ metadata:
   name: as-conf
 spec:
   forProvider:
-    imageId: ami-0a1a70369f0fce06a
+    imageId: ${data.aws_ami.ubuntu.id}
     instanceType: t2.micro
     region: us-west-1

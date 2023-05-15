@@ -15,47 +15,47 @@ import (
 
 type ClusterSnapshotObservation struct {
 
-	// List of EC2 Availability Zones that instances in the DocDB cluster snapshot can be restored in.
+	// List of EC2 Availability Zones that instances in the DocumentDB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The DocDB Cluster Identifier from which to take the snapshot.
+	// The DocumentDB Cluster Identifier from which to take the snapshot.
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DocDB Cluster Snapshot.
+	// The Amazon Resource Name (ARN) for the DocumentDB Cluster Snapshot.
 	DBClusterSnapshotArn *string `json:"dbClusterSnapshotArn,omitempty" tf:"db_cluster_snapshot_arn,omitempty"`
 
 	// Specifies the name of the database engine.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// Version of the database engine for this DocDB cluster snapshot.
+	// Version of the database engine for this DocumentDB cluster snapshot.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// If storage_encrypted is true, the AWS KMS key identifier for the encrypted DocDB cluster snapshot.
+	// If storage_encrypted is true, the AWS KMS key identifier for the encrypted DocumentDB cluster snapshot.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Port that the DocDB cluster was listening on at the time of the snapshot.
+	// Port that the DocumentDB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
-	// The Amazon Resource Name (ARN) for the DocDB Cluster Snapshot.
+	// The Amazon Resource Name (ARN) for the DocumentDB Cluster Snapshot.
 	SourceDBClusterSnapshotArn *string `json:"sourceDbClusterSnapshotArn,omitempty" tf:"source_db_cluster_snapshot_arn,omitempty"`
 
-	// The status of this DocDB Cluster Snapshot.
+	// The status of this DocumentDB Cluster Snapshot.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Specifies whether the DocDB cluster snapshot is encrypted.
+	// Specifies whether the DocumentDB cluster snapshot is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// The VPC ID associated with the DocDB cluster snapshot.
+	// The VPC ID associated with the DocumentDB cluster snapshot.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type ClusterSnapshotParameters struct {
 
-	// The DocDB Cluster Identifier from which to take the snapshot.
+	// The DocumentDB Cluster Identifier from which to take the snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -89,7 +89,7 @@ type ClusterSnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ClusterSnapshot is the Schema for the ClusterSnapshots API. Manages a DocDB database cluster snapshot.
+// ClusterSnapshot is the Schema for the ClusterSnapshots API. Manages a DocumentDB database cluster snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

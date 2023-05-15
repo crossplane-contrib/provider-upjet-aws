@@ -28,15 +28,7 @@ metadata:
   name: test-role
 spec:
   forProvider:
-    assumeRolePolicy: |2
-        {
-          "Version": "2012-10-17",
-          "Statement": {
-            "Effect": "Allow",
-            "Principal": {"Service": "ssm.amazonaws.com"},
-            "Action": "sts:AssumeRole"
-          }
-        }
+    assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
 
 ---
 

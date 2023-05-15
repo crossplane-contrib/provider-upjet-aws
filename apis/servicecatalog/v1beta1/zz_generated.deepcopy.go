@@ -1721,6 +1721,11 @@ func (in *ProvisioningArtifactObservation) DeepCopyInto(out *ProvisioningArtifac
 		*out = new(string)
 		**out = **in
 	}
+	if in.ProvisioningArtifactID != nil {
+		in, out := &in.ProvisioningArtifactID, &out.ProvisioningArtifactID
+		*out = new(string)
+		**out = **in
+	}
 	if in.TemplatePhysicalID != nil {
 		in, out := &in.TemplatePhysicalID, &out.TemplatePhysicalID
 		*out = new(string)

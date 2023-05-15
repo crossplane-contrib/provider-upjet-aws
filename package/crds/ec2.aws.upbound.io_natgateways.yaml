@@ -438,6 +438,11 @@ spec:
                     description: The Allocation ID of the Elastic IP address for the
                       gateway. Required for connectivity_type of public.
                     type: string
+                  associationId:
+                    description: The association ID of the Elastic IP address that's
+                      associated with the NAT gateway. Only available when connectivity_type
+                      is public.
+                    type: string
                   connectivityType:
                     description: Connectivity type for the gateway. Valid values are
                       private and public. Defaults to public.

@@ -68,6 +68,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  customEventData:
+                    description: Information to be added to all events that are related
+                      to this game session queue.
+                    type: string
                   destinations:
                     description: List of fleet/alias ARNs used by session queue for
                       placing game sessions.
@@ -379,6 +383,10 @@ spec:
                 properties:
                   arn:
                     description: Game Session Queue ARN.
+                    type: string
+                  customEventData:
+                    description: Information to be added to all events that are related
+                      to this game session queue.
                     type: string
                   destinations:
                     description: List of fleet/alias ARNs used by session queue for

@@ -30,6 +30,9 @@ type AsyncInferenceConfigOutputConfigObservation struct {
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
 	NotificationConfig []NotificationConfigObservation `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
 
+	// The Amazon S3 location to upload failure inference responses to.
+	S3FailurePath *string `json:"s3FailurePath,omitempty" tf:"s3_failure_path,omitempty"`
+
 	// The Amazon S3 location to upload inference responses to.
 	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
@@ -43,6 +46,10 @@ type AsyncInferenceConfigOutputConfigParameters struct {
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
 	// +kubebuilder:validation:Optional
 	NotificationConfig []NotificationConfigParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
+
+	// The Amazon S3 location to upload failure inference responses to.
+	// +kubebuilder:validation:Optional
+	S3FailurePath *string `json:"s3FailurePath,omitempty" tf:"s3_failure_path,omitempty"`
 
 	// The Amazon S3 location to upload inference responses to.
 	// +kubebuilder:validation:Required
@@ -249,6 +256,9 @@ type NotificationConfigObservation struct {
 	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
 
+	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
+
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
 	SuccessTopic *string `json:"successTopic,omitempty" tf:"success_topic,omitempty"`
 }
@@ -258,6 +268,10 @@ type NotificationConfigParameters struct {
 	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
 	// +kubebuilder:validation:Optional
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
+
+	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	// +kubebuilder:validation:Optional
+	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
 	// +kubebuilder:validation:Optional
@@ -274,6 +288,9 @@ type ProductionVariantsObservation struct {
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []CoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
@@ -313,6 +330,10 @@ type ProductionVariantsParameters struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	CoreDumpConfig []CoreDumpConfigParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	// +kubebuilder:validation:Optional
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
@@ -407,6 +428,9 @@ type ShadowProductionVariantsObservation struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
 
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -445,6 +469,10 @@ type ShadowProductionVariantsParameters struct {
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	// +kubebuilder:validation:Optional
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional

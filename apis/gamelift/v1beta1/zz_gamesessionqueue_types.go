@@ -18,6 +18,9 @@ type GameSessionQueueObservation struct {
 	// Game Session Queue ARN.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Information to be added to all events that are related to this game session queue.
+	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
+
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
@@ -40,6 +43,10 @@ type GameSessionQueueObservation struct {
 }
 
 type GameSessionQueueParameters struct {
+
+	// Information to be added to all events that are related to this game session queue.
+	// +kubebuilder:validation:Optional
+	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	// +kubebuilder:validation:Optional

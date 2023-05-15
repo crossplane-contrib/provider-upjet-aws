@@ -111,6 +111,11 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                   targetDatabase:
                     description: Configuration block for a target database for resource
                       linking. See target_database below.
@@ -357,7 +362,7 @@ spec:
                     description: Description of the database.
                     type: string
                   id:
-                    description: Catalog ID and name of the database
+                    description: Catalog ID and name of the database.
                     type: string
                   locationUri:
                     description: Location of the database (for example, an HDFS path).
@@ -367,6 +372,18 @@ spec:
                       type: string
                     description: List of key-value pairs that define parameters and
                       properties of the database.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                   targetDatabase:
                     description: Configuration block for a target database for resource

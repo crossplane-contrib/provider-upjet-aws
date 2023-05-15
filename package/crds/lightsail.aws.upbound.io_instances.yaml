@@ -125,8 +125,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   userData:
-                    description: launch script to configure server with additional
-                      user data
+                    description: Single lined launch script as a string to configure
+                      server with additional user data
                     type: string
                 required:
                 - region
@@ -419,8 +419,8 @@ spec:
                       block.
                     type: object
                   userData:
-                    description: launch script to configure server with additional
-                      user data
+                    description: Single lined launch script as a string to configure
+                      server with additional user data
                     type: string
                   username:
                     description: The user name for connecting to the instance (e.g.,

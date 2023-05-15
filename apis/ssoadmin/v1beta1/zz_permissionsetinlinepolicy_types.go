@@ -35,18 +35,8 @@ type PermissionSetInlinePolicyParameters struct {
 	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("instance_arn",false)
-	// +kubebuilder:validation:Optional
-	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
-
-	// Reference to a PermissionSet in ssoadmin to populate instanceArn.
-	// +kubebuilder:validation:Optional
-	InstanceArnRef *v1.Reference `json:"instanceArnRef,omitempty" tf:"-"`
-
-	// Selector for a PermissionSet in ssoadmin to populate instanceArn.
-	// +kubebuilder:validation:Optional
-	InstanceArnSelector *v1.Selector `json:"instanceArnSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet

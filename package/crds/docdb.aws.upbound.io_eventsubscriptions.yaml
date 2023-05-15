@@ -84,8 +84,8 @@ spec:
                       be created in.
                     type: string
                   snsTopicArn:
-                    description: The Amazon Resource Name of the DocDB event notification
-                      subscription
+                    description: The Amazon Resource Name of the DocumentDB event
+                      notification subscription
                     type: string
                   snsTopicArnRef:
                     description: Reference to a Topic in sns to populate snsTopicArn.
@@ -374,11 +374,11 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the DocDB event notification
-                      subscription
+                    description: The Amazon Resource Name of the DocumentDB event
+                      notification subscription
                     type: string
                   customerAwsId:
-                    description: The AWS customer account associated with the DocDB
+                    description: The AWS customer account associated with the DocumentDB
                       event notification subscription
                     type: string
                   enabled:
@@ -393,11 +393,11 @@ spec:
                       type: string
                     type: array
                   id:
-                    description: The name of the DocDB event notification subscription
+                    description: The name of the DocumentDB event notification subscription
                     type: string
                   snsTopicArn:
-                    description: The Amazon Resource Name of the DocDB event notification
-                      subscription
+                    description: The Amazon Resource Name of the DocumentDB event
+                      notification subscription
                     type: string
                   sourceIds:
                     description: A list of identifiers of the event sources for which

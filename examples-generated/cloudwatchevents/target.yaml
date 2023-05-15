@@ -35,18 +35,19 @@ metadata:
 spec:
   forProvider:
     description: Capture all EC2 scaling events
-    eventPattern: |
-      {
-        "source": [
-          "aws.autoscaling"
-        ],
-        "detail-type": [
-          "EC2 Instance Launch Successful",
-          "EC2 Instance Terminate Successful",
-          "EC2 Instance Launch Unsuccessful",
-          "EC2 Instance Terminate Unsuccessful"
-        ]
-      }
+    eventPattern: |-
+      ${jsonencode({
+          source = [
+            "aws.autoscaling"
+          ]
+
+          detail-type = [
+            "EC2 Instance Launch Successful",
+            "EC2 Instance Terminate Successful",
+            "EC2 Instance Launch Unsuccessful",
+            "EC2 Instance Terminate Unsuccessful"
+          ]
+        })}
     region: us-west-1
 
 ---

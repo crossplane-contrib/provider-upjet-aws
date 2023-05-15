@@ -8,14 +8,33 @@ metadata:
   name: test
 spec:
   forProvider:
-    content: "\t{\n\t\t\"Version\": \"2019-10-30\",\n\t\t\"StartAction\": \"12345678-1234-1234-1234-123456789012\",\n\t\t\"Actions\":
-      [\n\t\t\t{\n\t\t\t\t\"Identifier\": \"12345678-1234-1234-1234-123456789012\",\n\t\t\t\t\"Type\":
-      \"MessageParticipant\",\n\t\t\t\t\"Transitions\": {\n\t\t\t\t\t\"NextAction\":
-      \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n\t\t\t\t\t\"Errors\": [],\n\t\t\t\t\t\"Conditions\":
-      []\n\t\t\t\t},\n\t\t\t\t\"Parameters\": {\n\t\t\t\t\t\"Text\": \"Thanks for
-      calling the sample flow!\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"Identifier\":
-      \"abcdef-abcd-abcd-abcd-abcdefghijkl\",\n\t\t\t\t\"Type\": \"DisconnectParticipant\",\n\t\t\t\t\"Transitions\":
-      {},\n\t\t\t\t\"Parameters\": {}\n\t\t\t}\n\t\t]\n\t}\n"
+    content: |-
+      ${jsonencode({
+          Version     = "2019-10-30"
+          StartAction = "12345678-1234-1234-1234-123456789012"
+          Actions = [
+            {
+              Identifier = "12345678-1234-1234-1234-123456789012"
+              Type       = "MessageParticipant"
+
+              Transitions = {
+                NextAction = "abcdef-abcd-abcd-abcd-abcdefghijkl"
+                Errors     = []
+                Conditions = []
+              }
+
+              Parameters = {
+                Text = "Thanks for calling the sample flow!"
+              }
+            },
+            {
+              Identifier  = "abcdef-abcd-abcd-abcd-abcdefghijkl"
+              Type        = "DisconnectParticipant"
+              Transitions = {}
+              Parameters  = {}
+            }
+          ]
+        })}
     description: Test Contact Flow Description
     instanceIdSelector:
       matchLabels:

@@ -21,8 +21,14 @@ type UserPoolDomainObservation struct {
 	// The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
+	// The Amazon CloudFront endpoint (e.g. dpp0gtxikpq3y.cloudfront.net) that you use as the target of the alias that you set up with your Domain Name Service (DNS) provider.
+	CloudfrontDistribution *string `json:"cloudfrontDistribution,omitempty" tf:"cloudfront_distribution,omitempty"`
+
 	// The URL of the CloudFront distribution. This is required to generate the ALIAS aws_route53_record
 	CloudfrontDistributionArn *string `json:"cloudfrontDistributionArn,omitempty" tf:"cloudfront_distribution_arn,omitempty"`
+
+	// The Route 53 hosted zone ID of the CloudFront distribution.
+	CloudfrontDistributionZoneID *string `json:"cloudfrontDistributionZoneId,omitempty" tf:"cloudfront_distribution_zone_id,omitempty"`
 
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`

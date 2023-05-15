@@ -15,13 +15,20 @@ import (
 
 type CanvasAppSettingsObservation struct {
 
-	// Time series forecast settings for the Canvas app. see Time Series Forecasting Settings below.
+	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	ModelRegisterSettings []ModelRegisterSettingsObservation `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
+
+	// Time series forecast settings for the Canvas app. See Time Series Forecasting Settings below.
 	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsObservation `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 }
 
 type CanvasAppSettingsParameters struct {
 
-	// Time series forecast settings for the Canvas app. see Time Series Forecasting Settings below.
+	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	// +kubebuilder:validation:Optional
+	ModelRegisterSettings []ModelRegisterSettingsParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
+
+	// Time series forecast settings for the Canvas app. See Time Series Forecasting Settings below.
 	// +kubebuilder:validation:Optional
 	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 }
@@ -239,6 +246,9 @@ type DefaultUserSettingsObservation struct {
 	// The RSession app settings. See RSession App Settings below.
 	RSessionAppSettings []RSessionAppSettingsObservation `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudioServerProAppSettings below.
+	RStudioServerProAppSettings []RStudioServerProAppSettingsObservation `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
+
 	// A list of security group IDs that will be attached to the user.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
@@ -281,6 +291,10 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RSessionAppSettings []RSessionAppSettingsParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudioServerProAppSettings below.
+	// +kubebuilder:validation:Optional
+	RStudioServerProAppSettings []RStudioServerProAppSettingsParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
+
 	// A list of security group IDs that will be attached to the user.
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -299,7 +313,7 @@ type DomainObservation struct {
 	// Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly. Valid values are PublicInternetOnly and VpcOnly.
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
-	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.* domain_settings -  The domain settings. See Domain Settings below.
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
@@ -316,7 +330,7 @@ type DomainObservation struct {
 
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain's settings.
+	// The domain settings. See Domain Settings below.
 	DomainSettings []DomainSettingsObservation `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
@@ -359,7 +373,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AppNetworkAccessType *string `json:"appNetworkAccessType,omitempty" tf:"app_network_access_type,omitempty"`
 
-	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.* domain_settings -  The domain settings. See Domain Settings below.
+	// The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Valid values are Service and Customer.
 	// +kubebuilder:validation:Optional
 	AppSecurityGroupManagement *string `json:"appSecurityGroupManagement,omitempty" tf:"app_security_group_management,omitempty"`
 
@@ -378,7 +392,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain's settings.
+	// The domain settings. See Domain Settings below.
 	// +kubebuilder:validation:Optional
 	DomainSettings []DomainSettingsParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
@@ -442,6 +456,9 @@ type DomainSettingsObservation struct {
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
+	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
+	RStudioServerProDomainSettings []RStudioServerProDomainSettingsObservation `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
+
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
@@ -451,6 +468,10 @@ type DomainSettingsParameters struct {
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
+
+	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
+	// +kubebuilder:validation:Optional
+	RStudioServerProDomainSettings []RStudioServerProDomainSettingsParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 	// +kubebuilder:validation:Optional
@@ -638,6 +659,26 @@ type KernelGatewayAppSettingsParameters struct {
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
+type ModelRegisterSettingsObservation struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application.. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ModelRegisterSettingsParameters struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application.. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type RSessionAppSettingsCustomImageObservation struct {
 
 	// The name of the App Image Config.
@@ -717,6 +758,94 @@ type RSessionAppSettingsParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []RSessionAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+}
+
+type RStudioServerProAppSettingsObservation struct {
+
+	// Indicates whether the current user has access to the RStudioServerPro app. Valid values are ENABLED and DISABLED.
+	AccessStatus *string `json:"accessStatus,omitempty" tf:"access_status,omitempty"`
+
+	// The level of permissions that the user has within the RStudioServerPro app. This value defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value allows the user access to the RStudio Administrative Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
+}
+
+type RStudioServerProAppSettingsParameters struct {
+
+	// Indicates whether the current user has access to the RStudioServerPro app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	AccessStatus *string `json:"accessStatus,omitempty" tf:"access_status,omitempty"`
+
+	// The level of permissions that the user has within the RStudioServerPro app. This value defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value allows the user access to the RStudio Administrative Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+	// +kubebuilder:validation:Optional
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
+}
+
+type RStudioServerProDomainSettingsDefaultResourceSpecObservation struct {
+
+	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
+type RStudioServerProDomainSettingsDefaultResourceSpecParameters struct {
+
+	// The instance type that the image version runs on.. For valid values see SageMaker Instance Types.
+	// +kubebuilder:validation:Optional
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	// +kubebuilder:validation:Optional
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	// +kubebuilder:validation:Optional
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
+type RStudioServerProDomainSettingsObservation struct {
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The ARN of the execution role for the RStudioServerPro Domain-level app.
+	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn,omitempty" tf:"domain_execution_role_arn,omitempty"`
+
+	// A URL pointing to an RStudio Connect server.
+	RStudioConnectURL *string `json:"rStudioConnectUrl,omitempty" tf:"r_studio_connect_url,omitempty"`
+
+	// A URL pointing to an RStudio Package Manager server.
+	RStudioPackageManagerURL *string `json:"rStudioPackageManagerUrl,omitempty" tf:"r_studio_package_manager_url,omitempty"`
+}
+
+type RStudioServerProDomainSettingsParameters struct {
+
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// +kubebuilder:validation:Optional
+	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The ARN of the execution role for the RStudioServerPro Domain-level app.
+	// +kubebuilder:validation:Required
+	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn" tf:"domain_execution_role_arn,omitempty"`
+
+	// A URL pointing to an RStudio Connect server.
+	// +kubebuilder:validation:Optional
+	RStudioConnectURL *string `json:"rStudioConnectUrl,omitempty" tf:"r_studio_connect_url,omitempty"`
+
+	// A URL pointing to an RStudio Package Manager server.
+	// +kubebuilder:validation:Optional
+	RStudioPackageManagerURL *string `json:"rStudioPackageManagerUrl,omitempty" tf:"r_studio_package_manager_url,omitempty"`
 }
 
 type RetentionPolicyObservation struct {

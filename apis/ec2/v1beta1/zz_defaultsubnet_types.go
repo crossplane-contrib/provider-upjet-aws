@@ -31,6 +31,8 @@ type DefaultSubnetObservation struct {
 
 	EnableDns64 *bool `json:"enableDns64,omitempty" tf:"enable_dns64,omitempty"`
 
+	EnableLniAtDeviceIndex *float64 `json:"enableLniAtDeviceIndex,omitempty" tf:"enable_lni_at_device_index,omitempty"`
+
 	EnableResourceNameDNSARecordOnLaunch *bool `json:"enableResourceNameDnsARecordOnLaunch,omitempty" tf:"enable_resource_name_dns_a_record_on_launch,omitempty"`
 
 	EnableResourceNameDNSAaaaRecordOnLaunch *bool `json:"enableResourceNameDnsAaaaRecordOnLaunch,omitempty" tf:"enable_resource_name_dns_aaaa_record_on_launch,omitempty"`

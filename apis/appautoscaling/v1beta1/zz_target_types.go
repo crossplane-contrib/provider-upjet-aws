@@ -14,6 +14,10 @@ import (
 )
 
 type TargetObservation struct {
+
+	// The ARN of the scalable target.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Max capacity of the scalable target.
@@ -33,6 +37,12 @@ type TargetObservation struct {
 
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type TargetParameters struct {
@@ -75,6 +85,10 @@ type TargetParameters struct {
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Required
 	ServiceNamespace *string `json:"serviceNamespace" tf:"service_namespace,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // TargetSpec defines the desired state of Target

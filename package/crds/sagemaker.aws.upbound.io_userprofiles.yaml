@@ -178,6 +178,27 @@ spec:
                             below.
                           items:
                             properties:
+                              modelRegisterSettings:
+                                description: The model registry settings for the SageMaker
+                                  Canvas application. See Model Register Settings
+                                  below.
+                                items:
+                                  properties:
+                                    crossAccountModelRegisterRoleArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the SageMaker model registry account. Required
+                                        only to register model versions created by
+                                        a different SageMaker Canvas AWS account than
+                                        the AWS account in which SageMaker model registry
+                                        is set up.
+                                      type: string
+                                    status:
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
                               timeSeriesForecastingSettings:
                                 description: Time series forecast settings for the
                                   Canvas app. see Time Series Forecasting Settings
@@ -368,6 +389,26 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        rStudioServerProAppSettings:
+                          description: A collection of settings that configure user
+                            interaction with the RStudioServerPro app. See RStudio
+                            Server Pro App Settings below.
+                          items:
+                            properties:
+                              accessStatus:
+                                description: Indicates whether the current user has
+                                  access to the RStudioServerPro app. Valid values
+                                  are ENABLED and DISABLED.
+                                type: string
+                              userGroup:
+                                description: The level of permissions that the user
+                                  has within the RStudioServerPro app. This value
+                                  defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value
+                                  allows the user access to the RStudio Administrative
+                                  Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+                                type: string
                             type: object
                           type: array
                         securityGroups:
@@ -682,6 +723,27 @@ spec:
                             below.
                           items:
                             properties:
+                              modelRegisterSettings:
+                                description: The model registry settings for the SageMaker
+                                  Canvas application. See Model Register Settings
+                                  below.
+                                items:
+                                  properties:
+                                    crossAccountModelRegisterRoleArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the SageMaker model registry account. Required
+                                        only to register model versions created by
+                                        a different SageMaker Canvas AWS account than
+                                        the AWS account in which SageMaker model registry
+                                        is set up.
+                                      type: string
+                                    status:
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
                               timeSeriesForecastingSettings:
                                 description: Time series forecast settings for the
                                   Canvas app. see Time Series Forecasting Settings
@@ -864,6 +926,26 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        rStudioServerProAppSettings:
+                          description: A collection of settings that configure user
+                            interaction with the RStudioServerPro app. See RStudio
+                            Server Pro App Settings below.
+                          items:
+                            properties:
+                              accessStatus:
+                                description: Indicates whether the current user has
+                                  access to the RStudioServerPro app. Valid values
+                                  are ENABLED and DISABLED.
+                                type: string
+                              userGroup:
+                                description: The level of permissions that the user
+                                  has within the RStudioServerPro app. This value
+                                  defaults to R_STUDIO_USER. The R_STUDIO_ADMIN value
+                                  allows the user access to the RStudio Administrative
+                                  Dashboard. Valid values are R_STUDIO_USER and R_STUDIO_ADMIN.
+                                type: string
                             type: object
                           type: array
                         securityGroups:

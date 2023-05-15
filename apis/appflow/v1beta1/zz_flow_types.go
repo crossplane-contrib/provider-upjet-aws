@@ -783,6 +783,9 @@ type S3OutputFormatConfigObservation struct {
 
 	// Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. See Prefix Config for more details.
 	PrefixConfig []PrefixConfigObservation `json:"prefixConfig,omitempty" tf:"prefix_config,omitempty"`
+
+	// Whether the data types from the source system need to be preserved (Only valid for Parquet file type)
+	PreserveSourceDataTyping *bool `json:"preserveSourceDataTyping,omitempty" tf:"preserve_source_data_typing,omitempty"`
 }
 
 type S3OutputFormatConfigParameters struct {
@@ -798,6 +801,10 @@ type S3OutputFormatConfigParameters struct {
 	// Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. See Prefix Config for more details.
 	// +kubebuilder:validation:Optional
 	PrefixConfig []PrefixConfigParameters `json:"prefixConfig,omitempty" tf:"prefix_config,omitempty"`
+
+	// Whether the data types from the source system need to be preserved (Only valid for Parquet file type)
+	// +kubebuilder:validation:Optional
+	PreserveSourceDataTyping *bool `json:"preserveSourceDataTyping,omitempty" tf:"preserve_source_data_typing,omitempty"`
 }
 
 type S3OutputFormatConfigPrefixConfigObservation struct {

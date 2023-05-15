@@ -103,11 +103,20 @@ type ReportPlanParameters struct {
 
 type ReportSettingObservation struct {
 
+	// Specifies the list of accounts a report covers.
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
 	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
 	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+
+	// Specifies the list of Organizational Units a report covers.
+	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
+
+	// Specifies the list of regions a report covers.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
 	ReportTemplate *string `json:"reportTemplate,omitempty" tf:"report_template,omitempty"`
@@ -115,6 +124,10 @@ type ReportSettingObservation struct {
 
 type ReportSettingParameters struct {
 
+	// Specifies the list of accounts a report covers.
+	// +kubebuilder:validation:Optional
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
 	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
 	// +kubebuilder:validation:Optional
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
@@ -122,6 +135,14 @@ type ReportSettingParameters struct {
 	// Specifies the number of frameworks a report covers.
 	// +kubebuilder:validation:Optional
 	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+
+	// Specifies the list of Organizational Units a report covers.
+	// +kubebuilder:validation:Optional
+	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
+
+	// Specifies the list of regions a report covers.
+	// +kubebuilder:validation:Optional
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
 	// +kubebuilder:validation:Required

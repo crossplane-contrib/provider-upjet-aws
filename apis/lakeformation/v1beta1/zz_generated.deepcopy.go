@@ -211,6 +211,22 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 			}
 		}
 	}
+	if in.AllowExternalDataFiltering != nil {
+		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AuthorizedSessionTagValueList != nil {
+		in, out := &in.AuthorizedSessionTagValueList, &out.AuthorizedSessionTagValueList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CatalogID != nil {
 		in, out := &in.CatalogID, &out.CatalogID
 		*out = new(string)
@@ -228,6 +244,17 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 		*out = make([]CreateTableDefaultPermissionsObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ExternalDataFilteringAllowList != nil {
+		in, out := &in.ExternalDataFilteringAllowList, &out.ExternalDataFilteringAllowList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.ID != nil {
@@ -272,6 +299,22 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 			}
 		}
 	}
+	if in.AllowExternalDataFiltering != nil {
+		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AuthorizedSessionTagValueList != nil {
+		in, out := &in.AuthorizedSessionTagValueList, &out.AuthorizedSessionTagValueList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CatalogID != nil {
 		in, out := &in.CatalogID, &out.CatalogID
 		*out = new(string)
@@ -289,6 +332,17 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 		*out = make([]CreateTableDefaultPermissionsParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ExternalDataFilteringAllowList != nil {
+		in, out := &in.ExternalDataFilteringAllowList, &out.ExternalDataFilteringAllowList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.Region != nil {

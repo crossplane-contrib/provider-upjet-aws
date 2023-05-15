@@ -571,7 +571,7 @@ type S3ConfigurationObservation struct {
 	// The name of the bucket that contains the documents.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// A block that defines the Ddcument metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
+	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
 	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationObservation `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
 
 	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
@@ -604,7 +604,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
-	// A block that defines the Ddcument metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
+	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
 	// +kubebuilder:validation:Optional
 	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationParameters `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
 

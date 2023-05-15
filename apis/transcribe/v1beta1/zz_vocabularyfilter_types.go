@@ -32,10 +32,10 @@ type VocabularyFilterObservation struct {
 
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words.
+	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
 	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
 	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }
 
@@ -54,11 +54,11 @@ type VocabularyFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words.
+	// The Amazon S3 location (URI) of the text file that contains your custom VocabularyFilter. Conflicts with words argument.
 	// +kubebuilder:validation:Optional
 	VocabularyFilterFileURI *string `json:"vocabularyFilterFileUri,omitempty" tf:"vocabulary_filter_file_uri,omitempty"`
 
-	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_filter_file_uri argument.
 	// +kubebuilder:validation:Optional
 	Words []*string `json:"words,omitempty" tf:"words,omitempty"`
 }

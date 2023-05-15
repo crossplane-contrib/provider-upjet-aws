@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpotInstanceRequestCPUOptionsObservation struct {
+	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
+
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+}
+
+type SpotInstanceRequestCPUOptionsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+}
+
 type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetObservation struct {
 
 	// The Spot Instance Request ID.
@@ -253,6 +273,8 @@ type SpotInstanceRequestObservation struct {
 
 	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
+	CPUOptions []SpotInstanceRequestCPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
+
 	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	CapacityReservationSpecification []SpotInstanceRequestCapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -421,6 +443,9 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CPUOptions []SpotInstanceRequestCPUOptionsParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`

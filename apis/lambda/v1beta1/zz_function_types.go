@@ -176,6 +176,8 @@ type FunctionObservation struct {
 	// ARN of the signing profile version.
 	SigningProfileVersionArn *string `json:"signingProfileVersionArn,omitempty" tf:"signing_profile_version_arn,omitempty"`
 
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
 	// Snap start settings block. Detailed below.
 	SnapStart []SnapStartObservation `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
 
@@ -341,6 +343,9 @@ type FunctionParameters struct {
 	// Object version containing the function's deployment package. Conflicts with filename and image_uri.
 	// +kubebuilder:validation:Optional
 	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Snap start settings block. Detailed below.
 	// +kubebuilder:validation:Optional

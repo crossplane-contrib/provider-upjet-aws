@@ -100,6 +100,10 @@ type StackObservation struct {
 	// See storage_connectors below.
 	StorageConnectors []StorageConnectorsObservation `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
+	// The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+	// See streaming_experience_settings below.
+	StreamingExperienceSettings []StreamingExperienceSettingsObservation `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
+
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -156,6 +160,11 @@ type StackParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageConnectors []StorageConnectorsParameters `json:"storageConnectors,omitempty" tf:"storage_connectors,omitempty"`
 
+	// The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+	// See streaming_experience_settings below.
+	// +kubebuilder:validation:Optional
+	StreamingExperienceSettings []StreamingExperienceSettingsParameters `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -193,6 +202,21 @@ type StorageConnectorsParameters struct {
 	// ARN of the storage connector.
 	// +kubebuilder:validation:Optional
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
+}
+
+type StreamingExperienceSettingsObservation struct {
+
+	// The preferred protocol that you want to use while streaming your application.
+	// Valid values are TCP and UDP.
+	PreferredProtocol *string `json:"preferredProtocol,omitempty" tf:"preferred_protocol,omitempty"`
+}
+
+type StreamingExperienceSettingsParameters struct {
+
+	// The preferred protocol that you want to use while streaming your application.
+	// Valid values are TCP and UDP.
+	// +kubebuilder:validation:Optional
+	PreferredProtocol *string `json:"preferredProtocol,omitempty" tf:"preferred_protocol,omitempty"`
 }
 
 type UserSettingsObservation struct {

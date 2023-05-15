@@ -34,6 +34,18 @@ type AmisObservation struct {
 type AmisParameters struct {
 }
 
+type ContainersObservation struct {
+
+	// Set of URIs for created containers.
+	ImageUris []*string `json:"imageUris,omitempty" tf:"image_uris,omitempty"`
+
+	// Region of the AMI.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type ContainersParameters struct {
+}
+
 type ImageObservation struct {
 
 	// Amazon Resource Name (ARN) of the image.
@@ -175,6 +187,9 @@ type OutputResourcesObservation struct {
 
 	// Set of objects with each Amazon Machine Image (AMI) created.
 	Amis []AmisObservation `json:"amis,omitempty" tf:"amis,omitempty"`
+
+	// Set of objects with each container image created and stored in the output repository.
+	Containers []ContainersObservation `json:"containers,omitempty" tf:"containers,omitempty"`
 }
 
 type OutputResourcesParameters struct {

@@ -94,9 +94,40 @@ spec:
                   description:
                     description: The workspace description.
                     type: string
+                  grafanaVersion:
+                    description: Specifies the version of Grafana to support in the
+                      new workspace. Supported values are 8.4 and 9.4. If not specified,
+                      defaults to 8.4. Upgrading the workspace version isn't supported,
+                      however it's possible to copy content from the old version to
+                      the new one using AWS official migration tool.
+                    type: string
                   name:
                     description: The Grafana workspace name.
                     type: string
+                  networkAccessControl:
+                    description: Configuration for network access to your workspace.See
+                      Network Access Control below.
+                    items:
+                      properties:
+                        prefixListIds:
+                          description: '- An array of prefix list IDs.'
+                          items:
+                            type: string
+                          type: array
+                        vpceIds:
+                          description: '- An array of Amazon VPC endpoint IDs for
+                            the workspace. The only VPC endpoints that can be specified
+                            here are interface VPC endpoints for Grafana workspaces
+                            (using the com.amazonaws.[region].grafana-workspace service
+                            endpoint). Other VPC endpoints will be ignored.'
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - prefixListIds
+                      - vpceIds
+                      type: object
+                    type: array
                   notificationDestinations:
                     description: The notification destinations. If a data source is
                       specified here, Amazon Managed Grafana will create IAM roles
@@ -468,13 +499,38 @@ spec:
                     description: The endpoint of the Grafana workspace.
                     type: string
                   grafanaVersion:
-                    description: The version of Grafana running on the workspace.
+                    description: Specifies the version of Grafana to support in the
+                      new workspace. Supported values are 8.4 and 9.4. If not specified,
+                      defaults to 8.4. Upgrading the workspace version isn't supported,
+                      however it's possible to copy content from the old version to
+                      the new one using AWS official migration tool.
                     type: string
                   id:
                     type: string
                   name:
                     description: The Grafana workspace name.
                     type: string
+                  networkAccessControl:
+                    description: Configuration for network access to your workspace.See
+                      Network Access Control below.
+                    items:
+                      properties:
+                        prefixListIds:
+                          description: '- An array of prefix list IDs.'
+                          items:
+                            type: string
+                          type: array
+                        vpceIds:
+                          description: '- An array of Amazon VPC endpoint IDs for
+                            the workspace. The only VPC endpoints that can be specified
+                            here are interface VPC endpoints for Grafana workspaces
+                            (using the com.amazonaws.[region].grafana-workspace service
+                            endpoint). Other VPC endpoints will be ignored.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   notificationDestinations:
                     description: The notification destinations. If a data source is
                       specified here, Amazon Managed Grafana will create IAM roles

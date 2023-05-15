@@ -155,6 +155,9 @@ type OfflineStoreConfigObservation struct {
 
 	// The Amazon Simple Storage (Amazon S3) location of OfflineStore. See S3 Storage Config Below.
 	S3StorageConfig []S3StorageConfigObservation `json:"s3StorageConfig,omitempty" tf:"s3_storage_config,omitempty"`
+
+	// Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/).
+	TableFormat *string `json:"tableFormat,omitempty" tf:"table_format,omitempty"`
 }
 
 type OfflineStoreConfigParameters struct {
@@ -170,6 +173,10 @@ type OfflineStoreConfigParameters struct {
 	// The Amazon Simple Storage (Amazon S3) location of OfflineStore. See S3 Storage Config Below.
 	// +kubebuilder:validation:Required
 	S3StorageConfig []S3StorageConfigParameters `json:"s3StorageConfig" tf:"s3_storage_config,omitempty"`
+
+	// Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/).
+	// +kubebuilder:validation:Optional
+	TableFormat *string `json:"tableFormat,omitempty" tf:"table_format,omitempty"`
 }
 
 type OnlineStoreConfigObservation struct {

@@ -115,14 +115,41 @@ spec:
                           type: array
                       type: object
                     type: array
+                  documentDbEventSourceConfig:
+                    description: Configuration settings for a DocumentDB event source.
+                      Detailed below.
+                    items:
+                      properties:
+                        collectionName:
+                          description: The name of the collection to consume within
+                            the database. If you do not specify a collection, Lambda
+                            consumes all collections.
+                          type: string
+                        databaseName:
+                          description: The name of the database to consume within
+                            the DocumentDB cluster.
+                          type: string
+                        fullDocument:
+                          description: 'Determines what DocumentDB sends to your event
+                            stream during document update operations. If set to UpdateLookup,
+                            DocumentDB sends a delta describing the changes, along
+                            with a copy of the entire document. Otherwise, DocumentDB
+                            sends only a partial document that contains the changes.
+                            Valid values: UpdateLookup, Default.'
+                          type: string
+                      required:
+                      - databaseName
+                      type: object
+                    type: array
                   enabled:
                     description: Determines if the mapping will be enabled on creation.
                       Defaults to true.
                     type: boolean
                   eventSourceArn:
                     description: The event source ARN - this is required for Kinesis
-                      stream, DynamoDB stream, SQS queue, MQ broker or MSK cluster.  It
-                      is incompatible with a Self Managed Kafka source.
+                      stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or
+                      DocumentDB change stream.  It is incompatible with a Self Managed
+                      Kafka source.
                     type: string
                   filterCriteria:
                     description: The criteria to use for event filtering Kinesis stream,
@@ -602,14 +629,39 @@ spec:
                           type: array
                       type: object
                     type: array
+                  documentDbEventSourceConfig:
+                    description: Configuration settings for a DocumentDB event source.
+                      Detailed below.
+                    items:
+                      properties:
+                        collectionName:
+                          description: The name of the collection to consume within
+                            the database. If you do not specify a collection, Lambda
+                            consumes all collections.
+                          type: string
+                        databaseName:
+                          description: The name of the database to consume within
+                            the DocumentDB cluster.
+                          type: string
+                        fullDocument:
+                          description: 'Determines what DocumentDB sends to your event
+                            stream during document update operations. If set to UpdateLookup,
+                            DocumentDB sends a delta describing the changes, along
+                            with a copy of the entire document. Otherwise, DocumentDB
+                            sends only a partial document that contains the changes.
+                            Valid values: UpdateLookup, Default.'
+                          type: string
+                      type: object
+                    type: array
                   enabled:
                     description: Determines if the mapping will be enabled on creation.
                       Defaults to true.
                     type: boolean
                   eventSourceArn:
                     description: The event source ARN - this is required for Kinesis
-                      stream, DynamoDB stream, SQS queue, MQ broker or MSK cluster.  It
-                      is incompatible with a Self Managed Kafka source.
+                      stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or
+                      DocumentDB change stream.  It is incompatible with a Self Managed
+                      Kafka source.
                     type: string
                   filterCriteria:
                     description: The criteria to use for event filtering Kinesis stream,

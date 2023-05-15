@@ -3,15 +3,14 @@ kind: PermissionSetInlinePolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsetinlinepolicy
-    upjet.upbound.io/manual-intervention: "This resource was skipped because this is dependent on the PermissionSet resource."
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which
+    the operation will be executed)."
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    instanceArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

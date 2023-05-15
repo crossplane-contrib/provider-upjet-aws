@@ -81,8 +81,14 @@ type LBObservation struct {
 	// Indicates whether HTTP/2 is enabled in application load balancers. Defaults to true.
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
+	// Indicates whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
+	EnableTLSVersionAndCipherSuiteHeaders *bool `json:"enableTlsVersionAndCipherSuiteHeaders,omitempty" tf:"enable_tls_version_and_cipher_suite_headers,omitempty"`
+
 	// Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. Defaults to false.
 	EnableWafFailOpen *bool `json:"enableWafFailOpen,omitempty" tf:"enable_waf_fail_open,omitempty"`
+
+	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
+	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
 
 	// The ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -93,7 +99,7 @@ type LBObservation struct {
 	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
-	// If true, the LB will be internal.
+	// If true, the LB will be internal. Defaults to false.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
 	// The type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
@@ -125,6 +131,9 @@ type LBObservation struct {
 
 	// The ARN of the load balancer (matches arn).
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Determines how the load balancer modifies the X-Forwarded-For header in the HTTP request before sending the request to the target. The possible values are append, preserve, and remove. Only valid for Load Balancers of type application. The default is append.
+	XffHeaderProcessingMode *string `json:"xffHeaderProcessingMode,omitempty" tf:"xff_header_processing_mode,omitempty"`
 
 	// The canonical hosted zone ID of the load balancer (to be used in a Route 53 Alias record).
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
@@ -160,9 +169,17 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 
+	// Indicates whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
+	// +kubebuilder:validation:Optional
+	EnableTLSVersionAndCipherSuiteHeaders *bool `json:"enableTlsVersionAndCipherSuiteHeaders,omitempty" tf:"enable_tls_version_and_cipher_suite_headers,omitempty"`
+
 	// Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableWafFailOpen *bool `json:"enableWafFailOpen,omitempty" tf:"enable_waf_fail_open,omitempty"`
+
+	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
 
 	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
 	// +kubebuilder:validation:Optional
@@ -172,7 +189,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
-	// If true, the LB will be internal.
+	// If true, the LB will be internal. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
@@ -233,6 +250,10 @@ type LBParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Determines how the load balancer modifies the X-Forwarded-For header in the HTTP request before sending the request to the target. The possible values are append, preserve, and remove. Only valid for Load Balancers of type application. The default is append.
+	// +kubebuilder:validation:Optional
+	XffHeaderProcessingMode *string `json:"xffHeaderProcessingMode,omitempty" tf:"xff_header_processing_mode,omitempty"`
 }
 
 type SubnetMappingObservation struct {

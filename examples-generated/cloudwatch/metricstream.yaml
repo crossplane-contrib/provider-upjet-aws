@@ -33,20 +33,7 @@ metadata:
   name: firehose-to-s3
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "firehose.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.firehose_assume_role.json}
 
 ---
 
@@ -60,20 +47,7 @@ metadata:
   name: metric-stream-to-firehose
 spec:
   forProvider:
-    assumeRolePolicy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-              "Service": "streams.metrics.cloudwatch.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-          }
-        ]
-      }
+    assumeRolePolicy: ${data.aws_iam_policy_document.streams_assume_role.json}
 
 ---
 

@@ -123,6 +123,9 @@ type ContainerRecipeObservation struct {
 	// Platform of the container recipe.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Specifies the operating system platform when you use a custom base image.
+	PlatformOverride *string `json:"platformOverride,omitempty" tf:"platform_override,omitempty"`
+
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -185,6 +188,10 @@ type ContainerRecipeParameters struct {
 	// The base image for the container recipe.
 	// +kubebuilder:validation:Optional
 	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
+
+	// Specifies the operating system platform when you use a custom base image.
+	// +kubebuilder:validation:Optional
+	PlatformOverride *string `json:"platformOverride,omitempty" tf:"platform_override,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

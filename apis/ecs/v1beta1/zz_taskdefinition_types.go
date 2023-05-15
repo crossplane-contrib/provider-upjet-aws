@@ -247,6 +247,9 @@ type TaskDefinitionObservation struct {
 	// Full ARN of the Task Definition (including both family and revision).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// ARN of the Task Definition with the trailing revision removed. This may be useful for situations where the latest task definition is always desired. If a revision isn't specified, the latest ACTIVE revision is used. See the AWS documentation for details.
+	ArnWithoutRevision *string `json:"arnWithoutRevision,omitempty" tf:"arn_without_revision,omitempty"`
+
 	// Number of cpu units used by the task. If the requires_compatibilities is FARGATE this field is required.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
