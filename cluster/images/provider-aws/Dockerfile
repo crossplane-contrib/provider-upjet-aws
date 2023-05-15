@@ -27,7 +27,6 @@ FROM alpine:3.16.2 as base
 ARG CROSSPLANE_PROVIDER_VERSION
 ARG TARGETOS
 ARG TARGETARCH
-ARG APIGROUP
 ARG TERRAFORM_VERSION
 ARG TERRAFORM_PROVIDER_SOURCE
 ARG TERRAFORM_PROVIDER_VERSION
@@ -56,6 +55,3 @@ COPY --from=builder /tmp/terraform /usr/local/bin/
 COPY --from=builder /tmp/native/* ${PLUGIN_DIR}/
 
 ENTRYPOINT ["provider"]
-
-FROM base
-ADD "bin/${TARGETOS}_${TARGETARCH}/${APIGROUP}" /usr/local/bin/provider

@@ -1,9 +1,11 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-aws
+PROVIDER_NAME := aws
+PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
+export PROVIDER_NAME
 export TERRAFORM_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_VERSION := 4.66.0
@@ -57,23 +59,10 @@ export SUBPACKAGES := $(SUBPACKAGES)
 -include build/makelib/golang.mk
 
 # ====================================================================================
-# Setup XPKG
-
-XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
-# NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
-# inferred.
-XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
-
-export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
-export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
-
--include build/makelib/xpkg.mk
-
-# ====================================================================================
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.15.0
-UP_VERSION = v0.16.1
+UP_VERSION = v0.17.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.5.0
 
@@ -87,7 +76,23 @@ export UP_CHANNEL := $(UP_CHANNEL)
 
 REGISTRY_ORGS ?= xpkg.upbound.io/upbound
 IMAGES = provider-aws
+BATCH_PLATFORMS ?= linux_amd64,linux_arm64
+export BATCH_PLATFORMS := $(BATCH_PLATFORMS)
+
 -include build/makelib/imagelight.mk
+
+# ====================================================================================
+# Setup XPKG
+
+XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
+# NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
+# inferred.
+XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
+
+export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
+export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
+
+-include build/makelib/xpkg.mk
 
 # ====================================================================================
 # Targets
@@ -185,7 +190,10 @@ uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-monolith
+build-monolith:
+	@$(MAKE) build SUBPACKAGES=monolith LOAD_MONOLITH=true
+
+local-deploy: build-monolith controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-monolith
 	@$(INFO) running locally built provider
 	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-monolith --for condition=Healthy --timeout 5m
 	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
