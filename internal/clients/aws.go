@@ -78,7 +78,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 		}
 
 		if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
-			err = DefaultTerraformSetupBuilder(ctx, c, mg, &ps)
+			err = DefaultTerraformSetupBuilder(ctx, c, mg, pc, &ps)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
@@ -154,19 +154,6 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 			keySessionToken:    creds.SessionToken,
 		}
 	}
-
-	if pc.Spec.Endpoint.URL.Static != nil {
-		if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-			return errors.Wrap(err, "endpoint is wrong")
-		}
-	} else {
-		endpoints := make(map[string]string)
-		for _, service := range pc.Spec.Endpoint.Services {
-			endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
-		}
-		ps.Configuration[keyEndpoints] = endpoints
-	}
-
 	if len(pc.Spec.AssumeRoleChain) != 0 {
 		ps.Configuration[keyAssumeRole] = map[string]any{
 			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
@@ -175,16 +162,10 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 			keyExternalID:        pc.Spec.AssumeRoleChain[0].ExternalID,
 		}
 	}
-
-	ps.Configuration[keySkipCredsValidation]  = pc.Spec.SkipCredsValidation
-	ps.Configuration[keyS3UsePathStyle]       = pc.Spec.S3UsePathStyle
-	ps.Configuration[keySkipMetadataApiCheck] = pc.Spec.SkipMetadataApiCheck
-	ps.Configuration[keySkipReqAccountId]     = pc.Spec.SkipReqAccountId
-
 	return nil
 }
 
-func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, ps *terraform.Setup) error {
+func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	cfg, err := getAWSConfig(ctx, c, mg)
 	if err != nil {
 		return errors.Wrap(err, "cannot get AWS config")
@@ -193,11 +174,30 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 	if err != nil {
 		return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 	}
+
+	if pc.Spec.Endpoint != nil {
+		if pc.Spec.Endpoint.URL.Static != nil {
+			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+				return errors.Wrap(err, "endpoint is wrong")
+			} else {
+				endpoints := make(map[string]string)
+				for _, service := range pc.Spec.Endpoint.Services {
+					endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
+				}
+				ps.Configuration[keyEndpoints] = endpoints
+			}
+		}
+	}
+
 	ps.Configuration = map[string]any{
 		keyRegion:               cfg.Region,
 		keyAccessKeyID:          creds.AccessKeyID,
 		keySecretAccessKey:      creds.SecretAccessKey,
 		keySessionToken:         creds.SessionToken,
+		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
+		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
+		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
+		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}
 	return err
 }
