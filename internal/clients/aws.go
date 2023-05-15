@@ -35,6 +35,11 @@ const (
 	keyTags                      = "tags"
 	keyTransitiveTagKeys         = "transitive_tag_keys"
 	keyExternalID                = "external_id"
+	keySkipCredsValidation       = "skip_credentials_validation"
+	keyS3UsePathStyle            = "s3_use_path_style"
+	keySkipMetadataApiCheck      = "skip_metadata_api_check"
+	keySkipReqAccountId          = "skip_requesting_account_id"
+	keyEndpoints                 = "endpoints"
 )
 
 type SetupConfig struct {
@@ -48,7 +53,8 @@ type SetupConfig struct {
 func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn {
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
-		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
+		var err error
+		if err = c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
 		ps := terraform.Setup{
@@ -59,17 +65,20 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			},
 			Scheduler: config.DefaultScheduler,
 		}
-
-		account, err := getAccountId(ctx, c, mg)
-		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
+		account := "000000000"
+		if !pc.Spec.SkipCredsValidation {
+			account, err = getAccountId(ctx, c, mg)
+			if err != nil {
+				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
+			}
 		}
+
 		ps.ClientMetadata = map[string]string{
 			keyAccountId: account,
 		}
 
 		if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
-			err = DefaultTerraformSetupBuilder(ctx, c, mg, &ps)
+			err = DefaultTerraformSetupBuilder(ctx, c, mg, pc, &ps)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
@@ -145,7 +154,6 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 			keySessionToken:    creds.SessionToken,
 		}
 	}
-
 	if len(pc.Spec.AssumeRoleChain) != 0 {
 		ps.Configuration[keyAssumeRole] = map[string]any{
 			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
@@ -157,7 +165,7 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 	return nil
 }
 
-func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, ps *terraform.Setup) error {
+func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	cfg, err := getAWSConfig(ctx, c, mg)
 	if err != nil {
 		return errors.Wrap(err, "cannot get AWS config")
@@ -166,11 +174,30 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 	if err != nil {
 		return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 	}
+
+	if pc.Spec.Endpoint != nil {
+		if pc.Spec.Endpoint.URL.Static != nil {
+			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+				return errors.Wrap(err, "endpoint is wrong")
+			} else {
+				endpoints := make(map[string]string)
+				for _, service := range pc.Spec.Endpoint.Services {
+					endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
+				}
+				ps.Configuration[keyEndpoints] = endpoints
+			}
+		}
+	}
+
 	ps.Configuration = map[string]any{
-		keyRegion:          cfg.Region,
-		keyAccessKeyID:     creds.AccessKeyID,
-		keySecretAccessKey: creds.SecretAccessKey,
-		keySessionToken:    creds.SessionToken,
+		keyRegion:               cfg.Region,
+		keyAccessKeyID:          creds.AccessKeyID,
+		keySecretAccessKey:      creds.SecretAccessKey,
+		keySessionToken:         creds.SessionToken,
+		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
+		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
+		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
+		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}
 	return err
 }

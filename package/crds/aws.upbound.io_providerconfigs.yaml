@@ -204,6 +204,12 @@ spec:
                   partitionId:
                     description: The AWS partition the endpoint belongs to.
                     type: string
+                  services:
+                    description: Specifies the list of services you want endpoint
+                      to be used for
+                    items:
+                      type: string
+                    type: array
                   signingMethod:
                     description: The signing method that should be used for signing
                       the requests to the endpoint.
@@ -279,6 +285,24 @@ spec:
                 required:
                 - url
                 type: object
+              s3_use_path_style:
+                description: Whether to enable the request to use path-style addressing,
+                  i.e., https://s3.amazonaws.com/BUCKET/KEY.
+                type: boolean
+              skip_credentials_validation:
+                description: Whether to skip credentials validation via the STS API.
+                  This can be useful for testing and for AWS API implementations that
+                  do not have STS available.
+                type: boolean
+              skip_metadata_api_check:
+                description: Whether to skip the AWS Metadata API check Useful for
+                  AWS API implementations that do not have a metadata API endpoint.
+                type: boolean
+              skip_requesting_account_id:
+                description: Whether to skip requesting the account ID. Useful for
+                  AWS API implementations that do not have the IAM, STS API, or metadata
+                  API
+                type: boolean
             required:
             - credentials
             type: object

@@ -89,6 +89,11 @@ func (in *DynamicURLConfig) DeepCopy() *DynamicURLConfig {
 func (in *EndpointConfig) DeepCopyInto(out *EndpointConfig) {
 	*out = *in
 	in.URL.DeepCopyInto(&out.URL)
+	if in.Services != nil {
+		in, out := &in.Services, &out.Services
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	if in.HostnameImmutable != nil {
 		in, out := &in.HostnameImmutable, &out.HostnameImmutable
 		*out = new(bool)
