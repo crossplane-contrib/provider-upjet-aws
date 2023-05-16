@@ -4,7 +4,7 @@ metadata:
   name: {{ .Name }}
 {{ if ne .Service "monolith" }}
   labels:
-    pkg.crossplane.io/provider-family: provider-{{ .ProviderName }}-config
+    pkg.crossplane.io/provider-family: provider-family-{{ .ProviderName }}
 {{ end }}
   annotations:
     meta.crossplane.io/maintainer: Upbound <support@upbound.io>
@@ -24,6 +24,6 @@ metadata:
 {{ if and (ne .Service "config") (ne .Service "monolith") -}}
 spec:
   dependsOn:
-    - provider: {{ .XpkgRegOrg }}/provider-{{ .ProviderName }}-config
+    - provider: {{ .XpkgRegOrg }}/provider-family-{{ .ProviderName }}
       version: "{{ .DepConstraint }}"
 {{ end }}
