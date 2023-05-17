@@ -41,7 +41,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: example-destination-rand456
+    crossplane.io/external-name: example-destination-rand1test
     meta.upbound.io/example-id: appflow/v1beta1/flow
   labels:
     testing.upbound.io/example-name: example_destination
@@ -54,7 +54,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: example-source-rand123
+    crossplane.io/external-name: example-source-rand2test
     meta.upbound.io/example-id: appflow/v1beta1/flow
   labels:
     testing.upbound.io/example-name: example_source
@@ -93,8 +93,8 @@ spec:
                     "s3:PutObjectAcl"
                   ],
                   "Resource": [
-                    "arn:aws:s3:::example-destination-rand456",
-                    "arn:aws:s3:::example-destination-rand456/*"
+                    "arn:aws:s3:::example-destination-rand1test",
+                    "arn:aws:s3:::example-destination-rand1test/*"
                   ]
               }
           ]
@@ -127,8 +127,8 @@ spec:
                       "s3:GetObject"
                   ],
                   "Resource": [
-                     "arn:aws:s3:::example-source-rand123",
-                     "arn:aws:s3:::example-source-rand123/*"
+                     "arn:aws:s3:::example-source-rand2test",
+                     "arn:aws:s3:::example-source-rand2test/*"
                   ]
 
               }

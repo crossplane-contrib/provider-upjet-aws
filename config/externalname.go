@@ -46,7 +46,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// ID is a random UUID.
 	"aws_prometheus_workspace":            config.IdentifierFromProvider,
-	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .parameters.region }}:{{ .client_metadata.account_id }}:rulegroupsnamespace/IDstring/{{ .external_name }}"),
+	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:rulegroupsnamespace/IDstring/{{ .external_name }}"),
 	// Uses the ID of workspace, workspace_id parameter.
 	"aws_prometheus_alert_manager_definition": config.IdentifierFromProvider,
 
@@ -1647,7 +1647,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// config.NameAsIdentifier did not work, the identifier for the resource turned out to be an ARN
 	// arn:aws:cloudformation:us-west-1:123456789123:stack/networking-stack/1e691240-6f2c-11ed-8f91-06094dc221f3
-	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .parameters.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 
@@ -1755,7 +1755,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// appflow
 	//
 	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow
-	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .parameters.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
+	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
 
 	// sns
 	//
@@ -2262,10 +2262,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_networkmanager_transit_gateway_registration": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},{{ .parameters.transit_gateway_arn }}"),
 	// aws_networkmanager_transit_gateway_connect_peer_association can be imported using the global network ID and customer gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:transit-gateway-connect-peer/tgw-connect-peer-12345678
-	"aws_networkmanager_transit_gateway_connect_peer_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:transit-gateway-connect-peer/{{ .parameters.transit_gateway_connect_peer_arn }}"),
+	"aws_networkmanager_transit_gateway_connect_peer_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:transit-gateway-connect-peer/{{ .parameters.transit_gateway_connect_peer_arn }}"),
 	// aws_networkmanager_customer_gateway_association can be imported using the global network ID and customer gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:customer-gateway/cgw-123abc05e04123abc
-	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
+	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
 
 	// waf
 	//
@@ -2587,7 +2587,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_evidently_project": config.IdentifierFromProvider,
 	// CloudWatch Evidently Segment can be imported using the arn
 	// Example: arn:aws:evidently:us-west-2:123456789012:segment/example
-	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .parameters.region }}:{{ .setup.client_metadata.account_id }}:segment/{{ .external_name }}"),
+	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:segment/{{ .external_name }}"),
 
 	// fis
 	//
