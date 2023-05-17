@@ -3,6 +3,7 @@ kind: Flow
 metadata:
   annotations:
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "This resource depends on BucketPolicy. This resource is skipping because the BucketPolicy resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,11 +42,11 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: example-destination-rand1test
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example_destination
-  name: example-destination
+  name: example-destination-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1
@@ -54,11 +55,11 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
-    crossplane.io/external-name: example-source-rand2test
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example_source
-  name: example-source
+  name: example-source-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1
@@ -68,6 +69,7 @@ kind: BucketPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "The bucket ARN in policy should be changed manually."
   labels:
     testing.upbound.io/example-name: example_destination
   name: example-destination
@@ -83,7 +85,9 @@ spec:
               {
                   "Sid": "AllowAppFlowDestinationActions",
                   "Effect": "Allow",
-                  "Principal":"*",
+                  "Principal": {
+                    "Service": "appflow.amazonaws.com"
+                  },
                   "Action": [
                     "s3:PutObject",
                     "s3:AbortMultipartUpload",
@@ -93,8 +97,8 @@ spec:
                     "s3:PutObjectAcl"
                   ],
                   "Resource": [
-                    "arn:aws:s3:::example-destination-rand1test",
-                    "arn:aws:s3:::example-destination-rand1test/*"
+                    "arn:aws:s3:::<bucket name>",
+                    "arn:aws:s3:::<bucket name>/*"
                   ]
               }
           ]
@@ -106,6 +110,7 @@ kind: BucketPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "The bucket ARN in policy should be changed manually."
   labels:
     testing.upbound.io/example-name: example_source
   name: example-source
@@ -121,14 +126,16 @@ spec:
               {
                   "Sid": "AllowAppFlowSourceActions",
                   "Effect": "Allow",
-                  "Principal":"*",
+                  "Principal": {
+                    "Service": "appflow.amazonaws.com"
+                  },
                   "Action": [
                       "s3:ListBucket",
                       "s3:GetObject"
                   ],
                   "Resource": [
-                     "arn:aws:s3:::example-source-rand2test",
-                     "arn:aws:s3:::example-source-rand2test/*"
+                     "arn:aws:s3:::<bucket name>",
+                     "arn:aws:s3:::<bucket name>/*"
                   ]
 
               }
@@ -141,6 +148,7 @@ kind: Object
 metadata:
   annotations:
     meta.upbound.io/example-id: appflow/v1beta1/flow
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
