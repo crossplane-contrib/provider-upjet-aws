@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a password secret reference."
+    meta.upbound.io/example-id: rds/v1beta1/cluster
 spec:
   forProvider:
     region: us-west-1
@@ -17,3 +17,12 @@ spec:
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
     namespace: upbound-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!

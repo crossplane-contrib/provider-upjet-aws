@@ -52,6 +52,12 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["reader_endpoint"].(string); ok {
 				conn["reader_endpoint"] = []byte(a)
 			}
+			if a, ok := attr["master_username"].(string); ok {
+				conn["master_username"] = []byte(a)
+			}
+			if a, ok := attr["port"]; ok {
+				conn["port"] = []byte(fmt.Sprintf("%v", a))
+			}
 			return conn, nil
 		}
 	})
