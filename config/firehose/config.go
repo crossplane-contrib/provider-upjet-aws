@@ -1,6 +1,7 @@
 package firehose
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
@@ -9,6 +10,8 @@ import (
 // Configure adds configurations for firehose group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kinesis_firehose_delivery_stream", func(r *config.Resource) {
+		r.TerraformResource.Schema["splunk_configuration"].Elem.(*schema.Resource).Schema["hec_token"].Sensitive = true
+
 		r.References["extended_s3_configuration.role_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
