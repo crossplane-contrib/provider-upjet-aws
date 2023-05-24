@@ -11,15 +11,12 @@ import (
 // Configure adds configurations for elasticache group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_elasticache_cluster", func(r *config.Resource) {
-		r.References = config.References{
-			"parameter_group_name": config.Reference{
-				Type: "ParameterGroup",
-			},
-			"subnet_group_name": config.Reference{
-				Type: "SubnetGroup",
-			},
+		r.References["parameter_group_name"] = config.Reference{
+			TerraformName: "aws_elasticache_parameter_group",
 		}
-		r.UseAsync = true
+		// log_delivery_configuration.destination can point to either
+		// a CloudWatch Logs LogGroup or Kinesis Data Firehose resource.
+		delete(r.References, "log_delivery_configuration.destination")
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_replication_group", func(r *config.Resource) {

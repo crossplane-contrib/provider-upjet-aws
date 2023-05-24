@@ -219,15 +219,15 @@ type ClusterParameters struct {
 	OutpostMode *string `json:"outpostMode,omitempty" tf:"outpost_mode,omitempty"`
 
 	// –  The name of the parameter group to associate with this cache cluster.
-	// +crossplane:generate:reference:type=ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
-	// Reference to a ParameterGroup to populate parameterGroupName.
+	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a ParameterGroup to populate parameterGroupName.
+	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -249,10 +249,31 @@ type ClusterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 
+	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
+	// +kubebuilder:validation:Optional
+	ReplicationGroupIDRef *v1.Reference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
+	// +kubebuilder:validation:Optional
+	ReplicationGroupIDSelector *v1.Selector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// –  One or more VPC security groups associated with the cache cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -277,15 +298,15 @@ type ClusterParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// create the resource.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate subnetGroupName.
+	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameRef *v1.Reference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate subnetGroupName.
+	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v1.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
