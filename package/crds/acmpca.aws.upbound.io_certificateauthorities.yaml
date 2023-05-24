@@ -177,6 +177,13 @@ spec:
                       Defaults to true. Can only be disabled if the CA is in an ACTIVE
                       state.
                     type: boolean
+                  keyStorageSecurityStandard:
+                    description: 'Cryptographic key management compliance standard
+                      used for handling CA keys. Defaults to FIPS_140_2_LEVEL_3_OR_HIGHER.
+                      Valid values: FIPS_140_2_LEVEL_3_OR_HIGHER and FIPS_140_2_LEVEL_2_OR_HIGHER.
+                      Supported standard for each region can be found in the Storage
+                      and security compliance of AWS Private CA private keys Documentation.'
+                    type: string
                   permanentDeletionTimeInDays:
                     description: Number of days to make a CA restorable after it has
                       been deleted, must be between 7 to 30 days, with default to
@@ -591,6 +598,13 @@ spec:
                     type: boolean
                   id:
                     description: ARN of the certificate authority.
+                    type: string
+                  keyStorageSecurityStandard:
+                    description: 'Cryptographic key management compliance standard
+                      used for handling CA keys. Defaults to FIPS_140_2_LEVEL_3_OR_HIGHER.
+                      Valid values: FIPS_140_2_LEVEL_3_OR_HIGHER and FIPS_140_2_LEVEL_2_OR_HIGHER.
+                      Supported standard for each region can be found in the Storage
+                      and security compliance of AWS Private CA private keys Documentation.'
                     type: string
                   notAfter:
                     description: Date and time after which the certificate authority

@@ -15,11 +15,18 @@ import (
 
 type ExcludeFilterObservation struct {
 
+	// An array that defines the metrics you want to exclude for this metric namespace
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
+
 	// Name of the metric namespace in the filter.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type ExcludeFilterParameters struct {
+
+	// An array that defines the metrics you want to exclude for this metric namespace
+	// +kubebuilder:validation:Optional
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Required
@@ -28,11 +35,18 @@ type ExcludeFilterParameters struct {
 
 type IncludeFilterObservation struct {
 
+	// An array that defines the metrics you want to include for this metric namespace
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
+
 	// Name of the metric namespace in the filter.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type IncludeFilterParameters struct {
+
+	// An array that defines the metrics you want to include for this metric namespace
+	// +kubebuilder:validation:Optional
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Required
@@ -67,7 +81,7 @@ type MetricStreamObservation struct {
 	// Date and time in RFC3339 format that the metric stream was created.
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
-	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here. Conflicts with include_filter.
+	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces and the conditional metric names that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is excluded. Conflicts with include_filter.
 	ExcludeFilter []ExcludeFilterObservation `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
 
 	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
@@ -75,7 +89,7 @@ type MetricStreamObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of inclusive metric filters. If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. Conflicts with exclude_filter.
+	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
 	IncludeFilter []IncludeFilterObservation `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
 	// account observability.
@@ -108,7 +122,7 @@ type MetricStreamObservation struct {
 
 type MetricStreamParameters struct {
 
-	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here. Conflicts with include_filter.
+	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces and the conditional metric names that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is excluded. Conflicts with include_filter.
 	// +kubebuilder:validation:Optional
 	ExcludeFilter []ExcludeFilterParameters `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
 
@@ -126,7 +140,7 @@ type MetricStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 
-	// List of inclusive metric filters. If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. Conflicts with exclude_filter.
+	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
 	// +kubebuilder:validation:Optional
 	IncludeFilter []IncludeFilterParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
