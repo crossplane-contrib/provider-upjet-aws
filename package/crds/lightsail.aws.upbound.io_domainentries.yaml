@@ -362,7 +362,7 @@ spec:
                     type: string
                   id:
                     description: 'A combination of attributes to create a unique id:
-                      name_domain_name_type_target'
+                      name,domain_name,type,target'
                     type: string
                   isAlias:
                     description: If the entry should be an alias Defaults to false

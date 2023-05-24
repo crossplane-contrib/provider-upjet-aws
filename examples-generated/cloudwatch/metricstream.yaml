@@ -12,8 +12,12 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: s3_stream
     includeFilter:
-    - namespace: AWS/EC2
-    - namespace: AWS/EBS
+    - metricNames:
+      - CPUUtilization
+      - NetworkOut
+      namespace: AWS/EC2
+    - metricNames: []
+      namespace: AWS/EBS
     name: my-metric-stream
     outputFormat: json
     region: us-west-1

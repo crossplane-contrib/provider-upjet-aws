@@ -131,7 +131,7 @@ type OntapFileSystemObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048.
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
@@ -245,7 +245,7 @@ type OntapFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048.
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 

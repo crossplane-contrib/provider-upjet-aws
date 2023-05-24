@@ -363,6 +363,11 @@ func (in *CertificateAuthorityObservation) DeepCopyInto(out *CertificateAuthorit
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyStorageSecurityStandard != nil {
+		in, out := &in.KeyStorageSecurityStandard, &out.KeyStorageSecurityStandard
+		*out = new(string)
+		**out = **in
+	}
 	if in.NotAfter != nil {
 		in, out := &in.NotAfter, &out.NotAfter
 		*out = new(string)
@@ -460,6 +465,11 @@ func (in *CertificateAuthorityParameters) DeepCopyInto(out *CertificateAuthority
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.KeyStorageSecurityStandard != nil {
+		in, out := &in.KeyStorageSecurityStandard, &out.KeyStorageSecurityStandard
+		*out = new(string)
 		**out = **in
 	}
 	if in.PermanentDeletionTimeInDays != nil {

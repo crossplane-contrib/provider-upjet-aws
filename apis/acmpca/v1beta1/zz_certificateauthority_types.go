@@ -63,6 +63,9 @@ type CertificateAuthorityObservation struct {
 	// ARN of the certificate authority.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Cryptographic key management compliance standard used for handling CA keys. Defaults to FIPS_140_2_LEVEL_3_OR_HIGHER. Valid values: FIPS_140_2_LEVEL_3_OR_HIGHER and FIPS_140_2_LEVEL_2_OR_HIGHER. Supported standard for each region can be found in the Storage and security compliance of AWS Private CA private keys Documentation.
+	KeyStorageSecurityStandard *string `json:"keyStorageSecurityStandard,omitempty" tf:"key_storage_security_standard,omitempty"`
+
 	// Date and time after which the certificate authority is not valid. Only available after the certificate authority certificate has been imported.
 	NotAfter *string `json:"notAfter,omitempty" tf:"not_after,omitempty"`
 
@@ -103,6 +106,10 @@ type CertificateAuthorityParameters struct {
 	// Whether the certificate authority is enabled or disabled. Defaults to true. Can only be disabled if the CA is in an ACTIVE state.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Cryptographic key management compliance standard used for handling CA keys. Defaults to FIPS_140_2_LEVEL_3_OR_HIGHER. Valid values: FIPS_140_2_LEVEL_3_OR_HIGHER and FIPS_140_2_LEVEL_2_OR_HIGHER. Supported standard for each region can be found in the Storage and security compliance of AWS Private CA private keys Documentation.
+	// +kubebuilder:validation:Optional
+	KeyStorageSecurityStandard *string `json:"keyStorageSecurityStandard,omitempty" tf:"key_storage_security_standard,omitempty"`
 
 	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
 	// +kubebuilder:validation:Optional

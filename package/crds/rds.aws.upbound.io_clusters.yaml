@@ -70,8 +70,7 @@ spec:
                 properties:
                   allocatedStorage:
                     description: The amount of storage in gibibytes (GiB) to allocate
-                      to each DB instance in the Multi-AZ DB cluster. (This setting
-                      is required to create a Multi-AZ DB cluster).
+                      to each DB instance in the Multi-AZ DB cluster.
                     type: number
                   allowMajorVersionUpgrade:
                     description: Enable to allow major engine version upgrades when
@@ -119,8 +118,7 @@ spec:
                       DB instance classes are available in all AWS Regions, or for
                       all database engines. For the full list of DB instance classes
                       and availability for your engine, see DB instance class in the
-                      Amazon RDS User Guide. (This setting is required to create a
-                      Multi-AZ DB cluster).
+                      Amazon RDS User Guide.
                     type: string
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
@@ -271,9 +269,8 @@ spec:
                       per second) to be initially allocated for each DB instance in
                       the Multi-AZ DB cluster. For information about valid Iops values,
                       see Amazon RDS Provisioned IOPS storage to improve performance
-                      in the Amazon RDS User Guide. (This setting is required to create
-                      a Multi-AZ DB cluster). Must be a multiple between .5 and 50
-                      of the storage amount for the DB cluster.
+                      in the Amazon RDS User Guide. Must be a multiple between .5
+                      and 50 of the storage amount for the DB cluster.
                     type: number
                   kmsKeyId:
                     description: The ARN for the KMS encryption key. When specifying
@@ -785,9 +782,13 @@ spec:
                       cluster.
                     type: boolean
                   storageType:
-                    description: 'Specifies the storage type to be associated with
-                      the DB cluster. (This setting is required to create a Multi-AZ
-                      DB cluster). Valid values: io1, Default: io1.'
+                    description: '(Forces new for Multi-AZ DB clusters) Specifies
+                      the storage type to be associated with the DB cluster. For Aurora
+                      DB clusters, storage_type modifications can be done in-place.
+                      For Multi-AZ DB Clusters, the iops argument must also be set.
+                      Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1
+                      (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1
+                      (Multi-AZ DB Clusters).'
                     type: string
                   tags:
                     additionalProperties:
@@ -1073,8 +1074,7 @@ spec:
                 properties:
                   allocatedStorage:
                     description: The amount of storage in gibibytes (GiB) to allocate
-                      to each DB instance in the Multi-AZ DB cluster. (This setting
-                      is required to create a Multi-AZ DB cluster).
+                      to each DB instance in the Multi-AZ DB cluster.
                     type: number
                   allowMajorVersionUpgrade:
                     description: Enable to allow major engine version upgrades when
@@ -1128,8 +1128,7 @@ spec:
                       DB instance classes are available in all AWS Regions, or for
                       all database engines. For the full list of DB instance classes
                       and availability for your engine, see DB instance class in the
-                      Amazon RDS User Guide. (This setting is required to create a
-                      Multi-AZ DB cluster).
+                      Amazon RDS User Guide.
                     type: string
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
@@ -1225,9 +1224,8 @@ spec:
                       per second) to be initially allocated for each DB instance in
                       the Multi-AZ DB cluster. For information about valid Iops values,
                       see Amazon RDS Provisioned IOPS storage to improve performance
-                      in the Amazon RDS User Guide. (This setting is required to create
-                      a Multi-AZ DB cluster). Must be a multiple between .5 and 50
-                      of the storage amount for the DB cluster.
+                      in the Amazon RDS User Guide. Must be a multiple between .5
+                      and 50 of the storage amount for the DB cluster.
                     type: number
                   kmsKeyId:
                     description: The ARN for the KMS encryption key. When specifying
@@ -1433,9 +1431,13 @@ spec:
                       cluster.
                     type: boolean
                   storageType:
-                    description: 'Specifies the storage type to be associated with
-                      the DB cluster. (This setting is required to create a Multi-AZ
-                      DB cluster). Valid values: io1, Default: io1.'
+                    description: '(Forces new for Multi-AZ DB clusters) Specifies
+                      the storage type to be associated with the DB cluster. For Aurora
+                      DB clusters, storage_type modifications can be done in-place.
+                      For Multi-AZ DB Clusters, the iops argument must also be set.
+                      Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1
+                      (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1
+                      (Multi-AZ DB Clusters).'
                     type: string
                   tags:
                     additionalProperties:
