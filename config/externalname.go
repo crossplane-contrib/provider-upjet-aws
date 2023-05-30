@@ -585,8 +585,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_db_proxy_endpoint": config.TemplatedStringAsIdentifier("db_proxy_endpoint_name", "{{ .external_name }}/{{ .parameters.db_proxy_name }}"),
 	// RDS DB Proxy Targets can be imported using the db_proxy_name, target_group_name, target type (e.g., RDS_INSTANCE or TRACKED_CLUSTER), and resource identifier separated by forward slashes (/)
 	"aws_db_proxy_target": config.IdentifierFromProvider,
-	// DB Security groups can be imported using the name
-	"aws_db_security_group": config.NameAsIdentifier,
+	// NOTE(turkenf): The resource aws_db_security_group is deprecated,
+	// Please see: https://github.com/upbound/provider-aws/issues/696
 	// aws_db_snapshot can be imported by using the snapshot identifier
 	"aws_db_snapshot": config.ParameterAsIdentifier("db_snapshot_identifier"),
 	// RDS Aurora Cluster Database Activity Streams can be imported using the resource_arn

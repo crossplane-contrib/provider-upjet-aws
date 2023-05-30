@@ -692,7 +692,6 @@ import (
 	proxydefaulttargetgroup "github.com/upbound/provider-aws/internal/controller/rds/proxydefaulttargetgroup"
 	proxyendpoint "github.com/upbound/provider-aws/internal/controller/rds/proxyendpoint"
 	proxytarget "github.com/upbound/provider-aws/internal/controller/rds/proxytarget"
-	securitygrouprds "github.com/upbound/provider-aws/internal/controller/rds/securitygroup"
 	snapshotrds "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
@@ -1597,7 +1596,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		proxydefaulttargetgroup.Setup,
 		proxyendpoint.Setup,
 		proxytarget.Setup,
-		securitygrouprds.Setup,
 		snapshotrds.Setup,
 		subnetgrouprds.Setup,
 		authenticationprofile.Setup,
