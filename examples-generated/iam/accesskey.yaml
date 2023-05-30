@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     pgpKey: keybase:some_person_that_exists
+    region: us-west-1
     userSelector:
       matchLabels:
         testing.upbound.io/example-name: lb

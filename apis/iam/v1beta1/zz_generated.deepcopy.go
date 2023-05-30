@@ -136,6 +136,11 @@ func (in *AccessKeyParameters) DeepCopyInto(out *AccessKeyParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)

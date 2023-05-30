@@ -77,6 +77,10 @@ spec:
                       and not the "armored" one (e.g. avoid passing the -a option
                       to gpg --export).
                     type: string
+                  region:
+                    description: Region is the region you'd like your resource to
+                      be created in.
+                    type: string
                   status:
                     description: Access key status to apply. Defaults to Active. Valid
                       values are Active and Inactive.
@@ -157,6 +161,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - region
                 type: object
               managementPolicy:
                 default: FullControl
