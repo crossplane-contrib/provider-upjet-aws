@@ -21,7 +21,7 @@ import (
 // does not have a region notion.
 func RegionAddition() config.ResourceOption {
 	return func(r *config.Resource) {
-		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
+		if (r.ShortGroup == "iam" || r.ShortGroup == "opsworks") && r.Name != "aws_iam_access_key" {
 			return
 		}
 		c := "Region is the region you'd like your resource to be created in.\n"
