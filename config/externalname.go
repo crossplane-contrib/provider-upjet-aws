@@ -1127,9 +1127,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// RAM Resource Associations can be imported using their Resource Share ARN and Resource ARN separated by a comma:
 	// arn:aws:ram:eu-west-1:123456789012:resource-share/73da1ab9-b94a-4ba3-8eb4-45917f7f4b12,arn:aws:ec2:eu-west-1:123456789012:subnet/subnet-12345678
 	"aws_ram_resource_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "resource_arn"),
+	// RAM Principal Associations can be imported using their Resource Share ARN and the principal separated by a comma
+	"aws_ram_principal_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "principal"),
 	// Resource shares can be imported using the id
 	"aws_ram_resource_share": config.IdentifierFromProvider,
-
+	// Resource share accepters can be imported using the resource share ARN
+	"aws_ram_resource_share_accepter": config.IdentifierFromProvider,
 	// redshift
 	//
 	// Redshift Clusters can be imported using the cluster_identifier
