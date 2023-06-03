@@ -45,7 +45,7 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 # correctly.
 export GOPRIVATE = github.com/upbound/*
 
-GO_REQUIRED_VERSION ?= 1.19
+GO_REQUIRED_VERSION ?= 1.20
 GOLANGCILINT_VERSION ?= 1.50.0
 # SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 SUBPACKAGES ?= monolith

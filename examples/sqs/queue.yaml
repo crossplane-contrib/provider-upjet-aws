@@ -11,6 +11,6 @@ spec:
     maxMessageSize: 2048
     messageRetentionSeconds: 86400
     receiveWaitTimeSeconds: 10
-    region: us-west-1
+    region: us-east-1
     tags:
       Environment: production

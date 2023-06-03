@@ -6,6 +6,6 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      name: provider-creds
+      name: aws-creds
       namespace: upbound-system
       key: creds
