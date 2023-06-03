@@ -97,7 +97,14 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"name", "db_name"},
+			IgnoredFields: []string{
+				"allocated_storage",
+				"db_name",
+				"engine",
+				"engine_version",
+				"name",
+				"password",
+				"username"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
