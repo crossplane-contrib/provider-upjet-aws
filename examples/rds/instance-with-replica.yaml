@@ -30,7 +30,7 @@ spec:
     storageType: gp2
     kmsKeyIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: sample-key
+        testing.upbound.io/example-name: sample-key-rds-replicate
   writeConnectionSecretToRef:
     name: example-dbinstance-replicate-primary
     namespace: default
