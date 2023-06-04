@@ -64,6 +64,7 @@ spec:
     replicateSourceDbSelector:
       matchLabels:
           testing.upbound.io/example-name: example-dbinstance-replicate-primary
+    skipFinalSnapshot: true
   writeConnectionSecretToRef:
     name: example-dbinstance-replicate-replica
     namespace: default
