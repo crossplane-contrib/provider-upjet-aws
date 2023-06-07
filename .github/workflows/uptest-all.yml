@@ -44,7 +44,7 @@ jobs:
           - api-groups: examples/providerconfig/
     steps:
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@27d0a4f181a40b142cce983c5393082c365d1480 # v1
+        uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7 # v2
         with:
           platforms: all
 
