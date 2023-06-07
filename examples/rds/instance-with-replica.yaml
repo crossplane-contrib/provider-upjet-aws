@@ -3,6 +3,7 @@ kind: Instance
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/instance
+    uptest.upbound.io/timeout: "3600" # one hour timeout
   labels:
     testing.upbound.io/example-name: example-dbinstance-replicate-primary
   name: example-dbinstance-replicate-primary-${Rand.RFC1123Subdomain}
