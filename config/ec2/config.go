@@ -175,7 +175,7 @@ func Configure(p *config.Provider) {
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"interface_type", "private_ip_list", "private_ips", "ipv6_address_count",
+				"interface_type", "private_ip_list", "private_ips", "ipv6_addresses", "ipv6_address_count",
 			},
 		}
 		// Mutually exclusive with aws_network_interface_attachment
