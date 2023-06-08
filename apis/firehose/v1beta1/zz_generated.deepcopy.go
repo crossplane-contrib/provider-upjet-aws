@@ -4172,11 +4172,6 @@ func (in *SplunkConfigurationObservation) DeepCopyInto(out *SplunkConfigurationO
 		*out = new(string)
 		**out = **in
 	}
-	if in.HecToken != nil {
-		in, out := &in.HecToken, &out.HecToken
-		*out = new(string)
-		**out = **in
-	}
 	if in.ProcessingConfiguration != nil {
 		in, out := &in.ProcessingConfiguration, &out.ProcessingConfiguration
 		*out = make([]SplunkConfigurationProcessingConfigurationObservation, len(*in))
@@ -4231,11 +4226,7 @@ func (in *SplunkConfigurationParameters) DeepCopyInto(out *SplunkConfigurationPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.HecToken != nil {
-		in, out := &in.HecToken, &out.HecToken
-		*out = new(string)
-		**out = **in
-	}
+	out.HecTokenSecretRef = in.HecTokenSecretRef
 	if in.ProcessingConfiguration != nil {
 		in, out := &in.ProcessingConfiguration, &out.ProcessingConfiguration
 		*out = make([]SplunkConfigurationProcessingConfigurationParameters, len(*in))

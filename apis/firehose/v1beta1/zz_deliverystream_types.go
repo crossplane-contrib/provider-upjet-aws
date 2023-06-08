@@ -1983,9 +1983,6 @@ type SplunkConfigurationObservation struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
-	HecToken *string `json:"hecToken,omitempty" tf:"hec_token,omitempty"`
-
 	// The data processing configuration.  More details are given below.
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -2016,7 +2013,7 @@ type SplunkConfigurationParameters struct {
 
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
 	// +kubebuilder:validation:Required
-	HecToken *string `json:"hecToken" tf:"hec_token,omitempty"`
+	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
 	// The data processing configuration.  More details are given below.
 	// +kubebuilder:validation:Optional
