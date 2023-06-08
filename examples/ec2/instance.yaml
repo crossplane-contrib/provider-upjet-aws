@@ -3,6 +3,9 @@ kind: Instance
 metadata:
   annotations:
     uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
   name: sample-instance
 spec:
   forProvider:
@@ -11,7 +14,63 @@ spec:
     instanceType: t2.micro
     networkInterface:
     - deviceIndex: 0
-      networkInterfaceIdRef:
-        name: sample-ni
+      networkInterfaceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample-instance
     creditSpecification:
     - cpuCredits: unlimited
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    privateIps:
+      - "172.16.10.100"
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
