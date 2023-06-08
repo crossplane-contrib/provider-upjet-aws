@@ -28,7 +28,6 @@ import (
 	proxydefaulttargetgroup "github.com/upbound/provider-aws/internal/controller/rds/proxydefaulttargetgroup"
 	proxyendpoint "github.com/upbound/provider-aws/internal/controller/rds/proxyendpoint"
 	proxytarget "github.com/upbound/provider-aws/internal/controller/rds/proxytarget"
-	securitygroup "github.com/upbound/provider-aws/internal/controller/rds/securitygroup"
 	snapshot "github.com/upbound/provider-aws/internal/controller/rds/snapshot"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 )
@@ -56,7 +55,6 @@ func Setup_rds(mgr ctrl.Manager, o controller.Options) error {
 		proxydefaulttargetgroup.Setup,
 		proxyendpoint.Setup,
 		proxytarget.Setup,
-		securitygroup.Setup,
 		snapshot.Setup,
 		subnetgroup.Setup,
 	} {

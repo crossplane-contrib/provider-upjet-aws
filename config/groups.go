@@ -149,7 +149,6 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_db_proxy_endpoint":                                    ReplaceGroupWords("rds", 1),
 	"aws_db_proxy_target":                                      ReplaceGroupWords("rds", 1),
 	"aws_db_proxy":                                             ReplaceGroupWords("rds", 1),
-	"aws_db_security_group":                                    ReplaceGroupWords("rds", 1),
 	"aws_db_snapshot_copy":                                     ReplaceGroupWords("rds", 0),
 	"aws_db_snapshot":                                          ReplaceGroupWords("rds", 1),
 	"aws_db_subnet_group":                                      ReplaceGroupWords("rds", 1),
