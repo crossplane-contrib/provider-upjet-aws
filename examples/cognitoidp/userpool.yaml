@@ -1,0 +1,18 @@
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
+    upjet.upbound.io/manual-intervention: "This resource requires an existing lambda.Function for lambdaConfig paremeters"
+  labels:
+    testing.upbound.io/example-name: lambda-example
+  name: lambda-example
+spec:
+  forProvider:
+    name: lambda-example
+    region: eu-west-1
+    lambdaConfig:
+      - postAuthentication: arn:aws:lambda:us-west-1:123456789123:function:example
+        postConfirmation: arn:aws:lambda:us-west-1:123456789123:function:example
+        preAuthentication: arn:aws:lambda:us-west-1:123456789123:function:example
+        customMessage: arn:aws:lambda:us-west-1:123456789123:function:example
