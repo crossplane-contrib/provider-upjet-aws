@@ -11,6 +11,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
+	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/password"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -181,7 +182,9 @@ func Configure(p *config.Provider) {
 // for a resource if the toggle field is set to true and the secret referenced
 // by the secretRefFieldPath is not found or does not have content corresponding
 // to the password key.
-func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewInitializerFn {
+func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewInitializerFn { //nolint:gocyclo
+	// NOTE(muvaf): This function is just 1 point over the cyclo limit but there
+	// is no easy way to reduce it without making it harder to read.
 	return func(client client.Client) managed.Initializer {
 		return managed.InitializerFn(func(ctx context.Context, mg resource.Managed) error {
 			paved, err := fieldpath.PaveObject(mg)
@@ -189,8 +192,7 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 				return errors.Wrap(err, "cannot pave object")
 			}
 			sel := &v1.SecretKeySelector{}
-			err = paved.GetValueInto(secretRefFieldPath, sel)
-			if err != nil {
+			if err := paved.GetValueInto(secretRefFieldPath, sel); err != nil {
 				return errors.Wrapf(resource.Ignore(fieldpath.IsNotFound, err), "cannot unmarshal %s into a secret key selector", secretRefFieldPath)
 			}
 			s := &corev1.Secret{}
@@ -203,13 +205,12 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 			}
 			// At this point, either the secret doesn't exist, or it doesn't
 			// have the password filled.
-			gen, err := paved.GetBool(toggleFieldPath)
-			if resource.Ignore(fieldpath.IsNotFound, err) != nil {
-				return errors.Wrapf(err, "cannot get the value of %s", toggleFieldPath)
-			}
-			if !gen {
-				// Password is not set, and we don't want to generate one.
-				return nil
+			if gen, err := paved.GetBool(toggleFieldPath); err != nil || !gen {
+				// If there is error, then we return that.
+				// If the toggle field is not set to true, then we return nil.
+				// Because we don't want to generate a password if the user
+				// doesn't want to.
+				return errors.Wrapf(resource.Ignore(fieldpath.IsNotFound, err), "cannot get the value of %s", toggleFieldPath)
 			}
 			pw, err := password.Generate()
 			if err != nil {
@@ -217,6 +218,12 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 			}
 			s.SetName(sel.Name)
 			s.SetNamespace(sel.Namespace)
+			if !meta.WasCreated(s) {
+				// We don't want to own the Secret if it is created by someone
+				// else, otherwise the deletion of the managed resource will
+				// delete the Secret that we didn't create in the first place.
+				meta.AddOwnerReference(s, meta.AsOwner(meta.TypedReferenceTo(mg, mg.GetObjectKind().GroupVersionKind())))
+			}
 			if s.Data == nil {
 				s.Data = make(map[string][]byte, 1)
 			}

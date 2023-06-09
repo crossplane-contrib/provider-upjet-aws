@@ -7,6 +7,7 @@ package rds
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -14,6 +15,9 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/test"
 	"github.com/google/go-cmp/cmp"
 	corev1 "k8s.io/api/core/v1"
+	kerrors "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	ujfake "github.com/upbound/upjet/pkg/resource/fake"
@@ -138,10 +142,17 @@ func TestPasswordGenerator(t *testing.T) {
 			},
 		},
 		"GenerateAndApply": {
-			reason: "Should apply if we generate and set the content.",
+			reason: "Should apply if we generate, set the content of an already existing secret.",
 			args: args{
 				kube: &test.MockClient{
-					MockGet: test.NewMockGetFn(nil),
+					MockGet: func(ctx context.Context, key client.ObjectKey, obj client.Object) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						s.CreationTimestamp = metav1.Time{Time: time.Now()}
+						return nil
+					},
 					MockPatch: func(ctx context.Context, obj client.Object, patch client.Patch, opts ...client.PatchOption) error {
 						s, ok := obj.(*corev1.Secret)
 						if !ok {
@@ -150,12 +161,56 @@ func TestPasswordGenerator(t *testing.T) {
 						if len(s.Data["password"]) == 0 {
 							return errors.New("password is not set")
 						}
+						if len(s.OwnerReferences) != 0 {
+							return errors.New("owner references should not be set if secret already exists")
+						}
 						return nil
 					},
 				},
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
 				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
 				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"passwordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+							"autoGeneratePassword": true,
+						},
+					},
+				},
+			},
+		},
+		"GenerateAndCreate": {
+			reason: "Should create if we generate, set the content and there is no secret in place.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: test.NewMockGetFn(kerrors.NewNotFound(schema.GroupResource{}, "")),
+					MockCreate: func(ctx context.Context, obj client.Object, opts ...client.CreateOption) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						if len(s.Data["password"]) == 0 {
+							return errors.New("password is not set")
+						}
+						if len(s.OwnerReferences) == 1 &&
+							s.OwnerReferences[0].Name == "foo-mgd" {
+							return nil
+						}
+						return errors.New("owner references should be set if secret is created")
+					},
+				},
+				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
+				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
+				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name: "foo-mgd",
+						},
+					},
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
