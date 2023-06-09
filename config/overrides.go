@@ -19,10 +19,13 @@ import (
 
 // RegionAddition adds region to the spec of all resources except iam group which
 // does not have a region notion.
-func RegionAddition() config.ResourceOption {
+func RegionAddition() config.ResourceOption { //nolint:gocyclo // Only slightly over complexity, 11 instead of 10.
 	return func(r *config.Resource) {
-		if (r.ShortGroup == "iam" || r.ShortGroup == "opsworks") && r.Name != "aws_iam_access_key" {
-			return
+		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
+			// aws_iam_access_key is an exception in the iam group that it requires setting region under some circumstances. Please see https://github.com/upbound/provider-aws/issues/717
+			if r.Name != "aws_iam_access_key" {
+				return
+			}
 		}
 		c := "Region is the region you'd like your resource to be created in.\n"
 		comment, err := comments.New(c, comments.WithTFTag("-"))
