@@ -11,7 +11,7 @@ spec:
     domainSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    mailFromDomain: example.com
+    mailFromDomain: bounce.${aws_ses_domain_identity.example.domain}
     region: us-west-1
 
 ---
@@ -70,7 +70,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    domain: example.com
     region: us-west-1
 
 ---

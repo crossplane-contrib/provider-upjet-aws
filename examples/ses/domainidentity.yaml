@@ -3,10 +3,10 @@ kind: DomainIdentity
 metadata:
   annotations:
     meta.upbound.io/example-id: ses/v1beta1/domainidentity
+    crossplane.io/external-name: testdomain.com
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: examplename
 spec:
   forProvider:
-    domain: "example.com"
     region: us-west-1

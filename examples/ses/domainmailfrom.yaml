@@ -11,7 +11,7 @@ spec:
     domainSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    mailFromDomain: "mail.example.com"
+    mailFromDomain: "mail.testdomain.com"
     region: us-west-1
 
 ---
@@ -21,10 +21,10 @@ kind: DomainIdentity
 metadata:
   annotations:
     meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+    crossplane.io/external-name: testdomain.com
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    domain: "example.com"
     region: us-west-1

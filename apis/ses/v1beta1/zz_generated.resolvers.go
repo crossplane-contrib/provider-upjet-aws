@@ -25,7 +25,7 @@ func (mg *DomainMailFrom) ResolveReferences(ctx context.Context, c client.Reader
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-		Extract:      resource.ExtractParamPath("domain", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DomainRef,
 		Selector:     mg.Spec.ForProvider.DomainSelector,
 		To: reference.To{
@@ -132,7 +132,7 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Identity),
-		Extract:      resource.ExtractParamPath("domain", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.IdentityRef,
 		Selector:     mg.Spec.ForProvider.IdentitySelector,
 		To: reference.To{

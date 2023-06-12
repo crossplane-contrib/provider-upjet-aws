@@ -2185,7 +2185,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// DKIM tokens can be imported using the domain attribute
 	"aws_ses_domain_dkim": config.ParameterAsIdentifier("domain"),
 	// SES domain identities can be imported using the domain name.
-	"aws_ses_domain_identity": config.IdentifierFromProvider,
+	"aws_ses_domain_identity": config.ParameterAsIdentifier("domain"),
 	// MAIL FROM domain can be imported using the domain attribute
 	"aws_ses_domain_mail_from": config.IdentifierFromProvider,
 	// SES email identities can be imported using the email address.
