@@ -2,7 +2,7 @@ apiVersion: meta.pkg.crossplane.io/v1alpha1
 kind: Provider
 metadata:
   name: {{ .Name }}
-{{ if and (ne .Service "config") (ne .Service "monolith") }}
+{{ if ne .Service "monolith" }}
   labels:
     pkg.crossplane.io/provider-family: provider-family-{{ .ProviderName }}
 {{ end }}
