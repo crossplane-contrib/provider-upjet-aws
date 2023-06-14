@@ -21,8 +21,12 @@ metadata:
       address. This is a subpackage for the {{ .Service }} API group.
     friendly-name.meta.crossplane.io: Provider AWS ({{ .Service }})
     auth.upbound.io/group: {{ .ProviderName }}.upbound.io
-{{ if and (ne .Service "config") (ne .Service "monolith") -}}
 spec:
+{{ if ne .Service "monolith" }}
+  crossplane:
+    version: ">=v1.12.1-0"
+{{ end }}
+{{ if and (ne .Service "config") (ne .Service "monolith") }}
   dependsOn:
     - provider: {{ .XpkgRegOrg }}/provider-family-{{ .ProviderName }}
       version: "{{ .DepConstraint }}"
