@@ -13,9 +13,15 @@ import (
 // Configure adds configurations for dms group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dms_endpoint", func(r *config.Resource) {
-		r.References["service_access_role"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+		r.References = config.References{
+			"service_access_role": {
+				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+				Extractor: common.PathARNExtractor,
+			},
+			"kms_key_arn": {
+				Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+				Extractor: common.PathARNExtractor,
+			},
 		}
 	})
 }

@@ -622,16 +622,6 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SecretsManagerAccessRoleArnRef != nil {
-		in, out := &in.SecretsManagerAccessRoleArnRef, &out.SecretsManagerAccessRoleArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.SecretsManagerAccessRoleArnSelector != nil {
-		in, out := &in.SecretsManagerAccessRoleArnSelector, &out.SecretsManagerAccessRoleArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.SecretsManagerArn != nil {
 		in, out := &in.SecretsManagerArn, &out.SecretsManagerArn
 		*out = new(string)
