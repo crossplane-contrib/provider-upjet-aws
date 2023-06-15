@@ -14,6 +14,10 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dms_endpoint", func(r *config.Resource) {
 		r.References = config.References{
+			"secrets_manager_access_role_arn": {
+				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+				Extractor: common.PathARNExtractor,
+			},
 			"service_access_role": {
 				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 				Extractor: common.PathARNExtractor,

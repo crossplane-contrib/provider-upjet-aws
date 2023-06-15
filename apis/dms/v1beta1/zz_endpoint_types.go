@@ -203,8 +203,18 @@ type EndpointParameters struct {
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
 	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in SecretsManagerSecret.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SecretsManagerAccessRoleArn *string `json:"secretsManagerAccessRoleArn,omitempty" tf:"secrets_manager_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate secretsManagerAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	SecretsManagerAccessRoleArnRef *v1.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate secretsManagerAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
 	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
 	// +kubebuilder:validation:Optional
