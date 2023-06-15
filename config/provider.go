@@ -33,6 +33,7 @@ import (
 	"github.com/upbound/provider-aws/config/dax"
 	"github.com/upbound/provider-aws/config/devicefarm"
 	"github.com/upbound/provider-aws/config/directconnect"
+	"github.com/upbound/provider-aws/config/dms"
 	"github.com/upbound/provider-aws/config/docdb"
 	"github.com/upbound/provider-aws/config/ds"
 	"github.com/upbound/provider-aws/config/dynamodb"
@@ -166,6 +167,7 @@ func GetProvider() *config.Provider {
 		cur.Configure,
 		dax.Configure,
 		devicefarm.Configure,
+		dms.Configure,
 		docdb.Configure,
 		dynamodb.Configure,
 		ebs.Configure,

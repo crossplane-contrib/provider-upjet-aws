@@ -224,8 +224,18 @@ type EndpointParameters struct {
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
 	// ARN used by the service access IAM role for dynamodb endpoints.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceAccessRole *string `json:"serviceAccessRole,omitempty" tf:"service_access_role,omitempty"`
+
+	// Reference to a Role in iam to populate serviceAccessRole.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleRef *v1.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceAccessRole.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleSelector *v1.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
