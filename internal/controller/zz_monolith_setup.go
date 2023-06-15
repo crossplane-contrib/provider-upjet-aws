@@ -226,6 +226,8 @@ import (
 	dataset "github.com/upbound/provider-aws/internal/controller/dataexchange/dataset"
 	revision "github.com/upbound/provider-aws/internal/controller/dataexchange/revision"
 	pipeline "github.com/upbound/provider-aws/internal/controller/datapipeline/pipeline"
+	locations3 "github.com/upbound/provider-aws/internal/controller/datasync/locations3"
+	task "github.com/upbound/provider-aws/internal/controller/datasync/task"
 	cluster "github.com/upbound/provider-aws/internal/controller/dax/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/dax/parametergroup"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/dax/subnetgroup"
@@ -1130,6 +1132,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		dataset.Setup,
 		revision.Setup,
 		pipeline.Setup,
+		locations3.Setup,
+		task.Setup,
 		cluster.Setup,
 		parametergroup.Setup,
 		subnetgroup.Setup,

@@ -1429,6 +1429,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Remediation Configurations can be imported using the name config_rule_name
 	"aws_config_remediation_configuration": config.ParameterAsIdentifier("config_rule_name"),
 
+	// datasync
+	//
+	// aws_datasync_location_s3 can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_location_s3": config.IdentifierFromProvider,
+	// aws_datasync_task can be imported by using the DataSync Task Amazon Resource Name (ARN)
+	"aws_datasync_task": config.IdentifierFromProvider,
+
 	// appsync
 	//
 	// aws_appsync_api_cache can be imported using the AppSync API ID
