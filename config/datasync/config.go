@@ -15,8 +15,9 @@
 package datasync
 
 import (
-	"github.com/upbound/provider-aws/config/common"
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for datasync group.
@@ -32,6 +33,5 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group",
 			Extractor: common.PathARNExtractor,
 		}
-
 	})
 }
