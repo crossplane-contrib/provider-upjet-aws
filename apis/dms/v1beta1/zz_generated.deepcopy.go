@@ -647,6 +647,16 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ServiceAccessRoleRef != nil {
+		in, out := &in.ServiceAccessRoleRef, &out.ServiceAccessRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccessRoleSelector != nil {
+		in, out := &in.ServiceAccessRoleSelector, &out.ServiceAccessRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

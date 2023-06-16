@@ -1,0 +1,88 @@
+---
+apiVersion: dms.aws.upbound.io/v1beta1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: dms-endpoint-test
+  name: dms-endpoint-test
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    databaseName: test
+    endpointType: target
+    engineName: postgres
+    extraConnectionAttributes: ""
+    kmsKeyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dms-example-key
+    passwordSecretRef:
+      key: example-key
+      name: dms-example-secret
+      namespace: upbound-system
+    port: 5432
+    region: us-west-1
+    sslMode: none
+    serverName: test
+    username: test
+    serviceAccessRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dms-endpoint-role-test
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: dms-endpoint-role-test
+  name: dms-endpoint-role-test
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "dms.amazonaws.com"
+            },
+            "Effect": "Allow"
+          }
+        ]
+      }
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: dms-example-secret
+  name: dms-example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "pa$$w0rd"
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: dms-example-key
+  name: dms-example-key
+spec:
+  forProvider:
+    region: us-west-1
+    description: dms-example-key
+    deletionWindowInDays: 7
