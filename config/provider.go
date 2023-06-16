@@ -30,6 +30,7 @@ import (
 	"github.com/upbound/provider-aws/config/cognitoidp"
 	"github.com/upbound/provider-aws/config/connect"
 	"github.com/upbound/provider-aws/config/cur"
+	"github.com/upbound/provider-aws/config/datasync"
 	"github.com/upbound/provider-aws/config/dax"
 	"github.com/upbound/provider-aws/config/devicefarm"
 	"github.com/upbound/provider-aws/config/directconnect"
@@ -165,6 +166,7 @@ func GetProvider() *config.Provider {
 		cognitoidp.Configure,
 		connect.Configure,
 		cur.Configure,
+		datasync.Configure,
 		dax.Configure,
 		devicefarm.Configure,
 		dms.Configure,

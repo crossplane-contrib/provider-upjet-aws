@@ -1,0 +1,22 @@
+apiVersion: datasync.aws.upbound.io/v1beta1
+kind: LocationS3
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta1/locations3
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    s3BucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    s3Config:
+    - bucketAccessRoleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    subdirectory: /example/prefix
+
+---
+

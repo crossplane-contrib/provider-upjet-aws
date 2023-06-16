@@ -1,0 +1,23 @@
+apiVersion: datasync.aws.upbound.io/v1beta1
+kind: Task
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta1/task
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destinationLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: destination
+    name: example
+    options:
+    - bytesPerSecond: -1
+    region: us-west-1
+    sourceLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+
+---
+

@@ -55,6 +55,7 @@ import (
 	v1beta1cur "github.com/upbound/provider-aws/apis/cur/v1beta1"
 	v1beta1dataexchange "github.com/upbound/provider-aws/apis/dataexchange/v1beta1"
 	v1beta1datapipeline "github.com/upbound/provider-aws/apis/datapipeline/v1beta1"
+	v1beta1datasync "github.com/upbound/provider-aws/apis/datasync/v1beta1"
 	v1beta1dax "github.com/upbound/provider-aws/apis/dax/v1beta1"
 	v1beta1deploy "github.com/upbound/provider-aws/apis/deploy/v1beta1"
 	v1beta1detective "github.com/upbound/provider-aws/apis/detective/v1beta1"
@@ -217,6 +218,7 @@ func init() {
 		v1beta1cur.SchemeBuilder.AddToScheme,
 		v1beta1dataexchange.SchemeBuilder.AddToScheme,
 		v1beta1datapipeline.SchemeBuilder.AddToScheme,
+		v1beta1datasync.SchemeBuilder.AddToScheme,
 		v1beta1dax.SchemeBuilder.AddToScheme,
 		v1beta1deploy.SchemeBuilder.AddToScheme,
 		v1beta1detective.SchemeBuilder.AddToScheme,
