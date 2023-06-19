@@ -30,6 +30,10 @@ spec:
   forProvider:
     name: upbound.rocks
     region: us-west-1
+    vpc:
+    - vpcIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: primary
 
 ---
 
