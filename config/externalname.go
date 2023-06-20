@@ -532,8 +532,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	"aws_kms_key": config.IdentifierFromProvider,
-	// KMS aliases are imported using "alias/" + name
-	"aws_kms_alias": kmsAlias(),
+	// KMS aliases can be imported using the id
+	"aws_kms_alias": config.IdentifierFromProvider,
 	// No import
 	"aws_kms_ciphertext": config.IdentifierFromProvider,
 	// KMS External Keys can be imported using the id
@@ -2636,34 +2636,6 @@ func iamUserGroupMembership() config.ExternalName {
 		}
 		return strings.Join(append([]string{u.(string)}, groups...), "/"), nil
 	}
-	return e
-}
-
-func kmsAlias() config.ExternalName {
-	e := config.NameAsIdentifier
-	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
-		if _, ok := base["name"]; !ok {
-			if !strings.HasPrefix(externalName, "alias/") {
-				base["name"] = fmt.Sprintf("alias/%s", externalName)
-			} else {
-				base["name"] = externalName
-			}
-		}
-	}
-	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
-		id, ok := tfstate["id"]
-		if !ok {
-			return "", errors.New("id attribute missing from state file")
-		}
-
-		idStr, ok := id.(string)
-		if !ok {
-			return "", errors.New("value of id needs to be string")
-		}
-
-		return strings.TrimPrefix(idStr, "alias/"), nil
-	}
-
 	return e
 }
 
