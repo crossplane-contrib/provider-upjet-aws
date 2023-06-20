@@ -200,7 +200,10 @@ local-deploy: build-monolith controlplane.up local.xpkg.deploy.provider.$(PROJEC
 	@$(OK) running locally built provider
 
 # This target requires the following environment variables to be set:
-# - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/.aws/credentials)
+# - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g.
+#   $ export UPTEST_CLOUD_CREDENTIALS="DEFAULT='$(cat ~/.aws/credentials-uptest)'"
+#   or in case of multiple sets of credentials:
+#   $ export UPTEST_CLOUD_CREDENTIALS=$(echo "DEFAULT='$(cat ~/.aws/credentials)'\nPEER='$(cat ~/.aws/credentials-uptest)'")
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
 # - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
 e2e: local-deploy uptest
