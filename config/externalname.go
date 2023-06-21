@@ -2664,6 +2664,23 @@ func kmsAlias() config.ExternalName {
 		return strings.TrimPrefix(idStr, "alias/"), nil
 	}
 
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		n, ok := parameters["name"]
+		if !ok {
+			return "", errors.New("name cannot be empty")
+		}
+
+		nameStr, ok := n.(string)
+		if !ok {
+			return "", errors.New("value of name must be a string")
+		}
+
+		if !strings.HasPrefix(nameStr, "alias/") {
+			return fmt.Sprintf("alias/%s", nameStr), nil
+		}
+
+		return nameStr, nil
+	}
 	return e
 }
 
