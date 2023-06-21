@@ -7,9 +7,6 @@ on:
         description: 'Subpackages to be built individually (e.g. monolith config ec2)'
         default: 'monolith'
         required: false
-      version:
-        description: 'Provider version (e.g. v0.1.0)'
-        required: true
       size:
         description: "Number of smaller provider packages to build and push with each build job"
         default: '30'
@@ -24,7 +21,6 @@ jobs:
     uses: upbound/uptest/.github/workflows/provider-publish-service-artifacts.yml@main
     with:
       subpackages: ${{ github.event.inputs.subpackages }}
-      version: ${{ github.event.inputs.version }}
       size: ${{ github.event.inputs.size }}
       concurrency: ${{ github.event.inputs.concurrency }}
     secrets:
