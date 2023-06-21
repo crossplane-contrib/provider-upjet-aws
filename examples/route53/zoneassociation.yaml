@@ -39,6 +39,26 @@ spec:
 
 ---
 
+apiVersion: route53.aws.upbound.io/v1beta1
+kind: VPCAssociationAuthorization
+metadata:
+  annotations:
+    meta.upbound.io/example-id: route53/v1beta1/zoneassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
