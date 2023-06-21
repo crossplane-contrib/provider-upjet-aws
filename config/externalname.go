@@ -486,7 +486,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iam_access_key":       config.IdentifierFromProvider,
 	"aws_iam_instance_profile": config.NameAsIdentifier,
 	// arn:aws:iam::123456789012:policy/UsersManageOwnCredentials
-	"aws_iam_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:policy/{{ .external_name }}"),
+	"aws_iam_policy": iamPolicy(),
 	"aws_iam_user":   config.NameAsIdentifier,
 	"aws_iam_group":  config.NameAsIdentifier,
 	"aws_iam_role":   config.NameAsIdentifier,
@@ -2636,6 +2636,26 @@ func iamUserGroupMembership() config.ExternalName {
 		}
 		return strings.Join(append([]string{u.(string)}, groups...), "/"), nil
 	}
+	return e
+}
+
+func iamPolicy() config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:policy{{ .parameters.path }}{{ .external_name }}")
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id attribute missing from state file")
+		}
+
+		idStr, ok := id.(string)
+		if !ok {
+			return "", errors.New("value of id needs to be string")
+		}
+
+		arnSlice := strings.Split(idStr, "/")
+		return arnSlice[len(arnSlice)-1], nil
+	}
+
 	return e
 }
 
