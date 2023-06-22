@@ -3855,6 +3855,8 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("AssociatePublicIPAddress"))
+	opts = append(opts, resource.WithNameFilter("CPUCoreCount"))
+	opts = append(opts, resource.WithNameFilter("CPUThreadsPerCore"))
 	opts = append(opts, resource.WithNameFilter("IPv6AddressCount"))
 	opts = append(opts, resource.WithNameFilter("IPv6Addresses"))
 	opts = append(opts, resource.WithNameFilter("NetworkInterface"))

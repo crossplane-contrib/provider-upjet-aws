@@ -48,6 +48,8 @@ func Configure(p *config.Provider) {
 				"associate_public_ip_address",
 				"ipv6_addresses",
 				"ipv6_address_count",
+				"cpu_core_count",
+				"cpu_threads_per_core",
 			},
 		}
 		config.MoveToStatus(r.TerraformResource, "security_groups")
