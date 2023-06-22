@@ -18,6 +18,7 @@ import (
 	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
 	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
 	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
+	zoneassociation "github.com/upbound/provider-aws/internal/controller/route53/zoneassociation"
 )
 
 // Setup_route53 creates all controllers with the supplied logger and adds them to
@@ -33,6 +34,7 @@ func Setup_route53(mgr ctrl.Manager, o controller.Options) error {
 		trafficpolicyinstance.Setup,
 		vpcassociationauthorization.Setup,
 		zone.Setup,
+		zoneassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
