@@ -2640,7 +2640,17 @@ func iamUserGroupMembership() config.ExternalName {
 }
 
 func iamPolicy() config.ExternalName {
-	e := config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:policy{{ .parameters.path }}{{ .external_name }}")
+	e := config.NameAsIdentifier
+
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+		path, ok := parameters["path"]
+		if !ok {
+			path = "/"
+		}
+		accountID := setup["client_metadata"].(map[string]string)["account_id"]
+		return fmt.Sprintf("arn:aws:iam::%s:policy%s%s", accountID, path, externalName), nil
+	}
+
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["id"]
 		if !ok {
