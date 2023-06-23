@@ -2693,6 +2693,12 @@ func kmsAlias() config.ExternalName {
 		return strings.TrimPrefix(idStr, "alias/"), nil
 	}
 
+	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]interface{}, _ map[string]interface{}) (string, error) {
+		if !strings.HasPrefix(externalName, "alias/") {
+			return fmt.Sprintf("alias/%s", externalName), nil
+		}
+		return externalName, nil
+	}
 	return e
 }
 
