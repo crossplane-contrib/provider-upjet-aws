@@ -91,6 +91,11 @@ func Configure(p *config.Provider) {
 		r.References["qualifier"] = config.Reference{
 			Type: "Alias",
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"statement_id", "statement_id_prefix",
+			},
+		}
 		delete(r.References, "source_arn")
 	})
 
