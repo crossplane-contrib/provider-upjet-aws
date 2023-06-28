@@ -1159,7 +1159,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// sfn
 	//
 	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
-	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stateMachine/{{ .external_name }}"),
+	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stateMachine:{{ .external_name }}"),
 
 	// dax
 	//
