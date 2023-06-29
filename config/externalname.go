@@ -111,7 +111,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_abc123
 	"aws_cognito_user_pool": config.IdentifierFromProvider,
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
-	"aws_cognito_user_pool_client": config.IdentifierFromProvider,
+	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
 	// auth.example.org
 	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
