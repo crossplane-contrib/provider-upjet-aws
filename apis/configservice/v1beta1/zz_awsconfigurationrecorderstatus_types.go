@@ -56,7 +56,7 @@ type AWSConfigurationRecorderStatusStatus struct {
 type AWSConfigurationRecorderStatus struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.isEnabled)",message="isEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.isEnabled)",message="isEnabled is a required parameter"
 	Spec   AWSConfigurationRecorderStatusSpec   `json:"spec"`
 	Status AWSConfigurationRecorderStatusStatus `json:"status,omitempty"`
 }

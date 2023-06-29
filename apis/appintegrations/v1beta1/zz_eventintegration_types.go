@@ -98,8 +98,8 @@ type EventIntegrationStatus struct {
 type EventIntegration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventFilter)",message="eventFilter is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventbridgeBus)",message="eventbridgeBus is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventFilter)",message="eventFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventbridgeBus)",message="eventbridgeBus is a required parameter"
 	Spec   EventIntegrationSpec   `json:"spec"`
 	Status EventIntegrationStatus `json:"status,omitempty"`
 }

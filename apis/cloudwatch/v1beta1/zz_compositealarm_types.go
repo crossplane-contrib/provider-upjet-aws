@@ -126,7 +126,7 @@ type CompositeAlarmStatus struct {
 type CompositeAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alarmRule)",message="alarmRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alarmRule)",message="alarmRule is a required parameter"
 	Spec   CompositeAlarmSpec   `json:"spec"`
 	Status CompositeAlarmStatus `json:"status,omitempty"`
 }

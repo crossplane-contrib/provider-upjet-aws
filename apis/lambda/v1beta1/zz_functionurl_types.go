@@ -144,7 +144,7 @@ type FunctionURLStatus struct {
 type FunctionURL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authorizationType)",message="authorizationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationType)",message="authorizationType is a required parameter"
 	Spec   FunctionURLSpec   `json:"spec"`
 	Status FunctionURLStatus `json:"status,omitempty"`
 }

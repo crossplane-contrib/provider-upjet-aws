@@ -249,9 +249,9 @@ type FeatureGroupStatus struct {
 type FeatureGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTimeFeatureName)",message="eventTimeFeatureName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.featureDefinition)",message="featureDefinition is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recordIdentifierFeatureName)",message="recordIdentifierFeatureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTimeFeatureName)",message="eventTimeFeatureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureDefinition)",message="featureDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recordIdentifierFeatureName)",message="recordIdentifierFeatureName is a required parameter"
 	Spec   FeatureGroupSpec   `json:"spec"`
 	Status FeatureGroupStatus `json:"status,omitempty"`
 }

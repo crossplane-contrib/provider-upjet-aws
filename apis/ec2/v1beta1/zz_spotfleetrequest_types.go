@@ -975,8 +975,8 @@ type SpotFleetRequestStatus struct {
 type SpotFleetRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.iamFleetRole)",message="iamFleetRole is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetCapacity)",message="targetCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.iamFleetRole)",message="iamFleetRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetCapacity)",message="targetCapacity is a required parameter"
 	Spec   SpotFleetRequestSpec   `json:"spec"`
 	Status SpotFleetRequestStatus `json:"status,omitempty"`
 }

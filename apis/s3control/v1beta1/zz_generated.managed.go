@@ -17,9 +17,9 @@ func (mg *AccessPoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AccessPoint.
-func (mg *AccessPoint) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AccessPoint.
+func (mg *AccessPoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AccessPoint.
@@ -55,9 +55,9 @@ func (mg *AccessPoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AccessPoint.
-func (mg *AccessPoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AccessPoint.
+func (mg *AccessPoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AccessPoint.
@@ -93,9 +93,9 @@ func (mg *AccessPointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AccessPointPolicy.
-func (mg *AccessPointPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AccessPointPolicy.
+func (mg *AccessPointPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AccessPointPolicy.
@@ -131,9 +131,9 @@ func (mg *AccessPointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AccessPointPolicy.
-func (mg *AccessPointPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AccessPointPolicy.
+func (mg *AccessPointPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AccessPointPolicy.
@@ -169,9 +169,9 @@ func (mg *AccountPublicAccessBlock) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AccountPublicAccessBlock.
-func (mg *AccountPublicAccessBlock) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AccountPublicAccessBlock.
+func (mg *AccountPublicAccessBlock) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AccountPublicAccessBlock.
@@ -207,9 +207,9 @@ func (mg *AccountPublicAccessBlock) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AccountPublicAccessBlock.
-func (mg *AccountPublicAccessBlock) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AccountPublicAccessBlock.
+func (mg *AccountPublicAccessBlock) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AccountPublicAccessBlock.
@@ -245,9 +245,9 @@ func (mg *MultiRegionAccessPoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MultiRegionAccessPoint.
-func (mg *MultiRegionAccessPoint) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MultiRegionAccessPoint.
@@ -283,9 +283,9 @@ func (mg *MultiRegionAccessPoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MultiRegionAccessPoint.
-func (mg *MultiRegionAccessPoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MultiRegionAccessPoint.
+func (mg *MultiRegionAccessPoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MultiRegionAccessPoint.
@@ -321,9 +321,9 @@ func (mg *MultiRegionAccessPointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MultiRegionAccessPointPolicy.
-func (mg *MultiRegionAccessPointPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MultiRegionAccessPointPolicy.
@@ -359,9 +359,9 @@ func (mg *MultiRegionAccessPointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MultiRegionAccessPointPolicy.
-func (mg *MultiRegionAccessPointPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MultiRegionAccessPointPolicy.
+func (mg *MultiRegionAccessPointPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MultiRegionAccessPointPolicy.
@@ -397,9 +397,9 @@ func (mg *ObjectLambdaAccessPoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ObjectLambdaAccessPoint.
-func (mg *ObjectLambdaAccessPoint) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ObjectLambdaAccessPoint.
@@ -435,9 +435,9 @@ func (mg *ObjectLambdaAccessPoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ObjectLambdaAccessPoint.
-func (mg *ObjectLambdaAccessPoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ObjectLambdaAccessPoint.
+func (mg *ObjectLambdaAccessPoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ObjectLambdaAccessPoint.
@@ -473,9 +473,9 @@ func (mg *ObjectLambdaAccessPointPolicy) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ObjectLambdaAccessPointPolicy.
-func (mg *ObjectLambdaAccessPointPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ObjectLambdaAccessPointPolicy.
@@ -511,9 +511,9 @@ func (mg *ObjectLambdaAccessPointPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ObjectLambdaAccessPointPolicy.
-func (mg *ObjectLambdaAccessPointPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ObjectLambdaAccessPointPolicy.
+func (mg *ObjectLambdaAccessPointPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ObjectLambdaAccessPointPolicy.
@@ -549,9 +549,9 @@ func (mg *StorageLensConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this StorageLensConfiguration.
-func (mg *StorageLensConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StorageLensConfiguration.
@@ -587,9 +587,9 @@ func (mg *StorageLensConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this StorageLensConfiguration.
-func (mg *StorageLensConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this StorageLensConfiguration.
+func (mg *StorageLensConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StorageLensConfiguration.

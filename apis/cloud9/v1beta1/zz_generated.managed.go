@@ -17,9 +17,9 @@ func (mg *EnvironmentEC2) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EnvironmentEC2.
-func (mg *EnvironmentEC2) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EnvironmentEC2.
+func (mg *EnvironmentEC2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EnvironmentEC2.
@@ -55,9 +55,9 @@ func (mg *EnvironmentEC2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EnvironmentEC2.
-func (mg *EnvironmentEC2) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EnvironmentEC2.
+func (mg *EnvironmentEC2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EnvironmentEC2.
@@ -93,9 +93,9 @@ func (mg *EnvironmentMembership) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EnvironmentMembership.
-func (mg *EnvironmentMembership) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EnvironmentMembership.
+func (mg *EnvironmentMembership) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EnvironmentMembership.
@@ -131,9 +131,9 @@ func (mg *EnvironmentMembership) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EnvironmentMembership.
-func (mg *EnvironmentMembership) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EnvironmentMembership.
+func (mg *EnvironmentMembership) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EnvironmentMembership.

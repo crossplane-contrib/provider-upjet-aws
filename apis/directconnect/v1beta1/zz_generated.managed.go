@@ -17,9 +17,9 @@ func (mg *BGPPeer) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BGPPeer.
-func (mg *BGPPeer) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BGPPeer.
+func (mg *BGPPeer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BGPPeer.
@@ -55,9 +55,9 @@ func (mg *BGPPeer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BGPPeer.
-func (mg *BGPPeer) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BGPPeer.
+func (mg *BGPPeer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BGPPeer.
@@ -93,9 +93,9 @@ func (mg *Connection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Connection.
-func (mg *Connection) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Connection.
+func (mg *Connection) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Connection.
@@ -131,9 +131,9 @@ func (mg *Connection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Connection.
-func (mg *Connection) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Connection.
+func (mg *Connection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Connection.
@@ -169,9 +169,9 @@ func (mg *ConnectionAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ConnectionAssociation.
-func (mg *ConnectionAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ConnectionAssociation.
+func (mg *ConnectionAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ConnectionAssociation.
@@ -207,9 +207,9 @@ func (mg *ConnectionAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ConnectionAssociation.
-func (mg *ConnectionAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ConnectionAssociation.
+func (mg *ConnectionAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ConnectionAssociation.
@@ -245,9 +245,9 @@ func (mg *Gateway) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Gateway.
-func (mg *Gateway) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Gateway.
+func (mg *Gateway) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Gateway.
@@ -283,9 +283,9 @@ func (mg *Gateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Gateway.
-func (mg *Gateway) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Gateway.
+func (mg *Gateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Gateway.
@@ -321,9 +321,9 @@ func (mg *GatewayAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this GatewayAssociation.
-func (mg *GatewayAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this GatewayAssociation.
+func (mg *GatewayAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this GatewayAssociation.
@@ -359,9 +359,9 @@ func (mg *GatewayAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this GatewayAssociation.
-func (mg *GatewayAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this GatewayAssociation.
+func (mg *GatewayAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this GatewayAssociation.
@@ -397,9 +397,9 @@ func (mg *GatewayAssociationProposal) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this GatewayAssociationProposal.
-func (mg *GatewayAssociationProposal) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this GatewayAssociationProposal.
+func (mg *GatewayAssociationProposal) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this GatewayAssociationProposal.
@@ -435,9 +435,9 @@ func (mg *GatewayAssociationProposal) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this GatewayAssociationProposal.
-func (mg *GatewayAssociationProposal) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this GatewayAssociationProposal.
+func (mg *GatewayAssociationProposal) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this GatewayAssociationProposal.
@@ -473,9 +473,9 @@ func (mg *HostedPrivateVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedPrivateVirtualInterface.
-func (mg *HostedPrivateVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedPrivateVirtualInterface.
@@ -511,9 +511,9 @@ func (mg *HostedPrivateVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedPrivateVirtualInterface.
-func (mg *HostedPrivateVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedPrivateVirtualInterface.
+func (mg *HostedPrivateVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedPrivateVirtualInterface.
@@ -549,9 +549,9 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) GetDeletionPolicy() xpv1.Deleti
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedPrivateVirtualInterfaceAccepter.
-func (mg *HostedPrivateVirtualInterfaceAccepter) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedPrivateVirtualInterfaceAccepter.
+func (mg *HostedPrivateVirtualInterfaceAccepter) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedPrivateVirtualInterfaceAccepter.
@@ -587,9 +587,9 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) SetDeletionPolicy(r xpv1.Deleti
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedPrivateVirtualInterfaceAccepter.
-func (mg *HostedPrivateVirtualInterfaceAccepter) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedPrivateVirtualInterfaceAccepter.
+func (mg *HostedPrivateVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedPrivateVirtualInterfaceAccepter.
@@ -625,9 +625,9 @@ func (mg *HostedPublicVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedPublicVirtualInterface.
-func (mg *HostedPublicVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedPublicVirtualInterface.
+func (mg *HostedPublicVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedPublicVirtualInterface.
@@ -663,9 +663,9 @@ func (mg *HostedPublicVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedPublicVirtualInterface.
-func (mg *HostedPublicVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedPublicVirtualInterface.
+func (mg *HostedPublicVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedPublicVirtualInterface.
@@ -701,9 +701,9 @@ func (mg *HostedPublicVirtualInterfaceAccepter) GetDeletionPolicy() xpv1.Deletio
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedPublicVirtualInterfaceAccepter.
-func (mg *HostedPublicVirtualInterfaceAccepter) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedPublicVirtualInterfaceAccepter.
+func (mg *HostedPublicVirtualInterfaceAccepter) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedPublicVirtualInterfaceAccepter.
@@ -739,9 +739,9 @@ func (mg *HostedPublicVirtualInterfaceAccepter) SetDeletionPolicy(r xpv1.Deletio
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedPublicVirtualInterfaceAccepter.
-func (mg *HostedPublicVirtualInterfaceAccepter) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedPublicVirtualInterfaceAccepter.
+func (mg *HostedPublicVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedPublicVirtualInterfaceAccepter.
@@ -777,9 +777,9 @@ func (mg *HostedTransitVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedTransitVirtualInterface.
-func (mg *HostedTransitVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedTransitVirtualInterface.
+func (mg *HostedTransitVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedTransitVirtualInterface.
@@ -815,9 +815,9 @@ func (mg *HostedTransitVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedTransitVirtualInterface.
-func (mg *HostedTransitVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedTransitVirtualInterface.
+func (mg *HostedTransitVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedTransitVirtualInterface.
@@ -853,9 +853,9 @@ func (mg *HostedTransitVirtualInterfaceAccepter) GetDeletionPolicy() xpv1.Deleti
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this HostedTransitVirtualInterfaceAccepter.
-func (mg *HostedTransitVirtualInterfaceAccepter) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this HostedTransitVirtualInterfaceAccepter.
+func (mg *HostedTransitVirtualInterfaceAccepter) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this HostedTransitVirtualInterfaceAccepter.
@@ -891,9 +891,9 @@ func (mg *HostedTransitVirtualInterfaceAccepter) SetDeletionPolicy(r xpv1.Deleti
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this HostedTransitVirtualInterfaceAccepter.
-func (mg *HostedTransitVirtualInterfaceAccepter) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this HostedTransitVirtualInterfaceAccepter.
+func (mg *HostedTransitVirtualInterfaceAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this HostedTransitVirtualInterfaceAccepter.
@@ -929,9 +929,9 @@ func (mg *Lag) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Lag.
-func (mg *Lag) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Lag.
+func (mg *Lag) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Lag.
@@ -967,9 +967,9 @@ func (mg *Lag) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Lag.
-func (mg *Lag) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Lag.
+func (mg *Lag) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Lag.
@@ -1005,9 +1005,9 @@ func (mg *PrivateVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PrivateVirtualInterface.
-func (mg *PrivateVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PrivateVirtualInterface.
@@ -1043,9 +1043,9 @@ func (mg *PrivateVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PrivateVirtualInterface.
-func (mg *PrivateVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PrivateVirtualInterface.
+func (mg *PrivateVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PrivateVirtualInterface.
@@ -1081,9 +1081,9 @@ func (mg *PublicVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PublicVirtualInterface.
-func (mg *PublicVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PublicVirtualInterface.
+func (mg *PublicVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PublicVirtualInterface.
@@ -1119,9 +1119,9 @@ func (mg *PublicVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PublicVirtualInterface.
-func (mg *PublicVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PublicVirtualInterface.
+func (mg *PublicVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PublicVirtualInterface.
@@ -1157,9 +1157,9 @@ func (mg *TransitVirtualInterface) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TransitVirtualInterface.
-func (mg *TransitVirtualInterface) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TransitVirtualInterface.
+func (mg *TransitVirtualInterface) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TransitVirtualInterface.
@@ -1195,9 +1195,9 @@ func (mg *TransitVirtualInterface) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TransitVirtualInterface.
-func (mg *TransitVirtualInterface) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TransitVirtualInterface.
+func (mg *TransitVirtualInterface) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TransitVirtualInterface.
