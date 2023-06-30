@@ -1,29 +1,6 @@
 version: '2023-01-30'
 discriminant: spec.credentials.source
 sources:
-- name: Secret
-  docs: |
-    # Storing Credentials as a Kubernetes Secret
-
-    AWS credentials may be supplied as a Kubernetes `Secret`. Credentials will
-    be stored in this control plane and will only be accessible to installed
-    providers.
-
-    Credentials should be provided in the following format:
-    ```
-    [default]
-    aws_access_key_id = <aws_access_key>
-    aws_secret_access_key = <aws_secret_key>
-    ```
-
-    See the [AWS
-    documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-creds)
-    for more information on how to generate credentials.
-  additionalResources:
-  - type: Secret
-    ref: spec.credentials.secretRef
-  showFields:
-  - spec.credentials.secretRef
 - name: Upbound
   docs: |
     # OpenID Connect (OIDC)
