@@ -14,3 +14,6 @@ spec:
     region: us-west-1
     tags:
       Environment: production
+  writeConnectionSecretToRef:
+    name: "sqs-example"
+    namespace: "upbound-system"
