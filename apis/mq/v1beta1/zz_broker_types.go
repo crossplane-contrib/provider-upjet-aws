@@ -148,7 +148,18 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
 	// List of security group IDs assigned to the broker.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 

@@ -12,6 +12,8 @@ spec:
     # Details can be found in https://github.com/crossplane/terrajet/issues/280
     brokerName: example-broker
     region: us-west-1
+    securityGroupRefs:
+    - name: example
     engineType: ActiveMQ
     engineVersion: 5.15.9
     hostInstanceType: mq.t2.micro
@@ -21,14 +23,13 @@ spec:
         name: mq-secret
         namespace: upbound-system
       username: admin
-
 ---
-
 apiVersion: v1
 kind: Secret
 metadata:
   annotations:
     meta.upbound.io/example-id: mq/v1beta1/broker
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-broker.sh
   labels:
     testing.upbound.io/example-name: mq-secret
   name: mq-secret
@@ -36,3 +37,19 @@ metadata:
 type: Opaque
 stringData:
   password: "Upboundtest!"
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
