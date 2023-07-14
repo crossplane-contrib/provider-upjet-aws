@@ -215,10 +215,10 @@ match the chain of the trust policies defined among the roles.
     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
 
 [2]:
-    https://github.com/upbound/squad-control-planes/blob/40e589e14ccf8eea306b166bd6005ae582876d1f/design/design-doc-provider-identity-based-auth.md
+    https://github.com/upbound/upjet/blob/main/docs/design-doc-provider-identity-based-auth.md
 
 [3]:
-    https://crossplane.io/docs/v1.9/getting-started/install-configure.html#get-aws-account-keyfile
+    https://marketplace.upbound.io/providers/upbound/provider-aws/v0.37.0/docs/configuration
 
 [4]: https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html
 
