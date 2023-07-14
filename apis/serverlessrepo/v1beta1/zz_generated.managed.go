@@ -17,9 +17,9 @@ func (mg *CloudFormationStack) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this CloudFormationStack.
-func (mg *CloudFormationStack) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this CloudFormationStack.
+func (mg *CloudFormationStack) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CloudFormationStack.
@@ -55,9 +55,9 @@ func (mg *CloudFormationStack) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this CloudFormationStack.
-func (mg *CloudFormationStack) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this CloudFormationStack.
+func (mg *CloudFormationStack) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CloudFormationStack.

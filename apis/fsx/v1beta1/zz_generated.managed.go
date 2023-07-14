@@ -17,9 +17,9 @@ func (mg *Backup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Backup.
-func (mg *Backup) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Backup.
+func (mg *Backup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Backup.
@@ -55,9 +55,9 @@ func (mg *Backup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Backup.
-func (mg *Backup) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Backup.
+func (mg *Backup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Backup.
@@ -93,9 +93,9 @@ func (mg *DataRepositoryAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataRepositoryAssociation.
+func (mg *DataRepositoryAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataRepositoryAssociation.
@@ -131,9 +131,9 @@ func (mg *DataRepositoryAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataRepositoryAssociation.
-func (mg *DataRepositoryAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataRepositoryAssociation.
+func (mg *DataRepositoryAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataRepositoryAssociation.
@@ -169,9 +169,9 @@ func (mg *LustreFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LustreFileSystem.
-func (mg *LustreFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LustreFileSystem.
+func (mg *LustreFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LustreFileSystem.
@@ -207,9 +207,9 @@ func (mg *LustreFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LustreFileSystem.
-func (mg *LustreFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LustreFileSystem.
+func (mg *LustreFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LustreFileSystem.
@@ -245,9 +245,9 @@ func (mg *OntapFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this OntapFileSystem.
-func (mg *OntapFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this OntapFileSystem.
+func (mg *OntapFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this OntapFileSystem.
@@ -283,9 +283,9 @@ func (mg *OntapFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this OntapFileSystem.
-func (mg *OntapFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this OntapFileSystem.
+func (mg *OntapFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this OntapFileSystem.
@@ -321,9 +321,9 @@ func (mg *OntapStorageVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this OntapStorageVirtualMachine.
@@ -359,9 +359,9 @@ func (mg *OntapStorageVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this OntapStorageVirtualMachine.
-func (mg *OntapStorageVirtualMachine) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this OntapStorageVirtualMachine.
+func (mg *OntapStorageVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this OntapStorageVirtualMachine.
@@ -397,9 +397,9 @@ func (mg *WindowsFileSystem) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this WindowsFileSystem.
-func (mg *WindowsFileSystem) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this WindowsFileSystem.
+func (mg *WindowsFileSystem) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFileSystem.
@@ -435,9 +435,9 @@ func (mg *WindowsFileSystem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this WindowsFileSystem.
-func (mg *WindowsFileSystem) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this WindowsFileSystem.
+func (mg *WindowsFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFileSystem.

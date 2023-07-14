@@ -92,7 +92,7 @@ type TransitGatewayMulticastGroupSourceStatus struct {
 type TransitGatewayMulticastGroupSource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupIpAddress)",message="groupIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupIpAddress)",message="groupIpAddress is a required parameter"
 	Spec   TransitGatewayMulticastGroupSourceSpec   `json:"spec"`
 	Status TransitGatewayMulticastGroupSourceStatus `json:"status,omitempty"`
 }

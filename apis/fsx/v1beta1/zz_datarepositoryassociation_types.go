@@ -174,8 +174,8 @@ type DataRepositoryAssociationStatus struct {
 type DataRepositoryAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRepositoryPath)",message="dataRepositoryPath is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.fileSystemPath)",message="fileSystemPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRepositoryPath)",message="dataRepositoryPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fileSystemPath)",message="fileSystemPath is a required parameter"
 	Spec   DataRepositoryAssociationSpec   `json:"spec"`
 	Status DataRepositoryAssociationStatus `json:"status,omitempty"`
 }

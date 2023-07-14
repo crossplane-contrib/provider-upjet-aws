@@ -101,7 +101,7 @@ type MonitoringSubscriptionStatus struct {
 type MonitoringSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.monitoringSubscription)",message="monitoringSubscription is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitoringSubscription)",message="monitoringSubscription is a required parameter"
 	Spec   MonitoringSubscriptionSpec   `json:"spec"`
 	Status MonitoringSubscriptionStatus `json:"status,omitempty"`
 }

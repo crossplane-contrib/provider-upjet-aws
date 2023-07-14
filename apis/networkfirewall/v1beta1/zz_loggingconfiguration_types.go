@@ -115,7 +115,7 @@ type LoggingConfigurationStatus struct {
 type LoggingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loggingConfiguration)",message="loggingConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loggingConfiguration)",message="loggingConfiguration is a required parameter"
 	Spec   LoggingConfigurationSpec   `json:"spec"`
 	Status LoggingConfigurationStatus `json:"status,omitempty"`
 }

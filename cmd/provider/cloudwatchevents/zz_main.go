@@ -83,6 +83,7 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
 
+    eventHandler := tjcontroller.NewEventHandler()
 	// if the native Terraform provider plugin's path is not configured via
 	// the env. variable TERRAFORM_NATIVE_PROVIDER_PATH or
 	// the `--terraform-native-provider-path` command-line option,
@@ -105,6 +106,7 @@ func main() {
 		Provider:       config.GetProvider(),
 		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*setupConfig.NativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval)),
 		SetupFn:        clients.SelectTerraformSetup(log, setupConfig),
+        EventHandler:   eventHandler,
 	}
 
 	if *enableExternalSecretStores {

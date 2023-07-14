@@ -112,7 +112,7 @@ type VPCConnectorStatus struct {
 type VPCConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
 	Spec   VPCConnectorSpec   `json:"spec"`
 	Status VPCConnectorStatus `json:"status,omitempty"`
 }

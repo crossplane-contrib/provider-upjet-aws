@@ -17,9 +17,9 @@ func (mg *AutoScalingConfigurationVersion) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AutoScalingConfigurationVersion.
-func (mg *AutoScalingConfigurationVersion) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AutoScalingConfigurationVersion.
+func (mg *AutoScalingConfigurationVersion) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AutoScalingConfigurationVersion.
@@ -55,9 +55,9 @@ func (mg *AutoScalingConfigurationVersion) SetDeletionPolicy(r xpv1.DeletionPoli
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AutoScalingConfigurationVersion.
-func (mg *AutoScalingConfigurationVersion) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AutoScalingConfigurationVersion.
+func (mg *AutoScalingConfigurationVersion) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AutoScalingConfigurationVersion.
@@ -93,9 +93,9 @@ func (mg *Connection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Connection.
-func (mg *Connection) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Connection.
+func (mg *Connection) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Connection.
@@ -131,9 +131,9 @@ func (mg *Connection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Connection.
-func (mg *Connection) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Connection.
+func (mg *Connection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Connection.
@@ -169,9 +169,9 @@ func (mg *ObservabilityConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ObservabilityConfiguration.
-func (mg *ObservabilityConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ObservabilityConfiguration.
+func (mg *ObservabilityConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ObservabilityConfiguration.
@@ -207,9 +207,9 @@ func (mg *ObservabilityConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ObservabilityConfiguration.
-func (mg *ObservabilityConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ObservabilityConfiguration.
+func (mg *ObservabilityConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ObservabilityConfiguration.
@@ -245,9 +245,9 @@ func (mg *Service) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Service.
-func (mg *Service) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Service.
+func (mg *Service) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Service.
@@ -283,9 +283,9 @@ func (mg *Service) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Service.
-func (mg *Service) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Service.
+func (mg *Service) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Service.
@@ -321,9 +321,9 @@ func (mg *VPCConnector) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this VPCConnector.
-func (mg *VPCConnector) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this VPCConnector.
+func (mg *VPCConnector) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this VPCConnector.
@@ -359,9 +359,9 @@ func (mg *VPCConnector) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this VPCConnector.
-func (mg *VPCConnector) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this VPCConnector.
+func (mg *VPCConnector) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this VPCConnector.

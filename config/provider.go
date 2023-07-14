@@ -8,6 +8,9 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/provider-aws/config/kendra"
+	"github.com/upbound/provider-aws/config/medialive"
+
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
 
@@ -225,6 +228,8 @@ func GetProvider() *config.Provider {
 		networkmanager.Configure,
 		opsworks.Configure,
 		sagemaker.Configure,
+		kendra.Configure,
+		medialive.Configure,
 	} {
 		configure(pc)
 	}

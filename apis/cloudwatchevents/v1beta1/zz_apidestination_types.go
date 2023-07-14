@@ -98,8 +98,8 @@ type APIDestinationStatus struct {
 type APIDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.invocationEndpoint)",message="invocationEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.invocationEndpoint)",message="invocationEndpoint is a required parameter"
 	Spec   APIDestinationSpec   `json:"spec"`
 	Status APIDestinationStatus `json:"status,omitempty"`
 }

@@ -17,9 +17,9 @@ func (mg *ApprovalRuleTemplate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ApprovalRuleTemplate.
-func (mg *ApprovalRuleTemplate) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ApprovalRuleTemplate.
+func (mg *ApprovalRuleTemplate) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApprovalRuleTemplate.
@@ -55,9 +55,9 @@ func (mg *ApprovalRuleTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ApprovalRuleTemplate.
-func (mg *ApprovalRuleTemplate) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ApprovalRuleTemplate.
+func (mg *ApprovalRuleTemplate) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApprovalRuleTemplate.
@@ -93,9 +93,9 @@ func (mg *ApprovalRuleTemplateAssociation) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ApprovalRuleTemplateAssociation.
-func (mg *ApprovalRuleTemplateAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ApprovalRuleTemplateAssociation.
@@ -131,9 +131,9 @@ func (mg *ApprovalRuleTemplateAssociation) SetDeletionPolicy(r xpv1.DeletionPoli
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ApprovalRuleTemplateAssociation.
-func (mg *ApprovalRuleTemplateAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ApprovalRuleTemplateAssociation.
+func (mg *ApprovalRuleTemplateAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ApprovalRuleTemplateAssociation.
@@ -169,9 +169,9 @@ func (mg *Repository) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Repository.
-func (mg *Repository) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Repository.
+func (mg *Repository) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Repository.
@@ -207,9 +207,9 @@ func (mg *Repository) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Repository.
-func (mg *Repository) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Repository.
+func (mg *Repository) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Repository.
@@ -245,9 +245,9 @@ func (mg *Trigger) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Trigger.
-func (mg *Trigger) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Trigger.
+func (mg *Trigger) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Trigger.
@@ -283,9 +283,9 @@ func (mg *Trigger) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Trigger.
-func (mg *Trigger) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Trigger.
+func (mg *Trigger) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Trigger.

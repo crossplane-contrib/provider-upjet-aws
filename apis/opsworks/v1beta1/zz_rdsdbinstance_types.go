@@ -91,8 +91,8 @@ type RDSDBInstanceStatus struct {
 type RDSDBInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbPasswordSecretRef)",message="dbPasswordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dbUser)",message="dbUser is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dbPasswordSecretRef)",message="dbPasswordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dbUser)",message="dbUser is a required parameter"
 	Spec   RDSDBInstanceSpec   `json:"spec"`
 	Status RDSDBInstanceStatus `json:"status,omitempty"`
 }

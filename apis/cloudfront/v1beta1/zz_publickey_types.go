@@ -75,7 +75,7 @@ type PublicKeyStatus struct {
 type PublicKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encodedKeySecretRef)",message="encodedKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encodedKeySecretRef)",message="encodedKeySecretRef is a required parameter"
 	Spec   PublicKeySpec   `json:"spec"`
 	Status PublicKeyStatus `json:"status,omitempty"`
 }

@@ -17,9 +17,9 @@ func (mg *AnomalyMonitor) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AnomalyMonitor.
-func (mg *AnomalyMonitor) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AnomalyMonitor.
+func (mg *AnomalyMonitor) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AnomalyMonitor.
@@ -55,9 +55,9 @@ func (mg *AnomalyMonitor) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AnomalyMonitor.
-func (mg *AnomalyMonitor) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AnomalyMonitor.
+func (mg *AnomalyMonitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AnomalyMonitor.

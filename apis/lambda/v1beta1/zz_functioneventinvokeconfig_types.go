@@ -152,7 +152,7 @@ type FunctionEventInvokeConfigStatus struct {
 type FunctionEventInvokeConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName)",message="functionName is a required parameter"
 	Spec   FunctionEventInvokeConfigSpec   `json:"spec"`
 	Status FunctionEventInvokeConfigStatus `json:"status,omitempty"`
 }
