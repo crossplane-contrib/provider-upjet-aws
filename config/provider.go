@@ -191,6 +191,7 @@ func GetProvider() *config.Provider {
 		grafana.Configure,
 		iam.Configure,
 		kafka.Configure,
+		kendra.Configure,
 		kinesis.Configure,
 		kinesisanalytics.Configure,
 		kinesisanalytics2.Configure,
@@ -198,6 +199,7 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		lambda.Configure,
 		licensemanager.Configure,
+		medialive.Configure,
 		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
@@ -228,8 +230,6 @@ func GetProvider() *config.Provider {
 		networkmanager.Configure,
 		opsworks.Configure,
 		sagemaker.Configure,
-		kendra.Configure,
-		medialive.Configure,
 	} {
 		configure(pc)
 	}
