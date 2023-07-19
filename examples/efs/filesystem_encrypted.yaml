@@ -1,0 +1,27 @@
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    creationToken: my-product
+    encrypted: true
+    kmsKeyIdRef:
+      name: efs-key
+    tags:
+      Name: MyProduct
+---
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: efs-key
+  name: efs-key
+spec:
+  forProvider:
+    region: us-east-1
+    description: Created with Crossplane
+    deletionWindowInDays: 7
