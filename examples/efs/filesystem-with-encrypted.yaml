@@ -1,11 +1,11 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: FileSystem
 metadata:
+  name: example-efs-encrypted
   annotations:
     meta.upbound.io/example-id: efs/v1beta1/filesystem
-  name: example
   labels:
-    testing.upbound.io/example-name: efs
+    testing.upbound.io/example-name: example-efs-encrypted
 spec:
   forProvider:
     region: us-west-1
@@ -19,11 +19,13 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
-  labels:
-    testing.upbound.io/example-name: efs-key
   name: example-key
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/filesystem
+  labels:
+    testing.upbound.io/example-name: example-key
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     description: Created with Crossplane
     deletionWindowInDays: 7
