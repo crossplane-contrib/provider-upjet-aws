@@ -10,7 +10,7 @@ spec:
     creationToken: my-product
     encrypted: true
     kmsKeyIdRef:
-      name: efs-key
+      name: example-key
     tags:
       Name: MyProduct
 ---
@@ -19,7 +19,7 @@ kind: Key
 metadata:
   labels:
     testing.upbound.io/example-name: efs-key
-  name: efs-key
+  name: example-key
 spec:
   forProvider:
     region: us-east-1
