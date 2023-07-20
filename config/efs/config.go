@@ -1,6 +1,10 @@
 package efs
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-aws/config/common"
+)
 
 // Configure adds configurations for efs group.
 func Configure(p *config.Provider) {
@@ -34,6 +38,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_efs_file_system_policy", func(r *config.Resource) {
 		r.References["file_system_id"] = config.Reference{
 			Type: "FileSystem",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_efs_file_system", func(r *config.Resource) {
+		r.References["kms_key_id"] = config.Reference{
+			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			Extractor: common.PathARNExtractor,
 		}
 	})
 }

@@ -33,13 +33,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("aws_efs_file_system", func(r *config.Resource) {
-		r.References["kms_key_id"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: common.PathARNExtractor,
-		}
-	})
-
 	p.AddResourceConfigurator("aws_kms_replica_key", func(r *config.Resource) {
 		r.References["primary_key_arn"] = config.Reference{
 			Type:      "Key",
