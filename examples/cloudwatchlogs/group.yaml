@@ -5,6 +5,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+    retentionInDays: 5
     tags:
       Application: serviceA
       Environment: production

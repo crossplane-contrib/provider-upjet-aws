@@ -47,4 +47,12 @@ func Configure(p *config.Provider) {
 			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
+
+	p.AddResourceConfigurator("aws_cloudwatch_log_group", func(r *config.Resource) {
+		config.MarkAsRequired(r.TerraformResource, "name")
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"name_prefix"},
+		}
+	})
+
 }
