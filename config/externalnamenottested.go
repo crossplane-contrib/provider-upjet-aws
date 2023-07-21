@@ -746,18 +746,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"aws_redshift_partner": config.TemplatedStringAsIdentifier("", "{{ .parameters.account_id }}:{{ .parameters.cluster_identifier }}:{{ .external_name }}"),
 	// Redshift Data Statements can be imported using the id
 	"aws_redshiftdata_statement": config.IdentifierFromProvider,
-	// Redshift Serverless Endpoint Access can be imported using the endpoint_name
-	"aws_redshiftserverless_endpoint_access": config.ParameterAsIdentifier("vpc_endpoint"),
-	// Redshift Serverless Namespaces can be imported using the namespace_name
-	"aws_redshiftserverless_namespace": config.ParameterAsIdentifier("namespace_name"),
-	// Redshift Serverless Resource Policies can be imported using the resource_arn
-	"aws_redshiftserverless_resource_policy": config.ParameterAsIdentifier("resource_arn"),
-	// Redshift Serverless Snapshots can be imported using the snapshot_name
-	"aws_redshiftserverless_snapshot": config.ParameterAsIdentifier("snapshot_name"),
-	// Redshift Serverless Usage Limits can be imported using the id
-	"aws_redshiftserverless_usage_limit": config.IdentifierFromProvider,
-	// Redshift Serverless Workgroups can be imported using the workgroup_name
-	"aws_redshiftserverless_workgroup": config.ParameterAsIdentifier("workgroup_name"),
 
 	// resourceexplorer2
 	//

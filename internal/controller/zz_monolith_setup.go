@@ -711,6 +711,12 @@ import (
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
 	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
+	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshiftserverless/endpointaccess"
+	redshiftserverlessnamespace "github.com/upbound/provider-aws/internal/controller/redshiftserverless/redshiftserverlessnamespace"
+	resourcepolicyredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/resourcepolicy"
+	snapshotredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/snapshot"
+	usagelimitredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/usagelimit"
+	workgroupredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/workgroup"
 	groupresourcegroups "github.com/upbound/provider-aws/internal/controller/resourcegroups/group"
 	profile "github.com/upbound/provider-aws/internal/controller/rolesanywhere/profile"
 	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
@@ -1621,6 +1627,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,
 		usagelimit.Setup,
+		endpointaccess.Setup,
+		redshiftserverlessnamespace.Setup,
+		resourcepolicyredshiftserverless.Setup,
+		snapshotredshiftserverless.Setup,
+		usagelimitredshiftserverless.Setup,
+		workgroupredshiftserverless.Setup,
 		groupresourcegroups.Setup,
 		profile.Setup,
 		delegationset.Setup,
