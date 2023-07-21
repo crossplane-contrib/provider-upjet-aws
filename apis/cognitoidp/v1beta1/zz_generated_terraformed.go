@@ -521,6 +521,10 @@ func (tr *UserPool) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("EmailVerificationMessage"))
+	opts = append(opts, resource.WithNameFilter("EmailVerificationSubject"))
+	opts = append(opts, resource.WithNameFilter("SMSVerificationMessage"))
+	opts = append(opts, resource.WithNameFilter("VerificationMessageTemplate"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

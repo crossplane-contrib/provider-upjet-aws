@@ -43,4 +43,14 @@ func Configure(p *config.Provider) {
 			Type: "UserPool",
 		}
 	})
+	p.AddResourceConfigurator("aws_cognito_user_pool", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"verification_message_template",
+				"sms_verification_message",
+				"email_verification_message",
+				"email_verification_subject",
+			},
+		}
+	})
 }
