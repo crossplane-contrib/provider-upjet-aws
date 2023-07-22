@@ -108,12 +108,10 @@ func Configure(p *config.Provider) {
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
-			if a, ok := attr["endpoint"].(string); ok {
-				conn["endpoint"] = []byte(a)
-			}
 			if a, ok := attr["address"].(string); ok {
 				conn["address"] = []byte(a)
 				conn["host"] = []byte(a)
+				conn["endpoint"] = []byte(a)
 			}
 			if a, ok := attr["username"].(string); ok {
 				conn["username"] = []byte(a)
