@@ -6,7 +6,10 @@ package clients
 
 import (
 	"context"
+	"fmt"
 	"os"
+
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"k8s.io/apimachinery/pkg/types"
@@ -94,6 +97,17 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
 		}
+
+		config := xpprovider.AWSConfig{
+			AccessKey:        ps.Configuration[keyAccessKeyID].(string),
+			SecretKey:        ps.Configuration[keySecretAccessKey].(string),
+			Region:           ps.Configuration[keyRegion].(string),
+			TerraformVersion: ps.Version,
+		}
+		tfClient, diag := config.GetClient(context.TODO(), &xpprovider.AWSClient{})
+		fmt.Println(diag)
+		ps.Meta = tfClient
+
 		return ps, nil
 	}
 }

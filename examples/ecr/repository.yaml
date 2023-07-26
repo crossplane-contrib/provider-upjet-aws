@@ -1,12 +1,8 @@
 apiVersion: ecr.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: upbound-sample-repository
+  name: alper-test-repo
 spec:
   forProvider:
     region: us-east-1
-    imageScanningConfiguration:
-      - scanOnPush: true
     imageTagMutability: "IMMUTABLE"
-    tags:
-      key1: value1

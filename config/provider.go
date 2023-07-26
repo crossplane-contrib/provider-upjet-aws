@@ -14,6 +14,8 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
 
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
+
 	"github.com/upbound/provider-aws/config/acm"
 	"github.com/upbound/provider-aws/config/acmpca"
 	"github.com/upbound/provider-aws/config/apigateway"
@@ -96,9 +98,6 @@ import (
 )
 
 var (
-	//go:embed schema.json
-	providerSchema string
-
 	//go:embed provider-metadata.yaml
 	providerMetadata []byte
 )
@@ -125,8 +124,9 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *config.Provider {
+	p := xpprovider.Provider()
 	modulePath := "github.com/upbound/provider-aws"
-	pc := config.NewProvider([]byte(providerSchema), "aws",
+	pc := config.NewProvider(p.ResourcesMap, "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
