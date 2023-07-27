@@ -18,7 +18,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for kafka group.
+// Configure adds configurations for medialive group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_medialive_multiplex", func(r *config.Resource) {
 		r.Path = "multiplices"
