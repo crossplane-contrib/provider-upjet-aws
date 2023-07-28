@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PublicKeyInitParameters struct {
+
+	// An optional comment about the public key.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The name for the public key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type PublicKeyObservation struct {
 
 	// Internal value used by CloudFront to allow future updates to the public key configuration.
@@ -55,6 +64,10 @@ type PublicKeyParameters struct {
 type PublicKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PublicKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PublicKeyStatus defines the observed state of PublicKey.

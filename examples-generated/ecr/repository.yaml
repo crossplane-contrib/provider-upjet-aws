@@ -12,6 +12,3 @@ spec:
     - scanOnPush: true
     imageTagMutability: MUTABLE
     region: us-west-1
-
----
-

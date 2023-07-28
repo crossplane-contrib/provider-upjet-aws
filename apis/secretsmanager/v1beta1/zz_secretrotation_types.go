@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecretRotationInitParameters struct {
+
+	// A structure that defines the rotation configuration for this secret. Defined below.
+	RotationRules []SecretRotationRotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+}
+
 type SecretRotationObservation struct {
 
 	// Amazon Resource Name (ARN) of the secret.
@@ -71,6 +77,18 @@ type SecretRotationParameters struct {
 	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
+type SecretRotationRotationRulesInitParameters struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+
+	// - The length of the rotation window in hours. For example, 3h for a three hour window.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
 type SecretRotationRotationRulesObservation struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
@@ -102,6 +120,10 @@ type SecretRotationRotationRulesParameters struct {
 type SecretRotationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecretRotationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecretRotationInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecretRotationStatus defines the observed state of SecretRotation.
@@ -122,7 +144,7 @@ type SecretRotationStatus struct {
 type SecretRotation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rotationRules)",message="rotationRules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rotationRules) || has(self.initProvider.rotationRules)",message="rotationRules is a required parameter"
 	Spec   SecretRotationSpec   `json:"spec"`
 	Status SecretRotationStatus `json:"status,omitempty"`
 }

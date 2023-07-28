@@ -163,8 +163,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - events
                       type: object
                     type: array
                   region:
@@ -178,6 +176,37 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessPolicy:
+                    description: The policy document. This is a JSON formatted string.
+                      The heredoc syntax or file function is helpful here. Use the
+                      Glacier Developer Guide for more information on Glacier Vault
+                      Policy
+                    type: string
+                  notification:
+                    description: The notifications for the Vault. Fields documented
+                      below.
+                    items:
+                      properties:
+                        events:
+                          description: You can configure a vault to publish a notification
+                            for ArchiveRetrievalCompleted and InventoryRetrievalCompleted
+                            events.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

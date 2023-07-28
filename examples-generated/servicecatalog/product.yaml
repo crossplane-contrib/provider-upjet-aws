@@ -16,6 +16,3 @@ spec:
     tags:
       foo: bar
     type: CLOUD_FORMATION_TEMPLATE
-
----
-

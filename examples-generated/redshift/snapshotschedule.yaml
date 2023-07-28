@@ -11,6 +11,3 @@ spec:
     definitions:
     - rate(12 hours)
     region: us-west-1
-
----
-

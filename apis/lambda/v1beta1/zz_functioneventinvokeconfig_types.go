@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationConfigOnFailureInitParameters struct {
+}
+
 type DestinationConfigOnFailureObservation struct {
 
 	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
@@ -36,6 +39,15 @@ type DestinationConfigOnFailureParameters struct {
 	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
+type FunctionEventInvokeConfigDestinationConfigInitParameters struct {
+
+	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
+	OnFailure []DestinationConfigOnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
+	OnSuccess []OnSuccessInitParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
+}
+
 type FunctionEventInvokeConfigDestinationConfigObservation struct {
 
 	// Configuration block with destination configuration for failed asynchronous invocations. See below for details.
@@ -54,6 +66,24 @@ type FunctionEventInvokeConfigDestinationConfigParameters struct {
 	// Configuration block with destination configuration for successful asynchronous invocations. See below for details.
 	// +kubebuilder:validation:Optional
 	OnSuccess []OnSuccessParameters `json:"onSuccess,omitempty" tf:"on_success,omitempty"`
+}
+
+type FunctionEventInvokeConfigInitParameters struct {
+
+	// Configuration block with destination configuration. See below for details.
+	DestinationConfig []FunctionEventInvokeConfigDestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+
+	// Name or Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+
+	// Maximum number of times to retry when the function returns an error. Valid values between 0 and 2. Defaults to 2.
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+
+	// Lambda Function published version, $LATEST, or Lambda Alias name.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 }
 
 type FunctionEventInvokeConfigObservation struct {
@@ -105,6 +135,9 @@ type FunctionEventInvokeConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type OnSuccessInitParameters struct {
+}
+
 type OnSuccessObservation struct {
 
 	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
@@ -132,6 +165,10 @@ type OnSuccessParameters struct {
 type FunctionEventInvokeConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionEventInvokeConfigParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionEventInvokeConfigInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionEventInvokeConfigStatus defines the observed state of FunctionEventInvokeConfig.
@@ -152,7 +189,7 @@ type FunctionEventInvokeConfigStatus struct {
 type FunctionEventInvokeConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName) || has(self.initProvider.functionName)",message="functionName is a required parameter"
 	Spec   FunctionEventInvokeConfigSpec   `json:"spec"`
 	Status FunctionEventInvokeConfigStatus `json:"status,omitempty"`
 }

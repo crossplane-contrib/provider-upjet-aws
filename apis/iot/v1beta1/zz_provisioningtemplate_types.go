@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PreProvisioningHookInitParameters struct {
+
+	// The version of the payload that was sent to the target function. The only valid (and the default) payload version is "2020-04-01".
+	PayloadVersion *string `json:"payloadVersion,omitempty" tf:"payload_version,omitempty"`
+
+	// The ARN of the target function.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+}
+
 type PreProvisioningHookObservation struct {
 
 	// The version of the payload that was sent to the target function. The only valid (and the default) payload version is "2020-04-01".
@@ -29,8 +38,26 @@ type PreProvisioningHookParameters struct {
 	PayloadVersion *string `json:"payloadVersion,omitempty" tf:"payload_version,omitempty"`
 
 	// The ARN of the target function.
-	// +kubebuilder:validation:Required
-	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+}
+
+type ProvisioningTemplateInitParameters struct {
+
+	// The description of the fleet provisioning template.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// True to enable the fleet provisioning template, otherwise false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Creates a pre-provisioning hook template. Details below.
+	PreProvisioningHook []PreProvisioningHookInitParameters `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The JSON formatted contents of the fleet provisioning template.
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
 }
 
 type ProvisioningTemplateObservation struct {
@@ -111,6 +138,10 @@ type ProvisioningTemplateParameters struct {
 type ProvisioningTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProvisioningTemplateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProvisioningTemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProvisioningTemplateStatus defines the observed state of ProvisioningTemplate.
@@ -131,7 +162,7 @@ type ProvisioningTemplateStatus struct {
 type ProvisioningTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.templateBody)",message="templateBody is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.templateBody) || has(self.initProvider.templateBody)",message="templateBody is a required parameter"
 	Spec   ProvisioningTemplateSpec   `json:"spec"`
 	Status ProvisioningTemplateStatus `json:"status,omitempty"`
 }

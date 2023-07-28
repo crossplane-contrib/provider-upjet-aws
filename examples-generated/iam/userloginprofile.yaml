@@ -27,6 +27,3 @@ spec:
   forProvider:
     forceDestroy: true
     path: /
-
----
-

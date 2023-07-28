@@ -16,6 +16,3 @@ spec:
     invocationEndpoint: https://api.destination.com/endpoint
     invocationRateLimitPerSecond: 20
     region: us-west-1
-
----
-

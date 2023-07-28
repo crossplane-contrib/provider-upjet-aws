@@ -857,6 +857,29 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  carrierGatewayId:
+                    description: Identifier of a carrier gateway. This attribute can
+                      only be used when the VPC contains a subnet which is associated
+                      with a Wavelength Zone.
+                    type: string
+                  coreNetworkArn:
+                    description: The Amazon Resource Name (ARN) of a core network.
+                    type: string
+                  destinationCidrBlock:
+                    description: The destination CIDR block.
+                    type: string
+                  destinationIpv6CidrBlock:
+                    description: The destination IPv6 CIDR block.
+                    type: string
+                  localGatewayId:
+                    description: Identifier of a Outpost local gateway.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

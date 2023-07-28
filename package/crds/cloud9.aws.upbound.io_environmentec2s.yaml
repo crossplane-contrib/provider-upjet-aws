@@ -183,6 +183,44 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  automaticStopTimeMinutes:
+                    description: The number of minutes until the running instance
+                      is shut down after the environment has last been used.
+                    type: number
+                  connectionType:
+                    description: The connection type used for connecting to an Amazon
+                      EC2 environment. Valid values are CONNECT_SSH and CONNECT_SSM.
+                      For more information please refer AWS documentation for Cloud9.
+                    type: string
+                  description:
+                    description: The description of the environment.
+                    type: string
+                  imageId:
+                    description: The identifier for the Amazon Machine Image (AMI)
+                      that's used to create the EC2 instance. Valid values are
+                    type: string
+                  instanceType:
+                    description: The type of instance to connect to the environment,
+                      e.g., t2.micro.
+                    type: string
+                  name:
+                    description: The name of the environment.
+                    type: string
+                  ownerArn:
+                    description: The ARN of the environment owner. This can be ARN
+                      of any AWS IAM principal. Defaults to the environment's creator.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -383,10 +421,12 @@ spec:
             x-kubernetes-validations:
             - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
+                || has(self.initProvider.instanceType)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: EnvironmentEC2Status defines the observed state of EnvironmentEC2.
             properties:

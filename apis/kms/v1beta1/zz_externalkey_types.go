@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExternalKeyInitParameters struct {
+
+	// Specifies whether to disable the policy lockout check performed when creating or updating the key's policy. Setting this value to true increases the risk that the key becomes unmanageable. For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide. Defaults to false.
+	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
+
+	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+
+	// Description of the key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies whether the key is enabled. Keys pending import can only be false. Imported keys default to true unless expired.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
+	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
+
+	// A key policy JSON document. If you do not provide a key policy, AWS KMS attaches a default key policy to the CMK.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Time at which the imported key material expires. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. If not specified, key material does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
+	ValidTo *string `json:"validTo,omitempty" tf:"valid_to,omitempty"`
+}
+
 type ExternalKeyObservation struct {
 
 	// The Amazon Resource Name (ARN) of the key.
@@ -106,6 +133,10 @@ type ExternalKeyParameters struct {
 type ExternalKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExternalKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ExternalKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExternalKeyStatus defines the observed state of ExternalKey.

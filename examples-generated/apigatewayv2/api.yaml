@@ -12,6 +12,3 @@ spec:
     protocolType: WEBSOCKET
     region: us-west-1
     routeSelectionExpression: $request.body.action
-
----
-

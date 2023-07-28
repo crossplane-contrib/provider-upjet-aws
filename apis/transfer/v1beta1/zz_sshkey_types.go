@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SSHKeyInitParameters struct {
+
+	// (Requirement) The public key portion of an SSH key pair.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+}
+
 type SSHKeyObservation struct {
 
 	// (Requirement) The public key portion of an SSH key pair.
@@ -70,6 +76,10 @@ type SSHKeyParameters struct {
 type SSHKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SSHKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SSHKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SSHKeyStatus defines the observed state of SSHKey.
@@ -90,7 +100,7 @@ type SSHKeyStatus struct {
 type SSHKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
 	Spec   SSHKeySpec   `json:"spec"`
 	Status SSHKeyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TableReplicaInitParameters_2 struct {
+
+	// Whether to enable Point In Time Recovery for the replica. Default is false.
+	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
+
+	// Storage class of the table replica. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS. If not used, the table replica will use the same class as the global table.
+	TableClassOverride *string `json:"tableClassOverride,omitempty" tf:"table_class_override,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TableReplicaObservation_2 struct {
 
 	// ARN of the table replica.
@@ -91,6 +103,10 @@ type TableReplicaParameters_2 struct {
 type TableReplicaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TableReplicaParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TableReplicaInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // TableReplicaStatus defines the observed state of TableReplica.

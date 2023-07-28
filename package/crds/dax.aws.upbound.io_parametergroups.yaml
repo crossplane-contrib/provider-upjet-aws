@@ -80,9 +80,6 @@ spec:
                         value:
                           description: The value for the parameter.
                           type: string
-                      required:
-                      - name
-                      - value
                       type: object
                     type: array
                   region:
@@ -91,6 +88,27 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of the parameter group.
+                    type: string
+                  parameters:
+                    description: –  The parameters of the parameter group.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the parameter.
+                          type: string
+                        value:
+                          description: The value for the parameter.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

@@ -168,6 +168,106 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  appMonitorConfiguration:
+                    description: configuration data for the app monitor. See app_monitor_configuration
+                      below.
+                    items:
+                      properties:
+                        allowCookies:
+                          description: If you set this to true, RUM web client sets
+                            two cookies, a session cookie  and a user cookie. The
+                            cookies allow the RUM web client to collect data relating
+                            to the number of users an application has and the behavior
+                            of the application across a sequence of events. Cookies
+                            are stored in the top-level domain of the current page.
+                          type: boolean
+                        enableXray:
+                          description: If you set this to true, RUM enables X-Ray
+                            tracing for the user sessions  that RUM samples. RUM adds
+                            an X-Ray trace header to allowed HTTP requests. It also
+                            records an X-Ray segment for allowed HTTP requests.
+                          type: boolean
+                        excludedPages:
+                          description: A list of URLs in your website or application
+                            to exclude from RUM data collection.
+                          items:
+                            type: string
+                          type: array
+                        favoritePages:
+                          description: A list of pages in the CloudWatch RUM console
+                            that are to be displayed with a "favorite" icon.
+                          items:
+                            type: string
+                          type: array
+                        guestRoleArn:
+                          description: The ARN of the guest IAM role that is attached
+                            to the Amazon Cognito identity pool that is used to authorize
+                            the sending of data to RUM.
+                          type: string
+                        identityPoolId:
+                          description: The ID of the Amazon Cognito identity pool
+                            that is used to authorize the sending of data to RUM.
+                          type: string
+                        includedPages:
+                          description: If this app monitor is to collect data from
+                            only certain pages in your application, this structure
+                            lists those pages.
+                          items:
+                            type: string
+                          type: array
+                        sessionSampleRate:
+                          description: Specifies the percentage of user sessions to
+                            use for RUM data collection. Choosing a higher percentage
+                            gives you more data but also incurs more costs. The number
+                            you specify is the percentage of user sessions that will
+                            be used. Default value is 0.1.
+                          type: number
+                        telemetries:
+                          description: An array that lists the types of telemetry
+                            data that this app monitor is to collect. Valid values
+                            are errors, performance, and http.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  customEvents:
+                    description: Specifies whether this app monitor allows the web
+                      client to define and send custom events. If you omit this parameter,
+                      custom events are DISABLED. See custom_events below.
+                    items:
+                      properties:
+                        status:
+                          description: Specifies whether this app monitor allows the
+                            web client to define and send custom events. The default
+                            is for custom events to be DISABLED. Valid values are
+                            DISABLED and ENABLED.
+                          type: string
+                      type: object
+                    type: array
+                  cwLogEnabled:
+                    description: Data collected by RUM is kept by RUM for 30 days
+                      and then deleted. This parameter  specifies whether RUM sends
+                      a copy of this telemetry data to Amazon CloudWatch Logs in your
+                      account. This enables you to keep the telemetry data for more
+                      than 30 days, but it does incur Amazon CloudWatch Logs charges.
+                      Default value is false.
+                    type: boolean
+                  domain:
+                    description: The top-level internet domain name for which your
+                      application has administrative authority.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -368,7 +468,8 @@ spec:
             x-kubernetes-validations:
             - message: domain is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.domain)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.domain)
+                || has(self.initProvider.domain)'
           status:
             description: AppMonitorStatus defines the observed state of AppMonitor.
             properties:

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ListenerPolicyInitParameters struct {
+
+	// The load balancer listener port to apply the policy to.
+	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
+
+	// List of Policy Names to apply to the backend server.
+	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger an update.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+}
+
 type ListenerPolicyObservation struct {
 
 	// The ID of the policy.
@@ -68,6 +80,10 @@ type ListenerPolicyParameters struct {
 type ListenerPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ListenerPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ListenerPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ListenerPolicyStatus defines the observed state of ListenerPolicy.
@@ -88,7 +104,7 @@ type ListenerPolicyStatus struct {
 type ListenerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerPort)",message="loadBalancerPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerPort) || has(self.initProvider.loadBalancerPort)",message="loadBalancerPort is a required parameter"
 	Spec   ListenerPolicySpec   `json:"spec"`
 	Status ListenerPolicyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DestinationObservation struct {
 
 	// The Amazon Resource Name (ARN) specifying the log destination.
@@ -77,6 +83,10 @@ type DestinationParameters struct {
 type DestinationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DestinationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DestinationInitParameters `json:"initProvider,omitempty"`
 }
 
 // DestinationStatus defines the observed state of Destination.

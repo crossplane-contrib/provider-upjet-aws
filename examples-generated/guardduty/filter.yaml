@@ -28,6 +28,3 @@ spec:
         greaterThanOrEqual: "4"
     rank: 1
     region: us-west-1
-
----
-

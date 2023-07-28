@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TargetInitParameters struct {
+
+	// Max capacity of the scalable target.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Min capacity of the scalable target.
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TargetObservation struct {
 
 	// The ARN of the scalable target.
@@ -95,6 +107,10 @@ type TargetParameters struct {
 type TargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // TargetStatus defines the observed state of Target.
@@ -115,8 +131,8 @@ type TargetStatus struct {
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxCapacity)",message="maxCapacity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minCapacity)",message="minCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxCapacity) || has(self.initProvider.maxCapacity)",message="maxCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minCapacity) || has(self.initProvider.minCapacity)",message="minCapacity is a required parameter"
 	Spec   TargetSpec   `json:"spec"`
 	Status TargetStatus `json:"status,omitempty"`
 }

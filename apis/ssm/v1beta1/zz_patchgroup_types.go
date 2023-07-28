@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PatchGroupInitParameters struct {
+
+	// The name of the patch group that should be registered with the patch baseline.
+	PatchGroup *string `json:"patchGroup,omitempty" tf:"patch_group,omitempty"`
+}
+
 type PatchGroupObservation struct {
 
 	// The ID of the patch baseline to register the patch group with.
@@ -55,6 +61,10 @@ type PatchGroupParameters struct {
 type PatchGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PatchGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PatchGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // PatchGroupStatus defines the observed state of PatchGroup.
@@ -75,7 +85,7 @@ type PatchGroupStatus struct {
 type PatchGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patchGroup)",message="patchGroup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patchGroup) || has(self.initProvider.patchGroup)",message="patchGroup is a required parameter"
 	Spec   PatchGroupSpec   `json:"spec"`
 	Status PatchGroupStatus `json:"status,omitempty"`
 }

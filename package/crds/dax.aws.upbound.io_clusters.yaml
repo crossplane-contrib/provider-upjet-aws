@@ -285,6 +285,62 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  availabilityZones:
+                    description: List of Availability Zones in which the nodes will
+                      be created
+                    items:
+                      type: string
+                    type: array
+                  clusterEndpointEncryptionType:
+                    description: '–  The type of encryption the cluster''s endpoint
+                      should support. Valid values are: NONE and TLS. Default value
+                      is NONE.'
+                    type: string
+                  description:
+                    description: –  Description for the cluster
+                    type: string
+                  maintenanceWindow:
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00'
+                    type: string
+                  nodeType:
+                    description: –  The compute and memory capacity of the nodes.
+                      See Nodes for supported node types
+                    type: string
+                  notificationTopicArn:
+                    description: east-1:012345678999:my_sns_topic
+                    type: string
+                  parameterGroupName:
+                    description: –  Name of the parameter group to associate with
+                      this DAX cluster
+                    type: string
+                  replicationFactor:
+                    description: node cluster, without any read replicas
+                    type: number
+                  serverSideEncryption:
+                    description: Encrypt at rest options
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether to enable encryption at rest. Defaults
+                            to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  subnetGroupName:
+                    description: –  Name of the subnet group to be used for the cluster
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -485,10 +541,12 @@ spec:
             x-kubernetes-validations:
             - message: nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || has(self.initProvider.nodeType)'
             - message: replicationFactor is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.replicationFactor)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.replicationFactor)
+                || has(self.initProvider.replicationFactor)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

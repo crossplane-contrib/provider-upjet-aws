@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayPrefixListReferenceInitParameters struct {
+
+	// Indicates whether to drop traffic that matches the Prefix List. Defaults to false.
+	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
+}
+
 type TransitGatewayPrefixListReferenceObservation struct {
 
 	// Indicates whether to drop traffic that matches the Prefix List. Defaults to false.
@@ -92,6 +98,10 @@ type TransitGatewayPrefixListReferenceParameters struct {
 type TransitGatewayPrefixListReferenceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayPrefixListReferenceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayPrefixListReferenceInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayPrefixListReferenceStatus defines the observed state of TransitGatewayPrefixListReference.

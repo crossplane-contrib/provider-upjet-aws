@@ -81,8 +81,6 @@ spec:
                                 description: The name of the user hierarchy level.
                                   Must not be more than 50 characters.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                         levelFour:
@@ -94,8 +92,6 @@ spec:
                                 description: The name of the user hierarchy level.
                                   Must not be more than 50 characters.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                         levelOne:
@@ -107,8 +103,6 @@ spec:
                                 description: The name of the user hierarchy level.
                                   Must not be more than 50 characters.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                         levelThree:
@@ -120,8 +114,6 @@ spec:
                                 description: The name of the user hierarchy level.
                                   Must not be more than 50 characters.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                         levelTwo:
@@ -133,8 +125,6 @@ spec:
                                 description: The name of the user hierarchy level.
                                   Must not be more than 50 characters.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                       type: object
@@ -222,6 +212,74 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  hierarchyStructure:
+                    description: A block that defines the hierarchy structure's levels.
+                      The hierarchy_structure block is documented below.
+                    items:
+                      properties:
+                        levelFive:
+                          description: A block that defines the details of level five.
+                            The level block is documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
+                            type: object
+                          type: array
+                        levelFour:
+                          description: A block that defines the details of level four.
+                            The level block is documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
+                            type: object
+                          type: array
+                        levelOne:
+                          description: A block that defines the details of level one.
+                            The level block is documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
+                            type: object
+                          type: array
+                        levelThree:
+                          description: A block that defines the details of level three.
+                            The level block is documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
+                            type: object
+                          type: array
+                        levelTwo:
+                          description: A block that defines the details of level two.
+                            The level block is documented below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the user hierarchy level.
+                                  Must not be more than 50 characters.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -423,7 +481,8 @@ spec:
             x-kubernetes-validations:
             - message: hierarchyStructure is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.hierarchyStructure)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hierarchyStructure)
+                || has(self.initProvider.hierarchyStructure)'
           status:
             description: UserHierarchyStructureStatus defines the observed state of
               UserHierarchyStructure.

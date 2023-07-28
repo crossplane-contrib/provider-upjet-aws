@@ -172,6 +172,32 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  apiCachingBehavior:
+                    description: Caching behavior. Valid values are FULL_REQUEST_CACHING
+                      and PER_RESOLVER_CACHING.
+                    type: string
+                  atRestEncryptionEnabled:
+                    description: At-rest encryption flag for cache. You cannot update
+                      this setting after creation.
+                    type: boolean
+                  transitEncryptionEnabled:
+                    description: Transit encryption flag when connecting to cache.
+                      You cannot update this setting after creation.
+                    type: boolean
+                  ttl:
+                    description: TTL in seconds for cache entries.
+                    type: number
+                  type:
+                    description: Cache instance type. Valid values are SMALL, MEDIUM,
+                      LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL,
+                      T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -372,13 +398,16 @@ spec:
             x-kubernetes-validations:
             - message: apiCachingBehavior is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.apiCachingBehavior)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.apiCachingBehavior)
+                || has(self.initProvider.apiCachingBehavior)'
             - message: ttl is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ttl)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ttl)
+                || has(self.initProvider.ttl)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: APICacheStatus defines the observed state of APICache.
             properties:

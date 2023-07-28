@@ -195,6 +195,56 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  adminRoleValues:
+                    description: The admin role values.
+                    items:
+                      type: string
+                    type: array
+                  allowedOrganizations:
+                    description: The allowed organizations.
+                    items:
+                      type: string
+                    type: array
+                  editorRoleValues:
+                    description: The editor role values.
+                    items:
+                      type: string
+                    type: array
+                  emailAssertion:
+                    description: The email assertion.
+                    type: string
+                  groupsAssertion:
+                    description: The groups assertion.
+                    type: string
+                  idpMetadataUrl:
+                    description: The IDP Metadata URL. Note that either idp_metadata_url
+                      or idp_metadata_xml (but not both) must be specified.
+                    type: string
+                  idpMetadataXml:
+                    description: The IDP Metadata XML. Note that either idp_metadata_url
+                      or idp_metadata_xml (but not both) must be specified.
+                    type: string
+                  loginAssertion:
+                    description: The login assertion.
+                    type: string
+                  loginValidityDuration:
+                    description: The login validity duration.
+                    type: number
+                  nameAssertion:
+                    description: The name assertion.
+                    type: string
+                  orgAssertion:
+                    description: The org assertion.
+                    type: string
+                  roleAssertion:
+                    description: The role assertion.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -395,7 +445,8 @@ spec:
             x-kubernetes-validations:
             - message: editorRoleValues is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.editorRoleValues)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.editorRoleValues)
+                || has(self.initProvider.editorRoleValues)'
           status:
             description: WorkspaceSAMLConfigurationStatus defines the observed state
               of WorkspaceSAMLConfiguration.

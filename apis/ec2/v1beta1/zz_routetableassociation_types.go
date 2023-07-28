@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RouteTableAssociationInitParameters struct {
+}
+
 type RouteTableAssociationObservation struct {
 
 	// The gateway ID to create an association. Conflicts with subnet_id.
@@ -80,6 +83,10 @@ type RouteTableAssociationParameters struct {
 type RouteTableAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteTableAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RouteTableAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteTableAssociationStatus defines the observed state of RouteTableAssociation.

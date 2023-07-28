@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainInitParameters struct {
+}
+
 type DomainObservation struct {
 
 	// The name of the SimpleDB domain
@@ -31,6 +34,10 @@ type DomainParameters struct {
 type DomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainStatus defines the observed state of Domain.

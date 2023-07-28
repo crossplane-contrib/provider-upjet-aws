@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateAuthorityCertificateInitParameters struct {
+}
+
 type CertificateAuthorityCertificateObservation struct {
 
 	// ARN of the Certificate Authority.
@@ -54,6 +57,10 @@ type CertificateAuthorityCertificateParameters struct {
 type CertificateAuthorityCertificateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateAuthorityCertificateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CertificateAuthorityCertificateInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateAuthorityCertificateStatus defines the observed state of CertificateAuthorityCertificate.

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserPoolUICustomizationInitParameters struct {
+
+	// The CSS values in the UI customization, provided as a String. At least one of css or image_file is required.
+	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
+
+	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
+	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
+}
+
 type UserPoolUICustomizationObservation struct {
 
 	// The CSS values in the UI customization, provided as a String. At least one of css or image_file is required.
@@ -88,6 +97,10 @@ type UserPoolUICustomizationParameters struct {
 type UserPoolUICustomizationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserPoolUICustomizationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserPoolUICustomizationInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserPoolUICustomizationStatus defines the observed state of UserPoolUICustomization.

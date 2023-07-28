@@ -14,6 +14,3 @@ spec:
     - insightsEnabled: true
       notificationsEnabled: true
     region: us-west-1
-
----
-

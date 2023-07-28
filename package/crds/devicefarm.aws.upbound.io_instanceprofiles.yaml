@@ -100,6 +100,38 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the instance profile.
+                    type: string
+                  excludeAppPackagesFromCleanup:
+                    description: An array of strings that specifies the list of app
+                      packages that should not be cleaned up from the device after
+                      a test run.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name for the instance profile.
+                    type: string
+                  packageCleanup:
+                    description: When set to true, Device Farm removes app packages
+                      after a test run. The default value is false for private devices.
+                    type: boolean
+                  rebootAfterUse:
+                    description: When set to true, Device Farm reboots the instance
+                      after a test run. The default value is true.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -300,7 +332,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: InstanceProfileStatus defines the observed state of InstanceProfile.
             properties:

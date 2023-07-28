@@ -261,9 +261,6 @@ spec:
                                     value:
                                       description: Value of the tag.
                                       type: string
-                                  required:
-                                  - key
-                                  - value
                                   type: object
                                 type: array
                             type: object
@@ -307,8 +304,6 @@ spec:
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
                                   INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
                                 type: string
-                            required:
-                            - storageClass
                             type: object
                           type: array
                         prefix:
@@ -345,17 +340,213 @@ spec:
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
                                   INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
                                 type: string
-                            required:
-                            - storageClass
                             type: object
                           type: array
-                      required:
-                      - id
-                      - status
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner. If the bucket
+                      is owned by a different account, the request will fail with
+                      an HTTP 403 (Access Denied) error.
+                    type: string
+                  rule:
+                    description: List of configuration blocks describing the rules
+                      managing the replication. See below.
+                    items:
+                      properties:
+                        abortIncompleteMultipartUpload:
+                          description: Configuration block that specifies the days
+                            since the initiation of an incomplete multipart upload
+                            that Amazon S3 will wait before permanently removing all
+                            parts of the upload. See below.
+                          items:
+                            properties:
+                              daysAfterInitiation:
+                                description: Number of days after which Amazon S3
+                                  aborts an incomplete multipart upload.
+                                type: number
+                            type: object
+                          type: array
+                        expiration:
+                          description: Configuration block that specifies the expiration
+                            for the lifecycle of the object in the form of date, days
+                            and, whether the object has a delete marker. See below.
+                          items:
+                            properties:
+                              date:
+                                description: Date objects are transitioned to the
+                                  specified storage class. The date value must be
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+                                type: string
+                              days:
+                                description: Number of days after creation when objects
+                                  are transitioned to the specified storage class.
+                                  The value must be a positive integer. If both days
+                                  and date are not specified, defaults to 0. Valid
+                                  values depend on storage_class, see Transition objects
+                                  using Amazon S3 Lifecycle for more details.
+                                type: number
+                              expiredObjectDeleteMarker:
+                                description: Indicates whether Amazon S3 will remove
+                                  a delete marker with no noncurrent versions. If
+                                  set to true, the delete marker will be expired;
+                                  if set to false the policy takes no action.
+                                type: boolean
+                            type: object
+                          type: array
+                        filter:
+                          description: Configuration block used to identify objects
+                            that a Lifecycle Rule applies to. See below. If not specified,
+                            the rule will default to using prefix.
+                          items:
+                            properties:
+                              and:
+                                description: Configuration block used to apply a logical
+                                  AND to two or more predicates. See below. The Lifecycle
+                                  Rule will apply to any object matching all the predicates
+                                  configured inside the and block.
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      description: Minimum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    objectSizeLessThan:
+                                      description: Maximum object size (in bytes)
+                                        to which the rule applies.
+                                      type: number
+                                    prefix:
+                                      description: DEPRECATED Use filter instead.
+                                        This has been deprecated by Amazon S3. Prefix
+                                        identifying one or more objects to which the
+                                        rule applies. Defaults to an empty string
+                                        ("") if filter is not specified.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      description: Key-value map of resource tags.
+                                        All of these tags must exist in the object's
+                                        tag set in order for the rule to apply.
+                                      type: object
+                                  type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                description: Minimum object size (in bytes) to which
+                                  the rule applies.
+                                type: string
+                              objectSizeLessThan:
+                                description: Maximum object size (in bytes) to which
+                                  the rule applies.
+                                type: string
+                              prefix:
+                                description: DEPRECATED Use filter instead. This has
+                                  been deprecated by Amazon S3. Prefix identifying
+                                  one or more objects to which the rule applies. Defaults
+                                  to an empty string ("") if filter is not specified.
+                                type: string
+                              tag:
+                                description: Configuration block for specifying a
+                                  tag key and value. See below.
+                                items:
+                                  properties:
+                                    key:
+                                      description: Name of the object key.
+                                      type: string
+                                    value:
+                                      description: Value of the tag.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        id:
+                          description: Unique identifier for the rule. The value cannot
+                            be longer than 255 characters.
+                          type: string
+                        noncurrentVersionExpiration:
+                          description: Configuration block that specifies when noncurrent
+                            object versions expire. See below.
+                          items:
+                            properties:
+                              newerNoncurrentVersions:
+                                description: Number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
+                                type: string
+                              noncurrentDays:
+                                description: Number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                type: number
+                            type: object
+                          type: array
+                        noncurrentVersionTransition:
+                          description: Set of configuration blocks that specify the
+                            transition rule for the lifecycle rule that describes
+                            when noncurrent objects transition to a specific storage
+                            class. See below.
+                          items:
+                            properties:
+                              newerNoncurrentVersions:
+                                description: Number of noncurrent versions Amazon
+                                  S3 will retain. Must be a non-zero positive integer.
+                                type: string
+                              noncurrentDays:
+                                description: Number of days an object is noncurrent
+                                  before Amazon S3 can perform the associated action.
+                                type: number
+                              storageClass:
+                                description: 'Class of storage used to store the object.
+                                  Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
+                                  INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
+                                type: string
+                            type: object
+                          type: array
+                        prefix:
+                          description: DEPRECATED Use filter instead. This has been
+                            deprecated by Amazon S3. Prefix identifying one or more
+                            objects to which the rule applies. Defaults to an empty
+                            string ("") if filter is not specified.
+                          type: string
+                        status:
+                          description: 'Whether the rule is currently being applied.
+                            Valid values: Enabled or Disabled.'
+                          type: string
+                        transition:
+                          description: Set of configuration blocks that specify when
+                            an Amazon S3 object transitions to a specified storage
+                            class. See below.
+                          items:
+                            properties:
+                              date:
+                                description: Date objects are transitioned to the
+                                  specified storage class. The date value must be
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+                                type: string
+                              days:
+                                description: Number of days after creation when objects
+                                  are transitioned to the specified storage class.
+                                  The value must be a positive integer. If both days
+                                  and date are not specified, defaults to 0. Valid
+                                  values depend on storage_class, see Transition objects
+                                  using Amazon S3 Lifecycle for more details.
+                                type: number
+                              storageClass:
+                                description: 'Class of storage used to store the object.
+                                  Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
+                                  INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -557,7 +748,8 @@ spec:
             x-kubernetes-validations:
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
+                || has(self.initProvider.rule)'
           status:
             description: BucketLifecycleConfigurationStatus defines the observed state
               of BucketLifecycleConfiguration.

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityConfigurationInitParameters struct {
+
+	// A JSON formatted Security Configuration
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+}
+
 type SecurityConfigurationObservation struct {
 
 	// A JSON formatted Security Configuration
@@ -41,6 +47,10 @@ type SecurityConfigurationParameters struct {
 type SecurityConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityConfigurationStatus defines the observed state of SecurityConfiguration.
@@ -61,7 +71,7 @@ type SecurityConfigurationStatus struct {
 type SecurityConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configuration) || has(self.initProvider.configuration)",message="configuration is a required parameter"
 	Spec   SecurityConfigurationSpec   `json:"spec"`
 	Status SecurityConfigurationStatus `json:"status,omitempty"`
 }

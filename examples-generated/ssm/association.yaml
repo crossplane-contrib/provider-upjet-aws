@@ -16,6 +16,3 @@ spec:
     - key: InstanceIds
       values:
       - ${aws_instance.example.id}
-
----
-

@@ -44,6 +44,3 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-
----
-

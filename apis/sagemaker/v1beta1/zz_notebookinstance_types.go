@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceMetadataServiceConfigurationInitParameters struct {
+
+	// Indicates the minimum IMDS version that the notebook instance supports. When passed "1" is passed. This means that both IMDSv1 and IMDSv2 are supported. Valid values are 1 and 2.
+	MinimumInstanceMetadataServiceVersion *string `json:"minimumInstanceMetadataServiceVersion,omitempty" tf:"minimum_instance_metadata_service_version,omitempty"`
+}
+
 type InstanceMetadataServiceConfigurationObservation struct {
 
 	// Indicates the minimum IMDS version that the notebook instance supports. When passed "1" is passed. This means that both IMDSv1 and IMDSv2 are supported. Valid values are 1 and 2.
@@ -24,6 +30,43 @@ type InstanceMetadataServiceConfigurationParameters struct {
 	// Indicates the minimum IMDS version that the notebook instance supports. When passed "1" is passed. This means that both IMDSv1 and IMDSv2 are supported. Valid values are 1 and 2.
 	// +kubebuilder:validation:Optional
 	MinimumInstanceMetadataServiceVersion *string `json:"minimumInstanceMetadataServiceVersion,omitempty" tf:"minimum_instance_metadata_service_version,omitempty"`
+}
+
+type NotebookInstanceInitParameters struct {
+
+	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// An array of up to three Git repositories to associate with the notebook instance.
+	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
+	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
+
+	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
+	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
+
+	// Information on the IMDS configuration of the notebook instance. Conflicts with instance_metadata_service_configuration. see details below.
+	InstanceMetadataServiceConfiguration []InstanceMetadataServiceConfigurationInitParameters `json:"instanceMetadataServiceConfiguration,omitempty" tf:"instance_metadata_service_configuration,omitempty"`
+
+	// The name of ML compute instance type.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The name of a lifecycle configuration to associate with the notebook instance.
+	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
+
+	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, or  notebook-al2-v2, depending on which version of Amazon Linux you require.
+	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
+
+	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
+	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
+
+	// The associated security groups.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type NotebookInstanceObservation struct {
@@ -200,6 +243,10 @@ type NotebookInstanceParameters struct {
 type NotebookInstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotebookInstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NotebookInstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotebookInstanceStatus defines the observed state of NotebookInstance.
@@ -220,7 +267,7 @@ type NotebookInstanceStatus struct {
 type NotebookInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
 	Spec   NotebookInstanceSpec   `json:"spec"`
 	Status NotebookInstanceStatus `json:"status,omitempty"`
 }

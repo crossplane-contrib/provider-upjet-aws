@@ -88,8 +88,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - accountIds
                       type: object
                     type: array
                   organizationAggregationSource:
@@ -199,6 +197,55 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountAggregationSource:
+                    description: The account(s) to aggregate config data from as documented
+                      below.
+                    items:
+                      properties:
+                        accountIds:
+                          description: List of 12-digit account IDs of the account(s)
+                            being aggregated.
+                          items:
+                            type: string
+                          type: array
+                        allRegions:
+                          description: If true, aggregate existing AWS Config regions
+                            and future regions.
+                          type: boolean
+                        regions:
+                          description: List of source regions being aggregated.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  organizationAggregationSource:
+                    description: The organization to aggregate config data from as
+                      documented below.
+                    items:
+                      properties:
+                        allRegions:
+                          description: If true, aggregate existing AWS Config regions
+                            and future regions.
+                          type: boolean
+                        regions:
+                          description: List of source regions being aggregated.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

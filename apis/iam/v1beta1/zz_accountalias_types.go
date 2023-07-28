@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountAliasInitParameters struct {
+}
+
 type AccountAliasObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -24,6 +27,10 @@ type AccountAliasParameters struct {
 type AccountAliasSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountAliasParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountAliasInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountAliasStatus defines the observed state of AccountAlias.

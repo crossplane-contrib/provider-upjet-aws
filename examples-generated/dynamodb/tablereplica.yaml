@@ -38,6 +38,3 @@ spec:
     region: us-west-1
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES
-
----
-

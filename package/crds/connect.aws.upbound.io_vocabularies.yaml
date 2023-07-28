@@ -176,6 +176,37 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  content:
+                    description: The content of the custom vocabulary in plain-text
+                      format with a table of values. Each row in the table represents
+                      a word or a phrase, described with Phrase, IPA, SoundsLike,
+                      and DisplayAs fields. Separate the fields with TAB characters.
+                      For more information, see Create a custom vocabulary using a
+                      table. Minimum length of 1. Maximum length of 60000.
+                    type: string
+                  languageCode:
+                    description: The language code of the vocabulary entries. For
+                      a list of languages and their corresponding language codes,
+                      see What is Amazon Transcribe?. Valid Values are ar-AE, de-CH,
+                      de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES,
+                      es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT,
+                      zh-CN.
+                    type: string
+                  name:
+                    description: A unique name of the custom vocabulary. Must not
+                      be more than 140 characters.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -376,13 +407,16 @@ spec:
             x-kubernetes-validations:
             - message: content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
+                || has(self.initProvider.content)'
             - message: languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
+                || has(self.initProvider.languageCode)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: VocabularyStatus defines the observed state of Vocabulary.
             properties:

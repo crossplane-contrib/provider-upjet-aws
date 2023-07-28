@@ -17,6 +17,3 @@ spec:
         testing.upbound.io/example-name: aws_subnet_ids
     tags:
       Usage: example
-
----
-

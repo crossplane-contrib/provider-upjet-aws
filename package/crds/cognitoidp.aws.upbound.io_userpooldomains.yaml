@@ -232,6 +232,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  domain:
+                    description: For custom domains, this is the fully-qualified domain
+                      name, such as auth.example.com. For Amazon Cognito prefix domains,
+                      this is the prefix alone, such as auth.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -432,7 +443,8 @@ spec:
             x-kubernetes-validations:
             - message: domain is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.domain)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.domain)
+                || has(self.initProvider.domain)'
           status:
             description: UserPoolDomainStatus defines the observed state of UserPoolDomain.
             properties:

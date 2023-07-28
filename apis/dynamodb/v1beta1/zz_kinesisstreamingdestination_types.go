@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type KinesisStreamingDestinationInitParameters struct {
+}
+
 type KinesisStreamingDestinationObservation struct {
 
 	// The table_name and stream_arn separated by a comma (,).
@@ -66,6 +69,10 @@ type KinesisStreamingDestinationParameters struct {
 type KinesisStreamingDestinationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     KinesisStreamingDestinationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider KinesisStreamingDestinationInitParameters `json:"initProvider,omitempty"`
 }
 
 // KinesisStreamingDestinationStatus defines the observed state of KinesisStreamingDestination.

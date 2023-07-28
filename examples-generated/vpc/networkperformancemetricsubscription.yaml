@@ -11,6 +11,3 @@ spec:
     destination: us-west-1
     region: us-west-1
     source: us-east-1
-
----
-

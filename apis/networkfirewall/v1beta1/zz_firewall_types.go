@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttachmentInitParameters struct {
+}
+
 type AttachmentObservation struct {
 
 	// The identifier of the firewall endpoint that AWS Network Firewall has instantiated in the subnet. You use this to identify the firewall endpoint in the VPC route tables, when you redirect the VPC traffic through the endpoint.
@@ -23,6 +26,15 @@ type AttachmentObservation struct {
 }
 
 type AttachmentParameters struct {
+}
+
+type EncryptionConfigurationInitParameters struct {
+
+	// The ID of the customer managed key. You can use any of the key identifiers that KMS supports, unless you're using a key that's managed by another account. If you're using a key managed by another account, then specify the key ARN.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -41,8 +53,35 @@ type EncryptionConfigurationParameters struct {
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type FirewallInitParameters struct {
+
+	// A boolean flag indicating whether it is possible to delete the firewall. Defaults to false.
+	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
+
+	// A friendly description of the firewall.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// KMS encryption configuration settings. See Encryption Configuration below for details.
+	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
+	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
+
+	// A friendly name of the firewall.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A boolean flag indicating whether it is possible to change the associated subnet(s). Defaults to false.
+	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
+
+	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
+	SubnetMapping []SubnetMappingInitParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FirewallObservation struct {
@@ -160,6 +199,9 @@ type FirewallParameters struct {
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
+type FirewallStatusInitParameters struct {
+}
+
 type FirewallStatusObservation struct {
 
 	// Set of subnets configured for use by the firewall.
@@ -167,6 +209,12 @@ type FirewallStatusObservation struct {
 }
 
 type FirewallStatusParameters struct {
+}
+
+type SubnetMappingInitParameters struct {
+
+	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 }
 
 type SubnetMappingObservation struct {
@@ -199,6 +247,9 @@ type SubnetMappingParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type SyncStatesInitParameters struct {
+}
+
 type SyncStatesObservation struct {
 
 	// Nested list describing the attachment status of the firewall's association with a single VPC subnet.
@@ -215,6 +266,10 @@ type SyncStatesParameters struct {
 type FirewallSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FirewallParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FirewallInitParameters `json:"initProvider,omitempty"`
 }
 
 // FirewallStatus defines the observed state of Firewall.
@@ -235,8 +290,8 @@ type FirewallStatus struct {
 type Firewall struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subnetMapping)",message="subnetMapping is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subnetMapping) || has(self.initProvider.subnetMapping)",message="subnetMapping is a required parameter"
 	Spec   FirewallSpec   `json:"spec"`
 	Status FirewallStatus `json:"status,omitempty"`
 }

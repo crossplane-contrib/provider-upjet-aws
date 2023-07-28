@@ -199,6 +199,59 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the network profile.
+                    type: string
+                  downlinkBandwidthBits:
+                    description: The data throughput rate in bits per second, as an
+                      integer from 0 to 104857600. Default value is 104857600.
+                    type: number
+                  downlinkDelayMs:
+                    description: Delay time for all packets to destination in milliseconds
+                      as an integer from 0 to 2000.
+                    type: number
+                  downlinkJitterMs:
+                    description: Time variation in the delay of received packets in
+                      milliseconds as an integer from 0 to 2000.
+                    type: number
+                  downlinkLossPercent:
+                    description: Proportion of received packets that fail to arrive
+                      from 0 to 100 percent.
+                    type: number
+                  name:
+                    description: The name for the network profile.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of network profile to create. Valid values
+                      are listed are PRIVATE and CURATED.
+                    type: string
+                  uplinkBandwidthBits:
+                    description: The data throughput rate in bits per second, as an
+                      integer from 0 to 104857600. Default value is 104857600.
+                    type: number
+                  uplinkDelayMs:
+                    description: Delay time for all packets to destination in milliseconds
+                      as an integer from 0 to 2000.
+                    type: number
+                  uplinkJitterMs:
+                    description: Time variation in the delay of received packets in
+                      milliseconds as an integer from 0 to 2000.
+                    type: number
+                  uplinkLossPercent:
+                    description: Proportion of received packets that fail to arrive
+                      from 0 to 100 percent.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -399,7 +452,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: NetworkProfileStatus defines the observed state of NetworkProfile.
             properties:

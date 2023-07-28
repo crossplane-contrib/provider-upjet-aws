@@ -114,6 +114,33 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A text description of the HSM configuration to be
+                      created.
+                    type: string
+                  hsmIpAddress:
+                    description: The IP address that the Amazon Redshift cluster must
+                      use to access the HSM.
+                    type: string
+                  hsmPartitionName:
+                    description: The name of the partition in the HSM where the Amazon
+                      Redshift clusters will store their database encryption keys.
+                    type: string
+                  hsmServerPublicCertificate:
+                    description: The HSMs public certificate file. When using Cloud
+                      HSM, the file name is server.pem.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -314,19 +341,23 @@ spec:
             x-kubernetes-validations:
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: hsmIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmIpAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmIpAddress)
+                || has(self.initProvider.hsmIpAddress)'
             - message: hsmPartitionName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmPartitionName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmPartitionName)
+                || has(self.initProvider.hsmPartitionName)'
             - message: hsmPartitionPasswordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmPartitionPasswordSecretRef)'
             - message: hsmServerPublicCertificate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmServerPublicCertificate)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmServerPublicCertificate)
+                || has(self.initProvider.hsmServerPublicCertificate)'
           status:
             description: HSMConfigurationStatus defines the observed state of HSMConfiguration.
             properties:

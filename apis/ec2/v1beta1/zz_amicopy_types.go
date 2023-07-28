@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AMICopyEBSBlockDeviceInitParameters struct {
+}
+
 type AMICopyEBSBlockDeviceObservation struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
@@ -40,6 +43,9 @@ type AMICopyEBSBlockDeviceObservation struct {
 type AMICopyEBSBlockDeviceParameters struct {
 }
 
+type AMICopyEphemeralBlockDeviceInitParameters struct {
+}
+
 type AMICopyEphemeralBlockDeviceObservation struct {
 
 	// Region-unique name for the AMI.
@@ -50,6 +56,33 @@ type AMICopyEphemeralBlockDeviceObservation struct {
 }
 
 type AMICopyEphemeralBlockDeviceParameters struct {
+}
+
+type AMICopyInitParameters struct {
+	DeprecationTime *string `json:"deprecationTime,omitempty" tf:"deprecation_time,omitempty"`
+
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// ARN of the Outpost to which to copy the AMI.
+	// Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost.
+	DestinationOutpostArn *string `json:"destinationOutpostArn,omitempty" tf:"destination_outpost_arn,omitempty"`
+
+	EBSBlockDevice []AMICopyEBSBlockDeviceInitParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+
+	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+
+	// Region-unique name for the AMI.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region from which the AMI will be copied. This may be the
+	// same as the AWS provider region in order to create a copy within the same region.
+	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AMICopyObservation struct {
@@ -214,6 +247,10 @@ type AMICopyParameters struct {
 type AMICopySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AMICopyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AMICopyInitParameters `json:"initProvider,omitempty"`
 }
 
 // AMICopyStatus defines the observed state of AMICopy.
@@ -234,8 +271,8 @@ type AMICopyStatus struct {
 type AMICopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceAmiRegion)",message="sourceAmiRegion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceAmiRegion) || has(self.initProvider.sourceAmiRegion)",message="sourceAmiRegion is a required parameter"
 	Spec   AMICopySpec   `json:"spec"`
 	Status AMICopyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationConfigurationInitParameters struct {
+
+	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
+	AccessRoleArn *string `json:"accessRoleArn,omitempty" tf:"access_role_arn,omitempty"`
+}
+
 type AuthenticationConfigurationObservation struct {
 
 	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
@@ -43,6 +49,15 @@ type AuthenticationConfigurationParameters struct {
 	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 }
 
+type CodeConfigurationInitParameters struct {
+
+	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See Code Configuration Values below for more details.
+	CodeConfigurationValues []CodeConfigurationValuesInitParameters `json:"codeConfigurationValues,omitempty" tf:"code_configuration_values,omitempty"`
+
+	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
+	ConfigurationSource *string `json:"configurationSource,omitempty" tf:"configuration_source,omitempty"`
+}
+
 type CodeConfigurationObservation struct {
 
 	// Basic configuration for building and running the App Runner service. Use this parameter to quickly launch an App Runner service without providing an apprunner.yaml file in the source code repository (or ignoring the file if it exists). See Code Configuration Values below for more details.
@@ -59,8 +74,29 @@ type CodeConfigurationParameters struct {
 	CodeConfigurationValues []CodeConfigurationValuesParameters `json:"codeConfigurationValues,omitempty" tf:"code_configuration_values,omitempty"`
 
 	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
-	// +kubebuilder:validation:Required
-	ConfigurationSource *string `json:"configurationSource" tf:"configuration_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConfigurationSource *string `json:"configurationSource,omitempty" tf:"configuration_source,omitempty"`
+}
+
+type CodeConfigurationValuesInitParameters struct {
+
+	// Command App Runner runs to build your application.
+	BuildCommand *string `json:"buildCommand,omitempty" tf:"build_command,omitempty"`
+
+	// Port that your application listens to in the container. Defaults to "8080".
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Runtime environment type for building and running an App Runner service. Represents a programming language runtime. Valid values: PYTHON_3, NODEJS_12, NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11, GO_1, DOTNET_6, PHP_81, RUBY_31.
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
+
+	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
+
+	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
+	StartCommand *string `json:"startCommand,omitempty" tf:"start_command,omitempty"`
 }
 
 type CodeConfigurationValuesObservation struct {
@@ -95,8 +131,8 @@ type CodeConfigurationValuesParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Runtime environment type for building and running an App Runner service. Represents a programming language runtime. Valid values: PYTHON_3, NODEJS_12, NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11, GO_1, DOTNET_6, PHP_81, RUBY_31.
-	// +kubebuilder:validation:Required
-	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
+	// +kubebuilder:validation:Optional
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
@@ -109,6 +145,18 @@ type CodeConfigurationValuesParameters struct {
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
 	// +kubebuilder:validation:Optional
 	StartCommand *string `json:"startCommand,omitempty" tf:"start_command,omitempty"`
+}
+
+type CodeRepositoryInitParameters struct {
+
+	// Configuration for building and running the service from a source code repository. See Code Configuration below for more details.
+	CodeConfiguration []CodeConfigurationInitParameters `json:"codeConfiguration,omitempty" tf:"code_configuration,omitempty"`
+
+	// Location of the repository that contains the source code.
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+
+	// Version that should be used within the source code repository. See Source Code Version below for more details.
+	SourceCodeVersion []SourceCodeVersionInitParameters `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
 }
 
 type CodeRepositoryObservation struct {
@@ -130,12 +178,18 @@ type CodeRepositoryParameters struct {
 	CodeConfiguration []CodeConfigurationParameters `json:"codeConfiguration,omitempty" tf:"code_configuration,omitempty"`
 
 	// Location of the repository that contains the source code.
-	// +kubebuilder:validation:Required
-	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
 	// Version that should be used within the source code repository. See Source Code Version below for more details.
-	// +kubebuilder:validation:Required
-	SourceCodeVersion []SourceCodeVersionParameters `json:"sourceCodeVersion" tf:"source_code_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceCodeVersion []SourceCodeVersionParameters `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
+}
+
+type EgressConfigurationInitParameters struct {
+
+	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
+	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 }
 
 type EgressConfigurationObservation struct {
@@ -168,6 +222,12 @@ type EgressConfigurationParameters struct {
 	VPCConnectorArnSelector *v1.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
 }
 
+type EncryptionConfigurationInitParameters struct {
+
+	// ARN of the KMS key used for encryption.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
 type EncryptionConfigurationObservation struct {
 
 	// ARN of the KMS key used for encryption.
@@ -177,8 +237,29 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// ARN of the KMS key used for encryption.
-	// +kubebuilder:validation:Required
-	KMSKey *string `json:"kmsKey" tf:"kms_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
+type HealthCheckConfigurationInitParameters struct {
+
+	// Number of consecutive checks that must succeed before App Runner decides that the service is healthy. Defaults to 1. Minimum value of 1. Maximum value of 20.
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+
+	// Time interval, in seconds, between health checks. Defaults to 5. Minimum value of 1. Maximum value of 20.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// URL to send requests to for health checks. Defaults to /. Minimum length of 0. Maximum length of 51200.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// IP protocol that App Runner uses to perform health checks for your service. Valid values: TCP, HTTP. Defaults to TCP. If you set protocol to HTTP, App Runner sends health check requests to the HTTP path specified by path.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Time, in seconds, to wait for a health check response before deciding it failed. Defaults to 2. Minimum value of  1. Maximum value of 20.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Defaults to 5. Minimum value of  1. Maximum value of 20.
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckConfigurationObservation struct {
@@ -229,6 +310,21 @@ type HealthCheckConfigurationParameters struct {
 	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
+type ImageConfigurationInitParameters struct {
+
+	// Port that your application listens to in the container. Defaults to "8080".
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
+
+	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
+
+	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
+	StartCommand *string `json:"startCommand,omitempty" tf:"start_command,omitempty"`
+}
+
 type ImageConfigurationObservation struct {
 
 	// Port that your application listens to in the container. Defaults to "8080".
@@ -263,6 +359,19 @@ type ImageConfigurationParameters struct {
 	StartCommand *string `json:"startCommand,omitempty" tf:"start_command,omitempty"`
 }
 
+type ImageRepositoryInitParameters struct {
+
+	// Configuration for running the identified image. See Image Configuration below for more details.
+	ImageConfiguration []ImageConfigurationInitParameters `json:"imageConfiguration,omitempty" tf:"image_configuration,omitempty"`
+
+	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
+	// image name format, see Pulling an image in the Amazon ECR User Guide.
+	ImageIdentifier *string `json:"imageIdentifier,omitempty" tf:"image_identifier,omitempty"`
+
+	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
+	ImageRepositoryType *string `json:"imageRepositoryType,omitempty" tf:"image_repository_type,omitempty"`
+}
+
 type ImageRepositoryObservation struct {
 
 	// Configuration for running the identified image. See Image Configuration below for more details.
@@ -284,12 +393,18 @@ type ImageRepositoryParameters struct {
 
 	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
 	// image name format, see Pulling an image in the Amazon ECR User Guide.
-	// +kubebuilder:validation:Required
-	ImageIdentifier *string `json:"imageIdentifier" tf:"image_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	ImageIdentifier *string `json:"imageIdentifier,omitempty" tf:"image_identifier,omitempty"`
 
 	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
-	// +kubebuilder:validation:Required
-	ImageRepositoryType *string `json:"imageRepositoryType" tf:"image_repository_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ImageRepositoryType *string `json:"imageRepositoryType,omitempty" tf:"image_repository_type,omitempty"`
+}
+
+type IngressConfigurationInitParameters struct {
+
+	// Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False.
+	IsPubliclyAccessible *bool `json:"isPubliclyAccessible,omitempty" tf:"is_publicly_accessible,omitempty"`
 }
 
 type IngressConfigurationObservation struct {
@@ -303,6 +418,18 @@ type IngressConfigurationParameters struct {
 	// Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False.
 	// +kubebuilder:validation:Optional
 	IsPubliclyAccessible *bool `json:"isPubliclyAccessible,omitempty" tf:"is_publicly_accessible,omitempty"`
+}
+
+type InstanceConfigurationInitParameters struct {
+
+	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU.
+	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// ARN of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
+	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
+
+	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type InstanceConfigurationObservation struct {
@@ -332,6 +459,15 @@ type InstanceConfigurationParameters struct {
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
+type NetworkConfigurationInitParameters struct {
+
+	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
+	EgressConfiguration []EgressConfigurationInitParameters `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
+
+	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
+	IngressConfiguration []IngressConfigurationInitParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
+}
+
 type NetworkConfigurationObservation struct {
 
 	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
@@ -350,6 +486,42 @@ type NetworkConfigurationParameters struct {
 	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	IngressConfiguration []IngressConfigurationParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
+}
+
+type ServiceInitParameters struct {
+
+	// ARN of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner associates the latest revision of a default auto scaling configuration.
+	AutoScalingConfigurationArn *string `json:"autoScalingConfigurationArn,omitempty" tf:"auto_scaling_configuration_arn,omitempty"`
+
+	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
+	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// (Forces new resource) Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	HealthCheckConfiguration []HealthCheckConfigurationInitParameters `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
+
+	// The runtime configuration of instances (scaling units) of the App Runner service. See Instance Configuration below for more details.
+	InstanceConfiguration []InstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// Configuration settings related to network traffic of the web application that the App Runner service runs. See Network Configuration below for more details.
+	NetworkConfiguration []NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// The observability configuration of your service. See Observability Configuration below for more details.
+	ObservabilityConfiguration []ServiceObservabilityConfigurationInitParameters `json:"observabilityConfiguration,omitempty" tf:"observability_configuration,omitempty"`
+
+	// (Forces new resource) Name of the service.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// The source to deploy to the App Runner service. Can be a code or an image repository. See Source Configuration below for more details.
+	SourceConfiguration []SourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ServiceObservabilityConfigurationInitParameters struct {
+
+	// When true, an observability configuration resource is associated with the service.
+	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`
 }
 
 type ServiceObservabilityConfigurationObservation struct {
@@ -378,8 +550,8 @@ type ServiceObservabilityConfigurationParameters struct {
 	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
-	// +kubebuilder:validation:Required
-	ObservabilityEnabled *bool `json:"observabilityEnabled" tf:"observability_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`
 }
 
 type ServiceObservation struct {
@@ -473,6 +645,15 @@ type ServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SourceCodeVersionInitParameters struct {
+
+	// Type of version identifier. For a git-based repository, branches represent versions. Valid values: BRANCH.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Source code version. For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type SourceCodeVersionObservation struct {
 
 	// Type of version identifier. For a git-based repository, branches represent versions. Valid values: BRANCH.
@@ -485,12 +666,27 @@ type SourceCodeVersionObservation struct {
 type SourceCodeVersionParameters struct {
 
 	// Type of version identifier. For a git-based repository, branches represent versions. Valid values: BRANCH.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Source code version. For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SourceConfigurationInitParameters struct {
+
+	// Describes resources needed to authenticate access to some source repositories. See Authentication Configuration below for more details.
+	AuthenticationConfiguration []AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// Whether continuous integration from the source repository is enabled for the App Runner service. If set to true, each repository change (source code commit or new image version) starts a deployment. Defaults to true.
+	AutoDeploymentsEnabled *bool `json:"autoDeploymentsEnabled,omitempty" tf:"auto_deployments_enabled,omitempty"`
+
+	// Description of a source code repository. See Code Repository below for more details.
+	CodeRepository []CodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
+
+	// Description of a source image repository. See Image Repository below for more details.
+	ImageRepository []ImageRepositoryInitParameters `json:"imageRepository,omitempty" tf:"image_repository,omitempty"`
 }
 
 type SourceConfigurationObservation struct {
@@ -531,6 +727,10 @@ type SourceConfigurationParameters struct {
 type ServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceStatus defines the observed state of Service.
@@ -551,8 +751,8 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName)",message="serviceName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceConfiguration)",message="sourceConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName) || has(self.initProvider.serviceName)",message="serviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceConfiguration) || has(self.initProvider.sourceConfiguration)",message="sourceConfiguration is a required parameter"
 	Spec   ServiceSpec   `json:"spec"`
 	Status ServiceStatus `json:"status,omitempty"`
 }

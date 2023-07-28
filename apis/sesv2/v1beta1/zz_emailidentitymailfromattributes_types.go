@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EmailIdentityMailFromAttributesInitParameters struct {
+
+	// The action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
+	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
+
+	// The custom MAIL FROM domain that you want the verified identity to use. Required if behavior_on_mx_failure is REJECT_MESSAGE.
+	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
+}
+
 type EmailIdentityMailFromAttributesObservation struct {
 
 	// The action to take if the required MX record isn't found when you send an email. Valid values: USE_DEFAULT_VALUE, REJECT_MESSAGE.
@@ -44,6 +53,10 @@ type EmailIdentityMailFromAttributesParameters struct {
 type EmailIdentityMailFromAttributesSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EmailIdentityMailFromAttributesParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EmailIdentityMailFromAttributesInitParameters `json:"initProvider,omitempty"`
 }
 
 // EmailIdentityMailFromAttributesStatus defines the observed state of EmailIdentityMailFromAttributes.

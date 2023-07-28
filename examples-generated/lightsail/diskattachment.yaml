@@ -49,6 +49,3 @@ spec:
     blueprintId: amazon_linux_2
     bundleId: nano_1_0
     region: us-west-1
-
----
-

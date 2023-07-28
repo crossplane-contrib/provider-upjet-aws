@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CatalogTableInitParameters struct {
+
+	// Description of the table.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Owner of the table.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Properties associated with this table, as a list of key-value pairs.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Configuration block for a maximum of 3 partition indexes. See partition_index below.
+	PartitionIndex []PartitionIndexInitParameters `json:"partitionIndex,omitempty" tf:"partition_index,omitempty"`
+
+	// Configuration block of columns by which the table is partitioned. Only primitive types are supported as partition keys. See partition_keys below.
+	PartitionKeys []PartitionKeysInitParameters `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
+
+	// Retention time for this table.
+	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
+
+	// Configuration block for information about the physical storage of this table. For more information, refer to the Glue Developer Guide. See storage_descriptor below.
+	StorageDescriptor []StorageDescriptorInitParameters `json:"storageDescriptor,omitempty" tf:"storage_descriptor,omitempty"`
+
+	// Type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.). While optional, some Athena DDL queries such as ALTER TABLE and SHOW CREATE TABLE will fail if this argument is empty.
+	TableType *string `json:"tableType,omitempty" tf:"table_type,omitempty"`
+
+	// Configuration block of a target table for resource linking. See target_table below.
+	TargetTable []TargetTableInitParameters `json:"targetTable,omitempty" tf:"target_table,omitempty"`
+
+	// If the table is a view, the expanded text of the view; otherwise null.
+	ViewExpandedText *string `json:"viewExpandedText,omitempty" tf:"view_expanded_text,omitempty"`
+
+	// If the table is a view, the original text of the view; otherwise null.
+	ViewOriginalText *string `json:"viewOriginalText,omitempty" tf:"view_original_text,omitempty"`
+}
+
 type CatalogTableObservation struct {
 
 	// The ARN of the Glue Table.
@@ -130,6 +166,21 @@ type CatalogTableParameters struct {
 	ViewOriginalText *string `json:"viewOriginalText,omitempty" tf:"view_original_text,omitempty"`
 }
 
+type ColumnsInitParameters struct {
+
+	// Free-form text comment.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Name of the Column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value pairs defining properties associated with the column.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Datatype of data in the Column.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ColumnsObservation struct {
 
 	// Free-form text comment.
@@ -152,8 +203,8 @@ type ColumnsParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Name of the Column.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value pairs defining properties associated with the column.
 	// +kubebuilder:validation:Optional
@@ -162,6 +213,15 @@ type ColumnsParameters struct {
 	// Datatype of data in the Column.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PartitionIndexInitParameters struct {
+
+	// Name of the partition index.
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// Keys for the partition index.
+	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 }
 
 type PartitionIndexObservation struct {
@@ -178,12 +238,24 @@ type PartitionIndexObservation struct {
 type PartitionIndexParameters struct {
 
 	// Name of the partition index.
-	// +kubebuilder:validation:Required
-	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
 	// Keys for the partition index.
-	// +kubebuilder:validation:Required
-	Keys []*string `json:"keys" tf:"keys,omitempty"`
+	// +kubebuilder:validation:Optional
+	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
+}
+
+type PartitionKeysInitParameters struct {
+
+	// Free-form text comment.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Name of the Partition Key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Datatype of data in the Partition Key.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PartitionKeysObservation struct {
@@ -205,12 +277,24 @@ type PartitionKeysParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Name of the Partition Key.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Datatype of data in the Partition Key.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SchemaIDInitParameters struct {
+
+	// Name of the schema registry that contains the schema. Must be provided when schema_name is specified and conflicts with schema_arn.
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// ARN of the schema. One of schema_arn or schema_name has to be provided.
+	SchemaArn *string `json:"schemaArn,omitempty" tf:"schema_arn,omitempty"`
+
+	// Name of the schema. One of schema_arn or schema_name has to be provided.
+	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 }
 
 type SchemaIDObservation struct {
@@ -240,6 +324,18 @@ type SchemaIDParameters struct {
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 }
 
+type SchemaReferenceInitParameters struct {
+
+	// Configuration block that contains schema identity fields. Either this or the schema_version_id has to be provided. See schema_id below.
+	SchemaID []SchemaIDInitParameters `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
+
+	// Unique ID assigned to a version of the schema. Either this or the schema_id has to be provided.
+	SchemaVersionID *string `json:"schemaVersionId,omitempty" tf:"schema_version_id,omitempty"`
+
+	// Version number of the schema.
+	SchemaVersionNumber *float64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
+}
+
 type SchemaReferenceObservation struct {
 
 	// Configuration block that contains schema identity fields. Either this or the schema_version_id has to be provided. See schema_id below.
@@ -263,8 +359,20 @@ type SchemaReferenceParameters struct {
 	SchemaVersionID *string `json:"schemaVersionId,omitempty" tf:"schema_version_id,omitempty"`
 
 	// Version number of the schema.
-	// +kubebuilder:validation:Required
-	SchemaVersionNumber *float64 `json:"schemaVersionNumber" tf:"schema_version_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaVersionNumber *float64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
+}
+
+type SerDeInfoInitParameters struct {
+
+	// Name of the SerDe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Map of initialization parameters for the SerDe, in key-value form.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
+	SerializationLibrary *string `json:"serializationLibrary,omitempty" tf:"serialization_library,omitempty"`
 }
 
 type SerDeInfoObservation struct {
@@ -294,6 +402,18 @@ type SerDeInfoParameters struct {
 	SerializationLibrary *string `json:"serializationLibrary,omitempty" tf:"serialization_library,omitempty"`
 }
 
+type SkewedInfoInitParameters struct {
+
+	// List of names of columns that contain skewed values.
+	SkewedColumnNames []*string `json:"skewedColumnNames,omitempty" tf:"skewed_column_names,omitempty"`
+
+	// List of values that appear so frequently as to be considered skewed.
+	SkewedColumnValueLocationMaps map[string]*string `json:"skewedColumnValueLocationMaps,omitempty" tf:"skewed_column_value_location_maps,omitempty"`
+
+	// Map of skewed values to the columns that contain them.
+	SkewedColumnValues []*string `json:"skewedColumnValues,omitempty" tf:"skewed_column_values,omitempty"`
+}
+
 type SkewedInfoObservation struct {
 
 	// List of names of columns that contain skewed values.
@@ -321,6 +441,15 @@ type SkewedInfoParameters struct {
 	SkewedColumnValues []*string `json:"skewedColumnValues,omitempty" tf:"skewed_column_values,omitempty"`
 }
 
+type SortColumnsInitParameters struct {
+
+	// Name of the column.
+	Column *string `json:"column,omitempty" tf:"column,omitempty"`
+
+	// Whether the column is sorted in ascending (1) or descending order (0).
+	SortOrder *float64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+}
+
 type SortColumnsObservation struct {
 
 	// Name of the column.
@@ -333,12 +462,54 @@ type SortColumnsObservation struct {
 type SortColumnsParameters struct {
 
 	// Name of the column.
-	// +kubebuilder:validation:Required
-	Column *string `json:"column" tf:"column,omitempty"`
+	// +kubebuilder:validation:Optional
+	Column *string `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Whether the column is sorted in ascending (1) or descending order (0).
-	// +kubebuilder:validation:Required
-	SortOrder *float64 `json:"sortOrder" tf:"sort_order,omitempty"`
+	// +kubebuilder:validation:Optional
+	SortOrder *float64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+}
+
+type StorageDescriptorInitParameters struct {
+
+	// List of reducer grouping columns, clustering columns, and bucketing columns in the table.
+	BucketColumns []*string `json:"bucketColumns,omitempty" tf:"bucket_columns,omitempty"`
+
+	// Configuration block for columns in the table. See columns below.
+	Columns []ColumnsInitParameters `json:"columns,omitempty" tf:"columns,omitempty"`
+
+	// Whether the data in the table is compressed.
+	Compressed *bool `json:"compressed,omitempty" tf:"compressed,omitempty"`
+
+	// Input format: SequenceFileInputFormat (binary), or TextInputFormat, or a custom format.
+	InputFormat *string `json:"inputFormat,omitempty" tf:"input_format,omitempty"`
+
+	// Physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Must be specified if the table contains any dimension columns.
+	NumberOfBuckets *float64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
+
+	// Output format: SequenceFileOutputFormat (binary), or IgnoreKeyTextOutputFormat, or a custom format.
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// User-supplied properties in key-value form.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference. See Schema Reference below.
+	SchemaReference []SchemaReferenceInitParameters `json:"schemaReference,omitempty" tf:"schema_reference,omitempty"`
+
+	// Configuration block for serialization and deserialization ("SerDe") information. See ser_de_info below.
+	SerDeInfo []SerDeInfoInitParameters `json:"serDeInfo,omitempty" tf:"ser_de_info,omitempty"`
+
+	// Configuration block with information about values that appear very frequently in a column (skewed values). See skewed_info below.
+	SkewedInfo []SkewedInfoInitParameters `json:"skewedInfo,omitempty" tf:"skewed_info,omitempty"`
+
+	// Configuration block for the sort order of each bucket in the table. See sort_columns below.
+	SortColumns []SortColumnsInitParameters `json:"sortColumns,omitempty" tf:"sort_columns,omitempty"`
+
+	// Whether the table data is stored in subdirectories.
+	StoredAsSubDirectories *bool `json:"storedAsSubDirectories,omitempty" tf:"stored_as_sub_directories,omitempty"`
 }
 
 type StorageDescriptorObservation struct {
@@ -438,6 +609,12 @@ type StorageDescriptorParameters struct {
 	StoredAsSubDirectories *bool `json:"storedAsSubDirectories,omitempty" tf:"stored_as_sub_directories,omitempty"`
 }
 
+type TargetTableInitParameters struct {
+
+	// Name of the target table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type TargetTableObservation struct {
 
 	// ID of the Data Catalog in which the table resides.
@@ -461,14 +638,18 @@ type TargetTableParameters struct {
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// Name of the target table.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // CatalogTableSpec defines the desired state of CatalogTable
 type CatalogTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CatalogTableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CatalogTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // CatalogTableStatus defines the observed state of CatalogTable.

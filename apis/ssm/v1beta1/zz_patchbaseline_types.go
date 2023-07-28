@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApprovalRuleInitParameters struct {
+
+	// The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
+	// Valid Range: 0 to 100.
+	// Conflicts with approve_until_date.
+	ApproveAfterDays *float64 `json:"approveAfterDays,omitempty" tf:"approve_after_days,omitempty"`
+
+	// The cutoff date for auto approval of released patches.
+	// Any patches released on or before this date are installed automatically.
+	// Date is formatted as YYYY-MM-DD.
+	// Conflicts with approve_after_days
+	ApproveUntilDate *string `json:"approveUntilDate,omitempty" tf:"approve_until_date,omitempty"`
+
+	// The compliance level for patches approved by this rule.
+	// Valid values are CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, and UNSPECIFIED.
+	// The default value is UNSPECIFIED.
+	ComplianceLevel *string `json:"complianceLevel,omitempty" tf:"compliance_level,omitempty"`
+
+	// Boolean enabling the application of non-security updates.
+	// The default value is false.
+	// Valid for Linux instances only.
+	EnableNonSecurity *bool `json:"enableNonSecurity,omitempty" tf:"enable_non_security,omitempty"`
+
+	// The patch filter group that defines the criteria for the rule.
+	// Up to 5 patch filters can be specified per approval rule using Key/Value pairs.
+	// Valid combinations of these Keys and the operating_system value can be found in the SSM DescribePatchProperties API Reference.
+	// Valid Values are exact values for the patch property given as the key, or a wildcard *, which matches all values.
+	PatchFilter []PatchFilterInitParameters `json:"patchFilter,omitempty" tf:"patch_filter,omitempty"`
+}
+
 type ApprovalRuleObservation struct {
 
 	// The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
@@ -74,8 +104,14 @@ type ApprovalRuleParameters struct {
 	// Up to 5 patch filters can be specified per approval rule using Key/Value pairs.
 	// Valid combinations of these Keys and the operating_system value can be found in the SSM DescribePatchProperties API Reference.
 	// Valid Values are exact values for the patch property given as the key, or a wildcard *, which matches all values.
-	// +kubebuilder:validation:Required
-	PatchFilter []PatchFilterParameters `json:"patchFilter" tf:"patch_filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	PatchFilter []PatchFilterParameters `json:"patchFilter,omitempty" tf:"patch_filter,omitempty"`
+}
+
+type GlobalFilterInitParameters struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type GlobalFilterObservation struct {
@@ -86,11 +122,77 @@ type GlobalFilterObservation struct {
 
 type GlobalFilterParameters struct {
 
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type PatchBaselineInitParameters struct {
+
+	// A set of rules used to include patches in the baseline.
+	// Up to 10 approval rules can be specified.
+	// See approval_rule below.
+	ApprovalRule []ApprovalRuleInitParameters `json:"approvalRule,omitempty" tf:"approval_rule,omitempty"`
+
+	// A list of explicitly approved patches for the baseline.
+	// Cannot be specified with approval_rule.
+	ApprovedPatches []*string `json:"approvedPatches,omitempty" tf:"approved_patches,omitempty"`
+
+	// The compliance level for approved patches.
+	// This means that if an approved patch is reported as missing, this is the severity of the compliance violation.
+	// Valid values are CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
+	// The default value is UNSPECIFIED.
+	ApprovedPatchesComplianceLevel *string `json:"approvedPatchesComplianceLevel,omitempty" tf:"approved_patches_compliance_level,omitempty"`
+
+	// Indicates whether the list of approved patches includes non-security updates that should be applied to the instances.
+	// Applies to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool `json:"approvedPatchesEnableNonSecurity,omitempty" tf:"approved_patches_enable_non_security,omitempty"`
+
+	// The description of the patch baseline.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A set of global filters used to exclude patches from the baseline.
+	// Up to 4 global filters can be specified using Key/Value pairs.
+	// Valid Keys are PRODUCT, CLASSIFICATION, MSRC_SEVERITY, and PATCH_ID.
+	GlobalFilter []GlobalFilterInitParameters `json:"globalFilter,omitempty" tf:"global_filter,omitempty"`
+
+	// The name of the patch baseline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The operating system the patch baseline applies to.
+	// Valid values are
+	// AMAZON_LINUX,
+	// AMAZON_LINUX_2,
+	// AMAZON_LINUX_2022,
+	// CENTOS,
+	// DEBIAN,
+	// MACOS,
+	// ORACLE_LINUX,
+	// RASPBIAN,
+	// REDHAT_ENTERPRISE_LINUX,
+	// ROCKY_LINUX,
+	// SUSE,
+	// UBUNTU, and
+	// WINDOWS.
+	// The default value is WINDOWS.
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
+
+	// A list of rejected patches.
+	RejectedPatches []*string `json:"rejectedPatches,omitempty" tf:"rejected_patches,omitempty"`
+
+	// The action for Patch Manager to take on patches included in the rejected_patches list.
+	// Valid values are ALLOW_AS_DEPENDENCY and BLOCK.
+	RejectedPatchesAction *string `json:"rejectedPatchesAction,omitempty" tf:"rejected_patches_action,omitempty"`
+
+	// Configuration block with alternate sources for patches.
+	// Applies to Linux instances only.
+	// See source below.
+	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PatchBaselineObservation struct {
@@ -251,6 +353,12 @@ type PatchBaselineParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type PatchFilterInitParameters struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type PatchFilterObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
@@ -259,11 +367,25 @@ type PatchFilterObservation struct {
 
 type PatchFilterParameters struct {
 
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type SourceInitParameters struct {
+
+	// The value of the yum repo configuration.
+	// For information about other options available for your yum repository configuration, see the dnf.conf documentation
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The name specified to identify the patch source.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
+	// For lists of supported product values, see PatchFilter.
+	Products []*string `json:"products,omitempty" tf:"products,omitempty"`
 }
 
 type SourceObservation struct {
@@ -284,23 +406,27 @@ type SourceParameters struct {
 
 	// The value of the yum repo configuration.
 	// For information about other options available for your yum repository configuration, see the dnf.conf documentation
-	// +kubebuilder:validation:Required
-	Configuration *string `json:"configuration" tf:"configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// The name specified to identify the patch source.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
 	// For lists of supported product values, see PatchFilter.
-	// +kubebuilder:validation:Required
-	Products []*string `json:"products" tf:"products,omitempty"`
+	// +kubebuilder:validation:Optional
+	Products []*string `json:"products,omitempty" tf:"products,omitempty"`
 }
 
 // PatchBaselineSpec defines the desired state of PatchBaseline
 type PatchBaselineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PatchBaselineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PatchBaselineInitParameters `json:"initProvider,omitempty"`
 }
 
 // PatchBaselineStatus defines the observed state of PatchBaseline.
@@ -321,7 +447,7 @@ type PatchBaselineStatus struct {
 type PatchBaseline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   PatchBaselineSpec   `json:"spec"`
 	Status PatchBaselineStatus `json:"status,omitempty"`
 }

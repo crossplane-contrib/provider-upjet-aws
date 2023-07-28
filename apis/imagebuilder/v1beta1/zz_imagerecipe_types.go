@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BlockDeviceMappingEBSInitParameters struct {
+
+	// Whether to delete the volume on termination. Defaults to unset, which is the value inherited from the parent image.
+	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Whether to encrypt the volume. Defaults to unset, which is the value inherited from the parent image.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Identifier of the EC2 Volume Snapshot.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of the volume, in GiB.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of the volume. For example, gp2 or io2.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
 type BlockDeviceMappingEBSObservation struct {
 
 	// Whether to delete the volume on termination. Defaults to unset, which is the value inherited from the parent image.
@@ -75,6 +102,15 @@ type BlockDeviceMappingEBSParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type ComponentParameterInitParameters struct {
+
+	// The name of the component parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value for the named component parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ComponentParameterObservation struct {
 
 	// The name of the component parameter.
@@ -87,12 +123,27 @@ type ComponentParameterObservation struct {
 type ComponentParameterParameters struct {
 
 	// The name of the component parameter.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value for the named component parameter.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ImageRecipeBlockDeviceMappingInitParameters struct {
+
+	// Name of the device. For example, /dev/sda or /dev/xvdb.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Configuration block with Elastic Block Storage (EBS) block device mapping settings. Detailed below.
+	EBS []BlockDeviceMappingEBSInitParameters `json:"ebs,omitempty" tf:"ebs,omitempty"`
+
+	// Set to true to remove a mapping from the parent image.
+	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	// Virtual device name. For example, ephemeral0. Instance store volumes are numbered starting from 0.
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type ImageRecipeBlockDeviceMappingObservation struct {
@@ -129,6 +180,12 @@ type ImageRecipeBlockDeviceMappingParameters struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
+type ImageRecipeComponentInitParameters struct {
+
+	// Configuration block(s) for parameters to configure the component. Detailed below.
+	Parameter []ComponentParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
 type ImageRecipeComponentObservation struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
@@ -157,6 +214,39 @@ type ImageRecipeComponentParameters struct {
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	// +kubebuilder:validation:Optional
 	Parameter []ComponentParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
+type ImageRecipeInitParameters struct {
+
+	// Configuration block(s) with block device mappings for the image recipe. Detailed below.
+	BlockDeviceMapping []ImageRecipeBlockDeviceMappingInitParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
+
+	// Ordered configuration block(s) with components for the image recipe. Detailed below.
+	Component []ImageRecipeComponentInitParameters `json:"component,omitempty" tf:"component,omitempty"`
+
+	// Description of the image recipe.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of the image recipe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The image recipe uses this image as a base from which to build your customized image. The value can be the base image ARN or an AMI ID.
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
+
+	// Configuration block for the Systems Manager Agent installed by default by Image Builder. Detailed below.
+	SystemsManagerAgent []SystemsManagerAgentInitParameters `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.
+	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
+
+	// The semantic version of the image recipe, which specifies the version in the following format, with numeric values in each position to indicate a specific version: major.minor.patch. For example: 1.0.0.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type ImageRecipeObservation struct {
@@ -257,6 +347,12 @@ type ImageRecipeParameters struct {
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
+type SystemsManagerAgentInitParameters struct {
+
+	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
+}
+
 type SystemsManagerAgentObservation struct {
 
 	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
@@ -266,14 +362,18 @@ type SystemsManagerAgentObservation struct {
 type SystemsManagerAgentParameters struct {
 
 	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
-	// +kubebuilder:validation:Required
-	UninstallAfterBuild *bool `json:"uninstallAfterBuild" tf:"uninstall_after_build,omitempty"`
+	// +kubebuilder:validation:Optional
+	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
 }
 
 // ImageRecipeSpec defines the desired state of ImageRecipe
 type ImageRecipeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageRecipeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ImageRecipeInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageRecipeStatus defines the observed state of ImageRecipe.
@@ -294,10 +394,10 @@ type ImageRecipeStatus struct {
 type ImageRecipe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.component)",message="component is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentImage)",message="parentImage is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version)",message="version is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.component) || has(self.initProvider.component)",message="component is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentImage) || has(self.initProvider.parentImage)",message="parentImage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || has(self.initProvider.version)",message="version is a required parameter"
 	Spec   ImageRecipeSpec   `json:"spec"`
 	Status ImageRecipeStatus `json:"status,omitempty"`
 }

@@ -185,6 +185,23 @@ spec:
                 - scalableDimension
                 - serviceNamespace
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  maxCapacity:
+                    description: Max capacity of the scalable target.
+                    type: number
+                  minCapacity:
+                    description: Min capacity of the scalable target.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -385,10 +402,12 @@ spec:
             x-kubernetes-validations:
             - message: maxCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxCapacity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxCapacity)
+                || has(self.initProvider.maxCapacity)'
             - message: minCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.minCapacity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.minCapacity)
+                || has(self.initProvider.minCapacity)'
           status:
             description: TargetStatus defines the observed state of Target.
             properties:

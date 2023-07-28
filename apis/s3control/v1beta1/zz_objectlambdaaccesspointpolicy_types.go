@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ObjectLambdaAccessPointPolicyInitParameters struct {
+
+	// The AWS account ID for the account that owns the Object Lambda Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The Object Lambda Access Point resource policy document.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+}
+
 type ObjectLambdaAccessPointPolicyObservation struct {
 
 	// The AWS account ID for the account that owns the Object Lambda Access Point.
@@ -65,6 +74,10 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 type ObjectLambdaAccessPointPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ObjectLambdaAccessPointPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ObjectLambdaAccessPointPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ObjectLambdaAccessPointPolicyStatus defines the observed state of ObjectLambdaAccessPointPolicy.
@@ -85,7 +98,7 @@ type ObjectLambdaAccessPointPolicyStatus struct {
 type ObjectLambdaAccessPointPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || has(self.initProvider.policy)",message="policy is a required parameter"
 	Spec   ObjectLambdaAccessPointPolicySpec   `json:"spec"`
 	Status ObjectLambdaAccessPointPolicyStatus `json:"status,omitempty"`
 }

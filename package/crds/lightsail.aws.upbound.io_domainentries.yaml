@@ -161,6 +161,18 @@ spec:
                 - region
                 - type
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  isAlias:
+                    description: If the entry should be an alias Defaults to false
+                    type: boolean
+                  target:
+                    description: Target of the domain entry
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -361,7 +373,8 @@ spec:
             x-kubernetes-validations:
             - message: target is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.target)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.target)
+                || has(self.initProvider.target)'
           status:
             description: DomainEntryStatus defines the observed state of DomainEntry.
             properties:

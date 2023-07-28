@@ -19,6 +19,3 @@ spec:
         logDestinationType: S3
         logType: FLOW
     region: us-west-1
-
----
-

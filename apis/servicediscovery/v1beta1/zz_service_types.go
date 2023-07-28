@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSConfigInitParameters struct {
+
+	// An array that contains one DnsRecord object for each resource record set.
+	DNSRecords []DNSRecordsInitParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
+
+	// The routing policy that you want to apply to all records that Route 53 creates when you register an instance and specify the service. Valid Values: MULTIVALUE, WEIGHTED
+	RoutingPolicy *string `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
+}
+
 type DNSConfigObservation struct {
 
 	// An array that contains one DnsRecord object for each resource record set.
@@ -28,8 +37,8 @@ type DNSConfigObservation struct {
 type DNSConfigParameters struct {
 
 	// An array that contains one DnsRecord object for each resource record set.
-	// +kubebuilder:validation:Required
-	DNSRecords []DNSRecordsParameters `json:"dnsRecords" tf:"dns_records,omitempty"`
+	// +kubebuilder:validation:Optional
+	DNSRecords []DNSRecordsParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicediscovery/v1beta1.PrivateDNSNamespace
@@ -50,6 +59,15 @@ type DNSConfigParameters struct {
 	RoutingPolicy *string `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
 }
 
+type DNSRecordsInitParameters struct {
+
+	// The amount of time, in seconds, that you want DNS resolvers to cache the settings for this resource record set.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// The type of the resource, which indicates the value that Amazon Route 53 returns in response to DNS queries. Valid Values: A, AAAA, SRV, CNAME
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type DNSRecordsObservation struct {
 
 	// The amount of time, in seconds, that you want DNS resolvers to cache the settings for this resource record set.
@@ -62,12 +80,24 @@ type DNSRecordsObservation struct {
 type DNSRecordsParameters struct {
 
 	// The amount of time, in seconds, that you want DNS resolvers to cache the settings for this resource record set.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// The type of the resource, which indicates the value that Amazon Route 53 returns in response to DNS queries. Valid Values: A, AAAA, SRV, CNAME
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HealthCheckConfigInitParameters struct {
+
+	// The number of consecutive health checks. Maximum value of 10.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+
+	// The path that you want Route 53 to request when performing health checks. Route 53 automatically adds the DNS name for the service. If you don't specify a value, the default value is /.
+	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
+
+	// The type of health check that you want to create, which indicates how Route 53 determines whether an endpoint is healthy. Valid Values: HTTP, HTTPS, TCP
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthCheckConfigObservation struct {
@@ -97,6 +127,12 @@ type HealthCheckConfigParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type HealthCheckCustomConfigInitParameters struct {
+
+	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+}
+
 type HealthCheckCustomConfigObservation struct {
 
 	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
@@ -108,6 +144,36 @@ type HealthCheckCustomConfigParameters struct {
 	// The number of 30-second intervals that you want service discovery to wait before it changes the health status of a service instance.  Maximum value of 10.
 	// +kubebuilder:validation:Optional
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+}
+
+type ServiceInitParameters struct {
+
+	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance.
+	DNSConfig []DNSConfigInitParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
+
+	// The description of the service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces.
+	HealthCheckConfig []HealthCheckConfigInitParameters `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
+
+	// A complex type that contains settings for ECS managed health checks.
+	HealthCheckCustomConfig []HealthCheckCustomConfigInitParameters `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
+
+	// The name of the service.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the namespace that you want to use to create the service.
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// If present, specifies that the service instances are only discoverable using the DiscoverInstances API operation. No DNS records is registered for the service instances. The only valid value is HTTP.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ServiceObservation struct {
@@ -197,6 +263,10 @@ type ServiceParameters struct {
 type ServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceStatus defines the observed state of Service.
@@ -217,7 +287,7 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ServiceSpec   `json:"spec"`
 	Status ServiceStatus `json:"status,omitempty"`
 }

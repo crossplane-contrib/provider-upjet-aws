@@ -29,6 +29,3 @@ spec:
   forProvider:
     creationToken: my-product
     region: us-west-1
-
----
-

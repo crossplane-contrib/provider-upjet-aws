@@ -87,9 +87,6 @@ spec:
                         scopeName:
                           description: The scope name.
                           type: string
-                      required:
-                      - scopeDescription
-                      - scopeName
                       type: object
                     type: array
                   userPoolId:
@@ -169,6 +166,30 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  identifier:
+                    description: An identifier for the resource server.
+                    type: string
+                  name:
+                    description: A name for the resource server.
+                    type: string
+                  scope:
+                    description: A list of Authorization Scope.
+                    items:
+                      properties:
+                        scopeDescription:
+                          description: The scope description.
+                          type: string
+                        scopeName:
+                          description: The scope name.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -370,10 +391,12 @@ spec:
             x-kubernetes-validations:
             - message: identifier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.identifier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.identifier)
+                || has(self.initProvider.identifier)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ResourceServerStatus defines the observed state of ResourceServer.
             properties:

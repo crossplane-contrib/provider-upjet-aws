@@ -127,6 +127,3 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: dms-vpc-role
-
----
-

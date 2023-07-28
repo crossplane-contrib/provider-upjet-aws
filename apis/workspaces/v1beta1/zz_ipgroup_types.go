@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IPGroupInitParameters struct {
+
+	// The description of the IP group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the IP group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more pairs specifying the IP group rule (in CIDR format) from which web requests originate.
+	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type IPGroupObservation struct {
 
 	// The description of the IP group.
@@ -58,6 +73,15 @@ type IPGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RulesInitParameters struct {
+
+	// The description of the IP group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The IP address range, in CIDR notation, e.g., 10.0.0.0/16
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+}
+
 type RulesObservation struct {
 
 	// The description of the IP group.
@@ -74,14 +98,18 @@ type RulesParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The IP address range, in CIDR notation, e.g., 10.0.0.0/16
-	// +kubebuilder:validation:Required
-	Source *string `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 // IPGroupSpec defines the desired state of IPGroup
 type IPGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IPGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IPGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // IPGroupStatus defines the observed state of IPGroup.
@@ -102,7 +130,7 @@ type IPGroupStatus struct {
 type IPGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   IPGroupSpec   `json:"spec"`
 	Status IPGroupStatus `json:"status,omitempty"`
 }

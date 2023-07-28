@@ -168,6 +168,27 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  transitGatewayDefaultRouteTableAssociation:
+                    description: 'Boolean whether the VPC Attachment should be associated
+                      with the EC2 Transit Gateway association default route table.
+                      Default value: true.'
+                    type: boolean
+                  transitGatewayDefaultRouteTablePropagation:
+                    description: 'Boolean whether the VPC Attachment should propagate
+                      routes with the EC2 Transit Gateway propagation default route
+                      table. Default value: true.'
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

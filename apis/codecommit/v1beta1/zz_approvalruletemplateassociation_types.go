@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApprovalRuleTemplateAssociationInitParameters struct {
+}
+
 type ApprovalRuleTemplateAssociationObservation struct {
 
 	// The name for the approval rule template.
@@ -63,6 +66,10 @@ type ApprovalRuleTemplateAssociationParameters struct {
 type ApprovalRuleTemplateAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApprovalRuleTemplateAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ApprovalRuleTemplateAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApprovalRuleTemplateAssociationStatus defines the observed state of ApprovalRuleTemplateAssociation.

@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EBSSnapshotCopyInitParameters struct {
+
+	// A description of what the snapshot is.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether the snapshot is encrypted.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Indicates whether to permanently restore an archived snapshot.
+	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
+
+	// The region of the source snapshot.
+	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
+
+	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
+	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
+}
+
 type EBSSnapshotCopyObservation struct {
 
 	// Amazon Resource Name (ARN) of the EBS Snapshot.
@@ -137,6 +161,10 @@ type EBSSnapshotCopyParameters struct {
 type EBSSnapshotCopySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EBSSnapshotCopyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EBSSnapshotCopyInitParameters `json:"initProvider,omitempty"`
 }
 
 // EBSSnapshotCopyStatus defines the observed state of EBSSnapshotCopy.
@@ -157,7 +185,7 @@ type EBSSnapshotCopyStatus struct {
 type EBSSnapshotCopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRegion)",message="sourceRegion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRegion) || has(self.initProvider.sourceRegion)",message="sourceRegion is a required parameter"
 	Spec   EBSSnapshotCopySpec   `json:"spec"`
 	Status EBSSnapshotCopyStatus `json:"status,omitempty"`
 }

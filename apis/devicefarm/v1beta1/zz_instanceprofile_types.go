@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceProfileInitParameters struct {
+
+	// The description of the instance profile.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An array of strings that specifies the list of app packages that should not be cleaned up from the device after a test run.
+	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
+
+	// The name for the instance profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// When set to true, Device Farm removes app packages after a test run. The default value is false for private devices.
+	PackageCleanup *bool `json:"packageCleanup,omitempty" tf:"package_cleanup,omitempty"`
+
+	// When set to true, Device Farm reboots the instance after a test run. The default value is true.
+	RebootAfterUse *bool `json:"rebootAfterUse,omitempty" tf:"reboot_after_use,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type InstanceProfileObservation struct {
 
 	// The Amazon Resource Name of this instance profile.
@@ -78,6 +99,10 @@ type InstanceProfileParameters struct {
 type InstanceProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InstanceProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceProfileStatus defines the observed state of InstanceProfile.
@@ -98,7 +123,7 @@ type InstanceProfileStatus struct {
 type InstanceProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   InstanceProfileSpec   `json:"spec"`
 	Status InstanceProfileStatus `json:"status,omitempty"`
 }

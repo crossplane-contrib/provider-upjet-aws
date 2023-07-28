@@ -89,8 +89,6 @@ spec:
                           description: The string representing the regular expression,
                             see the AWS WAF documentation for more information.
                           type: string
-                      required:
-                      - regexString
                       type: object
                     type: array
                   scope:
@@ -106,6 +104,43 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A friendly description of the regular expression
+                      pattern set.
+                    type: string
+                  name:
+                    description: A friendly name of the regular expression pattern
+                      set.
+                    type: string
+                  regularExpression:
+                    description: One or more blocks of regular expression patterns
+                      that you want AWS WAF to search for, such as B[a@]dB[o0]t. See
+                      Regular Expression below for details.
+                    items:
+                      properties:
+                        regexString:
+                          description: The string representing the regular expression,
+                            see the AWS WAF documentation for more information.
+                          type: string
+                      type: object
+                    type: array
+                  scope:
+                    description: Specifies whether this is for an AWS CloudFront distribution
+                      or for a regional application. Valid values are CLOUDFRONT or
+                      REGIONAL. To work with CloudFront, you must also specify the
+                      region us-east-1 (N. Virginia) on the AWS provider.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -307,10 +342,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
+                || has(self.initProvider.scope)'
           status:
             description: RegexPatternSetStatus defines the observed state of RegexPatternSet.
             properties:

@@ -169,6 +169,31 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  filter:
+                    description: Object filtering that accepts a prefix, tags, or
+                      a logical AND of prefix and tags (documented below).
+                    items:
+                      properties:
+                        prefix:
+                          description: Object prefix for filtering (singular).
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                      type: object
+                    type: array
+                  name:
+                    description: Unique identifier of the metrics configuration for
+                      the bucket. Must be less than or equal to 64 characters in length.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -369,7 +394,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: BucketMetricStatus defines the observed state of BucketMetric.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActiveDirectoryConfigurationInitParameters struct {
+
+	// The NetBIOS name of the Active Directory computer object that will be created for your SVM. This is often the same as the SVM name but can be different. AWS limits to 15 characters because of standard NetBIOS naming limits.
+	NetbiosName *string `json:"netbiosName,omitempty" tf:"netbios_name,omitempty"`
+
+	// Configuration block that Amazon FSx uses to join the FSx ONTAP Storage Virtual Machine(SVM) to your Microsoft Active Directory (AD) directory. Detailed below.
+	SelfManagedActiveDirectoryConfiguration []SelfManagedActiveDirectoryConfigurationInitParameters `json:"selfManagedActiveDirectoryConfiguration,omitempty" tf:"self_managed_active_directory_configuration,omitempty"`
+}
+
 type ActiveDirectoryConfigurationObservation struct {
 
 	// The NetBIOS name of the Active Directory computer object that will be created for your SVM. This is often the same as the SVM name but can be different. AWS limits to 15 characters because of standard NetBIOS naming limits.
@@ -33,6 +42,9 @@ type ActiveDirectoryConfigurationParameters struct {
 	SelfManagedActiveDirectoryConfiguration []SelfManagedActiveDirectoryConfigurationParameters `json:"selfManagedActiveDirectoryConfiguration,omitempty" tf:"self_managed_active_directory_configuration,omitempty"`
 }
 
+type EndpointsManagementInitParameters struct {
+}
+
 type EndpointsManagementObservation struct {
 
 	// The Domain Name Service (DNS) name for the storage virtual machine. You can mount your storage virtual machine using its DNS name.
@@ -43,6 +55,9 @@ type EndpointsManagementObservation struct {
 }
 
 type EndpointsManagementParameters struct {
+}
+
+type ISCSIInitParameters struct {
 }
 
 type ISCSIObservation struct {
@@ -57,6 +72,9 @@ type ISCSIObservation struct {
 type ISCSIParameters struct {
 }
 
+type NFSInitParameters struct {
+}
+
 type NFSObservation struct {
 
 	// The Domain Name Service (DNS) name for the storage virtual machine. You can mount your storage virtual machine using its DNS name.
@@ -67,6 +85,9 @@ type NFSObservation struct {
 }
 
 type NFSParameters struct {
+}
+
+type OntapStorageVirtualMachineEndpointsInitParameters struct {
 }
 
 type OntapStorageVirtualMachineEndpointsObservation struct {
@@ -85,6 +106,21 @@ type OntapStorageVirtualMachineEndpointsObservation struct {
 }
 
 type OntapStorageVirtualMachineEndpointsParameters struct {
+}
+
+type OntapStorageVirtualMachineInitParameters struct {
+
+	// Configuration block that Amazon FSx uses to join the FSx ONTAP Storage Virtual Machine(SVM) to your Microsoft Active Directory (AD) directory. Detailed below.
+	ActiveDirectoryConfiguration []ActiveDirectoryConfigurationInitParameters `json:"activeDirectoryConfiguration,omitempty" tf:"active_directory_configuration,omitempty"`
+
+	// The name of the SVM. You can use a maximum of 47 alphanumeric characters, plus the underscore (_) special character.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the root volume security style, Valid values are UNIX, NTFS, and MIXED. All volumes created under this SVM will inherit the root security style unless the security style is specified on the volume. Default value is UNIX.
+	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OntapStorageVirtualMachineObservation struct {
@@ -164,6 +200,9 @@ type OntapStorageVirtualMachineParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SMBInitParameters struct {
+}
+
 type SMBObservation struct {
 
 	// The Domain Name Service (DNS) name for the storage virtual machine. You can mount your storage virtual machine using its DNS name.
@@ -174,6 +213,24 @@ type SMBObservation struct {
 }
 
 type SMBParameters struct {
+}
+
+type SelfManagedActiveDirectoryConfigurationInitParameters struct {
+
+	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
+
+	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// The name of the domain group whose members are granted administrative privileges for the SVM. The group that you specify must already exist in your domain. Defaults to Domain Admins.
+	FileSystemAdministratorsGroup *string `json:"fileSystemAdministratorsGroup,omitempty" tf:"file_system_administrators_group,omitempty"`
+
+	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the SVM. If none is provided, the SVM is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
+	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
+
+	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SelfManagedActiveDirectoryConfigurationObservation struct {
@@ -197,12 +254,12 @@ type SelfManagedActiveDirectoryConfigurationObservation struct {
 type SelfManagedActiveDirectoryConfigurationParameters struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
-	// +kubebuilder:validation:Required
-	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
+	// +kubebuilder:validation:Optional
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The name of the domain group whose members are granted administrative privileges for the SVM. The group that you specify must already exist in your domain. Defaults to Domain Admins.
 	// +kubebuilder:validation:Optional
@@ -217,14 +274,18 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // OntapStorageVirtualMachineSpec defines the desired state of OntapStorageVirtualMachine
 type OntapStorageVirtualMachineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OntapStorageVirtualMachineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OntapStorageVirtualMachineInitParameters `json:"initProvider,omitempty"`
 }
 
 // OntapStorageVirtualMachineStatus defines the observed state of OntapStorageVirtualMachine.
@@ -245,7 +306,7 @@ type OntapStorageVirtualMachineStatus struct {
 type OntapStorageVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   OntapStorageVirtualMachineSpec   `json:"spec"`
 	Status OntapStorageVirtualMachineStatus `json:"status,omitempty"`
 }

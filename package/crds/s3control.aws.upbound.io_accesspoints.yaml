@@ -296,6 +296,75 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: AWS account ID for the owner of the bucket for which
+                      you want to create an access point.
+                    type: string
+                  bucketAccountId:
+                    description: AWS account ID associated with the S3 bucket associated
+                      with this access point.
+                    type: string
+                  name:
+                    description: Name you want to assign to this access point.
+                    type: string
+                  policy:
+                    description: Valid JSON document that specifies the policy that
+                      you want to apply to this access point. Removing policy from
+                      your configuration or setting policy to null or an empty string
+                      (i.e., policy = "") will not delete the policy since it could
+                      have been set by aws_s3control_access_point_policy. To remove
+                      the policy, set it to "{}" (an empty JSON document).
+                    type: string
+                  publicAccessBlockConfiguration:
+                    description: Configuration block to manage the PublicAccessBlock
+                      configuration that you want to apply to this Amazon S3 bucket.
+                      You can enable the configuration options in any combination.
+                      Detailed below.
+                    items:
+                      properties:
+                        blockPublicAcls:
+                          description: 'Whether Amazon S3 should block public ACLs
+                            for buckets in this account. Defaults to true. Enabling
+                            this setting does not affect existing policies or ACLs.
+                            When set to true causes the following behavior:'
+                          type: boolean
+                        blockPublicPolicy:
+                          description: 'Whether Amazon S3 should block public bucket
+                            policies for buckets in this account. Defaults to true.
+                            Enabling this setting does not affect existing bucket
+                            policies. When set to true causes Amazon S3 to:'
+                          type: boolean
+                        ignorePublicAcls:
+                          description: 'Whether Amazon S3 should ignore public ACLs
+                            for buckets in this account. Defaults to true. Enabling
+                            this setting does not affect the persistence of any existing
+                            ACLs and doesn''t prevent new public ACLs from being set.
+                            When set to true causes Amazon S3 to:'
+                          type: boolean
+                        restrictPublicBuckets:
+                          description: 'Whether Amazon S3 should restrict public bucket
+                            policies for buckets in this account. Defaults to true.
+                            Enabling this setting does not affect previously stored
+                            bucket policies, except that public and cross-account
+                            access within any public bucket policy, including non-public
+                            delegation to specific accounts, is blocked. When set
+                            to true:'
+                          type: boolean
+                      type: object
+                    type: array
+                  vpcConfiguration:
+                    description: Configuration block to restrict access to this access
+                      point to requests from the specified Virtual Private Cloud (VPC).
+                      Required for S3 on Outposts. Detailed below.
+                    items:
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -496,7 +565,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: AccessPointStatus defines the observed state of AccessPoint.
             properties:

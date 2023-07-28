@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceGroupInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ResourceGroupObservation struct {
 
 	// The resource group ARN.
@@ -40,6 +46,10 @@ type ResourceGroupParameters struct {
 type ResourceGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceGroupStatus defines the observed state of ResourceGroup.
@@ -60,7 +70,7 @@ type ResourceGroupStatus struct {
 type ResourceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tags)",message="tags is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tags) || has(self.initProvider.tags)",message="tags is a required parameter"
 	Spec   ResourceGroupSpec   `json:"spec"`
 	Status ResourceGroupStatus `json:"status,omitempty"`
 }

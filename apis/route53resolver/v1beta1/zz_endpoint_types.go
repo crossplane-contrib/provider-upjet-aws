@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EndpointInitParameters struct {
+
+	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
+	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
+	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
+	IPAddress []IPAddressInitParameters `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The friendly name of the Route 53 Resolver endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type EndpointObservation struct {
 
 	// The ARN of the Route 53 Resolver endpoint.
@@ -88,6 +106,12 @@ type EndpointParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type IPAddressInitParameters struct {
+
+	// The IP address in the subnet that you want to use for DNS queries.
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+}
+
 type IPAddressObservation struct {
 
 	// The IP address in the subnet that you want to use for DNS queries.
@@ -125,6 +149,10 @@ type IPAddressParameters struct {
 type EndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // EndpointStatus defines the observed state of Endpoint.
@@ -145,8 +173,8 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.direction)",message="direction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipAddress)",message="ipAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.direction) || has(self.initProvider.direction)",message="direction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipAddress) || has(self.initProvider.ipAddress)",message="ipAddress is a required parameter"
 	Spec   EndpointSpec   `json:"spec"`
 	Status EndpointStatus `json:"status,omitempty"`
 }

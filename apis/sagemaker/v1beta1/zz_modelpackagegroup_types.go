@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ModelPackageGroupInitParameters struct {
+
+	// A description for the model group.
+	ModelPackageGroupDescription *string `json:"modelPackageGroupDescription,omitempty" tf:"model_package_group_description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ModelPackageGroupObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Model Package Group.
@@ -51,6 +60,10 @@ type ModelPackageGroupParameters struct {
 type ModelPackageGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ModelPackageGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ModelPackageGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ModelPackageGroupStatus defines the observed state of ModelPackageGroup.

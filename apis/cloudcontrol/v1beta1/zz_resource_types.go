@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceInitParameters struct {
+
+	// JSON string matching the CloudFormation resource type schema with desired configuration.
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
+
+	// CloudFormation resource type name. For example, AWS::EC2::VPC.
+	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
+
+	// Identifier of the CloudFormation resource type version.
+	TypeVersionID *string `json:"typeVersionId,omitempty" tf:"type_version_id,omitempty"`
+}
+
 type ResourceObservation struct {
 
 	// JSON string matching the CloudFormation resource type schema with desired configuration.
@@ -75,6 +87,10 @@ type ResourceParameters struct {
 type ResourceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceStatus defines the observed state of Resource.
@@ -95,8 +111,8 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.desiredState)",message="desiredState is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.typeName)",message="typeName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.desiredState) || has(self.initProvider.desiredState)",message="desiredState is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.typeName) || has(self.initProvider.typeName)",message="typeName is a required parameter"
 	Spec   ResourceSpec   `json:"spec"`
 	Status ResourceStatus `json:"status,omitempty"`
 }

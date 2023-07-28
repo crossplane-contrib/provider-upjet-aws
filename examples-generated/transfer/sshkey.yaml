@@ -69,6 +69,3 @@ spec:
         testing.upbound.io/example-name: example
     tags:
       NAME: tftestuser
-
----
-

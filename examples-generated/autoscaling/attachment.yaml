@@ -15,6 +15,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: bar
     region: us-west-1
-
----
-

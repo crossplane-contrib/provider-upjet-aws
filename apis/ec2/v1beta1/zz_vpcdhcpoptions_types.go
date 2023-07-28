@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCDHCPOptionsInitParameters struct {
+
+	// the suffix domain name to use by default when resolving non Fully Qualified Domain Names. In other words, this is what ends up being the search value in the /etc/resolv.conf file.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// List of name servers to configure in /etc/resolv.conf. If you want to use the default AWS nameservers you should set this to AmazonProvidedDNS.
+	DomainNameServers []*string `json:"domainNameServers,omitempty" tf:"domain_name_servers,omitempty"`
+
+	// List of NETBIOS name servers.
+	NetbiosNameServers []*string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
+
+	// The NetBIOS node type (1, 2, 4, or 8). AWS recommends to specify 2 since broadcast and multicast are not supported in their network. For more information about these node types, see RFC 2132.
+	NetbiosNodeType *string `json:"netbiosNodeType,omitempty" tf:"netbios_node_type,omitempty"`
+
+	// List of NTP servers to configure.
+	NtpServers []*string `json:"ntpServers,omitempty" tf:"ntp_servers,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCDHCPOptionsObservation struct {
 
 	// The ARN of the DHCP Options Set.
@@ -82,6 +103,10 @@ type VPCDHCPOptionsParameters struct {
 type VPCDHCPOptionsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCDHCPOptionsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCDHCPOptionsInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCDHCPOptionsStatus defines the observed state of VPCDHCPOptions.

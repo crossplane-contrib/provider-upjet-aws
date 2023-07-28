@@ -413,6 +413,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  contentHandling:
+                    description: How to handle request payload content type conversions.
+                      Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.
+                      If this property is not defined, the response payload will be
+                      passed through from the integration response to the method response
+                      without modification.
+                    type: string
+                  responseParameters:
+                    additionalProperties:
+                      type: string
+                    description: 'Map of response parameters that can be read from
+                      the backend response. For example: response_parameters = { "method.response.header.X-Some-Header"
+                      = "integration.response.header.X-Some-Other-Header" }.'
+                    type: object
+                  responseTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of templates used to transform the integration
+                      response body.
+                    type: object
+                  selectionPattern:
+                    description: Regular expression pattern used to choose an integration
+                      response based on the response from the backend. Omit configuring
+                      this to make the integration the default one. If the backend
+                      is an AWS Lambda function, the AWS Lambda function error header
+                      is matched. For all other HTTP and AWS backends, the HTTP status
+                      code is matched.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -66,6 +66,3 @@ spec:
         message:
         - content: Pick up the {FlowerType} at what time on {PickupDate}?
           contentType: PlainText
-
----
-

@@ -84,6 +84,23 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  userNames:
+                    description: Set of MemoryDB user names to be included in this
+                      ACL.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

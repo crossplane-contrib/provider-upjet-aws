@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VocabularyInitParameters struct {
+
+	// The language code you selected for your vocabulary.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// - A list of terms to include in the vocabulary. Conflicts with vocabulary_file_uri
+	Phrases []*string `json:"phrases,omitempty" tf:"phrases,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Amazon S3 location (URI) of the text file that contains your custom vocabulary.
+	VocabularyFileURI *string `json:"vocabularyFileUri,omitempty" tf:"vocabulary_file_uri,omitempty"`
+}
+
 type VocabularyObservation struct {
 
 	// ARN of the Vocabulary.
@@ -67,6 +82,10 @@ type VocabularyParameters struct {
 type VocabularySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VocabularyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VocabularyInitParameters `json:"initProvider,omitempty"`
 }
 
 // VocabularyStatus defines the observed state of Vocabulary.
@@ -87,7 +106,7 @@ type VocabularyStatus struct {
 type Vocabulary struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode)",message="languageCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode) || has(self.initProvider.languageCode)",message="languageCode is a required parameter"
 	Spec   VocabularySpec   `json:"spec"`
 	Status VocabularyStatus `json:"status,omitempty"`
 }

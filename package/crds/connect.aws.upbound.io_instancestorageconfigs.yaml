@@ -443,8 +443,6 @@ spec:
                                               type: string
                                           type: object
                                       type: object
-                                  required:
-                                  - encryptionType
                                   type: object
                                 type: array
                               prefix:
@@ -462,10 +460,6 @@ spec:
                                   A value of 0, indicates that the stream does not
                                   persist data.
                                 type: number
-                            required:
-                            - encryptionConfig
-                            - prefix
-                            - retentionPeriodHours
                             type: object
                           type: array
                         s3Config:
@@ -657,24 +651,106 @@ spec:
                                               type: string
                                           type: object
                                       type: object
-                                  required:
-                                  - encryptionType
                                   type: object
                                 type: array
-                            required:
-                            - bucketPrefix
                             type: object
                           type: array
                         storageType:
                           description: 'A valid storage type. Valid Values: S3 | KINESIS_VIDEO_STREAM
                             | KINESIS_STREAM | KINESIS_FIREHOSE.'
                           type: string
-                      required:
-                      - storageType
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  resourceType:
+                    description: 'A valid resource type. Valid Values: CHAT_TRANSCRIPTS
+                      | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS
+                      | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.'
+                    type: string
+                  storageConfig:
+                    description: Specifies the storage configuration options for the
+                      Connect Instance. Documented below.
+                    items:
+                      properties:
+                        kinesisFirehoseConfig:
+                          description: A block that specifies the configuration of
+                            the Kinesis Firehose delivery stream. Documented below.
+                          items:
+                            type: object
+                          type: array
+                        kinesisStreamConfig:
+                          description: A block that specifies the configuration of
+                            the Kinesis data stream. Documented below.
+                          items:
+                            type: object
+                          type: array
+                        kinesisVideoStreamConfig:
+                          description: A block that specifies the configuration of
+                            the Kinesis video stream. Documented below.
+                          items:
+                            properties:
+                              encryptionConfig:
+                                description: The encryption configuration. Documented
+                                  below.
+                                items:
+                                  properties:
+                                    encryptionType:
+                                      description: 'The type of encryption. Valid
+                                        Values: KMS.'
+                                      type: string
+                                  type: object
+                                type: array
+                              prefix:
+                                description: The prefix of the video stream. Minimum
+                                  length of 1. Maximum length of 128. When read from
+                                  the state, the value returned is <prefix>-connect-<connect_instance_alias>-contact-
+                                  since the API appends additional details to the
+                                  prefix.
+                                type: string
+                              retentionPeriodHours:
+                                description: The number of hours data is retained
+                                  in the stream. Kinesis Video Streams retains the
+                                  data in a data store that is associated with the
+                                  stream. Minimum value of 0. Maximum value of 87600.
+                                  A value of 0, indicates that the stream does not
+                                  persist data.
+                                type: number
+                            type: object
+                          type: array
+                        s3Config:
+                          description: A block that specifies the configuration of
+                            S3 Bucket. Documented below.
+                          items:
+                            properties:
+                              bucketPrefix:
+                                description: The S3 bucket prefix.
+                                type: string
+                              encryptionConfig:
+                                description: The encryption configuration. Documented
+                                  below.
+                                items:
+                                  properties:
+                                    encryptionType:
+                                      description: 'The type of encryption. Valid
+                                        Values: KMS.'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        storageType:
+                          description: 'A valid storage type. Valid Values: S3 | KINESIS_VIDEO_STREAM
+                            | KINESIS_STREAM | KINESIS_FIREHOSE.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -876,10 +952,12 @@ spec:
             x-kubernetes-validations:
             - message: resourceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceType)
+                || has(self.initProvider.resourceType)'
             - message: storageConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageConfig)
+                || has(self.initProvider.storageConfig)'
           status:
             description: InstanceStorageConfigStatus defines the observed state of
               InstanceStorageConfig.

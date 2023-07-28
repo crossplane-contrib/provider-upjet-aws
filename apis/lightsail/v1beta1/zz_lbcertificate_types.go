@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainValidationRecordsInitParameters struct {
+}
+
 type DomainValidationRecordsObservation struct {
 
 	// The domain name (e.g., example.com) for your SSL/TLS certificate.
@@ -27,6 +30,15 @@ type DomainValidationRecordsObservation struct {
 }
 
 type DomainValidationRecordsParameters struct {
+}
+
+type LBCertificateInitParameters struct {
+
+	// The domain name (e.g., example.com) for your SSL/TLS certificate.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
+	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 
 type LBCertificateObservation struct {
@@ -88,6 +100,10 @@ type LBCertificateParameters struct {
 type LBCertificateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBCertificateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LBCertificateInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBCertificateStatus defines the observed state of LBCertificate.

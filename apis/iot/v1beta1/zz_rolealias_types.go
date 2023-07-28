@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RoleAliasInitParameters struct {
+
+	// The name of the role alias.
+	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// The duration of the credential, in seconds. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 900 seconds (15 minutes) to 43200 seconds (12 hours).
+	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
+}
+
 type RoleAliasObservation struct {
 
 	// The name of the role alias.
@@ -64,6 +73,10 @@ type RoleAliasParameters struct {
 type RoleAliasSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RoleAliasParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RoleAliasInitParameters `json:"initProvider,omitempty"`
 }
 
 // RoleAliasStatus defines the observed state of RoleAlias.
@@ -84,7 +97,7 @@ type RoleAliasStatus struct {
 type RoleAlias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alias)",message="alias is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alias) || has(self.initProvider.alias)",message="alias is a required parameter"
 	Spec   RoleAliasSpec   `json:"spec"`
 	Status RoleAliasStatus `json:"status,omitempty"`
 }

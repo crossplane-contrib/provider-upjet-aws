@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RouteCalculatorInitParameters struct {
+
+	// Specifies the data provider of traffic and road network data.
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// The optional description for the route calculator resource.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type RouteCalculatorObservation struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you specify a resource across AWS.
@@ -63,6 +75,10 @@ type RouteCalculatorParameters struct {
 type RouteCalculatorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteCalculatorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RouteCalculatorInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteCalculatorStatus defines the observed state of RouteCalculator.
@@ -83,7 +99,7 @@ type RouteCalculatorStatus struct {
 type RouteCalculator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSource)",message="dataSource is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSource) || has(self.initProvider.dataSource)",message="dataSource is a required parameter"
 	Spec   RouteCalculatorSpec   `json:"spec"`
 	Status RouteCalculatorStatus `json:"status,omitempty"`
 }

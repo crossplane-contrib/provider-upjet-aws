@@ -13,6 +13,31 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReplicaKeyInitParameters struct {
+
+	// A flag to indicate whether to bypass the key policy lockout safety check.
+	// Setting this value to true increases the risk that the KMS key becomes unmanageable. Do not set this value to true indiscriminately.
+	// For more information, refer to the scenario in the Default Key Policy section in the AWS Key Management Service Developer Guide.
+	// The default value is false.
+	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
+
+	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
+	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+
+	// A description of the KMS key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies whether the replica key is enabled. Disabled KMS keys cannot be used in cryptographic operations. The default value is true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ReplicaKeyObservation struct {
 
 	// The Amazon Resource Name (ARN) of the replica key. The key ARNs of related multi-Region keys differ only in the Region value.
@@ -115,6 +140,10 @@ type ReplicaKeyParameters struct {
 type ReplicaKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReplicaKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReplicaKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReplicaKeyStatus defines the observed state of ReplicaKey.

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCAssociationAuthorizationInitParameters struct {
+
+	// The VPC's region. Defaults to the region of the AWS provider.
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
+}
+
 type VPCAssociationAuthorizationObservation struct {
 
 	// The calculated unique identifier for the association.
@@ -70,6 +76,10 @@ type VPCAssociationAuthorizationParameters struct {
 type VPCAssociationAuthorizationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCAssociationAuthorizationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCAssociationAuthorizationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCAssociationAuthorizationStatus defines the observed state of VPCAssociationAuthorization.

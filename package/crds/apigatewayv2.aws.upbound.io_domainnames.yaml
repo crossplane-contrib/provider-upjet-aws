@@ -169,9 +169,6 @@ spec:
                             the security policy for the domain name. Valid values:
                             TLS_1_2.'
                           type: string
-                      required:
-                      - endpointType
-                      - securityPolicy
                       type: object
                     type: array
                   mutualTlsAuthentication:
@@ -192,8 +189,6 @@ spec:
                             truststore. To specify a version, you must have versioning
                             enabled for the S3 bucket.
                           type: string
-                      required:
-                      - truststoreUri
                       type: object
                     type: array
                   region:
@@ -207,6 +202,57 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  domainNameConfiguration:
+                    description: Domain name configuration. See below.
+                    items:
+                      properties:
+                        endpointType:
+                          description: 'Endpoint type. Valid values: REGIONAL.'
+                          type: string
+                        ownershipVerificationCertificateArn:
+                          description: ARN of the AWS-issued certificate used to validate
+                            custom domain ownership (when certificate_arn is issued
+                            via an ACM Private CA or mutual_tls_authentication is
+                            configured with an ACM-imported certificate.)
+                          type: string
+                        securityPolicy:
+                          description: 'Transport Layer Security (TLS) version of
+                            the security policy for the domain name. Valid values:
+                            TLS_1_2.'
+                          type: string
+                      type: object
+                    type: array
+                  mutualTlsAuthentication:
+                    description: Mutual TLS authentication configuration for the domain
+                      name.
+                    items:
+                      properties:
+                        truststoreUri:
+                          description: Amazon S3 URL that specifies the truststore
+                            for mutual TLS authentication, for example, s3://bucket-name/key-name.
+                            The truststore can contain certificates from public or
+                            private certificate authorities. To update the truststore,
+                            upload a new version to S3, and then update your custom
+                            domain name to use the new version.
+                          type: string
+                        truststoreVersion:
+                          description: Version of the S3 object that contains the
+                            truststore. To specify a version, you must have versioning
+                            enabled for the S3 bucket.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -408,7 +454,8 @@ spec:
             x-kubernetes-validations:
             - message: domainNameConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.domainNameConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.domainNameConfiguration)
+                || has(self.initProvider.domainNameConfiguration)'
           status:
             description: DomainNameStatus defines the observed state of DomainName.
             properties:

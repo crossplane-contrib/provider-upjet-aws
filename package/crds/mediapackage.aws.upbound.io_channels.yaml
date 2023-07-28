@@ -85,6 +85,23 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  channelId:
+                    description: A unique identifier describing the channel
+                    type: string
+                  description:
+                    description: A description of the channel
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -285,7 +302,8 @@ spec:
             x-kubernetes-validations:
             - message: channelId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.channelId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.channelId)
+                || has(self.initProvider.channelId)'
           status:
             description: ChannelStatus defines the observed state of Channel.
             properties:

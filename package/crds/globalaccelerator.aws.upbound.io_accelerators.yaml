@@ -117,6 +117,55 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  attributes:
+                    description: The attributes of the accelerator. Fields documented
+                      below.
+                    items:
+                      properties:
+                        flowLogsEnabled:
+                          description: 'Indicates whether flow logs are enabled. Defaults
+                            to false. Valid values: true, false.'
+                          type: boolean
+                        flowLogsS3Bucket:
+                          description: The name of the Amazon S3 bucket for the flow
+                            logs. Required if flow_logs_enabled is true.
+                          type: string
+                        flowLogsS3Prefix:
+                          description: The prefix for the location in the Amazon S3
+                            bucket for the flow logs. Required if flow_logs_enabled
+                            is true.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: 'Indicates whether the accelerator is enabled. Defaults
+                      to true. Valid values: true, false.'
+                    type: boolean
+                  ipAddressType:
+                    description: 'The value for the address type. Defaults to IPV4.
+                      Valid values: IPV4, DUAL_STACK.'
+                    type: string
+                  ipAddresses:
+                    description: 'The IP addresses to use for BYOIP accelerators.
+                      If not specified, the service assigns IP addresses. Valid values:
+                      1 or 2 IPv4 addresses.'
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the accelerator.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -317,7 +366,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: AcceleratorStatus defines the observed state of Accelerator.
             properties:

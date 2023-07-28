@@ -12,6 +12,3 @@ spec:
     setting:
     - name: containerInsights
       value: enabled
-
----
-

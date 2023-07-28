@@ -246,6 +246,31 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoAccept:
+                    description: Accept the peering (both VPCs need to be in the same
+                      AWS account and region).
+                    type: boolean
+                  peerOwnerId:
+                    description: The AWS account ID of the owner of the peer VPC.
+                      Defaults to the account ID the AWS provider is currently connected
+                      to.
+                    type: string
+                  peerRegion:
+                    description: The region of the accepter VPC of the VPC Peering
+                      Connection. auto_accept must be false, and use the aws_vpc_peering_connection_accepter
+                      to manage the accepter side.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

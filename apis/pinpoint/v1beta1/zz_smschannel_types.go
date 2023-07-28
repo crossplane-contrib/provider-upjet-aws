@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SMSChannelInitParameters struct {
+
+	// Whether the channel is enabled or disabled. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Sender identifier of your messages.
+	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
+
+	// The Short Code registered with the phone provider.
+	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
+}
+
 type SMSChannelObservation struct {
 
 	// The application ID.
@@ -74,6 +86,10 @@ type SMSChannelParameters struct {
 type SMSChannelSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SMSChannelParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SMSChannelInitParameters `json:"initProvider,omitempty"`
 }
 
 // SMSChannelStatus defines the observed state of SMSChannel.

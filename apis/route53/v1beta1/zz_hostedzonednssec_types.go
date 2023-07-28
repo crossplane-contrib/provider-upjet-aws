@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HostedZoneDNSSECInitParameters struct {
+
+	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
+	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`
+}
+
 type HostedZoneDNSSECObservation struct {
 
 	// Identifier of the Route 53 Hosted Zone.
@@ -54,6 +60,10 @@ type HostedZoneDNSSECParameters struct {
 type HostedZoneDNSSECSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HostedZoneDNSSECParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HostedZoneDNSSECInitParameters `json:"initProvider,omitempty"`
 }
 
 // HostedZoneDNSSECStatus defines the observed state of HostedZoneDNSSEC.

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationSnapshotInitParameters struct {
+}
+
 type ApplicationSnapshotObservation struct {
 
 	// The name of an existing  Kinesis Analytics v2 Application. Note that the application must be running for a snapshot to be created.
@@ -53,6 +56,10 @@ type ApplicationSnapshotParameters struct {
 type ApplicationSnapshotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationSnapshotParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ApplicationSnapshotInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationSnapshotStatus defines the observed state of ApplicationSnapshot.

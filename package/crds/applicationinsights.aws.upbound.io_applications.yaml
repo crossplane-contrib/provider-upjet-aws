@@ -107,6 +107,45 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoConfigEnabled:
+                    description: Indicates whether Application Insights automatically
+                      configures unmonitored resources in the resource group.
+                    type: boolean
+                  autoCreate:
+                    description: Configures all of the resources in the resource group
+                      by applying the recommended configurations.
+                    type: boolean
+                  cweMonitorEnabled:
+                    description: Indicates whether Application Insights can listen
+                      to CloudWatch events for the application resources, such as
+                      instance terminated, failed deployment, and others.
+                    type: boolean
+                  groupingType:
+                    description: Application Insights can create applications based
+                      on a resource group or on an account. To create an account-based
+                      application using all of the resources in the account, set this
+                      parameter to ACCOUNT_BASED.
+                    type: string
+                  opsCenterEnabled:
+                    description: When set to true, creates opsItems for any problems
+                      detected on an application.
+                    type: boolean
+                  opsItemSnsTopicArn:
+                    description: SNS topic provided to Application Insights that is
+                      associated to the created opsItem. Allows you to receive notifications
+                      for updates to the opsItem.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

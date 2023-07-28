@@ -93,6 +93,31 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of the data catalog.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Key value pairs that specifies the Lambda function
+                      or functions to use for the data catalog. The mapping used depends
+                      on the catalog type.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: 'Type of data catalog: LAMBDA for a federated catalog,
+                      GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -293,13 +318,16 @@ spec:
             x-kubernetes-validations:
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: parameters is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.parameters)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.parameters)
+                || has(self.initProvider.parameters)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: DataCatalogStatus defines the observed state of DataCatalog.
             properties:

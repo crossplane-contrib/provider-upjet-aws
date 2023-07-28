@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LifecycleHookInitParameters struct {
+
+	// Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The value for this parameter can be either CONTINUE or ABANDON. The default value for this parameter is ABANDON.
+	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
+
+	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the DefaultResult parameter
+	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+
+	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
+
+	// Contains additional information that you want to include any time Auto Scaling sends a message to the notification target.
+	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
+
+	// ARN of the notification target that Auto Scaling will use to notify you when an instance is in the transition state for the lifecycle hook. This ARN target can be either an SQS queue or an SNS topic.
+	NotificationTargetArn *string `json:"notificationTargetArn,omitempty" tf:"notification_target_arn,omitempty"`
+}
+
 type LifecycleHookObservation struct {
 
 	// Name of the Auto Scaling group to which you want to assign the lifecycle hook
@@ -98,6 +116,10 @@ type LifecycleHookParameters struct {
 type LifecycleHookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LifecycleHookParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LifecycleHookInitParameters `json:"initProvider,omitempty"`
 }
 
 // LifecycleHookStatus defines the observed state of LifecycleHook.
@@ -118,7 +140,7 @@ type LifecycleHookStatus struct {
 type LifecycleHook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lifecycleTransition)",message="lifecycleTransition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lifecycleTransition) || has(self.initProvider.lifecycleTransition)",message="lifecycleTransition is a required parameter"
 	Spec   LifecycleHookSpec   `json:"spec"`
 	Status LifecycleHookStatus `json:"status,omitempty"`
 }

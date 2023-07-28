@@ -15,6 +15,3 @@ spec:
     region: us-west-1
     targetId: "012347678910"
     targetType: AWS_ACCOUNT
-
----
-

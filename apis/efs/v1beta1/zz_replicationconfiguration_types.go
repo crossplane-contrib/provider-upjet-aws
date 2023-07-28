@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationInitParameters struct {
+
+	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
+	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
+
+	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type DestinationObservation struct {
 
 	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
@@ -44,6 +53,12 @@ type DestinationParameters struct {
 	// The region in which the replica should be created.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type ReplicationConfigurationInitParameters struct {
+
+	// A destination configuration block (documented below).
+	Destination []DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 }
 
 type ReplicationConfigurationObservation struct {
@@ -100,6 +115,10 @@ type ReplicationConfigurationParameters struct {
 type ReplicationConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReplicationConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReplicationConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReplicationConfigurationStatus defines the observed state of ReplicationConfiguration.
@@ -120,7 +139,7 @@ type ReplicationConfigurationStatus struct {
 type ReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination) || has(self.initProvider.destination)",message="destination is a required parameter"
 	Spec   ReplicationConfigurationSpec   `json:"spec"`
 	Status ReplicationConfigurationStatus `json:"status,omitempty"`
 }

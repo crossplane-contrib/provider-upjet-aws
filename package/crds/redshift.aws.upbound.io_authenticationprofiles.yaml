@@ -79,6 +79,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authenticationProfileContent:
+                    description: The content of the authentication profile in JSON
+                      format. The maximum length of the JSON string is determined
+                      by a quota for your account.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -279,7 +290,8 @@ spec:
             x-kubernetes-validations:
             - message: authenticationProfileContent is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent)
+                || has(self.initProvider.authenticationProfileContent)'
           status:
             description: AuthenticationProfileStatus defines the observed state of
               AuthenticationProfile.

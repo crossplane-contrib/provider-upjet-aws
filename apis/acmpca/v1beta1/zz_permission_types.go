@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PermissionInitParameters struct {
+
+	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// ID of the calling account
+	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
+}
+
 type PermissionObservation struct {
 
 	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
@@ -71,6 +83,10 @@ type PermissionParameters struct {
 type PermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionStatus defines the observed state of Permission.
@@ -91,8 +107,8 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actions)",message="actions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actions) || has(self.initProvider.actions)",message="actions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || has(self.initProvider.principal)",message="principal is a required parameter"
 	Spec   PermissionSpec   `json:"spec"`
 	Status PermissionStatus `json:"status,omitempty"`
 }

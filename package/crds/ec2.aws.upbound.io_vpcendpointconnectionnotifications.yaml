@@ -240,6 +240,22 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  connectionEvents:
+                    description: One or more endpoint events for which to receive
+                      notifications.
+                    items:
+                      type: string
+                    type: array
+                  vpcEndpointId:
+                    description: The ID of the VPC Endpoint to receive notifications
+                      for.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -440,7 +456,8 @@ spec:
             x-kubernetes-validations:
             - message: connectionEvents is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionEvents)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionEvents)
+                || has(self.initProvider.connectionEvents)'
           status:
             description: VPCEndpointConnectionNotificationStatus defines the observed
               state of VPCEndpointConnectionNotification.

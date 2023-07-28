@@ -108,6 +108,3 @@ spec:
     instanceClass: db.r4.large
     provider: ${aws.secondary}
     region: us-west-1
-
----
-

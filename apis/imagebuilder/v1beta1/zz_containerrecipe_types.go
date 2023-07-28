@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BlockDeviceMappingInitParameters struct {
+
+	// Name of the device. For example, /dev/sda or /dev/xvdb.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Configuration block with Elastic Block Storage (EBS) block device mapping settings. Detailed below.
+	EBS []EBSInitParameters `json:"ebs,omitempty" tf:"ebs,omitempty"`
+
+	// Set to true to remove a mapping from the parent image.
+	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	// Virtual device name. For example, ephemeral0. Instance store volumes are numbered starting from 0.
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+}
+
 type BlockDeviceMappingObservation struct {
 
 	// Name of the device. For example, /dev/sda or /dev/xvdb.
@@ -47,6 +62,12 @@ type BlockDeviceMappingParameters struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
+type ContainerRecipeComponentInitParameters struct {
+
+	// Configuration block(s) for parameters to configure the component. Detailed below.
+	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
 type ContainerRecipeComponentObservation struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
@@ -75,6 +96,48 @@ type ContainerRecipeComponentParameters struct {
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
+type ContainerRecipeInitParameters struct {
+
+	// Ordered configuration block(s) with components for the container recipe. Detailed below.
+	Component []ContainerRecipeComponentInitParameters `json:"component,omitempty" tf:"component,omitempty"`
+
+	// The type of the container to create. Valid values: DOCKER.
+	ContainerType *string `json:"containerType,omitempty" tf:"container_type,omitempty"`
+
+	// The description of the container recipe.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Dockerfile template used to build the image as an inline data blob.
+	DockerfileTemplateData *string `json:"dockerfileTemplateData,omitempty" tf:"dockerfile_template_data,omitempty"`
+
+	// The Amazon S3 URI for the Dockerfile that will be used to build the container image.
+	DockerfileTemplateURI *string `json:"dockerfileTemplateUri,omitempty" tf:"dockerfile_template_uri,omitempty"`
+
+	// Configuration block used to configure an instance for building and testing container images. Detailed below.
+	InstanceConfiguration []InstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// The name of the container recipe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The base image for the container recipe.
+	ParentImage *string `json:"parentImage,omitempty" tf:"parent_image,omitempty"`
+
+	// Specifies the operating system platform when you use a custom base image.
+	PlatformOverride *string `json:"platformOverride,omitempty" tf:"platform_override,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The destination repository for the container image. Detailed below.
+	TargetRepository []TargetRepositoryInitParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
+
+	// Version of the container recipe.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
 type ContainerRecipeObservation struct {
@@ -215,6 +278,33 @@ type ContainerRecipeParameters struct {
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
+type EBSInitParameters struct {
+
+	// Whether to delete the volume on termination. Defaults to unset, which is the value inherited from the parent image.
+	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Whether to encrypt the volume. Defaults to unset, which is the value inherited from the parent image.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Identifier of the EC2 Volume Snapshot.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of the volume, in GiB.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of the volume. For example, gp2 or io2.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
 type EBSObservation struct {
 
 	// Whether to delete the volume on termination. Defaults to unset, which is the value inherited from the parent image.
@@ -277,6 +367,15 @@ type EBSParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type InstanceConfigurationInitParameters struct {
+
+	// Configuration block(s) with block device mappings for the container recipe. Detailed below.
+	BlockDeviceMapping []BlockDeviceMappingInitParameters `json:"blockDeviceMapping,omitempty" tf:"block_device_mapping,omitempty"`
+
+	// The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+}
+
 type InstanceConfigurationObservation struct {
 
 	// Configuration block(s) with block device mappings for the container recipe. Detailed below.
@@ -297,6 +396,15 @@ type InstanceConfigurationParameters struct {
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 }
 
+type ParameterInitParameters struct {
+
+	// The name of the component parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value for the named component parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ParameterObservation struct {
 
 	// The name of the component parameter.
@@ -309,12 +417,18 @@ type ParameterObservation struct {
 type ParameterParameters struct {
 
 	// The name of the component parameter.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value for the named component parameter.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TargetRepositoryInitParameters struct {
+
+	// The service in which this image is registered. Valid values: ECR.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type TargetRepositoryObservation struct {
@@ -342,14 +456,18 @@ type TargetRepositoryParameters struct {
 	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The service in which this image is registered. Valid values: ECR.
-	// +kubebuilder:validation:Required
-	Service *string `json:"service" tf:"service,omitempty"`
+	// +kubebuilder:validation:Optional
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 // ContainerRecipeSpec defines the desired state of ContainerRecipe
 type ContainerRecipeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContainerRecipeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ContainerRecipeInitParameters `json:"initProvider,omitempty"`
 }
 
 // ContainerRecipeStatus defines the observed state of ContainerRecipe.
@@ -370,12 +488,12 @@ type ContainerRecipeStatus struct {
 type ContainerRecipe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.component)",message="component is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerType)",message="containerType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentImage)",message="parentImage is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRepository)",message="targetRepository is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version)",message="version is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.component) || has(self.initProvider.component)",message="component is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerType) || has(self.initProvider.containerType)",message="containerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentImage) || has(self.initProvider.parentImage)",message="parentImage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRepository) || has(self.initProvider.targetRepository)",message="targetRepository is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || has(self.initProvider.version)",message="version is a required parameter"
 	Spec   ContainerRecipeSpec   `json:"spec"`
 	Status ContainerRecipeStatus `json:"status,omitempty"`
 }

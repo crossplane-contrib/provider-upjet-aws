@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LocationS3InitParameters struct {
+
+	// A list of DataSync Agent ARNs with which this location will be associated.
+	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
+
+	// Configuration block containing information for connecting to S3.
+	S3Config []S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
+
+	// The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. Valid values
+	S3StorageClass *string `json:"s3StorageClass,omitempty" tf:"s3_storage_class,omitempty"`
+
+	// Prefix to perform actions as source or destination.
+	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LocationS3Observation struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
@@ -87,6 +105,9 @@ type LocationS3Parameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type S3ConfigInitParameters struct {
+}
+
 type S3ConfigObservation struct {
 
 	// ARN of the IAM Role used to connect to the S3 Bucket.
@@ -114,6 +135,10 @@ type S3ConfigParameters struct {
 type LocationS3Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LocationS3Parameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LocationS3InitParameters `json:"initProvider,omitempty"`
 }
 
 // LocationS3Status defines the observed state of LocationS3.
@@ -134,8 +159,8 @@ type LocationS3Status struct {
 type LocationS3 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Config)",message="s3Config is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subdirectory)",message="subdirectory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Config) || has(self.initProvider.s3Config)",message="s3Config is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subdirectory) || has(self.initProvider.subdirectory)",message="subdirectory is a required parameter"
 	Spec   LocationS3Spec   `json:"spec"`
 	Status LocationS3Status `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EnvironmentInitParameters struct {
+
+	// Description of the environment. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Set of Amazon CloudWatch alarms to monitor during the deployment process. Maximum of 5. See Monitor below for more details.
+	Monitor []MonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
+
+	// Name for the environment. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type EnvironmentObservation struct {
 
 	// AppConfig application ID. Must be between 4 and 7 characters in length.
@@ -85,6 +100,9 @@ type EnvironmentParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type MonitorInitParameters struct {
+}
+
 type MonitorObservation struct {
 
 	// ARN of the Amazon CloudWatch alarm.
@@ -129,6 +147,10 @@ type MonitorParameters struct {
 type EnvironmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EnvironmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EnvironmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // EnvironmentStatus defines the observed state of Environment.
@@ -149,7 +171,7 @@ type EnvironmentStatus struct {
 type Environment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   EnvironmentSpec   `json:"spec"`
 	Status EnvironmentStatus `json:"status,omitempty"`
 }

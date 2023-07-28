@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MetricDimensionsInitParameters struct {
+}
+
 type MetricDimensionsObservation struct {
 	Class *string `json:"class,omitempty" tf:"class,omitempty"`
 
@@ -24,6 +27,18 @@ type MetricDimensionsObservation struct {
 }
 
 type MetricDimensionsParameters struct {
+}
+
+type ServiceQuotaInitParameters struct {
+
+	// Code of the service quota to track. For example: L-F678F1CE. Available values can be found with the AWS CLI service-quotas list-service-quotas command.
+	QuotaCode *string `json:"quotaCode,omitempty" tf:"quota_code,omitempty"`
+
+	// Code of the service to track. For example: vpc. Available values can be found with the AWS CLI service-quotas list-services command.
+	ServiceCode *string `json:"serviceCode,omitempty" tf:"service_code,omitempty"`
+
+	// Float specifying the desired value for the service quota. If the desired value is higher than the current value, a quota increase request is submitted. When a known request is submitted and pending, the value reflects the desired value of the pending request.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ServiceQuotaObservation struct {
@@ -84,6 +99,9 @@ type ServiceQuotaParameters struct {
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type UsageMetricInitParameters struct {
+}
+
 type UsageMetricObservation struct {
 
 	// The metric dimensions.
@@ -106,6 +124,10 @@ type UsageMetricParameters struct {
 type ServiceQuotaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceQuotaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceQuotaInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceQuotaStatus defines the observed state of ServiceQuota.
@@ -126,9 +148,9 @@ type ServiceQuotaStatus struct {
 type ServiceQuota struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quotaCode)",message="quotaCode is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceCode)",message="serviceCode is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quotaCode) || has(self.initProvider.quotaCode)",message="quotaCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceCode) || has(self.initProvider.serviceCode)",message="serviceCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   ServiceQuotaSpec   `json:"spec"`
 	Status ServiceQuotaStatus `json:"status,omitempty"`
 }

@@ -80,10 +80,6 @@ spec:
                         position:
                           description: The position of the action in the receipt rule
                           type: number
-                      required:
-                      - headerName
-                      - headerValue
-                      - position
                       type: object
                     type: array
                   after:
@@ -111,11 +107,6 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - message
-                      - position
-                      - sender
-                      - smtpReplyCode
                       type: object
                     type: array
                   enabled:
@@ -137,9 +128,6 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - functionArn
-                      - position
                       type: object
                     type: array
                   name:
@@ -176,9 +164,6 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - bucketName
-                      - position
                       type: object
                     type: array
                   scanEnabled:
@@ -199,9 +184,6 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - position
-                      - topicArn
                       type: object
                     type: array
                   stopAction:
@@ -218,9 +200,6 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - position
-                      - scope
                       type: object
                     type: array
                   tlsPolicy:
@@ -239,13 +218,165 @@ spec:
                         topicArn:
                           description: The ARN of an SNS topic to notify
                           type: string
-                      required:
-                      - organizationArn
-                      - position
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addHeaderAction:
+                    description: A list of Add Header Action blocks. Documented below.
+                    items:
+                      properties:
+                        headerName:
+                          description: The name of the header to add
+                          type: string
+                        headerValue:
+                          description: The value of the header to add
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                      type: object
+                    type: array
+                  after:
+                    description: The name of the rule to place this rule after
+                    type: string
+                  bounceAction:
+                    description: A list of Bounce Action blocks. Documented below.
+                    items:
+                      properties:
+                        message:
+                          description: The message to send
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        sender:
+                          description: The email address of the sender
+                          type: string
+                        smtpReplyCode:
+                          description: The RFC 5321 SMTP reply code
+                          type: string
+                        statusCode:
+                          description: The RFC 3463 SMTP enhanced status code
+                          type: string
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: If true, the rule will be enabled
+                    type: boolean
+                  lambdaAction:
+                    description: A list of Lambda Action blocks. Documented below.
+                    items:
+                      properties:
+                        functionArn:
+                          description: The ARN of the Lambda function to invoke
+                          type: string
+                        invocationType:
+                          description: Event or RequestResponse
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the rule
+                    type: string
+                  recipients:
+                    description: A list of email addresses
+                    items:
+                      type: string
+                    type: array
+                  ruleSetName:
+                    description: The name of the rule set
+                    type: string
+                  s3Action:
+                    description: A list of S3 Action blocks. Documented below.
+                    items:
+                      properties:
+                        bucketName:
+                          description: The name of the S3 bucket
+                          type: string
+                        kmsKeyArn:
+                          description: The ARN of the KMS key
+                          type: string
+                        objectKeyPrefix:
+                          description: The key prefix of the S3 bucket
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
+                  scanEnabled:
+                    description: If true, incoming emails will be scanned for spam
+                      and viruses
+                    type: boolean
+                  snsAction:
+                    description: A list of SNS Action blocks. Documented below.
+                    items:
+                      properties:
+                        encoding:
+                          description: The encoding to use for the email within the
+                            Amazon SNS notification. Default value is UTF-8.
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
+                  stopAction:
+                    description: A list of Stop Action blocks. Documented below.
+                    items:
+                      properties:
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        scope:
+                          description: The scope to apply. The only acceptable value
+                            is RuleSet.
+                          type: string
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
+                  tlsPolicy:
+                    description: Require or Optional
+                    type: string
+                  workmailAction:
+                    description: A list of WorkMail Action blocks. Documented below.
+                    items:
+                      properties:
+                        organizationArn:
+                          description: The ARN of the WorkMail organization
+                          type: string
+                        position:
+                          description: The position of the action in the receipt rule
+                          type: number
+                        topicArn:
+                          description: The ARN of an SNS topic to notify
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -447,10 +578,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: ruleSetName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleSetName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleSetName)
+                || has(self.initProvider.ruleSetName)'
           status:
             description: ReceiptRuleStatus defines the observed state of ReceiptRule.
             properties:

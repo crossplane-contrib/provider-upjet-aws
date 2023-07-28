@@ -184,6 +184,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addressFamily:
+                    description: Address family (IPv4 or IPv6) of this prefix list.
+                    type: string
+                  entry:
+                    description: Configuration block for prefix list entry. Detailed
+                      below. Different entries may have overlapping CIDR blocks, but
+                      a particular CIDR should not be duplicated.
+                    items:
+                      properties:
+                        description:
+                          description: Description of this entry. Due to API limitations,
+                            updating only the description of an existing entry requires
+                            temporarily removing and re-adding the entry.
+                          type: string
+                      type: object
+                    type: array
+                  maxEntries:
+                    description: Maximum number of entries that this prefix list can
+                      contain.
+                    type: number
+                  name:
+                    description: Name of this resource. The name must not start with
+                      com.amazonaws.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -384,13 +419,16 @@ spec:
             x-kubernetes-validations:
             - message: addressFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)
+                || has(self.initProvider.addressFamily)'
             - message: maxEntries is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxEntries)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxEntries)
+                || has(self.initProvider.maxEntries)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ManagedPrefixListStatus defines the observed state of ManagedPrefixList.
             properties:

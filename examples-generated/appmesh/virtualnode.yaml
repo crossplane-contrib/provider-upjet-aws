@@ -24,6 +24,3 @@ spec:
       serviceDiscovery:
       - dns:
         - hostname: serviceb.simpleapp.local
-
----
-

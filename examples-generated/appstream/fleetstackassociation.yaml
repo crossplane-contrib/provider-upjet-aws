@@ -49,6 +49,3 @@ spec:
   forProvider:
     name: STACK NAME
     region: us-west-1
-
----
-

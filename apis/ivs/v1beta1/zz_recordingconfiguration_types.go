@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationConfigurationInitParameters struct {
+
+	// S3 destination configuration where recorded videos will be stored.
+	S3 []S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
 type DestinationConfigurationObservation struct {
 
 	// S3 destination configuration where recorded videos will be stored.
@@ -22,8 +28,26 @@ type DestinationConfigurationObservation struct {
 type DestinationConfigurationParameters struct {
 
 	// S3 destination configuration where recorded videos will be stored.
-	// +kubebuilder:validation:Required
-	S3 []S3Parameters `json:"s3" tf:"s3,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3 []S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+}
+
+type RecordingConfigurationInitParameters struct {
+
+	// Object containing destination configuration for where recorded video will be stored.
+	DestinationConfiguration []DestinationConfigurationInitParameters `json:"destinationConfiguration,omitempty" tf:"destination_configuration,omitempty"`
+
+	// Recording Configuration name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
+	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Object containing information to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
+	ThumbnailConfiguration []ThumbnailConfigurationInitParameters `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
 type RecordingConfigurationObservation struct {
@@ -83,6 +107,12 @@ type RecordingConfigurationParameters struct {
 	ThumbnailConfiguration []ThumbnailConfigurationParameters `json:"thumbnailConfiguration,omitempty" tf:"thumbnail_configuration,omitempty"`
 }
 
+type S3InitParameters struct {
+
+	// S3 bucket name where recorded videos will be stored.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+}
+
 type S3Observation struct {
 
 	// S3 bucket name where recorded videos will be stored.
@@ -92,8 +122,17 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// S3 bucket name where recorded videos will be stored.
-	// +kubebuilder:validation:Required
-	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+}
+
+type ThumbnailConfigurationInitParameters struct {
+
+	// Thumbnail recording mode. Valid values: DISABLED, INTERVAL.
+	RecordingMode *string `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
+
+	// The targeted thumbnail-generation interval in seconds.
+	TargetIntervalSeconds *float64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
 }
 
 type ThumbnailConfigurationObservation struct {
@@ -120,6 +159,10 @@ type ThumbnailConfigurationParameters struct {
 type RecordingConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RecordingConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RecordingConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RecordingConfigurationStatus defines the observed state of RecordingConfiguration.
@@ -140,7 +183,7 @@ type RecordingConfigurationStatus struct {
 type RecordingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationConfiguration)",message="destinationConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationConfiguration) || has(self.initProvider.destinationConfiguration)",message="destinationConfiguration is a required parameter"
 	Spec   RecordingConfigurationSpec   `json:"spec"`
 	Status RecordingConfigurationStatus `json:"status,omitempty"`
 }

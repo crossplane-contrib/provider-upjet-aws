@@ -13,6 +13,17 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FairSharePolicyInitParameters struct {
+
+	// A value used to reserve some of the available maximum vCPU for fair share identifiers that have not yet been used. For more information, see FairsharePolicy.
+	ComputeReservation *float64 `json:"computeReservation,omitempty" tf:"compute_reservation,omitempty"`
+
+	ShareDecaySeconds *float64 `json:"shareDecaySeconds,omitempty" tf:"share_decay_seconds,omitempty"`
+
+	// One or more share distribution blocks which define the weights for the fair share identifiers for the fair share policy. For more information, see FairsharePolicy. The share_distribution block is documented below.
+	ShareDistribution []ShareDistributionInitParameters `json:"shareDistribution,omitempty" tf:"share_distribution,omitempty"`
+}
+
 type FairSharePolicyObservation struct {
 
 	// A value used to reserve some of the available maximum vCPU for fair share identifiers that have not yet been used. For more information, see FairsharePolicy.
@@ -36,6 +47,13 @@ type FairSharePolicyParameters struct {
 	// One or more share distribution blocks which define the weights for the fair share identifiers for the fair share policy. For more information, see FairsharePolicy. The share_distribution block is documented below.
 	// +kubebuilder:validation:Optional
 	ShareDistribution []ShareDistributionParameters `json:"shareDistribution,omitempty" tf:"share_distribution,omitempty"`
+}
+
+type SchedulingPolicyInitParameters struct {
+	FairSharePolicy []FairSharePolicyInitParameters `json:"fairSharePolicy,omitempty" tf:"fair_share_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SchedulingPolicyObservation struct {
@@ -69,6 +87,15 @@ type SchedulingPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ShareDistributionInitParameters struct {
+
+	// A fair share identifier or fair share identifier prefix. For more information, see ShareAttributes.
+	ShareIdentifier *string `json:"shareIdentifier,omitempty" tf:"share_identifier,omitempty"`
+
+	// The weight factor for the fair share identifier. For more information, see ShareAttributes.
+	WeightFactor *float64 `json:"weightFactor,omitempty" tf:"weight_factor,omitempty"`
+}
+
 type ShareDistributionObservation struct {
 
 	// A fair share identifier or fair share identifier prefix. For more information, see ShareAttributes.
@@ -81,8 +108,8 @@ type ShareDistributionObservation struct {
 type ShareDistributionParameters struct {
 
 	// A fair share identifier or fair share identifier prefix. For more information, see ShareAttributes.
-	// +kubebuilder:validation:Required
-	ShareIdentifier *string `json:"shareIdentifier" tf:"share_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	ShareIdentifier *string `json:"shareIdentifier,omitempty" tf:"share_identifier,omitempty"`
 
 	// The weight factor for the fair share identifier. For more information, see ShareAttributes.
 	// +kubebuilder:validation:Optional
@@ -93,6 +120,10 @@ type ShareDistributionParameters struct {
 type SchedulingPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SchedulingPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SchedulingPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SchedulingPolicyStatus defines the observed state of SchedulingPolicy.

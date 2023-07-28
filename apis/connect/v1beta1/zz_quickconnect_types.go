@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PhoneConfigInitParameters struct {
+
+	// Specifies the phone number in in E.164 format.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+}
+
 type PhoneConfigObservation struct {
 
 	// Specifies the phone number in in E.164 format.
@@ -22,8 +28,17 @@ type PhoneConfigObservation struct {
 type PhoneConfigParameters struct {
 
 	// Specifies the phone number in in E.164 format.
-	// +kubebuilder:validation:Required
-	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+}
+
+type QueueConfigInitParameters struct {
+
+	// Specifies the identifier of the contact flow.
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+
+	// Specifies the identifier for the queue.
+	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 }
 
 type QueueConfigObservation struct {
@@ -38,12 +53,27 @@ type QueueConfigObservation struct {
 type QueueConfigParameters struct {
 
 	// Specifies the identifier of the contact flow.
-	// +kubebuilder:validation:Required
-	ContactFlowID *string `json:"contactFlowId" tf:"contact_flow_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
 
 	// Specifies the identifier for the queue.
-	// +kubebuilder:validation:Required
-	QueueID *string `json:"queueId" tf:"queue_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
+}
+
+type QuickConnectConfigInitParameters struct {
+
+	// Specifies the phone configuration of the Quick Connect. This is required only if quick_connect_type is PHONE_NUMBER. The phone_config block is documented below.
+	PhoneConfig []PhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
+
+	// Specifies the queue configuration of the Quick Connect. This is required only if quick_connect_type is QUEUE. The queue_config block is documented below.
+	QueueConfig []QueueConfigInitParameters `json:"queueConfig,omitempty" tf:"queue_config,omitempty"`
+
+	// Specifies the configuration type of the quick connect. valid values are PHONE_NUMBER, QUEUE, USER.
+	QuickConnectType *string `json:"quickConnectType,omitempty" tf:"quick_connect_type,omitempty"`
+
+	// Specifies the user configuration of the Quick Connect. This is required only if quick_connect_type is USER. The user_config block is documented below.
+	UserConfig []UserConfigInitParameters `json:"userConfig,omitempty" tf:"user_config,omitempty"`
 }
 
 type QuickConnectConfigObservation struct {
@@ -72,12 +102,27 @@ type QuickConnectConfigParameters struct {
 	QueueConfig []QueueConfigParameters `json:"queueConfig,omitempty" tf:"queue_config,omitempty"`
 
 	// Specifies the configuration type of the quick connect. valid values are PHONE_NUMBER, QUEUE, USER.
-	// +kubebuilder:validation:Required
-	QuickConnectType *string `json:"quickConnectType" tf:"quick_connect_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	QuickConnectType *string `json:"quickConnectType,omitempty" tf:"quick_connect_type,omitempty"`
 
 	// Specifies the user configuration of the Quick Connect. This is required only if quick_connect_type is USER. The user_config block is documented below.
 	// +kubebuilder:validation:Optional
 	UserConfig []UserConfigParameters `json:"userConfig,omitempty" tf:"user_config,omitempty"`
+}
+
+type QuickConnectInitParameters struct {
+
+	// Specifies the description of the Quick Connect.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the name of the Quick Connect.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that defines the configuration information for the Quick Connect: quick_connect_type and one of phone_config, queue_config, user_config . The Quick Connect Config block is documented below.
+	QuickConnectConfig []QuickConnectConfigInitParameters `json:"quickConnectConfig,omitempty" tf:"quick_connect_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type QuickConnectObservation struct {
@@ -148,6 +193,15 @@ type QuickConnectParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type UserConfigInitParameters struct {
+
+	// Specifies the identifier of the contact flow.
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+
+	// Specifies the identifier for the user.
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+}
+
 type UserConfigObservation struct {
 
 	// Specifies the identifier of the contact flow.
@@ -160,18 +214,22 @@ type UserConfigObservation struct {
 type UserConfigParameters struct {
 
 	// Specifies the identifier of the contact flow.
-	// +kubebuilder:validation:Required
-	ContactFlowID *string `json:"contactFlowId" tf:"contact_flow_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
 
 	// Specifies the identifier for the user.
-	// +kubebuilder:validation:Required
-	UserID *string `json:"userId" tf:"user_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 // QuickConnectSpec defines the desired state of QuickConnect
 type QuickConnectSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     QuickConnectParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider QuickConnectInitParameters `json:"initProvider,omitempty"`
 }
 
 // QuickConnectStatus defines the observed state of QuickConnect.
@@ -192,8 +250,8 @@ type QuickConnectStatus struct {
 type QuickConnect struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quickConnectConfig)",message="quickConnectConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quickConnectConfig) || has(self.initProvider.quickConnectConfig)",message="quickConnectConfig is a required parameter"
 	Spec   QuickConnectSpec   `json:"spec"`
 	Status QuickConnectStatus `json:"status,omitempty"`
 }

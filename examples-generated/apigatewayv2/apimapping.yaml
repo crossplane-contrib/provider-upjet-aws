@@ -18,6 +18,3 @@ spec:
     stageSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

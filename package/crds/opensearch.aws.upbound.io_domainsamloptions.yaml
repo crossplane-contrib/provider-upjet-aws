@@ -166,9 +166,6 @@ spec:
                                 description: Metadata of the SAML application in xml
                                   format.
                                 type: string
-                            required:
-                            - entityId
-                            - metadataContent
                             type: object
                           type: array
                         masterBackendRole:
@@ -211,6 +208,53 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  samlOptions:
+                    description: SAML authentication options for an AWS OpenSearch
+                      Domain.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether SAML authentication is enabled.
+                          type: boolean
+                        idp:
+                          description: Information from your identity provider.
+                          items:
+                            properties:
+                              entityId:
+                                description: Unique Entity ID of the application in
+                                  SAML Identity Provider.
+                                type: string
+                              metadataContent:
+                                description: Metadata of the SAML application in xml
+                                  format.
+                                type: string
+                            type: object
+                          type: array
+                        masterBackendRole:
+                          description: This backend role from the SAML IdP receives
+                            full permissions to the cluster, equivalent to a new master
+                            user.
+                          type: string
+                        rolesKey:
+                          description: Element of the SAML assertion to use for backend
+                            roles. Default is roles.
+                          type: string
+                        sessionTimeoutMinutes:
+                          description: Duration of a session in minutes after a user
+                            logs in. Default is 60. Maximum value is 1,440.
+                          type: number
+                        subjectKey:
+                          description: Element of the SAML assertion to use for username.
+                            Default is NameID.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

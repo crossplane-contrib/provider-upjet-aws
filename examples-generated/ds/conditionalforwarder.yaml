@@ -16,6 +16,3 @@ spec:
     - 8.8.4.4
     region: us-west-1
     remoteDomainName: example.com
-
----
-

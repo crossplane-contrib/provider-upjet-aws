@@ -81,12 +81,8 @@ spec:
                                 description: S3 bucket name where recorded videos
                                   will be stored.
                                 type: string
-                            required:
-                            - bucketName
                             type: object
                           type: array
-                      required:
-                      - s3
                       type: object
                     type: array
                   name:
@@ -124,6 +120,59 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  destinationConfiguration:
+                    description: Object containing destination configuration for where
+                      recorded video will be stored.
+                    items:
+                      properties:
+                        s3:
+                          description: S3 destination configuration where recorded
+                            videos will be stored.
+                          items:
+                            properties:
+                              bucketName:
+                                description: S3 bucket name where recorded videos
+                                  will be stored.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: Recording Configuration name.
+                    type: string
+                  recordingReconnectWindowSeconds:
+                    description: If a broadcast disconnects and then reconnects within
+                      the specified interval, the multiple streams will be considered
+                      a single broadcast and merged together.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  thumbnailConfiguration:
+                    description: Object containing information to enable/disable the
+                      recording of thumbnails for a live session and modify the interval
+                      at which thumbnails are generated for the live session.
+                    items:
+                      properties:
+                        recordingMode:
+                          description: 'Thumbnail recording mode. Valid values: DISABLED,
+                            INTERVAL.'
+                          type: string
+                        targetIntervalSeconds:
+                          description: The targeted thumbnail-generation interval
+                            in seconds.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -325,7 +374,8 @@ spec:
             x-kubernetes-validations:
             - message: destinationConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationConfiguration)
+                || has(self.initProvider.destinationConfiguration)'
           status:
             description: RecordingConfigurationStatus defines the observed state of
               RecordingConfiguration.

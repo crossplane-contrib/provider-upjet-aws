@@ -67,6 +67,3 @@ spec:
     policyName: wu-tang-ssl
     policyTypeName: SSLNegotiationPolicyType
     region: us-west-1
-
----
-

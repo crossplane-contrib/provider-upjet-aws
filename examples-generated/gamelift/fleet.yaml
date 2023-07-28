@@ -19,6 +19,3 @@ spec:
     - serverProcess:
       - concurrentExecutions: 1
         launchPath: C:\game\GomokuServer.exe
-
----
-

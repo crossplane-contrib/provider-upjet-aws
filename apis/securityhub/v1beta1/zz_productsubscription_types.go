@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProductSubscriptionInitParameters struct {
+
+	// The ARN of the product that generates findings that you want to import into Security Hub - see below.
+	ProductArn *string `json:"productArn,omitempty" tf:"product_arn,omitempty"`
+}
+
 type ProductSubscriptionObservation struct {
 
 	// The ARN of a resource that represents your subscription to the product that generates the findings that you want to import into Security Hub.
@@ -40,6 +46,10 @@ type ProductSubscriptionParameters struct {
 type ProductSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProductSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProductSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProductSubscriptionStatus defines the observed state of ProductSubscription.
@@ -60,7 +70,7 @@ type ProductSubscriptionStatus struct {
 type ProductSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productArn)",message="productArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productArn) || has(self.initProvider.productArn)",message="productArn is a required parameter"
 	Spec   ProductSubscriptionSpec   `json:"spec"`
 	Status ProductSubscriptionStatus `json:"status,omitempty"`
 }

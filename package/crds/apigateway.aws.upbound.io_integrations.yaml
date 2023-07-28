@@ -556,6 +556,97 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cacheKeyParameters:
+                    description: List of cache key parameters for the integration.
+                    items:
+                      type: string
+                    type: array
+                  cacheNamespace:
+                    description: Integration's cache namespace.
+                    type: string
+                  connectionType:
+                    description: Integration input's connectionType. Valid values
+                      are INTERNET (default for connections through the public routable
+                      internet), and VPC_LINK (for private connections between API
+                      Gateway and a network load balancer in a VPC).
+                    type: string
+                  contentHandling:
+                    description: How to handle request payload content type conversions.
+                      Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT.
+                      If this property is not defined, the request payload will be
+                      passed through from the method request to integration request
+                      without modification, provided that the passthroughBehaviors
+                      is configured to support payload pass-through.
+                    type: string
+                  credentials:
+                    description: Credentials required for the integration. For AWS
+                      integrations, 2 options are available. To specify an IAM Role
+                      for Amazon API Gateway to assume, use the role's ARN. To require
+                      that the caller's identity be passed through from the request,
+                      specify the string arn:aws:iam::\*:user/\*.
+                    type: string
+                  integrationHttpMethod:
+                    description: Integration HTTP method (GET, POST, PUT, DELETE,
+                      HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact
+                      with the back end. Required if type is AWS, AWS_PROXY, HTTP
+                      or HTTP_PROXY. Not all methods are compatible with all AWS integrations.
+                      e.g., Lambda function can only be invoked via POST.
+                    type: string
+                  passthroughBehavior:
+                    description: Integration passthrough behavior (WHEN_NO_MATCH,
+                      WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is
+                      used.
+                    type: string
+                  requestParameters:
+                    additionalProperties:
+                      type: string
+                    description: 'Map of request query string parameters and headers
+                      that should be passed to the backend responder. For example:
+                      request_parameters = { "integration.request.header.X-Some-Other-Header"
+                      = "method.request.header.X-Some-Header" }'
+                    type: object
+                  requestTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of the integration's request templates.
+                    type: object
+                  timeoutMilliseconds:
+                    description: Custom timeout between 50 and 29,000 milliseconds.
+                      The default value is 29,000 milliseconds.
+                    type: number
+                  tlsConfig:
+                    description: TLS configuration. See below.
+                    items:
+                      properties:
+                        insecureSkipVerification:
+                          description: Whether or not API Gateway skips verification
+                            that the certificate for an integration endpoint is issued
+                            by a supported certificate authority. This isn’t recommended,
+                            but it enables you to use certificates that are signed
+                            by private certificate authorities, or certificates that
+                            are self-signed. If enabled, API Gateway still performs
+                            basic certificate validation, which includes checking
+                            the certificate's expiration date, hostname, and presence
+                            of a root certificate authority. Supported only for HTTP
+                            and HTTP_PROXY integrations.
+                          type: boolean
+                      type: object
+                    type: array
+                  type:
+                    description: Integration input's type. Valid values are HTTP (for
+                      HTTP backends), MOCK (not calling any real backend), AWS (for
+                      AWS services), AWS_PROXY (for Lambda proxy integration) and
+                      HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY
+                      integration with a connection_type of VPC_LINK is referred to
+                      as a private integration and uses a VpcLink to connect API Gateway
+                      to a network load balancer of a VPC.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -756,7 +847,8 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: IntegrationStatus defines the observed state of Integration.
             properties:

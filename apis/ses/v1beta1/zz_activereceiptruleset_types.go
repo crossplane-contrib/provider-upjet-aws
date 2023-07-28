@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActiveReceiptRuleSetInitParameters struct {
+
+	// The name of the rule set
+	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
+}
+
 type ActiveReceiptRuleSetObservation struct {
 
 	// The SES receipt rule set ARN.
@@ -41,6 +47,10 @@ type ActiveReceiptRuleSetParameters struct {
 type ActiveReceiptRuleSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ActiveReceiptRuleSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ActiveReceiptRuleSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ActiveReceiptRuleSetStatus defines the observed state of ActiveReceiptRuleSet.
@@ -61,7 +71,7 @@ type ActiveReceiptRuleSetStatus struct {
 type ActiveReceiptRuleSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleSetName)",message="ruleSetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleSetName) || has(self.initProvider.ruleSetName)",message="ruleSetName is a required parameter"
 	Spec   ActiveReceiptRuleSetSpec   `json:"spec"`
 	Status ActiveReceiptRuleSetStatus `json:"status,omitempty"`
 }

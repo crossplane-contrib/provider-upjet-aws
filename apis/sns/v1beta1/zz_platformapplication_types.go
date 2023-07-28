@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PlatformApplicationInitParameters struct {
+
+	// The bundle identifier that's assigned to your iOS app. May only include alphanumeric characters, hyphens (-), and periods (.).
+	ApplePlatformBundleID *string `json:"applePlatformBundleId,omitempty" tf:"apple_platform_bundle_id,omitempty"`
+
+	// The identifier that's assigned to your Apple developer account team. Must be 10 alphanumeric characters.
+	ApplePlatformTeamID *string `json:"applePlatformTeamId,omitempty" tf:"apple_platform_team_id,omitempty"`
+
+	// The ARN of the SNS Topic triggered when a delivery to any of the platform endpoints associated with your platform application encounters a permanent failure.
+	EventDeliveryFailureTopicArn *string `json:"eventDeliveryFailureTopicArn,omitempty" tf:"event_delivery_failure_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when a new platform endpoint is added to your platform application.
+	EventEndpointCreatedTopicArn *string `json:"eventEndpointCreatedTopicArn,omitempty" tf:"event_endpoint_created_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is deleted from your platform application.
+	EventEndpointDeletedTopicArn *string `json:"eventEndpointDeletedTopicArn,omitempty" tf:"event_endpoint_deleted_topic_arn,omitempty"`
+
+	// The ARN of the SNS Topic triggered when an existing platform endpoint is changed from your platform application.
+	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
+
+	// The platform that the app is registered with. See Platform for supported platforms.
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// The sample rate percentage (0-100) of successfully delivered messages.
+	SuccessFeedbackSampleRate *string `json:"successFeedbackSampleRate,omitempty" tf:"success_feedback_sample_rate,omitempty"`
+}
+
 type PlatformApplicationObservation struct {
 
 	// The bundle identifier that's assigned to your iOS app. May only include alphanumeric characters, hyphens (-), and periods (.).
@@ -132,6 +159,10 @@ type PlatformApplicationParameters struct {
 type PlatformApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PlatformApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PlatformApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // PlatformApplicationStatus defines the observed state of PlatformApplication.
@@ -152,7 +183,7 @@ type PlatformApplicationStatus struct {
 type PlatformApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platform)",message="platform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platform) || has(self.initProvider.platform)",message="platform is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformCredentialSecretRef)",message="platformCredentialSecretRef is a required parameter"
 	Spec   PlatformApplicationSpec   `json:"spec"`
 	Status PlatformApplicationStatus `json:"status,omitempty"`

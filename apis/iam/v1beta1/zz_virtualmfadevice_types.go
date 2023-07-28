@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VirtualMfaDeviceInitParameters struct {
+
+	// –  The path for the virtual MFA device.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
+	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
+}
+
 type VirtualMfaDeviceObservation struct {
 
 	// The Amazon Resource Name (ARN) specifying the virtual mfa device.
@@ -58,6 +70,10 @@ type VirtualMfaDeviceParameters struct {
 type VirtualMfaDeviceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualMfaDeviceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VirtualMfaDeviceInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualMfaDeviceStatus defines the observed state of VirtualMfaDevice.
@@ -78,7 +94,7 @@ type VirtualMfaDeviceStatus struct {
 type VirtualMfaDevice struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.virtualMfaDeviceName)",message="virtualMfaDeviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.virtualMfaDeviceName) || has(self.initProvider.virtualMfaDeviceName)",message="virtualMfaDeviceName is a required parameter"
 	Spec   VirtualMfaDeviceSpec   `json:"spec"`
 	Status VirtualMfaDeviceStatus `json:"status,omitempty"`
 }

@@ -175,6 +175,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  compatibility:
+                    description: 'The compatibility mode of the schema. Values values
+                      are: NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL,
+                      FULL, and FULL_ALL.'
+                    type: string
+                  dataFormat:
+                    description: The data format of the schema definition. Valid values
+                      are AVRO, JSON and PROTOBUF.
+                    type: string
+                  description:
+                    description: –  A description of the schema.
+                    type: string
+                  schemaDefinition:
+                    description: The schema definition using the data_format setting
+                      for schema_name.
+                    type: string
+                  schemaName:
+                    description: –  The Name of the schema.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -375,16 +405,20 @@ spec:
             x-kubernetes-validations:
             - message: compatibility is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.compatibility)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.compatibility)
+                || has(self.initProvider.compatibility)'
             - message: dataFormat is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataFormat)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataFormat)
+                || has(self.initProvider.dataFormat)'
             - message: schemaDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)
+                || has(self.initProvider.schemaDefinition)'
             - message: schemaName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaName)
+                || has(self.initProvider.schemaName)'
           status:
             description: SchemaStatus defines the observed state of Schema.
             properties:

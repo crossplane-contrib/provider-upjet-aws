@@ -233,6 +233,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of this entry. Due to API limitations,
+                      updating only the description of an entry requires recreating
+                      the entry.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

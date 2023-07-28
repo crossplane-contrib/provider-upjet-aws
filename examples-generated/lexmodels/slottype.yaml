@@ -21,6 +21,3 @@ spec:
       value: tulips
     region: us-west-1
     valueSelectionStrategy: ORIGINAL_VALUE
-
----
-

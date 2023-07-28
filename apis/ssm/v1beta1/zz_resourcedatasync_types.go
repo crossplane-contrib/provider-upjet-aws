@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceDataSyncInitParameters struct {
+
+	// Amazon S3 configuration details for the sync.
+	S3Destination []S3DestinationInitParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
+}
+
 type ResourceDataSyncObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -31,6 +37,18 @@ type ResourceDataSyncParameters struct {
 	// Amazon S3 configuration details for the sync.
 	// +kubebuilder:validation:Optional
 	S3Destination []S3DestinationParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
+}
+
+type S3DestinationInitParameters struct {
+
+	// ARN of an encryption key for a destination in Amazon S3.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Prefix for the bucket.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// A supported sync format. Only JsonSerDe is currently supported. Defaults to JsonSerDe.
+	SyncFormat *string `json:"syncFormat,omitempty" tf:"sync_format,omitempty"`
 }
 
 type S3DestinationObservation struct {
@@ -97,6 +115,10 @@ type S3DestinationParameters struct {
 type ResourceDataSyncSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceDataSyncParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceDataSyncInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceDataSyncStatus defines the observed state of ResourceDataSync.
@@ -117,7 +139,7 @@ type ResourceDataSyncStatus struct {
 type ResourceDataSync struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Destination)",message="s3Destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Destination) || has(self.initProvider.s3Destination)",message="s3Destination is a required parameter"
 	Spec   ResourceDataSyncSpec   `json:"spec"`
 	Status ResourceDataSyncStatus `json:"status,omitempty"`
 }

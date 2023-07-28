@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotAliasInitParameters struct {
+
+	// The name of the bot.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
+	// The name of the bot.
+	BotVersion *string `json:"botVersion,omitempty" tf:"bot_version,omitempty"`
+
+	// The settings that determine how Amazon Lex uses conversation logs for the alias. Attributes are documented under conversation_logs.
+	ConversationLogs []ConversationLogsInitParameters `json:"conversationLogs,omitempty" tf:"conversation_logs,omitempty"`
+
+	// A description of the alias. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type BotAliasObservation struct {
 
 	// The ARN of the bot alias.
@@ -66,6 +81,15 @@ type BotAliasParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type ConversationLogsInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
+	LogSettings []LogSettingsInitParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
+}
+
 type ConversationLogsObservation struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
@@ -78,12 +102,27 @@ type ConversationLogsObservation struct {
 type ConversationLogsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
-	// +kubebuilder:validation:Required
-	IAMRoleArn *string `json:"iamRoleArn" tf:"iam_role_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
 	// +kubebuilder:validation:Optional
 	LogSettings []LogSettingsParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
+}
+
+type LogSettingsInitParameters struct {
+
+	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The type of logging that is enabled. Options are AUDIO or TEXT.
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 type LogSettingsObservation struct {
@@ -107,26 +146,30 @@ type LogSettingsObservation struct {
 type LogSettingsParameters struct {
 
 	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
-	// +kubebuilder:validation:Required
-	Destination *string `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The type of logging that is enabled. Options are AUDIO or TEXT.
-	// +kubebuilder:validation:Required
-	LogType *string `json:"logType" tf:"log_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket where the logs are delivered. Must be less than or equal to 2048 characters in length.
-	// +kubebuilder:validation:Required
-	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 }
 
 // BotAliasSpec defines the desired state of BotAlias
 type BotAliasSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotAliasParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotAliasInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotAliasStatus defines the observed state of BotAlias.
@@ -147,8 +190,8 @@ type BotAliasStatus struct {
 type BotAlias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botName)",message="botName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botVersion)",message="botVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botName) || has(self.initProvider.botName)",message="botName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botVersion) || has(self.initProvider.botVersion)",message="botVersion is a required parameter"
 	Spec   BotAliasSpec   `json:"spec"`
 	Status BotAliasStatus `json:"status,omitempty"`
 }

@@ -93,8 +93,6 @@ spec:
                         type:
                           description: Type of routing strategyE.g., SIMPLE or TERMINAL
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   tags:
@@ -104,6 +102,41 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of the alias.
+                    type: string
+                  name:
+                    description: Name of the alias.
+                    type: string
+                  routingStrategy:
+                    description: Specifies the fleet and/or routing type to use for
+                      the alias.
+                    items:
+                      properties:
+                        fleetId:
+                          description: ID of the GameLift Fleet to point the alias
+                            to.
+                          type: string
+                        message:
+                          description: Message text to be used with the TERMINAL routing
+                            strategy.
+                          type: string
+                        type:
+                          description: Type of routing strategyE.g., SIMPLE or TERMINAL
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -305,10 +338,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: routingStrategy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.routingStrategy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.routingStrategy)
+                || has(self.initProvider.routingStrategy)'
           status:
             description: AliasStatus defines the observed state of Alias.
             properties:

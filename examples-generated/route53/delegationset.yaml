@@ -46,6 +46,3 @@ spec:
         testing.upbound.io/example-name: main
     name: terraform.io
     region: us-west-1
-
----
-

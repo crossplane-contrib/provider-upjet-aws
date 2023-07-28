@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ServiceSpecificCredentialInitParameters struct {
+
+	// The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// The status to be assigned to the service-specific credential. Valid values are Active and Inactive. Default value is Active.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type ServiceSpecificCredentialObservation struct {
 
 	// The combination of service_name and user_name as such: service_name:user_name:service_specific_credential_id.
@@ -62,6 +71,10 @@ type ServiceSpecificCredentialParameters struct {
 type ServiceSpecificCredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceSpecificCredentialParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceSpecificCredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceSpecificCredentialStatus defines the observed state of ServiceSpecificCredential.
@@ -82,7 +95,7 @@ type ServiceSpecificCredentialStatus struct {
 type ServiceSpecificCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName)",message="serviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName) || has(self.initProvider.serviceName)",message="serviceName is a required parameter"
 	Spec   ServiceSpecificCredentialSpec   `json:"spec"`
 	Status ServiceSpecificCredentialStatus `json:"status,omitempty"`
 }

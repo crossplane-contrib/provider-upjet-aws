@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserPoolDomainInitParameters struct {
+
+	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+}
+
 type UserPoolDomainObservation struct {
 
 	// The AWS account ID for the user pool owner.
@@ -88,6 +94,10 @@ type UserPoolDomainParameters struct {
 type UserPoolDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserPoolDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserPoolDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserPoolDomainStatus defines the observed state of UserPoolDomain.
@@ -108,7 +118,7 @@ type UserPoolDomainStatus struct {
 type UserPoolDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain)",message="domain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain) || has(self.initProvider.domain)",message="domain is a required parameter"
 	Spec   UserPoolDomainSpec   `json:"spec"`
 	Status UserPoolDomainStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayMulticastDomainInitParameters struct {
+
+	// Whether to automatically accept cross-account subnet associations that are associated with the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	AutoAcceptSharedAssociations *string `json:"autoAcceptSharedAssociations,omitempty" tf:"auto_accept_shared_associations,omitempty"`
+
+	// Whether to enable Internet Group Management Protocol (IGMP) version 2 for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	Igmpv2Support *string `json:"igmpv2Support,omitempty" tf:"igmpv2_support,omitempty"`
+
+	// Whether to enable support for statically configuring multicast group sources for the EC2 Transit Gateway Multicast Domain. Valid values: disable, enable. Default value: disable.
+	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TransitGatewayMulticastDomainObservation struct {
 
 	// EC2 Transit Gateway Multicast Domain Amazon Resource Name (ARN).
@@ -84,6 +99,10 @@ type TransitGatewayMulticastDomainParameters struct {
 type TransitGatewayMulticastDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayMulticastDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayMulticastDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayMulticastDomainStatus defines the observed state of TransitGatewayMulticastDomain.

@@ -144,6 +144,83 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  campaignHook:
+                    description: Specifies settings for invoking an AWS Lambda function
+                      that customizes a segment for a campaign
+                    items:
+                      properties:
+                        lambdaFunctionName:
+                          description: Lambda function name or ARN to be called for
+                            delivery. Conflicts with web_url
+                          type: string
+                        mode:
+                          description: What mode Lambda should be invoked in. Valid
+                            values for this parameter are DELIVERY, FILTER.
+                          type: string
+                        webUrl:
+                          description: Web URL to call for hook. If the URL has authentication
+                            specified it will be added as authentication to the request.
+                            Conflicts with lambda_function_name
+                          type: string
+                      type: object
+                    type: array
+                  limits:
+                    description: The default campaign limits for the app. These limits
+                      apply to each campaign for the app, unless the campaign overrides
+                      the default with limits of its own
+                    items:
+                      properties:
+                        daily:
+                          description: The maximum number of messages that the campaign
+                            can send daily.
+                          type: number
+                        maximumDuration:
+                          description: The length of time (in seconds) that the campaign
+                            can run before it ends and message deliveries stop. This
+                            duration begins at the scheduled start time for the campaign.
+                            The minimum value is 60.
+                          type: number
+                        messagesPerSecond:
+                          description: The number of messages that the campaign can
+                            send per second. The minimum value is 50, and the maximum
+                            is 20000.
+                          type: number
+                        total:
+                          description: The maximum total number of messages that the
+                            campaign can send.
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: The application name
+                    type: string
+                  quietTime:
+                    description: The default quiet time for the app. Each campaign
+                      for this app sends no messages during this time unless the campaign
+                      overrides the default with a quiet time of its own
+                    items:
+                      properties:
+                        end:
+                          description: The default end time for quiet time in ISO
+                            8601 format. Required if start is set
+                          type: string
+                        start:
+                          description: The default start time for quiet time in ISO
+                            8601 format. Required if end is set
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

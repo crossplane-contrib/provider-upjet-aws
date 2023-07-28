@@ -172,6 +172,34 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: 'Security group description. Cannot be "". NOTE:
+                      This field maps to the AWS GroupDescription attribute, for which
+                      there is no Update API. If you''d like to classify your security
+                      groups in a way that can be updated, use tags.'
+                    type: string
+                  name:
+                    description: Name of the security group.
+                    type: string
+                  revokeRulesOnDelete:
+                    description: This is normally not needed, however certain AWS
+                      services such as Elastic Map Reduce may automatically add required
+                      rules to security groups used with the service, and those rules
+                      may contain a cyclic dependency that prevent the security groups
+                      from being destroyed without removing the dependency first.
+                      Default false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

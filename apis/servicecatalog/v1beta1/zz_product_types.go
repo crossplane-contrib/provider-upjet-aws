@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProductInitParameters struct {
+
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Description of the product.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Distributor (i.e., vendor) of the product.
+	Distributor *string `json:"distributor,omitempty" tf:"distributor,omitempty"`
+
+	// Name of the product.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Owner of the product.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Configuration block for provisioning artifact (i.e., version) parameters. Detailed below.
+	ProvisioningArtifactParameters []ProvisioningArtifactParametersInitParameters `json:"provisioningArtifactParameters,omitempty" tf:"provisioning_artifact_parameters,omitempty"`
+
+	// Support information about the product.
+	SupportDescription *string `json:"supportDescription,omitempty" tf:"support_description,omitempty"`
+
+	// Contact email for product support.
+	SupportEmail *string `json:"supportEmail,omitempty" tf:"support_email,omitempty"`
+
+	// Contact URL for product support.
+	SupportURL *string `json:"supportUrl,omitempty" tf:"support_url,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Type of product. See AWS Docs for valid list of values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ProductObservation struct {
 
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
@@ -119,6 +155,27 @@ type ProductParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type ProvisioningArtifactParametersInitParameters struct {
+
+	// Description of the provisioning artifact (i.e., version), including how it differs from the previous provisioning artifact.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether AWS Service Catalog stops validating the specified provisioning artifact template even if it is invalid.
+	DisableTemplateValidation *bool `json:"disableTemplateValidation,omitempty" tf:"disable_template_validation,omitempty"`
+
+	// Name of the provisioning artifact (for example, v1, v2beta). No spaces are allowed.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
+	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
+
+	// Template source as URL of the CloudFormation template in Amazon S3.
+	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
+
+	// Type of provisioning artifact. See AWS Docs for valid list of values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ProvisioningArtifactParametersObservation struct {
 
 	// Description of the provisioning artifact (i.e., version), including how it differs from the previous provisioning artifact.
@@ -171,6 +228,10 @@ type ProvisioningArtifactParametersParameters struct {
 type ProductSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProductParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProductInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProductStatus defines the observed state of Product.
@@ -191,10 +252,10 @@ type ProductStatus struct {
 type Product struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.owner)",message="owner is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.provisioningArtifactParameters)",message="provisioningArtifactParameters is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.owner) || has(self.initProvider.owner)",message="owner is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.provisioningArtifactParameters) || has(self.initProvider.provisioningArtifactParameters)",message="provisioningArtifactParameters is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   ProductSpec   `json:"spec"`
 	Status ProductStatus `json:"status,omitempty"`
 }

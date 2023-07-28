@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BandwidthInitParameters struct {
+
+	// Download speed in Mbps.
+	DownloadSpeed *float64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
+
+	// Upload speed in Mbps.
+	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
+}
+
 type BandwidthObservation struct {
 
 	// Download speed in Mbps.
@@ -31,6 +40,24 @@ type BandwidthParameters struct {
 	// Upload speed in Mbps.
 	// +kubebuilder:validation:Optional
 	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
+}
+
+type LinkInitParameters struct {
+
+	// The upload speed and download speed in Mbps. Documented below.
+	Bandwidth []BandwidthInitParameters `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+
+	// A description of the link.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The provider of the link.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of the link.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinkObservation struct {
@@ -124,6 +151,10 @@ type LinkParameters struct {
 type LinkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LinkInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkStatus defines the observed state of Link.
@@ -144,7 +175,7 @@ type LinkStatus struct {
 type Link struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bandwidth)",message="bandwidth is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bandwidth) || has(self.initProvider.bandwidth)",message="bandwidth is a required parameter"
 	Spec   LinkSpec   `json:"spec"`
 	Status LinkStatus `json:"status,omitempty"`
 }

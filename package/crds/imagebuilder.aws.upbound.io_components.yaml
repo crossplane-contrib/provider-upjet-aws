@@ -188,6 +188,49 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  changeDescription:
+                    description: Change description of the component.
+                    type: string
+                  data:
+                    description: Inline YAML string with data of the component. Exactly
+                      one of data and uri can be specified.
+                    type: string
+                  description:
+                    description: Description of the component.
+                    type: string
+                  name:
+                    description: Name of the component.
+                    type: string
+                  platform:
+                    description: Platform of the component.
+                    type: string
+                  skipDestroy:
+                    description: Whether to retain the old version when the resource
+                      is destroyed or replacement is necessary. Defaults to false.
+                    type: boolean
+                  supportedOsVersions:
+                    description: Set of Operating Systems (OS) supported by the component.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  uri:
+                    description: S3 URI with data of the component. Exactly one of
+                      data and uri can be specified.
+                    type: string
+                  version:
+                    description: Version of the component.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -388,13 +431,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: platform is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)
+                || has(self.initProvider.platform)'
             - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || has(self.initProvider.version)'
           status:
             description: ComponentStatus defines the observed state of Component.
             properties:

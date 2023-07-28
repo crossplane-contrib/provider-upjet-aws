@@ -162,6 +162,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enableMediaMetricLogs:
+                    description: When true, enables logging of detailed media metrics
+                      for Voice Connectors to Amazon CloudWatch logs.
+                    type: boolean
+                  enableSipLogs:
+                    description: When true, enables SIP message logs for sending to
+                      Amazon CloudWatch Logs.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

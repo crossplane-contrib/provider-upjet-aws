@@ -176,6 +176,38 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of what the snapshot is.
+                    type: string
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost on
+                      which to create a local snapshot.
+                    type: string
+                  permanentRestore:
+                    description: Indicates whether to permanently restore an archived
+                      snapshot.
+                    type: boolean
+                  storageTier:
+                    description: The name of the storage tier. Valid values are archive
+                      and standard. Default value is standard.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  temporaryRestoreDays:
+                    description: Specifies the number of days for which to temporarily
+                      restore an archived snapshot. Required for temporary restores
+                      only. The snapshot will be automatically re-archived after this
+                      period.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'

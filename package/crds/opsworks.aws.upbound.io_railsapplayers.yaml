@@ -116,9 +116,6 @@ spec:
                                 type: string
                               timeZone:
                                 type: string
-                            required:
-                            - file
-                            - logGroupName
                             type: object
                           type: array
                       type: object
@@ -264,10 +261,6 @@ spec:
                           description: The type of volume to create. This may be standard
                             (the default), io1 or gp2.
                           type: string
-                      required:
-                      - mountPoint
-                      - numberOfDisks
-                      - size
                       type: object
                     type: array
                   elasticLoadBalancer:
@@ -422,6 +415,215 @@ spec:
                             type: string
                         type: object
                     type: object
+                  systemPackages:
+                    description: Names of a set of system packages to install on the
+                      layer's instances.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  useEbsOptimizedInstances:
+                    description: Whether to use EBS-optimized instances.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  appServer:
+                    description: Keyword for the app server to use. Defaults to "apache_passenger".
+                    type: string
+                  autoAssignElasticIps:
+                    description: Whether to automatically assign an elastic IP address
+                      to the layer's instances.
+                    type: boolean
+                  autoAssignPublicIps:
+                    description: For stacks belonging to a VPC, whether to automatically
+                      assign a public IP address to each of the layer's instances.
+                    type: boolean
+                  autoHealing:
+                    description: Whether to enable auto-healing for the layer.
+                    type: boolean
+                  bundlerVersion:
+                    description: When OpsWorks is managing Bundler, which version
+                      to use. Defaults to "1.5.3".
+                    type: string
+                  cloudwatchConfiguration:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        logStreams:
+                          items:
+                            properties:
+                              batchCount:
+                                type: number
+                              batchSize:
+                                type: number
+                              bufferDuration:
+                                type: number
+                              datetimeFormat:
+                                type: string
+                              encoding:
+                                type: string
+                              file:
+                                type: string
+                              fileFingerprintLines:
+                                type: string
+                              initialPosition:
+                                type: string
+                              logGroupName:
+                                description: A human-readable name for the layer.
+                                type: string
+                              multilineStartPattern:
+                                type: string
+                              timeZone:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  customConfigureRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customDeployRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customInstanceProfileArn:
+                    description: The ARN of an IAM profile that will be used for the
+                      layer's instances.
+                    type: string
+                  customJson:
+                    description: Custom JSON attributes to apply to the layer.
+                    type: string
+                  customSetupRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customShutdownRecipes:
+                    items:
+                      type: string
+                    type: array
+                  customUndeployRecipes:
+                    items:
+                      type: string
+                    type: array
+                  drainElbOnShutdown:
+                    description: Whether to enable Elastic Load Balancing connection
+                      draining.
+                    type: boolean
+                  ebsVolume:
+                    description: ebs_volume blocks, as described below, will each
+                      create an EBS volume and connect it to the layer's instances.
+                    items:
+                      properties:
+                        encrypted:
+                          type: boolean
+                        iops:
+                          description: For PIOPS volumes, the IOPS per disk.
+                          type: number
+                        mountPoint:
+                          description: The path to mount the EBS volume on the layer's
+                            instances.
+                          type: string
+                        numberOfDisks:
+                          description: The number of disks to use for the EBS volume.
+                          type: number
+                        raidLevel:
+                          description: The RAID level to use for the volume.
+                          type: string
+                        size:
+                          description: The size of the volume in gigabytes.
+                          type: number
+                        type:
+                          description: The type of volume to create. This may be standard
+                            (the default), io1 or gp2.
+                          type: string
+                      type: object
+                    type: array
+                  elasticLoadBalancer:
+                    description: Name of an Elastic Load Balancer to attach to this
+                      layer
+                    type: string
+                  installUpdatesOnBoot:
+                    description: Whether to install OS and package updates on each
+                      instance when it boots.
+                    type: boolean
+                  instanceShutdownTimeout:
+                    description: The time, in seconds, that OpsWorks will wait for
+                      Chef to complete after triggering the Shutdown event.
+                    type: number
+                  loadBasedAutoScaling:
+                    items:
+                      properties:
+                        downscaling:
+                          items:
+                            properties:
+                              alarms:
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                type: number
+                              ignoreMetricsTime:
+                                type: number
+                              instanceCount:
+                                type: number
+                              loadThreshold:
+                                type: number
+                              memoryThreshold:
+                                type: number
+                              thresholdsWaitTime:
+                                type: number
+                            type: object
+                          type: array
+                        enable:
+                          type: boolean
+                        upscaling:
+                          items:
+                            properties:
+                              alarms:
+                                items:
+                                  type: string
+                                type: array
+                              cpuThreshold:
+                                type: number
+                              ignoreMetricsTime:
+                                type: number
+                              instanceCount:
+                                type: number
+                              loadThreshold:
+                                type: number
+                              memoryThreshold:
+                                type: number
+                              thresholdsWaitTime:
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  manageBundler:
+                    description: Whether OpsWorks should manage bundler. On by default.
+                    type: boolean
+                  name:
+                    description: A human-readable name for the layer.
+                    type: string
+                  passengerVersion:
+                    description: The version of Passenger to use. Defaults to "4.0.46".
+                    type: string
+                  rubyVersion:
+                    description: The version of Ruby to use. Defaults to "2.0.0".
+                    type: string
+                  rubygemsVersion:
+                    description: The version of RubyGems to use. Defaults to "2.2.2".
+                    type: string
                   systemPackages:
                     description: Names of a set of system packages to install on the
                       layer's instances.

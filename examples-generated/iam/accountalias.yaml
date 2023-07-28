@@ -8,6 +8,3 @@ metadata:
   name: alias
 spec:
   forProvider: {}
-
----
-

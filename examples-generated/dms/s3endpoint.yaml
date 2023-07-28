@@ -14,6 +14,3 @@ spec:
     serviceAccessRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

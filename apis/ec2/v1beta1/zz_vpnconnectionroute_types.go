@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPNConnectionRouteInitParameters struct {
+
+	// The CIDR block associated with the local subnet of the customer network.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+}
+
 type VPNConnectionRouteObservation struct {
 
 	// The CIDR block associated with the local subnet of the customer network.
@@ -54,6 +60,10 @@ type VPNConnectionRouteParameters struct {
 type VPNConnectionRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPNConnectionRouteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPNConnectionRouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPNConnectionRouteStatus defines the observed state of VPNConnectionRoute.
@@ -74,7 +84,7 @@ type VPNConnectionRouteStatus struct {
 type VPNConnectionRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock) || has(self.initProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
 	Spec   VPNConnectionRouteSpec   `json:"spec"`
 	Status VPNConnectionRouteStatus `json:"status,omitempty"`
 }

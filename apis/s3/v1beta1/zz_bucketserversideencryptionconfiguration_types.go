@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketServerSideEncryptionConfigurationInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Set of server-side encryption configuration rules. See below. Currently, only a single rule is supported.
+	Rule []BucketServerSideEncryptionConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
 type BucketServerSideEncryptionConfigurationObservation struct {
 
 	// ID (name) of the bucket.
@@ -58,6 +67,15 @@ type BucketServerSideEncryptionConfigurationParameters struct {
 	Rule []BucketServerSideEncryptionConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
+type BucketServerSideEncryptionConfigurationRuleInitParameters struct {
+
+	// Single object for setting server-side encryption by default. See below.
+	ApplyServerSideEncryptionByDefault []RuleApplyServerSideEncryptionByDefaultInitParameters `json:"applyServerSideEncryptionByDefault,omitempty" tf:"apply_server_side_encryption_by_default,omitempty"`
+
+	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
+	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
+}
+
 type BucketServerSideEncryptionConfigurationRuleObservation struct {
 
 	// Single object for setting server-side encryption by default. See below.
@@ -76,6 +94,12 @@ type BucketServerSideEncryptionConfigurationRuleParameters struct {
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
 	// +kubebuilder:validation:Optional
 	BucketKeyEnabled *bool `json:"bucketKeyEnabled,omitempty" tf:"bucket_key_enabled,omitempty"`
+}
+
+type RuleApplyServerSideEncryptionByDefaultInitParameters struct {
+
+	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
 type RuleApplyServerSideEncryptionByDefaultObservation struct {
@@ -104,14 +128,18 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
 	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
-	// +kubebuilder:validation:Required
-	SseAlgorithm *string `json:"sseAlgorithm" tf:"sse_algorithm,omitempty"`
+	// +kubebuilder:validation:Optional
+	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
 // BucketServerSideEncryptionConfigurationSpec defines the desired state of BucketServerSideEncryptionConfiguration
 type BucketServerSideEncryptionConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketServerSideEncryptionConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketServerSideEncryptionConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketServerSideEncryptionConfigurationStatus defines the observed state of BucketServerSideEncryptionConfiguration.
@@ -132,7 +160,7 @@ type BucketServerSideEncryptionConfigurationStatus struct {
 type BucketServerSideEncryptionConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule)",message="rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   BucketServerSideEncryptionConfigurationSpec   `json:"spec"`
 	Status BucketServerSideEncryptionConfigurationStatus `json:"status,omitempty"`
 }

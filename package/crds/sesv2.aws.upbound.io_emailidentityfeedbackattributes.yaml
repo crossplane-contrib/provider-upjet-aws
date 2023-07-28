@@ -79,6 +79,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  emailForwardingEnabled:
+                    description: Sets the feedback forwarding configuration for the
+                      identity.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

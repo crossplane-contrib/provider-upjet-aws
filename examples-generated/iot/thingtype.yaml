@@ -10,6 +10,3 @@ spec:
   forProvider:
     name: my_iot_thing
     region: us-west-1
-
----
-

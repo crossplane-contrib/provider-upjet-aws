@@ -105,6 +105,43 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  assignGeneratedIpv6CidrBlock:
+                    description: and instance_tenancy arguments become computed attributes
+                    type: boolean
+                  enableClassiclink:
+                    type: boolean
+                  enableClassiclinkDnsSupport:
+                    type: boolean
+                  enableDnsHostnames:
+                    description: is true
+                    type: boolean
+                  enableDnsSupport:
+                    type: boolean
+                  enableNetworkAddressUsageMetrics:
+                    type: boolean
+                  forceDestroy:
+                    description: 'Whether destroying the resource deletes the default
+                      VPC. Default: false'
+                    type: boolean
+                  ipv6CidrBlock:
+                    description: and instance_tenancy arguments become computed attributes
+                    type: string
+                  ipv6CidrBlockNetworkBorderGroup:
+                    type: string
+                  ipv6IpamPoolId:
+                    type: string
+                  ipv6NetmaskLength:
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketVersioningInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+	Mfa *string `json:"mfa,omitempty" tf:"mfa,omitempty"`
+
+	// Configuration block for the versioning parameters. See below.
+	VersioningConfiguration []VersioningConfigurationInitParameters `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
+}
+
 type BucketVersioningObservation struct {
 
 	// Name of the S3 bucket.
@@ -65,6 +77,15 @@ type BucketVersioningParameters struct {
 	VersioningConfiguration []VersioningConfigurationParameters `json:"versioningConfiguration,omitempty" tf:"versioning_configuration,omitempty"`
 }
 
+type VersioningConfigurationInitParameters struct {
+
+	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
+	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
+
+	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type VersioningConfigurationObservation struct {
 
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration. Valid values: Enabled or Disabled.
@@ -81,14 +102,18 @@ type VersioningConfigurationParameters struct {
 	MfaDelete *string `json:"mfaDelete,omitempty" tf:"mfa_delete,omitempty"`
 
 	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
-	// +kubebuilder:validation:Required
-	Status *string `json:"status" tf:"status,omitempty"`
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 // BucketVersioningSpec defines the desired state of BucketVersioning
 type BucketVersioningSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketVersioningParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketVersioningInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketVersioningStatus defines the observed state of BucketVersioning.
@@ -109,7 +134,7 @@ type BucketVersioningStatus struct {
 type BucketVersioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningConfiguration)",message="versioningConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningConfiguration) || has(self.initProvider.versioningConfiguration)",message="versioningConfiguration is a required parameter"
 	Spec   BucketVersioningSpec   `json:"spec"`
 	Status BucketVersioningStatus `json:"status,omitempty"`
 }

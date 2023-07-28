@@ -15,6 +15,3 @@ spec:
     tags:
       foo1: bar1
       foo2: ""
-
----
-

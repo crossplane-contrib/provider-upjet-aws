@@ -162,6 +162,18 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  comment:
+                    description: A comment to describe the key group..
+                    type: string
+                  name:
+                    description: A name to identify the key group.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -362,7 +374,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: KeyGroupStatus defines the observed state of KeyGroup.
             properties:

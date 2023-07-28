@@ -42,6 +42,3 @@ spec:
   forProvider:
     elasticsearchVersion: "2.3"
     region: us-west-1
-
----
-

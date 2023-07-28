@@ -17,6 +17,3 @@ spec:
     key: destination_key
     region: us-west-1
     source: source_bucket/source_key
-
----
-

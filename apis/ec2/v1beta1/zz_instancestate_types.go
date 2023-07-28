@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceStateInitParameters struct {
+
+	// Whether to request a forced stop when state is stopped. Otherwise (i.e., state is running), ignored. When an instance is forced to stop, it does not flush file system caches or file system metadata, and you must subsequently perform file system check and repair. Not recommended for Windows instances. Defaults to false.
+	Force *bool `json:"force,omitempty" tf:"force,omitempty"`
+
+	// - State of the instance. Valid values are stopped, running.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
 type InstanceStateObservation struct {
 
 	// Whether to request a forced stop when state is stopped. Otherwise (i.e., state is running), ignored. When an instance is forced to stop, it does not flush file system caches or file system metadata, and you must subsequently perform file system check and repair. Not recommended for Windows instances. Defaults to false.
@@ -62,6 +71,10 @@ type InstanceStateParameters struct {
 type InstanceStateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceStateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InstanceStateInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceStateStatus defines the observed state of InstanceState.
@@ -82,7 +95,7 @@ type InstanceStateStatus struct {
 type InstanceState struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state)",message="state is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state) || has(self.initProvider.state)",message="state is a required parameter"
 	Spec   InstanceStateSpec   `json:"spec"`
 	Status InstanceStateStatus `json:"status,omitempty"`
 }

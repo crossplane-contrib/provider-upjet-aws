@@ -66,6 +66,3 @@ spec:
       - commonName: example.com
     region: us-west-1
     type: ROOT
-
----
-

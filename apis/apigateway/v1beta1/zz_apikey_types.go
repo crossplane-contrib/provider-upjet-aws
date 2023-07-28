@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APIKeyInitParameters struct {
+
+	// API key description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether the API key can be used by callers. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of the API key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type APIKeyObservation struct {
 
 	// ARN
@@ -75,6 +90,10 @@ type APIKeyParameters struct {
 type APIKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider APIKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIKeyStatus defines the observed state of APIKey.
@@ -95,7 +114,7 @@ type APIKeyStatus struct {
 type APIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   APIKeySpec   `json:"spec"`
 	Status APIKeyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ManagedPrefixListEntryInitParameters struct {
+
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type ManagedPrefixListEntryObservation struct {
 
 	// CIDR block of this entry.
@@ -72,6 +78,10 @@ type ManagedPrefixListEntryParameters struct {
 type ManagedPrefixListEntrySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedPrefixListEntryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagedPrefixListEntryInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedPrefixListEntryStatus defines the observed state of ManagedPrefixListEntry.

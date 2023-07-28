@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HostedConfigurationVersionInitParameters struct {
+
+	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Description of the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type HostedConfigurationVersionObservation struct {
 
 	// Application ID.
@@ -89,6 +98,10 @@ type HostedConfigurationVersionParameters struct {
 type HostedConfigurationVersionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HostedConfigurationVersionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HostedConfigurationVersionInitParameters `json:"initProvider,omitempty"`
 }
 
 // HostedConfigurationVersionStatus defines the observed state of HostedConfigurationVersion.
@@ -110,7 +123,7 @@ type HostedConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentSecretRef)",message="contentSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType)",message="contentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || has(self.initProvider.contentType)",message="contentType is a required parameter"
 	Spec   HostedConfigurationVersionSpec   `json:"spec"`
 	Status HostedConfigurationVersionStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BasePathMappingInitParameters struct {
+
+	// Path segment that must be prepended to the path when accessing the API via this mapping. If omitted, the API is exposed at the root of the given domain.
+	BasePath *string `json:"basePath,omitempty" tf:"base_path,omitempty"`
+}
+
 type BasePathMappingObservation struct {
 
 	// ID of the API to connect.
@@ -88,6 +94,10 @@ type BasePathMappingParameters struct {
 type BasePathMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BasePathMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BasePathMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // BasePathMappingStatus defines the observed state of BasePathMapping.

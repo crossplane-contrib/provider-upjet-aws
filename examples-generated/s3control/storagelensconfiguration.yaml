@@ -37,6 +37,3 @@ spec:
         - ${aws_s3_bucket.b2.arn}
         regions:
         - us-east-2
-
----
-

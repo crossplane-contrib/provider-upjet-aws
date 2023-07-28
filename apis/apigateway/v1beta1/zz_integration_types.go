@@ -13,6 +13,50 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IntegrationInitParameters struct {
+
+	// List of cache key parameters for the integration.
+	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
+
+	// Integration's cache namespace.
+	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
+
+	// Integration input's connectionType. Valid values are INTERNET (default for connections through the public routable internet), and VPC_LINK (for private connections between API Gateway and a network load balancer in a VPC).
+	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
+
+	// How to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through.
+	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
+
+	// Credentials required for the integration. For AWS integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
+	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// Integration HTTP method
+	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
+	// Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
+	// Not all methods are compatible with all AWS integrations.
+	// e.g., Lambda function can only be invoked via POST.
+	IntegrationHTTPMethod *string `json:"integrationHttpMethod,omitempty" tf:"integration_http_method,omitempty"`
+
+	// Integration passthrough behavior (WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER).  Required if request_templates is used.
+	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
+
+	// Map of request query string parameters and headers that should be passed to the backend responder.
+	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
+
+	// Map of the integration's request templates.
+	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
+
+	// TLS configuration. See below.
+	TLSConfig []TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
+
+	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
+	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+
+	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IntegrationObservation struct {
 
 	// List of cache key parameters for the integration.
@@ -211,6 +255,12 @@ type IntegrationParameters struct {
 	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
+type TLSConfigInitParameters struct {
+
+	// Whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a supported certificate authority. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate's expiration date, hostname, and presence of a root certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
+	InsecureSkipVerification *bool `json:"insecureSkipVerification,omitempty" tf:"insecure_skip_verification,omitempty"`
+}
+
 type TLSConfigObservation struct {
 
 	// Whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a supported certificate authority. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate's expiration date, hostname, and presence of a root certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
@@ -228,6 +278,10 @@ type TLSConfigParameters struct {
 type IntegrationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IntegrationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IntegrationInitParameters `json:"initProvider,omitempty"`
 }
 
 // IntegrationStatus defines the observed state of Integration.
@@ -248,7 +302,7 @@ type IntegrationStatus struct {
 type Integration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   IntegrationSpec   `json:"spec"`
 	Status IntegrationStatus `json:"status,omitempty"`
 }

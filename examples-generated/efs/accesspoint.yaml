@@ -12,6 +12,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: foo
     region: us-west-1
-
----
-

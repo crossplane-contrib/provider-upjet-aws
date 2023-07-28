@@ -356,6 +356,62 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  applyImmediately:
+                    description: Specifies whether any instance modifications are
+                      applied immediately, or during the next maintenance window.
+                      Default isfalse.
+                    type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Indicates that minor engine upgrades will be applied
+                      automatically to the instance during the maintenance window.
+                      Default is true.
+                    type: boolean
+                  availabilityZone:
+                    description: The EC2 Availability Zone that the neptune instance
+                      is created in.
+                    type: string
+                  engine:
+                    description: 'The name of the database engine to be used for the
+                      neptune instance. Defaults to neptune. Valid Values: neptune.'
+                    type: string
+                  engineVersion:
+                    description: The neptune engine version.
+                    type: string
+                  instanceClass:
+                    description: The instance class to use.
+                    type: string
+                  port:
+                    description: The port on which the DB accepts connections. Defaults
+                      to 8182.
+                    type: number
+                  preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled. Eg: "04:00-09:00"'
+                    type: string
+                  preferredMaintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00".'
+                    type: string
+                  promotionTier:
+                    description: Default 0. Failover Priority setting on instance
+                      level. The reader who has lower tier has higher priority to
+                      get promoter to writer.
+                    type: number
+                  publiclyAccessible:
+                    description: Bool to control if instance is publicly accessible.
+                      Default is false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -556,7 +612,8 @@ spec:
             x-kubernetes-validations:
             - message: instanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)
+                || has(self.initProvider.instanceClass)'
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:

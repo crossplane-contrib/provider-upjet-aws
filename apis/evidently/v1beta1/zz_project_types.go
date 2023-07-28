@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudwatchLogsInitParameters struct {
+
+	// The name of the log group where the project stores evaluation events.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
 type CloudwatchLogsObservation struct {
 
 	// The name of the log group where the project stores evaluation events.
@@ -24,6 +30,15 @@ type CloudwatchLogsParameters struct {
 	// The name of the log group where the project stores evaluation events.
 	// +kubebuilder:validation:Optional
 	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+}
+
+type DataDeliveryInitParameters struct {
+
+	// A block that defines the CloudWatch Log Group that stores the evaluation events. See below.
+	CloudwatchLogs []CloudwatchLogsInitParameters `json:"cloudwatchLogs,omitempty" tf:"cloudwatch_logs,omitempty"`
+
+	// A block that defines the S3 bucket and prefix that stores the evaluation events. See below.
+	S3Destination []S3DestinationInitParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
 }
 
 type DataDeliveryObservation struct {
@@ -44,6 +59,21 @@ type DataDeliveryParameters struct {
 	// A block that defines the S3 bucket and prefix that stores the evaluation events. See below.
 	// +kubebuilder:validation:Optional
 	S3Destination []S3DestinationParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
+}
+
+type ProjectInitParameters struct {
+
+	// A block that contains information about where Evidently is to store evaluation events for longer term storage, if you choose to do so. If you choose not to store these events, Evidently deletes them after using them to produce metrics and other experiment results that you can view. See below.
+	DataDelivery []DataDeliveryInitParameters `json:"dataDelivery,omitempty" tf:"data_delivery,omitempty"`
+
+	// Specifies the description of the project.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A name for the project.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ProjectObservation struct {
@@ -118,6 +148,15 @@ type ProjectParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type S3DestinationInitParameters struct {
+
+	// The name of the bucket in which Evidently stores evaluation events.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The bucket prefix in which Evidently stores evaluation events.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type S3DestinationObservation struct {
 
 	// The name of the bucket in which Evidently stores evaluation events.
@@ -142,6 +181,10 @@ type S3DestinationParameters struct {
 type ProjectSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProjectParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProjectInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProjectStatus defines the observed state of Project.
@@ -162,7 +205,7 @@ type ProjectStatus struct {
 type Project struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ProjectSpec   `json:"spec"`
 	Status ProjectStatus `json:"status,omitempty"`
 }

@@ -38,6 +38,3 @@ spec:
     - email
     name: example-pool
     region: us-west-1
-
----
-

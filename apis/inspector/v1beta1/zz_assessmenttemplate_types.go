@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AssessmentTemplateInitParameters struct {
+
+	// The duration of the inspector run.
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
+	EventSubscription []EventSubscriptionInitParameters `json:"eventSubscription,omitempty" tf:"event_subscription,omitempty"`
+
+	// The name of the assessment template.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The rules to be used during the run.
+	RulesPackageArns []*string `json:"rulesPackageArns,omitempty" tf:"rules_package_arns,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AssessmentTemplateObservation struct {
 
 	// The template assessment ARN.
@@ -84,6 +102,12 @@ type AssessmentTemplateParameters struct {
 	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
+type EventSubscriptionInitParameters struct {
+
+	// The event for which you want to receive SNS notifications. Valid values are ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, and FINDING_REPORTED.
+	Event *string `json:"event,omitempty" tf:"event,omitempty"`
+}
+
 type EventSubscriptionObservation struct {
 
 	// The event for which you want to receive SNS notifications. Valid values are ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, and FINDING_REPORTED.
@@ -96,8 +120,8 @@ type EventSubscriptionObservation struct {
 type EventSubscriptionParameters struct {
 
 	// The event for which you want to receive SNS notifications. Valid values are ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, and FINDING_REPORTED.
-	// +kubebuilder:validation:Required
-	Event *string `json:"event" tf:"event,omitempty"`
+	// +kubebuilder:validation:Optional
+	Event *string `json:"event,omitempty" tf:"event,omitempty"`
 
 	// The ARN of the SNS topic to which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
@@ -118,6 +142,10 @@ type EventSubscriptionParameters struct {
 type AssessmentTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AssessmentTemplateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AssessmentTemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // AssessmentTemplateStatus defines the observed state of AssessmentTemplate.
@@ -138,9 +166,9 @@ type AssessmentTemplateStatus struct {
 type AssessmentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.duration)",message="duration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rulesPackageArns)",message="rulesPackageArns is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.duration) || has(self.initProvider.duration)",message="duration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rulesPackageArns) || has(self.initProvider.rulesPackageArns)",message="rulesPackageArns is a required parameter"
 	Spec   AssessmentTemplateSpec   `json:"spec"`
 	Status AssessmentTemplateStatus `json:"status,omitempty"`
 }

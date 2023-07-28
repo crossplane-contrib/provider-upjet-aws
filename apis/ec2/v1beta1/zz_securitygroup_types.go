@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityGroupEgressInitParameters struct {
+}
+
 type SecurityGroupEgressObservation struct {
 
 	// List of CIDR blocks.
@@ -46,6 +49,9 @@ type SecurityGroupEgressObservation struct {
 type SecurityGroupEgressParameters struct {
 }
 
+type SecurityGroupIngressInitParameters struct {
+}
+
 type SecurityGroupIngressObservation struct {
 
 	// List of CIDR blocks.
@@ -77,6 +83,21 @@ type SecurityGroupIngressObservation struct {
 }
 
 type SecurityGroupIngressParameters struct {
+}
+
+type SecurityGroupInitParameters_2 struct {
+
+	// Security group description. Cannot be "". NOTE: This field maps to the AWS GroupDescription attribute, for which there is no Update API. If you'd like to classify your security groups in a way that can be updated, use tags.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of the security group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// This is normally not needed, however certain AWS services such as Elastic Map Reduce may automatically add required rules to security groups used with the service, and those rules may contain a cyclic dependency that prevent the security groups from being destroyed without removing the dependency first. Default false.
+	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SecurityGroupObservation_2 struct {
@@ -156,6 +177,10 @@ type SecurityGroupParameters_2 struct {
 type SecurityGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityGroupParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityGroupInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // SecurityGroupStatus defines the observed state of SecurityGroup.

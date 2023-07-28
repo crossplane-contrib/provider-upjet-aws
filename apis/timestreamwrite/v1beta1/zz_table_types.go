@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MagneticStoreRejectedDataLocationInitParameters struct {
+
+	// Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes. See S3 Configuration below for more details.
+	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
 type MagneticStoreRejectedDataLocationObservation struct {
 
 	// Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes. See S3 Configuration below for more details.
@@ -24,6 +30,15 @@ type MagneticStoreRejectedDataLocationParameters struct {
 	// Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes. See S3 Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type MagneticStoreWritePropertiesInitParameters struct {
+
+	// A flag to enable magnetic store writes.
+	EnableMagneticStoreWrites *bool `json:"enableMagneticStoreWrites,omitempty" tf:"enable_magnetic_store_writes,omitempty"`
+
+	// The location to write error reports for records rejected asynchronously during magnetic store writes. See Magnetic Store Rejected Data Location below for more details.
+	MagneticStoreRejectedDataLocation []MagneticStoreRejectedDataLocationInitParameters `json:"magneticStoreRejectedDataLocation,omitempty" tf:"magnetic_store_rejected_data_location,omitempty"`
 }
 
 type MagneticStoreWritePropertiesObservation struct {
@@ -46,6 +61,15 @@ type MagneticStoreWritePropertiesParameters struct {
 	MagneticStoreRejectedDataLocation []MagneticStoreRejectedDataLocationParameters `json:"magneticStoreRejectedDataLocation,omitempty" tf:"magnetic_store_rejected_data_location,omitempty"`
 }
 
+type RetentionPropertiesInitParameters struct {
+
+	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
+	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
+
+	// The duration for which data must be stored in the memory store. Minimum value of 1. Maximum value of 8766.
+	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
+}
+
 type RetentionPropertiesObservation struct {
 
 	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
@@ -58,12 +82,27 @@ type RetentionPropertiesObservation struct {
 type RetentionPropertiesParameters struct {
 
 	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
-	// +kubebuilder:validation:Required
-	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays" tf:"magnetic_store_retention_period_in_days,omitempty"`
+	// +kubebuilder:validation:Optional
+	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
 
 	// The duration for which data must be stored in the memory store. Minimum value of 1. Maximum value of 8766.
-	// +kubebuilder:validation:Required
-	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours" tf:"memory_store_retention_period_in_hours,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
+}
+
+type S3ConfigurationInitParameters struct {
+
+	// Bucket name of the customer S3 bucket.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Encryption option for the customer s3 location. Options are S3 server side encryption with an S3-managed key or KMS managed key. Valid values are SSE_KMS and SSE_S3.
+	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
+
+	// KMS key arn for the customer s3 location when encrypting with a KMS managed key.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Object key prefix for the customer S3 location.
+	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 }
 
 type S3ConfigurationObservation struct {
@@ -98,6 +137,18 @@ type S3ConfigurationParameters struct {
 	// Object key prefix for the customer S3 location.
 	// +kubebuilder:validation:Optional
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
+}
+
+type TableInitParameters struct {
+
+	// Contains properties to set on the table when enabling magnetic store writes. See Magnetic Store Write Properties below for more details.
+	MagneticStoreWriteProperties []MagneticStoreWritePropertiesInitParameters `json:"magneticStoreWriteProperties,omitempty" tf:"magnetic_store_write_properties,omitempty"`
+
+	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
+	RetentionProperties []RetentionPropertiesInitParameters `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TableObservation struct {
@@ -168,6 +219,10 @@ type TableParameters struct {
 type TableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TableInitParameters `json:"initProvider,omitempty"`
 }
 
 // TableStatus defines the observed state of Table.

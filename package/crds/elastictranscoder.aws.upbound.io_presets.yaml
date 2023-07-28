@@ -347,6 +347,285 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  audio:
+                    description: Audio parameters object (documented below).
+                    items:
+                      properties:
+                        audioPackingMode:
+                          description: The method of organizing audio channels and
+                            tracks. Use Audio:Channels to specify the number of channels
+                            in your output, and Audio:AudioPackingMode to specify
+                            the number of tracks and their relation to the channels.
+                            If you do not specify an Audio:AudioPackingMode, Elastic
+                            Transcoder uses SingleTrack.
+                          type: string
+                        bitRate:
+                          description: The bit rate of the audio stream in the output
+                            file, in kilobits/second. Enter an integer between 64
+                            and 320, inclusive.
+                          type: string
+                        channels:
+                          description: The number of audio channels in the output
+                            file
+                          type: string
+                        codec:
+                          description: The audio codec for the output file. Valid
+                            values are AAC, flac, mp2, mp3, pcm, and vorbis.
+                          type: string
+                        sampleRate:
+                          description: 'The sample rate of the audio stream in the
+                            output file, in hertz. Valid values are: auto, 22050,
+                            32000, 44100, 48000, 96000'
+                          type: string
+                      type: object
+                    type: array
+                  audioCodecOptions:
+                    description: Codec options for the audio parameters (documented
+                      below)
+                    items:
+                      properties:
+                        bitDepth:
+                          description: The bit depth of a sample is how many bits
+                            of information are included in the audio samples. Valid
+                            values are 16 and 24. (FLAC/PCM Only)
+                          type: string
+                        bitOrder:
+                          description: The order the bits of a PCM sample are stored
+                            in. The supported value is LittleEndian. (PCM Only)
+                          type: string
+                        profile:
+                          description: If you specified AAC for Audio:Codec, choose
+                            the AAC profile for the output file.
+                          type: string
+                        signed:
+                          description: Whether audio samples are represented with
+                            negative and positive numbers (signed) or only positive
+                            numbers (unsigned). The supported value is Signed. (PCM
+                            Only)
+                          type: string
+                      type: object
+                    type: array
+                  container:
+                    description: The container type for the output file. Valid values
+                      are flac, flv, fmp4, gif, mp3, mp4, mpg, mxf, oga, ogg, ts,
+                      and webm.
+                    type: string
+                  description:
+                    description: A description of the preset (maximum 255 characters)
+                    type: string
+                  name:
+                    description: The name of the preset. (maximum 40 characters)
+                    type: string
+                  thumbnails:
+                    description: Thumbnail parameters object (documented below)
+                    items:
+                      properties:
+                        aspectRatio:
+                          description: 'The aspect ratio of thumbnails. The following
+                            values are valid: auto, 1:1, 4:3, 3:2, 16:9'
+                          type: string
+                        format:
+                          description: The format of thumbnails, if any. Valid formats
+                            are jpg and png.
+                          type: string
+                        interval:
+                          description: The approximate number of seconds between thumbnails.
+                            The value must be an integer. The actual interval can
+                            vary by several seconds from one thumbnail to the next.
+                          type: string
+                        maxHeight:
+                          description: The maximum height of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1080 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 3072, inclusive.
+                          type: string
+                        maxWidth:
+                          description: The maximum width of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1920 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 4096, inclusive.
+                          type: string
+                        paddingPolicy:
+                          description: When you set PaddingPolicy to Pad, Elastic
+                            Transcoder might add black bars to the top and bottom
+                            and/or left and right sides of thumbnails to make the
+                            total size of the thumbnails match the values that you
+                            specified for thumbnail MaxWidth and MaxHeight settings.
+                          type: string
+                        resolution:
+                          description: The width and height of thumbnail files in
+                            pixels, in the format WidthxHeight, where both values
+                            are even integers. The values cannot exceed the width
+                            and height that you specified in the Video:Resolution
+                            object. (To better control resolution and aspect ratio
+                            of thumbnails, we recommend that you use the thumbnail
+                            values max_width, max_height, sizing_policy, and padding_policy
+                            instead of resolution and aspect_ratio. The two groups
+                            of settings are mutually exclusive. Do not use them together)
+                          type: string
+                        sizingPolicy:
+                          description: 'A value that controls scaling of thumbnails.
+                            Valid values are: Fit, Fill, Stretch, Keep, ShrinkToFit,
+                            and ShrinkToFill.'
+                          type: string
+                      type: object
+                    type: array
+                  type:
+                    type: string
+                  video:
+                    description: Video parameters object (documented below)
+                    items:
+                      properties:
+                        aspectRatio:
+                          description: 'The aspect ratio of thumbnails. The following
+                            values are valid: auto, 1:1, 4:3, 3:2, 16:9'
+                          type: string
+                        bitRate:
+                          description: The bit rate of the audio stream in the output
+                            file, in kilobits/second. Enter an integer between 64
+                            and 320, inclusive.
+                          type: string
+                        codec:
+                          description: The audio codec for the output file. Valid
+                            values are AAC, flac, mp2, mp3, pcm, and vorbis.
+                          type: string
+                        displayAspectRatio:
+                          description: The value that Elastic Transcoder adds to the
+                            metadata in the output file. If you set DisplayAspectRatio
+                            to auto, Elastic Transcoder chooses an aspect ratio that
+                            ensures square pixels. If you specify another option,
+                            Elastic Transcoder sets that value in the output file.
+                          type: string
+                        fixedGop:
+                          description: Whether to use a fixed value for Video:FixedGOP.
+                            Not applicable for containers of type gif. Valid values
+                            are true and false. Also known as, Fixed Number of Frames
+                            Between Keyframes.
+                          type: string
+                        frameRate:
+                          description: 'The frames per second for the video stream
+                            in the output file. The following values are valid: auto,
+                            10, 15, 23.97, 24, 25, 29.97, 30, 50, 60.'
+                          type: string
+                        keyframesMaxDist:
+                          description: The maximum number of frames between key frames.
+                            Not applicable for containers of type gif.
+                          type: string
+                        maxFrameRate:
+                          description: If you specify auto for FrameRate, Elastic
+                            Transcoder uses the frame rate of the input video for
+                            the frame rate of the output video, up to the maximum
+                            frame rate. If you do not specify a MaxFrameRate, Elastic
+                            Transcoder will use a default of 30.
+                          type: string
+                        maxHeight:
+                          description: The maximum height of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1080 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 3072, inclusive.
+                          type: string
+                        maxWidth:
+                          description: The maximum width of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1920 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 4096, inclusive.
+                          type: string
+                        paddingPolicy:
+                          description: When you set PaddingPolicy to Pad, Elastic
+                            Transcoder might add black bars to the top and bottom
+                            and/or left and right sides of thumbnails to make the
+                            total size of the thumbnails match the values that you
+                            specified for thumbnail MaxWidth and MaxHeight settings.
+                          type: string
+                        resolution:
+                          description: The width and height of thumbnail files in
+                            pixels, in the format WidthxHeight, where both values
+                            are even integers. The values cannot exceed the width
+                            and height that you specified in the Video:Resolution
+                            object. (To better control resolution and aspect ratio
+                            of thumbnails, we recommend that you use the thumbnail
+                            values max_width, max_height, sizing_policy, and padding_policy
+                            instead of resolution and aspect_ratio. The two groups
+                            of settings are mutually exclusive. Do not use them together)
+                          type: string
+                        sizingPolicy:
+                          description: 'A value that controls scaling of thumbnails.
+                            Valid values are: Fit, Fill, Stretch, Keep, ShrinkToFit,
+                            and ShrinkToFill.'
+                          type: string
+                      type: object
+                    type: array
+                  videoCodecOptions:
+                    additionalProperties:
+                      type: string
+                    description: Codec options for the video parameters
+                    type: object
+                  videoWatermarks:
+                    description: Watermark parameters for the video parameters (documented
+                      below)
+                    items:
+                      properties:
+                        horizontalAlign:
+                          description: The horizontal position of the watermark unless
+                            you specify a nonzero value for horzontal_offset.
+                          type: string
+                        horizontalOffset:
+                          description: The amount by which you want the horizontal
+                            position of the watermark to be offset from the position
+                            specified by horizontal_align.
+                          type: string
+                        id:
+                          description: A unique identifier for the settings for one
+                            watermark. The value of Id can be up to 40 characters
+                            long. You can specify settings for up to four watermarks.
+                          type: string
+                        maxHeight:
+                          description: The maximum height of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1080 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 3072, inclusive.
+                          type: string
+                        maxWidth:
+                          description: The maximum width of thumbnails, in pixels.
+                            If you specify auto, Elastic Transcoder uses 1920 (Full
+                            HD) as the default value. If you specify a numeric value,
+                            enter an even integer between 32 and 4096, inclusive.
+                          type: string
+                        opacity:
+                          description: A percentage that indicates how much you want
+                            a watermark to obscure the video in the location where
+                            it appears.
+                          type: string
+                        sizingPolicy:
+                          description: 'A value that controls scaling of thumbnails.
+                            Valid values are: Fit, Fill, Stretch, Keep, ShrinkToFit,
+                            and ShrinkToFill.'
+                          type: string
+                        target:
+                          description: A value that determines how Elastic Transcoder
+                            interprets values that you specified for video_watermarks.horizontal_offset,
+                            video_watermarks.vertical_offset, video_watermarks.max_width,
+                            and video_watermarks.max_height. Valid values are Content
+                            and Frame.
+                          type: string
+                        verticalAlign:
+                          description: The vertical position of the watermark unless
+                            you specify a nonzero value for vertical_align. Valid
+                            values are Top, Bottom, Center.
+                          type: string
+                        verticalOffset:
+                          description: The amount by which you want the vertical position
+                            of the watermark to be offset from the position specified
+                            by vertical_align
+                          type: string
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -547,7 +826,8 @@ spec:
             x-kubernetes-validations:
             - message: container is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.container)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.container)
+                || has(self.initProvider.container)'
           status:
             description: PresetStatus defines the observed state of Preset.
             properties:

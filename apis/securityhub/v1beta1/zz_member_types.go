@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MemberInitParameters struct {
+
+	// The ID of the member AWS account.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The email of the member AWS account.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Boolean whether to invite the account to Security Hub as a member. Defaults to false.
+	Invite *bool `json:"invite,omitempty" tf:"invite,omitempty"`
+}
+
 type MemberObservation struct {
 
 	// The ID of the member AWS account.
@@ -58,6 +70,10 @@ type MemberParameters struct {
 type MemberSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MemberParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MemberInitParameters `json:"initProvider,omitempty"`
 }
 
 // MemberStatus defines the observed state of Member.
@@ -78,7 +94,7 @@ type MemberStatus struct {
 type Member struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountId)",message="accountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountId) || has(self.initProvider.accountId)",message="accountId is a required parameter"
 	Spec   MemberSpec   `json:"spec"`
 	Status MemberStatus `json:"status,omitempty"`
 }

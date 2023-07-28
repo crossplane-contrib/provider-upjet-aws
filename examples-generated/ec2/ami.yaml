@@ -19,6 +19,3 @@ spec:
     region: us-west-1
     rootDeviceName: /dev/xvda
     virtualizationType: hvm
-
----
-

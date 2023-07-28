@@ -83,6 +83,21 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  active:
+                    description: Whether tag option is active. Default is true.
+                    type: boolean
+                  key:
+                    description: Tag option key.
+                    type: string
+                  value:
+                    description: Tag option value.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -283,10 +298,12 @@ spec:
             x-kubernetes-validations:
             - message: key is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.key)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.key)
+                || has(self.initProvider.key)'
             - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
+                || has(self.initProvider.value)'
           status:
             description: TagOptionStatus defines the observed state of TagOption.
             properties:

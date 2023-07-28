@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoScalingConfigurationVersionInitParameters struct {
+
+	// Name of the auto scaling configuration.
+	AutoScalingConfigurationName *string `json:"autoScalingConfigurationName,omitempty" tf:"auto_scaling_configuration_name,omitempty"`
+
+	// Maximal number of concurrent requests that you want an instance to process. When the number of concurrent requests goes over this limit, App Runner scales up your service.
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// Maximal number of instances that App Runner provisions for your service.
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// Minimal number of instances that App Runner provisions for your service.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AutoScalingConfigurationVersionObservation struct {
 
 	// ARN of this auto scaling configuration version.
@@ -80,6 +98,10 @@ type AutoScalingConfigurationVersionParameters struct {
 type AutoScalingConfigurationVersionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AutoScalingConfigurationVersionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AutoScalingConfigurationVersionInitParameters `json:"initProvider,omitempty"`
 }
 
 // AutoScalingConfigurationVersionStatus defines the observed state of AutoScalingConfigurationVersion.
@@ -100,7 +122,7 @@ type AutoScalingConfigurationVersionStatus struct {
 type AutoScalingConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoScalingConfigurationName)",message="autoScalingConfigurationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoScalingConfigurationName) || has(self.initProvider.autoScalingConfigurationName)",message="autoScalingConfigurationName is a required parameter"
 	Spec   AutoScalingConfigurationVersionSpec   `json:"spec"`
 	Status AutoScalingConfigurationVersionStatus `json:"status,omitempty"`
 }

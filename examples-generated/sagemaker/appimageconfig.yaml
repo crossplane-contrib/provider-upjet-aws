@@ -12,6 +12,3 @@ spec:
     - kernelSpec:
       - name: example
     region: us-west-1
-
----
-

@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReportDefinitionInitParameters struct {
+
+	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
+	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
+
+	// A list of schema elements. Valid values are: RESOURCES.
+	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
+
+	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.
+	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
+
+	// Format for report. Valid values are: textORcsv, Parquet. If Parquet is used, then Compression must also be Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Set to true to update your reports after they have been finalized if AWS detects charges related to previous months.
+	RefreshClosedReports *bool `json:"refreshClosedReports,omitempty" tf:"refresh_closed_reports,omitempty"`
+
+	// Overwrite the previous version of each report or to deliver the report in addition to the previous versions. Valid values are: CREATE_NEW_REPORT and OVERWRITE_REPORT.
+	ReportVersioning *string `json:"reportVersioning,omitempty" tf:"report_versioning,omitempty"`
+
+	// Report path prefix. Limited to 256 characters.
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
+
+	// Region of the existing S3 bucket to hold generated reports.
+	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
+
+	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
+	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
+}
+
 type ReportDefinitionObservation struct {
 
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
@@ -112,6 +142,10 @@ type ReportDefinitionParameters struct {
 type ReportDefinitionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReportDefinitionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReportDefinitionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReportDefinitionStatus defines the observed state of ReportDefinition.
@@ -132,11 +166,11 @@ type ReportDefinitionStatus struct {
 type ReportDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.additionalSchemaElements)",message="additionalSchemaElements is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.compression)",message="compression is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.format)",message="format is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Region)",message="s3Region is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit)",message="timeUnit is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.additionalSchemaElements) || has(self.initProvider.additionalSchemaElements)",message="additionalSchemaElements is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.compression) || has(self.initProvider.compression)",message="compression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.format) || has(self.initProvider.format)",message="format is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Region) || has(self.initProvider.s3Region)",message="s3Region is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || has(self.initProvider.timeUnit)",message="timeUnit is a required parameter"
 	Spec   ReportDefinitionSpec   `json:"spec"`
 	Status ReportDefinitionStatus `json:"status,omitempty"`
 }

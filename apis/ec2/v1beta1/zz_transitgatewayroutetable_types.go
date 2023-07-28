@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayRouteTableInitParameters_2 struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TransitGatewayRouteTableObservation_2 struct {
 
 	// EC2 Transit Gateway Route Table Amazon Resource Name (ARN).
@@ -66,6 +72,10 @@ type TransitGatewayRouteTableParameters_2 struct {
 type TransitGatewayRouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayRouteTableParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayRouteTableInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayRouteTableStatus defines the observed state of TransitGatewayRouteTable.

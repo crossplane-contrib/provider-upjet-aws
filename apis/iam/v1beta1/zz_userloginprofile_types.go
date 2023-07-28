@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserLoginProfileInitParameters struct {
+
+	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
+	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
+
+	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
+	PasswordResetRequired *bool `json:"passwordResetRequired,omitempty" tf:"password_reset_required,omitempty"`
+
+	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
+	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+}
+
 type UserLoginProfileObservation struct {
 
 	// The encrypted password, base64 encoded.
@@ -71,6 +83,10 @@ type UserLoginProfileParameters struct {
 type UserLoginProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserLoginProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserLoginProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserLoginProfileStatus defines the observed state of UserLoginProfile.

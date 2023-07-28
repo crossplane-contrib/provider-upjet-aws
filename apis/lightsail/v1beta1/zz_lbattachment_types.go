@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LBAttachmentInitParameters struct {
+}
+
 type LBAttachmentObservation struct {
 
 	// A combination of attributes to create a unique id: lb_name,instance_name
@@ -63,6 +66,10 @@ type LBAttachmentParameters struct {
 type LBAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LBAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBAttachmentStatus defines the observed state of LBAttachment.

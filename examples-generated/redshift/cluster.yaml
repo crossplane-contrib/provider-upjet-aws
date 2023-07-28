@@ -17,6 +17,3 @@ spec:
     masterUsername: exampleuser
     nodeType: dc1.large
     region: us-west-1
-
----
-

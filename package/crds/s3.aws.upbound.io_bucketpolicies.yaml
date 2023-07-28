@@ -156,6 +156,18 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  policy:
+                    description: 'Text of the policy. Although this is a bucket policy
+                      rather than an IAM policy, the aws_iam_policy_document data
+                      source may be used, so long as it specifies a principal. Note:
+                      Bucket policies are limited to 20 KB in size.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -356,7 +368,8 @@ spec:
             x-kubernetes-validations:
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: BucketPolicyStatus defines the observed state of BucketPolicy.
             properties:

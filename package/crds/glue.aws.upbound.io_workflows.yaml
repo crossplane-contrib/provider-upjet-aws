@@ -94,6 +94,32 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  defaultRunProperties:
+                    additionalProperties:
+                      type: string
+                    description: –  A map of default run properties for this workflow.
+                      These properties are passed to all jobs associated to the workflow.
+                    type: object
+                  description:
+                    description: –  Description of the workflow.
+                    type: string
+                  maxConcurrentRuns:
+                    description: Prevents exceeding the maximum number of concurrent
+                      runs of any of the component jobs. If you leave this parameter
+                      blank, there is no limit to the number of concurrent workflow
+                      runs.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

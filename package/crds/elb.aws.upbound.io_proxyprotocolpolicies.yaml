@@ -158,6 +158,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  instancePorts:
+                    description: List of instance ports to which the policy should
+                      be applied. This can be specified if the protocol is SSL or
+                      TCP.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,7 +371,8 @@ spec:
             x-kubernetes-validations:
             - message: instancePorts is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePorts)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePorts)
+                || has(self.initProvider.instancePorts)'
           status:
             description: ProxyProtocolPolicyStatus defines the observed state of ProxyProtocolPolicy.
             properties:

@@ -69,6 +69,25 @@ func (tr *VoiceConnector) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this VoiceConnector
+func (tr *VoiceConnector) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnector
+func (tr *VoiceConnector) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this VoiceConnector using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VoiceConnector) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +160,25 @@ func (tr *VoiceConnectorGroup) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this VoiceConnectorGroup
+func (tr *VoiceConnectorGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorGroup
+func (tr *VoiceConnectorGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VoiceConnectorGroup using its observed tfState.
@@ -217,6 +255,25 @@ func (tr *VoiceConnectorLogging) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this VoiceConnectorLogging
+func (tr *VoiceConnectorLogging) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorLogging
+func (tr *VoiceConnectorLogging) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this VoiceConnectorLogging using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VoiceConnectorLogging) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +346,25 @@ func (tr *VoiceConnectorOrigination) SetParameters(params map[string]any) error 
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this VoiceConnectorOrigination
+func (tr *VoiceConnectorOrigination) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorOrigination
+func (tr *VoiceConnectorOrigination) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VoiceConnectorOrigination using its observed tfState.
@@ -365,6 +441,25 @@ func (tr *VoiceConnectorStreaming) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this VoiceConnectorStreaming
+func (tr *VoiceConnectorStreaming) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorStreaming
+func (tr *VoiceConnectorStreaming) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this VoiceConnectorStreaming using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VoiceConnectorStreaming) LateInitialize(attrs []byte) (bool, error) {
@@ -439,6 +534,25 @@ func (tr *VoiceConnectorTermination) SetParameters(params map[string]any) error 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this VoiceConnectorTermination
+func (tr *VoiceConnectorTermination) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorTermination
+func (tr *VoiceConnectorTermination) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this VoiceConnectorTermination using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VoiceConnectorTermination) LateInitialize(attrs []byte) (bool, error) {
@@ -511,6 +625,25 @@ func (tr *VoiceConnectorTerminationCredentials) SetParameters(params map[string]
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this VoiceConnectorTerminationCredentials
+func (tr *VoiceConnectorTerminationCredentials) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this VoiceConnectorTerminationCredentials
+func (tr *VoiceConnectorTerminationCredentials) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VoiceConnectorTerminationCredentials using its observed tfState.

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RegistryPolicyInitParameters struct {
+
+	// The policy document. This is a JSON formatted string
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+}
+
 type RegistryPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -39,6 +45,10 @@ type RegistryPolicyParameters struct {
 type RegistryPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegistryPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RegistryPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegistryPolicyStatus defines the observed state of RegistryPolicy.
@@ -59,7 +69,7 @@ type RegistryPolicyStatus struct {
 type RegistryPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || has(self.initProvider.policy)",message="policy is a required parameter"
 	Spec   RegistryPolicySpec   `json:"spec"`
 	Status RegistryPolicyStatus `json:"status,omitempty"`
 }

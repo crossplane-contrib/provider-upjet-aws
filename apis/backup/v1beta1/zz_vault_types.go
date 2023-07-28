@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VaultInitParameters struct {
+
+	// A boolean that indicates that all recovery points stored in the vault are deleted so that the vault can be destroyed without error.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VaultObservation struct {
 
 	// The ARN of the vault.
@@ -71,6 +80,10 @@ type VaultParameters struct {
 type VaultSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VaultParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VaultInitParameters `json:"initProvider,omitempty"`
 }
 
 // VaultStatus defines the observed state of Vault.

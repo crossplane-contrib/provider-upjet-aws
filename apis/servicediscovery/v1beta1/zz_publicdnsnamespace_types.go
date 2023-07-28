@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PublicDNSNamespaceInitParameters struct {
+
+	// The description that you specify for the namespace when you create it.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the namespace.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PublicDNSNamespaceObservation struct {
 
 	// The ARN that Amazon Route 53 assigns to the namespace when you create it.
@@ -61,6 +73,10 @@ type PublicDNSNamespaceParameters struct {
 type PublicDNSNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicDNSNamespaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PublicDNSNamespaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // PublicDNSNamespaceStatus defines the observed state of PublicDNSNamespace.
@@ -81,7 +97,7 @@ type PublicDNSNamespaceStatus struct {
 type PublicDNSNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   PublicDNSNamespaceSpec   `json:"spec"`
 	Status PublicDNSNamespaceStatus `json:"status,omitempty"`
 }

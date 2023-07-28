@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InvitationAccepterInitParameters struct {
+
+	// The AWS account ID for the account that sent the invitation.
+	AdministratorAccountID *string `json:"administratorAccountId,omitempty" tf:"administrator_account_id,omitempty"`
+}
+
 type InvitationAccepterObservation struct {
 
 	// The AWS account ID for the account that sent the invitation.
@@ -41,6 +47,10 @@ type InvitationAccepterParameters struct {
 type InvitationAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InvitationAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InvitationAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // InvitationAccepterStatus defines the observed state of InvitationAccepter.
@@ -61,7 +71,7 @@ type InvitationAccepterStatus struct {
 type InvitationAccepter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administratorAccountId)",message="administratorAccountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administratorAccountId) || has(self.initProvider.administratorAccountId)",message="administratorAccountId is a required parameter"
 	Spec   InvitationAccepterSpec   `json:"spec"`
 	Status InvitationAccepterStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,46 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCIpamPoolInitParameters struct {
+
+	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
+	AllocationDefaultNetmaskLength *float64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
+
+	// The maximum netmask length that will be required for CIDR allocations in this pool.
+	AllocationMaxNetmaskLength *float64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
+
+	// The minimum netmask length that will be required for CIDR allocations in this pool.
+	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
+
+	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
+
+	// If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
+	// within the CIDR range in the pool.
+	AutoImport *bool `json:"autoImport,omitempty" tf:"auto_import,omitempty"`
+
+	// Limits which AWS service the pool can be used in. Only useable on public scopes. Valid Values: ec2.
+	AwsService *string `json:"awsService,omitempty" tf:"aws_service,omitempty"`
+
+	// A description for the IPAM pool.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
+
+	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
+	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
+
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
+	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCIpamPoolObservation struct {
 
 	// The IP protocol assigned to this pool. You must choose either IPv4 or IPv6 protocol for a pool.
@@ -163,6 +203,10 @@ type VPCIpamPoolParameters struct {
 type VPCIpamPoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCIpamPoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCIpamPoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCIpamPoolStatus defines the observed state of VPCIpamPool.
@@ -183,7 +227,7 @@ type VPCIpamPoolStatus struct {
 type VPCIpamPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressFamily) || has(self.initProvider.addressFamily)",message="addressFamily is a required parameter"
 	Spec   VPCIpamPoolSpec   `json:"spec"`
 	Status VPCIpamPoolStatus `json:"status,omitempty"`
 }

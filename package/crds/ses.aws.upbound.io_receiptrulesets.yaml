@@ -77,6 +77,15 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  ruleSetName:
+                    description: Name of the rule set.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -277,7 +286,8 @@ spec:
             x-kubernetes-validations:
             - message: ruleSetName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleSetName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleSetName)
+                || has(self.initProvider.ruleSetName)'
           status:
             description: ReceiptRuleSetStatus defines the observed state of ReceiptRuleSet.
             properties:

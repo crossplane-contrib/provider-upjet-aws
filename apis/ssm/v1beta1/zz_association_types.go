@@ -13,6 +13,48 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AssociationInitParameters struct {
+
+	// By default, when you create a new or update associations, the system runs it immediately and then according to the schedule you specified. Enable this option if you do not want an association to run immediately after you create or update it. This parameter is not supported for rate expressions. Default: false.
+	ApplyOnlyAtCronInterval *bool `json:"applyOnlyAtCronInterval,omitempty" tf:"apply_only_at_cron_interval,omitempty"`
+
+	// The descriptive name for the association.
+	AssociationName *string `json:"associationName,omitempty" tf:"association_name,omitempty"`
+
+	// Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls. This should be set to the SSM document parameter that will define how your automation will branch out.
+	AutomationTargetParameterName *string `json:"automationTargetParameterName,omitempty" tf:"automation_target_parameter_name,omitempty"`
+
+	// The compliance severity for the association. Can be one of the following: UNSPECIFIED, LOW, MEDIUM, HIGH or CRITICAL
+	ComplianceSeverity *string `json:"complianceSeverity,omitempty" tf:"compliance_severity,omitempty"`
+
+	// The document version you want to associate with the target(s). Can be a specific version or the default version.
+	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
+
+	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
+	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
+	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
+
+	// An output location block. Output Location is documented below.
+	OutputLocation []OutputLocationInitParameters `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
+
+	// A block of arbitrary string parameters to pass to the SSM document.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A cron or rate expression that specifies when the association runs.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
+	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// The number of seconds to wait for the association status to be Success. If Success status is not reached within the given time, create opration will fail.
+	WaitForSuccessTimeoutSeconds *float64 `json:"waitForSuccessTimeoutSeconds,omitempty" tf:"wait_for_success_timeout_seconds,omitempty"`
+}
+
 type AssociationObservation struct {
 
 	// By default, when you create a new or update associations, the system runs it immediately and then according to the schedule you specified. Enable this option if you do not want an association to run immediately after you create or update it. This parameter is not supported for rate expressions. Default: false.
@@ -139,6 +181,18 @@ type AssociationParameters struct {
 	WaitForSuccessTimeoutSeconds *float64 `json:"waitForSuccessTimeoutSeconds,omitempty" tf:"wait_for_success_timeout_seconds,omitempty"`
 }
 
+type OutputLocationInitParameters struct {
+
+	// The S3 bucket name.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// The S3 bucket prefix. Results stored in the root if not configured.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+
+	// The S3 bucket region.
+	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
+}
+
 type OutputLocationObservation struct {
 
 	// The S3 bucket name.
@@ -154,8 +208,8 @@ type OutputLocationObservation struct {
 type OutputLocationParameters struct {
 
 	// The S3 bucket name.
-	// +kubebuilder:validation:Required
-	S3BucketName *string `json:"s3BucketName" tf:"s3_bucket_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// The S3 bucket prefix. Results stored in the root if not configured.
 	// +kubebuilder:validation:Optional
@@ -164,6 +218,15 @@ type OutputLocationParameters struct {
 	// The S3 bucket region.
 	// +kubebuilder:validation:Optional
 	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
+}
+
+type TargetsInitParameters struct {
+
+	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TargetsObservation struct {
@@ -178,18 +241,22 @@ type TargetsObservation struct {
 type TargetsParameters struct {
 
 	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 // AssociationSpec defines the desired state of Association
 type AssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // AssociationStatus defines the observed state of Association.

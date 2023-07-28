@@ -86,9 +86,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - key
-                      - values
                       type: object
                     type: array
                   content:
@@ -131,6 +128,67 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  attachmentsSource:
+                    description: One or more configuration blocks describing attachments
+                      sources to a version of a document. Defined below.
+                    items:
+                      properties:
+                        key:
+                          description: 'The key describing the location of an attachment
+                            to a document. Valid key types include: SourceUrl and
+                            S3FileUrl'
+                          type: string
+                        name:
+                          description: The name of the document attachment file
+                          type: string
+                        values:
+                          description: The value describing the location of an attachment
+                            to a document
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  content:
+                    description: The JSON or YAML content of the document.
+                    type: string
+                  documentFormat:
+                    description: 'The format of the document. Valid document types
+                      include: JSON and YAML'
+                    type: string
+                  documentType:
+                    description: 'The type of the document. Valid document types include:
+                      Automation, Command, Package, Policy, and Session'
+                    type: string
+                  permissions:
+                    additionalProperties:
+                      type: string
+                    description: Additional Permissions to attach to the document.
+                      See Permissions below for details.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetType:
+                    description: The target type which defines the kinds of resources
+                      the document can run on. For example, /AWS::EC2::Instance. For
+                      a list of valid resource types, see AWS Resource Types Reference
+                      (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+                    type: string
+                  versionName:
+                    description: A field specifying the version of the artifact you
+                      are creating with the document. For example, "Release 12, Update
+                      6". This value is unique across all versions of a document and
+                      cannot be changed for an existing document version.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -332,10 +390,12 @@ spec:
             x-kubernetes-validations:
             - message: content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
+                || has(self.initProvider.content)'
             - message: documentType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.documentType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.documentType)
+                || has(self.initProvider.documentType)'
           status:
             description: DocumentStatus defines the observed state of Document.
             properties:

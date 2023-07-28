@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CidrAuthorizationContextInitParameters struct {
+
+	// The plain-text authorization message for the prefix and account.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The signed authorization message for the prefix and account.
+	Signature *string `json:"signature,omitempty" tf:"signature,omitempty"`
+}
+
 type CidrAuthorizationContextObservation struct {
 
 	// The plain-text authorization message for the prefix and account.
@@ -31,6 +40,18 @@ type CidrAuthorizationContextParameters struct {
 	// The signed authorization message for the prefix and account.
 	// +kubebuilder:validation:Optional
 	Signature *string `json:"signature,omitempty" tf:"signature,omitempty"`
+}
+
+type VPCIpamPoolCidrInitParameters struct {
+
+	// The CIDR you want to assign to the pool. Conflicts with netmask_length.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. This is not stored in the state file. See cidr_authorization_context for more information.
+	CidrAuthorizationContext []CidrAuthorizationContextInitParameters `json:"cidrAuthorizationContext,omitempty" tf:"cidr_authorization_context,omitempty"`
+
+	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
+	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }
 
 type VPCIpamPoolCidrObservation struct {
@@ -92,6 +113,10 @@ type VPCIpamPoolCidrParameters struct {
 type VPCIpamPoolCidrSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCIpamPoolCidrParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCIpamPoolCidrInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCIpamPoolCidrStatus defines the observed state of VPCIpamPoolCidr.

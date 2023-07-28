@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeliveryChannelInitParameters struct {
+
+	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
+	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
+
+	// The prefix for the specified S3 bucket.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+
+	// Options for how AWS Config delivers configuration snapshots. See below
+	SnapshotDeliveryProperties []SnapshotDeliveryPropertiesInitParameters `json:"snapshotDeliveryProperties,omitempty" tf:"snapshot_delivery_properties,omitempty"`
+
+	// The ARN of the SNS topic that AWS Config delivers notifications to.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+}
+
 type DeliveryChannelObservation struct {
 
 	// The name of the delivery channel.
@@ -71,6 +86,12 @@ type DeliveryChannelParameters struct {
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 }
 
+type SnapshotDeliveryPropertiesInitParameters struct {
+
+	// - The frequency with which AWS Config recurringly delivers configuration snapshotsE.g., One_Hour or Three_Hours. Valid values are listed here.
+	DeliveryFrequency *string `json:"deliveryFrequency,omitempty" tf:"delivery_frequency,omitempty"`
+}
+
 type SnapshotDeliveryPropertiesObservation struct {
 
 	// - The frequency with which AWS Config recurringly delivers configuration snapshotsE.g., One_Hour or Three_Hours. Valid values are listed here.
@@ -88,6 +109,10 @@ type SnapshotDeliveryPropertiesParameters struct {
 type DeliveryChannelSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeliveryChannelParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DeliveryChannelInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeliveryChannelStatus defines the observed state of DeliveryChannel.

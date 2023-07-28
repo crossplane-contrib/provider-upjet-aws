@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WorkspaceSAMLConfigurationInitParameters struct {
+
+	// The admin role values.
+	AdminRoleValues []*string `json:"adminRoleValues,omitempty" tf:"admin_role_values,omitempty"`
+
+	// The allowed organizations.
+	AllowedOrganizations []*string `json:"allowedOrganizations,omitempty" tf:"allowed_organizations,omitempty"`
+
+	// The editor role values.
+	EditorRoleValues []*string `json:"editorRoleValues,omitempty" tf:"editor_role_values,omitempty"`
+
+	// The email assertion.
+	EmailAssertion *string `json:"emailAssertion,omitempty" tf:"email_assertion,omitempty"`
+
+	// The groups assertion.
+	GroupsAssertion *string `json:"groupsAssertion,omitempty" tf:"groups_assertion,omitempty"`
+
+	// The IDP Metadata URL. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	IdpMetadataURL *string `json:"idpMetadataUrl,omitempty" tf:"idp_metadata_url,omitempty"`
+
+	// The IDP Metadata XML. Note that either idp_metadata_url or idp_metadata_xml (but not both) must be specified.
+	IdpMetadataXML *string `json:"idpMetadataXml,omitempty" tf:"idp_metadata_xml,omitempty"`
+
+	// The login assertion.
+	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
+
+	// The login validity duration.
+	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
+
+	// The name assertion.
+	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
+
+	// The org assertion.
+	OrgAssertion *string `json:"orgAssertion,omitempty" tf:"org_assertion,omitempty"`
+
+	// The role assertion.
+	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
+}
+
 type WorkspaceSAMLConfigurationObservation struct {
 
 	// The admin role values.
@@ -133,6 +172,10 @@ type WorkspaceSAMLConfigurationParameters struct {
 type WorkspaceSAMLConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkspaceSAMLConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WorkspaceSAMLConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkspaceSAMLConfigurationStatus defines the observed state of WorkspaceSAMLConfiguration.
@@ -153,7 +196,7 @@ type WorkspaceSAMLConfigurationStatus struct {
 type WorkspaceSAMLConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.editorRoleValues)",message="editorRoleValues is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.editorRoleValues) || has(self.initProvider.editorRoleValues)",message="editorRoleValues is a required parameter"
 	Spec   WorkspaceSAMLConfigurationSpec   `json:"spec"`
 	Status WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
 }

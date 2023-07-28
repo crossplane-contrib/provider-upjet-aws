@@ -18,6 +18,3 @@ spec:
     - name: enable_user_activity_logging
       value: "true"
     region: us-west-1
-
----
-

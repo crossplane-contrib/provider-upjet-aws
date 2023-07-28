@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCEndpointConnectionNotificationInitParameters struct {
+
+	// One or more endpoint events for which to receive notifications.
+	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
+
+	// The ID of the VPC Endpoint to receive notifications for.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+}
+
 type VPCEndpointConnectionNotificationObservation struct {
 
 	// One or more endpoint events for which to receive notifications.
@@ -85,6 +94,10 @@ type VPCEndpointConnectionNotificationParameters struct {
 type VPCEndpointConnectionNotificationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointConnectionNotificationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointConnectionNotificationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointConnectionNotificationStatus defines the observed state of VPCEndpointConnectionNotification.
@@ -105,7 +118,7 @@ type VPCEndpointConnectionNotificationStatus struct {
 type VPCEndpointConnectionNotification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionEvents)",message="connectionEvents is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionEvents) || has(self.initProvider.connectionEvents)",message="connectionEvents is a required parameter"
 	Spec   VPCEndpointConnectionNotificationSpec   `json:"spec"`
 	Status VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
 }

@@ -355,8 +355,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - groups
                             type: object
                           type: array
                       type: object
@@ -462,6 +460,68 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of the work team.
+                    type: string
+                  memberDefinition:
+                    description: A list of Member Definitions that contains objects
+                      that identify the workers that make up the work team. Workforces
+                      can be created using Amazon Cognito or your own OIDC Identity
+                      Provider (IdP). For private workforces created using Amazon
+                      Cognito use cognito_member_definition. For workforces created
+                      using your own OIDC identity provider (IdP) use oidc_member_definition.
+                      Do not provide input for both of these parameters in a single
+                      request. see Member Definition details below.
+                    items:
+                      properties:
+                        cognitoMemberDefinition:
+                          description: The Amazon Cognito user group that is part
+                            of the work team. See Cognito Member Definition details
+                            below.
+                          items:
+                            type: object
+                          type: array
+                        oidcMemberDefinition:
+                          description: A list user groups that exist in your OIDC
+                            Identity Provider (IdP). One to ten groups can be used
+                            to create a single private work team. See Cognito Member
+                            Definition details below.
+                          items:
+                            properties:
+                              groups:
+                                description: A list of comma separated strings that
+                                  identifies user groups in your OIDC IdP. Each user
+                                  group is made up of a group of private workers.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  notificationConfiguration:
+                    description: Configures notification of workers regarding available
+                      or expiring work items. see Notification Configuration details
+                      below.
+                    items:
+                      properties:
+                        notificationTopicArn:
+                          description: The ARN for the SNS topic to which notifications
+                            should be published.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -663,10 +723,12 @@ spec:
             x-kubernetes-validations:
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: memberDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.memberDefinition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.memberDefinition)
+                || has(self.initProvider.memberDefinition)'
           status:
             description: WorkteamStatus defines the observed state of Workteam.
             properties:

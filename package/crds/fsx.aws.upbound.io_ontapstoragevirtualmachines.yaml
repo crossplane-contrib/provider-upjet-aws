@@ -138,10 +138,7 @@ spec:
                                   use to join to your AD domain.
                                 type: string
                             required:
-                            - dnsIps
-                            - domainName
                             - passwordSecretRef
-                            - username
                             type: object
                           type: array
                       type: object
@@ -264,6 +261,81 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  activeDirectoryConfiguration:
+                    description: Configuration block that Amazon FSx uses to join
+                      the FSx ONTAP Storage Virtual Machine(SVM) to your Microsoft
+                      Active Directory (AD) directory. Detailed below.
+                    items:
+                      properties:
+                        netbiosName:
+                          description: The NetBIOS name of the Active Directory computer
+                            object that will be created for your SVM. This is often
+                            the same as the SVM name but can be different. AWS limits
+                            to 15 characters because of standard NetBIOS naming limits.
+                          type: string
+                        selfManagedActiveDirectoryConfiguration:
+                          description: Configuration block that Amazon FSx uses to
+                            join the FSx ONTAP Storage Virtual Machine(SVM) to your
+                            Microsoft Active Directory (AD) directory. Detailed below.
+                          items:
+                            properties:
+                              dnsIps:
+                                description: A list of up to three IP addresses of
+                                  DNS servers or domain controllers in the self-managed
+                                  AD directory.
+                                items:
+                                  type: string
+                                type: array
+                              domainName:
+                                description: The fully qualified domain name of the
+                                  self-managed AD directory. For example, corp.example.com.
+                                type: string
+                              fileSystemAdministratorsGroup:
+                                description: The name of the domain group whose members
+                                  are granted administrative privileges for the SVM.
+                                  The group that you specify must already exist in
+                                  your domain. Defaults to Domain Admins.
+                                type: string
+                              organizationalUnitDistinguishedName:
+                                description: The fully qualified distinguished name
+                                  of the organizational unit within your self-managed
+                                  AD directory that the Windows File Server instance
+                                  will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com.
+                                  Only accepts OU as the direct parent of the SVM.
+                                  If none is provided, the SVM is created in the default
+                                  location of your self-managed AD directory. To learn
+                                  more, see RFC 2253.
+                                type: string
+                              username:
+                                description: The user name for the service account
+                                  on your self-managed AD domain that Amazon FSx will
+                                  use to join to your AD domain.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the SVM. You can use a maximum of 47
+                      alphanumeric characters, plus the underscore (_) special character.
+                    type: string
+                  rootVolumeSecurityStyle:
+                    description: Specifies the root volume security style, Valid values
+                      are UNIX, NTFS, and MIXED. All volumes created under this SVM
+                      will inherit the root security style unless the security style
+                      is specified on the volume. Default value is UNIX.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -465,7 +537,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: OntapStorageVirtualMachineStatus defines the observed state
               of OntapStorageVirtualMachine.

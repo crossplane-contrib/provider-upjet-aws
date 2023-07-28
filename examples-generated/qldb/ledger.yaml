@@ -10,6 +10,3 @@ spec:
   forProvider:
     permissionsMode: STANDARD
     region: us-west-1
-
----
-

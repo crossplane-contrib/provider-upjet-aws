@@ -35,6 +35,3 @@ spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.example.json}
     path: /
-
----
-

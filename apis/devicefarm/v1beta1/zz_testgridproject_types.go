@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TestGridProjectInitParameters struct {
+
+	// Human-readable description of the project.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the Selenium testing project.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
+	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+}
+
 type TestGridProjectObservation struct {
 
 	// The Amazon Resource Name of this Test Grid Project.
@@ -58,6 +73,9 @@ type TestGridProjectParameters struct {
 	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
 	// +kubebuilder:validation:Optional
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+}
+
+type VPCConfigInitParameters struct {
 }
 
 type VPCConfigObservation struct {
@@ -123,6 +141,10 @@ type VPCConfigParameters struct {
 type TestGridProjectSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TestGridProjectParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TestGridProjectInitParameters `json:"initProvider,omitempty"`
 }
 
 // TestGridProjectStatus defines the observed state of TestGridProject.
@@ -143,7 +165,7 @@ type TestGridProjectStatus struct {
 type TestGridProject struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   TestGridProjectSpec   `json:"spec"`
 	Status TestGridProjectStatus `json:"status,omitempty"`
 }

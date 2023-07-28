@@ -20,6 +20,3 @@ spec:
       - enable: true
     enable: true
     region: us-west-1
-
----
-

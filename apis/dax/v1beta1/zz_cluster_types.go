@@ -13,6 +13,51 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterInitParameters struct {
+
+	// List of Availability Zones in which the
+	// nodes will be created
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// –  The type of encryption the
+	// cluster's endpoint should support. Valid values are: NONE and TLS.
+	// Default value is NONE.
+	ClusterEndpointEncryptionType *string `json:"clusterEndpointEncryptionType,omitempty" tf:"cluster_endpoint_encryption_type,omitempty"`
+
+	// –  Description for the cluster
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// ddd:hh24:mi
+	// (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example:
+	// sun:05:00-sun:09:00
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// –  The compute and memory capacity of the nodes. See
+	// Nodes for supported node types
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// east-1:012345678999:my_sns_topic
+	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
+
+	// –  Name of the parameter group to associate
+	// with this DAX cluster
+	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// node cluster, without any read
+	// replicas
+	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
+
+	// Encrypt at rest options
+	ServerSideEncryption []ServerSideEncryptionInitParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
+
+	// –  Name of the subnet group to be used for the
+	// cluster
+	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ClusterObservation struct {
 
 	// The ARN of the DAX cluster
@@ -183,6 +228,9 @@ type ClusterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type NodesInitParameters struct {
+}
+
 type NodesObservation struct {
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
@@ -195,6 +243,12 @@ type NodesObservation struct {
 }
 
 type NodesParameters struct {
+}
+
+type ServerSideEncryptionInitParameters struct {
+
+	// Whether to enable encryption at rest. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type ServerSideEncryptionObservation struct {
@@ -214,6 +268,10 @@ type ServerSideEncryptionParameters struct {
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.
@@ -234,8 +292,8 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicationFactor)",message="replicationFactor is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || has(self.initProvider.nodeType)",message="nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicationFactor) || has(self.initProvider.replicationFactor)",message="replicationFactor is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`
 }

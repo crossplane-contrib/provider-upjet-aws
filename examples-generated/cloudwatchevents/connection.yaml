@@ -18,6 +18,3 @@ spec:
     authorizationType: API_KEY
     description: A connection description
     region: us-west-1
-
----
-

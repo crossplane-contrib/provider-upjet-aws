@@ -74,6 +74,3 @@ spec:
       requireUppercase: false
       temporaryPasswordValidityDays: 7
     region: us-west-1
-
----
-

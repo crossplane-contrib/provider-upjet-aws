@@ -20,6 +20,3 @@ spec:
       threshold: 1
       type: ATLEAST
     waitPeriodMs: 5000
-
----
-

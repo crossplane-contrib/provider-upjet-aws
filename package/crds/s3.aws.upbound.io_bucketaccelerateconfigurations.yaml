@@ -158,6 +158,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  status:
+                    description: 'Transfer acceleration state of the bucket. Valid
+                      values: Enabled, Suspended.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,7 +371,8 @@ spec:
             x-kubernetes-validations:
             - message: status is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.status)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.status)
+                || has(self.initProvider.status)'
           status:
             description: BucketAccelerateConfigurationStatus defines the observed
               state of BucketAccelerateConfiguration.

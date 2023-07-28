@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionInitParameters struct {
+
+	// The ID of the link for the second device.
+	ConnectedLinkID *string `json:"connectedLinkId,omitempty" tf:"connected_link_id,omitempty"`
+
+	// A description of the connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of the link for the first device.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ConnectionObservation struct {
 
 	// The Amazon Resource Name (ARN) of the connection.
@@ -115,6 +130,10 @@ type ConnectionParameters struct {
 type ConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConnectionStatus defines the observed state of Connection.

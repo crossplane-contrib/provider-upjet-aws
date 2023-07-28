@@ -36,6 +36,3 @@ spec:
       subject:
       - commonName: example.com
     region: us-west-1
-
----
-

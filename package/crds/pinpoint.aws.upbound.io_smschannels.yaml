@@ -160,6 +160,22 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Whether the channel is enabled or disabled. Defaults
+                      to true.
+                    type: boolean
+                  senderId:
+                    description: Sender identifier of your messages.
+                    type: string
+                  shortCode:
+                    description: The Short Code registered with the phone provider.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

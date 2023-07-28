@@ -13,6 +13,28 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VolumeAttachmentInitParameters struct {
+
+	// The device name to expose to the instance (for
+	// example, /dev/sdh or xvdh).  See Device Naming on Linux Instances and Device Naming on Windows Instances for more information.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Set to true if you want to force the
+	// volume to detach. Useful if previous attempts failed, but use this option only
+	// as a last resort, as this can result in data loss. See
+	// Detaching an Amazon EBS Volume from an Instance for more information.
+	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
+
+	// This is
+	// useful when destroying an instance which has volumes created by some other
+	// means attached.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Set this to true to ensure that the target instance is stopped
+	// before trying to detach the volume. Stops the instance, if it is not already stopped.
+	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
+}
+
 type VolumeAttachmentObservation struct {
 
 	// The device name to expose to the instance (for
@@ -106,6 +128,10 @@ type VolumeAttachmentParameters struct {
 type VolumeAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VolumeAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VolumeAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // VolumeAttachmentStatus defines the observed state of VolumeAttachment.
@@ -126,7 +152,7 @@ type VolumeAttachmentStatus struct {
 type VolumeAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deviceName)",message="deviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deviceName) || has(self.initProvider.deviceName)",message="deviceName is a required parameter"
 	Spec   VolumeAttachmentSpec   `json:"spec"`
 	Status VolumeAttachmentStatus `json:"status,omitempty"`
 }

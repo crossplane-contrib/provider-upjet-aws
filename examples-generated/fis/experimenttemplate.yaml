@@ -28,6 +28,3 @@ spec:
         value: example
       resourceType: aws:ec2:instance
       selectionMode: COUNT(1)
-
----
-

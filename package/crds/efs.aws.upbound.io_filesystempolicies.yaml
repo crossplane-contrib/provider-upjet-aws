@@ -164,6 +164,26 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  bypassPolicyLockoutSafetyCheck:
+                    description: A flag to indicate whether to bypass the aws_efs_file_system_policy
+                      lockout safety check. The policy lockout safety check determines
+                      whether the policy in the request will prevent the principal
+                      making the request will be locked out from making future PutFileSystemPolicy
+                      requests on the file system. Set bypass_policy_lockout_safety_check
+                      to true only when you intend to prevent the principal that is
+                      making the request from making a subsequent PutFileSystemPolicy
+                      request on the file system. The default value is false.
+                    type: boolean
+                  policy:
+                    description: The JSON formatted file system policy for the EFS
+                      file system. see Docs for more info.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -364,7 +384,8 @@ spec:
             x-kubernetes-validations:
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: FileSystemPolicyStatus defines the observed state of FileSystemPolicy.
             properties:

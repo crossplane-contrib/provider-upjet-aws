@@ -126,8 +126,6 @@ spec:
                                 type: object
                             type: object
                           type: array
-                      required:
-                      - name
                       type: object
                     type: array
                   description:
@@ -150,6 +148,87 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  control:
+                    description: One or more control blocks that make up the framework.
+                      Each control in the list has a name, input parameters, and scope.
+                      Detailed below.
+                    items:
+                      properties:
+                        inputParameter:
+                          description: 'One or more input parameter blocks. An example
+                            of a control with two parameters is: "backup plan frequency
+                            is at least daily and the retention period is at least
+                            1 year". The first parameter is daily. The second parameter
+                            is 1 year. Detailed below.'
+                          items:
+                            properties:
+                              name:
+                                description: The unique name of the framework. The
+                                  name must be between 1 and 256 characters, starting
+                                  with a letter, and consisting of letters, numbers,
+                                  and underscores.
+                                type: string
+                              value:
+                                description: The value of parameter, for example,
+                                  hourly.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The unique name of the framework. The name
+                            must be between 1 and 256 characters, starting with a
+                            letter, and consisting of letters, numbers, and underscores.
+                          type: string
+                        scope:
+                          description: 'The scope of a control. The control scope
+                            defines what the control will evaluate. Three examples
+                            of control scopes are: a specific backup plan, all backup
+                            plans with a specific tag, or all backup plans. Detailed
+                            below.'
+                          items:
+                            properties:
+                              complianceResourceIds:
+                                description: The ID of the only AWS resource that
+                                  you want your control scope to contain. Minimum
+                                  number of 1 item. Maximum number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                              complianceResourceTypes:
+                                description: Describes whether the control scope includes
+                                  one or more types of resources, such as EFS or RDS.
+                                items:
+                                  type: string
+                                type: array
+                              tags:
+                                additionalProperties:
+                                  type: string
+                                description: Key-value map of resource tags.
+                                type: object
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: The description of the framework with a maximum of
+                      1,024 characters
+                    type: string
+                  name:
+                    description: The unique name of the framework. The name must be
+                      between 1 and 256 characters, starting with a letter, and consisting
+                      of letters, numbers, and underscores.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -351,10 +430,12 @@ spec:
             x-kubernetes-validations:
             - message: control is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.control)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.control)
+                || has(self.initProvider.control)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FrameworkStatus defines the observed state of Framework.
             properties:

@@ -85,6 +85,23 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: The name of the Lightsail Key Pair
+                    type: string
+                  pgpKey:
+                    description: –  An optional PGP key to encrypt the resulting private
+                      key material. Only used when creating a new key pair
+                    type: string
+                  publicKey:
+                    description: The public key material. This public key will be
+                      imported into Lightsail
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

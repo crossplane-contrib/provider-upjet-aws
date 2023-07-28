@@ -257,6 +257,39 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  defaultResult:
+                    description: Defines the action the Auto Scaling group should
+                      take when the lifecycle hook timeout elapses or if an unexpected
+                      failure occurs. The value for this parameter can be either CONTINUE
+                      or ABANDON. The default value for this parameter is ABANDON.
+                    type: string
+                  heartbeatTimeout:
+                    description: Defines the amount of time, in seconds, that can
+                      elapse before the lifecycle hook times out. When the lifecycle
+                      hook times out, Auto Scaling performs the action defined in
+                      the DefaultResult parameter
+                    type: number
+                  lifecycleTransition:
+                    description: Instance state to which you want to attach the lifecycle
+                      hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
+                    type: string
+                  notificationMetadata:
+                    description: Contains additional information that you want to
+                      include any time Auto Scaling sends a message to the notification
+                      target.
+                    type: string
+                  notificationTargetArn:
+                    description: ARN of the notification target that Auto Scaling
+                      will use to notify you when an instance is in the transition
+                      state for the lifecycle hook. This ARN target can be either
+                      an SQS queue or an SNS topic.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -457,7 +490,8 @@ spec:
             x-kubernetes-validations:
             - message: lifecycleTransition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.lifecycleTransition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.lifecycleTransition)
+                || has(self.initProvider.lifecycleTransition)'
           status:
             description: LifecycleHookStatus defines the observed state of LifecycleHook.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotebookInstanceLifecycleConfigurationInitParameters struct {
+
+	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
+
+	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
+}
+
 type NotebookInstanceLifecycleConfigurationObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this lifecycle configuration.
@@ -47,6 +56,10 @@ type NotebookInstanceLifecycleConfigurationParameters struct {
 type NotebookInstanceLifecycleConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotebookInstanceLifecycleConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NotebookInstanceLifecycleConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotebookInstanceLifecycleConfigurationStatus defines the observed state of NotebookInstanceLifecycleConfiguration.

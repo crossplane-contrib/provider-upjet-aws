@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttachmentAccepterInitParameters struct {
+}
+
 type AttachmentAccepterObservation struct {
 
 	// The ID of the attachment.
@@ -88,6 +91,10 @@ type AttachmentAccepterParameters struct {
 type AttachmentAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AttachmentAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AttachmentAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // AttachmentAccepterStatus defines the observed state of AttachmentAccepter.

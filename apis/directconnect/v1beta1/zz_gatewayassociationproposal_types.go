@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GatewayAssociationProposalInitParameters struct {
+
+	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
+	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
+}
+
 type GatewayAssociationProposalObservation struct {
 
 	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
@@ -95,6 +101,10 @@ type GatewayAssociationProposalParameters struct {
 type GatewayAssociationProposalSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GatewayAssociationProposalParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GatewayAssociationProposalInitParameters `json:"initProvider,omitempty"`
 }
 
 // GatewayAssociationProposalStatus defines the observed state of GatewayAssociationProposal.

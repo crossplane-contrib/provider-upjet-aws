@@ -242,6 +242,15 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  dbUser:
+                    description: A db username
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -445,7 +454,8 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dbPasswordSecretRef)'
             - message: dbUser is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dbUser)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dbUser)
+                || has(self.initProvider.dbUser)'
           status:
             description: RDSDBInstanceStatus defines the observed state of RDSDBInstance.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DocumentationVersionInitParameters struct {
+
+	// Description of the API documentation version.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Version identifier of the API documentation snapshot.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type DocumentationVersionObservation struct {
 
 	// Description of the API documentation version.
@@ -61,6 +70,10 @@ type DocumentationVersionParameters struct {
 type DocumentationVersionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DocumentationVersionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DocumentationVersionInitParameters `json:"initProvider,omitempty"`
 }
 
 // DocumentationVersionStatus defines the observed state of DocumentationVersion.
@@ -81,7 +94,7 @@ type DocumentationVersionStatus struct {
 type DocumentationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version)",message="version is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || has(self.initProvider.version)",message="version is a required parameter"
 	Spec   DocumentationVersionSpec   `json:"spec"`
 	Status DocumentationVersionStatus `json:"status,omitempty"`
 }

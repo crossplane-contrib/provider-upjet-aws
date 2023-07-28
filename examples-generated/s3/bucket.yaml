@@ -13,6 +13,3 @@ spec:
     tags:
       Environment: Dev
       Name: My bucket
-
----
-

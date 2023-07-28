@@ -177,9 +177,6 @@ spec:
                         usernamePrefix:
                           description: A prefix that is prepended to username claims.
                           type: string
-                      required:
-                      - clientId
-                      - issuerUrl
                       type: object
                     type: array
                   region:
@@ -193,6 +190,53 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  oidc:
+                    description: Nested attribute containing OpenID Connect identity
+                      provider information for the cluster. Detailed below.
+                    items:
+                      properties:
+                        clientId:
+                          description: –  Client ID for the OpenID Connect identity
+                            provider.
+                          type: string
+                        groupsClaim:
+                          description: The JWT claim that the provider will use to
+                            return groups.
+                          type: string
+                        groupsPrefix:
+                          description: A prefix that is prepended to group claims
+                            e.g., oidc:.
+                          type: string
+                        issuerUrl:
+                          description: Issuer URL for the OpenID Connect identity
+                            provider.
+                          type: string
+                        requiredClaims:
+                          additionalProperties:
+                            type: string
+                          description: The key value pairs that describe required
+                            claims in the identity token.
+                          type: object
+                        usernameClaim:
+                          description: The JWT claim that the provider will use as
+                            the username.
+                          type: string
+                        usernamePrefix:
+                          description: A prefix that is prepended to username claims.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -394,7 +438,8 @@ spec:
             x-kubernetes-validations:
             - message: oidc is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.oidc)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.oidc)
+                || has(self.initProvider.oidc)'
           status:
             description: IdentityProviderConfigStatus defines the observed state of
               IdentityProviderConfig.

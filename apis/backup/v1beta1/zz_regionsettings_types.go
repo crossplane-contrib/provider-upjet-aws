@@ -13,6 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RegionSettingsInitParameters struct {
+
+	// A map of services along with the management preferences for the Region.
+	//
+	// WARNING: All parameters are required to be given: EFS, DynamoDB
+	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
+
+	// A map of services along with the opt-in preferences for the Region.
+	//
+	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
+	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference,omitempty" tf:"resource_type_opt_in_preference,omitempty"`
+}
+
 type RegionSettingsObservation struct {
 
 	// The AWS region.
@@ -53,6 +66,10 @@ type RegionSettingsParameters struct {
 type RegionSettingsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegionSettingsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RegionSettingsInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegionSettingsStatus defines the observed state of RegionSettings.
@@ -73,7 +90,7 @@ type RegionSettingsStatus struct {
 type RegionSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypeOptInPreference)",message="resourceTypeOptInPreference is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypeOptInPreference) || has(self.initProvider.resourceTypeOptInPreference)",message="resourceTypeOptInPreference is a required parameter"
 	Spec   RegionSettingsSpec   `json:"spec"`
 	Status RegionSettingsStatus `json:"status,omitempty"`
 }

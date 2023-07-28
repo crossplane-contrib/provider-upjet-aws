@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateAuthorityInitParameters struct {
+}
+
 type CertificateAuthorityObservation struct {
 
 	// Base64 encoded certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
@@ -20,6 +23,30 @@ type CertificateAuthorityObservation struct {
 }
 
 type CertificateAuthorityParameters struct {
+}
+
+type ClusterInitParameters struct {
+
+	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
+	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
+
+	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
+	EncryptionConfig []EncryptionConfigInitParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+
+	// Configuration block with kubernetes network configuration for the cluster. Detailed below.
+	KubernetesNetworkConfig []KubernetesNetworkConfigInitParameters `json:"kubernetesNetworkConfig,omitempty" tf:"kubernetes_network_config,omitempty"`
+
+	// Configuration block representing the configuration of your local Amazon EKS cluster on an AWS Outpost. This block isn't available for creating Amazon EKS clusters on the AWS cloud.
+	OutpostConfig []OutpostConfigInitParameters `json:"outpostConfig,omitempty" tf:"outpost_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
+	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
+
+	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -129,6 +156,12 @@ type ClusterParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type ControlPlanePlacementInitParameters struct {
+
+	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+}
+
 type ControlPlanePlacementObservation struct {
 
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
@@ -138,8 +171,17 @@ type ControlPlanePlacementObservation struct {
 type ControlPlanePlacementParameters struct {
 
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
-	// +kubebuilder:validation:Required
-	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+}
+
+type EncryptionConfigInitParameters struct {
+
+	// Configuration block with provider for encryption. Detailed below.
+	Provider []ProviderInitParameters `json:"provider,omitempty" tf:"provider,omitempty"`
+
+	// List of strings with resources to be encrypted. Valid values: secrets.
+	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
 type EncryptionConfigObservation struct {
@@ -154,12 +196,15 @@ type EncryptionConfigObservation struct {
 type EncryptionConfigParameters struct {
 
 	// Configuration block with provider for encryption. Detailed below.
-	// +kubebuilder:validation:Required
-	Provider []ProviderParameters `json:"provider" tf:"provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	Provider []ProviderParameters `json:"provider,omitempty" tf:"provider,omitempty"`
 
 	// List of strings with resources to be encrypted. Valid values: secrets.
-	// +kubebuilder:validation:Required
-	Resources []*string `json:"resources" tf:"resources,omitempty"`
+	// +kubebuilder:validation:Optional
+	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
+}
+
+type IdentityInitParameters struct {
 }
 
 type IdentityObservation struct {
@@ -169,6 +214,15 @@ type IdentityObservation struct {
 }
 
 type IdentityParameters struct {
+}
+
+type KubernetesNetworkConfigInitParameters struct {
+
+	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4 (default) and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
+	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
+
+	// The CIDR block to assign Kubernetes pod and service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created. The block must meet the following requirements:
+	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 }
 
 type KubernetesNetworkConfigObservation struct {
@@ -194,6 +248,9 @@ type KubernetesNetworkConfigParameters struct {
 	ServiceIPv4Cidr *string `json:"serviceIpv4Cidr,omitempty" tf:"service_ipv4_cidr,omitempty"`
 }
 
+type OidcInitParameters struct {
+}
+
 type OidcObservation struct {
 
 	// Issuer URL for the OpenID Connect identity provider.
@@ -201,6 +258,19 @@ type OidcObservation struct {
 }
 
 type OidcParameters struct {
+}
+
+type OutpostConfigInitParameters struct {
+
+	// The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:
+	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
+
+	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
+	// The following arguments are supported in the control_plane_placement configuration block:
+	ControlPlanePlacement []ControlPlanePlacementInitParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
+
+	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
+	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
 }
 
 type OutpostConfigObservation struct {
@@ -219,8 +289,8 @@ type OutpostConfigObservation struct {
 type OutpostConfigParameters struct {
 
 	// The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:
-	// +kubebuilder:validation:Required
-	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType" tf:"control_plane_instance_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
 	// The following arguments are supported in the control_plane_placement configuration block:
@@ -228,8 +298,14 @@ type OutpostConfigParameters struct {
 	ControlPlanePlacement []ControlPlanePlacementParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
-	// +kubebuilder:validation:Required
-	OutpostArns []*string `json:"outpostArns" tf:"outpost_arns,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
+}
+
+type ProviderInitParameters struct {
+
+	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
+	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
 }
 
 type ProviderObservation struct {
@@ -241,8 +317,20 @@ type ProviderObservation struct {
 type ProviderParameters struct {
 
 	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
-	// +kubebuilder:validation:Required
-	KeyArn *string `json:"keyArn" tf:"key_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
+}
+
+type VPCConfigInitParameters struct {
+
+	// Whether the Amazon EKS private API server endpoint is enabled. Default is false.
+	EndpointPrivateAccess *bool `json:"endpointPrivateAccess,omitempty" tf:"endpoint_private_access,omitempty"`
+
+	// Whether the Amazon EKS public API server endpoint is enabled. Default is true.
+	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
+
+	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
+	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 }
 
 type VPCConfigObservation struct {
@@ -318,6 +406,10 @@ type VPCConfigParameters struct {
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.
@@ -338,7 +430,7 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcConfig)",message="vpcConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcConfig) || has(self.initProvider.vpcConfig)",message="vpcConfig is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`
 }

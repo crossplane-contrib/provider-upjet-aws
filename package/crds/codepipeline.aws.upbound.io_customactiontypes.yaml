@@ -101,11 +101,6 @@ spec:
                           description: 'The type of the configuration property. Valid
                             values: String, Number, Boolean'
                           type: string
-                      required:
-                      - key
-                      - name
-                      - required
-                      - secret
                       type: object
                     type: array
                   inputArtifactDetails:
@@ -120,9 +115,6 @@ spec:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
                           type: number
-                      required:
-                      - maximumCount
-                      - minimumCount
                       type: object
                     type: array
                   outputArtifactDetails:
@@ -137,9 +129,6 @@ spec:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
                           type: number
-                      required:
-                      - maximumCount
-                      - minimumCount
                       type: object
                     type: array
                   providerName:
@@ -185,6 +174,113 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  category:
+                    description: 'The category of the custom action. Valid values:
+                      Source, Build, Deploy, Test, Invoke, Approval'
+                    type: string
+                  configurationProperty:
+                    description: The configuration properties for the custom action.
+                      Max 10 items.
+                    items:
+                      properties:
+                        description:
+                          description: The description of the action configuration
+                            property.
+                          type: string
+                        key:
+                          description: Whether the configuration property is a key.
+                          type: boolean
+                        name:
+                          description: The name of the action configuration property.
+                          type: string
+                        queryable:
+                          description: Indicates that the property will be used in
+                            conjunction with PollForJobs.
+                          type: boolean
+                        required:
+                          description: Whether the configuration property is a required
+                            value.
+                          type: boolean
+                        secret:
+                          description: Whether the configuration property is secret.
+                          type: boolean
+                        type:
+                          description: 'The type of the configuration property. Valid
+                            values: String, Number, Boolean'
+                          type: string
+                      type: object
+                    type: array
+                  inputArtifactDetails:
+                    description: The details of the input artifact for the action.
+                    items:
+                      properties:
+                        maximumCount:
+                          description: 'The maximum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                        minimumCount:
+                          description: 'The minimum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                      type: object
+                    type: array
+                  outputArtifactDetails:
+                    description: The details of the output artifact of the action.
+                    items:
+                      properties:
+                        maximumCount:
+                          description: 'The maximum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                        minimumCount:
+                          description: 'The minimum number of artifacts allowed for
+                            the action type. Min: 0, Max: 5'
+                          type: number
+                      type: object
+                    type: array
+                  providerName:
+                    description: The provider of the service used in the custom action
+                    type: string
+                  settings:
+                    description: The settings for an action type.
+                    items:
+                      properties:
+                        entityUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that provides a deep link to the resources of the external
+                            system.
+                          type: string
+                        executionUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that contains a link to the top-level landing page for
+                            the external system.
+                          type: string
+                        revisionUrlTemplate:
+                          description: The URL returned to the AWS CodePipeline console
+                            that contains a link to the page where customers can update
+                            or change the configuration of the external action.
+                          type: string
+                        thirdPartyConfigurationUrl:
+                          description: The URL of a sign-up page where users can sign
+                            up for an external service and perform initial configuration
+                            of the action provided by that service.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  version:
+                    description: The version identifier of the custom action.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -386,19 +482,24 @@ spec:
             x-kubernetes-validations:
             - message: category is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.category)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.category)
+                || has(self.initProvider.category)'
             - message: inputArtifactDetails is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.inputArtifactDetails)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.inputArtifactDetails)
+                || has(self.initProvider.inputArtifactDetails)'
             - message: outputArtifactDetails is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.outputArtifactDetails)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.outputArtifactDetails)
+                || has(self.initProvider.outputArtifactDetails)'
             - message: providerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)
+                || has(self.initProvider.providerName)'
             - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || has(self.initProvider.version)'
           status:
             description: CustomActionTypeStatus defines the observed state of CustomActionType.
             properties:

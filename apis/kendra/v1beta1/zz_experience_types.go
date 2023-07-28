@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ContentSourceConfigurationInitParameters struct {
+
+	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
+
+	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
+	DirectPutContent *bool `json:"directPutContent,omitempty" tf:"direct_put_content,omitempty"`
+
+	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
+}
+
 type ContentSourceConfigurationObservation struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
@@ -40,6 +52,9 @@ type ContentSourceConfigurationParameters struct {
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
+type EndpointsInitParameters struct {
+}
+
 type EndpointsObservation struct {
 
 	// The endpoint of your Amazon Kendra experience.
@@ -50,6 +65,15 @@ type EndpointsObservation struct {
 }
 
 type EndpointsParameters struct {
+}
+
+type ExperienceConfigurationInitParameters struct {
+
+	// The identifiers of your data sources and FAQs. Or, you can specify that you want to use documents indexed via the BatchPutDocument API. Detailed below.
+	ContentSourceConfiguration []ContentSourceConfigurationInitParameters `json:"contentSourceConfiguration,omitempty" tf:"content_source_configuration,omitempty"`
+
+	// The AWS SSO field name that contains the identifiers of your users, such as their emails. Detailed below.
+	UserIdentityConfiguration []UserIdentityConfigurationInitParameters `json:"userIdentityConfiguration,omitempty" tf:"user_identity_configuration,omitempty"`
 }
 
 type ExperienceConfigurationObservation struct {
@@ -70,6 +94,18 @@ type ExperienceConfigurationParameters struct {
 	// The AWS SSO field name that contains the identifiers of your users, such as their emails. Detailed below.
 	// +kubebuilder:validation:Optional
 	UserIdentityConfiguration []UserIdentityConfigurationParameters `json:"userIdentityConfiguration,omitempty" tf:"user_identity_configuration,omitempty"`
+}
+
+type ExperienceInitParameters struct {
+
+	// Configuration information for your Amazon Kendra experience. Detailed below.
+	Configuration []ExperienceConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// A description for your Amazon Kendra experience.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A name for your Amazon Kendra experience.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ExperienceObservation struct {
@@ -153,6 +189,12 @@ type ExperienceParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
+type UserIdentityConfigurationInitParameters struct {
+
+	// The AWS SSO field name that contains the identifiers of your users, such as their emails.
+	IdentityAttributeName *string `json:"identityAttributeName,omitempty" tf:"identity_attribute_name,omitempty"`
+}
+
 type UserIdentityConfigurationObservation struct {
 
 	// The AWS SSO field name that contains the identifiers of your users, such as their emails.
@@ -162,14 +204,18 @@ type UserIdentityConfigurationObservation struct {
 type UserIdentityConfigurationParameters struct {
 
 	// The AWS SSO field name that contains the identifiers of your users, such as their emails.
-	// +kubebuilder:validation:Required
-	IdentityAttributeName *string `json:"identityAttributeName" tf:"identity_attribute_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityAttributeName *string `json:"identityAttributeName,omitempty" tf:"identity_attribute_name,omitempty"`
 }
 
 // ExperienceSpec defines the desired state of Experience
 type ExperienceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExperienceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ExperienceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExperienceStatus defines the observed state of Experience.
@@ -190,7 +236,7 @@ type ExperienceStatus struct {
 type Experience struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ExperienceSpec   `json:"spec"`
 	Status ExperienceStatus `json:"status,omitempty"`
 }

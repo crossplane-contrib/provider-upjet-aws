@@ -284,6 +284,43 @@ spec:
                 - catalogId
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  connectionType:
+                    description: '–  The type of the connection. Supported are: CUSTOM,
+                      JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to
+                      JBDC.'
+                    type: string
+                  description:
+                    description: –  Description of the connection.
+                    type: string
+                  matchCriteria:
+                    description: –  A list of criteria that can be used in selecting
+                      this connection.
+                    items:
+                      type: string
+                    type: array
+                  physicalConnectionRequirements:
+                    description: A map of physical connection requirements, such as
+                      VPC and SecurityGroup. Defined below.
+                    items:
+                      properties:
+                        securityGroupIdList:
+                          description: The security group ID list used by the connection.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

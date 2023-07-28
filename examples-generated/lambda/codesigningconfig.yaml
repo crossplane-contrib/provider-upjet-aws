@@ -16,6 +16,3 @@ spec:
     policies:
     - untrustedArtifactOnDeployment: Warn
     region: us-west-1
-
----
-

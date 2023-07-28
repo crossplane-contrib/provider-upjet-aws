@@ -37,6 +37,3 @@ spec:
     - key: AmazonECSManaged
       propagateAtLaunch: true
       value: true
-
----
-

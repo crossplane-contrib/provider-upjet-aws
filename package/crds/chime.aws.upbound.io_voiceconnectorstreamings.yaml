@@ -183,6 +183,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  dataRetention:
+                    description: The retention period, in hours, for the Amazon Kinesis
+                      data.
+                    type: number
+                  disabled:
+                    description: 'When true, media streaming to Amazon Kinesis is
+                      turned off. Default: false'
+                    type: boolean
+                  mediaInsightsConfiguration:
+                    description: The media insights configuration. See media_insights_configuration.
+                    items:
+                      properties:
+                        configurationArn:
+                          description: The media insights configuration that will
+                            be invoked by the Voice Connector.
+                          type: string
+                        disabled:
+                          description: When true, the media insights configuration
+                            is not enabled. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  streamingNotificationTargets:
+                    description: 'The streaming notification targets. Valid Values:
+                      EventBridge | SNS | SQS'
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -383,7 +417,8 @@ spec:
             x-kubernetes-validations:
             - message: dataRetention is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataRetention)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataRetention)
+                || has(self.initProvider.dataRetention)'
           status:
             description: VoiceConnectorStreamingStatus defines the observed state
               of VoiceConnectorStreaming.

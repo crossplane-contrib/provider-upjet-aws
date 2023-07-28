@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RouteTableInitParameters_2 struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type RouteTableObservation_2 struct {
 
 	// The ARN of the route table.
@@ -64,6 +70,9 @@ type RouteTableParameters_2 struct {
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+}
+
+type RouteTableRouteInitParameters_2 struct {
 }
 
 type RouteTableRouteObservation_2 struct {
@@ -118,6 +127,10 @@ type RouteTableRouteParameters_2 struct {
 type RouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteTableParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RouteTableInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // RouteTableStatus defines the observed state of RouteTable.

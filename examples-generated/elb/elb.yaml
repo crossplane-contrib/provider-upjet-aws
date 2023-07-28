@@ -41,6 +41,3 @@ spec:
     region: us-west-1
     tags:
       Name: foobar-terraform-elb
-
----
-

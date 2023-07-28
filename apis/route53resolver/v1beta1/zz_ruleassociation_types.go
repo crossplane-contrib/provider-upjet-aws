@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RuleAssociationInitParameters struct {
+
+	// A name for the association that you're creating between a resolver rule and a VPC.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type RuleAssociationObservation struct {
 
 	// The ID of the resolver rule association.
@@ -71,6 +77,10 @@ type RuleAssociationParameters struct {
 type RuleAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RuleAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RuleAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RuleAssociationStatus defines the observed state of RuleAssociation.

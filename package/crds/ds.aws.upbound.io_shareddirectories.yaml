@@ -184,12 +184,34 @@ spec:
                           description: Type of identifier to be used in the id field.
                             Valid value is ACCOUNT. Default is ACCOUNT.
                           type: string
-                      required:
-                      - id
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  method:
+                    description: Method used when sharing a directory. Valid values
+                      are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
+                    type: string
+                  target:
+                    description: Identifier for the directory consumer account with
+                      whom the directory is to be shared. See below.
+                    items:
+                      properties:
+                        id:
+                          description: Identifier of the directory consumer account.
+                          type: string
+                        type:
+                          description: Type of identifier to be used in the id field.
+                            Valid value is ACCOUNT. Default is ACCOUNT.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -391,7 +413,8 @@ spec:
             x-kubernetes-validations:
             - message: target is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.target)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.target)
+                || has(self.initProvider.target)'
           status:
             description: SharedDirectoryStatus defines the observed state of SharedDirectory.
             properties:

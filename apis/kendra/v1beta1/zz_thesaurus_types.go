@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ThesaurusInitParameters struct {
+
+	// The description for a thesaurus.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name for the thesaurus.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The S3 path where your thesaurus file sits in S3. Detailed below.
+	SourceS3Path []ThesaurusSourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
+
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ThesaurusObservation struct {
 
 	// ARN of the thesaurus.
@@ -101,6 +116,9 @@ type ThesaurusParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ThesaurusSourceS3PathInitParameters struct {
+}
+
 type ThesaurusSourceS3PathObservation struct {
 
 	// The name of the S3 bucket that contains the file.
@@ -145,6 +163,10 @@ type ThesaurusSourceS3PathParameters struct {
 type ThesaurusSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ThesaurusParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ThesaurusInitParameters `json:"initProvider,omitempty"`
 }
 
 // ThesaurusStatus defines the observed state of Thesaurus.
@@ -165,8 +187,8 @@ type ThesaurusStatus struct {
 type Thesaurus struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceS3Path) || has(self.initProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
 	Spec   ThesaurusSpec   `json:"spec"`
 	Status ThesaurusStatus `json:"status,omitempty"`
 }

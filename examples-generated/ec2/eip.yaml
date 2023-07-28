@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: web
     region: us-west-1
     vpc: true
-
----
-

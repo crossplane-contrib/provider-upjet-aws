@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationPropertyInitParameters struct {
+
+	// The description of the action configuration property.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether the configuration property is a key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the action configuration property.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates that the property will be used in conjunction with PollForJobs.
+	Queryable *bool `json:"queryable,omitempty" tf:"queryable,omitempty"`
+
+	// Whether the configuration property is a required value.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Whether the configuration property is secret.
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// The type of the configuration property. Valid values: String, Number, Boolean
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ConfigurationPropertyObservation struct {
 
 	// The description of the action configuration property.
@@ -44,28 +68,55 @@ type ConfigurationPropertyParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether the configuration property is a key.
-	// +kubebuilder:validation:Required
-	Key *bool `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the action configuration property.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Indicates that the property will be used in conjunction with PollForJobs.
 	// +kubebuilder:validation:Optional
 	Queryable *bool `json:"queryable,omitempty" tf:"queryable,omitempty"`
 
 	// Whether the configuration property is a required value.
-	// +kubebuilder:validation:Required
-	Required *bool `json:"required" tf:"required,omitempty"`
+	// +kubebuilder:validation:Optional
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
 
 	// Whether the configuration property is secret.
-	// +kubebuilder:validation:Required
-	Secret *bool `json:"secret" tf:"secret,omitempty"`
+	// +kubebuilder:validation:Optional
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// The type of the configuration property. Valid values: String, Number, Boolean
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CustomActionTypeInitParameters struct {
+
+	// The category of the custom action. Valid values: Source, Build, Deploy, Test, Invoke, Approval
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The configuration properties for the custom action. Max 10 items.
+	ConfigurationProperty []ConfigurationPropertyInitParameters `json:"configurationProperty,omitempty" tf:"configuration_property,omitempty"`
+
+	// The details of the input artifact for the action.
+	InputArtifactDetails []InputArtifactDetailsInitParameters `json:"inputArtifactDetails,omitempty" tf:"input_artifact_details,omitempty"`
+
+	// The details of the output artifact of the action.
+	OutputArtifactDetails []OutputArtifactDetailsInitParameters `json:"outputArtifactDetails,omitempty" tf:"output_artifact_details,omitempty"`
+
+	// The provider of the service used in the custom action
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// The settings for an action type.
+	Settings []SettingsInitParameters `json:"settings,omitempty" tf:"settings,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The version identifier of the custom action.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type CustomActionTypeObservation struct {
@@ -147,6 +198,15 @@ type CustomActionTypeParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type InputArtifactDetailsInitParameters struct {
+
+	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
+}
+
 type InputArtifactDetailsObservation struct {
 
 	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
@@ -159,12 +219,21 @@ type InputArtifactDetailsObservation struct {
 type InputArtifactDetailsParameters struct {
 
 	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
-	// +kubebuilder:validation:Required
-	MaximumCount *float64 `json:"maximumCount" tf:"maximum_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
 
 	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
-	// +kubebuilder:validation:Required
-	MinimumCount *float64 `json:"minimumCount" tf:"minimum_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
+}
+
+type OutputArtifactDetailsInitParameters struct {
+
+	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
 }
 
 type OutputArtifactDetailsObservation struct {
@@ -179,12 +248,27 @@ type OutputArtifactDetailsObservation struct {
 type OutputArtifactDetailsParameters struct {
 
 	// The maximum number of artifacts allowed for the action type. Min: 0, Max: 5
-	// +kubebuilder:validation:Required
-	MaximumCount *float64 `json:"maximumCount" tf:"maximum_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
 
 	// The minimum number of artifacts allowed for the action type. Min: 0, Max: 5
-	// +kubebuilder:validation:Required
-	MinimumCount *float64 `json:"minimumCount" tf:"minimum_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
+}
+
+type SettingsInitParameters struct {
+
+	// The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system.
+	EntityURLTemplate *string `json:"entityUrlTemplate,omitempty" tf:"entity_url_template,omitempty"`
+
+	// The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system.
+	ExecutionURLTemplate *string `json:"executionUrlTemplate,omitempty" tf:"execution_url_template,omitempty"`
+
+	// The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+	RevisionURLTemplate *string `json:"revisionUrlTemplate,omitempty" tf:"revision_url_template,omitempty"`
+
+	// The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+	ThirdPartyConfigurationURL *string `json:"thirdPartyConfigurationUrl,omitempty" tf:"third_party_configuration_url,omitempty"`
 }
 
 type SettingsObservation struct {
@@ -225,6 +309,10 @@ type SettingsParameters struct {
 type CustomActionTypeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CustomActionTypeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CustomActionTypeInitParameters `json:"initProvider,omitempty"`
 }
 
 // CustomActionTypeStatus defines the observed state of CustomActionType.
@@ -245,11 +333,11 @@ type CustomActionTypeStatus struct {
 type CustomActionType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.category)",message="category is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputArtifactDetails)",message="inputArtifactDetails is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputArtifactDetails)",message="outputArtifactDetails is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName)",message="providerName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version)",message="version is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.category) || has(self.initProvider.category)",message="category is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputArtifactDetails) || has(self.initProvider.inputArtifactDetails)",message="inputArtifactDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputArtifactDetails) || has(self.initProvider.outputArtifactDetails)",message="outputArtifactDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName) || has(self.initProvider.providerName)",message="providerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || has(self.initProvider.version)",message="version is a required parameter"
 	Spec   CustomActionTypeSpec   `json:"spec"`
 	Status CustomActionTypeStatus `json:"status,omitempty"`
 }

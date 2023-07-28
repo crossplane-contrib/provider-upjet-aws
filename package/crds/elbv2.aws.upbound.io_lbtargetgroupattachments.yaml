@@ -168,6 +168,27 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  availabilityZone:
+                    description: The Availability Zone where the IP address of the
+                      target is to be registered. If the private ip address is outside
+                      of the VPC scope, this value must be set to 'all'.
+                    type: string
+                  port:
+                    description: The port on which targets receive traffic.
+                    type: number
+                  targetId:
+                    description: The ID of the target. This is the Instance ID for
+                      an instance, or the container ID for an ECS container. If the
+                      target type is ip, specify an IP address. If the target type
+                      is lambda, specify the arn of lambda. If the target type is
+                      alb, specify the arn of alb.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -368,7 +389,8 @@ spec:
             x-kubernetes-validations:
             - message: targetId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)
+                || has(self.initProvider.targetId)'
           status:
             description: LBTargetGroupAttachmentStatus defines the observed state
               of LBTargetGroupAttachment.

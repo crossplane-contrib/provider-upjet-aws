@@ -83,6 +83,21 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cookieDuration:
+                    description: The cookie duration in seconds. This determines the
+                      length of the session stickiness.
+                    type: number
+                  enabled:
+                    description: '- The Session Stickiness state of the load balancer.
+                      true to activate session stickiness or false to deactivate session
+                      stickiness.'
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -283,10 +298,12 @@ spec:
             x-kubernetes-validations:
             - message: cookieDuration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.cookieDuration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.cookieDuration)
+                || has(self.initProvider.cookieDuration)'
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
+                || has(self.initProvider.enabled)'
           status:
             description: LBStickinessPolicyStatus defines the observed state of LBStickinessPolicy.
             properties:

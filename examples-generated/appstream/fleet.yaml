@@ -25,6 +25,3 @@ spec:
     vpcConfig:
     - subnetIdRefs:
       - name: example
-
----
-

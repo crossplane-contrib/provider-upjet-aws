@@ -52,6 +52,3 @@ spec:
   forProvider:
     name: examplequeue
     region: us-west-1
-
----
-

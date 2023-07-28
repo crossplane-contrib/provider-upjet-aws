@@ -356,10 +356,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                      required:
-                      - cloudwatchEncryption
-                      - jobBookmarksEncryption
-                      - s3Encryption
                       type: object
                     type: array
                   region:
@@ -368,6 +364,51 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  encryptionConfiguration:
+                    description: –  Configuration block containing encryption configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        cloudwatchEncryption:
+                          items:
+                            properties:
+                              cloudwatchEncryptionMode:
+                                description: 'Encryption mode to use for CloudWatch
+                                  data. Valid values: DISABLED, SSE-KMS. Default value:
+                                  DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                        jobBookmarksEncryption:
+                          items:
+                            properties:
+                              jobBookmarksEncryptionMode:
+                                description: 'Encryption mode to use for job bookmarks
+                                  data. Valid values: CSE-KMS, DISABLED. Default value:
+                                  DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                        s3Encryption:
+                          description: A s3_encryption  block as described below,
+                            which contains encryption configuration for S3 data.
+                          items:
+                            properties:
+                              s3EncryptionMode:
+                                description: 'Encryption mode to use for S3 data.
+                                  Valid values: DISABLED, SSE-KMS, SSE-S3. Default
+                                  value: DISABLED.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -569,7 +610,8 @@ spec:
             x-kubernetes-validations:
             - message: encryptionConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.encryptionConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.encryptionConfiguration)
+                || has(self.initProvider.encryptionConfiguration)'
           status:
             description: SecurityConfigurationStatus defines the observed state of
               SecurityConfiguration.

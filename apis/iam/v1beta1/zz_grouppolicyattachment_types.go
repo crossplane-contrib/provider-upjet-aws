@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GroupPolicyAttachmentInitParameters struct {
+}
+
 type GroupPolicyAttachmentObservation struct {
 
 	// The group the policy should be applied to
@@ -58,6 +61,10 @@ type GroupPolicyAttachmentParameters struct {
 type GroupPolicyAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupPolicyAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GroupPolicyAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupPolicyAttachmentStatus defines the observed state of GroupPolicyAttachment.

@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RuleInitParameters struct {
+
+	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
+	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
+	// This argument should only be specified for FORWARD type rules.
+	TargetIP []TargetIPInitParameters `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
+}
+
 type RuleObservation struct {
 
 	// The ARN (Amazon Resource Name) for the resolver rule.
@@ -96,6 +115,15 @@ type RuleParameters struct {
 	TargetIP []TargetIPParameters `json:"targetIp,omitempty" tf:"target_ip,omitempty"`
 }
 
+type TargetIPInitParameters struct {
+
+	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+
+	// The port at ip that you want to forward DNS queries to. Default value is 53
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
 type TargetIPObservation struct {
 
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
@@ -108,8 +136,8 @@ type TargetIPObservation struct {
 type TargetIPParameters struct {
 
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
-	// +kubebuilder:validation:Required
-	IP *string `json:"ip" tf:"ip,omitempty"`
+	// +kubebuilder:validation:Optional
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// The port at ip that you want to forward DNS queries to. Default value is 53
 	// +kubebuilder:validation:Optional
@@ -120,6 +148,10 @@ type TargetIPParameters struct {
 type RuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // RuleStatus defines the observed state of Rule.
@@ -140,8 +172,8 @@ type RuleStatus struct {
 type Rule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainName)",message="domainName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleType)",message="ruleType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainName) || has(self.initProvider.domainName)",message="domainName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleType) || has(self.initProvider.ruleType)",message="ruleType is a required parameter"
 	Spec   RuleSpec   `json:"spec"`
 	Status RuleStatus `json:"status,omitempty"`
 }

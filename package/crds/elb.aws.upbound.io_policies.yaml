@@ -242,6 +242,26 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  policyAttribute:
+                    description: Policy attribute to apply to the policy.
+                    items:
+                      properties:
+                        name:
+                          type: string
+                      type: object
+                    type: array
+                  policyName:
+                    description: The name of the load balancer policy.
+                    type: string
+                  policyTypeName:
+                    description: The policy type.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -442,10 +462,12 @@ spec:
             x-kubernetes-validations:
             - message: policyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyName)
+                || has(self.initProvider.policyName)'
             - message: policyTypeName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyTypeName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyTypeName)
+                || has(self.initProvider.policyTypeName)'
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:

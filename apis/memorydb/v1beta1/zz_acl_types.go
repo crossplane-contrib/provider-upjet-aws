@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ACLInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Set of MemoryDB user names to be included in this ACL.
+	UserNames []*string `json:"userNames,omitempty" tf:"user_names,omitempty"`
+}
+
 type ACLObservation struct {
 
 	// The ARN of the ACL.
@@ -54,6 +63,10 @@ type ACLParameters struct {
 type ACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // ACLStatus defines the observed state of ACL.

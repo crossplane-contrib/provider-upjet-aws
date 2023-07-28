@@ -169,8 +169,6 @@ spec:
                             this attribute means that the policy is enforced until
                             the queue times out.
                           type: number
-                      required:
-                      - maximumIndividualPlayerLatencyMilliseconds
                       type: object
                     type: array
                   region:
@@ -188,6 +186,48 @@ spec:
                     type: number
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  customEventData:
+                    description: Information to be added to all events that are related
+                      to this game session queue.
+                    type: string
+                  destinations:
+                    description: List of fleet/alias ARNs used by session queue for
+                      placing game sessions.
+                    items:
+                      type: string
+                    type: array
+                  playerLatencyPolicy:
+                    description: One or more policies used to choose fleet based on
+                      player latency. See below.
+                    items:
+                      properties:
+                        maximumIndividualPlayerLatencyMilliseconds:
+                          description: Maximum latency value that is allowed for any
+                            player.
+                          type: number
+                        policyDurationSeconds:
+                          description: Length of time that the policy is enforced
+                            while placing a new game session. Absence of value for
+                            this attribute means that the policy is enforced until
+                            the queue times out.
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  timeoutInSeconds:
+                    description: Maximum time a game session request can remain in
+                      the queue.
+                    type: number
                 type: object
               managementPolicies:
                 default:

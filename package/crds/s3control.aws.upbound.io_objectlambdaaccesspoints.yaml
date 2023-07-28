@@ -294,17 +294,10 @@ spec:
                                             type: string
                                         type: object
                                       type: array
-                                  required:
-                                  - awsLambda
                                   type: object
                                 type: array
-                            required:
-                            - actions
-                            - contentTransformation
                             type: object
                           type: array
-                      required:
-                      - transformationConfiguration
                       type: object
                     type: array
                   name:
@@ -316,6 +309,71 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: The AWS account ID for the owner of the bucket for
+                      which you want to create an Object Lambda Access Point.
+                    type: string
+                  configuration:
+                    description: A configuration block containing details about the
+                      Object Lambda Access Point. See Configuration below for more
+                      details.
+                    items:
+                      properties:
+                        allowedFeatures:
+                          description: 'Allowed features. Valid values: GetObject-Range,
+                            GetObject-PartNumber.'
+                          items:
+                            type: string
+                          type: array
+                        cloudWatchMetricsEnabled:
+                          description: Whether or not the CloudWatch metrics configuration
+                            is enabled.
+                          type: boolean
+                        transformationConfiguration:
+                          description: List of transformation configurations for the
+                            Object Lambda Access Point. See Transformation Configuration
+                            below for more details.
+                          items:
+                            properties:
+                              actions:
+                                description: 'The actions of an Object Lambda Access
+                                  Point configuration. Valid values: GetObject.'
+                                items:
+                                  type: string
+                                type: array
+                              contentTransformation:
+                                description: The content transformation of an Object
+                                  Lambda Access Point configuration. See Content Transformation
+                                  below for more details.
+                                items:
+                                  properties:
+                                    awsLambda:
+                                      description: Configuration for an AWS Lambda
+                                        function. See AWS Lambda below for more details.
+                                      items:
+                                        properties:
+                                          functionPayload:
+                                            description: Additional JSON that provides
+                                              supplemental data to the Lambda function
+                                              used to transform objects.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The name for this Object Lambda Access Point.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -517,10 +575,12 @@ spec:
             x-kubernetes-validations:
             - message: configuration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.configuration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.configuration)
+                || has(self.initProvider.configuration)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ObjectLambdaAccessPointStatus defines the observed state
               of ObjectLambdaAccessPoint.

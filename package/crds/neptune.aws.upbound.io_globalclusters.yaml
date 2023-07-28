@@ -170,6 +170,31 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  deletionProtection:
+                    description: If the Global Cluster should have deletion protection
+                      enabled. The database can't be deleted when this value is set
+                      to true. The default is false.
+                    type: boolean
+                  engine:
+                    description: 'Name of the database engine to be used for this
+                      DB cluster. Current Valid values: neptune. Conflicts with source_db_cluster_identifier.'
+                    type: string
+                  engineVersion:
+                    description: Engine version of the global database. Upgrading
+                      the engine version will result in all cluster members being
+                      immediately updated and will.
+                    type: string
+                  storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted. The
+                      default is false unless source_db_cluster_identifier is specified
+                      and encrypted.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

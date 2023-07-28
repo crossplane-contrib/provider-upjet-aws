@@ -266,6 +266,38 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  actionsEnabled:
+                    description: Indicates whether actions should be executed during
+                      any changes to the alarm state of the composite alarm. Defaults
+                      to true.
+                    type: boolean
+                  alarmDescription:
+                    description: The description for the composite alarm.
+                    type: string
+                  alarmRule:
+                    description: An expression that specifies which other alarms are
+                      to be evaluated to determine this composite alarm's state. For
+                      syntax, see Creating a Composite Alarm. The maximum length is
+                      10240 characters.
+                    type: string
+                  insufficientDataActions:
+                    description: The set of actions to execute when this alarm transitions
+                      to the INSUFFICIENT_DATA state from any other state. Each action
+                      is specified as an ARN. Up to 5 actions are allowed.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -466,7 +498,8 @@ spec:
             x-kubernetes-validations:
             - message: alarmRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.alarmRule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.alarmRule)
+                || has(self.initProvider.alarmRule)'
           status:
             description: CompositeAlarmStatus defines the observed state of CompositeAlarm.
             properties:

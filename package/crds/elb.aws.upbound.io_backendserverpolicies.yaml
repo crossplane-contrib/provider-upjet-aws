@@ -158,6 +158,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  instancePort:
+                    description: The instance port to apply the policy to.
+                    type: number
+                  policyNames:
+                    description: List of Policy Names to apply to the backend server.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,7 +372,8 @@ spec:
             x-kubernetes-validations:
             - message: instancePort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePort)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePort)
+                || has(self.initProvider.instancePort)'
           status:
             description: BackendServerPolicyStatus defines the observed state of BackendServerPolicy.
             properties:

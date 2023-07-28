@@ -11,6 +11,3 @@ spec:
     blockPublicAcls: true
     blockPublicPolicy: true
     region: us-west-1
-
----
-

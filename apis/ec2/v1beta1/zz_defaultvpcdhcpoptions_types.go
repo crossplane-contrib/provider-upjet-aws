@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefaultVPCDHCPOptionsInitParameters struct {
+
+	// The ID of the AWS account that owns the DHCP options set.
+	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DefaultVPCDHCPOptionsObservation struct {
 
 	// The ARN of the DHCP Options Set.
@@ -62,6 +71,10 @@ type DefaultVPCDHCPOptionsParameters struct {
 type DefaultVPCDHCPOptionsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DefaultVPCDHCPOptionsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DefaultVPCDHCPOptionsInitParameters `json:"initProvider,omitempty"`
 }
 
 // DefaultVPCDHCPOptionsStatus defines the observed state of DefaultVPCDHCPOptions.

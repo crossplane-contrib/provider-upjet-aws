@@ -181,8 +181,6 @@ spec:
                                 type: number
                             type: object
                           type: array
-                      required:
-                      - defaultRetention
                       type: object
                     type: array
                   tokenSecretRef:
@@ -208,6 +206,47 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  objectLockEnabled:
+                    description: 'Indicates whether this bucket has an Object Lock
+                      configuration enabled. Defaults to Enabled. Valid values: Enabled.'
+                    type: string
+                  rule:
+                    description: Configuration block for specifying the Object Lock
+                      rule for the specified object. See below.
+                    items:
+                      properties:
+                        defaultRetention:
+                          description: Configuration block for specifying the default
+                            Object Lock retention settings for new objects placed
+                            in the specified bucket. See below.
+                          items:
+                            properties:
+                              days:
+                                description: Number of days that you want to specify
+                                  for the default retention period.
+                                type: number
+                              mode:
+                                description: 'Default Object Lock retention mode you
+                                  want to apply to new objects placed in the specified
+                                  bucket. Valid values: COMPLIANCE, GOVERNANCE.'
+                                type: string
+                              years:
+                                description: Number of years that you want to specify
+                                  for the default retention period.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

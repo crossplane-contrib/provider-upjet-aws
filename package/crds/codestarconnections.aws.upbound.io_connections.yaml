@@ -94,6 +94,32 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  hostArn:
+                    description: The Amazon Resource Name (ARN) of the host associated
+                      with the connection. Conflicts with provider_type
+                    type: string
+                  name:
+                    description: The name of the connection to be created. The name
+                      must be unique in the calling AWS account. Changing name will
+                      create a new resource.
+                    type: string
+                  providerType:
+                    description: The name of the external provider where your third-party
+                      code repository is configured. Valid values are Bitbucket, GitHub
+                      or GitHubEnterpriseServer. Changing provider_type will create
+                      a new resource. Conflicts with host_arn
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -294,7 +320,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ConnectionStatus defines the observed state of Connection.
             properties:

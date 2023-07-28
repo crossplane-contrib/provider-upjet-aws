@@ -173,6 +173,35 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Whether the event subscription should be enabled.
+                    type: boolean
+                  eventCategories:
+                    description: List of event categories to listen for, see DescribeEventCategories
+                      for a canonical list.
+                    items:
+                      type: string
+                    type: array
+                  sourceIds:
+                    description: Ids of sources to listen to.
+                    items:
+                      type: string
+                    type: array
+                  sourceType:
+                    description: 'Type of source for events. Valid values: replication-instance
+                      or replication-task'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -373,7 +402,8 @@ spec:
             x-kubernetes-validations:
             - message: eventCategories is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventCategories)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventCategories)
+                || has(self.initProvider.eventCategories)'
           status:
             description: EventSubscriptionStatus defines the observed state of EventSubscription.
             properties:

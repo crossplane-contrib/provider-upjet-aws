@@ -87,10 +87,6 @@ spec:
                           description: The add-on type. There is currently only one
                             valid type AutoSnapshot.
                           type: string
-                      required:
-                      - snapshotTime
-                      - status
-                      - type
                       type: object
                     type: array
                   availabilityZone:
@@ -129,6 +125,64 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addOn:
+                    description: The add on configuration for the instance. Detailed
+                      below.
+                    items:
+                      properties:
+                        snapshotTime:
+                          description: The daily time when an automatic snapshot will
+                            be created. Must be in HH:00 format, and in an hourly
+                            increment and specified in Coordinated Universal Time
+                            (UTC). The snapshot will be automatically created between
+                            the time specified and up to 45 minutes after.
+                          type: string
+                        status:
+                          description: 'The status of the add on. Valid Values: Enabled,
+                            Disabled.'
+                          type: string
+                        type:
+                          description: The add-on type. There is currently only one
+                            valid type AutoSnapshot.
+                          type: string
+                      type: object
+                    type: array
+                  availabilityZone:
+                    description: The Availability Zone in which to create your instance
+                      (see list below)
+                    type: string
+                  blueprintId:
+                    description: 'The ID for a virtual private server image. A list
+                      of available blueprint IDs can be obtained using the AWS CLI
+                      command: aws lightsail get-blueprints'
+                    type: string
+                  bundleId:
+                    description: The bundle of specification information (see list
+                      below)
+                    type: string
+                  ipAddressType:
+                    description: 'The IP address type of the Lightsail Instance. Valid
+                      Values: dualstack | ipv4.'
+                    type: string
+                  keyPairName:
+                    description: The name of your key pair. Created in the Lightsail
+                      console (cannot use aws_key_pair at this time)
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  userData:
+                    description: Single lined launch script as a string to configure
+                      server with additional user data
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -330,13 +384,16 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
+                || has(self.initProvider.availabilityZone)'
             - message: blueprintId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.blueprintId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.blueprintId)
+                || has(self.initProvider.blueprintId)'
             - message: bundleId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bundleId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bundleId)
+                || has(self.initProvider.bundleId)'
           status:
             description: InstanceStatus defines the observed state of Instance.
             properties:

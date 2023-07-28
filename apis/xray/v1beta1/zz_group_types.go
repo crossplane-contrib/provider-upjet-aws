@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GroupInitParameters struct {
+
+	// The filter expression defining criteria by which to group traces. more info can be found in official docs.
+	FilterExpression *string `json:"filterExpression,omitempty" tf:"filter_expression,omitempty"`
+
+	// The name of the group.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Configuration options for enabling insights.
+	InsightsConfiguration []InsightsConfigurationInitParameters `json:"insightsConfiguration,omitempty" tf:"insights_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type GroupObservation struct {
 
 	// The ARN of the Group.
@@ -61,6 +76,15 @@ type GroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type InsightsConfigurationInitParameters struct {
+
+	// Specifies whether insights are enabled.
+	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
+
+	// Specifies whether insight notifications are enabled.
+	NotificationsEnabled *bool `json:"notificationsEnabled,omitempty" tf:"notifications_enabled,omitempty"`
+}
+
 type InsightsConfigurationObservation struct {
 
 	// Specifies whether insights are enabled.
@@ -73,8 +97,8 @@ type InsightsConfigurationObservation struct {
 type InsightsConfigurationParameters struct {
 
 	// Specifies whether insights are enabled.
-	// +kubebuilder:validation:Required
-	InsightsEnabled *bool `json:"insightsEnabled" tf:"insights_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
 
 	// Specifies whether insight notifications are enabled.
 	// +kubebuilder:validation:Optional
@@ -85,6 +109,10 @@ type InsightsConfigurationParameters struct {
 type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupStatus defines the observed state of Group.
@@ -105,8 +133,8 @@ type GroupStatus struct {
 type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterExpression)",message="filterExpression is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupName)",message="groupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterExpression) || has(self.initProvider.filterExpression)",message="filterExpression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupName) || has(self.initProvider.groupName)",message="groupName is a required parameter"
 	Spec   GroupSpec   `json:"spec"`
 	Status GroupStatus `json:"status,omitempty"`
 }

@@ -18,6 +18,3 @@ spec:
       source: 125.191.14.85/32
     - description: STL
       source: 44.98.100.0/24
-
----
-

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountInitParameters struct {
+}
+
 type AccountObservation struct {
 
 	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
@@ -46,6 +49,9 @@ type AccountParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type ThrottleSettingsInitParameters struct {
+}
+
 type ThrottleSettingsObservation struct {
 
 	// Absolute maximum number of times API Gateway allows the API to be called per second (RPS).
@@ -62,6 +68,10 @@ type ThrottleSettingsParameters struct {
 type AccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountStatus defines the observed state of Account.

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayRouteTableAssociationInitParameters struct {
+}
+
 type TransitGatewayRouteTableAssociationObservation struct {
 
 	// EC2 Transit Gateway Route Table identifier combined with EC2 Transit Gateway Attachment identifier
@@ -69,6 +72,10 @@ type TransitGatewayRouteTableAssociationParameters struct {
 type TransitGatewayRouteTableAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayRouteTableAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayRouteTableAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayRouteTableAssociationStatus defines the observed state of TransitGatewayRouteTableAssociation.

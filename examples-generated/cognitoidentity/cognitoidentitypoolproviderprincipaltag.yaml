@@ -79,6 +79,3 @@ spec:
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

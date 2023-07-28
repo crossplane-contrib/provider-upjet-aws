@@ -316,6 +316,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowedPrefixes:
+                    description: VPC prefixes (CIDRs) to advertise to the Direct Connect
+                      gateway. Defaults to the CIDR block of the VPC associated with
+                      the Virtual Gateway. To enable drift detection, must be configured.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

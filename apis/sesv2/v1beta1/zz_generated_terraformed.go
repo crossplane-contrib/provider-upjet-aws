@@ -69,6 +69,25 @@ func (tr *ConfigurationSet) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ConfigurationSet
+func (tr *ConfigurationSet) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ConfigurationSet
+func (tr *ConfigurationSet) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ConfigurationSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ConfigurationSet) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +160,25 @@ func (tr *ConfigurationSetEventDestination) SetParameters(params map[string]any)
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ConfigurationSetEventDestination
+func (tr *ConfigurationSetEventDestination) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ConfigurationSetEventDestination
+func (tr *ConfigurationSetEventDestination) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ConfigurationSetEventDestination using its observed tfState.
@@ -217,6 +255,25 @@ func (tr *DedicatedIPPool) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this DedicatedIPPool
+func (tr *DedicatedIPPool) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this DedicatedIPPool
+func (tr *DedicatedIPPool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this DedicatedIPPool using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DedicatedIPPool) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +346,25 @@ func (tr *EmailIdentity) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this EmailIdentity
+func (tr *EmailIdentity) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EmailIdentity
+func (tr *EmailIdentity) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EmailIdentity using its observed tfState.
@@ -365,6 +441,25 @@ func (tr *EmailIdentityFeedbackAttributes) SetParameters(params map[string]any) 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EmailIdentityFeedbackAttributes
+func (tr *EmailIdentityFeedbackAttributes) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EmailIdentityFeedbackAttributes
+func (tr *EmailIdentityFeedbackAttributes) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this EmailIdentityFeedbackAttributes using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EmailIdentityFeedbackAttributes) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +532,25 @@ func (tr *EmailIdentityMailFromAttributes) SetParameters(params map[string]any) 
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this EmailIdentityMailFromAttributes
+func (tr *EmailIdentityMailFromAttributes) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EmailIdentityMailFromAttributes
+func (tr *EmailIdentityMailFromAttributes) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EmailIdentityMailFromAttributes using its observed tfState.

@@ -155,6 +155,14 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  resourcePolicy:
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -355,7 +363,8 @@ spec:
             x-kubernetes-validations:
             - message: resourcePolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourcePolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourcePolicy)
+                || has(self.initProvider.resourcePolicy)'
           status:
             description: ModelPackageGroupPolicyStatus defines the observed state
               of ModelPackageGroupPolicy.

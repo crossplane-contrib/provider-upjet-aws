@@ -106,6 +106,44 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  content:
+                    description: The policy content to add to the new policy. For
+                      example, if you create a service control policy (SCP), this
+                      string must be JSON text that specifies the permissions that
+                      admins in attached accounts can delegate to their users, groups,
+                      and roles. For more information about the SCP syntax, see the
+                      Service Control Policy Syntax documentation and for more information
+                      on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+                    type: string
+                  description:
+                    description: A description to assign to the policy.
+                    type: string
+                  name:
+                    description: The friendly name to assign to the policy.
+                    type: string
+                  skipDestroy:
+                    description: If set to true, destroy will not delete the policy
+                      and instead just remove the resource from state. This can be
+                      useful in situations where the policies (and the associated
+                      attachment) must be preserved to meet the AWS minimum requirement
+                      of 1 attached policy.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY,
+                      BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY.
+                      Defaults to SERVICE_CONTROL_POLICY.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -306,10 +344,12 @@ spec:
             x-kubernetes-validations:
             - message: content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
+                || has(self.initProvider.content)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReadinessCheckInitParameters struct {
+
+	// Name describing the resource set that will be monitored for readiness.
+	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ReadinessCheckObservation struct {
 
 	// ARN of the readiness_check
@@ -50,6 +59,10 @@ type ReadinessCheckParameters struct {
 type ReadinessCheckSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReadinessCheckParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReadinessCheckInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReadinessCheckStatus defines the observed state of ReadinessCheck.
@@ -70,7 +83,7 @@ type ReadinessCheckStatus struct {
 type ReadinessCheck struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetName)",message="resourceSetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetName) || has(self.initProvider.resourceSetName)",message="resourceSetName is a required parameter"
 	Spec   ReadinessCheckSpec   `json:"spec"`
 	Status ReadinessCheckStatus `json:"status,omitempty"`
 }

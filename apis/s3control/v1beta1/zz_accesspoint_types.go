@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessPointInitParameters struct {
+
+	// AWS account ID for the owner of the bucket for which you want to create an access point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// AWS account ID associated with the S3 bucket associated with this access point.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
+	// Name you want to assign to this access point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Valid JSON document that specifies the policy that you want to apply to this access point. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_s3control_access_point_policy. To remove the policy, set it to "{}" (an empty JSON document).
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. Detailed below.
+	PublicAccessBlockConfiguration []PublicAccessBlockConfigurationInitParameters `json:"publicAccessBlockConfiguration,omitempty" tf:"public_access_block_configuration,omitempty"`
+
+	// Configuration block to restrict access to this access point to requests from the specified Virtual Private Cloud (VPC). Required for S3 on Outposts. Detailed below.
+	VPCConfiguration []VPCConfigurationInitParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
+}
+
 type AccessPointObservation struct {
 
 	// AWS account ID for the owner of the bucket for which you want to create an access point.
@@ -105,6 +126,21 @@ type AccessPointParameters struct {
 	VPCConfiguration []VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
+type PublicAccessBlockConfigurationInitParameters struct {
+
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
+
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
+
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
+
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
+}
+
 type PublicAccessBlockConfigurationObservation struct {
 
 	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
@@ -139,6 +175,9 @@ type PublicAccessBlockConfigurationParameters struct {
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
+type VPCConfigurationInitParameters struct {
+}
+
 type VPCConfigurationObservation struct {
 
 	// This access point will only allow connections from the specified VPC ID.
@@ -166,6 +205,10 @@ type VPCConfigurationParameters struct {
 type AccessPointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccessPointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccessPointInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccessPointStatus defines the observed state of AccessPoint.
@@ -186,7 +229,7 @@ type AccessPointStatus struct {
 type AccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AccessPointSpec   `json:"spec"`
 	Status AccessPointStatus `json:"status,omitempty"`
 }

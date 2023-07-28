@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationConfigurationInitParameters struct {
+
+	// A valid CIDR block for IP filtering. Required for IP.
+	AllowedIPRange *string `json:"allowedIpRange,omitempty" tf:"allowed_ip_range,omitempty"`
+}
+
 type AuthenticationConfigurationObservation struct {
 
 	// A valid CIDR block for IP filtering. Required for IP.
@@ -30,6 +36,15 @@ type AuthenticationConfigurationParameters struct {
 	SecretTokenSecretRef *v1.SecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
 }
 
+type FilterInitParameters struct {
+
+	// The JSON path to filter on.
+	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
+
+	// The value to match on (e.g., refs/heads/{Branch}). See AWS docs for details.
+	MatchEquals *string `json:"matchEquals,omitempty" tf:"match_equals,omitempty"`
+}
+
 type FilterObservation struct {
 
 	// The JSON path to filter on.
@@ -42,12 +57,30 @@ type FilterObservation struct {
 type FilterParameters struct {
 
 	// The JSON path to filter on.
-	// +kubebuilder:validation:Required
-	JSONPath *string `json:"jsonPath" tf:"json_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
 
 	// The value to match on (e.g., refs/heads/{Branch}). See AWS docs for details.
-	// +kubebuilder:validation:Required
-	MatchEquals *string `json:"matchEquals" tf:"match_equals,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchEquals *string `json:"matchEquals,omitempty" tf:"match_equals,omitempty"`
+}
+
+type WebhookInitParameters struct {
+
+	// The type of authentication  to use. One of IP, GITHUB_HMAC, or UNAUTHENTICATED.
+	Authentication *string `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// An auth block. Required for IP and GITHUB_HMAC. Auth blocks are documented below.
+	AuthenticationConfiguration []AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// One or more filter blocks. Filter blocks are documented below.
+	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
+	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 }
 
 type WebhookObservation struct {
@@ -128,6 +161,10 @@ type WebhookParameters struct {
 type WebhookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebhookParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WebhookInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebhookStatus defines the observed state of Webhook.
@@ -148,9 +185,9 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication)",message="authentication is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filter)",message="filter is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetAction)",message="targetAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication) || has(self.initProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filter) || has(self.initProvider.filter)",message="filter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetAction) || has(self.initProvider.targetAction)",message="targetAction is a required parameter"
 	Spec   WebhookSpec   `json:"spec"`
 	Status WebhookStatus `json:"status,omitempty"`
 }

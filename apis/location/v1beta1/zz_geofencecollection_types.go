@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GeofenceCollectionInitParameters struct {
+
+	// The optional description for the geofence collection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type GeofenceCollectionObservation struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all AWS.
@@ -71,6 +80,10 @@ type GeofenceCollectionParameters struct {
 type GeofenceCollectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GeofenceCollectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GeofenceCollectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // GeofenceCollectionStatus defines the observed state of GeofenceCollection.

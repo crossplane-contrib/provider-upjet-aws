@@ -155,8 +155,6 @@ spec:
                           type: number
                         volumeType:
                           type: string
-                      required:
-                      - deviceName
                       type: object
                     type: array
                   ebsOptimized:
@@ -177,8 +175,6 @@ spec:
                           type: boolean
                         virtualName:
                           type: string
-                      required:
-                      - deviceName
                       type: object
                     type: array
                   getPasswordData:
@@ -261,9 +257,6 @@ spec:
                         networkInterfaceId:
                           description: The Spot Instance Request ID.
                           type: string
-                      required:
-                      - deviceIndex
-                      - networkInterfaceId
                       type: object
                     type: array
                   placementGroup:
@@ -521,6 +514,296 @@ spec:
                     type: boolean
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  ami:
+                    type: string
+                  associatePublicIpAddress:
+                    type: boolean
+                  availabilityZone:
+                    type: string
+                  blockDurationMinutes:
+                    description: The required duration for the Spot instances, in
+                      minutes. This value must be a multiple of 60 (60, 120, 180,
+                      240, 300, or 360). The duration period starts as soon as your
+                      Spot instance receives its instance ID. At the end of the duration
+                      period, Amazon EC2 marks the Spot instance for termination and
+                      provides a Spot instance termination notice, which gives the
+                      instance a two-minute warning before it terminates. Note that
+                      you can't specify an Availability Zone group or a launch group
+                      if you specify a duration.
+                    type: number
+                  capacityReservationSpecification:
+                    items:
+                      properties:
+                        capacityReservationPreference:
+                          type: string
+                        capacityReservationTarget:
+                          items:
+                            properties:
+                              capacityReservationId:
+                                description: The Spot Instance Request ID.
+                                type: string
+                              capacityReservationResourceGroupArn:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  cpuCoreCount:
+                    type: number
+                  cpuOptions:
+                    items:
+                      properties:
+                        amdSevSnp:
+                          type: string
+                        coreCount:
+                          type: number
+                        threadsPerCore:
+                          type: number
+                      type: object
+                    type: array
+                  cpuThreadsPerCore:
+                    type: number
+                  creditSpecification:
+                    items:
+                      properties:
+                        cpuCredits:
+                          type: string
+                      type: object
+                    type: array
+                  disableApiStop:
+                    type: boolean
+                  disableApiTermination:
+                    type: boolean
+                  ebsBlockDevice:
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          type: boolean
+                        deviceName:
+                          type: string
+                        encrypted:
+                          type: boolean
+                        iops:
+                          type: number
+                        kmsKeyId:
+                          description: The Spot Instance Request ID.
+                          type: string
+                        snapshotId:
+                          description: The Spot Instance Request ID.
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                        throughput:
+                          type: number
+                        volumeSize:
+                          type: number
+                        volumeType:
+                          type: string
+                      type: object
+                    type: array
+                  ebsOptimized:
+                    type: boolean
+                  enclaveOptions:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                      type: object
+                    type: array
+                  ephemeralBlockDevice:
+                    items:
+                      properties:
+                        deviceName:
+                          type: string
+                        noDevice:
+                          type: boolean
+                        virtualName:
+                          type: string
+                      type: object
+                    type: array
+                  getPasswordData:
+                    type: boolean
+                  hibernation:
+                    type: boolean
+                  hostId:
+                    description: The Spot Instance Request ID.
+                    type: string
+                  hostResourceGroupArn:
+                    type: string
+                  iamInstanceProfile:
+                    type: string
+                  instanceInitiatedShutdownBehavior:
+                    type: string
+                  instanceInterruptionBehavior:
+                    description: Indicates Spot instance behavior when it is interrupted.
+                      Valid values are terminate, stop, or hibernate. Default value
+                      is terminate.
+                    type: string
+                  instanceType:
+                    type: string
+                  ipv6AddressCount:
+                    type: number
+                  ipv6Addresses:
+                    items:
+                      type: string
+                    type: array
+                  keyName:
+                    type: string
+                  launchGroup:
+                    description: A launch group is a group of spot instances that
+                      launch together and terminate together. If left empty instances
+                      are launched and terminated individually.
+                    type: string
+                  launchTemplate:
+                    items:
+                      properties:
+                        id:
+                          description: The Spot Instance Request ID.
+                          type: string
+                        name:
+                          type: string
+                        version:
+                          type: string
+                      type: object
+                    type: array
+                  maintenanceOptions:
+                    items:
+                      properties:
+                        autoRecovery:
+                          type: string
+                      type: object
+                    type: array
+                  metadataOptions:
+                    items:
+                      properties:
+                        httpEndpoint:
+                          type: string
+                        httpPutResponseHopLimit:
+                          type: number
+                        httpTokens:
+                          type: string
+                        instanceMetadataTags:
+                          description: Key-value map of resource tags.
+                          type: string
+                      type: object
+                    type: array
+                  monitoring:
+                    type: boolean
+                  networkInterface:
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          type: boolean
+                        deviceIndex:
+                          type: number
+                        networkCardIndex:
+                          type: number
+                        networkInterfaceId:
+                          description: The Spot Instance Request ID.
+                          type: string
+                      type: object
+                    type: array
+                  placementGroup:
+                    type: string
+                  placementPartitionNumber:
+                    type: number
+                  privateDnsNameOptions:
+                    items:
+                      properties:
+                        enableResourceNameDnsARecord:
+                          type: boolean
+                        enableResourceNameDnsAaaaRecord:
+                          type: boolean
+                        hostnameType:
+                          type: string
+                      type: object
+                    type: array
+                  privateIp:
+                    description: The private IP address assigned to the instance
+                    type: string
+                  rootBlockDevice:
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          type: boolean
+                        encrypted:
+                          type: boolean
+                        iops:
+                          type: number
+                        kmsKeyId:
+                          description: The Spot Instance Request ID.
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                        throughput:
+                          type: number
+                        volumeSize:
+                          type: number
+                        volumeType:
+                          type: string
+                      type: object
+                    type: array
+                  secondaryPrivateIps:
+                    items:
+                      type: string
+                    type: array
+                  securityGroups:
+                    items:
+                      type: string
+                    type: array
+                  sourceDestCheck:
+                    type: boolean
+                  spotPrice:
+                    description: The maximum price to request on the spot market.
+                    type: string
+                  spotType:
+                    description: If set to one-time, after the instance is terminated,
+                      the spot request will be closed.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tenancy:
+                    type: string
+                  userData:
+                    type: string
+                  userDataBase64:
+                    type: string
+                  userDataReplaceOnChange:
+                    type: boolean
+                  validFrom:
+                    description: The start date and time of the request, in UTC RFC3339
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to
+                      start fulfilling the request immediately.
+                    type: string
+                  validUntil:
+                    description: The end date and time of the request, in UTC RFC3339
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no
+                      new Spot instance requests are placed or enabled to fulfill
+                      the request. The default end date is 7 days from the current
+                      date.
+                    type: string
+                  volumeTags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  waitForFulfillment:
+                    type: boolean
                 type: object
               managementPolicies:
                 default:

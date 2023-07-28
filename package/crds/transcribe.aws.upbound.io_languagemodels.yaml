@@ -159,8 +159,6 @@ spec:
                         tuningDataS3Uri:
                           description: S3 URI where tuning data is located.
                           type: string
-                      required:
-                      - s3Uri
                       type: object
                     type: array
                   languageCode:
@@ -178,6 +176,37 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  baseModelName:
+                    description: Name of reference base model.
+                    type: string
+                  inputDataConfig:
+                    description: The input data config for the LanguageModel. See
+                      Input Data Config for more details.
+                    items:
+                      properties:
+                        s3Uri:
+                          description: S3 URI where training data is located.
+                          type: string
+                        tuningDataS3Uri:
+                          description: S3 URI where tuning data is located.
+                          type: string
+                      type: object
+                    type: array
+                  languageCode:
+                    description: The language code you selected for your language
+                      model. Refer to the supported languages page for accepted codes.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -379,13 +408,16 @@ spec:
             x-kubernetes-validations:
             - message: baseModelName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.baseModelName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.baseModelName)
+                || has(self.initProvider.baseModelName)'
             - message: inputDataConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.inputDataConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.inputDataConfig)
+                || has(self.initProvider.inputDataConfig)'
             - message: languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
+                || has(self.initProvider.languageCode)'
           status:
             description: LanguageModelStatus defines the observed state of LanguageModel.
             properties:

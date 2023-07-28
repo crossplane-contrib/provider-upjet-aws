@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HostInitParameters struct {
+
+	// The name of the host to be created. The name must be unique in the calling AWS account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The endpoint of the infrastructure to be represented by the host after it is created.
+	ProviderEndpoint *string `json:"providerEndpoint,omitempty" tf:"provider_endpoint,omitempty"`
+
+	// The name of the external provider where your third-party code repository is configured.
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// The VPC configuration to be provisioned for the host. A VPC must be configured, and the infrastructure to be represented by the host must already be connected to the VPC.
+	VPCConfiguration []VPCConfigurationInitParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
+}
+
 type HostObservation struct {
 
 	// The CodeStar Host ARN.
@@ -61,6 +76,21 @@ type HostParameters struct {
 	VPCConfiguration []VPCConfigurationParameters `json:"vpcConfiguration,omitempty" tf:"vpc_configuration,omitempty"`
 }
 
+type VPCConfigurationInitParameters struct {
+
+	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
+
+	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+}
+
 type VPCConfigurationObservation struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
@@ -79,26 +109,30 @@ type VPCConfigurationObservation struct {
 type VPCConfigurationParameters struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
-	// +kubebuilder:validation:Required
-	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
-	// +kubebuilder:validation:Required
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
 	TLSCertificate *string `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 
 	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
-	// +kubebuilder:validation:Required
-	VPCID *string `json:"vpcId" tf:"vpc_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 // HostSpec defines the desired state of Host
 type HostSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HostParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HostInitParameters `json:"initProvider,omitempty"`
 }
 
 // HostStatus defines the observed state of Host.
@@ -119,9 +153,9 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerEndpoint)",message="providerEndpoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerType)",message="providerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerEndpoint) || has(self.initProvider.providerEndpoint)",message="providerEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerType) || has(self.initProvider.providerType)",message="providerType is a required parameter"
 	Spec   HostSpec   `json:"spec"`
 	Status HostStatus `json:"status,omitempty"`
 }

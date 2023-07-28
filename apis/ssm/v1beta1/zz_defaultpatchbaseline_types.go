@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefaultPatchBaselineInitParameters struct {
+}
+
 type DefaultPatchBaselineObservation struct {
 
 	// ID of the patch baseline.
@@ -96,6 +99,10 @@ type DefaultPatchBaselineParameters struct {
 type DefaultPatchBaselineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DefaultPatchBaselineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DefaultPatchBaselineInitParameters `json:"initProvider,omitempty"`
 }
 
 // DefaultPatchBaselineStatus defines the observed state of DefaultPatchBaseline.

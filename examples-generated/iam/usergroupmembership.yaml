@@ -66,6 +66,3 @@ metadata:
   name: user1
 spec:
   forProvider: {}
-
----
-

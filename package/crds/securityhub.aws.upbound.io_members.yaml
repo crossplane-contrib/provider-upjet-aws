@@ -84,6 +84,22 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: The ID of the member AWS account.
+                    type: string
+                  email:
+                    description: The email of the member AWS account.
+                    type: string
+                  invite:
+                    description: Boolean whether to invite the account to Security
+                      Hub as a member. Defaults to false.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -284,7 +300,8 @@ spec:
             x-kubernetes-validations:
             - message: accountId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)
+                || has(self.initProvider.accountId)'
           status:
             description: MemberStatus defines the observed state of Member.
             properties:

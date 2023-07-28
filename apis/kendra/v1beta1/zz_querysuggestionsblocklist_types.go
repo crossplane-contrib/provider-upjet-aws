@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type QuerySuggestionsBlockListInitParameters struct {
+
+	// The description for a block list.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name for the block list.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The S3 path where your block list text file sits in S3. Detailed below.
+	SourceS3Path []SourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
+
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type QuerySuggestionsBlockListObservation struct {
 
 	// ARN of the block list.
@@ -99,6 +114,12 @@ type QuerySuggestionsBlockListParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SourceS3PathInitParameters struct {
+
+	// The name of the file.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
 type SourceS3PathObservation struct {
 
 	// The name of the S3 bucket that contains the file.
@@ -125,14 +146,18 @@ type SourceS3PathParameters struct {
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// The name of the file.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 // QuerySuggestionsBlockListSpec defines the desired state of QuerySuggestionsBlockList
 type QuerySuggestionsBlockListSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     QuerySuggestionsBlockListParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider QuerySuggestionsBlockListInitParameters `json:"initProvider,omitempty"`
 }
 
 // QuerySuggestionsBlockListStatus defines the observed state of QuerySuggestionsBlockList.
@@ -153,8 +178,8 @@ type QuerySuggestionsBlockListStatus struct {
 type QuerySuggestionsBlockList struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceS3Path) || has(self.initProvider.sourceS3Path)",message="sourceS3Path is a required parameter"
 	Spec   QuerySuggestionsBlockListSpec   `json:"spec"`
 	Status QuerySuggestionsBlockListStatus `json:"status,omitempty"`
 }

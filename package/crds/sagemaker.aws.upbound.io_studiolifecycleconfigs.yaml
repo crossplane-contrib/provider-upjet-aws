@@ -87,6 +87,25 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  studioLifecycleConfigAppType:
+                    description: The App type that the Lifecycle Configuration is
+                      attached to. Valid values are JupyterServer and KernelGateway.
+                    type: string
+                  studioLifecycleConfigContent:
+                    description: The content of your Studio Lifecycle Configuration
+                      script. This content must be base64 encoded.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -287,10 +306,12 @@ spec:
             x-kubernetes-validations:
             - message: studioLifecycleConfigAppType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType)
+                || has(self.initProvider.studioLifecycleConfigAppType)'
             - message: studioLifecycleConfigContent is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent)
+                || has(self.initProvider.studioLifecycleConfigContent)'
           status:
             description: StudioLifecycleConfigStatus defines the observed state of
               StudioLifecycleConfig.

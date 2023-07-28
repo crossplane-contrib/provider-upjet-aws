@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SiteInitParameters struct {
+
+	// Description of the Site.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The site location as documented below.
+	Location []SiteLocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type SiteLocationInitParameters struct {
+
+	// Address of the location.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Latitude of the location.
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	// Longitude of the location.
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
+}
+
 type SiteLocationObservation struct {
 
 	// Address of the location.
@@ -101,6 +125,10 @@ type SiteParameters struct {
 type SiteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SiteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SiteInitParameters `json:"initProvider,omitempty"`
 }
 
 // SiteStatus defines the observed state of Site.

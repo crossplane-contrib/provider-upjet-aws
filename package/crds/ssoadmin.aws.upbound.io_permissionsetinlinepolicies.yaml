@@ -163,6 +163,15 @@ spec:
                 - instanceArn
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  inlinePolicy:
+                    description: The IAM inline policy to attach to a Permission Set.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -363,7 +372,8 @@ spec:
             x-kubernetes-validations:
             - message: inlinePolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.inlinePolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.inlinePolicy)
+                || has(self.initProvider.inlinePolicy)'
           status:
             description: PermissionSetInlinePolicyStatus defines the observed state
               of PermissionSetInlinePolicy.

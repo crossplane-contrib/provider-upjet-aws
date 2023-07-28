@@ -240,6 +240,21 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  preSignedUrl:
+                    description: A URL that contains a Signature Version 4 signed
+                      request for the StartDBInstanceAutomatedBackupsReplication action
+                      to be called in the AWS Region of the source DB instance.
+                    type: string
+                  retentionPeriod:
+                    description: The retention period for the replicated automated
+                      backups, defaults to 7.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'

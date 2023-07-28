@@ -85,6 +85,24 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountIds:
+                    description: 'Set of account IDs. Can contain one of: the Organization''s
+                      Administrator Account, or one or more Member Accounts.'
+                    items:
+                      type: string
+                    type: array
+                  resourceTypes:
+                    description: Type of resources to scan. Valid values are EC2,
+                      ECR, and LAMBDA. At least one item is required.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -285,10 +303,12 @@ spec:
             x-kubernetes-validations:
             - message: accountIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountIds)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountIds)
+                || has(self.initProvider.accountIds)'
             - message: resourceTypes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceTypes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceTypes)
+                || has(self.initProvider.resourceTypes)'
           status:
             description: EnablerStatus defines the observed state of Enabler.
             properties:

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttachmentInitParameters struct {
+}
+
 type AttachmentObservation struct {
 
 	// ARN of an ALB Target Group.
@@ -97,6 +100,10 @@ type AttachmentParameters struct {
 type AttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // AttachmentStatus defines the observed state of Attachment.

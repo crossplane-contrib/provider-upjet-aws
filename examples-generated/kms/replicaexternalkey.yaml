@@ -41,6 +41,3 @@ spec:
     multiRegion: true
     provider: ${aws.primary}
     region: us-west-1
-
----
-

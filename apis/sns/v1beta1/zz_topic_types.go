@@ -13,6 +13,51 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TopicInitParameters struct {
+
+	// Percentage of success to sample
+	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
+
+	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
+	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
+
+	// The SNS delivery policy. More on AWS documentation
+	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
+
+	// The display name for the topic
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
+	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
+
+	// Percentage of success to sample
+	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
+
+	// Percentage of success to sample
+	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
+
+	// The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
+	// Percentage of success to sample
+	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+
+	// The fully-formed AWS policy as JSON.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// If SignatureVersion should be 1 (SHA1) or 2 (SHA256). The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
+	SignatureVersion *float64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
+
+	// Percentage of success to sample
+	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Tracing mode of an Amazon SNS topic. Valid values: "PassThrough", "Active".
+	TracingConfig *string `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
+}
+
 type TopicObservation struct {
 
 	// IAM role for failure feedback
@@ -308,6 +353,10 @@ type TopicParameters struct {
 type TopicSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TopicParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TopicInitParameters `json:"initProvider,omitempty"`
 }
 
 // TopicStatus defines the observed state of Topic.

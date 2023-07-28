@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DevicePoolInitParameters struct {
+
+	// The device pool's description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The number of devices that Device Farm can add to your device pool.
+	MaxDevices *float64 `json:"maxDevices,omitempty" tf:"max_devices,omitempty"`
+
+	// The name of the Device Pool
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The device pool's rules. See Rule.
+	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DevicePoolObservation struct {
 
 	// The Amazon Resource Name of this Device Pool
@@ -86,6 +104,18 @@ type DevicePoolParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RuleInitParameters struct {
+
+	// The rule's stringified attribute. Valid values are: APPIUM_VERSION, ARN, AVAILABILITY, FLEET_TYPE, FORM_FACTOR, INSTANCE_ARN, INSTANCE_LABELS, MANUFACTURER, MODEL, OS_VERSION, PLATFORM, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED.
+	Attribute *string `json:"attribute,omitempty" tf:"attribute,omitempty"`
+
+	// Specifies how Device Farm compares the rule's attribute to the value. For the operators that are supported by each attribute. Valid values are: EQUALS, NOT_IN, IN, GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, CONTAINS.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// The rule's value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type RuleObservation struct {
 
 	// The rule's stringified attribute. Valid values are: APPIUM_VERSION, ARN, AVAILABILITY, FLEET_TYPE, FORM_FACTOR, INSTANCE_ARN, INSTANCE_LABELS, MANUFACTURER, MODEL, OS_VERSION, PLATFORM, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED.
@@ -117,6 +147,10 @@ type RuleParameters struct {
 type DevicePoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DevicePoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DevicePoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // DevicePoolStatus defines the observed state of DevicePool.
@@ -137,8 +171,8 @@ type DevicePoolStatus struct {
 type DevicePool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule)",message="rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   DevicePoolSpec   `json:"spec"`
 	Status DevicePoolStatus `json:"status,omitempty"`
 }

@@ -101,6 +101,3 @@ spec:
         testing.upbound.io/example-name: example
     provider: ${aws.secondary}
     region: us-west-1
-
----
-

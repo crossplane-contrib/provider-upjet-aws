@@ -86,6 +86,24 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  logGroupNames:
+                    description: Specific log groups to use with the query.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the query.
+                    type: string
+                  queryString:
+                    description: The query to save. You can read more about CloudWatch
+                      Logs Query Syntax in the documentation.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -286,10 +304,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: queryString is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.queryString)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.queryString)
+                || has(self.initProvider.queryString)'
           status:
             description: DefinitionStatus defines the observed state of Definition.
             properties:

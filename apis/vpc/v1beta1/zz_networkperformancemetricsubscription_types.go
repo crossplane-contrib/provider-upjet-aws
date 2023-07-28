@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkPerformanceMetricSubscriptionInitParameters struct {
+
+	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// The metric used for the enabled subscription. Valid values: aggregate-latency. Default: aggregate-latency.
+	Metric *string `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The statistic used for the enabled subscription. Valid values: p50. Default: p50.
+	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
+}
+
 type NetworkPerformanceMetricSubscriptionObservation struct {
 
 	// The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
@@ -61,6 +76,10 @@ type NetworkPerformanceMetricSubscriptionParameters struct {
 type NetworkPerformanceMetricSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkPerformanceMetricSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NetworkPerformanceMetricSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkPerformanceMetricSubscriptionStatus defines the observed state of NetworkPerformanceMetricSubscription.
@@ -81,8 +100,8 @@ type NetworkPerformanceMetricSubscriptionStatus struct {
 type NetworkPerformanceMetricSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination)",message="destination is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source)",message="source is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination) || has(self.initProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source) || has(self.initProvider.source)",message="source is a required parameter"
 	Spec   NetworkPerformanceMetricSubscriptionSpec   `json:"spec"`
 	Status NetworkPerformanceMetricSubscriptionStatus `json:"status,omitempty"`
 }

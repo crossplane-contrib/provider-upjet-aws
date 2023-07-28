@@ -88,6 +88,33 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  forceDestroy:
+                    description: when destroying this user, destroy even if it has
+                      non-Upbound official provider-managed iam access keys, login
+                      profile or mfa devices. without force_destroy a user with non-Upbound
+                      official provider-managed access keys and login profile will
+                      fail to be destroyed. delete user even if it has non-Upbound
+                      official provider-managed iam access keys, login profile or
+                      mfa devices
+                    type: boolean
+                  path:
+                    description: Path in which to create the user.
+                    type: string
+                  permissionsBoundary:
+                    description: The ARN of the policy that is used to set the permissions
+                      boundary for the user.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

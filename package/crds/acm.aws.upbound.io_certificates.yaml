@@ -155,13 +155,85 @@ spec:
                             a certificate for "testing.example.com", you can specify
                             "example.com" for this value.
                           type: string
-                      required:
-                      - domainName
-                      - validationDomain
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  certificateAuthorityArn:
+                    description: ARN of an ACM PCA
+                    type: string
+                  certificateBody:
+                    description: Certificate's PEM-formatted public key
+                    type: string
+                  certificateChain:
+                    description: Certificate's PEM-formatted chain
+                    type: string
+                  domainName:
+                    description: Domain name for which the certificate should be issued
+                    type: string
+                  earlyRenewalDuration:
+                    description: Amount of time to start automatic renewal process
+                      before expiration. Has no effect if less than 60 days. Represented
+                      by either a subset of RFC 3339 duration supporting years, months,
+                      and days (e.g., P90D), or a string such as 2160h.
+                    type: string
+                  keyAlgorithm:
+                    description: Specifies the algorithm of the public and private
+                      key pair that your Amazon issued certificate uses to encrypt
+                      data. See ACM Certificate characteristics for more details.
+                    type: string
+                  options:
+                    description: Configuration block used to set certificate options.
+                      Detailed below.
+                    items:
+                      properties:
+                        certificateTransparencyLoggingPreference:
+                          description: Whether certificate details should be added
+                            to a certificate transparency log. Valid values are ENABLED
+                            or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+                            for more details.
+                          type: string
+                      type: object
+                    type: array
+                  subjectAlternativeNames:
+                    description: Set of domains that should be SANs in the issued
+                      certificate.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  validationMethod:
+                    description: Which method to use for validation.
+                    type: string
+                  validationOption:
+                    description: Configuration block used to specify information about
+                      the initial validation of each domain name. Detailed below.
+                    items:
+                      properties:
+                        domainName:
+                          description: Fully qualified domain name (FQDN) in the certificate.
+                          type: string
+                        validationDomain:
+                          description: Domain name that you want ACM to use to send
+                            you validation emails. This domain name is the suffix
+                            of the email addresses that you want ACM to use. This
+                            must be the same as the domain_name value or a superdomain
+                            of the domain_name value. For example, if you request
+                            a certificate for "testing.example.com", you can specify
+                            "example.com" for this value.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

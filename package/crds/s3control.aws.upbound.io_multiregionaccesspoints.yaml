@@ -214,7 +214,6 @@ spec:
                             type: object
                           type: array
                       required:
-                      - name
                       - region
                       type: object
                     type: array
@@ -226,6 +225,67 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: The AWS account ID for the owner of the buckets for
+                      which you want to create a Multi-Region Access Point.
+                    type: string
+                  details:
+                    description: A configuration block containing details about the
+                      Multi-Region Access Point. See Details Configuration Block below
+                      for more details
+                    items:
+                      properties:
+                        name:
+                          description: The name of the Multi-Region Access Point.
+                          type: string
+                        publicAccessBlock:
+                          description: Configuration block to manage the PublicAccessBlock
+                            configuration that you want to apply to this Multi-Region
+                            Access Point. You can enable the configuration options
+                            in any combination. See Public Access Block Configuration
+                            below for more details.
+                          items:
+                            properties:
+                              blockPublicAcls:
+                                description: 'Whether Amazon S3 should block public
+                                  ACLs for buckets in this account. Defaults to true.
+                                  Enabling this setting does not affect existing policies
+                                  or ACLs. When set to true causes the following behavior:'
+                                type: boolean
+                              blockPublicPolicy:
+                                description: 'Whether Amazon S3 should block public
+                                  bucket policies for buckets in this account. Defaults
+                                  to true. Enabling this setting does not affect existing
+                                  bucket policies. When set to true causes Amazon
+                                  S3 to:'
+                                type: boolean
+                              ignorePublicAcls:
+                                description: 'Whether Amazon S3 should ignore public
+                                  ACLs for buckets in this account. Defaults to true.
+                                  Enabling this setting does not affect the persistence
+                                  of any existing ACLs and doesn''t prevent new public
+                                  ACLs from being set. When set to true causes Amazon
+                                  S3 to:'
+                                type: boolean
+                              restrictPublicBuckets:
+                                description: 'Whether Amazon S3 should restrict public
+                                  bucket policies for buckets in this account. Defaults
+                                  to true. Enabling this setting does not affect previously
+                                  stored bucket policies, except that public and cross-account
+                                  access within any public bucket policy, including
+                                  non-public delegation to specific accounts, is blocked.
+                                  When set to true:'
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -427,7 +487,8 @@ spec:
             x-kubernetes-validations:
             - message: details is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.details)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.details)
+                || has(self.initProvider.details)'
           status:
             description: MultiRegionAccessPointStatus defines the observed state of
               MultiRegionAccessPoint.

@@ -31,6 +31,3 @@ spec:
     region: us-west-1
     tags:
       foo: bar
-
----
-

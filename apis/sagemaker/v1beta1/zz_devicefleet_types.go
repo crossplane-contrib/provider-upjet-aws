@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeviceFleetInitParameters struct {
+
+	// A description of the fleet.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether to create an AWS IoT Role Alias during device fleet creation. The name of the role alias generated will match this pattern: "SageMakerEdge-{DeviceFleetName}".
+	EnableIotRoleAlias *bool `json:"enableIotRoleAlias,omitempty" tf:"enable_iot_role_alias,omitempty"`
+
+	// Specifies details about the repository. see Output Config details below.
+	OutputConfig []OutputConfigInitParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DeviceFleetObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Device Fleet.
@@ -80,6 +95,15 @@ type DeviceFleetParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type OutputConfigInitParameters struct {
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The Amazon Simple Storage (S3) bucker URI.
+	S3OutputLocation *string `json:"s3OutputLocation,omitempty" tf:"s3_output_location,omitempty"`
+}
+
 type OutputConfigObservation struct {
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
@@ -96,14 +120,18 @@ type OutputConfigParameters struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The Amazon Simple Storage (S3) bucker URI.
-	// +kubebuilder:validation:Required
-	S3OutputLocation *string `json:"s3OutputLocation" tf:"s3_output_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3OutputLocation *string `json:"s3OutputLocation,omitempty" tf:"s3_output_location,omitempty"`
 }
 
 // DeviceFleetSpec defines the desired state of DeviceFleet
 type DeviceFleetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeviceFleetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DeviceFleetInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeviceFleetStatus defines the observed state of DeviceFleet.
@@ -124,7 +152,7 @@ type DeviceFleetStatus struct {
 type DeviceFleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputConfig)",message="outputConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputConfig) || has(self.initProvider.outputConfig)",message="outputConfig is a required parameter"
 	Spec   DeviceFleetSpec   `json:"spec"`
 	Status DeviceFleetStatus `json:"status,omitempty"`
 }

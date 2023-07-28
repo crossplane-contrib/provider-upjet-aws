@@ -314,6 +314,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  basePath:
+                    description: Path segment that must be prepended to the path when
+                      accessing the API via this mapping. If omitted, the API is exposed
+                      at the root of the given domain.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

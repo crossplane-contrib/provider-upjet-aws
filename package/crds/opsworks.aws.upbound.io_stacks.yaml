@@ -142,9 +142,6 @@ spec:
                           description: Username to use when authenticating to the
                             source.
                           type: string
-                      required:
-                      - type
-                      - url
                       type: object
                     type: array
                   customJson:
@@ -508,6 +505,98 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  agentVersion:
+                    description: If set to "LATEST", OpsWorks will automatically install
+                      the latest version.
+                    type: string
+                  berkshelfVersion:
+                    description: If manage_berkshelf is enabled, the version of Berkshelf
+                      to use.
+                    type: string
+                  color:
+                    description: Color to paint next to the stack's resources in the
+                      OpsWorks console.
+                    type: string
+                  configurationManagerName:
+                    description: Name of the configuration manager to use. Defaults
+                      to "Chef".
+                    type: string
+                  configurationManagerVersion:
+                    description: Version of the configuration manager to use. Defaults
+                      to "11.4".
+                    type: string
+                  customCookbooksSource:
+                    description: When use_custom_cookbooks is set, provide this sub-object
+                      as described below.
+                    items:
+                      properties:
+                        revision:
+                          description: For sources that are version-aware, the revision
+                            to use.
+                          type: string
+                        type:
+                          description: The type of source to use. For example, "archive".
+                          type: string
+                        url:
+                          description: The URL where the cookbooks resource can be
+                            found.
+                          type: string
+                        username:
+                          description: Username to use when authenticating to the
+                            source.
+                          type: string
+                      type: object
+                    type: array
+                  customJson:
+                    description: User defined JSON passed to "Chef". Use a "here doc"
+                      for multiline JSON.
+                    type: string
+                  defaultAvailabilityZone:
+                    description: Name of the availability zone where instances will
+                      be created by default. Cannot be set when vpc_id is set.
+                    type: string
+                  defaultOs:
+                    description: Name of OS that will be installed on instances by
+                      default.
+                    type: string
+                  defaultRootDeviceType:
+                    description: Name of the type of root device instances will have
+                      by default.
+                    type: string
+                  defaultSshKeyName:
+                    description: Name of the SSH keypair that instances will have
+                      by default.
+                    type: string
+                  hostnameTheme:
+                    description: Keyword representing the naming scheme that will
+                      be used for instance hostnames within this stack.
+                    type: string
+                  manageBerkshelf:
+                    description: Boolean value controlling whether Opsworks will run
+                      Berkshelf for this stack.
+                    type: boolean
+                  name:
+                    description: The name of the stack.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  useCustomCookbooks:
+                    description: Boolean value controlling whether the custom cookbook
+                      settings are enabled.
+                    type: boolean
+                  useOpsworksSecurityGroups:
+                    description: Boolean value controlling whether the standard OpsWorks
+                      security groups apply to created instances.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -708,7 +797,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: StackStatus defines the observed state of Stack.
             properties:

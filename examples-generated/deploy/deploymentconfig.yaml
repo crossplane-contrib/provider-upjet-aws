@@ -52,6 +52,3 @@ spec:
       triggerTargetArnSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-
----
-

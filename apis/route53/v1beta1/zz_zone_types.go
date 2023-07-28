@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCInitParameters struct {
+
+	// Region of the VPC to associate. Defaults to AWS provider region.
+	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
+}
+
 type VPCObservation struct {
 
 	// ID of the VPC to associate.
@@ -41,6 +47,23 @@ type VPCParameters struct {
 	// Region of the VPC to associate. Defaults to AWS provider region.
 	// +kubebuilder:validation:Optional
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
+}
+
+type ZoneInitParameters struct {
+
+	// A comment for the hosted zone.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// This is the name of the hosted zone.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block(s) specifying VPC(s) to associate with a private hosted zone. Conflicts with the delegation_set_id argument in this resource and any aws_route53_zone_association resource specifying the same zone ID. Detailed below.
+	VPC []VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type ZoneObservation struct {
@@ -125,6 +148,10 @@ type ZoneParameters struct {
 type ZoneSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ZoneParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ZoneInitParameters `json:"initProvider,omitempty"`
 }
 
 // ZoneStatus defines the observed state of Zone.
@@ -145,7 +172,7 @@ type ZoneStatus struct {
 type Zone struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ZoneSpec   `json:"spec"`
 	Status ZoneStatus `json:"status,omitempty"`
 }

@@ -254,6 +254,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of what the snapshot is.
+                    type: string
+                  encrypted:
+                    description: Whether the snapshot is encrypted.
+                    type: boolean
+                  permanentRestore:
+                    description: Indicates whether to permanently restore an archived
+                      snapshot.
+                    type: boolean
+                  sourceRegion:
+                    description: The region of the source snapshot.
+                    type: string
+                  storageTier:
+                    description: The name of the storage tier. Valid values are archive
+                      and standard. Default value is standard.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  temporaryRestoreDays:
+                    description: Specifies the number of days for which to temporarily
+                      restore an archived snapshot. Required for temporary restores
+                      only. The snapshot will be automatically re-archived after this
+                      period.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -454,7 +488,8 @@ spec:
             x-kubernetes-validations:
             - message: sourceRegion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceRegion)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceRegion)
+                || has(self.initProvider.sourceRegion)'
           status:
             description: EBSSnapshotCopyStatus defines the observed state of EBSSnapshotCopy.
             properties:

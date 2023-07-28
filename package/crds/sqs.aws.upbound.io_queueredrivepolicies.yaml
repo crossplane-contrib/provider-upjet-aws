@@ -155,6 +155,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  redrivePolicy:
+                    description: 'The JSON redrive policy for the SQS queue. Accepts
+                      two key/val pairs: deadLetterTargetArn and maxReceiveCount.
+                      Learn more in the Amazon SQS dead-letter queues documentation.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -355,7 +366,8 @@ spec:
             x-kubernetes-validations:
             - message: redrivePolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.redrivePolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.redrivePolicy)
+                || has(self.initProvider.redrivePolicy)'
           status:
             description: QueueRedrivePolicyStatus defines the observed state of QueueRedrivePolicy.
             properties:

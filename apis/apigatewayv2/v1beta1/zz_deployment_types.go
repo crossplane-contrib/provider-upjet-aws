@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeploymentInitParameters struct {
+
+	// Description for the deployment resource. Must be less than or equal to 1024 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type DeploymentObservation struct {
 
 	// API identifier.
@@ -57,6 +63,10 @@ type DeploymentParameters struct {
 type DeploymentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeploymentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DeploymentInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeploymentStatus defines the observed state of Deployment.

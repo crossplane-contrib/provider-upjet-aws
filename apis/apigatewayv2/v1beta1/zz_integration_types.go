@@ -13,6 +13,57 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IntegrationInitParameters struct {
+
+	// Type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
+	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
+
+	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT. Supported only for WebSocket APIs.
+	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
+
+	// Description of the integration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Integration's HTTP method. Must be specified if integration_type is not MOCK.
+	IntegrationMethod *string `json:"integrationMethod,omitempty" tf:"integration_method,omitempty"`
+
+	// AWS service action to invoke. Supported only for HTTP APIs when integration_type is AWS_PROXY. See the AWS service integration reference documentation for supported values. Must be between 1 and 128 characters in length.
+	IntegrationSubtype *string `json:"integrationSubtype,omitempty" tf:"integration_subtype,omitempty"`
+
+	// Integration type of an integration.
+	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
+	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
+
+	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
+	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.
+	PassthroughBehavior *string `json:"passthroughBehavior,omitempty" tf:"passthrough_behavior,omitempty"`
+
+	// The format of the payload sent to an integration. Valid values: 1.0, 2.0. Default is 1.0.
+	PayloadFormatVersion *string `json:"payloadFormatVersion,omitempty" tf:"payload_format_version,omitempty"`
+
+	// For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend.
+	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
+	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
+	// See the Amazon API Gateway Developer Guide for details.
+	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
+
+	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
+	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
+
+	// Mappings to transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.
+	ResponseParameters []ResponseParametersInitParameters `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// TLS configuration for a private integration. Supported only for HTTP APIs.
+	TLSConfig []TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
+
+	// The template selection expression for the integration.
+	TemplateSelectionExpression *string `json:"templateSelectionExpression,omitempty" tf:"template_selection_expression,omitempty"`
+
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
+	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
+	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+}
+
 type IntegrationObservation struct {
 
 	// API identifier.
@@ -209,6 +260,16 @@ type IntegrationParameters struct {
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
+type ResponseParametersInitParameters struct {
+
+	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
+	// See the Amazon API Gateway Developer Guide for details.
+	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
+
+	// HTTP status code in the range 200-599.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
 type ResponseParametersObservation struct {
 
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
@@ -223,12 +284,18 @@ type ResponseParametersParameters struct {
 
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
-	// +kubebuilder:validation:Required
-	Mappings map[string]*string `json:"mappings" tf:"mappings,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
 
 	// HTTP status code in the range 200-599.
-	// +kubebuilder:validation:Required
-	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type TLSConfigInitParameters struct {
+
+	// If you specify a server name, API Gateway uses it to verify the hostname on the integration's certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.
+	ServerNameToVerify *string `json:"serverNameToVerify,omitempty" tf:"server_name_to_verify,omitempty"`
 }
 
 type TLSConfigObservation struct {
@@ -248,6 +315,10 @@ type TLSConfigParameters struct {
 type IntegrationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IntegrationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IntegrationInitParameters `json:"initProvider,omitempty"`
 }
 
 // IntegrationStatus defines the observed state of Integration.
@@ -268,7 +339,7 @@ type IntegrationStatus struct {
 type Integration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.integrationType)",message="integrationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.integrationType) || has(self.initProvider.integrationType)",message="integrationType is a required parameter"
 	Spec   IntegrationSpec   `json:"spec"`
 	Status IntegrationStatus `json:"status,omitempty"`
 }

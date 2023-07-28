@@ -90,6 +90,28 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  domainName:
+                    description: A domain name for which the certificate should be
+                      issued.
+                    type: string
+                  subjectAlternativeNames:
+                    description: Set of domains that should be SANs in the issued
+                      certificate. domain_name attribute is automatically added as
+                      a Subject Alternative Name.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

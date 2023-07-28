@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPNGatewayRoutePropagationInitParameters struct {
+}
+
 type VPNGatewayRoutePropagationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -63,6 +66,10 @@ type VPNGatewayRoutePropagationParameters struct {
 type VPNGatewayRoutePropagationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPNGatewayRoutePropagationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPNGatewayRoutePropagationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPNGatewayRoutePropagationStatus defines the observed state of VPNGatewayRoutePropagation.

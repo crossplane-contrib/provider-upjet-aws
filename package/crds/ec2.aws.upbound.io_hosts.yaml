@@ -110,6 +110,48 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoPlacement:
+                    description: 'Indicates whether the host accepts any untargeted
+                      instance launches that match its instance type configuration,
+                      or if it only accepts Host tenancy instance launches that specify
+                      its unique host ID. Valid values: on, off. Default: on.'
+                    type: string
+                  availabilityZone:
+                    description: The Availability Zone in which to allocate the Dedicated
+                      Host.
+                    type: string
+                  hostRecovery:
+                    description: 'Indicates whether to enable or disable host recovery
+                      for the Dedicated Host. Valid values: on, off. Default: off.'
+                    type: string
+                  instanceFamily:
+                    description: Specifies the instance family to be supported by
+                      the Dedicated Hosts. If you specify an instance family, the
+                      Dedicated Hosts support multiple instance types within that
+                      instance family. Exactly one of instance_family or instance_type
+                      must be specified.
+                    type: string
+                  instanceType:
+                    description: Specifies the instance type to be supported by the
+                      Dedicated Hosts. If you specify an instance type, the Dedicated
+                      Hosts support instances of the specified instance type only.
+                      Exactly one of instance_family or instance_type must be specified.
+                    type: string
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the AWS Outpost
+                      on which to allocate the Dedicated Host.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -310,7 +352,8 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
+                || has(self.initProvider.availabilityZone)'
           status:
             description: HostStatus defines the observed state of Host.
             properties:

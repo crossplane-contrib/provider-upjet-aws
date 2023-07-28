@@ -507,6 +507,210 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addColumnName:
+                    description: Whether to add column name information to the .csv
+                      output file. Default is false.
+                    type: boolean
+                  addTrailingPaddingCharacter:
+                    description: Whether to add padding. Default is false. (Ignored
+                      for source endpoints.)
+                    type: boolean
+                  bucketFolder:
+                    description: S3 object prefix.
+                    type: string
+                  bucketName:
+                    description: S3 bucket name.
+                    type: string
+                  cannedAclForObjects:
+                    description: Predefined (canned) access control list for objects
+                      created in an S3 bucket. Valid values include none, private,
+                      public-read, public-read-write, authenticated-read, aws-exec-read,
+                      bucket-owner-read, and bucket-owner-full-control. Default is
+                      none.
+                    type: string
+                  cdcInsertsAndUpdates:
+                    description: Whether to write insert and update operations to
+                      .csv or .parquet output files. Default is false.
+                    type: boolean
+                  cdcInsertsOnly:
+                    description: Whether to write insert operations to .csv or .parquet
+                      output files. Default is false.
+                    type: boolean
+                  cdcMaxBatchInterval:
+                    description: Maximum length of the interval, defined in seconds,
+                      after which to output a file to Amazon S3. (AWS default is 60.)
+                    type: number
+                  cdcMinFileSize:
+                    description: Minimum file size condition as defined in kilobytes
+                      to output a file to Amazon S3. (AWS default is 32000 KB.)
+                    type: number
+                  cdcPath:
+                    description: Folder path of CDC files. If cdc_path is set, AWS
+                      DMS reads CDC files from this path and replicates the data changes
+                      to the target endpoint. Supported in AWS DMS versions 3.4.2
+                      and later.
+                    type: string
+                  certificateArn:
+                    description: ARN for the certificate.
+                    type: string
+                  compressionType:
+                    description: Set to compress target files. Valid values are GZIP
+                      and NONE. Default is NONE. (Ignored for source endpoints.)
+                    type: string
+                  csvDelimiter:
+                    description: Delimiter used to separate columns in the source
+                      files. Default is ,.
+                    type: string
+                  csvNoSupValue:
+                    description: Only applies if output files for a CDC load are written
+                      in .csv format. If use_csv_no_sup_value is set to true, string
+                      to use for all columns not included in the supplemental log.
+                      If you do not specify a string value, DMS uses the null value
+                      for these columns regardless of use_csv_no_sup_value. (Ignored
+                      for source endpoints.)
+                    type: string
+                  csvNullValue:
+                    description: String to as null when writing to the target. (AWS
+                      default is NULL.)
+                    type: string
+                  csvRowDelimiter:
+                    description: Delimiter used to separate rows in the source files.
+                      Default is newline (i.e., \n).
+                    type: string
+                  dataFormat:
+                    description: Output format for the files that AWS DMS uses to
+                      create S3 objects. Valid values are csv and parquet.  (Ignored
+                      for source endpoints -- only csv is valid.)
+                    type: string
+                  dataPageSize:
+                    description: Size of one data page in bytes. (AWS default is 1
+                      MiB, i.e., 1048576.)
+                    type: number
+                  datePartitionDelimiter:
+                    description: Date separating delimiter to use during folder partitioning.
+                      Valid values are SLASH, UNDERSCORE, DASH, and NONE. (AWS default
+                      is SLASH.) (Ignored for source endpoints.)
+                    type: string
+                  datePartitionEnabled:
+                    description: Partition S3 bucket folders based on transaction
+                      commit dates. Default is false. (Ignored for source endpoints.)
+                    type: boolean
+                  datePartitionSequence:
+                    description: Date format to use during folder partitioning. Use
+                      this parameter when date_partition_enabled is set to true. Valid
+                      values are YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, and DDMMYYYY.
+                      (AWS default is YYYYMMDD.) (Ignored for source endpoints.)
+                    type: string
+                  datePartitionTimezone:
+                    description: Convert the current UTC time to a timezone. The conversion
+                      occurs when a date partition folder is created and a CDC filename
+                      is generated. The timezone format is Area/Location (e.g., Europe/Paris).
+                      Use this when date_partition_enabled is true. (Ignored for source
+                      endpoints.)
+                    type: string
+                  detachTargetOnLobLookupFailureParquet:
+                    description: Undocumented argument for use as directed by AWS
+                      Support.
+                    type: boolean
+                  dictPageSizeLimit:
+                    description: Maximum size in bytes of an encoded dictionary page
+                      of a column. (AWS default is 1 MiB, i.e., 1048576.)
+                    type: number
+                  enableStatistics:
+                    description: Whether to enable statistics for Parquet pages and
+                      row groups. Default is true.
+                    type: boolean
+                  encodingType:
+                    description: Type of encoding to use. Value values are rle_dictionary,
+                      plain, and plain_dictionary. (AWS default is rle_dictionary.)
+                    type: string
+                  encryptionMode:
+                    description: Server-side encryption mode that you want to encrypt
+                      your .csv or .parquet object files copied to S3. Valid values
+                      are SSE_S3 and SSE_KMS. (AWS default is SSE_S3.) (Ignored for
+                      source endpoints -- only SSE_S3 is valid.)
+                    type: string
+                  endpointType:
+                    description: Type of endpoint. Valid values are source, target.
+                    type: string
+                  expectedBucketOwner:
+                    description: Bucket owner to prevent sniping. Value is an AWS
+                      account ID.
+                    type: string
+                  externalTableDefinition:
+                    description: JSON document that describes how AWS DMS should interpret
+                      the data.
+                    type: string
+                  ignoreHeaderRows:
+                    description: When this value is set to 1, DMS ignores the first
+                      row header in a .csv file. (AWS default is 0.)
+                    type: number
+                  includeOpForFullLoad:
+                    description: Whether to enable a full load to write INSERT operations
+                      to the .csv output files only to indicate how the rows were
+                      added to the source database. Default is false.
+                    type: boolean
+                  maxFileSize:
+                    description: Maximum size (in KB) of any .csv file to be created
+                      while migrating to an S3 target during full load. Valid values
+                      are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
+                    type: number
+                  parquetTimestampInMillisecond:
+                    description: '- Specifies the precision of any TIMESTAMP column
+                      values written to an S3 object file in .parquet format. Default
+                      is false. (Ignored for source endpoints.)'
+                    type: boolean
+                  parquetVersion:
+                    description: Version of the .parquet file format. Valid values
+                      are parquet-1-0 and parquet-2-0. (AWS default is parquet-1-0.)
+                      (Ignored for source endpoints.)
+                    type: string
+                  preserveTransactions:
+                    description: Whether DMS saves the transaction order for a CDC
+                      load on the S3 target specified by cdc_path. Default is false.
+                      (Ignored for source endpoints.)
+                    type: boolean
+                  rfc4180:
+                    description: For an S3 source, whether each leading double quotation
+                      mark has to be followed by an ending double quotation mark.
+                      Default is true.
+                    type: boolean
+                  rowGroupLength:
+                    description: Number of rows in a row group. (AWS default is 10000.)
+                    type: number
+                  sslMode:
+                    description: SSL mode to use for the connection. Valid values
+                      are none, require, verify-ca, verify-full. (AWS default is none.)
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  timestampColumnName:
+                    description: Column to add with timestamp information to the endpoint
+                      data for an Amazon S3 target.
+                    type: string
+                  useCsvNoSupValue:
+                    description: Whether to use csv_no_sup_value for columns not included
+                      in the supplemental log. (Ignored for source endpoints.)
+                    type: boolean
+                  useTaskStartTimeForFullLoadTimestamp:
+                    description: When set to true, uses the task start time as the
+                      timestamp column value instead of the time data is written to
+                      target. For full load, when set to true, each row of the timestamp
+                      column contains the task start time. For CDC loads, each row
+                      of the timestamp column contains the transaction commit time.When
+                      set to false, the full load timestamp in the timestamp column
+                      increments with the time data arrives at the target. Default
+                      is false.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -707,10 +911,12 @@ spec:
             x-kubernetes-validations:
             - message: bucketName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bucketName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bucketName)
+                || has(self.initProvider.bucketName)'
             - message: endpointType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)
+                || has(self.initProvider.endpointType)'
           status:
             description: S3EndpointStatus defines the observed state of S3Endpoint.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ScalableTargetActionInitParameters struct {
+
+	// Maximum capacity. At least one of max_capacity or min_capacity must be set.
+	MaxCapacity *string `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Minimum capacity. At least one of min_capacity or max_capacity must be set.
+	MinCapacity *string `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+}
+
 type ScalableTargetActionObservation struct {
 
 	// Maximum capacity. At least one of max_capacity or min_capacity must be set.
@@ -31,6 +40,27 @@ type ScalableTargetActionParameters struct {
 	// Minimum capacity. At least one of min_capacity or max_capacity must be set.
 	// +kubebuilder:validation:Optional
 	MinCapacity *string `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+}
+
+type ScheduledActionInitParameters struct {
+
+	// Date and time for the scheduled action to end in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// Name of the scheduled action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// New minimum and maximum capacity. You can set both values or just one. See below
+	ScalableTargetAction []ScalableTargetActionInitParameters `json:"scalableTargetAction,omitempty" tf:"scalable_target_action,omitempty"`
+
+	// Schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the Timezone parameter at: AWS Application Auto Scaling API Reference
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Time zone used when setting a scheduled action by using an at or cron expression. Does not affect timezone for start_time and end_time. Valid values are the canonical names of the IANA time zones supported by Joda-Time, such as Etc/GMT+9 or Pacific/Tahiti. Default is UTC.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type ScheduledActionObservation struct {
@@ -146,6 +176,10 @@ type ScheduledActionParameters struct {
 type ScheduledActionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ScheduledActionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ScheduledActionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ScheduledActionStatus defines the observed state of ScheduledAction.
@@ -166,9 +200,9 @@ type ScheduledActionStatus struct {
 type ScheduledAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scalableTargetAction)",message="scalableTargetAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schedule)",message="schedule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scalableTargetAction) || has(self.initProvider.scalableTargetAction)",message="scalableTargetAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schedule) || has(self.initProvider.schedule)",message="schedule is a required parameter"
 	Spec   ScheduledActionSpec   `json:"spec"`
 	Status ScheduledActionStatus `json:"status,omitempty"`
 }

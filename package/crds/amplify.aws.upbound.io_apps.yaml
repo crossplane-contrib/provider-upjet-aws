@@ -194,9 +194,6 @@ spec:
                           description: Target pattern for a URL rewrite or redirect
                             rule.
                           type: string
-                      required:
-                      - source
-                      - target
                       type: object
                     type: array
                   description:
@@ -340,6 +337,125 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoBranchCreationConfig:
+                    description: Automated branch creation configuration for an Amplify
+                      app. An auto_branch_creation_config block is documented below.
+                    items:
+                      properties:
+                        buildSpec:
+                          description: Build specification (build spec) for the autocreated
+                            branch.
+                          type: string
+                        enableAutoBuild:
+                          description: Enables auto building for the autocreated branch.
+                          type: boolean
+                        enableBasicAuth:
+                          description: Enables basic authorization for the autocreated
+                            branch.
+                          type: boolean
+                        enablePerformanceMode:
+                          description: Enables performance mode for the branch.
+                          type: boolean
+                        enablePullRequestPreview:
+                          description: Enables pull request previews for the autocreated
+                            branch.
+                          type: boolean
+                        environmentVariables:
+                          additionalProperties:
+                            type: string
+                          description: Environment variables for the autocreated branch.
+                          type: object
+                        framework:
+                          description: Framework for the autocreated branch.
+                          type: string
+                        pullRequestEnvironmentName:
+                          description: Amplify environment name for the pull request.
+                          type: string
+                        stage:
+                          description: 'Describes the current stage for the autocreated
+                            branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL,
+                            PULL_REQUEST.'
+                          type: string
+                      type: object
+                    type: array
+                  autoBranchCreationPatterns:
+                    description: Automated branch creation glob patterns for an Amplify
+                      app.
+                    items:
+                      type: string
+                    type: array
+                  buildSpec:
+                    description: The build specification (build spec) for an Amplify
+                      app.
+                    type: string
+                  customRule:
+                    description: Custom rewrite and redirect rules for an Amplify
+                      app. A custom_rule block is documented below.
+                    items:
+                      properties:
+                        condition:
+                          description: Condition for a URL rewrite or redirect rule,
+                            such as a country code.
+                          type: string
+                        source:
+                          description: Source pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                        status:
+                          description: 'Status code for a URL rewrite or redirect
+                            rule. Valid values: 200, 301, 302, 404, 404-200.'
+                          type: string
+                        target:
+                          description: Target pattern for a URL rewrite or redirect
+                            rule.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Description for an Amplify app.
+                    type: string
+                  enableAutoBranchCreation:
+                    description: Enables automated branch creation for an Amplify
+                      app.
+                    type: boolean
+                  enableBasicAuth:
+                    description: Enables basic authorization for an Amplify app. This
+                      will apply to all branches that are part of this app.
+                    type: boolean
+                  enableBranchAutoBuild:
+                    description: Enables auto-building of branches for the Amplify
+                      App.
+                    type: boolean
+                  enableBranchAutoDeletion:
+                    description: Automatically disconnects a branch in the Amplify
+                      Console when you delete a branch from your Git repository.
+                    type: boolean
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Environment variables map for an Amplify app.
+                    type: object
+                  name:
+                    description: Name for an Amplify app.
+                    type: string
+                  platform:
+                    description: 'Platform or framework for an Amplify app. Valid
+                      values: WEB, WEB_COMPUTE. Default value: WEB.'
+                    type: string
+                  repository:
+                    description: Repository for an Amplify app.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -541,7 +657,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: AppStatus defines the observed state of App.
             properties:

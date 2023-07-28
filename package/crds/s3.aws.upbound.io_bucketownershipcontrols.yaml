@@ -158,12 +158,27 @@ spec:
                           description: 'Object ownership. Valid values: BucketOwnerPreferred,
                             ObjectWriter or BucketOwnerEnforced'
                           type: string
-                      required:
-                      - objectOwnership
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  rule:
+                    description: Configuration block(s) with Ownership Controls rules.
+                      Detailed below.
+                    items:
+                      properties:
+                        objectOwnership:
+                          description: 'Object ownership. Valid values: BucketOwnerPreferred,
+                            ObjectWriter or BucketOwnerEnforced'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -365,7 +380,8 @@ spec:
             x-kubernetes-validations:
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
+                || has(self.initProvider.rule)'
           status:
             description: BucketOwnershipControlsStatus defines the observed state
               of BucketOwnershipControls.

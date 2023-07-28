@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppInitParameters struct {
+
+	// The compute platform can either be ECS, Lambda, or Server. Default is Server.
+	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppObservation struct {
 
 	// The application ID.
@@ -60,6 +69,10 @@ type AppParameters struct {
 type AppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppStatus defines the observed state of App.

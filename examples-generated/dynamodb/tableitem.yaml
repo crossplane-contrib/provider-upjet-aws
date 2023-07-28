@@ -41,6 +41,3 @@ spec:
     readCapacity: 10
     region: us-west-1
     writeCapacity: 10
-
----
-

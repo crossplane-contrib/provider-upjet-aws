@@ -17,6 +17,3 @@ spec:
     routingConfig:
     - additionalVersionWeights:
         "2": 0.5
-
----
-

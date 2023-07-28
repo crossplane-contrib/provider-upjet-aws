@@ -15,6 +15,3 @@ spec:
         filterType: WILDCARD
       scanFrequency: CONTINUOUS_SCAN
     scanType: ENHANCED
-
----
-

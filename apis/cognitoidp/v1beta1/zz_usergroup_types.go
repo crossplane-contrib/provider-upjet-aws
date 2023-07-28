@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserGroupInitParameters struct {
+
+	// The description of the user group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the user group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The precedence of the user group.
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+}
+
 type UserGroupObservation struct {
 
 	// The description of the user group.
@@ -84,6 +96,10 @@ type UserGroupParameters struct {
 type UserGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserGroupStatus defines the observed state of UserGroup.
@@ -104,7 +120,7 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   UserGroupSpec   `json:"spec"`
 	Status UserGroupStatus `json:"status,omitempty"`
 }

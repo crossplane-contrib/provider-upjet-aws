@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSNameConfigurationInitParameters struct {
+}
+
 type PrivateDNSNameConfigurationObservation struct {
 
 	// Name of the record subdomain the service provider needs to create.
@@ -29,6 +32,27 @@ type PrivateDNSNameConfigurationObservation struct {
 }
 
 type PrivateDNSNameConfigurationParameters struct {
+}
+
+type VPCEndpointServiceInitParameters struct {
+
+	// Whether or not VPC endpoint connection requests to the service must be accepted by the service owner - true or false.
+	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
+
+	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
+
+	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
+
+	// The private DNS name for the service.
+	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
+
+	// The supported IP address types. The possible values are ipv4 and ipv6.
+	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VPCEndpointServiceObservation struct {
@@ -121,6 +145,10 @@ type VPCEndpointServiceParameters struct {
 type VPCEndpointServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointServiceStatus defines the observed state of VPCEndpointService.
@@ -141,7 +169,7 @@ type VPCEndpointServiceStatus struct {
 type VPCEndpointService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.acceptanceRequired)",message="acceptanceRequired is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.acceptanceRequired) || has(self.initProvider.acceptanceRequired)",message="acceptanceRequired is a required parameter"
 	Spec   VPCEndpointServiceSpec   `json:"spec"`
 	Status VPCEndpointServiceStatus `json:"status,omitempty"`
 }

@@ -57,6 +57,3 @@ spec:
     ownerAccountId: ${data.aws_caller_identity.accepter.account_id}
     region: us-west-1
     vlan: 4094
-
----
-

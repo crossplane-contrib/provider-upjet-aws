@@ -11,6 +11,3 @@ spec:
     ecrRepositoryPrefix: ecr-public
     region: us-west-1
     upstreamRegistryUrl: public.ecr.aws
-
----
-

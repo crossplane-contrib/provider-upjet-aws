@@ -49,6 +49,3 @@ spec:
   forProvider:
     name: example_api
     region: us-west-1
-
----
-

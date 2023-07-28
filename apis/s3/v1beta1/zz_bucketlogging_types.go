@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketLoggingInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Set of configuration blocks with information for granting permissions. See below.
+	TargetGrant []TargetGrantInitParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
+
+	// Prefix for all log object keys.
+	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
+}
+
 type BucketLoggingObservation struct {
 
 	// Name of the bucket.
@@ -82,6 +94,21 @@ type BucketLoggingParameters struct {
 	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
 }
 
+type TargetGrantGranteeInitParameters struct {
+
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// Canonical user ID of the grantee.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// URI of the grantee group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type TargetGrantGranteeObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -109,12 +136,21 @@ type TargetGrantGranteeParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type TargetGrantInitParameters struct {
+
+	// Configuration block for the person being granted permissions. See below.
+	Grantee []TargetGrantGranteeInitParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type TargetGrantObservation struct {
@@ -129,18 +165,22 @@ type TargetGrantObservation struct {
 type TargetGrantParameters struct {
 
 	// Configuration block for the person being granted permissions. See below.
-	// +kubebuilder:validation:Required
-	Grantee []TargetGrantGranteeParameters `json:"grantee" tf:"grantee,omitempty"`
+	// +kubebuilder:validation:Optional
+	Grantee []TargetGrantGranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
 	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
-	// +kubebuilder:validation:Required
-	Permission *string `json:"permission" tf:"permission,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 // BucketLoggingSpec defines the desired state of BucketLogging
 type BucketLoggingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketLoggingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketLoggingInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketLoggingStatus defines the observed state of BucketLogging.
@@ -161,7 +201,7 @@ type BucketLoggingStatus struct {
 type BucketLogging struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetPrefix)",message="targetPrefix is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetPrefix) || has(self.initProvider.targetPrefix)",message="targetPrefix is a required parameter"
 	Spec   BucketLoggingSpec   `json:"spec"`
 	Status BucketLoggingStatus `json:"status,omitempty"`
 }

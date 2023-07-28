@@ -244,6 +244,30 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  contentHandlingStrategy:
+                    description: 'How to handle response payload content type conversions.
+                      Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT.'
+                    type: string
+                  integrationResponseKey:
+                    description: Integration response key.
+                    type: string
+                  responseTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of Velocity templates that are applied on the
+                      request payload based on the value of the Content-Type header
+                      sent by the client.
+                    type: object
+                  templateSelectionExpression:
+                    description: The template selection expression for the integration
+                      response.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -444,7 +468,8 @@ spec:
             x-kubernetes-validations:
             - message: integrationResponseKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.integrationResponseKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.integrationResponseKey)
+                || has(self.initProvider.integrationResponseKey)'
           status:
             description: IntegrationResponseStatus defines the observed state of IntegrationResponse.
             properties:

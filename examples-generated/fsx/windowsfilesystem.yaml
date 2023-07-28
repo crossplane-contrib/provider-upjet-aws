@@ -19,6 +19,3 @@ spec:
     subnetIdRefs:
     - name: example
     throughputCapacity: 1024
-
----
-

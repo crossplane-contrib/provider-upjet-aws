@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainEntryInitParameters struct {
+
+	// If the entry should be an alias Defaults to false
+	IsAlias *bool `json:"isAlias,omitempty" tf:"is_alias,omitempty"`
+
+	// Target of the domain entry
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
 type DomainEntryObservation struct {
 
 	// The name of the Lightsail domain in which to create the entry
@@ -69,6 +78,10 @@ type DomainEntryParameters struct {
 type DomainEntrySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainEntryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DomainEntryInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainEntryStatus defines the observed state of DomainEntry.
@@ -89,7 +102,7 @@ type DomainEntryStatus struct {
 type DomainEntry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target)",message="target is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target) || has(self.initProvider.target)",message="target is a required parameter"
 	Spec   DomainEntrySpec   `json:"spec"`
 	Status DomainEntryStatus `json:"status,omitempty"`
 }

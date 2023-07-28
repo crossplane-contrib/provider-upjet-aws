@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReceiptFilterInitParameters struct {
+
+	// The IP address or address range to filter, in CIDR notation
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// Block or Allow
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+}
+
 type ReceiptFilterObservation struct {
 
 	// The SES receipt filter ARN.
@@ -48,6 +57,10 @@ type ReceiptFilterParameters struct {
 type ReceiptFilterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReceiptFilterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReceiptFilterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReceiptFilterStatus defines the observed state of ReceiptFilter.
@@ -68,8 +81,8 @@ type ReceiptFilterStatus struct {
 type ReceiptFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidr)",message="cidr is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidr) || has(self.initProvider.cidr)",message="cidr is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || has(self.initProvider.policy)",message="policy is a required parameter"
 	Spec   ReceiptFilterSpec   `json:"spec"`
 	Status ReceiptFilterStatus `json:"status,omitempty"`
 }

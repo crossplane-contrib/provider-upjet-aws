@@ -18,6 +18,3 @@ spec:
           protocol: http
     tags:
       Environment: test
-
----
-

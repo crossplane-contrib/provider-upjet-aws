@@ -72,6 +72,3 @@ spec:
         provider: CodeBuild
         version: "1"
       name: Build
-
----
-

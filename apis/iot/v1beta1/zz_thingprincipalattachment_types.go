@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ThingPrincipalAttachmentInitParameters struct {
+}
+
 type ThingPrincipalAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -62,6 +65,10 @@ type ThingPrincipalAttachmentParameters struct {
 type ThingPrincipalAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ThingPrincipalAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ThingPrincipalAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ThingPrincipalAttachmentStatus defines the observed state of ThingPrincipalAttachment.

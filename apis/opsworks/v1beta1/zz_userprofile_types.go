@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserProfileInitParameters struct {
+
+	// Whether users can specify their own SSH public key through the My Settings page
+	AllowSelfManagement *bool `json:"allowSelfManagement,omitempty" tf:"allow_self_management,omitempty"`
+
+	// The users public key
+	SSHPublicKey *string `json:"sshPublicKey,omitempty" tf:"ssh_public_key,omitempty"`
+
+	// The ssh username, with witch this user wants to log in
+	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
+}
+
 type UserProfileObservation struct {
 
 	// Whether users can specify their own SSH public key through the My Settings page
@@ -64,6 +76,10 @@ type UserProfileParameters struct {
 type UserProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserProfileStatus defines the observed state of UserProfile.
@@ -84,7 +100,7 @@ type UserProfileStatus struct {
 type UserProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sshUsername)",message="sshUsername is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sshUsername) || has(self.initProvider.sshUsername)",message="sshUsername is a required parameter"
 	Spec   UserProfileSpec   `json:"spec"`
 	Status UserProfileStatus `json:"status,omitempty"`
 }

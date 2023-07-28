@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CiphertextInitParameters struct {
+
+	// An optional mapping that makes up the encryption context.
+	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
+}
+
 type CiphertextObservation struct {
 
 	// Base64 encoded ciphertext
@@ -60,6 +66,10 @@ type CiphertextParameters struct {
 type CiphertextSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CiphertextParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CiphertextInitParameters `json:"initProvider,omitempty"`
 }
 
 // CiphertextStatus defines the observed state of Ciphertext.

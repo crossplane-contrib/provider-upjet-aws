@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TrackerAssociationInitParameters struct {
+}
+
 type TrackerAssociationObservation struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
@@ -63,6 +66,10 @@ type TrackerAssociationParameters struct {
 type TrackerAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrackerAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TrackerAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrackerAssociationStatus defines the observed state of TrackerAssociation.

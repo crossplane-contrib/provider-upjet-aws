@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CorsInitParameters struct {
+
+	// Whether to allow cookies or other credentials in requests to the function URL. The default is false.
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// The HTTP headers that origins can include in requests to the function URL. For example: ["date", "keep-alive", "x-custom-header"].
+	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
+
+	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
+	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
+
+	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
+	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
+
+	// The HTTP headers in your function response that you want to expose to origins that call the function URL.
+	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
+
+	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
 type CorsObservation struct {
 
 	// Whether to allow cookies or other credentials in requests to the function URL. The default is false.
@@ -59,6 +80,21 @@ type CorsParameters struct {
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
 	// +kubebuilder:validation:Optional
 	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type FunctionURLInitParameters struct {
+
+	// The type of authentication that the function URL uses. Set to "AWS_IAM" to restrict access to authenticated IAM users only. Set to "NONE" to bypass IAM authentication and create a public endpoint. See the AWS documentation for more details.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
+	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Determines how the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM. See more in Configuring a Lambda function to stream responses.
+	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
+
+	// The alias name or "$LATEST".
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 }
 
 type FunctionURLObservation struct {
@@ -131,6 +167,10 @@ type FunctionURLParameters struct {
 type FunctionURLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionURLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionURLInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionURLStatus defines the observed state of FunctionURL.
@@ -151,7 +191,7 @@ type FunctionURLStatus struct {
 type FunctionURL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationType)",message="authorizationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationType) || has(self.initProvider.authorizationType)",message="authorizationType is a required parameter"
 	Spec   FunctionURLSpec   `json:"spec"`
 	Status FunctionURLStatus `json:"status,omitempty"`
 }

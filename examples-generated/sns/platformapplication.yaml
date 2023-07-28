@@ -18,6 +18,3 @@ spec:
       name: example-secret
       namespace: upbound-system
     region: us-west-1
-
----
-

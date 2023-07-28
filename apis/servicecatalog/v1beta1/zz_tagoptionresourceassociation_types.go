@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TagOptionResourceAssociationInitParameters struct {
+}
+
 type TagOptionResourceAssociationObservation struct {
 
 	// Identifier of the association.
@@ -75,6 +78,10 @@ type TagOptionResourceAssociationParameters struct {
 type TagOptionResourceAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TagOptionResourceAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TagOptionResourceAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TagOptionResourceAssociationStatus defines the observed state of TagOptionResourceAssociation.

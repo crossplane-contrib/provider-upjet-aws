@@ -96,6 +96,41 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  assumeRolePolicy:
+                    description: Policy that grants an entity permission to assume
+                      the role.
+                    type: string
+                  description:
+                    description: Description of the role.
+                    type: string
+                  forceDetachPolicies:
+                    description: Whether to force detaching any policies the role
+                      has before destroying it. Defaults to false.
+                    type: boolean
+                  maxSessionDuration:
+                    description: Maximum session duration (in seconds) that you want
+                      to set for the specified role. If you do not specify a value
+                      for this setting, the default maximum of one hour is applied.
+                      This setting can have a value from 1 hour to 12 hours.
+                    type: number
+                  path:
+                    description: Path to the role. See IAM Identifiers for more information.
+                    type: string
+                  permissionsBoundary:
+                    description: ARN of the policy that is used to set the permissions
+                      boundary for the role.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -296,7 +331,8 @@ spec:
             x-kubernetes-validations:
             - message: assumeRolePolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.assumeRolePolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.assumeRolePolicy)
+                || has(self.initProvider.assumeRolePolicy)'
           status:
             description: RoleStatus defines the observed state of Role.
             properties:

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionInitParameters struct {
+
+	// valid values are: BLOCK, ALLOW, or COUNT
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ActionObservation struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
@@ -22,8 +28,15 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type DefaultActionInitParameters struct {
+
+	// Specifies how you want AWS WAF to respond to requests that don't match the criteria in any of the rules.
+	// e.g., ALLOW or BLOCK
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DefaultActionObservation struct {
@@ -37,8 +50,14 @@ type DefaultActionParameters struct {
 
 	// Specifies how you want AWS WAF to respond to requests that don't match the criteria in any of the rules.
 	// e.g., ALLOW or BLOCK
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LoggingConfigurationInitParameters struct {
+
+	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
+	RedactedFields []RedactedFieldsInitParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {
@@ -71,6 +90,12 @@ type LoggingConfigurationParameters struct {
 	RedactedFields []RedactedFieldsParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 }
 
+type OverrideActionInitParameters struct {
+
+	// valid values are: BLOCK, ALLOW, or COUNT
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type OverrideActionObservation struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
@@ -80,8 +105,17 @@ type OverrideActionObservation struct {
 type OverrideActionParameters struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RedactedFieldsFieldToMatchInitParameters struct {
+
+	// When the value of type is HEADER, enter the name of the header that you want the WAF to search, for example, User-Agent or Referer. If the value of type is any other value, omit data.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// valid values are: BLOCK, ALLOW, or COUNT
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RedactedFieldsFieldToMatchObservation struct {
@@ -100,8 +134,14 @@ type RedactedFieldsFieldToMatchParameters struct {
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// valid values are: BLOCK, ALLOW, or COUNT
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RedactedFieldsInitParameters struct {
+
+	// Set of configuration blocks for fields to redact. Detailed below.
+	FieldToMatch []RedactedFieldsFieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 }
 
 type RedactedFieldsObservation struct {
@@ -113,8 +153,24 @@ type RedactedFieldsObservation struct {
 type RedactedFieldsParameters struct {
 
 	// Set of configuration blocks for fields to redact. Detailed below.
-	// +kubebuilder:validation:Required
-	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+}
+
+type RulesInitParameters struct {
+
+	// The action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. Not used if type is GROUP.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Override the action that a group requests CloudFront or AWS WAF takes when a web request matches the conditions in the rule. Only used if type is GROUP.
+	OverrideAction []OverrideActionInitParameters `json:"overrideAction,omitempty" tf:"override_action,omitempty"`
+
+	// Specifies the order in which the rules in a WebACL are evaluated.
+	// Rules with a lower value are evaluated before rules with a higher value.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RulesObservation struct {
@@ -148,8 +204,8 @@ type RulesParameters struct {
 
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Global) rule (e.g., aws_waf_rule). WAF (Regional) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.Rule
@@ -168,6 +224,27 @@ type RulesParameters struct {
 	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type WebACLInitParameters struct {
+
+	// Configuration block with action that you want AWS WAF to take when a request doesn't match the criteria in any of the rules that are associated with the web ACL. Detailed below.
+	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// Configuration block to enable WAF logging. Detailed below.
+	LoggingConfiguration []LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
+	// The name or description for the Amazon CloudWatch metric of this web ACL.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The name or description of the web ACL.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration blocks containing rules to associate with the web ACL and the settings for each rule. Detailed below.
+	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WebACLObservation struct {
@@ -236,6 +313,10 @@ type WebACLParameters struct {
 type WebACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WebACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebACLStatus defines the observed state of WebACL.
@@ -256,9 +337,9 @@ type WebACLStatus struct {
 type WebACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricName)",message="metricName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction) || has(self.initProvider.defaultAction)",message="defaultAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricName) || has(self.initProvider.metricName)",message="metricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   WebACLSpec   `json:"spec"`
 	Status WebACLStatus `json:"status,omitempty"`
 }

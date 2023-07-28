@@ -202,6 +202,63 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  availabilityZoneName:
+                    description: the AWS Availability Zone in which to create the
+                      file system. Used to create a file system that uses One Zone
+                      storage classes. See user guide for more information.
+                    type: string
+                  creationToken:
+                    description: A unique name (a maximum of 64 characters are allowed)
+                      used as reference when creating the Elastic File System to ensure
+                      idempotent file system creation. See Elastic File System user
+                      guide for more information.
+                    type: string
+                  encrypted:
+                    description: If true, the disk will be encrypted.
+                    type: boolean
+                  lifecyclePolicy:
+                    description: A file system lifecycle policy object (documented
+                      below).
+                    items:
+                      properties:
+                        transitionToIa:
+                          description: 'Indicates how long it takes to transition
+                            files to the IA storage class. Valid values: AFTER_1_DAY,
+                            AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS,
+                            or AFTER_90_DAYS.'
+                          type: string
+                        transitionToPrimaryStorageClass:
+                          description: 'Describes the policy used to transition a
+                            file from infequent access storage to primary storage.
+                            Valid values: AFTER_1_ACCESS.'
+                          type: string
+                      type: object
+                    type: array
+                  performanceMode:
+                    description: 'The file system performance mode. Can be either
+                      "generalPurpose" or "maxIO" (Default: "generalPurpose").'
+                    type: string
+                  provisionedThroughputInMibps:
+                    description: The throughput, measured in MiB/s, that you want
+                      to provision for the file system. Only applicable with throughput_mode
+                      set to provisioned.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  throughputMode:
+                    description: 'Throughput mode for the file system. Defaults to
+                      bursting. Valid values: bursting, provisioned, or elastic. When
+                      using provisioned, also set provisioned_throughput_in_mibps.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

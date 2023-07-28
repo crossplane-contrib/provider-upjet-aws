@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AwsLambdaInitParameters struct {
+
+	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
+	FunctionPayload *string `json:"functionPayload,omitempty" tf:"function_payload,omitempty"`
+}
+
 type AwsLambdaObservation struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Lambda function.
@@ -41,6 +47,18 @@ type AwsLambdaParameters struct {
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
 	// +kubebuilder:validation:Optional
 	FunctionPayload *string `json:"functionPayload,omitempty" tf:"function_payload,omitempty"`
+}
+
+type ConfigurationInitParameters struct {
+
+	// Allowed features. Valid values: GetObject-Range, GetObject-PartNumber.
+	AllowedFeatures []*string `json:"allowedFeatures,omitempty" tf:"allowed_features,omitempty"`
+
+	// Whether or not the CloudWatch metrics configuration is enabled.
+	CloudWatchMetricsEnabled *bool `json:"cloudWatchMetricsEnabled,omitempty" tf:"cloud_watch_metrics_enabled,omitempty"`
+
+	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
+	TransformationConfiguration []TransformationConfigurationInitParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
@@ -83,8 +101,14 @@ type ConfigurationParameters struct {
 	SupportingAccessPointSelector *v1.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
 	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
-	// +kubebuilder:validation:Required
-	TransformationConfiguration []TransformationConfigurationParameters `json:"transformationConfiguration" tf:"transformation_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	TransformationConfiguration []TransformationConfigurationParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
+}
+
+type ContentTransformationInitParameters struct {
+
+	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
+	AwsLambda []AwsLambdaInitParameters `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
 }
 
 type ContentTransformationObservation struct {
@@ -96,8 +120,20 @@ type ContentTransformationObservation struct {
 type ContentTransformationParameters struct {
 
 	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
-	// +kubebuilder:validation:Required
-	AwsLambda []AwsLambdaParameters `json:"awsLambda" tf:"aws_lambda,omitempty"`
+	// +kubebuilder:validation:Optional
+	AwsLambda []AwsLambdaParameters `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
+}
+
+type ObjectLambdaAccessPointInitParameters struct {
+
+	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// A configuration block containing details about the Object Lambda Access Point. See Configuration below for more details.
+	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// The name for this Object Lambda Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ObjectLambdaAccessPointObservation struct {
@@ -138,6 +174,15 @@ type ObjectLambdaAccessPointParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type TransformationConfigurationInitParameters struct {
+
+	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
+	ContentTransformation []ContentTransformationInitParameters `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
+}
+
 type TransformationConfigurationObservation struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
@@ -150,18 +195,22 @@ type TransformationConfigurationObservation struct {
 type TransformationConfigurationParameters struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
-	// +kubebuilder:validation:Required
-	Actions []*string `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
-	// +kubebuilder:validation:Required
-	ContentTransformation []ContentTransformationParameters `json:"contentTransformation" tf:"content_transformation,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentTransformation []ContentTransformationParameters `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
 }
 
 // ObjectLambdaAccessPointSpec defines the desired state of ObjectLambdaAccessPoint
 type ObjectLambdaAccessPointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ObjectLambdaAccessPointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ObjectLambdaAccessPointInitParameters `json:"initProvider,omitempty"`
 }
 
 // ObjectLambdaAccessPointStatus defines the observed state of ObjectLambdaAccessPoint.
@@ -182,8 +231,8 @@ type ObjectLambdaAccessPointStatus struct {
 type ObjectLambdaAccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configuration)",message="configuration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configuration) || has(self.initProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ObjectLambdaAccessPointSpec   `json:"spec"`
 	Status ObjectLambdaAccessPointStatus `json:"status,omitempty"`
 }

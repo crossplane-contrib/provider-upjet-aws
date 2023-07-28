@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LicenseAssociationInitParameters struct {
+
+	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
+	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+}
+
 type LicenseAssociationObservation struct {
 
 	// If license_type is set to ENTERPRISE_FREE_TRIAL, this is the expiration date of the free trial.
@@ -60,6 +66,10 @@ type LicenseAssociationParameters struct {
 type LicenseAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LicenseAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LicenseAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // LicenseAssociationStatus defines the observed state of LicenseAssociation.
@@ -80,7 +90,7 @@ type LicenseAssociationStatus struct {
 type LicenseAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseType)",message="licenseType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseType) || has(self.initProvider.licenseType)",message="licenseType is a required parameter"
 	Spec   LicenseAssociationSpec   `json:"spec"`
 	Status LicenseAssociationStatus `json:"status,omitempty"`
 }

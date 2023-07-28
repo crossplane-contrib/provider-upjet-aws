@@ -81,10 +81,6 @@ spec:
                           description: The source for the value. May be any of "messageTag",
                             "emailHeader" or "linkTag".
                           type: string
-                      required:
-                      - defaultValue
-                      - dimensionName
-                      - valueSource
                       type: object
                     type: array
                   configurationSetName:
@@ -433,6 +429,47 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cloudwatchDestination:
+                    description: CloudWatch destination for the events
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value for the event
+                          type: string
+                        dimensionName:
+                          description: The name for the dimension
+                          type: string
+                        valueSource:
+                          description: The source for the value. May be any of "messageTag",
+                            "emailHeader" or "linkTag".
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: If true, the event destination will be enabled
+                    type: boolean
+                  kinesisDestination:
+                    description: Send the events to a kinesis firehose destination
+                    items:
+                      type: object
+                    type: array
+                  matchingTypes:
+                    description: A list of matching types. May be any of "send", "reject",
+                      "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+                    items:
+                      type: string
+                    type: array
+                  snsDestination:
+                    description: Send the events to an SNS Topic destination
+                    items:
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -633,7 +670,8 @@ spec:
             x-kubernetes-validations:
             - message: matchingTypes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.matchingTypes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.matchingTypes)
+                || has(self.initProvider.matchingTypes)'
           status:
             description: EventDestinationStatus defines the observed state of EventDestination.
             properties:

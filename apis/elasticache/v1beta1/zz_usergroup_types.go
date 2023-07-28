@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserGroupInitParameters struct {
+
+	// The current supported value is REDIS.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type UserGroupObservation struct {
 
 	// The ARN that identifies the user group.
@@ -69,6 +78,10 @@ type UserGroupParameters struct {
 type UserGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserGroupStatus defines the observed state of UserGroup.
@@ -89,7 +102,7 @@ type UserGroupStatus struct {
 type UserGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine)",message="engine is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine) || has(self.initProvider.engine)",message="engine is a required parameter"
 	Spec   UserGroupSpec   `json:"spec"`
 	Status UserGroupStatus `json:"status,omitempty"`
 }

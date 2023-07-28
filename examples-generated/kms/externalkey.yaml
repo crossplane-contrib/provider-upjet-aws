@@ -10,6 +10,3 @@ spec:
   forProvider:
     description: KMS EXTERNAL for AMI encryption
     region: us-west-1
-
----
-

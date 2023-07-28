@@ -158,6 +158,18 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: Name of the policy.
+                    type: string
+                  policy:
+                    description: JSON string of the policy.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,10 +370,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: IdentityPolicyStatus defines the observed state of IdentityPolicy.
             properties:

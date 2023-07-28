@@ -16,6 +16,3 @@ spec:
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

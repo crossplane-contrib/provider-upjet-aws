@@ -13,6 +13,3 @@ spec:
     tags:
       Environment: test
     validationMethod: DNS
-
----
-

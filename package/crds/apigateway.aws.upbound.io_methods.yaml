@@ -354,6 +354,57 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  apiKeyRequired:
+                    description: Specify if the method requires an API key
+                    type: boolean
+                  authorization:
+                    description: Type of authorization used for the method (NONE,
+                      CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
+                    type: string
+                  authorizationScopes:
+                    description: Authorization scopes used when the authorization
+                      is COGNITO_USER_POOLS
+                    items:
+                      type: string
+                    type: array
+                  httpMethod:
+                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
+                      ANY)
+                    type: string
+                  operationName:
+                    description: Function name that will be given to the method when
+                      generating an SDK through API Gateway. If omitted, API Gateway
+                      will generate a function name based on the resource path and
+                      HTTP verb.
+                    type: string
+                  requestModels:
+                    additionalProperties:
+                      type: string
+                    description: Map of the API models used for the request's content
+                      type where key is the content type (e.g., application/json)
+                      and value is either Error, Empty (built-in models) or aws_api_gateway_model's
+                      name.
+                    type: object
+                  requestParameters:
+                    additionalProperties:
+                      type: boolean
+                    description: 'Map of request parameters (from the path, query
+                      string and headers) that should be passed to the integration.
+                      The boolean value indicates whether the parameter is required
+                      (true) or optional (false). For example: request_parameters
+                      = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param"
+                      = true} would define that the header X-Some-Header and the query
+                      string some-query-param must be provided in the request.'
+                    type: object
+                  requestValidatorId:
+                    description: ID of a aws_api_gateway_request_validator
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -554,10 +605,12 @@ spec:
             x-kubernetes-validations:
             - message: authorization is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorization)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorization)
+                || has(self.initProvider.authorization)'
             - message: httpMethod is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)
+                || has(self.initProvider.httpMethod)'
           status:
             description: MethodStatus defines the observed state of Method.
             properties:

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketNotificationInitParameters struct {
+
+	// Whether to enable Amazon EventBridge notifications.
+	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
+
+	// Used to configure notifications to a Lambda Function. See below.
+	LambdaFunction []LambdaFunctionInitParameters `json:"lambdaFunction,omitempty" tf:"lambda_function,omitempty"`
+
+	// Notification configuration to SQS Queue. See below.
+	Queue []QueueInitParameters `json:"queue,omitempty" tf:"queue,omitempty"`
+
+	// Notification configuration to SNS Topic. See below.
+	Topic []TopicInitParameters `json:"topic,omitempty" tf:"topic,omitempty"`
+}
+
 type BucketNotificationObservation struct {
 
 	// Name of the bucket for notification configuration.
@@ -72,6 +87,24 @@ type BucketNotificationParameters struct {
 	Topic []TopicParameters `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
+type LambdaFunctionInitParameters struct {
+
+	// Event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Lambda function ARN.
+	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
+}
+
 type LambdaFunctionObservation struct {
 
 	// Event for which to send notifications.
@@ -93,8 +126,8 @@ type LambdaFunctionObservation struct {
 type LambdaFunctionParameters struct {
 
 	// Event for which to send notifications.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional
@@ -111,6 +144,21 @@ type LambdaFunctionParameters struct {
 	// Lambda function ARN.
 	// +kubebuilder:validation:Optional
 	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty" tf:"lambda_function_arn,omitempty"`
+}
+
+type QueueInitParameters struct {
+
+	// Specifies event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type QueueObservation struct {
@@ -134,8 +182,8 @@ type QueueObservation struct {
 type QueueParameters struct {
 
 	// Specifies event for which to send notifications.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional
@@ -164,6 +212,21 @@ type QueueParameters struct {
 	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
 
+type TopicInitParameters struct {
+
+	// Event for which to send notifications.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Object key name prefix.
+	FilterPrefix *string `json:"filterPrefix,omitempty" tf:"filter_prefix,omitempty"`
+
+	// Object key name suffix.
+	FilterSuffix *string `json:"filterSuffix,omitempty" tf:"filter_suffix,omitempty"`
+
+	// Unique identifier for each of the notification configurations.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
 type TopicObservation struct {
 
 	// Event for which to send notifications.
@@ -185,8 +248,8 @@ type TopicObservation struct {
 type TopicParameters struct {
 
 	// Event for which to send notifications.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional
@@ -219,6 +282,10 @@ type TopicParameters struct {
 type BucketNotificationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketNotificationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketNotificationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketNotificationStatus defines the observed state of BucketNotification.

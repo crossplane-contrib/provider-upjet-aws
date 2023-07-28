@@ -159,8 +159,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - priority
                       type: object
                     type: array
                   region:
@@ -169,6 +167,24 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  connector:
+                    description: The Amazon Chime Voice Connectors to route inbound
+                      calls to.
+                    items:
+                      properties:
+                        priority:
+                          description: The priority associated with the Amazon Chime
+                            Voice Connector, with 1 being the highest priority. Higher
+                            priority Amazon Chime Voice Connectors are attempted first.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

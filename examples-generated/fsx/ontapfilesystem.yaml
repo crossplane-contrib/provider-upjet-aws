@@ -18,6 +18,3 @@ spec:
     - name: test1
     - name: test2
     throughputCapacity: 512
-
----
-

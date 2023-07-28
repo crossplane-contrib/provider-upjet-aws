@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CarrierGatewayInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CarrierGatewayObservation struct {
 
 	// The ARN of the carrier gateway.
@@ -63,6 +69,10 @@ type CarrierGatewayParameters struct {
 type CarrierGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CarrierGatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CarrierGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // CarrierGatewayStatus defines the observed state of CarrierGateway.

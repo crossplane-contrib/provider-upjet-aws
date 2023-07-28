@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RegistryScanningConfigurationInitParameters struct {
+
+	// One or multiple blocks specifying scanning rules to determine which repository filters are used and at what frequency scanning will occur. See below for schema.
+	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// the scanning type to set for the registry. Can be either ENHANCED or BASIC.
+	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
+}
+
 type RegistryScanningConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -42,6 +51,12 @@ type RegistryScanningConfigurationParameters struct {
 	ScanType *string `json:"scanType,omitempty" tf:"scan_type,omitempty"`
 }
 
+type RepositoryFilterInitParameters struct {
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
 type RepositoryFilterObservation struct {
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -50,11 +65,20 @@ type RepositoryFilterObservation struct {
 
 type RepositoryFilterParameters struct {
 
-	// +kubebuilder:validation:Required
-	Filter *string `json:"filter" tf:"filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// +kubebuilder:validation:Required
-	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+}
+
+type RuleInitParameters struct {
+
+	// One or more repository filter blocks, containing a filter  and a filter_type .
+	RepositoryFilter []RepositoryFilterInitParameters `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
+
+	// The frequency that scans are performed at for a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN, or MANUAL.
+	ScanFrequency *string `json:"scanFrequency,omitempty" tf:"scan_frequency,omitempty"`
 }
 
 type RuleObservation struct {
@@ -69,18 +93,22 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// One or more repository filter blocks, containing a filter  and a filter_type .
-	// +kubebuilder:validation:Required
-	RepositoryFilter []RepositoryFilterParameters `json:"repositoryFilter" tf:"repository_filter,omitempty"`
+	// +kubebuilder:validation:Optional
+	RepositoryFilter []RepositoryFilterParameters `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
 
 	// The frequency that scans are performed at for a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN, or MANUAL.
-	// +kubebuilder:validation:Required
-	ScanFrequency *string `json:"scanFrequency" tf:"scan_frequency,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScanFrequency *string `json:"scanFrequency,omitempty" tf:"scan_frequency,omitempty"`
 }
 
 // RegistryScanningConfigurationSpec defines the desired state of RegistryScanningConfiguration
 type RegistryScanningConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegistryScanningConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RegistryScanningConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegistryScanningConfigurationStatus defines the observed state of RegistryScanningConfiguration.
@@ -101,7 +129,7 @@ type RegistryScanningConfigurationStatus struct {
 type RegistryScanningConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scanType)",message="scanType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scanType) || has(self.initProvider.scanType)",message="scanType is a required parameter"
 	Spec   RegistryScanningConfigurationSpec   `json:"spec"`
 	Status RegistryScanningConfigurationStatus `json:"status,omitempty"`
 }

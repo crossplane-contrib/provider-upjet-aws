@@ -232,6 +232,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  body:
+                    description: (Requirement) The public key portion of an SSH key
+                      pair.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -432,7 +442,8 @@ spec:
             x-kubernetes-validations:
             - message: body is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.body)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.body)
+                || has(self.initProvider.body)'
           status:
             description: SSHKeyStatus defines the observed state of SSHKey.
             properties:

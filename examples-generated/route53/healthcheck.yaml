@@ -17,6 +17,3 @@ spec:
     tags:
       Name: tf-test-health-check
     type: HTTP
-
----
-

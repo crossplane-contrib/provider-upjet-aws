@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayMulticastGroupMemberInitParameters struct {
+
+	// The IP address assigned to the transit gateway multicast group.
+	GroupIPAddress *string `json:"groupIpAddress,omitempty" tf:"group_ip_address,omitempty"`
+}
+
 type TransitGatewayMulticastGroupMemberObservation struct {
 
 	// The IP address assigned to the transit gateway multicast group.
@@ -72,6 +78,10 @@ type TransitGatewayMulticastGroupMemberParameters struct {
 type TransitGatewayMulticastGroupMemberSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayMulticastGroupMemberParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayMulticastGroupMemberInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayMulticastGroupMemberStatus defines the observed state of TransitGatewayMulticastGroupMember.
@@ -92,7 +102,7 @@ type TransitGatewayMulticastGroupMemberStatus struct {
 type TransitGatewayMulticastGroupMember struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupIpAddress)",message="groupIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupIpAddress) || has(self.initProvider.groupIpAddress)",message="groupIpAddress is a required parameter"
 	Spec   TransitGatewayMulticastGroupMemberSpec   `json:"spec"`
 	Status TransitGatewayMulticastGroupMemberStatus `json:"status,omitempty"`
 }

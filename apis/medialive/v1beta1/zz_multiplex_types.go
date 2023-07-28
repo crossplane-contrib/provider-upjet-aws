@@ -13,6 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MultiplexInitParameters struct {
+
+	// A list of availability zones. You must specify exactly two.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// Multiplex settings. See Multiplex Settings for more details.
+	MultiplexSettings []MultiplexMultiplexSettingsInitParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+
+	// name of Multiplex.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to start the Multiplex. Defaults to false.
+	StartMultiplex *bool `json:"startMultiplex,omitempty" tf:"start_multiplex,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type MultiplexMultiplexSettingsInitParameters struct {
+
+	// Maximum video buffer delay.
+	MaximumVideoBufferDelayMilliseconds *float64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *float64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *float64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
+}
+
 type MultiplexMultiplexSettingsObservation struct {
 
 	// Maximum video buffer delay.
@@ -35,12 +68,12 @@ type MultiplexMultiplexSettingsParameters struct {
 	MaximumVideoBufferDelayMilliseconds *float64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
 
 	// Transport stream bit rate.
-	// +kubebuilder:validation:Required
-	TransportStreamBitrate *float64 `json:"transportStreamBitrate" tf:"transport_stream_bitrate,omitempty"`
+	// +kubebuilder:validation:Optional
+	TransportStreamBitrate *float64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
 
 	// Unique ID for each multiplex.
-	// +kubebuilder:validation:Required
-	TransportStreamID *float64 `json:"transportStreamId" tf:"transport_stream_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
 	// Transport stream reserved bit rate.
 	// +kubebuilder:validation:Optional
@@ -104,6 +137,10 @@ type MultiplexParameters struct {
 type MultiplexSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MultiplexParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MultiplexInitParameters `json:"initProvider,omitempty"`
 }
 
 // MultiplexStatus defines the observed state of Multiplex.
@@ -124,8 +161,8 @@ type MultiplexStatus struct {
 type Multiplex struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZones)",message="availabilityZones is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZones) || has(self.initProvider.availabilityZones)",message="availabilityZones is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   MultiplexSpec   `json:"spec"`
 	Status MultiplexStatus `json:"status,omitempty"`
 }

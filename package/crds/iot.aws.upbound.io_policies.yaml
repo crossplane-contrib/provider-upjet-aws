@@ -77,6 +77,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  policy:
+                    description: The policy document. This is a JSON formatted string.
+                      Use the IoT Developer Guide for more information on IoT Policies.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -277,7 +287,8 @@ spec:
             x-kubernetes-validations:
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:

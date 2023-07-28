@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppInitParameters struct {
+
+	// The name of the app.
+	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
+
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
+
+	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.See Resource Spec below.
+	ResourceSpec []ResourceSpecInitParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
+
+	// The name of the space. At least one of user_profile_name or space_name required.
+	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppObservation struct {
 
 	// The name of the app.
@@ -102,6 +120,21 @@ type AppParameters struct {
 	UserProfileNameSelector *v1.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
 }
 
+type ResourceSpecInitParameters struct {
+
+	// The instance type that the image version runs on. For valid values see SageMaker Instance Types.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.
+	LifecycleConfigArn *string `json:"lifecycleConfigArn,omitempty" tf:"lifecycle_config_arn,omitempty"`
+
+	// The ARN of the SageMaker image that the image version belongs to.
+	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The ARN of the image version created on the instance.
+	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
+}
+
 type ResourceSpecObservation struct {
 
 	// The instance type that the image version runs on. For valid values see SageMaker Instance Types.
@@ -140,6 +173,10 @@ type ResourceSpecParameters struct {
 type AppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppStatus defines the observed state of App.
@@ -160,8 +197,8 @@ type AppStatus struct {
 type App struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appName)",message="appName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appType)",message="appType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appName) || has(self.initProvider.appName)",message="appName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appType) || has(self.initProvider.appType)",message="appType is a required parameter"
 	Spec   AppSpec   `json:"spec"`
 	Status AppStatus `json:"status,omitempty"`
 }

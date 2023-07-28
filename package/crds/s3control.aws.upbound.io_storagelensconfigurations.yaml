@@ -214,8 +214,6 @@ spec:
                                                   type: array
                                               type: object
                                             type: array
-                                        required:
-                                        - storageMetrics
                                         type: object
                                       type: array
                                   type: object
@@ -232,8 +230,6 @@ spec:
                                       type: boolean
                                   type: object
                                 type: array
-                            required:
-                            - bucketLevel
                             type: object
                           type: array
                         awsOrg:
@@ -246,8 +242,6 @@ spec:
                                 description: The Amazon Resource Name (ARN) of the
                                   bucket.
                                 type: string
-                            required:
-                            - arn
                             type: object
                           type: array
                         dataExport:
@@ -266,8 +260,6 @@ spec:
                                       description: Whether the S3 Storage Lens configuration
                                         is enabled.
                                       type: boolean
-                                  required:
-                                  - enabled
                                   type: object
                                 type: array
                               s3BucketDestination:
@@ -382,8 +374,6 @@ spec:
                                                 keyId:
                                                   description: KMS key ARN.
                                                   type: string
-                                              required:
-                                              - keyId
                                               type: object
                                             type: array
                                           sseS3:
@@ -406,10 +396,6 @@ spec:
                                       description: The prefix of the destination bucket
                                         where the metrics export will be delivered.
                                       type: string
-                                  required:
-                                  - accountId
-                                  - format
-                                  - outputSchemaVersion
                                   type: object
                                 type: array
                             type: object
@@ -452,9 +438,6 @@ spec:
                                 type: array
                             type: object
                           type: array
-                      required:
-                      - accountLevel
-                      - enabled
                       type: object
                     type: array
                   tags:
@@ -464,6 +447,297 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: The AWS account ID for the S3 Storage Lens configuration.
+                    type: string
+                  configId:
+                    description: The ID of the S3 Storage Lens configuration.
+                    type: string
+                  storageLensConfiguration:
+                    description: The S3 Storage Lens configuration. See Storage Lens
+                      Configuration below for more details.
+                    items:
+                      properties:
+                        accountLevel:
+                          description: level configurations of the S3 Storage Lens
+                            configuration. See Account Level below for more details.
+                          items:
+                            properties:
+                              activityMetrics:
+                                description: S3 Storage Lens activity metrics. See
+                                  Activity Metrics below for more details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Whether the activity metrics are
+                                        enabled.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              advancedCostOptimizationMetrics:
+                                description: optimization metrics for S3 Storage Lens.
+                                  See Advanced Cost-Optimization Metrics below for
+                                  more details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Whether the S3 Storage Lens configuration
+                                        is enabled.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              advancedDataProtectionMetrics:
+                                description: protection metrics for S3 Storage Lens.
+                                  See Advanced Data-Protection Metrics below for more
+                                  details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Whether the S3 Storage Lens configuration
+                                        is enabled.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              bucketLevel:
+                                description: level configuration. See Bucket Level
+                                  below for more details.
+                                items:
+                                  properties:
+                                    activityMetrics:
+                                      description: S3 Storage Lens activity metrics.
+                                        See Activity Metrics below for more details.
+                                      items:
+                                        properties:
+                                          enabled:
+                                            description: Whether the S3 Storage Lens
+                                              configuration is enabled.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    advancedCostOptimizationMetrics:
+                                      description: optimization metrics for S3 Storage
+                                        Lens. See Advanced Cost-Optimization Metrics
+                                        below for more details.
+                                      items:
+                                        properties:
+                                          enabled:
+                                            description: Whether the S3 Storage Lens
+                                              configuration is enabled.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    advancedDataProtectionMetrics:
+                                      description: protection metrics for S3 Storage
+                                        Lens. See Advanced Data-Protection Metrics
+                                        below for more details.
+                                      items:
+                                        properties:
+                                          enabled:
+                                            description: Whether the S3 Storage Lens
+                                              configuration is enabled.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    detailedStatusCodeMetrics:
+                                      description: Detailed status code metrics for
+                                        S3 Storage Lens. See Detailed Status Code
+                                        Metrics below for more details.
+                                      items:
+                                        properties:
+                                          enabled:
+                                            description: Whether the S3 Storage Lens
+                                              configuration is enabled.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    prefixLevel:
+                                      description: level metrics for S3 Storage Lens.
+                                        See Prefix Level below for more details.
+                                      items:
+                                        properties:
+                                          storageMetrics:
+                                            description: level storage metrics for
+                                              S3 Storage Lens. See Prefix Level Storage
+                                              Metrics below for more details.
+                                            items:
+                                              properties:
+                                                enabled:
+                                                  description: Whether the S3 Storage
+                                                    Lens configuration is enabled.
+                                                  type: boolean
+                                                selectionCriteria:
+                                                  description: Selection criteria.
+                                                    See Selection Criteria below for
+                                                    more details.
+                                                  items:
+                                                    properties:
+                                                      delimiter:
+                                                        description: The delimiter
+                                                          of the selection criteria
+                                                          being used.
+                                                        type: string
+                                                      maxDepth:
+                                                        description: The max depth
+                                                          of the selection criteria.
+                                                        type: number
+                                                      minStorageBytesPercentage:
+                                                        description: The minimum number
+                                                          of storage bytes percentage
+                                                          whose metrics will be selected.
+                                                        type: number
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              detailedStatusCodeMetrics:
+                                description: Detailed status code metrics for S3 Storage
+                                  Lens. See Detailed Status Code Metrics below for
+                                  more details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Whether the S3 Storage Lens configuration
+                                        is enabled.
+                                      type: boolean
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        awsOrg:
+                          description: The Amazon Web Services organization for the
+                            S3 Storage Lens configuration. See AWS Org below for more
+                            details.
+                          items:
+                            properties:
+                              arn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  bucket.
+                                type: string
+                            type: object
+                          type: array
+                        dataExport:
+                          description: Properties of S3 Storage Lens metrics export
+                            including the destination, schema and format. See Data
+                            Export below for more details.
+                          items:
+                            properties:
+                              cloudWatchMetrics:
+                                description: Amazon CloudWatch publishing for S3 Storage
+                                  Lens metrics. See Cloud Watch Metrics below for
+                                  more details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Whether the S3 Storage Lens configuration
+                                        is enabled.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              s3BucketDestination:
+                                description: The bucket where the S3 Storage Lens
+                                  metrics export will be located. See S3 Bucket Destination
+                                  below for more details.
+                                items:
+                                  properties:
+                                    accountId:
+                                      description: The account ID of the owner of
+                                        the S3 Storage Lens metrics export bucket.
+                                      type: string
+                                    encryption:
+                                      description: Encryption of the metrics exports
+                                        in this bucket. See Encryption below for more
+                                        details.
+                                      items:
+                                        properties:
+                                          sseKms:
+                                            description: KMS encryption. See SSE KMS
+                                              below for more details.
+                                            items:
+                                              properties:
+                                                keyId:
+                                                  description: KMS key ARN.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          sseS3:
+                                            description: S3 encryption. An empty configuration
+                                              block {} should be used.
+                                            items:
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    format:
+                                      description: 'The export format. Valid values:
+                                        CSV, Parquet.'
+                                      type: string
+                                    outputSchemaVersion:
+                                      description: 'The schema version of the export
+                                        file. Valid values: V_1.'
+                                      type: string
+                                    prefix:
+                                      description: The prefix of the destination bucket
+                                        where the metrics export will be delivered.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        enabled:
+                          description: Whether the S3 Storage Lens configuration is
+                            enabled.
+                          type: boolean
+                        exclude:
+                          description: What is excluded in this configuration. Conflicts
+                            with include. See Exclude below for more details.
+                          items:
+                            properties:
+                              buckets:
+                                description: List of S3 bucket ARNs.
+                                items:
+                                  type: string
+                                type: array
+                              regions:
+                                description: List of AWS Regions.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        include:
+                          description: What is included in this configuration. Conflicts
+                            with exclude. See Include below for more details.
+                          items:
+                            properties:
+                              buckets:
+                                description: List of S3 bucket ARNs.
+                                items:
+                                  type: string
+                                type: array
+                              regions:
+                                description: List of AWS Regions.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -665,10 +939,12 @@ spec:
             x-kubernetes-validations:
             - message: configId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.configId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.configId)
+                || has(self.initProvider.configId)'
             - message: storageLensConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLensConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLensConfiguration)
+                || has(self.initProvider.storageLensConfiguration)'
           status:
             description: StorageLensConfigurationStatus defines the observed state
               of StorageLensConfiguration.

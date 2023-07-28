@@ -192,6 +192,53 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  availabilityZone:
+                    description: The AZ where the EBS volume will exist.
+                    type: string
+                  encrypted:
+                    description: If true, the disk will be encrypted.
+                    type: boolean
+                  finalSnapshot:
+                    description: If true, snapshot will be created before volume deletion.
+                      Any tags on the volume will be migrated to the snapshot. By
+                      default set to false
+                    type: boolean
+                  iops:
+                    description: The amount of IOPS to provision for the disk. Only
+                      valid for type of io1, io2 or gp3.
+                    type: number
+                  multiAttachEnabled:
+                    description: Specifies whether to enable Amazon EBS Multi-Attach.
+                      Multi-Attach is supported on io1 and io2 volumes.
+                    type: boolean
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    type: string
+                  size:
+                    description: The size of the drive in GiBs.
+                    type: number
+                  snapshotId:
+                    description: A snapshot to base the EBS volume off of.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  throughput:
+                    description: The throughput that the volume supports, in MiB/s.
+                      Only valid for type of gp3.
+                    type: number
+                  type:
+                    description: 'The type of EBS volume. Can be standard, gp2, gp3,
+                      io1, io2, sc1 or st1 (Default: gp2).'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -392,7 +439,8 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
+                || has(self.initProvider.availabilityZone)'
           status:
             description: EBSVolumeStatus defines the observed state of EBSVolume.
             properties:

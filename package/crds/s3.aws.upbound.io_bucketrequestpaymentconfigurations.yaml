@@ -158,6 +158,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  payer:
+                    description: 'Specifies who pays for the download and request
+                      fees. Valid values: BucketOwner, Requester.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,7 +371,8 @@ spec:
             x-kubernetes-validations:
             - message: payer is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.payer)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.payer)
+                || has(self.initProvider.payer)'
           status:
             description: BucketRequestPaymentConfigurationStatus defines the observed
               state of BucketRequestPaymentConfiguration.

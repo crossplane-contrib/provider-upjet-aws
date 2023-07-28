@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MethodResponseInitParameters struct {
+
+	// Map of the API models used for the response's content type
+	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Map of response parameters that can be sent to the caller.
+	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
+	// would define that the header X-Some-Header can be provided on the response.
+	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// HTTP status code
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
 type MethodResponseObservation struct {
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
@@ -106,6 +120,10 @@ type MethodResponseParameters struct {
 type MethodResponseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MethodResponseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MethodResponseInitParameters `json:"initProvider,omitempty"`
 }
 
 // MethodResponseStatus defines the observed state of MethodResponse.
@@ -126,7 +144,7 @@ type MethodResponseStatus struct {
 type MethodResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.statusCode)",message="statusCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.statusCode) || has(self.initProvider.statusCode)",message="statusCode is a required parameter"
 	Spec   MethodResponseSpec   `json:"spec"`
 	Status MethodResponseStatus `json:"status,omitempty"`
 }

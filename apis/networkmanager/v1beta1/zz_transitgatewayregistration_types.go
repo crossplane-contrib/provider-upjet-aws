@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayRegistrationInitParameters struct {
+}
+
 type TransitGatewayRegistrationObservation struct {
 
 	// The ID of the Global Network to register to.
@@ -64,6 +67,10 @@ type TransitGatewayRegistrationParameters struct {
 type TransitGatewayRegistrationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayRegistrationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayRegistrationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayRegistrationStatus defines the observed state of TransitGatewayRegistration.

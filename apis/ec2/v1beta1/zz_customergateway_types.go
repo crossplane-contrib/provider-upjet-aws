@@ -13,6 +13,28 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomerGatewayInitParameters struct {
+
+	// The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).
+	BGPAsn *string `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// A name for the customer gateway device.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// The IPv4 address for the customer gateway device's outside interface.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of customer gateway. The only type AWS
+	// supports at this time is "ipsec.1".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type CustomerGatewayObservation struct {
 
 	// The ARN of the customer gateway.
@@ -81,6 +103,10 @@ type CustomerGatewayParameters struct {
 type CustomerGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CustomerGatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CustomerGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // CustomerGatewayStatus defines the observed state of CustomerGateway.
@@ -101,8 +127,8 @@ type CustomerGatewayStatus struct {
 type CustomerGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bgpAsn)",message="bgpAsn is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bgpAsn) || has(self.initProvider.bgpAsn)",message="bgpAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   CustomerGatewaySpec   `json:"spec"`
 	Status CustomerGatewayStatus `json:"status,omitempty"`
 }

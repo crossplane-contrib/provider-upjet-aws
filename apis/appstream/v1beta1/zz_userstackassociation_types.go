@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserStackAssociationInitParameters struct {
+
+	// Whether a welcome email is sent to a user after the user is created in the user pool.
+	SendEmailNotification *bool `json:"sendEmailNotification,omitempty" tf:"send_email_notification,omitempty"`
+}
+
 type UserStackAssociationObservation struct {
 
 	// Authentication type for the user.
@@ -88,6 +94,10 @@ type UserStackAssociationParameters struct {
 type UserStackAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserStackAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserStackAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserStackAssociationStatus defines the observed state of UserStackAssociation.

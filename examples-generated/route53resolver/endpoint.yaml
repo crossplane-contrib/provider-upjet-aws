@@ -24,6 +24,3 @@ spec:
     - name: sg2
     tags:
       Environment: Prod
-
----
-

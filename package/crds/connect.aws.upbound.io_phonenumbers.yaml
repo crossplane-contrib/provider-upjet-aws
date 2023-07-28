@@ -173,6 +173,34 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  countryCode:
+                    description: The ISO country code. For a list of Valid values,
+                      refer to PhoneNumberCountryCode.
+                    type: string
+                  description:
+                    description: The description of the phone number.
+                    type: string
+                  prefix:
+                    description: The prefix of the phone number that is used to filter
+                      available phone numbers. If provided, it must contain + as part
+                      of the country code. Do not specify this argument when importing
+                      the resource.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: 'The type of phone number. Valid Values: TOLL_FREE
+                      | DID.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -373,10 +401,12 @@ spec:
             x-kubernetes-validations:
             - message: countryCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.countryCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.countryCode)
+                || has(self.initProvider.countryCode)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: PhoneNumberStatus defines the observed state of PhoneNumber.
             properties:

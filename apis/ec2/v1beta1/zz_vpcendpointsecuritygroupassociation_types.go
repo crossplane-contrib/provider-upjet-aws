@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCEndpointSecurityGroupAssociationInitParameters struct {
+
+	// Whether this association should replace the association with the VPC's default security group that is created when no security groups are specified during VPC endpoint creation. At most 1 association per-VPC endpoint should be configured with replace_default_association = true.
+	ReplaceDefaultAssociation *bool `json:"replaceDefaultAssociation,omitempty" tf:"replace_default_association,omitempty"`
+}
+
 type VPCEndpointSecurityGroupAssociationObservation struct {
 
 	// The ID of the association.
@@ -71,6 +77,10 @@ type VPCEndpointSecurityGroupAssociationParameters struct {
 type VPCEndpointSecurityGroupAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointSecurityGroupAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointSecurityGroupAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointSecurityGroupAssociationStatus defines the observed state of VPCEndpointSecurityGroupAssociation.

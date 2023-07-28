@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackendEnvironmentInitParameters struct {
+
+	// Name of deployment artifacts.
+	DeploymentArtifacts *string `json:"deploymentArtifacts,omitempty" tf:"deployment_artifacts,omitempty"`
+
+	// AWS CloudFormation stack name of a backend environment.
+	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
+}
+
 type BackendEnvironmentObservation struct {
 
 	// Unique ID for an Amplify app.
@@ -65,6 +74,10 @@ type BackendEnvironmentParameters struct {
 type BackendEnvironmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackendEnvironmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BackendEnvironmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackendEnvironmentStatus defines the observed state of BackendEnvironment.

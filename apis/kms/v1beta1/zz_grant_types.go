@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConstraintsInitParameters struct {
+
+	// A list of key-value pairs that must match the encryption context in subsequent cryptographic operation requests. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint. Conflicts with encryption_context_subset.
+	EncryptionContextEquals map[string]*string `json:"encryptionContextEquals,omitempty" tf:"encryption_context_equals,omitempty"`
+
+	// A list of key-value pairs that must be included in the encryption context of subsequent cryptographic operation requests. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs. Conflicts with encryption_context_equals.
+	EncryptionContextSubset map[string]*string `json:"encryptionContextSubset,omitempty" tf:"encryption_context_subset,omitempty"`
+}
+
 type ConstraintsObservation struct {
 
 	// A list of key-value pairs that must match the encryption context in subsequent cryptographic operation requests. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint. Conflicts with encryption_context_subset.
@@ -31,6 +40,28 @@ type ConstraintsParameters struct {
 	// A list of key-value pairs that must be included in the encryption context of subsequent cryptographic operation requests. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs. Conflicts with encryption_context_equals.
 	// +kubebuilder:validation:Optional
 	EncryptionContextSubset map[string]*string `json:"encryptionContextSubset,omitempty" tf:"encryption_context_subset,omitempty"`
+}
+
+type GrantInitParameters struct {
+
+	// A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see Encryption Context.
+	Constraints []ConstraintsInitParameters `json:"constraints,omitempty" tf:"constraints,omitempty"`
+
+	// A list of grant tokens to be used when creating the grant. See Grant Tokens for more information about grant tokens.
+	GrantCreationTokens []*string `json:"grantCreationTokens,omitempty" tf:"grant_creation_tokens,omitempty"`
+
+	// A friendly name for identifying the grant.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of operations that the grant permits. The permitted values are: Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, or GenerateDataKeyPairWithoutPlaintext.
+	Operations []*string `json:"operations,omitempty" tf:"operations,omitempty"`
+
+	// (Defaults to false, Forces new resources) If set to false (the default) the grants will be revoked upon deletion, and if set to true the grants will try to be retired upon deletion. Note that retiring grants requires special permissions, hence why we default to revoking grants.
+	// See RetireGrant for more information.
+	RetireOnDelete *bool `json:"retireOnDelete,omitempty" tf:"retire_on_delete,omitempty"`
+
+	// The principal that is given permission to retire the grant by using RetireGrant operation in ARN format.
+	RetiringPrincipal *string `json:"retiringPrincipal,omitempty" tf:"retiring_principal,omitempty"`
 }
 
 type GrantObservation struct {
@@ -134,6 +165,10 @@ type GrantParameters struct {
 type GrantSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GrantParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GrantInitParameters `json:"initProvider,omitempty"`
 }
 
 // GrantStatus defines the observed state of Grant.
@@ -154,7 +189,7 @@ type GrantStatus struct {
 type Grant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operations)",message="operations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operations) || has(self.initProvider.operations)",message="operations is a required parameter"
 	Spec   GrantSpec   `json:"spec"`
 	Status GrantStatus `json:"status,omitempty"`
 }

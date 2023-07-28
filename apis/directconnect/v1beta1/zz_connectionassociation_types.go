@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionAssociationInitParameters struct {
+}
+
 type ConnectionAssociationObservation struct {
 
 	// The ID of the connection.
@@ -64,6 +67,10 @@ type ConnectionAssociationParameters struct {
 type ConnectionAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConnectionAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ConnectionAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConnectionAssociationStatus defines the observed state of ConnectionAssociation.

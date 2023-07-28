@@ -69,6 +69,25 @@ func (tr *Pool) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Pool
+func (tr *Pool) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Pool
+func (tr *Pool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Pool using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Pool) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +162,25 @@ func (tr *CognitoIdentityPoolProviderPrincipalTag) SetParameters(params map[stri
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this CognitoIdentityPoolProviderPrincipalTag
+func (tr *CognitoIdentityPoolProviderPrincipalTag) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this CognitoIdentityPoolProviderPrincipalTag
+func (tr *CognitoIdentityPoolProviderPrincipalTag) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this CognitoIdentityPoolProviderPrincipalTag using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CognitoIdentityPoolProviderPrincipalTag) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +253,25 @@ func (tr *PoolRolesAttachment) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this PoolRolesAttachment
+func (tr *PoolRolesAttachment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this PoolRolesAttachment
+func (tr *PoolRolesAttachment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PoolRolesAttachment using its observed tfState.

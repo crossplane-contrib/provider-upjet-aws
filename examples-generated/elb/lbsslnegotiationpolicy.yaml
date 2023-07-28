@@ -51,6 +51,3 @@ spec:
       lbProtocol: https
       sslCertificateId: arn:aws:iam::123456789012:server-certificate/certName
     region: us-west-1
-
----
-

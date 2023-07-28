@@ -123,13 +123,8 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - certificateName
-                            - domainNames
                             type: object
                           type: array
-                      required:
-                      - certificate
                       type: object
                     type: array
                   region:
@@ -148,6 +143,82 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  isDisabled:
+                    description: A Boolean value indicating whether the container
+                      service is disabled. Defaults to false.
+                    type: boolean
+                  power:
+                    description: 'The power specification for the container service.
+                      The power specifies the amount of memory, the number of vCPUs,
+                      and the monthly price of each node of the container service.
+                      Possible values: nano, micro, small, medium, large, xlarge.'
+                    type: string
+                  privateRegistryAccess:
+                    description: An object to describe the configuration for the container
+                      service to access private container image repositories, such
+                      as Amazon Elastic Container Registry (Amazon ECR) private repositories.
+                      See Private Registry Access below for more details.
+                    items:
+                      properties:
+                        ecrImagePullerRole:
+                          description: Describes a request to configure an Amazon
+                            Lightsail container service to access private container
+                            image repositories, such as Amazon Elastic Container Registry
+                            (Amazon ECR) private repositories. See ECR Image Puller
+                            Role below for more details.
+                          items:
+                            properties:
+                              isActive:
+                                description: A Boolean value that indicates whether
+                                  to activate the role. The default is false.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  publicDomainNames:
+                    description: The public domain names to use with the container
+                      service, such as example.com and www.example.com. You can specify
+                      up to four public domain names for a container service. The
+                      domain names that you specify are used when you create a deployment
+                      with a container configured as the public endpoint of your container
+                      service. If you don't specify public domain names, then you
+                      can use the default domain of the container service. Defined
+                      below.
+                    items:
+                      properties:
+                        certificate:
+                          items:
+                            properties:
+                              certificateName:
+                                description: The name for the container service. Names
+                                  must be of length 1 to 63, and be unique within
+                                  each AWS Region in your Lightsail account.
+                                type: string
+                              domainNames:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  scale:
+                    description: The scale specification for the container service.
+                      The scale specifies the allocated compute nodes of the container
+                      service.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -349,10 +420,12 @@ spec:
             x-kubernetes-validations:
             - message: power is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.power)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.power)
+                || has(self.initProvider.power)'
             - message: scale is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scale)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scale)
+                || has(self.initProvider.scale)'
           status:
             description: ContainerServiceStatus defines the observed state of ContainerService.
             properties:

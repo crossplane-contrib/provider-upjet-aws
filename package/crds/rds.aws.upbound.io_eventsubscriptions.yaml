@@ -180,6 +180,42 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: A boolean flag to enable/disable the subscription.
+                      Defaults to true.
+                    type: boolean
+                  eventCategories:
+                    description: A list of event categories for a SourceType that
+                      you want to subscribe to. See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+                      or run aws rds describe-event-categories.
+                    items:
+                      type: string
+                    type: array
+                  sourceIds:
+                    description: A list of identifiers of the event sources for which
+                      events will be returned. If not specified, then all sources
+                      are included in the response. If specified, a source_type must
+                      also be specified.
+                    items:
+                      type: string
+                    type: array
+                  sourceType:
+                    description: The type of source that will be generating the events.
+                      Valid options are db-instance, db-security-group, db-parameter-group,
+                      db-snapshot, db-cluster or db-cluster-snapshot. If not set,
+                      all sources will be subscribed to.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

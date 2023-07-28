@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EnvironmentMembershipInitParameters struct {
+
+	// The type of environment member permissions you want to associate with this environment member. Allowed values are read-only and read-write .
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+}
+
 type EnvironmentMembershipObservation struct {
 
 	// The ID of the environment that contains the environment member you want to add.
@@ -75,6 +81,10 @@ type EnvironmentMembershipParameters struct {
 type EnvironmentMembershipSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EnvironmentMembershipParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EnvironmentMembershipInitParameters `json:"initProvider,omitempty"`
 }
 
 // EnvironmentMembershipStatus defines the observed state of EnvironmentMembership.
@@ -95,7 +105,7 @@ type EnvironmentMembershipStatus struct {
 type EnvironmentMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissions)",message="permissions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissions) || has(self.initProvider.permissions)",message="permissions is a required parameter"
 	Spec   EnvironmentMembershipSpec   `json:"spec"`
 	Status EnvironmentMembershipStatus `json:"status,omitempty"`
 }

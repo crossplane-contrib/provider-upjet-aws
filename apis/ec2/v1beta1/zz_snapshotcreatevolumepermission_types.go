@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SnapshotCreateVolumePermissionInitParameters struct {
+
+	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+}
+
 type SnapshotCreateVolumePermissionObservation struct {
 
 	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
@@ -55,6 +61,10 @@ type SnapshotCreateVolumePermissionParameters struct {
 type SnapshotCreateVolumePermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SnapshotCreateVolumePermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SnapshotCreateVolumePermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SnapshotCreateVolumePermissionStatus defines the observed state of SnapshotCreateVolumePermission.
@@ -75,7 +85,7 @@ type SnapshotCreateVolumePermissionStatus struct {
 type SnapshotCreateVolumePermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountId)",message="accountId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountId) || has(self.initProvider.accountId)",message="accountId is a required parameter"
 	Spec   SnapshotCreateVolumePermissionSpec   `json:"spec"`
 	Status SnapshotCreateVolumePermissionStatus `json:"status,omitempty"`
 }

@@ -31,6 +31,3 @@ spec:
   forProvider:
     name: app
     region: us-west-1
-
----
-

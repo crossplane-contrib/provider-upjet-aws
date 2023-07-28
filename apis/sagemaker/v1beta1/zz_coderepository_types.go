@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CodeRepositoryInitParameters struct {
+
+	// Specifies details about the repository. see Git Config details below.
+	GitConfig []GitConfigInitParameters `json:"gitConfig,omitempty" tf:"git_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CodeRepositoryObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Code Repository.
@@ -47,6 +56,15 @@ type CodeRepositoryParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type GitConfigInitParameters struct {
+
+	// The default branch for the Git repository.
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// The URL where the Git repository is located.
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+}
+
 type GitConfigObservation struct {
 
 	// The default branch for the Git repository.
@@ -66,8 +84,8 @@ type GitConfigParameters struct {
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
 
 	// The URL where the Git repository is located.
-	// +kubebuilder:validation:Required
-	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of AWSCURRENT and must be in the following format: {"username": UserName, "password": Password}
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
@@ -88,6 +106,10 @@ type GitConfigParameters struct {
 type CodeRepositorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CodeRepositoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CodeRepositoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // CodeRepositoryStatus defines the observed state of CodeRepository.
@@ -108,7 +130,7 @@ type CodeRepositoryStatus struct {
 type CodeRepository struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gitConfig)",message="gitConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gitConfig) || has(self.initProvider.gitConfig)",message="gitConfig is a required parameter"
 	Spec   CodeRepositorySpec   `json:"spec"`
 	Status CodeRepositoryStatus `json:"status,omitempty"`
 }

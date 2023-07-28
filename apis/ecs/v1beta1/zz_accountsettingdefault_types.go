@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountSettingDefaultInitParameters struct {
+
+	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// State of the setting. Valid values are enabled and disabled.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type AccountSettingDefaultObservation struct {
 
 	// ARN that identifies the account setting.
@@ -47,6 +56,10 @@ type AccountSettingDefaultParameters struct {
 type AccountSettingDefaultSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountSettingDefaultParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountSettingDefaultInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountSettingDefaultStatus defines the observed state of AccountSettingDefault.
@@ -67,8 +80,8 @@ type AccountSettingDefaultStatus struct {
 type AccountSettingDefault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   AccountSettingDefaultSpec   `json:"spec"`
 	Status AccountSettingDefaultStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ParameterInitParameters_2 struct {
+
+	// Regular expression used to validate the parameter value.
+	AllowedPattern *string `json:"allowedPattern,omitempty" tf:"allowed_pattern,omitempty"`
+
+	// ARN of the parameter.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Data type of the parameter. Valid values: text, aws:ssm:integration and aws:ec2:image for AMI format, see the Native parameter support for Amazon Machine Image IDs.
+	DataType *string `json:"dataType,omitempty" tf:"data_type,omitempty"`
+
+	// Description of the parameter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Value of the parameter. This argument is not valid with a type of SecureString.
+	InsecureValue *string `json:"insecureValue,omitempty" tf:"insecure_value,omitempty"`
+
+	// KMS key ID or ARN for encrypting a SecureString.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Overwrite an existing parameter.
+	Overwrite *bool `json:"overwrite,omitempty" tf:"overwrite,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Parameter tier to assign to the parameter. If not specified, will use the default parameter tier for the region. Valid tiers are Standard, Advanced, and Intelligent-Tiering. Downgrading an Advanced tier parameter to Standard will recreate the resource. For more information on parameter tiers, see the AWS SSM Parameter tier comparison and guide.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+
+	// Type of the parameter. Valid types are String, StringList and SecureString.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ParameterObservation_2 struct {
 
 	// Regular expression used to validate the parameter value.
@@ -110,6 +143,10 @@ type ParameterParameters_2 struct {
 type ParameterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ParameterParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ParameterInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // ParameterStatus defines the observed state of Parameter.
@@ -130,7 +167,7 @@ type ParameterStatus struct {
 type Parameter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   ParameterSpec   `json:"spec"`
 	Status ParameterStatus `json:"status,omitempty"`
 }

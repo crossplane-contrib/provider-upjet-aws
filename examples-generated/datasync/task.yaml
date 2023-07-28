@@ -18,6 +18,3 @@ spec:
     sourceLocationArnSelector:
       matchLabels:
         testing.upbound.io/example-name: source
-
----
-

@@ -69,6 +69,25 @@ func (tr *AccessPoint) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AccessPoint
+func (tr *AccessPoint) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AccessPoint
+func (tr *AccessPoint) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AccessPoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccessPoint) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +160,25 @@ func (tr *AccountPublicAccessBlock) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this AccountPublicAccessBlock
+func (tr *AccountPublicAccessBlock) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AccountPublicAccessBlock
+func (tr *AccountPublicAccessBlock) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AccountPublicAccessBlock using its observed tfState.
@@ -217,6 +255,25 @@ func (tr *AccessPointPolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AccessPointPolicy
+func (tr *AccessPointPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AccessPointPolicy
+func (tr *AccessPointPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AccessPointPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccessPointPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +346,25 @@ func (tr *MultiRegionAccessPoint) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this MultiRegionAccessPoint
+func (tr *MultiRegionAccessPoint) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this MultiRegionAccessPoint
+func (tr *MultiRegionAccessPoint) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MultiRegionAccessPoint using its observed tfState.
@@ -365,6 +441,25 @@ func (tr *MultiRegionAccessPointPolicy) SetParameters(params map[string]any) err
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MultiRegionAccessPointPolicy
+func (tr *MultiRegionAccessPointPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this MultiRegionAccessPointPolicy
+func (tr *MultiRegionAccessPointPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this MultiRegionAccessPointPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MultiRegionAccessPointPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +532,25 @@ func (tr *ObjectLambdaAccessPoint) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ObjectLambdaAccessPoint
+func (tr *ObjectLambdaAccessPoint) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ObjectLambdaAccessPoint
+func (tr *ObjectLambdaAccessPoint) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ObjectLambdaAccessPoint using its observed tfState.
@@ -513,6 +627,25 @@ func (tr *ObjectLambdaAccessPointPolicy) SetParameters(params map[string]any) er
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ObjectLambdaAccessPointPolicy
+func (tr *ObjectLambdaAccessPointPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ObjectLambdaAccessPointPolicy
+func (tr *ObjectLambdaAccessPointPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ObjectLambdaAccessPointPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ObjectLambdaAccessPointPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +718,25 @@ func (tr *StorageLensConfiguration) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this StorageLensConfiguration
+func (tr *StorageLensConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this StorageLensConfiguration
+func (tr *StorageLensConfiguration) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this StorageLensConfiguration using its observed tfState.

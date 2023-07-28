@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AssessmentTargetInitParameters struct {
+
+	// The name of the assessment target.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type AssessmentTargetObservation struct {
 
 	// The target assessment ARN.
@@ -57,6 +63,10 @@ type AssessmentTargetParameters struct {
 type AssessmentTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AssessmentTargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AssessmentTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // AssessmentTargetStatus defines the observed state of AssessmentTarget.
@@ -77,7 +87,7 @@ type AssessmentTargetStatus struct {
 type AssessmentTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AssessmentTargetSpec   `json:"spec"`
 	Status AssessmentTargetStatus `json:"status,omitempty"`
 }

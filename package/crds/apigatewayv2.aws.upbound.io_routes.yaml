@@ -269,9 +269,6 @@ spec:
                         required:
                           description: Boolean whether or not the parameter is required.
                           type: boolean
-                      required:
-                      - requestParameterKey
-                      - required
                       type: object
                     type: array
                   routeKey:
@@ -363,6 +360,68 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  apiKeyRequired:
+                    description: Boolean whether an API key is required for the route.
+                      Defaults to false. Supported only for WebSocket APIs.
+                    type: boolean
+                  authorizationScopes:
+                    description: Authorization scopes supported by this route. The
+                      scopes are used with a JWT authorizer to authorize the method
+                      invocation.
+                    items:
+                      type: string
+                    type: array
+                  authorizationType:
+                    description: Authorization type for the route. For WebSocket APIs,
+                      valid values are NONE for open access, AWS_IAM for using AWS
+                      IAM permissions, and CUSTOM for using a Lambda authorizer. For
+                      HTTP APIs, valid values are NONE for open access, JWT for using
+                      JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and
+                      CUSTOM for using a Lambda authorizer. Defaults to NONE.
+                    type: string
+                  modelSelectionExpression:
+                    description: The model selection expression for the route. Supported
+                      only for WebSocket APIs.
+                    type: string
+                  operationName:
+                    description: Operation name for the route. Must be between 1 and
+                      64 characters in length.
+                    type: string
+                  requestModels:
+                    additionalProperties:
+                      type: string
+                    description: Request models for the route. Supported only for
+                      WebSocket APIs.
+                    type: object
+                  requestParameter:
+                    description: Request parameters for the route. Supported only
+                      for WebSocket APIs.
+                    items:
+                      properties:
+                        requestParameterKey:
+                          description: Request parameter key. This is a request data
+                            mapping parameter.
+                          type: string
+                        required:
+                          description: Boolean whether or not the parameter is required.
+                          type: boolean
+                      type: object
+                    type: array
+                  routeKey:
+                    description: Route key for the route. For HTTP APIs, the route
+                      key can be either $default, or a combination of an HTTP method
+                      and resource path, for example, GET /pets.
+                    type: string
+                  routeResponseSelectionExpression:
+                    description: The route response selection expression for the route.
+                      Supported only for WebSocket APIs.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -564,7 +623,8 @@ spec:
             x-kubernetes-validations:
             - message: routeKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.routeKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.routeKey)
+                || has(self.initProvider.routeKey)'
           status:
             description: RouteStatus defines the observed state of Route.
             properties:

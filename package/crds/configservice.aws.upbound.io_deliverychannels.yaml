@@ -175,6 +175,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  s3KeyPrefix:
+                    description: The prefix for the specified S3 bucket.
+                    type: string
+                  s3KmsKeyArn:
+                    description: The ARN of the AWS KMS key used to encrypt objects
+                      delivered by AWS Config. Must belong to the same Region as the
+                      destination S3 bucket.
+                    type: string
+                  snapshotDeliveryProperties:
+                    description: Options for how AWS Config delivers configuration
+                      snapshots. See below
+                    items:
+                      properties:
+                        deliveryFrequency:
+                          description: '- The frequency with which AWS Config recurringly
+                            delivers configuration snapshotsE.g., One_Hour or Three_Hours.
+                            Valid values are listed here.'
+                          type: string
+                      type: object
+                    type: array
+                  snsTopicArn:
+                    description: The ARN of the SNS topic that AWS Config delivers
+                      notifications to.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

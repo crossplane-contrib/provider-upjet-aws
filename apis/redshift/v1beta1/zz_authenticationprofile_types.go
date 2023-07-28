@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationProfileInitParameters struct {
+
+	// The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
+	AuthenticationProfileContent *string `json:"authenticationProfileContent,omitempty" tf:"authentication_profile_content,omitempty"`
+}
+
 type AuthenticationProfileObservation struct {
 
 	// The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
@@ -38,6 +44,10 @@ type AuthenticationProfileParameters struct {
 type AuthenticationProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AuthenticationProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AuthenticationProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // AuthenticationProfileStatus defines the observed state of AuthenticationProfile.
@@ -58,7 +68,7 @@ type AuthenticationProfileStatus struct {
 type AuthenticationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent)",message="authenticationProfileContent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent) || has(self.initProvider.authenticationProfileContent)",message="authenticationProfileContent is a required parameter"
 	Spec   AuthenticationProfileSpec   `json:"spec"`
 	Status AuthenticationProfileStatus `json:"status,omitempty"`
 }

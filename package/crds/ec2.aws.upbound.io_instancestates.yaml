@@ -162,6 +162,24 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  force:
+                    description: Whether to request a forced stop when state is stopped.
+                      Otherwise (i.e., state is running), ignored. When an instance
+                      is forced to stop, it does not flush file system caches or file
+                      system metadata, and you must subsequently perform file system
+                      check and repair. Not recommended for Windows instances. Defaults
+                      to false.
+                    type: boolean
+                  state:
+                    description: '- State of the instance. Valid values are stopped,
+                      running.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -362,7 +380,8 @@ spec:
             x-kubernetes-validations:
             - message: state is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.state)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.state)
+                || has(self.initProvider.state)'
           status:
             description: InstanceStateStatus defines the observed state of InstanceState.
             properties:

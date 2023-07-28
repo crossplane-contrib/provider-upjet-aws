@@ -19,6 +19,3 @@ spec:
             testing.upbound.io/example-name: aws_kms_key
         s3EncryptionMode: SSE-KMS
     region: us-west-1
-
----
-

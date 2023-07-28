@@ -48,6 +48,3 @@ spec:
   forProvider:
     name: example
     region: us-west-1
-
----
-

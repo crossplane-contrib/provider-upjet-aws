@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectorInitParameters struct {
+
+	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
 type ConnectorObservation struct {
 
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
@@ -25,8 +31,8 @@ type ConnectorObservation struct {
 type ConnectorParameters struct {
 
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
@@ -41,6 +47,12 @@ type ConnectorParameters struct {
 	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
 	// +kubebuilder:validation:Optional
 	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
+}
+
+type VoiceConnectorGroupInitParameters struct {
+
+	// The Amazon Chime Voice Connectors to route inbound calls to.
+	Connector []ConnectorInitParameters `json:"connector,omitempty" tf:"connector,omitempty"`
 }
 
 type VoiceConnectorGroupObservation struct {
@@ -68,6 +80,10 @@ type VoiceConnectorGroupParameters struct {
 type VoiceConnectorGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VoiceConnectorGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VoiceConnectorGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // VoiceConnectorGroupStatus defines the observed state of VoiceConnectorGroup.

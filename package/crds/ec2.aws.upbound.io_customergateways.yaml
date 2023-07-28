@@ -100,6 +100,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  bgpAsn:
+                    description: The gateway's Border Gateway Protocol (BGP) Autonomous
+                      System Number (ASN).
+                    type: string
+                  certificateArn:
+                    description: The Amazon Resource Name (ARN) for the customer gateway
+                      certificate.
+                    type: string
+                  deviceName:
+                    description: A name for the customer gateway device.
+                    type: string
+                  ipAddress:
+                    description: The IPv4 address for the customer gateway device's
+                      outside interface.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of customer gateway. The only type AWS supports
+                      at this time is "ipsec.1".
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -300,10 +330,12 @@ spec:
             x-kubernetes-validations:
             - message: bgpAsn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)
+                || has(self.initProvider.bgpAsn)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: CustomerGatewayStatus defines the observed state of CustomerGateway.
             properties:

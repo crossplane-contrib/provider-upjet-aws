@@ -36,6 +36,3 @@ spec:
       permission: ENABLED
     - action: PRINTING_TO_LOCAL_DEVICE
       permission: ENABLED
-
----
-

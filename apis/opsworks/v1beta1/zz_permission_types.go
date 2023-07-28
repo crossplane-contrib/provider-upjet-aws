@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PermissionInitParameters struct {
+
+	// Whether the user is allowed to use SSH to communicate with the instance
+	AllowSSH *bool `json:"allowSsh,omitempty" tf:"allow_ssh,omitempty"`
+
+	// Whether the user is allowed to use sudo to elevate privileges
+	AllowSudo *bool `json:"allowSudo,omitempty" tf:"allow_sudo,omitempty"`
+
+	// The users permission level. Mus be one of deny, show, deploy, manage, iam_only
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+}
+
 type PermissionObservation struct {
 
 	// Whether the user is allowed to use SSH to communicate with the instance
@@ -81,6 +93,10 @@ type PermissionParameters struct {
 type PermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionStatus defines the observed state of Permission.

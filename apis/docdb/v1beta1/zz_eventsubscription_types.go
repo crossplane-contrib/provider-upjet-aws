@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EventSubscriptionInitParameters struct {
+
+	// A boolean flag to enable/disable the subscription. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of event categories for a SourceType that you want to subscribe to. See https://docs.aws.amazon.com/documentdb/latest/developerguide/API_Event.html or run aws docdb describe-event-categories.
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
+
+	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// The type of source that will be generating the events. Valid options are db-instance, db-cluster, db-parameter-group, db-security-group, db-cluster-snapshot. If not set, all sources will be subscribed to.
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type EventSubscriptionObservation struct {
 
 	// The Amazon Resource Name of the DocumentDB event notification subscription
@@ -92,6 +110,10 @@ type EventSubscriptionParameters struct {
 type EventSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.

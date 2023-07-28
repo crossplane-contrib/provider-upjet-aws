@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionAuthenticateCognitoInitParameters struct {
+
+	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// The set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// The maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+}
+
 type ActionAuthenticateCognitoObservation struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
@@ -105,6 +123,39 @@ type ActionAuthenticateCognitoParameters struct {
 	UserPoolDomainSelector *v1.Selector `json:"userPoolDomainSelector,omitempty" tf:"-"`
 }
 
+type ActionAuthenticateOidcInitParameters struct {
+
+	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// The authorization endpoint of the IdP.
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+
+	// The OAuth 2.0 client identifier.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OIDC issuer identifier of the IdP.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// The set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// The maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// The token endpoint of the IdP.
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+
+	// The user info endpoint of the IdP.
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+}
+
 type ActionAuthenticateOidcObservation struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
@@ -145,20 +196,20 @@ type ActionAuthenticateOidcParameters struct {
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The authorization endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
 	// The OAuth 2.0 client identifier.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret.
 	// +kubebuilder:validation:Required
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OIDC issuer identifier of the IdP.
-	// +kubebuilder:validation:Required
-	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
 	// +kubebuilder:validation:Optional
@@ -177,12 +228,24 @@ type ActionAuthenticateOidcParameters struct {
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
 	// The token endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	TokenEndpoint *string `json:"tokenEndpoint" tf:"token_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
 	// The user info endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	UserInfoEndpoint *string `json:"userInfoEndpoint" tf:"user_info_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+}
+
+type ActionFixedResponseInitParameters struct {
+
+	// The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// The message body.
+	MessageBody *string `json:"messageBody,omitempty" tf:"message_body,omitempty"`
+
+	// The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type ActionFixedResponseObservation struct {
@@ -200,8 +263,8 @@ type ActionFixedResponseObservation struct {
 type ActionFixedResponseParameters struct {
 
 	// The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// The message body.
 	// +kubebuilder:validation:Optional
@@ -210,6 +273,15 @@ type ActionFixedResponseParameters struct {
 	// The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ActionForwardInitParameters struct {
+
+	// The target group stickiness for the rule.
+	Stickiness []ForwardStickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
+
+	// One or more target groups block.
+	TargetGroup []ForwardTargetGroupInitParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type ActionForwardObservation struct {
@@ -228,8 +300,31 @@ type ActionForwardParameters struct {
 	Stickiness []ForwardStickinessParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
 	// One or more target groups block.
-	// +kubebuilder:validation:Required
-	TargetGroup []ForwardTargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetGroup []ForwardTargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+}
+
+type ActionInitParameters struct {
+
+	// Information for creating an authenticate action using Cognito. Required if type is authenticate-cognito.
+	AuthenticateCognito []ActionAuthenticateCognitoInitParameters `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
+
+	// Information for creating an authenticate action using OIDC. Required if type is authenticate-oidc.
+	AuthenticateOidc []ActionAuthenticateOidcInitParameters `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
+
+	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
+	FixedResponse []ActionFixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
+
+	// Information for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn.
+	Forward []ActionForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Information for creating a redirect action. Required if type is redirect.
+	Redirect []ActionRedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ActionObservation struct {
@@ -298,8 +393,29 @@ type ActionParameters struct {
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ActionRedirectInitParameters struct {
+
+	// The hostname. This component is not percent-encoded. The hostname can contain #{host}. Defaults to #{host}.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}. Defaults to /#{path}.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port. Specify a value from 1 to 65535 or #{port}. Defaults to #{port}.
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol. Valid values are HTTP, HTTPS, or #{protocol}. Defaults to #{protocol}.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?". Defaults to #{query}.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type ActionRedirectObservation struct {
@@ -346,8 +462,29 @@ type ActionRedirectParameters struct {
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
-	// +kubebuilder:validation:Required
-	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ConditionInitParameters struct {
+
+	// HTTP headers to match. HTTP Header block fields documented below.
+	HTTPHeader []HTTPHeaderInitParameters `json:"httpHeader,omitempty" tf:"http_header,omitempty"`
+
+	// Contains a single values item which is a list of HTTP request methods or verbs to match. Maximum size is 40 characters. Only allowed characters are A-Z, hyphen (-) and underscore (_). Comparison is case sensitive. Wildcards are not supported. Only one needs to match for the condition to be satisfied. AWS recommends that GET and HEAD requests are routed in the same way because the response to a HEAD request may be cached.
+	HTTPRequestMethod []HTTPRequestMethodInitParameters `json:"httpRequestMethod,omitempty" tf:"http_request_method,omitempty"`
+
+	// Contains a single values item which is a list of host header patterns to match. The maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied.
+	HostHeader []HostHeaderInitParameters `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// Contains a single values item which is a list of path patterns to match against the request URL. Maximum size of each pattern is 128 characters. Comparison is case sensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). Only one pattern needs to match for the condition to be satisfied. Path pattern is compared only to the path of the URL, not to its query string. To compare against the query string, use a query_string condition.
+	PathPattern []PathPatternInitParameters `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
+
+	// Query strings to match. Query String block fields documented below.
+	QueryString []QueryStringInitParameters `json:"queryString,omitempty" tf:"query_string,omitempty"`
+
+	// Contains a single values item which is a list of source IP CIDR notations to match. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. Condition is satisfied if the source IP address of the request matches one of the CIDR blocks. Condition is not satisfied by the addresses in the X-Forwarded-For header, use http_header condition instead.
+	SourceIP []SourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
 type ConditionObservation struct {
@@ -398,6 +535,15 @@ type ConditionParameters struct {
 	SourceIP []SourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
+type ForwardStickinessInitParameters struct {
+
+	// The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Indicates whether target group stickiness is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type ForwardStickinessObservation struct {
 
 	// The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
@@ -410,12 +556,18 @@ type ForwardStickinessObservation struct {
 type ForwardStickinessParameters struct {
 
 	// The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
-	// +kubebuilder:validation:Required
-	Duration *float64 `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Indicates whether target group stickiness is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ForwardTargetGroupInitParameters struct {
+
+	// The weight. The range is 0 to 999.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ForwardTargetGroupObservation struct {
@@ -448,6 +600,15 @@ type ForwardTargetGroupParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
+type HTTPHeaderInitParameters struct {
+
+	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
+	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
+
+	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type HTTPHeaderObservation struct {
 
 	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
@@ -460,12 +621,18 @@ type HTTPHeaderObservation struct {
 type HTTPHeaderParameters struct {
 
 	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
-	// +kubebuilder:validation:Required
-	HTTPHeaderName *string `json:"httpHeaderName" tf:"http_header_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
 
 	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type HTTPRequestMethodInitParameters struct {
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodObservation struct {
@@ -477,8 +644,14 @@ type HTTPRequestMethodObservation struct {
 type HTTPRequestMethodParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type HostHeaderInitParameters struct {
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HostHeaderObservation struct {
@@ -490,8 +663,23 @@ type HostHeaderObservation struct {
 type HostHeaderParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LBListenerRuleInitParameters struct {
+
+	// An Action block. Action blocks are documented below.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A Condition block. Multiple condition blocks of different types can be set and all must be satisfied for the rule to match. Condition blocks are documented below.
+	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The priority for the rule between 1 and 50000. Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LBListenerRuleObservation struct {
@@ -559,6 +747,12 @@ type LBListenerRuleParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type PathPatternInitParameters struct {
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type PathPatternObservation struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
@@ -568,8 +762,17 @@ type PathPatternObservation struct {
 type PathPatternParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type QueryStringInitParameters struct {
+
+	// Query string key pattern to match.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Query string value pattern to match.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type QueryStringObservation struct {
@@ -588,8 +791,14 @@ type QueryStringParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Query string value pattern to match.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SourceIPInitParameters struct {
+
+	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SourceIPObservation struct {
@@ -601,14 +810,18 @@ type SourceIPObservation struct {
 type SourceIPParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 // LBListenerRuleSpec defines the desired state of LBListenerRule
 type LBListenerRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBListenerRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LBListenerRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBListenerRuleStatus defines the observed state of LBListenerRule.
@@ -629,8 +842,8 @@ type LBListenerRuleStatus struct {
 type LBListenerRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.condition)",message="condition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.condition) || has(self.initProvider.condition)",message="condition is a required parameter"
 	Spec   LBListenerRuleSpec   `json:"spec"`
 	Status LBListenerRuleStatus `json:"status,omitempty"`
 }

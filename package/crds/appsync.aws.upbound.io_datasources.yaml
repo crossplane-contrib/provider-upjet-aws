@@ -162,8 +162,6 @@ spec:
                                 type: string
                               deltaSyncTableTtl:
                                 type: number
-                            required:
-                            - deltaSyncTableName
                             type: object
                           type: array
                         region:
@@ -270,8 +268,6 @@ spec:
                           description: AWS region of Elasticsearch domain. Defaults
                             to current region.
                           type: string
-                      required:
-                      - endpoint
                       type: object
                     type: array
                   eventBridgeConfig:
@@ -281,8 +277,6 @@ spec:
                         eventBusArn:
                           description: ARN for the EventBridge bus.
                           type: string
-                      required:
-                      - eventBusArn
                       type: object
                     type: array
                   httpConfig:
@@ -317,8 +311,6 @@ spec:
                         endpoint:
                           description: HTTP URL.
                           type: string
-                      required:
-                      - endpoint
                       type: object
                     type: array
                   lambdaConfig:
@@ -328,8 +320,6 @@ spec:
                         functionArn:
                           description: ARN for the Lambda function.
                           type: string
-                      required:
-                      - functionArn
                       type: object
                     type: array
                   opensearchserviceConfig:
@@ -343,8 +333,6 @@ spec:
                           description: AWS region of the OpenSearch domain. Defaults
                             to current region.
                           type: string
-                      required:
-                      - endpoint
                       type: object
                     type: array
                   region:
@@ -377,9 +365,6 @@ spec:
                               schema:
                                 description: Logical schema name.
                                 type: string
-                            required:
-                            - awsSecretStoreArn
-                            - dbClusterIdentifier
                             type: object
                           type: array
                         sourceType:
@@ -471,6 +456,143 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of the data source.
+                    type: string
+                  dynamodbConfig:
+                    description: DynamoDB settings. See below
+                    items:
+                      properties:
+                        deltaSyncConfig:
+                          items:
+                            properties:
+                              baseTableTtl:
+                                type: number
+                              deltaSyncTableName:
+                                description: User-supplied name for the data source.
+                                type: string
+                              deltaSyncTableTtl:
+                                type: number
+                            type: object
+                          type: array
+                        useCallerCredentials:
+                          description: Set to true to use Amazon Cognito credentials
+                            with this data source.
+                          type: boolean
+                        versioned:
+                          type: boolean
+                      type: object
+                    type: array
+                  elasticsearchConfig:
+                    description: Amazon Elasticsearch settings. See below
+                    items:
+                      properties:
+                        endpoint:
+                          description: HTTP endpoint of the Elasticsearch domain.
+                          type: string
+                      type: object
+                    type: array
+                  eventBridgeConfig:
+                    description: AWS EventBridge settings. See below
+                    items:
+                      properties:
+                        eventBusArn:
+                          description: ARN for the EventBridge bus.
+                          type: string
+                      type: object
+                    type: array
+                  httpConfig:
+                    description: HTTP settings. See below
+                    items:
+                      properties:
+                        authorizationConfig:
+                          description: Authorization configuration in case the HTTP
+                            endpoint requires authorization. See Authorization Config.
+                          items:
+                            properties:
+                              authorizationType:
+                                description: Authorization type that the HTTP endpoint
+                                  requires. Default values is AWS_IAM.
+                                type: string
+                              awsIamConfig:
+                                description: Identity and Access Management (IAM)
+                                  settings. See AWS IAM Config.
+                                items:
+                                  properties:
+                                    signingRegion:
+                                      description: Signing Amazon Web Services Region
+                                        for IAM authorization.
+                                      type: string
+                                    signingServiceName:
+                                      description: Signing service name for IAM authorization.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        endpoint:
+                          description: HTTP URL.
+                          type: string
+                      type: object
+                    type: array
+                  lambdaConfig:
+                    description: AWS Lambda settings. See below
+                    items:
+                      properties:
+                        functionArn:
+                          description: ARN for the Lambda function.
+                          type: string
+                      type: object
+                    type: array
+                  opensearchserviceConfig:
+                    description: Amazon OpenSearch Service settings. See below
+                    items:
+                      properties:
+                        endpoint:
+                          description: HTTP endpoint of the OpenSearch domain.
+                          type: string
+                      type: object
+                    type: array
+                  relationalDatabaseConfig:
+                    description: AWS RDS settings. See Relational Database Config
+                    items:
+                      properties:
+                        httpEndpointConfig:
+                          description: Amazon RDS HTTP endpoint configuration. See
+                            HTTP Endpoint Config.
+                          items:
+                            properties:
+                              awsSecretStoreArn:
+                                description: AWS secret store ARN for database credentials.
+                                type: string
+                              databaseName:
+                                description: Logical database name.
+                                type: string
+                              dbClusterIdentifier:
+                                description: Amazon RDS cluster identifier.
+                                type: string
+                              schema:
+                                description: Logical schema name.
+                                type: string
+                            type: object
+                          type: array
+                        sourceType:
+                          description: 'Source type for the relational database. Valid
+                            values: RDS_HTTP_ENDPOINT.'
+                          type: string
+                      type: object
+                    type: array
+                  type:
+                    description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
+                      AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
+                      AMAZON_EVENTBRIDGE.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -672,7 +794,8 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: DatasourceStatus defines the observed state of Datasource.
             properties:

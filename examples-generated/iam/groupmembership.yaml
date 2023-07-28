@@ -54,6 +54,3 @@ metadata:
   name: user-two
 spec:
   forProvider: {}
-
----
-

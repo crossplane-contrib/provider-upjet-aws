@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BuildInitParameters struct {
+
+	// Name of the build
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
+
+	// Information indicating where your game build files are stored. See below.
+	StorageLocation []StorageLocationInitParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Version that is associated with this build.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type BuildObservation struct {
 
 	// GameLift Build ARN.
@@ -66,6 +84,12 @@ type BuildParameters struct {
 	// Version that is associated with this build.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type StorageLocationInitParameters struct {
+
+	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }
 
 type StorageLocationObservation struct {
@@ -135,6 +159,10 @@ type StorageLocationParameters struct {
 type BuildSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BuildParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BuildInitParameters `json:"initProvider,omitempty"`
 }
 
 // BuildStatus defines the observed state of Build.
@@ -155,9 +183,9 @@ type BuildStatus struct {
 type Build struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operatingSystem)",message="operatingSystem is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageLocation)",message="storageLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operatingSystem) || has(self.initProvider.operatingSystem)",message="operatingSystem is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageLocation) || has(self.initProvider.storageLocation)",message="storageLocation is a required parameter"
 	Spec   BuildSpec   `json:"spec"`
 	Status BuildStatus `json:"status,omitempty"`
 }

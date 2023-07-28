@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PortfolioInitParameters struct {
+
+	// Description of the portfolio
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the portfolio.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Name of the person or organization who owns the portfolio.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PortfolioObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -65,6 +80,10 @@ type PortfolioParameters struct {
 type PortfolioSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PortfolioParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PortfolioInitParameters `json:"initProvider,omitempty"`
 }
 
 // PortfolioStatus defines the observed state of Portfolio.
@@ -85,8 +104,8 @@ type PortfolioStatus struct {
 type Portfolio struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName)",message="providerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName) || has(self.initProvider.providerName)",message="providerName is a required parameter"
 	Spec   PortfolioSpec   `json:"spec"`
 	Status PortfolioStatus `json:"status,omitempty"`
 }

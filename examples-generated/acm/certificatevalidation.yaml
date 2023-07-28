@@ -75,6 +75,3 @@ spec:
     zoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_route53_zone
-
----
-

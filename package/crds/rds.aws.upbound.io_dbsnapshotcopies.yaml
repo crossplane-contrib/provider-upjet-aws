@@ -251,6 +251,37 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  copyTags:
+                    description: Whether to copy existing tags. Defaults to false.
+                    type: boolean
+                  destinationRegion:
+                    description: The Destination region to place snapshot copy.
+                    type: string
+                  optionGroupName:
+                    description: The name of an option group to associate with the
+                      copy of the snapshot.
+                    type: string
+                  presignedUrl:
+                    description: he URL that contains a Signature Version 4 signed
+                      request.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetCustomAvailabilityZone:
+                    description: The external custom Availability Zone.
+                    type: string
+                  targetDbSnapshotIdentifier:
+                    description: The Identifier for the snapshot.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -451,7 +482,8 @@ spec:
             x-kubernetes-validations:
             - message: targetDbSnapshotIdentifier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetDbSnapshotIdentifier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetDbSnapshotIdentifier)
+                || has(self.initProvider.targetDbSnapshotIdentifier)'
           status:
             description: DBSnapshotCopyStatus defines the observed state of DBSnapshotCopy.
             properties:

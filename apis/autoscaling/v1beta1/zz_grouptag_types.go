@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GroupTagInitParameters struct {
+
+	// Tag to create. The tag block is documented below.
+	Tag []GroupTagTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
 type GroupTagObservation struct {
 
 	// Name of the Autoscaling Group to apply the tag to.
@@ -50,6 +56,18 @@ type GroupTagParameters struct {
 	Tag []GroupTagTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
+type GroupTagTagInitParameters struct {
+
+	// Tag name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Whether to propagate the tags to instances launched by the ASG.
+	PropagateAtLaunch *bool `json:"propagateAtLaunch,omitempty" tf:"propagate_at_launch,omitempty"`
+
+	// Tag value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type GroupTagTagObservation struct {
 
 	// Tag name.
@@ -65,22 +83,26 @@ type GroupTagTagObservation struct {
 type GroupTagTagParameters struct {
 
 	// Tag name.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Whether to propagate the tags to instances launched by the ASG.
-	// +kubebuilder:validation:Required
-	PropagateAtLaunch *bool `json:"propagateAtLaunch" tf:"propagate_at_launch,omitempty"`
+	// +kubebuilder:validation:Optional
+	PropagateAtLaunch *bool `json:"propagateAtLaunch,omitempty" tf:"propagate_at_launch,omitempty"`
 
 	// Tag value.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // GroupTagSpec defines the desired state of GroupTag
 type GroupTagSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupTagParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GroupTagInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupTagStatus defines the observed state of GroupTag.
@@ -101,7 +123,7 @@ type GroupTagStatus struct {
 type GroupTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tag)",message="tag is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tag) || has(self.initProvider.tag)",message="tag is a required parameter"
 	Spec   GroupTagSpec   `json:"spec"`
 	Status GroupTagStatus `json:"status,omitempty"`
 }

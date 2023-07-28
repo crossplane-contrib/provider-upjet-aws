@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AliasInitParameters struct {
+
+	// Description of the alias.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of the alias.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the fleet and/or routing type to use for the alias.
+	RoutingStrategy []RoutingStrategyInitParameters `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AliasObservation struct {
 
 	// Alias ARN.
@@ -61,6 +76,18 @@ type AliasParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RoutingStrategyInitParameters struct {
+
+	// ID of the GameLift Fleet to point the alias to.
+	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
+
+	// Message text to be used with the TERMINAL routing strategy.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// Type of routing strategyE.g., SIMPLE or TERMINAL
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type RoutingStrategyObservation struct {
 
 	// ID of the GameLift Fleet to point the alias to.
@@ -84,14 +111,18 @@ type RoutingStrategyParameters struct {
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
 	// Type of routing strategyE.g., SIMPLE or TERMINAL
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // AliasSpec defines the desired state of Alias
 type AliasSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AliasParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AliasInitParameters `json:"initProvider,omitempty"`
 }
 
 // AliasStatus defines the observed state of Alias.
@@ -112,8 +143,8 @@ type AliasStatus struct {
 type Alias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routingStrategy)",message="routingStrategy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routingStrategy) || has(self.initProvider.routingStrategy)",message="routingStrategy is a required parameter"
 	Spec   AliasSpec   `json:"spec"`
 	Status AliasStatus `json:"status,omitempty"`
 }

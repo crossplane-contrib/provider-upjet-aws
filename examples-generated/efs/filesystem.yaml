@@ -12,6 +12,3 @@ spec:
     region: us-west-1
     tags:
       Name: MyProduct
-
----
-

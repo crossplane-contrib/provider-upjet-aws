@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AnomalyMonitorInitParameters struct {
+
+	// The dimensions to evaluate. Valid values: SERVICE.
+	MonitorDimension *string `json:"monitorDimension,omitempty" tf:"monitor_dimension,omitempty"`
+
+	// A valid JSON representation for the Expression object.
+	MonitorSpecification *string `json:"monitorSpecification,omitempty" tf:"monitor_specification,omitempty"`
+
+	// The possible type values. Valid values: DIMENSIONAL | CUSTOM.
+	MonitorType *string `json:"monitorType,omitempty" tf:"monitor_type,omitempty"`
+
+	// The name of the monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AnomalyMonitorObservation struct {
 
 	// ARN of the anomaly monitor.
@@ -72,6 +90,10 @@ type AnomalyMonitorParameters struct {
 type AnomalyMonitorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AnomalyMonitorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AnomalyMonitorInitParameters `json:"initProvider,omitempty"`
 }
 
 // AnomalyMonitorStatus defines the observed state of AnomalyMonitor.
@@ -92,8 +114,8 @@ type AnomalyMonitorStatus struct {
 type AnomalyMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorType)",message="monitorType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorType) || has(self.initProvider.monitorType)",message="monitorType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AnomalyMonitorSpec   `json:"spec"`
 	Status AnomalyMonitorStatus `json:"status,omitempty"`
 }

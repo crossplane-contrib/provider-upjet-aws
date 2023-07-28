@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApprovalRuleTemplateInitParameters struct {
+
+	// The content of the approval rule template. Maximum of 3000 characters.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The description of the approval rule template. Maximum of 1000 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type ApprovalRuleTemplateObservation struct {
 
 	// The ID of the approval rule template
@@ -59,6 +68,10 @@ type ApprovalRuleTemplateParameters struct {
 type ApprovalRuleTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApprovalRuleTemplateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ApprovalRuleTemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApprovalRuleTemplateStatus defines the observed state of ApprovalRuleTemplate.
@@ -79,7 +92,7 @@ type ApprovalRuleTemplateStatus struct {
 type ApprovalRuleTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
 	Spec   ApprovalRuleTemplateSpec   `json:"spec"`
 	Status ApprovalRuleTemplateStatus `json:"status,omitempty"`
 }

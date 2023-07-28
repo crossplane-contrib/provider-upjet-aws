@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterEndpointInitParameters struct {
+
+	// The type of the endpoint. One of: READER , ANY .
+	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
+
+	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
+
+	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ClusterEndpointObservation struct {
 
 	// Amazon Resource Name (ARN) of cluster
@@ -85,6 +100,10 @@ type ClusterEndpointParameters struct {
 type ClusterEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterEndpointStatus defines the observed state of ClusterEndpoint.
@@ -105,7 +124,7 @@ type ClusterEndpointStatus struct {
 type ClusterEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customEndpointType)",message="customEndpointType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customEndpointType) || has(self.initProvider.customEndpointType)",message="customEndpointType is a required parameter"
 	Spec   ClusterEndpointSpec   `json:"spec"`
 	Status ClusterEndpointStatus `json:"status,omitempty"`
 }

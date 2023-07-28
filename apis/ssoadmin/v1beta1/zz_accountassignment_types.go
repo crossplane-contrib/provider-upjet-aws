@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountAssignmentInitParameters struct {
+}
+
 type AccountAssignmentObservation struct {
 
 	// The identifier of the Account Assignment i.e., principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,).
@@ -73,6 +76,10 @@ type AccountAssignmentParameters struct {
 type AccountAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountAssignmentStatus defines the observed state of AccountAssignment.

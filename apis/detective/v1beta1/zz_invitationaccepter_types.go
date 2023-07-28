@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InvitationAccepterInitParameters struct {
+}
+
 type InvitationAccepterObservation struct {
 
 	// ARN of the behavior graph that the member account is accepting the invitation for.
@@ -48,6 +51,10 @@ type InvitationAccepterParameters struct {
 type InvitationAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InvitationAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InvitationAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // InvitationAccepterStatus defines the observed state of InvitationAccepter.

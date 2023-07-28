@@ -13,6 +13,68 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterInstanceInitParameters struct {
+
+	// Specifies whether any database modifications
+	// are applied immediately, or during the next maintenance window. Default isfalse.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
+	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The identifier of the CA certificate for the DB instance.
+	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
+
+	// defined tags from the DB instance to snapshots of the DB instance. Default false.
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+
+	// The name of the DB parameter group to associate with this instance.
+	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
+
+	// The name of the database engine to be used for the RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql.
+	// For information on the difference between the available Aurora MySQL engines
+	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
+	// in the Amazon RDS User Guide.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The database engine version.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// The instance class to use. For details on CPU
+	// and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
+
+	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+
+	// Specifies whether Performance Insights is enabled or not.
+	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
+
+	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
+	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
+
+	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
+	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
+
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoted to writer.
+	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+
+	// Bool to control if instance is publicly accessible.
+	// Default false. See the documentation on Creating DB Instances for more
+	// details on controlling this property.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ClusterInstanceObservation struct {
 
 	// Specifies whether any database modifications
@@ -266,6 +328,10 @@ type ClusterInstanceParameters struct {
 type ClusterInstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterInstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterInstanceStatus defines the observed state of ClusterInstance.
@@ -286,7 +352,7 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass) || has(self.initProvider.instanceClass)",message="instanceClass is a required parameter"
 	Spec   ClusterInstanceSpec   `json:"spec"`
 	Status ClusterInstanceStatus `json:"status,omitempty"`
 }

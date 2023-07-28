@@ -184,6 +184,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  durationSeconds:
+                    description: The number of seconds the vended session credentials
+                      are valid for. Defaults to 3600.
+                    type: number
+                  enabled:
+                    description: Whether or not the Profile is enabled.
+                    type: boolean
+                  managedPolicyArns:
+                    description: A list of managed policy ARNs that apply to the vended
+                      session credentials.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the Profile.
+                    type: string
+                  requireInstanceProperties:
+                    description: Specifies whether instance properties are required
+                      in CreateSession requests with this profile.
+                    type: boolean
+                  sessionPolicy:
+                    description: A session policy that applies to the trust boundary
+                      of the vended session credentials.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -384,7 +419,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ProfileStatus defines the observed state of Profile.
             properties:

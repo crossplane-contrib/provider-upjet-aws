@@ -17,6 +17,3 @@ spec:
           key2 = "value2"
         })}
     region: us-west-1
-
----
-

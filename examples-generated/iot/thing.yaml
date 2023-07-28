@@ -11,6 +11,3 @@ spec:
     attributes:
       First: examplevalue
     region: us-west-1
-
----
-

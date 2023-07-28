@@ -18,6 +18,3 @@ spec:
     tags:
       hello: world
     type: CUSTOM
-
----
-

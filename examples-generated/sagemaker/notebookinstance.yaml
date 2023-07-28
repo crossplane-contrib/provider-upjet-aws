@@ -15,6 +15,3 @@ spec:
         testing.upbound.io/example-name: role
     tags:
       Name: foo
-
----
-

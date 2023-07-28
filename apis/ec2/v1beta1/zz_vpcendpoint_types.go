@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSEntryInitParameters struct {
+}
+
 type DNSEntryObservation struct {
 
 	// The DNS name.
@@ -23,6 +26,12 @@ type DNSEntryObservation struct {
 }
 
 type DNSEntryParameters struct {
+}
+
+type DNSOptionsInitParameters struct {
+
+	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
+	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
 }
 
 type DNSOptionsObservation struct {
@@ -36,6 +45,31 @@ type DNSOptionsParameters struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+}
+
+type VPCEndpointInitParameters_2 struct {
+
+	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
+	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
+	// The DNS options for the endpoint. See dns_options below.
+	DNSOptions []DNSOptionsInitParameters `json:"dnsOptions,omitempty" tf:"dns_options,omitempty"`
+
+	// The IP address type for the endpoint. Valid values are ipv4, dualstack, and ipv6.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface.
+	// Defaults to false.
+	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The VPC endpoint type, Gateway, GatewayLoadBalancer, or Interface. Defaults to Gateway.
+	VPCEndpointType *string `json:"vpcEndpointType,omitempty" tf:"vpc_endpoint_type,omitempty"`
 }
 
 type VPCEndpointObservation_2 struct {
@@ -177,6 +211,10 @@ type VPCEndpointParameters_2 struct {
 type VPCEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointStatus defines the observed state of VPCEndpoint.

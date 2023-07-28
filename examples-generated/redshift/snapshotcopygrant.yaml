@@ -27,6 +27,3 @@ spec:
     snapshotCopy:
     - destinationRegion: us-east-2
       grantName: my-grant
-
----
-

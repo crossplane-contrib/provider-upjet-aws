@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserInGroupInitParameters struct {
+}
+
 type UserInGroupObservation struct {
 
 	// The name of the group to which the user is to be added.
@@ -80,6 +83,10 @@ type UserInGroupParameters struct {
 type UserInGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserInGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserInGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserInGroupStatus defines the observed state of UserInGroup.

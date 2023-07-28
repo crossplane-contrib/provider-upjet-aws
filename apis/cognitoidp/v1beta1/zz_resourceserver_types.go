@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceServerInitParameters struct {
+
+	// An identifier for the resource server.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// A name for the resource server.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of Authorization Scope.
+	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type ResourceServerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -63,6 +75,15 @@ type ResourceServerParameters struct {
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
+type ScopeInitParameters struct {
+
+	// The scope description.
+	ScopeDescription *string `json:"scopeDescription,omitempty" tf:"scope_description,omitempty"`
+
+	// The scope name.
+	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
+}
+
 type ScopeObservation struct {
 
 	// The scope description.
@@ -75,18 +96,22 @@ type ScopeObservation struct {
 type ScopeParameters struct {
 
 	// The scope description.
-	// +kubebuilder:validation:Required
-	ScopeDescription *string `json:"scopeDescription" tf:"scope_description,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScopeDescription *string `json:"scopeDescription,omitempty" tf:"scope_description,omitempty"`
 
 	// The scope name.
-	// +kubebuilder:validation:Required
-	ScopeName *string `json:"scopeName" tf:"scope_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
 }
 
 // ResourceServerSpec defines the desired state of ResourceServer
 type ResourceServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceServerStatus defines the observed state of ResourceServer.
@@ -107,8 +132,8 @@ type ResourceServerStatus struct {
 type ResourceServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identifier)",message="identifier is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identifier) || has(self.initProvider.identifier)",message="identifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ResourceServerSpec   `json:"spec"`
 	Status ResourceServerStatus `json:"status,omitempty"`
 }

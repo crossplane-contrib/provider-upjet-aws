@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DirectoryInitParameters struct {
+
+	// The identifiers of the IP access control groups associated with the directory.
+	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
+
+	// service capabilities. Defined below.
+	SelfServicePermissions []SelfServicePermissionsInitParameters `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
+	WorkspaceAccessProperties []WorkspaceAccessPropertiesInitParameters `json:"workspaceAccessProperties,omitempty" tf:"workspace_access_properties,omitempty"`
+
+	// –  Default properties that are used for creating WorkSpaces. Defined below.
+	WorkspaceCreationProperties []WorkspaceCreationPropertiesInitParameters `json:"workspaceCreationProperties,omitempty" tf:"workspace_creation_properties,omitempty"`
+}
+
 type DirectoryObservation struct {
 
 	// The directory alias.
@@ -124,6 +142,24 @@ type DirectoryParameters struct {
 	WorkspaceCreationProperties []WorkspaceCreationPropertiesParameters `json:"workspaceCreationProperties,omitempty" tf:"workspace_creation_properties,omitempty"`
 }
 
+type SelfServicePermissionsInitParameters struct {
+
+	// –  Whether WorkSpaces directory users can change the compute type (bundle) for their workspace. Default false.
+	ChangeComputeType *bool `json:"changeComputeType,omitempty" tf:"change_compute_type,omitempty"`
+
+	// –  Whether WorkSpaces directory users can increase the volume size of the drives on their workspace. Default false.
+	IncreaseVolumeSize *bool `json:"increaseVolumeSize,omitempty" tf:"increase_volume_size,omitempty"`
+
+	// –  Whether WorkSpaces directory users can rebuild the operating system of a workspace to its original state. Default false.
+	RebuildWorkspace *bool `json:"rebuildWorkspace,omitempty" tf:"rebuild_workspace,omitempty"`
+
+	// –  Whether WorkSpaces directory users can restart their workspace. Default true.
+	RestartWorkspace *bool `json:"restartWorkspace,omitempty" tf:"restart_workspace,omitempty"`
+
+	// –  Whether WorkSpaces directory users can switch the running mode of their workspace. Default false.
+	SwitchRunningMode *bool `json:"switchRunningMode,omitempty" tf:"switch_running_mode,omitempty"`
+}
+
 type SelfServicePermissionsObservation struct {
 
 	// –  Whether WorkSpaces directory users can change the compute type (bundle) for their workspace. Default false.
@@ -163,6 +199,33 @@ type SelfServicePermissionsParameters struct {
 	// –  Whether WorkSpaces directory users can switch the running mode of their workspace. Default false.
 	// +kubebuilder:validation:Optional
 	SwitchRunningMode *bool `json:"switchRunningMode,omitempty" tf:"switch_running_mode,omitempty"`
+}
+
+type WorkspaceAccessPropertiesInitParameters struct {
+
+	// –  Indicates whether users can use Android devices to access their WorkSpaces.
+	DeviceTypeAndroid *string `json:"deviceTypeAndroid,omitempty" tf:"device_type_android,omitempty"`
+
+	// –  Indicates whether users can use Chromebooks to access their WorkSpaces.
+	DeviceTypeChromeos *string `json:"deviceTypeChromeos,omitempty" tf:"device_type_chromeos,omitempty"`
+
+	// –  Indicates whether users can use iOS devices to access their WorkSpaces.
+	DeviceTypeIos *string `json:"deviceTypeIos,omitempty" tf:"device_type_ios,omitempty"`
+
+	// –  Indicates whether users can use Linux clients to access their WorkSpaces.
+	DeviceTypeLinux *string `json:"deviceTypeLinux,omitempty" tf:"device_type_linux,omitempty"`
+
+	// –  Indicates whether users can use macOS clients to access their WorkSpaces.
+	DeviceTypeOsx *string `json:"deviceTypeOsx,omitempty" tf:"device_type_osx,omitempty"`
+
+	// –  Indicates whether users can access their WorkSpaces through a web browser.
+	DeviceTypeWeb *string `json:"deviceTypeWeb,omitempty" tf:"device_type_web,omitempty"`
+
+	// –  Indicates whether users can use Windows clients to access their WorkSpaces.
+	DeviceTypeWindows *string `json:"deviceTypeWindows,omitempty" tf:"device_type_windows,omitempty"`
+
+	// –  Indicates whether users can use zero client devices to access their WorkSpaces.
+	DeviceTypeZeroclient *string `json:"deviceTypeZeroclient,omitempty" tf:"device_type_zeroclient,omitempty"`
 }
 
 type WorkspaceAccessPropertiesObservation struct {
@@ -227,6 +290,21 @@ type WorkspaceAccessPropertiesParameters struct {
 	DeviceTypeZeroclient *string `json:"deviceTypeZeroclient,omitempty" tf:"device_type_zeroclient,omitempty"`
 }
 
+type WorkspaceCreationPropertiesInitParameters struct {
+
+	// –  The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
+	DefaultOu *string `json:"defaultOu,omitempty" tf:"default_ou,omitempty"`
+
+	// –  Indicates whether internet access is enabled for your WorkSpaces.
+	EnableInternetAccess *bool `json:"enableInternetAccess,omitempty" tf:"enable_internet_access,omitempty"`
+
+	// –  Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see WorkSpace Maintenance..
+	EnableMaintenanceMode *bool `json:"enableMaintenanceMode,omitempty" tf:"enable_maintenance_mode,omitempty"`
+
+	// –  Indicates whether users are local administrators of their WorkSpaces.
+	UserEnabledAsLocalAdministrator *bool `json:"userEnabledAsLocalAdministrator,omitempty" tf:"user_enabled_as_local_administrator,omitempty"`
+}
+
 type WorkspaceCreationPropertiesObservation struct {
 
 	// –  The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
@@ -282,6 +360,10 @@ type WorkspaceCreationPropertiesParameters struct {
 type DirectorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DirectoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DirectoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // DirectoryStatus defines the observed state of Directory.

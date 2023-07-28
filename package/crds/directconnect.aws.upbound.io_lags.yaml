@@ -106,6 +106,44 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  connectionId:
+                    description: The ID of an existing dedicated connection to migrate
+                      to the LAG.
+                    type: string
+                  connectionsBandwidth:
+                    description: 'The bandwidth of the individual physical connections
+                      bundled by the LAG. Valid values: 50Mbps, 100Mbps, 200Mbps,
+                      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, 10Gbps and 100Gbps.
+                      Case sensitive.'
+                    type: string
+                  forceDestroy:
+                    description: A boolean that indicates all connections associated
+                      with the LAG should be deleted so that the LAG can be destroyed
+                      without error. These objects are not recoverable.
+                    type: boolean
+                  location:
+                    description: The AWS Direct Connect location in which the LAG
+                      should be allocated. See DescribeLocations for the list of AWS
+                      Direct Connect locations. Use locationCode.
+                    type: string
+                  name:
+                    description: The name of the LAG.
+                    type: string
+                  providerName:
+                    description: The name of the service provider associated with
+                      the LAG.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -306,13 +344,16 @@ spec:
             x-kubernetes-validations:
             - message: connectionsBandwidth is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionsBandwidth)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionsBandwidth)
+                || has(self.initProvider.connectionsBandwidth)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: LagStatus defines the observed state of Lag.
             properties:

@@ -252,6 +252,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the rule.
+                    type: string
+                  eventPattern:
+                    description: The event pattern described a JSON object. At least
+                      one of schedule_expression or event_pattern is required. See
+                      full documentation of Events and Event Patterns in EventBridge
+                      for details.
+                    type: string
+                  isEnabled:
+                    description: Whether the rule should be enabled (defaults to true).
+                    type: boolean
+                  scheduleExpression:
+                    description: The scheduling expression. For example, cron(0 20
+                      * * ? *) or rate(5 minutes). At least one of schedule_expression
+                      or event_pattern is required. Can only be used on the default
+                      event bus. For more information, refer to the AWS documentation
+                      Schedule Expressions for Rules.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

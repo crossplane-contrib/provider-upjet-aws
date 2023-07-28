@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthorizationConfigInitParameters struct {
+
+	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// Identity and Access Management (IAM) settings. See AWS IAM Config.
+	AwsIAMConfig []AwsIAMConfigInitParameters `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
+}
+
 type AuthorizationConfigObservation struct {
 
 	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
@@ -33,6 +42,15 @@ type AuthorizationConfigParameters struct {
 	AwsIAMConfig []AwsIAMConfigParameters `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
 
+type AwsIAMConfigInitParameters struct {
+
+	// Signing Amazon Web Services Region for IAM authorization.
+	SigningRegion *string `json:"signingRegion,omitempty" tf:"signing_region,omitempty"`
+
+	// Signing service name for IAM authorization.
+	SigningServiceName *string `json:"signingServiceName,omitempty" tf:"signing_service_name,omitempty"`
+}
+
 type AwsIAMConfigObservation struct {
 
 	// Signing Amazon Web Services Region for IAM authorization.
@@ -51,6 +69,36 @@ type AwsIAMConfigParameters struct {
 	// Signing service name for IAM authorization.
 	// +kubebuilder:validation:Optional
 	SigningServiceName *string `json:"signingServiceName,omitempty" tf:"signing_service_name,omitempty"`
+}
+
+type DatasourceInitParameters struct {
+
+	// Description of the data source.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// DynamoDB settings. See below
+	DynamodbConfig []DynamodbConfigInitParameters `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
+
+	// Amazon Elasticsearch settings. See below
+	ElasticsearchConfig []ElasticsearchConfigInitParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
+
+	// AWS EventBridge settings. See below
+	EventBridgeConfig []EventBridgeConfigInitParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
+
+	// HTTP settings. See below
+	HTTPConfig []HTTPConfigInitParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
+
+	// AWS Lambda settings. See below
+	LambdaConfig []LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
+
+	// Amazon OpenSearch Service settings. See below
+	OpensearchserviceConfig []OpensearchserviceConfigInitParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
+
+	// AWS RDS settings. See Relational Database Config
+	RelationalDatabaseConfig []RelationalDatabaseConfigInitParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
+
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DatasourceObservation struct {
@@ -167,6 +215,15 @@ type DatasourceParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type DeltaSyncConfigInitParameters struct {
+	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
+
+	// User-supplied name for the data source.
+	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
+
+	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
+}
+
 type DeltaSyncConfigObservation struct {
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
@@ -182,11 +239,20 @@ type DeltaSyncConfigParameters struct {
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
 	// User-supplied name for the data source.
-	// +kubebuilder:validation:Required
-	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
+}
+
+type DynamodbConfigInitParameters struct {
+	DeltaSyncConfig []DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
+
+	// Set to true to use Amazon Cognito credentials with this data source.
+	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
+
+	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
 
 type DynamodbConfigObservation struct {
@@ -234,6 +300,12 @@ type DynamodbConfigParameters struct {
 	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
 
+type ElasticsearchConfigInitParameters struct {
+
+	// HTTP endpoint of the Elasticsearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+}
+
 type ElasticsearchConfigObservation struct {
 
 	// HTTP endpoint of the Elasticsearch domain.
@@ -246,12 +318,18 @@ type ElasticsearchConfigObservation struct {
 type ElasticsearchConfigParameters struct {
 
 	// HTTP endpoint of the Elasticsearch domain.
-	// +kubebuilder:validation:Required
-	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// AWS region of Elasticsearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type EventBridgeConfigInitParameters struct {
+
+	// ARN for the EventBridge bus.
+	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
 }
 
 type EventBridgeConfigObservation struct {
@@ -263,8 +341,17 @@ type EventBridgeConfigObservation struct {
 type EventBridgeConfigParameters struct {
 
 	// ARN for the EventBridge bus.
-	// +kubebuilder:validation:Required
-	EventBusArn *string `json:"eventBusArn" tf:"event_bus_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
+}
+
+type HTTPConfigInitParameters struct {
+
+	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	AuthorizationConfig []AuthorizationConfigInitParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
+
+	// HTTP URL.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type HTTPConfigObservation struct {
@@ -283,8 +370,23 @@ type HTTPConfigParameters struct {
 	AuthorizationConfig []AuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
 	// HTTP URL.
-	// +kubebuilder:validation:Required
-	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+}
+
+type HTTPEndpointConfigInitParameters struct {
+
+	// AWS secret store ARN for database credentials.
+	AwsSecretStoreArn *string `json:"awsSecretStoreArn,omitempty" tf:"aws_secret_store_arn,omitempty"`
+
+	// Amazon RDS cluster identifier.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Logical database name.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Logical schema name.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type HTTPEndpointConfigObservation struct {
@@ -308,12 +410,12 @@ type HTTPEndpointConfigObservation struct {
 type HTTPEndpointConfigParameters struct {
 
 	// AWS secret store ARN for database credentials.
-	// +kubebuilder:validation:Required
-	AwsSecretStoreArn *string `json:"awsSecretStoreArn" tf:"aws_secret_store_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	AwsSecretStoreArn *string `json:"awsSecretStoreArn,omitempty" tf:"aws_secret_store_arn,omitempty"`
 
 	// Amazon RDS cluster identifier.
-	// +kubebuilder:validation:Required
-	DBClusterIdentifier *string `json:"dbClusterIdentifier" tf:"db_cluster_identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
 	// Logical database name.
 	// +kubebuilder:validation:Optional
@@ -328,6 +430,12 @@ type HTTPEndpointConfigParameters struct {
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
+type LambdaConfigInitParameters struct {
+
+	// ARN for the Lambda function.
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+}
+
 type LambdaConfigObservation struct {
 
 	// ARN for the Lambda function.
@@ -337,8 +445,14 @@ type LambdaConfigObservation struct {
 type LambdaConfigParameters struct {
 
 	// ARN for the Lambda function.
-	// +kubebuilder:validation:Required
-	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+}
+
+type OpensearchserviceConfigInitParameters struct {
+
+	// HTTP endpoint of the OpenSearch domain.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type OpensearchserviceConfigObservation struct {
@@ -353,12 +467,21 @@ type OpensearchserviceConfigObservation struct {
 type OpensearchserviceConfigParameters struct {
 
 	// HTTP endpoint of the OpenSearch domain.
-	// +kubebuilder:validation:Required
-	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// AWS region of the OpenSearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
+type RelationalDatabaseConfigInitParameters struct {
+
+	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	HTTPEndpointConfig []HTTPEndpointConfigInitParameters `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
+
+	// Source type for the relational database. Valid values: RDS_HTTP_ENDPOINT.
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 }
 
 type RelationalDatabaseConfigObservation struct {
@@ -385,6 +508,10 @@ type RelationalDatabaseConfigParameters struct {
 type DatasourceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DatasourceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DatasourceInitParameters `json:"initProvider,omitempty"`
 }
 
 // DatasourceStatus defines the observed state of Datasource.
@@ -405,7 +532,7 @@ type DatasourceStatus struct {
 type Datasource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   DatasourceSpec   `json:"spec"`
 	Status DatasourceStatus `json:"status,omitempty"`
 }

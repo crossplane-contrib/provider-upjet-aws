@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UsagePlanKeyInitParameters struct {
+
+	// Type of the API key resource. Currently, the valid key type is API_KEY.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+}
+
 type UsagePlanKeyObservation struct {
 
 	// ID of a usage plan key.
@@ -78,6 +84,10 @@ type UsagePlanKeyParameters struct {
 type UsagePlanKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UsagePlanKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UsagePlanKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // UsagePlanKeyStatus defines the observed state of UsagePlanKey.
@@ -98,7 +108,7 @@ type UsagePlanKeyStatus struct {
 type UsagePlanKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyType)",message="keyType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyType) || has(self.initProvider.keyType)",message="keyType is a required parameter"
 	Spec   UsagePlanKeySpec   `json:"spec"`
 	Status UsagePlanKeyStatus `json:"status,omitempty"`
 }

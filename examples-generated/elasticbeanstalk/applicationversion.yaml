@@ -66,6 +66,3 @@ spec:
     key: beanstalk/go-v1.zip
     region: us-west-1
     source: go-v1.zip
-
----
-

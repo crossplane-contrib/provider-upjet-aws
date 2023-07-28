@@ -102,8 +102,6 @@ spec:
                           description: 'Specifies the authentication type. Possible
                             options are: password, no-password-required or iam.'
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   engine:
@@ -148,6 +146,41 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessString:
+                    description: Access permissions string used for this user. See
+                      Specifying Permissions Using an Access String for more details.
+                    type: string
+                  authenticationMode:
+                    description: Denotes the user's authentication properties. Detailed
+                      below.
+                    items:
+                      properties:
+                        type:
+                          description: 'Specifies the authentication type. Possible
+                            options are: password, no-password-required or iam.'
+                          type: string
+                      type: object
+                    type: array
+                  engine:
+                    description: The current supported value is REDIS.
+                    type: string
+                  noPasswordRequired:
+                    description: Indicates a password is not required for this user.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  userName:
+                    description: The username of the user.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -349,13 +382,16 @@ spec:
             x-kubernetes-validations:
             - message: accessString is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessString)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessString)
+                || has(self.initProvider.accessString)'
             - message: engine is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
+                || has(self.initProvider.engine)'
             - message: userName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)
+                || has(self.initProvider.userName)'
           status:
             description: UserStatus defines the observed state of User.
             properties:

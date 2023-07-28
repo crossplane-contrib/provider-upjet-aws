@@ -55,6 +55,3 @@ spec:
   forProvider:
     provider: ${aws.accepter}
     region: us-west-1
-
----
-

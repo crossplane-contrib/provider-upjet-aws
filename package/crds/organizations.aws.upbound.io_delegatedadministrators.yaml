@@ -157,6 +157,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  servicePrincipal:
+                    description: The service principal of the AWS service for which
+                      you want to make the member account a delegated administrator.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -357,7 +367,8 @@ spec:
             x-kubernetes-validations:
             - message: servicePrincipal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.servicePrincipal)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.servicePrincipal)
+                || has(self.initProvider.servicePrincipal)'
           status:
             description: DelegatedAdministratorStatus defines the observed state of
               DelegatedAdministrator.

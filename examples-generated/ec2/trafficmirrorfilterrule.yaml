@@ -35,6 +35,3 @@ spec:
     networkServices:
     - amazon-dns
     region: us-west-1
-
----
-

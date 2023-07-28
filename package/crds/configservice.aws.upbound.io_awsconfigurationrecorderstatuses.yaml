@@ -79,6 +79,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  isEnabled:
+                    description: Whether the configuration recorder should be enabled
+                      or disabled.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -279,7 +289,8 @@ spec:
             x-kubernetes-validations:
             - message: isEnabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.isEnabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.isEnabled)
+                || has(self.initProvider.isEnabled)'
           status:
             description: AWSConfigurationRecorderStatusStatus defines the observed
               state of AWSConfigurationRecorderStatus.

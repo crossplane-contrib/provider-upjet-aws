@@ -26,6 +26,3 @@ metadata:
 spec:
   forProvider:
     path: /system/
-
----
-

@@ -91,6 +91,30 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  languageCode:
+                    description: The language code you selected for your vocabulary.
+                    type: string
+                  phrases:
+                    description: '- A list of terms to include in the vocabulary.
+                      Conflicts with vocabulary_file_uri'
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vocabularyFileUri:
+                    description: The Amazon S3 location (URI) of the text file that
+                      contains your custom vocabulary.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -291,7 +315,8 @@ spec:
             x-kubernetes-validations:
             - message: languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
+                || has(self.initProvider.languageCode)'
           status:
             description: VocabularyStatus defines the observed state of Vocabulary.
             properties:

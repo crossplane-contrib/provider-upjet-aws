@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LoggingConfigurationInitParameters struct {
+
+	// Determines whether execution data is included in your log. When set to false, data is excluded.
+	IncludeExecutionData *bool `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
+
+	// Defines which category of execution history events are logged. Valid values: ALL, ERROR, FATAL, OFF
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
+	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+}
+
 type LoggingConfigurationObservation struct {
 
 	// Determines whether execution data is included in your log. When set to false, data is excluded.
@@ -38,6 +50,24 @@ type LoggingConfigurationParameters struct {
 	// Amazon Resource Name (ARN) of a CloudWatch log group. Make sure the State Machine has the correct IAM policies for logging. The ARN must end with :*
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+}
+
+type StateMachineInitParameters struct {
+
+	// The Amazon States Language definition of the state machine.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
+	LoggingConfiguration []LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Selects whether AWS X-Ray tracing is enabled.
+	TracingConfiguration []TracingConfigurationInitParameters `json:"tracingConfiguration,omitempty" tf:"tracing_configuration,omitempty"`
+
+	// Determines whether a Standard or Express state machine is created. The default is STANDARD. You cannot update the type of a state machine once it has been created. Valid values: STANDARD, EXPRESS.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StateMachineObservation struct {
@@ -118,6 +148,12 @@ type StateMachineParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type TracingConfigurationInitParameters struct {
+
+	// When set to true, AWS X-Ray tracing is enabled. Make sure the State Machine has the correct IAM policies for logging. See the AWS Step Functions Developer Guide for details.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type TracingConfigurationObservation struct {
 
 	// When set to true, AWS X-Ray tracing is enabled. Make sure the State Machine has the correct IAM policies for logging. See the AWS Step Functions Developer Guide for details.
@@ -135,6 +171,10 @@ type TracingConfigurationParameters struct {
 type StateMachineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StateMachineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider StateMachineInitParameters `json:"initProvider,omitempty"`
 }
 
 // StateMachineStatus defines the observed state of StateMachine.
@@ -155,7 +195,7 @@ type StateMachineStatus struct {
 type StateMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition)",message="definition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition) || has(self.initProvider.definition)",message="definition is a required parameter"
 	Spec   StateMachineSpec   `json:"spec"`
 	Status StateMachineStatus `json:"status,omitempty"`
 }

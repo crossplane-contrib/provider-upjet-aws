@@ -173,6 +173,33 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoAcceptSharedAssociations:
+                    description: 'Whether to automatically accept cross-account subnet
+                      associations that are associated with the EC2 Transit Gateway
+                      Multicast Domain. Valid values: disable, enable. Default value:
+                      disable.'
+                    type: string
+                  igmpv2Support:
+                    description: 'Whether to enable Internet Group Management Protocol
+                      (IGMP) version 2 for the EC2 Transit Gateway Multicast Domain.
+                      Valid values: disable, enable. Default value: disable.'
+                    type: string
+                  staticSourcesSupport:
+                    description: 'Whether to enable support for statically configuring
+                      multicast group sources for the EC2 Transit Gateway Multicast
+                      Domain. Valid values: disable, enable. Default value: disable.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -201,6 +201,62 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  definition:
+                    description: The Amazon States Language definition of the state
+                      machine.
+                    type: string
+                  loggingConfiguration:
+                    description: Defines what execution history events are logged
+                      and where they are logged. The logging_configuration parameter
+                      is only valid when type is set to EXPRESS. Defaults to OFF.
+                      For more information see Logging Express Workflows and Log Levels
+                      in the AWS Step Functions User Guide.
+                    items:
+                      properties:
+                        includeExecutionData:
+                          description: Determines whether execution data is included
+                            in your log. When set to false, data is excluded.
+                          type: boolean
+                        level:
+                          description: 'Defines which category of execution history
+                            events are logged. Valid values: ALL, ERROR, FATAL, OFF'
+                          type: string
+                        logDestination:
+                          description: Amazon Resource Name (ARN) of a CloudWatch
+                            log group. Make sure the State Machine has the correct
+                            IAM policies for logging. The ARN must end with :*
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tracingConfiguration:
+                    description: Selects whether AWS X-Ray tracing is enabled.
+                    items:
+                      properties:
+                        enabled:
+                          description: When set to true, AWS X-Ray tracing is enabled.
+                            Make sure the State Machine has the correct IAM policies
+                            for logging. See the AWS Step Functions Developer Guide
+                            for details.
+                          type: boolean
+                      type: object
+                    type: array
+                  type:
+                    description: 'Determines whether a Standard or Express state machine
+                      is created. The default is STANDARD. You cannot update the type
+                      of a state machine once it has been created. Valid values: STANDARD,
+                      EXPRESS.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -401,7 +457,8 @@ spec:
             x-kubernetes-validations:
             - message: definition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)
+                || has(self.initProvider.definition)'
           status:
             description: StateMachineStatus defines the observed state of StateMachine.
             properties:

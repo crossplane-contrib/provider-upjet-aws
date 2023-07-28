@@ -29,6 +29,3 @@ spec:
     taskDefinitionSelector:
       matchLabels:
         testing.upbound.io/example-name: mongo
-
----
-

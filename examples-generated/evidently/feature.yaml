@@ -19,6 +19,3 @@ spec:
     - name: Variation1
       value:
       - stringValue: example
-
----
-

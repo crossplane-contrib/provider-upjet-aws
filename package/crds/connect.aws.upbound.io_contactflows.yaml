@@ -185,6 +185,46 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  content:
+                    description: Specifies the content of the Contact Flow, provided
+                      as a JSON string, written in Amazon Connect Contact Flow Language.
+                      If defined, the filename argument cannot be used.
+                    type: string
+                  contentHash:
+                    description: Used to trigger updates. Must be set to a base64-encoded
+                      SHA256 hash of the Contact Flow source specified with filename.
+                      The usual way to set this is filebase64sha256("mycontact_flow.11.12
+                      and later) or base64sha256(file("mycontact_flow.11.11 and earlier),
+                      where "mycontact_flow.json" is the local filename of the Contact
+                      Flow source.
+                    type: string
+                  description:
+                    description: Specifies the description of the Contact Flow.
+                    type: string
+                  filename:
+                    description: The path to the Contact Flow source within the local
+                      filesystem. Conflicts with content.
+                    type: string
+                  name:
+                    description: Specifies the name of the Contact Flow.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: 'Specifies the type of the Contact Flow. Defaults
+                      to CONTACT_FLOW. Allowed Values are: CONTACT_FLOW, CUSTOMER_QUEUE,
+                      CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER,
+                      OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -385,7 +425,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ContactFlowStatus defines the observed state of ContactFlow.
             properties:

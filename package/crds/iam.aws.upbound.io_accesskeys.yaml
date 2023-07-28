@@ -157,6 +157,24 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  pgpKey:
+                    description: Either a base-64 encoded PGP public key, or a keybase
+                      username in the form keybase:some_person_that_exists, for use
+                      in the encrypted_secret output attribute. If providing a base-64
+                      encoded PGP public key, make sure to provide the "raw" version
+                      and not the "armored" one (e.g. avoid passing the -a option
+                      to gpg --export).
+                    type: string
+                  status:
+                    description: Access key status to apply. Defaults to Active. Valid
+                      values are Active and Inactive.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

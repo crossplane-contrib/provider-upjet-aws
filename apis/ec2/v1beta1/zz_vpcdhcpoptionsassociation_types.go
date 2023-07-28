@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCDHCPOptionsAssociationInitParameters struct {
+}
+
 type VPCDHCPOptionsAssociationObservation struct {
 
 	// The ID of the DHCP Options Set to associate to the VPC.
@@ -64,6 +67,10 @@ type VPCDHCPOptionsAssociationParameters struct {
 type VPCDHCPOptionsAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCDHCPOptionsAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCDHCPOptionsAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCDHCPOptionsAssociationStatus defines the observed state of VPCDHCPOptionsAssociation.

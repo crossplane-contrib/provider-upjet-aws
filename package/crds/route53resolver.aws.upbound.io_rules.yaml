@@ -183,12 +183,49 @@ spec:
                           description: The port at ip that you want to forward DNS
                             queries to. Default value is 53
                           type: number
-                      required:
-                      - ip
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  domainName:
+                    description: DNS queries for this domain name are forwarded to
+                      the IP addresses that are specified using target_ip.
+                    type: string
+                  name:
+                    description: A friendly name that lets you easily find a rule
+                      in the Resolver dashboard in the Route 53 console.
+                    type: string
+                  ruleType:
+                    description: The rule type. Valid values are FORWARD, SYSTEM and
+                      RECURSIVE.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetIp:
+                    description: Configuration block(s) indicating the IPs that you
+                      want Resolver to forward DNS queries to (documented below).
+                      This argument should only be specified for FORWARD type rules.
+                    items:
+                      properties:
+                        ip:
+                          description: One IP address that you want to forward DNS
+                            queries to. You can specify only IPv4 addresses.
+                          type: string
+                        port:
+                          description: The port at ip that you want to forward DNS
+                            queries to. Default value is 53
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -390,10 +427,12 @@ spec:
             x-kubernetes-validations:
             - message: domainName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.domainName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.domainName)
+                || has(self.initProvider.domainName)'
             - message: ruleType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleType)
+                || has(self.initProvider.ruleType)'
           status:
             description: RuleStatus defines the observed state of Rule.
             properties:

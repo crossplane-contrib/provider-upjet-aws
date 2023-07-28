@@ -13,6 +13,34 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityGroupRuleInitParameters_2 struct {
+
+	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
+	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// Description of the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Start port (or ICMP type number if protocol is "icmp" or "icmpv6").
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
+	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// Protocol. If not icmp, icmpv6, tcp, udp, or all use the protocol number
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
+	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	// End port (or ICMP code if protocol is "icmp").
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+
+	// Type of rule being created. Valid options are ingress (inbound)
+	// or egress (outbound).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SecurityGroupRuleObservation_2 struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
@@ -142,6 +170,10 @@ type SecurityGroupRuleParameters_2 struct {
 type SecurityGroupRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityGroupRuleParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityGroupRuleInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.
@@ -162,10 +194,10 @@ type SecurityGroupRuleStatus struct {
 type SecurityGroupRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fromPort)",message="fromPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol)",message="protocol is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.toPort)",message="toPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fromPort) || has(self.initProvider.fromPort)",message="fromPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.toPort) || has(self.initProvider.toPort)",message="toPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   SecurityGroupRuleSpec   `json:"spec"`
 	Status SecurityGroupRuleStatus `json:"status,omitempty"`
 }

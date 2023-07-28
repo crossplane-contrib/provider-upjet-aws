@@ -111,14 +111,59 @@ spec:
                           description: The ID of the Amazon VPC connected to the infrastructure
                             where your provider type is installed.
                           type: string
-                      required:
-                      - securityGroupIds
-                      - subnetIds
-                      - vpcId
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: The name of the host to be created. The name must
+                      be unique in the calling AWS account.
+                    type: string
+                  providerEndpoint:
+                    description: The endpoint of the infrastructure to be represented
+                      by the host after it is created.
+                    type: string
+                  providerType:
+                    description: The name of the external provider where your third-party
+                      code repository is configured.
+                    type: string
+                  vpcConfiguration:
+                    description: The VPC configuration to be provisioned for the host.
+                      A VPC must be configured, and the infrastructure to be represented
+                      by the host must already be connected to the VPC.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: ID of the security group or security groups
+                            associated with the Amazon VPC connected to the infrastructure
+                            where your provider type is installed.
+                          items:
+                            type: string
+                          type: array
+                        subnetIds:
+                          description: The ID of the subnet or subnets associated
+                            with the Amazon VPC connected to the infrastructure where
+                            your provider type is installed.
+                          items:
+                            type: string
+                          type: array
+                        tlsCertificate:
+                          description: The value of the Transport Layer Security (TLS)
+                            certificate associated with the infrastructure where your
+                            provider type is installed.
+                          type: string
+                        vpcId:
+                          description: The ID of the Amazon VPC connected to the infrastructure
+                            where your provider type is installed.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -320,13 +365,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: providerEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerEndpoint)
+                || has(self.initProvider.providerEndpoint)'
             - message: providerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerType)
+                || has(self.initProvider.providerType)'
           status:
             description: HostStatus defines the observed state of Host.
             properties:

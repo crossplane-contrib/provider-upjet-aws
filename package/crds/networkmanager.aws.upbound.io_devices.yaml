@@ -280,6 +280,62 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  awsLocation:
+                    description: The AWS location of the device. Documented below.
+                    items:
+                      properties:
+                        subnetArn:
+                          description: The Amazon Resource Name (ARN) of the subnet
+                            that the device is located in.
+                          type: string
+                        zone:
+                          description: The Zone that the device is located in. Specify
+                            the ID of an Availability Zone, Local Zone, Wavelength
+                            Zone, or an Outpost.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the device.
+                    type: string
+                  location:
+                    description: The location of the device. Documented below.
+                    items:
+                      properties:
+                        address:
+                          description: The physical address.
+                          type: string
+                        latitude:
+                          description: The latitude.
+                          type: string
+                        longitude:
+                          description: The longitude.
+                          type: string
+                      type: object
+                    type: array
+                  model:
+                    description: The model of device.
+                    type: string
+                  serialNumber:
+                    description: The serial number of the device.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of device.
+                    type: string
+                  vendor:
+                    description: The vendor of the device.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

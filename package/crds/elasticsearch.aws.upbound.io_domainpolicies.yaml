@@ -156,6 +156,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessPolicies:
+                    description: IAM policy document specifying the access policies
+                      for the domain
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -356,7 +366,8 @@ spec:
             x-kubernetes-validations:
             - message: accessPolicies is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessPolicies)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessPolicies)
+                || has(self.initProvider.accessPolicies)'
           status:
             description: DomainPolicyStatus defines the observed state of DomainPolicy.
             properties:

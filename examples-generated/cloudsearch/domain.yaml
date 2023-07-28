@@ -26,6 +26,3 @@ spec:
     region: us-west-1
     scalingParameters:
     - desiredInstanceType: search.medium
-
----
-

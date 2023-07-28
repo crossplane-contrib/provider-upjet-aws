@@ -19,6 +19,3 @@ spec:
       partitionKey:
       - name: Message
     tableName: my_table
-
----
-

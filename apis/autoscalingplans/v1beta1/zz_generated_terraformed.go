@@ -69,6 +69,25 @@ func (tr *ScalingPlan) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ScalingPlan
+func (tr *ScalingPlan) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ScalingPlan
+func (tr *ScalingPlan) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ScalingPlan using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ScalingPlan) LateInitialize(attrs []byte) (bool, error) {

@@ -197,10 +197,6 @@ spec:
                               unit:
                                 description: The unit for this metric.
                                 type: string
-                            required:
-                            - metricName
-                            - period
-                            - stat
                             type: object
                           type: array
                         period:
@@ -213,8 +209,6 @@ spec:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
                           type: boolean
-                      required:
-                      - id
                       type: object
                     type: array
                   namespace:
@@ -268,6 +262,201 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  actionsEnabled:
+                    description: Indicates whether or not actions should be executed
+                      during any changes to the alarm's state. Defaults to true.
+                    type: boolean
+                  alarmActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an ALARM state from any other state. Each action is specified
+                      as an Amazon Resource Name (ARN).
+                    items:
+                      type: string
+                    type: array
+                  alarmDescription:
+                    description: The description for the alarm.
+                    type: string
+                  comparisonOperator:
+                    description: 'The arithmetic operation to use when comparing the
+                      specified Statistic and Threshold. The specified Statistic value
+                      is used as the first operand. Either of the following is supported:
+                      GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold,
+                      LessThanOrEqualToThreshold. Additionally, the values  LessThanLowerOrGreaterThanUpperThreshold,
+                      LessThanLowerThreshold, and GreaterThanUpperThreshold are used
+                      only for alarms based on anomaly detection models.'
+                    type: string
+                  datapointsToAlarm:
+                    description: The number of datapoints that must be breaching to
+                      trigger the alarm.
+                    type: number
+                  dimensions:
+                    additionalProperties:
+                      type: string
+                    description: The dimensions for the alarm's associated metric.  For
+                      the list of available dimensions see the AWS documentation here.
+                    type: object
+                  evaluateLowSampleCountPercentiles:
+                    description: 'Used only for alarms based on percentiles. If you
+                      specify ignore, the alarm state will not change during periods
+                      with too few data points to be statistically significant. If
+                      you specify evaluate or omit this parameter, the alarm will
+                      always be evaluated and possibly change state no matter how
+                      many data points are available. The following values are supported:
+                      ignore, and evaluate.'
+                    type: string
+                  evaluationPeriods:
+                    description: The number of periods over which data is compared
+                      to the specified threshold.
+                    type: number
+                  extendedStatistic:
+                    description: The percentile statistic for the metric associated
+                      with the alarm. Specify a value between p0.0 and p100.
+                    type: string
+                  insufficientDataActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an INSUFFICIENT_DATA state from any other state. Each action
+                      is specified as an Amazon Resource Name (ARN).
+                    items:
+                      type: string
+                    type: array
+                  metricName:
+                    description: The name for the alarm's associated metric. See docs
+                      for supported metrics.
+                    type: string
+                  metricQuery:
+                    description: Enables you to create an alarm based on a metric
+                      math expression. You may specify at most 20.
+                    items:
+                      properties:
+                        accountId:
+                          description: The ID of the account where the metrics are
+                            located, if this is a cross-account alarm.
+                          type: string
+                        expression:
+                          description: The math expression to be performed on the
+                            returned data, if this object is performing a math expression.
+                            This expression can use the id of the other metrics to
+                            refer to those metrics, and can also use the id of other
+                            expressions to use the result of those expressions. For
+                            more information about metric math expressions, see Metric
+                            Math Syntax and Functions in the Amazon CloudWatch User
+                            Guide.
+                          type: string
+                        id:
+                          description: A short name used to tie this object to the
+                            results in the response. If you are performing math expressions
+                            on this set of data, this name represents that data and
+                            can serve as a variable in the mathematical expression.
+                            The valid characters are letters, numbers, and underscore.
+                            The first character must be a lowercase letter.
+                          type: string
+                        label:
+                          description: A human-readable label for this metric or expression.
+                            This is especially useful if this is an expression, so
+                            that you know what the value represents.
+                          type: string
+                        metric:
+                          description: The metric to be returned, along with statistics,
+                            period, and units. Use this parameter only if this object
+                            is retrieving a metric and not performing a math expression
+                            on returned data.
+                          items:
+                            properties:
+                              dimensions:
+                                additionalProperties:
+                                  type: string
+                                description: The dimensions for this metric.  For
+                                  the list of available dimensions see the AWS documentation
+                                  here.
+                                type: object
+                              metricName:
+                                description: The name for this metric. See docs for
+                                  supported metrics.
+                                type: string
+                              namespace:
+                                description: The namespace for this metric. See docs
+                                  for the list of namespaces. See docs for supported
+                                  metrics.
+                                type: string
+                              period:
+                                description: Granularity in seconds of returned data
+                                  points. For metrics with regular resolution, valid
+                                  values are any multiple of 60. For high-resolution
+                                  metrics, valid values are 1, 5, 10, 30, or any multiple
+                                  of 60.
+                                type: number
+                              stat:
+                                description: The statistic to apply to this metric.
+                                  See docs for supported statistics.
+                                type: string
+                              unit:
+                                description: The unit for this metric.
+                                type: string
+                            type: object
+                          type: array
+                        period:
+                          description: Granularity in seconds of returned data points.
+                            For metrics with regular resolution, valid values are
+                            any multiple of 60. For high-resolution metrics, valid
+                            values are 1, 5, 10, 30, or any multiple of 60.
+                          type: number
+                        returnData:
+                          description: Specify exactly one metric_query to be true
+                            to use that metric_query result as the alarm.
+                          type: boolean
+                      type: object
+                    type: array
+                  namespace:
+                    description: The namespace for the alarm's associated metric.
+                      See docs for the list of namespaces. See docs for supported
+                      metrics.
+                    type: string
+                  okActions:
+                    description: The list of actions to execute when this alarm transitions
+                      into an OK state from any other state. Each action is specified
+                      as an Amazon Resource Name (ARN).
+                    items:
+                      type: string
+                    type: array
+                  period:
+                    description: The period in seconds over which the specified statistic
+                      is applied. Valid values are 10, 30, or any multiple of 60.
+                    type: number
+                  statistic:
+                    description: 'The statistic to apply to the alarm''s associated
+                      metric. Either of the following is supported: SampleCount, Average,
+                      Sum, Minimum, Maximum'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  threshold:
+                    description: The value against which the specified statistic is
+                      compared. This parameter is required for alarms based on static
+                      thresholds, but should not be used for alarms based on anomaly
+                      detection models.
+                    type: number
+                  thresholdMetricId:
+                    description: If this is an alarm based on an anomaly detection
+                      model, make this value match the ID of the ANOMALY_DETECTION_BAND
+                      function.
+                    type: string
+                  treatMissingData:
+                    description: 'Sets how this alarm is to handle missing data points.
+                      The following values are supported: missing, ignore, breaching
+                      and notBreaching. Defaults to missing.'
+                    type: string
+                  unit:
+                    description: The unit for the alarm's associated metric.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -469,10 +658,12 @@ spec:
             x-kubernetes-validations:
             - message: comparisonOperator is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.comparisonOperator)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.comparisonOperator)
+                || has(self.initProvider.comparisonOperator)'
             - message: evaluationPeriods is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluationPeriods)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluationPeriods)
+                || has(self.initProvider.evaluationPeriods)'
           status:
             description: MetricAlarmStatus defines the observed state of MetricAlarm.
             properties:

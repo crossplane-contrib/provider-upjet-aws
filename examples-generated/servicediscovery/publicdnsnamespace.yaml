@@ -11,6 +11,3 @@ spec:
     description: example
     name: hoge.example.com
     region: us-west-1
-
----
-

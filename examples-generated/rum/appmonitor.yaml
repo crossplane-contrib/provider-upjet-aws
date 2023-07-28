@@ -10,6 +10,3 @@ spec:
   forProvider:
     domain: localhost
     region: us-west-1
-
----
-

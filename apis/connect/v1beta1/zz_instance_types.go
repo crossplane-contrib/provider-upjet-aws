@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceInitParameters struct {
+
+	// Specifies whether auto resolve best voices is enabled. Defaults to true.
+	AutoResolveBestVoicesEnabled *bool `json:"autoResolveBestVoicesEnabled,omitempty" tf:"auto_resolve_best_voices_enabled,omitempty"`
+
+	// Specifies whether contact flow logs are enabled. Defaults to false.
+	ContactFlowLogsEnabled *bool `json:"contactFlowLogsEnabled,omitempty" tf:"contact_flow_logs_enabled,omitempty"`
+
+	// Specifies whether contact lens is enabled. Defaults to true.
+	ContactLensEnabled *bool `json:"contactLensEnabled,omitempty" tf:"contact_lens_enabled,omitempty"`
+
+	// Specifies whether early media for outbound calls is enabled . Defaults to true if outbound calls is enabled.
+	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
+
+	// Specifies the identity management type attached to the instance. Allowed Values are: SAML, CONNECT_MANAGED, EXISTING_DIRECTORY.
+	IdentityManagementType *string `json:"identityManagementType,omitempty" tf:"identity_management_type,omitempty"`
+
+	// Specifies whether inbound calls are enabled.
+	InboundCallsEnabled *bool `json:"inboundCallsEnabled,omitempty" tf:"inbound_calls_enabled,omitempty"`
+
+	// Specifies the name of the instance. Required if directory_id not specified.
+	InstanceAlias *string `json:"instanceAlias,omitempty" tf:"instance_alias,omitempty"`
+
+	// Specifies whether multi-party calls/conference is enabled. Defaults to false.
+	MultiPartyConferenceEnabled *bool `json:"multiPartyConferenceEnabled,omitempty" tf:"multi_party_conference_enabled,omitempty"`
+
+	// Specifies whether outbound calls are enabled.
+	OutboundCallsEnabled *bool `json:"outboundCallsEnabled,omitempty" tf:"outbound_calls_enabled,omitempty"`
+}
+
 type InstanceObservation struct {
 
 	// Amazon Resource Name (ARN) of the instance.
@@ -123,6 +153,10 @@ type InstanceParameters struct {
 type InstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceStatus defines the observed state of Instance.
@@ -143,9 +177,9 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityManagementType)",message="identityManagementType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled)",message="inboundCallsEnabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled)",message="outboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityManagementType) || has(self.initProvider.identityManagementType)",message="identityManagementType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled) || has(self.initProvider.inboundCallsEnabled)",message="inboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled) || has(self.initProvider.outboundCallsEnabled)",message="outboundCallsEnabled is a required parameter"
 	Spec   InstanceSpec   `json:"spec"`
 	Status InstanceStatus `json:"status,omitempty"`
 }

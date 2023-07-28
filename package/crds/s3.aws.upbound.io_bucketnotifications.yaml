@@ -169,8 +169,6 @@ spec:
                         lambdaFunctionArn:
                           description: Lambda function ARN.
                           type: string
-                      required:
-                      - events
                       type: object
                     type: array
                   queue:
@@ -271,8 +269,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - events
                       type: object
                     type: array
                   region:
@@ -377,12 +373,86 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - events
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  eventbridge:
+                    description: Whether to enable Amazon EventBridge notifications.
+                    type: boolean
+                  lambdaFunction:
+                    description: Used to configure notifications to a Lambda Function.
+                      See below.
+                    items:
+                      properties:
+                        events:
+                          description: Event for which to send notifications.
+                          items:
+                            type: string
+                          type: array
+                        filterPrefix:
+                          description: Object key name prefix.
+                          type: string
+                        filterSuffix:
+                          description: Object key name suffix.
+                          type: string
+                        id:
+                          description: Unique identifier for each of the notification
+                            configurations.
+                          type: string
+                        lambdaFunctionArn:
+                          description: Lambda function ARN.
+                          type: string
+                      type: object
+                    type: array
+                  queue:
+                    description: Notification configuration to SQS Queue. See below.
+                    items:
+                      properties:
+                        events:
+                          description: Specifies event for which to send notifications.
+                          items:
+                            type: string
+                          type: array
+                        filterPrefix:
+                          description: Object key name prefix.
+                          type: string
+                        filterSuffix:
+                          description: Object key name suffix.
+                          type: string
+                        id:
+                          description: Unique identifier for each of the notification
+                            configurations.
+                          type: string
+                      type: object
+                    type: array
+                  topic:
+                    description: Notification configuration to SNS Topic. See below.
+                    items:
+                      properties:
+                        events:
+                          description: Event for which to send notifications.
+                          items:
+                            type: string
+                          type: array
+                        filterPrefix:
+                          description: Object key name prefix.
+                          type: string
+                        filterSuffix:
+                          description: Object key name suffix.
+                          type: string
+                        id:
+                          description: Unique identifier for each of the notification
+                            configurations.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OperatingRegionsInitParameters struct {
+
+	// The name of the Region you want to add to the IPAM.
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+}
+
 type OperatingRegionsObservation struct {
 
 	// The name of the Region you want to add to the IPAM.
@@ -22,8 +28,23 @@ type OperatingRegionsObservation struct {
 type OperatingRegionsParameters struct {
 
 	// The name of the Region you want to add to the IPAM.
-	// +kubebuilder:validation:Required
-	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+}
+
+type VPCIpamInitParameters struct {
+
+	// Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes.
+	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
+
+	// A description for the IPAM.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
+	OperatingRegions []OperatingRegionsInitParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VPCIpamObservation struct {
@@ -94,6 +115,10 @@ type VPCIpamParameters struct {
 type VPCIpamSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCIpamParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCIpamInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCIpamStatus defines the observed state of VPCIpam.
@@ -114,7 +139,7 @@ type VPCIpamStatus struct {
 type VPCIpam struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operatingRegions)",message="operatingRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operatingRegions) || has(self.initProvider.operatingRegions)",message="operatingRegions is a required parameter"
 	Spec   VPCIpamSpec   `json:"spec"`
 	Status VPCIpamStatus `json:"status,omitempty"`
 }

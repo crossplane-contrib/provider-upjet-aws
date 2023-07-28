@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCEndpointServiceAllowedPrincipalInitParameters struct {
+
+	// The ARN of the principal to allow permissions.
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+}
+
 type VPCEndpointServiceAllowedPrincipalObservation struct {
 
 	// The ID of the association.
@@ -55,6 +61,10 @@ type VPCEndpointServiceAllowedPrincipalParameters struct {
 type VPCEndpointServiceAllowedPrincipalSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointServiceAllowedPrincipalParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointServiceAllowedPrincipalInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointServiceAllowedPrincipalStatus defines the observed state of VPCEndpointServiceAllowedPrincipal.
@@ -75,7 +85,7 @@ type VPCEndpointServiceAllowedPrincipalStatus struct {
 type VPCEndpointServiceAllowedPrincipal struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalArn)",message="principalArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalArn) || has(self.initProvider.principalArn)",message="principalArn is a required parameter"
 	Spec   VPCEndpointServiceAllowedPrincipalSpec   `json:"spec"`
 	Status VPCEndpointServiceAllowedPrincipalStatus `json:"status,omitempty"`
 }

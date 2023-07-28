@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StaticIPInitParameters struct {
+
+	// The name for the allocated static IP
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type StaticIPObservation struct {
 
 	// The ARN of the Lightsail static IP
@@ -46,6 +52,10 @@ type StaticIPParameters struct {
 type StaticIPSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StaticIPParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider StaticIPInitParameters `json:"initProvider,omitempty"`
 }
 
 // StaticIPStatus defines the observed state of StaticIP.
@@ -66,7 +76,7 @@ type StaticIPStatus struct {
 type StaticIP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   StaticIPSpec   `json:"spec"`
 	Status StaticIPStatus `json:"status,omitempty"`
 }

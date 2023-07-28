@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EndpointConfigurationInitParameters struct {
+
+	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
+	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
+
+	// An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID.
+	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
+
+	// The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
 type EndpointConfigurationObservation struct {
 
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
@@ -38,6 +50,36 @@ type EndpointConfigurationParameters struct {
 	// The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type EndpointGroupInitParameters struct {
+
+	// The list of endpoint objects. Fields documented below.
+	EndpointConfiguration []EndpointConfigurationInitParameters `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
+
+	// The name of the AWS Region where the endpoint group is located.
+	EndpointGroupRegion *string `json:"endpointGroupRegion,omitempty" tf:"endpoint_group_region,omitempty"`
+
+	// The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
+	HealthCheckIntervalSeconds *float64 `json:"healthCheckIntervalSeconds,omitempty" tf:"health_check_interval_seconds,omitempty"`
+
+	// If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.
+	HealthCheckPort *float64 `json:"healthCheckPort,omitempty" tf:"health_check_port,omitempty"`
+
+	// The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
+	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
+
+	// Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. Fields documented below.
+	PortOverride []PortOverrideInitParameters `json:"portOverride,omitempty" tf:"port_override,omitempty"`
+
+	// The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.
+	ThresholdCount *float64 `json:"thresholdCount,omitempty" tf:"threshold_count,omitempty"`
+
+	// The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. The default value is 100.
+	TrafficDialPercentage *float64 `json:"trafficDialPercentage,omitempty" tf:"traffic_dial_percentage,omitempty"`
 }
 
 type EndpointGroupObservation struct {
@@ -136,6 +178,15 @@ type EndpointGroupParameters struct {
 	TrafficDialPercentage *float64 `json:"trafficDialPercentage,omitempty" tf:"traffic_dial_percentage,omitempty"`
 }
 
+type PortOverrideInitParameters struct {
+
+	// The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint, such as the Application Load Balancer or Amazon EC2 instance.
+	EndpointPort *float64 `json:"endpointPort,omitempty" tf:"endpoint_port,omitempty"`
+
+	// The listener port that you want to map to a specific endpoint port. This is the port that user traffic arrives to the Global Accelerator on.
+	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
+}
+
 type PortOverrideObservation struct {
 
 	// The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint, such as the Application Load Balancer or Amazon EC2 instance.
@@ -148,18 +199,22 @@ type PortOverrideObservation struct {
 type PortOverrideParameters struct {
 
 	// The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint, such as the Application Load Balancer or Amazon EC2 instance.
-	// +kubebuilder:validation:Required
-	EndpointPort *float64 `json:"endpointPort" tf:"endpoint_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointPort *float64 `json:"endpointPort,omitempty" tf:"endpoint_port,omitempty"`
 
 	// The listener port that you want to map to a specific endpoint port. This is the port that user traffic arrives to the Global Accelerator on.
-	// +kubebuilder:validation:Required
-	ListenerPort *float64 `json:"listenerPort" tf:"listener_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
 }
 
 // EndpointGroupSpec defines the desired state of EndpointGroup
 type EndpointGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EndpointGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EndpointGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // EndpointGroupStatus defines the observed state of EndpointGroup.

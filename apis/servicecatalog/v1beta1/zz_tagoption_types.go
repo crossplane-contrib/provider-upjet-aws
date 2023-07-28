@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TagOptionInitParameters struct {
+
+	// Whether tag option is active. Default is true.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+
+	// Tag option key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Tag option value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type TagOptionObservation struct {
 
 	// Whether tag option is active. Default is true.
@@ -54,6 +66,10 @@ type TagOptionParameters struct {
 type TagOptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TagOptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TagOptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // TagOptionStatus defines the observed state of TagOption.
@@ -74,8 +90,8 @@ type TagOptionStatus struct {
 type TagOption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key)",message="key is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key) || has(self.initProvider.key)",message="key is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   TagOptionSpec   `json:"spec"`
 	Status TagOptionStatus `json:"status,omitempty"`
 }

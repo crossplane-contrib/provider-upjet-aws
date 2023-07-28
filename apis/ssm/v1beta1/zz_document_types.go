@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttachmentsSourceInitParameters struct {
+
+	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the document attachment file
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value describing the location of an attachment to a document
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type AttachmentsSourceObservation struct {
 
 	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
@@ -28,16 +40,43 @@ type AttachmentsSourceObservation struct {
 type AttachmentsSourceParameters struct {
 
 	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the document attachment file
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value describing the location of an attachment to a document
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type DocumentInitParameters struct {
+
+	// One or more configuration blocks describing attachments sources to a version of a document. Defined below.
+	AttachmentsSource []AttachmentsSourceInitParameters `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
+
+	// The JSON or YAML content of the document.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The format of the document. Valid document types include: JSON and YAML
+	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
+
+	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
+	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
+
+	// Additional Permissions to attach to the document. See Permissions below for details.
+	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// A field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and cannot be changed for an existing document version.
+	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
 
 type DocumentObservation struct {
@@ -149,6 +188,9 @@ type DocumentParameters struct {
 	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
 
+type ParameterInitParameters struct {
+}
+
 type ParameterObservation struct {
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
@@ -169,6 +211,10 @@ type ParameterParameters struct {
 type DocumentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DocumentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DocumentInitParameters `json:"initProvider,omitempty"`
 }
 
 // DocumentStatus defines the observed state of Document.
@@ -189,8 +235,8 @@ type DocumentStatus struct {
 type Document struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.documentType)",message="documentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.documentType) || has(self.initProvider.documentType)",message="documentType is a required parameter"
 	Spec   DocumentSpec   `json:"spec"`
 	Status DocumentStatus `json:"status,omitempty"`
 }

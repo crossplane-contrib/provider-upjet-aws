@@ -102,6 +102,29 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  certificateBody:
+                    description: encoded format.
+                    type: string
+                  certificateChain:
+                    description: encoded public key certificates of the chain.
+                    type: string
+                  path:
+                    description: The IAM path for the server certificate.  If it is
+                      not included, it defaults to a slash (/). If this certificate
+                      is for use with AWS CloudFront, the path must be in format /cloudfront/your_path_here.
+                      See IAM Identifiers for more details on IAM Paths.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -302,7 +325,8 @@ spec:
             x-kubernetes-validations:
             - message: certificateBody is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateBody)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateBody)
+                || has(self.initProvider.certificateBody)'
             - message: privateKeySecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.privateKeySecretRef)'

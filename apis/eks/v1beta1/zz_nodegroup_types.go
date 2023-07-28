@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutoscalingGroupsInitParameters struct {
+}
+
 type AutoscalingGroupsObservation struct {
 
 	// Name of the AutoScaling Group.
@@ -20,6 +23,18 @@ type AutoscalingGroupsObservation struct {
 }
 
 type AutoscalingGroupsParameters struct {
+}
+
+type LaunchTemplateInitParameters struct {
+
+	// Identifier of the EC2 Launch Template. Conflicts with name.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the EC2 Launch Template. Conflicts with id.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type LaunchTemplateObservation struct {
@@ -45,8 +60,49 @@ type LaunchTemplateParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type NodeGroupInitParameters struct {
+
+	// Type of Amazon Machine Image (AMI) associated with the EKS Node Group. See the AWS documentation for valid values.
+	AMIType *string `json:"amiType,omitempty" tf:"ami_type,omitempty"`
+
+	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT.
+	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
+
+	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
+	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+
+	// Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
+	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
+
+	// List of instance types associated with the EKS Node Group. Defaults to ["t3.medium"].
+	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
+
+	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// Configuration block with Launch Template settings. Detailed below.
+	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
+	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
+
+	// Configuration block with remote access settings. Detailed below.
+	RemoteAccess []RemoteAccessInitParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
+
+	// Configuration block with scaling settings. Detailed below.
+	ScalingConfig []ScalingConfigInitParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
+	Taint []TaintInitParameters `json:"taint,omitempty" tf:"taint,omitempty"`
+
+	UpdateConfig []UpdateConfigInitParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 }
 
 type NodeGroupObservation struct {
@@ -233,6 +289,12 @@ type NodeGroupParameters struct {
 	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
+type RemoteAccessInitParameters struct {
+
+	// EC2 Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, either port 3389 for Windows, or port 22 for all other operating systems is opened on the worker nodes to the Internet (0.0.0.0/0). For Windows nodes, this will allow you to use RDP, for all others this allows you to SSH into the worker nodes.
+	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
+}
+
 type RemoteAccessObservation struct {
 
 	// EC2 Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, either port 3389 for Windows, or port 22 for all other operating systems is opened on the worker nodes to the Internet (0.0.0.0/0). For Windows nodes, this will allow you to use RDP, for all others this allows you to SSH into the worker nodes.
@@ -264,6 +326,9 @@ type RemoteAccessParameters struct {
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 
+type ResourcesInitParameters struct {
+}
+
 type ResourcesObservation struct {
 
 	// List of objects containing information about AutoScaling Groups.
@@ -274,6 +339,18 @@ type ResourcesObservation struct {
 }
 
 type ResourcesParameters struct {
+}
+
+type ScalingConfigInitParameters struct {
+
+	// Desired number of worker nodes.
+	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+
+	// Maximum number of worker nodes.
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+
+	// Minimum number of worker nodes.
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 }
 
 type ScalingConfigObservation struct {
@@ -291,16 +368,28 @@ type ScalingConfigObservation struct {
 type ScalingConfigParameters struct {
 
 	// Desired number of worker nodes.
-	// +kubebuilder:validation:Required
-	DesiredSize *float64 `json:"desiredSize" tf:"desired_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
 
 	// Maximum number of worker nodes.
-	// +kubebuilder:validation:Required
-	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Minimum number of worker nodes.
-	// +kubebuilder:validation:Required
-	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+}
+
+type TaintInitParameters struct {
+
+	// The effect of the taint. Valid values: NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE.
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+
+	// The key of the taint. Maximum length of 63.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the taint. Maximum length of 63.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TaintObservation struct {
@@ -318,16 +407,25 @@ type TaintObservation struct {
 type TaintParameters struct {
 
 	// The effect of the taint. Valid values: NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE.
-	// +kubebuilder:validation:Required
-	Effect *string `json:"effect" tf:"effect,omitempty"`
+	// +kubebuilder:validation:Optional
+	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
 
 	// The key of the taint. Maximum length of 63.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The value of the taint. Maximum length of 63.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type UpdateConfigInitParameters struct {
+
+	// Desired max number of unavailable worker nodes during node group update.
+	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+
+	// Desired max percentage of unavailable worker nodes during node group update.
+	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
 }
 
 type UpdateConfigObservation struct {
@@ -354,6 +452,10 @@ type UpdateConfigParameters struct {
 type NodeGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NodeGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NodeGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // NodeGroupStatus defines the observed state of NodeGroup.
@@ -374,7 +476,7 @@ type NodeGroupStatus struct {
 type NodeGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scalingConfig)",message="scalingConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scalingConfig) || has(self.initProvider.scalingConfig)",message="scalingConfig is a required parameter"
 	Spec   NodeGroupSpec   `json:"spec"`
 	Status NodeGroupStatus `json:"status,omitempty"`
 }

@@ -163,8 +163,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - repositoryUrl
                       type: object
                     type: array
                   region:
@@ -178,6 +176,30 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  gitConfig:
+                    description: Specifies details about the repository. see Git Config
+                      details below.
+                    items:
+                      properties:
+                        branch:
+                          description: The default branch for the Git repository.
+                          type: string
+                        repositoryUrl:
+                          description: The URL where the Git repository is located.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -379,7 +401,8 @@ spec:
             x-kubernetes-validations:
             - message: gitConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.gitConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.gitConfig)
+                || has(self.initProvider.gitConfig)'
           status:
             description: CodeRepositoryStatus defines the observed state of CodeRepository.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DiskIopsConfigurationInitParameters struct {
+
+	// - The total number of SSD IOPS provisioned for the file system.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
 type DiskIopsConfigurationObservation struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
@@ -33,6 +42,9 @@ type DiskIopsConfigurationParameters struct {
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
+type EndpointsInitParameters struct {
+}
+
 type EndpointsObservation struct {
 
 	// An endpoint for managing your file system by setting up NetApp SnapMirror with other ONTAP systems. See Endpoint.
@@ -43,6 +55,9 @@ type EndpointsObservation struct {
 }
 
 type EndpointsParameters struct {
+}
+
+type InterclusterInitParameters struct {
 }
 
 type InterclusterObservation struct {
@@ -57,6 +72,9 @@ type InterclusterObservation struct {
 type InterclusterParameters struct {
 }
 
+type ManagementInitParameters struct {
+}
+
 type ManagementObservation struct {
 
 	// DNS name for the file system, e.g., fs-12345678.fsx.us-west-2.amazonaws.com
@@ -67,6 +85,42 @@ type ManagementObservation struct {
 }
 
 type ManagementParameters struct {
+}
+
+type OntapFileSystemInitParameters struct {
+
+	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
+	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
+	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
+
+	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
+	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
+
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
+	DiskIopsConfiguration []DiskIopsConfigurationInitParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
+
+	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
+	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
+
+	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+
+	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
+	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
+
+	// - The filesystem storage type. defaults to SSD.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
+	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
+	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
 }
 
 type OntapFileSystemObservation struct {
@@ -258,6 +312,10 @@ type OntapFileSystemParameters struct {
 type OntapFileSystemSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OntapFileSystemParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OntapFileSystemInitParameters `json:"initProvider,omitempty"`
 }
 
 // OntapFileSystemStatus defines the observed state of OntapFileSystem.
@@ -278,8 +336,8 @@ type OntapFileSystemStatus struct {
 type OntapFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentType)",message="deploymentType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentType) || has(self.initProvider.deploymentType)",message="deploymentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || has(self.initProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
 	Spec   OntapFileSystemSpec   `json:"spec"`
 	Status OntapFileSystemStatus `json:"status,omitempty"`
 }

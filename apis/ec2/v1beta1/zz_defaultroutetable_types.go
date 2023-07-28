@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefaultRouteTableInitParameters struct {
+
+	// List of virtual gateways for propagation.
+	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
+
+	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
+	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DefaultRouteTableObservation struct {
 
 	// The ARN of the route table.
@@ -75,6 +87,39 @@ type DefaultRouteTableParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type RouteInitParameters struct {
+
+	// The CIDR block of the route.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block"`
+
+	// The Amazon Resource Name (ARN) of a core network.
+	CoreNetworkArn *string `json:"coreNetworkArn,omitempty" tf:"core_network_arn"`
+
+	// The ID of a managed prefix list destination of the route.
+	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id"`
+
+	// The Ipv6 CIDR block of the route
+	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block"`
+
+	// Identifier of an EC2 instance.
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id"`
+
+	// Identifier of a VPC NAT gateway.
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id"`
+
+	// Identifier of an EC2 network interface.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id"`
+
+	// Identifier of an EC2 Transit Gateway.
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id"`
+
+	// Identifier of a VPC Endpoint. This route must be removed prior to VPC Endpoint deletion.
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id"`
+
+	// Identifier of a VPC peering connection.
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id"`
 }
 
 type RouteObservation struct {
@@ -191,6 +236,10 @@ type RouteParameters struct {
 type DefaultRouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DefaultRouteTableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DefaultRouteTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // DefaultRouteTableStatus defines the observed state of DefaultRouteTable.

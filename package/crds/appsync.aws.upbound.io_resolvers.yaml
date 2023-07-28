@@ -298,9 +298,6 @@ spec:
                           description: The version of the runtime to use. Currently,
                             the only allowed version is 1.0.0.
                           type: string
-                      required:
-                      - name
-                      - runtimeVersion
                       type: object
                     type: array
                   syncConfig:
@@ -339,6 +336,109 @@ spec:
                 - field
                 - region
                 - type
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cachingConfig:
+                    description: The Caching Config. See Caching Config.
+                    items:
+                      properties:
+                        cachingKeys:
+                          description: The caching keys for a resolver that has caching
+                            activated. Valid values are entries from the $context.arguments,
+                            $context.source, and $context.identity maps.
+                          items:
+                            type: string
+                          type: array
+                        ttl:
+                          description: The TTL in seconds for a resolver that has
+                            caching activated. Valid values are between 1 and 3600
+                            seconds.
+                          type: number
+                      type: object
+                    type: array
+                  code:
+                    description: The function code that contains the request and response
+                      functions. When code is used, the runtime is required. The runtime
+                      value must be APPSYNC_JS.
+                    type: string
+                  kind:
+                    description: Resolver type. Valid values are UNIT and PIPELINE.
+                    type: string
+                  maxBatchSize:
+                    description: Maximum batching size for a resolver. Valid values
+                      are between 0 and 2000.
+                    type: number
+                  pipelineConfig:
+                    description: The caching configuration for the resolver. See Pipeline
+                      Config.
+                    items:
+                      properties:
+                        functions:
+                          description: A list of Function objects.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  requestTemplate:
+                    description: Request mapping template for UNIT resolver or 'before
+                      mapping template' for PIPELINE resolver. Required for non-Lambda
+                      resolvers.
+                    type: string
+                  responseTemplate:
+                    description: Response mapping template for UNIT resolver or 'after
+                      mapping template' for PIPELINE resolver. Required for non-Lambda
+                      resolvers.
+                    type: string
+                  runtime:
+                    description: Describes a runtime used by an AWS AppSync pipeline
+                      resolver or AWS AppSync function. Specifies the name and version
+                      of the runtime to use. Note that if a runtime is specified,
+                      code must also be specified. See Runtime.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the runtime to use. Currently,
+                            the only allowed value is APPSYNC_JS.
+                          type: string
+                        runtimeVersion:
+                          description: The version of the runtime to use. Currently,
+                            the only allowed version is 1.0.0.
+                          type: string
+                      type: object
+                    type: array
+                  syncConfig:
+                    description: Describes a Sync configuration for a resolver. See
+                      Sync Config.
+                    items:
+                      properties:
+                        conflictDetection:
+                          description: Conflict Detection strategy to use. Valid values
+                            are NONE and VERSION.
+                          type: string
+                        conflictHandler:
+                          description: Conflict Resolution strategy to perform in
+                            the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY,
+                            AUTOMERGE, and LAMBDA.
+                          type: string
+                        lambdaConflictHandlerConfig:
+                          description: Lambda Conflict Handler Config when configuring
+                            LAMBDA as the Conflict Handler. See Lambda Conflict Handler
+                            Config.
+                          items:
+                            properties:
+                              lambdaConflictHandlerArn:
+                                description: ARN for the Lambda function to use as
+                                  the Conflict Handler.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

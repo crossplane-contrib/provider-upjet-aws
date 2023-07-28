@@ -82,6 +82,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  ecrRepositoryPrefix:
+                    description: The repository name prefix to use when caching images
+                      from the source registry.
+                    type: string
+                  upstreamRegistryUrl:
+                    description: The registry URL of the upstream public registry
+                      to use as the source.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -282,10 +296,12 @@ spec:
             x-kubernetes-validations:
             - message: ecrRepositoryPrefix is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ecrRepositoryPrefix)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ecrRepositoryPrefix)
+                || has(self.initProvider.ecrRepositoryPrefix)'
             - message: upstreamRegistryUrl is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.upstreamRegistryUrl)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.upstreamRegistryUrl)
+                || has(self.initProvider.upstreamRegistryUrl)'
           status:
             description: PullThroughCacheRuleStatus defines the observed state of
               PullThroughCacheRule.

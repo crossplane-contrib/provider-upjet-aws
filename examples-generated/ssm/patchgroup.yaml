@@ -30,6 +30,3 @@ spec:
     - KB123456
     name: patch-baseline
     region: us-west-1
-
----
-

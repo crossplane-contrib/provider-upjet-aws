@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthorizerInitParameters struct {
+
+	// TTL of cached authorizer results in seconds. Defaults to 300.
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+
+	// Source of the identity in an incoming request. Defaults to method.request.header.Authorization. For REQUEST type, this may be a comma-separated list of values, including headers, query string parameters and stage variables - e.g., "method.request.header.SomeHeaderName,method.request.querystring.SomeQueryStringName,stageVariables.SomeStageVariableName"
+	IdentitySource *string `json:"identitySource,omitempty" tf:"identity_source,omitempty"`
+
+	// Validation expression for the incoming identity. For TOKEN type, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.
+	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
+
+	// Name of the authorizer
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
+	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
+
+	// Type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type AuthorizerObservation struct {
 
 	// ARN of the API Gateway Authorizer
@@ -129,6 +150,10 @@ type AuthorizerParameters struct {
 type AuthorizerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AuthorizerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AuthorizerInitParameters `json:"initProvider,omitempty"`
 }
 
 // AuthorizerStatus defines the observed state of Authorizer.
@@ -149,7 +174,7 @@ type AuthorizerStatus struct {
 type Authorizer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AuthorizerSpec   `json:"spec"`
 	Status AuthorizerStatus `json:"status,omitempty"`
 }

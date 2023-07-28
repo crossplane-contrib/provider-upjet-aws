@@ -82,6 +82,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: log_bucket
     region: us-west-1
-
----
-

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SchemaInitParameters struct {
+
+	// The schema specification. Must be a valid Open API 3.0 spec.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The description of the schema. Maximum of 256 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the schema. Maximum of 385 characters consisting of lower case letters, upper case letters, ., -, _, @.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of the schema. Valid values: OpenApi3.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SchemaObservation struct {
 
 	// The Amazon Resource Name (ARN) of the discoverer.
@@ -96,6 +114,10 @@ type SchemaParameters struct {
 type SchemaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SchemaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SchemaInitParameters `json:"initProvider,omitempty"`
 }
 
 // SchemaStatus defines the observed state of Schema.
@@ -116,9 +138,9 @@ type SchemaStatus struct {
 type Schema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   SchemaSpec   `json:"spec"`
 	Status SchemaStatus `json:"status,omitempty"`
 }

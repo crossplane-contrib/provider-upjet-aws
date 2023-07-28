@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExcludesInitParameters struct {
+
+	// The type of filter rule to apply. Valid values: SIMPLE_PATTERN.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+
+	// A single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ExcludesObservation struct {
 
 	// The type of filter rule to apply. Valid values: SIMPLE_PATTERN.
@@ -30,6 +39,15 @@ type ExcludesParameters struct {
 
 	// A single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type IncludesInitParameters struct {
+
+	// The type of filter rule to apply. Valid values: SIMPLE_PATTERN.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+
+	// A single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -51,6 +69,51 @@ type IncludesParameters struct {
 	// A single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type OptionsInitParameters struct {
+
+	// A file metadata that shows the last time a file was accessed (that is when the file was read or written to). If set to BEST_EFFORT, the DataSync Task attempts to preserve the original (that is, the version before sync PREPARING phase) atime attribute on all source files. Valid values: BEST_EFFORT, NONE. Default: BEST_EFFORT.
+	Atime *string `json:"atime,omitempty" tf:"atime,omitempty"`
+
+	// Limits the bandwidth utilized. For example, to set a maximum of 1 MB, set this value to 1048576. Value values: -1 or greater. Default: -1 (unlimited).
+	BytesPerSecond *float64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
+
+	// Group identifier of the file's owners. Valid values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE (preserve integer value of the ID).
+	GID *string `json:"gid,omitempty" tf:"gid,omitempty"`
+
+	// Determines the type of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide. Valid values: OFF, BASIC, TRANSFER. Default: OFF.
+	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
+
+	// A file metadata that indicates the last time a file was modified (written to) before the sync PREPARING phase. Value values: NONE, PRESERVE. Default: PRESERVE.
+	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
+
+	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
+	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
+
+	// Determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. Valid values: NONE, PRESERVE. Default: PRESERVE.
+	PosixPermissions *string `json:"posixPermissions,omitempty" tf:"posix_permissions,omitempty"`
+
+	// Whether files deleted in the source should be removed or preserved in the destination file system. Valid values: PRESERVE, REMOVE. Default: PRESERVE.
+	PreserveDeletedFiles *string `json:"preserveDeletedFiles,omitempty" tf:"preserve_deleted_files,omitempty"`
+
+	// Whether the DataSync Task should preserve the metadata of block and character devices in the source files system, and recreate the files with that device name and metadata on the destination. The DataSync Task can’t sync the actual contents of such devices, because many of the devices are non-terminal and don’t return an end of file (EOF) marker. Valid values: NONE, PRESERVE. Default: NONE (ignore special devices).
+	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
+
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
+	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
+
+	// Determines whether tasks should be queued before executing the tasks. Valid values: ENABLED, DISABLED. Default ENABLED.
+	TaskQueueing *string `json:"taskQueueing,omitempty" tf:"task_queueing,omitempty"`
+
+	// Determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location. Valid values: CHANGED, ALL. Default: CHANGED
+	TransferMode *string `json:"transferMode,omitempty" tf:"transfer_mode,omitempty"`
+
+	// User identifier of the file's owners. Valid values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE (preserve integer value of the ID).
+	UID *string `json:"uid,omitempty" tf:"uid,omitempty"`
+
+	// Whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. Valid values: NONE, POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED. Default: POINT_IN_TIME_CONSISTENT.
+	VerifyMode *string `json:"verifyMode,omitempty" tf:"verify_mode,omitempty"`
 }
 
 type OptionsObservation struct {
@@ -157,6 +220,12 @@ type OptionsParameters struct {
 	VerifyMode *string `json:"verifyMode,omitempty" tf:"verify_mode,omitempty"`
 }
 
+type ScheduleInitParameters struct {
+
+	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
 type ScheduleObservation struct {
 
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
@@ -166,8 +235,29 @@ type ScheduleObservation struct {
 type ScheduleParameters struct {
 
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
-	// +kubebuilder:validation:Required
-	ScheduleExpression *string `json:"scheduleExpression" tf:"schedule_expression,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
+type TaskInitParameters struct {
+
+	// Filter rules that determines which files to exclude from a task.
+	Excludes []ExcludesInitParameters `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// Filter rules that determines which files to include in a task.
+	Includes []IncludesInitParameters `json:"includes,omitempty" tf:"includes,omitempty"`
+
+	// Name of the DataSync Task.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block containing option that controls the default behavior when you start an execution of this DataSync Task. For each individual task execution, you can override these options by specifying an overriding configuration in those executions.
+	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// Specifies a schedule used to periodically transfer files from a source to a destination location.
+	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TaskObservation struct {
@@ -285,6 +375,10 @@ type TaskParameters struct {
 type TaskSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TaskParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TaskInitParameters `json:"initProvider,omitempty"`
 }
 
 // TaskStatus defines the observed state of Task.

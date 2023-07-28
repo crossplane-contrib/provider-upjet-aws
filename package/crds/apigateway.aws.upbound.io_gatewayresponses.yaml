@@ -169,6 +169,29 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  responseParameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of parameters (paths, query strings and headers)
+                      of the Gateway Response.
+                    type: object
+                  responseTemplates:
+                    additionalProperties:
+                      type: string
+                    description: Map of templates used to transform the response body.
+                    type: object
+                  responseType:
+                    description: Response type of the associated GatewayResponse.
+                    type: string
+                  statusCode:
+                    description: HTTP status code of the Gateway Response.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -369,7 +392,8 @@ spec:
             x-kubernetes-validations:
             - message: responseType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.responseType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.responseType)
+                || has(self.initProvider.responseType)'
           status:
             description: GatewayResponseStatus defines the observed state of GatewayResponse.
             properties:

@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MountTargetInitParameters struct {
+
+	// The address (within the address range of the specified subnet) at
+	// which the file system may be mounted via the mount target.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+}
+
 type MountTargetObservation struct {
 
 	// The unique and consistent identifier of the Availability Zone (AZ) that the mount target resides in.
@@ -111,6 +118,10 @@ type MountTargetParameters struct {
 type MountTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MountTargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MountTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // MountTargetStatus defines the observed state of MountTarget.

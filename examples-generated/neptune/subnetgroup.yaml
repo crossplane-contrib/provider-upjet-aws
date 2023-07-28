@@ -14,6 +14,3 @@ spec:
     - name: backend
     tags:
       Name: My neptune subnet group
-
----
-

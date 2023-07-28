@@ -105,6 +105,3 @@ spec:
     engineVersion: ${aws_rds_cluster.default.engine_version}
     instanceClass: db.t2.small
     region: us-west-1
-
----
-

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayPeeringAttachmentInitParameters struct {
+
+	// Account ID of EC2 Transit Gateway to peer with. Defaults to the account ID the AWS provider is currently connected to.
+	PeerAccountID *string `json:"peerAccountId,omitempty" tf:"peer_account_id,omitempty"`
+
+	// Region of EC2 Transit Gateway to peer with.
+	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TransitGatewayPeeringAttachmentObservation struct {
 
 	// EC2 Transit Gateway Attachment identifier
@@ -89,6 +101,10 @@ type TransitGatewayPeeringAttachmentParameters struct {
 type TransitGatewayPeeringAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayPeeringAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayPeeringAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayPeeringAttachmentStatus defines the observed state of TransitGatewayPeeringAttachment.
@@ -109,7 +125,7 @@ type TransitGatewayPeeringAttachmentStatus struct {
 type TransitGatewayPeeringAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerRegion)",message="peerRegion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerRegion) || has(self.initProvider.peerRegion)",message="peerRegion is a required parameter"
 	Spec   TransitGatewayPeeringAttachmentSpec   `json:"spec"`
 	Status TransitGatewayPeeringAttachmentStatus `json:"status,omitempty"`
 }

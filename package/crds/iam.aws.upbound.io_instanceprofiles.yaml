@@ -158,6 +158,26 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  path:
+                    description: Path to the instance profile. For more information
+                      about paths, see IAM Identifiers in the IAM User Guide. Can
+                      be a string of characters consisting of either a forward slash
+                      (/) by itself or a string that must begin and end with forward
+                      slashes. Can include any ASCII character from the ! (\u0021)
+                      through the DEL character (\u007F), including most punctuation
+                      characters, digits, and upper and lowercase letters.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

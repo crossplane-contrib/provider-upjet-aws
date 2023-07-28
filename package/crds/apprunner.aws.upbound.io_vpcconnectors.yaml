@@ -253,6 +253,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vpcConnectorName:
+                    description: Name for the VPC connector.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -453,7 +467,8 @@ spec:
             x-kubernetes-validations:
             - message: vpcConnectorName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConnectorName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConnectorName)
+                || has(self.initProvider.vpcConnectorName)'
           status:
             description: VPCConnectorStatus defines the observed state of VPCConnector.
             properties:

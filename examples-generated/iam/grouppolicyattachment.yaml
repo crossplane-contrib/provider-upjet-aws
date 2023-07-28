@@ -42,6 +42,3 @@ spec:
   forProvider:
     description: A test policy
     policy: '{ ... policy JSON ... }'
-
----
-

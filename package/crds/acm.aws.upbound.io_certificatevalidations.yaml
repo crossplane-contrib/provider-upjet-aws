@@ -159,6 +159,21 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  validationRecordFqdns:
+                    description: List of FQDNs that implement the validation. Only
+                      valid for DNS validation method ACM certificates. If this is
+                      set, the resource can implement additional sanity checks and
+                      has an explicit dependency on the resource that is implementing
+                      the validation
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

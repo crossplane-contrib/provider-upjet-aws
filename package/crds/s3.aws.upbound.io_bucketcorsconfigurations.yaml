@@ -183,9 +183,6 @@ spec:
                           description: Time in seconds that your browser is to cache
                             the preflight response for the specified resource.
                           type: number
-                      required:
-                      - allowedMethods
-                      - allowedOrigins
                       type: object
                     type: array
                   expectedBucketOwner:
@@ -197,6 +194,56 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  corsRule:
+                    description: Set of origins and methods (cross-origin access that
+                      you want to allow). See below. You can configure up to 100 rules.
+                    items:
+                      properties:
+                        allowedHeaders:
+                          description: Set of Headers that are specified in the Access-Control-Request-Headers
+                            header.
+                          items:
+                            type: string
+                          type: array
+                        allowedMethods:
+                          description: Set of HTTP methods that you allow the origin
+                            to execute. Valid values are GET, PUT, HEAD, POST, and
+                            DELETE.
+                          items:
+                            type: string
+                          type: array
+                        allowedOrigins:
+                          description: Set of origins you want customers to be able
+                            to access the bucket from.
+                          items:
+                            type: string
+                          type: array
+                        exposeHeaders:
+                          description: Set of headers in the response that you want
+                            customers to be able to access from their applications
+                            (for example, from a JavaScript XMLHttpRequest object).
+                          items:
+                            type: string
+                          type: array
+                        id:
+                          description: Unique identifier for the rule. The value cannot
+                            be longer than 255 characters.
+                          type: string
+                        maxAgeSeconds:
+                          description: Time in seconds that your browser is to cache
+                            the preflight response for the specified resource.
+                          type: number
+                      type: object
+                    type: array
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -398,7 +445,8 @@ spec:
             x-kubernetes-validations:
             - message: corsRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.corsRule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.corsRule)
+                || has(self.initProvider.corsRule)'
           status:
             description: BucketCorsConfigurationStatus defines the observed state
               of BucketCorsConfiguration.

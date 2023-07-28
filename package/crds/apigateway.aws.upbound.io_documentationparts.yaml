@@ -91,8 +91,6 @@ spec:
                           description: Type of API entity to which the documentation
                             content appliesE.g., API, METHOD or REQUEST_BODY
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   properties:
@@ -185,6 +183,44 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  location:
+                    description: Location of the targeted API entity of the to-be-created
+                      documentation part. See below.
+                    items:
+                      properties:
+                        method:
+                          description: HTTP verb of a method. The default value is
+                            * for any method.
+                          type: string
+                        name:
+                          description: Name of the targeted API entity.
+                          type: string
+                        path:
+                          description: URL path of the target. The default value is
+                            / for the root resource.
+                          type: string
+                        statusCode:
+                          description: HTTP status code of a response. The default
+                            value is * for any status code.
+                          type: string
+                        type:
+                          description: Type of API entity to which the documentation
+                            content appliesE.g., API, METHOD or REQUEST_BODY
+                          type: string
+                      type: object
+                    type: array
+                  properties:
+                    description: 'Content map of API-specific key-value pairs describing
+                      the targeted API entity. The map must be encoded as a JSON string,
+                      e.g., "{ "description": "The API does ..." }". Only Swagger-compliant
+                      key-value pairs can be exported and, hence, published.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -386,10 +422,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: properties is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.properties)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.properties)
+                || has(self.initProvider.properties)'
           status:
             description: DocumentationPartStatus defines the observed state of DocumentationPart.
             properties:

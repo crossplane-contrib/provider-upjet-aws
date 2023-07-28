@@ -125,6 +125,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: codepipeline_bucket
     region: us-west-1
-
----
-

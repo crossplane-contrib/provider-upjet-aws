@@ -61,6 +61,3 @@ spec:
       negated: false
       type: IPMatch
     region: us-west-1
-
----
-

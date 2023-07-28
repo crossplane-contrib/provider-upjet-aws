@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LambdaFunctionAssociationInitParameters struct {
+}
+
 type LambdaFunctionAssociationObservation struct {
 
 	// Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
@@ -65,6 +68,10 @@ type LambdaFunctionAssociationParameters struct {
 type LambdaFunctionAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LambdaFunctionAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LambdaFunctionAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // LambdaFunctionAssociationStatus defines the observed state of LambdaFunctionAssociation.

@@ -734,6 +734,119 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowMajorVersionUpgrade:
+                    description: Specifies whether upgrades between different major
+                      versions are allowed. You must set it to true when providing
+                      an engine_version parameter that uses a different major version
+                      than the DB cluster's current version. Default is false.
+                    type: boolean
+                  applyImmediately:
+                    description: Specifies whether any cluster modifications are applied
+                      immediately, or during the next maintenance window. Default
+                      is false.
+                    type: boolean
+                  availabilityZones:
+                    description: A list of EC2 Availability Zones that instances in
+                      the Neptune cluster can be created in.
+                    items:
+                      type: string
+                    type: array
+                  backupRetentionPeriod:
+                    description: The days to retain backups for. Default 1
+                    type: number
+                  copyTagsToSnapshot:
+                    description: If set to true, tags are copied to any snapshot of
+                      the DB cluster that is created.
+                    type: boolean
+                  deletionProtection:
+                    description: A value that indicates whether the DB cluster has
+                      deletion protection enabled.The database can't be deleted when
+                      deletion protection is enabled. By default, deletion protection
+                      is disabled.
+                    type: boolean
+                  enableCloudwatchLogsExports:
+                    description: A list of the log types this DB cluster is configured
+                      to export to Cloudwatch Logs. Currently only supports audit.
+                    items:
+                      type: string
+                    type: array
+                  engine:
+                    description: The name of the database engine to be used for this
+                      Neptune cluster. Defaults to neptune.
+                    type: string
+                  engineVersion:
+                    description: The database engine version.
+                    type: string
+                  finalSnapshotIdentifier:
+                    description: The name of your final Neptune snapshot when this
+                      Neptune cluster is deleted. If omitted, no final snapshot will
+                      be made.
+                    type: string
+                  globalClusterIdentifier:
+                    description: The global cluster identifier specified on aws_neptune_global_cluster.
+                    type: string
+                  iamDatabaseAuthenticationEnabled:
+                    description: Specifies whether or not mappings of AWS Identity
+                      and Access Management (IAM) accounts to database accounts is
+                      enabled.
+                    type: boolean
+                  neptuneInstanceParameterGroupName:
+                    description: The name of the DB parameter group to apply to all
+                      instances of the DB cluster.
+                    type: string
+                  port:
+                    description: The port on which the Neptune accepts connections.
+                      Default is 8182.
+                    type: number
+                  preferredBackupWindow:
+                    description: 'The daily time range during which automated backups
+                      are created if automated backups are enabled using the BackupRetentionPeriod
+                      parameter. Time in UTC. Default: A 30-minute window selected
+                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
+                    type: string
+                  preferredMaintenanceWindow:
+                    description: The weekly time range during which system maintenance
+                      can occur, in (UTC) e.g., wed:04:00-wed:04:30
+                    type: string
+                  serverlessV2ScalingConfiguration:
+                    description: If set, create the Neptune cluster as a serverless
+                      one. See Serverless for example block attributes.
+                    items:
+                      properties:
+                        maxCapacity:
+                          description: ': (default: 128) The maximum Neptune Capacity
+                            Units (NCUs) for this cluster. Must be lower or equal
+                            than 128. See AWS Documentation for more details.'
+                          type: number
+                        minCapacity:
+                          description: ': (default: 2.5) The minimum Neptune Capacity
+                            Units (NCUs) for this cluster. Must be greater or equal
+                            than 1. See AWS Documentation for more details.'
+                          type: number
+                      type: object
+                    type: array
+                  skipFinalSnapshot:
+                    description: Determines whether a final Neptune snapshot is created
+                      before the Neptune cluster is deleted. If true is specified,
+                      no Neptune snapshot is created. If false is specified, a Neptune
+                      snapshot is created before the Neptune cluster is deleted, using
+                      the value from final_snapshot_identifier. Default is false.
+                    type: boolean
+                  storageEncrypted:
+                    description: Specifies whether the Neptune cluster is encrypted.
+                      The default is false if not specified.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

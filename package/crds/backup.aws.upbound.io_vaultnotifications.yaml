@@ -233,6 +233,18 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  backupVaultEvents:
+                    description: An array of events that indicate the status of jobs
+                      to back up resources to the backup vault.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -433,7 +445,8 @@ spec:
             x-kubernetes-validations:
             - message: backupVaultEvents is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backupVaultEvents)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backupVaultEvents)
+                || has(self.initProvider.backupVaultEvents)'
           status:
             description: VaultNotificationsStatus defines the observed state of VaultNotifications.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RegexMatchSetInitParameters struct {
+
+	// The name or description of the Regex Match Set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The regular expression pattern that you want AWS WAF to search for in web requests, the location in requests that you want AWS WAF to search, and other settings. See below.
+	RegexMatchTuple []RegexMatchTupleInitParameters `json:"regexMatchTuple,omitempty" tf:"regex_match_tuple,omitempty"`
+}
+
 type RegexMatchSetObservation struct {
 
 	// The ID of the WAF Regional Regex Match Set.
@@ -41,6 +50,19 @@ type RegexMatchSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type RegexMatchTupleFieldToMatchInitParameters struct {
+
+	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
+	// If type is any other value, omit this field.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// The part of the web request that you want AWS WAF to search for a specified string.
+	// e.g., HEADER, METHOD or BODY.
+	// See docs
+	// for all supported values.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type RegexMatchTupleFieldToMatchObservation struct {
 
 	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
@@ -65,8 +87,20 @@ type RegexMatchTupleFieldToMatchParameters struct {
 	// e.g., HEADER, METHOD or BODY.
 	// See docs
 	// for all supported values.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RegexMatchTupleInitParameters struct {
+
+	// The part of a web request that you want to search, such as a specified header or a query string.
+	FieldToMatch []RegexMatchTupleFieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+
+	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
+	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
+	// See docs
+	// for all supported values.
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type RegexMatchTupleObservation struct {
@@ -87,8 +121,8 @@ type RegexMatchTupleObservation struct {
 type RegexMatchTupleParameters struct {
 
 	// The part of a web request that you want to search, such as a specified header or a query string.
-	// +kubebuilder:validation:Required
-	FieldToMatch []RegexMatchTupleFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldToMatch []RegexMatchTupleFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
 	// The ID of a Regex Pattern Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.RegexPatternSet
@@ -108,14 +142,18 @@ type RegexMatchTupleParameters struct {
 	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
 	// See docs
 	// for all supported values.
-	// +kubebuilder:validation:Required
-	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
+	// +kubebuilder:validation:Optional
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 // RegexMatchSetSpec defines the desired state of RegexMatchSet
 type RegexMatchSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegexMatchSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RegexMatchSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegexMatchSetStatus defines the observed state of RegexMatchSet.
@@ -136,7 +174,7 @@ type RegexMatchSetStatus struct {
 type RegexMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   RegexMatchSetSpec   `json:"spec"`
 	Status RegexMatchSetStatus `json:"status,omitempty"`
 }

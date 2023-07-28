@@ -104,6 +104,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  applicationId:
+                    description: The ARN of the application from the Serverless Application
+                      Repository.
+                    type: string
+                  capabilities:
+                    description: A list of capabilities. Valid values are CAPABILITY_IAM,
+                      CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY, or CAPABILITY_AUTO_EXPAND
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the stack to create. The resource deployed
+                      in AWS will be prefixed with serverlessrepo-
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of Parameter structures that specify input
+                      parameters for the stack.
+                    type: object
+                  semanticVersion:
+                    description: The version of the application to deploy. If not
+                      supplied, deploys the latest version.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -304,13 +339,16 @@ spec:
             x-kubernetes-validations:
             - message: applicationId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.applicationId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.applicationId)
+                || has(self.initProvider.applicationId)'
             - message: capabilities is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.capabilities)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.capabilities)
+                || has(self.initProvider.capabilities)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: CloudFormationStackStatus defines the observed state of CloudFormationStack.
             properties:

@@ -183,6 +183,44 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  databaseName:
+                    description: Name for an automatically created database on cluster
+                      creation.
+                    type: string
+                  deletionProtection:
+                    description: If the Global Cluster should have deletion protection
+                      enabled. The database can't be deleted when this value is set
+                      to true. The default is false.
+                    type: boolean
+                  engine:
+                    description: 'Name of the database engine to be used for this
+                      DB cluster. Valid values: aurora, aurora-mysql, aurora-postgresql.
+                      Defaults to aurora. Conflicts with source_db_cluster_identifier.'
+                    type: string
+                  engineVersion:
+                    description: 'Engine version of the Aurora global database. The
+                      engine, engine_version, and instance_class (on the aws_rds_cluster_instance)
+                      must together support global databases. See Using Amazon Aurora
+                      global databases for more information. NOTE: To avoid an inconsistent
+                      final plan error while upgrading, use the lifecycle ignore_changes
+                      for engine_version meta argument on the associated aws_rds_cluster
+                      resource as shown above in Upgrading Engine Versions example.'
+                    type: string
+                  forceDestroy:
+                    description: Enable to remove DB Cluster members from Global Cluster
+                      on destroy. Required with source_db_cluster_identifier.
+                    type: boolean
+                  storageEncrypted:
+                    description: Specifies whether the DB cluster is encrypted. The
+                      default is false unless source_db_cluster_identifier is specified
+                      and encrypted.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCEndpointSubnetAssociationInitParameters struct {
+}
+
 type VPCEndpointSubnetAssociationObservation struct {
 
 	// The ID of the association.
@@ -64,6 +67,10 @@ type VPCEndpointSubnetAssociationParameters struct {
 type VPCEndpointSubnetAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointSubnetAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointSubnetAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointSubnetAssociationStatus defines the observed state of VPCEndpointSubnetAssociation.

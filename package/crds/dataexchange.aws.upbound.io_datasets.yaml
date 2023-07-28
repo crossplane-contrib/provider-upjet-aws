@@ -89,6 +89,27 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  assetType:
+                    description: 'The type of asset that is added to a data set. Valid
+                      values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.'
+                    type: string
+                  description:
+                    description: A description for the data set.
+                    type: string
+                  name:
+                    description: The name of the data set.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -289,13 +310,16 @@ spec:
             x-kubernetes-validations:
             - message: assetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.assetType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.assetType)
+                || has(self.initProvider.assetType)'
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: DataSetStatus defines the observed state of DataSet.
             properties:

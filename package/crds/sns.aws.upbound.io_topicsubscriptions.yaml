@@ -342,6 +342,50 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  confirmationTimeoutInMinutes:
+                    description: Integer indicating number of minutes to wait in retrying
+                      mode for fetching subscription arn before marking it as failure.
+                      Only applicable for http and https protocols. Default is 1.
+                    type: number
+                  deliveryPolicy:
+                    description: JSON String with the delivery policy (retries, backoff,
+                      etc.) that will be used in the subscription - this only applies
+                      to HTTP/S subscriptions. Refer to the SNS docs for more details.
+                    type: string
+                  endpointAutoConfirms:
+                    description: Whether the endpoint is capable of auto confirming
+                      subscription (e.g., PagerDuty). Default is false.
+                    type: boolean
+                  filterPolicy:
+                    description: JSON String with the filter policy that will be used
+                      in the subscription to filter messages seen by the target resource.
+                      Refer to the SNS docs for more details.
+                    type: string
+                  filterPolicyScope:
+                    description: Whether the filter_policy applies to MessageAttributes
+                      (default) or MessageBody.
+                    type: string
+                  protocol:
+                    description: 'Protocol to use. Valid values are: sqs, sms, lambda,
+                      firehose, and application. Protocols email, email-json, http
+                      and https are also valid but partially supported. See details
+                      below.'
+                    type: string
+                  rawMessageDelivery:
+                    description: Whether to enable raw message delivery (the original
+                      message is directly passed, not wrapped in JSON with the original
+                      message in the message property). Default is false.
+                    type: boolean
+                  redrivePolicy:
+                    description: JSON String with the redrive policy that will be
+                      used in the subscription. Refer to the SNS docs for more details.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -542,7 +586,8 @@ spec:
             x-kubernetes-validations:
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
           status:
             description: TopicSubscriptionStatus defines the observed state of TopicSubscription.
             properties:

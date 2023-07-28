@@ -82,6 +82,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessPolicy:
+                    description: The policy document. This is a JSON formatted string.
+                    type: string
+                  forceUpdate:
+                    description: Specify true if you are updating an existing destination
+                      policy to grant permission to an organization ID instead of
+                      granting permission to individual AWS accounts.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -282,7 +296,8 @@ spec:
             x-kubernetes-validations:
             - message: accessPolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessPolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessPolicy)
+                || has(self.initProvider.accessPolicy)'
           status:
             description: DestinationPolicyStatus defines the observed state of DestinationPolicy.
             properties:

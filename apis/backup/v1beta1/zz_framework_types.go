@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ControlInitParameters struct {
+
+	// One or more input parameter blocks. An example of a control with two parameters is: "backup plan frequency is at least daily and the retention period is at least 1 year". The first parameter is daily. The second parameter is 1 year. Detailed below.
+	InputParameter []InputParameterInitParameters `json:"inputParameter,omitempty" tf:"input_parameter,omitempty"`
+
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. Detailed below.
+	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type ControlObservation struct {
 
 	// One or more input parameter blocks. An example of a control with two parameters is: "backup plan frequency is at least daily and the retention period is at least 1 year". The first parameter is daily. The second parameter is 1 year. Detailed below.
@@ -32,12 +44,27 @@ type ControlParameters struct {
 	InputParameter []InputParameterParameters `json:"inputParameter,omitempty" tf:"input_parameter,omitempty"`
 
 	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. Detailed below.
 	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
+type FrameworkInitParameters struct {
+
+	// One or more control blocks that make up the framework. Each control in the list has a name, input parameters, and scope. Detailed below.
+	Control []ControlInitParameters `json:"control,omitempty" tf:"control,omitempty"`
+
+	// The description of the framework with a maximum of 1,024 characters
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrameworkObservation struct {
@@ -97,6 +124,15 @@ type FrameworkParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type InputParameterInitParameters struct {
+
+	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of parameter, for example, hourly.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type InputParameterObservation struct {
 
 	// The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
@@ -115,6 +151,18 @@ type InputParameterParameters struct {
 	// The value of parameter, for example, hourly.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ScopeInitParameters struct {
+
+	// The ID of the only AWS resource that you want your control scope to contain. Minimum number of 1 item. Maximum number of 100 items.
+	ComplianceResourceIds []*string `json:"complianceResourceIds,omitempty" tf:"compliance_resource_ids,omitempty"`
+
+	// Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
+	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ScopeObservation struct {
@@ -148,6 +196,10 @@ type ScopeParameters struct {
 type FrameworkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrameworkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FrameworkInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrameworkStatus defines the observed state of Framework.
@@ -168,8 +220,8 @@ type FrameworkStatus struct {
 type Framework struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.control)",message="control is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.control) || has(self.initProvider.control)",message="control is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FrameworkSpec   `json:"spec"`
 	Status FrameworkStatus `json:"status,omitempty"`
 }

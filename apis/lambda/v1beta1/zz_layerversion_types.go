@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LayerVersionInitParameters struct {
+
+	// List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified.
+	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
+
+	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
+
+	// Description of what your Lambda Layer does.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// prefixed options cannot be used.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// Unique name for your Lambda Layer
+	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
+
+	// License info for your Lambda Layer. See License Info.
+	LicenseInfo *string `json:"licenseInfo,omitempty" tf:"license_info,omitempty"`
+
+	// S3 bucket location containing the function's deployment package. Conflicts with filename. This bucket must reside in the same AWS region where you are creating the Lambda function.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// S3 key of an object containing the function's deployment package. Conflicts with filename.
+	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+
+	// Object version containing the function's deployment package. Conflicts with filename.
+	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
+
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is ${filebase64sha256("file.11.12 or later) or ${base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda layer source archive.
+	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
+}
+
 type LayerVersionObservation struct {
 
 	// ARN of the Lambda Layer with version.
@@ -128,6 +164,10 @@ type LayerVersionParameters struct {
 type LayerVersionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LayerVersionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LayerVersionInitParameters `json:"initProvider,omitempty"`
 }
 
 // LayerVersionStatus defines the observed state of LayerVersion.
@@ -148,7 +188,7 @@ type LayerVersionStatus struct {
 type LayerVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName)",message="layerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName) || has(self.initProvider.layerName)",message="layerName is a required parameter"
 	Spec   LayerVersionSpec   `json:"spec"`
 	Status LayerVersionStatus `json:"status,omitempty"`
 }

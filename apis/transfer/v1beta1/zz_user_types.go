@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HomeDirectoryMappingsInitParameters struct {
+
+	// Represents an entry and a target.
+	Entry *string `json:"entry,omitempty" tf:"entry,omitempty"`
+
+	// Represents the map target.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
 type HomeDirectoryMappingsObservation struct {
 
 	// Represents an entry and a target.
@@ -25,12 +34,24 @@ type HomeDirectoryMappingsObservation struct {
 type HomeDirectoryMappingsParameters struct {
 
 	// Represents an entry and a target.
-	// +kubebuilder:validation:Required
-	Entry *string `json:"entry" tf:"entry,omitempty"`
+	// +kubebuilder:validation:Optional
+	Entry *string `json:"entry,omitempty" tf:"entry,omitempty"`
 
 	// Represents the map target.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type PosixProfileInitParameters struct {
+
+	// The POSIX group ID used for all EFS operations by this user.
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
+
+	// The secondary POSIX group IDs used for all EFS operations by this user.
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+
+	// The POSIX user ID used for all EFS operations by this user.
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type PosixProfileObservation struct {
@@ -48,16 +69,37 @@ type PosixProfileObservation struct {
 type PosixProfileParameters struct {
 
 	// The POSIX group ID used for all EFS operations by this user.
-	// +kubebuilder:validation:Required
-	GID *float64 `json:"gid" tf:"gid,omitempty"`
+	// +kubebuilder:validation:Optional
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
-	// +kubebuilder:validation:Required
-	UID *float64 `json:"uid" tf:"uid,omitempty"`
+	// +kubebuilder:validation:Optional
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
+}
+
+type UserInitParameters struct {
+
+	// The landing directory (folder) for a user when they log in to the server using their SFTP client.  It should begin with a /.  The first item in the path is the name of the home bucket (accessible as ${Transfer:HomeBucket} in the policy) and the rest is the home directory (accessible as ${Transfer:HomeDirectory} in the policy). For example, /example-bucket-1234/username would set the home bucket to example-bucket-1234 and the home directory to username.
+	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
+
+	// Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible. See Home Directory Mappings below.
+	HomeDirectoryMappings []HomeDirectoryMappingsInitParameters `json:"homeDirectoryMappings,omitempty" tf:"home_directory_mappings,omitempty"`
+
+	// The type of landing directory (folder) you mapped for your users' home directory. Valid values are PATH and LOGICAL.
+	HomeDirectoryType *string `json:"homeDirectoryType,omitempty" tf:"home_directory_type,omitempty"`
+
+	// An IAM JSON policy document that scopes down user access to portions of their Amazon S3 bucket. IAM variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  These are evaluated on-the-fly when navigating the bucket.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and any secondary groups IDs (SecondaryGids), that controls your users' access to your Amazon EFS file systems. See Posix Profile below.
+	PosixProfile []PosixProfileInitParameters `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type UserObservation struct {
@@ -158,6 +200,10 @@ type UserParameters struct {
 type UserSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserStatus defines the observed state of User.

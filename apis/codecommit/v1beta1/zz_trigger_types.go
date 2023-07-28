@@ -13,6 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TriggerInitParameters struct {
+	Trigger []TriggerTriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
+}
+
 type TriggerObservation struct {
 
 	// System-generated unique identifier.
@@ -48,6 +52,21 @@ type TriggerParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Trigger []TriggerTriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
+}
+
+type TriggerTriggerInitParameters struct {
+
+	// The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+	Branches []*string `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
+	CustomData *string `json:"customData,omitempty" tf:"custom_data,omitempty"`
+
+	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The name of the trigger.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TriggerTriggerObservation struct {
@@ -93,18 +112,22 @@ type TriggerTriggerParameters struct {
 	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// The name of the trigger.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // TriggerSpec defines the desired state of Trigger
 type TriggerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TriggerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TriggerInitParameters `json:"initProvider,omitempty"`
 }
 
 // TriggerStatus defines the observed state of Trigger.
@@ -125,7 +148,7 @@ type TriggerStatus struct {
 type Trigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger)",message="trigger is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger) || has(self.initProvider.trigger)",message="trigger is a required parameter"
 	Spec   TriggerSpec   `json:"spec"`
 	Status TriggerStatus `json:"status,omitempty"`
 }

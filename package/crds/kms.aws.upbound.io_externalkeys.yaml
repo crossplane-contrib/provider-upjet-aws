@@ -134,6 +134,52 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  bypassPolicyLockoutSafetyCheck:
+                    description: Specifies whether to disable the policy lockout check
+                      performed when creating or updating the key's policy. Setting
+                      this value to true increases the risk that the key becomes unmanageable.
+                      For more information, refer to the scenario in the Default Key
+                      Policy section in the AWS Key Management Service Developer Guide.
+                      Defaults to false.
+                    type: boolean
+                  deletionWindowInDays:
+                    description: Duration in days after which the key is deleted after
+                      destruction of the resource. Must be between 7 and 30 days.
+                      Defaults to 30.
+                    type: number
+                  description:
+                    description: Description of the key.
+                    type: string
+                  enabled:
+                    description: Specifies whether the key is enabled. Keys pending
+                      import can only be false. Imported keys default to true unless
+                      expired.
+                    type: boolean
+                  multiRegion:
+                    description: Indicates whether the KMS key is a multi-Region (true)
+                      or regional (false) key. Defaults to false.
+                    type: boolean
+                  policy:
+                    description: A key policy JSON document. If you do not provide
+                      a key policy, AWS KMS attaches a default key policy to the CMK.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  validTo:
+                    description: 'Time at which the imported key material expires.
+                      When the key material expires, AWS KMS deletes the key material
+                      and the CMK becomes unusable. If not specified, key material
+                      does not expire. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -25,6 +25,3 @@ spec:
       - items:
         - example
     region: us-west-1
-
----
-

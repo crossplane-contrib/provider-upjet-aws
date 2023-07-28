@@ -163,14 +163,32 @@ spec:
                         value:
                           description: Tag value.
                           type: string
-                      required:
-                      - key
-                      - propagateAtLaunch
-                      - value
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  tag:
+                    description: Tag to create. The tag block is documented below.
+                    items:
+                      properties:
+                        key:
+                          description: Tag name.
+                          type: string
+                        propagateAtLaunch:
+                          description: Whether to propagate the tags to instances
+                            launched by the ASG.
+                          type: boolean
+                        value:
+                          description: Tag value.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -372,7 +390,8 @@ spec:
             x-kubernetes-validations:
             - message: tag is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tag)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tag)
+                || has(self.initProvider.tag)'
           status:
             description: GroupTagStatus defines the observed state of GroupTag.
             properties:

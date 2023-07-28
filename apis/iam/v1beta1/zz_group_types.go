@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GroupInitParameters struct {
+
+	// Path in which to create the group.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
 type GroupObservation struct {
 
 	// The ARN assigned by AWS for this group.
@@ -39,6 +45,10 @@ type GroupParameters struct {
 type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // GroupStatus defines the observed state of Group.

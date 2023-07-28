@@ -13,6 +13,3 @@ spec:
     region: us-west-1
     tags:
       Environment: Production
-
----
-

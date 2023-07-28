@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessLogSettingsInitParameters struct {
+
+	// ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Single line format of the access logs of data. Refer to log settings for HTTP or Websocket.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+}
+
 type AccessLogSettingsObservation struct {
 
 	// ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
@@ -25,12 +34,32 @@ type AccessLogSettingsObservation struct {
 type AccessLogSettingsParameters struct {
 
 	// ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
-	// +kubebuilder:validation:Required
-	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// Single line format of the access logs of data. Refer to log settings for HTTP or Websocket.
-	// +kubebuilder:validation:Required
-	Format *string `json:"format" tf:"format,omitempty"`
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+}
+
+type DefaultRouteSettingsInitParameters struct {
+
+	// Whether data trace logging is enabled for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Defaults to false. Supported only for WebSocket APIs.
+	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
+
+	// Whether detailed metrics are enabled for the default route. Defaults to false.
+	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
+
+	// Logging level for the default route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
+
+	// Throttling burst limit for the default route.
+	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+
+	// Throttling rate limit for the default route.
+	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 }
 
 type DefaultRouteSettingsObservation struct {
@@ -78,6 +107,29 @@ type DefaultRouteSettingsParameters struct {
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
 }
 
+type RouteSettingsInitParameters struct {
+
+	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Defaults to false. Supported only for WebSocket APIs.
+	DataTraceEnabled *bool `json:"dataTraceEnabled,omitempty" tf:"data_trace_enabled,omitempty"`
+
+	// Whether detailed metrics are enabled for the route. Defaults to false.
+	DetailedMetricsEnabled *bool `json:"detailedMetricsEnabled,omitempty" tf:"detailed_metrics_enabled,omitempty"`
+
+	// Logging level for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
+	// Valid values: ERROR, INFO, OFF. Defaults to OFF. Supported only for WebSocket APIs.
+	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
+
+	// Route key.
+	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
+
+	// Throttling burst limit for the route.
+	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+
+	// Throttling rate limit for the route.
+	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
+}
+
 type RouteSettingsObservation struct {
 
 	// Whether data trace logging is enabled for the route. Affects the log entries pushed to Amazon CloudWatch Logs.
@@ -118,8 +170,8 @@ type RouteSettingsParameters struct {
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Route key.
-	// +kubebuilder:validation:Required
-	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
 	// Throttling burst limit for the route.
 	// +kubebuilder:validation:Optional
@@ -128,6 +180,35 @@ type RouteSettingsParameters struct {
 	// Throttling rate limit for the route.
 	// +kubebuilder:validation:Optional
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
+}
+
+type StageInitParameters struct {
+
+	// Settings for logging access in this stage.
+	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
+	AccessLogSettings []AccessLogSettingsInitParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
+
+	// Whether updates to an API automatically trigger a new deployment. Defaults to false. Applicable for HTTP APIs.
+	AutoDeploy *bool `json:"autoDeploy,omitempty" tf:"auto_deploy,omitempty"`
+
+	// Identifier of a client certificate for the stage. Use the aws_api_gateway_client_certificate resource to configure a client certificate.
+	// Supported only for WebSocket APIs.
+	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
+
+	// Default route settings for the stage.
+	DefaultRouteSettings []DefaultRouteSettingsInitParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
+
+	// Description for the stage. Must be less than or equal to 1024 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Route settings for the stage.
+	RouteSettings []RouteSettingsInitParameters `json:"routeSettings,omitempty" tf:"route_settings,omitempty"`
+
+	// Map that defines the stage variables for the stage.
+	StageVariables map[string]*string `json:"stageVariables,omitempty" tf:"stage_variables,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StageObservation struct {
@@ -255,6 +336,10 @@ type StageParameters struct {
 type StageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider StageInitParameters `json:"initProvider,omitempty"`
 }
 
 // StageStatus defines the observed state of Stage.

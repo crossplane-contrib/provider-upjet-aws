@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainMailFromInitParameters struct {
+
+	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
+	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
+
+	// Subdomain (of above domain) which is to be used as MAIL FROM address
+	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
+}
+
 type DomainMailFromObservation struct {
 
 	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
@@ -61,6 +70,10 @@ type DomainMailFromParameters struct {
 type DomainMailFromSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainMailFromParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DomainMailFromInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainMailFromStatus defines the observed state of DomainMailFrom.
@@ -81,7 +94,7 @@ type DomainMailFromStatus struct {
 type DomainMailFrom struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mailFromDomain)",message="mailFromDomain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mailFromDomain) || has(self.initProvider.mailFromDomain)",message="mailFromDomain is a required parameter"
 	Spec   DomainMailFromSpec   `json:"spec"`
 	Status DomainMailFromStatus `json:"status,omitempty"`
 }

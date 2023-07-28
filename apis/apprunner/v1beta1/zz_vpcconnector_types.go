@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCConnectorInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Name for the VPC connector.
+	VPCConnectorName *string `json:"vpcConnectorName,omitempty" tf:"vpc_connector_name,omitempty"`
+}
+
 type VPCConnectorObservation struct {
 
 	// ARN of VPC connector.
@@ -92,6 +101,10 @@ type VPCConnectorParameters struct {
 type VPCConnectorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCConnectorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCConnectorInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCConnectorStatus defines the observed state of VPCConnector.
@@ -112,7 +125,7 @@ type VPCConnectorStatus struct {
 type VPCConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcConnectorName) || has(self.initProvider.vpcConnectorName)",message="vpcConnectorName is a required parameter"
 	Spec   VPCConnectorSpec   `json:"spec"`
 	Status VPCConnectorStatus `json:"status,omitempty"`
 }

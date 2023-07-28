@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityProfileInitParameters struct {
+
+	// Specifies the description of the Security Profile.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the name of the Security Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of permissions assigned to the security profile.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type SecurityProfileObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Security Profile.
@@ -88,6 +103,10 @@ type SecurityProfileParameters struct {
 type SecurityProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityProfileStatus defines the observed state of SecurityProfile.
@@ -108,7 +127,7 @@ type SecurityProfileStatus struct {
 type SecurityProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SecurityProfileSpec   `json:"spec"`
 	Status SecurityProfileStatus `json:"status,omitempty"`
 }

@@ -183,9 +183,6 @@ spec:
                                         type: string
                                     type: object
                                 type: object
-                            required:
-                            - fieldPatterns
-                            - providerId
                             type: object
                           type: array
                       type: object
@@ -199,6 +196,49 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  comment:
+                    description: An optional comment about the Field Level Encryption
+                      Profile.
+                    type: string
+                  encryptionEntities:
+                    description: The encryption entities config block for field-level
+                      encryption profiles that contains an attribute items which includes
+                      the encryption key and field pattern specifications.
+                    items:
+                      properties:
+                        items:
+                          items:
+                            properties:
+                              fieldPatterns:
+                                description: Object that contains an attribute items
+                                  that contains the list of field patterns in a field-level
+                                  encryption content type profile specify the fields
+                                  that you want to be encrypted.
+                                items:
+                                  properties:
+                                    items:
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              providerId:
+                                description: The provider associated with the public
+                                  key being used for encryption.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the Field Level Encryption Profile.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -400,10 +440,12 @@ spec:
             x-kubernetes-validations:
             - message: encryptionEntities is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.encryptionEntities)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.encryptionEntities)
+                || has(self.initProvider.encryptionEntities)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FieldLevelEncryptionProfileStatus defines the observed state
               of FieldLevelEncryptionProfile.

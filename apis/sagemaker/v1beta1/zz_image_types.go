@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ImageInitParameters struct {
+
+	// The description of the image.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The display name of the image. When the image is added to a domain (must be unique to the domain).
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ImageObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Image.
@@ -75,6 +87,10 @@ type ImageParameters struct {
 type ImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ImageInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageStatus defines the observed state of Image.

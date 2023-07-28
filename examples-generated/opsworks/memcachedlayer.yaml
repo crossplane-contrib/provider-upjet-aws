@@ -11,6 +11,3 @@ spec:
     stackIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
-
----
-

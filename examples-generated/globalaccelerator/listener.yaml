@@ -38,6 +38,3 @@ spec:
     ipAddressType: IPV4
     name: Example
     region: us-west-1
-
----
-

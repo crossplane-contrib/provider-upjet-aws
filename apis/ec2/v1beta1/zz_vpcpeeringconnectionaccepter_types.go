@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCPeeringConnectionAccepterAccepterInitParameters struct {
+
+	// Indicates whether a local ClassicLink connection can communicate
+	// with the peer VPC over the VPC Peering Connection.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Indicates whether a local VPC can resolve public DNS hostnames to
+	// private IP addresses when queried from instances in a peer VPC.
+	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Indicates whether a local VPC can communicate with a ClassicLink
+	// connection in the peer VPC over the VPC Peering Connection.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
+}
+
 type VPCPeeringConnectionAccepterAccepterObservation struct {
 
 	// Indicates whether a local ClassicLink connection can communicate
@@ -44,6 +59,23 @@ type VPCPeeringConnectionAccepterAccepterParameters struct {
 	// connection in the peer VPC over the VPC Peering Connection.
 	// +kubebuilder:validation:Optional
 	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
+}
+
+type VPCPeeringConnectionAccepterInitParameters struct {
+
+	// A configuration block that describes [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the accepter VPC.
+	Accepter []VPCPeeringConnectionAccepterAccepterInitParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
+
+	// Whether or not to accept the peering request. Defaults to false.
+	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
+
+	// A configuration block that describes [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the requester VPC.
+	Requester []VPCPeeringConnectionAccepterRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterObservation struct {
@@ -127,6 +159,21 @@ type VPCPeeringConnectionAccepterParameters struct {
 	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
 
+type VPCPeeringConnectionAccepterRequesterInitParameters struct {
+
+	// Indicates whether a local ClassicLink connection can communicate
+	// with the peer VPC over the VPC Peering Connection.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Indicates whether a local VPC can resolve public DNS hostnames to
+	// private IP addresses when queried from instances in a peer VPC.
+	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Indicates whether a local VPC can communicate with a ClassicLink
+	// connection in the peer VPC over the VPC Peering Connection.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
+}
+
 type VPCPeeringConnectionAccepterRequesterObservation struct {
 
 	// Indicates whether a local ClassicLink connection can communicate
@@ -164,6 +211,10 @@ type VPCPeeringConnectionAccepterRequesterParameters struct {
 type VPCPeeringConnectionAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCPeeringConnectionAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCPeeringConnectionAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCPeeringConnectionAccepterStatus defines the observed state of VPCPeeringConnectionAccepter.

@@ -165,9 +165,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - key
-                      - type
                       type: object
                     type: array
                   eventBusName:
@@ -264,6 +261,40 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  action:
+                    description: The action that you are enabling the other account
+                      to perform. Defaults to events:PutEvents.
+                    type: string
+                  condition:
+                    description: Configuration block to limit the event bus permissions
+                      you are granting to only accounts that fulfill the condition.
+                      Specified below.
+                    items:
+                      properties:
+                        key:
+                          description: 'Key for the condition. Valid values: aws:PrincipalOrgID.'
+                          type: string
+                        type:
+                          description: 'Type of condition. Value values: StringEquals.'
+                          type: string
+                      type: object
+                    type: array
+                  principal:
+                    description: The 12-digit AWS account ID that you are permitting
+                      to put events to your default event bus. Specify * to permit
+                      any account to put events to your default event bus, optionally
+                      limited by condition.
+                    type: string
+                  statementId:
+                    description: An identifier string for the external account that
+                      you are granting permissions to.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -465,10 +496,12 @@ spec:
             x-kubernetes-validations:
             - message: principal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.principal)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.principal)
+                || has(self.initProvider.principal)'
             - message: statementId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.statementId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.statementId)
+                || has(self.initProvider.statementId)'
           status:
             description: PermissionStatus defines the observed state of Permission.
             properties:

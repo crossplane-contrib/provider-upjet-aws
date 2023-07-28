@@ -16,6 +16,3 @@ spec:
     publish: true
     region: us-west-1
     runtime: cloudfront-js-1.0
-
----
-

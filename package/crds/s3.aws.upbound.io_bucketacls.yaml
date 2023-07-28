@@ -96,16 +96,12 @@ spec:
                                     uri:
                                       description: URI of the grantee group.
                                       type: string
-                                  required:
-                                  - type
                                   type: object
                                 type: array
                               permission:
                                 description: Logging permissions assigned to the grantee
                                   for the bucket.
                                 type: string
-                            required:
-                            - permission
                             type: object
                           type: array
                         owner:
@@ -119,12 +115,8 @@ spec:
                               id:
                                 description: ID of the owner.
                                 type: string
-                            required:
-                            - id
                             type: object
                           type: array
-                      required:
-                      - owner
                       type: object
                     type: array
                   acl:
@@ -215,6 +207,70 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessControlPolicy:
+                    description: Configuration block that sets the ACL permissions
+                      for an object per grantee. See below.
+                    items:
+                      properties:
+                        grant:
+                          description: Set of grant configuration blocks. See below.
+                          items:
+                            properties:
+                              grantee:
+                                description: Configuration block for the person being
+                                  granted permissions. See below.
+                                items:
+                                  properties:
+                                    emailAddress:
+                                      description: Email address of the grantee. See
+                                        Regions and Endpoints for supported AWS regions
+                                        where this argument can be specified.
+                                      type: string
+                                    id:
+                                      description: ID of the owner.
+                                      type: string
+                                    type:
+                                      description: 'Type of grantee. Valid values:
+                                        CanonicalUser, AmazonCustomerByEmail, Group.'
+                                      type: string
+                                    uri:
+                                      description: URI of the grantee group.
+                                      type: string
+                                  type: object
+                                type: array
+                              permission:
+                                description: Logging permissions assigned to the grantee
+                                  for the bucket.
+                                type: string
+                            type: object
+                          type: array
+                        owner:
+                          description: Configuration block of the bucket owner's display
+                            name and ID. See below.
+                          items:
+                            properties:
+                              displayName:
+                                description: Display name of the owner.
+                                type: string
+                              id:
+                                description: ID of the owner.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  acl:
+                    description: Canned ACL to apply to the bucket.
+                    type: string
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
                 type: object
               managementPolicies:
                 default:

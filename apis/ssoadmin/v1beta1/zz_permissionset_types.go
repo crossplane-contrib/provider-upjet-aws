@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PermissionSetInitParameters struct {
+
+	// The description of the Permission Set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed.
+	InstanceArn *string `json:"instanceArn,omitempty" tf:"instance_arn,omitempty"`
+
+	// The name of the Permission Set.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The relay state URL used to redirect users within the application during the federation authentication process.
+	RelayState *string `json:"relayState,omitempty" tf:"relay_state,omitempty"`
+
+	// The length of time that the application user sessions are valid in the ISO-8601 standard. Default: PT1H.
+	SessionDuration *string `json:"sessionDuration,omitempty" tf:"session_duration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PermissionSetObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
@@ -82,6 +103,10 @@ type PermissionSetParameters struct {
 type PermissionSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PermissionSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionSetStatus defines the observed state of PermissionSet.
@@ -102,8 +127,8 @@ type PermissionSetStatus struct {
 type PermissionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceArn)",message="instanceArn is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceArn) || has(self.initProvider.instanceArn)",message="instanceArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   PermissionSetSpec   `json:"spec"`
 	Status PermissionSetStatus `json:"status,omitempty"`
 }

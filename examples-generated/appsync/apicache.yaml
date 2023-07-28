@@ -31,6 +31,3 @@ spec:
     authenticationType: API_KEY
     name: example
     region: us-west-1
-
----
-

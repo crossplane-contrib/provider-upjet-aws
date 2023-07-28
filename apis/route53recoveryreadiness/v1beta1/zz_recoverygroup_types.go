@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RecoveryGroupInitParameters struct {
+
+	// List of cell arns to add as nested fault domains within this recovery group
+	Cells []*string `json:"cells,omitempty" tf:"cells,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type RecoveryGroupObservation struct {
 
 	// ARN of the recovery group
@@ -50,6 +59,10 @@ type RecoveryGroupParameters struct {
 type RecoveryGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RecoveryGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RecoveryGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // RecoveryGroupStatus defines the observed state of RecoveryGroup.

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TransitGatewayPeeringAttachmentAccepterObservation struct {
 
 	// EC2 Transit Gateway Attachment identifier
@@ -69,6 +75,10 @@ type TransitGatewayPeeringAttachmentAccepterParameters struct {
 type TransitGatewayPeeringAttachmentAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayPeeringAttachmentAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayPeeringAttachmentAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayPeeringAttachmentAccepterStatus defines the observed state of TransitGatewayPeeringAttachmentAccepter.

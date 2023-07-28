@@ -112,6 +112,50 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  closeOnDeletion:
+                    description: If true, a deletion event will close the account.
+                      Otherwise, it will only remove from the organization. This is
+                      not supported for GovCloud accounts.
+                    type: boolean
+                  createGovcloud:
+                    description: Whether to also create a GovCloud account. The GovCloud
+                      account is tied to the main (commercial) account this resource
+                      creates. If true, the GovCloud account ID is available in the
+                      govcloud_id attribute.
+                    type: boolean
+                  email:
+                    description: Email address of the owner to assign to the new member
+                      account. This email address must not already be associated with
+                      another AWS account.
+                    type: string
+                  iamUserAccessToBilling:
+                    description: If set to ALLOW, the new account enables IAM users
+                      and roles to access account billing information if they have
+                      the required permissions. If set to DENY, then only the root
+                      user (and no roles) of the new account can access account billing
+                      information. If this is unset, the AWS API will default this
+                      to ALLOW. If the resource is created and this option is changed,
+                      it will try to recreate the account.
+                    type: string
+                  name:
+                    description: Friendly name for the member account.
+                    type: string
+                  parentId:
+                    description: Parent Organizational Unit ID or Root ID for the
+                      account. Defaults to the Organization default Root ID. A configuration
+                      must be present for this argument to perform drift detection.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -312,10 +356,12 @@ spec:
             x-kubernetes-validations:
             - message: email is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
+                || has(self.initProvider.email)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: AccountStatus defines the observed state of Account.
             properties:

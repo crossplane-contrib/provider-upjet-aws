@@ -445,6 +445,75 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  deliverCrossAccountRole:
+                    description: ARN of the IAM role that allows Amazon EC2 to publish
+                      flow logs across accounts.
+                    type: string
+                  destinationOptions:
+                    description: Describes the destination options for a flow log.
+                      More details below.
+                    items:
+                      properties:
+                        fileFormat:
+                          description: 'The format for the flow log. Default value:
+                            plain-text. Valid values: plain-text, parquet.'
+                          type: string
+                        hiveCompatiblePartitions:
+                          description: 'Indicates whether to use Hive-compatible prefixes
+                            for flow logs stored in Amazon S3. Default value: false.'
+                          type: boolean
+                        perHourPartition:
+                          description: 'Indicates whether to partition the flow log
+                            per hour. This reduces the cost and response time for
+                            queries. Default value: false.'
+                          type: boolean
+                      type: object
+                    type: array
+                  eniId:
+                    description: Elastic Network Interface ID to attach to
+                    type: string
+                  logDestinationType:
+                    description: 'The type of the logging destination. Valid values:
+                      cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
+                    type: string
+                  logFormat:
+                    description: The fields to include in the flow log record, in
+                      the order in which they should appear.
+                    type: string
+                  logGroupName:
+                    description: 'Deprecated: Use log_destination instead. The name
+                      of the CloudWatch log group. Either log_group_name or log_destination
+                      must be set.'
+                    type: string
+                  maxAggregationInterval:
+                    description: 'The maximum interval of time during which a flow
+                      of packets is captured and aggregated into a flow log record.
+                      Valid Values: 60 seconds (1 minute) or 600 seconds (10 minutes).
+                      Default: 600. When transit_gateway_id or transit_gateway_attachment_id
+                      is specified, max_aggregation_interval must be 60 seconds (1
+                      minute).'
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  trafficType:
+                    description: 'The type of traffic to capture. Valid values: ACCEPT,REJECT,
+                      ALL.'
+                    type: string
+                  transitGatewayAttachmentId:
+                    description: Transit Gateway Attachment ID to attach to
+                    type: string
+                  transitGatewayId:
+                    description: Transit Gateway ID to attach to
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

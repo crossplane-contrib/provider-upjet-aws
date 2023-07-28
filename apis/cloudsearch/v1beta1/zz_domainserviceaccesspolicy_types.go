@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainServiceAccessPolicyInitParameters struct {
+
+	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+}
+
 type DomainServiceAccessPolicyObservation struct {
 
 	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
@@ -54,6 +60,10 @@ type DomainServiceAccessPolicyParameters struct {
 type DomainServiceAccessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainServiceAccessPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DomainServiceAccessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainServiceAccessPolicyStatus defines the observed state of DomainServiceAccessPolicy.
@@ -74,7 +84,7 @@ type DomainServiceAccessPolicyStatus struct {
 type DomainServiceAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy)",message="accessPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy) || has(self.initProvider.accessPolicy)",message="accessPolicy is a required parameter"
 	Spec   DomainServiceAccessPolicySpec   `json:"spec"`
 	Status DomainServiceAccessPolicyStatus `json:"status,omitempty"`
 }

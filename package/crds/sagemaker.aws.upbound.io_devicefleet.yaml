@@ -90,8 +90,6 @@ spec:
                         s3OutputLocation:
                           description: The Amazon Simple Storage (S3) bucker URI.
                           type: string
-                      required:
-                      - s3OutputLocation
                       type: object
                     type: array
                   region:
@@ -182,6 +180,42 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of the fleet.
+                    type: string
+                  enableIotRoleAlias:
+                    description: 'Whether to create an AWS IoT Role Alias during device
+                      fleet creation. The name of the role alias generated will match
+                      this pattern: "SageMakerEdge-{DeviceFleetName}".'
+                    type: boolean
+                  outputConfig:
+                    description: Specifies details about the repository. see Output
+                      Config details below.
+                    items:
+                      properties:
+                        kmsKeyId:
+                          description: The AWS Key Management Service (AWS KMS) key
+                            that Amazon SageMaker uses to encrypt data on the storage
+                            volume after compilation job. If you don't provide a KMS
+                            key ID, Amazon SageMaker uses the default KMS key for
+                            Amazon S3 for your role's account.
+                          type: string
+                        s3OutputLocation:
+                          description: The Amazon Simple Storage (S3) bucker URI.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -383,7 +417,8 @@ spec:
             x-kubernetes-validations:
             - message: outputConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.outputConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.outputConfig)
+                || has(self.initProvider.outputConfig)'
           status:
             description: DeviceFleetStatus defines the observed state of DeviceFleet.
             properties:

@@ -258,6 +258,119 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  egress:
+                    description: Configuration block. Detailed below.
+                    items:
+                      properties:
+                        cidrBlocks:
+                          description: List of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: Description of this rule.
+                          type: string
+                        fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp)
+                          type: number
+                        ipv6CidrBlocks:
+                          description: List of IPv6 CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          description: List of prefix list IDs (for allowing access
+                            to VPC endpoints)
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: Protocol. If you select a protocol of "-1"
+                            (semantically equivalent to all, which is not a valid
+                            value here), you must specify a from_port and to_port
+                            equal to 0. If not icmp, tcp, udp, or -1 use the protocol
+                            number.
+                          type: string
+                        securityGroups:
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
+                          items:
+                            type: string
+                          type: array
+                        self:
+                          description: Whether the security group itself will be added
+                            as a source to this egress rule.
+                          type: boolean
+                        toPort:
+                          description: End range port (or ICMP code if protocol is
+                            icmp).
+                          type: number
+                      type: object
+                    type: array
+                  ingress:
+                    description: Configuration block. Detailed below.
+                    items:
+                      properties:
+                        cidrBlocks:
+                          description: List of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        description:
+                          description: Description of this rule.
+                          type: string
+                        fromPort:
+                          description: Start port (or ICMP type number if protocol
+                            is icmp)
+                          type: number
+                        ipv6CidrBlocks:
+                          description: List of IPv6 CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        prefixListIds:
+                          description: List of prefix list IDs (for allowing access
+                            to VPC endpoints)
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: Protocol. If you select a protocol of "-1"
+                            (semantically equivalent to all, which is not a valid
+                            value here), you must specify a from_port and to_port
+                            equal to 0. If not icmp, tcp, udp, or -1 use the protocol
+                            number.
+                          type: string
+                        securityGroups:
+                          description: List of security groups. A group name can be
+                            used relative to the default VPC. Otherwise, group ID.
+                          items:
+                            type: string
+                          type: array
+                        self:
+                          description: Whether the security group itself will be added
+                            as a source to this egress rule.
+                          type: boolean
+                        toPort:
+                          description: End range port (or ICMP code if protocol is
+                            icmp).
+                          type: number
+                      type: object
+                    type: array
+                  revokeRulesOnDelete:
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

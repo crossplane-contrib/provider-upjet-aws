@@ -29,6 +29,3 @@ spec:
     operatingRegions:
     - regionName: ${data.aws_region.current.name}
     region: us-west-1
-
----
-

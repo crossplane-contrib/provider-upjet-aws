@@ -13,6 +13,34 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ContainerServiceInitParameters struct {
+
+	// A Boolean value indicating whether the container service is disabled. Defaults to false.
+	IsDisabled *bool `json:"isDisabled,omitempty" tf:"is_disabled,omitempty"`
+
+	// The power specification for the container service. The power specifies the amount of memory,
+	// the number of vCPUs, and the monthly price of each node of the container service.
+	// Possible values: nano, micro, small, medium, large, xlarge.
+	Power *string `json:"power,omitempty" tf:"power,omitempty"`
+
+	// An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See Private Registry Access below for more details.
+	PrivateRegistryAccess []PrivateRegistryAccessInitParameters `json:"privateRegistryAccess,omitempty" tf:"private_registry_access,omitempty"`
+
+	// The public domain names to use with the container service, such as example.com
+	// and www.example.com. You can specify up to four public domain names for a container service. The domain names that you
+	// specify are used when you create a deployment with a container configured as the public endpoint of your container
+	// service. If you don't specify public domain names, then you can use the default domain of the container service.
+	// Defined below.
+	PublicDomainNames []PublicDomainNamesInitParameters `json:"publicDomainNames,omitempty" tf:"public_domain_names,omitempty"`
+
+	// The scale specification for the container service. The scale specifies the allocated compute
+	// nodes of the container service.
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ContainerServiceObservation struct {
 
 	// The Amazon Resource Name (ARN) of the container service.
@@ -117,6 +145,12 @@ type ContainerServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type EcrImagePullerRoleInitParameters struct {
+
+	// A Boolean value that indicates whether to activate the role. The default is false.
+	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
+}
+
 type EcrImagePullerRoleObservation struct {
 
 	// A Boolean value that indicates whether to activate the role. The default is false.
@@ -135,6 +169,12 @@ type EcrImagePullerRoleParameters struct {
 	IsActive *bool `json:"isActive,omitempty" tf:"is_active,omitempty"`
 }
 
+type PrivateRegistryAccessInitParameters struct {
+
+	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
+	EcrImagePullerRole []EcrImagePullerRoleInitParameters `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
+}
+
 type PrivateRegistryAccessObservation struct {
 
 	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
@@ -146,6 +186,15 @@ type PrivateRegistryAccessParameters struct {
 	// Describes a request to configure an Amazon Lightsail container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. See ECR Image Puller Role below for more details.
 	// +kubebuilder:validation:Optional
 	EcrImagePullerRole []EcrImagePullerRoleParameters `json:"ecrImagePullerRole,omitempty" tf:"ecr_image_puller_role,omitempty"`
+}
+
+type PublicDomainNamesCertificateInitParameters struct {
+
+	// The name for the container service. Names must be of length 1 to 63, and be
+	// unique within each AWS Region in your Lightsail account.
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+
+	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesCertificateObservation struct {
@@ -161,11 +210,15 @@ type PublicDomainNamesCertificateParameters struct {
 
 	// The name for the container service. Names must be of length 1 to 63, and be
 	// unique within each AWS Region in your Lightsail account.
-	// +kubebuilder:validation:Required
-	CertificateName *string `json:"certificateName" tf:"certificate_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DomainNames []*string `json:"domainNames" tf:"domain_names,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
+}
+
+type PublicDomainNamesInitParameters struct {
+	Certificate []PublicDomainNamesCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 type PublicDomainNamesObservation struct {
@@ -174,14 +227,18 @@ type PublicDomainNamesObservation struct {
 
 type PublicDomainNamesParameters struct {
 
-	// +kubebuilder:validation:Required
-	Certificate []PublicDomainNamesCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
+	// +kubebuilder:validation:Optional
+	Certificate []PublicDomainNamesCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 // ContainerServiceSpec defines the desired state of ContainerService
 type ContainerServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContainerServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ContainerServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ContainerServiceStatus defines the observed state of ContainerService.
@@ -202,8 +259,8 @@ type ContainerServiceStatus struct {
 type ContainerService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.power)",message="power is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale)",message="scale is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.power) || has(self.initProvider.power)",message="power is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale) || has(self.initProvider.scale)",message="scale is a required parameter"
 	Spec   ContainerServiceSpec   `json:"spec"`
 	Status ContainerServiceStatus `json:"status,omitempty"`
 }

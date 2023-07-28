@@ -23,6 +23,3 @@ spec:
       originOverride: true
     name: example-policy
     region: us-west-1
-
----
-

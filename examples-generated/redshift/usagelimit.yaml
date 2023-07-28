@@ -15,6 +15,3 @@ spec:
     featureType: concurrency-scaling
     limitType: time
     region: us-west-1
-
----
-

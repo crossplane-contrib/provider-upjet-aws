@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationRecorderInitParameters struct {
+
+	// Recording group - see below.
+	RecordingGroup []RecordingGroupInitParameters `json:"recordingGroup,omitempty" tf:"recording_group,omitempty"`
+}
+
 type ConfigurationRecorderObservation struct {
 
 	// Name of the recorder
@@ -51,6 +57,18 @@ type ConfigurationRecorderParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
+type RecordingGroupInitParameters struct {
+
+	// Specifies whether AWS Config records configuration changes for every supported type of regional resource (which includes any new type that will become supported in the future). Conflicts with resource_types. Defaults to true.
+	AllSupported *bool `json:"allSupported,omitempty" tf:"all_supported,omitempty"`
+
+	// Specifies whether AWS Config includes all supported types of global resources with the resources that it records. Requires all_supported = true. Conflicts with resource_types.
+	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
+
+	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+}
+
 type RecordingGroupObservation struct {
 
 	// Specifies whether AWS Config records configuration changes for every supported type of regional resource (which includes any new type that will become supported in the future). Conflicts with resource_types. Defaults to true.
@@ -82,6 +100,10 @@ type RecordingGroupParameters struct {
 type ConfigurationRecorderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationRecorderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ConfigurationRecorderInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationRecorderStatus defines the observed state of ConfigurationRecorder.

@@ -11,6 +11,3 @@ spec:
     deletionWindowInDays: 10
     description: KMS key 1
     region: us-west-1
-
----
-

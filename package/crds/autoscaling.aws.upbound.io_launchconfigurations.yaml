@@ -110,8 +110,6 @@ spec:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
                           type: string
-                      required:
-                      - deviceName
                       type: object
                     type: array
                   ebsOptimized:
@@ -137,8 +135,6 @@ spec:
                         virtualName:
                           description: The Instance Store Device Name.
                           type: string
-                      required:
-                      - deviceName
                       type: object
                     type: array
                   iamInstanceProfile:
@@ -243,6 +239,177 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  associatePublicIpAddress:
+                    description: Associate a public ip address with an instance in
+                      a VPC.
+                    type: boolean
+                  ebsBlockDevice:
+                    description: Additional EBS block devices to attach to the instance.
+                      See Block Devices below for details.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: 'Whether the volume should be destroyed on
+                            instance termination (Default: true).'
+                          type: boolean
+                        deviceName:
+                          description: The name of the device to mount.
+                          type: string
+                        encrypted:
+                          description: Whether the volume should be encrypted or not.
+                            Defaults to false.
+                          type: boolean
+                        iops:
+                          description: The amount of provisioned IOPS. This must be
+                            set with a volume_type of "io1".
+                          type: number
+                        noDevice:
+                          description: Whether the device in the block device mapping
+                            of the AMI is suppressed.
+                          type: boolean
+                        snapshotId:
+                          description: The Snapshot ID to mount.
+                          type: string
+                        throughput:
+                          description: The throughput (MiBps) to provision for a gp3
+                            volume.
+                          type: number
+                        volumeSize:
+                          description: The size of the volume in gigabytes.
+                          type: number
+                        volumeType:
+                          description: The type of volume. Can be standard, gp2, gp3,
+                            st1, sc1 or io1.
+                          type: string
+                      type: object
+                    type: array
+                  ebsOptimized:
+                    description: If true, the launched EC2 instance will be EBS-optimized.
+                    type: boolean
+                  enableMonitoring:
+                    description: Enables/disables detailed monitoring. This is enabled
+                      by default.
+                    type: boolean
+                  ephemeralBlockDevice:
+                    description: Customize Ephemeral (also known as "Instance Store")
+                      volumes on the instance. See Block Devices below for details.
+                    items:
+                      properties:
+                        deviceName:
+                          description: The name of the block device to mount on the
+                            instance.
+                          type: string
+                        noDevice:
+                          description: Whether the device in the block device mapping
+                            of the AMI is suppressed.
+                          type: boolean
+                        virtualName:
+                          description: The Instance Store Device Name.
+                          type: string
+                      type: object
+                    type: array
+                  iamInstanceProfile:
+                    description: The name attribute of the IAM instance profile to
+                      associate with launched instances.
+                    type: string
+                  imageId:
+                    description: The EC2 image ID to launch.
+                    type: string
+                  instanceType:
+                    description: The size of instance to launch.
+                    type: string
+                  keyName:
+                    description: The key name that should be used for the instance.
+                    type: string
+                  metadataOptions:
+                    description: The metadata options for the instance.
+                    items:
+                      properties:
+                        httpEndpoint:
+                          description: 'The state of the metadata service: enabled,
+                            disabled.'
+                          type: string
+                        httpPutResponseHopLimit:
+                          description: The desired HTTP PUT response hop limit for
+                            instance metadata requests.
+                          type: number
+                        httpTokens:
+                          description: 'If session tokens are required: optional,
+                            required.'
+                          type: string
+                      type: object
+                    type: array
+                  placementTenancy:
+                    description: The tenancy of the instance. Valid values are default
+                      or dedicated, see AWS's Create Launch Configuration for more
+                      details.
+                    type: string
+                  rootBlockDevice:
+                    description: Customize details about the root block device of
+                      the instance. See Block Devices below for details.
+                    items:
+                      properties:
+                        deleteOnTermination:
+                          description: Whether the volume should be destroyed on instance
+                            termination. Defaults to true.
+                          type: boolean
+                        encrypted:
+                          description: Whether the volume should be encrypted or not.
+                            Defaults to false.
+                          type: boolean
+                        iops:
+                          description: The amount of provisioned IOPS. This must be
+                            set with a volume_type of io1.
+                          type: number
+                        throughput:
+                          description: The throughput (MiBps) to provision for a gp3
+                            volume.
+                          type: number
+                        volumeSize:
+                          description: The size of the volume in gigabytes.
+                          type: number
+                        volumeType:
+                          description: The type of volume. Can be standard, gp2, gp3,
+                            st1, sc1 or io1.
+                          type: string
+                      type: object
+                    type: array
+                  securityGroups:
+                    description: A list of associated security group IDS.
+                    items:
+                      type: string
+                    type: array
+                  spotPrice:
+                    description: The maximum price to use for reserving spot instances.
+                    type: string
+                  userData:
+                    description: The user data to provide when launching the instance.
+                      Do not pass gzip-compressed data via this argument; see user_data_base64
+                      instead.
+                    type: string
+                  userDataBase64:
+                    description: Can be used instead of user_data to pass base64-encoded
+                      binary data directly. Use this instead of user_data whenever
+                      the value is not a valid UTF-8 string. For example, gzip-encoded
+                      user data must be base64-encoded and passed via this argument
+                      to avoid corruption.
+                    type: string
+                  vpcClassicLinkId:
+                    description: The ID of a ClassicLink-enabled VPC. Only applies
+                      to EC2-Classic instances. (eg. vpc-2730681a)
+                    type: string
+                  vpcClassicLinkSecurityGroups:
+                    description: The IDs of one or more security groups for the specified
+                      ClassicLink-enabled VPC (eg. sg-46ae3d11).
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -444,10 +611,12 @@ spec:
             x-kubernetes-validations:
             - message: imageId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.imageId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.imageId)
+                || has(self.initProvider.imageId)'
             - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
+                || has(self.initProvider.instanceType)'
           status:
             description: LaunchConfigurationStatus defines the observed state of LaunchConfiguration.
             properties:

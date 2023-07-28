@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdvancedEventSelectorFieldSelectorInitParameters struct {
+
+	// A list of values that includes events that match the last few characters of the event record field specified as the value of field.
+	EndsWith []*string `json:"endsWith,omitempty" tf:"ends_with,omitempty"`
+
+	// A list of values that includes events that match the exact value of the event record field specified as the value of field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.
+	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
+
+	// Specifies a field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// A list of values that excludes events that match the last few characters of the event record field specified as the value of field.
+	NotEndsWith []*string `json:"notEndsWith,omitempty" tf:"not_ends_with,omitempty"`
+
+	// A list of values that excludes events that match the exact value of the event record field specified as the value of field.
+	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
+
+	// A list of values that excludes events that match the first few characters of the event record field specified as the value of field.
+	NotStartsWith []*string `json:"notStartsWith,omitempty" tf:"not_starts_with,omitempty"`
+
+	// A list of values that includes events that match the first few characters of the event record field specified as the value of field.
+	StartsWith []*string `json:"startsWith,omitempty" tf:"starts_with,omitempty"`
+}
+
 type AdvancedEventSelectorFieldSelectorObservation struct {
 
 	// A list of values that includes events that match the last few characters of the event record field specified as the value of field.
@@ -68,6 +92,15 @@ type AdvancedEventSelectorFieldSelectorParameters struct {
 	StartsWith []*string `json:"startsWith,omitempty" tf:"starts_with,omitempty"`
 }
 
+type EventDataStoreAdvancedEventSelectorInitParameters struct {
+
+	// Specifies the selector statements in an advanced event selector. Fields documented below.
+	FieldSelector []AdvancedEventSelectorFieldSelectorInitParameters `json:"fieldSelector,omitempty" tf:"field_selector,omitempty"`
+
+	// The name of the event data store.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type EventDataStoreAdvancedEventSelectorObservation struct {
 
 	// Specifies the selector statements in an advanced event selector. Fields documented below.
@@ -86,6 +119,30 @@ type EventDataStoreAdvancedEventSelectorParameters struct {
 	// The name of the event data store.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type EventDataStoreInitParameters struct {
+
+	// The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
+	AdvancedEventSelector []EventDataStoreAdvancedEventSelectorInitParameters `json:"advancedEventSelector,omitempty" tf:"advanced_event_selector,omitempty"`
+
+	// Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created. Default: true.
+	MultiRegionEnabled *bool `json:"multiRegionEnabled,omitempty" tf:"multi_region_enabled,omitempty"`
+
+	// The name of the event data store.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies whether an event data store collects events logged for an organization in AWS Organizations. Default: false.
+	OrganizationEnabled *bool `json:"organizationEnabled,omitempty" tf:"organization_enabled,omitempty"`
+
+	// The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years. Default: 2555.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies whether termination protection is enabled for the event data store. If termination protection is enabled, you cannot delete the event data store until termination protection is disabled. Default: true.
+	TerminationProtectionEnabled *bool `json:"terminationProtectionEnabled,omitempty" tf:"termination_protection_enabled,omitempty"`
 }
 
 type EventDataStoreObservation struct {
@@ -177,6 +234,10 @@ type EventDataStoreParameters struct {
 type EventDataStoreSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventDataStoreParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventDataStoreInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventDataStoreStatus defines the observed state of EventDataStore.
@@ -197,7 +258,7 @@ type EventDataStoreStatus struct {
 type EventDataStore struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   EventDataStoreSpec   `json:"spec"`
 	Status EventDataStoreStatus `json:"status,omitempty"`
 }

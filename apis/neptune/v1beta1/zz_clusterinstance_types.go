@@ -13,6 +13,47 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterInstanceInitParameters struct {
+
+	// Specifies whether any instance modifications
+	// are applied immediately, or during the next maintenance window. Default isfalse.
+	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
+	// Indicates that minor engine upgrades will be applied automatically to the instance during the maintenance window. Default is true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// The EC2 Availability Zone that the neptune instance is created in.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The neptune engine version.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// The instance class to use.
+	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
+
+	// The port on which the DB accepts connections. Defaults to 8182.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00"
+	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
+
+	// The window to perform maintenance in.
+	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
+
+	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
+	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+
+	// Bool to control if instance is publicly accessible. Default is false.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ClusterInstanceObservation struct {
 
 	// The hostname of the instance. See also endpoint and port.
@@ -191,6 +232,10 @@ type ClusterInstanceParameters struct {
 type ClusterInstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterInstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterInstanceStatus defines the observed state of ClusterInstance.
@@ -211,7 +256,7 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass)",message="instanceClass is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass) || has(self.initProvider.instanceClass)",message="instanceClass is a required parameter"
 	Spec   ClusterInstanceSpec   `json:"spec"`
 	Status ClusterInstanceStatus `json:"status,omitempty"`
 }

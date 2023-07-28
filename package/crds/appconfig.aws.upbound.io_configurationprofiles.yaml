@@ -286,12 +286,56 @@ spec:
                           description: 'Type of validator. Valid values: JSON_SCHEMA
                             and LAMBDA.'
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of the configuration profile. Can be
+                      at most 1024 characters.
+                    type: string
+                  locationUri:
+                    description: 'URI to locate the configuration. You can specify
+                      the AWS AppConfig hosted configuration store, Systems Manager
+                      (SSM) document, an SSM Parameter Store parameter, or an Amazon
+                      S3 object. For the hosted configuration store, specify hosted.
+                      For an SSM document, specify either the document name in the
+                      format ssm-document://<Document_name> or the ARN. For a parameter,
+                      specify either the parameter name in the format ssm-parameter://<Parameter_name>
+                      or the ARN. For an Amazon S3 object, specify the URI in the
+                      following format: s3://<bucket>/<objectKey>.'
+                    type: string
+                  name:
+                    description: Name for the configuration profile. Must be between
+                      1 and 64 characters in length.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: 'Type of configurations contained in the profile.
+                      Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default:
+                      AWS.Freeform.'
+                    type: string
+                  validator:
+                    description: Set of methods for validating the configuration.
+                      Maximum of 2. See Validator below for more details.
+                    items:
+                      properties:
+                        type:
+                          description: 'Type of validator. Valid values: JSON_SCHEMA
+                            and LAMBDA.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -493,10 +537,12 @@ spec:
             x-kubernetes-validations:
             - message: locationUri is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.locationUri)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.locationUri)
+                || has(self.initProvider.locationUri)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ConfigurationProfileStatus defines the observed state of
               ConfigurationProfile.

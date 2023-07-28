@@ -10,6 +10,3 @@ spec:
   forProvider:
     name: my-schedule-group
     region: us-west-1
-
----
-

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ParameterGroupInitParameters struct {
+
+	// The description of the Redshift parameter group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The family of the Redshift parameter group.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	// The name of the Redshift parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of Redshift parameters to apply.
+	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ParameterGroupObservation struct {
 
 	// Amazon Resource Name (ARN) of parameter group
@@ -68,6 +86,15 @@ type ParameterGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ParameterInitParameters struct {
+
+	// The name of the Redshift parameter group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the Redshift parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ParameterObservation struct {
 
 	// The name of the Redshift parameter group.
@@ -80,18 +107,22 @@ type ParameterObservation struct {
 type ParameterParameters struct {
 
 	// The name of the Redshift parameter group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the Redshift parameter.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // ParameterGroupSpec defines the desired state of ParameterGroup
 type ParameterGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ParameterGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ParameterGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ParameterGroupStatus defines the observed state of ParameterGroup.
@@ -112,8 +143,8 @@ type ParameterGroupStatus struct {
 type ParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family)",message="family is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || has(self.initProvider.family)",message="family is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ParameterGroupSpec   `json:"spec"`
 	Status ParameterGroupStatus `json:"status,omitempty"`
 }

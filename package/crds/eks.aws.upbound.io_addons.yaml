@@ -261,6 +261,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addonName:
+                    description: on. The name must match one of the names returned
+                      by describe-addon-versions.
+                    type: string
+                  addonVersion:
+                    description: on. The version must match one of the versions returned
+                      by describe-addon-versions.
+                    type: string
+                  configurationValues:
+                    description: custom configuration values for addons with single
+                      JSON string. This JSON string value must match the JSON schema
+                      derived from describe-addon-configuration.
+                    type: string
+                  preserve:
+                    description: Indicates if you want to preserve the created resources
+                      when deleting the EKS add-on.
+                    type: boolean
+                  resolveConflicts:
+                    description: Define how to resolve parameter value conflicts when
+                      migrating an existing add-on to an Amazon EKS add-on or when
+                      applying version updates to the add-on. Valid values are NONE,
+                      OVERWRITE and PRESERVE. For more details check UpdateAddon API
+                      Docs.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -461,7 +496,8 @@ spec:
             x-kubernetes-validations:
             - message: addonName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addonName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.addonName)
+                || has(self.initProvider.addonName)'
           status:
             description: AddonStatus defines the observed state of Addon.
             properties:

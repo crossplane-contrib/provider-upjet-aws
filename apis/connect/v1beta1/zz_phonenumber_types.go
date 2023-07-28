@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PhoneNumberInitParameters struct {
+
+	// The ISO country code. For a list of Valid values, refer to PhoneNumberCountryCode.
+	CountryCode *string `json:"countryCode,omitempty" tf:"country_code,omitempty"`
+
+	// The description of the phone number.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The prefix of the phone number that is used to filter available phone numbers. If provided, it must contain + as part of the country code. Do not specify this argument when importing the resource.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of phone number. Valid Values: TOLL_FREE | DID.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type PhoneNumberObservation struct {
 
 	// The ARN of the phone number.
@@ -91,6 +109,9 @@ type PhoneNumberParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type StatusInitParameters struct {
+}
+
 type StatusObservation struct {
 
 	// The status message.
@@ -107,6 +128,10 @@ type StatusParameters struct {
 type PhoneNumberSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PhoneNumberParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PhoneNumberInitParameters `json:"initProvider,omitempty"`
 }
 
 // PhoneNumberStatus defines the observed state of PhoneNumber.
@@ -127,8 +152,8 @@ type PhoneNumberStatus struct {
 type PhoneNumber struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.countryCode)",message="countryCode is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.countryCode) || has(self.initProvider.countryCode)",message="countryCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   PhoneNumberSpec   `json:"spec"`
 	Status PhoneNumberStatus `json:"status,omitempty"`
 }

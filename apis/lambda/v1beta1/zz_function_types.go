@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeadLetterConfigInitParameters struct {
+
+	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+}
+
 type DeadLetterConfigObservation struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
@@ -22,8 +28,14 @@ type DeadLetterConfigObservation struct {
 type DeadLetterConfigParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
-	// +kubebuilder:validation:Required
-	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+}
+
+type EnvironmentInitParameters struct {
+
+	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type EnvironmentObservation struct {
@@ -39,6 +51,12 @@ type EnvironmentParameters struct {
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
+type EphemeralStorageInitParameters struct {
+
+	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+}
+
 type EphemeralStorageObservation struct {
 
 	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
@@ -50,6 +68,12 @@ type EphemeralStorageParameters struct {
 	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+}
+
+type FileSystemConfigInitParameters struct {
+
+	// Path where the function can access the file system, starting with /mnt/.
+	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
 }
 
 type FileSystemConfigObservation struct {
@@ -78,8 +102,88 @@ type FileSystemConfigParameters struct {
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Path where the function can access the file system, starting with /mnt/.
-	// +kubebuilder:validation:Required
-	LocalMountPath *string `json:"localMountPath" tf:"local_mount_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
+}
+
+type FunctionInitParameters struct {
+
+	// Instruction set architecture for your Lambda function. Valid values are ["x86_64"] and ["arm64"]. Default is ["x86_64"]. Removing this attribute, function's architecture stay the same.
+	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
+
+	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
+	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
+
+	// Configuration block. Detailed below.
+	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+
+	// Description of what your Lambda Function does.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block. Detailed below.
+	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// The amount of Ephemeral storage(/tmp) to allocate for the Lambda Function in MB. This parameter is used to expand the total amount of Ephemeral storage available, beyond the default amount of 512MB. Detailed below.
+	EphemeralStorage []EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
+
+	// Configuration block. Detailed below.
+	FileSystemConfig []FileSystemConfigInitParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
+
+	// Function entrypoint in your code.
+	Handler *string `json:"handler,omitempty" tf:"handler,omitempty"`
+
+	// Configuration block. Detailed below.
+	ImageConfig []ImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
+
+	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
+	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
+
+	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
+	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
+
+	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
+	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+
+	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
+	PackageType *string `json:"packageType,omitempty" tf:"package_type,omitempty"`
+
+	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
+
+	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
+	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
+
+	// Identifier of the function's runtime. See Runtimes for valid values.
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
+	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+
+	// Object version containing the function's deployment package. Conflicts with filename and image_uri.
+	S3ObjectVersion *string `json:"s3ObjectVersion,omitempty" tf:"s3_object_version,omitempty"`
+
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Snap start settings block. Detailed below.
+	SnapStart []SnapStartInitParameters `json:"snapStart,omitempty" tf:"snap_start,omitempty"`
+
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the package file specified with either filename or s3_key. The usual way to set this is filebase64sha256("file.11.12 and later) or base64sha256(file("file.11.11 and earlier), where "file.zip" is the local filename of the lambda function source archive.
+	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// Configuration block. Detailed below.
+	TracingConfig []TracingConfigInitParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
+
+	// Configuration block. Detailed below.
+	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type FunctionObservation struct {
@@ -372,6 +476,18 @@ type FunctionParameters struct {
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
+type ImageConfigInitParameters struct {
+
+	// Parameters that you want to pass in with entry_point.
+	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
+
+	// Entry point to your application, which is typically the location of the runtime executable.
+	EntryPoint []*string `json:"entryPoint,omitempty" tf:"entry_point,omitempty"`
+
+	// Working directory.
+	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
+}
+
 type ImageConfigObservation struct {
 
 	// Parameters that you want to pass in with entry_point.
@@ -399,6 +515,12 @@ type ImageConfigParameters struct {
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
 }
 
+type SnapStartInitParameters struct {
+
+	// Conditions where snap start is enabled. Valid values are PublishedVersions.
+	ApplyOn *string `json:"applyOn,omitempty" tf:"apply_on,omitempty"`
+}
+
 type SnapStartObservation struct {
 
 	// Conditions where snap start is enabled. Valid values are PublishedVersions.
@@ -411,8 +533,14 @@ type SnapStartObservation struct {
 type SnapStartParameters struct {
 
 	// Conditions where snap start is enabled. Valid values are PublishedVersions.
-	// +kubebuilder:validation:Required
-	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApplyOn *string `json:"applyOn,omitempty" tf:"apply_on,omitempty"`
+}
+
+type TracingConfigInitParameters struct {
+
+	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type TracingConfigObservation struct {
@@ -424,8 +552,11 @@ type TracingConfigObservation struct {
 type TracingConfigParameters struct {
 
 	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type VPCConfigInitParameters struct {
 }
 
 type VPCConfigObservation struct {
@@ -477,6 +608,10 @@ type VPCConfigParameters struct {
 type FunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionStatus defines the observed state of Function.

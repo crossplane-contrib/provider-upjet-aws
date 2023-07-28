@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LedgerInitParameters struct {
+
+	// The deletion protection for the QLDB Ledger instance. By default it is true.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
+	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
+	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LedgerObservation struct {
 
 	// The ARN of the QLDB Ledger
@@ -74,6 +86,10 @@ type LedgerParameters struct {
 type LedgerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LedgerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LedgerInitParameters `json:"initProvider,omitempty"`
 }
 
 // LedgerStatus defines the observed state of Ledger.
@@ -94,7 +110,7 @@ type LedgerStatus struct {
 type Ledger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissionsMode)",message="permissionsMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissionsMode) || has(self.initProvider.permissionsMode)",message="permissionsMode is a required parameter"
 	Spec   LedgerSpec   `json:"spec"`
 	Status LedgerStatus `json:"status,omitempty"`
 }

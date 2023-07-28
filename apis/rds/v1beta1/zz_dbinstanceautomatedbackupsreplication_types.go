@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DBInstanceAutomatedBackupsReplicationInitParameters struct {
+
+	// A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance.
+	PreSignedURL *string `json:"preSignedUrl,omitempty" tf:"pre_signed_url,omitempty"`
+
+	// The retention period for the replicated automated backups, defaults to 7.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+}
+
 type DBInstanceAutomatedBackupsReplicationObservation struct {
 
 	// The Amazon Resource Name (ARN) of the replicated automated backups.
@@ -78,6 +87,10 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 type DBInstanceAutomatedBackupsReplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DBInstanceAutomatedBackupsReplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DBInstanceAutomatedBackupsReplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // DBInstanceAutomatedBackupsReplicationStatus defines the observed state of DBInstanceAutomatedBackupsReplication.

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EnablerInitParameters struct {
+
+	// Set of account IDs.
+	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// Type of resources to scan.
+	// Valid values are EC2, ECR, and LAMBDA.
+	// At least one item is required.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+}
+
 type EnablerObservation struct {
 
 	// Set of account IDs.
@@ -50,6 +62,10 @@ type EnablerParameters struct {
 type EnablerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EnablerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EnablerInitParameters `json:"initProvider,omitempty"`
 }
 
 // EnablerStatus defines the observed state of Enabler.
@@ -70,8 +86,8 @@ type EnablerStatus struct {
 type Enabler struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountIds)",message="accountIds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypes)",message="resourceTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountIds) || has(self.initProvider.accountIds)",message="accountIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypes) || has(self.initProvider.resourceTypes)",message="resourceTypes is a required parameter"
 	Spec   EnablerSpec   `json:"spec"`
 	Status EnablerStatus `json:"status,omitempty"`
 }

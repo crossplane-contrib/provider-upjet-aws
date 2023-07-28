@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessPointInitParameters struct {
+
+	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
+	PosixUser []PosixUserInitParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
+
+	// Directory on the Amazon EFS file system that the access point provides access to. Detailed below.
+	RootDirectory []RootDirectoryInitParameters `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AccessPointObservation struct {
 
 	// ARN of the access point.
@@ -76,6 +88,18 @@ type AccessPointParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type CreationInfoInitParameters struct {
+
+	// POSIX group ID to apply to the root_directory.
+	OwnerGID *float64 `json:"ownerGid,omitempty" tf:"owner_gid,omitempty"`
+
+	// POSIX user ID to apply to the root_directory.
+	OwnerUID *float64 `json:"ownerUid,omitempty" tf:"owner_uid,omitempty"`
+
+	// POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+}
+
 type CreationInfoObservation struct {
 
 	// POSIX group ID to apply to the root_directory.
@@ -91,16 +115,28 @@ type CreationInfoObservation struct {
 type CreationInfoParameters struct {
 
 	// POSIX group ID to apply to the root_directory.
-	// +kubebuilder:validation:Required
-	OwnerGID *float64 `json:"ownerGid" tf:"owner_gid,omitempty"`
+	// +kubebuilder:validation:Optional
+	OwnerGID *float64 `json:"ownerGid,omitempty" tf:"owner_gid,omitempty"`
 
 	// POSIX user ID to apply to the root_directory.
-	// +kubebuilder:validation:Required
-	OwnerUID *float64 `json:"ownerUid" tf:"owner_uid,omitempty"`
+	// +kubebuilder:validation:Optional
+	OwnerUID *float64 `json:"ownerUid,omitempty" tf:"owner_uid,omitempty"`
 
 	// POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
-	// +kubebuilder:validation:Required
-	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+}
+
+type PosixUserInitParameters struct {
+
+	// POSIX group ID used for all file system operations using this access point.
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
+
+	// Secondary POSIX group IDs used for all file system operations using this access point.
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+
+	// POSIX user ID used for all file system operations using this access point.
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type PosixUserObservation struct {
@@ -118,16 +154,25 @@ type PosixUserObservation struct {
 type PosixUserParameters struct {
 
 	// POSIX group ID used for all file system operations using this access point.
-	// +kubebuilder:validation:Required
-	GID *float64 `json:"gid" tf:"gid,omitempty"`
+	// +kubebuilder:validation:Optional
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.
-	// +kubebuilder:validation:Required
-	UID *float64 `json:"uid" tf:"uid,omitempty"`
+	// +kubebuilder:validation:Optional
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
+}
+
+type RootDirectoryInitParameters struct {
+
+	// POSIX IDs and permissions to apply to the access point's Root Directory. See Creation Info below.
+	CreationInfo []CreationInfoInitParameters `json:"creationInfo,omitempty" tf:"creation_info,omitempty"`
+
+	// Path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide creation_info.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type RootDirectoryObservation struct {
@@ -154,6 +199,10 @@ type RootDirectoryParameters struct {
 type AccessPointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccessPointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccessPointInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccessPointStatus defines the observed state of AccessPoint.

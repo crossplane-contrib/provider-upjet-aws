@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RevisionInitParameters struct {
+
+	// An optional comment about the revision.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type RevisionObservation struct {
 
 	// The Amazon Resource Name of this data set.
@@ -71,6 +80,10 @@ type RevisionParameters struct {
 type RevisionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RevisionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RevisionInitParameters `json:"initProvider,omitempty"`
 }
 
 // RevisionStatus defines the observed state of Revision.

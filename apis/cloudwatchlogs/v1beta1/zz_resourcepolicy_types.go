@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourcePolicyInitParameters struct {
+
+	// Details of the resource policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. Maximum length of 5120 characters.
+	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
+}
+
 type ResourcePolicyObservation struct {
 
 	// The name of the CloudWatch log resource policy
@@ -38,6 +44,10 @@ type ResourcePolicyParameters struct {
 type ResourcePolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourcePolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourcePolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourcePolicyStatus defines the observed state of ResourcePolicy.
@@ -58,7 +68,7 @@ type ResourcePolicyStatus struct {
 type ResourcePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument)",message="policyDocument is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument) || has(self.initProvider.policyDocument)",message="policyDocument is a required parameter"
 	Spec   ResourcePolicySpec   `json:"spec"`
 	Status ResourcePolicyStatus `json:"status,omitempty"`
 }

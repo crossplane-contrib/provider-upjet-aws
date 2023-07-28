@@ -155,6 +155,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  data:
+                    description: the rule group namespace data that you want to be
+                      applied. See more in AWS Docs.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -355,7 +365,8 @@ spec:
             x-kubernetes-validations:
             - message: data is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.data)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.data)
+                || has(self.initProvider.data)'
           status:
             description: RuleGroupNamespaceStatus defines the observed state of RuleGroupNamespace.
             properties:

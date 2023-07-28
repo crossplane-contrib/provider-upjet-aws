@@ -29,6 +29,3 @@ spec:
     domainName: tf-test
     engineVersion: OpenSearch_1.1
     region: us-west-1
-
----
-

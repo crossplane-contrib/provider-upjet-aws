@@ -79,9 +79,6 @@ spec:
                         value:
                           description: The CIDR notation.
                           type: string
-                      required:
-                      - type
-                      - value
                       type: object
                     type: array
                   name:
@@ -93,6 +90,29 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  ipSetDescriptor:
+                    description: One or more pairs specifying the IP address type
+                      (IPV4 or IPV6) and the IP address range (in CIDR notation) from
+                      which web requests originate.
+                    items:
+                      properties:
+                        type:
+                          description: The string like IPV4 or IPV6.
+                          type: string
+                        value:
+                          description: The CIDR notation.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name or description of the IPSet.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -294,7 +314,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:

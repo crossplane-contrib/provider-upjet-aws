@@ -79,6 +79,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  policyDocument:
+                    description: Details of the resource policy, including the identity
+                      of the principal that is enabled to put logs to this account.
+                      This is formatted as a JSON string. Maximum length of 5120 characters.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -279,7 +290,8 @@ spec:
             x-kubernetes-validations:
             - message: policyDocument is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyDocument)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyDocument)
+                || has(self.initProvider.policyDocument)'
           status:
             description: ResourcePolicyStatus defines the observed state of ResourcePolicy.
             properties:

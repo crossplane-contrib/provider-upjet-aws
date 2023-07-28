@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CommandInitParameters struct {
+
+	// –  The name you assign to this job. It must be unique in your account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
+	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
+
+	// Specifies the S3 path to a script that executes a job.
+	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
+}
+
 type CommandObservation struct {
 
 	// –  The name you assign to this job. It must be unique in your account.
@@ -36,8 +48,14 @@ type CommandParameters struct {
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Specifies the S3 path to a script that executes a job.
-	// +kubebuilder:validation:Required
-	ScriptLocation *string `json:"scriptLocation" tf:"script_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
+}
+
+type ExecutionPropertyInitParameters struct {
+
+	// The maximum number of concurrent runs allowed for a job. The default is 1.
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 }
 
 type ExecutionPropertyObservation struct {
@@ -51,6 +69,57 @@ type ExecutionPropertyParameters struct {
 	// The maximum number of concurrent runs allowed for a job. The default is 1.
 	// +kubebuilder:validation:Optional
 	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+}
+
+type JobInitParameters struct {
+
+	// –  The command of the job. Defined below.
+	Command []CommandInitParameters `json:"command,omitempty" tf:"command,omitempty"`
+
+	// –  The list of connections used for this job.
+	Connections []*string `json:"connections,omitempty" tf:"connections,omitempty"`
+
+	// execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+	DefaultArguments map[string]*string `json:"defaultArguments,omitempty" tf:"default_arguments,omitempty"`
+
+	// –  Description of the job.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. Valid value: FLEX, STANDARD.
+	ExecutionClass *string `json:"executionClass,omitempty" tf:"execution_class,omitempty"`
+
+	// –  Execution property of the job. Defined below.
+	ExecutionProperty []ExecutionPropertyInitParameters `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
+
+	// The version of glue to use, for example "1.0". For information about available versions, see the AWS Glue Release Notes.
+	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
+
+	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// –  The maximum number of times to retry this job if it fails.
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+
+	// overridable arguments for this job, specified as name-value pairs.
+	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
+
+	// Notification property of the job. Defined below.
+	NotificationProperty []NotificationPropertyInitParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
+
+	// The number of workers of a defined workerType that are allocated when a job runs.
+	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
+
+	// The name of the Security Configuration to be associated with the job.
+	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
+	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
 type JobObservation struct {
@@ -202,6 +271,12 @@ type JobParameters struct {
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
+type NotificationPropertyInitParameters struct {
+
+	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+}
+
 type NotificationPropertyObservation struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
@@ -219,6 +294,10 @@ type NotificationPropertyParameters struct {
 type JobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     JobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider JobInitParameters `json:"initProvider,omitempty"`
 }
 
 // JobStatus defines the observed state of Job.
@@ -239,7 +318,7 @@ type JobStatus struct {
 type Job struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.command)",message="command is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.command) || has(self.initProvider.command)",message="command is a required parameter"
 	Spec   JobSpec   `json:"spec"`
 	Status JobStatus `json:"status,omitempty"`
 }

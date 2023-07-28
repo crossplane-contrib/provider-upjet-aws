@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudwatchDestinationInitParameters struct {
+
+	// The default value for the event
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The name for the dimension
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+
+	// The source for the value. May be any of "messageTag", "emailHeader" or "linkTag".
+	ValueSource *string `json:"valueSource,omitempty" tf:"value_source,omitempty"`
+}
+
 type CloudwatchDestinationObservation struct {
 
 	// The default value for the event
@@ -28,16 +40,34 @@ type CloudwatchDestinationObservation struct {
 type CloudwatchDestinationParameters struct {
 
 	// The default value for the event
-	// +kubebuilder:validation:Required
-	DefaultValue *string `json:"defaultValue" tf:"default_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
 	// The name for the dimension
-	// +kubebuilder:validation:Required
-	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
 	// The source for the value. May be any of "messageTag", "emailHeader" or "linkTag".
-	// +kubebuilder:validation:Required
-	ValueSource *string `json:"valueSource" tf:"value_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	ValueSource *string `json:"valueSource,omitempty" tf:"value_source,omitempty"`
+}
+
+type EventDestinationInitParameters struct {
+
+	// CloudWatch destination for the events
+	CloudwatchDestination []CloudwatchDestinationInitParameters `json:"cloudwatchDestination,omitempty" tf:"cloudwatch_destination,omitempty"`
+
+	// If true, the event destination will be enabled
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Send the events to a kinesis firehose destination
+	KinesisDestination []KinesisDestinationInitParameters `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
+
+	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
+
+	// Send the events to an SNS Topic destination
+	SnsDestination []SnsDestinationInitParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationObservation struct {
@@ -108,6 +138,9 @@ type EventDestinationParameters struct {
 	SnsDestination []SnsDestinationParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
+type KinesisDestinationInitParameters struct {
+}
+
 type KinesisDestinationObservation struct {
 
 	// The ARN of the role that has permissions to access the Kinesis Stream
@@ -148,6 +181,9 @@ type KinesisDestinationParameters struct {
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
+type SnsDestinationInitParameters struct {
+}
+
 type SnsDestinationObservation struct {
 
 	// The ARN of the SNS topic
@@ -175,6 +211,10 @@ type SnsDestinationParameters struct {
 type EventDestinationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventDestinationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventDestinationInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventDestinationStatus defines the observed state of EventDestination.
@@ -195,7 +235,7 @@ type EventDestinationStatus struct {
 type EventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.matchingTypes)",message="matchingTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.matchingTypes) || has(self.initProvider.matchingTypes)",message="matchingTypes is a required parameter"
 	Spec   EventDestinationSpec   `json:"spec"`
 	Status EventDestinationStatus `json:"status,omitempty"`
 }

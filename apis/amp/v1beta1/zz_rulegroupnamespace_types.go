@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RuleGroupNamespaceInitParameters struct {
+
+	// the rule group namespace data that you want to be applied. See more in AWS Docs.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+}
+
 type RuleGroupNamespaceObservation struct {
 
 	// the rule group namespace data that you want to be applied. See more in AWS Docs.
@@ -54,6 +60,10 @@ type RuleGroupNamespaceParameters struct {
 type RuleGroupNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RuleGroupNamespaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RuleGroupNamespaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // RuleGroupNamespaceStatus defines the observed state of RuleGroupNamespace.
@@ -74,7 +84,7 @@ type RuleGroupNamespaceStatus struct {
 type RuleGroupNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.data)",message="data is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.data) || has(self.initProvider.data)",message="data is a required parameter"
 	Spec   RuleGroupNamespaceSpec   `json:"spec"`
 	Status RuleGroupNamespaceStatus `json:"status,omitempty"`
 }

@@ -21,6 +21,3 @@ spec:
         testing.upbound.io/example-name: example
     s3Region: us-east-1
     timeUnit: HOURLY
-
----
-

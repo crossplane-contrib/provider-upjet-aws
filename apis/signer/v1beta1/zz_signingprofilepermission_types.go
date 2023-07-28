@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SigningProfilePermissionInitParameters struct {
+
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The AWS principal to be granted a cross-account permission.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// A statement identifier prefix. Conflicts with statement_id.
+	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
+}
+
 type SigningProfilePermissionObservation struct {
 
 	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
@@ -91,6 +103,10 @@ type SigningProfilePermissionParameters struct {
 type SigningProfilePermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SigningProfilePermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SigningProfilePermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SigningProfilePermissionStatus defines the observed state of SigningProfilePermission.
@@ -111,8 +127,8 @@ type SigningProfilePermissionStatus struct {
 type SigningProfilePermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || has(self.initProvider.principal)",message="principal is a required parameter"
 	Spec   SigningProfilePermissionSpec   `json:"spec"`
 	Status SigningProfilePermissionStatus `json:"status,omitempty"`
 }

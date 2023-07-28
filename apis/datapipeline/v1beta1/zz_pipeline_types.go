@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PipelineInitParameters struct {
+
+	// The description of Pipeline.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of Pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PipelineObservation struct {
 
 	// The description of Pipeline.
@@ -55,6 +67,10 @@ type PipelineParameters struct {
 type PipelineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PipelineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PipelineInitParameters `json:"initProvider,omitempty"`
 }
 
 // PipelineStatus defines the observed state of Pipeline.
@@ -75,7 +91,7 @@ type PipelineStatus struct {
 type Pipeline struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   PipelineSpec   `json:"spec"`
 	Status PipelineStatus `json:"status,omitempty"`
 }

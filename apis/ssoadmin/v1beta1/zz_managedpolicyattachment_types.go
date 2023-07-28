@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ManagedPolicyAttachmentInitParameters struct {
+}
+
 type ManagedPolicyAttachmentObservation struct {
 
 	// The Amazon Resource Names (ARNs) of the Managed Policy, Permission Set, and SSO Instance, separated by a comma (,).
@@ -65,6 +68,10 @@ type ManagedPolicyAttachmentParameters struct {
 type ManagedPolicyAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedPolicyAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagedPolicyAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedPolicyAttachmentStatus defines the observed state of ManagedPolicyAttachment.

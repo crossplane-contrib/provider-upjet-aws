@@ -73,6 +73,3 @@ spec:
   forProvider:
     name: example.com
     region: us-west-1
-
----
-

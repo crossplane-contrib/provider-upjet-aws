@@ -123,6 +123,23 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  active:
+                    description: Boolean flag to indicate if the certificate should
+                      be active
+                    type: boolean
+                  csr:
+                    description: The certificate signing request. Review CreateCertificateFromCsr
+                      for more information on generating a certificate from a certificate
+                      signing request (CSR). If none is specified both the certificate
+                      and keys will be generated, review CreateKeysAndCertificate
+                      for more information on generating keys and a certificate.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -323,7 +340,8 @@ spec:
             x-kubernetes-validations:
             - message: active is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.active)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.active)
+                || has(self.initProvider.active)'
           status:
             description: CertificateStatus defines the observed state of Certificate.
             properties:

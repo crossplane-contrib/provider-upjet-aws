@@ -13,6 +13,31 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AddonInitParameters struct {
+
+	// on. The name must match one of
+	// the names returned by describe-addon-versions.
+	AddonName *string `json:"addonName,omitempty" tf:"addon_name,omitempty"`
+
+	// on. The version must
+	// match one of the versions returned by describe-addon-versions.
+	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
+
+	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
+	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
+
+	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
+	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
+
+	// Define how to resolve parameter value conflicts
+	// when migrating an existing add-on to an Amazon EKS add-on or when applying
+	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AddonObservation struct {
 
 	// on. The name must match one of
@@ -136,6 +161,10 @@ type AddonParameters struct {
 type AddonSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AddonParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AddonInitParameters `json:"initProvider,omitempty"`
 }
 
 // AddonStatus defines the observed state of Addon.
@@ -156,7 +185,7 @@ type AddonStatus struct {
 type Addon struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addonName)",message="addonName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addonName) || has(self.initProvider.addonName)",message="addonName is a required parameter"
 	Spec   AddonSpec   `json:"spec"`
 	Status AddonStatus `json:"status,omitempty"`
 }

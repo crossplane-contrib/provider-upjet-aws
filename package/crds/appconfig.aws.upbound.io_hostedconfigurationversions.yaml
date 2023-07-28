@@ -256,6 +256,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  contentType:
+                    description: Standard MIME type describing the format of the configuration
+                      content. For more information, see Content-Type.
+                    type: string
+                  description:
+                    description: Description of the configuration.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -459,7 +472,8 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.contentSecretRef)'
             - message: contentType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.contentType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.contentType)
+                || has(self.initProvider.contentType)'
           status:
             description: HostedConfigurationVersionStatus defines the observed state
               of HostedConfigurationVersion.

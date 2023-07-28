@@ -21,6 +21,3 @@ spec:
     startMultiplex: true
     tags:
       tag1: value1
-
----
-

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GraphInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type GraphObservation struct {
 
 	// Date and time, in UTC and extended RFC 3339 format, when the Amazon Detective Graph was created.
@@ -46,6 +52,10 @@ type GraphParameters struct {
 type GraphSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GraphParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GraphInitParameters `json:"initProvider,omitempty"`
 }
 
 // GraphStatus defines the observed state of Graph.

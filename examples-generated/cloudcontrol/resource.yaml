@@ -20,6 +20,3 @@ spec:
         })}
     region: us-west-1
     typeName: AWS::ECS::Cluster
-
----
-

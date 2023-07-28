@@ -52,6 +52,3 @@ spec:
           maxReceiveCount     = 4
         })}
     region: us-west-1
-
----
-

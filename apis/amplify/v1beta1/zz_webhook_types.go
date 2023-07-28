@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WebhookInitParameters struct {
+
+	// Description for a webhook.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type WebhookObservation struct {
 
 	// Unique ID for an Amplify app.
@@ -76,6 +82,10 @@ type WebhookParameters struct {
 type WebhookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebhookParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WebhookInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebhookStatus defines the observed state of Webhook.

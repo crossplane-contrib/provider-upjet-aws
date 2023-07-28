@@ -19,6 +19,3 @@ spec:
     - route.request.header.Auth
     name: example-authorizer
     region: us-west-1
-
----
-

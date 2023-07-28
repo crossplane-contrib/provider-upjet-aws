@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CellInitParameters struct {
+
+	// List of cell arns to add as nested fault domains within this cell.
+	Cells []*string `json:"cells,omitempty" tf:"cells,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CellObservation struct {
 
 	// ARN of the cell
@@ -53,6 +62,10 @@ type CellParameters struct {
 type CellSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CellParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CellInitParameters `json:"initProvider,omitempty"`
 }
 
 // CellStatus defines the observed state of Cell.

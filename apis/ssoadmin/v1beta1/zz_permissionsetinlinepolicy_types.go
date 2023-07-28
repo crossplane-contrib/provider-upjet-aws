@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PermissionSetInlinePolicyInitParameters struct {
+
+	// The IAM inline policy to attach to a Permission Set.
+	InlinePolicy *string `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
+}
+
 type PermissionSetInlinePolicyObservation struct {
 
 	// The Amazon Resource Names (ARNs) of the Permission Set and SSO Instance, separated by a comma (,).
@@ -62,6 +68,10 @@ type PermissionSetInlinePolicyParameters struct {
 type PermissionSetInlinePolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionSetInlinePolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PermissionSetInlinePolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionSetInlinePolicyStatus defines the observed state of PermissionSetInlinePolicy.
@@ -82,7 +92,7 @@ type PermissionSetInlinePolicyStatus struct {
 type PermissionSetInlinePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inlinePolicy)",message="inlinePolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inlinePolicy) || has(self.initProvider.inlinePolicy)",message="inlinePolicy is a required parameter"
 	Spec   PermissionSetInlinePolicySpec   `json:"spec"`
 	Status PermissionSetInlinePolicyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APIMappingInitParameters struct {
+
+	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
+	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
+}
+
 type APIMappingObservation struct {
 
 	// API identifier.
@@ -87,6 +93,10 @@ type APIMappingParameters struct {
 type APIMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider APIMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIMappingStatus defines the observed state of APIMapping.

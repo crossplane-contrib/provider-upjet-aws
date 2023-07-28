@@ -16,6 +16,3 @@ spec:
     vpcPeeringConnectionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

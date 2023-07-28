@@ -244,6 +244,28 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  application:
+                    description: Name of the Beanstalk Application the version is
+                      associated with.
+                    type: string
+                  description:
+                    description: Short description of the Application Version.
+                    type: string
+                  forceDelete:
+                    description: On delete, force an Application Version to be deleted
+                      when it may be in use by multiple Elastic Beanstalk Environments.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -444,7 +466,8 @@ spec:
             x-kubernetes-validations:
             - message: application is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.application)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.application)
+                || has(self.initProvider.application)'
           status:
             description: ApplicationVersionStatus defines the observed state of ApplicationVersion.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DiscovererInitParameters struct {
+
+	// The description of the discoverer. Maximum of 256 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DiscovererObservation struct {
 
 	// The Amazon Resource Name (ARN) of the discoverer.
@@ -68,6 +77,10 @@ type DiscovererParameters struct {
 type DiscovererSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DiscovererParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DiscovererInitParameters `json:"initProvider,omitempty"`
 }
 
 // DiscovererStatus defines the observed state of Discoverer.

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FleetStackAssociationInitParameters struct {
+}
+
 type FleetStackAssociationObservation struct {
 
 	// Name of the fleet.
@@ -65,6 +68,10 @@ type FleetStackAssociationParameters struct {
 type FleetStackAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FleetStackAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FleetStackAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // FleetStackAssociationStatus defines the observed state of FleetStackAssociation.

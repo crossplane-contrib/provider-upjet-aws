@@ -15,6 +15,3 @@ spec:
     rule:
     - id: rule-1
       status: Enabled
-
----
-

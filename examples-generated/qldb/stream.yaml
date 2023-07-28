@@ -24,6 +24,3 @@ spec:
     streamName: sample-ledger-stream
     tags:
       example: tag
-
----
-

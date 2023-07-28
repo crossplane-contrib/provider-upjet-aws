@@ -13,6 +13,3 @@ spec:
     name: maintenance-window-application
     region: us-west-1
     schedule: cron(0 16 ? * TUE *)
-
----
-

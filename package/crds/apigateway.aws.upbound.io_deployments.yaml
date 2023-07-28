@@ -180,6 +180,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Description of the deployment
+                    type: string
+                  stageDescription:
+                    description: Description to set on the stage managed by the stage_name
+                      argument.
+                    type: string
+                  stageName:
+                    description: Name of the stage to create with this deployment.
+                      If the specified stage already exists, it will be updated to
+                      point to the new deployment. We recommend using the aws_api_gateway_stage
+                      resource instead to manage stages.
+                    type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: argument or explicit resource references using the
+                      resource . The triggers argument should be preferred over depends_on,
+                      since depends_on can only capture dependency ordering and will
+                      not cause the resource to recreate (redeploy the REST API) with
+                      upstream configuration changes.
+                    type: object
+                  variables:
+                    additionalProperties:
+                      type: string
+                    description: Map to set on the stage managed by the stage_name
+                      argument.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

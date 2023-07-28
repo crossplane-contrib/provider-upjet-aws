@@ -20,6 +20,3 @@ spec:
     - reportTemplate: RESTORE_JOB_REPORT
     tags:
       Name: Example Report Plan
-
----
-

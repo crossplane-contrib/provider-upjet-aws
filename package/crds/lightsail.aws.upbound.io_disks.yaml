@@ -85,6 +85,23 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  availabilityZone:
+                    description: The Availability Zone in which to create your disk.
+                    type: string
+                  sizeInGb:
+                    description: The instance port the load balancer will connect.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -285,10 +302,12 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
+                || has(self.initProvider.availabilityZone)'
             - message: sizeInGb is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sizeInGb)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sizeInGb)
+                || has(self.initProvider.sizeInGb)'
           status:
             description: DiskStatus defines the observed state of Disk.
             properties:

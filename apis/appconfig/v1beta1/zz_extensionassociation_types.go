@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExtensionAssociationInitParameters struct {
+
+	// The parameter names and values defined for the association.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
 type ExtensionAssociationObservation struct {
 
 	// ARN of the AppConfig Extension Association.
@@ -78,6 +84,10 @@ type ExtensionAssociationParameters struct {
 type ExtensionAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExtensionAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ExtensionAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExtensionAssociationStatus defines the observed state of ExtensionAssociation.

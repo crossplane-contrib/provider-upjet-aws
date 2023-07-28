@@ -87,6 +87,25 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  overrideDynamicGroup:
+                    description: Override dynamic thing groups with static thing groups
+                      when 10-group limit is reached. If a thing belongs to 10 thing
+                      groups, and one or more of those groups are dynamic thing groups,
+                      adding a thing to a static group removes the thing from the
+                      last dynamic group.
+                    type: boolean
+                  thingGroupName:
+                    description: The name of the group to which you are adding a thing.
+                    type: string
+                  thingName:
+                    description: The name of the thing to add to a group.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -287,10 +306,12 @@ spec:
             x-kubernetes-validations:
             - message: thingGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.thingGroupName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.thingGroupName)
+                || has(self.initProvider.thingGroupName)'
             - message: thingName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.thingName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.thingName)
+                || has(self.initProvider.thingName)'
           status:
             description: ThingGroupMembershipStatus defines the observed state of
               ThingGroupMembership.

@@ -81,8 +81,6 @@ spec:
                             the vended log data will be published. This log group
                             must exist.
                           type: string
-                      required:
-                      - logGroupArn
                       type: object
                     type: array
                   region:
@@ -96,6 +94,33 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  alias:
+                    description: The alias of the prometheus workspace. See more in
+                      AWS Docs.
+                    type: string
+                  loggingConfiguration:
+                    description: Logging configuration for the workspace. See Logging
+                      Configuration below for details.
+                    items:
+                      properties:
+                        logGroupArn:
+                          description: The ARN of the CloudWatch log group to which
+                            the vended log data will be published. This log group
+                            must exist.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

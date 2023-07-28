@@ -243,9 +243,6 @@ spec:
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
                           type: number
-                      required:
-                      - channel
-                      - concurrency
                       type: object
                     type: array
                   name:
@@ -275,11 +272,6 @@ spec:
                         queueId:
                           description: Specifies the identifier for the queue.
                           type: string
-                      required:
-                      - channel
-                      - delay
-                      - priority
-                      - queueId
                       type: object
                     type: array
                   region:
@@ -293,6 +285,70 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: Specifies the description of the Routing Profile.
+                    type: string
+                  mediaConcurrencies:
+                    description: One or more media_concurrencies blocks that specify
+                      the channels that agents can handle in the Contact Control Panel
+                      (CCP) for this Routing Profile. The media_concurrencies block
+                      is documented below.
+                    items:
+                      properties:
+                        channel:
+                          description: Specifies the channels that agents can handle
+                            in the Contact Control Panel (CCP). Valid values are VOICE,
+                            CHAT, TASK.
+                          type: string
+                        concurrency:
+                          description: 'Specifies the number of contacts an agent
+                            can have on a channel simultaneously. Valid Range for
+                            VOICE: Minimum value of 1. Maximum value of 1. Valid Range
+                            for CHAT: Minimum value of 1. Maximum value of 10. Valid
+                            Range for TASK: Minimum value of 1. Maximum value of 10.'
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: Specifies the name of the Routing Profile.
+                    type: string
+                  queueConfigs:
+                    description: One or more queue_configs blocks that specify the
+                      inbound queues associated with the routing profile. If no queue
+                      is added, the agent only can make outbound calls. The queue_configs
+                      block is documented below.
+                    items:
+                      properties:
+                        channel:
+                          description: Specifies the channels agents can handle in
+                            the Contact Control Panel (CCP) for this routing profile.
+                            Valid values are VOICE, CHAT, TASK.
+                          type: string
+                        delay:
+                          description: Specifies the delay, in seconds, that a contact
+                            should be in the queue before they are routed to an available
+                            agent
+                          type: number
+                        priority:
+                          description: Specifies the order in which contacts are to
+                            be handled for the queue.
+                          type: number
+                        queueId:
+                          description: Specifies the identifier for the queue.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -494,13 +550,16 @@ spec:
             x-kubernetes-validations:
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: mediaConcurrencies is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.mediaConcurrencies)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.mediaConcurrencies)
+                || has(self.initProvider.mediaConcurrencies)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: RoutingProfileStatus defines the observed state of RoutingProfile.
             properties:

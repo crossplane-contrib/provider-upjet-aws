@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ACLConfigurationInitParameters struct {
+
+	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+	S3ACLOption *string `json:"s3AclOption,omitempty" tf:"s3_acl_option,omitempty"`
+}
+
 type ACLConfigurationObservation struct {
 
 	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
@@ -22,8 +28,29 @@ type ACLConfigurationObservation struct {
 type ACLConfigurationParameters struct {
 
 	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
-	// +kubebuilder:validation:Required
-	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3ACLOption *string `json:"s3AclOption,omitempty" tf:"s3_acl_option,omitempty"`
+}
+
+type DatabaseInitParameters struct {
+
+	// That an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
+	ACLConfiguration []ACLConfigurationInitParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
+
+	// Description of the database.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Encryption key block AWS Athena uses to decrypt the data in S3, such as an AWS Key Management Service (AWS KMS) key. See Encryption Configuration below.
+	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// AWS account ID that you expect to be the owner of the Amazon S3 bucket.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Boolean that indicates all tables should be deleted from the database so that the database can be destroyed without error. The tables are not recoverable.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// Key-value map of custom metadata properties for the database definition.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
 type DatabaseObservation struct {
@@ -99,6 +126,15 @@ type DatabaseParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type EncryptionConfigurationInitParameters struct {
+
+	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
+
+	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+}
+
 type EncryptionConfigurationObservation struct {
 
 	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
@@ -111,8 +147,8 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
-	// +kubebuilder:validation:Required
-	EncryptionOption *string `json:"encryptionOption" tf:"encryption_option,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
 	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
 	// +kubebuilder:validation:Optional
@@ -123,6 +159,10 @@ type EncryptionConfigurationParameters struct {
 type DatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // DatabaseStatus defines the observed state of Database.

@@ -13,6 +13,3 @@ spec:
     - name: neptune_query_timeout
       value: "25"
     region: us-west-1
-
----
-

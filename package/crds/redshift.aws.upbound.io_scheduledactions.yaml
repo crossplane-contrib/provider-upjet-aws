@@ -179,8 +179,6 @@ spec:
                               clusterIdentifier:
                                 description: The identifier of the cluster to be paused.
                                 type: string
-                            required:
-                            - clusterIdentifier
                             type: object
                           type: array
                         resizeCluster:
@@ -208,8 +206,6 @@ spec:
                               numberOfNodes:
                                 description: The new number of nodes for the cluster.
                                 type: number
-                            required:
-                            - clusterIdentifier
                             type: object
                           type: array
                         resumeCluster:
@@ -220,14 +216,91 @@ spec:
                               clusterIdentifier:
                                 description: The identifier of the cluster to be resumed.
                                 type: string
-                            required:
-                            - clusterIdentifier
                             type: object
                           type: array
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the scheduled action.
+                    type: string
+                  enable:
+                    description: Whether to enable the scheduled action. Default is
+                      true .
+                    type: boolean
+                  endTime:
+                    description: The end time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  schedule:
+                    description: The schedule of action. The schedule is defined format
+                      of "at expression" or "cron expression", for example at(2016-03-04T17:27:00)
+                      or cron(0 10 ? * MON *). See Scheduled Action for more information.
+                    type: string
+                  startTime:
+                    description: The start time in UTC when the schedule is active,
+                      in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
+                    type: string
+                  targetAction:
+                    description: Target action. Documented below.
+                    items:
+                      properties:
+                        pauseCluster:
+                          description: An action that runs a PauseCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be paused.
+                                type: string
+                            type: object
+                          type: array
+                        resizeCluster:
+                          description: An action that runs a ResizeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              classic:
+                                description: 'A boolean value indicating whether the
+                                  resize operation is using the classic resize process.
+                                  Default: false.'
+                                type: boolean
+                              clusterIdentifier:
+                                description: The unique identifier for the cluster
+                                  to resize.
+                                type: string
+                              clusterType:
+                                description: The new cluster type for the specified
+                                  cluster.
+                                type: string
+                              nodeType:
+                                description: The new node type for the nodes you are
+                                  adding.
+                                type: string
+                              numberOfNodes:
+                                description: The new number of nodes for the cluster.
+                                type: number
+                            type: object
+                          type: array
+                        resumeCluster:
+                          description: An action that runs a ResumeCluster API operation.
+                            Documented below.
+                          items:
+                            properties:
+                              clusterIdentifier:
+                                description: The identifier of the cluster to be resumed.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -429,10 +502,12 @@ spec:
             x-kubernetes-validations:
             - message: schedule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)
+                || has(self.initProvider.schedule)'
             - message: targetAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)
+                || has(self.initProvider.targetAction)'
           status:
             description: ScheduledActionStatus defines the observed state of ScheduledAction.
             properties:

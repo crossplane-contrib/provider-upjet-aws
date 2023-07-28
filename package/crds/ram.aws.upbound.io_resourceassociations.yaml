@@ -154,6 +154,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  resourceArn:
+                    description: Amazon Resource Name (ARN) of the resource to associate
+                      with the RAM Resource Share.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -354,7 +364,8 @@ spec:
             x-kubernetes-validations:
             - message: resourceArn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceArn)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceArn)
+                || has(self.initProvider.resourceArn)'
           status:
             description: ResourceAssociationStatus defines the observed state of ResourceAssociation.
             properties:

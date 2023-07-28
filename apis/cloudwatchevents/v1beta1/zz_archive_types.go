@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ArchiveInitParameters struct {
+
+	// The description of the new event archive.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
+	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+}
+
 type ArchiveObservation struct {
 
 	// The Amazon Resource Name (ARN) of the event archive.
@@ -71,6 +83,10 @@ type ArchiveParameters struct {
 type ArchiveSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ArchiveParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ArchiveInitParameters `json:"initProvider,omitempty"`
 }
 
 // ArchiveStatus defines the observed state of Archive.

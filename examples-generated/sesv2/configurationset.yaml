@@ -21,6 +21,3 @@ spec:
       - COMPLAINT
     trackingOptions:
     - customRedirectDomain: example.com
-
----
-

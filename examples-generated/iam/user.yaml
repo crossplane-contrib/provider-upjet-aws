@@ -27,6 +27,3 @@ spec:
     userSelector:
       matchLabels:
         testing.upbound.io/example-name: lb
-
----
-

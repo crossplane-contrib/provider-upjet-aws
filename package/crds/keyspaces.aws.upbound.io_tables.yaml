@@ -228,9 +228,6 @@ spec:
                                 description: 'The order modifier. Valid values: ASC,
                                   DESC.'
                                 type: string
-                            required:
-                            - name
-                            - orderBy
                             type: object
                           type: array
                         column:
@@ -245,9 +242,6 @@ spec:
                                   the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY.
                                   The default value is AWS_OWNED_KMS_KEY.'
                                 type: string
-                            required:
-                            - name
-                            - type
                             type: object
                           type: array
                         partitionKey:
@@ -258,8 +252,6 @@ spec:
                               name:
                                 description: The name of the column.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
                         staticColumn:
@@ -271,13 +263,8 @@ spec:
                               name:
                                 description: The name of the column.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
-                      required:
-                      - column
-                      - partitionKey
                       type: object
                     type: array
                   tableName:
@@ -297,12 +284,152 @@ spec:
                           description: 'Valid values: ENABLED, DISABLED. The default
                             value is DISABLED.'
                           type: string
-                      required:
-                      - status
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  capacitySpecification:
+                    description: Specifies the read/write throughput capacity mode
+                      for the table.
+                    items:
+                      properties:
+                        readCapacityUnits:
+                          description: The throughput capacity specified for read
+                            operations defined in read capacity units (RCUs).
+                          type: number
+                        throughputMode:
+                          description: 'The read/write throughput capacity mode for
+                            a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The
+                            default value is PAY_PER_REQUEST.'
+                          type: string
+                        writeCapacityUnits:
+                          description: The throughput capacity specified for write
+                            operations defined in write capacity units (WCUs).
+                          type: number
+                      type: object
+                    type: array
+                  comment:
+                    description: A description of the table.
+                    items:
+                      properties:
+                        message:
+                          description: A description of the table.
+                          type: string
+                      type: object
+                    type: array
+                  defaultTimeToLive:
+                    description: The default Time to Live setting in seconds for the
+                      table. More information can be found in the Developer Guide.
+                    type: number
+                  encryptionSpecification:
+                    description: Specifies how the encryption key for encryption at
+                      rest is managed for the table. More information can be found
+                      in the Developer Guide.
+                    items:
+                      properties:
+                        kmsKeyIdentifier:
+                          description: The Amazon Resource Name (ARN) of the customer
+                            managed KMS key.
+                          type: string
+                        type:
+                          description: 'The encryption option specified for the table.
+                            Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY.
+                            The default value is AWS_OWNED_KMS_KEY.'
+                          type: string
+                      type: object
+                    type: array
+                  pointInTimeRecovery:
+                    description: Specifies if point-in-time recovery is enabled or
+                      disabled for the table. More information can be found in the
+                      Developer Guide.
+                    items:
+                      properties:
+                        status:
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
+                          type: string
+                      type: object
+                    type: array
+                  schemaDefinition:
+                    description: Describes the schema of the table.
+                    items:
+                      properties:
+                        clusteringKey:
+                          description: The columns that are part of the clustering
+                            key of the table.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                              orderBy:
+                                description: 'The order modifier. Valid values: ASC,
+                                  DESC.'
+                                type: string
+                            type: object
+                          type: array
+                        column:
+                          description: The regular columns of the table.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                              type:
+                                description: 'The encryption option specified for
+                                  the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY.
+                                  The default value is AWS_OWNED_KMS_KEY.'
+                                type: string
+                            type: object
+                          type: array
+                        partitionKey:
+                          description: The columns that are part of the partition
+                            key of the table .
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                            type: object
+                          type: array
+                        staticColumn:
+                          description: The columns that have been defined as STATIC.
+                            Static columns store values that are shared by all rows
+                            in the same partition.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the column.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tableName:
+                    description: The name of the table.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  ttl:
+                    description: Enables Time to Live custom settings for the table.
+                      More information can be found in the Developer Guide.
+                    items:
+                      properties:
+                        status:
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -504,10 +631,12 @@ spec:
             x-kubernetes-validations:
             - message: schemaDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)
+                || has(self.initProvider.schemaDefinition)'
             - message: tableName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tableName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tableName)
+                || has(self.initProvider.tableName)'
           status:
             description: TableStatus defines the observed state of Table.
             properties:

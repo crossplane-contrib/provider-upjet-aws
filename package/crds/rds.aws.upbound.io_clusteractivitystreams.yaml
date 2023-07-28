@@ -241,6 +241,24 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  engineNativeAuditFieldsIncluded:
+                    description: Specifies whether the database activity stream includes
+                      engine-native audit fields. This option only applies to an Oracle
+                      DB instance. By default, no engine-native audit fields are included.
+                      Defaults false.
+                    type: boolean
+                  mode:
+                    description: 'Specifies the mode of the database activity stream.
+                      Database events such as a change or access generate an activity
+                      stream event. The database session can handle these events either
+                      synchronously or asynchronously. One of: sync, async.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -441,7 +459,8 @@ spec:
             x-kubernetes-validations:
             - message: mode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)
+                || has(self.initProvider.mode)'
           status:
             description: ClusterActivityStreamStatus defines the observed state of
               ClusterActivityStream.

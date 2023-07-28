@@ -11,6 +11,3 @@ spec:
     name: taskLongArnFormat
     region: us-west-1
     value: enabled
-
----
-

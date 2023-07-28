@@ -90,6 +90,24 @@ spec:
                 - authenticationType
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Whether the user in the user pool is enabled.
+                    type: boolean
+                  firstName:
+                    description: First name, or given name, of the user.
+                    type: string
+                  lastName:
+                    description: Last name, or surname, of the user.
+                    type: string
+                  sendEmailNotification:
+                    description: Send an email notification.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

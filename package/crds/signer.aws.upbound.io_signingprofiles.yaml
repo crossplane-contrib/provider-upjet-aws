@@ -83,9 +83,6 @@ spec:
                           type: string
                         value:
                           type: number
-                      required:
-                      - type
-                      - value
                       type: object
                     type: array
                   tags:
@@ -95,6 +92,31 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  platformId:
+                    description: The ID of the platform that is used by the target
+                      signing profile.
+                    type: string
+                  signatureValidityPeriod:
+                    description: The validity period for a signing job.
+                    items:
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -296,7 +318,8 @@ spec:
             x-kubernetes-validations:
             - message: platformId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.platformId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.platformId)
+                || has(self.initProvider.platformId)'
           status:
             description: SigningProfileStatus defines the observed state of SigningProfile.
             properties:

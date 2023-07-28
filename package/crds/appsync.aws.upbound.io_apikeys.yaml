@@ -160,6 +160,20 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: API key description.
+                    type: string
+                  expires:
+                    description: RFC3339 string representation of the expiry date.
+                      Rounded down to nearest hour. By default, it is 7 days from
+                      the date of creation.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

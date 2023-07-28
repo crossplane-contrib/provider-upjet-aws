@@ -14,6 +14,3 @@ spec:
     nodeType: dax.r4.large
     region: us-west-1
     replicationFactor: 1
-
----
-

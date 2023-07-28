@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DelegationSetInitParameters struct {
+
+	// This is a reference name used in Caller Reference
+	// (helpful for identifying single delegation set amongst others)
+	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
+}
+
 type DelegationSetObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Delegation Set.
@@ -47,6 +54,10 @@ type DelegationSetParameters struct {
 type DelegationSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DelegationSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DelegationSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // DelegationSetStatus defines the observed state of DelegationSet.

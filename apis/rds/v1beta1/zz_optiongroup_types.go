@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OptionGroupInitParameters struct {
+
+	// Specifies the name of the engine that this option group should be associated with.
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
+
+	// Specifies the major version of the engine that this option group should be associated with.
+	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
+
+	// A list of Options to apply.
+	Option []OptionInitParameters `json:"option,omitempty" tf:"option,omitempty"`
+
+	// The description of the option group.
+	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type OptionGroupObservation struct {
 
 	// The ARN of the db option group.
@@ -68,6 +86,27 @@ type OptionGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type OptionInitParameters struct {
+
+	// A list of DB Security Groups for which the option is enabled.
+	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
+
+	// The Name of the Option (e.g., MEMCACHED).
+	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
+
+	// A list of option settings to apply.
+	OptionSettings []OptionSettingsInitParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
+
+	// The Port number when connecting to the Option (e.g., 11211).
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// A list of VPC Security Groups for which the option is enabled.
+	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
+
+	// The version of the option (e.g., 13.1.0.0).
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type OptionObservation struct {
 
 	// A list of DB Security Groups for which the option is enabled.
@@ -96,8 +135,8 @@ type OptionParameters struct {
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
 	// The Name of the Option (e.g., MEMCACHED).
-	// +kubebuilder:validation:Required
-	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
 
 	// A list of option settings to apply.
 	// +kubebuilder:validation:Optional
@@ -116,6 +155,15 @@ type OptionParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type OptionSettingsInitParameters struct {
+
+	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Value of the setting.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type OptionSettingsObservation struct {
 
 	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
@@ -128,18 +176,22 @@ type OptionSettingsObservation struct {
 type OptionSettingsParameters struct {
 
 	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Value of the setting.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // OptionGroupSpec defines the desired state of OptionGroup
 type OptionGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OptionGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OptionGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // OptionGroupStatus defines the observed state of OptionGroup.
@@ -160,8 +212,8 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName)",message="engineName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion) || has(self.initProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
 	Spec   OptionGroupSpec   `json:"spec"`
 	Status OptionGroupStatus `json:"status,omitempty"`
 }

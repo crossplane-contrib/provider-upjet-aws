@@ -135,6 +135,54 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowedPattern:
+                    description: Regular expression used to validate the parameter
+                      value.
+                    type: string
+                  arn:
+                    description: ARN of the parameter.
+                    type: string
+                  dataType:
+                    description: 'Data type of the parameter. Valid values: text,
+                      aws:ssm:integration and aws:ec2:image for AMI format, see the
+                      Native parameter support for Amazon Machine Image IDs.'
+                    type: string
+                  description:
+                    description: Description of the parameter.
+                    type: string
+                  insecureValue:
+                    description: Value of the parameter. This argument is not valid
+                      with a type of SecureString.
+                    type: string
+                  keyId:
+                    description: KMS key ID or ARN for encrypting a SecureString.
+                    type: string
+                  overwrite:
+                    description: Overwrite an existing parameter.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tier:
+                    description: Parameter tier to assign to the parameter. If not
+                      specified, will use the default parameter tier for the region.
+                      Valid tiers are Standard, Advanced, and Intelligent-Tiering.
+                      Downgrading an Advanced tier parameter to Standard will recreate
+                      the resource. For more information on parameter tiers, see the
+                      AWS SSM Parameter tier comparison and guide.
+                    type: string
+                  type:
+                    description: Type of the parameter. Valid types are String, StringList
+                      and SecureString.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -335,7 +383,8 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: ParameterStatus defines the observed state of Parameter.
             properties:

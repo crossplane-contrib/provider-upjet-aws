@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCAttachmentInitParameters struct {
+
+	// Options for the VPC attachment.
+	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCAttachmentObservation struct {
 
 	// The ARN of the attachment.
@@ -62,6 +71,15 @@ type VPCAttachmentObservation struct {
 
 	// The ARN of the VPC.
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
+}
+
+type VPCAttachmentOptionsInitParameters struct {
+
+	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
+
+	// Indicates whether IPv6 is supported.
+	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
@@ -145,6 +163,10 @@ type VPCAttachmentParameters struct {
 type VPCAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCAttachmentStatus defines the observed state of VPCAttachment.

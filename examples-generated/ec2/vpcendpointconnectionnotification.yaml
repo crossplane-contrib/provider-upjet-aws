@@ -50,6 +50,3 @@ spec:
     networkLoadBalancerArns:
     - ${aws_lb.test.arn}
     region: us-west-1
-
----
-

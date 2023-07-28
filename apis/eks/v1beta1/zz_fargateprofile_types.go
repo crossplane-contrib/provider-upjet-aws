@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FargateProfileInitParameters struct {
+
+	// Configuration block(s) for selecting Kubernetes Pods to execute with this EKS Fargate Profile. Detailed below.
+	Selector []SelectorInitParameters `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type FargateProfileObservation struct {
 
 	// Amazon Resource Name (ARN) of the EKS Fargate Profile.
@@ -101,6 +110,15 @@ type FargateProfileParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SelectorInitParameters struct {
+
+	// Key-value map of Kubernetes labels for selection.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// Kubernetes namespace for selection.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
 type SelectorObservation struct {
 
 	// Key-value map of Kubernetes labels for selection.
@@ -117,14 +135,18 @@ type SelectorParameters struct {
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Kubernetes namespace for selection.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 // FargateProfileSpec defines the desired state of FargateProfile
 type FargateProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FargateProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FargateProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // FargateProfileStatus defines the observed state of FargateProfile.
@@ -145,7 +167,7 @@ type FargateProfileStatus struct {
 type FargateProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.selector)",message="selector is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.selector) || has(self.initProvider.selector)",message="selector is a required parameter"
 	Spec   FargateProfileSpec   `json:"spec"`
 	Status FargateProfileStatus `json:"status,omitempty"`
 }

@@ -46,6 +46,3 @@ spec:
       value: foo-bar
     terminationPolicies:
     - OldestInstance
-
----
-

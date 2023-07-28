@@ -16,6 +16,3 @@ spec:
     - name: min-slaves-to-write
       value: "2"
     region: us-west-1
-
----
-

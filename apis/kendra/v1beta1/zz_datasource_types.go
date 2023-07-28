@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessControlListConfigurationInitParameters struct {
+
+	// Path to the AWS S3 bucket that contains the ACL files.
+	KeyPath *string `json:"keyPath,omitempty" tf:"key_path,omitempty"`
+}
+
 type AccessControlListConfigurationObservation struct {
 
 	// Path to the AWS S3 bucket that contains the ACL files.
@@ -26,6 +32,12 @@ type AccessControlListConfigurationParameters struct {
 	KeyPath *string `json:"keyPath,omitempty" tf:"key_path,omitempty"`
 }
 
+type AuthenticationConfigurationInitParameters struct {
+
+	// The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host. Detailed below.
+	BasicAuthentication []BasicAuthenticationInitParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
+}
+
 type AuthenticationConfigurationObservation struct {
 
 	// The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host. Detailed below.
@@ -37,6 +49,15 @@ type AuthenticationConfigurationParameters struct {
 	// The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host. Detailed below.
 	// +kubebuilder:validation:Optional
 	BasicAuthentication []BasicAuthenticationParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
+}
+
+type BasicAuthenticationInitParameters struct {
+
+	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type BasicAuthenticationObservation struct {
@@ -68,12 +89,24 @@ type BasicAuthenticationParameters struct {
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
-	// +kubebuilder:validation:Required
-	Host *string `json:"host" tf:"host,omitempty"`
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
+type ConditionInitParameters struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []ConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionObservation struct {
@@ -86,6 +119,20 @@ type ConditionObservation struct {
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+}
+
+type ConditionOnValueInitParameters struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type ConditionOnValueObservation struct {
@@ -123,16 +170,25 @@ type ConditionOnValueParameters struct {
 type ConditionParameters struct {
 
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
-	// +kubebuilder:validation:Required
-	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey" tf:"condition_document_attribute_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
 	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []ConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+}
+
+type ConfigurationInitParameters struct {
+
+	// A block that provides the configuration information to connect to an Amazon S3 bucket as your data source. Detailed below.
+	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
+	WebCrawlerConfiguration []WebCrawlerConfigurationInitParameters `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
@@ -153,6 +209,21 @@ type ConfigurationParameters struct {
 	// A block that provides the configuration information required for Amazon Kendra Web Crawler. Detailed below.
 	// +kubebuilder:validation:Optional
 	WebCrawlerConfiguration []WebCrawlerConfigurationParameters `json:"webCrawlerConfiguration,omitempty" tf:"web_crawler_configuration,omitempty"`
+}
+
+type CustomDocumentEnrichmentConfigurationInitParameters struct {
+
+	// Configuration information to alter document attributes or metadata fields and content when ingesting documents into Amazon Kendra. Minimum number of 0 items. Maximum number of 100 items. Detailed below.
+	InlineConfigurations []InlineConfigurationsInitParameters `json:"inlineConfigurations,omitempty" tf:"inline_configurations,omitempty"`
+
+	// A block that specifies the configuration information for invoking a Lambda function in AWS Lambda on the structured documents with their metadata and text extracted. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
+	PostExtractionHookConfiguration []PostExtractionHookConfigurationInitParameters `json:"postExtractionHookConfiguration,omitempty" tf:"post_extraction_hook_configuration,omitempty"`
+
+	// Configuration information for invoking a Lambda function in AWS Lambda on the original or raw documents before extracting their metadata and text. You can use a Lambda function to apply advanced logic for creating, modifying, or deleting document metadata and content. For more information, see Advanced data manipulation. Detailed below.
+	PreExtractionHookConfiguration []PreExtractionHookConfigurationInitParameters `json:"preExtractionHookConfiguration,omitempty" tf:"pre_extraction_hook_configuration,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type CustomDocumentEnrichmentConfigurationObservation struct {
@@ -187,6 +258,33 @@ type CustomDocumentEnrichmentConfigurationParameters struct {
 	// The Amazon Resource Name (ARN) of a role with permission to run pre_extraction_hook_configuration and post_extraction_hook_configuration for altering document metadata and content during the document ingestion process. For more information, see IAM roles for Amazon Kendra.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type DataSourceInitParameters struct {
+
+	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration argument when the type parameter is set to CUSTOM. Detailed below.
+	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// A block with the configuration information for altering document metadata and content during the document ingestion process. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process. Detailed below.
+	CustomDocumentEnrichmentConfiguration []CustomDocumentEnrichmentConfigurationInitParameters `json:"customDocumentEnrichmentConfiguration,omitempty" tf:"custom_document_enrichment_configuration,omitempty"`
+
+	// A description for the Data Source connector.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// A name for your Data Source connector.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataSourceObservation struct {
@@ -314,6 +412,12 @@ type DataSourceParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type DocumentsMetadataConfigurationInitParameters struct {
+
+	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use s3_prefix to include only the desired metadata files.
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
+}
+
 type DocumentsMetadataConfigurationObservation struct {
 
 	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use s3_prefix to include only the desired metadata files.
@@ -325,6 +429,18 @@ type DocumentsMetadataConfigurationParameters struct {
 	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use s3_prefix to include only the desired metadata files.
 	// +kubebuilder:validation:Optional
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
+}
+
+type InlineConfigurationsInitParameters struct {
+
+	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See Document Attribute Condition.
+	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// TRUE to delete content if the condition used for the target attribute is met.
+	DocumentContentDeletion *bool `json:"documentContentDeletion,omitempty" tf:"document_content_deletion,omitempty"`
+
+	// Configuration of the target document attribute or metadata field when ingesting documents into Amazon Kendra. You can also include a value. Detailed below.
+	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type InlineConfigurationsObservation struct {
@@ -352,6 +468,20 @@ type InlineConfigurationsParameters struct {
 	// Configuration of the target document attribute or metadata field when ingesting documents into Amazon Kendra. You can also include a value. Detailed below.
 	// +kubebuilder:validation:Optional
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type InvocationConditionConditionOnValueInitParameters struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type InvocationConditionConditionOnValueObservation struct {
@@ -386,6 +516,18 @@ type InvocationConditionConditionOnValueParameters struct {
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
+type InvocationConditionInitParameters struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []InvocationConditionConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+}
+
 type InvocationConditionObservation struct {
 
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
@@ -401,16 +543,28 @@ type InvocationConditionObservation struct {
 type InvocationConditionParameters struct {
 
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
-	// +kubebuilder:validation:Required
-	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey" tf:"condition_document_attribute_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
 	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []InvocationConditionConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+}
+
+type PostExtractionHookConfigurationInitParameters struct {
+
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	InvocationCondition []InvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 }
 
 type PostExtractionHookConfigurationObservation struct {
@@ -432,12 +586,38 @@ type PostExtractionHookConfigurationParameters struct {
 	InvocationCondition []InvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
-	// +kubebuilder:validation:Required
-	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
-	// +kubebuilder:validation:Required
-	S3Bucket *string `json:"s3Bucket" tf:"s3_bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+}
+
+type PreExtractionHookConfigurationInitParameters struct {
+
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	InvocationCondition []PreExtractionHookConfigurationInvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+}
+
+type PreExtractionHookConfigurationInvocationConditionConditionOnValueInitParameters struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type PreExtractionHookConfigurationInvocationConditionConditionOnValueObservation struct {
@@ -472,6 +652,18 @@ type PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
+type PreExtractionHookConfigurationInvocationConditionInitParameters struct {
+
+	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
+
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
+
+	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+}
+
 type PreExtractionHookConfigurationInvocationConditionObservation struct {
 
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
@@ -487,16 +679,16 @@ type PreExtractionHookConfigurationInvocationConditionObservation struct {
 type PreExtractionHookConfigurationInvocationConditionParameters struct {
 
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
-	// +kubebuilder:validation:Required
-	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey" tf:"condition_document_attribute_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
 	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type PreExtractionHookConfigurationObservation struct {
@@ -518,12 +710,21 @@ type PreExtractionHookConfigurationParameters struct {
 	InvocationCondition []PreExtractionHookConfigurationInvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
-	// +kubebuilder:validation:Required
-	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
 	// Stores the original, raw documents or the structured, parsed documents before and after altering them. For more information, see Data contracts for Lambda functions.
-	// +kubebuilder:validation:Required
-	S3Bucket *string `json:"s3Bucket" tf:"s3_bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+}
+
+type ProxyConfigurationInitParameters struct {
+
+	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ProxyConfigurationObservation struct {
@@ -555,12 +756,30 @@ type ProxyConfigurationParameters struct {
 	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
 
 	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
-	// +kubebuilder:validation:Required
-	Host *string `json:"host" tf:"host,omitempty"`
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The port number of the website host you want to connect to using authentication credentials. For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+}
+
+type S3ConfigurationInitParameters struct {
+
+	// A block that provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see Access control for S3 data sources. Detailed below.
+	AccessControlListConfiguration []AccessControlListConfigurationInitParameters `json:"accessControlListConfiguration,omitempty" tf:"access_control_list_configuration,omitempty"`
+
+	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
+	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationInitParameters `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
+
+	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
+	ExclusionPatterns []*string `json:"exclusionPatterns,omitempty" tf:"exclusion_patterns,omitempty"`
+
+	// A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Inclusion Patterns for more examples.
+	InclusionPatterns []*string `json:"inclusionPatterns,omitempty" tf:"inclusion_patterns,omitempty"`
+
+	// A list of S3 prefixes for the documents that should be included in the index.
+	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
 type S3ConfigurationObservation struct {
@@ -621,6 +840,15 @@ type S3ConfigurationParameters struct {
 	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
+type SeedURLConfigurationInitParameters struct {
+
+	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
+	SeedUrls []*string `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
+
+	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
+	WebCrawlerMode *string `json:"webCrawlerMode,omitempty" tf:"web_crawler_mode,omitempty"`
+}
+
 type SeedURLConfigurationObservation struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
@@ -633,12 +861,18 @@ type SeedURLConfigurationObservation struct {
 type SeedURLConfigurationParameters struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
-	// +kubebuilder:validation:Required
-	SeedUrls []*string `json:"seedUrls" tf:"seed_urls,omitempty"`
+	// +kubebuilder:validation:Optional
+	SeedUrls []*string `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 
 	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
 	// +kubebuilder:validation:Optional
 	WebCrawlerMode *string `json:"webCrawlerMode,omitempty" tf:"web_crawler_mode,omitempty"`
+}
+
+type SiteMapsConfigurationInitParameters struct {
+
+	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
+	SiteMaps []*string `json:"siteMaps,omitempty" tf:"site_maps,omitempty"`
 }
 
 type SiteMapsConfigurationObservation struct {
@@ -650,8 +884,22 @@ type SiteMapsConfigurationObservation struct {
 type SiteMapsConfigurationParameters struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
-	// +kubebuilder:validation:Required
-	SiteMaps []*string `json:"siteMaps" tf:"site_maps,omitempty"`
+	// +kubebuilder:validation:Optional
+	SiteMaps []*string `json:"siteMaps,omitempty" tf:"site_maps,omitempty"`
+}
+
+type TargetDocumentAttributeValueInitParameters struct {
+
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be included in the ISO 8601 date-time format. As of this writing only UTC is supported. For example, 2012-03-25T12:30:10+00:00.
+	DateValue *string `json:"dateValue,omitempty" tf:"date_value,omitempty"`
+
+	// A long integer value.
+	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// A list of strings.
+	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
+
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
 type TargetDocumentAttributeValueObservation struct {
@@ -686,6 +934,19 @@ type TargetDocumentAttributeValueParameters struct {
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
+type TargetInitParameters struct {
+
+	// The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
+	TargetDocumentAttributeKey *string `json:"targetDocumentAttributeKey,omitempty" tf:"target_document_attribute_key,omitempty"`
+
+	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'.
+	// See Document Attribute Value.
+	TargetDocumentAttributeValue []TargetDocumentAttributeValueInitParameters `json:"targetDocumentAttributeValue,omitempty" tf:"target_document_attribute_value,omitempty"`
+
+	// TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE. To create a target value (TargetDocumentAttributeValue), set this to FALSE.
+	TargetDocumentAttributeValueDeletion *bool `json:"targetDocumentAttributeValueDeletion,omitempty" tf:"target_document_attribute_value_deletion,omitempty"`
+}
+
 type TargetObservation struct {
 
 	// The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
@@ -715,6 +976,15 @@ type TargetParameters struct {
 	TargetDocumentAttributeValueDeletion *bool `json:"targetDocumentAttributeValueDeletion,omitempty" tf:"target_document_attribute_value_deletion,omitempty"`
 }
 
+type UrlsInitParameters struct {
+
+	// A block that specifies the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs. Detailed below.
+	SeedURLConfiguration []SeedURLConfigurationInitParameters `json:"seedUrlConfiguration,omitempty" tf:"seed_url_configuration,omitempty"`
+
+	// A block that specifies the configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to 3 sitemap URLs. Detailed below.
+	SiteMapsConfiguration []SiteMapsConfigurationInitParameters `json:"siteMapsConfiguration,omitempty" tf:"site_maps_configuration,omitempty"`
+}
+
 type UrlsObservation struct {
 
 	// A block that specifies the configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs. Detailed below.
@@ -733,6 +1003,36 @@ type UrlsParameters struct {
 	// A block that specifies the configuration of the sitemap URLs of the websites you want to crawl. Only URLs belonging to the same website host names are crawled. You can list up to 3 sitemap URLs. Detailed below.
 	// +kubebuilder:validation:Optional
 	SiteMapsConfiguration []SiteMapsConfigurationParameters `json:"siteMapsConfiguration,omitempty" tf:"site_maps_configuration,omitempty"`
+}
+
+type WebCrawlerConfigurationInitParameters struct {
+
+	// A block with the configuration information required to connect to websites using authentication. You can connect to websites using basic authentication of user name and password. You use a secret in AWS Secrets Manager to store your authentication credentials. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Detailed below.
+	AuthenticationConfiguration []AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2. Minimum value of 0. Maximum value of 10.
+	CrawlDepth *float64 `json:"crawlDepth,omitempty" tf:"crawl_depth,omitempty"`
+
+	// The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB. Minimum value of 1.0e-06. Maximum value of 50.
+	MaxContentSizePerPageInMegaBytes *float64 `json:"maxContentSizePerPageInMegaBytes,omitempty" tf:"max_content_size_per_page_in_mega_bytes,omitempty"`
+
+	// The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage. As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance. The default maximum links per page is 100. Minimum value of 1. Maximum value of 1000.
+	MaxLinksPerPage *float64 `json:"maxLinksPerPage,omitempty" tf:"max_links_per_page,omitempty"`
+
+	// The maximum number of URLs crawled per website host per minute. The default maximum number of URLs crawled per website host per minute is 300. Minimum value of 1. Maximum value of 300.
+	MaxUrlsPerMinuteCrawlRate *float64 `json:"maxUrlsPerMinuteCrawlRate,omitempty" tf:"max_urls_per_minute_crawl_rate,omitempty"`
+
+	// Configuration information required to connect to your internal websites via a web proxy. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in AWS Secrets Manager. Detailed below.
+	ProxyConfiguration []ProxyConfigurationInitParameters `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
+
+	// A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	URLExclusionPatterns []*string `json:"urlExclusionPatterns,omitempty" tf:"url_exclusion_patterns,omitempty"`
+
+	// A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
+
+	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
+	Urls []UrlsInitParameters `json:"urls,omitempty" tf:"urls,omitempty"`
 }
 
 type WebCrawlerConfigurationObservation struct {
@@ -800,14 +1100,18 @@ type WebCrawlerConfigurationParameters struct {
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
 	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
-	// +kubebuilder:validation:Required
-	Urls []UrlsParameters `json:"urls" tf:"urls,omitempty"`
+	// +kubebuilder:validation:Optional
+	Urls []UrlsParameters `json:"urls,omitempty" tf:"urls,omitempty"`
 }
 
 // DataSourceSpec defines the desired state of DataSource
 type DataSourceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSourceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DataSourceInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSourceStatus defines the observed state of DataSource.
@@ -828,8 +1132,8 @@ type DataSourceStatus struct {
 type DataSource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   DataSourceSpec   `json:"spec"`
 	Status DataSourceStatus `json:"status,omitempty"`
 }

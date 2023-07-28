@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketAccelerateConfigurationInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Transfer acceleration state of the bucket. Valid values: Enabled, Suspended.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type BucketAccelerateConfigurationObservation struct {
 
 	// Name of the bucket.
@@ -62,6 +71,10 @@ type BucketAccelerateConfigurationParameters struct {
 type BucketAccelerateConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketAccelerateConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketAccelerateConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketAccelerateConfigurationStatus defines the observed state of BucketAccelerateConfiguration.
@@ -82,7 +95,7 @@ type BucketAccelerateConfigurationStatus struct {
 type BucketAccelerateConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.status)",message="status is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.status) || has(self.initProvider.status)",message="status is a required parameter"
 	Spec   BucketAccelerateConfigurationSpec   `json:"spec"`
 	Status BucketAccelerateConfigurationStatus `json:"status,omitempty"`
 }

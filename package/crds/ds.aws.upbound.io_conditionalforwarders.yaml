@@ -161,6 +161,17 @@ spec:
                 - region
                 - remoteDomainName
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  dnsIps:
+                    description: A list of forwarder IP addresses.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -361,7 +372,8 @@ spec:
             x-kubernetes-validations:
             - message: dnsIps is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dnsIps)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dnsIps)
+                || has(self.initProvider.dnsIps)'
           status:
             description: ConditionalForwarderStatus defines the observed state of
               ConditionalForwarder.

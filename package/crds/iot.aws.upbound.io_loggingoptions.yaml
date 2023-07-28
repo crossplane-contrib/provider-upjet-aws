@@ -158,6 +158,19 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  defaultLogLevel:
+                    description: 'The default logging level. Valid Values: "DEBUG",
+                      "INFO", "ERROR", "WARN", "DISABLED".'
+                    type: string
+                  disableAllLogs:
+                    description: If true all logs are disabled. The default is false.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -358,7 +371,8 @@ spec:
             x-kubernetes-validations:
             - message: defaultLogLevel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultLogLevel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultLogLevel)
+                || has(self.initProvider.defaultLogLevel)'
           status:
             description: LoggingOptionsStatus defines the observed state of LoggingOptions.
             properties:

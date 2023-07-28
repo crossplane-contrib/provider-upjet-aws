@@ -89,6 +89,27 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  resourceTypeManagementPreference:
+                    additionalProperties:
+                      type: boolean
+                    description: "A map of services along with the management preferences
+                      for the Region. \n WARNING: All parameters are required to be
+                      given: EFS, DynamoDB"
+                    type: object
+                  resourceTypeOptInPreference:
+                    additionalProperties:
+                      type: boolean
+                    description: "A map of services along with the opt-in preferences
+                      for the Region. \n WARNING: All parameters are required to be
+                      given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage
+                      Gateway, VirtualMachine"
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -289,7 +310,8 @@ spec:
             x-kubernetes-validations:
             - message: resourceTypeOptInPreference is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceTypeOptInPreference)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceTypeOptInPreference)
+                || has(self.initProvider.resourceTypeOptInPreference)'
           status:
             description: RegionSettingsStatus defines the observed state of RegionSettings.
             properties:

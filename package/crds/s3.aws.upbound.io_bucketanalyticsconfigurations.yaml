@@ -295,24 +295,87 @@ spec:
                                             type: string
                                         type: object
                                       type: array
-                                  required:
-                                  - s3BucketDestination
                                   type: object
                                 type: array
                               outputSchemaVersion:
                                 description: 'Schema version of exported analytics
                                   data. Allowed values: V_1. Default value: V_1.'
                                 type: string
-                            required:
-                            - destination
                             type: object
                           type: array
-                      required:
-                      - dataExport
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  filter:
+                    description: Object filtering that accepts a prefix, tags, or
+                      a logical AND of prefix and tags (documented below).
+                    items:
+                      properties:
+                        prefix:
+                          description: Object prefix for filtering.
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                      type: object
+                    type: array
+                  name:
+                    description: Unique identifier of the analytics configuration
+                      for the bucket.
+                    type: string
+                  storageClassAnalysis:
+                    description: Configuration for the analytics data export (documented
+                      below).
+                    items:
+                      properties:
+                        dataExport:
+                          description: Data export configuration (documented below).
+                          items:
+                            properties:
+                              destination:
+                                description: Specifies the destination for the exported
+                                  analytics data (documented below).
+                                items:
+                                  properties:
+                                    s3BucketDestination:
+                                      description: Analytics data export currently
+                                        only supports an S3 bucket destination (documented
+                                        below).
+                                      items:
+                                        properties:
+                                          bucketAccountId:
+                                            description: Account ID that owns the
+                                              destination bucket.
+                                            type: string
+                                          format:
+                                            description: 'Output format of exported
+                                              analytics data. Allowed values: CSV.
+                                              Default value: CSV.'
+                                            type: string
+                                          prefix:
+                                            description: Object prefix for filtering.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              outputSchemaVersion:
+                                description: 'Schema version of exported analytics
+                                  data. Allowed values: V_1. Default value: V_1.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -514,7 +577,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: BucketAnalyticsConfigurationStatus defines the observed state
               of BucketAnalyticsConfiguration.

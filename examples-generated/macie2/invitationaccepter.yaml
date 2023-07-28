@@ -58,6 +58,3 @@ spec:
     invite: true
     provider: awsalternate
     region: us-west-1
-
----
-

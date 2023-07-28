@@ -122,6 +122,60 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowUnassociatedTargets:
+                    description: Whether targets must be registered with the Maintenance
+                      Window before tasks can be defined for those targets.
+                    type: boolean
+                  cutoff:
+                    description: The number of hours before the end of the Maintenance
+                      Window that Systems Manager stops scheduling new tasks for execution.
+                    type: number
+                  description:
+                    description: A description for the maintenance window.
+                    type: string
+                  duration:
+                    description: The duration of the Maintenance Window in hours.
+                    type: number
+                  enabled:
+                    description: 'Whether the maintenance window is enabled. Default:
+                      true.'
+                    type: boolean
+                  endDate:
+                    description: Timestamp in ISO-8601 extended format when to no
+                      longer run the maintenance window.
+                    type: string
+                  name:
+                    description: The name of the maintenance window.
+                    type: string
+                  schedule:
+                    description: The schedule of the Maintenance Window in the form
+                      of a cron or rate expression.
+                    type: string
+                  scheduleOffset:
+                    description: The number of days to wait after the date and time
+                      specified by a CRON expression before running the maintenance
+                      window.
+                    type: number
+                  scheduleTimezone:
+                    description: 'Timezone for schedule in Internet Assigned Numbers
+                      Authority (IANA) Time Zone Database format. For example: America/Los_Angeles,
+                      etc/UTC, or Asia/Seoul.'
+                    type: string
+                  startDate:
+                    description: Timestamp in ISO-8601 extended format when to begin
+                      the maintenance window.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -322,16 +376,20 @@ spec:
             x-kubernetes-validations:
             - message: cutoff is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.cutoff)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.cutoff)
+                || has(self.initProvider.cutoff)'
             - message: duration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.duration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.duration)
+                || has(self.initProvider.duration)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: schedule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)
+                || has(self.initProvider.schedule)'
           status:
             description: MaintenanceWindowStatus defines the observed state of MaintenanceWindow.
             properties:

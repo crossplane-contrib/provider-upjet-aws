@@ -81,6 +81,3 @@ spec:
     key: example-flink-application
     region: us-west-1
     source: flink-app.jar
-
----
-

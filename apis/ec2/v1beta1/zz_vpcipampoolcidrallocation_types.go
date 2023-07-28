@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCIpamPoolCidrAllocationInitParameters struct {
+
+	// The CIDR you want to assign to the pool.
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// The description for the allocation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Exclude a particular CIDR range from being returned by the pool.
+	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
+
+	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
+	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+}
+
 type VPCIpamPoolCidrAllocationObservation struct {
 
 	// The CIDR you want to assign to the pool.
@@ -88,6 +103,10 @@ type VPCIpamPoolCidrAllocationParameters struct {
 type VPCIpamPoolCidrAllocationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCIpamPoolCidrAllocationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCIpamPoolCidrAllocationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCIpamPoolCidrAllocationStatus defines the observed state of VPCIpamPoolCidrAllocation.

@@ -163,6 +163,25 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  input:
+                    description: JSON payload to the lambda function.
+                    type: string
+                  qualifier:
+                    description: Qualifier (i.e., version) of the lambda function.
+                      Defaults to $LATEST.
+                    type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: Map of arbitrary keys and values that, when changed,
+                      will trigger a re-invocation.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -363,7 +382,8 @@ spec:
             x-kubernetes-validations:
             - message: input is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)
+                || has(self.initProvider.input)'
           status:
             description: InvocationStatus defines the observed state of Invocation.
             properties:

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ContributorInsightsInitParameters struct {
+
+	// The global secondary index name
+	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+}
+
 type ContributorInsightsObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -52,6 +58,10 @@ type ContributorInsightsParameters struct {
 type ContributorInsightsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContributorInsightsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ContributorInsightsInitParameters `json:"initProvider,omitempty"`
 }
 
 // ContributorInsightsStatus defines the observed state of ContributorInsights.

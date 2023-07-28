@@ -96,10 +96,6 @@ spec:
                           description: Specifies the number of reserved transcode
                             slots (RTS) for queue.
                           type: number
-                      required:
-                      - commitment
-                      - renewalType
-                      - reservedSlots
                       type: object
                     type: array
                   status:
@@ -113,6 +109,48 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of the queue
+                    type: string
+                  pricingPlan:
+                    description: Specifies whether the pricing plan for the queue
+                      is on-demand or reserved. Valid values are ON_DEMAND or RESERVED.
+                      Default to ON_DEMAND.
+                    type: string
+                  reservationPlanSettings:
+                    description: A detail pricing plan of the  reserved queue. See
+                      below.
+                    items:
+                      properties:
+                        commitment:
+                          description: The length of the term of your reserved queue
+                            pricing plan commitment. Valid value is ONE_YEAR.
+                          type: string
+                        renewalType:
+                          description: Specifies whether the term of your reserved
+                            queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
+                          type: string
+                        reservedSlots:
+                          description: Specifies the number of reserved transcode
+                            slots (RTS) for queue.
+                          type: number
+                      type: object
+                    type: array
+                  status:
+                    description: A status of the queue. Valid values are ACTIVE or
+                      RESERVED. Default to PAUSED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

@@ -12,6 +12,3 @@ spec:
     region: us-west-1
     thingGroupName: example-group
     thingName: example-thing
-
----
-

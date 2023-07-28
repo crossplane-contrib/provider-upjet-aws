@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SnapshotScheduleAssociationInitParameters struct {
+}
+
 type SnapshotScheduleAssociationObservation struct {
 
 	// The cluster identifier.
@@ -64,6 +67,10 @@ type SnapshotScheduleAssociationParameters struct {
 type SnapshotScheduleAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SnapshotScheduleAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SnapshotScheduleAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // SnapshotScheduleAssociationStatus defines the observed state of SnapshotScheduleAssociation.

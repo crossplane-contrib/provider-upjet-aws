@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCIpamScopeInitParameters struct {
+
+	// A description for the scope you're creating.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCIpamScopeObservation struct {
 
 	// The Amazon Resource Name (ARN) of the scope.
@@ -78,6 +87,10 @@ type VPCIpamScopeParameters struct {
 type VPCIpamScopeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCIpamScopeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCIpamScopeInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCIpamScopeStatus defines the observed state of VPCIpamScope.

@@ -37,6 +37,3 @@ spec:
   forProvider:
     platformId: AWSLambda-SHA384-ECDSA
     region: us-west-1
-
----
-

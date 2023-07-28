@@ -107,8 +107,6 @@ spec:
                                 description: The AWS SSO field name that contains
                                   the identifiers of your users, such as their emails.
                                 type: string
-                            required:
-                            - identityAttributeName
                             type: object
                           type: array
                       type: object
@@ -281,6 +279,63 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  configuration:
+                    description: Configuration information for your Amazon Kendra
+                      experience. Detailed below.
+                    items:
+                      properties:
+                        contentSourceConfiguration:
+                          description: The identifiers of your data sources and FAQs.
+                            Or, you can specify that you want to use documents indexed
+                            via the BatchPutDocument API. Detailed below.
+                          items:
+                            properties:
+                              dataSourceIds:
+                                description: The identifiers of the data sources you
+                                  want to use for your Amazon Kendra experience. Maximum
+                                  number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                              directPutContent:
+                                description: Whether to use documents you indexed
+                                  directly using the BatchPutDocument API. Defaults
+                                  to false.
+                                type: boolean
+                              faqIds:
+                                description: The identifier of the FAQs that you want
+                                  to use for your Amazon Kendra experience. Maximum
+                                  number of 100 items.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        userIdentityConfiguration:
+                          description: The AWS SSO field name that contains the identifiers
+                            of your users, such as their emails. Detailed below.
+                          items:
+                            properties:
+                              identityAttributeName:
+                                description: The AWS SSO field name that contains
+                                  the identifiers of your users, such as their emails.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: A description for your Amazon Kendra experience.
+                    type: string
+                  name:
+                    description: A name for your Amazon Kendra experience.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -482,7 +537,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ExperienceStatus defines the observed state of Experience.
             properties:

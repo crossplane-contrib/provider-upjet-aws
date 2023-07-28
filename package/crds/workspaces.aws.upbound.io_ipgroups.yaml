@@ -89,8 +89,6 @@ spec:
                           description: The IP address range, in CIDR notation, e.g.,
                             10.0.0.0/16
                           type: string
-                      required:
-                      - source
                       type: object
                     type: array
                   tags:
@@ -100,6 +98,37 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the IP group.
+                    type: string
+                  name:
+                    description: The name of the IP group.
+                    type: string
+                  rules:
+                    description: One or more pairs specifying the IP group rule (in
+                      CIDR format) from which web requests originate.
+                    items:
+                      properties:
+                        description:
+                          description: The description of the IP group.
+                          type: string
+                        source:
+                          description: The IP address range, in CIDR notation, e.g.,
+                            10.0.0.0/16
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -301,7 +330,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: IPGroupStatus defines the observed state of IPGroup.
             properties:

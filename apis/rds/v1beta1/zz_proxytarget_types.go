@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProxyTargetInitParameters struct {
+
+	// DB cluster identifier.
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// The name of the target group.
+	TargetGroupName *string `json:"targetGroupName,omitempty" tf:"target_group_name,omitempty"`
+}
+
 type ProxyTargetObservation struct {
 
 	// DB cluster identifier.
@@ -96,6 +105,10 @@ type ProxyTargetParameters struct {
 type ProxyTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProxyTargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProxyTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProxyTargetStatus defines the observed state of ProxyTarget.
@@ -116,7 +129,7 @@ type ProxyTargetStatus struct {
 type ProxyTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetGroupName)",message="targetGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetGroupName) || has(self.initProvider.targetGroupName)",message="targetGroupName is a required parameter"
 	Spec   ProxyTargetSpec   `json:"spec"`
 	Status ProxyTargetStatus `json:"status,omitempty"`
 }

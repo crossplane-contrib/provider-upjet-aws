@@ -77,6 +77,15 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  standardsArn:
+                    description: The ARN of a standard - see below.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -277,7 +286,8 @@ spec:
             x-kubernetes-validations:
             - message: standardsArn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.standardsArn)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.standardsArn)
+                || has(self.initProvider.standardsArn)'
           status:
             description: StandardsSubscriptionStatus defines the observed state of
               StandardsSubscription.

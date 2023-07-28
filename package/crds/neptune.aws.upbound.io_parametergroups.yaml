@@ -88,9 +88,6 @@ spec:
                         value:
                           description: The value of the Neptune parameter.
                           type: string
-                      required:
-                      - name
-                      - value
                       type: object
                     type: array
                   region:
@@ -104,6 +101,40 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the Neptune parameter group.
+                    type: string
+                  family:
+                    description: The family of the Neptune parameter group.
+                    type: string
+                  parameter:
+                    description: A list of Neptune parameters to apply.
+                    items:
+                      properties:
+                        applyMethod:
+                          description: The apply method of the Neptune parameter.
+                            Valid values are immediate and pending-reboot. Defaults
+                            to pending-reboot.
+                          type: string
+                        name:
+                          description: The name of the Neptune parameter group.
+                          type: string
+                        value:
+                          description: The value of the Neptune parameter.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -305,7 +336,8 @@ spec:
             x-kubernetes-validations:
             - message: family is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.family)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.family)
+                || has(self.initProvider.family)'
           status:
             description: ParameterGroupStatus defines the observed state of ParameterGroup.
             properties:

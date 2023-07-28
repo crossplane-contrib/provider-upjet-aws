@@ -16,6 +16,3 @@ spec:
     - name: example
     - name: example
     vpcConnectorName: name
-
----
-

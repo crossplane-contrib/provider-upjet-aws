@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BudgetResourceAssociationInitParameters struct {
+}
+
 type BudgetResourceAssociationObservation struct {
 
 	// Budget name.
@@ -63,6 +66,10 @@ type BudgetResourceAssociationParameters struct {
 type BudgetResourceAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BudgetResourceAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BudgetResourceAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BudgetResourceAssociationStatus defines the observed state of BudgetResourceAssociation.

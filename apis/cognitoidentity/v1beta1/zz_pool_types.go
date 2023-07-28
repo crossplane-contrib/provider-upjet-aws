@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CognitoIdentityProvidersInitParameters struct {
+
+	// The provider name for an Amazon Cognito Identity User Pool.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// Whether server-side token validation is enabled for the identity provider’s token or not.
+	ServerSideTokenCheck *bool `json:"serverSideTokenCheck,omitempty" tf:"server_side_token_check,omitempty"`
+}
+
 type CognitoIdentityProvidersObservation struct {
 
 	// The client ID for the Amazon Cognito Identity User Pool.
@@ -47,6 +56,34 @@ type CognitoIdentityProvidersParameters struct {
 	// Whether server-side token validation is enabled for the identity provider’s token or not.
 	// +kubebuilder:validation:Optional
 	ServerSideTokenCheck *bool `json:"serverSideTokenCheck,omitempty" tf:"server_side_token_check,omitempty"`
+}
+
+type PoolInitParameters struct {
+
+	// Enables or disables the classic / basic authentication flow. Default is false.
+	AllowClassicFlow *bool `json:"allowClassicFlow,omitempty" tf:"allow_classic_flow,omitempty"`
+
+	// Whether the identity pool supports unauthenticated logins or not.
+	AllowUnauthenticatedIdentities *bool `json:"allowUnauthenticatedIdentities,omitempty" tf:"allow_unauthenticated_identities,omitempty"`
+
+	// An array of Amazon Cognito Identity user pools and their client IDs.
+	CognitoIdentityProviders []CognitoIdentityProvidersInitParameters `json:"cognitoIdentityProviders,omitempty" tf:"cognito_identity_providers,omitempty"`
+
+	// The "domain" by which Cognito will refer to your users. This name acts as a placeholder that allows your
+	// backend and the Cognito service to communicate about the developer provider.
+	DeveloperProviderName *string `json:"developerProviderName,omitempty" tf:"developer_provider_name,omitempty"`
+
+	// The Cognito Identity Pool name.
+	IdentityPoolName *string `json:"identityPoolName,omitempty" tf:"identity_pool_name,omitempty"`
+
+	// Set of OpendID Connect provider ARNs.
+	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
+
+	// Key-Value pairs mapping provider names to provider app IDs.
+	SupportedLoginProviders map[string]*string `json:"supportedLoginProviders,omitempty" tf:"supported_login_providers,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PoolObservation struct {
@@ -148,6 +185,10 @@ type PoolParameters struct {
 type PoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // PoolStatus defines the observed state of Pool.
@@ -168,7 +209,7 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityPoolName)",message="identityPoolName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityPoolName) || has(self.initProvider.identityPoolName)",message="identityPoolName is a required parameter"
 	Spec   PoolSpec   `json:"spec"`
 	Status PoolStatus `json:"status,omitempty"`
 }

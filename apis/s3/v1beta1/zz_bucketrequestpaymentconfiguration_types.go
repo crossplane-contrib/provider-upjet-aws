@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketRequestPaymentConfigurationInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Specifies who pays for the download and request fees. Valid values: BucketOwner, Requester.
+	Payer *string `json:"payer,omitempty" tf:"payer,omitempty"`
+}
+
 type BucketRequestPaymentConfigurationObservation struct {
 
 	// Name of the bucket.
@@ -62,6 +71,10 @@ type BucketRequestPaymentConfigurationParameters struct {
 type BucketRequestPaymentConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketRequestPaymentConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketRequestPaymentConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketRequestPaymentConfigurationStatus defines the observed state of BucketRequestPaymentConfiguration.
@@ -82,7 +95,7 @@ type BucketRequestPaymentConfigurationStatus struct {
 type BucketRequestPaymentConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.payer)",message="payer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.payer) || has(self.initProvider.payer)",message="payer is a required parameter"
 	Spec   BucketRequestPaymentConfigurationSpec   `json:"spec"`
 	Status BucketRequestPaymentConfigurationStatus `json:"status,omitempty"`
 }

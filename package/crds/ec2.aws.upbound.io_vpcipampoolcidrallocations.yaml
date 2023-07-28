@@ -169,6 +169,28 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cidr:
+                    description: The CIDR you want to assign to the pool.
+                    type: string
+                  description:
+                    description: The description for the allocation.
+                    type: string
+                  disallowedCidrs:
+                    description: Exclude a particular CIDR range from being returned
+                      by the pool.
+                    items:
+                      type: string
+                    type: array
+                  netmaskLength:
+                    description: 'The netmask length of the CIDR you would like to
+                      allocate to the IPAM pool. Valid Values: 0-128.'
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'

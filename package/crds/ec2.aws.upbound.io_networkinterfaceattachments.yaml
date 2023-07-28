@@ -232,6 +232,15 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  deviceIndex:
+                    description: Network interface index (int).
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -432,7 +441,8 @@ spec:
             x-kubernetes-validations:
             - message: deviceIndex is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.deviceIndex)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.deviceIndex)
+                || has(self.initProvider.deviceIndex)'
           status:
             description: NetworkInterfaceAttachmentStatus defines the observed state
               of NetworkInterfaceAttachment.

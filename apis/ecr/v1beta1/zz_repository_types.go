@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionConfigurationInitParameters struct {
+
+	// The encryption type to use for the repository. Valid values are AES256 or KMS. Defaults to AES256.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+}
+
 type EncryptionConfigurationObservation struct {
 
 	// The encryption type to use for the repository. Valid values are AES256 or KMS. Defaults to AES256.
@@ -43,6 +49,12 @@ type EncryptionConfigurationParameters struct {
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
+type ImageScanningConfigurationInitParameters struct {
+
+	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
+	ScanOnPush *bool `json:"scanOnPush,omitempty" tf:"scan_on_push,omitempty"`
+}
+
 type ImageScanningConfigurationObservation struct {
 
 	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
@@ -52,8 +64,27 @@ type ImageScanningConfigurationObservation struct {
 type ImageScanningConfigurationParameters struct {
 
 	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
-	// +kubebuilder:validation:Required
-	ScanOnPush *bool `json:"scanOnPush" tf:"scan_on_push,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScanOnPush *bool `json:"scanOnPush,omitempty" tf:"scan_on_push,omitempty"`
+}
+
+type RepositoryInitParameters struct {
+
+	// Encryption configuration for the repository. See below for schema.
+	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// If true, will delete the repository even if it contains images.
+	// Defaults to false.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
+	// Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.
+	ImageScanningConfiguration []ImageScanningConfigurationInitParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
+
+	// The tag mutability setting for the repository. Must be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.
+	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RepositoryObservation struct {
@@ -122,6 +153,10 @@ type RepositoryParameters struct {
 type RepositorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RepositoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RepositoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // RepositoryStatus defines the observed state of Repository.

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateValidationInitParameters struct {
+
+	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
+}
+
 type CertificateValidationObservation struct {
 
 	// ARN of the certificate that is being validated.
@@ -54,6 +60,10 @@ type CertificateValidationParameters struct {
 type CertificateValidationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateValidationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CertificateValidationInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateValidationStatus defines the observed state of CertificateValidation.

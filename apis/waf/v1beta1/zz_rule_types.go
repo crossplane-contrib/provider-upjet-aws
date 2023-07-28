@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RuleInitParameters struct {
+
+	// The name or description for the Amazon CloudWatch metric of this rule. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The name or description of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The objects to include in a rule (documented below).
+	Predicates []RulePredicatesInitParameters `json:"predicates,omitempty" tf:"predicates,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type RuleObservation struct {
 
 	// The ARN of the WAF rule.
@@ -61,6 +76,18 @@ type RuleParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RulePredicatesInitParameters struct {
+
+	// Set this to false if you want to allow, block, or count requests
+	// based on the settings in the specified waf_byte_match_set, waf_ipset, aws_waf_size_constraint_set, aws_waf_sql_injection_match_set or aws_waf_xss_match_set.
+	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.
+	// If set to true, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
+	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+
+	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type RulePredicatesObservation struct {
 
 	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
@@ -96,18 +123,22 @@ type RulePredicatesParameters struct {
 	// based on the settings in the specified waf_byte_match_set, waf_ipset, aws_waf_size_constraint_set, aws_waf_sql_injection_match_set or aws_waf_xss_match_set.
 	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.
 	// If set to true, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
-	// +kubebuilder:validation:Required
-	Negated *bool `json:"negated" tf:"negated,omitempty"`
+	// +kubebuilder:validation:Optional
+	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
 
 	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // RuleSpec defines the desired state of Rule
 type RuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // RuleStatus defines the observed state of Rule.
@@ -128,8 +159,8 @@ type RuleStatus struct {
 type Rule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricName)",message="metricName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricName) || has(self.initProvider.metricName)",message="metricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   RuleSpec   `json:"spec"`
 	Status RuleStatus `json:"status,omitempty"`
 }

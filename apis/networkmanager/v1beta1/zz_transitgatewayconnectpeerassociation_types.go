@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayConnectPeerAssociationInitParameters struct {
+
+	// The ID of the link.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+}
+
 type TransitGatewayConnectPeerAssociationObservation struct {
 
 	// The ID of the device.
@@ -88,6 +94,10 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 type TransitGatewayConnectPeerAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayConnectPeerAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TransitGatewayConnectPeerAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayConnectPeerAssociationStatus defines the observed state of TransitGatewayConnectPeerAssociation.

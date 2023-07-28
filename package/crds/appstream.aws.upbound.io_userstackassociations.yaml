@@ -307,6 +307,16 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  sendEmailNotification:
+                    description: Whether a welcome email is sent to a user after the
+                      user is created in the user pool.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

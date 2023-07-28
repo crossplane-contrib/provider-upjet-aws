@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StreamConsumerInitParameters struct {
+
+	// Name of the stream consumer.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type StreamConsumerObservation struct {
 
 	// Amazon Resource Name (ARN) of the stream consumer.
@@ -61,6 +67,10 @@ type StreamConsumerParameters struct {
 type StreamConsumerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamConsumerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider StreamConsumerInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamConsumerStatus defines the observed state of StreamConsumer.
@@ -81,7 +91,7 @@ type StreamConsumerStatus struct {
 type StreamConsumer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   StreamConsumerSpec   `json:"spec"`
 	Status StreamConsumerStatus `json:"status,omitempty"`
 }

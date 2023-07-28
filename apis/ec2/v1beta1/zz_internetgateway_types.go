@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InternetGatewayInitParameters_2 struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type InternetGatewayObservation_2 struct {
 
 	// The ARN of the Internet Gateway.
@@ -63,6 +69,10 @@ type InternetGatewayParameters_2 struct {
 type InternetGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InternetGatewayParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InternetGatewayInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // InternetGatewayStatus defines the observed state of InternetGateway.

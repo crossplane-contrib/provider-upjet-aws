@@ -253,8 +253,6 @@ spec:
                                 description: Server-side encryption algorithm to use.
                                   Valid values are AES256 and aws:kms
                                 type: string
-                            required:
-                            - sseAlgorithm
                             type: object
                           type: array
                         bucketKeyEnabled:
@@ -265,6 +263,37 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  rule:
+                    description: Set of server-side encryption configuration rules.
+                      See below. Currently, only a single rule is supported.
+                    items:
+                      properties:
+                        applyServerSideEncryptionByDefault:
+                          description: Single object for setting server-side encryption
+                            by default. See below.
+                          items:
+                            properties:
+                              sseAlgorithm:
+                                description: Server-side encryption algorithm to use.
+                                  Valid values are AES256 and aws:kms
+                                type: string
+                            type: object
+                          type: array
+                        bucketKeyEnabled:
+                          description: Whether or not to use Amazon S3 Bucket Keys
+                            for SSE-KMS.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -466,7 +495,8 @@ spec:
             x-kubernetes-validations:
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
+                || has(self.initProvider.rule)'
           status:
             description: BucketServerSideEncryptionConfigurationStatus defines the
               observed state of BucketServerSideEncryptionConfiguration.

@@ -173,8 +173,6 @@ spec:
                             after the base count of tasks has been satisfied. Defaults
                             to 0.
                           type: number
-                      required:
-                      - capacityProvider
                       type: object
                     type: array
                   region:
@@ -183,6 +181,42 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  capacityProviders:
+                    description: Set of names of one or more capacity providers to
+                      associate with the cluster. Valid values also include FARGATE
+                      and FARGATE_SPOT.
+                    items:
+                      type: string
+                    type: array
+                  defaultCapacityProviderStrategy:
+                    description: Set of capacity provider strategies to use by default
+                      for the cluster. Detailed below.
+                    items:
+                      properties:
+                        base:
+                          description: The number of tasks, at a minimum, to run on
+                            the specified capacity provider. Only one capacity provider
+                            in a capacity provider strategy can have a base defined.
+                            Defaults to 0.
+                          type: number
+                        capacityProvider:
+                          description: Name of the capacity provider.
+                          type: string
+                        weight:
+                          description: The relative percentage of the total number
+                            of launched tasks that should use the specified capacity
+                            provider. The weight value is taken into consideration
+                            after the base count of tasks has been satisfied. Defaults
+                            to 0.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

@@ -172,6 +172,33 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the resource that you want to
+                      register.
+                    type: string
+                  expirationDate:
+                    description: UTC timestamp in RFC3339 format by which this activation
+                      request should expire. The default value is 24 hours from resource
+                      creation time.
+                    type: string
+                  name:
+                    description: The default name of the registered managed instance.
+                    type: string
+                  registrationLimit:
+                    description: The maximum number of managed instances you want
+                      to register. The default value is 1 instance.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

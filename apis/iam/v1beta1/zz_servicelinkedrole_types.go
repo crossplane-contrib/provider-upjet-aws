@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ServiceLinkedRoleInitParameters struct {
+
+	// The AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com. To find the full list of services that support service-linked roles, check the docs.
+	AwsServiceName *string `json:"awsServiceName,omitempty" tf:"aws_service_name,omitempty"`
+
+	// Additional string appended to the role name. Not all AWS services support custom suffixes.
+	CustomSuffix *string `json:"customSuffix,omitempty" tf:"custom_suffix,omitempty"`
+
+	// The description of the role.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ServiceLinkedRoleObservation struct {
 
 	// The Amazon Resource Name (ARN) specifying the role.
@@ -72,6 +87,10 @@ type ServiceLinkedRoleParameters struct {
 type ServiceLinkedRoleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceLinkedRoleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceLinkedRoleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceLinkedRoleStatus defines the observed state of ServiceLinkedRole.
@@ -92,7 +111,7 @@ type ServiceLinkedRoleStatus struct {
 type ServiceLinkedRole struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.awsServiceName)",message="awsServiceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.awsServiceName) || has(self.initProvider.awsServiceName)",message="awsServiceName is a required parameter"
 	Spec   ServiceLinkedRoleSpec   `json:"spec"`
 	Status ServiceLinkedRoleStatus `json:"status,omitempty"`
 }

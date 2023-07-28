@@ -236,6 +236,21 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
+                  principalType:
+                    description: Principal type. Setting this argument empty (e.g.,
+                      principal_type = "") will result in an error. Valid value is
+                      IAM. Default is IAM.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -436,7 +451,8 @@ spec:
             x-kubernetes-validations:
             - message: acceptLanguage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.acceptLanguage)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.acceptLanguage)
+                || has(self.initProvider.acceptLanguage)'
           status:
             description: PrincipalPortfolioAssociationStatus defines the observed
               state of PrincipalPortfolioAssociation.

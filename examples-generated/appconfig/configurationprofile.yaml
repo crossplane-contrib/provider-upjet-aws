@@ -23,6 +23,3 @@ spec:
         name: example-lambda-function
         namespace: upbound-system
       type: LAMBDA
-
----
-

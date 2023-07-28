@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APIKeyInitParameters struct {
+
+	// API key description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// RFC3339 string representation of the expiry date. Rounded down to nearest hour. By default, it is 7 days from the date of creation.
+	Expires *string `json:"expires,omitempty" tf:"expires,omitempty"`
+}
+
 type APIKeyObservation struct {
 
 	// ID of the associated AppSync API
@@ -62,6 +71,10 @@ type APIKeyParameters struct {
 type APIKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider APIKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIKeyStatus defines the observed state of APIKey.

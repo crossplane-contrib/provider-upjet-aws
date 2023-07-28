@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomerGatewayAssociationInitParameters struct {
+
+	// The ID of the link.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+}
+
 type CustomerGatewayAssociationObservation struct {
 
 	// The Amazon Resource Name (ARN) of the customer gateway.
@@ -88,6 +94,10 @@ type CustomerGatewayAssociationParameters struct {
 type CustomerGatewayAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CustomerGatewayAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CustomerGatewayAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // CustomerGatewayAssociationStatus defines the observed state of CustomerGatewayAssociation.

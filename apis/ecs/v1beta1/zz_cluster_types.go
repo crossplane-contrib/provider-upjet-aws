@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterInitParameters struct {
+
+	// The execute command configuration for the cluster. Detailed below.
+	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
+	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyInitParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
+
+	// Configures a default Service Connect namespace. Detailed below.
+	ServiceConnectDefaults []ServiceConnectDefaultsInitParameters `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
+
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	Setting []SettingInitParameters `json:"setting,omitempty" tf:"setting,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ClusterObservation struct {
 
 	// ARN that identifies the cluster.
@@ -71,6 +89,12 @@ type ClusterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ConfigurationInitParameters struct {
+
+	// The details of the execute command configuration. Detailed below.
+	ExecuteCommandConfiguration []ExecuteCommandConfigurationInitParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+}
+
 type ConfigurationObservation struct {
 
 	// The details of the execute command configuration. Detailed below.
@@ -82,6 +106,18 @@ type ConfigurationParameters struct {
 	// The details of the execute command configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+}
+
+type DefaultCapacityProviderStrategyInitParameters struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// The short name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DefaultCapacityProviderStrategyObservation struct {
@@ -103,12 +139,24 @@ type DefaultCapacityProviderStrategyParameters struct {
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// The short name of the capacity provider.
-	// +kubebuilder:validation:Required
-	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type ExecuteCommandConfigurationInitParameters struct {
+
+	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
+	LogConfiguration []LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
+	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type ExecuteCommandConfigurationObservation struct {
@@ -136,6 +184,24 @@ type ExecuteCommandConfigurationParameters struct {
 	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
 	// +kubebuilder:validation:Optional
 	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
+}
+
+type LogConfigurationInitParameters struct {
+
+	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
+
+	// The name of the CloudWatch log group to send logs to.
+	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
+
+	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
+	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
+
+	// The name of the S3 bucket to send logs to.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// An optional folder in the S3 bucket to place logs in.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type LogConfigurationObservation struct {
@@ -179,6 +245,12 @@ type LogConfigurationParameters struct {
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
+type ServiceConnectDefaultsInitParameters struct {
+
+	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
 type ServiceConnectDefaultsObservation struct {
 
 	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
@@ -188,8 +260,17 @@ type ServiceConnectDefaultsObservation struct {
 type ServiceConnectDefaultsParameters struct {
 
 	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type SettingInitParameters struct {
+
+	// Name of the setting to manage. Valid values: containerInsights.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value to assign to the setting. Valid values are enabled and disabled.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SettingObservation struct {
@@ -204,18 +285,22 @@ type SettingObservation struct {
 type SettingParameters struct {
 
 	// Name of the setting to manage. Valid values: containerInsights.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value to assign to the setting. Valid values are enabled and disabled.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.

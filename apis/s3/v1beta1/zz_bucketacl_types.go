@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessControlPolicyGrantInitParameters struct {
+
+	// Configuration block for the person being granted permissions. See below.
+	Grantee []GranteeInitParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
+
+	// Logging permissions assigned to the grantee for the bucket.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+}
+
 type AccessControlPolicyGrantObservation struct {
 
 	// Configuration block for the person being granted permissions. See below.
@@ -29,8 +38,17 @@ type AccessControlPolicyGrantParameters struct {
 	Grantee []GranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
 	// Logging permissions assigned to the grantee for the bucket.
-	// +kubebuilder:validation:Required
-	Permission *string `json:"permission" tf:"permission,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+}
+
+type AccessControlPolicyInitParameters struct {
+
+	// Set of grant configuration blocks. See below.
+	Grant []AccessControlPolicyGrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
+
+	// Configuration block of the bucket owner's display name and ID. See below.
+	Owner []OwnerInitParameters `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
 type AccessControlPolicyObservation struct {
@@ -49,8 +67,20 @@ type AccessControlPolicyParameters struct {
 	Grant []AccessControlPolicyGrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
 	// Configuration block of the bucket owner's display name and ID. See below.
-	// +kubebuilder:validation:Required
-	Owner []OwnerParameters `json:"owner" tf:"owner,omitempty"`
+	// +kubebuilder:validation:Optional
+	Owner []OwnerParameters `json:"owner,omitempty" tf:"owner,omitempty"`
+}
+
+type BucketACLInitParameters struct {
+
+	// Canned ACL to apply to the bucket.
+	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
+
+	// Configuration block that sets the ACL permissions for an object per grantee. See below.
+	AccessControlPolicy []AccessControlPolicyInitParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 }
 
 type BucketACLObservation struct {
@@ -105,6 +135,21 @@ type BucketACLParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type GranteeInitParameters struct {
+
+	// Email address of the grantee. See Regions and Endpoints for supported AWS regions where this argument can be specified.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// ID of the owner.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// URI of the grantee group.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type GranteeObservation struct {
 
 	// Display name of the owner.
@@ -134,12 +179,21 @@ type GranteeParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type OwnerInitParameters struct {
+
+	// Display name of the owner.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// ID of the owner.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type OwnerObservation struct {
@@ -158,14 +212,18 @@ type OwnerParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// ID of the owner.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 // BucketACLSpec defines the desired state of BucketACL
 type BucketACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BucketACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketACLStatus defines the observed state of BucketACL.

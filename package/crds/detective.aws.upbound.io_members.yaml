@@ -168,6 +168,29 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: AWS account ID for the account.
+                    type: string
+                  disableEmailNotification:
+                    description: If set to true, then the root user of the invited
+                      account will not receive an email notification. This notification
+                      is in addition to an alert that the root user receives in AWS
+                      Personal Health Dashboard. By default, this is set to false.
+                    type: boolean
+                  emailAddress:
+                    description: Email address for the account.
+                    type: string
+                  message:
+                    description: A custom message to include in the invitation. Amazon
+                      Detective adds this message to the standard content that it
+                      sends for an invitation.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -368,10 +391,12 @@ spec:
             x-kubernetes-validations:
             - message: accountId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)
+                || has(self.initProvider.accountId)'
             - message: emailAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)
+                || has(self.initProvider.emailAddress)'
           status:
             description: MemberStatus defines the observed state of Member.
             properties:

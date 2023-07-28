@@ -324,6 +324,29 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  responseModels:
+                    additionalProperties:
+                      type: string
+                    description: Map of the API models used for the response's content
+                      type
+                    type: object
+                  responseParameters:
+                    additionalProperties:
+                      type: boolean
+                    description: 'Map of response parameters that can be sent to the
+                      caller. For example: response_parameters = { "method.response.header.X-Some-Header"
+                      = true } would define that the header X-Some-Header can be provided
+                      on the response.'
+                    type: object
+                  statusCode:
+                    description: HTTP status code
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -524,7 +547,8 @@ spec:
             x-kubernetes-validations:
             - message: statusCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.statusCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.statusCode)
+                || has(self.initProvider.statusCode)'
           status:
             description: MethodResponseStatus defines the observed state of MethodResponse.
             properties:

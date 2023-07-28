@@ -10,6 +10,3 @@ spec:
   forProvider:
     description: A custom schema registry
     region: us-west-1
-
----
-

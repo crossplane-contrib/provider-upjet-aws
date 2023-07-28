@@ -215,9 +215,6 @@ spec:
                             in the memory store. Minimum value of 1. Maximum value
                             of 8766.
                           type: number
-                      required:
-                      - magneticStoreRetentionPeriodInDays
-                      - memoryStoreRetentionPeriodInHours
                       type: object
                     type: array
                   tableName:
@@ -231,6 +228,85 @@ spec:
                 required:
                 - region
                 - tableName
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  magneticStoreWriteProperties:
+                    description: Contains properties to set on the table when enabling
+                      magnetic store writes. See Magnetic Store Write Properties below
+                      for more details.
+                    items:
+                      properties:
+                        enableMagneticStoreWrites:
+                          description: A flag to enable magnetic store writes.
+                          type: boolean
+                        magneticStoreRejectedDataLocation:
+                          description: The location to write error reports for records
+                            rejected asynchronously during magnetic store writes.
+                            See Magnetic Store Rejected Data Location below for more
+                            details.
+                          items:
+                            properties:
+                              s3Configuration:
+                                description: Configuration of an S3 location to write
+                                  error reports for records rejected, asynchronously,
+                                  during magnetic store writes. See S3 Configuration
+                                  below for more details.
+                                items:
+                                  properties:
+                                    bucketName:
+                                      description: Bucket name of the customer S3
+                                        bucket.
+                                      type: string
+                                    encryptionOption:
+                                      description: Encryption option for the customer
+                                        s3 location. Options are S3 server side encryption
+                                        with an S3-managed key or KMS managed key.
+                                        Valid values are SSE_KMS and SSE_S3.
+                                      type: string
+                                    kmsKeyId:
+                                      description: KMS key arn for the customer s3
+                                        location when encrypting with a KMS managed
+                                        key.
+                                      type: string
+                                    objectKeyPrefix:
+                                      description: Object key prefix for the customer
+                                        S3 location.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  retentionProperties:
+                    description: The retention duration for the memory store and magnetic
+                      store. See Retention Properties below for more details. If not
+                      provided, magnetic_store_retention_period_in_days default to
+                      73000 and memory_store_retention_period_in_hours defaults to
+                      6.
+                    items:
+                      properties:
+                        magneticStoreRetentionPeriodInDays:
+                          description: The duration for which data must be stored
+                            in the magnetic store. Minimum value of 1. Maximum value
+                            of 73000.
+                          type: number
+                        memoryStoreRetentionPeriodInHours:
+                          description: The duration for which data must be stored
+                            in the memory store. Minimum value of 1. Maximum value
+                            of 8766.
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

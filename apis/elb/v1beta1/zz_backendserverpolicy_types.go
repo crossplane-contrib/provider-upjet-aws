@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackendServerPolicyInitParameters struct {
+
+	// The instance port to apply the policy to.
+	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+
+	// List of Policy Names to apply to the backend server.
+	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+}
+
 type BackendServerPolicyObservation struct {
 
 	// The ID of the policy.
@@ -61,6 +70,10 @@ type BackendServerPolicyParameters struct {
 type BackendServerPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackendServerPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BackendServerPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackendServerPolicyStatus defines the observed state of BackendServerPolicy.
@@ -81,7 +94,7 @@ type BackendServerPolicyStatus struct {
 type BackendServerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instancePort)",message="instancePort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instancePort) || has(self.initProvider.instancePort)",message="instancePort is a required parameter"
 	Spec   BackendServerPolicySpec   `json:"spec"`
 	Status BackendServerPolicyStatus `json:"status,omitempty"`
 }

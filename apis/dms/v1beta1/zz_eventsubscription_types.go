@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EventSubscriptionInitParameters struct {
+
+	// Whether the event subscription should be enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
+	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
+
+	// Ids of sources to listen to.
+	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// Type of source for events. Valid values: replication-instance or replication-task
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type EventSubscriptionObservation struct {
 
 	// Amazon Resource Name (ARN) of the DMS Event Subscription.
@@ -88,6 +106,10 @@ type EventSubscriptionParameters struct {
 type EventSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventSubscriptionStatus defines the observed state of EventSubscription.
@@ -108,7 +130,7 @@ type EventSubscriptionStatus struct {
 type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventCategories)",message="eventCategories is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventCategories) || has(self.initProvider.eventCategories)",message="eventCategories is a required parameter"
 	Spec   EventSubscriptionSpec   `json:"spec"`
 	Status EventSubscriptionStatus `json:"status,omitempty"`
 }

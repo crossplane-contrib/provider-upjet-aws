@@ -13,6 +13,3 @@ spec:
     hostRecovery: "on"
     instanceType: c5.18xlarge
     region: us-west-1
-
----
-

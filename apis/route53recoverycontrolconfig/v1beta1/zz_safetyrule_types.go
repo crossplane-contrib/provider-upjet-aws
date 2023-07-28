@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RuleConfigInitParameters struct {
+
+	// Logical negation of the rule.
+	Inverted *bool `json:"inverted,omitempty" tf:"inverted,omitempty"`
+
+	// Number of controls that must be set when you specify an ATLEAST type rule.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+
+	// Rule type. Valid values are ATLEAST, AND, and OR.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type RuleConfigObservation struct {
 
 	// Logical negation of the rule.
@@ -28,16 +40,34 @@ type RuleConfigObservation struct {
 type RuleConfigParameters struct {
 
 	// Logical negation of the rule.
-	// +kubebuilder:validation:Required
-	Inverted *bool `json:"inverted" tf:"inverted,omitempty"`
+	// +kubebuilder:validation:Optional
+	Inverted *bool `json:"inverted,omitempty" tf:"inverted,omitempty"`
 
 	// Number of controls that must be set when you specify an ATLEAST type rule.
-	// +kubebuilder:validation:Required
-	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
+	// +kubebuilder:validation:Optional
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
 	// Rule type. Valid values are ATLEAST, AND, and OR.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SafetyRuleInitParameters struct {
+
+	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
+	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
+
+	// Name describing the safety rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block for safety rule criteria. See below.
+	RuleConfig []RuleConfigInitParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
+
+	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
+	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
+
+	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
+	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
 }
 
 type SafetyRuleObservation struct {
@@ -132,6 +162,10 @@ type SafetyRuleParameters struct {
 type SafetyRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SafetyRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SafetyRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // SafetyRuleStatus defines the observed state of SafetyRule.
@@ -152,9 +186,9 @@ type SafetyRuleStatus struct {
 type SafetyRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleConfig)",message="ruleConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.waitPeriodMs)",message="waitPeriodMs is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleConfig) || has(self.initProvider.ruleConfig)",message="ruleConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.waitPeriodMs) || has(self.initProvider.waitPeriodMs)",message="waitPeriodMs is a required parameter"
 	Spec   SafetyRuleSpec   `json:"spec"`
 	Status SafetyRuleStatus `json:"status,omitempty"`
 }

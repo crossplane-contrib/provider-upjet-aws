@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EnvironmentEC2InitParameters struct {
+
+	// The number of minutes until the running instance is shut down after the environment has last been used.
+	AutomaticStopTimeMinutes *float64 `json:"automaticStopTimeMinutes,omitempty" tf:"automatic_stop_time_minutes,omitempty"`
+
+	// The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT_SSH and CONNECT_SSM. For more information please refer AWS documentation for Cloud9.
+	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
+
+	// The description of the environment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. Valid values are
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// The type of instance to connect to the environment, e.g., t2.micro.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The name of the environment.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of the environment owner. This can be ARN of any AWS IAM principal. Defaults to the environment's creator.
+	OwnerArn *string `json:"ownerArn,omitempty" tf:"owner_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type EnvironmentEC2Observation struct {
 
 	// The ARN of the environment.
@@ -112,6 +139,10 @@ type EnvironmentEC2Parameters struct {
 type EnvironmentEC2Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EnvironmentEC2Parameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EnvironmentEC2InitParameters `json:"initProvider,omitempty"`
 }
 
 // EnvironmentEC2Status defines the observed state of EnvironmentEC2.
@@ -132,8 +163,8 @@ type EnvironmentEC2Status struct {
 type EnvironmentEC2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   EnvironmentEC2Spec   `json:"spec"`
 	Status EnvironmentEC2Status `json:"status,omitempty"`
 }

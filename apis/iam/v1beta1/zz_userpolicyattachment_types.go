@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserPolicyAttachmentInitParameters struct {
+}
+
 type UserPolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -57,6 +60,10 @@ type UserPolicyAttachmentParameters struct {
 type UserPolicyAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserPolicyAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserPolicyAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserPolicyAttachmentStatus defines the observed state of UserPolicyAttachment.

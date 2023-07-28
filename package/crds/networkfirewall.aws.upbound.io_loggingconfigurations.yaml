@@ -176,14 +176,8 @@ spec:
                                   a log message. Flow logs are standard network traffic
                                   flow logs.'
                                 type: string
-                            required:
-                            - logDestination
-                            - logDestinationType
-                            - logType
                             type: object
                           type: array
-                      required:
-                      - logDestinationConfig
                       type: object
                     type: array
                   region:
@@ -192,6 +186,46 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  loggingConfiguration:
+                    description: A configuration block describing how AWS Network
+                      Firewall performs logging for a firewall. See Logging Configuration
+                      below for details.
+                    items:
+                      properties:
+                        logDestinationConfig:
+                          description: Set of configuration blocks describing the
+                            logging details for a firewall. See Log Destination Config
+                            below for details. At most, only two blocks can be specified;
+                            one for FLOW logs and one for ALERT logs.
+                          items:
+                            properties:
+                              logDestination:
+                                additionalProperties:
+                                  type: string
+                                description: A map describing the logging destination
+                                  for the chosen log_destination_type.
+                                type: object
+                              logDestinationType:
+                                description: 'The location to send logs to. Valid
+                                  values: S3, CloudWatchLogs, KinesisDataFirehose.'
+                                type: string
+                              logType:
+                                description: 'The type of log to send. Valid values:
+                                  ALERT or FLOW. Alert logs report traffic that matches
+                                  a StatefulRule with an action setting that sends
+                                  a log message. Flow logs are standard network traffic
+                                  flow logs.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -393,7 +427,8 @@ spec:
             x-kubernetes-validations:
             - message: loggingConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.loggingConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.loggingConfiguration)
+                || has(self.initProvider.loggingConfiguration)'
           status:
             description: LoggingConfigurationStatus defines the observed state of
               LoggingConfiguration.

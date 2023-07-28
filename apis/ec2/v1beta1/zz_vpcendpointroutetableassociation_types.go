@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCEndpointRouteTableAssociationInitParameters struct {
+}
+
 type VPCEndpointRouteTableAssociationObservation struct {
 
 	// A hash of the EC2 Route Table and VPC Endpoint identifiers.
@@ -65,6 +68,10 @@ type VPCEndpointRouteTableAssociationParameters struct {
 type VPCEndpointRouteTableAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCEndpointRouteTableAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCEndpointRouteTableAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCEndpointRouteTableAssociationStatus defines the observed state of VPCEndpointRouteTableAssociation.

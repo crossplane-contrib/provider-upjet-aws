@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCLinkInitParameters struct {
+
+	// Description of the VPC link.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name used to label and identify the VPC link.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCLinkObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -75,6 +87,10 @@ type VPCLinkParameters struct {
 type VPCLinkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCLinkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPCLinkInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCLinkStatus defines the observed state of VPCLink.
@@ -95,7 +111,7 @@ type VPCLinkStatus struct {
 type VPCLink struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   VPCLinkSpec   `json:"spec"`
 	Status VPCLinkStatus `json:"status,omitempty"`
 }

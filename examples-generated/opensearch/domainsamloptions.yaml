@@ -39,6 +39,3 @@ spec:
     - automatedSnapshotStartHour: 23
     tags:
       Domain: TestDomain
-
----
-

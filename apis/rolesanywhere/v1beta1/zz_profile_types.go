@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProfileInitParameters struct {
+
+	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
+	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
+
+	// Whether or not the Profile is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of managed policy ARNs that apply to the vended session credentials.
+	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
+
+	// The name of the Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies whether instance properties are required in CreateSession requests with this profile.
+	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
+
+	// A session policy that applies to the trust boundary of the vended session credentials.
+	SessionPolicy *string `json:"sessionPolicy,omitempty" tf:"session_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ProfileObservation struct {
 
 	// Amazon Resource Name (ARN) of the Profile
@@ -103,6 +127,10 @@ type ProfileParameters struct {
 type ProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProfileStatus defines the observed state of Profile.
@@ -123,7 +151,7 @@ type ProfileStatus struct {
 type Profile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ProfileSpec   `json:"spec"`
 	Status ProfileStatus `json:"status,omitempty"`
 }

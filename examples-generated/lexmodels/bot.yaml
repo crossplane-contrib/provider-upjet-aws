@@ -28,6 +28,3 @@ spec:
     processBehavior: BUILD
     region: us-west-1
     voiceId: Salli
-
----
-

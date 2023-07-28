@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GlobalNetworkInitParameters struct {
+
+	// Description of the Global Network.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type GlobalNetworkObservation struct {
 
 	// Global Network Amazon Resource Name (ARN)
@@ -50,6 +59,10 @@ type GlobalNetworkParameters struct {
 type GlobalNetworkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GlobalNetworkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GlobalNetworkInitParameters `json:"initProvider,omitempty"`
 }
 
 // GlobalNetworkStatus defines the observed state of GlobalNetwork.

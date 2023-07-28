@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PolicyAttachmentInitParameters struct {
+
+	// If set to true, destroy will not detach the policy and instead just remove the resource from state. This can be useful in situations where the attachment must be preserved to meet the AWS minimum requirement of 1 attached policy.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// The unique identifier (ID) of the root, organizational unit, or account number that you want to attach the policy to.
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
+}
+
 type PolicyAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -60,6 +69,10 @@ type PolicyAttachmentParameters struct {
 type PolicyAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PolicyAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PolicyAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // PolicyAttachmentStatus defines the observed state of PolicyAttachment.
@@ -80,7 +93,7 @@ type PolicyAttachmentStatus struct {
 type PolicyAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetId)",message="targetId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetId) || has(self.initProvider.targetId)",message="targetId is a required parameter"
 	Spec   PolicyAttachmentSpec   `json:"spec"`
 	Status PolicyAttachmentStatus `json:"status,omitempty"`
 }

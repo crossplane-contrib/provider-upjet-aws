@@ -235,6 +235,17 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  permissions:
+                    description: The type of environment member permissions you want
+                      to associate with this environment member. Allowed values are
+                      read-only and read-write .
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -435,7 +446,8 @@ spec:
             x-kubernetes-validations:
             - message: permissions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissions)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissions)
+                || has(self.initProvider.permissions)'
           status:
             description: EnvironmentMembershipStatus defines the observed state of
               EnvironmentMembership.

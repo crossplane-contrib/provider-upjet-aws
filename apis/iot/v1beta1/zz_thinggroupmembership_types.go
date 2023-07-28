@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ThingGroupMembershipInitParameters struct {
+
+	// Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+	OverrideDynamicGroup *bool `json:"overrideDynamicGroup,omitempty" tf:"override_dynamic_group,omitempty"`
+
+	// The name of the group to which you are adding a thing.
+	ThingGroupName *string `json:"thingGroupName,omitempty" tf:"thing_group_name,omitempty"`
+
+	// The name of the thing to add to a group.
+	ThingName *string `json:"thingName,omitempty" tf:"thing_name,omitempty"`
+}
+
 type ThingGroupMembershipObservation struct {
 
 	// The membership ID.
@@ -52,6 +64,10 @@ type ThingGroupMembershipParameters struct {
 type ThingGroupMembershipSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ThingGroupMembershipParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ThingGroupMembershipInitParameters `json:"initProvider,omitempty"`
 }
 
 // ThingGroupMembershipStatus defines the observed state of ThingGroupMembership.
@@ -72,8 +88,8 @@ type ThingGroupMembershipStatus struct {
 type ThingGroupMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingGroupName)",message="thingGroupName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingName)",message="thingName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingGroupName) || has(self.initProvider.thingGroupName)",message="thingGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingName) || has(self.initProvider.thingName)",message="thingName is a required parameter"
 	Spec   ThingGroupMembershipSpec   `json:"spec"`
 	Status ThingGroupMembershipStatus `json:"status,omitempty"`
 }

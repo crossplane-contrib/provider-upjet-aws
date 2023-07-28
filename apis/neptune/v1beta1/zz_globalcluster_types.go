@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GlobalClusterInitParameters struct {
+
+	// If the Global Cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
+
+	// Name of the database engine to be used for this DB cluster. Current Valid values: neptune. Conflicts with source_db_cluster_identifier.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Engine version of the global database. Upgrading the engine version will result in all cluster members being immediately updated and will.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
+	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+}
+
+type GlobalClusterMembersInitParameters struct {
+}
+
 type GlobalClusterMembersObservation struct {
 
 	// Amazon Resource Name (ARN) of member DB Cluster.
@@ -99,6 +117,10 @@ type GlobalClusterParameters struct {
 type GlobalClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GlobalClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GlobalClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // GlobalClusterStatus defines the observed state of GlobalCluster.

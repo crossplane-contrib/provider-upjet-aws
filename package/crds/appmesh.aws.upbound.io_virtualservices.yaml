@@ -370,6 +370,51 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  meshOwner:
+                    description: AWS account ID of the service mesh's owner. Defaults
+                      to the account ID the AWS provider is currently connected to.
+                    type: string
+                  name:
+                    description: Name to use for the virtual service. Must be between
+                      1 and 255 characters in length.
+                    type: string
+                  spec:
+                    description: Virtual service specification to apply.
+                    items:
+                      properties:
+                        provider:
+                          description: App Mesh object that is acting as the provider
+                            for a virtual service. You can specify a single virtual
+                            node or virtual router.
+                          items:
+                            properties:
+                              virtualNode:
+                                description: Virtual node associated with a virtual
+                                  service.
+                                items:
+                                  type: object
+                                type: array
+                              virtualRouter:
+                                description: Virtual router associated with a virtual
+                                  service.
+                                items:
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -570,10 +615,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: spec is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.spec)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.spec)
+                || has(self.initProvider.spec)'
           status:
             description: VirtualServiceStatus defines the observed state of VirtualService.
             properties:

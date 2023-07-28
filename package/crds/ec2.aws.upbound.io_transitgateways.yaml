@@ -122,6 +122,60 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  amazonSideAsn:
+                    description: 'Private Autonomous System Number (ASN) for the Amazon
+                      side of a BGP session. The range is 64512 to 65534 for 16-bit
+                      ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value:
+                      64512.'
+                    type: number
+                  autoAcceptSharedAttachments:
+                    description: 'Whether resource attachment requests are automatically
+                      accepted. Valid values: disable, enable. Default value: disable.'
+                    type: string
+                  defaultRouteTableAssociation:
+                    description: 'Whether resource attachments are automatically associated
+                      with the default association route table. Valid values: disable,
+                      enable. Default value: enable.'
+                    type: string
+                  defaultRouteTablePropagation:
+                    description: 'Whether resource attachments automatically propagate
+                      routes to the default propagation route table. Valid values:
+                      disable, enable. Default value: enable.'
+                    type: string
+                  description:
+                    description: Description of the EC2 Transit Gateway.
+                    type: string
+                  dnsSupport:
+                    description: 'Whether DNS support is enabled. Valid values: disable,
+                      enable. Default value: enable.'
+                    type: string
+                  multicastSupport:
+                    description: 'Whether Multicast support is enabled. Required to
+                      use ec2_transit_gateway_multicast_domain. Valid values: disable,
+                      enable. Default value: disable.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  transitGatewayCidrBlocks:
+                    description: One or more IPv4 or IPv6 CIDR blocks for the transit
+                      gateway. Must be a size /24 CIDR block or larger for IPv4, or
+                      a size /64 CIDR block or larger for IPv6.
+                    items:
+                      type: string
+                    type: array
+                  vpnEcmpSupport:
+                    description: 'Whether VPN Equal Cost Multipath Protocol support
+                      is enabled. Valid values: disable, enable. Default value: enable.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

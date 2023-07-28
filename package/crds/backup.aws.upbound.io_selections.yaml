@@ -81,9 +81,6 @@ spec:
                               value:
                                 description: The value in a key-value pair.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         stringLike:
@@ -95,9 +92,6 @@ spec:
                               value:
                                 description: The value in a key-value pair.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         stringNotEquals:
@@ -109,9 +103,6 @@ spec:
                               value:
                                 description: The value in a key-value pair.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         stringNotLike:
@@ -123,9 +114,6 @@ spec:
                               value:
                                 description: The value in a key-value pair.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                       type: object
@@ -324,14 +312,102 @@ spec:
                         value:
                           description: The value in a key-value pair.
                           type: string
-                      required:
-                      - key
-                      - type
-                      - value
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  condition:
+                    description: A list of conditions that you define to assign resources
+                      to your backup plans using tags.
+                    items:
+                      properties:
+                        stringEquals:
+                          items:
+                            properties:
+                              key:
+                                description: The key in a key-value pair.
+                                type: string
+                              value:
+                                description: The value in a key-value pair.
+                                type: string
+                            type: object
+                          type: array
+                        stringLike:
+                          items:
+                            properties:
+                              key:
+                                description: The key in a key-value pair.
+                                type: string
+                              value:
+                                description: The value in a key-value pair.
+                                type: string
+                            type: object
+                          type: array
+                        stringNotEquals:
+                          items:
+                            properties:
+                              key:
+                                description: The key in a key-value pair.
+                                type: string
+                              value:
+                                description: The value in a key-value pair.
+                                type: string
+                            type: object
+                          type: array
+                        stringNotLike:
+                          items:
+                            properties:
+                              key:
+                                description: The key in a key-value pair.
+                                type: string
+                              value:
+                                description: The value in a key-value pair.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The display name of a resource selection document.
+                    type: string
+                  notResources:
+                    description: An array of strings that either contain Amazon Resource
+                      Names (ARNs) or match patterns of resources to exclude from
+                      a backup plan.
+                    items:
+                      type: string
+                    type: array
+                  resources:
+                    description: An array of strings that either contain Amazon Resource
+                      Names (ARNs) or match patterns of resources to assign to a backup
+                      plan.
+                    items:
+                      type: string
+                    type: array
+                  selectionTag:
+                    description: Tag-based conditions used to specify a set of resources
+                      to assign to a backup plan.
+                    items:
+                      properties:
+                        key:
+                          description: The key in a key-value pair.
+                          type: string
+                        type:
+                          description: An operation, such as StringEquals, that is
+                            applied to a key-value pair used to filter resources in
+                            a selection.
+                          type: string
+                        value:
+                          description: The value in a key-value pair.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -533,7 +609,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: SelectionStatus defines the observed state of Selection.
             properties:
