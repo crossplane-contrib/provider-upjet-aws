@@ -175,6 +175,17 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 		return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 	}
 
+	ps.Configuration = map[string]any{
+		keyRegion:               cfg.Region,
+		keyAccessKeyID:          creds.AccessKeyID,
+		keySecretAccessKey:      creds.SecretAccessKey,
+		keySessionToken:         creds.SessionToken,
+		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
+		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
+		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
+		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
+	}
+
 	if pc.Spec.Endpoint != nil {
 		if pc.Spec.Endpoint.URL.Static != nil {
 			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
@@ -187,17 +198,6 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 				ps.Configuration[keyEndpoints] = endpoints
 			}
 		}
-	}
-
-	ps.Configuration = map[string]any{
-		keyRegion:               cfg.Region,
-		keyAccessKeyID:          creds.AccessKeyID,
-		keySecretAccessKey:      creds.SecretAccessKey,
-		keySessionToken:         creds.SessionToken,
-		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
-		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
-		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
-		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}
 	return err
 }
