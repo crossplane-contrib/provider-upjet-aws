@@ -114,7 +114,7 @@ type VPCIpamStatus struct {
 type VPCIpam struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.operatingRegions)",message="operatingRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operatingRegions)",message="operatingRegions is a required parameter"
 	Spec   VPCIpamSpec   `json:"spec"`
 	Status VPCIpamStatus `json:"status,omitempty"`
 }

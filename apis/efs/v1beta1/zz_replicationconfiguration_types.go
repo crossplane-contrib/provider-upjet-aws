@@ -120,7 +120,7 @@ type ReplicationConfigurationStatus struct {
 type ReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination)",message="destination is a required parameter"
 	Spec   ReplicationConfigurationSpec   `json:"spec"`
 	Status ReplicationConfigurationStatus `json:"status,omitempty"`
 }

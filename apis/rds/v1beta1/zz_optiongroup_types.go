@@ -160,8 +160,8 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.engineName)",message="engineName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
 	Spec   OptionGroupSpec   `json:"spec"`
 	Status OptionGroupStatus `json:"status,omitempty"`
 }

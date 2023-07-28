@@ -92,9 +92,9 @@ type DirectoryConfigStatus struct {
 type DirectoryConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.directoryName)",message="directoryName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.organizationalUnitDistinguishedNames)",message="organizationalUnitDistinguishedNames is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceAccountCredentials)",message="serviceAccountCredentials is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.directoryName)",message="directoryName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.organizationalUnitDistinguishedNames)",message="organizationalUnitDistinguishedNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceAccountCredentials)",message="serviceAccountCredentials is a required parameter"
 	Spec   DirectoryConfigSpec   `json:"spec"`
 	Status DirectoryConfigStatus `json:"status,omitempty"`
 }

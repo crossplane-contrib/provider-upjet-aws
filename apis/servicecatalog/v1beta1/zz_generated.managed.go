@@ -17,9 +17,9 @@ func (mg *BudgetResourceAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BudgetResourceAssociation.
-func (mg *BudgetResourceAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BudgetResourceAssociation.
+func (mg *BudgetResourceAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BudgetResourceAssociation.
@@ -55,9 +55,9 @@ func (mg *BudgetResourceAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BudgetResourceAssociation.
-func (mg *BudgetResourceAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BudgetResourceAssociation.
+func (mg *BudgetResourceAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BudgetResourceAssociation.
@@ -93,9 +93,9 @@ func (mg *Constraint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Constraint.
-func (mg *Constraint) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Constraint.
+func (mg *Constraint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Constraint.
@@ -131,9 +131,9 @@ func (mg *Constraint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Constraint.
-func (mg *Constraint) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Constraint.
+func (mg *Constraint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Constraint.
@@ -169,9 +169,9 @@ func (mg *Portfolio) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Portfolio.
-func (mg *Portfolio) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Portfolio.
+func (mg *Portfolio) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Portfolio.
@@ -207,9 +207,9 @@ func (mg *Portfolio) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Portfolio.
-func (mg *Portfolio) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Portfolio.
+func (mg *Portfolio) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Portfolio.
@@ -245,9 +245,9 @@ func (mg *PortfolioShare) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PortfolioShare.
-func (mg *PortfolioShare) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PortfolioShare.
+func (mg *PortfolioShare) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PortfolioShare.
@@ -283,9 +283,9 @@ func (mg *PortfolioShare) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PortfolioShare.
-func (mg *PortfolioShare) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PortfolioShare.
+func (mg *PortfolioShare) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PortfolioShare.
@@ -321,9 +321,9 @@ func (mg *PrincipalPortfolioAssociation) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PrincipalPortfolioAssociation.
-func (mg *PrincipalPortfolioAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PrincipalPortfolioAssociation.
+func (mg *PrincipalPortfolioAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PrincipalPortfolioAssociation.
@@ -359,9 +359,9 @@ func (mg *PrincipalPortfolioAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PrincipalPortfolioAssociation.
-func (mg *PrincipalPortfolioAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PrincipalPortfolioAssociation.
+func (mg *PrincipalPortfolioAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PrincipalPortfolioAssociation.
@@ -397,9 +397,9 @@ func (mg *Product) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Product.
-func (mg *Product) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Product.
+func (mg *Product) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Product.
@@ -435,9 +435,9 @@ func (mg *Product) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Product.
-func (mg *Product) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Product.
+func (mg *Product) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Product.
@@ -473,9 +473,9 @@ func (mg *ProductPortfolioAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ProductPortfolioAssociation.
-func (mg *ProductPortfolioAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ProductPortfolioAssociation.
+func (mg *ProductPortfolioAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ProductPortfolioAssociation.
@@ -511,9 +511,9 @@ func (mg *ProductPortfolioAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ProductPortfolioAssociation.
-func (mg *ProductPortfolioAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ProductPortfolioAssociation.
+func (mg *ProductPortfolioAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ProductPortfolioAssociation.
@@ -549,9 +549,9 @@ func (mg *ProvisioningArtifact) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ProvisioningArtifact.
-func (mg *ProvisioningArtifact) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ProvisioningArtifact.
+func (mg *ProvisioningArtifact) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ProvisioningArtifact.
@@ -587,9 +587,9 @@ func (mg *ProvisioningArtifact) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ProvisioningArtifact.
-func (mg *ProvisioningArtifact) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ProvisioningArtifact.
+func (mg *ProvisioningArtifact) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ProvisioningArtifact.
@@ -625,9 +625,9 @@ func (mg *ServiceAction) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ServiceAction.
-func (mg *ServiceAction) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ServiceAction.
+func (mg *ServiceAction) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ServiceAction.
@@ -663,9 +663,9 @@ func (mg *ServiceAction) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ServiceAction.
-func (mg *ServiceAction) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ServiceAction.
+func (mg *ServiceAction) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ServiceAction.
@@ -701,9 +701,9 @@ func (mg *TagOption) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TagOption.
-func (mg *TagOption) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TagOption.
+func (mg *TagOption) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TagOption.
@@ -739,9 +739,9 @@ func (mg *TagOption) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TagOption.
-func (mg *TagOption) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TagOption.
+func (mg *TagOption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TagOption.
@@ -777,9 +777,9 @@ func (mg *TagOptionResourceAssociation) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TagOptionResourceAssociation.
-func (mg *TagOptionResourceAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TagOptionResourceAssociation.
+func (mg *TagOptionResourceAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TagOptionResourceAssociation.
@@ -815,9 +815,9 @@ func (mg *TagOptionResourceAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TagOptionResourceAssociation.
-func (mg *TagOptionResourceAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TagOptionResourceAssociation.
+func (mg *TagOptionResourceAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TagOptionResourceAssociation.

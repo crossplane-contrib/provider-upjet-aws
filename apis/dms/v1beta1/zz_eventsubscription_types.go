@@ -108,7 +108,7 @@ type EventSubscriptionStatus struct {
 type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventCategories)",message="eventCategories is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventCategories)",message="eventCategories is a required parameter"
 	Spec   EventSubscriptionSpec   `json:"spec"`
 	Status EventSubscriptionStatus `json:"status,omitempty"`
 }

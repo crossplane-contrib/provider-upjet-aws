@@ -98,7 +98,7 @@ type PrincipalPortfolioAssociationStatus struct {
 type PrincipalPortfolioAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.acceptLanguage)",message="acceptLanguage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.acceptLanguage)",message="acceptLanguage is a required parameter"
 	Spec   PrincipalPortfolioAssociationSpec   `json:"spec"`
 	Status PrincipalPortfolioAssociationStatus `json:"status,omitempty"`
 }

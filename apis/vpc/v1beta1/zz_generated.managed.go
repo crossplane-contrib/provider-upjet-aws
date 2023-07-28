@@ -17,9 +17,9 @@ func (mg *NetworkPerformanceMetricSubscription) GetDeletionPolicy() xpv1.Deletio
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this NetworkPerformanceMetricSubscription.
-func (mg *NetworkPerformanceMetricSubscription) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this NetworkPerformanceMetricSubscription.
+func (mg *NetworkPerformanceMetricSubscription) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this NetworkPerformanceMetricSubscription.
@@ -55,9 +55,9 @@ func (mg *NetworkPerformanceMetricSubscription) SetDeletionPolicy(r xpv1.Deletio
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this NetworkPerformanceMetricSubscription.
-func (mg *NetworkPerformanceMetricSubscription) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this NetworkPerformanceMetricSubscription.
+func (mg *NetworkPerformanceMetricSubscription) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this NetworkPerformanceMetricSubscription.

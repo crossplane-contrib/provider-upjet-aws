@@ -242,7 +242,7 @@ type EBSSnapshotImportStatus struct {
 type EBSSnapshotImport struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.diskContainer)",message="diskContainer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.diskContainer)",message="diskContainer is a required parameter"
 	Spec   EBSSnapshotImportSpec   `json:"spec"`
 	Status EBSSnapshotImportStatus `json:"status,omitempty"`
 }

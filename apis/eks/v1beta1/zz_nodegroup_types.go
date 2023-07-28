@@ -374,7 +374,7 @@ type NodeGroupStatus struct {
 type NodeGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scalingConfig)",message="scalingConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scalingConfig)",message="scalingConfig is a required parameter"
 	Spec   NodeGroupSpec   `json:"spec"`
 	Status NodeGroupStatus `json:"status,omitempty"`
 }

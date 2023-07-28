@@ -82,7 +82,7 @@ type SecretPolicyStatus struct {
 type SecretPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
 	Spec   SecretPolicySpec   `json:"spec"`
 	Status SecretPolicyStatus `json:"status,omitempty"`
 }

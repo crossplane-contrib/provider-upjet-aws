@@ -17,9 +17,9 @@ func (mg *ConfigurationSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ConfigurationSet.
-func (mg *ConfigurationSet) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ConfigurationSet.
+func (mg *ConfigurationSet) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ConfigurationSet.
@@ -55,9 +55,9 @@ func (mg *ConfigurationSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ConfigurationSet.
-func (mg *ConfigurationSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ConfigurationSet.
+func (mg *ConfigurationSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ConfigurationSet.
@@ -93,9 +93,9 @@ func (mg *ConfigurationSetEventDestination) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ConfigurationSetEventDestination.
-func (mg *ConfigurationSetEventDestination) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ConfigurationSetEventDestination.
+func (mg *ConfigurationSetEventDestination) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ConfigurationSetEventDestination.
@@ -131,9 +131,9 @@ func (mg *ConfigurationSetEventDestination) SetDeletionPolicy(r xpv1.DeletionPol
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ConfigurationSetEventDestination.
-func (mg *ConfigurationSetEventDestination) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ConfigurationSetEventDestination.
+func (mg *ConfigurationSetEventDestination) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ConfigurationSetEventDestination.
@@ -169,9 +169,9 @@ func (mg *DedicatedIPPool) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DedicatedIPPool.
-func (mg *DedicatedIPPool) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DedicatedIPPool.
+func (mg *DedicatedIPPool) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DedicatedIPPool.
@@ -207,9 +207,9 @@ func (mg *DedicatedIPPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DedicatedIPPool.
-func (mg *DedicatedIPPool) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DedicatedIPPool.
+func (mg *DedicatedIPPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DedicatedIPPool.
@@ -245,9 +245,9 @@ func (mg *EmailIdentity) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EmailIdentity.
-func (mg *EmailIdentity) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EmailIdentity.
+func (mg *EmailIdentity) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EmailIdentity.
@@ -283,9 +283,9 @@ func (mg *EmailIdentity) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EmailIdentity.
-func (mg *EmailIdentity) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EmailIdentity.
+func (mg *EmailIdentity) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EmailIdentity.
@@ -321,9 +321,9 @@ func (mg *EmailIdentityFeedbackAttributes) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EmailIdentityFeedbackAttributes.
-func (mg *EmailIdentityFeedbackAttributes) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EmailIdentityFeedbackAttributes.
+func (mg *EmailIdentityFeedbackAttributes) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EmailIdentityFeedbackAttributes.
@@ -359,9 +359,9 @@ func (mg *EmailIdentityFeedbackAttributes) SetDeletionPolicy(r xpv1.DeletionPoli
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EmailIdentityFeedbackAttributes.
-func (mg *EmailIdentityFeedbackAttributes) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EmailIdentityFeedbackAttributes.
+func (mg *EmailIdentityFeedbackAttributes) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EmailIdentityFeedbackAttributes.
@@ -397,9 +397,9 @@ func (mg *EmailIdentityMailFromAttributes) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EmailIdentityMailFromAttributes.
-func (mg *EmailIdentityMailFromAttributes) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EmailIdentityMailFromAttributes.
+func (mg *EmailIdentityMailFromAttributes) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EmailIdentityMailFromAttributes.
@@ -435,9 +435,9 @@ func (mg *EmailIdentityMailFromAttributes) SetDeletionPolicy(r xpv1.DeletionPoli
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EmailIdentityMailFromAttributes.
-func (mg *EmailIdentityMailFromAttributes) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EmailIdentityMailFromAttributes.
+func (mg *EmailIdentityMailFromAttributes) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EmailIdentityMailFromAttributes.
