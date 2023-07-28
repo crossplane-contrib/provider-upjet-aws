@@ -79,15 +79,6 @@ func (tr *APICache) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this APICache
-func (tr *APICache) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this APICache using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APICache) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *APIKey) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this APIKey
-func (tr *APIKey) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this APIKey using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Datasource) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Datasource
-func (tr *Datasource) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Datasource using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Datasource) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *Function) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Function
-func (tr *Function) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Function using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *GraphQLAPI) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this GraphQLAPI
-func (tr *GraphQLAPI) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this GraphQLAPI using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GraphQLAPI) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *Resolver) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Resolver
-func (tr *Resolver) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Resolver using its observed tfState.

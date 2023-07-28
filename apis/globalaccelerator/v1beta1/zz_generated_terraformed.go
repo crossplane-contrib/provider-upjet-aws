@@ -79,15 +79,6 @@ func (tr *Accelerator) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Accelerator
-func (tr *Accelerator) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Accelerator using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Accelerator) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *EndpointGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this EndpointGroup
-func (tr *EndpointGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this EndpointGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EndpointGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *Listener) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Listener
-func (tr *Listener) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Listener using its observed tfState.

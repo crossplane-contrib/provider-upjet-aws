@@ -79,15 +79,6 @@ func (tr *AccountAssignment) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AccountAssignment
-func (tr *AccountAssignment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AccountAssignment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccountAssignment) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ManagedPolicyAttachment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ManagedPolicyAttachment
-func (tr *ManagedPolicyAttachment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ManagedPolicyAttachment using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *PermissionSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this PermissionSet
-func (tr *PermissionSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this PermissionSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PermissionSet) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *PermissionSetInlinePolicy) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this PermissionSetInlinePolicy
-func (tr *PermissionSetInlinePolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PermissionSetInlinePolicy using its observed tfState.

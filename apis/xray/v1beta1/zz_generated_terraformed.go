@@ -79,15 +79,6 @@ func (tr *EncryptionConfig) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this EncryptionConfig
-func (tr *EncryptionConfig) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this EncryptionConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EncryptionConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *Group) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Group
-func (tr *Group) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Group using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Group) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *SamplingRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SamplingRule
-func (tr *SamplingRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SamplingRule using its observed tfState.

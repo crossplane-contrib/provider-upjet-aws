@@ -79,15 +79,6 @@ func (tr *Bucket) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Bucket
-func (tr *Bucket) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Bucket using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Bucket) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *BucketAccelerateConfiguration) GetInitParameters() (map[string]any, er
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketAccelerateConfiguration
-func (tr *BucketAccelerateConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketAccelerateConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketAccelerateConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *BucketACL) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketACL
-func (tr *BucketACL) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketACL using its observed tfState.
@@ -360,15 +333,6 @@ func (tr *BucketAnalyticsConfiguration) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketAnalyticsConfiguration
-func (tr *BucketAnalyticsConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketAnalyticsConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketAnalyticsConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -451,15 +415,6 @@ func (tr *BucketCorsConfiguration) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketCorsConfiguration
-func (tr *BucketCorsConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketCorsConfiguration using its observed tfState.
@@ -546,15 +501,6 @@ func (tr *BucketIntelligentTieringConfiguration) GetInitParameters() (map[string
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketIntelligentTieringConfiguration
-func (tr *BucketIntelligentTieringConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketIntelligentTieringConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketIntelligentTieringConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -637,15 +583,6 @@ func (tr *BucketInventory) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketInventory
-func (tr *BucketInventory) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketInventory using its observed tfState.
@@ -732,15 +669,6 @@ func (tr *BucketLifecycleConfiguration) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketLifecycleConfiguration
-func (tr *BucketLifecycleConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketLifecycleConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketLifecycleConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -823,15 +751,6 @@ func (tr *BucketLogging) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketLogging
-func (tr *BucketLogging) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketLogging using its observed tfState.
@@ -918,15 +837,6 @@ func (tr *BucketMetric) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketMetric
-func (tr *BucketMetric) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketMetric using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketMetric) LateInitialize(attrs []byte) (bool, error) {
@@ -1009,15 +919,6 @@ func (tr *BucketNotification) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketNotification
-func (tr *BucketNotification) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketNotification using its observed tfState.
@@ -1104,15 +1005,6 @@ func (tr *BucketObject) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketObject
-func (tr *BucketObject) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketObject using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketObject) LateInitialize(attrs []byte) (bool, error) {
@@ -1195,15 +1087,6 @@ func (tr *BucketObjectLockConfiguration) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketObjectLockConfiguration
-func (tr *BucketObjectLockConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketObjectLockConfiguration using its observed tfState.
@@ -1290,15 +1173,6 @@ func (tr *BucketOwnershipControls) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketOwnershipControls
-func (tr *BucketOwnershipControls) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketOwnershipControls using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketOwnershipControls) LateInitialize(attrs []byte) (bool, error) {
@@ -1381,15 +1255,6 @@ func (tr *BucketPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketPolicy
-func (tr *BucketPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketPolicy using its observed tfState.
@@ -1476,15 +1341,6 @@ func (tr *BucketPublicAccessBlock) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketPublicAccessBlock
-func (tr *BucketPublicAccessBlock) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketPublicAccessBlock using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketPublicAccessBlock) LateInitialize(attrs []byte) (bool, error) {
@@ -1567,15 +1423,6 @@ func (tr *BucketReplicationConfiguration) GetInitParameters() (map[string]any, e
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketReplicationConfiguration
-func (tr *BucketReplicationConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketReplicationConfiguration using its observed tfState.
@@ -1662,15 +1509,6 @@ func (tr *BucketRequestPaymentConfiguration) GetInitParameters() (map[string]any
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketRequestPaymentConfiguration
-func (tr *BucketRequestPaymentConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketRequestPaymentConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketRequestPaymentConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -1753,15 +1591,6 @@ func (tr *BucketServerSideEncryptionConfiguration) GetInitParameters() (map[stri
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketServerSideEncryptionConfiguration
-func (tr *BucketServerSideEncryptionConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketServerSideEncryptionConfiguration using its observed tfState.
@@ -1848,15 +1677,6 @@ func (tr *BucketVersioning) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BucketVersioning
-func (tr *BucketVersioning) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BucketVersioning using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BucketVersioning) LateInitialize(attrs []byte) (bool, error) {
@@ -1939,15 +1759,6 @@ func (tr *BucketWebsiteConfiguration) GetInitParameters() (map[string]any, error
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BucketWebsiteConfiguration
-func (tr *BucketWebsiteConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BucketWebsiteConfiguration using its observed tfState.
@@ -2036,15 +1847,6 @@ func (tr *Object) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Object
-func (tr *Object) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Object using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Object) LateInitialize(attrs []byte) (bool, error) {
@@ -2129,15 +1931,6 @@ func (tr *ObjectCopy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ObjectCopy
-func (tr *ObjectCopy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ObjectCopy using its observed tfState.

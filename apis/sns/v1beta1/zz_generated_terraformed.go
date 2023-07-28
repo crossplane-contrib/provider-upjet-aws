@@ -79,15 +79,6 @@ func (tr *PlatformApplication) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this PlatformApplication
-func (tr *PlatformApplication) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this PlatformApplication using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PlatformApplication) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *SMSPreferences) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SMSPreferences
-func (tr *SMSPreferences) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SMSPreferences using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Topic) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Topic
-func (tr *Topic) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Topic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Topic) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *TopicPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this TopicPolicy
-func (tr *TopicPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this TopicPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *TopicPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *TopicSubscription) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this TopicSubscription
-func (tr *TopicSubscription) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this TopicSubscription using its observed tfState.

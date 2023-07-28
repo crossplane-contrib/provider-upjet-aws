@@ -79,15 +79,6 @@ func (tr *EnvironmentEC2) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this EnvironmentEC2
-func (tr *EnvironmentEC2) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this EnvironmentEC2 using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EnvironmentEC2) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *EnvironmentMembership) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this EnvironmentMembership
-func (tr *EnvironmentMembership) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EnvironmentMembership using its observed tfState.

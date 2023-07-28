@@ -79,15 +79,6 @@ func (tr *DelegationSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DelegationSet
-func (tr *DelegationSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DelegationSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DelegationSet) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *HealthCheck) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this HealthCheck
-func (tr *HealthCheck) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this HealthCheck using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *HostedZoneDNSSEC) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this HostedZoneDNSSEC
-func (tr *HostedZoneDNSSEC) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this HostedZoneDNSSEC using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HostedZoneDNSSEC) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *Record) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Record
-func (tr *Record) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Record using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *ResolverConfig) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ResolverConfig
-func (tr *ResolverConfig) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ResolverConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResolverConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *TrafficPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this TrafficPolicy
-func (tr *TrafficPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this TrafficPolicy using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *TrafficPolicyInstance) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this TrafficPolicyInstance
-func (tr *TrafficPolicyInstance) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this TrafficPolicyInstance using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *TrafficPolicyInstance) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *VPCAssociationAuthorization) GetInitParameters() (map[string]any, erro
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this VPCAssociationAuthorization
-func (tr *VPCAssociationAuthorization) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VPCAssociationAuthorization using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *Zone) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Zone
-func (tr *Zone) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Zone using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Zone) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *ZoneAssociation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ZoneAssociation
-func (tr *ZoneAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ZoneAssociation using its observed tfState.

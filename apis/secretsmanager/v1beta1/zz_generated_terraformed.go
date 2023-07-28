@@ -79,15 +79,6 @@ func (tr *Secret) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Secret
-func (tr *Secret) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Secret using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Secret) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *SecretPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecretPolicy
-func (tr *SecretPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecretPolicy using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *SecretRotation) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SecretRotation
-func (tr *SecretRotation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SecretRotation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecretRotation) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *SecretVersion) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecretVersion
-func (tr *SecretVersion) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecretVersion using its observed tfState.

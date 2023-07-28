@@ -79,15 +79,6 @@ func (tr *Certificate) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Certificate
-func (tr *Certificate) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Certificate using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Certificate) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *CertificateAuthority) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this CertificateAuthority
-func (tr *CertificateAuthority) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this CertificateAuthority using its observed tfState.
@@ -266,15 +248,6 @@ func (tr *CertificateAuthorityCertificate) GetInitParameters() (map[string]any, 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this CertificateAuthorityCertificate
-func (tr *CertificateAuthorityCertificate) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this CertificateAuthorityCertificate using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CertificateAuthorityCertificate) LateInitialize(attrs []byte) (bool, error) {
@@ -359,15 +332,6 @@ func (tr *Permission) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Permission
-func (tr *Permission) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Permission using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Permission) LateInitialize(attrs []byte) (bool, error) {
@@ -450,15 +414,6 @@ func (tr *Policy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Policy
-func (tr *Policy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Policy using its observed tfState.

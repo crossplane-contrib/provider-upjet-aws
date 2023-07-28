@@ -79,15 +79,6 @@ func (tr *DataSource) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DataSource
-func (tr *DataSource) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DataSource using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DataSource) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *Experience) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Experience
-func (tr *Experience) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Experience using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Index) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Index
-func (tr *Index) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Index using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Index) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *QuerySuggestionsBlockList) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this QuerySuggestionsBlockList
-func (tr *QuerySuggestionsBlockList) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this QuerySuggestionsBlockList using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *QuerySuggestionsBlockList) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *Thesaurus) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Thesaurus
-func (tr *Thesaurus) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Thesaurus using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *Cell) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Cell
-func (tr *Cell) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Cell using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Cell) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ReadinessCheck) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ReadinessCheck
-func (tr *ReadinessCheck) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ReadinessCheck using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *RecoveryGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this RecoveryGroup
-func (tr *RecoveryGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this RecoveryGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RecoveryGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *ResourceSet) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ResourceSet
-func (tr *ResourceSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ResourceSet using its observed tfState.

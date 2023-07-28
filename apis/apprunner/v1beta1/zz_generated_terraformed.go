@@ -79,15 +79,6 @@ func (tr *AutoScalingConfigurationVersion) GetInitParameters() (map[string]any, 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AutoScalingConfigurationVersion
-func (tr *AutoScalingConfigurationVersion) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AutoScalingConfigurationVersion using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AutoScalingConfigurationVersion) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *Connection) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Connection
-func (tr *Connection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Connection using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *ObservabilityConfiguration) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ObservabilityConfiguration
-func (tr *ObservabilityConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ObservabilityConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ObservabilityConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Service
-func (tr *Service) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Service using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Service) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *VPCConnector) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this VPCConnector
-func (tr *VPCConnector) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VPCConnector using its observed tfState.

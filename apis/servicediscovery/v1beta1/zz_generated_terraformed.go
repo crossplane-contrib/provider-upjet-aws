@@ -79,15 +79,6 @@ func (tr *HTTPNamespace) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this HTTPNamespace
-func (tr *HTTPNamespace) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this HTTPNamespace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HTTPNamespace) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *PrivateDNSNamespace) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PrivateDNSNamespace using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *PublicDNSNamespace) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this PublicDNSNamespace
-func (tr *PublicDNSNamespace) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this PublicDNSNamespace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PublicDNSNamespace) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Service
-func (tr *Service) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Service using its observed tfState.

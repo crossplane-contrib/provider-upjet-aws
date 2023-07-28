@@ -79,15 +79,6 @@ func (tr *AccountSettingDefault) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AccountSettingDefault
-func (tr *AccountSettingDefault) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AccountSettingDefault using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccountSettingDefault) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *CapacityProvider) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this CapacityProvider
-func (tr *CapacityProvider) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this CapacityProvider using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Cluster
-func (tr *Cluster) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Cluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Cluster) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *ClusterCapacityProviders) GetInitParameters() (map[string]any, error) 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ClusterCapacityProviders
-func (tr *ClusterCapacityProviders) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ClusterCapacityProviders using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Service
-func (tr *Service) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Service using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Service) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *TaskDefinition) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this TaskDefinition
-func (tr *TaskDefinition) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this TaskDefinition using its observed tfState.

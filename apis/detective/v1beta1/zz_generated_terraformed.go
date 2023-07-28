@@ -79,15 +79,6 @@ func (tr *Graph) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Graph
-func (tr *Graph) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Graph using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Graph) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *InvitationAccepter) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this InvitationAccepter
-func (tr *InvitationAccepter) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this InvitationAccepter using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *InvitationAccepter) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *Member) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Member
-func (tr *Member) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Member using its observed tfState.

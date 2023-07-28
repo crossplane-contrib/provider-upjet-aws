@@ -79,15 +79,6 @@ func (tr *CloudFormationStack) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this CloudFormationStack
-func (tr *CloudFormationStack) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this CloudFormationStack using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CloudFormationStack) LateInitialize(attrs []byte) (bool, error) {

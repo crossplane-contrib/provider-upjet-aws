@@ -79,15 +79,6 @@ func (tr *Account) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Account
-func (tr *Account) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Account using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Account) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *DelegatedAdministrator) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this DelegatedAdministrator
-func (tr *DelegatedAdministrator) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this DelegatedAdministrator using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Organization) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Organization
-func (tr *Organization) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Organization using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Organization) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *OrganizationalUnit) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OrganizationalUnit
-func (tr *OrganizationalUnit) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OrganizationalUnit using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *Policy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Policy
-func (tr *Policy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Policy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Policy) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *PolicyAttachment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this PolicyAttachment
-func (tr *PolicyAttachment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PolicyAttachment using its observed tfState.

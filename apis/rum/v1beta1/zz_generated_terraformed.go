@@ -79,15 +79,6 @@ func (tr *AppMonitor) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AppMonitor
-func (tr *AppMonitor) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AppMonitor using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppMonitor) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *MetricsDestination) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MetricsDestination
-func (tr *MetricsDestination) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MetricsDestination using its observed tfState.

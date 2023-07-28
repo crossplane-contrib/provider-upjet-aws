@@ -79,15 +79,6 @@ func (tr *Bot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Bot
-func (tr *Bot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Bot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Bot) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *BotAlias) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotAlias
-func (tr *BotAlias) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotAlias using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Intent) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Intent
-func (tr *Intent) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Intent using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Intent) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *SlotType) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SlotType
-func (tr *SlotType) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SlotType using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *Addon) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Addon
-func (tr *Addon) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Addon using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Addon) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Cluster
-func (tr *Cluster) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Cluster using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *FargateProfile) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FargateProfile
-func (tr *FargateProfile) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FargateProfile using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FargateProfile) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *IdentityProviderConfig) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this IdentityProviderConfig
-func (tr *IdentityProviderConfig) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this IdentityProviderConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IdentityProviderConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *NodeGroup) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this NodeGroup
-func (tr *NodeGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this NodeGroup using its observed tfState.

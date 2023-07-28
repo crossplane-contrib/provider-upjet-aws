@@ -79,15 +79,6 @@ func (tr *AttachmentAccepter) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AttachmentAccepter
-func (tr *AttachmentAccepter) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AttachmentAccepter using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AttachmentAccepter) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ConnectAttachment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ConnectAttachment
-func (tr *ConnectAttachment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ConnectAttachment using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Connection) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Connection
-func (tr *Connection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Connection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Connection) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *CoreNetwork) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this CoreNetwork
-func (tr *CoreNetwork) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this CoreNetwork using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *CustomerGatewayAssociation) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this CustomerGatewayAssociation
-func (tr *CustomerGatewayAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this CustomerGatewayAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CustomerGatewayAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *Device) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Device
-func (tr *Device) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Device using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *GlobalNetwork) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this GlobalNetwork
-func (tr *GlobalNetwork) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this GlobalNetwork using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GlobalNetwork) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *Link) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Link
-func (tr *Link) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Link using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *LinkAssociation) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LinkAssociation
-func (tr *LinkAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LinkAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LinkAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *Site) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Site
-func (tr *Site) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Site using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *TransitGatewayConnectPeerAssociation) GetInitParameters() (map[string]
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this TransitGatewayConnectPeerAssociation
-func (tr *TransitGatewayConnectPeerAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this TransitGatewayConnectPeerAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *TransitGatewayConnectPeerAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -1102,15 +1003,6 @@ func (tr *TransitGatewayRegistration) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this TransitGatewayRegistration
-func (tr *TransitGatewayRegistration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this TransitGatewayRegistration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *TransitGatewayRegistration) LateInitialize(attrs []byte) (bool, error) {
@@ -1193,15 +1085,6 @@ func (tr *VPCAttachment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this VPCAttachment
-func (tr *VPCAttachment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VPCAttachment using its observed tfState.

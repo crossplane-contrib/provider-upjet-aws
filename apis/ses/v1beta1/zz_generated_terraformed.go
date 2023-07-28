@@ -79,15 +79,6 @@ func (tr *ActiveReceiptRuleSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ActiveReceiptRuleSet
-func (tr *ActiveReceiptRuleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ActiveReceiptRuleSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ActiveReceiptRuleSet) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ConfigurationSet) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ConfigurationSet
-func (tr *ConfigurationSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ConfigurationSet using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *DomainDKIM) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DomainDKIM
-func (tr *DomainDKIM) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DomainDKIM using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DomainDKIM) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *DomainIdentity) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this DomainIdentity
-func (tr *DomainIdentity) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this DomainIdentity using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *DomainMailFrom) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DomainMailFrom
-func (tr *DomainMailFrom) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DomainMailFrom using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DomainMailFrom) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *EmailIdentity) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this EmailIdentity
-func (tr *EmailIdentity) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EmailIdentity using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *EventDestination) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this EventDestination
-func (tr *EventDestination) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this EventDestination using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventDestination) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *IdentityNotificationTopic) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this IdentityNotificationTopic
-func (tr *IdentityNotificationTopic) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IdentityNotificationTopic using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *IdentityPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this IdentityPolicy
-func (tr *IdentityPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this IdentityPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IdentityPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *ReceiptFilter) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ReceiptFilter
-func (tr *ReceiptFilter) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ReceiptFilter using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *ReceiptRule) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ReceiptRule
-func (tr *ReceiptRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ReceiptRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ReceiptRule) LateInitialize(attrs []byte) (bool, error) {
@@ -1102,15 +1003,6 @@ func (tr *ReceiptRuleSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ReceiptRuleSet
-func (tr *ReceiptRuleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ReceiptRuleSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ReceiptRuleSet) LateInitialize(attrs []byte) (bool, error) {
@@ -1193,15 +1085,6 @@ func (tr *Template) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Template
-func (tr *Template) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Template using its observed tfState.

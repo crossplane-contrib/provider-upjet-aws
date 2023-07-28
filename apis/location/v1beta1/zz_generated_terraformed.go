@@ -79,15 +79,6 @@ func (tr *GeofenceCollection) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this GeofenceCollection
-func (tr *GeofenceCollection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this GeofenceCollection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GeofenceCollection) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *PlaceIndex) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this PlaceIndex
-func (tr *PlaceIndex) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PlaceIndex using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *RouteCalculator) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this RouteCalculator
-func (tr *RouteCalculator) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this RouteCalculator using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RouteCalculator) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *Tracker) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Tracker
-func (tr *Tracker) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Tracker using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Tracker) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *TrackerAssociation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this TrackerAssociation
-func (tr *TrackerAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this TrackerAssociation using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *DirectoryConfig) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DirectoryConfig
-func (tr *DirectoryConfig) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DirectoryConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DirectoryConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *Fleet) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Fleet
-func (tr *Fleet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Fleet using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *FleetStackAssociation) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FleetStackAssociation
-func (tr *FleetStackAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FleetStackAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FleetStackAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *ImageBuilder) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ImageBuilder
-func (tr *ImageBuilder) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ImageBuilder using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *Stack) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Stack
-func (tr *Stack) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Stack using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Stack) LateInitialize(attrs []byte) (bool, error) {
@@ -544,15 +499,6 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this User
-func (tr *User) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this User using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *User) LateInitialize(attrs []byte) (bool, error) {
@@ -635,15 +581,6 @@ func (tr *UserStackAssociation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this UserStackAssociation
-func (tr *UserStackAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this UserStackAssociation using its observed tfState.

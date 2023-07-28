@@ -79,15 +79,6 @@ func (tr *Firewall) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Firewall
-func (tr *Firewall) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Firewall using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Firewall) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *FirewallPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FirewallPolicy
-func (tr *FirewallPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FirewallPolicy using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *LoggingConfiguration) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LoggingConfiguration
-func (tr *LoggingConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LoggingConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LoggingConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *RuleGroup) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this RuleGroup
-func (tr *RuleGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this RuleGroup using its observed tfState.

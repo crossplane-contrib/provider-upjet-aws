@@ -2,8 +2,6 @@ module github.com/upbound/provider-aws
 
 go 1.19
 
-replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20230728123159-7a510ca957d1
-
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
@@ -17,7 +15,7 @@ require (
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.9.0-rc.0.0.20230727122232-e4ffeb8a7525
+	github.com/upbound/upjet v0.9.0-rc.0.0.20230728172702-46549fea2147
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.27.3
 	k8s.io/apimachinery v0.27.3

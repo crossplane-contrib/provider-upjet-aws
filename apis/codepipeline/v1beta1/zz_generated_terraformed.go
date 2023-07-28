@@ -79,15 +79,6 @@ func (tr *Codepipeline) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Codepipeline
-func (tr *Codepipeline) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Codepipeline using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Codepipeline) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *CustomActionType) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this CustomActionType
-func (tr *CustomActionType) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this CustomActionType using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CustomActionType) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *Webhook) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Webhook
-func (tr *Webhook) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Webhook using its observed tfState.

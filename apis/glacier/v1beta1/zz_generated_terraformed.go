@@ -79,15 +79,6 @@ func (tr *Vault) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Vault
-func (tr *Vault) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Vault using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Vault) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *VaultLock) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this VaultLock
-func (tr *VaultLock) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this VaultLock using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *ConditionalForwarder) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ConditionalForwarder
-func (tr *ConditionalForwarder) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ConditionalForwarder using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ConditionalForwarder) LateInitialize(attrs []byte) (bool, error) {
@@ -172,15 +163,6 @@ func (tr *Directory) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Directory
-func (tr *Directory) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Directory using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Directory) LateInitialize(attrs []byte) (bool, error) {
@@ -263,15 +245,6 @@ func (tr *SharedDirectory) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SharedDirectory
-func (tr *SharedDirectory) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SharedDirectory using its observed tfState.

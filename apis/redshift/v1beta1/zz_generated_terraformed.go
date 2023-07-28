@@ -79,15 +79,6 @@ func (tr *AuthenticationProfile) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AuthenticationProfile
-func (tr *AuthenticationProfile) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AuthenticationProfile using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AuthenticationProfile) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Cluster
-func (tr *Cluster) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Cluster using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *EventSubscription) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this EventSubscription
-func (tr *EventSubscription) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this EventSubscription using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventSubscription) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *HSMClientCertificate) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this HSMClientCertificate
-func (tr *HSMClientCertificate) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this HSMClientCertificate using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *HSMConfiguration) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this HSMConfiguration
-func (tr *HSMConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this HSMConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HSMConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *ParameterGroup) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ParameterGroup
-func (tr *ParameterGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ParameterGroup using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *ScheduledAction) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ScheduledAction
-func (tr *ScheduledAction) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ScheduledAction using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ScheduledAction) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *SnapshotCopyGrant) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SnapshotCopyGrant
-func (tr *SnapshotCopyGrant) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SnapshotCopyGrant using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *SnapshotSchedule) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SnapshotSchedule
-func (tr *SnapshotSchedule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SnapshotSchedule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SnapshotSchedule) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *SnapshotScheduleAssociation) GetInitParameters() (map[string]any, erro
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SnapshotScheduleAssociation
-func (tr *SnapshotScheduleAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SnapshotScheduleAssociation using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *SubnetGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SubnetGroup
-func (tr *SubnetGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SubnetGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SubnetGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -1100,15 +1001,6 @@ func (tr *UsageLimit) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this UsageLimit
-func (tr *UsageLimit) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this UsageLimit using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *IdentityProvider) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this IdentityProvider
-func (tr *IdentityProvider) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this IdentityProvider using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IdentityProvider) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ResourceServer) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ResourceServer
-func (tr *ResourceServer) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ResourceServer using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *RiskConfiguration) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this RiskConfiguration
-func (tr *RiskConfiguration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this RiskConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RiskConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this User
-func (tr *User) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this User using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *UserGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this UserGroup
-func (tr *UserGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this UserGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UserGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -544,15 +499,6 @@ func (tr *UserInGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this UserInGroup
-func (tr *UserInGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this UserInGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UserInGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -635,15 +581,6 @@ func (tr *UserPool) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this UserPool
-func (tr *UserPool) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this UserPool using its observed tfState.
@@ -734,15 +671,6 @@ func (tr *UserPoolClient) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this UserPoolClient
-func (tr *UserPoolClient) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this UserPoolClient using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UserPoolClient) LateInitialize(attrs []byte) (bool, error) {
@@ -827,15 +755,6 @@ func (tr *UserPoolDomain) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this UserPoolDomain
-func (tr *UserPoolDomain) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this UserPoolDomain using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UserPoolDomain) LateInitialize(attrs []byte) (bool, error) {
@@ -918,15 +837,6 @@ func (tr *UserPoolUICustomization) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this UserPoolUICustomization
-func (tr *UserPoolUICustomization) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this UserPoolUICustomization using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *Server) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Server
-func (tr *Server) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Server using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Server) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *SSHKey) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SSHKey
-func (tr *SSHKey) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SSHKey using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Tag) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Tag
-func (tr *Tag) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Tag using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Tag) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this User
-func (tr *User) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this User using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *User) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *Workflow) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Workflow
-func (tr *Workflow) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Workflow using its observed tfState.

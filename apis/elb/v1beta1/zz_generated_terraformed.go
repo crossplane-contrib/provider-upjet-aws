@@ -79,15 +79,6 @@ func (tr *AppCookieStickinessPolicy) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AppCookieStickinessPolicy
-func (tr *AppCookieStickinessPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AppCookieStickinessPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppCookieStickinessPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ELB) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ELB
-func (tr *ELB) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ELB using its observed tfState.
@@ -266,15 +248,6 @@ func (tr *Attachment) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Attachment
-func (tr *Attachment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Attachment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Attachment) LateInitialize(attrs []byte) (bool, error) {
@@ -357,15 +330,6 @@ func (tr *LBCookieStickinessPolicy) GetInitParameters() (map[string]any, error) 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this LBCookieStickinessPolicy
-func (tr *LBCookieStickinessPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LBCookieStickinessPolicy using its observed tfState.
@@ -452,15 +416,6 @@ func (tr *LBSSLNegotiationPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LBSSLNegotiationPolicy
-func (tr *LBSSLNegotiationPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LBSSLNegotiationPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LBSSLNegotiationPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -543,15 +498,6 @@ func (tr *BackendServerPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BackendServerPolicy
-func (tr *BackendServerPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BackendServerPolicy using its observed tfState.
@@ -638,15 +584,6 @@ func (tr *ListenerPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ListenerPolicy
-func (tr *ListenerPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ListenerPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ListenerPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -731,15 +668,6 @@ func (tr *Policy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Policy
-func (tr *Policy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Policy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Policy) LateInitialize(attrs []byte) (bool, error) {
@@ -822,15 +750,6 @@ func (tr *ProxyProtocolPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ProxyProtocolPolicy
-func (tr *ProxyProtocolPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ProxyProtocolPolicy using its observed tfState.
