@@ -78,6 +78,7 @@ import (
 	"github.com/upbound/provider-aws/config/ram"
 	"github.com/upbound/provider-aws/config/rds"
 	"github.com/upbound/provider-aws/config/redshift"
+	"github.com/upbound/provider-aws/config/redshiftserverless"
 	"github.com/upbound/provider-aws/config/rolesanywhere"
 	"github.com/upbound/provider-aws/config/route53"
 	"github.com/upbound/provider-aws/config/route53recoverycontrolconfig"
@@ -190,7 +191,6 @@ func GetProvider() *config.Provider {
 		grafana.Configure,
 		iam.Configure,
 		kafka.Configure,
-		kendra.Configure,
 		kinesis.Configure,
 		kinesisanalytics.Configure,
 		kinesisanalytics2.Configure,
@@ -198,7 +198,6 @@ func GetProvider() *config.Provider {
 		lakeformation.Configure,
 		lambda.Configure,
 		licensemanager.Configure,
-		medialive.Configure,
 		memorydb.Configure,
 		mq.Configure,
 		neptune.Configure,
@@ -229,6 +228,9 @@ func GetProvider() *config.Provider {
 		networkmanager.Configure,
 		opsworks.Configure,
 		sagemaker.Configure,
+		redshiftserverless.Configure,
+		kendra.Configure,
+		medialive.Configure,
 	} {
 		configure(pc)
 	}
