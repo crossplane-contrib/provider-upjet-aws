@@ -131,6 +131,76 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  availabilityZone:
+                    description: The Availability Zone in which to create the Capacity
+                      Reservation.
+                    type: string
+                  ebsOptimized:
+                    description: Indicates whether the Capacity Reservation supports
+                      EBS-optimized instances.
+                    type: boolean
+                  endDate:
+                    description: 'The date and time at which the Capacity Reservation
+                      expires. When a Capacity Reservation expires, the reserved capacity
+                      is released and you can no longer launch instances into it.
+                      Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)'
+                    type: string
+                  endDateType:
+                    description: Indicates the way in which the Capacity Reservation
+                      ends. Specify either unlimited or limited.
+                    type: string
+                  ephemeralStorage:
+                    description: Indicates whether the Capacity Reservation supports
+                      instances with temporary, block-level storage.
+                    type: boolean
+                  instanceCount:
+                    description: The number of instances for which to reserve capacity.
+                    type: number
+                  instanceMatchCriteria:
+                    description: Indicates the type of instance launches that the
+                      Capacity Reservation accepts. Specify either open or targeted.
+                    type: string
+                  instancePlatform:
+                    description: The type of operating system for which to reserve
+                      capacity. Valid options are Linux/UNIX, Red Hat Enterprise Linux,
+                      SUSE Linux, Windows, Windows with SQL Server, Windows with SQL
+                      Server Enterprise, Windows with SQL Server Standard or Windows
+                      with SQL Server Web.
+                    type: string
+                  instanceType:
+                    description: The instance type for which to reserve capacity.
+                    type: string
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost on
+                      which to create the Capacity Reservation.
+                    type: string
+                  placementGroupArn:
+                    description: The Amazon Resource Name (ARN) of the cluster placement
+                      group in which to create the Capacity Reservation.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tenancy:
+                    description: Indicates the tenancy of the Capacity Reservation.
+                      Specify either default or dedicated.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -331,16 +401,20 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
+                || has(self.initProvider.availabilityZone)'
             - message: instanceCount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceCount)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceCount)
+                || has(self.initProvider.instanceCount)'
             - message: instancePlatform is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePlatform)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePlatform)
+                || has(self.initProvider.instancePlatform)'
             - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
+                || has(self.initProvider.instanceType)'
           status:
             description: CapacityReservationStatus defines the observed state of CapacityReservation.
             properties:

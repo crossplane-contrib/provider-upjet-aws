@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SignatureValidityPeriodInitParameters struct {
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type SignatureValidityPeriodObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -21,11 +27,23 @@ type SignatureValidityPeriodObservation struct {
 
 type SignatureValidityPeriodParameters struct {
 
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SigningProfileInitParameters struct {
+
+	// The ID of the platform that is used by the target signing profile.
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
+
+	// The validity period for a signing job.
+	SignatureValidityPeriod []SignatureValidityPeriodInitParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SigningProfileObservation struct {
@@ -83,6 +101,9 @@ type SigningProfileParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SigningProfileRevocationRecordInitParameters struct {
+}
+
 type SigningProfileRevocationRecordObservation struct {
 	RevocationEffectiveFrom *string `json:"revocationEffectiveFrom,omitempty" tf:"revocation_effective_from,omitempty"`
 
@@ -98,6 +119,18 @@ type SigningProfileRevocationRecordParameters struct {
 type SigningProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SigningProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SigningProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // SigningProfileStatus defines the observed state of SigningProfile.
@@ -118,7 +151,7 @@ type SigningProfileStatus struct {
 type SigningProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformId)",message="platformId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformId) || has(self.initProvider.platformId)",message="platformId is a required parameter"
 	Spec   SigningProfileSpec   `json:"spec"`
 	Status SigningProfileStatus `json:"status,omitempty"`
 }

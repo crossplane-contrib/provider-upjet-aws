@@ -23,6 +23,3 @@ spec:
       key: example/suggestions.txt
     tags:
       Name: Example Kendra Index
-
----
-

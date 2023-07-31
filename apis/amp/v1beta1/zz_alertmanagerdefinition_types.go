@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AlertManagerDefinitionInitParameters struct {
+
+	// the alert manager definition that you want to be applied. See more in AWS Docs.
+	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+}
+
 type AlertManagerDefinitionObservation struct {
 
 	// the alert manager definition that you want to be applied. See more in AWS Docs.
@@ -54,6 +60,18 @@ type AlertManagerDefinitionParameters struct {
 type AlertManagerDefinitionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AlertManagerDefinitionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AlertManagerDefinitionInitParameters `json:"initProvider,omitempty"`
 }
 
 // AlertManagerDefinitionStatus defines the observed state of AlertManagerDefinition.
@@ -74,7 +92,7 @@ type AlertManagerDefinitionStatus struct {
 type AlertManagerDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition)",message="definition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition) || has(self.initProvider.definition)",message="definition is a required parameter"
 	Spec   AlertManagerDefinitionSpec   `json:"spec"`
 	Status AlertManagerDefinitionStatus `json:"status,omitempty"`
 }

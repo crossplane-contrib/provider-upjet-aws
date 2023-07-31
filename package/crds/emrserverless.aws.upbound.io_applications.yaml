@@ -106,8 +106,6 @@ spec:
                         imageUri:
                           description: The image URI.
                           type: string
-                      required:
-                      - imageUri
                       type: object
                     type: array
                   initialCapacity:
@@ -136,17 +134,12 @@ spec:
                                       description: The maximum allowed resources for
                                         an application.
                                       type: string
-                                  required:
-                                  - cpu
-                                  - memory
                                   type: object
                                 type: array
                               workerCount:
                                 description: The number of workers in the initial
                                   capacity configuration.
                                 type: number
-                            required:
-                            - workerCount
                             type: object
                           type: array
                         initialCapacityType:
@@ -155,8 +148,6 @@ spec:
                             or Executor. For Hive applications, it can be set to HiveDriver
                             or TezTask.
                           type: string
-                      required:
-                      - initialCapacityType
                       type: object
                     type: array
                   maximumCapacity:
@@ -176,9 +167,6 @@ spec:
                         memory:
                           description: The maximum allowed resources for an application.
                           type: string
-                      required:
-                      - cpu
-                      - memory
                       type: object
                     type: array
                   name:
@@ -219,6 +207,154 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  architecture:
+                    description: –  The CPU architecture of an application. Valid
+                      values are ARM64 or X86_64. Default value is X86_64.
+                    type: string
+                  autoStartConfiguration:
+                    description: –  The configuration for an application to automatically
+                      start on job submission.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables the application to automatically start
+                            on job submission. Defaults to true.
+                          type: boolean
+                      type: object
+                    type: array
+                  autoStopConfiguration:
+                    description: –  The configuration for an application to automatically
+                      stop after a certain amount of time being idle.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables the application to automatically start
+                            on job submission. Defaults to true.
+                          type: boolean
+                        idleTimeoutMinutes:
+                          description: The amount of idle time in minutes after which
+                            your application will automatically stop. Defaults to
+                            15 minutes.
+                          type: number
+                      type: object
+                    type: array
+                  imageConfiguration:
+                    description: –  The image configuration applied to all worker
+                      types.
+                    items:
+                      properties:
+                        imageUri:
+                          description: The image URI.
+                          type: string
+                      type: object
+                    type: array
+                  initialCapacity:
+                    description: –  The capacity to initialize when the application
+                      is created.
+                    items:
+                      properties:
+                        initialCapacityConfig:
+                          description: The initial capacity configuration per worker.
+                          items:
+                            properties:
+                              workerConfiguration:
+                                description: The resource configuration of the initial
+                                  capacity configuration.
+                                items:
+                                  properties:
+                                    cpu:
+                                      description: The maximum allowed CPU for an
+                                        application.
+                                      type: string
+                                    disk:
+                                      description: The maximum allowed disk for an
+                                        application.
+                                      type: string
+                                    memory:
+                                      description: The maximum allowed resources for
+                                        an application.
+                                      type: string
+                                  type: object
+                                type: array
+                              workerCount:
+                                description: The number of workers in the initial
+                                  capacity configuration.
+                                type: number
+                            type: object
+                          type: array
+                        initialCapacityType:
+                          description: The worker type for an analytics framework.
+                            For Spark applications, the key can either be set to Driver
+                            or Executor. For Hive applications, it can be set to HiveDriver
+                            or TezTask.
+                          type: string
+                      type: object
+                    type: array
+                  maximumCapacity:
+                    description: –  The maximum capacity to allocate when the application
+                      is created. This is cumulative across all workers at any given
+                      point in time, not just when an application is created. No new
+                      resources will be created once any one of the defined limits
+                      is hit.
+                    items:
+                      properties:
+                        cpu:
+                          description: The maximum allowed CPU for an application.
+                          type: string
+                        disk:
+                          description: The maximum allowed disk for an application.
+                          type: string
+                        memory:
+                          description: The maximum allowed resources for an application.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: –  The name of the application.
+                    type: string
+                  networkConfiguration:
+                    description: –  The network configuration for customer VPC connectivity.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: The array of security group Ids for customer
+                            VPC connectivity.
+                          items:
+                            type: string
+                          type: array
+                        subnetIds:
+                          description: The array of subnet Ids for customer VPC connectivity.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  releaseLabel:
+                    description: –  The EMR release version associated with the application.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: –  The type of application you want to start, such
+                      as spark or hive.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -420,13 +556,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: releaseLabel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.releaseLabel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.releaseLabel)
+                || has(self.initProvider.releaseLabel)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: ApplicationStatus defines the observed state of Application.
             properties:

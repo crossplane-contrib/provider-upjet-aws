@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GatewayResponseInitParameters struct {
+
+	// Map of parameters (paths, query strings and headers) of the Gateway Response.
+	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// Map of templates used to transform the response body.
+	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
+
+	// Response type of the associated GatewayResponse.
+	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
+
+	// HTTP status code of the Gateway Response.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
 type GatewayResponseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -74,6 +89,18 @@ type GatewayResponseParameters struct {
 type GatewayResponseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GatewayResponseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GatewayResponseInitParameters `json:"initProvider,omitempty"`
 }
 
 // GatewayResponseStatus defines the observed state of GatewayResponse.
@@ -94,7 +121,7 @@ type GatewayResponseStatus struct {
 type GatewayResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.responseType)",message="responseType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.responseType) || has(self.initProvider.responseType)",message="responseType is a required parameter"
 	Spec   GatewayResponseSpec   `json:"spec"`
 	Status GatewayResponseStatus `json:"status,omitempty"`
 }

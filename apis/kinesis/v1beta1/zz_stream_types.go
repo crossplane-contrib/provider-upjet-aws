@@ -13,6 +13,37 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StreamInitParameters struct {
+
+	// The encryption type to use. The only acceptable values are NONE or KMS. The default value is NONE.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// A boolean that indicates all registered consumers should be deregistered from the stream so that the stream can be destroyed without error. The default value is false.
+	EnforceConsumerDeletion *bool `json:"enforceConsumerDeletion,omitempty" tf:"enforce_consumer_deletion,omitempty"`
+
+	// Length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 8760 hours. Minimum value is 24. Default is 24.
+	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+
+	// –  The number of shards that the stream will use. If the stream_mode is PROVISIONED, this field is required.
+	// Amazon has guidelines for specifying the Stream size that should be referenced when creating a Kinesis stream. See Amazon Kinesis Streams for more.
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
+
+	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
+
+	// Indicates the capacity mode of the data stream. Detailed below.
+	StreamModeDetails []StreamModeDetailsInitParameters `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type StreamModeDetailsInitParameters struct {
+
+	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
+	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
+}
+
 type StreamModeDetailsObservation struct {
 
 	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
@@ -22,8 +53,8 @@ type StreamModeDetailsObservation struct {
 type StreamModeDetailsParameters struct {
 
 	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
-	// +kubebuilder:validation:Required
-	StreamMode *string `json:"streamMode" tf:"stream_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
 }
 
 type StreamObservation struct {
@@ -117,6 +148,18 @@ type StreamParameters struct {
 type StreamSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StreamInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamStatus defines the observed state of Stream.

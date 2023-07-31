@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuditLogsInitParameters struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
 type AuditLogsObservation struct {
 
 	// If true, enables Malware Protection as data source for the detector.
@@ -24,8 +31,23 @@ type AuditLogsParameters struct {
 
 	// If true, enables Malware Protection as data source for the detector.
 	// Defaults to true.
-	// +kubebuilder:validation:Required
-	Enable *bool `json:"enable" tf:"enable,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
+type DatasourcesInitParameters struct {
+
+	// Configures Kubernetes protection.
+	// See Kubernetes and Kubernetes Audit Logs below for more details.
+	Kubernetes []KubernetesInitParameters `json:"kubernetes,omitempty" tf:"kubernetes,omitempty"`
+
+	// Configures Malware Protection.
+	// See Malware Protection, Scan EC2 instance with findings and EBS volumes below for more details.
+	MalwareProtection []MalwareProtectionInitParameters `json:"malwareProtection,omitempty" tf:"malware_protection,omitempty"`
+
+	// Configures S3 protection.
+	// See S3 Logs below for more details.
+	S3Logs []S3LogsInitParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
 }
 
 type DatasourcesObservation struct {
@@ -59,6 +81,21 @@ type DatasourcesParameters struct {
 	// See S3 Logs below for more details.
 	// +kubebuilder:validation:Optional
 	S3Logs []S3LogsParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
+}
+
+type DetectorInitParameters struct {
+
+	// Describes which data sources will be enabled for the detector. See Data Sources below for more details.
+	Datasources []DatasourcesInitParameters `json:"datasources,omitempty" tf:"datasources,omitempty"`
+
+	// Enable monitoring and feedback reporting. Setting to false is equivalent to "suspending" GuardDuty. Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// Specifies the frequency of notifications sent for subsequent finding occurrences. If the detector is a GuardDuty member account, the value is determined by the GuardDuty primary account and cannot be modified, otherwise defaults to SIX_HOURS. Valid values for standalone and primary accounts: FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS. See AWS Documentation for more information.
+	FindingPublishingFrequency *string `json:"findingPublishingFrequency,omitempty" tf:"finding_publishing_frequency,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DetectorObservation struct {
@@ -112,6 +149,13 @@ type DetectorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type EBSVolumesInitParameters struct {
+
+	// If true, enables Malware Protection as data source for the detector.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
 type EBSVolumesObservation struct {
 
 	// If true, enables Malware Protection as data source for the detector.
@@ -123,8 +167,15 @@ type EBSVolumesParameters struct {
 
 	// If true, enables Malware Protection as data source for the detector.
 	// Defaults to true.
-	// +kubebuilder:validation:Required
-	Enable *bool `json:"enable" tf:"enable,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
+type KubernetesInitParameters struct {
+
+	// Configures Kubernetes audit logs as a data source for Kubernetes protection.
+	// See Kubernetes Audit Logs below for more details.
+	AuditLogs []AuditLogsInitParameters `json:"auditLogs,omitempty" tf:"audit_logs,omitempty"`
 }
 
 type KubernetesObservation struct {
@@ -138,8 +189,15 @@ type KubernetesParameters struct {
 
 	// Configures Kubernetes audit logs as a data source for Kubernetes protection.
 	// See Kubernetes Audit Logs below for more details.
-	// +kubebuilder:validation:Required
-	AuditLogs []AuditLogsParameters `json:"auditLogs" tf:"audit_logs,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuditLogs []AuditLogsParameters `json:"auditLogs,omitempty" tf:"audit_logs,omitempty"`
+}
+
+type MalwareProtectionInitParameters struct {
+
+	// Configure whether Malware Protection is enabled as data source for EC2 instances with findings for the detector.
+	// See Scan EC2 instance with findings below for more details.
+	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsInitParameters `json:"scanEc2InstanceWithFindings,omitempty" tf:"scan_ec2_instance_with_findings,omitempty"`
 }
 
 type MalwareProtectionObservation struct {
@@ -153,8 +211,15 @@ type MalwareProtectionParameters struct {
 
 	// Configure whether Malware Protection is enabled as data source for EC2 instances with findings for the detector.
 	// See Scan EC2 instance with findings below for more details.
-	// +kubebuilder:validation:Required
-	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsParameters `json:"scanEc2InstanceWithFindings" tf:"scan_ec2_instance_with_findings,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsParameters `json:"scanEc2InstanceWithFindings,omitempty" tf:"scan_ec2_instance_with_findings,omitempty"`
+}
+
+type S3LogsInitParameters struct {
+
+	// If true, enables S3 protection.
+	// Defaults to true.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type S3LogsObservation struct {
@@ -168,8 +233,15 @@ type S3LogsParameters struct {
 
 	// If true, enables S3 protection.
 	// Defaults to true.
-	// +kubebuilder:validation:Required
-	Enable *bool `json:"enable" tf:"enable,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
+type ScanEC2InstanceWithFindingsInitParameters struct {
+
+	// Configure whether scanning EBS volumes is enabled as data source for the detector for instances with findings.
+	// See EBS volumes below for more details.
+	EBSVolumes []EBSVolumesInitParameters `json:"ebsVolumes,omitempty" tf:"ebs_volumes,omitempty"`
 }
 
 type ScanEC2InstanceWithFindingsObservation struct {
@@ -183,14 +255,26 @@ type ScanEC2InstanceWithFindingsParameters struct {
 
 	// Configure whether scanning EBS volumes is enabled as data source for the detector for instances with findings.
 	// See EBS volumes below for more details.
-	// +kubebuilder:validation:Required
-	EBSVolumes []EBSVolumesParameters `json:"ebsVolumes" tf:"ebs_volumes,omitempty"`
+	// +kubebuilder:validation:Optional
+	EBSVolumes []EBSVolumesParameters `json:"ebsVolumes,omitempty" tf:"ebs_volumes,omitempty"`
 }
 
 // DetectorSpec defines the desired state of Detector
 type DetectorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DetectorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DetectorInitParameters `json:"initProvider,omitempty"`
 }
 
 // DetectorStatus defines the observed state of Detector.

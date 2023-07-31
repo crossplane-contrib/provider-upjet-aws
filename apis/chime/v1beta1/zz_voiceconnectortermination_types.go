@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VoiceConnectorTerminationInitParameters struct {
+
+	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
+
+	// The IP addresses allowed to make calls, in CIDR format.
+	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
+
+	// The limit on calls per second. Max value based on account service quota. Default value of 1.
+	CpsLimit *float64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
+
+	// The default caller ID phone number.
+	DefaultPhoneNumber *string `json:"defaultPhoneNumber,omitempty" tf:"default_phone_number,omitempty"`
+
+	// When termination settings are disabled, outbound calls can not be made.
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+}
+
 type VoiceConnectorTerminationObservation struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
@@ -83,6 +101,18 @@ type VoiceConnectorTerminationParameters struct {
 type VoiceConnectorTerminationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VoiceConnectorTerminationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VoiceConnectorTerminationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VoiceConnectorTerminationStatus defines the observed state of VoiceConnectorTermination.
@@ -103,8 +133,8 @@ type VoiceConnectorTerminationStatus struct {
 type VoiceConnectorTermination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.callingRegions)",message="callingRegions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrAllowList)",message="cidrAllowList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.callingRegions) || has(self.initProvider.callingRegions)",message="callingRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrAllowList) || has(self.initProvider.cidrAllowList)",message="cidrAllowList is a required parameter"
 	Spec   VoiceConnectorTerminationSpec   `json:"spec"`
 	Status VoiceConnectorTerminationStatus `json:"status,omitempty"`
 }

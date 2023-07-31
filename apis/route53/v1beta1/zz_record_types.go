@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AliasInitParameters struct {
+
+	// Set to true if you want Route 53 to determine whether to respond to DNS queries using this resource record set by checking the health of the resource record set. Some resources have special requirements, see related part of documentation.
+	EvaluateTargetHealth *bool `json:"evaluateTargetHealth,omitempty" tf:"evaluate_target_health,omitempty"`
+
+	// The name of the record.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the hosted zone to contain this record.
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+}
+
 type AliasObservation struct {
 
 	// Set to true if you want Route 53 to determine whether to respond to DNS queries using this resource record set by checking the health of the resource record set. Some resources have special requirements, see related part of documentation.
@@ -28,16 +40,25 @@ type AliasObservation struct {
 type AliasParameters struct {
 
 	// Set to true if you want Route 53 to determine whether to respond to DNS queries using this resource record set by checking the health of the resource record set. Some resources have special requirements, see related part of documentation.
-	// +kubebuilder:validation:Required
-	EvaluateTargetHealth *bool `json:"evaluateTargetHealth" tf:"evaluate_target_health,omitempty"`
+	// +kubebuilder:validation:Optional
+	EvaluateTargetHealth *bool `json:"evaluateTargetHealth,omitempty" tf:"evaluate_target_health,omitempty"`
 
 	// The name of the record.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
-	// +kubebuilder:validation:Required
-	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+}
+
+type CidrRoutingPolicyInitParameters struct {
+
+	// The CIDR collection ID. See the aws_route53_cidr_collection resource for more details.
+	CollectionID *string `json:"collectionId,omitempty" tf:"collection_id,omitempty"`
+
+	// The CIDR collection location name. See the aws_route53_cidr_location resource for more details. A location_name with an asterisk "*" can be used to create a default CIDR record. collection_id is still required for default record.
+	LocationName *string `json:"locationName,omitempty" tf:"location_name,omitempty"`
 }
 
 type CidrRoutingPolicyObservation struct {
@@ -52,12 +73,18 @@ type CidrRoutingPolicyObservation struct {
 type CidrRoutingPolicyParameters struct {
 
 	// The CIDR collection ID. See the aws_route53_cidr_collection resource for more details.
-	// +kubebuilder:validation:Required
-	CollectionID *string `json:"collectionId" tf:"collection_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	CollectionID *string `json:"collectionId,omitempty" tf:"collection_id,omitempty"`
 
 	// The CIDR collection location name. See the aws_route53_cidr_location resource for more details. A location_name with an asterisk "*" can be used to create a default CIDR record. collection_id is still required for default record.
-	// +kubebuilder:validation:Required
-	LocationName *string `json:"locationName" tf:"location_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocationName *string `json:"locationName,omitempty" tf:"location_name,omitempty"`
+}
+
+type FailoverRoutingPolicyInitParameters struct {
+
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FailoverRoutingPolicyObservation struct {
@@ -69,8 +96,20 @@ type FailoverRoutingPolicyObservation struct {
 type FailoverRoutingPolicyParameters struct {
 
 	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type GeolocationRoutingPolicyInitParameters struct {
+
+	// A two-letter continent code. See http://docs.aws.amazon.com/Route53/latest/APIReference/API_GetGeoLocation.html for code details. Either continent or country must be specified.
+	Continent *string `json:"continent,omitempty" tf:"continent,omitempty"`
+
+	// A two-character country code or * to indicate a default resource record set.
+	Country *string `json:"country,omitempty" tf:"country,omitempty"`
+
+	// A subdivision code for a country.
+	Subdivision *string `json:"subdivision,omitempty" tf:"subdivision,omitempty"`
 }
 
 type GeolocationRoutingPolicyObservation struct {
@@ -100,6 +139,9 @@ type GeolocationRoutingPolicyParameters struct {
 	Subdivision *string `json:"subdivision,omitempty" tf:"subdivision,omitempty"`
 }
 
+type LatencyRoutingPolicyInitParameters struct {
+}
+
 type LatencyRoutingPolicyObservation struct {
 
 	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
@@ -111,6 +153,49 @@ type LatencyRoutingPolicyParameters struct {
 	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+}
+
+type RecordInitParameters struct {
+
+	// An alias block. Conflicts with ttl & records.
+	// Documented below.
+	Alias []AliasInitParameters `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// false by default. This configuration is not recommended for most environments.
+	AllowOverwrite *bool `json:"allowOverwrite,omitempty" tf:"allow_overwrite,omitempty"`
+
+	// A block indicating a routing policy based on the IP network ranges of requestors. Conflicts with any other routing policy. Documented below.
+	CidrRoutingPolicy []CidrRoutingPolicyInitParameters `json:"cidrRoutingPolicy,omitempty" tf:"cidr_routing_policy,omitempty"`
+
+	// A block indicating the routing behavior when associated health check fails. Conflicts with any other routing policy. Documented below.
+	FailoverRoutingPolicy []FailoverRoutingPolicyInitParameters `json:"failoverRoutingPolicy,omitempty" tf:"failover_routing_policy,omitempty"`
+
+	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.
+	GeolocationRoutingPolicy []GeolocationRoutingPolicyInitParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
+
+	// A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below.
+	LatencyRoutingPolicy []LatencyRoutingPolicyInitParameters `json:"latencyRoutingPolicy,omitempty" tf:"latency_routing_policy,omitempty"`
+
+	// Set to true to indicate a multivalue answer routing policy. Conflicts with any other routing policy.
+	MultivalueAnswerRoutingPolicy *bool `json:"multivalueAnswerRoutingPolicy,omitempty" tf:"multivalue_answer_routing_policy,omitempty"`
+
+	// The name of the record.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A string list of records.g., "first255characters\"\"morecharacters").
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
+	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
+
+	// The TTL of the record.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
+	WeightedRoutingPolicy []WeightedRoutingPolicyInitParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 }
 
 type RecordObservation struct {
@@ -255,6 +340,12 @@ type RecordParameters struct {
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
+type WeightedRoutingPolicyInitParameters struct {
+
+	// A numeric value indicating the relative weight of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
 type WeightedRoutingPolicyObservation struct {
 
 	// A numeric value indicating the relative weight of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
@@ -264,14 +355,26 @@ type WeightedRoutingPolicyObservation struct {
 type WeightedRoutingPolicyParameters struct {
 
 	// A numeric value indicating the relative weight of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
-	// +kubebuilder:validation:Required
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	// +kubebuilder:validation:Optional
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 // RecordSpec defines the desired state of Record
 type RecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // RecordStatus defines the observed state of Record.
@@ -292,8 +395,8 @@ type RecordStatus struct {
 type Record struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   RecordSpec   `json:"spec"`
 	Status RecordStatus `json:"status,omitempty"`
 }

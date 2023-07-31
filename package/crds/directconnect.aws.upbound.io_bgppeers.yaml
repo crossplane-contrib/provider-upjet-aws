@@ -172,6 +172,39 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  addressFamily:
+                    description: The address family for the BGP peer. ipv4  or ipv6.
+                    type: string
+                  amazonAddress:
+                    description: The IPv4 CIDR address to use to send traffic to Amazon.
+                      Required for IPv4 BGP peers on public virtual interfaces.
+                    type: string
+                  bgpAsn:
+                    description: The autonomous system (AS) number for Border Gateway
+                      Protocol (BGP) configuration.
+                    type: number
+                  bgpAuthKey:
+                    description: The authentication key for BGP configuration.
+                    type: string
+                  customerAddress:
+                    description: The IPv4 CIDR destination address to which Amazon
+                      should send traffic. Required for IPv4 BGP peers on public virtual
+                      interfaces.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -372,10 +405,12 @@ spec:
             x-kubernetes-validations:
             - message: addressFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)
+                || has(self.initProvider.addressFamily)'
             - message: bgpAsn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)
+                || has(self.initProvider.bgpAsn)'
           status:
             description: BGPPeerStatus defines the observed state of BGPPeer.
             properties:

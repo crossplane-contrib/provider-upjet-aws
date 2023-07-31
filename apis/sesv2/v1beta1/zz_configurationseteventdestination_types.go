@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudWatchDestinationInitParameters struct {
+
+	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
+	DimensionConfiguration []DimensionConfigurationInitParameters `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
+}
+
 type CloudWatchDestinationObservation struct {
 
 	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
@@ -22,8 +28,17 @@ type CloudWatchDestinationObservation struct {
 type CloudWatchDestinationParameters struct {
 
 	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
-	// +kubebuilder:validation:Required
-	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration" tf:"dimension_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
+}
+
+type ConfigurationSetEventDestinationInitParameters struct {
+
+	// A name that identifies the event destination within the configuration set.
+	EventDestination []EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
+
+	// An object that defines the event destination. See event_destination below.
+	EventDestinationName *string `json:"eventDestinationName,omitempty" tf:"event_destination_name,omitempty"`
 }
 
 type ConfigurationSetEventDestinationObservation struct {
@@ -70,6 +85,18 @@ type ConfigurationSetEventDestinationParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type DimensionConfigurationInitParameters struct {
+
+	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
+	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
+	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
+
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+
+	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
+	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
+}
+
 type DimensionConfigurationObservation struct {
 
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
@@ -86,15 +113,36 @@ type DimensionConfigurationParameters struct {
 
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
 	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
-	// +kubebuilder:validation:Required
-	DefaultDimensionValue *string `json:"defaultDimensionValue" tf:"default_dimension_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
-	// +kubebuilder:validation:Required
-	DimensionValueSource *string `json:"dimensionValueSource" tf:"dimension_value_source,omitempty"`
+	// +kubebuilder:validation:Optional
+	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
+}
+
+type EventDestinationInitParameters struct {
+
+	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
+	CloudWatchDestination []CloudWatchDestinationInitParameters `json:"cloudWatchDestination,omitempty" tf:"cloud_watch_destination,omitempty"`
+
+	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
+	KinesisFirehoseDestination []KinesisFirehoseDestinationInitParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
+
+	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
+	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
+
+	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
+	PinpointDestination []PinpointDestinationInitParameters `json:"pinpointDestination,omitempty" tf:"pinpoint_destination,omitempty"`
+
+	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
+	SnsDestination []SnsDestinationInitParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
 
 type EventDestinationObservation struct {
@@ -133,8 +181,8 @@ type EventDestinationParameters struct {
 	KinesisFirehoseDestination []KinesisFirehoseDestinationParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
-	// +kubebuilder:validation:Required
-	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
 
 	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
 	// +kubebuilder:validation:Optional
@@ -143,6 +191,9 @@ type EventDestinationParameters struct {
 	// An object that defines an Amazon SNS destination for email events. See sns_destination below.
 	// +kubebuilder:validation:Optional
 	SnsDestination []SnsDestinationParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
+}
+
+type KinesisFirehoseDestinationInitParameters struct {
 }
 
 type KinesisFirehoseDestinationObservation struct {
@@ -185,6 +236,9 @@ type KinesisFirehoseDestinationParameters struct {
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
+type PinpointDestinationInitParameters struct {
+}
+
 type PinpointDestinationObservation struct {
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 }
@@ -203,6 +257,9 @@ type PinpointDestinationParameters struct {
 	// Selector for a App in pinpoint to populate applicationArn.
 	// +kubebuilder:validation:Optional
 	ApplicationArnSelector *v1.Selector `json:"applicationArnSelector,omitempty" tf:"-"`
+}
+
+type SnsDestinationInitParameters struct {
 }
 
 type SnsDestinationObservation struct {
@@ -232,6 +289,18 @@ type SnsDestinationParameters struct {
 type ConfigurationSetEventDestinationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationSetEventDestinationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConfigurationSetEventDestinationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationSetEventDestinationStatus defines the observed state of ConfigurationSetEventDestination.
@@ -252,8 +321,8 @@ type ConfigurationSetEventDestinationStatus struct {
 type ConfigurationSetEventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestination)",message="eventDestination is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestinationName)",message="eventDestinationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestination) || has(self.initProvider.eventDestination)",message="eventDestination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestinationName) || has(self.initProvider.eventDestinationName)",message="eventDestinationName is a required parameter"
 	Spec   ConfigurationSetEventDestinationSpec   `json:"spec"`
 	Status ConfigurationSetEventDestinationStatus `json:"status,omitempty"`
 }

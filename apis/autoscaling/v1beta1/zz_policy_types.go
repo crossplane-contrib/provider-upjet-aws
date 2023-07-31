@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomizedCapacityMetricSpecificationInitParameters struct {
+
+	// List of up to 10 structures that defines custom capacity metric in predictive scaling policy
+	MetricDataQueries []MetricDataQueriesInitParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
 type CustomizedCapacityMetricSpecificationObservation struct {
 
 	// List of up to 10 structures that defines custom capacity metric in predictive scaling policy
@@ -22,8 +28,32 @@ type CustomizedCapacityMetricSpecificationObservation struct {
 type CustomizedCapacityMetricSpecificationParameters struct {
 
 	// List of up to 10 structures that defines custom capacity metric in predictive scaling policy
-	// +kubebuilder:validation:Required
-	MetricDataQueries []MetricDataQueriesParameters `json:"metricDataQueries" tf:"metric_data_queries,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricDataQueries []MetricDataQueriesParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
+type CustomizedLoadMetricSpecificationInitParameters struct {
+
+	// List of up to 10 structures that defines custom load metric in predictive scaling policy
+	MetricDataQueries []CustomizedLoadMetricSpecificationMetricDataQueriesInitParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
+type CustomizedLoadMetricSpecificationMetricDataQueriesInitParameters struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricDataQueriesMetricStatInitParameters `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
 type CustomizedLoadMetricSpecificationMetricDataQueriesObservation struct {
@@ -51,8 +81,8 @@ type CustomizedLoadMetricSpecificationMetricDataQueriesParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// Short name for the metric used in predictive scaling policy.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Human-readable label for this metric or expression.
 	// +kubebuilder:validation:Optional
@@ -76,8 +106,29 @@ type CustomizedLoadMetricSpecificationObservation struct {
 type CustomizedLoadMetricSpecificationParameters struct {
 
 	// List of up to 10 structures that defines custom load metric in predictive scaling policy
-	// +kubebuilder:validation:Required
-	MetricDataQueries []CustomizedLoadMetricSpecificationMetricDataQueriesParameters `json:"metricDataQueries" tf:"metric_data_queries,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricDataQueries []CustomizedLoadMetricSpecificationMetricDataQueriesParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
+type CustomizedMetricSpecificationInitParameters struct {
+
+	// Dimensions of the metric.
+	MetricDimension []MetricDimensionInitParameters `json:"metricDimension,omitempty" tf:"metric_dimension,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Metrics to include, as a metric data query.
+	Metrics []MetricsInitParameters `json:"metrics,omitempty" tf:"metrics,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// Statistic of the metric.
+	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type CustomizedMetricSpecificationObservation struct {
@@ -128,6 +179,42 @@ type CustomizedMetricSpecificationParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
+type CustomizedScalingMetricSpecificationInitParameters struct {
+
+	// List of up to 10 structures that defines custom scaling metric in predictive scaling policy
+	MetricDataQueries []CustomizedScalingMetricSpecificationMetricDataQueriesInitParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
+type CustomizedScalingMetricSpecificationMetricDataQueriesInitParameters struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatInitParameters `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
+type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatInitParameters struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricDataQueriesMetricStatMetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
 type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatObservation struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
@@ -143,12 +230,12 @@ type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatObservation 
 type CustomizedScalingMetricSpecificationMetricDataQueriesMetricStatParameters struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
-	// +kubebuilder:validation:Required
-	Metric []MetricDataQueriesMetricStatMetricParameters `json:"metric" tf:"metric,omitempty"`
+	// +kubebuilder:validation:Optional
+	Metric []MetricDataQueriesMetricStatMetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
 	// Statistic of the metrics to return.
-	// +kubebuilder:validation:Required
-	Stat *string `json:"stat" tf:"stat,omitempty"`
+	// +kubebuilder:validation:Optional
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -180,8 +267,8 @@ type CustomizedScalingMetricSpecificationMetricDataQueriesParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// Short name for the metric used in predictive scaling policy.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Human-readable label for this metric or expression.
 	// +kubebuilder:validation:Optional
@@ -205,8 +292,17 @@ type CustomizedScalingMetricSpecificationObservation struct {
 type CustomizedScalingMetricSpecificationParameters struct {
 
 	// List of up to 10 structures that defines custom scaling metric in predictive scaling policy
-	// +kubebuilder:validation:Required
-	MetricDataQueries []CustomizedScalingMetricSpecificationMetricDataQueriesParameters `json:"metricDataQueries" tf:"metric_data_queries,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricDataQueries []CustomizedScalingMetricSpecificationMetricDataQueriesParameters `json:"metricDataQueries,omitempty" tf:"metric_data_queries,omitempty"`
+}
+
+type DimensionsInitParameters struct {
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DimensionsObservation struct {
@@ -221,12 +317,54 @@ type DimensionsObservation struct {
 type DimensionsParameters struct {
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the dimension.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricDataQueriesInitParameters struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricStatInitParameters `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
+type MetricDataQueriesMetricStatInitParameters struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricStatMetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricDataQueriesMetricStatMetricInitParameters struct {
+
+	// Dimensions of the metric.
+	Dimensions []MetricStatMetricDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricDataQueriesMetricStatMetricObservation struct {
@@ -248,12 +386,12 @@ type MetricDataQueriesMetricStatMetricParameters struct {
 	Dimensions []MetricStatMetricDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricDataQueriesMetricStatObservation struct {
@@ -271,12 +409,12 @@ type MetricDataQueriesMetricStatObservation struct {
 type MetricDataQueriesMetricStatParameters struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
-	// +kubebuilder:validation:Required
-	Metric []MetricStatMetricParameters `json:"metric" tf:"metric,omitempty"`
+	// +kubebuilder:validation:Optional
+	Metric []MetricStatMetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
 	// Statistic of the metrics to return.
-	// +kubebuilder:validation:Required
-	Stat *string `json:"stat" tf:"stat,omitempty"`
+	// +kubebuilder:validation:Optional
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -308,8 +446,8 @@ type MetricDataQueriesParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// Short name for the metric used in predictive scaling policy.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Human-readable label for this metric or expression.
 	// +kubebuilder:validation:Optional
@@ -324,6 +462,15 @@ type MetricDataQueriesParameters struct {
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
 }
 
+type MetricDimensionInitParameters struct {
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type MetricDimensionObservation struct {
 
 	// Name of the policy.
@@ -336,12 +483,21 @@ type MetricDimensionObservation struct {
 type MetricDimensionParameters struct {
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the dimension.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricDimensionsInitParameters struct {
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricDimensionsObservation struct {
@@ -356,12 +512,24 @@ type MetricDimensionsObservation struct {
 type MetricDimensionsParameters struct {
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the dimension.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricInitParameters struct {
+
+	// Dimensions of the metric.
+	Dimensions []DimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricObservation struct {
@@ -383,12 +551,36 @@ type MetricParameters struct {
 	Dimensions []DimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type MetricSpecificationInitParameters struct {
+
+	// Customized capacity metric specification. The field is only valid when you use customized_load_metric_specification
+	CustomizedCapacityMetricSpecification []CustomizedCapacityMetricSpecificationInitParameters `json:"customizedCapacityMetricSpecification,omitempty" tf:"customized_capacity_metric_specification,omitempty"`
+
+	// Customized load metric specification.
+	CustomizedLoadMetricSpecification []CustomizedLoadMetricSpecificationInitParameters `json:"customizedLoadMetricSpecification,omitempty" tf:"customized_load_metric_specification,omitempty"`
+
+	// Customized scaling metric specification.
+	CustomizedScalingMetricSpecification []CustomizedScalingMetricSpecificationInitParameters `json:"customizedScalingMetricSpecification,omitempty" tf:"customized_scaling_metric_specification,omitempty"`
+
+	// Predefined load metric specification.
+	PredefinedLoadMetricSpecification []PredefinedLoadMetricSpecificationInitParameters `json:"predefinedLoadMetricSpecification,omitempty" tf:"predefined_load_metric_specification,omitempty"`
+
+	// Metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling metric and load metric to use.
+	PredefinedMetricPairSpecification []PredefinedMetricPairSpecificationInitParameters `json:"predefinedMetricPairSpecification,omitempty" tf:"predefined_metric_pair_specification,omitempty"`
+
+	// Predefined scaling metric specification.
+	PredefinedScalingMetricSpecification []PredefinedScalingMetricSpecificationInitParameters `json:"predefinedScalingMetricSpecification,omitempty" tf:"predefined_scaling_metric_specification,omitempty"`
+
+	// Target value for the metric.
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
 }
 
 type MetricSpecificationObservation struct {
@@ -442,8 +634,29 @@ type MetricSpecificationParameters struct {
 	PredefinedScalingMetricSpecification []PredefinedScalingMetricSpecificationParameters `json:"predefinedScalingMetricSpecification,omitempty" tf:"predefined_scaling_metric_specification,omitempty"`
 
 	// Target value for the metric.
-	// +kubebuilder:validation:Required
-	TargetValue *float64 `json:"targetValue" tf:"target_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
+}
+
+type MetricStatInitParameters struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricStatMetricDimensionsInitParameters struct {
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricStatMetricDimensionsObservation struct {
@@ -458,12 +671,24 @@ type MetricStatMetricDimensionsObservation struct {
 type MetricStatMetricDimensionsParameters struct {
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the dimension.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricStatMetricInitParameters struct {
+
+	// Dimensions of the metric.
+	Dimensions []MetricDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricStatMetricObservation struct {
@@ -485,12 +710,12 @@ type MetricStatMetricParameters struct {
 	Dimensions []MetricDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricStatObservation struct {
@@ -508,16 +733,55 @@ type MetricStatObservation struct {
 type MetricStatParameters struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
-	// +kubebuilder:validation:Required
-	Metric []MetricParameters `json:"metric" tf:"metric,omitempty"`
+	// +kubebuilder:validation:Optional
+	Metric []MetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
 	// Statistic of the metrics to return.
-	// +kubebuilder:validation:Required
-	Stat *string `json:"stat" tf:"stat,omitempty"`
+	// +kubebuilder:validation:Optional
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricsInitParameters struct {
+
+	// Math expression used on the returned metric. You must specify either expression or metric_stat, but not both.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Short name for the metric used in predictive scaling policy.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Human-readable label for this metric or expression.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Structure that defines CloudWatch metric to be used in predictive scaling policy. You must specify either expression or metric_stat, but not both.
+	MetricStat []MetricsMetricStatInitParameters `json:"metricStat,omitempty" tf:"metric_stat,omitempty"`
+
+	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
+	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
+type MetricsMetricStatInitParameters struct {
+
+	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
+	Metric []MetricsMetricStatMetricInitParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+
+	// Statistic of the metrics to return.
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+
+	// Unit of the metric.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+}
+
+type MetricsMetricStatMetricDimensionsInitParameters struct {
+
+	// Name of the policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of the dimension.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MetricsMetricStatMetricDimensionsObservation struct {
@@ -532,12 +796,24 @@ type MetricsMetricStatMetricDimensionsObservation struct {
 type MetricsMetricStatMetricDimensionsParameters struct {
 
 	// Name of the policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of the dimension.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MetricsMetricStatMetricInitParameters struct {
+
+	// Dimensions of the metric.
+	Dimensions []MetricsMetricStatMetricDimensionsInitParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// Name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// Namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricsMetricStatMetricObservation struct {
@@ -559,12 +835,12 @@ type MetricsMetricStatMetricParameters struct {
 	Dimensions []MetricsMetricStatMetricDimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type MetricsMetricStatObservation struct {
@@ -582,12 +858,12 @@ type MetricsMetricStatObservation struct {
 type MetricsMetricStatParameters struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
-	// +kubebuilder:validation:Required
-	Metric []MetricsMetricStatMetricParameters `json:"metric" tf:"metric,omitempty"`
+	// +kubebuilder:validation:Optional
+	Metric []MetricsMetricStatMetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
 
 	// Statistic of the metrics to return.
-	// +kubebuilder:validation:Required
-	Stat *string `json:"stat" tf:"stat,omitempty"`
+	// +kubebuilder:validation:Optional
+	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -619,8 +895,8 @@ type MetricsParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// Short name for the metric used in predictive scaling policy.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Human-readable label for this metric or expression.
 	// +kubebuilder:validation:Optional
@@ -633,6 +909,43 @@ type MetricsParameters struct {
 	// Boolean that indicates whether to return the timestamps and raw data values of this metric, the default is true
 	// +kubebuilder:validation:Optional
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
+}
+
+type PolicyInitParameters struct {
+
+	// Whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.
+	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
+
+	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
+	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+
+	// Whether the scaling policy is enabled or disabled. Default: true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period.
+	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+
+	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
+	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
+
+	// Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.
+	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+
+	// Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// Predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.
+	PredictiveScalingConfiguration []PredictiveScalingConfigurationInitParameters `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
+
+	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
+	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+
+	// Set of adjustments that manage
+	// group scaling. These have the following structure:
+	StepAdjustment []StepAdjustmentInitParameters `json:"stepAdjustment,omitempty" tf:"step_adjustment,omitempty"`
+
+	// Target tracking policy. These have the following structure:
+	TargetTrackingConfiguration []TargetTrackingConfigurationInitParameters `json:"targetTrackingConfiguration,omitempty" tf:"target_tracking_configuration,omitempty"`
 }
 
 type PolicyObservation struct {
@@ -747,6 +1060,15 @@ type PolicyParameters struct {
 	TargetTrackingConfiguration []TargetTrackingConfigurationParameters `json:"targetTrackingConfiguration,omitempty" tf:"target_tracking_configuration,omitempty"`
 }
 
+type PredefinedLoadMetricSpecificationInitParameters struct {
+
+	// Metric type. Valid values are ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
+}
+
 type PredefinedLoadMetricSpecificationObservation struct {
 
 	// Metric type. Valid values are ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
@@ -759,11 +1081,20 @@ type PredefinedLoadMetricSpecificationObservation struct {
 type PredefinedLoadMetricSpecificationParameters struct {
 
 	// Metric type. Valid values are ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
-	// +kubebuilder:validation:Required
-	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
+}
+
+type PredefinedMetricPairSpecificationInitParameters struct {
+
+	// Which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric. For example, if the metric type is ASGCPUUtilization, the Auto Scaling group's total CPU metric is used as the load metric, and the average CPU metric is used for the scaling metric. Valid values are ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
@@ -779,11 +1110,20 @@ type PredefinedMetricPairSpecificationObservation struct {
 type PredefinedMetricPairSpecificationParameters struct {
 
 	// Which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric. For example, if the metric type is ASGCPUUtilization, the Auto Scaling group's total CPU metric is used as the load metric, and the average CPU metric is used for the scaling metric. Valid values are ASGCPUUtilization, ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.
-	// +kubebuilder:validation:Required
-	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
+}
+
+type PredefinedMetricSpecificationInitParameters struct {
+
+	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
@@ -799,11 +1139,20 @@ type PredefinedMetricSpecificationObservation struct {
 type PredefinedMetricSpecificationParameters struct {
 
 	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
-	// +kubebuilder:validation:Required
-	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	// +kubebuilder:validation:Optional
+	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
+}
+
+type PredefinedScalingMetricSpecificationInitParameters struct {
+
+	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+
+	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
 }
 
@@ -819,12 +1168,30 @@ type PredefinedScalingMetricSpecificationObservation struct {
 type PredefinedScalingMetricSpecificationParameters struct {
 
 	// Describes a scaling metric for a predictive scaling policy. Valid values are ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
-	// +kubebuilder:validation:Required
-	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
 
 	// Label that uniquely identifies a specific Application Load Balancer target group from which to determine the request count served by your Auto Scaling group.
 	// +kubebuilder:validation:Optional
 	ResourceLabel *string `json:"resourceLabel,omitempty" tf:"resource_label,omitempty"`
+}
+
+type PredictiveScalingConfigurationInitParameters struct {
+
+	// Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity of the Auto Scaling group. Valid values are HonorMaxCapacity or IncreaseMaxCapacity. Default is HonorMaxCapacity.
+	MaxCapacityBreachBehavior *string `json:"maxCapacityBreachBehavior,omitempty" tf:"max_capacity_breach_behavior,omitempty"`
+
+	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. Valid range is 0 to 100. If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but not exceed forecast capacity.
+	MaxCapacityBuffer *string `json:"maxCapacityBuffer,omitempty" tf:"max_capacity_buffer,omitempty"`
+
+	// This structure includes the metrics and target utilization to use for predictive scaling.
+	MetricSpecification []MetricSpecificationInitParameters `json:"metricSpecification,omitempty" tf:"metric_specification,omitempty"`
+
+	// Predictive scaling mode. Valid values are ForecastAndScale and ForecastOnly. Default is ForecastOnly.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Amount of time, in seconds, by which the instance launch time can be advanced. Minimum is 0.
+	SchedulingBufferTime *string `json:"schedulingBufferTime,omitempty" tf:"scheduling_buffer_time,omitempty"`
 }
 
 type PredictiveScalingConfigurationObservation struct {
@@ -856,8 +1223,8 @@ type PredictiveScalingConfigurationParameters struct {
 	MaxCapacityBuffer *string `json:"maxCapacityBuffer,omitempty" tf:"max_capacity_buffer,omitempty"`
 
 	// This structure includes the metrics and target utilization to use for predictive scaling.
-	// +kubebuilder:validation:Required
-	MetricSpecification []MetricSpecificationParameters `json:"metricSpecification" tf:"metric_specification,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricSpecification []MetricSpecificationParameters `json:"metricSpecification,omitempty" tf:"metric_specification,omitempty"`
 
 	// Predictive scaling mode. Valid values are ForecastAndScale and ForecastOnly. Default is ForecastOnly.
 	// +kubebuilder:validation:Optional
@@ -866,6 +1233,23 @@ type PredictiveScalingConfigurationParameters struct {
 	// Amount of time, in seconds, by which the instance launch time can be advanced. Minimum is 0.
 	// +kubebuilder:validation:Optional
 	SchedulingBufferTime *string `json:"schedulingBufferTime,omitempty" tf:"scheduling_buffer_time,omitempty"`
+}
+
+type StepAdjustmentInitParameters struct {
+
+	// Lower bound for the
+	// difference between the alarm threshold and the CloudWatch metric.
+	// Without a value, AWS will treat this bound as negative infinity.
+	MetricIntervalLowerBound *string `json:"metricIntervalLowerBound,omitempty" tf:"metric_interval_lower_bound,omitempty"`
+
+	// Upper bound for the
+	// difference between the alarm threshold and the CloudWatch metric.
+	// Without a value, AWS will treat this bound as positive infinity. The upper bound
+	// must be greater than the lower bound.
+	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
+
+	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
+	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentObservation struct {
@@ -901,8 +1285,23 @@ type StepAdjustmentParameters struct {
 	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
-	// +kubebuilder:validation:Required
-	ScalingAdjustment *float64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+}
+
+type TargetTrackingConfigurationInitParameters struct {
+
+	// Customized metric. Conflicts with predefined_metric_specification.
+	CustomizedMetricSpecification []CustomizedMetricSpecificationInitParameters `json:"customizedMetricSpecification,omitempty" tf:"customized_metric_specification,omitempty"`
+
+	// Whether scale in by the target tracking policy is disabled.
+	DisableScaleIn *bool `json:"disableScaleIn,omitempty" tf:"disable_scale_in,omitempty"`
+
+	// Predefined metric. Conflicts with customized_metric_specification.
+	PredefinedMetricSpecification []PredefinedMetricSpecificationInitParameters `json:"predefinedMetricSpecification,omitempty" tf:"predefined_metric_specification,omitempty"`
+
+	// Target value for the metric.
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
 }
 
 type TargetTrackingConfigurationObservation struct {
@@ -935,14 +1334,26 @@ type TargetTrackingConfigurationParameters struct {
 	PredefinedMetricSpecification []PredefinedMetricSpecificationParameters `json:"predefinedMetricSpecification,omitempty" tf:"predefined_metric_specification,omitempty"`
 
 	// Target value for the metric.
-	// +kubebuilder:validation:Required
-	TargetValue *float64 `json:"targetValue" tf:"target_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
 }
 
 // PolicySpec defines the desired state of Policy
 type PolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PolicyStatus defines the observed state of Policy.

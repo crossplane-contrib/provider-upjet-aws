@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AwsLocationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the subnet that the device is located in.
+	SubnetArn *string `json:"subnetArn,omitempty" tf:"subnet_arn,omitempty"`
+
+	// The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type AwsLocationObservation struct {
 
 	// The Amazon Resource Name (ARN) of the subnet that the device is located in.
@@ -31,6 +40,33 @@ type AwsLocationParameters struct {
 	// The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type DeviceInitParameters struct {
+
+	// The AWS location of the device. Documented below.
+	AwsLocation []AwsLocationInitParameters `json:"awsLocation,omitempty" tf:"aws_location,omitempty"`
+
+	// A description of the device.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The location of the device. Documented below.
+	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The model of device.
+	Model *string `json:"model,omitempty" tf:"model,omitempty"`
+
+	// The serial number of the device.
+	SerialNumber *string `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of device.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The vendor of the device.
+	Vendor *string `json:"vendor,omitempty" tf:"vendor,omitempty"`
 }
 
 type DeviceObservation struct {
@@ -142,6 +178,18 @@ type DeviceParameters struct {
 	Vendor *string `json:"vendor,omitempty" tf:"vendor,omitempty"`
 }
 
+type LocationInitParameters struct {
+
+	// The physical address.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The latitude.
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	// The longitude.
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
+}
+
 type LocationObservation struct {
 
 	// The physical address.
@@ -173,6 +221,18 @@ type LocationParameters struct {
 type DeviceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeviceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DeviceInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeviceStatus defines the observed state of Device.

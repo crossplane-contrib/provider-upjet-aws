@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountAggregationSourceInitParameters struct {
+
+	// List of 12-digit account IDs of the account(s) being aggregated.
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+
+	// If true, aggregate existing AWS Config regions and future regions.
+	AllRegions *bool `json:"allRegions,omitempty" tf:"all_regions,omitempty"`
+
+	// List of source regions being aggregated.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+}
+
 type AccountAggregationSourceObservation struct {
 
 	// List of 12-digit account IDs of the account(s) being aggregated.
@@ -28,8 +40,8 @@ type AccountAggregationSourceObservation struct {
 type AccountAggregationSourceParameters struct {
 
 	// List of 12-digit account IDs of the account(s) being aggregated.
-	// +kubebuilder:validation:Required
-	AccountIds []*string `json:"accountIds" tf:"account_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	// If true, aggregate existing AWS Config regions and future regions.
 	// +kubebuilder:validation:Optional
@@ -38,6 +50,18 @@ type AccountAggregationSourceParameters struct {
 	// List of source regions being aggregated.
 	// +kubebuilder:validation:Optional
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+}
+
+type ConfigurationAggregatorInitParameters struct {
+
+	// The account(s) to aggregate config data from as documented below.
+	AccountAggregationSource []AccountAggregationSourceInitParameters `json:"accountAggregationSource,omitempty" tf:"account_aggregation_source,omitempty"`
+
+	// The organization to aggregate config data from as documented below.
+	OrganizationAggregationSource []OrganizationAggregationSourceInitParameters `json:"organizationAggregationSource,omitempty" tf:"organization_aggregation_source,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ConfigurationAggregatorObservation struct {
@@ -78,6 +102,15 @@ type ConfigurationAggregatorParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type OrganizationAggregationSourceInitParameters struct {
+
+	// If true, aggregate existing AWS Config regions and future regions.
+	AllRegions *bool `json:"allRegions,omitempty" tf:"all_regions,omitempty"`
+
+	// List of source regions being aggregated.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
 type OrganizationAggregationSourceObservation struct {
@@ -121,6 +154,18 @@ type OrganizationAggregationSourceParameters struct {
 type ConfigurationAggregatorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationAggregatorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConfigurationAggregatorInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationAggregatorStatus defines the observed state of ConfigurationAggregator.

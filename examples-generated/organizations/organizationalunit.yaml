@@ -11,6 +11,3 @@ spec:
     name: example
     parentId: ${aws_organizations_organization.example.roots[0].id}
     region: us-west-1
-
----
-

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ListenerInitParameters struct {
+
+	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
+	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
+
+	// The list of port ranges for the connections from clients to the accelerator. Fields documented below.
+	PortRange []PortRangeInitParameters `json:"portRange,omitempty" tf:"port_range,omitempty"`
+
+	// The protocol for the connections from clients to the accelerator. Valid values are TCP, UDP.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
 type ListenerObservation struct {
 
 	// The Amazon Resource Name (ARN) of your accelerator.
@@ -64,6 +76,15 @@ type ListenerParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type PortRangeInitParameters struct {
+
+	// The first port in the range of ports, inclusive.
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// The last port in the range of ports, inclusive.
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
 type PortRangeObservation struct {
 
 	// The first port in the range of ports, inclusive.
@@ -88,6 +109,18 @@ type PortRangeParameters struct {
 type ListenerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ListenerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ListenerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ListenerStatus defines the observed state of Listener.
@@ -108,8 +141,8 @@ type ListenerStatus struct {
 type Listener struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.portRange)",message="portRange is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.portRange) || has(self.initProvider.portRange)",message="portRange is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
 	Spec   ListenerSpec   `json:"spec"`
 	Status ListenerStatus `json:"status,omitempty"`
 }

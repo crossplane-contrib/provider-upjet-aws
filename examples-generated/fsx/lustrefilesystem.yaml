@@ -13,6 +13,3 @@ spec:
     storageCapacity: 1200
     subnetIdRefs:
     - name: example
-
----
-

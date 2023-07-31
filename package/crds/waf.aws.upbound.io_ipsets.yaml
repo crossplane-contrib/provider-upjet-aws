@@ -80,9 +80,6 @@ spec:
                           description: An IPv4 or IPv6 address specified via CIDR
                             notationE.g., 192.0.2.44/32 or 1111:0000:0000:0000:0000:0000:0000:0000/64
                           type: string
-                      required:
-                      - type
-                      - value
                       type: object
                     type: array
                   name:
@@ -94,6 +91,38 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  ipSetDescriptors:
+                    description: One or more pairs specifying the IP address type
+                      (IPV4 or IPV6) and the IP address range (in CIDR format) from
+                      which web requests originate.
+                    items:
+                      properties:
+                        type:
+                          description: Type of the IP address - IPV4 or IPV6.
+                          type: string
+                        value:
+                          description: An IPv4 or IPv6 address specified via CIDR
+                            notationE.g., 192.0.2.44/32 or 1111:0000:0000:0000:0000:0000:0000:0000/64
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name or description of the IPSet.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -295,7 +324,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:

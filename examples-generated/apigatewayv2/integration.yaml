@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: example
     integrationType: MOCK
     region: us-west-1
-
----
-

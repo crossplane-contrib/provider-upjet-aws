@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CapacityUnitsInitParameters struct {
+
+	// The amount of extra query capacity for an index and GetQuerySuggestions capacity. For more information, refer to QueryCapacityUnits.
+	QueryCapacityUnits *float64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
+
+	// The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first. Minimum value of 0.
+	StorageCapacityUnits *float64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
+}
+
 type CapacityUnitsObservation struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions capacity. For more information, refer to QueryCapacityUnits.
@@ -33,6 +42,21 @@ type CapacityUnitsParameters struct {
 	StorageCapacityUnits *float64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
 }
 
+type DocumentMetadataConfigurationUpdatesInitParameters struct {
+
+	// The name of the index field. Minimum length of 1. Maximum length of 30.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that provides manual tuning parameters to determine how the field affects the search results. Detailed below
+	Relevance []RelevanceInitParameters `json:"relevance,omitempty" tf:"relevance,omitempty"`
+
+	// A block that provides information about how the field is used during a search. Documented below. Detailed below
+	Search []SearchInitParameters `json:"search,omitempty" tf:"search,omitempty"`
+
+	// The data type of the index field. Valid values are STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type DocumentMetadataConfigurationUpdatesObservation struct {
 
 	// The name of the index field. Minimum length of 1. Maximum length of 30.
@@ -51,8 +75,8 @@ type DocumentMetadataConfigurationUpdatesObservation struct {
 type DocumentMetadataConfigurationUpdatesParameters struct {
 
 	// The name of the index field. Minimum length of 1. Maximum length of 30.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that provides manual tuning parameters to determine how the field affects the search results. Detailed below
 	// +kubebuilder:validation:Optional
@@ -63,8 +87,11 @@ type DocumentMetadataConfigurationUpdatesParameters struct {
 	Search []SearchParameters `json:"search,omitempty" tf:"search,omitempty"`
 
 	// The data type of the index field. Valid values are STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type FaqStatisticsInitParameters struct {
 }
 
 type FaqStatisticsObservation struct {
@@ -74,6 +101,39 @@ type FaqStatisticsObservation struct {
 }
 
 type FaqStatisticsParameters struct {
+}
+
+type IndexInitParameters struct {
+
+	// A block that sets the number of additional document storage and query capacity units that should be used by the index. Detailed below.
+	CapacityUnits []CapacityUnitsInitParameters `json:"capacityUnits,omitempty" tf:"capacity_units,omitempty"`
+
+	// The description of the Index.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// One or more blocks that specify the configuration settings for any metadata applied to the documents in the index. Minimum number of 0 items. Maximum number of 500 items. If specified, you must define all elements, including those that are provided by default. These index fields are documented at Amazon Kendra Index documentation. For an example resource that defines these default index fields, refer to the default example above. For an example resource that appends additional index fields, refer to the append example above. All arguments for each block must be specified. Note that blocks cannot be removed since index fields cannot be deleted. This argument is detailed below.
+	DocumentMetadataConfigurationUpdates []DocumentMetadataConfigurationUpdatesInitParameters `json:"documentMetadataConfigurationUpdates,omitempty" tf:"document_metadata_configuration_updates,omitempty"`
+
+	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed. Defaults to ENTERPRISE_EDITION
+	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// Specifies the name of the Index.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that specifies the identifier of the AWS KMS customer managed key (CMK) that's used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs. Detailed below.
+	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The user context policy. Valid values are ATTRIBUTE_FILTER or USER_TOKEN. For more information, refer to UserContextPolicy. Defaults to ATTRIBUTE_FILTER.
+	UserContextPolicy *string `json:"userContextPolicy,omitempty" tf:"user_context_policy,omitempty"`
+
+	// A block that enables fetching access levels of groups and users from an AWS Single Sign-On identity source. To configure this, see UserGroupResolutionConfiguration. Detailed below.
+	UserGroupResolutionConfiguration []UserGroupResolutionConfigurationInitParameters `json:"userGroupResolutionConfiguration,omitempty" tf:"user_group_resolution_configuration,omitempty"`
+
+	// A block that specifies the user token configuration. Detailed below.
+	UserTokenConfigurations []UserTokenConfigurationsInitParameters `json:"userTokenConfigurations,omitempty" tf:"user_token_configurations,omitempty"`
 }
 
 type IndexObservation struct {
@@ -198,6 +258,9 @@ type IndexParameters struct {
 	UserTokenConfigurations []UserTokenConfigurationsParameters `json:"userTokenConfigurations,omitempty" tf:"user_token_configurations,omitempty"`
 }
 
+type IndexStatisticsInitParameters struct {
+}
+
 type IndexStatisticsObservation struct {
 
 	// A block that specifies the number of question and answer topics in the index. Detailed below.
@@ -208,6 +271,15 @@ type IndexStatisticsObservation struct {
 }
 
 type IndexStatisticsParameters struct {
+}
+
+type JSONTokenTypeConfigurationInitParameters struct {
+
+	// The group attribute field. Minimum length of 1. Maximum length of 2048.
+	GroupAttributeField *string `json:"groupAttributeField,omitempty" tf:"group_attribute_field,omitempty"`
+
+	// The user name attribute field. Minimum length of 1. Maximum length of 2048.
+	UserNameAttributeField *string `json:"userNameAttributeField,omitempty" tf:"user_name_attribute_field,omitempty"`
 }
 
 type JSONTokenTypeConfigurationObservation struct {
@@ -222,12 +294,36 @@ type JSONTokenTypeConfigurationObservation struct {
 type JSONTokenTypeConfigurationParameters struct {
 
 	// The group attribute field. Minimum length of 1. Maximum length of 2048.
-	// +kubebuilder:validation:Required
-	GroupAttributeField *string `json:"groupAttributeField" tf:"group_attribute_field,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupAttributeField *string `json:"groupAttributeField,omitempty" tf:"group_attribute_field,omitempty"`
 
 	// The user name attribute field. Minimum length of 1. Maximum length of 2048.
-	// +kubebuilder:validation:Required
-	UserNameAttributeField *string `json:"userNameAttributeField" tf:"user_name_attribute_field,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserNameAttributeField *string `json:"userNameAttributeField,omitempty" tf:"user_name_attribute_field,omitempty"`
+}
+
+type JwtTokenTypeConfigurationInitParameters struct {
+
+	// The regular expression that identifies the claim. Minimum length of 1. Maximum length of 100.
+	ClaimRegex *string `json:"claimRegex,omitempty" tf:"claim_regex,omitempty"`
+
+	// The group attribute field. Minimum length of 1. Maximum length of 2048.
+	GroupAttributeField *string `json:"groupAttributeField,omitempty" tf:"group_attribute_field,omitempty"`
+
+	// The issuer of the token. Minimum length of 1. Maximum length of 65.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// The location of the key. Valid values are URL or SECRET_MANAGER
+	KeyLocation *string `json:"keyLocation,omitempty" tf:"key_location,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the secret.
+	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
+
+	// The signing key URL. Valid pattern is ^(https?|ftp|file):\/\/([^\s]*)
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The user name attribute field. Minimum length of 1. Maximum length of 2048.
+	UserNameAttributeField *string `json:"userNameAttributeField,omitempty" tf:"user_name_attribute_field,omitempty"`
 }
 
 type JwtTokenTypeConfigurationObservation struct {
@@ -269,8 +365,8 @@ type JwtTokenTypeConfigurationParameters struct {
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// The location of the key. Valid values are URL or SECRET_MANAGER
-	// +kubebuilder:validation:Required
-	KeyLocation *string `json:"keyLocation" tf:"key_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyLocation *string `json:"keyLocation,omitempty" tf:"key_location,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the secret.
 	// +kubebuilder:validation:Optional
@@ -283,6 +379,24 @@ type JwtTokenTypeConfigurationParameters struct {
 	// The user name attribute field. Minimum length of 1. Maximum length of 2048.
 	// +kubebuilder:validation:Optional
 	UserNameAttributeField *string `json:"userNameAttributeField,omitempty" tf:"user_name_attribute_field,omitempty"`
+}
+
+type RelevanceInitParameters struct {
+
+	// Specifies the time period that the boost applies to. For more information, refer to Duration.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Indicates that this field determines how "fresh" a document is. For more information, refer to Freshness.
+	Freshness *bool `json:"freshness,omitempty" tf:"freshness,omitempty"`
+
+	// The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers. Minimum value of 1. Maximum value of 10.
+	Importance *float64 `json:"importance,omitempty" tf:"importance,omitempty"`
+
+	// Determines how values should be interpreted. For more information, refer to RankOrder.
+	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
+
+	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
+	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
 type RelevanceObservation struct {
@@ -326,6 +440,21 @@ type RelevanceParameters struct {
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
+type SearchInitParameters struct {
+
+	// Determines whether the field is returned in the query response. The default is true.
+	Displayable *bool `json:"displayable,omitempty" tf:"displayable,omitempty"`
+
+	// Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is false.
+	Facetable *bool `json:"facetable,omitempty" tf:"facetable,omitempty"`
+
+	// Determines whether the field is used in the search. If the Searchable field is true, you can use relevance tuning to manually tune how Amazon Kendra weights the field in the search. The default is true for string fields and false for number and date fields.
+	Searchable *bool `json:"searchable,omitempty" tf:"searchable,omitempty"`
+
+	// Determines whether the field can be used to sort the results of a query. If you specify sorting on a field that does not have Sortable set to true, Amazon Kendra returns an exception. The default is false.
+	Sortable *bool `json:"sortable,omitempty" tf:"sortable,omitempty"`
+}
+
 type SearchObservation struct {
 
 	// Determines whether the field is returned in the query response. The default is true.
@@ -360,6 +489,12 @@ type SearchParameters struct {
 	Sortable *bool `json:"sortable,omitempty" tf:"sortable,omitempty"`
 }
 
+type ServerSideEncryptionConfigurationInitParameters struct {
+
+	// The identifier of the AWS KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type ServerSideEncryptionConfigurationObservation struct {
 
 	// The identifier of the AWS KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
@@ -371,6 +506,9 @@ type ServerSideEncryptionConfigurationParameters struct {
 	// The identifier of the AWS KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type TextDocumentStatisticsInitParameters struct {
 }
 
 type TextDocumentStatisticsObservation struct {
@@ -385,6 +523,12 @@ type TextDocumentStatisticsObservation struct {
 type TextDocumentStatisticsParameters struct {
 }
 
+type UserGroupResolutionConfigurationInitParameters struct {
+
+	// The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode. Valid Values are AWS_SSO or NONE.
+	UserGroupResolutionMode *string `json:"userGroupResolutionMode,omitempty" tf:"user_group_resolution_mode,omitempty"`
+}
+
 type UserGroupResolutionConfigurationObservation struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode. Valid Values are AWS_SSO or NONE.
@@ -394,8 +538,17 @@ type UserGroupResolutionConfigurationObservation struct {
 type UserGroupResolutionConfigurationParameters struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode. Valid Values are AWS_SSO or NONE.
-	// +kubebuilder:validation:Required
-	UserGroupResolutionMode *string `json:"userGroupResolutionMode" tf:"user_group_resolution_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserGroupResolutionMode *string `json:"userGroupResolutionMode,omitempty" tf:"user_group_resolution_mode,omitempty"`
+}
+
+type UserTokenConfigurationsInitParameters struct {
+
+	// A block that specifies the information about the JSON token type configuration. Detailed below.
+	JSONTokenTypeConfiguration []JSONTokenTypeConfigurationInitParameters `json:"jsonTokenTypeConfiguration,omitempty" tf:"json_token_type_configuration,omitempty"`
+
+	// A block that specifies the information about the JWT token type configuration. Detailed below.
+	JwtTokenTypeConfiguration []JwtTokenTypeConfigurationInitParameters `json:"jwtTokenTypeConfiguration,omitempty" tf:"jwt_token_type_configuration,omitempty"`
 }
 
 type UserTokenConfigurationsObservation struct {
@@ -422,6 +575,18 @@ type UserTokenConfigurationsParameters struct {
 type IndexSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IndexParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IndexInitParameters `json:"initProvider,omitempty"`
 }
 
 // IndexStatus defines the observed state of Index.
@@ -442,7 +607,7 @@ type IndexStatus struct {
 type Index struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   IndexSpec   `json:"spec"`
 	Status IndexStatus `json:"status,omitempty"`
 }

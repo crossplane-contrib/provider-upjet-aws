@@ -173,6 +173,38 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  destination:
+                    description: A destination configuration block (documented below).
+                    items:
+                      properties:
+                        availabilityZoneName:
+                          description: The availability zone in which the replica
+                            should be created. If specified, the replica will be created
+                            with One Zone storage. If omitted, regional storage will
+                            be used.
+                          type: string
+                        kmsKeyId:
+                          description: The Key ID, ARN, alias, or alias ARN of the
+                            KMS key that should be used to encrypt the replica file
+                            system. If omitted, the default KMS key for EFS /aws/elasticfilesystem
+                            will be used.
+                          type: string
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -373,7 +405,8 @@ spec:
             x-kubernetes-validations:
             - message: destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
+                || has(self.initProvider.destination)'
           status:
             description: ReplicationConfigurationStatus defines the observed state
               of ReplicationConfiguration.

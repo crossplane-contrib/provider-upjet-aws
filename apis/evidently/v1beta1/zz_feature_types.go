@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EvaluationRulesInitParameters struct {
+}
+
 type EvaluationRulesObservation struct {
 
 	// The name of the experiment or launch.
@@ -23,6 +26,27 @@ type EvaluationRulesObservation struct {
 }
 
 type EvaluationRulesParameters struct {
+}
+
+type FeatureInitParameters struct {
+
+	// The name of the variation to use as the default variation. The default variation is served to users who are not allocated to any ongoing launches or experiments of this feature. This variation must also be listed in the variations structure. If you omit default_variation, the first variation listed in the variations structure is used as the default variation.
+	DefaultVariation *string `json:"defaultVariation,omitempty" tf:"default_variation,omitempty"`
+
+	// Specifies the description of the feature.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.
+	EntityOverrides map[string]*string `json:"entityOverrides,omitempty" tf:"entity_overrides,omitempty"`
+
+	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION to serve the default variation to all users instead.
+	EvaluationStrategy *string `json:"evaluationStrategy,omitempty" tf:"evaluation_strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more blocks that contain the configuration of the feature's different variations. Detailed below
+	Variations []VariationsInitParameters `json:"variations,omitempty" tf:"variations,omitempty"`
 }
 
 type FeatureObservation struct {
@@ -119,6 +143,21 @@ type FeatureParameters struct {
 	Variations []VariationsParameters `json:"variations,omitempty" tf:"variations,omitempty"`
 }
 
+type ValueInitParameters struct {
+
+	// If this feature uses the Boolean variation type, this field contains the Boolean value of this variation.
+	BoolValue *string `json:"boolValue,omitempty" tf:"bool_value,omitempty"`
+
+	// If this feature uses the double integer variation type, this field contains the double integer value of this variation.
+	DoubleValue *string `json:"doubleValue,omitempty" tf:"double_value,omitempty"`
+
+	// If this feature uses the long variation type, this field contains the long value of this variation. Minimum value of -9007199254740991. Maximum value of 9007199254740991.
+	LongValue *string `json:"longValue,omitempty" tf:"long_value,omitempty"`
+
+	// If this feature uses the string variation type, this field contains the string value of this variation. Minimum length of 0. Maximum length of 512.
+	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
+}
+
 type ValueObservation struct {
 
 	// If this feature uses the Boolean variation type, this field contains the Boolean value of this variation.
@@ -153,6 +192,15 @@ type ValueParameters struct {
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
 }
 
+type VariationsInitParameters struct {
+
+	// The name of the variation. Minimum length of 1. Maximum length of 127.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that specifies the value assigned to this variation. Detailed below
+	Value []ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type VariationsObservation struct {
 
 	// The name of the variation. Minimum length of 1. Maximum length of 127.
@@ -165,18 +213,30 @@ type VariationsObservation struct {
 type VariationsParameters struct {
 
 	// The name of the variation. Minimum length of 1. Maximum length of 127.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that specifies the value assigned to this variation. Detailed below
-	// +kubebuilder:validation:Required
-	Value []ValueParameters `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value []ValueParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // FeatureSpec defines the desired state of Feature
 type FeatureSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FeatureParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FeatureInitParameters `json:"initProvider,omitempty"`
 }
 
 // FeatureStatus defines the observed state of Feature.
@@ -197,7 +257,7 @@ type FeatureStatus struct {
 type Feature struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.variations)",message="variations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.variations) || has(self.initProvider.variations)",message="variations is a required parameter"
 	Spec   FeatureSpec   `json:"spec"`
 	Status FeatureStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CredentialsInitParameters struct {
+
+	// RFC2617 compliant username associated with the SIP credentials.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type CredentialsObservation struct {
 
 	// RFC2617 compliant username associated with the SIP credentials.
@@ -26,8 +32,14 @@ type CredentialsParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// RFC2617 compliant username associated with the SIP credentials.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type VoiceConnectorTerminationCredentialsInitParameters struct {
+
+	// List of termination SIP credentials.
+	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 }
 
 type VoiceConnectorTerminationCredentialsObservation struct {
@@ -72,6 +84,18 @@ type VoiceConnectorTerminationCredentialsParameters struct {
 type VoiceConnectorTerminationCredentialsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VoiceConnectorTerminationCredentialsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VoiceConnectorTerminationCredentialsInitParameters `json:"initProvider,omitempty"`
 }
 
 // VoiceConnectorTerminationCredentialsStatus defines the observed state of VoiceConnectorTerminationCredentials.
@@ -92,7 +116,7 @@ type VoiceConnectorTerminationCredentialsStatus struct {
 type VoiceConnectorTerminationCredentials struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.credentials)",message="credentials is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.credentials) || has(self.initProvider.credentials)",message="credentials is a required parameter"
 	Spec   VoiceConnectorTerminationCredentialsSpec   `json:"spec"`
 	Status VoiceConnectorTerminationCredentialsStatus `json:"status,omitempty"`
 }

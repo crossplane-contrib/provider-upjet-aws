@@ -82,9 +82,6 @@ spec:
                         actionThresholdValue:
                           description: The threshold of a notification.
                           type: number
-                      required:
-                      - actionThresholdType
-                      - actionThresholdValue
                       type: object
                     type: array
                   actionType:
@@ -300,9 +297,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - policyId
-                            - targetIds
                             type: object
                           type: array
                         ssmActionDefinition:
@@ -323,8 +317,6 @@ spec:
                                 description: The Region to run the SSM document.
                                 type: string
                             required:
-                            - actionSubType
-                            - instanceIds
                             - region
                             type: object
                           type: array
@@ -427,13 +419,132 @@ spec:
                           description: The type of notification that AWS sends to
                             a subscriber. Valid values are SNS or EMAIL.
                           type: string
-                      required:
-                      - address
-                      - subscriptionType
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountId:
+                    description: The ID of the target account for budget. Will use
+                      current user's account_id by default if omitted.
+                    type: string
+                  actionThreshold:
+                    description: The trigger threshold of the action. See Action Threshold.
+                    items:
+                      properties:
+                        actionThresholdType:
+                          description: The type of threshold for a notification. Valid
+                            values are PERCENTAGE or ABSOLUTE_VALUE.
+                          type: string
+                        actionThresholdValue:
+                          description: The threshold of a notification.
+                          type: number
+                      type: object
+                    type: array
+                  actionType:
+                    description: The type of action. This defines the type of tasks
+                      that can be carried out by this action. This field also determines
+                      the format for definition. Valid values are APPLY_IAM_POLICY,
+                      APPLY_SCP_POLICY, and RUN_SSM_DOCUMENTS.
+                    type: string
+                  approvalModel:
+                    description: This specifies if the action needs manual or automatic
+                      approval. Valid values are AUTOMATIC and MANUAL.
+                    type: string
+                  definition:
+                    description: Specifies all of the type-specific parameters. See
+                      Definition.
+                    items:
+                      properties:
+                        iamActionDefinition:
+                          description: The AWS Identity and Access Management (IAM)
+                            action definition details. See IAM Action Definition.
+                          items:
+                            properties:
+                              groups:
+                                description: A list of groups to be attached. There
+                                  must be at least one group.
+                                items:
+                                  type: string
+                                type: array
+                              roles:
+                                description: A list of roles to be attached. There
+                                  must be at least one role.
+                                items:
+                                  type: string
+                                type: array
+                              users:
+                                description: A list of users to be attached. There
+                                  must be at least one user.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        scpActionDefinition:
+                          description: The service control policies (SCPs) action
+                            definition details. See SCP Action Definition.
+                          items:
+                            properties:
+                              policyId:
+                                description: The policy ID attached.
+                                type: string
+                              targetIds:
+                                description: A list of target IDs.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        ssmActionDefinition:
+                          description: The AWS Systems Manager (SSM) action definition
+                            details. See SSM Action Definition.
+                          items:
+                            properties:
+                              actionSubType:
+                                description: The action subType. Valid values are
+                                  STOP_EC2_INSTANCES or STOP_RDS_INSTANCES.
+                                type: string
+                              instanceIds:
+                                description: The EC2 and RDS instance IDs.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  notificationType:
+                    description: The type of a notification. Valid values are ACTUAL
+                      or FORECASTED.
+                    type: string
+                  subscriber:
+                    description: A list of subscribers. See Subscriber.
+                    items:
+                      properties:
+                        address:
+                          description: The address that AWS sends budget notifications
+                            to, either an SNS topic or an email.
+                          type: string
+                        subscriptionType:
+                          description: The type of notification that AWS sends to
+                            a subscriber. Valid values are SNS or EMAIL.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -635,22 +746,28 @@ spec:
             x-kubernetes-validations:
             - message: actionThreshold is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionThreshold)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionThreshold)
+                || has(self.initProvider.actionThreshold)'
             - message: actionType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionType)
+                || has(self.initProvider.actionType)'
             - message: approvalModel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.approvalModel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.approvalModel)
+                || has(self.initProvider.approvalModel)'
             - message: definition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)
+                || has(self.initProvider.definition)'
             - message: notificationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.notificationType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.notificationType)
+                || has(self.initProvider.notificationType)'
             - message: subscriber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subscriber)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subscriber)
+                || has(self.initProvider.subscriber)'
           status:
             description: BudgetActionStatus defines the observed state of BudgetAction.
             properties:

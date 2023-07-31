@@ -269,18 +269,11 @@ spec:
                                 description: A brief string that the claim must match,
                                   for example, "paid" or "yes".
                                 type: string
-                            required:
-                            - claim
-                            - matchType
-                            - value
                             type: object
                           type: array
                         type:
                           description: The role mapping type.
                           type: string
-                      required:
-                      - identityProvider
-                      - type
                       type: object
                     type: array
                   roles:
@@ -292,6 +285,71 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  roleMapping:
+                    description: A List of Role Mapping.
+                    items:
+                      properties:
+                        ambiguousRoleResolution:
+                          description: Specifies the action to be taken if either
+                            no rules match the claim value for the Rules type, or
+                            there is no cognito:preferred_role claim and there are
+                            multiple cognito:roles matches for the Token type. Required
+                            if you specify Token or Rules as the Type.
+                          type: string
+                        identityProvider:
+                          description: A string identifying the identity provider,
+                            for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+                            Depends on cognito_identity_providers set on aws_cognito_identity_pool
+                            resource or a aws_cognito_identity_provider resource.
+                          type: string
+                        mappingRule:
+                          description: The Rules Configuration to be used for mapping
+                            users to roles. You can specify up to 25 rules per identity
+                            provider. Rules are evaluated in order. The first one
+                            to match specifies the role.
+                          items:
+                            properties:
+                              claim:
+                                description: The claim name that must be present in
+                                  the token, for example, "isAdmin" or "paid".
+                                type: string
+                              matchType:
+                                description: The match condition that specifies how
+                                  closely the claim value in the IdP token must match
+                                  Value.
+                                type: string
+                              value:
+                                description: A brief string that the claim must match,
+                                  for example, "paid" or "yes".
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The role mapping type.
+                          type: string
+                      type: object
+                    type: array
+                  roles:
+                    additionalProperties:
+                      type: string
+                    description: The map of roles associated with this pool. For a
+                      given role, the key will be either "authenticated" or "unauthenticated"
+                      and the value will be the Role ARN.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -493,7 +551,8 @@ spec:
             x-kubernetes-validations:
             - message: roles is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.roles)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.roles)
+                || has(self.initProvider.roles)'
           status:
             description: PoolRolesAttachmentStatus defines the observed state of PoolRolesAttachment.
             properties:

@@ -15,6 +15,3 @@ spec:
     targetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: kinesis_for_cloudwatch
-
----
-

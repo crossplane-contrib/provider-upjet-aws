@@ -15,6 +15,3 @@ spec:
     tags:
       Name: example-athena-data-catalog
     type: LAMBDA
-
----
-

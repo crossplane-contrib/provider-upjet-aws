@@ -14,6 +14,3 @@ spec:
     routingStrategy:
     - message: Example Message
       type: TERMINAL
-
----
-

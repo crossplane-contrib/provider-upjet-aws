@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CreateDatabaseDefaultPermissionsInitParameters struct {
+
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+}
+
 type CreateDatabaseDefaultPermissionsObservation struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
@@ -30,6 +39,15 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
 	// +kubebuilder:validation:Optional
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+}
+
+type CreateTableDefaultPermissionsInitParameters struct {
+
+	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
@@ -51,6 +69,33 @@ type CreateTableDefaultPermissionsParameters struct {
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
 	// +kubebuilder:validation:Optional
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+}
+
+type DataLakeSettingsInitParameters struct {
+
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
+	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
+
+	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
+	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
+
+	// –  Identifier for the Data Catalog. By default, the account ID.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Up to three configuration blocks of principal permissions for default create database permissions. Detailed below.
+	CreateDatabaseDefaultPermissions []CreateDatabaseDefaultPermissionsInitParameters `json:"createDatabaseDefaultPermissions,omitempty" tf:"create_database_default_permissions,omitempty"`
+
+	// Up to three configuration blocks of principal permissions for default create table permissions. Detailed below.
+	CreateTableDefaultPermissions []CreateTableDefaultPermissionsInitParameters `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
+
+	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
+	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
+
+	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
+	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
 
 type DataLakeSettingsObservation struct {
@@ -126,6 +171,18 @@ type DataLakeSettingsParameters struct {
 type DataLakeSettingsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataLakeSettingsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataLakeSettingsInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataLakeSettingsStatus defines the observed state of DataLakeSettings.

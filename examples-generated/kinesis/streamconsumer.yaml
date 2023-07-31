@@ -28,6 +28,3 @@ spec:
   forProvider:
     region: us-west-1
     shardCount: 1
-
----
-

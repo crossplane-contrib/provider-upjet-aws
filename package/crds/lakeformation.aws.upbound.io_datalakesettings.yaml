@@ -149,6 +149,95 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  admins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles).
+                    items:
+                      type: string
+                    type: array
+                  allowExternalDataFiltering:
+                    description: Whether to allow Amazon EMR clusters to access data
+                      managed by Lake Formation.
+                    type: boolean
+                  authorizedSessionTagValueList:
+                    description: Lake Formation relies on a privileged process secured
+                      by Amazon EMR or the third party integrator to tag the user's
+                      role while assuming it.
+                    items:
+                      type: string
+                    type: array
+                  catalogId:
+                    description: –  Identifier for the Data Catalog. By default, the
+                      account ID.
+                    type: string
+                  createDatabaseDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create database permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For
+                            more details, see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
+                  createTableDefaultPermissions:
+                    description: Up to three configuration blocks of principal permissions
+                      for default create table permissions. Detailed below.
+                    items:
+                      properties:
+                        permissions:
+                          description: List of permissions that are granted to the
+                            principal. Valid values may include ALL, SELECT, ALTER,
+                            DROP, DELETE, INSERT, and DESCRIBE. For more details,
+                            see Lake Formation Permissions Reference.
+                          items:
+                            type: string
+                          type: array
+                        principal:
+                          description: Principal who is granted permissions. To enforce
+                            metadata and underlying data access control only by IAM
+                            on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS
+                            and permissions to ["ALL"].
+                          type: string
+                      type: object
+                    type: array
+                  externalDataFilteringAllowList:
+                    description: A list of the account IDs of Amazon Web Services
+                      accounts with Amazon EMR clusters that are to perform data filtering.
+                    items:
+                      type: string
+                    type: array
+                  trustedResourceOwners:
+                    description: owning account IDs that the caller's account can
+                      use to share their user access details (user ARNs).
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -81,9 +81,6 @@ spec:
                           description: Single line format of the access logs of data.
                             Refer to log settings for HTTP or Websocket.
                           type: string
-                      required:
-                      - destinationArn
-                      - format
                       type: object
                     type: array
                   apiId:
@@ -313,8 +310,6 @@ spec:
                         throttlingRateLimit:
                           description: Throttling rate limit for the route.
                           type: number
-                      required:
-                      - routeKey
                       type: object
                     type: array
                   stageVariables:
@@ -329,6 +324,118 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accessLogSettings:
+                    description: Settings for logging access in this stage. Use the
+                      aws_api_gateway_account resource to configure permissions for
+                      CloudWatch Logging.
+                    items:
+                      properties:
+                        destinationArn:
+                          description: ARN of the CloudWatch Logs log group to receive
+                            access logs. Any trailing :* is trimmed from the ARN.
+                          type: string
+                        format:
+                          description: Single line format of the access logs of data.
+                            Refer to log settings for HTTP or Websocket.
+                          type: string
+                      type: object
+                    type: array
+                  autoDeploy:
+                    description: Whether updates to an API automatically trigger a
+                      new deployment. Defaults to false. Applicable for HTTP APIs.
+                    type: boolean
+                  clientCertificateId:
+                    description: Identifier of a client certificate for the stage.
+                      Use the aws_api_gateway_client_certificate resource to configure
+                      a client certificate. Supported only for WebSocket APIs.
+                    type: string
+                  defaultRouteSettings:
+                    description: Default route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            default route. Affects the log entries pushed to Amazon
+                            CloudWatch Logs. Defaults to false. Supported only for
+                            WebSocket APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            default route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the default route. Affects
+                            the log entries pushed to Amazon CloudWatch Logs. Valid
+                            values: ERROR, INFO, OFF. Defaults to OFF. Supported only
+                            for WebSocket APIs.'
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the default route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the default route.
+                          type: number
+                      type: object
+                    type: array
+                  description:
+                    description: Description for the stage. Must be less than or equal
+                      to 1024 characters in length.
+                    type: string
+                  routeSettings:
+                    description: Route settings for the stage.
+                    items:
+                      properties:
+                        dataTraceEnabled:
+                          description: Whether data trace logging is enabled for the
+                            route. Affects the log entries pushed to Amazon CloudWatch
+                            Logs. Defaults to false. Supported only for WebSocket
+                            APIs.
+                          type: boolean
+                        detailedMetricsEnabled:
+                          description: Whether detailed metrics are enabled for the
+                            route. Defaults to false.
+                          type: boolean
+                        loggingLevel:
+                          description: 'Logging level for the route. Affects the log
+                            entries pushed to Amazon CloudWatch Logs. Valid values:
+                            ERROR, INFO, OFF. Defaults to OFF. Supported only for
+                            WebSocket APIs.'
+                          type: string
+                        routeKey:
+                          description: Route key.
+                          type: string
+                        throttlingBurstLimit:
+                          description: Throttling burst limit for the route.
+                          type: number
+                        throttlingRateLimit:
+                          description: Throttling rate limit for the route.
+                          type: number
+                      type: object
+                    type: array
+                  stageVariables:
+                    additionalProperties:
+                      type: string
+                    description: Map that defines the stage variables for the stage.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

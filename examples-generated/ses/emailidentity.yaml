@@ -10,6 +10,3 @@ spec:
   forProvider:
     email: email@example.com
     region: us-west-1
-
----
-

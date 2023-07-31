@@ -188,8 +188,6 @@ spec:
                           description: Specifies the capacity mode of the stream.
                             Must be either PROVISIONED or ON_DEMAND.
                           type: string
-                      required:
-                      - streamMode
                       type: object
                     type: array
                   tags:
@@ -199,6 +197,66 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  encryptionType:
+                    description: The encryption type to use. The only acceptable values
+                      are NONE or KMS. The default value is NONE.
+                    type: string
+                  enforceConsumerDeletion:
+                    description: A boolean that indicates all registered consumers
+                      should be deregistered from the stream so that the stream can
+                      be destroyed without error. The default value is false.
+                    type: boolean
+                  retentionPeriod:
+                    description: Length of time data records are accessible after
+                      they are added to the stream. The maximum value of a stream's
+                      retention period is 8760 hours. Minimum value is 24. Default
+                      is 24.
+                    type: number
+                  shardCount:
+                    description: –  The number of shards that the stream will use.
+                      If the stream_mode is PROVISIONED, this field is required. Amazon
+                      has guidelines for specifying the Stream size that should be
+                      referenced when creating a Kinesis stream. See Amazon Kinesis
+                      Streams for more.
+                    type: number
+                  shardLevelMetrics:
+                    description: A list of shard-level CloudWatch metrics which can
+                      be enabled for the stream. See Monitoring with CloudWatch for
+                      more. Note that the value ALL should not be used; instead you
+                      should provide an explicit list of metrics you wish to enable.
+                    items:
+                      type: string
+                    type: array
+                  streamModeDetails:
+                    description: Indicates the capacity mode of the data stream. Detailed
+                      below.
+                    items:
+                      properties:
+                        streamMode:
+                          description: Specifies the capacity mode of the stream.
+                            Must be either PROVISIONED or ON_DEMAND.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

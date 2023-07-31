@@ -163,6 +163,31 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  cookieExpirationPeriod:
+                    description: The time period after which the session cookie should
+                      be considered stale, expressed in seconds.
+                    type: number
+                  lbPort:
+                    description: The load balancer port to which the policy should
+                      be applied. This must be an active listener on the load balancer.
+                    type: number
+                  name:
+                    description: The name of the stickiness policy.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -363,10 +388,12 @@ spec:
             x-kubernetes-validations:
             - message: lbPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.lbPort)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.lbPort)
+                || has(self.initProvider.lbPort)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: LBCookieStickinessPolicyStatus defines the observed state
               of LBCookieStickinessPolicy.

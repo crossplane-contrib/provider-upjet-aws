@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PortfolioShareInitParameters struct {
+
+	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.
+	SharePrincipals *bool `json:"sharePrincipals,omitempty" tf:"share_principals,omitempty"`
+
+	// Whether to enable sharing of aws_servicecatalog_tag_option resources when creating the portfolio share.
+	ShareTagOptions *bool `json:"shareTagOptions,omitempty" tf:"share_tag_options,omitempty"`
+
+	// Type of portfolio share. Valid values are ACCOUNT (an external account), ORGANIZATION (a share to every account in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT (a share to an account in an organization).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Whether to wait (up to the timeout) for the share to be accepted. Organizational shares are automatically accepted.
+	WaitForAcceptance *bool `json:"waitForAcceptance,omitempty" tf:"wait_for_acceptance,omitempty"`
+}
+
 type PortfolioShareObservation struct {
 
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
@@ -92,6 +113,18 @@ type PortfolioShareParameters struct {
 type PortfolioShareSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PortfolioShareParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PortfolioShareInitParameters `json:"initProvider,omitempty"`
 }
 
 // PortfolioShareStatus defines the observed state of PortfolioShare.
@@ -112,8 +145,8 @@ type PortfolioShareStatus struct {
 type PortfolioShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId)",message="principalId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || has(self.initProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   PortfolioShareSpec   `json:"spec"`
 	Status PortfolioShareStatus `json:"status,omitempty"`
 }

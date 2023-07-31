@@ -17,6 +17,3 @@ spec:
       namespace: upbound-system
     hsmServerPublicCertificate: example
     region: us-west-1
-
----
-

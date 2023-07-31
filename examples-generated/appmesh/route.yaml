@@ -30,6 +30,3 @@ spec:
     virtualRouterNameSelector:
       matchLabels:
         testing.upbound.io/example-name: serviceb
-
----
-

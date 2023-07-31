@@ -102,6 +102,48 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  addresses:
+                    description: Contains an array of strings that specify one or
+                      more IP addresses or blocks of IP addresses in Classless Inter-Domain
+                      Routing (CIDR) notation. AWS WAF supports all address ranges
+                      for IP versions IPv4 and IPv6.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: A friendly description of the IP set.
+                    type: string
+                  ipAddressVersion:
+                    description: Specify IPV4 or IPV6. Valid values are IPV4 or IPV6.
+                    type: string
+                  name:
+                    description: A friendly name of the IP set.
+                    type: string
+                  scope:
+                    description: Specifies whether this is for an AWS CloudFront distribution
+                      or for a regional application. Valid values are CLOUDFRONT or
+                      REGIONAL. To work with CloudFront, you must also specify the
+                      Region US East (N. Virginia).
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -302,13 +344,16 @@ spec:
             x-kubernetes-validations:
             - message: ipAddressVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddressVersion)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddressVersion)
+                || has(self.initProvider.ipAddressVersion)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
+                || has(self.initProvider.scope)'
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:

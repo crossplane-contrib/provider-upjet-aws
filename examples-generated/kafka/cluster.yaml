@@ -243,6 +243,3 @@ spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
     region: us-west-1
-
----
-

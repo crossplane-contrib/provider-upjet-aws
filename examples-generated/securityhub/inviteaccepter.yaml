@@ -59,6 +59,3 @@ spec:
     email: example@example.com
     invite: true
     region: us-west-1
-
----
-

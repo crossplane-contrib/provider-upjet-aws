@@ -83,6 +83,3 @@ spec:
     policyNames:
     - ${aws_load_balancer_policy.wu-tang-ssl.policy_name}
     region: us-west-1
-
----
-

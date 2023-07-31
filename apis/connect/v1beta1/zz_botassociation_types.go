@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotAssociationInitParameters struct {
+
+	// Configuration information of an Amazon Lex (V1) bot. Detailed below.
+	LexBot []LexBotInitParameters `json:"lexBot,omitempty" tf:"lex_bot,omitempty"`
+}
+
 type BotAssociationObservation struct {
 
 	// The Amazon Connect instance ID, Lex (V1) bot name, and Lex (V1) bot region separated by colons (:).
@@ -51,6 +57,12 @@ type BotAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type LexBotInitParameters struct {
+
+	// The Region that the Amazon Lex (V1) bot was created in. Defaults to current region.
+	LexRegion *string `json:"lexRegion,omitempty" tf:"lex_region,omitempty"`
+}
+
 type LexBotObservation struct {
 
 	// The Region that the Amazon Lex (V1) bot was created in. Defaults to current region.
@@ -84,6 +96,18 @@ type LexBotParameters struct {
 type BotAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BotAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotAssociationStatus defines the observed state of BotAssociation.
@@ -104,7 +128,7 @@ type BotAssociationStatus struct {
 type BotAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lexBot)",message="lexBot is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lexBot) || has(self.initProvider.lexBot)",message="lexBot is a required parameter"
 	Spec   BotAssociationSpec   `json:"spec"`
 	Status BotAssociationStatus `json:"status,omitempty"`
 }

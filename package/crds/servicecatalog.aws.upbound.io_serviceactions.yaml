@@ -97,9 +97,6 @@ spec:
                         version:
                           description: SSM document version. For example, 1.
                           type: string
-                      required:
-                      - name
-                      - version
                       type: object
                     type: array
                   description:
@@ -114,6 +111,58 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  acceptLanguage:
+                    description: Language code. Valid values are en (English), jp
+                      (Japanese), and zh (Chinese). Default is en.
+                    type: string
+                  definition:
+                    description: Self-service action definition configuration block.
+                      Detailed below.
+                    items:
+                      properties:
+                        assumeRole:
+                          description: ARN of the role that performs the self-service
+                            actions on your behalf. For example, arn:aws:iam::12345678910:role/ActionRole.
+                            To reuse the provisioned product launch role, set to LAUNCH_ROLE.
+                          type: string
+                        name:
+                          description: Name of the SSM document. For example, AWS-RestartEC2Instance.
+                            If you are using a shared SSM document, you must provide
+                            the ARN instead of the name.
+                          type: string
+                        parameters:
+                          description: 'List of parameters in JSON format. For example:
+                            [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].'
+                          type: string
+                        type:
+                          description: Service action definition type. Valid value
+                            is SSM_AUTOMATION. Default is SSM_AUTOMATION.
+                          type: string
+                        version:
+                          description: SSM document version. For example, 1.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Self-service action description.
+                    type: string
+                  name:
+                    description: Self-service action name.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -315,10 +364,12 @@ spec:
             x-kubernetes-validations:
             - message: definition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)
+                || has(self.initProvider.definition)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ServiceActionStatus defines the observed state of ServiceAction.
             properties:

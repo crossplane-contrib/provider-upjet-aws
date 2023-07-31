@@ -30,6 +30,3 @@ spec:
     tags:
       Env: bar
       Name: foo
-
----
-

@@ -15,6 +15,3 @@ spec:
     serverProperties: |
       auto.create.topics.enable = true
       delete.topic.enable = true
-
----
-

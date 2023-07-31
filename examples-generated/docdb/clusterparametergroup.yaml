@@ -14,6 +14,3 @@ spec:
     - name: tls
       value: enabled
     region: us-west-1
-
----
-

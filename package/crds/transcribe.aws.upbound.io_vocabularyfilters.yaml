@@ -93,6 +93,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  languageCode:
+                    description: The language code you selected for your vocabulary
+                      filter. Refer to the supported languages page for accepted codes.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vocabularyFilterFileUri:
+                    description: The Amazon S3 location (URI) of the text file that
+                      contains your custom VocabularyFilter. Conflicts with words
+                      argument.
+                    type: string
+                  words:
+                    description: '- A list of terms to include in the vocabulary.
+                      Conflicts with vocabulary_filter_file_uri argument.'
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -293,7 +327,8 @@ spec:
             x-kubernetes-validations:
             - message: languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
+                || has(self.initProvider.languageCode)'
           status:
             description: VocabularyFilterStatus defines the observed state of VocabularyFilter.
             properties:

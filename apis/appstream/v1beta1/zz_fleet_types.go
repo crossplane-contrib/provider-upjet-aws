@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ComputeCapacityInitParameters struct {
+
+	// Desired number of streaming instances.
+	DesiredInstances *float64 `json:"desiredInstances,omitempty" tf:"desired_instances,omitempty"`
+}
+
 type ComputeCapacityObservation struct {
 
 	// Number of currently available instances that can be used to stream sessions.
@@ -31,8 +37,17 @@ type ComputeCapacityObservation struct {
 type ComputeCapacityParameters struct {
 
 	// Desired number of streaming instances.
-	// +kubebuilder:validation:Required
-	DesiredInstances *float64 `json:"desiredInstances" tf:"desired_instances,omitempty"`
+	// +kubebuilder:validation:Optional
+	DesiredInstances *float64 `json:"desiredInstances,omitempty" tf:"desired_instances,omitempty"`
+}
+
+type DomainJoinInfoInitParameters struct {
+
+	// Fully qualified name of the directory (for example, corp.example.com).
+	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
+
+	// Distinguished name of the organizational unit for computer accounts.
+	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 }
 
 type DomainJoinInfoObservation struct {
@@ -53,6 +68,57 @@ type DomainJoinInfoParameters struct {
 	// Distinguished name of the organizational unit for computer accounts.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
+}
+
+type FleetInitParameters struct {
+
+	// Configuration block for the desired capacity of the fleet. See below.
+	ComputeCapacity []ComputeCapacityInitParameters `json:"computeCapacity,omitempty" tf:"compute_capacity,omitempty"`
+
+	// Description to display.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amount of time that a streaming session remains active after users disconnect.
+	DisconnectTimeoutInSeconds *float64 `json:"disconnectTimeoutInSeconds,omitempty" tf:"disconnect_timeout_in_seconds,omitempty"`
+
+	// Human-readable friendly name for the AppStream fleet.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Configuration block for the name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. See below.
+	DomainJoinInfo []DomainJoinInfoInitParameters `json:"domainJoinInfo,omitempty" tf:"domain_join_info,omitempty"`
+
+	// Enables or disables default internet access for the fleet.
+	EnableDefaultInternetAccess *bool `json:"enableDefaultInternetAccess,omitempty" tf:"enable_default_internet_access,omitempty"`
+
+	// Fleet type. Valid values are: ON_DEMAND, ALWAYS_ON
+	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
+
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins.
+	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
+
+	// ARN of the public, private, or shared image to use.
+	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
+
+	// Name of the image used to create the fleet.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Instance type to use when launching fleet instances.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Maximum amount of time that a streaming session can remain active, in seconds.
+	MaxUserDurationInSeconds *float64 `json:"maxUserDurationInSeconds,omitempty" tf:"max_user_duration_in_seconds,omitempty"`
+
+	// Unique name for the fleet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// AppStream 2.0 view that is displayed to your users when they stream from the fleet. When APP is specified, only the windows of applications opened by users display. When DESKTOP is specified, the standard desktop that is provided by the operating system displays. If not specified, defaults to APP.
+	StreamView *string `json:"streamView,omitempty" tf:"stream_view,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for the VPC configuration for the image builder. See below.
+	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type FleetObservation struct {
@@ -209,6 +275,12 @@ type FleetParameters struct {
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
+type VPCConfigInitParameters struct {
+
+	// Identifiers of the security groups for the fleet or image builder.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+}
+
 type VPCConfigObservation struct {
 
 	// Identifiers of the security groups for the fleet or image builder.
@@ -244,6 +316,18 @@ type VPCConfigParameters struct {
 type FleetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FleetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FleetInitParameters `json:"initProvider,omitempty"`
 }
 
 // FleetStatus defines the observed state of Fleet.
@@ -264,9 +348,9 @@ type FleetStatus struct {
 type Fleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.computeCapacity)",message="computeCapacity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.computeCapacity) || has(self.initProvider.computeCapacity)",message="computeCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FleetSpec   `json:"spec"`
 	Status FleetStatus `json:"status,omitempty"`
 }

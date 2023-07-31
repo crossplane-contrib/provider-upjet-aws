@@ -69,6 +69,16 @@ func (tr *AssessmentTarget) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AssessmentTarget
+func (tr *AssessmentTarget) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this AssessmentTarget using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AssessmentTarget) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *AssessmentTemplate) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AssessmentTemplate
+func (tr *AssessmentTemplate) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this AssessmentTemplate using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AssessmentTemplate) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *ResourceGroup) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ResourceGroup
+func (tr *ResourceGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this ResourceGroup using its observed tfState.

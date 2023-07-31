@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: example
     destination: CloudWatch
     region: us-west-1
-
----
-

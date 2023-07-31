@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RDSDBInstanceInitParameters struct {
+
+	// A db username
+	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
+}
+
 type RDSDBInstanceObservation struct {
 
 	// A db username
@@ -71,6 +77,18 @@ type RDSDBInstanceParameters struct {
 type RDSDBInstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RDSDBInstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RDSDBInstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // RDSDBInstanceStatus defines the observed state of RDSDBInstance.
@@ -92,7 +110,7 @@ type RDSDBInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dbPasswordSecretRef)",message="dbPasswordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dbUser)",message="dbUser is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dbUser) || has(self.initProvider.dbUser)",message="dbUser is a required parameter"
 	Spec   RDSDBInstanceSpec   `json:"spec"`
 	Status RDSDBInstanceStatus `json:"status,omitempty"`
 }

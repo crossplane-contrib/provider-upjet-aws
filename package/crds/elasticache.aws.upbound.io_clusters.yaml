@@ -137,11 +137,6 @@ spec:
                           description: Valid values are  slow-log or engine-log. Max
                             1 of each.
                           type: string
-                      required:
-                      - destination
-                      - destinationType
-                      - logFormat
-                      - logType
                       type: object
                     type: array
                   maintenanceWindow:
@@ -558,6 +553,178 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  applyImmediately:
+                    description: Whether any database modifications are applied immediately,
+                      or during the next maintenance window. Default is false. See
+                      Amazon ElastiCache Documentation for more information..
+                    type: boolean
+                  autoMinorVersionUpgrade:
+                    description: Specifies whether minor version engine upgrades will
+                      be applied automatically to the underlying Cache Cluster instances
+                      during the maintenance window. Only supported for engine type
+                      "redis" and if the engine version is 6 or higher. Defaults to
+                      true.
+                    type: string
+                  availabilityZone:
+                    description: 'Availability Zone for the cache cluster. If you
+                      want to create cache nodes in multi-az, use preferred_availability_zones
+                      instead. Default: System chosen Availability Zone. Changing
+                      this value will re-create the resource.'
+                    type: string
+                  azMode:
+                    description: Whether the nodes in this Memcached node group are
+                      created in a single Availability Zone or created across multiple
+                      Availability Zones in the cluster's region. Valid values for
+                      this parameter are single-az or cross-az, default is single-az.
+                      If you want to choose cross-az, num_cache_nodes must be greater
+                      than 1.
+                    type: string
+                  engine:
+                    description: –  Name of the cache engine to be used for this cache
+                      cluster. Valid values are memcached or redis.
+                    type: string
+                  engineVersion:
+                    description: –  Version number of the cache engine to be used.
+                      If not set, defaults to the latest version. See Describe Cache
+                      Engine Versions in the AWS Documentation for supported versions.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
+                    type: string
+                  finalSnapshotIdentifier:
+                    description: Name of your final cluster snapshot. If omitted,
+                      no final snapshot will be made.
+                    type: string
+                  ipDiscovery:
+                    description: The IP version to advertise in the discovery protocol.
+                      Valid values are ipv4 or ipv6.
+                    type: string
+                  logDeliveryConfiguration:
+                    description: Specifies the destination and format of Redis SLOWLOG
+                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
+                      See Log Delivery Configuration below for more details.
+                    items:
+                      properties:
+                        destination:
+                          description: Name of either the CloudWatch Logs LogGroup
+                            or Kinesis Data Firehose resource.
+                          type: string
+                        destinationType:
+                          description: For CloudWatch Logs use cloudwatch-logs or
+                            for Kinesis Data Firehose use kinesis-firehose.
+                          type: string
+                        logFormat:
+                          description: Valid values are json or text
+                          type: string
+                        logType:
+                          description: Valid values are  slow-log or engine-log. Max
+                            1 of each.
+                          type: string
+                      type: object
+                    type: array
+                  maintenanceWindow:
+                    description: 'ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:05:00-sun:09:00.'
+                    type: string
+                  networkType:
+                    description: The IP versions for cache cluster connections. IPv6
+                      is supported with Redis engine 6.2 onword or Memcached version
+                      1.6.6 for all Nitro system instances. Valid values are ipv4,
+                      ipv6 or dual_stack.
+                    type: string
+                  nodeType:
+                    description: create the resource.
+                    type: string
+                  notificationTopicArn:
+                    description: east-1:012345678999:my_sns_topic.
+                    type: string
+                  numCacheNodes:
+                    description: –  The initial number of cache nodes that the cache
+                      cluster will have. For Redis, this value must be 1. For Memcached,
+                      this value must be between 1 and 40. If this number is reduced
+                      on subsequent runs, the highest numbered nodes will be removed.
+                    type: number
+                  outpostMode:
+                    description: Specify the outpost mode that will apply to the cache
+                      cluster creation. Valid values are "single-outpost" and "cross-outpost",
+                      however AWS currently only supports "single-outpost" mode.
+                    type: string
+                  port:
+                    description: create the resource.
+                    type: number
+                  preferredAvailabilityZones:
+                    description: 'List of the Availability Zones in which cache nodes
+                      are created. If you are creating your cluster in an Amazon VPC
+                      you can only locate nodes in Availability Zones that are associated
+                      with the subnets in the selected subnet group. The number of
+                      Availability Zones listed must equal the value of num_cache_nodes.
+                      If you want all the nodes in the same Availability Zone, use
+                      availability_zone instead, or repeat the Availability Zone multiple
+                      times in the list. Default: System chosen Availability Zones.
+                      Detecting drift of existing node availability zone is not currently
+                      supported. Updating this argument by itself to migrate existing
+                      node availability zones is not currently supported and will
+                      show a perpetual difference.'
+                    items:
+                      type: string
+                    type: array
+                  preferredOutpostArn:
+                    description: The outpost ARN in which the cache cluster will be
+                      created.
+                    type: string
+                  securityGroupNames:
+                    description: create the resource.
+                    items:
+                      type: string
+                    type: array
+                  snapshotArns:
+                    description: element string list containing an Amazon Resource
+                      Name (ARN) of a Redis RDB snapshot file stored in Amazon S3.
+                      The object name cannot contain any commas. Changing snapshot_arns
+                      forces a new resource.
+                    items:
+                      type: string
+                    type: array
+                  snapshotName:
+                    description: Name of a snapshot from which to restore data into
+                      the new node group. Changing snapshot_name forces a new resource.
+                    type: string
+                  snapshotRetentionLimit:
+                    description: Number of days for which ElastiCache will retain
+                      automatic cache cluster snapshots before deleting them. For
+                      example, if you set SnapshotRetentionLimit to 5, then a snapshot
+                      that was taken today will be retained for 5 days before being
+                      deleted. If the value of SnapshotRetentionLimit is set to zero
+                      (0), backups are turned off. Please note that setting a snapshot_retention_limit
+                      is not supported on cache.t1.micro cache nodes
+                    type: number
+                  snapshotWindow:
+                    description: 'Daily time range (in UTC) during which ElastiCache
+                      will begin taking a daily snapshot of your cache cluster. Example:
+                      05:00-09:00'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

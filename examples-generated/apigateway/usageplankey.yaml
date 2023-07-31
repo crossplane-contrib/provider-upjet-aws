@@ -68,6 +68,3 @@ spec:
           testing.upbound.io/example-name: foo
     name: my_usage_plan
     region: us-west-1
-
----
-

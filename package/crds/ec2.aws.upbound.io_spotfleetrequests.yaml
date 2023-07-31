@@ -146,8 +146,6 @@ spec:
                                 type: number
                               volumeType:
                                 type: string
-                            required:
-                            - deviceName
                             type: object
                           type: array
                         ebsOptimized:
@@ -163,9 +161,6 @@ spec:
                                 description: The name of the launch template. Conflicts
                                   with id.
                                 type: string
-                            required:
-                            - deviceName
-                            - virtualName
                             type: object
                           type: array
                         iamInstanceProfile:
@@ -308,9 +303,6 @@ spec:
                           description: The capacity added to the fleet by a fulfilled
                             request.
                           type: string
-                      required:
-                      - ami
-                      - instanceType
                       type: object
                     type: array
                   launchTemplateConfig:
@@ -788,8 +780,6 @@ spec:
                                 type: number
                             type: object
                           type: array
-                      required:
-                      - launchTemplateSpecification
                       type: object
                     type: array
                   loadBalancers:
@@ -891,6 +881,575 @@ spec:
                     type: boolean
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  allocationStrategy:
+                    description: 'Indicates how to allocate the target capacity across
+                      the Spot pools specified by the Spot fleet request. Valid values:
+                      lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized,
+                      and priceCapacityOptimized. The default is lowestPrice.'
+                    type: string
+                  context:
+                    description: Reserved.
+                    type: string
+                  excessCapacityTerminationPolicy:
+                    description: Indicates whether running Spot instances should be
+                      terminated if the target capacity of the Spot fleet request
+                      is decreased below the current size of the Spot fleet.
+                    type: string
+                  fleetType:
+                    description: The type of fleet request. Indicates whether the
+                      Spot Fleet only requests the target capacity or also attempts
+                      to maintain it. Default is maintain.
+                    type: string
+                  iamFleetRole:
+                    description: Grants the Spot fleet permission to terminate Spot
+                      instances on your behalf when you cancel its Spot fleet request
+                      using CancelSpotFleetRequests or when the Spot fleet request
+                      expires, if you set terminateInstancesWithExpiration.
+                    type: string
+                  instanceInterruptionBehaviour:
+                    description: Indicates whether a Spot instance stops or terminates
+                      when it is interrupted. Default is terminate.
+                    type: string
+                  instancePoolsToUseCount:
+                    description: The number of Spot pools across which to allocate
+                      your target Spot capacity. Valid only when allocation_strategy
+                      is set to lowestPrice. Spot Fleet selects the cheapest Spot
+                      pools and evenly allocates your target Spot capacity across
+                      the number of Spot pools that you specify.
+                    type: number
+                  launchSpecification:
+                    description: Used to define the launch configuration of the spot-fleet
+                      request. Can be specified multiple times to define different
+                      bids across different markets and instance types. Conflicts
+                      with launch_template_config. At least one of launch_specification
+                      or launch_template_config is required.
+                    items:
+                      properties:
+                        ami:
+                          type: string
+                        associatePublicIpAddress:
+                          type: boolean
+                        availabilityZone:
+                          description: The availability zone in which to place the
+                            request.
+                          type: string
+                        ebsBlockDevice:
+                          items:
+                            properties:
+                              deleteOnTermination:
+                                type: boolean
+                              deviceName:
+                                description: The name of the launch template. Conflicts
+                                  with id.
+                                type: string
+                              encrypted:
+                                type: boolean
+                              iops:
+                                type: number
+                              kmsKeyId:
+                                description: The ID of the launch template. Conflicts
+                                  with name.
+                                type: string
+                              snapshotId:
+                                description: The ID of the launch template. Conflicts
+                                  with name.
+                                type: string
+                              throughput:
+                                type: number
+                              volumeSize:
+                                type: number
+                              volumeType:
+                                type: string
+                            type: object
+                          type: array
+                        ebsOptimized:
+                          type: boolean
+                        ephemeralBlockDevice:
+                          items:
+                            properties:
+                              deviceName:
+                                description: The name of the launch template. Conflicts
+                                  with id.
+                                type: string
+                              virtualName:
+                                description: The name of the launch template. Conflicts
+                                  with id.
+                                type: string
+                            type: object
+                          type: array
+                        iamInstanceProfile:
+                          type: string
+                        instanceType:
+                          description: The type of instance to request.
+                          type: string
+                        keyName:
+                          description: The name of the launch template. Conflicts
+                            with id.
+                          type: string
+                        monitoring:
+                          type: boolean
+                        placementGroup:
+                          type: string
+                        placementTenancy:
+                          type: string
+                        rootBlockDevice:
+                          items:
+                            properties:
+                              deleteOnTermination:
+                                type: boolean
+                              encrypted:
+                                type: boolean
+                              iops:
+                                type: number
+                              kmsKeyId:
+                                description: The ID of the launch template. Conflicts
+                                  with name.
+                                type: string
+                              throughput:
+                                type: number
+                              volumeSize:
+                                type: number
+                              volumeType:
+                                type: string
+                            type: object
+                          type: array
+                        spotPrice:
+                          description: The maximum bid price per unit hour.
+                          type: string
+                        subnetId:
+                          description: The subnet in which to launch the requested
+                            instance.
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Key-value map of resource tags.
+                          type: object
+                        userData:
+                          type: string
+                        vpcSecurityGroupIds:
+                          items:
+                            type: string
+                          type: array
+                        weightedCapacity:
+                          description: The capacity added to the fleet by a fulfilled
+                            request.
+                          type: string
+                      type: object
+                    type: array
+                  launchTemplateConfig:
+                    description: Launch template configuration block. See Launch Template
+                      Configs below for more details. Conflicts with launch_specification.
+                      At least one of launch_specification or launch_template_config
+                      is required.
+                    items:
+                      properties:
+                        launchTemplateSpecification:
+                          description: Launch template specification. See Launch Template
+                            Specification below for more details.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the launch template. Conflicts
+                                  with id.
+                                type: string
+                            type: object
+                          type: array
+                        overrides:
+                          description: One or more override configurations. See Overrides
+                            below for more details.
+                          items:
+                            properties:
+                              availabilityZone:
+                                description: The availability zone in which to place
+                                  the request.
+                                type: string
+                              instanceRequirements:
+                                description: The instance requirements. See below.
+                                items:
+                                  properties:
+                                    acceleratorCount:
+                                      description: Block describing the minimum and
+                                        maximum number of accelerators (GPUs, FPGAs,
+                                        or AWS Inferentia chips). Default is no minimum
+                                        or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorManufacturers:
+                                      description: List of accelerator manufacturer
+                                        names. Default is any manufacturer.
+                                      items:
+                                        type: string
+                                      type: array
+                                    acceleratorNames:
+                                      description: List of accelerator names. Default
+                                        is any acclerator.
+                                      items:
+                                        type: string
+                                      type: array
+                                    acceleratorTotalMemoryMib:
+                                      description: Block describing the minimum and
+                                        maximum total memory of the accelerators.
+                                        Default is no minimum or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    acceleratorTypes:
+                                      description: List of accelerator types. Default
+                                        is any accelerator type.
+                                      items:
+                                        type: string
+                                      type: array
+                                    allowedInstanceTypes:
+                                      description: 'List of instance types to apply
+                                        your specified attributes against. All other
+                                        instance types are ignored, even if they match
+                                        your specified attributes. You can use strings
+                                        with one or more wild cards, represented by
+                                        an asterisk (*), to allow an instance type,
+                                        size, or generation. The following are examples:
+                                        m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example,
+                                        if you specify c5*, you are allowing the entire
+                                        C5 instance family, which includes all C5a
+                                        and C5n instance types. If you specify m5a.*,
+                                        you are allowing all the M5a instance types,
+                                        but not the M5n instance types. Maximum of
+                                        400 entries in the list; each entry is limited
+                                        to 30 characters. Default is all instance
+                                        types.'
+                                      items:
+                                        type: string
+                                      type: array
+                                    bareMetal:
+                                      description: Indicate whether bare metal instace
+                                        types should be included, excluded, or required.
+                                        Default is excluded.
+                                      type: string
+                                    baselineEbsBandwidthMbps:
+                                      description: Block describing the minimum and
+                                        maximum baseline EBS bandwidth, in Mbps. Default
+                                        is no minimum or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    burstablePerformance:
+                                      description: Indicate whether burstable performance
+                                        instance types should be included, excluded,
+                                        or required. Default is excluded.
+                                      type: string
+                                    cpuManufacturers:
+                                      description: List of CPU manufacturer names.
+                                        Default is any manufacturer.
+                                      items:
+                                        type: string
+                                      type: array
+                                    excludedInstanceTypes:
+                                      description: 'List of instance types to exclude.
+                                        You can use strings with one or more wild
+                                        cards, represented by an asterisk (*), to
+                                        exclude an instance type, size, or generation.
+                                        The following are examples: m5.8xlarge, c5*.*,
+                                        m5a.*, r*, *3*. For example, if you specify
+                                        c5*, you are excluding the entire C5 instance
+                                        family, which includes all C5a and C5n instance
+                                        types. If you specify m5a.*, you are excluding
+                                        all the M5a instance types, but not the M5n
+                                        instance types. Maximum of 400 entries in
+                                        the list; each entry is limited to 30 characters.
+                                        Default is no excluded instance types.'
+                                      items:
+                                        type: string
+                                      type: array
+                                    instanceGenerations:
+                                      description: List of instance generation names.
+                                        Default is any generation.
+                                      items:
+                                        type: string
+                                      type: array
+                                    localStorage:
+                                      description: Indicate whether instance types
+                                        with local storage volumes are included, excluded,
+                                        or required. Default is included.
+                                      type: string
+                                    localStorageTypes:
+                                      description: List of local storage type names.
+                                        Default any storage type.
+                                      items:
+                                        type: string
+                                      type: array
+                                    memoryGibPerVcpu:
+                                      description: Block describing the minimum and
+                                        maximum amount of memory (GiB) per vCPU. Default
+                                        is no minimum or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    memoryMib:
+                                      description: Block describing the minimum and
+                                        maximum amount of memory (MiB). Default is
+                                        no maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkBandwidthGbps:
+                                      description: Block describing the minimum and
+                                        maximum amount of network bandwidth, in gigabits
+                                        per second (Gbps). Default is no minimum or
+                                        maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    networkInterfaceCount:
+                                      description: Block describing the minimum and
+                                        maximum number of network interfaces. Default
+                                        is no minimum or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    onDemandMaxPricePercentageOverLowestPrice:
+                                      description: The price protection threshold
+                                        for On-Demand Instances. This is the maximum
+                                        you’ll pay for an On-Demand Instance, expressed
+                                        as a percentage higher than the cheapest M,
+                                        C, or R instance type with your specified
+                                        attributes. When Amazon EC2 Auto Scaling selects
+                                        instance types with your attributes, we will
+                                        exclude instance types whose price is higher
+                                        than your threshold. The parameter accepts
+                                        an integer, which Amazon EC2 Auto Scaling
+                                        interprets as a percentage. To turn off price
+                                        protection, specify a high value, such as
+                                        999999. Default is 20.
+                                      type: number
+                                    requireHibernateSupport:
+                                      description: Indicate whether instance types
+                                        must support On-Demand Instance Hibernation,
+                                        either true or false. Default is false.
+                                      type: boolean
+                                    spotMaxPricePercentageOverLowestPrice:
+                                      description: The price protection threshold
+                                        for Spot Instances. This is the maximum you’ll
+                                        pay for a Spot Instance, expressed as a percentage
+                                        higher than the cheapest M, C, or R instance
+                                        type with your specified attributes. When
+                                        Amazon EC2 Auto Scaling selects instance types
+                                        with your attributes, we will exclude instance
+                                        types whose price is higher than your threshold.
+                                        The parameter accepts an integer, which Amazon
+                                        EC2 Auto Scaling interprets as a percentage.
+                                        To turn off price protection, specify a high
+                                        value, such as 999999. Default is 100.
+                                      type: number
+                                    totalLocalStorageGb:
+                                      description: Block describing the minimum and
+                                        maximum total local storage (GB). Default
+                                        is no minimum or maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    vcpuCount:
+                                      description: Block describing the minimum and
+                                        maximum number of vCPUs. Default is no maximum.
+                                      items:
+                                        properties:
+                                          max:
+                                            description: Maximum.
+                                            type: number
+                                          min:
+                                            description: Minimum.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              instanceType:
+                                description: The type of instance to request.
+                                type: string
+                              priority:
+                                description: The priority for the launch template
+                                  override. The lower the number, the higher the priority.
+                                  If no number is set, the launch template override
+                                  has the lowest priority.
+                                type: number
+                              spotPrice:
+                                description: The maximum bid price per unit hour.
+                                type: string
+                              subnetId:
+                                description: The subnet in which to launch the requested
+                                  instance.
+                                type: string
+                              weightedCapacity:
+                                description: The capacity added to the fleet by a
+                                  fulfilled request.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  loadBalancers:
+                    description: A list of elastic load balancer names to add to the
+                      Spot fleet.
+                    items:
+                      type: string
+                    type: array
+                  onDemandAllocationStrategy:
+                    description: 'The order of the launch template overrides to use
+                      in fulfilling On-Demand capacity. the possible values are: lowestPrice
+                      and prioritized. the default is lowestPrice.'
+                    type: string
+                  onDemandMaxTotalPrice:
+                    description: The maximum amount per hour for On-Demand Instances
+                      that you're willing to pay. When the maximum amount you're willing
+                      to pay is reached, the fleet stops launching instances even
+                      if it hasn’t met the target capacity.
+                    type: string
+                  onDemandTargetCapacity:
+                    description: The number of On-Demand units to request. If the
+                      request type is maintain, you can specify a target capacity
+                      of 0 and add capacity later.
+                    type: number
+                  replaceUnhealthyInstances:
+                    description: Indicates whether Spot fleet should replace unhealthy
+                      instances. Default false.
+                    type: boolean
+                  spotMaintenanceStrategies:
+                    description: Nested argument containing maintenance strategies
+                      for managing your Spot Instances that are at an elevated risk
+                      of being interrupted. Defined below.
+                    items:
+                      properties:
+                        capacityRebalance:
+                          description: Nested argument containing the capacity rebalance
+                            for your fleet request. Defined below.
+                          items:
+                            properties:
+                              replacementStrategy:
+                                description: 'The replacement strategy to use. Only
+                                  available for spot fleets with fleet_type set to
+                                  maintain. Valid values: launch.'
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  spotPrice:
+                    description: The maximum bid price per unit hour.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetCapacity:
+                    description: The number of units to request. You can choose to
+                      set the target capacity in terms of instances or a performance
+                      characteristic that is important to your application workload,
+                      such as vCPUs, memory, or I/O.
+                    type: number
+                  targetCapacityUnitType:
+                    description: The unit for the target capacity. This can only be
+                      done with instance_requirements defined
+                    type: string
+                  targetGroupArns:
+                    description: A list of aws_alb_target_group ARNs, for use with
+                      Application Load Balancing.
+                    items:
+                      type: string
+                    type: array
+                  terminateInstancesOnDelete:
+                    description: Indicates whether running Spot instances should be
+                      terminated when the resource is deleted (and the Spot fleet
+                      request cancelled). If no value is specified, the value of the
+                      terminate_instances_with_expiration argument is used.
+                    type: string
+                  terminateInstancesWithExpiration:
+                    description: Indicates whether running Spot instances should be
+                      terminated when the Spot fleet request expires.
+                    type: boolean
+                  validFrom:
+                    description: The start date and time of the request, in UTC RFC3339
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). The default is to
+                      start fulfilling the request immediately.
+                    type: string
+                  validUntil:
+                    description: The end date and time of the request, in UTC RFC3339
+                      format(for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no
+                      new Spot instance requests are placed or enabled to fulfill
+                      the request.
+                    type: string
+                  waitForFulfillment:
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -1092,10 +1651,12 @@ spec:
             x-kubernetes-validations:
             - message: iamFleetRole is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.iamFleetRole)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.iamFleetRole)
+                || has(self.initProvider.iamFleetRole)'
             - message: targetCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetCapacity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetCapacity)
+                || has(self.initProvider.targetCapacity)'
           status:
             description: SpotFleetRequestStatus defines the observed state of SpotFleetRequest.
             properties:

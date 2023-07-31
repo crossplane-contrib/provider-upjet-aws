@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeploymentStrategyInitParameters struct {
+
+	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
+	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+
+	// Description of the deployment strategy. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
+	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+
+	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
+	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
+
+	// Algorithm used to define how percentage grows over time. Valid value: LINEAR and EXPONENTIAL. Defaults to LINEAR.
+	GrowthType *string `json:"growthType,omitempty" tf:"growth_type,omitempty"`
+
+	// Name for the deployment strategy. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Where to save the deployment strategy. Valid values: NONE and SSM_DOCUMENT.
+	ReplicateTo *string `json:"replicateTo,omitempty" tf:"replicate_to,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DeploymentStrategyObservation struct {
 
 	// ARN of the AppConfig Deployment Strategy.
@@ -93,6 +120,18 @@ type DeploymentStrategyParameters struct {
 type DeploymentStrategySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeploymentStrategyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DeploymentStrategyInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeploymentStrategyStatus defines the observed state of DeploymentStrategy.
@@ -113,10 +152,10 @@ type DeploymentStrategyStatus struct {
 type DeploymentStrategy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentDurationInMinutes)",message="deploymentDurationInMinutes is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.growthFactor)",message="growthFactor is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicateTo)",message="replicateTo is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentDurationInMinutes) || has(self.initProvider.deploymentDurationInMinutes)",message="deploymentDurationInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.growthFactor) || has(self.initProvider.growthFactor)",message="growthFactor is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicateTo) || has(self.initProvider.replicateTo)",message="replicateTo is a required parameter"
 	Spec   DeploymentStrategySpec   `json:"spec"`
 	Status DeploymentStrategyStatus `json:"status,omitempty"`
 }

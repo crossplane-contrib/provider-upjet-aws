@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SSHKeyInitParameters struct {
+
+	// (Requirement) The public key portion of an SSH key pair.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+}
+
 type SSHKeyObservation struct {
 
 	// (Requirement) The public key portion of an SSH key pair.
@@ -70,6 +76,18 @@ type SSHKeyParameters struct {
 type SSHKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SSHKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SSHKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SSHKeyStatus defines the observed state of SSHKey.
@@ -90,7 +108,7 @@ type SSHKeyStatus struct {
 type SSHKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
 	Spec   SSHKeySpec   `json:"spec"`
 	Status SSHKeyStatus `json:"status,omitempty"`
 }

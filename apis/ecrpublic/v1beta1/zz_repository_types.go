@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CatalogDataInitParameters struct {
+
+	// A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
+	AboutText *string `json:"aboutText,omitempty" tf:"about_text,omitempty"`
+
+	// The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters: ARM, ARM 64, x86, x86-64
+	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
+
+	// A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The base64-encoded repository logo payload. (Only visible for verified accounts) Note that drift detection is disabled for this attribute.
+	LogoImageBlob *string `json:"logoImageBlob,omitempty" tf:"logo_image_blob,omitempty"`
+
+	// The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters: Linux, Windows
+	OperatingSystems []*string `json:"operatingSystems,omitempty" tf:"operating_systems,omitempty"`
+
+	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
+	UsageText *string `json:"usageText,omitempty" tf:"usage_text,omitempty"`
+}
+
 type CatalogDataObservation struct {
 
 	// A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
@@ -59,6 +80,17 @@ type CatalogDataParameters struct {
 	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
 	// +kubebuilder:validation:Optional
 	UsageText *string `json:"usageText,omitempty" tf:"usage_text,omitempty"`
+}
+
+type RepositoryInitParameters struct {
+
+	// Catalog data configuration for the repository. See below for schema.
+	CatalogData []CatalogDataInitParameters `json:"catalogData,omitempty" tf:"catalog_data,omitempty"`
+
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RepositoryObservation struct {
@@ -110,6 +142,18 @@ type RepositoryParameters struct {
 type RepositorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RepositoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RepositoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // RepositoryStatus defines the observed state of Repository.

@@ -46,6 +46,3 @@ spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.pubsub.json}
     region: us-west-1
-
----
-

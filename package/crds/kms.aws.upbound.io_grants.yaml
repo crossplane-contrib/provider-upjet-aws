@@ -288,6 +288,78 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  constraints:
+                    description: A structure that you can use to allow certain operations
+                      in the grant only when the desired encryption context is present.
+                      For more information about encryption context, see Encryption
+                      Context.
+                    items:
+                      properties:
+                        encryptionContextEquals:
+                          additionalProperties:
+                            type: string
+                          description: A list of key-value pairs that must match the
+                            encryption context in subsequent cryptographic operation
+                            requests. The grant allows the operation only when the
+                            encryption context in the request is the same as the encryption
+                            context specified in this constraint. Conflicts with encryption_context_subset.
+                          type: object
+                        encryptionContextSubset:
+                          additionalProperties:
+                            type: string
+                          description: A list of key-value pairs that must be included
+                            in the encryption context of subsequent cryptographic
+                            operation requests. The grant allows the cryptographic
+                            operation only when the encryption context in the request
+                            includes the key-value pairs specified in this constraint,
+                            although it can include additional key-value pairs. Conflicts
+                            with encryption_context_equals.
+                          type: object
+                      type: object
+                    type: array
+                  grantCreationTokens:
+                    description: A list of grant tokens to be used when creating the
+                      grant. See Grant Tokens for more information about grant tokens.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: A friendly name for identifying the grant.
+                    type: string
+                  operations:
+                    description: 'A list of operations that the grant permits. The
+                      permitted values are: Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext,
+                      ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant,
+                      RetireGrant, DescribeKey, GenerateDataKeyPair, or GenerateDataKeyPairWithoutPlaintext.'
+                    items:
+                      type: string
+                    type: array
+                  retireOnDelete:
+                    description: (Defaults to false, Forces new resources) If set
+                      to false (the default) the grants will be revoked upon deletion,
+                      and if set to true the grants will try to be retired upon deletion.
+                      Note that retiring grants requires special permissions, hence
+                      why we default to revoking grants. See RetireGrant for more
+                      information.
+                    type: boolean
+                  retiringPrincipal:
+                    description: The principal that is given permission to retire
+                      the grant by using RetireGrant operation in ARN format.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -488,7 +560,8 @@ spec:
             x-kubernetes-validations:
             - message: operations is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.operations)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.operations)
+                || has(self.initProvider.operations)'
           status:
             description: GrantStatus defines the observed state of Grant.
             properties:

@@ -37,6 +37,3 @@ spec:
       namespace: upbound-system
     masterUsername: foo
     region: us-west-1
-
----
-

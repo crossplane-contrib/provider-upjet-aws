@@ -203,6 +203,72 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  applyImmediately:
+                    description: Specifies whether any database modifications are
+                      applied immediately, or during the next maintenance window.
+                      Default isfalse.
+                    type: boolean
+                  autoMinorVersionUpgrade:
+                    description: This parameter does not apply to Amazon DocumentDB.
+                      Amazon DocumentDB does not perform minor version upgrades regardless
+                      of the value set (see docs). Default true.
+                    type: boolean
+                  availabilityZone:
+                    description: The EC2 Availability Zone that the DB instance is
+                      created in. See docs about the details.
+                    type: string
+                  caCertIdentifier:
+                    description: The identifier of the CA certificate for the DB instance.
+                    type: string
+                  enablePerformanceInsights:
+                    description: A value that indicates whether to enable Performance
+                      Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
+                      about the details.
+                    type: boolean
+                  engine:
+                    description: 'The name of the database engine to be used for the
+                      DocumentDB instance. Defaults to docdb. Valid Values: docdb.'
+                    type: string
+                  instanceClass:
+                    description: The instance class to use. For details on CPU and
+                      memory, see Scaling for DocumentDB Instances. DocumentDB currently
+                      supports the below instance classes. Please see AWS Documentation
+                      for complete details.
+                    type: string
+                  performanceInsightsKmsKeyId:
+                    description: The KMS key identifier is the key ARN, key ID, alias
+                      ARN, or alias name for the KMS key. If you do not specify a
+                      value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB
+                      uses your default KMS key.
+                    type: string
+                  preferredMaintenanceWindow:
+                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                      Eg: "Mon:00:00-Mon:03:00".'
+                    type: string
+                  promotionTier:
+                    description: Default 0. Failover Priority setting on instance
+                      level. The reader who has lower tier has higher priority to
+                      get promoter to writer.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -403,7 +469,8 @@ spec:
             x-kubernetes-validations:
             - message: instanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)
+                || has(self.initProvider.instanceClass)'
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:

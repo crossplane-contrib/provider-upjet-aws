@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupPolicyBackupPolicyInitParameters struct {
+
+	// A status of the backup policy. Valid values: ENABLED, DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type BackupPolicyBackupPolicyObservation struct {
 
 	// A status of the backup policy. Valid values: ENABLED, DISABLED.
@@ -22,8 +28,14 @@ type BackupPolicyBackupPolicyObservation struct {
 type BackupPolicyBackupPolicyParameters struct {
 
 	// A status of the backup policy. Valid values: ENABLED, DISABLED.
-	// +kubebuilder:validation:Required
-	Status *string `json:"status" tf:"status,omitempty"`
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type BackupPolicyInitParameters struct {
+
+	// A backup_policy object (documented below).
+	BackupPolicy []BackupPolicyBackupPolicyInitParameters `json:"backupPolicy,omitempty" tf:"backup_policy,omitempty"`
 }
 
 type BackupPolicyObservation struct {
@@ -67,6 +79,18 @@ type BackupPolicyParameters struct {
 type BackupPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackupPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BackupPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackupPolicyStatus defines the observed state of BackupPolicy.
@@ -87,7 +111,7 @@ type BackupPolicyStatus struct {
 type BackupPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupPolicy)",message="backupPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupPolicy) || has(self.initProvider.backupPolicy)",message="backupPolicy is a required parameter"
 	Spec   BackupPolicySpec   `json:"spec"`
 	Status BackupPolicyStatus `json:"status,omitempty"`
 }

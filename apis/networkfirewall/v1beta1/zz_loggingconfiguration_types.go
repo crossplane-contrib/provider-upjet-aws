@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogDestinationConfigInitParameters struct {
+
+	// A map describing the logging destination for the chosen log_destination_type.
+	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+
+	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+
+	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
 type LogDestinationConfigObservation struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
@@ -28,16 +40,28 @@ type LogDestinationConfigObservation struct {
 type LogDestinationConfigParameters struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
-	// +kubebuilder:validation:Required
-	LogDestination map[string]*string `json:"logDestination" tf:"log_destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
-	// +kubebuilder:validation:Required
-	LogDestinationType *string `json:"logDestinationType" tf:"log_destination_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
 	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
-	// +kubebuilder:validation:Required
-	LogType *string `json:"logType" tf:"log_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
+type LoggingConfigurationInitParameters struct {
+
+	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
+	LoggingConfiguration []LoggingConfigurationLoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+}
+
+type LoggingConfigurationLoggingConfigurationInitParameters struct {
+
+	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
+	LogDestinationConfig []LogDestinationConfigInitParameters `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationLoggingConfigurationObservation struct {
@@ -49,8 +73,8 @@ type LoggingConfigurationLoggingConfigurationObservation struct {
 type LoggingConfigurationLoggingConfigurationParameters struct {
 
 	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
-	// +kubebuilder:validation:Required
-	LogDestinationConfig []LogDestinationConfigParameters `json:"logDestinationConfig" tf:"log_destination_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogDestinationConfig []LogDestinationConfigParameters `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {
@@ -95,6 +119,18 @@ type LoggingConfigurationParameters struct {
 type LoggingConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoggingConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LoggingConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoggingConfigurationStatus defines the observed state of LoggingConfiguration.
@@ -115,7 +151,7 @@ type LoggingConfigurationStatus struct {
 type LoggingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loggingConfiguration)",message="loggingConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loggingConfiguration) || has(self.initProvider.loggingConfiguration)",message="loggingConfiguration is a required parameter"
 	Spec   LoggingConfigurationSpec   `json:"spec"`
 	Status LoggingConfigurationStatus `json:"status,omitempty"`
 }

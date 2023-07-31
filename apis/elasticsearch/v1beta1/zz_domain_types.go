@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdvancedSecurityOptionsInitParameters struct {
+
+	// Whether advanced security is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether the internal user database is enabled. If not set, defaults to false by the AWS API.
+	InternalUserDatabaseEnabled *bool `json:"internalUserDatabaseEnabled,omitempty" tf:"internal_user_database_enabled,omitempty"`
+
+	// Configuration block for the main user. Detailed below.
+	MasterUserOptions []MasterUserOptionsInitParameters `json:"masterUserOptions,omitempty" tf:"master_user_options,omitempty"`
+}
+
 type AdvancedSecurityOptionsObservation struct {
 
 	// Whether advanced security is enabled.
@@ -28,8 +40,8 @@ type AdvancedSecurityOptionsObservation struct {
 type AdvancedSecurityOptionsParameters struct {
 
 	// Whether advanced security is enabled.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Whether the internal user database is enabled. If not set, defaults to false by the AWS API.
 	// +kubebuilder:validation:Optional
@@ -38,6 +50,18 @@ type AdvancedSecurityOptionsParameters struct {
 	// Configuration block for the main user. Detailed below.
 	// +kubebuilder:validation:Optional
 	MasterUserOptions []MasterUserOptionsParameters `json:"masterUserOptions,omitempty" tf:"master_user_options,omitempty"`
+}
+
+type AutoTuneOptionsInitParameters struct {
+
+	// The Auto-Tune desired state for the domain. Valid values: ENABLED or DISABLED.
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
+
+	// Configuration block for Auto-Tune maintenance windows. Can be specified multiple times for each maintenance window. Detailed below.
+	MaintenanceSchedule []MaintenanceScheduleInitParameters `json:"maintenanceSchedule,omitempty" tf:"maintenance_schedule,omitempty"`
+
+	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
+	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
 }
 
 type AutoTuneOptionsObservation struct {
@@ -55,8 +79,8 @@ type AutoTuneOptionsObservation struct {
 type AutoTuneOptionsParameters struct {
 
 	// The Auto-Tune desired state for the domain. Valid values: ENABLED or DISABLED.
-	// +kubebuilder:validation:Required
-	DesiredState *string `json:"desiredState" tf:"desired_state,omitempty"`
+	// +kubebuilder:validation:Optional
+	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
 
 	// Configuration block for Auto-Tune maintenance windows. Can be specified multiple times for each maintenance window. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -65,6 +89,42 @@ type AutoTuneOptionsParameters struct {
 	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
 	// +kubebuilder:validation:Optional
 	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
+}
+
+type ClusterConfigInitParameters struct {
+
+	// Configuration block containing cold storage configuration. Detailed below.
+	ColdStorageOptions []ColdStorageOptionsInitParameters `json:"coldStorageOptions,omitempty" tf:"cold_storage_options,omitempty"`
+
+	// Number of dedicated main nodes in the cluster.
+	DedicatedMasterCount *float64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
+
+	// Whether dedicated main nodes are enabled for the cluster.
+	DedicatedMasterEnabled *bool `json:"dedicatedMasterEnabled,omitempty" tf:"dedicated_master_enabled,omitempty"`
+
+	// Instance type of the dedicated main nodes in the cluster.
+	DedicatedMasterType *string `json:"dedicatedMasterType,omitempty" tf:"dedicated_master_type,omitempty"`
+
+	// Number of instances in the cluster.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Instance type of data nodes in the cluster.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
+	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
+
+	// Whether to enable warm storage.
+	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
+
+	// Instance type for the Elasticsearch cluster's warm nodes. Valid values are ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch and ultrawarm1.xlarge.elasticsearch. warm_type can be only and must be set when warm_enabled is set to true.
+	WarmType *string `json:"warmType,omitempty" tf:"warm_type,omitempty"`
+
+	// Configuration block containing zone awareness settings. Detailed below.
+	ZoneAwarenessConfig []ZoneAwarenessConfigInitParameters `json:"zoneAwarenessConfig,omitempty" tf:"zone_awareness_config,omitempty"`
+
+	// Whether zone awareness is enabled, set to true for multi-az deployment. To enable awareness with three Availability Zones, the availability_zone_count within the zone_awareness_config must be set to 3.
+	ZoneAwarenessEnabled *bool `json:"zoneAwarenessEnabled,omitempty" tf:"zone_awareness_enabled,omitempty"`
 }
 
 type ClusterConfigObservation struct {
@@ -150,6 +210,21 @@ type ClusterConfigParameters struct {
 	ZoneAwarenessEnabled *bool `json:"zoneAwarenessEnabled,omitempty" tf:"zone_awareness_enabled,omitempty"`
 }
 
+type CognitoOptionsInitParameters struct {
+
+	// Whether Amazon Cognito authentication with Kibana is enabled or not.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// ID of the Cognito Identity Pool to use.
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// ARN of the IAM role that has the AmazonESCognitoAccess policy attached.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// ID of the Cognito User Pool to use.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+}
+
 type CognitoOptionsObservation struct {
 
 	// Whether Amazon Cognito authentication with Kibana is enabled or not.
@@ -172,16 +247,22 @@ type CognitoOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// ID of the Cognito Identity Pool to use.
-	// +kubebuilder:validation:Required
-	IdentityPoolID *string `json:"identityPoolId" tf:"identity_pool_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
 	// ARN of the IAM role that has the AmazonESCognitoAccess policy attached.
-	// +kubebuilder:validation:Required
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// ID of the Cognito User Pool to use.
-	// +kubebuilder:validation:Required
-	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+}
+
+type ColdStorageOptionsInitParameters struct {
+
+	// Boolean to enable cold storage for an Elasticsearch domain. Defaults to false. Master and ultrawarm nodes must be enabled for cold storage.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type ColdStorageOptionsObservation struct {
@@ -195,6 +276,24 @@ type ColdStorageOptionsParameters struct {
 	// Boolean to enable cold storage for an Elasticsearch domain. Defaults to false. Master and ultrawarm nodes must be enabled for cold storage.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type DomainEndpointOptionsInitParameters struct {
+
+	// Fully qualified domain for your custom endpoint.
+	CustomEndpoint *string `json:"customEndpoint,omitempty" tf:"custom_endpoint,omitempty"`
+
+	// ACM certificate ARN for your custom endpoint.
+	CustomEndpointCertificateArn *string `json:"customEndpointCertificateArn,omitempty" tf:"custom_endpoint_certificate_arn,omitempty"`
+
+	// Whether to enable custom endpoint for the Elasticsearch domain.
+	CustomEndpointEnabled *bool `json:"customEndpointEnabled,omitempty" tf:"custom_endpoint_enabled,omitempty"`
+
+	// Whether or not to require HTTPS. Defaults to true.
+	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
+
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
 type DomainEndpointOptionsObservation struct {
@@ -236,6 +335,54 @@ type DomainEndpointOptionsParameters struct {
 	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
 	// +kubebuilder:validation:Optional
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
+}
+
+type DomainInitParameters struct {
+
+	// IAM policy document specifying the access policies for the domain.
+	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
+
+	// Key-value string pairs to specify advanced configuration options.
+	AdvancedOptions map[string]*string `json:"advancedOptions,omitempty" tf:"advanced_options,omitempty"`
+
+	// Configuration block for fine-grained access control. Detailed below.
+	AdvancedSecurityOptions []AdvancedSecurityOptionsInitParameters `json:"advancedSecurityOptions,omitempty" tf:"advanced_security_options,omitempty"`
+
+	// Configuration block for the Auto-Tune options of the domain. Detailed below.
+	AutoTuneOptions []AutoTuneOptionsInitParameters `json:"autoTuneOptions,omitempty" tf:"auto_tune_options,omitempty"`
+
+	// Configuration block for the cluster of the domain. Detailed below.
+	ClusterConfig []ClusterConfigInitParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+
+	// Configuration block for authenticating Kibana with Cognito. Detailed below.
+	CognitoOptions []CognitoOptionsInitParameters `json:"cognitoOptions,omitempty" tf:"cognito_options,omitempty"`
+
+	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
+	DomainEndpointOptions []DomainEndpointOptionsInitParameters `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
+
+	// Configuration block for EBS related options, may be required based on chosen instance size. Detailed below.
+	EBSOptions []EBSOptionsInitParameters `json:"ebsOptions,omitempty" tf:"ebs_options,omitempty"`
+
+	// Version of Elasticsearch to deploy. Defaults to 1.5.
+	ElasticsearchVersion *string `json:"elasticsearchVersion,omitempty" tf:"elasticsearch_version,omitempty"`
+
+	// Configuration block for encrypt at rest options. Only available for certain instance types. Detailed below.
+	EncryptAtRest []EncryptAtRestInitParameters `json:"encryptAtRest,omitempty" tf:"encrypt_at_rest,omitempty"`
+
+	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
+	LogPublishingOptions []LogPublishingOptionsInitParameters `json:"logPublishingOptions,omitempty" tf:"log_publishing_options,omitempty"`
+
+	// Configuration block for node-to-node encryption options. Detailed below.
+	NodeToNodeEncryption []NodeToNodeEncryptionInitParameters `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
+
+	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running Elasticsearch 5.3 and later, Amazon ES takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions of Elasticsearch, Amazon ES takes daily automated snapshots.
+	SnapshotOptions []SnapshotOptionsInitParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for VPC related options. Adding or removing this configuration forces a new resource (documentation). Detailed below.
+	VPCOptions []VPCOptionsInitParameters `json:"vpcOptions,omitempty" tf:"vpc_options,omitempty"`
 }
 
 type DomainObservation struct {
@@ -371,6 +518,15 @@ type DomainParameters struct {
 	VPCOptions []VPCOptionsParameters `json:"vpcOptions,omitempty" tf:"vpc_options,omitempty"`
 }
 
+type DurationInitParameters struct {
+
+	// The unit of time specifying the duration of an Auto-Tune maintenance window. Valid values: HOURS.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type DurationObservation struct {
 
 	// The unit of time specifying the duration of an Auto-Tune maintenance window. Valid values: HOURS.
@@ -383,12 +539,30 @@ type DurationObservation struct {
 type DurationParameters struct {
 
 	// The unit of time specifying the duration of an Auto-Tune maintenance window. Valid values: HOURS.
-	// +kubebuilder:validation:Required
-	Unit *string `json:"unit" tf:"unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
-	// +kubebuilder:validation:Required
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type EBSOptionsInitParameters struct {
+
+	// Whether EBS volumes are attached to data nodes in the domain.
+	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
+
+	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of EBS volumes attached to data nodes (in GiB).
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of EBS volumes attached to data nodes.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type EBSOptionsObservation struct {
@@ -412,8 +586,8 @@ type EBSOptionsObservation struct {
 type EBSOptionsParameters struct {
 
 	// Whether EBS volumes are attached to data nodes in the domain.
-	// +kubebuilder:validation:Required
-	EBSEnabled *bool `json:"ebsEnabled" tf:"ebs_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
 
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
 	// +kubebuilder:validation:Optional
@@ -432,6 +606,15 @@ type EBSOptionsParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type EncryptAtRestInitParameters struct {
+
+	// Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false. Enabling encryption on new domains requires elasticsearch_version 5.1 or greater.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// KMS key ARN to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key. Note that KMS will accept a KMS key ID but will return the key ARN.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type EncryptAtRestObservation struct {
 
 	// Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false. Enabling encryption on new domains requires elasticsearch_version 5.1 or greater.
@@ -444,12 +627,21 @@ type EncryptAtRestObservation struct {
 type EncryptAtRestParameters struct {
 
 	// Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false. Enabling encryption on new domains requires elasticsearch_version 5.1 or greater.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// KMS key ARN to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key. Note that KMS will accept a KMS key ID but will return the key ARN.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type LogPublishingOptionsInitParameters struct {
+
+	// Whether given log publishing option is enabled or not.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Type of Elasticsearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS, AUDIT_LOGS.
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
 }
 
 type LogPublishingOptionsObservation struct {
@@ -485,8 +677,20 @@ type LogPublishingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Type of Elasticsearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS, AUDIT_LOGS.
-	// +kubebuilder:validation:Required
-	LogType *string `json:"logType" tf:"log_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+}
+
+type MaintenanceScheduleInitParameters struct {
+
+	// A cron expression specifying the recurrence pattern for an Auto-Tune maintenance schedule.
+	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence,omitempty" tf:"cron_expression_for_recurrence,omitempty"`
+
+	// Configuration block for the duration of the Auto-Tune maintenance window. Detailed below.
+	Duration []DurationInitParameters `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Date and time at which to start the Auto-Tune maintenance schedule in RFC3339 format.
+	StartAt *string `json:"startAt,omitempty" tf:"start_at,omitempty"`
 }
 
 type MaintenanceScheduleObservation struct {
@@ -504,16 +708,25 @@ type MaintenanceScheduleObservation struct {
 type MaintenanceScheduleParameters struct {
 
 	// A cron expression specifying the recurrence pattern for an Auto-Tune maintenance schedule.
-	// +kubebuilder:validation:Required
-	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence" tf:"cron_expression_for_recurrence,omitempty"`
+	// +kubebuilder:validation:Optional
+	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence,omitempty" tf:"cron_expression_for_recurrence,omitempty"`
 
 	// Configuration block for the duration of the Auto-Tune maintenance window. Detailed below.
-	// +kubebuilder:validation:Required
-	Duration []DurationParameters `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration []DurationParameters `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Date and time at which to start the Auto-Tune maintenance schedule in RFC3339 format.
-	// +kubebuilder:validation:Required
-	StartAt *string `json:"startAt" tf:"start_at,omitempty"`
+	// +kubebuilder:validation:Optional
+	StartAt *string `json:"startAt,omitempty" tf:"start_at,omitempty"`
+}
+
+type MasterUserOptionsInitParameters struct {
+
+	// ARN for the main user. Only specify if internal_user_database_enabled is not set or set to false.
+	MasterUserArn *string `json:"masterUserArn,omitempty" tf:"master_user_arn,omitempty"`
+
+	// Main user's username, which is stored in the Amazon Elasticsearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
+	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
 }
 
 type MasterUserOptionsObservation struct {
@@ -540,6 +753,12 @@ type MasterUserOptionsParameters struct {
 	MasterUserPasswordSecretRef *v1.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
+type NodeToNodeEncryptionInitParameters struct {
+
+	// Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false. Enabling node-to-node encryption of a new domain requires an elasticsearch_version of 6.0 or greater.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type NodeToNodeEncryptionObservation struct {
 
 	// Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false. Enabling node-to-node encryption of a new domain requires an elasticsearch_version of 6.0 or greater.
@@ -549,8 +768,14 @@ type NodeToNodeEncryptionObservation struct {
 type NodeToNodeEncryptionParameters struct {
 
 	// Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false. Enabling node-to-node encryption of a new domain requires an elasticsearch_version of 6.0 or greater.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type SnapshotOptionsInitParameters struct {
+
+	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type SnapshotOptionsObservation struct {
@@ -562,8 +787,17 @@ type SnapshotOptionsObservation struct {
 type SnapshotOptionsParameters struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
-	// +kubebuilder:validation:Required
-	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
+}
+
+type VPCOptionsInitParameters struct {
+
+	// List of VPC Security Group IDs to be applied to the Elasticsearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCOptionsObservation struct {
@@ -592,6 +826,12 @@ type VPCOptionsParameters struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
+type ZoneAwarenessConfigInitParameters struct {
+
+	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
+	AvailabilityZoneCount *float64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
+}
+
 type ZoneAwarenessConfigObservation struct {
 
 	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
@@ -609,6 +849,18 @@ type ZoneAwarenessConfigParameters struct {
 type DomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainStatus defines the observed state of Domain.

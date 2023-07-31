@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AsyncInferenceConfigInitParameters struct {
+
+	// Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+	ClientConfig []ClientConfigInitParameters `json:"clientConfig,omitempty" tf:"client_config,omitempty"`
+
+	// Specifies the configuration for asynchronous inference invocation outputs.
+	OutputConfig []AsyncInferenceConfigOutputConfigInitParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+}
+
 type AsyncInferenceConfigObservation struct {
 
 	// Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
@@ -20,6 +29,21 @@ type AsyncInferenceConfigObservation struct {
 
 	// Specifies the configuration for asynchronous inference invocation outputs.
 	OutputConfig []AsyncInferenceConfigOutputConfigObservation `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+}
+
+type AsyncInferenceConfigOutputConfigInitParameters struct {
+
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Specifies the configuration for notifications of inference results for asynchronous inference.
+	NotificationConfig []NotificationConfigInitParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
+
+	// The Amazon S3 location to upload failure inference responses to.
+	S3FailurePath *string `json:"s3FailurePath,omitempty" tf:"s3_failure_path,omitempty"`
+
+	// The Amazon S3 location to upload inference responses to.
+	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
 
 type AsyncInferenceConfigOutputConfigObservation struct {
@@ -52,8 +76,8 @@ type AsyncInferenceConfigOutputConfigParameters struct {
 	S3FailurePath *string `json:"s3FailurePath,omitempty" tf:"s3_failure_path,omitempty"`
 
 	// The Amazon S3 location to upload inference responses to.
-	// +kubebuilder:validation:Required
-	S3OutputPath *string `json:"s3OutputPath" tf:"s3_output_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
 
 type AsyncInferenceConfigParameters struct {
@@ -63,8 +87,17 @@ type AsyncInferenceConfigParameters struct {
 	ClientConfig []ClientConfigParameters `json:"clientConfig,omitempty" tf:"client_config,omitempty"`
 
 	// Specifies the configuration for asynchronous inference invocation outputs.
-	// +kubebuilder:validation:Required
-	OutputConfig []AsyncInferenceConfigOutputConfigParameters `json:"outputConfig" tf:"output_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	OutputConfig []AsyncInferenceConfigOutputConfigParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+}
+
+type CaptureContentTypeHeaderInitParameters struct {
+
+	// The CSV content type headers to capture.
+	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
+
+	// The JSON content type headers to capture.
+	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
 type CaptureContentTypeHeaderObservation struct {
@@ -87,6 +120,12 @@ type CaptureContentTypeHeaderParameters struct {
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
+type CaptureOptionsInitParameters struct {
+
+	// Specifies the data to be captured. Should be one of Input or Output.
+	CaptureMode *string `json:"captureMode,omitempty" tf:"capture_mode,omitempty"`
+}
+
 type CaptureOptionsObservation struct {
 
 	// Specifies the data to be captured. Should be one of Input or Output.
@@ -96,8 +135,14 @@ type CaptureOptionsObservation struct {
 type CaptureOptionsParameters struct {
 
 	// Specifies the data to be captured. Should be one of Input or Output.
-	// +kubebuilder:validation:Required
-	CaptureMode *string `json:"captureMode" tf:"capture_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	CaptureMode *string `json:"captureMode,omitempty" tf:"capture_mode,omitempty"`
+}
+
+type ClientConfigInitParameters struct {
+
+	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
+	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type ClientConfigObservation struct {
@@ -113,6 +158,15 @@ type ClientConfigParameters struct {
 	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
+type CoreDumpConfigInitParameters struct {
+
+	// The Amazon S3 bucket to send the core dump to.
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type CoreDumpConfigObservation struct {
 
 	// The Amazon S3 bucket to send the core dump to.
@@ -125,11 +179,32 @@ type CoreDumpConfigObservation struct {
 type CoreDumpConfigParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
-	// +kubebuilder:validation:Required
-	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type DataCaptureConfigInitParameters struct {
+
+	// The content type headers to capture. Fields are documented below.
+	CaptureContentTypeHeader []CaptureContentTypeHeaderInitParameters `json:"captureContentTypeHeader,omitempty" tf:"capture_content_type_header,omitempty"`
+
+	// Specifies what data to capture. Fields are documented below.
+	CaptureOptions []CaptureOptionsInitParameters `json:"captureOptions,omitempty" tf:"capture_options,omitempty"`
+
+	// The URL for S3 location where the captured data is stored.
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+
+	// Flag to enable data capture. Defaults to false.
+	EnableCapture *bool `json:"enableCapture,omitempty" tf:"enable_capture,omitempty"`
+
+	// Portion of data to capture. Should be between 0 and 100.
+	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
+
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
@@ -161,24 +236,42 @@ type DataCaptureConfigParameters struct {
 	CaptureContentTypeHeader []CaptureContentTypeHeaderParameters `json:"captureContentTypeHeader,omitempty" tf:"capture_content_type_header,omitempty"`
 
 	// Specifies what data to capture. Fields are documented below.
-	// +kubebuilder:validation:Required
-	CaptureOptions []CaptureOptionsParameters `json:"captureOptions" tf:"capture_options,omitempty"`
+	// +kubebuilder:validation:Optional
+	CaptureOptions []CaptureOptionsParameters `json:"captureOptions,omitempty" tf:"capture_options,omitempty"`
 
 	// The URL for S3 location where the captured data is stored.
-	// +kubebuilder:validation:Required
-	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
 	// Flag to enable data capture. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableCapture *bool `json:"enableCapture,omitempty" tf:"enable_capture,omitempty"`
 
 	// Portion of data to capture. Should be between 0 and 100.
-	// +kubebuilder:validation:Required
-	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage" tf:"initial_sampling_percentage,omitempty"`
+	// +kubebuilder:validation:Optional
+	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type EndpointConfigurationInitParameters struct {
+
+	// Specifies configuration for how an endpoint performs asynchronous inference.
+	AsyncInferenceConfig []AsyncInferenceConfigInitParameters `json:"asyncInferenceConfig,omitempty" tf:"async_inference_config,omitempty"`
+
+	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
+	DataCaptureConfig []DataCaptureConfigInitParameters `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
+
+	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
+	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
+
+	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
+	ShadowProductionVariants []ShadowProductionVariantsInitParameters `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type EndpointConfigurationObservation struct {
@@ -251,6 +344,18 @@ type EndpointConfigurationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type NotificationConfigInitParameters struct {
+
+	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
+	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
+
+	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
+
+	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
+	SuccessTopic *string `json:"successTopic,omitempty" tf:"success_topic,omitempty"`
+}
+
 type NotificationConfigObservation struct {
 
 	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
@@ -276,6 +381,42 @@ type NotificationConfigParameters struct {
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
 	// +kubebuilder:validation:Optional
 	SuccessTopic *string `json:"successTopic,omitempty" tf:"success_topic,omitempty"`
+}
+
+type ProductionVariantsInitParameters struct {
+
+	// The size of the Elastic Inference (EI) instance to use for the production variant.
+	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+
+	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
+	CoreDumpConfig []CoreDumpConfigInitParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
+	// Initial number of instances used for auto-scaling.
+	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+
+	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
+	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
+
+	// The type of instance to start.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
+	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+
+	// Specifies configuration for how an endpoint performs asynchronous inference.
+	ServerlessConfig []ServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
+
+	// The name of the variant.
+	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
+
+	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
+	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ProductionVariantsObservation struct {
@@ -377,6 +518,15 @@ type ProductionVariantsParameters struct {
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
+type ServerlessConfigInitParameters struct {
+
+	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
+	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+}
+
 type ServerlessConfigObservation struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
@@ -389,12 +539,21 @@ type ServerlessConfigObservation struct {
 type ServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	// +kubebuilder:validation:Required
-	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	// +kubebuilder:validation:Required
-	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+}
+
+type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
+
+	// The Amazon S3 bucket to send the core dump to.
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ShadowProductionVariantsCoreDumpConfigObservation struct {
@@ -409,12 +568,51 @@ type ShadowProductionVariantsCoreDumpConfigObservation struct {
 type ShadowProductionVariantsCoreDumpConfigParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
-	// +kubebuilder:validation:Required
-	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
-	// +kubebuilder:validation:Required
-	KMSKeyID *string `json:"kmsKeyId" tf:"kms_key_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type ShadowProductionVariantsInitParameters struct {
+
+	// The size of the Elastic Inference (EI) instance to use for the production variant.
+	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
+	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
+	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+
+	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
+	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigInitParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
+
+	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
+	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
+	// Initial number of instances used for auto-scaling.
+	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+
+	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
+	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
+
+	// The type of instance to start.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
+	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+
+	// The name of the model to use.
+	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+
+	// Specifies configuration for how an endpoint performs asynchronous inference.
+	ServerlessConfig []ShadowProductionVariantsServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
+
+	// The name of the variant.
+	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
+
+	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
+	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ShadowProductionVariantsObservation struct {
@@ -491,8 +689,8 @@ type ShadowProductionVariantsParameters struct {
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
-	// +kubebuilder:validation:Required
-	ModelName *string `json:"modelName" tf:"model_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	// +kubebuilder:validation:Optional
@@ -507,6 +705,15 @@ type ShadowProductionVariantsParameters struct {
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
+type ShadowProductionVariantsServerlessConfigInitParameters struct {
+
+	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
+	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+}
+
 type ShadowProductionVariantsServerlessConfigObservation struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
@@ -519,18 +726,30 @@ type ShadowProductionVariantsServerlessConfigObservation struct {
 type ShadowProductionVariantsServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	// +kubebuilder:validation:Required
-	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	// +kubebuilder:validation:Required
-	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
 }
 
 // EndpointConfigurationSpec defines the desired state of EndpointConfiguration
 type EndpointConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EndpointConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EndpointConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // EndpointConfigurationStatus defines the observed state of EndpointConfiguration.
@@ -551,7 +770,7 @@ type EndpointConfigurationStatus struct {
 type EndpointConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants)",message="productionVariants is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants) || has(self.initProvider.productionVariants)",message="productionVariants is a required parameter"
 	Spec   EndpointConfigurationSpec   `json:"spec"`
 	Status EndpointConfigurationStatus `json:"status,omitempty"`
 }

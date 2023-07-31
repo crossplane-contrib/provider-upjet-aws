@@ -251,6 +251,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  protocol:
+                    description: 'The tunnel protocol. Valida values: gre. Default
+                      is gre.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  transitGatewayDefaultRouteTableAssociation:
+                    description: 'Boolean whether the Connect should be associated
+                      with the EC2 Transit Gateway association default route table.
+                      This cannot be configured or perform drift detection with Resource
+                      Access Manager shared EC2 Transit Gateways. Default value: true.'
+                    type: boolean
+                  transitGatewayDefaultRouteTablePropagation:
+                    description: 'Boolean whether the Connect should propagate routes
+                      with the EC2 Transit Gateway propagation default route table.
+                      This cannot be configured or perform drift detection with Resource
+                      Access Manager shared EC2 Transit Gateways. Default value: true.'
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

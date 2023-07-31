@@ -18,6 +18,3 @@ spec:
     replicateTo: NONE
     tags:
       Type: AppConfig Deployment Strategy
-
----
-

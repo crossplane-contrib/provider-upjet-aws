@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: example
     dbClusterSnapshotIdentifier: resourcetestsnapshot1234
     region: us-west-1
-
----
-

@@ -89,9 +89,6 @@ spec:
                             deleted. For more information, see the documentation on
                             Multi-Region Access Point Permissions.
                           type: string
-                      required:
-                      - name
-                      - policy
                       type: object
                     type: array
                   region:
@@ -100,6 +97,42 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountId:
+                    description: The AWS account ID for the owner of the Multi-Region
+                      Access Point.
+                    type: string
+                  details:
+                    description: A configuration block containing details about the
+                      policy for the Multi-Region Access Point. See Details Configuration
+                      Block below for more details
+                    items:
+                      properties:
+                        name:
+                          description: The name of the Multi-Region Access Point.
+                          type: string
+                        policy:
+                          description: A valid JSON document that specifies the policy
+                            that you want to associate with this Multi-Region Access
+                            Point. Once applied, the policy can be edited, but not
+                            deleted. For more information, see the documentation on
+                            Multi-Region Access Point Permissions.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -301,7 +334,8 @@ spec:
             x-kubernetes-validations:
             - message: details is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.details)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.details)
+                || has(self.initProvider.details)'
           status:
             description: MultiRegionAccessPointPolicyStatus defines the observed state
               of MultiRegionAccessPointPolicy.

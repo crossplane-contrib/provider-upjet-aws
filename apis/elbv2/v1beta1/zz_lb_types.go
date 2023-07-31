@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessLogsInitParameters struct {
+
+	// Boolean to enable / disable access_logs. Defaults to false, even when bucket is specified.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type AccessLogsObservation struct {
 
 	// The S3 bucket name to store the logs in.
@@ -47,6 +56,67 @@ type AccessLogsParameters struct {
 	// The S3 bucket prefix. Logs are stored in the root if not configured.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type LBInitParameters struct {
+
+	// An Access Logs block. Access Logs documented below.
+	AccessLogs []AccessLogsInitParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
+
+	// The ID of the customer owned ipv4 pool to use for this load balancer.
+	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
+	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
+	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
+
+	// Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer (true) or routed to targets (false). The default is false. Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens. Only valid for Load Balancers of type application.
+	DropInvalidHeaderFields *bool `json:"dropInvalidHeaderFields,omitempty" tf:"drop_invalid_header_fields,omitempty"`
+
+	// If true, cross-zone load balancing of the load balancer will be enabled. For network and gateway type load balancers, this feature is disabled by default (false). For application load balancer this feature is always enabled (true) and cannot be disabled. Defaults to false.
+	EnableCrossZoneLoadBalancing *bool `json:"enableCrossZoneLoadBalancing,omitempty" tf:"enable_cross_zone_load_balancing,omitempty"`
+
+	// If true, deletion of the load balancer will be disabled via the AWS API. Defaults to false.
+	EnableDeletionProtection *bool `json:"enableDeletionProtection,omitempty" tf:"enable_deletion_protection,omitempty"`
+
+	// Indicates whether HTTP/2 is enabled in application load balancers. Defaults to true.
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+
+	// Indicates whether the two headers (x-amzn-tls-version and x-amzn-tls-cipher-suite), which contain information about the negotiated TLS version and cipher suite, are added to the client request before sending it to the target. Only valid for Load Balancers of type application. Defaults to false
+	EnableTLSVersionAndCipherSuiteHeaders *bool `json:"enableTlsVersionAndCipherSuiteHeaders,omitempty" tf:"enable_tls_version_and_cipher_suite_headers,omitempty"`
+
+	// Indicates whether to allow a WAF-enabled load balancer to route requests to targets if it is unable to forward the request to AWS WAF. Defaults to false.
+	EnableWafFailOpen *bool `json:"enableWafFailOpen,omitempty" tf:"enable_waf_fail_open,omitempty"`
+
+	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
+	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
+
+	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
+	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+
+	// If true, the LB will be internal. Defaults to false.
+	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
+
+	// The type of load balancer to create. Possible values are application, gateway, or network. The default value is application.
+	LoadBalancerType *string `json:"loadBalancerType,omitempty" tf:"load_balancer_type,omitempty"`
+
+	// The name of the LB. This name must be unique within your AWS account, can have a maximum of 32 characters,
+	// must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
+	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
+
+	// A subnet mapping block as documented below.
+	SubnetMapping []SubnetMappingInitParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Determines how the load balancer modifies the X-Forwarded-For header in the HTTP request before sending the request to the target. The possible values are append, preserve, and remove. Only valid for Load Balancers of type application. The default is append.
+	XffHeaderProcessingMode *string `json:"xffHeaderProcessingMode,omitempty" tf:"xff_header_processing_mode,omitempty"`
 }
 
 type LBObservation struct {
@@ -256,6 +326,18 @@ type LBParameters struct {
 	XffHeaderProcessingMode *string `json:"xffHeaderProcessingMode,omitempty" tf:"xff_header_processing_mode,omitempty"`
 }
 
+type SubnetMappingInitParameters struct {
+
+	// The allocation ID of the Elastic IP address for an internet-facing load balancer.
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// The IPv6 address. You associate IPv6 CIDR blocks with your VPC and choose the subnets where you launch both internet-facing and internal Application Load Balancers or Network Load Balancers.
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+
+	// The private IPv4 address for an internal load balancer.
+	PrivateIPv4Address *string `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
+}
+
 type SubnetMappingObservation struct {
 
 	// The allocation ID of the Elastic IP address for an internet-facing load balancer.
@@ -306,6 +388,18 @@ type SubnetMappingParameters struct {
 type LBSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LBInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBStatus defines the observed state of LB.

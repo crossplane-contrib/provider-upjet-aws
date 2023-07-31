@@ -269,6 +269,60 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  appName:
+                    description: The name of the app.
+                    type: string
+                  appType:
+                    description: The type of app. Valid values are JupyterServer,
+                      KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+                    type: string
+                  resourceSpec:
+                    description: The instance type and the Amazon Resource Name (ARN)
+                      of the SageMaker image created on the instance.See Resource
+                      Spec below.
+                    items:
+                      properties:
+                        instanceType:
+                          description: The instance type that the image version runs
+                            on. For valid values see SageMaker Instance Types.
+                          type: string
+                        lifecycleConfigArn:
+                          description: The Amazon Resource Name (ARN) of the Lifecycle
+                            Configuration attached to the Resource.
+                          type: string
+                        sagemakerImageArn:
+                          description: The ARN of the SageMaker image that the image
+                            version belongs to.
+                          type: string
+                        sagemakerImageVersionArn:
+                          description: The ARN of the image version created on the
+                            instance.
+                          type: string
+                      type: object
+                    type: array
+                  spaceName:
+                    description: The name of the space. At least one of user_profile_name
+                      or space_name required.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -469,10 +523,12 @@ spec:
             x-kubernetes-validations:
             - message: appName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.appName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.appName)
+                || has(self.initProvider.appName)'
             - message: appType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.appType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.appType)
+                || has(self.initProvider.appType)'
           status:
             description: AppStatus defines the observed state of App.
             properties:

@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FunctionInitParameters struct {
+
+	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Function description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Version of the request mapping template. Currently the supported value is 2018-05-29. Does not apply when specifying code.
+	FunctionVersion *string `json:"functionVersion,omitempty" tf:"function_version,omitempty"`
+
+	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
+	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+
+	// Function name. The function name does not have to be unique.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Function request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
+	RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty" tf:"request_mapping_template,omitempty"`
+
+	// Function response mapping template.
+	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	Runtime []RuntimeInitParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// Describes a Sync configuration for a resolver. See Sync Config.
+	SyncConfig []SyncConfigInitParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
+}
+
 type FunctionObservation struct {
 
 	// ID of the associated AppSync API.
@@ -129,6 +159,12 @@ type FunctionParameters struct {
 	SyncConfig []SyncConfigParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
+type LambdaConflictHandlerConfigInitParameters struct {
+
+	// ARN for the Lambda function to use as the Conflict Handler.
+	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
+}
+
 type LambdaConflictHandlerConfigObservation struct {
 
 	// ARN for the Lambda function to use as the Conflict Handler.
@@ -140,6 +176,15 @@ type LambdaConflictHandlerConfigParameters struct {
 	// ARN for the Lambda function to use as the Conflict Handler.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty" tf:"lambda_conflict_handler_arn,omitempty"`
+}
+
+type RuntimeInitParameters struct {
+
+	// Function name. The function name does not have to be unique.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 }
 
 type RuntimeObservation struct {
@@ -154,12 +199,24 @@ type RuntimeObservation struct {
 type RuntimeParameters struct {
 
 	// Function name. The function name does not have to be unique.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
-	// +kubebuilder:validation:Required
-	RuntimeVersion *string `json:"runtimeVersion" tf:"runtime_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+}
+
+type SyncConfigInitParameters struct {
+
+	// Conflict Detection strategy to use. Valid values are NONE and VERSION.
+	ConflictDetection *string `json:"conflictDetection,omitempty" tf:"conflict_detection,omitempty"`
+
+	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
+	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
+
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	LambdaConflictHandlerConfig []LambdaConflictHandlerConfigInitParameters `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
 
 type SyncConfigObservation struct {
@@ -193,6 +250,18 @@ type SyncConfigParameters struct {
 type FunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionStatus defines the observed state of Function.
@@ -213,7 +282,7 @@ type FunctionStatus struct {
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FunctionSpec   `json:"spec"`
 	Status FunctionStatus `json:"status,omitempty"`
 }

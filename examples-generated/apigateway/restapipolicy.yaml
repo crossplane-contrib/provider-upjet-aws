@@ -28,6 +28,3 @@ spec:
   forProvider:
     name: example-rest-api
     region: us-west-1
-
----
-

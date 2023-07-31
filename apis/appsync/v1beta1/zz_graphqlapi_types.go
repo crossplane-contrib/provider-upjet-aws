@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdditionalAuthenticationProviderInitParameters struct {
+
+	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Nested argument containing Lambda authorizer configuration. Defined below.
+	LambdaAuthorizerConfig []LambdaAuthorizerConfigInitParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
+
+	// Nested argument containing OpenID Connect configuration. Defined below.
+	OpenIDConnectConfig []OpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
+
+	// Amazon Cognito User Pool configuration. Defined below.
+	UserPoolConfig []UserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
+}
+
 type AdditionalAuthenticationProviderObservation struct {
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
@@ -31,8 +46,8 @@ type AdditionalAuthenticationProviderObservation struct {
 type AdditionalAuthenticationProviderParameters struct {
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
-	// +kubebuilder:validation:Required
-	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	// +kubebuilder:validation:Optional
@@ -45,6 +60,51 @@ type AdditionalAuthenticationProviderParameters struct {
 	// Amazon Cognito User Pool configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig []UserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
+}
+
+type GraphQLAPIInitParameters struct {
+
+	// One or more additional authentication providers for the GraphqlApi. Defined below.
+	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderInitParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
+
+	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Nested argument containing Lambda authorizer configuration. Defined below.
+	LambdaAuthorizerConfig []GraphQLAPILambdaAuthorizerConfigInitParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
+
+	// Nested argument containing logging configuration. Defined below.
+	LogConfig []LogConfigInitParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
+	// User-supplied name for the GraphqlApi.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Nested argument containing OpenID Connect configuration. Defined below.
+	OpenIDConnectConfig []GraphQLAPIOpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
+
+	// Schema definition, in GraphQL schema language format.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Amazon Cognito User Pool configuration. Defined below.
+	UserPoolConfig []GraphQLAPIUserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
+
+	// Whether tracing with X-ray is enabled. Defaults to false.
+	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
+}
+
+type GraphQLAPILambdaAuthorizerConfigInitParameters struct {
+
+	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+
+	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
+	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+
+	// Regular expression for validation of tokens before the Lambda function is called.
+	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 }
 
 type GraphQLAPILambdaAuthorizerConfigObservation struct {
@@ -66,8 +126,8 @@ type GraphQLAPILambdaAuthorizerConfigParameters struct {
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
-	// +kubebuilder:validation:Required
-	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
 	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
@@ -119,6 +179,21 @@ type GraphQLAPIObservation struct {
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
 }
 
+type GraphQLAPIOpenIDConnectConfigInitParameters struct {
+
+	// Number of milliseconds a token is valid after being authenticated.
+	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+
+	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Number of milliseconds a token is valid after being issued to a user.
+	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+
+	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+}
+
 type GraphQLAPIOpenIDConnectConfigObservation struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
@@ -149,8 +224,8 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
-	// +kubebuilder:validation:Required
-	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
 
 type GraphQLAPIParameters struct {
@@ -201,6 +276,18 @@ type GraphQLAPIParameters struct {
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
 }
 
+type GraphQLAPIUserPoolConfigInitParameters struct {
+
+	// Regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+	AppIDClientRegex *string `json:"appIdClientRegex,omitempty" tf:"app_id_client_regex,omitempty"`
+
+	// AWS region in which the user pool was created.
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
+	// Action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+}
+
 type GraphQLAPIUserPoolConfigObservation struct {
 
 	// Regular expression for validating the incoming Amazon Cognito User Pool app client ID.
@@ -227,8 +314,8 @@ type GraphQLAPIUserPoolConfigParameters struct {
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
 
 	// Action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
-	// +kubebuilder:validation:Required
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// User pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
@@ -243,6 +330,18 @@ type GraphQLAPIUserPoolConfigParameters struct {
 	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+}
+
+type LambdaAuthorizerConfigInitParameters struct {
+
+	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+
+	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
+	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+
+	// Regular expression for validation of tokens before the Lambda function is called.
+	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
 }
 
 type LambdaAuthorizerConfigObservation struct {
@@ -264,12 +363,21 @@ type LambdaAuthorizerConfigParameters struct {
 	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
-	// +kubebuilder:validation:Required
-	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
 	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
 	IdentityValidationExpression *string `json:"identityValidationExpression,omitempty" tf:"identity_validation_expression,omitempty"`
+}
+
+type LogConfigInitParameters struct {
+
+	// Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging  level. Valid values: true, false. Default value: false
+	ExcludeVerboseContent *bool `json:"excludeVerboseContent,omitempty" tf:"exclude_verbose_content,omitempty"`
+
+	// Field logging level. Valid values: ALL, ERROR, NONE.
+	FieldLogLevel *string `json:"fieldLogLevel,omitempty" tf:"field_log_level,omitempty"`
 }
 
 type LogConfigObservation struct {
@@ -305,8 +413,23 @@ type LogConfigParameters struct {
 	ExcludeVerboseContent *bool `json:"excludeVerboseContent,omitempty" tf:"exclude_verbose_content,omitempty"`
 
 	// Field logging level. Valid values: ALL, ERROR, NONE.
-	// +kubebuilder:validation:Required
-	FieldLogLevel *string `json:"fieldLogLevel" tf:"field_log_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldLogLevel *string `json:"fieldLogLevel,omitempty" tf:"field_log_level,omitempty"`
+}
+
+type OpenIDConnectConfigInitParameters struct {
+
+	// Number of milliseconds a token is valid after being authenticated.
+	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+
+	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Number of milliseconds a token is valid after being issued to a user.
+	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+
+	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
 
 type OpenIDConnectConfigObservation struct {
@@ -339,8 +462,20 @@ type OpenIDConnectConfigParameters struct {
 	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
-	// +kubebuilder:validation:Required
-	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+}
+
+type UserPoolConfigInitParameters struct {
+
+	// Regular expression for validating the incoming Amazon Cognito User Pool app client ID.
+	AppIDClientRegex *string `json:"appIdClientRegex,omitempty" tf:"app_id_client_regex,omitempty"`
+
+	// AWS region in which the user pool was created.
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
+	// User pool ID.
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 type UserPoolConfigObservation struct {
@@ -366,14 +501,26 @@ type UserPoolConfigParameters struct {
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
 
 	// User pool ID.
-	// +kubebuilder:validation:Required
-	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
 // GraphQLAPISpec defines the desired state of GraphQLAPI
 type GraphQLAPISpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GraphQLAPIParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GraphQLAPIInitParameters `json:"initProvider,omitempty"`
 }
 
 // GraphQLAPIStatus defines the observed state of GraphQLAPI.
@@ -394,8 +541,8 @@ type GraphQLAPIStatus struct {
 type GraphQLAPI struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationType)",message="authenticationType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationType) || has(self.initProvider.authenticationType)",message="authenticationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   GraphQLAPISpec   `json:"spec"`
 	Status GraphQLAPIStatus `json:"status,omitempty"`
 }

@@ -35,6 +35,3 @@ spec:
           value: main
     tags:
       Name: example-apprunner-service
-
----
-

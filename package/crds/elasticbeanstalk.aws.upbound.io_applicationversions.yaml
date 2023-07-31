@@ -244,6 +244,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  application:
+                    description: Name of the Beanstalk Application the version is
+                      associated with.
+                    type: string
+                  description:
+                    description: Short description of the Application Version.
+                    type: string
+                  forceDelete:
+                    description: On delete, force an Application Version to be deleted
+                      when it may be in use by multiple Elastic Beanstalk Environments.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -444,7 +474,8 @@ spec:
             x-kubernetes-validations:
             - message: application is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.application)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.application)
+                || has(self.initProvider.application)'
           status:
             description: ApplicationVersionStatus defines the observed state of ApplicationVersion.
             properties:

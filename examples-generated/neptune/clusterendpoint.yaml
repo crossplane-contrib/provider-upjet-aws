@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: test
     endpointType: READER
     region: us-west-1
-
----
-

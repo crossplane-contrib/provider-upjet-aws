@@ -35,6 +35,3 @@ spec:
     amazonSideAsn: 64512
     name: tf-dxg-example
     region: us-west-1
-
----
-

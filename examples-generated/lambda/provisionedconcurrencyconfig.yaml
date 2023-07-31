@@ -12,6 +12,3 @@ spec:
     provisionedConcurrentExecutions: 1
     qualifier: ${aws_lambda_alias.example.name}
     region: us-west-1
-
----
-

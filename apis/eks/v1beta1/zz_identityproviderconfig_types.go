@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityProviderConfigInitParameters struct {
+
+	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
+	Oidc []IdentityProviderConfigOidcInitParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type IdentityProviderConfigObservation struct {
 
 	// Amazon Resource Name (ARN) of the EKS Identity Provider Configuration.
@@ -35,6 +44,30 @@ type IdentityProviderConfigObservation struct {
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+}
+
+type IdentityProviderConfigOidcInitParameters struct {
+
+	// –  Client ID for the OpenID Connect identity provider.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The JWT claim that the provider will use to return groups.
+	GroupsClaim *string `json:"groupsClaim,omitempty" tf:"groups_claim,omitempty"`
+
+	// A prefix that is prepended to group claims e.g., oidc:.
+	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// Issuer URL for the OpenID Connect identity provider.
+	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
+
+	// The key value pairs that describe required claims in the identity token.
+	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
+
+	// The JWT claim that the provider will use as the username.
+	UsernameClaim *string `json:"usernameClaim,omitempty" tf:"username_claim,omitempty"`
+
+	// A prefix that is prepended to username claims.
+	UsernamePrefix *string `json:"usernamePrefix,omitempty" tf:"username_prefix,omitempty"`
 }
 
 type IdentityProviderConfigOidcObservation struct {
@@ -64,8 +97,8 @@ type IdentityProviderConfigOidcObservation struct {
 type IdentityProviderConfigOidcParameters struct {
 
 	// –  Client ID for the OpenID Connect identity provider.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The JWT claim that the provider will use to return groups.
 	// +kubebuilder:validation:Optional
@@ -76,8 +109,8 @@ type IdentityProviderConfigOidcParameters struct {
 	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
 
 	// Issuer URL for the OpenID Connect identity provider.
-	// +kubebuilder:validation:Required
-	IssuerURL *string `json:"issuerUrl" tf:"issuer_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
 
 	// The key value pairs that describe required claims in the identity token.
 	// +kubebuilder:validation:Optional
@@ -125,6 +158,18 @@ type IdentityProviderConfigParameters struct {
 type IdentityProviderConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IdentityProviderConfigParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IdentityProviderConfigInitParameters `json:"initProvider,omitempty"`
 }
 
 // IdentityProviderConfigStatus defines the observed state of IdentityProviderConfig.
@@ -145,7 +190,7 @@ type IdentityProviderConfigStatus struct {
 type IdentityProviderConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.oidc)",message="oidc is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.oidc) || has(self.initProvider.oidc)",message="oidc is a required parameter"
 	Spec   IdentityProviderConfigSpec   `json:"spec"`
 	Status IdentityProviderConfigStatus `json:"status,omitempty"`
 }

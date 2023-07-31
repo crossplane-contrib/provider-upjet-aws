@@ -12,6 +12,3 @@ spec:
     providerEndpoint: https://example.com
     providerType: GitHubEnterpriseServer
     region: us-west-1
-
----
-

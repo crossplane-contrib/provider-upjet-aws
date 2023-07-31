@@ -31,6 +31,3 @@ spec:
           testing.upbound.io/example-name: example
       service: ECR
     version: 1.0.0
-
----
-

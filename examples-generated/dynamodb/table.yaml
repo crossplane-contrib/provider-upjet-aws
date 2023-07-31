@@ -36,6 +36,3 @@ spec:
     - attributeName: TimeToExist
       enabled: false
     writeCapacity: 20
-
----
-

@@ -45,6 +45,3 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

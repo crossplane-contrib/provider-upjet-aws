@@ -145,6 +145,3 @@ spec:
     typeSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

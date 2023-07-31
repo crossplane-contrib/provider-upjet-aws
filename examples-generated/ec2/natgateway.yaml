@@ -17,6 +17,3 @@ spec:
         testing.upbound.io/example-name: example
     tags:
       Name: gw NAT
-
----
-

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AnalyticsConfigurationInitParameters struct {
+
+	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
+	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
+
+	// ID for the Analytics Configuration. Conflicts with application_arn.
+	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+
+	// If set to true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
+	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
+}
+
 type AnalyticsConfigurationObservation struct {
 
 	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
@@ -74,6 +86,18 @@ type AnalyticsConfigurationParameters struct {
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
 }
 
+type TokenValidityUnitsInitParameters struct {
+
+	// Time unit in for the value in access_token_validity, defaults to hours.
+	AccessToken *string `json:"accessToken,omitempty" tf:"access_token,omitempty"`
+
+	// Time unit in for the value in id_token_validity, defaults to hours.
+	IDToken *string `json:"idToken,omitempty" tf:"id_token,omitempty"`
+
+	// Time unit in for the value in refresh_token_validity, defaults to days.
+	RefreshToken *string `json:"refreshToken,omitempty" tf:"refresh_token,omitempty"`
+}
+
 type TokenValidityUnitsObservation struct {
 
 	// Time unit in for the value in access_token_validity, defaults to hours.
@@ -99,6 +123,78 @@ type TokenValidityUnitsParameters struct {
 	// Time unit in for the value in refresh_token_validity, defaults to days.
 	// +kubebuilder:validation:Optional
 	RefreshToken *string `json:"refreshToken,omitempty" tf:"refresh_token,omitempty"`
+}
+
+type UserPoolClientInitParameters struct {
+
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.access_token.
+	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
+
+	// List of allowed OAuth flows (code, implicit, client_credentials).
+	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
+
+	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
+
+	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
+
+	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
+	AnalyticsConfiguration []AnalyticsConfigurationInitParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
+
+	// Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires. Valid values between 3 and 15. Default value is 3.
+	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
+
+	// List of allowed callback URLs for the identity providers.
+	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
+
+	// Default redirect URI. Must be in the list of callback URLs.
+	DefaultRedirectURI *string `json:"defaultRedirectUri,omitempty" tf:"default_redirect_uri,omitempty"`
+
+	// Activates the propagation of additional user context data.
+	EnablePropagateAdditionalUserContextData *bool `json:"enablePropagateAdditionalUserContextData,omitempty" tf:"enable_propagate_additional_user_context_data,omitempty"`
+
+	// Enables or disables token revocation.
+	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
+
+	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
+
+	// Should an application secret be generated.
+	GenerateSecret *bool `json:"generateSecret,omitempty" tf:"generate_secret,omitempty"`
+
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
+	// By default, the unit is hours.
+	// The unit can be overridden by a value in token_validity_units.id_token.
+	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
+
+	// List of allowed logout URLs for the identity providers.
+	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
+
+	// Name of the application client.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool.
+	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
+
+	// List of user pool attributes the application client can read from.
+	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
+
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
+	// By default, the unit is days.
+	// The unit can be overridden by a value in token_validity_units.refresh_token.
+	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
+
+	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
+
+	// Configuration block for units in which the validity times are represented in. Detailed below.
+	TokenValidityUnits []TokenValidityUnitsInitParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
+
+	// List of user pool attributes the application client can write to.
+	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 
 type UserPoolClientObservation struct {
@@ -294,6 +390,18 @@ type UserPoolClientParameters struct {
 type UserPoolClientSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserPoolClientParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider UserPoolClientInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserPoolClientStatus defines the observed state of UserPoolClient.
@@ -314,7 +422,7 @@ type UserPoolClientStatus struct {
 type UserPoolClient struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   UserPoolClientSpec   `json:"spec"`
 	Status UserPoolClientStatus `json:"status,omitempty"`
 }

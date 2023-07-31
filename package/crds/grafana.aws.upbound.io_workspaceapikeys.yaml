@@ -164,6 +164,32 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  keyName:
+                    description: Specifies the name of the API key. Key names must
+                      be unique to the workspace.
+                    type: string
+                  keyRole:
+                    description: Specifies the permission level of the API key. Valid
+                      values are VIEWER, EDITOR, or ADMIN.
+                    type: string
+                  secondsToLive:
+                    description: Specifies the time in seconds until the API key expires.
+                      Keys can be valid for up to 30 days.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -364,13 +390,16 @@ spec:
             x-kubernetes-validations:
             - message: keyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyName)
+                || has(self.initProvider.keyName)'
             - message: keyRole is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyRole)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyRole)
+                || has(self.initProvider.keyRole)'
             - message: secondsToLive is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.secondsToLive)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.secondsToLive)
+                || has(self.initProvider.secondsToLive)'
           status:
             description: WorkspaceAPIKeyStatus defines the observed state of WorkspaceAPIKey.
             properties:

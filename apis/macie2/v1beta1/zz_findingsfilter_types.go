@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CriterionInitParameters struct {
+
+	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
+
+	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
+
+	// The name of the field to be evaluated.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// The value for the property is greater than the specified value.
+	Gt *string `json:"gt,omitempty" tf:"gt,omitempty"`
+
+	// The value for the property is greater than or equal to the specified value.
+	Gte *string `json:"gte,omitempty" tf:"gte,omitempty"`
+
+	// The value for the property is less than the specified value.
+	Lt *string `json:"lt,omitempty" tf:"lt,omitempty"`
+
+	// The value for the property is less than or equal to the specified value.
+	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
+
+	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
+}
+
 type CriterionObservation struct {
 
 	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
@@ -51,8 +78,8 @@ type CriterionParameters struct {
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
 	// The name of the field to be evaluated.
-	// +kubebuilder:validation:Required
-	Field *string `json:"field" tf:"field,omitempty"`
+	// +kubebuilder:validation:Optional
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// The value for the property is greater than the specified value.
 	// +kubebuilder:validation:Optional
@@ -75,6 +102,12 @@ type CriterionParameters struct {
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
+type FindingCriteriaInitParameters struct {
+
+	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
+	Criterion []CriterionInitParameters `json:"criterion,omitempty" tf:"criterion,omitempty"`
+}
+
 type FindingCriteriaObservation struct {
 
 	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
@@ -86,6 +119,27 @@ type FindingCriteriaParameters struct {
 	// A condition that specifies the property, operator, and one or more values to use to filter the results.  (documented below)
 	// +kubebuilder:validation:Optional
 	Criterion []CriterionParameters `json:"criterion,omitempty" tf:"criterion,omitempty"`
+}
+
+type FindingsFilterInitParameters struct {
+
+	// The action to perform on findings that meet the filter criteria (finding_criteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A custom description of the filter. The description can contain as many as 512 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The criteria to use to filter findings.
+	FindingCriteria []FindingCriteriaInitParameters `json:"findingCriteria,omitempty" tf:"finding_criteria,omitempty"`
+
+	// A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FindingsFilterObservation struct {
@@ -153,6 +207,18 @@ type FindingsFilterParameters struct {
 type FindingsFilterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FindingsFilterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FindingsFilterInitParameters `json:"initProvider,omitempty"`
 }
 
 // FindingsFilterStatus defines the observed state of FindingsFilter.
@@ -173,8 +239,8 @@ type FindingsFilterStatus struct {
 type FindingsFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.findingCriteria)",message="findingCriteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.findingCriteria) || has(self.initProvider.findingCriteria)",message="findingCriteria is a required parameter"
 	Spec   FindingsFilterSpec   `json:"spec"`
 	Status FindingsFilterStatus `json:"status,omitempty"`
 }

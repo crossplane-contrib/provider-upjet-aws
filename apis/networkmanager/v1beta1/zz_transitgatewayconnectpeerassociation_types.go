@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayConnectPeerAssociationInitParameters struct {
+
+	// The ID of the link.
+	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
+}
+
 type TransitGatewayConnectPeerAssociationObservation struct {
 
 	// The ID of the device.
@@ -88,6 +94,18 @@ type TransitGatewayConnectPeerAssociationParameters struct {
 type TransitGatewayConnectPeerAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayConnectPeerAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TransitGatewayConnectPeerAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayConnectPeerAssociationStatus defines the observed state of TransitGatewayConnectPeerAssociation.

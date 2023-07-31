@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SnapshotCopyGrantInitParameters struct {
+
+	// A friendly name for identifying the grant.
+	SnapshotCopyGrantName *string `json:"snapshotCopyGrantName,omitempty" tf:"snapshot_copy_grant_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type SnapshotCopyGrantObservation struct {
 
 	// Amazon Resource Name (ARN) of snapshot copy grant
@@ -66,6 +75,18 @@ type SnapshotCopyGrantParameters struct {
 type SnapshotCopyGrantSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SnapshotCopyGrantParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SnapshotCopyGrantInitParameters `json:"initProvider,omitempty"`
 }
 
 // SnapshotCopyGrantStatus defines the observed state of SnapshotCopyGrant.
@@ -86,7 +107,7 @@ type SnapshotCopyGrantStatus struct {
 type SnapshotCopyGrant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.snapshotCopyGrantName)",message="snapshotCopyGrantName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.snapshotCopyGrantName) || has(self.initProvider.snapshotCopyGrantName)",message="snapshotCopyGrantName is a required parameter"
 	Spec   SnapshotCopyGrantSpec   `json:"spec"`
 	Status SnapshotCopyGrantStatus `json:"status,omitempty"`
 }

@@ -345,8 +345,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                      required:
-                      - s3Logs
                       type: object
                     type: array
                   name:
@@ -609,6 +607,80 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Description for the configuration.
+                    type: string
+                  instanceMetadataOptions:
+                    description: Configuration block with instance metadata options
+                      for the HTTP requests that pipeline builds use to launch EC2
+                      build and test instances. Detailed below.
+                    items:
+                      properties:
+                        httpPutResponseHopLimit:
+                          description: The number of hops that an instance can traverse
+                            to reach its destonation.
+                          type: number
+                        httpTokens:
+                          description: 'Whether a signed token is required for instance
+                            metadata retrieval requests. Valid values: required, optional.'
+                          type: string
+                      type: object
+                    type: array
+                  instanceTypes:
+                    description: Set of EC2 Instance Types.
+                    items:
+                      type: string
+                    type: array
+                  logging:
+                    description: Configuration block with logging settings. Detailed
+                      below.
+                    items:
+                      properties:
+                        s3Logs:
+                          description: Configuration block with S3 logging settings.
+                            Detailed below.
+                          items:
+                            properties:
+                              s3KeyPrefix:
+                                description: Prefix to use for S3 logs. Defaults to
+                                  /.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: Name for the configuration.
+                    type: string
+                  resourceTags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags to assign to infrastructure
+                      created by the configuration.
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  terminateInstanceOnFailure:
+                    description: Enable if the instance should be terminated when
+                      the pipeline fails. Defaults to false.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -809,7 +881,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: InfrastructureConfigurationStatus defines the observed state
               of InfrastructureConfiguration.

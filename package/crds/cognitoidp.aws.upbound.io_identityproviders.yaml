@@ -172,6 +172,42 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  attributeMapping:
+                    additionalProperties:
+                      type: string
+                    description: The map of attribute mapping of user pool attributes.
+                      AttributeMapping in AWS API documentation
+                    type: object
+                  idpIdentifiers:
+                    description: The list of identity providers.
+                    items:
+                      type: string
+                    type: array
+                  providerDetails:
+                    additionalProperties:
+                      type: string
+                    description: The map of identity details, such as access token
+                    type: object
+                  providerName:
+                    description: The provider name
+                    type: string
+                  providerType:
+                    description: The provider type.  See AWS API for valid values
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -372,13 +408,16 @@ spec:
             x-kubernetes-validations:
             - message: providerDetails is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerDetails)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerDetails)
+                || has(self.initProvider.providerDetails)'
             - message: providerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)
+                || has(self.initProvider.providerName)'
             - message: providerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerType)
+                || has(self.initProvider.providerType)'
           status:
             description: IdentityProviderStatus defines the observed state of IdentityProvider.
             properties:

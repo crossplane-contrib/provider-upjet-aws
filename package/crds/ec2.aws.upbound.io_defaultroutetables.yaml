@@ -365,6 +365,72 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  propagatingVgws:
+                    description: List of virtual gateways for propagation.
+                    items:
+                      type: string
+                    type: array
+                  route:
+                    description: Configuration block of routes. Detailed below. This
+                      argument is processed in attribute-as-blocks mode. This means
+                      that omitting this argument is interpreted as ignoring any existing
+                      routes. To remove all managed routes an empty list should be
+                      specified. See the example above.
+                    items:
+                      properties:
+                        cidrBlock:
+                          description: The CIDR block of the route.
+                          type: string
+                        coreNetworkArn:
+                          description: The Amazon Resource Name (ARN) of a core network.
+                          type: string
+                        destinationPrefixListId:
+                          description: The ID of a managed prefix list destination
+                            of the route.
+                          type: string
+                        instanceId:
+                          description: Identifier of an EC2 instance.
+                          type: string
+                        ipv6CidrBlock:
+                          description: The Ipv6 CIDR block of the route
+                          type: string
+                        natGatewayId:
+                          description: Identifier of a VPC NAT gateway.
+                          type: string
+                        networkInterfaceId:
+                          description: Identifier of an EC2 network interface.
+                          type: string
+                        transitGatewayId:
+                          description: Identifier of an EC2 Transit Gateway.
+                          type: string
+                        vpcEndpointId:
+                          description: Identifier of a VPC Endpoint. This route must
+                            be removed prior to VPC Endpoint deletion.
+                          type: string
+                        vpcPeeringConnectionId:
+                          description: Identifier of a VPC peering connection.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

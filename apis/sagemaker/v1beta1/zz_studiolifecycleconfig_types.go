@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StudioLifecycleConfigInitParameters struct {
+
+	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer and KernelGateway.
+	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
+
+	// The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
+	StudioLifecycleConfigContent *string `json:"studioLifecycleConfigContent,omitempty" tf:"studio_lifecycle_config_content,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type StudioLifecycleConfigObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this Studio Lifecycle Config.
@@ -58,6 +70,18 @@ type StudioLifecycleConfigParameters struct {
 type StudioLifecycleConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StudioLifecycleConfigParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StudioLifecycleConfigInitParameters `json:"initProvider,omitempty"`
 }
 
 // StudioLifecycleConfigStatus defines the observed state of StudioLifecycleConfig.
@@ -78,8 +102,8 @@ type StudioLifecycleConfigStatus struct {
 type StudioLifecycleConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType)",message="studioLifecycleConfigAppType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent)",message="studioLifecycleConfigContent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType) || has(self.initProvider.studioLifecycleConfigAppType)",message="studioLifecycleConfigAppType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent) || has(self.initProvider.studioLifecycleConfigContent)",message="studioLifecycleConfigContent is a required parameter"
 	Spec   StudioLifecycleConfigSpec   `json:"spec"`
 	Status StudioLifecycleConfigStatus `json:"status,omitempty"`
 }

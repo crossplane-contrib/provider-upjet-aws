@@ -17,6 +17,3 @@ spec:
     - fieldToMatch:
       - type: QUERY_STRING
       textTransformation: NONE
-
----
-

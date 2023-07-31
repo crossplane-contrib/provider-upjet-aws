@@ -11,6 +11,3 @@ spec:
     instanceType: t2.micro
     name: example-env
     region: us-west-1
-
----
-

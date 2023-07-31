@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubnetCidrReservationInitParameters struct {
+
+	// The CIDR block for the reservation.
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// A brief description of the reservation.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The type of reservation to create. Valid values: explicit, prefix
+	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
+}
+
 type SubnetCidrReservationObservation struct {
 
 	// The CIDR block for the reservation.
@@ -71,6 +83,18 @@ type SubnetCidrReservationParameters struct {
 type SubnetCidrReservationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubnetCidrReservationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SubnetCidrReservationInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubnetCidrReservationStatus defines the observed state of SubnetCidrReservation.
@@ -91,8 +115,8 @@ type SubnetCidrReservationStatus struct {
 type SubnetCidrReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrBlock)",message="cidrBlock is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reservationType)",message="reservationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrBlock) || has(self.initProvider.cidrBlock)",message="cidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reservationType) || has(self.initProvider.reservationType)",message="reservationType is a required parameter"
 	Spec   SubnetCidrReservationSpec   `json:"spec"`
 	Status SubnetCidrReservationStatus `json:"status,omitempty"`
 }

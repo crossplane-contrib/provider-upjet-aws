@@ -192,12 +192,8 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - field
                             type: object
                           type: array
-                      required:
-                      - criterion
                       type: object
                     type: array
                   rank:
@@ -216,6 +212,81 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  action:
+                    description: Specifies the action that is to be applied to the
+                      findings that match the filter. Can be one of ARCHIVE or NOOP.
+                    type: string
+                  description:
+                    description: Description of the filter.
+                    type: string
+                  findingCriteria:
+                    description: Represents the criteria to be used in the filter
+                      for querying findings. Contains one or more criterion blocks,
+                      documented below.
+                    items:
+                      properties:
+                        criterion:
+                          items:
+                            properties:
+                              equals:
+                                description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                              field:
+                                description: The name of the field to be evaluated.
+                                  The full list of field names can be found in AWS
+                                  documentation.
+                                type: string
+                              greaterThan:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              greaterThanOrEqual:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              lessThan:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              lessThanOrEqual:
+                                description: A value to be evaluated. Accepts either
+                                  an integer or a date in RFC 3339 format.
+                                type: string
+                              notEquals:
+                                description: List of string values to be evaluated.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  rank:
+                    description: Specifies the position of the filter in the list
+                      of current filters. Also specifies the order in which this filter
+                      is applied to the findings.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -417,13 +488,16 @@ spec:
             x-kubernetes-validations:
             - message: action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
+                || has(self.initProvider.action)'
             - message: findingCriteria is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.findingCriteria)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.findingCriteria)
+                || has(self.initProvider.findingCriteria)'
             - message: rank is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rank)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rank)
+                || has(self.initProvider.rank)'
           status:
             description: FilterStatus defines the observed state of Filter.
             properties:

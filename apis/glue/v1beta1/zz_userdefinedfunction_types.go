@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceUrisInitParameters struct {
+
+	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The URI for accessing the resource.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type ResourceUrisObservation struct {
 
 	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
@@ -25,12 +34,27 @@ type ResourceUrisObservation struct {
 type ResourceUrisParameters struct {
 
 	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
-	// +kubebuilder:validation:Required
-	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// The URI for accessing the resource.
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
+type UserDefinedFunctionInitParameters struct {
+
+	// The Java class that contains the function code.
+	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
+
+	// The owner of the function.
+	OwnerName *string `json:"ownerName,omitempty" tf:"owner_name,omitempty"`
+
+	// The owner type. can be one of USER, ROLE, and GROUP.
+	OwnerType *string `json:"ownerType,omitempty" tf:"owner_type,omitempty"`
+
+	// The configuration block for Resource URIs. See resource uris below for more details.
+	ResourceUris []ResourceUrisInitParameters `json:"resourceUris,omitempty" tf:"resource_uris,omitempty"`
 }
 
 type UserDefinedFunctionObservation struct {
@@ -108,6 +132,18 @@ type UserDefinedFunctionParameters struct {
 type UserDefinedFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserDefinedFunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider UserDefinedFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserDefinedFunctionStatus defines the observed state of UserDefinedFunction.
@@ -128,9 +164,9 @@ type UserDefinedFunctionStatus struct {
 type UserDefinedFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.className)",message="className is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerName)",message="ownerName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerType)",message="ownerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.className) || has(self.initProvider.className)",message="className is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerName) || has(self.initProvider.ownerName)",message="ownerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerType) || has(self.initProvider.ownerType)",message="ownerType is a required parameter"
 	Spec   UserDefinedFunctionSpec   `json:"spec"`
 	Status UserDefinedFunctionStatus `json:"status,omitempty"`
 }

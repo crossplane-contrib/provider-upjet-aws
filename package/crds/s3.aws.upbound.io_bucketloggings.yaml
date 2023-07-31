@@ -252,17 +252,12 @@ spec:
                               uri:
                                 description: URI of the grantee group.
                                 type: string
-                            required:
-                            - type
                             type: object
                           type: array
                         permission:
                           description: 'Logging permissions assigned to the grantee
                             for the bucket. Valid values: FULL_CONTROL, READ, WRITE.'
                           type: string
-                      required:
-                      - grantee
-                      - permission
                       type: object
                     type: array
                   targetPrefix:
@@ -270,6 +265,59 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  targetGrant:
+                    description: Set of configuration blocks with information for
+                      granting permissions. See below.
+                    items:
+                      properties:
+                        grantee:
+                          description: Configuration block for the person being granted
+                            permissions. See below.
+                          items:
+                            properties:
+                              emailAddress:
+                                description: Email address of the grantee. See Regions
+                                  and Endpoints for supported AWS regions where this
+                                  argument can be specified.
+                                type: string
+                              id:
+                                description: Canonical user ID of the grantee.
+                                type: string
+                              type:
+                                description: 'Type of grantee. Valid values: CanonicalUser,
+                                  AmazonCustomerByEmail, Group.'
+                                type: string
+                              uri:
+                                description: URI of the grantee group.
+                                type: string
+                            type: object
+                          type: array
+                        permission:
+                          description: 'Logging permissions assigned to the grantee
+                            for the bucket. Valid values: FULL_CONTROL, READ, WRITE.'
+                          type: string
+                      type: object
+                    type: array
+                  targetPrefix:
+                    description: Prefix for all log object keys.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -471,7 +519,8 @@ spec:
             x-kubernetes-validations:
             - message: targetPrefix is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetPrefix)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetPrefix)
+                || has(self.initProvider.targetPrefix)'
           status:
             description: BucketLoggingStatus defines the observed state of BucketLogging.
             properties:

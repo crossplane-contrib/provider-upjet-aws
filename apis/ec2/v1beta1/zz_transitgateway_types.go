@@ -13,6 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayInitParameters_2 struct {
+
+	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
+	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+
+	// Whether resource attachment requests are automatically accepted. Valid values: disable, enable. Default value: disable.
+	AutoAcceptSharedAttachments *string `json:"autoAcceptSharedAttachments,omitempty" tf:"auto_accept_shared_attachments,omitempty"`
+
+	// Whether DNS support is enabled. Valid values: disable, enable. Default value: enable.
+	DNSSupport *string `json:"dnsSupport,omitempty" tf:"dns_support,omitempty"`
+
+	// Whether resource attachments are automatically associated with the default association route table. Valid values: disable, enable. Default value: enable.
+	DefaultRouteTableAssociation *string `json:"defaultRouteTableAssociation,omitempty" tf:"default_route_table_association,omitempty"`
+
+	// Whether resource attachments automatically propagate routes to the default propagation route table. Valid values: disable, enable. Default value: enable.
+	DefaultRouteTablePropagation *string `json:"defaultRouteTablePropagation,omitempty" tf:"default_route_table_propagation,omitempty"`
+
+	// Description of the EC2 Transit Gateway.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
+	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
+
+	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.
+	VPNEcmpSupport *string `json:"vpnEcmpSupport,omitempty" tf:"vpn_ecmp_support,omitempty"`
+}
+
 type TransitGatewayObservation_2 struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
@@ -116,6 +149,18 @@ type TransitGatewayParameters_2 struct {
 type TransitGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TransitGatewayInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayStatus defines the observed state of TransitGateway.

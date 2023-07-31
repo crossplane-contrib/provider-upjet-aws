@@ -24,6 +24,3 @@ spec:
       RDS: true
       Storage Gateway: true
       VirtualMachine: true
-
----
-

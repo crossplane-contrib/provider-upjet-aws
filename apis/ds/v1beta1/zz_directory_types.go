@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectSettingsInitParameters struct {
+
+	// The DNS IP addresses of the domain to connect to.
+	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
+
+	// The username corresponding to the password provided.
+	CustomerUsername *string `json:"customerUsername,omitempty" tf:"customer_username,omitempty"`
+}
+
 type ConnectSettingsObservation struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -35,12 +44,12 @@ type ConnectSettingsObservation struct {
 type ConnectSettingsParameters struct {
 
 	// The DNS IP addresses of the domain to connect to.
-	// +kubebuilder:validation:Required
-	CustomerDNSIps []*string `json:"customerDnsIps" tf:"customer_dns_ips,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
 
 	// The username corresponding to the password provided.
-	// +kubebuilder:validation:Required
-	CustomerUsername *string `json:"customerUsername" tf:"customer_username,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomerUsername *string `json:"customerUsername,omitempty" tf:"customer_username,omitempty"`
 
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
@@ -68,6 +77,45 @@ type ConnectSettingsParameters struct {
 	// Selector for a VPC in ec2 to populate vpcId.
 	// +kubebuilder:validation:Optional
 	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+}
+
+type DirectoryInitParameters struct {
+
+	// The alias for the directory (must be unique amongst all aliases in AWS). Required for enable_sso.
+	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// Connector related information about the directory. Fields documented below.
+	ConnectSettings []ConnectSettingsInitParameters `json:"connectSettings,omitempty" tf:"connect_settings,omitempty"`
+
+	// A textual description for the directory.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+
+	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
+	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// Whether to enable single-sign on for the directory. Requires alias. Defaults to false.
+	EnableSso *bool `json:"enableSso,omitempty" tf:"enable_sso,omitempty"`
+
+	// The fully qualified name for the directory, such as corp.example.com
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The short name of the directory, such as CORP.
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
+
+	// (For SimpleAD and ADConnector types) The size of the directory (Small or Large are accepted values). Large by default.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The directory type (SimpleAD, ADConnector or MicrosoftAD are accepted values). Defaults to SimpleAD.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// VPC related information about the directory. Fields documented below.
+	VPCSettings []VPCSettingsInitParameters `json:"vpcSettings,omitempty" tf:"vpc_settings,omitempty"`
 }
 
 type DirectoryObservation struct {
@@ -184,6 +232,9 @@ type DirectoryParameters struct {
 	VPCSettings []VPCSettingsParameters `json:"vpcSettings,omitempty" tf:"vpc_settings,omitempty"`
 }
 
+type VPCSettingsInitParameters struct {
+}
+
 type VPCSettingsObservation struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -228,6 +279,18 @@ type VPCSettingsParameters struct {
 type DirectorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DirectoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DirectoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // DirectoryStatus defines the observed state of Directory.
@@ -248,7 +311,7 @@ type DirectoryStatus struct {
 type Directory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
 	Spec   DirectorySpec   `json:"spec"`
 	Status DirectoryStatus `json:"status,omitempty"`

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttributeInitParameters struct {
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the attribute
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type AttributeObservation struct {
 
 	// The name of the SSL negotiation policy.
@@ -25,12 +34,29 @@ type AttributeObservation struct {
 type AttributeParameters struct {
 
 	// The name of the SSL negotiation policy.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the attribute
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type LBSSLNegotiationPolicyInitParameters struct {
+
+	// An SSL Negotiation policy attribute. Each has two properties:
+	Attribute []AttributeInitParameters `json:"attribute,omitempty" tf:"attribute,omitempty"`
+
+	// The load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The name of the SSL negotiation policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Map of arbitrary keys and values that, when changed, will trigger a redeployment.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
 type LBSSLNegotiationPolicyObservation struct {
@@ -102,6 +128,18 @@ type LBSSLNegotiationPolicyParameters struct {
 type LBSSLNegotiationPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBSSLNegotiationPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LBSSLNegotiationPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBSSLNegotiationPolicyStatus defines the observed state of LBSSLNegotiationPolicy.
@@ -122,8 +160,8 @@ type LBSSLNegotiationPolicyStatus struct {
 type LBSSLNegotiationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbPort)",message="lbPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbPort) || has(self.initProvider.lbPort)",message="lbPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   LBSSLNegotiationPolicySpec   `json:"spec"`
 	Status LBSSLNegotiationPolicyStatus `json:"status,omitempty"`
 }

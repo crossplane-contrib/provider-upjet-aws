@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MonitoringSubscriptionInitParameters struct {
+
+	// A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+	MonitoringSubscription []MonitoringSubscriptionMonitoringSubscriptionInitParameters `json:"monitoringSubscription,omitempty" tf:"monitoring_subscription,omitempty"`
+}
+
+type MonitoringSubscriptionMonitoringSubscriptionInitParameters struct {
+
+	// A subscription configuration for additional CloudWatch metrics. See below.
+	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigInitParameters `json:"realtimeMetricsSubscriptionConfig,omitempty" tf:"realtime_metrics_subscription_config,omitempty"`
+}
+
 type MonitoringSubscriptionMonitoringSubscriptionObservation struct {
 
 	// A subscription configuration for additional CloudWatch metrics. See below.
@@ -22,8 +34,8 @@ type MonitoringSubscriptionMonitoringSubscriptionObservation struct {
 type MonitoringSubscriptionMonitoringSubscriptionParameters struct {
 
 	// A subscription configuration for additional CloudWatch metrics. See below.
-	// +kubebuilder:validation:Required
-	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigParameters `json:"realtimeMetricsSubscriptionConfig" tf:"realtime_metrics_subscription_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigParameters `json:"realtimeMetricsSubscriptionConfig,omitempty" tf:"realtime_metrics_subscription_config,omitempty"`
 }
 
 type MonitoringSubscriptionObservation struct {
@@ -64,6 +76,12 @@ type MonitoringSubscriptionParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type RealtimeMetricsSubscriptionConfigInitParameters struct {
+
+	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
+	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus,omitempty" tf:"realtime_metrics_subscription_status,omitempty"`
+}
+
 type RealtimeMetricsSubscriptionConfigObservation struct {
 
 	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
@@ -73,14 +91,26 @@ type RealtimeMetricsSubscriptionConfigObservation struct {
 type RealtimeMetricsSubscriptionConfigParameters struct {
 
 	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
-	// +kubebuilder:validation:Required
-	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus" tf:"realtime_metrics_subscription_status,omitempty"`
+	// +kubebuilder:validation:Optional
+	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus,omitempty" tf:"realtime_metrics_subscription_status,omitempty"`
 }
 
 // MonitoringSubscriptionSpec defines the desired state of MonitoringSubscription
 type MonitoringSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitoringSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MonitoringSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitoringSubscriptionStatus defines the observed state of MonitoringSubscription.
@@ -101,7 +131,7 @@ type MonitoringSubscriptionStatus struct {
 type MonitoringSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitoringSubscription)",message="monitoringSubscription is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitoringSubscription) || has(self.initProvider.monitoringSubscription)",message="monitoringSubscription is a required parameter"
 	Spec   MonitoringSubscriptionSpec   `json:"spec"`
 	Status MonitoringSubscriptionStatus `json:"status,omitempty"`
 }

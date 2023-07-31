@@ -223,9 +223,6 @@ spec:
                               value:
                                 description: The value for the named component parameter.
                                 type: string
-                            required:
-                            - name
-                            - value
                             type: object
                           type: array
                       type: object
@@ -254,8 +251,6 @@ spec:
                           description: Whether to remove the Systems Manager Agent
                             after the image has been built. Defaults to false.
                           type: boolean
-                      required:
-                      - uninstallAfterBuild
                       type: object
                     type: array
                   tags:
@@ -279,6 +274,139 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  blockDeviceMapping:
+                    description: Configuration block(s) with block device mappings
+                      for the image recipe. Detailed below.
+                    items:
+                      properties:
+                        deviceName:
+                          description: Name of the device. For example, /dev/sda or
+                            /dev/xvdb.
+                          type: string
+                        ebs:
+                          description: Configuration block with Elastic Block Storage
+                            (EBS) block device mapping settings. Detailed below.
+                          items:
+                            properties:
+                              deleteOnTermination:
+                                description: Whether to delete the volume on termination.
+                                  Defaults to unset, which is the value inherited
+                                  from the parent image.
+                                type: string
+                              encrypted:
+                                description: Whether to encrypt the volume. Defaults
+                                  to unset, which is the value inherited from the
+                                  parent image.
+                                type: string
+                              iops:
+                                description: Number of Input/Output (I/O) operations
+                                  per second to provision for an io1 or io2 volume.
+                                type: number
+                              kmsKeyId:
+                                description: Amazon Resource Name (ARN) of the Key
+                                  Management Service (KMS) Key for encryption.
+                                type: string
+                              snapshotId:
+                                description: Identifier of the EC2 Volume Snapshot.
+                                type: string
+                              throughput:
+                                description: For GP3 volumes only. The throughput
+                                  in MiB/s that the volume supports.
+                                type: number
+                              volumeSize:
+                                description: Size of the volume, in GiB.
+                                type: number
+                              volumeType:
+                                description: Type of the volume. For example, gp2
+                                  or io2.
+                                type: string
+                            type: object
+                          type: array
+                        noDevice:
+                          description: Set to true to remove a mapping from the parent
+                            image.
+                          type: boolean
+                        virtualName:
+                          description: Virtual device name. For example, ephemeral0.
+                            Instance store volumes are numbered starting from 0.
+                          type: string
+                      type: object
+                    type: array
+                  component:
+                    description: Ordered configuration block(s) with components for
+                      the image recipe. Detailed below.
+                    items:
+                      properties:
+                        parameter:
+                          description: Configuration block(s) for parameters to configure
+                            the component. Detailed below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the component parameter.
+                                type: string
+                              value:
+                                description: The value for the named component parameter.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Description of the image recipe.
+                    type: string
+                  name:
+                    description: Name of the image recipe.
+                    type: string
+                  parentImage:
+                    description: The image recipe uses this image as a base from which
+                      to build your customized image. The value can be the base image
+                      ARN or an AMI ID.
+                    type: string
+                  systemsManagerAgent:
+                    description: Configuration block for the Systems Manager Agent
+                      installed by default by Image Builder. Detailed below.
+                    items:
+                      properties:
+                        uninstallAfterBuild:
+                          description: Whether to remove the Systems Manager Agent
+                            after the image has been built. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  userDataBase64:
+                    description: Base64 encoded user data. Use this to provide commands
+                      or a command script to run when you launch your build instance.
+                    type: string
+                  version:
+                    description: 'The semantic version of the image recipe, which
+                      specifies the version in the following format, with numeric
+                      values in each position to indicate a specific version: major.minor.patch.
+                      For example: 1.0.0.'
+                    type: string
+                  workingDirectory:
+                    description: The working directory to be used during build and
+                      test workflows.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -480,16 +608,20 @@ spec:
             x-kubernetes-validations:
             - message: component is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.component)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.component)
+                || has(self.initProvider.component)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: parentImage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.parentImage)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.parentImage)
+                || has(self.initProvider.parentImage)'
             - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || has(self.initProvider.version)'
           status:
             description: ImageRecipeStatus defines the observed state of ImageRecipe.
             properties:

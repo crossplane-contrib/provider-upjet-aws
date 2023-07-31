@@ -164,6 +164,30 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  skipDestroy:
+                    description: If set to true, destroy will not detach the policy
+                      and instead just remove the resource from state. This can be
+                      useful in situations where the attachment must be preserved
+                      to meet the AWS minimum requirement of 1 attached policy.
+                    type: boolean
+                  targetId:
+                    description: The unique identifier (ID) of the root, organizational
+                      unit, or account number that you want to attach the policy to.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -364,7 +388,8 @@ spec:
             x-kubernetes-validations:
             - message: targetId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)
+                || has(self.initProvider.targetId)'
           status:
             description: PolicyAttachmentStatus defines the observed state of PolicyAttachment.
             properties:

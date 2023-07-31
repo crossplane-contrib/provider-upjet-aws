@@ -167,8 +167,6 @@ spec:
                                 description: Specifies the phone number in in E.164
                                   format.
                                 type: string
-                            required:
-                            - phoneNumber
                             type: object
                           type: array
                         queueConfig:
@@ -184,9 +182,6 @@ spec:
                               queueId:
                                 description: Specifies the identifier for the queue.
                                 type: string
-                            required:
-                            - contactFlowId
-                            - queueId
                             type: object
                           type: array
                         quickConnectType:
@@ -206,13 +201,8 @@ spec:
                               userId:
                                 description: Specifies the identifier for the user.
                                 type: string
-                            required:
-                            - contactFlowId
-                            - userId
                             type: object
                           type: array
-                      required:
-                      - quickConnectType
                       type: object
                     type: array
                   region:
@@ -226,6 +216,86 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Specifies the description of the Quick Connect.
+                    type: string
+                  name:
+                    description: Specifies the name of the Quick Connect.
+                    type: string
+                  quickConnectConfig:
+                    description: 'A block that defines the configuration information
+                      for the Quick Connect: quick_connect_type and one of phone_config,
+                      queue_config, user_config . The Quick Connect Config block is
+                      documented below.'
+                    items:
+                      properties:
+                        phoneConfig:
+                          description: Specifies the phone configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            PHONE_NUMBER. The phone_config block is documented below.
+                          items:
+                            properties:
+                              phoneNumber:
+                                description: Specifies the phone number in in E.164
+                                  format.
+                                type: string
+                            type: object
+                          type: array
+                        queueConfig:
+                          description: Specifies the queue configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            QUEUE. The queue_config block is documented below.
+                          items:
+                            properties:
+                              contactFlowId:
+                                description: Specifies the identifier of the contact
+                                  flow.
+                                type: string
+                              queueId:
+                                description: Specifies the identifier for the queue.
+                                type: string
+                            type: object
+                          type: array
+                        quickConnectType:
+                          description: Specifies the configuration type of the quick
+                            connect. valid values are PHONE_NUMBER, QUEUE, USER.
+                          type: string
+                        userConfig:
+                          description: Specifies the user configuration of the Quick
+                            Connect. This is required only if quick_connect_type is
+                            USER. The user_config block is documented below.
+                          items:
+                            properties:
+                              contactFlowId:
+                                description: Specifies the identifier of the contact
+                                  flow.
+                                type: string
+                              userId:
+                                description: Specifies the identifier for the user.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -427,10 +497,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: quickConnectConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.quickConnectConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.quickConnectConfig)
+                || has(self.initProvider.quickConnectConfig)'
           status:
             description: QuickConnectStatus defines the observed state of QuickConnect.
             properties:

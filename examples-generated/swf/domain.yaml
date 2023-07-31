@@ -11,6 +11,3 @@ spec:
     description: Terraform SWF Domain
     region: us-west-1
     workflowExecutionRetentionPeriodInDays: 30
-
----
-

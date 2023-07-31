@@ -17,6 +17,3 @@ spec:
     sourceAmiRegion: us-west-1
     tags:
       Name: HelloWorld
-
----
-

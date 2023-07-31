@@ -19,6 +19,3 @@ spec:
       eq:
       - "false"
     region: us-west-1
-
----
-

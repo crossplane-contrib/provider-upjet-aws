@@ -95,8 +95,6 @@ spec:
                                   want AWS WAF to search for a specified stringE.g.,
                                   HEADER or METHOD
                                 type: string
-                            required:
-                            - type
                             type: object
                           type: array
                         textTransformation:
@@ -104,13 +102,57 @@ spec:
                             on the web request before inspecting the request for cross-site
                             scripting attacks.
                           type: string
-                      required:
-                      - fieldToMatch
-                      - textTransformation
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  name:
+                    description: The name of the set
+                    type: string
+                  xssMatchTuple:
+                    description: The parts of web requests that you want to inspect
+                      for cross-site scripting attacks.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: Specifies where in a web request to look for
+                            cross-site scripting attacks.
+                          items:
+                            properties:
+                              data:
+                                description: When the value of type is HEADER, enter
+                                  the name of the header that you want the WAF to
+                                  search, for example, User-Agent or Referer. If the
+                                  value of type is any other value, omit data.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified stringE.g.,
+                                  HEADER or METHOD
+                                type: string
+                            type: object
+                          type: array
+                        textTransformation:
+                          description: Which text transformation, if any, to perform
+                            on the web request before inspecting the request for cross-site
+                            scripting attacks.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -312,7 +354,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: XSSMatchSetStatus defines the observed state of XSSMatchSet.
             properties:

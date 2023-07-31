@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ScriptInitParameters struct {
+
+	// Name of the script
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Information indicating where your game script files are stored. See below.
+	StorageLocation []ScriptStorageLocationInitParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Version that is associated with this script.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
+}
+
 type ScriptObservation struct {
 
 	// GameLift Script ARN.
@@ -66,6 +84,12 @@ type ScriptParameters struct {
 	// A data object containing your Realtime scripts and dependencies as a zip  file. The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
 	// +kubebuilder:validation:Optional
 	ZipFile *string `json:"zipFile,omitempty" tf:"zip_file,omitempty"`
+}
+
+type ScriptStorageLocationInitParameters struct {
+
+	// A specific version of the file. If not set, the latest version of the file is retrieved.
+	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }
 
 type ScriptStorageLocationObservation struct {
@@ -135,6 +159,18 @@ type ScriptStorageLocationParameters struct {
 type ScriptSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ScriptParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ScriptInitParameters `json:"initProvider,omitempty"`
 }
 
 // ScriptStatus defines the observed state of Script.
@@ -155,7 +191,7 @@ type ScriptStatus struct {
 type Script struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ScriptSpec   `json:"spec"`
 	Status ScriptStatus `json:"status,omitempty"`
 }

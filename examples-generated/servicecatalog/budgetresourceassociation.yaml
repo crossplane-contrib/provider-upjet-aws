@@ -15,6 +15,3 @@ spec:
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

@@ -17,6 +17,3 @@ spec:
     - attribute: OS_VERSION
       operator: EQUALS
       value: '"AVAILABLE"'
-
----
-

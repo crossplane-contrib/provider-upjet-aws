@@ -89,9 +89,6 @@ spec:
                         transportStreamReservedBitrate:
                           description: Transport stream reserved bit rate.
                           type: number
-                      required:
-                      - transportStreamBitrate
-                      - transportStreamId
                       type: object
                     type: array
                   name:
@@ -111,6 +108,56 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  availabilityZones:
+                    description: A list of availability zones. You must specify exactly
+                      two.
+                    items:
+                      type: string
+                    type: array
+                  multiplexSettings:
+                    description: Multiplex settings. See Multiplex Settings for more
+                      details.
+                    items:
+                      properties:
+                        maximumVideoBufferDelayMilliseconds:
+                          description: Maximum video buffer delay.
+                          type: number
+                        transportStreamBitrate:
+                          description: Transport stream bit rate.
+                          type: number
+                        transportStreamId:
+                          description: Unique ID for each multiplex.
+                          type: number
+                        transportStreamReservedBitrate:
+                          description: Transport stream reserved bit rate.
+                          type: number
+                      type: object
+                    type: array
+                  name:
+                    description: name of Multiplex.
+                    type: string
+                  startMultiplex:
+                    description: Whether to start the Multiplex. Defaults to false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -312,10 +359,12 @@ spec:
             x-kubernetes-validations:
             - message: availabilityZones is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZones)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZones)
+                || has(self.initProvider.availabilityZones)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: MultiplexStatus defines the observed state of Multiplex.
             properties:

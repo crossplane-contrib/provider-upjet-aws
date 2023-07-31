@@ -358,9 +358,6 @@ spec:
                                               https://a.example.com/page1.html is
                                               443, the standard port for HTTPS.
                                             type: number
-                                        required:
-                                        - host
-                                        - port
                                         type: object
                                       type: array
                                   type: object
@@ -515,9 +512,6 @@ spec:
                                         credentials. For example, the port for https://a.example.com/page1.html
                                         is 443, the standard port for HTTPS.
                                       type: number
-                                  required:
-                                  - host
-                                  - port
                                   type: object
                                 type: array
                               urlExclusionPatterns:
@@ -592,8 +586,6 @@ spec:
                                               to HOST_ONLY. You can choose one of
                                               the following modes:'
                                             type: string
-                                        required:
-                                        - seedUrls
                                         type: object
                                       type: array
                                     siteMapsConfiguration:
@@ -612,14 +604,10 @@ spec:
                                             items:
                                               type: string
                                             type: array
-                                        required:
-                                        - siteMaps
                                         type: object
                                       type: array
                                   type: object
                                 type: array
-                            required:
-                            - urls
                             type: object
                           type: array
                       type: object
@@ -692,9 +680,6 @@ spec:
                                         | Contains | NotContains | Exists | NotExists
                                         | BeginsWith.'
                                       type: string
-                                  required:
-                                  - conditionDocumentAttributeKey
-                                  - operator
                                   type: object
                                 type: array
                               documentContentDeletion:
@@ -818,9 +803,6 @@ spec:
                                         | Contains | NotContains | Exists | NotExists
                                         | BeginsWith.'
                                       type: string
-                                  required:
-                                  - conditionDocumentAttributeKey
-                                  - operator
                                   type: object
                                 type: array
                               lambdaArn:
@@ -834,9 +816,6 @@ spec:
                                   altering them. For more information, see Data contracts
                                   for Lambda functions.
                                 type: string
-                            required:
-                            - lambdaArn
-                            - s3Bucket
                             type: object
                           type: array
                         preExtractionHookConfiguration:
@@ -903,9 +882,6 @@ spec:
                                         | Contains | NotContains | Exists | NotExists
                                         | BeginsWith.'
                                       type: string
-                                  required:
-                                  - conditionDocumentAttributeKey
-                                  - operator
                                   type: object
                                 type: array
                               lambdaArn:
@@ -919,9 +895,6 @@ spec:
                                   altering them. For more information, see Data contracts
                                   for Lambda functions.
                                 type: string
-                            required:
-                            - lambdaArn
-                            - s3Bucket
                             type: object
                           type: array
                         roleArn:
@@ -1126,6 +1099,616 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  configuration:
+                    description: A block with the configuration information to connect
+                      to your Data Source repository. You can't specify the configuration
+                      argument when the type parameter is set to CUSTOM. Detailed
+                      below.
+                    items:
+                      properties:
+                        s3Configuration:
+                          description: A block that provides the configuration information
+                            to connect to an Amazon S3 bucket as your data source.
+                            Detailed below.
+                          items:
+                            properties:
+                              accessControlListConfiguration:
+                                description: A block that provides the path to the
+                                  S3 bucket that contains the user context filtering
+                                  files for the data source. For the format of the
+                                  file, see Access control for S3 data sources. Detailed
+                                  below.
+                                items:
+                                  properties:
+                                    keyPath:
+                                      description: Path to the AWS S3 bucket that
+                                        contains the ACL files.
+                                      type: string
+                                  type: object
+                                type: array
+                              documentsMetadataConfiguration:
+                                description: A block that defines the Document metadata
+                                  files that contain information such as the document
+                                  access control information, source URI, document
+                                  author, and custom attributes. Each metadata file
+                                  contains metadata about a single document. Detailed
+                                  below.
+                                items:
+                                  properties:
+                                    s3Prefix:
+                                      description: A prefix used to filter metadata
+                                        configuration files in the AWS S3 bucket.
+                                        The S3 bucket might contain multiple metadata
+                                        files. Use s3_prefix to include only the desired
+                                        metadata files.
+                                      type: string
+                                  type: object
+                                type: array
+                              exclusionPatterns:
+                                description: A list of glob patterns for documents
+                                  that should not be indexed. If a document that matches
+                                  an inclusion prefix or inclusion pattern also matches
+                                  an exclusion pattern, the document is not indexed.
+                                  Refer to Exclusion Patterns for more examples.
+                                items:
+                                  type: string
+                                type: array
+                              inclusionPatterns:
+                                description: A list of glob patterns for documents
+                                  that should be indexed. If a document that matches
+                                  an inclusion pattern also matches an exclusion pattern,
+                                  the document is not indexed. Refer to Inclusion
+                                  Patterns for more examples.
+                                items:
+                                  type: string
+                                type: array
+                              inclusionPrefixes:
+                                description: A list of S3 prefixes for the documents
+                                  that should be included in the index.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        webCrawlerConfiguration:
+                          description: A block that provides the configuration information
+                            required for Amazon Kendra Web Crawler. Detailed below.
+                          items:
+                            properties:
+                              authenticationConfiguration:
+                                description: A block with the configuration information
+                                  required to connect to websites using authentication.
+                                  You can connect to websites using basic authentication
+                                  of user name and password. You use a secret in AWS
+                                  Secrets Manager to store your authentication credentials.
+                                  You must provide the website host name and port
+                                  number. For example, the host name of https://a.example.com/page1.html
+                                  is "a.example.com" and the port is 443, the standard
+                                  port for HTTPS. Detailed below.
+                                items:
+                                  properties:
+                                    basicAuthentication:
+                                      description: The list of configuration information
+                                        that's required to connect to and crawl a
+                                        website host using basic authentication credentials.
+                                        The list includes the name and port number
+                                        of the website host. Detailed below.
+                                      items:
+                                        properties:
+                                          host:
+                                            description: The name of the website host
+                                              you want to connect to using authentication
+                                              credentials. For example, the host name
+                                              of https://a.example.com/page1.html
+                                              is "a.example.com".
+                                            type: string
+                                          port:
+                                            description: The port number of the website
+                                              host you want to connect to using authentication
+                                              credentials. For example, the port for
+                                              https://a.example.com/page1.html is
+                                              443, the standard port for HTTPS.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              crawlDepth:
+                                description: Specifies the number of levels in a website
+                                  that you want to crawl. The first level begins from
+                                  the website seed or starting point URL. For example,
+                                  if a website has 3 levels – index level (i.e. seed
+                                  in this example), sections level, and subsections
+                                  level – and you are only interested in crawling
+                                  information up to the sections level (i.e. levels
+                                  0-1), you can set your depth to 1. The default crawl
+                                  depth is set to 2. Minimum value of 0. Maximum value
+                                  of 10.
+                                type: number
+                              maxContentSizePerPageInMegaBytes:
+                                description: The maximum size (in MB) of a webpage
+                                  or attachment to crawl. Files larger than this size
+                                  (in MB) are skipped/not crawled. The default maximum
+                                  size of a webpage or attachment is set to 50 MB.
+                                  Minimum value of 1.0e-06. Maximum value of 50.
+                                type: number
+                              maxLinksPerPage:
+                                description: The maximum number of URLs on a webpage
+                                  to include when crawling a website. This number
+                                  is per webpage. As a website’s webpages are crawled,
+                                  any URLs the webpages link to are also crawled.
+                                  URLs on a webpage are crawled in order of appearance.
+                                  The default maximum links per page is 100. Minimum
+                                  value of 1. Maximum value of 1000.
+                                type: number
+                              maxUrlsPerMinuteCrawlRate:
+                                description: The maximum number of URLs crawled per
+                                  website host per minute. The default maximum number
+                                  of URLs crawled per website host per minute is 300.
+                                  Minimum value of 1. Maximum value of 300.
+                                type: number
+                              proxyConfiguration:
+                                description: Configuration information required to
+                                  connect to your internal websites via a web proxy.
+                                  You must provide the website host name and port
+                                  number. For example, the host name of https://a.example.com/page1.html
+                                  is "a.example.com" and the port is 443, the standard
+                                  port for HTTPS. Web proxy credentials are optional
+                                  and you can use them to connect to a web proxy server
+                                  that requires basic authentication. To store web
+                                  proxy credentials, you use a secret in AWS Secrets
+                                  Manager. Detailed below.
+                                items:
+                                  properties:
+                                    host:
+                                      description: The name of the website host you
+                                        want to connect to using authentication credentials.
+                                        For example, the host name of https://a.example.com/page1.html
+                                        is "a.example.com".
+                                      type: string
+                                    port:
+                                      description: The port number of the website
+                                        host you want to connect to using authentication
+                                        credentials. For example, the port for https://a.example.com/page1.html
+                                        is 443, the standard port for HTTPS.
+                                      type: number
+                                  type: object
+                                type: array
+                              urlExclusionPatterns:
+                                description: 'A list of regular expression patterns
+                                  to exclude certain URLs to crawl. URLs that match
+                                  the patterns are excluded from the index. URLs that
+                                  don''t match the patterns are included in the index.
+                                  If a URL matches both an inclusion and exclusion
+                                  pattern, the exclusion pattern takes precedence
+                                  and the URL file isn''t included in the index. Array
+                                  Members: Minimum number of 0 items. Maximum number
+                                  of 100 items. Length Constraints: Minimum length
+                                  of 1. Maximum length of 150.'
+                                items:
+                                  type: string
+                                type: array
+                              urlInclusionPatterns:
+                                description: 'A list of regular expression patterns
+                                  to include certain URLs to crawl. URLs that match
+                                  the patterns are included in the index. URLs that
+                                  don''t match the patterns are excluded from the
+                                  index. If a URL matches both an inclusion and exclusion
+                                  pattern, the exclusion pattern takes precedence
+                                  and the URL file isn''t included in the index. Array
+                                  Members: Minimum number of 0 items. Maximum number
+                                  of 100 items. Length Constraints: Minimum length
+                                  of 1. Maximum length of 150.'
+                                items:
+                                  type: string
+                                type: array
+                              urls:
+                                description: A block that specifies the seed or starting
+                                  point URLs of the websites or the sitemap URLs of
+                                  the websites you want to crawl. You can include
+                                  website subdomains. You can list up to 100 seed
+                                  URLs and up to 3 sitemap URLs. You can only crawl
+                                  websites that use the secure communication protocol,
+                                  Hypertext Transfer Protocol Secure (HTTPS). If you
+                                  receive an error when crawling a website, it could
+                                  be that the website is blocked from crawling. When
+                                  selecting websites to index, you must adhere to
+                                  the Amazon Acceptable Use Policy and all other Amazon
+                                  terms. Remember that you must only use Amazon Kendra
+                                  Web Crawler to index your own webpages, or webpages
+                                  that you have authorization to index. Detailed below.
+                                items:
+                                  properties:
+                                    seedUrlConfiguration:
+                                      description: A block that specifies the configuration
+                                        of the seed or starting point URLs of the
+                                        websites you want to crawl. You can choose
+                                        to crawl only the website host names, or the
+                                        website host names with subdomains, or the
+                                        website host names with subdomains and other
+                                        domains that the webpages link to. You can
+                                        list up to 100 seed URLs. Detailed below.
+                                      items:
+                                        properties:
+                                          seedUrls:
+                                            description: 'The list of seed or starting
+                                              point URLs of the websites you want
+                                              to crawl. The list can include a maximum
+                                              of 100 seed URLs. Array Members: Minimum
+                                              number of 0 items. Maximum number of
+                                              100 items. Length Constraints: Minimum
+                                              length of 1. Maximum length of 2048.'
+                                            items:
+                                              type: string
+                                            type: array
+                                          webCrawlerMode:
+                                            description: 'The default mode is set
+                                              to HOST_ONLY. You can choose one of
+                                              the following modes:'
+                                            type: string
+                                        type: object
+                                      type: array
+                                    siteMapsConfiguration:
+                                      description: A block that specifies the configuration
+                                        of the sitemap URLs of the websites you want
+                                        to crawl. Only URLs belonging to the same
+                                        website host names are crawled. You can list
+                                        up to 3 sitemap URLs. Detailed below.
+                                      items:
+                                        properties:
+                                          siteMaps:
+                                            description: The list of sitemap URLs
+                                              of the websites you want to crawl. The
+                                              list can include a maximum of 3 sitemap
+                                              URLs.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  customDocumentEnrichmentConfiguration:
+                    description: A block with the configuration information for altering
+                      document metadata and content during the document ingestion
+                      process. For more information on how to create, modify and delete
+                      document metadata, or make other content alterations when you
+                      ingest documents into Amazon Kendra, see Customizing document
+                      metadata during the ingestion process. Detailed below.
+                    items:
+                      properties:
+                        inlineConfigurations:
+                          description: Configuration information to alter document
+                            attributes or metadata fields and content when ingesting
+                            documents into Amazon Kendra. Minimum number of 0 items.
+                            Maximum number of 100 items. Detailed below.
+                          items:
+                            properties:
+                              condition:
+                                description: Configuration of the condition used for
+                                  the target document attribute or metadata field
+                                  when ingesting documents into Amazon Kendra. See
+                                  Document Attribute Condition.
+                                items:
+                                  properties:
+                                    conditionDocumentAttributeKey:
+                                      description: The identifier of the document
+                                        attribute used for the condition. For example,
+                                        _source_uri could be an identifier for the
+                                        attribute or metadata field that contains
+                                        source URIs associated with the documents.
+                                        Amazon Kendra currently does not support _document_body
+                                        as an attribute key used for the condition.
+                                      type: string
+                                    conditionOnValue:
+                                      description: The value used by the operator.
+                                        For example, you can specify the value 'financial'
+                                        for strings in the _source_uri field that
+                                        partially match or contain this value. See
+                                        Document Attribute Value.
+                                      items:
+                                        properties:
+                                          dateValue:
+                                            description: A date expressed as an ISO
+                                              8601 string. It is important for the
+                                              time zone to be included in the ISO
+                                              8601 date-time format. As of this writing
+                                              only UTC is supported. For example,
+                                              2012-03-25T12:30:10+00:00.
+                                            type: string
+                                          longValue:
+                                            description: A long integer value.
+                                            type: number
+                                          stringListValue:
+                                            description: A list of strings.
+                                            items:
+                                              type: string
+                                            type: array
+                                          stringValue:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    operator:
+                                      description: 'The condition operator. For example,
+                                        you can use Contains to partially match a
+                                        string. Valid Values: GreaterThan | GreaterThanOrEquals
+                                        | LessThan | LessThanOrEquals | Equals | NotEquals
+                                        | Contains | NotContains | Exists | NotExists
+                                        | BeginsWith.'
+                                      type: string
+                                  type: object
+                                type: array
+                              documentContentDeletion:
+                                description: TRUE to delete content if the condition
+                                  used for the target attribute is met.
+                                type: boolean
+                              target:
+                                description: Configuration of the target document
+                                  attribute or metadata field when ingesting documents
+                                  into Amazon Kendra. You can also include a value.
+                                  Detailed below.
+                                items:
+                                  properties:
+                                    targetDocumentAttributeKey:
+                                      description: The identifier of the target document
+                                        attribute or metadata field. For example,
+                                        'Department' could be an identifier for the
+                                        target attribute or metadata field that includes
+                                        the department names associated with the documents.
+                                      type: string
+                                    targetDocumentAttributeValue:
+                                      description: The target value you want to create
+                                        for the target attribute. For example, 'Finance'
+                                        could be the target value for the target attribute
+                                        key 'Department'. See Document Attribute Value.
+                                      items:
+                                        properties:
+                                          dateValue:
+                                            description: A date expressed as an ISO
+                                              8601 string. It is important for the
+                                              time zone to be included in the ISO
+                                              8601 date-time format. As of this writing
+                                              only UTC is supported. For example,
+                                              2012-03-25T12:30:10+00:00.
+                                            type: string
+                                          longValue:
+                                            description: A long integer value.
+                                            type: number
+                                          stringListValue:
+                                            description: A list of strings.
+                                            items:
+                                              type: string
+                                            type: array
+                                          stringValue:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    targetDocumentAttributeValueDeletion:
+                                      description: TRUE to delete the existing target
+                                        value for your specified target attribute
+                                        key. You cannot create a target value and
+                                        set this to TRUE. To create a target value
+                                        (TargetDocumentAttributeValue), set this to
+                                        FALSE.
+                                      type: boolean
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        postExtractionHookConfiguration:
+                          description: A block that specifies the configuration information
+                            for invoking a Lambda function in AWS Lambda on the structured
+                            documents with their metadata and text extracted. You
+                            can use a Lambda function to apply advanced logic for
+                            creating, modifying, or deleting document metadata and
+                            content. For more information, see Advanced data manipulation.
+                            Detailed below.
+                          items:
+                            properties:
+                              invocationCondition:
+                                description: A block that specifies the condition
+                                  used for when a Lambda function should be invoked.
+                                  For example, you can specify a condition that if
+                                  there are empty date-time values, then Amazon Kendra
+                                  should invoke a function that inserts the current
+                                  date-time. See Document Attribute Condition.
+                                items:
+                                  properties:
+                                    conditionDocumentAttributeKey:
+                                      description: The identifier of the document
+                                        attribute used for the condition. For example,
+                                        _source_uri could be an identifier for the
+                                        attribute or metadata field that contains
+                                        source URIs associated with the documents.
+                                        Amazon Kendra currently does not support _document_body
+                                        as an attribute key used for the condition.
+                                      type: string
+                                    conditionOnValue:
+                                      description: The value used by the operator.
+                                        For example, you can specify the value 'financial'
+                                        for strings in the _source_uri field that
+                                        partially match or contain this value. See
+                                        Document Attribute Value.
+                                      items:
+                                        properties:
+                                          dateValue:
+                                            description: A date expressed as an ISO
+                                              8601 string. It is important for the
+                                              time zone to be included in the ISO
+                                              8601 date-time format. As of this writing
+                                              only UTC is supported. For example,
+                                              2012-03-25T12:30:10+00:00.
+                                            type: string
+                                          longValue:
+                                            description: A long integer value.
+                                            type: number
+                                          stringListValue:
+                                            description: A list of strings.
+                                            items:
+                                              type: string
+                                            type: array
+                                          stringValue:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    operator:
+                                      description: 'The condition operator. For example,
+                                        you can use Contains to partially match a
+                                        string. Valid Values: GreaterThan | GreaterThanOrEquals
+                                        | LessThan | LessThanOrEquals | Equals | NotEquals
+                                        | Contains | NotContains | Exists | NotExists
+                                        | BeginsWith.'
+                                      type: string
+                                  type: object
+                                type: array
+                              lambdaArn:
+                                description: The Amazon Resource Name (ARN) of a Lambda
+                                  Function that can manipulate your document metadata
+                                  fields or attributes and content.
+                                type: string
+                              s3Bucket:
+                                description: Stores the original, raw documents or
+                                  the structured, parsed documents before and after
+                                  altering them. For more information, see Data contracts
+                                  for Lambda functions.
+                                type: string
+                            type: object
+                          type: array
+                        preExtractionHookConfiguration:
+                          description: Configuration information for invoking a Lambda
+                            function in AWS Lambda on the original or raw documents
+                            before extracting their metadata and text. You can use
+                            a Lambda function to apply advanced logic for creating,
+                            modifying, or deleting document metadata and content.
+                            For more information, see Advanced data manipulation.
+                            Detailed below.
+                          items:
+                            properties:
+                              invocationCondition:
+                                description: A block that specifies the condition
+                                  used for when a Lambda function should be invoked.
+                                  For example, you can specify a condition that if
+                                  there are empty date-time values, then Amazon Kendra
+                                  should invoke a function that inserts the current
+                                  date-time. See Document Attribute Condition.
+                                items:
+                                  properties:
+                                    conditionDocumentAttributeKey:
+                                      description: The identifier of the document
+                                        attribute used for the condition. For example,
+                                        _source_uri could be an identifier for the
+                                        attribute or metadata field that contains
+                                        source URIs associated with the documents.
+                                        Amazon Kendra currently does not support _document_body
+                                        as an attribute key used for the condition.
+                                      type: string
+                                    conditionOnValue:
+                                      description: The value used by the operator.
+                                        For example, you can specify the value 'financial'
+                                        for strings in the _source_uri field that
+                                        partially match or contain this value. See
+                                        Document Attribute Value.
+                                      items:
+                                        properties:
+                                          dateValue:
+                                            description: A date expressed as an ISO
+                                              8601 string. It is important for the
+                                              time zone to be included in the ISO
+                                              8601 date-time format. As of this writing
+                                              only UTC is supported. For example,
+                                              2012-03-25T12:30:10+00:00.
+                                            type: string
+                                          longValue:
+                                            description: A long integer value.
+                                            type: number
+                                          stringListValue:
+                                            description: A list of strings.
+                                            items:
+                                              type: string
+                                            type: array
+                                          stringValue:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    operator:
+                                      description: 'The condition operator. For example,
+                                        you can use Contains to partially match a
+                                        string. Valid Values: GreaterThan | GreaterThanOrEquals
+                                        | LessThan | LessThanOrEquals | Equals | NotEquals
+                                        | Contains | NotContains | Exists | NotExists
+                                        | BeginsWith.'
+                                      type: string
+                                  type: object
+                                type: array
+                              lambdaArn:
+                                description: The Amazon Resource Name (ARN) of a Lambda
+                                  Function that can manipulate your document metadata
+                                  fields or attributes and content.
+                                type: string
+                              s3Bucket:
+                                description: Stores the original, raw documents or
+                                  the structured, parsed documents before and after
+                                  altering them. For more information, see Data contracts
+                                  for Lambda functions.
+                                type: string
+                            type: object
+                          type: array
+                        roleArn:
+                          description: The Amazon Resource Name (ARN) of a role with
+                            permission to run pre_extraction_hook_configuration and
+                            post_extraction_hook_configuration for altering document
+                            metadata and content during the document ingestion process.
+                            For more information, see IAM roles for Amazon Kendra.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description for the Data Source connector.
+                    type: string
+                  languageCode:
+                    description: The code for a language. This allows you to support
+                      a language for all documents when creating the Data Source connector.
+                      English is supported by default. For more information on supported
+                      languages, including their codes, see Adding documents in languages
+                      other than English.
+                    type: string
+                  name:
+                    description: A name for your Data Source connector.
+                    type: string
+                  schedule:
+                    description: Sets the frequency for Amazon Kendra to check the
+                      documents in your Data Source repository and update the index.
+                      If you don't set a schedule Amazon Kendra will not periodically
+                      update the index. You can call the StartDataSourceSyncJob API
+                      to update the index.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of data source repository. For an updated
+                      list of values, refer to Valid Values for Type.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -1326,10 +1909,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: DataSourceStatus defines the observed state of DataSource.
             properties:

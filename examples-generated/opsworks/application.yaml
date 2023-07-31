@@ -36,6 +36,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     type: rails
-
----
-

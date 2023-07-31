@@ -91,8 +91,6 @@ spec:
                             of your Network Firewall resources. Valid values are CUSTOMER_KMS
                             and AWS_OWNED_KMS_KEY.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   firewallPolicyArn:
@@ -367,6 +365,76 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  deleteProtection:
+                    description: A boolean flag indicating whether it is possible
+                      to delete the firewall. Defaults to false.
+                    type: boolean
+                  description:
+                    description: A friendly description of the firewall.
+                    type: string
+                  encryptionConfiguration:
+                    description: KMS encryption configuration settings. See Encryption
+                      Configuration below for details.
+                    items:
+                      properties:
+                        keyId:
+                          description: The ID of the customer managed key. You can
+                            use any of the key identifiers that KMS supports, unless
+                            you're using a key that's managed by another account.
+                            If you're using a key managed by another account, then
+                            specify the key ARN.
+                          type: string
+                        type:
+                          description: The type of AWS KMS key to use for encryption
+                            of your Network Firewall resources. Valid values are CUSTOMER_KMS
+                            and AWS_OWNED_KMS_KEY.
+                          type: string
+                      type: object
+                    type: array
+                  firewallPolicyChangeProtection:
+                    description: (Option) A boolean flag indicating whether it is
+                      possible to change the associated firewall policy. Defaults
+                      to false.
+                    type: boolean
+                  name:
+                    description: A friendly name of the firewall.
+                    type: string
+                  subnetChangeProtection:
+                    description: A boolean flag indicating whether it is possible
+                      to change the associated subnet(s). Defaults to false.
+                    type: boolean
+                  subnetMapping:
+                    description: Set of configuration blocks describing the public
+                      subnets. Each subnet must belong to a different Availability
+                      Zone in the VPC. AWS Network Firewall creates a firewall endpoint
+                      in each subnet. See Subnet Mapping below for details.
+                    items:
+                      properties:
+                        ipAddressType:
+                          description: 'The subnet''s IP address type. Valida values:
+                            "DUALSTACK", "IPV4".'
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -567,10 +635,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: subnetMapping is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subnetMapping)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subnetMapping)
+                || has(self.initProvider.subnetMapping)'
           status:
             description: FirewallStatus defines the observed state of Firewall.
             properties:

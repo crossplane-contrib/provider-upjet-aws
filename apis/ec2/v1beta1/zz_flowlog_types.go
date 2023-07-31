@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationOptionsInitParameters struct {
+
+	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
+	FileFormat *string `json:"fileFormat,omitempty" tf:"file_format,omitempty"`
+
+	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3. Default value: false.
+	HiveCompatiblePartitions *bool `json:"hiveCompatiblePartitions,omitempty" tf:"hive_compatible_partitions,omitempty"`
+
+	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
+	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
+}
+
 type DestinationOptionsObservation struct {
 
 	// The format for the flow log. Default value: plain-text. Valid values: plain-text, parquet.
@@ -38,6 +50,45 @@ type DestinationOptionsParameters struct {
 	// Indicates whether to partition the flow log per hour. This reduces the cost and response time for queries. Default value: false.
 	// +kubebuilder:validation:Optional
 	PerHourPartition *bool `json:"perHourPartition,omitempty" tf:"per_hour_partition,omitempty"`
+}
+
+type FlowLogInitParameters struct {
+
+	// ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
+	DeliverCrossAccountRole *string `json:"deliverCrossAccountRole,omitempty" tf:"deliver_cross_account_role,omitempty"`
+
+	// Describes the destination options for a flow log. More details below.
+	DestinationOptions []DestinationOptionsInitParameters `json:"destinationOptions,omitempty" tf:"destination_options,omitempty"`
+
+	// Elastic Network Interface ID to attach to
+	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
+
+	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
+	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+
+	// The fields to include in the flow log record, in the order in which they should appear.
+	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
+
+	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The maximum interval of time
+	// during which a flow of packets is captured and aggregated into a flow
+	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
+	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
+	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
+	TrafficType *string `json:"trafficType,omitempty" tf:"traffic_type,omitempty"`
+
+	// Transit Gateway Attachment ID to attach to
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Transit Gateway ID to attach to
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 }
 
 type FlowLogObservation struct {
@@ -213,6 +264,18 @@ type FlowLogParameters struct {
 type FlowLogSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FlowLogParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FlowLogInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlowLogStatus defines the observed state of FlowLog.

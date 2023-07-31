@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotificationInitParameters struct {
+
+	// List of AutoScaling Group Names
+	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
+
+	// List of Notification Types that trigger
+	// notifications. Acceptable values are documented in the AWS documentation here
+	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
+}
+
 type NotificationObservation struct {
 
 	// List of AutoScaling Group Names
@@ -63,6 +73,18 @@ type NotificationParameters struct {
 type NotificationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotificationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NotificationInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotificationStatus defines the observed state of Notification.
@@ -83,8 +105,8 @@ type NotificationStatus struct {
 type Notification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupNames)",message="groupNames is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notifications)",message="notifications is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupNames) || has(self.initProvider.groupNames)",message="groupNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notifications) || has(self.initProvider.notifications)",message="notifications is a required parameter"
 	Spec   NotificationSpec   `json:"spec"`
 	Status NotificationStatus `json:"status,omitempty"`
 }

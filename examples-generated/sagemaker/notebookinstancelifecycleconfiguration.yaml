@@ -11,6 +11,3 @@ spec:
     onCreate: ${base64encode("echo foo")}
     onStart: ${base64encode("echo bar")}
     region: us-west-1
-
----
-

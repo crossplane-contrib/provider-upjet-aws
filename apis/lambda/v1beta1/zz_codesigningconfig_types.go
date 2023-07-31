@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AllowedPublishersInitParameters struct {
+}
+
 type AllowedPublishersObservation struct {
 
 	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
@@ -34,6 +37,18 @@ type AllowedPublishersParameters struct {
 	// Selector for a list of SigningProfile in signer to populate signingProfileVersionArns.
 	// +kubebuilder:validation:Optional
 	SigningProfileVersionArnsSelector *v1.Selector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
+}
+
+type CodeSigningConfigInitParameters struct {
+
+	// A configuration block of allowed publishers as signing profiles for this code signing configuration. Detailed below.
+	AllowedPublishers []AllowedPublishersInitParameters `json:"allowedPublishers,omitempty" tf:"allowed_publishers,omitempty"`
+
+	// Descriptive name for this code signing configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
+	Policies []PoliciesInitParameters `json:"policies,omitempty" tf:"policies,omitempty"`
 }
 
 type CodeSigningConfigObservation struct {
@@ -79,6 +94,12 @@ type CodeSigningConfigParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type PoliciesInitParameters struct {
+
+	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
+	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment,omitempty" tf:"untrusted_artifact_on_deployment,omitempty"`
+}
+
 type PoliciesObservation struct {
 
 	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
@@ -88,14 +109,26 @@ type PoliciesObservation struct {
 type PoliciesParameters struct {
 
 	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
-	// +kubebuilder:validation:Required
-	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment" tf:"untrusted_artifact_on_deployment,omitempty"`
+	// +kubebuilder:validation:Optional
+	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment,omitempty" tf:"untrusted_artifact_on_deployment,omitempty"`
 }
 
 // CodeSigningConfigSpec defines the desired state of CodeSigningConfig
 type CodeSigningConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CodeSigningConfigParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CodeSigningConfigInitParameters `json:"initProvider,omitempty"`
 }
 
 // CodeSigningConfigStatus defines the observed state of CodeSigningConfig.
@@ -116,7 +149,7 @@ type CodeSigningConfigStatus struct {
 type CodeSigningConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedPublishers)",message="allowedPublishers is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedPublishers) || has(self.initProvider.allowedPublishers)",message="allowedPublishers is a required parameter"
 	Spec   CodeSigningConfigSpec   `json:"spec"`
 	Status CodeSigningConfigStatus `json:"status,omitempty"`
 }

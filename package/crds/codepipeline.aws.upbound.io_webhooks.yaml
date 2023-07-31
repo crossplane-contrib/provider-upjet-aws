@@ -113,9 +113,6 @@ spec:
                           description: The value to match on (e.g., refs/heads/{Branch}).
                             See AWS docs for details.
                           type: string
-                      required:
-                      - jsonPath
-                      - matchEquals
                       type: object
                     type: array
                   region:
@@ -212,6 +209,59 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  authentication:
+                    description: The type of authentication  to use. One of IP, GITHUB_HMAC,
+                      or UNAUTHENTICATED.
+                    type: string
+                  authenticationConfiguration:
+                    description: An auth block. Required for IP and GITHUB_HMAC. Auth
+                      blocks are documented below.
+                    items:
+                      properties:
+                        allowedIpRange:
+                          description: A valid CIDR block for IP filtering. Required
+                            for IP.
+                          type: string
+                      type: object
+                    type: array
+                  filter:
+                    description: One or more filter blocks. Filter blocks are documented
+                      below.
+                    items:
+                      properties:
+                        jsonPath:
+                          description: The JSON path to filter on.
+                          type: string
+                        matchEquals:
+                          description: The value to match on (e.g., refs/heads/{Branch}).
+                            See AWS docs for details.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetAction:
+                    description: The name of the action in a pipeline you want to
+                      connect to the webhook. The action must be from the source (first)
+                      stage of the pipeline.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -413,13 +463,16 @@ spec:
             x-kubernetes-validations:
             - message: authentication is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authentication)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authentication)
+                || has(self.initProvider.authentication)'
             - message: filter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filter)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.filter)
+                || has(self.initProvider.filter)'
             - message: targetAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)
+                || has(self.initProvider.targetAction)'
           status:
             description: WebhookStatus defines the observed state of Webhook.
             properties:

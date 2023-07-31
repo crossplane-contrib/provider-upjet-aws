@@ -30,6 +30,3 @@ spec:
     instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
     name: Example
     region: us-west-1
-
----
-

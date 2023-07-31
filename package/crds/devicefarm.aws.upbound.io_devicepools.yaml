@@ -189,6 +189,57 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The device pool's description.
+                    type: string
+                  maxDevices:
+                    description: The number of devices that Device Farm can add to
+                      your device pool.
+                    type: number
+                  name:
+                    description: The name of the Device Pool
+                    type: string
+                  rule:
+                    description: The device pool's rules. See Rule.
+                    items:
+                      properties:
+                        attribute:
+                          description: 'The rule''s stringified attribute. Valid values
+                            are: APPIUM_VERSION, ARN, AVAILABILITY, FLEET_TYPE, FORM_FACTOR,
+                            INSTANCE_ARN, INSTANCE_LABELS, MANUFACTURER, MODEL, OS_VERSION,
+                            PLATFORM, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED.'
+                          type: string
+                        operator:
+                          description: 'Specifies how Device Farm compares the rule''s
+                            attribute to the value. For the operators that are supported
+                            by each attribute. Valid values are: EQUALS, NOT_IN, IN,
+                            GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS,
+                            CONTAINS.'
+                          type: string
+                        value:
+                          description: The rule's value.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -389,10 +440,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
+                || has(self.initProvider.rule)'
           status:
             description: DevicePoolStatus defines the observed state of DevicePool.
             properties:

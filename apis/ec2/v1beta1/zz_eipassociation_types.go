@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EIPAssociationInitParameters struct {
+
+	// Whether to allow an Elastic IP to
+	// be re-associated. Defaults to true in VPC.
+	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
+
+	// The ID of the network interface. If the
+	// instance has more than one network interface, you must specify a network
+	// interface ID.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// The primary or secondary private IP address
+	// to associate with the Elastic IP address. If no private IP address is
+	// specified, the Elastic IP address is associated with the primary private IP
+	// address.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The Elastic IP address. This is required for EC2-Classic.
+	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
+}
+
 type EIPAssociationObservation struct {
 
 	// The allocation ID. This is required for EC2-VPC.
@@ -110,6 +131,18 @@ type EIPAssociationParameters struct {
 type EIPAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EIPAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EIPAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // EIPAssociationStatus defines the observed state of EIPAssociation.

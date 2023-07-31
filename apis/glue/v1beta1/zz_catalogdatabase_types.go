@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CatalogDatabaseInitParameters struct {
+
+	// Creates a set of default permissions on the table for principals. See create_table_default_permission below.
+	CreateTableDefaultPermission []CreateTableDefaultPermissionInitParameters `json:"createTableDefaultPermission,omitempty" tf:"create_table_default_permission,omitempty"`
+
+	// Description of the database.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Location of the database (for example, an HDFS path).
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
+
+	// List of key-value pairs that define parameters and properties of the database.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for a target database for resource linking. See target_database below.
+	TargetDatabase []TargetDatabaseInitParameters `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
+}
+
 type CatalogDatabaseObservation struct {
 
 	// ARN of the Glue Catalog Database.
@@ -82,6 +103,15 @@ type CatalogDatabaseParameters struct {
 	TargetDatabase []TargetDatabaseParameters `json:"targetDatabase,omitempty" tf:"target_database,omitempty"`
 }
 
+type CreateTableDefaultPermissionInitParameters struct {
+
+	// The permissions that are granted to the principal.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The principal who is granted permissions.. See principal below.
+	Principal []PrincipalInitParameters `json:"principal,omitempty" tf:"principal,omitempty"`
+}
+
 type CreateTableDefaultPermissionObservation struct {
 
 	// The permissions that are granted to the principal.
@@ -102,6 +132,12 @@ type CreateTableDefaultPermissionParameters struct {
 	Principal []PrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
 }
 
+type PrincipalInitParameters struct {
+
+	// An identifier for the Lake Formation principal.
+	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
+}
+
 type PrincipalObservation struct {
 
 	// An identifier for the Lake Formation principal.
@@ -113,6 +149,12 @@ type PrincipalParameters struct {
 	// An identifier for the Lake Formation principal.
 	// +kubebuilder:validation:Optional
 	DataLakePrincipalIdentifier *string `json:"dataLakePrincipalIdentifier,omitempty" tf:"data_lake_principal_identifier,omitempty"`
+}
+
+type TargetDatabaseInitParameters struct {
+
+	// Name of the catalog database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 }
 
 type TargetDatabaseObservation struct {
@@ -131,14 +173,26 @@ type TargetDatabaseParameters struct {
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
 	// Name of the catalog database.
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 }
 
 // CatalogDatabaseSpec defines the desired state of CatalogDatabase
 type CatalogDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CatalogDatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CatalogDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // CatalogDatabaseStatus defines the observed state of CatalogDatabase.

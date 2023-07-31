@@ -182,10 +182,6 @@ spec:
                             If you're counting the bytes transferred the published
                             value will be the value in the log event.
                           type: string
-                      required:
-                      - name
-                      - namespace
-                      - value
                       type: object
                     type: array
                   pattern:
@@ -198,6 +194,62 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  metricTransformation:
+                    description: A block defining collection of information needed
+                      to define how metric data gets emitted. See below.
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The value to emit when a filter pattern does
+                            not match a log event. Conflicts with dimensions.
+                          type: string
+                        dimensions:
+                          additionalProperties:
+                            type: string
+                          description: Map of fields to use as dimensions for the
+                            metric. Up to 3 dimensions are allowed. Conflicts with
+                            default_value.
+                          type: object
+                        name:
+                          description: The name of the CloudWatch metric to which
+                            the monitored log information should be published (e.g.,
+                            ErrorCount)
+                          type: string
+                        namespace:
+                          description: The destination namespace of the CloudWatch
+                            metric.
+                          type: string
+                        unit:
+                          description: The unit to assign to the metric. If you omit
+                            this, the unit is set as None.
+                          type: string
+                        value:
+                          description: What to publish to the metric. For example,
+                            if you're counting the occurrences of a particular term
+                            like "Error", the value will be "1" for each occurrence.
+                            If you're counting the bytes transferred the published
+                            value will be the value in the log event.
+                          type: string
+                      type: object
+                    type: array
+                  pattern:
+                    description: A valid CloudWatch Logs filter pattern for extracting
+                      metric data out of ingested log events.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -399,10 +451,12 @@ spec:
             x-kubernetes-validations:
             - message: metricTransformation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.metricTransformation)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.metricTransformation)
+                || has(self.initProvider.metricTransformation)'
             - message: pattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.pattern)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.pattern)
+                || has(self.initProvider.pattern)'
           status:
             description: MetricFilterStatus defines the observed state of MetricFilter.
             properties:

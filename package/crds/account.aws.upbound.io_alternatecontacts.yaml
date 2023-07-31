@@ -95,6 +95,36 @@ spec:
                 - alternateContactType
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountId:
+                    description: ID of the target account when managing member accounts.
+                      Will manage current user's account by default if omitted.
+                    type: string
+                  emailAddress:
+                    description: An email address for the alternate contact.
+                    type: string
+                  name:
+                    description: Name of the alternate contact.
+                    type: string
+                  phoneNumber:
+                    description: Phone number for the alternate contact.
+                    type: string
+                  title:
+                    description: Title for the alternate contact.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -295,16 +325,20 @@ spec:
             x-kubernetes-validations:
             - message: emailAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)
+                || has(self.initProvider.emailAddress)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: phoneNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneNumber)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneNumber)
+                || has(self.initProvider.phoneNumber)'
             - message: title is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.title)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.title)
+                || has(self.initProvider.title)'
           status:
             description: AlternateContactStatus defines the observed state of AlternateContact.
             properties:

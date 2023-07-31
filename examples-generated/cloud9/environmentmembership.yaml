@@ -45,6 +45,3 @@ metadata:
   name: test
 spec:
   forProvider: {}
-
----
-

@@ -85,12 +85,8 @@ spec:
                                   can use to limit signed objects keys to begin with
                                   the specified prefix.
                                 type: string
-                            required:
-                            - bucket
                             type: object
                           type: array
-                      required:
-                      - s3
                       type: object
                     type: array
                   ignoreSigningJobFailure:
@@ -200,18 +196,77 @@ spec:
                                 description: Version of your source image in your
                                   version enabled S3 bucket.
                                 type: string
-                            required:
-                            - bucket
-                            - key
-                            - version
                             type: object
                           type: array
-                      required:
-                      - s3
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  destination:
+                    description: The S3 bucket in which to save your signed object.
+                      See Destination below for details.
+                    items:
+                      properties:
+                        s3:
+                          description: 'A configuration block describing the S3 Source
+                            object: See S3 Source below for details.'
+                          items:
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket.
+                                type: string
+                              prefix:
+                                description: An Amazon S3 object key prefix that you
+                                  can use to limit signed objects keys to begin with
+                                  the specified prefix.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  ignoreSigningJobFailure:
+                    description: Set this argument to true to ignore signing job failures
+                      and retrieve failed status and reason. Default false.
+                    type: boolean
+                  source:
+                    description: The S3 bucket that contains the object to sign. See
+                      Source below for details.
+                    items:
+                      properties:
+                        s3:
+                          description: 'A configuration block describing the S3 Source
+                            object: See S3 Source below for details.'
+                          items:
+                            properties:
+                              bucket:
+                                description: Name of the S3 bucket.
+                                type: string
+                              key:
+                                description: Key name of the object that contains
+                                  your unsigned code.
+                                type: string
+                              version:
+                                description: Version of your source image in your
+                                  version enabled S3 bucket.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -413,10 +468,12 @@ spec:
             x-kubernetes-validations:
             - message: destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
+                || has(self.initProvider.destination)'
             - message: source is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.source)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.source)
+                || has(self.initProvider.source)'
           status:
             description: SigningJobStatus defines the observed state of SigningJob.
             properties:

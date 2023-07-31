@@ -106,6 +106,52 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountId:
+                    description: The AWS account ID for the account.
+                    type: string
+                  email:
+                    description: The email address for the account.
+                    type: string
+                  invitationDisableEmailNotification:
+                    description: Specifies whether to send an email notification to
+                      the root user of each account that the invitation will be sent
+                      to. This notification is in addition to an alert that the root
+                      user receives in AWS Personal Health Dashboard. To send an email
+                      notification to the root user of each account, set this value
+                      to true.
+                    type: boolean
+                  invitationMessage:
+                    description: A custom message to include in the invitation. Amazon
+                      Macie adds this message to the standard content that it sends
+                      for an invitation.
+                    type: string
+                  invite:
+                    description: Send an invitation to a member
+                    type: boolean
+                  status:
+                    description: Specifies the status for the account. To enable Amazon
+                      Macie and start all Macie activities for the account, set this
+                      value to ENABLED. Valid values are ENABLED or PAUSED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -306,10 +352,12 @@ spec:
             x-kubernetes-validations:
             - message: accountId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountId)
+                || has(self.initProvider.accountId)'
             - message: email is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
+                || has(self.initProvider.email)'
           status:
             description: MemberStatus defines the observed state of Member.
             properties:

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LBCookieStickinessPolicyInitParameters struct {
+
+	// The time period after which
+	// the session cookie should be considered stale, expressed in seconds.
+	CookieExpirationPeriod *float64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
+
+	// The load balancer port to which the policy
+	// should be applied. This must be an active listener on the load
+	// balancer.
+	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+
+	// The name of the stickiness policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type LBCookieStickinessPolicyObservation struct {
 
 	// The time period after which
@@ -77,6 +92,18 @@ type LBCookieStickinessPolicyParameters struct {
 type LBCookieStickinessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBCookieStickinessPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LBCookieStickinessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBCookieStickinessPolicyStatus defines the observed state of LBCookieStickinessPolicy.
@@ -97,8 +124,8 @@ type LBCookieStickinessPolicyStatus struct {
 type LBCookieStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbPort)",message="lbPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbPort) || has(self.initProvider.lbPort)",message="lbPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   LBCookieStickinessPolicySpec   `json:"spec"`
 	Status LBCookieStickinessPolicyStatus `json:"status,omitempty"`
 }

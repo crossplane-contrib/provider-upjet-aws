@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReplicaInitParameters struct {
+
+	// ARN, Key ID, or Alias of the AWS KMS key within the region secret is replicated to. If one is not specified, then Secrets Manager defaults to using the AWS account's default KMS key (aws/secretsmanager) in the region or creates one for use if non-existent.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type ReplicaObservation struct {
 
 	// ARN, Key ID, or Alias of the AWS KMS key within the region secret is replicated to. If one is not specified, then Secrets Manager defaults to using the AWS account's default KMS key (aws/secretsmanager) in the region or creates one for use if non-existent.
@@ -42,6 +48,9 @@ type ReplicaParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 }
 
+type RotationRulesInitParameters struct {
+}
+
 type RotationRulesObservation struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret.
@@ -53,6 +62,27 @@ type RotationRulesObservation struct {
 }
 
 type RotationRulesParameters struct {
+}
+
+type SecretInitParameters struct {
+
+	// Description of the secret.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Accepts boolean value to specify whether to overwrite a secret with the same name in the destination Region.
+	ForceOverwriteReplicaSecret *bool `json:"forceOverwriteReplicaSecret,omitempty" tf:"force_overwrite_replica_secret,omitempty"`
+
+	// Friendly name of the new secret. The secret name can consist of uppercase letters, lowercase letters, digits, and any of the following characters: /_+=.@- Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Number of days that AWS Secrets Manager waits before it can delete the secret. This value can be 0 to force deletion without recovery or range from 7 to 30 days. The default value is 30.
+	RecoveryWindowInDays *float64 `json:"recoveryWindowInDays,omitempty" tf:"recovery_window_in_days,omitempty"`
+
+	// Configuration block to support secret replication. See details below.
+	Replica []ReplicaInitParameters `json:"replica,omitempty" tf:"replica,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SecretObservation struct {
@@ -150,6 +180,18 @@ type SecretParameters struct {
 type SecretSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecretParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SecretInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecretStatus defines the observed state of Secret.

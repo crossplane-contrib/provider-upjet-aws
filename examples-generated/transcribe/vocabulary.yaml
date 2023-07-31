@@ -49,6 +49,3 @@ spec:
     key: transcribe/test1.txt
     region: us-west-1
     source: test.txt
-
----
-

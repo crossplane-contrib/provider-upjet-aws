@@ -93,9 +93,6 @@ spec:
                               value:
                                 description: Parameter value.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         startAfter:
@@ -115,14 +112,8 @@ spec:
                                 description: Target name, referencing a corresponding
                                   target.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
-                      required:
-                      - actionId
-                      - name
                       type: object
                     type: array
                   description:
@@ -221,8 +212,6 @@ spec:
                           description: ARN of the CloudWatch alarm. Required if the
                             source is a CloudWatch alarm.
                           type: string
-                      required:
-                      - source
                       type: object
                     type: array
                   tags:
@@ -249,9 +238,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - path
-                            - values
                             type: object
                           type: array
                         name:
@@ -275,9 +261,6 @@ spec:
                               value:
                                 description: Tag value.
                                 type: string
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         resourceType:
@@ -291,14 +274,152 @@ spec:
                             select n of the identified resources), PERCENT(n) (randomly
                             select n percent of the identified resources).
                           type: string
-                      required:
-                      - name
-                      - resourceType
-                      - selectionMode
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  action:
+                    description: Action to be performed during an experiment. See
+                      below.
+                    items:
+                      properties:
+                        actionId:
+                          description: ID of the action. To find out what actions
+                            are supported see AWS FIS actions reference.
+                          type: string
+                        description:
+                          description: Description of the action.
+                          type: string
+                        name:
+                          description: Friendly name of the action.
+                          type: string
+                        parameter:
+                          description: Parameter(s) for the action, if applicable.
+                            See below.
+                          items:
+                            properties:
+                              key:
+                                description: Parameter name.
+                                type: string
+                              value:
+                                description: Parameter value.
+                                type: string
+                            type: object
+                          type: array
+                        startAfter:
+                          description: Set of action names that must complete before
+                            this action can be executed.
+                          items:
+                            type: string
+                          type: array
+                        target:
+                          description: Action's target, if applicable. See below.
+                          items:
+                            properties:
+                              key:
+                                description: Tag key.
+                                type: string
+                              value:
+                                description: Target name, referencing a corresponding
+                                  target.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Description for the experiment template.
+                    type: string
+                  stopCondition:
+                    description: When an ongoing experiment should be stopped. See
+                      below.
+                    items:
+                      properties:
+                        source:
+                          description: Source of the condition. One of none, aws:cloudwatch:alarm.
+                          type: string
+                        value:
+                          description: ARN of the CloudWatch alarm. Required if the
+                            source is a CloudWatch alarm.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  target:
+                    description: Target of an action. See below.
+                    items:
+                      properties:
+                        filter:
+                          description: Filter(s) for the target. Filters can be used
+                            to select resources based on specific attributes returned
+                            by the respective describe action of the resource type.
+                            For more information, see Targets for AWS FIS. See below.
+                          items:
+                            properties:
+                              path:
+                                description: Attribute path for the filter.
+                                type: string
+                              values:
+                                description: Set of attribute values for the filter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Friendly name given to the target.
+                          type: string
+                        resourceArns:
+                          description: Set of ARNs of the resources to target with
+                            an action. Conflicts with resource_tag.
+                          items:
+                            type: string
+                          type: array
+                        resourceTag:
+                          description: Tag(s) the resources need to have to be considered
+                            a valid target for an action. Conflicts with resource_arns.
+                            See below.
+                          items:
+                            properties:
+                              key:
+                                description: Tag key.
+                                type: string
+                              value:
+                                description: Tag value.
+                                type: string
+                            type: object
+                          type: array
+                        resourceType:
+                          description: AWS resource type. The resource type must be
+                            supported for the specified action. To find out what resource
+                            types are supported, see Targets for AWS FIS.
+                          type: string
+                        selectionMode:
+                          description: Scopes the identified resources. Valid values
+                            are ALL (all identified resources), COUNT(n) (randomly
+                            select n of the identified resources), PERCENT(n) (randomly
+                            select n percent of the identified resources).
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -500,13 +621,16 @@ spec:
             x-kubernetes-validations:
             - message: action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
+                || has(self.initProvider.action)'
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || has(self.initProvider.description)'
             - message: stopCondition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.stopCondition)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.stopCondition)
+                || has(self.initProvider.stopCondition)'
           status:
             description: ExperimentTemplateStatus defines the observed state of ExperimentTemplate.
             properties:

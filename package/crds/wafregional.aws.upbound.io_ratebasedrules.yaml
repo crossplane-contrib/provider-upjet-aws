@@ -175,9 +175,6 @@ spec:
                             ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint,
                             SqlInjectionMatch, or XssMatch.'
                           type: string
-                      required:
-                      - negated
-                      - type
                       type: object
                     type: array
                   rateKey:
@@ -199,6 +196,61 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  metricName:
+                    description: The name or description for the Amazon CloudWatch
+                      metric of this rule.
+                    type: string
+                  name:
+                    description: The name or description of the rule.
+                    type: string
+                  predicate:
+                    description: The objects to include in a rule (documented below).
+                    items:
+                      properties:
+                        negated:
+                          description: Set this to false if you want to allow, block,
+                            or count requests based on the settings in the specified
+                            ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+                            or SizeConstraintSet. For example, if an IPSet includes
+                            the IP address 192.0.2.44, AWS WAF will allow or block
+                            requests based on that IP address. If set to true, AWS
+                            WAF will allow, block, or count requests based on all
+                            IP addresses except 192.0.2.44.
+                          type: boolean
+                        type:
+                          description: 'The type of predicate in a rule. Valid values:
+                            ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint,
+                            SqlInjectionMatch, or XssMatch.'
+                          type: string
+                      type: object
+                    type: array
+                  rateKey:
+                    description: Valid value is IP.
+                    type: string
+                  rateLimit:
+                    description: The maximum number of requests, which have an identical
+                      value in the field specified by the RateKey, allowed in a five-minute
+                      period. Minimum value is 100.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -400,16 +452,20 @@ spec:
             x-kubernetes-validations:
             - message: metricName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.metricName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.metricName)
+                || has(self.initProvider.metricName)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: rateKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rateKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rateKey)
+                || has(self.initProvider.rateKey)'
             - message: rateLimit is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rateLimit)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rateLimit)
+                || has(self.initProvider.rateLimit)'
           status:
             description: RateBasedRuleStatus defines the observed state of RateBasedRule.
             properties:

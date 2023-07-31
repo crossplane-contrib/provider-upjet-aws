@@ -340,6 +340,53 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  cdcStartPosition:
+                    description: Indicates when you want a change data capture (CDC)
+                      operation to start. The value can be in date, checkpoint, or
+                      LSN/SCN format depending on the source engine. For more information,
+                      see Determining a CDC native start point.
+                    type: string
+                  cdcStartTime:
+                    description: The Unix timestamp integer for the start of the Change
+                      Data Capture (CDC) operation.
+                    type: string
+                  migrationType:
+                    description: The migration type. Can be one of full-load | cdc
+                      | full-load-and-cdc.
+                    type: string
+                  replicationTaskSettings:
+                    description: An escaped JSON string that contains the task settings.
+                      For a complete list of task settings, see Task Settings for
+                      AWS Database Migration Service Tasks.
+                    type: string
+                  startReplicationTask:
+                    description: Whether to run or stop the replication task.
+                    type: boolean
+                  tableMappings:
+                    description: An escaped JSON string that contains the table mappings.
+                      For information on table mapping see Using Table Mapping with
+                      an AWS Database Migration Service Task to Select and Filter
+                      Data
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -540,10 +587,12 @@ spec:
             x-kubernetes-validations:
             - message: migrationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.migrationType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.migrationType)
+                || has(self.initProvider.migrationType)'
             - message: tableMappings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tableMappings)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tableMappings)
+                || has(self.initProvider.tableMappings)'
           status:
             description: ReplicationTaskStatus defines the observed state of ReplicationTask.
             properties:

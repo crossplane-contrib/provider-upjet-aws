@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RoleAssociationInitParameters struct {
+
+	// The AWS SSO group ids to be assigned the role given in role.
+	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
+
+	// The grafana role. Valid values can be found here.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The AWS SSO user ids to be assigned the role given in role.
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
+}
+
 type RoleAssociationObservation struct {
 
 	// The AWS SSO group ids to be assigned the role given in role.
@@ -67,6 +79,18 @@ type RoleAssociationParameters struct {
 type RoleAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RoleAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RoleAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RoleAssociationStatus defines the observed state of RoleAssociation.
@@ -87,7 +111,7 @@ type RoleAssociationStatus struct {
 type RoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.role)",message="role is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.role) || has(self.initProvider.role)",message="role is a required parameter"
 	Spec   RoleAssociationSpec   `json:"spec"`
 	Status RoleAssociationStatus `json:"status,omitempty"`
 }

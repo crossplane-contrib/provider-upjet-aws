@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VPCAttachmentInitParameters struct {
+
+	// Options for the VPC attachment.
+	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VPCAttachmentObservation struct {
 
 	// The ARN of the attachment.
@@ -62,6 +71,15 @@ type VPCAttachmentObservation struct {
 
 	// The ARN of the VPC.
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
+}
+
+type VPCAttachmentOptionsInitParameters struct {
+
+	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
+
+	// Indicates whether IPv6 is supported.
+	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
@@ -145,6 +163,18 @@ type VPCAttachmentParameters struct {
 type VPCAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPCAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VPCAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPCAttachmentStatus defines the observed state of VPCAttachment.

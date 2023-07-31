@@ -131,8 +131,6 @@ spec:
                                       type: array
                                   type: object
                                 type: array
-                            required:
-                            - domainName
                             type: object
                           type: array
                         readinessScopes:
@@ -231,6 +229,95 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  resourceSetType:
+                    description: Type of the resources in the resource set.
+                    type: string
+                  resources:
+                    description: List of resources to add to this resource set. See
+                      below.
+                    items:
+                      properties:
+                        dnsTargetResource:
+                          description: Component for DNS/Routing Control Readiness
+                            Checks.
+                          items:
+                            properties:
+                              domainName:
+                                description: DNS Name that acts as the ingress point
+                                  to a portion of application.
+                                type: string
+                              hostedZoneArn:
+                                description: Hosted Zone ARN that contains the DNS
+                                  record with the provided name of target resource.
+                                type: string
+                              recordSetId:
+                                description: Route53 record set id to uniquely identify
+                                  a record given a domain_name and a record_type.
+                                type: string
+                              recordType:
+                                description: Type of DNS Record of target resource.
+                                type: string
+                              targetResource:
+                                description: Target resource the R53 record specified
+                                  with the above params points to.
+                                items:
+                                  properties:
+                                    nlbResource:
+                                      description: NLB resource a DNS Target Resource
+                                        points to. Required if r53_resource is not
+                                        set.
+                                      items:
+                                        properties:
+                                          arn:
+                                            description: NLB resource ARN.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    r53Resource:
+                                      description: Route53 resource a DNS Target Resource
+                                        record points to.
+                                      items:
+                                        properties:
+                                          domainName:
+                                            description: Domain name that is targeted.
+                                            type: string
+                                          recordSetId:
+                                            description: Resource record set ID that
+                                              is targeted.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        readinessScopes:
+                          description: Recovery group ARN or cell ARN that contains
+                            this resource set.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -432,10 +519,12 @@ spec:
             x-kubernetes-validations:
             - message: resourceSetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceSetType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceSetType)
+                || has(self.initProvider.resourceSetType)'
             - message: resources is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resources)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resources)
+                || has(self.initProvider.resources)'
           status:
             description: ResourceSetStatus defines the observed state of ResourceSet.
             properties:

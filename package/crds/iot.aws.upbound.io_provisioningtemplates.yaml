@@ -87,8 +87,6 @@ spec:
                         targetArn:
                           description: The ARN of the target function.
                           type: string
-                      required:
-                      - targetArn
                       type: object
                     type: array
                   provisioningRoleArn:
@@ -184,6 +182,51 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The description of the fleet provisioning template.
+                    type: string
+                  enabled:
+                    description: True to enable the fleet provisioning template, otherwise
+                      false.
+                    type: boolean
+                  preProvisioningHook:
+                    description: Creates a pre-provisioning hook template. Details
+                      below.
+                    items:
+                      properties:
+                        payloadVersion:
+                          description: The version of the payload that was sent to
+                            the target function. The only valid (and the default)
+                            payload version is "2020-04-01".
+                          type: string
+                        targetArn:
+                          description: The ARN of the target function.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  templateBody:
+                    description: The JSON formatted contents of the fleet provisioning
+                      template.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -385,7 +428,8 @@ spec:
             x-kubernetes-validations:
             - message: templateBody is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.templateBody)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.templateBody)
+                || has(self.initProvider.templateBody)'
           status:
             description: ProvisioningTemplateStatus defines the observed state of
               ProvisioningTemplate.

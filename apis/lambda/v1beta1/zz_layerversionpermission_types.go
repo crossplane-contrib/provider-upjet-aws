@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LayerVersionPermissionInitParameters struct {
+
+	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name or ARN of the Lambda Layer, which you want to grant access to.
+	LayerName *string `json:"layerName,omitempty" tf:"layer_name,omitempty"`
+
+	// An identifier of AWS Organization, which should be able to use your Lambda Layer. principal should be equal to * if organization_id provided.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+}
+
 type LayerVersionPermissionObservation struct {
 
 	// Action, which will be allowed. lambda:GetLayerVersion value is suggested by AWS documantation.
@@ -79,6 +100,18 @@ type LayerVersionPermissionParameters struct {
 type LayerVersionPermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LayerVersionPermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LayerVersionPermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // LayerVersionPermissionStatus defines the observed state of LayerVersionPermission.
@@ -99,11 +132,11 @@ type LayerVersionPermissionStatus struct {
 type LayerVersionPermission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName)",message="layerName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal)",message="principal is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.statementId)",message="statementId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versionNumber)",message="versionNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName) || has(self.initProvider.layerName)",message="layerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || has(self.initProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.statementId) || has(self.initProvider.statementId)",message="statementId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versionNumber) || has(self.initProvider.versionNumber)",message="versionNumber is a required parameter"
 	Spec   LayerVersionPermissionSpec   `json:"spec"`
 	Status LayerVersionPermissionStatus `json:"status,omitempty"`
 }

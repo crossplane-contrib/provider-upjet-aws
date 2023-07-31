@@ -112,12 +112,50 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - accountName
                       - accountPasswordSecretRef
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  directoryName:
+                    description: Fully qualified name of the directory.
+                    type: string
+                  organizationalUnitDistinguishedNames:
+                    description: Distinguished names of the organizational units for
+                      computer accounts.
+                    items:
+                      type: string
+                    type: array
+                  serviceAccountCredentials:
+                    description: Configuration block for the name of the directory
+                      and organizational unit (OU) to use to join the directory config
+                      to a Microsoft Active Directory domain. See service_account_credentials
+                      below.
+                    items:
+                      properties:
+                        accountName:
+                          description: 'User name of the account. This account must
+                            have the following privileges: create computer objects,
+                            join computers to the domain, and change/reset the password
+                            on descendant computer objects for the organizational
+                            units specified.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -319,13 +357,16 @@ spec:
             x-kubernetes-validations:
             - message: directoryName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.directoryName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.directoryName)
+                || has(self.initProvider.directoryName)'
             - message: organizationalUnitDistinguishedNames is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.organizationalUnitDistinguishedNames)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.organizationalUnitDistinguishedNames)
+                || has(self.initProvider.organizationalUnitDistinguishedNames)'
             - message: serviceAccountCredentials is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceAccountCredentials)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceAccountCredentials)
+                || has(self.initProvider.serviceAccountCredentials)'
           status:
             description: DirectoryConfigStatus defines the observed state of DirectoryConfig.
             properties:

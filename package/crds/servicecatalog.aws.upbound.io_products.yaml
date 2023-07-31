@@ -142,6 +142,88 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
+                  description:
+                    description: Description of the product.
+                    type: string
+                  distributor:
+                    description: Distributor (i.e., vendor) of the product.
+                    type: string
+                  name:
+                    description: Name of the product.
+                    type: string
+                  owner:
+                    description: Owner of the product.
+                    type: string
+                  provisioningArtifactParameters:
+                    description: Configuration block for provisioning artifact (i.e.,
+                      version) parameters. Detailed below.
+                    items:
+                      properties:
+                        description:
+                          description: Description of the provisioning artifact (i.e.,
+                            version), including how it differs from the previous provisioning
+                            artifact.
+                          type: string
+                        disableTemplateValidation:
+                          description: Whether AWS Service Catalog stops validating
+                            the specified provisioning artifact template even if it
+                            is invalid.
+                          type: boolean
+                        name:
+                          description: Name of the provisioning artifact (for example,
+                            v1, v2beta). No spaces are allowed.
+                          type: string
+                        templatePhysicalId:
+                          description: Template source as the physical ID of the resource
+                            that contains the template. Currently only supports CloudFormation
+                            stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account
+                            ID]:stack/[stack name]/[resource ID].
+                          type: string
+                        templateUrl:
+                          description: Template source as URL of the CloudFormation
+                            template in Amazon S3.
+                          type: string
+                        type:
+                          description: Type of provisioning artifact. See AWS Docs
+                            for valid list of values.
+                          type: string
+                      type: object
+                    type: array
+                  supportDescription:
+                    description: Support information about the product.
+                    type: string
+                  supportEmail:
+                    description: Contact email for product support.
+                    type: string
+                  supportUrl:
+                    description: Contact URL for product support.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: Type of product. See AWS Docs for valid list of values.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -342,16 +424,20 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: owner is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.owner)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.owner)
+                || has(self.initProvider.owner)'
             - message: provisioningArtifactParameters is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.provisioningArtifactParameters)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.provisioningArtifactParameters)
+                || has(self.initProvider.provisioningArtifactParameters)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: ProductStatus defines the observed state of Product.
             properties:

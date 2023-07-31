@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MetricFilterInitParameters struct {
+
+	// A block defining collection of information needed to define how metric data gets emitted. See below.
+	MetricTransformation []MetricTransformationInitParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
+
+	// A valid CloudWatch Logs filter pattern
+	// for extracting metric data out of ingested log events.
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+}
+
 type MetricFilterObservation struct {
 
 	// The name of the metric filter.
@@ -59,6 +69,27 @@ type MetricFilterParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type MetricTransformationInitParameters struct {
+
+	// The value to emit when a filter pattern does not match a log event. Conflicts with dimensions.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
+
+	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The destination namespace of the CloudWatch metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// The unit to assign to the metric. If you omit this, the unit is set as None.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// What to publish to the metric. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type MetricTransformationObservation struct {
 
 	// The value to emit when a filter pattern does not match a log event. Conflicts with dimensions.
@@ -91,26 +122,38 @@ type MetricTransformationParameters struct {
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The destination namespace of the CloudWatch metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The unit to assign to the metric. If you omit this, the unit is set as None.
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// What to publish to the metric. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // MetricFilterSpec defines the desired state of MetricFilter
 type MetricFilterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MetricFilterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MetricFilterInitParameters `json:"initProvider,omitempty"`
 }
 
 // MetricFilterStatus defines the observed state of MetricFilter.
@@ -131,8 +174,8 @@ type MetricFilterStatus struct {
 type MetricFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricTransformation)",message="metricTransformation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pattern)",message="pattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricTransformation) || has(self.initProvider.metricTransformation)",message="metricTransformation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pattern) || has(self.initProvider.pattern)",message="pattern is a required parameter"
 	Spec   MetricFilterSpec   `json:"spec"`
 	Status MetricFilterStatus `json:"status,omitempty"`
 }

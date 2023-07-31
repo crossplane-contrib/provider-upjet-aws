@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MediaInsightsConfigurationInitParameters struct {
+
+	// The media insights configuration that will be invoked by the Voice Connector.
+	ConfigurationArn *string `json:"configurationArn,omitempty" tf:"configuration_arn,omitempty"`
+
+	// When true, the media insights configuration is not enabled. Defaults to false.
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+}
+
 type MediaInsightsConfigurationObservation struct {
 
 	// The media insights configuration that will be invoked by the Voice Connector.
@@ -31,6 +40,21 @@ type MediaInsightsConfigurationParameters struct {
 	// When true, the media insights configuration is not enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+}
+
+type VoiceConnectorStreamingInitParameters struct {
+
+	// The retention period, in hours, for the Amazon Kinesis data.
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
+
+	// When true, media streaming to Amazon Kinesis is turned off. Default: false
+	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
+	// The media insights configuration. See media_insights_configuration.
+	MediaInsightsConfiguration []MediaInsightsConfigurationInitParameters `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
+
+	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
+	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
 }
 
 type VoiceConnectorStreamingObservation struct {
@@ -96,6 +120,18 @@ type VoiceConnectorStreamingParameters struct {
 type VoiceConnectorStreamingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VoiceConnectorStreamingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VoiceConnectorStreamingInitParameters `json:"initProvider,omitempty"`
 }
 
 // VoiceConnectorStreamingStatus defines the observed state of VoiceConnectorStreaming.
@@ -116,7 +152,7 @@ type VoiceConnectorStreamingStatus struct {
 type VoiceConnectorStreaming struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRetention)",message="dataRetention is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRetention) || has(self.initProvider.dataRetention)",message="dataRetention is a required parameter"
 	Spec   VoiceConnectorStreamingSpec   `json:"spec"`
 	Status VoiceConnectorStreamingStatus `json:"status,omitempty"`
 }

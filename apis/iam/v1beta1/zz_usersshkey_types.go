@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserSSHKeyInitParameters struct {
+
+	// Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is active.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type UserSSHKeyObservation struct {
 
 	// Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM.
@@ -68,6 +80,18 @@ type UserSSHKeyParameters struct {
 type UserSSHKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserSSHKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider UserSSHKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserSSHKeyStatus defines the observed state of UserSSHKey.
@@ -88,8 +112,8 @@ type UserSSHKeyStatus struct {
 type UserSSHKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encoding)",message="encoding is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicKey)",message="publicKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encoding) || has(self.initProvider.encoding)",message="encoding is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicKey) || has(self.initProvider.publicKey)",message="publicKey is a required parameter"
 	Spec   UserSSHKeySpec   `json:"spec"`
 	Status UserSSHKeyStatus `json:"status,omitempty"`
 }

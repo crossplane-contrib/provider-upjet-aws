@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkACLEgressInitParameters struct {
+}
+
 type NetworkACLEgressObservation struct {
 
 	// The action to take.
@@ -48,6 +51,9 @@ type NetworkACLEgressObservation struct {
 type NetworkACLEgressParameters struct {
 }
 
+type NetworkACLIngressInitParameters struct {
+}
+
 type NetworkACLIngressObservation struct {
 
 	// The action to take.
@@ -81,6 +87,12 @@ type NetworkACLIngressObservation struct {
 }
 
 type NetworkACLIngressParameters struct {
+}
+
+type NetworkACLInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NetworkACLObservation struct {
@@ -159,6 +171,18 @@ type NetworkACLParameters struct {
 type NetworkACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NetworkACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkACLStatus defines the observed state of NetworkACL.

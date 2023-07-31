@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppInitParameters struct {
+
+	// Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign
+	CampaignHook []CampaignHookInitParameters `json:"campaignHook,omitempty" tf:"campaign_hook,omitempty"`
+
+	// The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own
+	Limits []LimitsInitParameters `json:"limits,omitempty" tf:"limits,omitempty"`
+
+	// The application name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own
+	QuietTime []QuietTimeInitParameters `json:"quietTime,omitempty" tf:"quiet_time,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppObservation struct {
 
 	// The Application ID of the Pinpoint App.
@@ -70,6 +88,18 @@ type AppParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type CampaignHookInitParameters struct {
+
+	// Lambda function name or ARN to be called for delivery. Conflicts with web_url
+	LambdaFunctionName *string `json:"lambdaFunctionName,omitempty" tf:"lambda_function_name,omitempty"`
+
+	// What mode Lambda should be invoked in. Valid values for this parameter are DELIVERY, FILTER.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request. Conflicts with lambda_function_name
+	WebURL *string `json:"webUrl,omitempty" tf:"web_url,omitempty"`
+}
+
 type CampaignHookObservation struct {
 
 	// Lambda function name or ARN to be called for delivery. Conflicts with web_url
@@ -95,6 +125,21 @@ type CampaignHookParameters struct {
 	// Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request. Conflicts with lambda_function_name
 	// +kubebuilder:validation:Optional
 	WebURL *string `json:"webUrl,omitempty" tf:"web_url,omitempty"`
+}
+
+type LimitsInitParameters struct {
+
+	// The maximum number of messages that the campaign can send daily.
+	Daily *float64 `json:"daily,omitempty" tf:"daily,omitempty"`
+
+	// The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
+	MaximumDuration *float64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
+
+	// The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
+	MessagesPerSecond *float64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
+
+	// The maximum total number of messages that the campaign can send.
+	Total *float64 `json:"total,omitempty" tf:"total,omitempty"`
 }
 
 type LimitsObservation struct {
@@ -131,6 +176,15 @@ type LimitsParameters struct {
 	Total *float64 `json:"total,omitempty" tf:"total,omitempty"`
 }
 
+type QuietTimeInitParameters struct {
+
+	// The default end time for quiet time in ISO 8601 format. Required if start is set
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// The default start time for quiet time in ISO 8601 format. Required if end is set
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
 type QuietTimeObservation struct {
 
 	// The default end time for quiet time in ISO 8601 format. Required if start is set
@@ -155,6 +209,18 @@ type QuietTimeParameters struct {
 type AppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppStatus defines the observed state of App.

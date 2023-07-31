@@ -13,6 +13,47 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StackInitParameters struct {
+
+	// A list of capabilities.
+	// Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, or CAPABILITY_AUTO_EXPAND
+	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
+
+	// Set to true to disable rollback of the stack if stack creation failed.
+	// Conflicts with on_failure.
+	DisableRollback *bool `json:"disableRollback,omitempty" tf:"disable_rollback,omitempty"`
+
+	// A list of SNS topic ARNs to publish stack related events.
+	NotificationArns []*string `json:"notificationArns,omitempty" tf:"notification_arns,omitempty"`
+
+	// Action to be taken if stack creation fails. This must be
+	// one of: DO_NOTHING, ROLLBACK, or DELETE. Conflicts with disable_rollback.
+	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// A map of Parameter structures that specify input parameters for the stack.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Structure containing the stack policy body.
+	// Conflicts w/ policy_url.
+	PolicyBody *string `json:"policyBody,omitempty" tf:"policy_body,omitempty"`
+
+	// Location of a file containing the stack policy.
+	// Conflicts w/ policy_body.
+	PolicyURL *string `json:"policyUrl,omitempty" tf:"policy_url,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Structure containing the template body (max size: 51,200 bytes).
+	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// Location of a file containing the template body (max size: 460,800 bytes).
+	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
+
+	// The amount of time that can pass before the stack status becomes CREATE_FAILED.
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+}
+
 type StackObservation struct {
 
 	// A list of capabilities.
@@ -148,6 +189,18 @@ type StackParameters struct {
 type StackSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StackParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StackInitParameters `json:"initProvider,omitempty"`
 }
 
 // StackStatus defines the observed state of Stack.

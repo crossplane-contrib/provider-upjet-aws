@@ -20,6 +20,3 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: test
     region: us-west-1
-
----
-

@@ -81,6 +81,33 @@ spec:
                       for.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  certificateBody:
+                    description: encoded format.
+                    type: string
+                  status:
+                    description: –   The status you want to assign to the certificate.
+                      Active means that the certificate can be used for programmatic
+                      calls to Amazon Web Services Inactive means that the certificate
+                      cannot be used.
+                    type: string
+                  userName:
+                    description: –  The name of the user the signing certificate is
+                      for.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -281,10 +308,12 @@ spec:
             x-kubernetes-validations:
             - message: certificateBody is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateBody)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateBody)
+                || has(self.initProvider.certificateBody)'
             - message: userName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)
+                || has(self.initProvider.userName)'
           status:
             description: SigningCertificateStatus defines the observed state of SigningCertificate.
             properties:

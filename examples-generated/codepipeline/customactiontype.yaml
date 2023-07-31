@@ -18,6 +18,3 @@ spec:
     providerName: example
     region: us-west-1
     version: "1"
-
----
-

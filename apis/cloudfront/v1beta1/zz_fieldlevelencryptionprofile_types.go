@@ -13,6 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionEntitiesInitParameters struct {
+	Items []EncryptionEntitiesItemsInitParameters `json:"items,omitempty" tf:"items,omitempty"`
+}
+
+type EncryptionEntitiesItemsInitParameters struct {
+
+	// Object that contains an attribute items that contains the list of field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted.
+	FieldPatterns []FieldPatternsInitParameters `json:"fieldPatterns,omitempty" tf:"field_patterns,omitempty"`
+
+	// The provider associated with the public key being used for encryption.
+	ProviderID *string `json:"providerId,omitempty" tf:"provider_id,omitempty"`
+}
+
 type EncryptionEntitiesItemsObservation struct {
 
 	// Object that contains an attribute items that contains the list of field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted.
@@ -28,12 +41,12 @@ type EncryptionEntitiesItemsObservation struct {
 type EncryptionEntitiesItemsParameters struct {
 
 	// Object that contains an attribute items that contains the list of field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted.
-	// +kubebuilder:validation:Required
-	FieldPatterns []FieldPatternsParameters `json:"fieldPatterns" tf:"field_patterns,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldPatterns []FieldPatternsParameters `json:"fieldPatterns,omitempty" tf:"field_patterns,omitempty"`
 
 	// The provider associated with the public key being used for encryption.
-	// +kubebuilder:validation:Required
-	ProviderID *string `json:"providerId" tf:"provider_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ProviderID *string `json:"providerId,omitempty" tf:"provider_id,omitempty"`
 
 	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.PublicKey
@@ -58,6 +71,18 @@ type EncryptionEntitiesParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Items []EncryptionEntitiesItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
+}
+
+type FieldLevelEncryptionProfileInitParameters struct {
+
+	// An optional comment about the Field Level Encryption Profile.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The encryption entities config block for field-level encryption profiles that contains an attribute items which includes the encryption key and field pattern specifications.
+	EncryptionEntities []EncryptionEntitiesInitParameters `json:"encryptionEntities,omitempty" tf:"encryption_entities,omitempty"`
+
+	// The name of the Field Level Encryption Profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FieldLevelEncryptionProfileObservation struct {
@@ -101,6 +126,10 @@ type FieldLevelEncryptionProfileParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type FieldPatternsInitParameters struct {
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
+}
+
 type FieldPatternsObservation struct {
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
@@ -115,6 +144,18 @@ type FieldPatternsParameters struct {
 type FieldLevelEncryptionProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FieldLevelEncryptionProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FieldLevelEncryptionProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // FieldLevelEncryptionProfileStatus defines the observed state of FieldLevelEncryptionProfile.
@@ -135,8 +176,8 @@ type FieldLevelEncryptionProfileStatus struct {
 type FieldLevelEncryptionProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionEntities)",message="encryptionEntities is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionEntities) || has(self.initProvider.encryptionEntities)",message="encryptionEntities is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FieldLevelEncryptionProfileSpec   `json:"spec"`
 	Status FieldLevelEncryptionProfileStatus `json:"status,omitempty"`
 }

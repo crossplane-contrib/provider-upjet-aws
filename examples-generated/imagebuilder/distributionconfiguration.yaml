@@ -21,6 +21,3 @@ spec:
       region: us-east-1
     name: example
     region: us-west-1
-
----
-

@@ -424,8 +424,6 @@ spec:
                         s3KeyPrefix:
                           description: The prefix applied to the log file names.
                           type: string
-                      required:
-                      - enable
                       type: object
                     type: array
                   maintenanceTrackName:
@@ -531,8 +529,6 @@ spec:
                             in the destination region after they are copied from the
                             source region. Defaults to 7.
                           type: number
-                      required:
-                      - destinationRegion
                       type: object
                     type: array
                   snapshotIdentifier:
@@ -629,6 +625,233 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  allowVersionUpgrade:
+                    description: If true , major version upgrades can be applied during
+                      the maintenance window to the Amazon Redshift engine that is
+                      running on the cluster. Default is true.
+                    type: boolean
+                  applyImmediately:
+                    description: Specifies whether any cluster modifications are applied
+                      immediately, or during the next maintenance window. Default
+                      is false.
+                    type: boolean
+                  aquaConfigurationStatus:
+                    description: The value represents how the cluster is configured
+                      to use AQUA (Advanced Query Accelerator) after the cluster is
+                      restored. Possible values are enabled, disabled, and auto. Requires
+                      Cluster reboot.
+                    type: string
+                  automatedSnapshotRetentionPeriod:
+                    description: The number of days that automated snapshots are retained.
+                      If the value is 0, automated snapshots are disabled. Even if
+                      automated snapshots are disabled, you can still create manual
+                      snapshots when you want with create-cluster-snapshot. Default
+                      is 1.
+                    type: number
+                  availabilityZone:
+                    description: The EC2 Availability Zone (AZ) in which you want
+                      Amazon Redshift to provision the cluster. For example, if you
+                      have several EC2 instances running in a specific Availability
+                      Zone, then you might want the cluster to be provisioned in the
+                      same zone in order to decrease network latency. Can only be
+                      changed if availability_zone_relocation_enabled is true.
+                    type: string
+                  availabilityZoneRelocationEnabled:
+                    description: If true, the cluster can be relocated to another
+                      availabity zone, either automatically by AWS or when requested.
+                      Default is false. Available for use on clusters from the RA3
+                      instance family.
+                    type: boolean
+                  clusterParameterGroupName:
+                    description: The name of the parameter group to be associated
+                      with this cluster.
+                    type: string
+                  clusterPublicKey:
+                    description: The public key for the cluster
+                    type: string
+                  clusterRevisionNumber:
+                    description: The specific revision number of the database in the
+                      cluster
+                    type: string
+                  clusterSecurityGroups:
+                    description: A list of security groups to be associated with this
+                      cluster.
+                    items:
+                      type: string
+                    type: array
+                  clusterSubnetGroupName:
+                    description: The name of a cluster subnet group to be associated
+                      with this cluster. If this parameter is not provided the resulting
+                      cluster will be deployed outside virtual private cloud (VPC).
+                    type: string
+                  clusterType:
+                    description: The cluster type to use. Either single-node or multi-node.
+                    type: string
+                  clusterVersion:
+                    description: The version of the Amazon Redshift engine software
+                      that you want to deploy on the cluster. The version selected
+                      runs on all the nodes in the cluster.
+                    type: string
+                  databaseName:
+                    description: The name of the first database to be created when
+                      the cluster is created. If you do not provide a name, Amazon
+                      Redshift will create a default database called dev.
+                    type: string
+                  elasticIp:
+                    description: The Elastic IP (EIP) address for the cluster.
+                    type: string
+                  encrypted:
+                    description: If true , the data in the cluster is encrypted at
+                      rest.
+                    type: boolean
+                  endpoint:
+                    description: The connection endpoint
+                    type: string
+                  enhancedVpcRouting:
+                    description: If true , enhanced VPC routing is enabled.
+                    type: boolean
+                  finalSnapshotIdentifier:
+                    description: The identifier of the final snapshot that is to be
+                      created immediately before deleting the cluster. If this parameter
+                      is provided, skip_final_snapshot must be false.
+                    type: string
+                  logging:
+                    description: Logging, documented below.
+                    items:
+                      properties:
+                        bucketName:
+                          description: The name of an existing S3 bucket where the
+                            log files are to be stored. Must be in the same region
+                            as the cluster and the cluster must have read bucket and
+                            put object permissions. For more information on the permissions
+                            required for the bucket, please read the AWS documentation
+                          type: string
+                        enable:
+                          description: Enables logging information such as queries
+                            and connection attempts, for the specified Amazon Redshift
+                            cluster.
+                          type: boolean
+                        logDestinationType:
+                          description: The log destination type. An enum with possible
+                            values of s3 and cloudwatch.
+                          type: string
+                        logExports:
+                          description: The collection of exported log types. Log types
+                            include the connection log, user log and user activity
+                            log. Required when log_destination_type is cloudwatch.
+                            Valid log types are connectionlog, userlog, and useractivitylog.
+                          items:
+                            type: string
+                          type: array
+                        s3KeyPrefix:
+                          description: The prefix applied to the log file names.
+                          type: string
+                      type: object
+                    type: array
+                  maintenanceTrackName:
+                    description: The name of the maintenance track for the restored
+                      cluster. When you take a snapshot, the snapshot inherits the
+                      MaintenanceTrack value from the cluster. The snapshot might
+                      be on a different track than the cluster that was the source
+                      for the snapshot. For example, suppose that you take a snapshot
+                      of  a cluster that is on the current track and then change the
+                      cluster to be on the trailing track. In this case, the snapshot
+                      and the source cluster are on different tracks. Default value
+                      is current.
+                    type: string
+                  manualSnapshotRetentionPeriod:
+                    description: The default number of days to retain a manual snapshot.
+                      If the value is -1, the snapshot is retained indefinitely. This
+                      setting doesn't change the retention period of existing snapshots.
+                      Valid values are between -1 and 3653. Default value is -1.
+                    type: number
+                  masterUsername:
+                    description: Username for the master DB user.
+                    type: string
+                  nodeType:
+                    description: The node type to be provisioned for the cluster.
+                    type: string
+                  numberOfNodes:
+                    description: The number of compute nodes in the cluster. This
+                      parameter is required when the ClusterType parameter is specified
+                      as multi-node. Default is 1.
+                    type: number
+                  ownerAccount:
+                    description: The AWS customer account used to create or copy the
+                      snapshot. Required if you are restoring a snapshot you do not
+                      own, optional if you own the snapshot.
+                    type: string
+                  port:
+                    description: The port number on which the cluster accepts incoming
+                      connections. Valid values are between 1115 and 65535. The cluster
+                      is accessible only via the JDBC and ODBC connection strings.
+                      Part of the connection string requires the port on which the
+                      cluster will listen for incoming connections. Default port is
+                      5439.
+                    type: number
+                  preferredMaintenanceWindow:
+                    description: 'The weekly time range (in UTC) during which automated
+                      cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
+                    type: string
+                  publiclyAccessible:
+                    description: If true, the cluster can be accessed from a public
+                      network. Default is true.
+                    type: boolean
+                  skipFinalSnapshot:
+                    description: Determines whether a final snapshot of the cluster
+                      is created before Amazon Redshift deletes the cluster. If true
+                      , a final cluster snapshot is not created. If false , a final
+                      cluster snapshot is created before the cluster is deleted. Default
+                      is false.
+                    type: boolean
+                  snapshotClusterIdentifier:
+                    description: The name of the cluster the source snapshot was created
+                      from.
+                    type: string
+                  snapshotCopy:
+                    description: Configuration of automatic copy of snapshots from
+                      one region to another. Documented below.
+                    items:
+                      properties:
+                        destinationRegion:
+                          description: The destination region that you want to copy
+                            snapshots to.
+                          type: string
+                        grantName:
+                          description: The name of the snapshot copy grant to use
+                            when snapshots of an AWS KMS-encrypted cluster are copied
+                            to the destination region.
+                          type: string
+                        retentionPeriod:
+                          description: The number of days to retain automated snapshots
+                            in the destination region after they are copied from the
+                            source region. Defaults to 7.
+                          type: number
+                      type: object
+                    type: array
+                  snapshotIdentifier:
+                    description: The name of the snapshot from which to create the
+                      new cluster.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -830,7 +1053,8 @@ spec:
             x-kubernetes-validations:
             - message: nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || has(self.initProvider.nodeType)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

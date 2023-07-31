@@ -162,6 +162,3 @@ spec:
     region: us-west-1
     versioningConfiguration:
     - status: Enabled
-
----
-

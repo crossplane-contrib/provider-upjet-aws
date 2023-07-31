@@ -179,6 +179,48 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  content:
+                    description: Specifies the content of the Contact Flow Module,
+                      provided as a JSON string, written in Amazon Connect Contact
+                      Flow Language. If defined, the filename argument cannot be used.
+                    type: string
+                  contentHash:
+                    description: Used to trigger updates. Must be set to a base64-encoded
+                      SHA256 hash of the Contact Flow Module source specified with
+                      filename. The usual way to set this is filebase64sha256("contact_flow_module.11.12
+                      and later) or base64sha256(file("contact_flow_module.11.11 and
+                      earlier), where "contact_flow_module.json" is the local filename
+                      of the Contact Flow Module source.
+                    type: string
+                  description:
+                    description: Specifies the description of the Contact Flow Module.
+                    type: string
+                  filename:
+                    description: The path to the Contact Flow Module source within
+                      the local filesystem. Conflicts with content.
+                    type: string
+                  name:
+                    description: Specifies the name of the Contact Flow Module.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -379,7 +421,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ContactFlowModuleStatus defines the observed state of ContactFlowModule.
             properties:

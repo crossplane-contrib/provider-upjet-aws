@@ -86,16 +86,11 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - name
-                            - values
                             type: object
                           type: array
                         type:
                           description: Specifies the type of group configuration item.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   description:
@@ -117,8 +112,6 @@ spec:
                           description: The type of the resource query. Defaults to
                             TAG_FILTERS_1_0.
                           type: string
-                      required:
-                      - query
                       type: object
                     type: array
                   tags:
@@ -128,6 +121,69 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  configuration:
+                    description: A configuration associates the resource group with
+                      an AWS service and specifies how the service can interact with
+                      the resources in the group. See below for details.
+                    items:
+                      properties:
+                        parameters:
+                          description: A collection of parameters for this group configuration
+                            item. See below for details.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the group configuration parameter.
+                                type: string
+                              values:
+                                description: The value or values to be used for the
+                                  specified parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        type:
+                          description: Specifies the type of group configuration item.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the resource group.
+                    type: string
+                  resourceQuery:
+                    description: A resource_query block. Resource queries are documented
+                      below.
+                    items:
+                      properties:
+                        query:
+                          description: The resource query as a JSON string.
+                          type: string
+                        type:
+                          description: The type of the resource query. Defaults to
+                            TAG_FILTERS_1_0.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

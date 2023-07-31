@@ -182,11 +182,6 @@ spec:
                             Port numbers are end-inclusive. This value must be higher
                             than from_port.
                           type: number
-                      required:
-                      - fromPort
-                      - ipRange
-                      - protocol
-                      - toPort
                       type: object
                     type: array
                   ec2InstanceType:
@@ -340,9 +335,6 @@ spec:
                                 description: Optional list of parameters to pass to
                                   the server executable on launch.
                                 type: string
-                            required:
-                            - concurrentExecutions
-                            - launchPath
                             type: object
                           type: array
                       type: object
@@ -357,6 +349,143 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  certificateConfiguration:
+                    description: Prompts GameLift to generate a TLS/SSL certificate
+                      for the fleet. See certificate_configuration.
+                    items:
+                      properties:
+                        certificateType:
+                          description: Indicates whether a TLS/SSL certificate is
+                            generated for a fleet. Valid values are DISABLED and GENERATED.
+                            Default value is DISABLED.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Human-readable description of the fleet.
+                    type: string
+                  ec2InboundPermission:
+                    description: Range of IP addresses and port settings that permit
+                      inbound traffic to access server processes running on the fleet.
+                      See below.
+                    items:
+                      properties:
+                        fromPort:
+                          description: Starting value for a range of allowed port
+                            numbers.
+                          type: number
+                        ipRange:
+                          description: Range of allowed IP addresses expressed in
+                            CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet
+                            mask].
+                          type: string
+                        protocol:
+                          description: Network communication protocol used by the
+                            fleetE.g., TCP or UDP
+                          type: string
+                        toPort:
+                          description: Ending value for a range of allowed port numbers.
+                            Port numbers are end-inclusive. This value must be higher
+                            than from_port.
+                          type: number
+                      type: object
+                    type: array
+                  ec2InstanceType:
+                    description: Name of an EC2 instance typeE.g., t2.micro
+                    type: string
+                  fleetType:
+                    description: Type of fleet. This value must be ON_DEMAND or SPOT.
+                      Defaults to ON_DEMAND.
+                    type: string
+                  metricGroups:
+                    description: List of names of metric groups to add this fleet
+                      to. A metric group tracks metrics across all fleets in the group.
+                      Defaults to default.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the fleet.
+                    type: string
+                  newGameSessionProtectionPolicy:
+                    description: Game session protection policy to apply to all instances
+                      in this fleetE.g., FullProtection. Defaults to NoProtection.
+                    type: string
+                  resourceCreationLimitPolicy:
+                    description: Policy that limits the number of game sessions an
+                      individual player can create over a span of time for this fleet.
+                      See below.
+                    items:
+                      properties:
+                        newGameSessionsPerCreator:
+                          description: Maximum number of game sessions that an individual
+                            can create during the policy period.
+                          type: number
+                        policyPeriodInMinutes:
+                          description: Time span used in evaluating the resource creation
+                            limit policy.
+                          type: number
+                      type: object
+                    type: array
+                  runtimeConfiguration:
+                    description: Instructions for launching server processes on each
+                      instance in the fleet. See below.
+                    items:
+                      properties:
+                        gameSessionActivationTimeoutSeconds:
+                          description: Maximum amount of time (in seconds) that a
+                            game session can remain in status ACTIVATING.
+                          type: number
+                        maxConcurrentGameSessionActivations:
+                          description: Maximum number of game sessions with status
+                            ACTIVATING to allow on an instance simultaneously.
+                          type: number
+                        serverProcess:
+                          description: Collection of server process configurations
+                            that describe which server processes to run on each instance
+                            in a fleet. See below.
+                          items:
+                            properties:
+                              concurrentExecutions:
+                                description: Number of server processes using this
+                                  configuration to run concurrently on an instance.
+                                type: number
+                              launchPath:
+                                description: 'Location of the server executable in
+                                  a game build. All game builds are installed on instances
+                                  at the root : for Windows instances C:\game, and
+                                  for Linux instances /local/game.'
+                                type: string
+                              parameters:
+                                description: Optional list of parameters to pass to
+                                  the server executable on launch.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  scriptId:
+                    description: ID of the GameLift Script to be deployed on the fleet.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -558,10 +687,12 @@ spec:
             x-kubernetes-validations:
             - message: ec2InstanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ec2InstanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ec2InstanceType)
+                || has(self.initProvider.ec2InstanceType)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FleetStatus defines the observed state of Fleet.
             properties:

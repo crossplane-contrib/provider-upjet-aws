@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotebookInstanceLifecycleConfigurationInitParameters struct {
+
+	// A shell script (base64-encoded) that runs only once when the SageMaker Notebook Instance is created.
+	OnCreate *string `json:"onCreate,omitempty" tf:"on_create,omitempty"`
+
+	// A shell script (base64-encoded) that runs every time the SageMaker Notebook Instance is started including the time it's created.
+	OnStart *string `json:"onStart,omitempty" tf:"on_start,omitempty"`
+}
+
 type NotebookInstanceLifecycleConfigurationObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this lifecycle configuration.
@@ -47,6 +56,18 @@ type NotebookInstanceLifecycleConfigurationParameters struct {
 type NotebookInstanceLifecycleConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotebookInstanceLifecycleConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NotebookInstanceLifecycleConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotebookInstanceLifecycleConfigurationStatus defines the observed state of NotebookInstanceLifecycleConfiguration.

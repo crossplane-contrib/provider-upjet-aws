@@ -118,8 +118,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - name
                       type: object
                     type: array
                   region:
@@ -146,6 +144,90 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  automatic:
+                    description: Remediation is triggered automatically if true.
+                    type: boolean
+                  executionControls:
+                    description: Configuration block for execution controls. See below.
+                    items:
+                      properties:
+                        ssmControls:
+                          description: Configuration block for SSM controls. See below.
+                          items:
+                            properties:
+                              concurrentExecutionRatePercentage:
+                                description: Maximum percentage of remediation actions
+                                  allowed to run in parallel on the non-compliant
+                                  resources for that specific rule. The default value
+                                  is 10%.
+                                type: number
+                              errorPercentage:
+                                description: Percentage of errors that are allowed
+                                  before SSM stops running automations on non-compliant
+                                  resources for that specific rule. The default is
+                                  50%.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  maximumAutomaticAttempts:
+                    description: Maximum number of failed attempts for auto-remediation.
+                      If you do not select a number, the default is 5.
+                    type: number
+                  parameter:
+                    description: Can be specified multiple times for each parameter.
+                      Each parameter block supports arguments below.
+                    items:
+                      properties:
+                        name:
+                          description: Name of the attribute.
+                          type: string
+                        resourceValue:
+                          description: Value is dynamic and changes at run-time.
+                          type: string
+                        staticValue:
+                          description: Value is static and does not change at run-time.
+                          type: string
+                        staticValues:
+                          description: List of static values.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  resourceType:
+                    description: Type of resource.
+                    type: string
+                  retryAttemptSeconds:
+                    description: Maximum time in seconds that AWS Config runs auto-remediation.
+                      If you do not select a number, the default is 60 seconds.
+                    type: number
+                  targetId:
+                    description: Target ID is the name of the public document.
+                    type: string
+                  targetType:
+                    description: Type of the target. Target executes remediation.
+                      For example, SSM document.
+                    type: string
+                  targetVersion:
+                    description: Version of the target. For example, version of the
+                      SSM document
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -347,10 +429,12 @@ spec:
             x-kubernetes-validations:
             - message: targetId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)
+                || has(self.initProvider.targetId)'
             - message: targetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetType)
+                || has(self.initProvider.targetType)'
           status:
             description: RemediationConfigurationStatus defines the observed state
               of RemediationConfiguration.

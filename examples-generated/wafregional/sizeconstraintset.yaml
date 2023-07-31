@@ -16,6 +16,3 @@ spec:
       - type: BODY
       size: "4096"
       textTransformation: NONE
-
----
-

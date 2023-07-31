@@ -12,6 +12,3 @@ spec:
     transitGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

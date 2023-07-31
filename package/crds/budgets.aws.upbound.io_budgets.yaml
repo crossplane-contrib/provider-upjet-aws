@@ -83,12 +83,8 @@ spec:
                             properties:
                               budgetAdjustmentPeriod:
                                 type: number
-                            required:
-                            - budgetAdjustmentPeriod
                             type: object
                           type: array
-                      required:
-                      - autoAdjustType
                       type: object
                     type: array
                   budgetType:
@@ -106,9 +102,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - name
-                      - values
                       type: object
                     type: array
                   costFilters:
@@ -209,11 +202,6 @@ spec:
                           description: What kind of threshold is defined. Can be PERCENTAGE
                             OR ABSOLUTE_VALUE.
                           type: string
-                      required:
-                      - comparisonOperator
-                      - notificationType
-                      - threshold
-                      - thresholdType
                       type: object
                     type: array
                   plannedLimit:
@@ -235,10 +223,6 @@ spec:
                             forecast, actual spend, or budget threshold, such as dollars
                             or GB. See Spend documentation.
                           type: string
-                      required:
-                      - amount
-                      - startTime
-                      - unit
                       type: object
                     type: array
                   region:
@@ -262,6 +246,193 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountId:
+                    description: The ID of the target account for budget. Will use
+                      current user's account_id by default if omitted.
+                    type: string
+                  autoAdjustData:
+                    description: Object containing [AutoAdjustData] which determines
+                      the budget amount for an auto-adjusting budget.
+                    items:
+                      properties:
+                        autoAdjustType:
+                          type: string
+                        historicalOptions:
+                          items:
+                            properties:
+                              budgetAdjustmentPeriod:
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  budgetType:
+                    description: Whether this budget tracks monetary cost or usage.
+                    type: string
+                  costFilter:
+                    description: A list of CostFilter name/values pair to apply to
+                      budget.
+                    items:
+                      properties:
+                        name:
+                          description: The name of a budget. Unique within accounts.
+                          type: string
+                        values:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  costFilters:
+                    additionalProperties:
+                      type: string
+                    description: Map of CostFilters key/value pairs to apply to the
+                      budget.
+                    type: object
+                  costTypes:
+                    description: Object containing CostTypes The types of cost included
+                      in a budget, such as tax and subscriptions.
+                    items:
+                      properties:
+                        includeCredit:
+                          description: A boolean value whether to include credits
+                            in the cost budget. Defaults to true
+                          type: boolean
+                        includeDiscount:
+                          description: Whether a budget includes discounts. Defaults
+                            to true
+                          type: boolean
+                        includeOtherSubscription:
+                          description: A boolean value whether to include other subscription
+                            costs in the cost budget. Defaults to true
+                          type: boolean
+                        includeRecurring:
+                          description: A boolean value whether to include recurring
+                            costs in the cost budget. Defaults to true
+                          type: boolean
+                        includeRefund:
+                          description: A boolean value whether to include refunds
+                            in the cost budget. Defaults to true
+                          type: boolean
+                        includeSubscription:
+                          description: A boolean value whether to include subscriptions
+                            in the cost budget. Defaults to true
+                          type: boolean
+                        includeSupport:
+                          description: A boolean value whether to include support
+                            costs in the cost budget. Defaults to true
+                          type: boolean
+                        includeTax:
+                          description: A boolean value whether to include tax in the
+                            cost budget. Defaults to true
+                          type: boolean
+                        includeUpfront:
+                          description: A boolean value whether to include upfront
+                            costs in the cost budget. Defaults to true
+                          type: boolean
+                        useAmortized:
+                          description: Whether a budget uses the amortized rate. Defaults
+                            to false
+                          type: boolean
+                        useBlended:
+                          description: A boolean value whether to use blended costs
+                            in the cost budget. Defaults to false
+                          type: boolean
+                      type: object
+                    type: array
+                  limitAmount:
+                    description: The amount of cost or usage being measured for a
+                      budget.
+                    type: string
+                  limitUnit:
+                    description: The unit of measurement used for the budget forecast,
+                      actual spend, or budget threshold, such as dollars or GB. See
+                      Spend documentation.
+                    type: string
+                  notification:
+                    description: Object containing Budget Notifications. Can be used
+                      multiple times to define more than one budget notification.
+                    items:
+                      properties:
+                        comparisonOperator:
+                          description: Comparison operator to use to evaluate the
+                            condition. Can be LESS_THAN, EQUAL_TO or GREATER_THAN.
+                          type: string
+                        notificationType:
+                          description: What kind of budget value to notify on. Can
+                            be ACTUAL or FORECASTED
+                          type: string
+                        subscriberEmailAddresses:
+                          description: E-Mail addresses to notify. Either this or
+                            subscriber_sns_topic_arns is required.
+                          items:
+                            type: string
+                          type: array
+                        subscriberSnsTopicArns:
+                          description: SNS topics to notify. Either this or subscriber_email_addresses
+                            is required.
+                          items:
+                            type: string
+                          type: array
+                        threshold:
+                          description: Threshold when the notification should be sent.
+                          type: number
+                        thresholdType:
+                          description: What kind of threshold is defined. Can be PERCENTAGE
+                            OR ABSOLUTE_VALUE.
+                          type: string
+                      type: object
+                    type: array
+                  plannedLimit:
+                    description: Object containing Planned Budget Limits. Can be used
+                      multiple times to plan more than one budget limit. See PlannedBudgetLimits
+                      documentation.
+                    items:
+                      properties:
+                        amount:
+                          description: The amount of cost or usage being measured
+                            for a budget.
+                          type: string
+                        startTime:
+                          description: 'The start time of the budget limit. Format:
+                            2017-01-01_12:00. See PlannedBudgetLimits documentation.'
+                          type: string
+                        unit:
+                          description: The unit of measurement used for the budget
+                            forecast, actual spend, or budget threshold, such as dollars
+                            or GB. See Spend documentation.
+                          type: string
+                      type: object
+                    type: array
+                  timePeriodEnd:
+                    description: 'The end of the time period covered by the budget.
+                      There are no restrictions on the end date. Format: 2017-01-01_12:00.'
+                    type: string
+                  timePeriodStart:
+                    description: 'The start of the time period covered by the budget.
+                      If you don''t specify a start date, AWS defaults to the start
+                      of your chosen time period. The start date must come before
+                      the end date. Format: 2017-01-01_12:00.'
+                    type: string
+                  timeUnit:
+                    description: 'The length of time until a budget resets the actual
+                      and forecasted spend. Valid values: MONTHLY, QUARTERLY, ANNUALLY,
+                      and DAILY.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -463,10 +634,12 @@ spec:
             x-kubernetes-validations:
             - message: budgetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.budgetType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.budgetType)
+                || has(self.initProvider.budgetType)'
             - message: timeUnit is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeUnit)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeUnit)
+                || has(self.initProvider.timeUnit)'
           status:
             description: BudgetStatus defines the observed state of Budget.
             properties:

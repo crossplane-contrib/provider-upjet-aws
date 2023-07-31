@@ -251,9 +251,6 @@ spec:
                                                               description: Value of
                                                                 the dimension.
                                                               type: string
-                                                          required:
-                                                          - name
-                                                          - value
                                                           type: object
                                                         type: array
                                                       metricName:
@@ -263,9 +260,6 @@ spec:
                                                         description: Namespace of
                                                           the metric.
                                                         type: string
-                                                    required:
-                                                    - metricName
-                                                    - namespace
                                                     type: object
                                                   type: array
                                                 stat:
@@ -275,9 +269,6 @@ spec:
                                                 unit:
                                                   description: Unit of the metric.
                                                   type: string
-                                              required:
-                                              - metric
-                                              - stat
                                               type: object
                                             type: array
                                           returnData:
@@ -286,12 +277,8 @@ spec:
                                               values of this metric, the default is
                                               true
                                             type: boolean
-                                        required:
-                                        - id
                                         type: object
                                       type: array
-                                  required:
-                                  - metricDataQueries
                                   type: object
                                 type: array
                               customizedLoadMetricSpecification:
@@ -344,9 +331,6 @@ spec:
                                                               description: Value of
                                                                 the dimension.
                                                               type: string
-                                                          required:
-                                                          - name
-                                                          - value
                                                           type: object
                                                         type: array
                                                       metricName:
@@ -356,9 +340,6 @@ spec:
                                                         description: Namespace of
                                                           the metric.
                                                         type: string
-                                                    required:
-                                                    - metricName
-                                                    - namespace
                                                     type: object
                                                   type: array
                                                 stat:
@@ -368,9 +349,6 @@ spec:
                                                 unit:
                                                   description: Unit of the metric.
                                                   type: string
-                                              required:
-                                              - metric
-                                              - stat
                                               type: object
                                             type: array
                                           returnData:
@@ -379,12 +357,8 @@ spec:
                                               values of this metric, the default is
                                               true
                                             type: boolean
-                                        required:
-                                        - id
                                         type: object
                                       type: array
-                                  required:
-                                  - metricDataQueries
                                   type: object
                                 type: array
                               customizedScalingMetricSpecification:
@@ -437,9 +411,6 @@ spec:
                                                               description: Value of
                                                                 the dimension.
                                                               type: string
-                                                          required:
-                                                          - name
-                                                          - value
                                                           type: object
                                                         type: array
                                                       metricName:
@@ -449,9 +420,6 @@ spec:
                                                         description: Namespace of
                                                           the metric.
                                                         type: string
-                                                    required:
-                                                    - metricName
-                                                    - namespace
                                                     type: object
                                                   type: array
                                                 stat:
@@ -461,9 +429,6 @@ spec:
                                                 unit:
                                                   description: Unit of the metric.
                                                   type: string
-                                              required:
-                                              - metric
-                                              - stat
                                               type: object
                                             type: array
                                           returnData:
@@ -472,12 +437,8 @@ spec:
                                               values of this metric, the default is
                                               true
                                             type: boolean
-                                        required:
-                                        - id
                                         type: object
                                       type: array
-                                  required:
-                                  - metricDataQueries
                                   type: object
                                 type: array
                               predefinedLoadMetricSpecification:
@@ -495,8 +456,6 @@ spec:
                                         group from which to determine the request
                                         count served by your Auto Scaling group.
                                       type: string
-                                  required:
-                                  - predefinedMetricType
                                   type: object
                                 type: array
                               predefinedMetricPairSpecification:
@@ -522,8 +481,6 @@ spec:
                                         group from which to determine the request
                                         count served by your Auto Scaling group.
                                       type: string
-                                  required:
-                                  - predefinedMetricType
                                   type: object
                                 type: array
                               predefinedScalingMetricSpecification:
@@ -542,15 +499,11 @@ spec:
                                         group from which to determine the request
                                         count served by your Auto Scaling group.
                                       type: string
-                                  required:
-                                  - predefinedMetricType
                                   type: object
                                 type: array
                               targetValue:
                                 description: Target value for the metric.
                                 type: number
-                            required:
-                            - targetValue
                             type: object
                           type: array
                         mode:
@@ -561,8 +514,6 @@ spec:
                           description: Amount of time, in seconds, by which the instance
                             launch time can be advanced. Minimum is 0.
                           type: string
-                      required:
-                      - metricSpecification
                       type: object
                     type: array
                   region:
@@ -600,8 +551,6 @@ spec:
                             the current capacity and a negative value removes from
                             the current capacity.
                           type: number
-                      required:
-                      - scalingAdjustment
                       type: object
                     type: array
                   targetTrackingConfiguration:
@@ -623,9 +572,6 @@ spec:
                                     value:
                                       description: Value of the dimension.
                                       type: string
-                                  required:
-                                  - name
-                                  - value
                                   type: object
                                 type: array
                               metricName:
@@ -673,9 +619,6 @@ spec:
                                                         description: Value of the
                                                           dimension.
                                                         type: string
-                                                    required:
-                                                    - name
-                                                    - value
                                                     type: object
                                                   type: array
                                                 metricName:
@@ -684,9 +627,6 @@ spec:
                                                 namespace:
                                                   description: Namespace of the metric.
                                                   type: string
-                                              required:
-                                              - metricName
-                                              - namespace
                                               type: object
                                             type: array
                                           stat:
@@ -696,9 +636,6 @@ spec:
                                           unit:
                                             description: Unit of the metric.
                                             type: string
-                                        required:
-                                        - metric
-                                        - stat
                                         type: object
                                       type: array
                                     returnData:
@@ -706,8 +643,6 @@ spec:
                                         to return the timestamps and raw data values
                                         of this metric, the default is true
                                       type: boolean
-                                  required:
-                                  - id
                                   type: object
                                 type: array
                               namespace:
@@ -740,19 +675,562 @@ spec:
                                   to determine the request count served by your Auto
                                   Scaling group.
                                 type: string
-                            required:
-                            - predefinedMetricType
                             type: object
                           type: array
                         targetValue:
                           description: Target value for the metric.
                           type: number
-                      required:
-                      - targetValue
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  adjustmentType:
+                    description: Whether the adjustment is an absolute number or a
+                      percentage of the current capacity. Valid values are ChangeInCapacity,
+                      ExactCapacity, and PercentChangeInCapacity.
+                    type: string
+                  cooldown:
+                    description: Amount of time, in seconds, after a scaling activity
+                      completes and before the next scaling activity can start.
+                    type: number
+                  enabled:
+                    description: 'Whether the scaling policy is enabled or disabled.
+                      Default: true.'
+                    type: boolean
+                  estimatedInstanceWarmup:
+                    description: Estimated time, in seconds, until a newly launched
+                      instance will contribute CloudWatch metrics. Without a value,
+                      AWS will default to the group's specified cooldown period.
+                    type: number
+                  metricAggregationType:
+                    description: Aggregation type for the policy's metrics. Valid
+                      values are "Minimum", "Maximum", and "Average". Without a value,
+                      AWS will treat the aggregation type as "Average".
+                    type: string
+                  minAdjustmentMagnitude:
+                    description: Minimum value to scale by when adjustment_type is
+                      set to PercentChangeInCapacity.
+                    type: number
+                  policyType:
+                    description: Policy type, either "SimpleScaling", "StepScaling",
+                      "TargetTrackingScaling", or "PredictiveScaling". If this value
+                      isn't provided, AWS will default to "SimpleScaling."
+                    type: string
+                  predictiveScalingConfiguration:
+                    description: Predictive scaling policy configuration to use with
+                      Amazon EC2 Auto Scaling.
+                    items:
+                      properties:
+                        maxCapacityBreachBehavior:
+                          description: Defines the behavior that should be applied
+                            if the forecast capacity approaches or exceeds the maximum
+                            capacity of the Auto Scaling group. Valid values are HonorMaxCapacity
+                            or IncreaseMaxCapacity. Default is HonorMaxCapacity.
+                          type: string
+                        maxCapacityBuffer:
+                          description: Size of the capacity buffer to use when the
+                            forecast capacity is close to or exceeds the maximum capacity.
+                            Valid range is 0 to 100. If set to 0, Amazon EC2 Auto
+                            Scaling may scale capacity higher than the maximum capacity
+                            to equal but not exceed forecast capacity.
+                          type: string
+                        metricSpecification:
+                          description: This structure includes the metrics and target
+                            utilization to use for predictive scaling.
+                          items:
+                            properties:
+                              customizedCapacityMetricSpecification:
+                                description: Customized capacity metric specification.
+                                  The field is only valid when you use customized_load_metric_specification
+                                items:
+                                  properties:
+                                    metricDataQueries:
+                                      description: List of up to 10 structures that
+                                        defines custom capacity metric in predictive
+                                        scaling policy
+                                      items:
+                                        properties:
+                                          expression:
+                                            description: Math expression used on the
+                                              returned metric. You must specify either
+                                              expression or metric_stat, but not both.
+                                            type: string
+                                          id:
+                                            description: Short name for the metric
+                                              used in predictive scaling policy.
+                                            type: string
+                                          label:
+                                            description: Human-readable label for
+                                              this metric or expression.
+                                            type: string
+                                          metricStat:
+                                            description: Structure that defines CloudWatch
+                                              metric to be used in predictive scaling
+                                              policy. You must specify either expression
+                                              or metric_stat, but not both.
+                                            items:
+                                              properties:
+                                                metric:
+                                                  description: Structure that defines
+                                                    the CloudWatch metric to return,
+                                                    including the metric name, namespace,
+                                                    and dimensions.
+                                                  items:
+                                                    properties:
+                                                      dimensions:
+                                                        description: Dimensions of
+                                                          the metric.
+                                                        items:
+                                                          properties:
+                                                            name:
+                                                              description: Name of
+                                                                the policy.
+                                                              type: string
+                                                            value:
+                                                              description: Value of
+                                                                the dimension.
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                      metricName:
+                                                        description: Name of the metric.
+                                                        type: string
+                                                      namespace:
+                                                        description: Namespace of
+                                                          the metric.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                stat:
+                                                  description: Statistic of the metrics
+                                                    to return.
+                                                  type: string
+                                                unit:
+                                                  description: Unit of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          returnData:
+                                            description: Boolean that indicates whether
+                                              to return the timestamps and raw data
+                                              values of this metric, the default is
+                                              true
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              customizedLoadMetricSpecification:
+                                description: Customized load metric specification.
+                                items:
+                                  properties:
+                                    metricDataQueries:
+                                      description: List of up to 10 structures that
+                                        defines custom load metric in predictive scaling
+                                        policy
+                                      items:
+                                        properties:
+                                          expression:
+                                            description: Math expression used on the
+                                              returned metric. You must specify either
+                                              expression or metric_stat, but not both.
+                                            type: string
+                                          id:
+                                            description: Short name for the metric
+                                              used in predictive scaling policy.
+                                            type: string
+                                          label:
+                                            description: Human-readable label for
+                                              this metric or expression.
+                                            type: string
+                                          metricStat:
+                                            description: Structure that defines CloudWatch
+                                              metric to be used in predictive scaling
+                                              policy. You must specify either expression
+                                              or metric_stat, but not both.
+                                            items:
+                                              properties:
+                                                metric:
+                                                  description: Structure that defines
+                                                    the CloudWatch metric to return,
+                                                    including the metric name, namespace,
+                                                    and dimensions.
+                                                  items:
+                                                    properties:
+                                                      dimensions:
+                                                        description: Dimensions of
+                                                          the metric.
+                                                        items:
+                                                          properties:
+                                                            name:
+                                                              description: Name of
+                                                                the policy.
+                                                              type: string
+                                                            value:
+                                                              description: Value of
+                                                                the dimension.
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                      metricName:
+                                                        description: Name of the metric.
+                                                        type: string
+                                                      namespace:
+                                                        description: Namespace of
+                                                          the metric.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                stat:
+                                                  description: Statistic of the metrics
+                                                    to return.
+                                                  type: string
+                                                unit:
+                                                  description: Unit of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          returnData:
+                                            description: Boolean that indicates whether
+                                              to return the timestamps and raw data
+                                              values of this metric, the default is
+                                              true
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              customizedScalingMetricSpecification:
+                                description: Customized scaling metric specification.
+                                items:
+                                  properties:
+                                    metricDataQueries:
+                                      description: List of up to 10 structures that
+                                        defines custom scaling metric in predictive
+                                        scaling policy
+                                      items:
+                                        properties:
+                                          expression:
+                                            description: Math expression used on the
+                                              returned metric. You must specify either
+                                              expression or metric_stat, but not both.
+                                            type: string
+                                          id:
+                                            description: Short name for the metric
+                                              used in predictive scaling policy.
+                                            type: string
+                                          label:
+                                            description: Human-readable label for
+                                              this metric or expression.
+                                            type: string
+                                          metricStat:
+                                            description: Structure that defines CloudWatch
+                                              metric to be used in predictive scaling
+                                              policy. You must specify either expression
+                                              or metric_stat, but not both.
+                                            items:
+                                              properties:
+                                                metric:
+                                                  description: Structure that defines
+                                                    the CloudWatch metric to return,
+                                                    including the metric name, namespace,
+                                                    and dimensions.
+                                                  items:
+                                                    properties:
+                                                      dimensions:
+                                                        description: Dimensions of
+                                                          the metric.
+                                                        items:
+                                                          properties:
+                                                            name:
+                                                              description: Name of
+                                                                the policy.
+                                                              type: string
+                                                            value:
+                                                              description: Value of
+                                                                the dimension.
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                      metricName:
+                                                        description: Name of the metric.
+                                                        type: string
+                                                      namespace:
+                                                        description: Namespace of
+                                                          the metric.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                stat:
+                                                  description: Statistic of the metrics
+                                                    to return.
+                                                  type: string
+                                                unit:
+                                                  description: Unit of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          returnData:
+                                            description: Boolean that indicates whether
+                                              to return the timestamps and raw data
+                                              values of this metric, the default is
+                                              true
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              predefinedLoadMetricSpecification:
+                                description: Predefined load metric specification.
+                                items:
+                                  properties:
+                                    predefinedMetricType:
+                                      description: Metric type. Valid values are ASGTotalCPUUtilization,
+                                        ASGTotalNetworkIn, ASGTotalNetworkOut, or
+                                        ALBTargetGroupRequestCount.
+                                      type: string
+                                    resourceLabel:
+                                      description: Label that uniquely identifies
+                                        a specific Application Load Balancer target
+                                        group from which to determine the request
+                                        count served by your Auto Scaling group.
+                                      type: string
+                                  type: object
+                                type: array
+                              predefinedMetricPairSpecification:
+                                description: Metric pair specification from which
+                                  Amazon EC2 Auto Scaling determines the appropriate
+                                  scaling metric and load metric to use.
+                                items:
+                                  properties:
+                                    predefinedMetricType:
+                                      description: 'Which metrics to use. There are
+                                        two different types of metrics for each metric
+                                        type: one is a load metric and one is a scaling
+                                        metric. For example, if the metric type is
+                                        ASGCPUUtilization, the Auto Scaling group''s
+                                        total CPU metric is used as the load metric,
+                                        and the average CPU metric is used for the
+                                        scaling metric. Valid values are ASGCPUUtilization,
+                                        ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.'
+                                      type: string
+                                    resourceLabel:
+                                      description: Label that uniquely identifies
+                                        a specific Application Load Balancer target
+                                        group from which to determine the request
+                                        count served by your Auto Scaling group.
+                                      type: string
+                                  type: object
+                                type: array
+                              predefinedScalingMetricSpecification:
+                                description: Predefined scaling metric specification.
+                                items:
+                                  properties:
+                                    predefinedMetricType:
+                                      description: Describes a scaling metric for
+                                        a predictive scaling policy. Valid values
+                                        are ASGAverageCPUUtilization, ASGAverageNetworkIn,
+                                        ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                                      type: string
+                                    resourceLabel:
+                                      description: Label that uniquely identifies
+                                        a specific Application Load Balancer target
+                                        group from which to determine the request
+                                        count served by your Auto Scaling group.
+                                      type: string
+                                  type: object
+                                type: array
+                              targetValue:
+                                description: Target value for the metric.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: Predictive scaling mode. Valid values are ForecastAndScale
+                            and ForecastOnly. Default is ForecastOnly.
+                          type: string
+                        schedulingBufferTime:
+                          description: Amount of time, in seconds, by which the instance
+                            launch time can be advanced. Minimum is 0.
+                          type: string
+                      type: object
+                    type: array
+                  scalingAdjustment:
+                    description: Number of instances by which to scale. adjustment_type
+                      determines the interpretation of this number (e.g., as an absolute
+                      number or as a percentage of the existing Auto Scaling group
+                      size). A positive increment adds to the current capacity and
+                      a negative value removes from the current capacity.
+                    type: number
+                  stepAdjustment:
+                    description: 'Set of adjustments that manage group scaling. These
+                      have the following structure:'
+                    items:
+                      properties:
+                        metricIntervalLowerBound:
+                          description: Lower bound for the difference between the
+                            alarm threshold and the CloudWatch metric. Without a value,
+                            AWS will treat this bound as negative infinity.
+                          type: string
+                        metricIntervalUpperBound:
+                          description: Upper bound for the difference between the
+                            alarm threshold and the CloudWatch metric. Without a value,
+                            AWS will treat this bound as positive infinity. The upper
+                            bound must be greater than the lower bound.
+                          type: string
+                        scalingAdjustment:
+                          description: Number of instances by which to scale. adjustment_type
+                            determines the interpretation of this number (e.g., as
+                            an absolute number or as a percentage of the existing
+                            Auto Scaling group size). A positive increment adds to
+                            the current capacity and a negative value removes from
+                            the current capacity.
+                          type: number
+                      type: object
+                    type: array
+                  targetTrackingConfiguration:
+                    description: 'Target tracking policy. These have the following
+                      structure:'
+                    items:
+                      properties:
+                        customizedMetricSpecification:
+                          description: Customized metric. Conflicts with predefined_metric_specification.
+                          items:
+                            properties:
+                              metricDimension:
+                                description: Dimensions of the metric.
+                                items:
+                                  properties:
+                                    name:
+                                      description: Name of the policy.
+                                      type: string
+                                    value:
+                                      description: Value of the dimension.
+                                      type: string
+                                  type: object
+                                type: array
+                              metricName:
+                                description: Name of the metric.
+                                type: string
+                              metrics:
+                                description: Metrics to include, as a metric data
+                                  query.
+                                items:
+                                  properties:
+                                    expression:
+                                      description: Math expression used on the returned
+                                        metric. You must specify either expression
+                                        or metric_stat, but not both.
+                                      type: string
+                                    id:
+                                      description: Short name for the metric used
+                                        in predictive scaling policy.
+                                      type: string
+                                    label:
+                                      description: Human-readable label for this metric
+                                        or expression.
+                                      type: string
+                                    metricStat:
+                                      description: Structure that defines CloudWatch
+                                        metric to be used in predictive scaling policy.
+                                        You must specify either expression or metric_stat,
+                                        but not both.
+                                      items:
+                                        properties:
+                                          metric:
+                                            description: Structure that defines the
+                                              CloudWatch metric to return, including
+                                              the metric name, namespace, and dimensions.
+                                            items:
+                                              properties:
+                                                dimensions:
+                                                  description: Dimensions of the metric.
+                                                  items:
+                                                    properties:
+                                                      name:
+                                                        description: Name of the policy.
+                                                        type: string
+                                                      value:
+                                                        description: Value of the
+                                                          dimension.
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                                metricName:
+                                                  description: Name of the metric.
+                                                  type: string
+                                                namespace:
+                                                  description: Namespace of the metric.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          stat:
+                                            description: Statistic of the metrics
+                                              to return.
+                                            type: string
+                                          unit:
+                                            description: Unit of the metric.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    returnData:
+                                      description: Boolean that indicates whether
+                                        to return the timestamps and raw data values
+                                        of this metric, the default is true
+                                      type: boolean
+                                  type: object
+                                type: array
+                              namespace:
+                                description: Namespace of the metric.
+                                type: string
+                              statistic:
+                                description: Statistic of the metric.
+                                type: string
+                              unit:
+                                description: Unit of the metric.
+                                type: string
+                            type: object
+                          type: array
+                        disableScaleIn:
+                          description: Whether scale in by the target tracking policy
+                            is disabled.
+                          type: boolean
+                        predefinedMetricSpecification:
+                          description: Predefined metric. Conflicts with customized_metric_specification.
+                          items:
+                            properties:
+                              predefinedMetricType:
+                                description: Describes a scaling metric for a predictive
+                                  scaling policy. Valid values are ASGAverageCPUUtilization,
+                                  ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                                type: string
+                              resourceLabel:
+                                description: Label that uniquely identifies a specific
+                                  Application Load Balancer target group from which
+                                  to determine the request count served by your Auto
+                                  Scaling group.
+                                type: string
+                            type: object
+                          type: array
+                        targetValue:
+                          description: Target value for the metric.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

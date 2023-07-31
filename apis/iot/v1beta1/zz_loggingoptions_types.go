@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LoggingOptionsInitParameters struct {
+
+	// The default logging level. Valid Values: "DEBUG", "INFO", "ERROR", "WARN", "DISABLED".
+	DefaultLogLevel *string `json:"defaultLogLevel,omitempty" tf:"default_log_level,omitempty"`
+
+	// If true all logs are disabled. The default is false.
+	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
+}
+
 type LoggingOptionsObservation struct {
 
 	// The default logging level. Valid Values: "DEBUG", "INFO", "ERROR", "WARN", "DISABLED".
@@ -61,6 +70,18 @@ type LoggingOptionsParameters struct {
 type LoggingOptionsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoggingOptionsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LoggingOptionsInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoggingOptionsStatus defines the observed state of LoggingOptions.
@@ -81,7 +102,7 @@ type LoggingOptionsStatus struct {
 type LoggingOptions struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultLogLevel)",message="defaultLogLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultLogLevel) || has(self.initProvider.defaultLogLevel)",message="defaultLogLevel is a required parameter"
 	Spec   LoggingOptionsSpec   `json:"spec"`
 	Status LoggingOptionsStatus `json:"status,omitempty"`
 }

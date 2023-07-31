@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionInitParameters struct {
+
+	// Information about the action.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The action name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ActionObservation struct {
 
 	// Information about the action.
@@ -35,8 +44,8 @@ type ActionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The action name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -67,6 +76,15 @@ type ActionParameters struct {
 	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
+type ActionPointInitParameters struct {
+
+	// An action defines the tasks the extension performs during the AppConfig workflow. Detailed below.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The point at which to perform the defined actions. Valid points are PRE_CREATE_HOSTED_CONFIGURATION_VERSION, PRE_START_DEPLOYMENT, ON_DEPLOYMENT_START, ON_DEPLOYMENT_STEP, ON_DEPLOYMENT_BAKING, ON_DEPLOYMENT_COMPLETE, ON_DEPLOYMENT_ROLLED_BACK.
+	Point *string `json:"point,omitempty" tf:"point,omitempty"`
+}
+
 type ActionPointObservation struct {
 
 	// An action defines the tasks the extension performs during the AppConfig workflow. Detailed below.
@@ -79,12 +97,30 @@ type ActionPointObservation struct {
 type ActionPointParameters struct {
 
 	// An action defines the tasks the extension performs during the AppConfig workflow. Detailed below.
-	// +kubebuilder:validation:Required
-	Action []ActionParameters `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The point at which to perform the defined actions. Valid points are PRE_CREATE_HOSTED_CONFIGURATION_VERSION, PRE_START_DEPLOYMENT, ON_DEPLOYMENT_START, ON_DEPLOYMENT_STEP, ON_DEPLOYMENT_BAKING, ON_DEPLOYMENT_COMPLETE, ON_DEPLOYMENT_ROLLED_BACK.
-	// +kubebuilder:validation:Required
-	Point *string `json:"point" tf:"point,omitempty"`
+	// +kubebuilder:validation:Optional
+	Point *string `json:"point,omitempty" tf:"point,omitempty"`
+}
+
+type ExtensionInitParameters struct {
+
+	// The action points defined in the extension. Detailed below.
+	ActionPoint []ActionPointInitParameters `json:"actionPoint,omitempty" tf:"action_point,omitempty"`
+
+	// Information about the extension.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A name for the extension. Each extension name in your account must be unique. Extension versions use the same name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters accepted by the extension. You specify parameter values when you associate the extension to an AppConfig resource by using the CreateExtensionAssociation API action. For Lambda extension actions, these parameters are included in the Lambda request object. Detailed below.
+	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ExtensionObservation struct {
@@ -144,6 +180,18 @@ type ExtensionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ParameterInitParameters struct {
+
+	// Information about the parameter.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The parameter name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Determines if a parameter value must be specified in the extension association.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+}
+
 type ParameterObservation struct {
 
 	// Information about the parameter.
@@ -163,8 +211,8 @@ type ParameterParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The parameter name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Determines if a parameter value must be specified in the extension association.
 	// +kubebuilder:validation:Optional
@@ -175,6 +223,18 @@ type ParameterParameters struct {
 type ExtensionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExtensionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ExtensionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExtensionStatus defines the observed state of Extension.
@@ -195,8 +255,8 @@ type ExtensionStatus struct {
 type Extension struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actionPoint)",message="actionPoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actionPoint) || has(self.initProvider.actionPoint)",message="actionPoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ExtensionSpec   `json:"spec"`
 	Status ExtensionStatus `json:"status,omitempty"`
 }

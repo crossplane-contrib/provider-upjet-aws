@@ -70,6 +70,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     stageName: example
-
----
-

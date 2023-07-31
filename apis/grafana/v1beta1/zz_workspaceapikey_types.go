@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WorkspaceAPIKeyInitParameters struct {
+
+	// Specifies the name of the API key. Key names must be unique to the workspace.
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// Specifies the permission level of the API key. Valid values are VIEWER, EDITOR, or ADMIN.
+	KeyRole *string `json:"keyRole,omitempty" tf:"key_role,omitempty"`
+
+	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
+	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
+}
+
 type WorkspaceAPIKeyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -70,6 +82,18 @@ type WorkspaceAPIKeyParameters struct {
 type WorkspaceAPIKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkspaceAPIKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider WorkspaceAPIKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkspaceAPIKeyStatus defines the observed state of WorkspaceAPIKey.
@@ -90,9 +114,9 @@ type WorkspaceAPIKeyStatus struct {
 type WorkspaceAPIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyName)",message="keyName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyRole)",message="keyRole is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.secondsToLive)",message="secondsToLive is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyName) || has(self.initProvider.keyName)",message="keyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyRole) || has(self.initProvider.keyRole)",message="keyRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.secondsToLive) || has(self.initProvider.secondsToLive)",message="secondsToLive is a required parameter"
 	Spec   WorkspaceAPIKeySpec   `json:"spec"`
 	Status WorkspaceAPIKeyStatus `json:"status,omitempty"`
 }

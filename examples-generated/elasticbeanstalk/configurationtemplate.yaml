@@ -28,6 +28,3 @@ spec:
   forProvider:
     description: tf-test-desc
     region: us-west-1
-
----
-

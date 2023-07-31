@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ContactFlowInitParameters struct {
+
+	// Specifies the content of the Contact Flow, provided as a JSON string, written in Amazon Connect Contact Flow Language. If defined, the filename argument cannot be used.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// Used to trigger updates. Must be set to a base64-encoded SHA256 hash of the Contact Flow source specified with filename. The usual way to set this is filebase64sha256("mycontact_flow.11.12 and later) or base64sha256(file("mycontact_flow.11.11 and earlier), where "mycontact_flow.json" is the local filename of the Contact Flow source.
+	ContentHash *string `json:"contentHash,omitempty" tf:"content_hash,omitempty"`
+
+	// Specifies the description of the Contact Flow.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The path to the Contact Flow source within the local filesystem. Conflicts with content.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// Specifies the name of the Contact Flow.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the type of the Contact Flow. Defaults to CONTACT_FLOW. Allowed Values are: CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ContactFlowObservation struct {
 
 	// The Amazon Resource Name (ARN) of the Contact Flow.
@@ -106,6 +130,18 @@ type ContactFlowParameters struct {
 type ContactFlowSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ContactFlowParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ContactFlowInitParameters `json:"initProvider,omitempty"`
 }
 
 // ContactFlowStatus defines the observed state of ContactFlow.
@@ -126,7 +162,7 @@ type ContactFlowStatus struct {
 type ContactFlow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ContactFlowSpec   `json:"spec"`
 	Status ContactFlowStatus `json:"status,omitempty"`
 }

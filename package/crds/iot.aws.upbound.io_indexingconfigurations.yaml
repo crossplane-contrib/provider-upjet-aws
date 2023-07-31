@@ -108,8 +108,6 @@ spec:
                           description: 'Thing group indexing mode. Valid values: OFF,
                             ON.'
                           type: string
-                      required:
-                      - thingGroupIndexingMode
                       type: object
                     type: array
                   thingIndexingConfiguration:
@@ -161,12 +159,114 @@ spec:
                           description: 'Thing indexing mode. Valid values: REGISTRY,
                             REGISTRY_AND_SHADOW, OFF.'
                           type: string
-                      required:
-                      - thingIndexingMode
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  thingGroupIndexingConfiguration:
+                    description: Thing group indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: A list of thing group fields to index. This
+                            list cannot contain any managed fields. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        thingGroupIndexingMode:
+                          description: 'Thing group indexing mode. Valid values: OFF,
+                            ON.'
+                          type: string
+                      type: object
+                    type: array
+                  thingIndexingConfiguration:
+                    description: Thing indexing configuration. See below.
+                    items:
+                      properties:
+                        customField:
+                          description: Contains custom field names and their data
+                            type. See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        deviceDefenderIndexingMode:
+                          description: 'Device Defender indexing mode. Valid values:
+                            VIOLATIONS, OFF. Default: OFF.'
+                          type: string
+                        managedField:
+                          description: Contains fields that are indexed and whose
+                            types are already known by the Fleet Indexing service.
+                            See below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the field.
+                                type: string
+                              type:
+                                description: 'The data type of the field. Valid values:
+                                  Number, String, Boolean.'
+                                type: string
+                            type: object
+                          type: array
+                        namedShadowIndexingMode:
+                          description: 'Named shadow indexing mode. Valid values:
+                            ON, OFF. Default: OFF.'
+                          type: string
+                        thingConnectivityIndexingMode:
+                          description: 'Thing connectivity indexing mode. Valid values:
+                            STATUS, OFF. Default: OFF.'
+                          type: string
+                        thingIndexingMode:
+                          description: 'Thing indexing mode. Valid values: REGISTRY,
+                            REGISTRY_AND_SHADOW, OFF.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

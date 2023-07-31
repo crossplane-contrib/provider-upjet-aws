@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InfrastructureConfigurationInitParameters struct {
+
+	// Description for the configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block with instance metadata options for the HTTP requests that pipeline builds use to launch EC2 build and test instances. Detailed below.
+	InstanceMetadataOptions []InstanceMetadataOptionsInitParameters `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
+
+	// Set of EC2 Instance Types.
+	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
+
+	// Configuration block with logging settings. Detailed below.
+	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// Name for the configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
+	TerminateInstanceOnFailure *bool `json:"terminateInstanceOnFailure,omitempty" tf:"terminate_instance_on_failure,omitempty"`
+}
+
 type InfrastructureConfigurationObservation struct {
 
 	// Amazon Resource Name (ARN) of the configuration.
@@ -178,6 +205,15 @@ type InfrastructureConfigurationParameters struct {
 	TerminateInstanceOnFailure *bool `json:"terminateInstanceOnFailure,omitempty" tf:"terminate_instance_on_failure,omitempty"`
 }
 
+type InstanceMetadataOptionsInitParameters struct {
+
+	// The number of hops that an instance can traverse to reach its destonation.
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+
+	// Whether a signed token is required for instance metadata retrieval requests. Valid values: required, optional.
+	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
+}
+
 type InstanceMetadataOptionsObservation struct {
 
 	// The number of hops that an instance can traverse to reach its destonation.
@@ -198,6 +234,12 @@ type InstanceMetadataOptionsParameters struct {
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 }
 
+type LoggingInitParameters struct {
+
+	// Configuration block with S3 logging settings. Detailed below.
+	S3Logs []S3LogsInitParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
+}
+
 type LoggingObservation struct {
 
 	// Configuration block with S3 logging settings. Detailed below.
@@ -207,8 +249,14 @@ type LoggingObservation struct {
 type LoggingParameters struct {
 
 	// Configuration block with S3 logging settings. Detailed below.
-	// +kubebuilder:validation:Required
-	S3Logs []S3LogsParameters `json:"s3Logs" tf:"s3_logs,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Logs []S3LogsParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
+}
+
+type S3LogsInitParameters struct {
+
+	// Prefix to use for S3 logs. Defaults to /.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type S3LogsObservation struct {
@@ -244,6 +292,18 @@ type S3LogsParameters struct {
 type InfrastructureConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InfrastructureConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider InfrastructureConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // InfrastructureConfigurationStatus defines the observed state of InfrastructureConfiguration.
@@ -264,7 +324,7 @@ type InfrastructureConfigurationStatus struct {
 type InfrastructureConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   InfrastructureConfigurationSpec   `json:"spec"`
 	Status InfrastructureConfigurationStatus `json:"status,omitempty"`
 }

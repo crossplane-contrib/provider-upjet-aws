@@ -76,8 +76,6 @@ spec:
                           description: Amazon S3 canned ACL that Athena should specify
                             when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
                           type: string
-                      required:
-                      - s3AclOption
                       type: object
                     type: array
                   bucket:
@@ -173,8 +171,6 @@ spec:
                           description: KMS key ARN or ID; required for key types SSE_KMS
                             and CSE_KMS.
                           type: string
-                      required:
-                      - encryptionOption
                       type: object
                     type: array
                   expectedBucketOwner:
@@ -198,6 +194,64 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  aclConfiguration:
+                    description: That an Amazon S3 canned ACL should be set to control
+                      ownership of stored query results. See ACL Configuration below.
+                    items:
+                      properties:
+                        s3AclOption:
+                          description: Amazon S3 canned ACL that Athena should specify
+                            when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
+                          type: string
+                      type: object
+                    type: array
+                  comment:
+                    description: Description of the database.
+                    type: string
+                  encryptionConfiguration:
+                    description: Encryption key block AWS Athena uses to decrypt the
+                      data in S3, such as an AWS Key Management Service (AWS KMS)
+                      key. See Encryption Configuration below.
+                    items:
+                      properties:
+                        encryptionOption:
+                          description: Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
+                          type: string
+                        kmsKey:
+                          description: KMS key ARN or ID; required for key types SSE_KMS
+                            and CSE_KMS.
+                          type: string
+                      type: object
+                    type: array
+                  expectedBucketOwner:
+                    description: AWS account ID that you expect to be the owner of
+                      the Amazon S3 bucket.
+                    type: string
+                  forceDestroy:
+                    description: Boolean that indicates all tables should be deleted
+                      from the database so that the database can be destroyed without
+                      error. The tables are not recoverable.
+                    type: boolean
+                  properties:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of custom metadata properties for the
+                      database definition.
+                    type: object
                 type: object
               managementPolicies:
                 default:

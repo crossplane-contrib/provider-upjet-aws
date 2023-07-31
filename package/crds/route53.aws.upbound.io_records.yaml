@@ -85,10 +85,6 @@ spec:
                         zoneId:
                           description: The ID of the hosted zone to contain this record.
                           type: string
-                      required:
-                      - evaluateTargetHealth
-                      - name
-                      - zoneId
                       type: object
                     type: array
                   allowOverwrite:
@@ -112,9 +108,6 @@ spec:
                             a default CIDR record. collection_id is still required
                             for default record.
                           type: string
-                      required:
-                      - collectionId
-                      - locationName
                       type: object
                     type: array
                   failoverRoutingPolicy:
@@ -128,8 +121,6 @@ spec:
                             CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and
                             TXT.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   geolocationRoutingPolicy:
@@ -283,8 +274,6 @@ spec:
                           description: A numeric value indicating the relative weight
                             of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
                           type: number
-                      required:
-                      - weight
                       type: object
                     type: array
                   zoneId:
@@ -365,6 +354,139 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  alias:
+                    description: An alias block. Conflicts with ttl & records. Documented
+                      below.
+                    items:
+                      properties:
+                        evaluateTargetHealth:
+                          description: Set to true if you want Route 53 to determine
+                            whether to respond to DNS queries using this resource
+                            record set by checking the health of the resource record
+                            set. Some resources have special requirements, see related
+                            part of documentation.
+                          type: boolean
+                        name:
+                          description: The name of the record.
+                          type: string
+                        zoneId:
+                          description: The ID of the hosted zone to contain this record.
+                          type: string
+                      type: object
+                    type: array
+                  allowOverwrite:
+                    description: false by default. This configuration is not recommended
+                      for most environments.
+                    type: boolean
+                  cidrRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      IP network ranges of requestors. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        collectionId:
+                          description: The CIDR collection ID. See the aws_route53_cidr_collection
+                            resource for more details.
+                          type: string
+                        locationName:
+                          description: The CIDR collection location name. See the
+                            aws_route53_cidr_location resource for more details. A
+                            location_name with an asterisk "*" can be used to create
+                            a default CIDR record. collection_id is still required
+                            for default record.
+                          type: string
+                      type: object
+                    type: array
+                  failoverRoutingPolicy:
+                    description: A block indicating the routing behavior when associated
+                      health check fails. Conflicts with any other routing policy.
+                      Documented below.
+                    items:
+                      properties:
+                        type:
+                          description: The record type. Valid values are A, AAAA,
+                            CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and
+                            TXT.
+                          type: string
+                      type: object
+                    type: array
+                  geolocationRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      geolocation of the requestor. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        continent:
+                          description: A two-letter continent code. See http://docs.aws.amazon.com/Route53/latest/APIReference/API_GetGeoLocation.html
+                            for code details. Either continent or country must be
+                            specified.
+                          type: string
+                        country:
+                          description: A two-character country code or * to indicate
+                            a default resource record set.
+                          type: string
+                        subdivision:
+                          description: A subdivision code for a country.
+                          type: string
+                      type: object
+                    type: array
+                  latencyRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      latency between the requestor and an AWS region. Conflicts with
+                      any other routing policy. Documented below.
+                    items:
+                      type: object
+                    type: array
+                  multivalueAnswerRoutingPolicy:
+                    description: Set to true to indicate a multivalue answer routing
+                      policy. Conflicts with any other routing policy.
+                    type: boolean
+                  name:
+                    description: The name of the record.
+                    type: string
+                  records:
+                    description: A string list of records.g., "first255characters\"\"morecharacters").
+                    items:
+                      type: string
+                    type: array
+                  setIdentifier:
+                    description: Unique identifier to differentiate records with routing
+                      policies from one another. Required if using cidr_routing_policy,
+                      failover_routing_policy, geolocation_routing_policy, latency_routing_policy,
+                      multivalue_answer_routing_policy, or weighted_routing_policy.
+                    type: string
+                  ttl:
+                    description: The TTL of the record.
+                    type: number
+                  type:
+                    description: The record type. Valid values are A, AAAA, CAA, CNAME,
+                      DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
+                    type: string
+                  weightedRoutingPolicy:
+                    description: A block indicating a weighted routing policy. Conflicts
+                      with any other routing policy. Documented below.
+                    items:
+                      properties:
+                        weight:
+                          description: A numeric value indicating the relative weight
+                            of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -566,10 +688,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: RecordStatus defines the observed state of Record.
             properties:

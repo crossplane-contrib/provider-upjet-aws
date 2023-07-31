@@ -270,9 +270,6 @@ spec:
                           description: The version of the runtime to use. Currently,
                             the only allowed version is 1.0.0.
                           type: string
-                      required:
-                      - name
-                      - runtimeVersion
                       type: object
                     type: array
                   syncConfig:
@@ -305,6 +302,93 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  code:
+                    description: The function code that contains the request and response
+                      functions. When code is used, the runtime is required. The runtime
+                      value must be APPSYNC_JS.
+                    type: string
+                  description:
+                    description: Function description.
+                    type: string
+                  functionVersion:
+                    description: Version of the request mapping template. Currently
+                      the supported value is 2018-05-29. Does not apply when specifying
+                      code.
+                    type: string
+                  maxBatchSize:
+                    description: Maximum batching size for a resolver. Valid values
+                      are between 0 and 2000.
+                    type: number
+                  name:
+                    description: Function name. The function name does not have to
+                      be unique.
+                    type: string
+                  requestMappingTemplate:
+                    description: Function request mapping template. Functions support
+                      only the 2018-05-29 version of the request mapping template.
+                    type: string
+                  responseMappingTemplate:
+                    description: Function response mapping template.
+                    type: string
+                  runtime:
+                    description: Describes a runtime used by an AWS AppSync pipeline
+                      resolver or AWS AppSync function. Specifies the name and version
+                      of the runtime to use. Note that if a runtime is specified,
+                      code must also be specified. See Runtime.
+                    items:
+                      properties:
+                        name:
+                          description: Function name. The function name does not have
+                            to be unique.
+                          type: string
+                        runtimeVersion:
+                          description: The version of the runtime to use. Currently,
+                            the only allowed version is 1.0.0.
+                          type: string
+                      type: object
+                    type: array
+                  syncConfig:
+                    description: Describes a Sync configuration for a resolver. See
+                      Sync Config.
+                    items:
+                      properties:
+                        conflictDetection:
+                          description: Conflict Detection strategy to use. Valid values
+                            are NONE and VERSION.
+                          type: string
+                        conflictHandler:
+                          description: Conflict Resolution strategy to perform in
+                            the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY,
+                            AUTOMERGE, and LAMBDA.
+                          type: string
+                        lambdaConflictHandlerConfig:
+                          description: Lambda Conflict Handler Config when configuring
+                            LAMBDA as the Conflict Handler. See Lambda Conflict Handler
+                            Config.
+                          items:
+                            properties:
+                              lambdaConflictHandlerArn:
+                                description: ARN for the Lambda function to use as
+                                  the Conflict Handler.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -506,7 +590,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FunctionStatus defines the observed state of Function.
             properties:

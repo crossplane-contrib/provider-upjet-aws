@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutomationParametersInitParameters struct {
+
+	// The version of an Automation document to use during task execution.
+	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
+
+	// The parameters for the RUN_COMMAND task execution. Documented below.
+	Parameter []AutomationParametersParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
 type AutomationParametersObservation struct {
 
 	// The version of an Automation document to use during task execution.
@@ -20,6 +29,15 @@ type AutomationParametersObservation struct {
 
 	// The parameters for the RUN_COMMAND task execution. Documented below.
 	Parameter []AutomationParametersParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
+type AutomationParametersParameterInitParameters struct {
+
+	// The name of the maintenance window task.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The array of strings.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AutomationParametersParameterObservation struct {
@@ -34,12 +52,12 @@ type AutomationParametersParameterObservation struct {
 type AutomationParametersParameterParameters struct {
 
 	// The name of the maintenance window task.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The array of strings.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AutomationParametersParameters struct {
@@ -51,6 +69,15 @@ type AutomationParametersParameters struct {
 	// The parameters for the RUN_COMMAND task execution. Documented below.
 	// +kubebuilder:validation:Optional
 	Parameter []AutomationParametersParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+}
+
+type CloudwatchConfigInitParameters struct {
+
+	// The name of the CloudWatch log group where you want to send command output. If you don't specify a group name, Systems Manager automatically creates a log group for you. The log group uses the following naming format: aws/ssm/SystemsManagerDocumentName.
+	CloudwatchLogGroupName *string `json:"cloudwatchLogGroupName,omitempty" tf:"cloudwatch_log_group_name,omitempty"`
+
+	// Enables Systems Manager to send command output to CloudWatch Logs.
+	CloudwatchOutputEnabled *bool `json:"cloudwatchOutputEnabled,omitempty" tf:"cloudwatch_output_enabled,omitempty"`
 }
 
 type CloudwatchConfigObservation struct {
@@ -71,6 +98,15 @@ type CloudwatchConfigParameters struct {
 	// Enables Systems Manager to send command output to CloudWatch Logs.
 	// +kubebuilder:validation:Optional
 	CloudwatchOutputEnabled *bool `json:"cloudwatchOutputEnabled,omitempty" tf:"cloudwatch_output_enabled,omitempty"`
+}
+
+type LambdaParametersInitParameters struct {
+
+	// Pass client-specific information to the Lambda function that you are invoking.
+	ClientContext *string `json:"clientContext,omitempty" tf:"client_context,omitempty"`
+
+	// Specify a Lambda function version or alias name.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 }
 
 type LambdaParametersObservation struct {
@@ -95,6 +131,36 @@ type LambdaParametersParameters struct {
 	// Specify a Lambda function version or alias name.
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+}
+
+type MaintenanceWindowTaskInitParameters struct {
+
+	// Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. Valid values are CONTINUE_TASK and CANCEL_TASK.
+	CutoffBehavior *string `json:"cutoffBehavior,omitempty" tf:"cutoff_behavior,omitempty"`
+
+	// The description of the maintenance window task.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The maximum number of targets this task can be run for in parallel.
+	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+
+	// The maximum number of errors allowed before this task stops being scheduled.
+	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
+
+	// The name of the maintenance window task.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
+	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// Configuration block with parameters for task execution.
+	TaskInvocationParameters []TaskInvocationParametersInitParameters `json:"taskInvocationParameters,omitempty" tf:"task_invocation_parameters,omitempty"`
+
+	// The type of task being registered. Valid values: AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.
+	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 }
 
 type MaintenanceWindowTaskObservation struct {
@@ -231,6 +297,13 @@ type MaintenanceWindowTaskParameters struct {
 	WindowIDSelector *v1.Selector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
+type MaintenanceWindowTaskTargetsInitParameters struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The array of strings.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type MaintenanceWindowTaskTargetsObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
@@ -240,12 +313,21 @@ type MaintenanceWindowTaskTargetsObservation struct {
 
 type MaintenanceWindowTaskTargetsParameters struct {
 
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The array of strings.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type NotificationConfigInitParameters struct {
+
+	// The different events for which you can receive notifications. Valid values: All, InProgress, Success, TimedOut, Cancelled, and Failed
+	NotificationEvents []*string `json:"notificationEvents,omitempty" tf:"notification_events,omitempty"`
+
+	// When specified with Command, receive notification when the status of a command changes. When specified with Invocation, for commands sent to multiple instances, receive notification on a per-instance basis when the status of a command changes. Valid values: Command and Invocation
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 }
 
 type NotificationConfigObservation struct {
@@ -285,6 +367,36 @@ type NotificationConfigParameters struct {
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 }
 
+type RunCommandParametersInitParameters struct {
+
+	// Configuration options for sending command output to CloudWatch Logs. Documented below.
+	CloudwatchConfig []CloudwatchConfigInitParameters `json:"cloudwatchConfig,omitempty" tf:"cloudwatch_config,omitempty"`
+
+	// Information about the command(s) to execute.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The SHA-256 or SHA-1 hash created by the system when the document was created. SHA-1 hashes have been deprecated.
+	DocumentHash *string `json:"documentHash,omitempty" tf:"document_hash,omitempty"`
+
+	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated. Valid values: Sha256 and Sha1
+	DocumentHashType *string `json:"documentHashType,omitempty" tf:"document_hash_type,omitempty"`
+
+	// The version of an Automation document to use during task execution.
+	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
+
+	// Configurations for sending notifications about command status changes on a per-instance basis. Documented below.
+	NotificationConfig []NotificationConfigInitParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
+
+	// The Amazon S3 bucket subfolder.
+	OutputS3KeyPrefix *string `json:"outputS3KeyPrefix,omitempty" tf:"output_s3_key_prefix,omitempty"`
+
+	// The parameters for the RUN_COMMAND task execution. Documented below.
+	Parameter []RunCommandParametersParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// If this time is reached and the command has not already started executing, it doesn't run.
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+}
+
 type RunCommandParametersObservation struct {
 
 	// Configuration options for sending command output to CloudWatch Logs. Documented below.
@@ -321,6 +433,15 @@ type RunCommandParametersObservation struct {
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
+type RunCommandParametersParameterInitParameters struct {
+
+	// The name of the maintenance window task.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The array of strings.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type RunCommandParametersParameterObservation struct {
 
 	// The name of the maintenance window task.
@@ -333,12 +454,12 @@ type RunCommandParametersParameterObservation struct {
 type RunCommandParametersParameterParameters struct {
 
 	// The name of the maintenance window task.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The array of strings.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type RunCommandParametersParameters struct {
@@ -408,6 +529,12 @@ type RunCommandParametersParameters struct {
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
+type StepFunctionsParametersInitParameters struct {
+
+	// The name of the maintenance window task.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type StepFunctionsParametersObservation struct {
 
 	// The name of the maintenance window task.
@@ -423,6 +550,21 @@ type StepFunctionsParametersParameters struct {
 	// The name of the maintenance window task.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type TaskInvocationParametersInitParameters struct {
+
+	// The parameters for an AUTOMATION task type. Documented below.
+	AutomationParameters []AutomationParametersInitParameters `json:"automationParameters,omitempty" tf:"automation_parameters,omitempty"`
+
+	// The parameters for a LAMBDA task type. Documented below.
+	LambdaParameters []LambdaParametersInitParameters `json:"lambdaParameters,omitempty" tf:"lambda_parameters,omitempty"`
+
+	// The parameters for a RUN_COMMAND task type. Documented below.
+	RunCommandParameters []RunCommandParametersInitParameters `json:"runCommandParameters,omitempty" tf:"run_command_parameters,omitempty"`
+
+	// The parameters for a STEP_FUNCTIONS task type. Documented below.
+	StepFunctionsParameters []StepFunctionsParametersInitParameters `json:"stepFunctionsParameters,omitempty" tf:"step_functions_parameters,omitempty"`
 }
 
 type TaskInvocationParametersObservation struct {
@@ -463,6 +605,18 @@ type TaskInvocationParametersParameters struct {
 type MaintenanceWindowTaskSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MaintenanceWindowTaskParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MaintenanceWindowTaskInitParameters `json:"initProvider,omitempty"`
 }
 
 // MaintenanceWindowTaskStatus defines the observed state of MaintenanceWindowTask.
@@ -483,7 +637,7 @@ type MaintenanceWindowTaskStatus struct {
 type MaintenanceWindowTask struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.taskType)",message="taskType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.taskType) || has(self.initProvider.taskType)",message="taskType is a required parameter"
 	Spec   MaintenanceWindowTaskSpec   `json:"spec"`
 	Status MaintenanceWindowTaskStatus `json:"status,omitempty"`
 }

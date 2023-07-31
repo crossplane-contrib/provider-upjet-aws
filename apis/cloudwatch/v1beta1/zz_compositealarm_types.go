@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CompositeAlarmInitParameters struct {
+
+	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
+	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
+
+	// The description for the composite alarm.
+	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
+
+	// An expression that specifies which other alarms are to be evaluated to determine this composite alarm's state. For syntax, see Creating a Composite Alarm. The maximum length is 10240 characters.
+	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
+
+	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CompositeAlarmObservation struct {
 
 	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
@@ -106,6 +124,18 @@ type CompositeAlarmParameters struct {
 type CompositeAlarmSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CompositeAlarmParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CompositeAlarmInitParameters `json:"initProvider,omitempty"`
 }
 
 // CompositeAlarmStatus defines the observed state of CompositeAlarm.
@@ -126,7 +156,7 @@ type CompositeAlarmStatus struct {
 type CompositeAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alarmRule)",message="alarmRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alarmRule) || has(self.initProvider.alarmRule)",message="alarmRule is a required parameter"
 	Spec   CompositeAlarmSpec   `json:"spec"`
 	Status CompositeAlarmStatus `json:"status,omitempty"`
 }

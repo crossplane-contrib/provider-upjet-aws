@@ -43,6 +43,3 @@ spec:
     vpcArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

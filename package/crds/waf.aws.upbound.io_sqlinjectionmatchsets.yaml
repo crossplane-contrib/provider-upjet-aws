@@ -98,8 +98,6 @@ spec:
                                   HEADER, METHOD or BODY. See docs for all supported
                                   values.
                                 type: string
-                            required:
-                            - type
                             type: object
                           type: array
                         textTransformation:
@@ -110,13 +108,63 @@ spec:
                             inspecting a request for a match. e.g., CMD_LINE, HTML_ENTITY_DECODE
                             or NONE. See docs for all supported values.
                           type: string
-                      required:
-                      - fieldToMatch
-                      - textTransformation
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  name:
+                    description: The name or description of the SQL Injection Match
+                      Set.
+                    type: string
+                  sqlInjectionMatchTuples:
+                    description: The parts of web requests that you want AWS WAF to
+                      inspect for malicious SQL code and, if you want AWS WAF to inspect
+                      a header, the name of the header.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: Specifies where in a web request to look for
+                            snippets of malicious SQL code.
+                          items:
+                            properties:
+                              data:
+                                description: When type is HEADER, enter the name of
+                                  the header that you want to search, e.g., User-Agent
+                                  or Referer. If type is any other value, omit this
+                                  field.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified string. e.g.,
+                                  HEADER, METHOD or BODY. See docs for all supported
+                                  values.
+                                type: string
+                            type: object
+                          type: array
+                        textTransformation:
+                          description: Text transformations used to eliminate unusual
+                            formatting that attackers use in web requests in an effort
+                            to bypass AWS WAF. If you specify a transformation, AWS
+                            WAF performs the transformation on field_to_match before
+                            inspecting a request for a match. e.g., CMD_LINE, HTML_ENTITY_DECODE
+                            or NONE. See docs for all supported values.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -318,7 +366,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: SQLInjectionMatchSetStatus defines the observed state of
               SQLInjectionMatchSet.

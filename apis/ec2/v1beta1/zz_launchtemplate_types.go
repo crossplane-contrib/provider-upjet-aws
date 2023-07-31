@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AcceleratorCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type AcceleratorCountObservation struct {
 
 	// Maximum.
@@ -30,6 +39,15 @@ type AcceleratorCountParameters struct {
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type AcceleratorTotalMemoryMibInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
@@ -53,6 +71,15 @@ type AcceleratorTotalMemoryMibParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type BaselineEBSBandwidthMbpsInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type BaselineEBSBandwidthMbpsObservation struct {
 
 	// Maximum.
@@ -71,6 +98,23 @@ type BaselineEBSBandwidthMbpsParameters struct {
 	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type BlockDeviceMappingsInitParameters struct {
+
+	// The name of the device to mount.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Configure EBS volume properties.
+	EBS []EBSInitParameters `json:"ebs,omitempty" tf:"ebs,omitempty"`
+
+	// Suppresses the specified device included in the AMI's block device mapping.
+	NoDevice *string `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	// The Instance Store Device
+	// Name
+	// (e.g., "ephemeral0").
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
 type BlockDeviceMappingsObservation struct {
@@ -111,6 +155,15 @@ type BlockDeviceMappingsParameters struct {
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
 }
 
+type CapacityReservationSpecificationCapacityReservationTargetInitParameters struct {
+
+	// The ID of the Capacity Reservation in which to run the instance.
+	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
+
+	// The ARN of the Capacity Reservation resource group in which to run the instance.
+	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
+}
+
 type CapacityReservationSpecificationCapacityReservationTargetObservation struct {
 
 	// The ID of the Capacity Reservation in which to run the instance.
@@ -129,6 +182,34 @@ type CapacityReservationSpecificationCapacityReservationTargetParameters struct 
 	// The ARN of the Capacity Reservation resource group in which to run the instance.
 	// +kubebuilder:validation:Optional
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
+}
+
+type EBSInitParameters struct {
+
+	// Whether the volume should be destroyed on instance termination.
+	// See Preserving Amazon EBS Volumes on Instance Termination for more information.
+	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Enables EBS encryption on the volume.
+	// Cannot be used with snapshot_id.
+	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// The amount of provisioned IOPS.
+	// This must be set with a volume_type of "io1/io2/gp3".
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The Snapshot ID to mount.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// The throughput to provision for a gp3 volume in MiB/s (specified as an integer, e.g., 500), with a maximum of 1,000 MiB/s.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// The size of the volume in gigabytes.
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// The volume type.
+	// Can be one of standard, gp2, gp3, io1, io2, sc1 or st1.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type EBSObservation struct {
@@ -213,6 +294,12 @@ type EBSParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type ElasticGpuSpecificationsInitParameters struct {
+
+	// The Elastic GPU Type
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ElasticGpuSpecificationsObservation struct {
 
 	// The Elastic GPU Type
@@ -222,8 +309,14 @@ type ElasticGpuSpecificationsObservation struct {
 type ElasticGpuSpecificationsParameters struct {
 
 	// The Elastic GPU Type
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ElasticInferenceAcceleratorInitParameters struct {
+
+	// Accelerator type.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ElasticInferenceAcceleratorObservation struct {
@@ -235,8 +328,14 @@ type ElasticInferenceAcceleratorObservation struct {
 type ElasticInferenceAcceleratorParameters struct {
 
 	// Accelerator type.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HibernationOptionsInitParameters struct {
+
+	// If set to true, the launched EC2 instance will hibernation enabled.
+	Configured *bool `json:"configured,omitempty" tf:"configured,omitempty"`
 }
 
 type HibernationOptionsObservation struct {
@@ -248,8 +347,11 @@ type HibernationOptionsObservation struct {
 type HibernationOptionsParameters struct {
 
 	// If set to true, the launched EC2 instance will hibernation enabled.
-	// +kubebuilder:validation:Required
-	Configured *bool `json:"configured" tf:"configured,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configured *bool `json:"configured,omitempty" tf:"configured,omitempty"`
+}
+
+type IAMInstanceProfileInitParameters struct {
 }
 
 type IAMInstanceProfileObservation struct {
@@ -291,6 +393,15 @@ type IAMInstanceProfileParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
+type InstanceMarketOptionsInitParameters struct {
+
+	// The market type. Can be spot.
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// The options for Spot Instance
+	SpotOptions []SpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
 type InstanceMarketOptionsObservation struct {
 
 	// The market type. Can be spot.
@@ -309,6 +420,78 @@ type InstanceMarketOptionsParameters struct {
 	// The options for Spot Instance
 	// +kubebuilder:validation:Optional
 	SpotOptions []SpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type InstanceRequirementsInitParameters struct {
+
+	// Block describing the minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips). Default is no minimum or maximum.
+	AcceleratorCount []AcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
+
+	// List of accelerator manufacturer names. Default is any manufacturer.
+	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
+
+	// List of accelerator names. Default is any acclerator.
+	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
+
+	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
+	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
+
+	// List of accelerator types. Default is any accelerator type.
+	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
+
+	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
+
+	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
+	BareMetal *string `json:"bareMetal,omitempty" tf:"bare_metal,omitempty"`
+
+	// Block describing the minimum and maximum baseline EBS bandwidth, in Mbps. Default is no minimum or maximum.
+	BaselineEBSBandwidthMbps []BaselineEBSBandwidthMbpsInitParameters `json:"baselineEbsBandwidthMbps,omitempty" tf:"baseline_ebs_bandwidth_mbps,omitempty"`
+
+	// Indicate whether burstable performance instance types should be included, excluded, or required. Default is excluded.
+	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
+
+	// List of CPU manufacturer names. Default is any manufacturer.
+	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
+
+	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
+
+	// List of instance generation names. Default is any generation.
+	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
+
+	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
+	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
+
+	// List of local storage type names. Default any storage type.
+	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
+	MemoryGibPerVcpu []MemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
+
+	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
+	MemoryMib []MemoryMibInitParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+
+	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
+	NetworkBandwidthGbps []NetworkBandwidthGbpsInitParameters `json:"networkBandwidthGbps,omitempty" tf:"network_bandwidth_gbps,omitempty"`
+
+	// Block describing the minimum and maximum number of network interfaces. Default is no minimum or maximum.
+	NetworkInterfaceCount []NetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
+
+	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
+	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+
+	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
+	TotalLocalStorageGb []TotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
+
+	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
+	VcpuCount []VcpuCountInitParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
 }
 
 type InstanceRequirementsObservation struct {
@@ -446,8 +629,8 @@ type InstanceRequirementsParameters struct {
 	MemoryGibPerVcpu []MemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
-	// +kubebuilder:validation:Required
-	MemoryMib []MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemoryMib []MemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
 
 	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -474,8 +657,22 @@ type InstanceRequirementsParameters struct {
 	TotalLocalStorageGb []TotalLocalStorageGbParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
 
 	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
-	// +kubebuilder:validation:Required
-	VcpuCount []VcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	VcpuCount []VcpuCountParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+}
+
+type LaunchTemplateCPUOptionsInitParameters struct {
+
+	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. Valid values are enabled and disabled.
+	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
+
+	// The number of CPU cores for the instance.
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// The number of threads per CPU core.
+	// To disable Intel Hyper-Threading Technology for the instance, specify a value of 1.
+	// Otherwise, specify the default value of 2.
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type LaunchTemplateCPUOptionsObservation struct {
@@ -509,6 +706,15 @@ type LaunchTemplateCPUOptionsParameters struct {
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
+type LaunchTemplateCapacityReservationSpecificationInitParameters struct {
+
+	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// Used to target a specific Capacity Reservation:
+	CapacityReservationTarget []CapacityReservationSpecificationCapacityReservationTargetInitParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
 type LaunchTemplateCapacityReservationSpecificationObservation struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Can be open or none. (Default none).
@@ -527,6 +733,15 @@ type LaunchTemplateCapacityReservationSpecificationParameters struct {
 	// Used to target a specific Capacity Reservation:
 	// +kubebuilder:validation:Optional
 	CapacityReservationTarget []CapacityReservationSpecificationCapacityReservationTargetParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
+type LaunchTemplateCreditSpecificationInitParameters struct {
+
+	// The credit option for CPU usage.
+	// Can be standard or unlimited.
+	// T3 instances are launched as unlimited by default.
+	// T2 instances are launched as standard by default.
+	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
 type LaunchTemplateCreditSpecificationObservation struct {
@@ -548,6 +763,12 @@ type LaunchTemplateCreditSpecificationParameters struct {
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
+type LaunchTemplateEnclaveOptionsInitParameters struct {
+
+	// If set to true, Nitro Enclaves will be enabled on the instance.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type LaunchTemplateEnclaveOptionsObservation struct {
 
 	// If set to true, Nitro Enclaves will be enabled on the instance.
@@ -561,6 +782,125 @@ type LaunchTemplateEnclaveOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
+type LaunchTemplateInitParameters_2 struct {
+
+	// Specify volumes to attach to the instance besides the volumes specified by the AMI.
+	// See Block Devices below for details.
+	BlockDeviceMappings []BlockDeviceMappingsInitParameters `json:"blockDeviceMappings,omitempty" tf:"block_device_mappings,omitempty"`
+
+	// The CPU options for the instance. See CPU Options below for more details.
+	CPUOptions []LaunchTemplateCPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
+
+	// Targeting for EC2 capacity reservations. See Capacity Reservation Specification below for more details.
+	CapacityReservationSpecification []LaunchTemplateCapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
+
+	// Customize the credit specification of the instance. See Credit
+	// Specification below for more details.
+	CreditSpecification []LaunchTemplateCreditSpecificationInitParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
+
+	// Default Version of the launch template.
+	DefaultVersion *float64 `json:"defaultVersion,omitempty" tf:"default_version,omitempty"`
+
+	// Description of the launch template.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// If true, enables EC2 Instance Stop Protection.
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
+
+	// If true, enables EC2 Instance
+	// Termination Protection
+	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
+
+	// If true, the launched EC2 instance will be EBS-optimized.
+	EBSOptimized *string `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// The elastic GPU to attach to the instance. See Elastic GPU
+	// below for more details.
+	ElasticGpuSpecifications []ElasticGpuSpecificationsInitParameters `json:"elasticGpuSpecifications,omitempty" tf:"elastic_gpu_specifications,omitempty"`
+
+	// Configuration block containing an Elastic Inference Accelerator to attach to the instance. See Elastic Inference Accelerator below for more details.
+	ElasticInferenceAccelerator []ElasticInferenceAcceleratorInitParameters `json:"elasticInferenceAccelerator,omitempty" tf:"elastic_inference_accelerator,omitempty"`
+
+	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
+	EnclaveOptions []LaunchTemplateEnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
+
+	// The hibernation options for the instance. See Hibernation Options below for more details.
+	HibernationOptions []HibernationOptionsInitParameters `json:"hibernationOptions,omitempty" tf:"hibernation_options,omitempty"`
+
+	// The IAM Instance Profile to launch the instance with. See Instance Profile
+	// below for more details.
+	IAMInstanceProfile []IAMInstanceProfileInitParameters `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
+
+	// The AMI from which to launch the instance.
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// Shutdown behavior for the instance. Can be stop or terminate.
+	// (Default: stop).
+	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
+
+	// The market (purchasing) option for the instance. See Market Options
+	// below for details.
+	InstanceMarketOptions []InstanceMarketOptionsInitParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+
+	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
+	InstanceRequirements []InstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
+
+	// The type of the instance. If present then instance_requirements cannot be present.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The kernel ID.
+	KernelID *string `json:"kernelId,omitempty" tf:"kernel_id,omitempty"`
+
+	// The key name to use for the instance.
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// A list of license specifications to associate with. See License Specification below for more details.
+	LicenseSpecification []LicenseSpecificationInitParameters `json:"licenseSpecification,omitempty" tf:"license_specification,omitempty"`
+
+	// The maintenance options for the instance. See Maintenance Options below for more details.
+	MaintenanceOptions []LaunchTemplateMaintenanceOptionsInitParameters `json:"maintenanceOptions,omitempty" tf:"maintenance_options,omitempty"`
+
+	// Customize the metadata options for the instance. See Metadata Options below for more details.
+	MetadataOptions []LaunchTemplateMetadataOptionsInitParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	// The monitoring option for the instance. See Monitoring below for more details.
+	Monitoring []MonitoringInitParameters `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
+
+	// The name of the launch template.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Customize network interfaces to be attached at instance boot time. See Network
+	// Interfaces below for more details.
+	NetworkInterfaces []NetworkInterfacesInitParameters `json:"networkInterfaces,omitempty" tf:"network_interfaces,omitempty"`
+
+	// The placement of the instance. See Placement below for more details.
+	Placement []PlacementInitParameters `json:"placement,omitempty" tf:"placement,omitempty"`
+
+	// The options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
+	PrivateDNSNameOptions []LaunchTemplatePrivateDNSNameOptionsInitParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
+
+	// The ID of the RAM disk.
+	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
+
+	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
+	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Whether to update Default Version each update. Conflicts with default_version.
+	UpdateDefaultVersion *bool `json:"updateDefaultVersion,omitempty" tf:"update_default_version,omitempty"`
+
+	// The base64-encoded user data to provide when launching the instance.
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+}
+
+type LaunchTemplateMaintenanceOptionsInitParameters struct {
+
+	// Disables the automatic recovery behavior of your instance or sets it to default. Can be "default" or "disabled". See Recover your instance for more details.
+	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
+}
+
 type LaunchTemplateMaintenanceOptionsObservation struct {
 
 	// Disables the automatic recovery behavior of your instance or sets it to default. Can be "default" or "disabled". See Recover your instance for more details.
@@ -572,6 +912,24 @@ type LaunchTemplateMaintenanceOptionsParameters struct {
 	// Disables the automatic recovery behavior of your instance or sets it to default. Can be "default" or "disabled". See Recover your instance for more details.
 	// +kubebuilder:validation:Optional
 	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
+}
+
+type LaunchTemplateMetadataOptionsInitParameters struct {
+
+	// Whether the metadata service is available. Can be enabled or disabled.
+	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
+
+	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
+	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
+
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
+	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
+
+	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
+	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type LaunchTemplateMetadataOptionsObservation struct {
@@ -930,6 +1288,18 @@ type LaunchTemplateParameters_2 struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
+type LaunchTemplatePrivateDNSNameOptionsInitParameters struct {
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	// The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
+}
+
 type LaunchTemplatePrivateDNSNameOptionsObservation struct {
 
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
@@ -957,6 +1327,12 @@ type LaunchTemplatePrivateDNSNameOptionsParameters struct {
 	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
 }
 
+type LicenseSpecificationInitParameters struct {
+
+	// ARN of the license configuration.
+	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
+}
+
 type LicenseSpecificationObservation struct {
 
 	// ARN of the license configuration.
@@ -966,8 +1342,17 @@ type LicenseSpecificationObservation struct {
 type LicenseSpecificationParameters struct {
 
 	// ARN of the license configuration.
-	// +kubebuilder:validation:Required
-	LicenseConfigurationArn *string `json:"licenseConfigurationArn" tf:"license_configuration_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
+}
+
+type MemoryGibPerVcpuInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryGibPerVcpuObservation struct {
@@ -990,6 +1375,15 @@ type MemoryGibPerVcpuParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type MemoryMibInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type MemoryMibObservation struct {
 
 	// Maximum.
@@ -1006,8 +1400,14 @@ type MemoryMibParameters struct {
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	// +kubebuilder:validation:Required
-	Min *float64 `json:"min" tf:"min,omitempty"`
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type MonitoringInitParameters struct {
+
+	// If true, the launched EC2 instance will have detailed monitoring enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type MonitoringObservation struct {
@@ -1021,6 +1421,15 @@ type MonitoringParameters struct {
 	// If true, the launched EC2 instance will have detailed monitoring enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type NetworkBandwidthGbpsInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkBandwidthGbpsObservation struct {
@@ -1043,6 +1452,15 @@ type NetworkBandwidthGbpsParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type NetworkInterfaceCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type NetworkInterfaceCountObservation struct {
 
 	// Maximum.
@@ -1061,6 +1479,60 @@ type NetworkInterfaceCountParameters struct {
 	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type NetworkInterfacesInitParameters struct {
+
+	// Associate a Carrier IP address with eth0 for a new network interface.
+	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
+	// Boolean value, can be left unset.
+	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
+
+	// Associate a public ip address with the network interface.
+	// Boolean value, can be left unset.
+	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	// Whether the network interface should be destroyed on instance termination.
+	DeleteOnTermination *string `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Description of the network interface.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integer index of the network interface attachment.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// The number of secondary private IPv4 addresses to assign to a network interface. Conflicts with ipv4_addresses
+	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
+
+	// One or more private IPv4 addresses to associate. Conflicts with ipv4_address_count
+	IPv4Addresses []*string `json:"ipv4Addresses,omitempty" tf:"ipv4_addresses,omitempty"`
+
+	// The number of IPv4 prefixes to be automatically assigned to the network interface. Conflicts with ipv4_prefixes
+	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
+
+	// One or more IPv4 prefixes to be assigned to the network interface. Conflicts with ipv4_prefix_count
+	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
+
+	// The number of IPv6 addresses to assign to a network interface. Conflicts with ipv6_addresses
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+
+	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
+	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
+
+	// The number of IPv6 prefixes to be automatically assigned to the network interface. Conflicts with ipv6_prefixes
+	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
+
+	// One or more IPv6 prefixes to be assigned to the network interface. Conflicts with ipv6_prefix_count
+	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
+
+	// The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa.
+	InterfaceType *string `json:"interfaceType,omitempty" tf:"interface_type,omitempty"`
+
+	// The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+
+	// The primary private IPv4 address.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 }
 
 type NetworkInterfacesObservation struct {
@@ -1237,6 +1709,33 @@ type NetworkInterfacesParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type PlacementInitParameters struct {
+
+	// The affinity setting for an instance on a Dedicated Host.
+	Affinity *string `json:"affinity,omitempty" tf:"affinity,omitempty"`
+
+	// The Availability Zone for the instance.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// The name of the placement group for the instance.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// The ID of the Dedicated Host for the instance.
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// The ARN of the Host Resource Group in which to launch instances.
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	// The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.
+	PartitionNumber *float64 `json:"partitionNumber,omitempty" tf:"partition_number,omitempty"`
+
+	// Reserved for future use.
+	SpreadDomain *string `json:"spreadDomain,omitempty" tf:"spread_domain,omitempty"`
+
+	// The tenancy of the instance (if the instance is running in a VPC). Can be default, dedicated, or host.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+}
+
 type PlacementObservation struct {
 
 	// The affinity setting for an instance on a Dedicated Host.
@@ -1299,6 +1798,25 @@ type PlacementParameters struct {
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 }
 
+type SpotOptionsInitParameters struct {
+
+	// The required duration in minutes. This value must be a multiple of 60.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
 type SpotOptionsObservation struct {
 
 	// The required duration in minutes. This value must be a multiple of 60.
@@ -1342,6 +1860,15 @@ type SpotOptionsParameters struct {
 	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
+type TagSpecificationsInitParameters struct {
+
+	// The type of resource to tag.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A map of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type TagSpecificationsObservation struct {
 
 	// The type of resource to tag.
@@ -1360,6 +1887,15 @@ type TagSpecificationsParameters struct {
 	// A map of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type TotalLocalStorageGbInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type TotalLocalStorageGbObservation struct {
@@ -1382,6 +1918,15 @@ type TotalLocalStorageGbParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type VcpuCountInitParameters struct {
+
+	// Maximum.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// Minimum.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
 type VcpuCountObservation struct {
 
 	// Maximum.
@@ -1398,14 +1943,26 @@ type VcpuCountParameters struct {
 	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	// +kubebuilder:validation:Required
-	Min *float64 `json:"min" tf:"min,omitempty"`
+	// +kubebuilder:validation:Optional
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 // LaunchTemplateSpec defines the desired state of LaunchTemplate
 type LaunchTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LaunchTemplateParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LaunchTemplateInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // LaunchTemplateStatus defines the observed state of LaunchTemplate.

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OrganizationalUnitAccountsInitParameters struct {
+}
+
 type OrganizationalUnitAccountsObservation struct {
 
 	// ARN of the account
@@ -29,6 +32,18 @@ type OrganizationalUnitAccountsObservation struct {
 }
 
 type OrganizationalUnitAccountsParameters struct {
+}
+
+type OrganizationalUnitInitParameters struct {
+
+	// The name for the organizational unit
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the parent organizational unit, which may be the root
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OrganizationalUnitObservation struct {
@@ -79,6 +94,18 @@ type OrganizationalUnitParameters struct {
 type OrganizationalUnitSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OrganizationalUnitParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OrganizationalUnitInitParameters `json:"initProvider,omitempty"`
 }
 
 // OrganizationalUnitStatus defines the observed state of OrganizationalUnit.
@@ -99,8 +126,8 @@ type OrganizationalUnitStatus struct {
 type OrganizationalUnit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentId)",message="parentId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parentId) || has(self.initProvider.parentId)",message="parentId is a required parameter"
 	Spec   OrganizationalUnitSpec   `json:"spec"`
 	Status OrganizationalUnitStatus `json:"status,omitempty"`
 }

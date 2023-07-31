@@ -122,9 +122,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - prefixListIds
-                      - vpceIds
                       type: object
                     type: array
                   notificationDestinations:
@@ -259,13 +256,135 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - securityGroupIds
-                      - subnetIds
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accountAccessType:
+                    description: The type of account access for the workspace. Valid
+                      values are CURRENT_ACCOUNT and ORGANIZATION. If ORGANIZATION
+                      is specified, then organizational_units must also be present.
+                    type: string
+                  authenticationProviders:
+                    description: The authentication providers for the workspace. Valid
+                      values are AWS_SSO, SAML, or both.
+                    items:
+                      type: string
+                    type: array
+                  configuration:
+                    description: The configuration string for the workspace that you
+                      create. For more information about the format and configuration
+                      options available, see Working in your Grafana workspace.
+                    type: string
+                  dataSources:
+                    description: The data sources for the workspace. Valid values
+                      are AMAZON_OPENSEARCH_SERVICE, ATHENA, CLOUDWATCH, PROMETHEUS,
+                      REDSHIFT, SITEWISE, TIMESTREAM, XRAY
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The workspace description.
+                    type: string
+                  grafanaVersion:
+                    description: Specifies the version of Grafana to support in the
+                      new workspace. Supported values are 8.4 and 9.4. If not specified,
+                      defaults to 8.4. Upgrading the workspace version isn't supported,
+                      however it's possible to copy content from the old version to
+                      the new one using AWS official migration tool.
+                    type: string
+                  name:
+                    description: The Grafana workspace name.
+                    type: string
+                  networkAccessControl:
+                    description: Configuration for network access to your workspace.See
+                      Network Access Control below.
+                    items:
+                      properties:
+                        prefixListIds:
+                          description: '- An array of prefix list IDs.'
+                          items:
+                            type: string
+                          type: array
+                        vpceIds:
+                          description: '- An array of Amazon VPC endpoint IDs for
+                            the workspace. The only VPC endpoints that can be specified
+                            here are interface VPC endpoints for Grafana workspaces
+                            (using the com.amazonaws.[region].grafana-workspace service
+                            endpoint). Other VPC endpoints will be ignored.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  notificationDestinations:
+                    description: The notification destinations. If a data source is
+                      specified here, Amazon Managed Grafana will create IAM roles
+                      and permissions needed to use these destinations. Must be set
+                      to SNS.
+                    items:
+                      type: string
+                    type: array
+                  organizationRoleName:
+                    description: The role name that the workspace uses to access resources
+                      through Amazon Organizations.
+                    type: string
+                  organizationalUnits:
+                    description: The Amazon Organizations organizational units that
+                      the workspace is authorized to use data sources from.
+                    items:
+                      type: string
+                    type: array
+                  permissionType:
+                    description: The permission type of the workspace. If SERVICE_MANAGED
+                      is specified, the IAM roles and IAM policy attachments are generated
+                      automatically. If CUSTOMER_MANAGED is specified, the IAM roles
+                      and IAM policy attachments will not be created.
+                    type: string
+                  stackSetName:
+                    description: The AWS CloudFormation stack set name that provisions
+                      IAM roles to be used by the workspace.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vpcConfiguration:
+                    description: The configuration settings for an Amazon VPC that
+                      contains data sources for your Grafana workspace to connect
+                      to. See VPC Configuration below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: '- The list of Amazon EC2 security group IDs
+                            attached to the Amazon VPC for your Grafana workspace
+                            to connect.'
+                          items:
+                            type: string
+                          type: array
+                        subnetIds:
+                          description: '- The list of Amazon EC2 subnet IDs created
+                            in the Amazon VPC for your Grafana workspace to connect.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -467,13 +586,16 @@ spec:
             x-kubernetes-validations:
             - message: accountAccessType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountAccessType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountAccessType)
+                || has(self.initProvider.accountAccessType)'
             - message: authenticationProviders is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProviders)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProviders)
+                || has(self.initProvider.authenticationProviders)'
             - message: permissionType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissionType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissionType)
+                || has(self.initProvider.permissionType)'
           status:
             description: WorkspaceStatus defines the observed state of Workspace.
             properties:

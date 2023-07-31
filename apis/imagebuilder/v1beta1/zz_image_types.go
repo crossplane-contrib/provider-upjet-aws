@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AmisInitParameters struct {
+}
+
 type AmisObservation struct {
 
 	// Account identifier of the AMI.
@@ -34,6 +37,9 @@ type AmisObservation struct {
 type AmisParameters struct {
 }
 
+type ContainersInitParameters struct {
+}
+
 type ContainersObservation struct {
 
 	// Set of URIs for created containers.
@@ -44,6 +50,21 @@ type ContainersObservation struct {
 }
 
 type ContainersParameters struct {
+}
+
+type ImageInitParameters struct {
+
+	// - Amazon Resource Name (ARN) of the container recipe.
+	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
+
+	// Whether additional information about the image being created is collected. Defaults to true.
+	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
+	// Configuration block with image tests configuration. Detailed below.
+	ImageTestsConfiguration []ImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ImageObservation struct {
@@ -163,6 +184,15 @@ type ImageParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ImageTestsConfigurationInitParameters struct {
+
+	// Whether image tests are enabled. Defaults to true.
+	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
+
+	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
+	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+}
+
 type ImageTestsConfigurationObservation struct {
 
 	// Whether image tests are enabled. Defaults to true.
@@ -183,6 +213,9 @@ type ImageTestsConfigurationParameters struct {
 	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
+type OutputResourcesInitParameters struct {
+}
+
 type OutputResourcesObservation struct {
 
 	// Set of objects with each Amazon Machine Image (AMI) created.
@@ -199,6 +232,18 @@ type OutputResourcesParameters struct {
 type ImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ImageInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageStatus defines the observed state of Image.

@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LicenseConfigurationInitParameters struct {
+
+	// Description of the license configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Number of licenses managed by the license configuration.
+	LicenseCount *float64 `json:"licenseCount,omitempty" tf:"license_count,omitempty"`
+
+	// Sets the number of available licenses as a hard limit.
+	LicenseCountHardLimit *bool `json:"licenseCountHardLimit,omitempty" tf:"license_count_hard_limit,omitempty"`
+
+	// Dimension to use to track license inventory. Specify either vCPU, Instance, Core or Socket.
+	LicenseCountingType *string `json:"licenseCountingType,omitempty" tf:"license_counting_type,omitempty"`
+
+	// Array of configured License Manager rules.
+	LicenseRules []*string `json:"licenseRules,omitempty" tf:"license_rules,omitempty"`
+
+	// Name of the license configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LicenseConfigurationObservation struct {
 
 	// The license configuration ARN.
@@ -89,6 +113,18 @@ type LicenseConfigurationParameters struct {
 type LicenseConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LicenseConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LicenseConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // LicenseConfigurationStatus defines the observed state of LicenseConfiguration.
@@ -109,8 +145,8 @@ type LicenseConfigurationStatus struct {
 type LicenseConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseCountingType)",message="licenseCountingType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseCountingType) || has(self.initProvider.licenseCountingType)",message="licenseCountingType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   LicenseConfigurationSpec   `json:"spec"`
 	Status LicenseConfigurationStatus `json:"status,omitempty"`
 }

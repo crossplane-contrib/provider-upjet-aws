@@ -11,6 +11,3 @@ spec:
     key: nyckel
     region: us-west-1
     value: värde
-
----
-

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountsInitParameters struct {
+}
+
 type AccountsObservation struct {
 
 	// ARN of the account
@@ -34,6 +37,9 @@ type AccountsObservation struct {
 type AccountsParameters struct {
 }
 
+type NonMasterAccountsInitParameters struct {
+}
+
 type NonMasterAccountsObservation struct {
 
 	// ARN of the account
@@ -53,6 +59,18 @@ type NonMasterAccountsObservation struct {
 }
 
 type NonMasterAccountsParameters struct {
+}
+
+type OrganizationInitParameters struct {
+
+	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
+	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
+
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
+
+	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
 }
 
 type OrganizationObservation struct {
@@ -111,6 +129,9 @@ type OrganizationParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type PolicyTypesInitParameters struct {
+}
+
 type PolicyTypesObservation struct {
 
 	// Current status of the account
@@ -120,6 +141,9 @@ type PolicyTypesObservation struct {
 }
 
 type PolicyTypesParameters struct {
+}
+
+type RootsInitParameters struct {
 }
 
 type RootsObservation struct {
@@ -144,6 +168,18 @@ type RootsParameters struct {
 type OrganizationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OrganizationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OrganizationInitParameters `json:"initProvider,omitempty"`
 }
 
 // OrganizationStatus defines the observed state of Organization.

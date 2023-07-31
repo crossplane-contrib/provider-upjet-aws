@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataLocationInitParameters struct {
+
+	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+}
+
 type DataLocationObservation struct {
 
 	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
@@ -40,6 +46,12 @@ type DataLocationParameters struct {
 
 	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
 	// +kubebuilder:validation:Optional
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+}
+
+type DatabaseInitParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 }
 
@@ -72,6 +84,15 @@ type DatabaseParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
+type ExpressionInitParameters struct {
+
+	// name of an LF-Tag.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A list of possible values of an LF-Tag.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type ExpressionObservation struct {
 
 	// name of an LF-Tag.
@@ -84,12 +105,24 @@ type ExpressionObservation struct {
 type ExpressionParameters struct {
 
 	// name of an LF-Tag.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LfTagInitParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// name for the tag.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// A list of possible values an attribute can take.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type LfTagObservation struct {
@@ -111,12 +144,24 @@ type LfTagParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// name for the tag.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type LfTagPolicyInitParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// A list of tag conditions that apply to the resource's tag policy. Configuration block for tag conditions that apply to the policy. See expression below.
+	Expression []ExpressionInitParameters `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// –  The resource type for which the tag policy applies. Valid values are DATABASE and TABLE.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 }
 
 type LfTagPolicyObservation struct {
@@ -138,12 +183,48 @@ type LfTagPolicyParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// A list of tag conditions that apply to the resource's tag policy. Configuration block for tag conditions that apply to the policy. See expression below.
-	// +kubebuilder:validation:Required
-	Expression []ExpressionParameters `json:"expression" tf:"expression,omitempty"`
+	// +kubebuilder:validation:Optional
+	Expression []ExpressionParameters `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// –  The resource type for which the tag policy applies. Valid values are DATABASE and TABLE.
-	// +kubebuilder:validation:Required
-	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type PermissionsInitParameters struct {
+
+	// –  Identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
+	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
+
+	// Configuration block for a data location resource. Detailed below.
+	DataLocation []DataLocationInitParameters `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
+
+	// Configuration block for a database resource. Detailed below.
+	Database []DatabaseInitParameters `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Configuration block for an LF-tag resource. Detailed below.
+	LfTag []LfTagInitParameters `json:"lfTag,omitempty" tf:"lf_tag,omitempty"`
+
+	// Configuration block for an LF-tag policy resource. Detailed below.
+	LfTagPolicy []LfTagPolicyInitParameters `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
+
+	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
+	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Subset of permissions which the principal can pass.
+	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
+
+	// account permissions. For more information, see Lake Formation Permissions Reference.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Configuration block for a table resource. Detailed below.
+	Table []TableInitParameters `json:"table,omitempty" tf:"table,omitempty"`
+
+	// Configuration block for a table with columns resource. Detailed below.
+	TableWithColumns []TableWithColumnsInitParameters `json:"tableWithColumns,omitempty" tf:"table_with_columns,omitempty"`
 }
 
 type PermissionsObservation struct {
@@ -236,6 +317,21 @@ type PermissionsParameters struct {
 	TableWithColumns []TableWithColumnsParameters `json:"tableWithColumns,omitempty" tf:"table_with_columns,omitempty"`
 }
 
+type TableInitParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  Name of the database for the table. Unique to a Data Catalog.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Name of the table.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to use a wildcard representing every table under a database. Defaults to false.
+	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
+}
+
 type TableObservation struct {
 
 	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
@@ -258,8 +354,8 @@ type TableParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// –  Name of the database for the table. Unique to a Data Catalog.
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Name of the table.
 	// +kubebuilder:validation:Optional
@@ -267,6 +363,24 @@ type TableParameters struct {
 
 	// Whether to use a wildcard representing every table under a database. Defaults to false.
 	// +kubebuilder:validation:Optional
+	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
+}
+
+type TableWithColumnsInitParameters struct {
+
+	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// Set of column names for the table.
+	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
+
+	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Set of column names for the table to exclude.
+	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
+
+	// Whether to use a column wildcard.
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
 }
 
@@ -302,8 +416,8 @@ type TableWithColumnsParameters struct {
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
 	// +kubebuilder:validation:Optional
@@ -331,6 +445,18 @@ type TableWithColumnsParameters struct {
 type PermissionsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PermissionsInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionsStatus defines the observed state of Permissions.
@@ -351,8 +477,8 @@ type PermissionsStatus struct {
 type Permissions struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissions)",message="permissions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissions) || has(self.initProvider.permissions)",message="permissions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || has(self.initProvider.principal)",message="principal is a required parameter"
 	Spec   PermissionsSpec   `json:"spec"`
 	Status PermissionsStatus `json:"status,omitempty"`
 }

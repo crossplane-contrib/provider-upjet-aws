@@ -179,6 +179,47 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  blockPublicAcls:
+                    description: 'Whether Amazon S3 should block public ACLs for this
+                      bucket. Defaults to false. Enabling this setting does not affect
+                      existing policies or ACLs. When set to true causes the following
+                      behavior:'
+                    type: boolean
+                  blockPublicPolicy:
+                    description: 'Whether Amazon S3 should block public bucket policies
+                      for this bucket. Defaults to false. Enabling this setting does
+                      not affect the existing bucket policy. When set to true causes
+                      Amazon S3 to:'
+                    type: boolean
+                  ignorePublicAcls:
+                    description: 'Whether Amazon S3 should ignore public ACLs for
+                      this bucket. Defaults to false. Enabling this setting does not
+                      affect the persistence of any existing ACLs and doesn''t prevent
+                      new public ACLs from being set. When set to true causes Amazon
+                      S3 to:'
+                    type: boolean
+                  restrictPublicBuckets:
+                    description: 'Whether Amazon S3 should restrict public bucket
+                      policies for this bucket. Defaults to false. Enabling this setting
+                      does not affect the previously stored bucket policy, except
+                      that public and cross-account access within the public bucket
+                      policy, including non-public delegation to specific accounts,
+                      is blocked. When set to true:'
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -143,12 +143,6 @@ spec:
                           description: A Boolean value that determines how CloudFront
                             behaves for the HTTP response header.
                           type: boolean
-                      required:
-                      - accessControlAllowCredentials
-                      - accessControlAllowHeaders
-                      - accessControlAllowMethods
-                      - accessControlAllowOrigins
-                      - originOverride
                       type: object
                     type: array
                   customHeadersConfig:
@@ -170,10 +164,6 @@ spec:
                               value:
                                 description: The value for the HTTP response header.
                                 type: string
-                            required:
-                            - header
-                            - override
-                            - value
                             type: object
                           type: array
                       type: object
@@ -201,8 +191,6 @@ spec:
                               header:
                                 description: The HTTP response header name.
                                 type: string
-                            required:
-                            - header
                             type: object
                           type: array
                       type: object
@@ -230,9 +218,6 @@ spec:
                                   header with the same name received from the origin
                                   with the header specifies here.
                                 type: boolean
-                            required:
-                            - contentSecurityPolicy
-                            - override
                             type: object
                           type: array
                         contentTypeOptions:
@@ -246,8 +231,6 @@ spec:
                                   header with the same name received from the origin
                                   with the header specifies here.
                                 type: boolean
-                            required:
-                            - override
                             type: object
                           type: array
                         frameOptions:
@@ -265,9 +248,6 @@ spec:
                                   header with the same name received from the origin
                                   with the header specifies here.
                                 type: boolean
-                            required:
-                            - frameOption
-                            - override
                             type: object
                           type: array
                         referrerPolicy:
@@ -286,9 +266,6 @@ spec:
                                   the Referrer-Policy HTTP response header and the
                                   header’s value. See Referrer Policy for more information.
                                 type: string
-                            required:
-                            - override
-                            - referrerPolicy
                             type: object
                           type: array
                         strictTransportSecurity:
@@ -318,9 +295,6 @@ spec:
                                   directive in the Strict-Transport-Security HTTP
                                   response header.
                                 type: boolean
-                            required:
-                            - accessControlMaxAgeSec
-                            - override
                             type: object
                           type: array
                         xssProtection:
@@ -351,9 +325,6 @@ spec:
                                   header. You cannot specify a report_uri when mode_block
                                   is true.
                                 type: string
-                            required:
-                            - override
-                            - protection
                             type: object
                           type: array
                       type: object
@@ -376,13 +347,302 @@ spec:
                             add the Server-Timing header to. Valid range: Minimum
                             value of 0.0. Maximum value of 100.0.'
                           type: number
-                      required:
-                      - enabled
-                      - samplingRate
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  comment:
+                    description: A comment to describe the response headers policy.
+                      The comment cannot be longer than 128 characters.
+                    type: string
+                  corsConfig:
+                    description: A configuration for a set of HTTP response headers
+                      that are used for Cross-Origin Resource Sharing (CORS). See
+                      Cors Config for more information.
+                    items:
+                      properties:
+                        accessControlAllowCredentials:
+                          description: A Boolean value that CloudFront uses as the
+                            value for the Access-Control-Allow-Credentials HTTP response
+                            header.
+                          type: boolean
+                        accessControlAllowHeaders:
+                          description: Object that contains an attribute items that
+                            contains a list of HTTP header names that CloudFront includes
+                            as values for the Access-Control-Allow-Headers HTTP response
+                            header.
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        accessControlAllowMethods:
+                          description: 'Object that contains an attribute items that
+                            contains a list of HTTP methods that CloudFront includes
+                            as values for the Access-Control-Allow-Methods HTTP response
+                            header. Valid values: GET | POST | OPTIONS | PUT | DELETE
+                            | HEAD | ALL'
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        accessControlAllowOrigins:
+                          description: Object that contains an attribute items that
+                            contains a list of origins that CloudFront can use as
+                            the value for the Access-Control-Allow-Origin HTTP response
+                            header.
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        accessControlExposeHeaders:
+                          description: Object that contains an attribute items that
+                            contains a list of HTTP headers that CloudFront includes
+                            as values for the Access-Control-Expose-Headers HTTP response
+                            header.
+                          items:
+                            properties:
+                              items:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        accessControlMaxAgeSec:
+                          description: A number that CloudFront uses as the value
+                            for the Access-Control-Max-Age HTTP response header.
+                          type: number
+                        originOverride:
+                          description: A Boolean value that determines how CloudFront
+                            behaves for the HTTP response header.
+                          type: boolean
+                      type: object
+                    type: array
+                  customHeadersConfig:
+                    description: Object that contains an attribute items that contains
+                      a list of custom headers. See Custom Header for more information.
+                    items:
+                      properties:
+                        items:
+                          items:
+                            properties:
+                              header:
+                                description: The HTTP response header name.
+                                type: string
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                              value:
+                                description: The value for the HTTP response header.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  etag:
+                    description: The current version of the response headers policy.
+                    type: string
+                  name:
+                    description: A unique name to identify the response headers policy.
+                    type: string
+                  removeHeadersConfig:
+                    description: A configuration for a set of HTTP headers to remove
+                      from the HTTP response. Object that contains an attribute items
+                      that contains a list of headers. See Remove Header for more
+                      information.
+                    items:
+                      properties:
+                        items:
+                          items:
+                            properties:
+                              header:
+                                description: The HTTP response header name.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  securityHeadersConfig:
+                    description: A configuration for a set of security-related HTTP
+                      response headers. See Security Headers Config for more information.
+                    items:
+                      properties:
+                        contentSecurityPolicy:
+                          description: The policy directives and their values that
+                            CloudFront includes as values for the Content-Security-Policy
+                            HTTP response header. See Content Security Policy for
+                            more information.
+                          items:
+                            properties:
+                              contentSecurityPolicy:
+                                description: The policy directives and their values
+                                  that CloudFront includes as values for the Content-Security-Policy
+                                  HTTP response header. See Content Security Policy
+                                  for more information.
+                                type: string
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                            type: object
+                          type: array
+                        contentTypeOptions:
+                          description: Determines whether CloudFront includes the
+                            X-Content-Type-Options HTTP response header with its value
+                            set to nosniff. See Content Type Options for more information.
+                          items:
+                            properties:
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                            type: object
+                          type: array
+                        frameOptions:
+                          description: Determines whether CloudFront includes the
+                            X-Frame-Options HTTP response header and the header’s
+                            value. See Frame Options for more information.
+                          items:
+                            properties:
+                              frameOption:
+                                description: 'The value of the X-Frame-Options HTTP
+                                  response header. Valid values: DENY | SAMEORIGIN'
+                                type: string
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                            type: object
+                          type: array
+                        referrerPolicy:
+                          description: Determines whether CloudFront includes the
+                            Referrer-Policy HTTP response header and the header’s
+                            value. See Referrer Policy for more information.
+                          items:
+                            properties:
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                              referrerPolicy:
+                                description: Determines whether CloudFront includes
+                                  the Referrer-Policy HTTP response header and the
+                                  header’s value. See Referrer Policy for more information.
+                                type: string
+                            type: object
+                          type: array
+                        strictTransportSecurity:
+                          description: Determines whether CloudFront includes the
+                            Strict-Transport-Security HTTP response header and the
+                            header’s value. See Strict Transport Security for more
+                            information.
+                          items:
+                            properties:
+                              accessControlMaxAgeSec:
+                                description: A number that CloudFront uses as the
+                                  value for the Access-Control-Max-Age HTTP response
+                                  header.
+                                type: number
+                              includeSubdomains:
+                                description: Whether CloudFront includes the includeSubDomains
+                                  directive in the Strict-Transport-Security HTTP
+                                  response header.
+                                type: boolean
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                              preload:
+                                description: Whether CloudFront includes the preload
+                                  directive in the Strict-Transport-Security HTTP
+                                  response header.
+                                type: boolean
+                            type: object
+                          type: array
+                        xssProtection:
+                          description: Determine whether CloudFront includes the X-XSS-Protection
+                            HTTP response header and the header’s value. See XSS Protection
+                            for more information.
+                          items:
+                            properties:
+                              modeBlock:
+                                description: Whether CloudFront includes the mode=block
+                                  directive in the X-XSS-Protection header.
+                                type: boolean
+                              override:
+                                description: Whether CloudFront overrides a response
+                                  header with the same name received from the origin
+                                  with the header specifies here.
+                                type: boolean
+                              protection:
+                                description: A Boolean value that determines the value
+                                  of the X-XSS-Protection HTTP response header. When
+                                  this setting is true, the value of the X-XSS-Protection
+                                  header is 1. When this setting is false, the value
+                                  of the X-XSS-Protection header is 0.
+                                type: boolean
+                              reportUri:
+                                description: A reporting URI, which CloudFront uses
+                                  as the value of the report directive in the X-XSS-Protection
+                                  header. You cannot specify a report_uri when mode_block
+                                  is true.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  serverTimingHeadersConfig:
+                    description: A configuration for enabling the Server-Timing header
+                      in HTTP responses sent from CloudFront. See Server Timing Headers
+                      Config for more information.
+                    items:
+                      properties:
+                        enabled:
+                          description: A Whether CloudFront adds the Server-Timing
+                            header to HTTP responses that it sends in response to
+                            requests that match a cache behavior that's associated
+                            with this response headers policy.
+                          type: boolean
+                        samplingRate:
+                          description: 'A number 0–100 (inclusive) that specifies
+                            the percentage of responses that you want CloudFront to
+                            add the Server-Timing header to. Valid range: Minimum
+                            value of 0.0. Maximum value of 100.0.'
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -584,7 +844,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ResponseHeadersPolicyStatus defines the observed state of
               ResponseHeadersPolicy.

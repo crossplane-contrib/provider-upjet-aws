@@ -285,6 +285,57 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  destinationConfig:
+                    description: Configuration block with destination configuration.
+                      See below for details.
+                    items:
+                      properties:
+                        onFailure:
+                          description: Configuration block with destination configuration
+                            for failed asynchronous invocations. See below for details.
+                          items:
+                            type: object
+                          type: array
+                        onSuccess:
+                          description: Configuration block with destination configuration
+                            for successful asynchronous invocations. See below for
+                            details.
+                          items:
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  functionName:
+                    description: Name or Amazon Resource Name (ARN) of the Lambda
+                      Function, omitting any version or alias qualifier.
+                    type: string
+                  maximumEventAgeInSeconds:
+                    description: Maximum age of a request that Lambda sends to a function
+                      for processing in seconds. Valid values between 60 and 21600.
+                    type: number
+                  maximumRetryAttempts:
+                    description: Maximum number of times to retry when the function
+                      returns an error. Valid values between 0 and 2. Defaults to
+                      2.
+                    type: number
+                  qualifier:
+                    description: Lambda Function published version, $LATEST, or Lambda
+                      Alias name.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -485,7 +536,8 @@ spec:
             x-kubernetes-validations:
             - message: functionName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionName)
+                || has(self.initProvider.functionName)'
           status:
             description: FunctionEventInvokeConfigStatus defines the observed state
               of FunctionEventInvokeConfig.

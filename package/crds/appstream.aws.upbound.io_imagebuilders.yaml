@@ -79,8 +79,6 @@ spec:
                           description: Identifier (ID) of the VPC in which the interface
                             endpoint is used.
                           type: string
-                      required:
-                      - endpointType
                       type: object
                     type: array
                   appstreamAgentVersion:
@@ -309,6 +307,89 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accessEndpoint:
+                    description: Set of interface VPC endpoint (interface endpoint)
+                      objects. Maximum of 4. See below.
+                    items:
+                      properties:
+                        endpointType:
+                          description: Type of interface endpoint.
+                          type: string
+                        vpceId:
+                          description: Identifier (ID) of the VPC in which the interface
+                            endpoint is used.
+                          type: string
+                      type: object
+                    type: array
+                  appstreamAgentVersion:
+                    description: Version of the AppStream 2.0 agent to use for this
+                      image builder.
+                    type: string
+                  description:
+                    description: Description to display.
+                    type: string
+                  displayName:
+                    description: Human-readable friendly name for the AppStream image
+                      builder.
+                    type: string
+                  domainJoinInfo:
+                    description: Configuration block for the name of the directory
+                      and organizational unit (OU) to use to join the image builder
+                      to a Microsoft Active Directory domain. See below.
+                    items:
+                      properties:
+                        directoryName:
+                          description: Fully qualified name of the directory (for
+                            example, corp.example.com).
+                          type: string
+                        organizationalUnitDistinguishedName:
+                          description: Distinguished name of the organizational unit
+                            for computer accounts.
+                          type: string
+                      type: object
+                    type: array
+                  enableDefaultInternetAccess:
+                    description: Enables or disables default internet access for the
+                      image builder.
+                    type: boolean
+                  imageArn:
+                    description: ARN of the public, private, or shared image to use.
+                    type: string
+                  instanceType:
+                    description: Instance type to use when launching the image builder.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vpcConfig:
+                    description: Configuration block for the VPC configuration for
+                      the image builder. See below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: Identifiers of the security groups for the
+                            image builder or image builder.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -509,7 +590,8 @@ spec:
             x-kubernetes-validations:
             - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
+                || has(self.initProvider.instanceType)'
           status:
             description: ImageBuilderStatus defines the observed state of ImageBuilder.
             properties:

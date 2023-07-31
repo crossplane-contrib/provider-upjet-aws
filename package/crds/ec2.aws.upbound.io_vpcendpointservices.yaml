@@ -105,6 +105,51 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  acceptanceRequired:
+                    description: Whether or not VPC endpoint connection requests to
+                      the service must be accepted by the service owner - true or
+                      false.
+                    type: boolean
+                  gatewayLoadBalancerArns:
+                    description: Amazon Resource Names (ARNs) of one or more Gateway
+                      Load Balancers for the endpoint service.
+                    items:
+                      type: string
+                    type: array
+                  networkLoadBalancerArns:
+                    description: Amazon Resource Names (ARNs) of one or more Network
+                      Load Balancers for the endpoint service.
+                    items:
+                      type: string
+                    type: array
+                  privateDnsName:
+                    description: The private DNS name for the service.
+                    type: string
+                  supportedIpAddressTypes:
+                    description: The supported IP address types. The possible values
+                      are ipv4 and ipv6.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -305,7 +350,8 @@ spec:
             x-kubernetes-validations:
             - message: acceptanceRequired is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.acceptanceRequired)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.acceptanceRequired)
+                || has(self.initProvider.acceptanceRequired)'
           status:
             description: VPCEndpointServiceStatus defines the observed state of VPCEndpointService.
             properties:

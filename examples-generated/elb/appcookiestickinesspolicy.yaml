@@ -35,6 +35,3 @@ spec:
       lbPort: 80
       lbProtocol: http
     region: us-west-1
-
----
-

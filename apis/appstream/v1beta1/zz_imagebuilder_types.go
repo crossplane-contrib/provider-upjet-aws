@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessEndpointInitParameters struct {
+
+	// Type of interface endpoint.
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+
+	// Identifier (ID) of the VPC in which the interface endpoint is used.
+	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
+}
+
 type AccessEndpointObservation struct {
 
 	// Type of interface endpoint.
@@ -25,12 +34,21 @@ type AccessEndpointObservation struct {
 type AccessEndpointParameters struct {
 
 	// Type of interface endpoint.
-	// +kubebuilder:validation:Required
-	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// Identifier (ID) of the VPC in which the interface endpoint is used.
 	// +kubebuilder:validation:Optional
 	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
+}
+
+type ImageBuilderDomainJoinInfoInitParameters struct {
+
+	// Fully qualified name of the directory (for example, corp.example.com).
+	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
+
+	// Distinguished name of the organizational unit for computer accounts.
+	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 }
 
 type ImageBuilderDomainJoinInfoObservation struct {
@@ -51,6 +69,39 @@ type ImageBuilderDomainJoinInfoParameters struct {
 	// Distinguished name of the organizational unit for computer accounts.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
+}
+
+type ImageBuilderInitParameters struct {
+
+	// Set of interface VPC endpoint (interface endpoint) objects. Maximum of 4. See below.
+	AccessEndpoint []AccessEndpointInitParameters `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty"`
+
+	// Version of the AppStream 2.0 agent to use for this image builder.
+	AppstreamAgentVersion *string `json:"appstreamAgentVersion,omitempty" tf:"appstream_agent_version,omitempty"`
+
+	// Description to display.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Human-readable friendly name for the AppStream image builder.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Configuration block for the name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. See below.
+	DomainJoinInfo []ImageBuilderDomainJoinInfoInitParameters `json:"domainJoinInfo,omitempty" tf:"domain_join_info,omitempty"`
+
+	// Enables or disables default internet access for the image builder.
+	EnableDefaultInternetAccess *bool `json:"enableDefaultInternetAccess,omitempty" tf:"enable_default_internet_access,omitempty"`
+
+	// ARN of the public, private, or shared image to use.
+	ImageArn *string `json:"imageArn,omitempty" tf:"image_arn,omitempty"`
+
+	// Instance type to use when launching the image builder.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for the VPC configuration for the image builder. See below.
+	VPCConfig []ImageBuilderVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ImageBuilderObservation struct {
@@ -169,6 +220,12 @@ type ImageBuilderParameters struct {
 	VPCConfig []ImageBuilderVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
+type ImageBuilderVPCConfigInitParameters struct {
+
+	// Identifiers of the security groups for the image builder or image builder.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+}
+
 type ImageBuilderVPCConfigObservation struct {
 
 	// Identifiers of the security groups for the image builder or image builder.
@@ -204,6 +261,18 @@ type ImageBuilderVPCConfigParameters struct {
 type ImageBuilderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageBuilderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ImageBuilderInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageBuilderStatus defines the observed state of ImageBuilder.
@@ -224,7 +293,7 @@ type ImageBuilderStatus struct {
 type ImageBuilder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
 	Spec   ImageBuilderSpec   `json:"spec"`
 	Status ImageBuilderStatus `json:"status,omitempty"`
 }

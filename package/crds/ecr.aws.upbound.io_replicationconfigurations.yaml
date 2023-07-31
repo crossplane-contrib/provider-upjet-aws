@@ -97,7 +97,6 @@ spec:
                                       type: string
                                   required:
                                   - region
-                                  - registryId
                                   type: object
                                 type: array
                               repositoryFilter:
@@ -114,21 +113,70 @@ spec:
                                         is a repository name prefix specified with
                                         the filter parameter.
                                       type: string
-                                  required:
-                                  - filter
-                                  - filterType
                                   type: object
                                 type: array
-                            required:
-                            - destination
                             type: object
                           type: array
-                      required:
-                      - rule
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  replicationConfiguration:
+                    description: Replication configuration for a registry. See Replication
+                      Configuration.
+                    items:
+                      properties:
+                        rule:
+                          description: The replication rules for a replication configuration.
+                            A maximum of 10 are allowed per replication_configuration.
+                            See Rule
+                          items:
+                            properties:
+                              destination:
+                                description: the details of a replication destination.
+                                  A maximum of 25 are allowed per rule. See Destination.
+                                items:
+                                  properties:
+                                    registryId:
+                                      description: The account ID of the destination
+                                        registry to replicate to.
+                                      type: string
+                                  type: object
+                                type: array
+                              repositoryFilter:
+                                description: filters for a replication rule. See Repository
+                                  Filter.
+                                items:
+                                  properties:
+                                    filter:
+                                      description: The repository filter details.
+                                      type: string
+                                    filterType:
+                                      description: The repository filter type. The
+                                        only supported value is PREFIX_MATCH, which
+                                        is a repository name prefix specified with
+                                        the filter parameter.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

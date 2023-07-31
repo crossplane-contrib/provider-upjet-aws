@@ -17,6 +17,3 @@ spec:
     zoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: primary
-
----
-

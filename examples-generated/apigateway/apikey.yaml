@@ -10,6 +10,3 @@ spec:
   forProvider:
     name: demo
     region: us-west-1
-
----
-

@@ -33,6 +33,3 @@ spec:
     sourceSelector:
       matchLabels:
         testing.upbound.io/example-name: source
-
----
-

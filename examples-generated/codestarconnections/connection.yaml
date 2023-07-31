@@ -50,6 +50,3 @@ spec:
     - action:
       - {}
       name: Deploy
-
----
-

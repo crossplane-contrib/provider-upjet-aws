@@ -254,6 +254,47 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  bandwidth:
+                    description: The upload speed and download speed in Mbps. Documented
+                      below.
+                    items:
+                      properties:
+                        downloadSpeed:
+                          description: Download speed in Mbps.
+                          type: number
+                        uploadSpeed:
+                          description: Upload speed in Mbps.
+                          type: number
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the link.
+                    type: string
+                  providerName:
+                    description: The provider of the link.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  type:
+                    description: The type of the link.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -454,7 +495,8 @@ spec:
             x-kubernetes-validations:
             - message: bandwidth is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bandwidth)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bandwidth)
+                || has(self.initProvider.bandwidth)'
           status:
             description: LinkStatus defines the observed state of Link.
             properties:

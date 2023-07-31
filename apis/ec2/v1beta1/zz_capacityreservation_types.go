@@ -13,6 +13,48 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CapacityReservationInitParameters struct {
+
+	// The Availability Zone in which to create the Capacity Reservation.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Indicates whether the Capacity Reservation supports EBS-optimized instances.
+	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// The date and time at which the Capacity Reservation expires. When a Capacity Reservation expires, the reserved capacity is released and you can no longer launch instances into it. Valid values: RFC3339 time string (YYYY-MM-DDTHH:MM:SSZ)
+	EndDate *string `json:"endDate,omitempty" tf:"end_date,omitempty"`
+
+	// Indicates the way in which the Capacity Reservation ends. Specify either unlimited or limited.
+	EndDateType *string `json:"endDateType,omitempty" tf:"end_date_type,omitempty"`
+
+	// Indicates whether the Capacity Reservation supports instances with temporary, block-level storage.
+	EphemeralStorage *bool `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
+
+	// The number of instances for which to reserve capacity.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Indicates the type of instance launches that the Capacity Reservation accepts. Specify either open or targeted.
+	InstanceMatchCriteria *string `json:"instanceMatchCriteria,omitempty" tf:"instance_match_criteria,omitempty"`
+
+	// The type of operating system for which to reserve capacity. Valid options are Linux/UNIX, Red Hat Enterprise Linux, SUSE Linux, Windows, Windows with SQL Server, Windows with SQL Server Enterprise, Windows with SQL Server Standard or Windows with SQL Server Web.
+	InstancePlatform *string `json:"instancePlatform,omitempty" tf:"instance_platform,omitempty"`
+
+	// The instance type for which to reserve capacity.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity Reservation.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the cluster placement group in which to create the Capacity Reservation.
+	PlacementGroupArn *string `json:"placementGroupArn,omitempty" tf:"placement_group_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Indicates the tenancy of the Capacity Reservation. Specify either default or dedicated.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+}
+
 type CapacityReservationObservation struct {
 
 	// The ARN of the Capacity Reservation.
@@ -131,6 +173,18 @@ type CapacityReservationParameters struct {
 type CapacityReservationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CapacityReservationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CapacityReservationInitParameters `json:"initProvider,omitempty"`
 }
 
 // CapacityReservationStatus defines the observed state of CapacityReservation.
@@ -151,10 +205,10 @@ type CapacityReservationStatus struct {
 type CapacityReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount)",message="instanceCount is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instancePlatform)",message="instancePlatform is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType)",message="instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone) || has(self.initProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount) || has(self.initProvider.instanceCount)",message="instanceCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instancePlatform) || has(self.initProvider.instancePlatform)",message="instancePlatform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
 	Spec   CapacityReservationSpec   `json:"spec"`
 	Status CapacityReservationStatus `json:"status,omitempty"`
 }

@@ -49,6 +49,3 @@ spec:
   forProvider:
     enable: true
     region: us-west-1
-
----
-

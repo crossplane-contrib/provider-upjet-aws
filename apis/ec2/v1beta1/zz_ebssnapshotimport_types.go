@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClientDataInitParameters struct {
+
+	// A user-defined comment about the disk upload.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The time that the disk upload ends.
+	UploadEnd *string `json:"uploadEnd,omitempty" tf:"upload_end,omitempty"`
+
+	// The size of the uploaded disk image, in GiB.
+	UploadSize *float64 `json:"uploadSize,omitempty" tf:"upload_size,omitempty"`
+
+	// The time that the disk upload starts.
+	UploadStart *string `json:"uploadStart,omitempty" tf:"upload_start,omitempty"`
+}
+
 type ClientDataObservation struct {
 
 	// A user-defined comment about the disk upload.
@@ -47,6 +62,21 @@ type ClientDataParameters struct {
 	UploadStart *string `json:"uploadStart,omitempty" tf:"upload_start,omitempty"`
 }
 
+type DiskContainerInitParameters struct {
+
+	// The description of the disk image being imported.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The format of the disk image being imported. One of VHD or VMDK.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The Amazon S3 bucket for the disk image. One of url or user_bucket must be set. Detailed below.
+	UserBucket []UserBucketInitParameters `json:"userBucket,omitempty" tf:"user_bucket,omitempty"`
+}
+
 type DiskContainerObservation struct {
 
 	// The description of the disk image being imported.
@@ -69,8 +99,8 @@ type DiskContainerParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The format of the disk image being imported. One of VHD or VMDK.
-	// +kubebuilder:validation:Required
-	Format *string `json:"format" tf:"format,omitempty"`
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
 	// +kubebuilder:validation:Optional
@@ -79,6 +109,36 @@ type DiskContainerParameters struct {
 	// The Amazon S3 bucket for the disk image. One of url or user_bucket must be set. Detailed below.
 	// +kubebuilder:validation:Optional
 	UserBucket []UserBucketParameters `json:"userBucket,omitempty" tf:"user_bucket,omitempty"`
+}
+
+type EBSSnapshotImportInitParameters struct {
+
+	// The client-specific data. Detailed below.
+	ClientData []ClientDataInitParameters `json:"clientData,omitempty" tf:"client_data,omitempty"`
+
+	// The description string for the import snapshot task.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Information about the disk container. Detailed below.
+	DiskContainer []DiskContainerInitParameters `json:"diskContainer,omitempty" tf:"disk_container,omitempty"`
+
+	// Specifies whether the destination snapshot of the imported image should be encrypted. The default KMS key for EBS is used unless you specify a non-default KMS key using KmsKeyId.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Indicates whether to permanently restore an archived snapshot.
+	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
+
+	// The name of the IAM Role the VM Import/Export service will assume. This role needs certain permissions. See https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-role. Default: vmimport
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
+	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 }
 
 type EBSSnapshotImportObservation struct {
@@ -198,6 +258,15 @@ type EBSSnapshotImportParameters struct {
 	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 }
 
+type UserBucketInitParameters struct {
+
+	// The name of the Amazon S3 bucket where the disk image is located.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// The file name of the disk image.
+	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+}
+
 type UserBucketObservation struct {
 
 	// The name of the Amazon S3 bucket where the disk image is located.
@@ -210,18 +279,30 @@ type UserBucketObservation struct {
 type UserBucketParameters struct {
 
 	// The name of the Amazon S3 bucket where the disk image is located.
-	// +kubebuilder:validation:Required
-	S3Bucket *string `json:"s3Bucket" tf:"s3_bucket,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
 	// The file name of the disk image.
-	// +kubebuilder:validation:Required
-	S3Key *string `json:"s3Key" tf:"s3_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
 }
 
 // EBSSnapshotImportSpec defines the desired state of EBSSnapshotImport
 type EBSSnapshotImportSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EBSSnapshotImportParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EBSSnapshotImportInitParameters `json:"initProvider,omitempty"`
 }
 
 // EBSSnapshotImportStatus defines the observed state of EBSSnapshotImport.
@@ -242,7 +323,7 @@ type EBSSnapshotImportStatus struct {
 type EBSSnapshotImport struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.diskContainer)",message="diskContainer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.diskContainer) || has(self.initProvider.diskContainer)",message="diskContainer is a required parameter"
 	Spec   EBSSnapshotImportSpec   `json:"spec"`
 	Status EBSSnapshotImportStatus `json:"status,omitempty"`
 }

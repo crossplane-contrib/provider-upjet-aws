@@ -55,6 +55,3 @@ spec:
     region: us-west-1
     type: ON_DEMAND
     workflowName: example
-
----
-

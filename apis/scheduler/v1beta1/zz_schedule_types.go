@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CapacityProviderStrategyInitParameters struct {
+
+	// How many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Ranges from 0 (default) to 100000.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Short name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
 type CapacityProviderStrategyObservation struct {
 
 	// How many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Ranges from 0 (default) to 100000.
@@ -32,12 +44,18 @@ type CapacityProviderStrategyParameters struct {
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
-	// +kubebuilder:validation:Required
-	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type DeadLetterConfigInitParameters struct {
+
+	// ARN of the target of this schedule, such as a SQS queue or ECS cluster. For universal targets, this is a Service ARN specific to the target service.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type DeadLetterConfigObservation struct {
@@ -49,8 +67,53 @@ type DeadLetterConfigObservation struct {
 type DeadLetterConfigParameters struct {
 
 	// ARN of the target of this schedule, such as a SQS queue or ECS cluster. For universal targets, this is a Service ARN specific to the target service.
-	// +kubebuilder:validation:Required
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type EcsParametersInitParameters struct {
+
+	// Up to 6 capacity provider strategies to use for the task. Detailed below.
+	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
+
+	// Specifies whether to enable Amazon ECS managed tags for the task. For more information, see Tagging Your Amazon ECS Resources in the Amazon ECS Developer Guide.
+	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
+
+	// Specifies whether to enable the execute command functionality for the containers in this task.
+	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Specifies an ECS task group for the task. At most 255 characters.
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
+	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. One of: EC2, FARGATE, EXTERNAL.
+	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
+
+	// Configures the networking associated with the task. Detailed below.
+	NetworkConfiguration []NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// A set of up to 10 placement constraints to use for the task. Detailed below.
+	PlacementConstraints []PlacementConstraintsInitParameters `json:"placementConstraints,omitempty" tf:"placement_constraints,omitempty"`
+
+	// A set of up to 5 placement strategies. Detailed below.
+	PlacementStrategy []PlacementStrategyInitParameters `json:"placementStrategy,omitempty" tf:"placement_strategy,omitempty"`
+
+	// Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0.
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
+
+	// Specifies whether to propagate the tags from the task definition to the task. One of: TASK_DEFINITION.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// Reference ID to use for the task.
+	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The number of tasks to create. Ranges from 1 (default) to 10.
+	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+
+	// ARN of the task definition to use.
+	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
 }
 
 type EcsParametersObservation struct {
@@ -153,8 +216,17 @@ type EcsParametersParameters struct {
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// ARN of the task definition to use.
-	// +kubebuilder:validation:Required
-	TaskDefinitionArn *string `json:"taskDefinitionArn" tf:"task_definition_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
+}
+
+type EventbridgeParametersInitParameters struct {
+
+	// Free-form string used to decide what fields to expect in the event detail. Up to 128 characters.
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
+
+	// Source of the event.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type EventbridgeParametersObservation struct {
@@ -169,12 +241,21 @@ type EventbridgeParametersObservation struct {
 type EventbridgeParametersParameters struct {
 
 	// Free-form string used to decide what fields to expect in the event detail. Up to 128 characters.
-	// +kubebuilder:validation:Required
-	DetailType *string `json:"detailType" tf:"detail_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
 
 	// Source of the event.
-	// +kubebuilder:validation:Required
-	Source *string `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+}
+
+type FlexibleTimeWindowInitParameters struct {
+
+	// Maximum time window during which a schedule can be invoked. Ranges from 1 to 1440 minutes.
+	MaximumWindowInMinutes *float64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
+
+	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type FlexibleTimeWindowObservation struct {
@@ -193,8 +274,14 @@ type FlexibleTimeWindowParameters struct {
 	MaximumWindowInMinutes *float64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
 
 	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type KinesisParametersInitParameters struct {
+
+	// Specifies the shard to which EventBridge Scheduler sends the event. Up to 256 characters.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 }
 
 type KinesisParametersObservation struct {
@@ -206,8 +293,20 @@ type KinesisParametersObservation struct {
 type KinesisParametersParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. Up to 256 characters.
-	// +kubebuilder:validation:Required
-	PartitionKey *string `json:"partitionKey" tf:"partition_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+}
+
+type NetworkConfigurationInitParameters struct {
+
+	// Specifies whether the task's elastic network interface receives a public IP address. This attribute is a boolean type, where true maps to ENABLED and false to DISABLED. You can specify true only when the launch_type is set to FARGATE.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
@@ -233,8 +332,17 @@ type NetworkConfigurationParameters struct {
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
-	// +kubebuilder:validation:Required
-	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+}
+
+type PipelineParameterInitParameters struct {
+
+	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PipelineParameterObservation struct {
@@ -249,12 +357,21 @@ type PipelineParameterObservation struct {
 type PipelineParameterParameters struct {
 
 	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PlacementConstraintsInitParameters struct {
+
+	// A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. For more information, see Cluster query language in the Amazon ECS Developer Guide.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// The type of placement strategy. One of: random, spread, binpack.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementConstraintsObservation struct {
@@ -273,8 +390,17 @@ type PlacementConstraintsParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// The type of placement strategy. One of: random, spread, binpack.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PlacementStrategyInitParameters struct {
+
+	// The field to apply the placement strategy against.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// The type of placement strategy. One of: random, spread, binpack.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementStrategyObservation struct {
@@ -293,8 +419,17 @@ type PlacementStrategyParameters struct {
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// The type of placement strategy. One of: random, spread, binpack.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RetryPolicyInitParameters struct {
+
+	// Maximum amount of time, in seconds, to continue to make retry attempts. Ranges from 60 to 86400 (default).
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+
+	// Maximum number of retry attempts to make before the request fails. Ranges from 0 to 185 (default).
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyObservation struct {
@@ -317,6 +452,12 @@ type RetryPolicyParameters struct {
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
+type SagemakerPipelineParametersInitParameters struct {
+
+	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
+	PipelineParameter []PipelineParameterInitParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
+}
+
 type SagemakerPipelineParametersObservation struct {
 
 	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
@@ -328,6 +469,39 @@ type SagemakerPipelineParametersParameters struct {
 	// Set of up to 200 parameter names and values to use when executing the SageMaker Model Building Pipeline. Detailed below.
 	// +kubebuilder:validation:Optional
 	PipelineParameter []PipelineParameterParameters `json:"pipelineParameter,omitempty" tf:"pipeline_parameter,omitempty"`
+}
+
+type ScheduleInitParameters struct {
+
+	// Brief description of the schedule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the end date you specify. EventBridge Scheduler ignores the end date for one-time schedules. Example: 2030-01-01T01:00:00Z.
+	EndDate *string `json:"endDate,omitempty" tf:"end_date,omitempty"`
+
+	// Configures a time window during which EventBridge Scheduler invokes the schedule. Detailed below.
+	FlexibleTimeWindow []FlexibleTimeWindowInitParameters `json:"flexibleTimeWindow,omitempty" tf:"flexible_time_window,omitempty"`
+
+	// Name of the schedule group to associate with this schedule. When omitted, the default schedule group is used.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Name of the schedule. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Defines when the schedule runs. Read more in Schedule types on EventBridge Scheduler.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// Timezone in which the scheduling expression is evaluated. Defaults to UTC. Example: Australia/Sydney.
+	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
+
+	// The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the start date you specify. EventBridge Scheduler ignores the start date for one-time schedules. Example: 2030-01-01T01:00:00Z.
+	StartDate *string `json:"startDate,omitempty" tf:"start_date,omitempty"`
+
+	// Specifies whether the schedule is enabled or disabled. One of: ENABLED (default), DISABLED.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Configures the target of the schedule. Detailed below.
+	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type ScheduleObservation struct {
@@ -433,6 +607,12 @@ type ScheduleParameters struct {
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
+type SqsParametersInitParameters struct {
+
+	// FIFO message group ID to use as the target.
+	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
+}
+
 type SqsParametersObservation struct {
 
 	// FIFO message group ID to use as the target.
@@ -444,6 +624,33 @@ type SqsParametersParameters struct {
 	// FIFO message group ID to use as the target.
 	// +kubebuilder:validation:Optional
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
+}
+
+type TargetInitParameters struct {
+
+	// Information about an Amazon SQS queue that EventBridge Scheduler uses as a dead-letter queue for your schedule. If specified, EventBridge Scheduler delivers failed events that could not be successfully delivered to a target to the queue. Detailed below.
+	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+
+	// Templated target type for the Amazon ECS RunTask API operation. Detailed below.
+	EcsParameters []EcsParametersInitParameters `json:"ecsParameters,omitempty" tf:"ecs_parameters,omitempty"`
+
+	// Templated target type for the EventBridge PutEvents API operation. Detailed below.
+	EventbridgeParameters []EventbridgeParametersInitParameters `json:"eventbridgeParameters,omitempty" tf:"eventbridge_parameters,omitempty"`
+
+	// Text, or well-formed JSON, passed to the target. Read more in Universal target.
+	Input *string `json:"input,omitempty" tf:"input,omitempty"`
+
+	// Templated target type for the Amazon Kinesis PutRecord API operation. Detailed below.
+	KinesisParameters []KinesisParametersInitParameters `json:"kinesisParameters,omitempty" tf:"kinesis_parameters,omitempty"`
+
+	// Information about the retry policy settings. Detailed below.
+	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Templated target type for the Amazon SageMaker StartPipelineExecution API operation. Detailed below.
+	SagemakerPipelineParameters []SagemakerPipelineParametersInitParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`
+
+	// The templated target type for the Amazon SQS SendMessage API operation. Detailed below.
+	SqsParameters []SqsParametersInitParameters `json:"sqsParameters,omitempty" tf:"sqs_parameters,omitempty"`
 }
 
 type TargetObservation struct {
@@ -546,6 +753,18 @@ type TargetParameters struct {
 type ScheduleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ScheduleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ScheduleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ScheduleStatus defines the observed state of Schedule.
@@ -566,9 +785,9 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.flexibleTimeWindow)",message="flexibleTimeWindow is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scheduleExpression)",message="scheduleExpression is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target)",message="target is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.flexibleTimeWindow) || has(self.initProvider.flexibleTimeWindow)",message="flexibleTimeWindow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scheduleExpression) || has(self.initProvider.scheduleExpression)",message="scheduleExpression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target) || has(self.initProvider.target)",message="target is a required parameter"
 	Spec   ScheduleSpec   `json:"spec"`
 	Status ScheduleStatus `json:"status,omitempty"`
 }

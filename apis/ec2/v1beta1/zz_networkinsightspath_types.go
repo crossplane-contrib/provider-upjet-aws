@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkInsightsPathInitParameters struct {
+
+	// IP address of the destination resource.
+	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
+
+	// Destination port to analyze access to.
+	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+
+	// Protocol to use for analysis. Valid options are tcp or udp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// IP address of the source resource.
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type NetworkInsightsPathObservation struct {
 
 	// ARN of the Network Insights Path.
@@ -106,6 +124,18 @@ type NetworkInsightsPathParameters struct {
 type NetworkInsightsPathSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkInsightsPathParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NetworkInsightsPathInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkInsightsPathStatus defines the observed state of NetworkInsightsPath.
@@ -126,7 +156,7 @@ type NetworkInsightsPathStatus struct {
 type NetworkInsightsPath struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
 	Spec   NetworkInsightsPathSpec   `json:"spec"`
 	Status NetworkInsightsPathStatus `json:"status,omitempty"`
 }

@@ -160,6 +160,35 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  encoding:
+                    description: Specifies the public key encoding format to use in
+                      the response. To retrieve the public key in ssh-rsa format,
+                      use SSH. To retrieve the public key in PEM format, use PEM.
+                    type: string
+                  publicKey:
+                    description: The SSH public key. The public key must be encoded
+                      in ssh-rsa format or PEM format.
+                    type: string
+                  status:
+                    description: The status to assign to the SSH public key. Active
+                      means the key can be used for authentication with an AWS CodeCommit
+                      repository. Inactive means the key cannot be used. Default is
+                      active.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -360,10 +389,12 @@ spec:
             x-kubernetes-validations:
             - message: encoding is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.encoding)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.encoding)
+                || has(self.initProvider.encoding)'
             - message: publicKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.publicKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publicKey)
+                || has(self.initProvider.publicKey)'
           status:
             description: UserSSHKeyStatus defines the observed state of UserSSHKey.
             properties:

@@ -292,14 +292,7 @@ spec:
                             to configure your private workforce.
                           type: string
                       required:
-                      - authorizationEndpoint
-                      - clientId
                       - clientSecretSecretRef
-                      - issuer
-                      - jwksUri
-                      - logoutEndpoint
-                      - tokenEndpoint
-                      - userInfoEndpoint
                       type: object
                     type: array
                   region:
@@ -318,8 +311,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - cidrs
                       type: object
                     type: array
                   workforceVpcConfig:
@@ -347,6 +338,101 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  cognitoConfig:
+                    description: Use this parameter to configure an Amazon Cognito
+                      private workforce. A single Cognito workforce is created using
+                      and corresponds to a single Amazon Cognito user pool. Conflicts
+                      with oidc_config. see Cognito Config details below.
+                    items:
+                      type: object
+                    type: array
+                  oidcConfig:
+                    description: Use this parameter to configure a private workforce
+                      using your own OIDC Identity Provider. Conflicts with cognito_config.
+                      see OIDC Config details below.
+                    items:
+                      properties:
+                        authorizationEndpoint:
+                          description: The OIDC IdP authorization endpoint used to
+                            configure your private workforce.
+                          type: string
+                        clientId:
+                          description: The client ID for your Amazon Cognito user
+                            pool.
+                          type: string
+                        issuer:
+                          description: The OIDC IdP issuer used to configure your
+                            private workforce.
+                          type: string
+                        jwksUri:
+                          description: The OIDC IdP JSON Web Key Set (Jwks) URI used
+                            to configure your private workforce.
+                          type: string
+                        logoutEndpoint:
+                          description: The OIDC IdP logout endpoint used to configure
+                            your private workforce.
+                          type: string
+                        tokenEndpoint:
+                          description: The OIDC IdP token endpoint used to configure
+                            your private workforce.
+                          type: string
+                        userInfoEndpoint:
+                          description: The OIDC IdP user information endpoint used
+                            to configure your private workforce.
+                          type: string
+                      type: object
+                    type: array
+                  sourceIpConfig:
+                    description: A list of IP address ranges Used to create an allow
+                      list of IP addresses for a private workforce. By default, a
+                      workforce isn't restricted to specific IP addresses. see Source
+                      Ip Config details below.
+                    items:
+                      properties:
+                        cidrs:
+                          description: A list of up to 10 CIDR values.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  workforceVpcConfig:
+                    description: configure a workforce using VPC. see Workforce VPC
+                      Config details below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: The VPC security group IDs. The security groups
+                            must be for the same VPC as specified in the subnet.
+                          items:
+                            type: string
+                          type: array
+                        subnets:
+                          description: The ID of the subnets in the VPC that you want
+                            to connect.
+                          items:
+                            type: string
+                          type: array
+                        vpcId:
+                          description: The ID of the VPC that the workforce uses for
+                            communication.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

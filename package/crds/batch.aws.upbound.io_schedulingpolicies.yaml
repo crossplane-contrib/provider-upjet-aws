@@ -92,8 +92,6 @@ spec:
                                 description: The weight factor for the fair share
                                   identifier. For more information, see ShareAttributes.
                                 type: number
-                            required:
-                            - shareIdentifier
                             type: object
                           type: array
                       type: object
@@ -109,6 +107,54 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  fairSharePolicy:
+                    items:
+                      properties:
+                        computeReservation:
+                          description: A value used to reserve some of the available
+                            maximum vCPU for fair share identifiers that have not
+                            yet been used. For more information, see FairsharePolicy.
+                          type: number
+                        shareDecaySeconds:
+                          type: number
+                        shareDistribution:
+                          description: One or more share distribution blocks which
+                            define the weights for the fair share identifiers for
+                            the fair share policy. For more information, see FairsharePolicy.
+                            The share_distribution block is documented below.
+                          items:
+                            properties:
+                              shareIdentifier:
+                                description: A fair share identifier or fair share
+                                  identifier prefix. For more information, see ShareAttributes.
+                                type: string
+                              weightFactor:
+                                description: The weight factor for the fair share
+                                  identifier. For more information, see ShareAttributes.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

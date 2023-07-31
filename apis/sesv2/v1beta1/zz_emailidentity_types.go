@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DKIMSigningAttributesInitParameters struct {
+
+	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
+	DomainSigningPrivateKey *string `json:"domainSigningPrivateKey,omitempty" tf:"domain_signing_private_key,omitempty"`
+
+	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
+	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
+
+	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
+	NextSigningKeyLength *string `json:"nextSigningKeyLength,omitempty" tf:"next_signing_key_length,omitempty"`
+}
+
 type DKIMSigningAttributesObservation struct {
 
 	// [Easy DKIM] The key length of the DKIM key pair in use.
@@ -53,6 +65,15 @@ type DKIMSigningAttributesParameters struct {
 	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day. Valid values: RSA_1024_BIT, RSA_2048_BIT.
 	// +kubebuilder:validation:Optional
 	NextSigningKeyLength *string `json:"nextSigningKeyLength,omitempty" tf:"next_signing_key_length,omitempty"`
+}
+
+type EmailIdentityInitParameters struct {
+
+	// The configuration of the DKIM authentication settings for an email domain identity.
+	DKIMSigningAttributes []DKIMSigningAttributesInitParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type EmailIdentityObservation struct {
@@ -113,6 +134,18 @@ type EmailIdentityParameters struct {
 type EmailIdentitySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EmailIdentityParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EmailIdentityInitParameters `json:"initProvider,omitempty"`
 }
 
 // EmailIdentityStatus defines the observed state of EmailIdentity.

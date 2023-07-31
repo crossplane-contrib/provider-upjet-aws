@@ -87,6 +87,3 @@ spec:
     policyName: wu-tang-root-ca-backend-auth-policy
     policyTypeName: BackendServerAuthenticationPolicyType
     region: us-west-1
-
----
-

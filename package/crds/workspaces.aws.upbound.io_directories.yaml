@@ -421,6 +421,124 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  ipGroupIds:
+                    description: The identifiers of the IP access control groups associated
+                      with the directory.
+                    items:
+                      type: string
+                    type: array
+                  selfServicePermissions:
+                    description: service capabilities. Defined below.
+                    items:
+                      properties:
+                        changeComputeType:
+                          description: –  Whether WorkSpaces directory users can change
+                            the compute type (bundle) for their workspace. Default
+                            false.
+                          type: boolean
+                        increaseVolumeSize:
+                          description: –  Whether WorkSpaces directory users can increase
+                            the volume size of the drives on their workspace. Default
+                            false.
+                          type: boolean
+                        rebuildWorkspace:
+                          description: –  Whether WorkSpaces directory users can rebuild
+                            the operating system of a workspace to its original state.
+                            Default false.
+                          type: boolean
+                        restartWorkspace:
+                          description: –  Whether WorkSpaces directory users can restart
+                            their workspace. Default true.
+                          type: boolean
+                        switchRunningMode:
+                          description: –  Whether WorkSpaces directory users can switch
+                            the running mode of their workspace. Default false.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  workspaceAccessProperties:
+                    description: –  Specifies which devices and operating systems
+                      users can use to access their WorkSpaces. Defined below.
+                    items:
+                      properties:
+                        deviceTypeAndroid:
+                          description: –  Indicates whether users can use Android
+                            devices to access their WorkSpaces.
+                          type: string
+                        deviceTypeChromeos:
+                          description: –  Indicates whether users can use Chromebooks
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeIos:
+                          description: –  Indicates whether users can use iOS devices
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeLinux:
+                          description: –  Indicates whether users can use Linux clients
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeOsx:
+                          description: –  Indicates whether users can use macOS clients
+                            to access their WorkSpaces.
+                          type: string
+                        deviceTypeWeb:
+                          description: –  Indicates whether users can access their
+                            WorkSpaces through a web browser.
+                          type: string
+                        deviceTypeWindows:
+                          description: –  Indicates whether users can use Windows
+                            clients to access their WorkSpaces.
+                          type: string
+                        deviceTypeZeroclient:
+                          description: –  Indicates whether users can use zero client
+                            devices to access their WorkSpaces.
+                          type: string
+                      type: object
+                    type: array
+                  workspaceCreationProperties:
+                    description: –  Default properties that are used for creating
+                      WorkSpaces. Defined below.
+                    items:
+                      properties:
+                        defaultOu:
+                          description: –  The default organizational unit (OU) for
+                            your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>"
+                            pattern.
+                          type: string
+                        enableInternetAccess:
+                          description: –  Indicates whether internet access is enabled
+                            for your WorkSpaces.
+                          type: boolean
+                        enableMaintenanceMode:
+                          description: –  Indicates whether maintenance mode is enabled
+                            for your WorkSpaces. For more information, see WorkSpace
+                            Maintenance..
+                          type: boolean
+                        userEnabledAsLocalAdministrator:
+                          description: –  Indicates whether users are local administrators
+                            of their WorkSpaces.
+                          type: boolean
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

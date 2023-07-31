@@ -19,6 +19,3 @@ spec:
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: iam_for_lambda
-
----
-

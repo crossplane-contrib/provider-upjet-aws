@@ -261,10 +261,6 @@ spec:
                           description: Rule type. Valid values are ATLEAST, AND, and
                             OR.
                           type: string
-                      required:
-                      - inverted
-                      - threshold
-                      - type
                       type: object
                     type: array
                   targetControls:
@@ -280,6 +276,59 @@ spec:
                     type: number
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  gatingControls:
+                    description: Gating controls for the new gating rule. That is,
+                      routing controls that are evaluated by the rule configuration
+                      that you specify.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: Name describing the safety rule.
+                    type: string
+                  ruleConfig:
+                    description: Configuration block for safety rule criteria. See
+                      below.
+                    items:
+                      properties:
+                        inverted:
+                          description: Logical negation of the rule.
+                          type: boolean
+                        threshold:
+                          description: Number of controls that must be set when you
+                            specify an ATLEAST type rule.
+                          type: number
+                        type:
+                          description: Rule type. Valid values are ATLEAST, AND, and
+                            OR.
+                          type: string
+                      type: object
+                    type: array
+                  targetControls:
+                    description: Routing controls that can only be set or unset if
+                      the specified rule_config evaluates to true for the specified
+                      gating_controls.
+                    items:
+                      type: string
+                    type: array
+                  waitPeriodMs:
+                    description: Evaluation period, in milliseconds (ms), during which
+                      any request against the target routing controls will fail.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -481,13 +530,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: ruleConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleConfig)
+                || has(self.initProvider.ruleConfig)'
             - message: waitPeriodMs is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.waitPeriodMs)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.waitPeriodMs)
+                || has(self.initProvider.waitPeriodMs)'
           status:
             description: SafetyRuleStatus defines the observed state of SafetyRule.
             properties:

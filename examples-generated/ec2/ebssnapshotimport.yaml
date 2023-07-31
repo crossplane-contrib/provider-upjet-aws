@@ -17,6 +17,3 @@ spec:
     roleName: disk-image-import
     tags:
       Name: HelloWorld
-
----
-

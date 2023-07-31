@@ -225,6 +225,95 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  assignIpv6AddressOnCreation:
+                    description: Specify true to indicate that network interfaces
+                      created in the specified subnet should be assigned an IPv6 address.
+                      Default is false
+                    type: boolean
+                  availabilityZone:
+                    description: AZ for the subnet.
+                    type: string
+                  availabilityZoneId:
+                    description: AZ ID of the subnet. This argument is not supported
+                      in all regions or partitions. If necessary, use availability_zone
+                      instead.
+                    type: string
+                  cidrBlock:
+                    description: The IPv4 CIDR block for the subnet.
+                    type: string
+                  customerOwnedIpv4Pool:
+                    description: The customer owned IPv4 address pool. Typically used
+                      with the map_customer_owned_ip_on_launch argument. The outpost_arn
+                      argument must be specified when configured.
+                    type: string
+                  enableDns64:
+                    description: 'Indicates whether DNS queries made to the Amazon-provided
+                      DNS Resolver in this subnet should return synthetic IPv6 addresses
+                      for IPv4-only destinations. Default: false.'
+                    type: boolean
+                  enableLniAtDeviceIndex:
+                    description: Indicates the device position for local network interfaces
+                      in this subnet. For example, 1 indicates local network interfaces
+                      in this subnet are the secondary network interface (eth1). A
+                      local network interface cannot be the primary network interface
+                      (eth0).
+                    type: number
+                  enableResourceNameDnsARecordOnLaunch:
+                    description: 'Indicates whether to respond to DNS queries for
+                      instance hostnames with DNS A records. Default: false.'
+                    type: boolean
+                  enableResourceNameDnsAaaaRecordOnLaunch:
+                    description: 'Indicates whether to respond to DNS queries for
+                      instance hostnames with DNS AAAA records. Default: false.'
+                    type: boolean
+                  ipv6CidrBlock:
+                    description: The IPv6 network range for the subnet, in CIDR notation.
+                      The subnet size must use a /64 prefix length.
+                    type: string
+                  ipv6Native:
+                    description: 'Indicates whether to create an IPv6-only subnet.
+                      Default: false.'
+                    type: boolean
+                  mapCustomerOwnedIpOnLaunch:
+                    description: Specify true to indicate that network interfaces
+                      created in the subnet should be assigned a customer owned IP
+                      address. The customer_owned_ipv4_pool and outpost_arn arguments
+                      must be specified when set to true. Default is false.
+                    type: boolean
+                  mapPublicIpOnLaunch:
+                    description: Specify true to indicate that instances launched
+                      into the subnet should be assigned a public IP address. Default
+                      is false.
+                    type: boolean
+                  outpostArn:
+                    description: The Amazon Resource Name (ARN) of the Outpost.
+                    type: string
+                  privateDnsHostnameTypeOnLaunch:
+                    description: 'The type of hostnames to assign to instances in
+                      the subnet at launch. For IPv6-only subnets, an instance DNS
+                      name must be based on the instance ID. For dual-stack and IPv4-only
+                      subnets, you can specify whether DNS names use the instance
+                      IPv4 address or the instance ID. Valid values: ip-name, resource-name.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

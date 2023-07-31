@@ -54,6 +54,3 @@ spec:
     - columns:
       - name: event
         type: string
-
----
-

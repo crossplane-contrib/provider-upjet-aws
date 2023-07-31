@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketPolicyInitParameters struct {
+
+	// Text of the policy. Although this is a bucket policy rather than an IAM policy, the aws_iam_policy_document data source may be used, so long as it specifies a principal. Note: Bucket policies are limited to 20 KB in size.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+}
+
 type BucketPolicyObservation struct {
 
 	// Name of the bucket to which to apply the policy.
@@ -54,6 +60,18 @@ type BucketPolicyParameters struct {
 type BucketPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketPolicyStatus defines the observed state of BucketPolicy.
@@ -74,7 +92,7 @@ type BucketPolicyStatus struct {
 type BucketPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || has(self.initProvider.policy)",message="policy is a required parameter"
 	Spec   BucketPolicySpec   `json:"spec"`
 	Status BucketPolicyStatus `json:"status,omitempty"`
 }

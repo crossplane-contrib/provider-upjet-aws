@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketObjectLockConfigurationInitParameters struct {
+
+	// Account ID of the expected bucket owner.
+	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Indicates whether this bucket has an Object Lock configuration enabled. Defaults to Enabled. Valid values: Enabled.
+	ObjectLockEnabled *string `json:"objectLockEnabled,omitempty" tf:"object_lock_enabled,omitempty"`
+
+	// Configuration block for specifying the Object Lock rule for the specified object. See below.
+	Rule []BucketObjectLockConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
 type BucketObjectLockConfigurationObservation struct {
 
 	// Name of the bucket.
@@ -70,6 +82,12 @@ type BucketObjectLockConfigurationParameters struct {
 	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
+type BucketObjectLockConfigurationRuleInitParameters struct {
+
+	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
+	DefaultRetention []RuleDefaultRetentionInitParameters `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
+}
+
 type BucketObjectLockConfigurationRuleObservation struct {
 
 	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
@@ -79,8 +97,20 @@ type BucketObjectLockConfigurationRuleObservation struct {
 type BucketObjectLockConfigurationRuleParameters struct {
 
 	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
-	// +kubebuilder:validation:Required
-	DefaultRetention []RuleDefaultRetentionParameters `json:"defaultRetention" tf:"default_retention,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultRetention []RuleDefaultRetentionParameters `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
+}
+
+type RuleDefaultRetentionInitParameters struct {
+
+	// Number of days that you want to specify for the default retention period.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Number of years that you want to specify for the default retention period.
+	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type RuleDefaultRetentionObservation struct {
@@ -114,6 +144,18 @@ type RuleDefaultRetentionParameters struct {
 type BucketObjectLockConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketObjectLockConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketObjectLockConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketObjectLockConfigurationStatus defines the observed state of BucketObjectLockConfiguration.

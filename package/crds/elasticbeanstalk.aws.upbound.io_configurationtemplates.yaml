@@ -176,10 +176,6 @@ spec:
                         value:
                           description: value for the configuration option
                           type: string
-                      required:
-                      - name
-                      - namespace
-                      - value
                       type: object
                     type: array
                   solutionStackName:
@@ -188,6 +184,52 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Short description of the Template
+                    type: string
+                  environmentId:
+                    description: –  The ID of the environment used with this configuration
+                      template
+                    type: string
+                  setting:
+                    description: –  Option settings to configure the new Environment.
+                      These override specific values that are set as defaults. The
+                      format is detailed below in Option Settings
+                    items:
+                      properties:
+                        name:
+                          description: A unique name for this Template.
+                          type: string
+                        namespace:
+                          description: unique namespace identifying the option's associated
+                            AWS resource
+                          type: string
+                        resource:
+                          description: resource name for scheduled action
+                          type: string
+                        value:
+                          description: value for the configuration option
+                          type: string
+                      type: object
+                    type: array
+                  solutionStackName:
+                    description: –  A solution stack to base your Template off of.
+                      Example stacks can be found in the Amazon API documentation
+                    type: string
                 type: object
               managementPolicies:
                 default:

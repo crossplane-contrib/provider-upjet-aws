@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainNameConfigurationInitParameters struct {
+
+	// Endpoint type. Valid values: REGIONAL.
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+
+	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
+	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
+
+	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+}
+
 type DomainNameConfigurationObservation struct {
 
 	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
@@ -51,16 +63,28 @@ type DomainNameConfigurationParameters struct {
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// Endpoint type. Valid values: REGIONAL.
-	// +kubebuilder:validation:Required
-	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	// +kubebuilder:validation:Optional
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
 
 	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
-	// +kubebuilder:validation:Required
-	SecurityPolicy *string `json:"securityPolicy" tf:"security_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+}
+
+type DomainNameInitParameters struct {
+
+	// Domain name configuration. See below.
+	DomainNameConfiguration []DomainNameConfigurationInitParameters `json:"domainNameConfiguration,omitempty" tf:"domain_name_configuration,omitempty"`
+
+	// Mutual TLS authentication configuration for the domain name.
+	MutualTLSAuthentication []MutualTLSAuthenticationInitParameters `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DomainNameObservation struct {
@@ -107,6 +131,15 @@ type DomainNameParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type MutualTLSAuthenticationInitParameters struct {
+
+	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
+	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
+
+	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+	TruststoreVersion *string `json:"truststoreVersion,omitempty" tf:"truststore_version,omitempty"`
+}
+
 type MutualTLSAuthenticationObservation struct {
 
 	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
@@ -119,8 +152,8 @@ type MutualTLSAuthenticationObservation struct {
 type MutualTLSAuthenticationParameters struct {
 
 	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
-	// +kubebuilder:validation:Required
-	TruststoreURI *string `json:"truststoreUri" tf:"truststore_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
 
 	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
 	// +kubebuilder:validation:Optional
@@ -131,6 +164,18 @@ type MutualTLSAuthenticationParameters struct {
 type DomainNameSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainNameParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DomainNameInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainNameStatus defines the observed state of DomainName.
@@ -151,7 +196,7 @@ type DomainNameStatus struct {
 type DomainName struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainNameConfiguration)",message="domainNameConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainNameConfiguration) || has(self.initProvider.domainNameConfiguration)",message="domainNameConfiguration is a required parameter"
 	Spec   DomainNameSpec   `json:"spec"`
 	Status DomainNameStatus `json:"status,omitempty"`
 }

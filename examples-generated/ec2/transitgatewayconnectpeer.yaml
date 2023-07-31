@@ -35,6 +35,3 @@ spec:
     transportAttachmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

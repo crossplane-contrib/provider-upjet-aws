@@ -175,13 +175,8 @@ spec:
                                       description: Protocol used for the port mapping.
                                         Valid values are http,http2, tcp and grpc.
                                       type: string
-                                  required:
-                                  - port
-                                  - protocol
                                   type: object
                                 type: array
-                            required:
-                            - portMapping
                             type: object
                           type: array
                       type: object
@@ -193,6 +188,58 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  meshOwner:
+                    description: AWS account ID of the service mesh's owner. Defaults
+                      to the account ID the AWS provider is currently connected to.
+                    type: string
+                  name:
+                    description: Name to use for the virtual router. Must be between
+                      1 and 255 characters in length.
+                    type: string
+                  spec:
+                    description: Virtual router specification to apply.
+                    items:
+                      properties:
+                        listener:
+                          description: configuration block to the spec argument.
+                          items:
+                            properties:
+                              portMapping:
+                                description: Port mapping information for the listener.
+                                items:
+                                  properties:
+                                    port:
+                                      description: Port used for the port mapping.
+                                      type: number
+                                    protocol:
+                                      description: Protocol used for the port mapping.
+                                        Valid values are http,http2, tcp and grpc.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -394,10 +441,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: spec is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.spec)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.spec)
+                || has(self.initProvider.spec)'
           status:
             description: VirtualRouterStatus defines the observed state of VirtualRouter.
             properties:

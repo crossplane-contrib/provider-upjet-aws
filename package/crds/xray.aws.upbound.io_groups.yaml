@@ -85,8 +85,6 @@ spec:
                           description: Specifies whether insight notifications are
                             enabled.
                           type: boolean
-                      required:
-                      - insightsEnabled
                       type: object
                     type: array
                   region:
@@ -100,6 +98,45 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  filterExpression:
+                    description: The filter expression defining criteria by which
+                      to group traces. more info can be found in official docs.
+                    type: string
+                  groupName:
+                    description: The name of the group.
+                    type: string
+                  insightsConfiguration:
+                    description: Configuration options for enabling insights.
+                    items:
+                      properties:
+                        insightsEnabled:
+                          description: Specifies whether insights are enabled.
+                          type: boolean
+                        notificationsEnabled:
+                          description: Specifies whether insight notifications are
+                            enabled.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -301,10 +338,12 @@ spec:
             x-kubernetes-validations:
             - message: filterExpression is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterExpression)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterExpression)
+                || has(self.initProvider.filterExpression)'
             - message: groupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupName)
+                || has(self.initProvider.groupName)'
           status:
             description: GroupStatus defines the observed state of Group.
             properties:

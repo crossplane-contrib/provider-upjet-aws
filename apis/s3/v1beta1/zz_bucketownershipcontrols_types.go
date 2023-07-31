@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketOwnershipControlsInitParameters struct {
+
+	// Configuration block(s) with Ownership Controls rules. Detailed below.
+	Rule []BucketOwnershipControlsRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
 type BucketOwnershipControlsObservation struct {
 
 	// Name of the bucket that you want to associate this access point with.
@@ -51,6 +57,12 @@ type BucketOwnershipControlsParameters struct {
 	Rule []BucketOwnershipControlsRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
+type BucketOwnershipControlsRuleInitParameters struct {
+
+	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
+	ObjectOwnership *string `json:"objectOwnership,omitempty" tf:"object_ownership,omitempty"`
+}
+
 type BucketOwnershipControlsRuleObservation struct {
 
 	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
@@ -60,14 +72,26 @@ type BucketOwnershipControlsRuleObservation struct {
 type BucketOwnershipControlsRuleParameters struct {
 
 	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
-	// +kubebuilder:validation:Required
-	ObjectOwnership *string `json:"objectOwnership" tf:"object_ownership,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObjectOwnership *string `json:"objectOwnership,omitempty" tf:"object_ownership,omitempty"`
 }
 
 // BucketOwnershipControlsSpec defines the desired state of BucketOwnershipControls
 type BucketOwnershipControlsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketOwnershipControlsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketOwnershipControlsInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketOwnershipControlsStatus defines the observed state of BucketOwnershipControls.
@@ -88,7 +112,7 @@ type BucketOwnershipControlsStatus struct {
 type BucketOwnershipControls struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule)",message="rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   BucketOwnershipControlsSpec   `json:"spec"`
 	Status BucketOwnershipControlsStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutboundCallerConfigInitParameters struct {
+
+	// Specifies the caller ID name.
+	OutboundCallerIDName *string `json:"outboundCallerIdName,omitempty" tf:"outbound_caller_id_name,omitempty"`
+
+	// Specifies the caller ID number.
+	OutboundCallerIDNumberID *string `json:"outboundCallerIdNumberId,omitempty" tf:"outbound_caller_id_number_id,omitempty"`
+
+	// Specifies outbound whisper flow to be used during an outbound call.
+	OutboundFlowID *string `json:"outboundFlowId,omitempty" tf:"outbound_flow_id,omitempty"`
+}
+
 type OutboundCallerConfigObservation struct {
 
 	// Specifies the caller ID name.
@@ -38,6 +50,30 @@ type OutboundCallerConfigParameters struct {
 	// Specifies outbound whisper flow to be used during an outbound call.
 	// +kubebuilder:validation:Optional
 	OutboundFlowID *string `json:"outboundFlowId,omitempty" tf:"outbound_flow_id,omitempty"`
+}
+
+type QueueInitParameters struct {
+
+	// Specifies the description of the Queue.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
+	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
+
+	// Specifies the name of the Queue.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A block that defines the outbound caller ID name, number, and outbound whisper flow. The Outbound Caller Config block is documented below.
+	OutboundCallerConfig []OutboundCallerConfigInitParameters `json:"outboundCallerConfig,omitempty" tf:"outbound_caller_config,omitempty"`
+
+	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
+
+	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type QueueObservation struct {
@@ -152,6 +188,18 @@ type QueueParameters struct {
 type QueueSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     QueueParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider QueueInitParameters `json:"initProvider,omitempty"`
 }
 
 // QueueStatus defines the observed state of Queue.
@@ -172,7 +220,7 @@ type QueueStatus struct {
 type Queue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   QueueSpec   `json:"spec"`
 	Status QueueStatus `json:"status,omitempty"`
 }

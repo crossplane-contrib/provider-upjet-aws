@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayVPCAttachmentAccepterInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Boolean whether the VPC Attachment should be associated with the EC2 Transit Gateway association default route table. Default value: true.
+	TransitGatewayDefaultRouteTableAssociation *bool `json:"transitGatewayDefaultRouteTableAssociation,omitempty" tf:"transit_gateway_default_route_table_association,omitempty"`
+
+	// Boolean whether the VPC Attachment should propagate routes with the EC2 Transit Gateway propagation default route table. Default value: true.
+	TransitGatewayDefaultRouteTablePropagation *bool `json:"transitGatewayDefaultRouteTablePropagation,omitempty" tf:"transit_gateway_default_route_table_propagation,omitempty"`
+}
+
 type TransitGatewayVPCAttachmentAccepterObservation struct {
 
 	// Whether Appliance Mode support is enabled. Valid values: disable, enable.
@@ -92,6 +104,18 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 type TransitGatewayVPCAttachmentAccepterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayVPCAttachmentAccepterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TransitGatewayVPCAttachmentAccepterInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayVPCAttachmentAccepterStatus defines the observed state of TransitGatewayVPCAttachmentAccepter.

@@ -19,6 +19,3 @@ spec:
         - virtualNodeNameSelector:
             matchLabels:
               testing.upbound.io/example-name: serviceb1
-
----
-

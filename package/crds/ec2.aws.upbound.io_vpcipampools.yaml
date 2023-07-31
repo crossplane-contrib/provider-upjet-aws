@@ -294,6 +294,86 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  addressFamily:
+                    description: The IP protocol assigned to this pool. You must choose
+                      either IPv4 or IPv6 protocol for a pool.
+                    type: string
+                  allocationDefaultNetmaskLength:
+                    description: A default netmask length for allocations added to
+                      this pool. If, for example, the CIDR assigned to this pool is
+                      10.0.0.0/8 and you enter 16 here, new allocations will default
+                      to 10.0.0.0/16 (unless you provide a different netmask value
+                      when you create the new allocation).
+                    type: number
+                  allocationMaxNetmaskLength:
+                    description: The maximum netmask length that will be required
+                      for CIDR allocations in this pool.
+                    type: number
+                  allocationMinNetmaskLength:
+                    description: The minimum netmask length that will be required
+                      for CIDR allocations in this pool.
+                    type: number
+                  allocationResourceTags:
+                    additionalProperties:
+                      type: string
+                    description: Tags that are required for resources that use CIDRs
+                      from this IPAM pool. Resources that do not have these tags will
+                      not be allowed to allocate space from the pool. If the resources
+                      have their tags changed after they have allocated space or if
+                      the allocation tagging requirements are changed on the pool,
+                      the resource may be marked as noncompliant.
+                    type: object
+                  autoImport:
+                    description: If you include this argument, IPAM automatically
+                      imports any VPCs you have in your scope that fall within the
+                      CIDR range in the pool.
+                    type: boolean
+                  awsService:
+                    description: 'Limits which AWS service the pool can be used in.
+                      Only useable on public scopes. Valid Values: ec2.'
+                    type: string
+                  description:
+                    description: A description for the IPAM pool.
+                    type: string
+                  locale:
+                    description: 'The locale in which you would like to create the
+                      IPAM pool. Locale is the Region where you want to make an IPAM
+                      pool available for allocations. You can only create pools with
+                      locales that match the operating Regions of the IPAM. You can
+                      only create VPCs from a pool whose locale matches the VPC''s
+                      Region. Possible values: Any AWS region, such as us-east-1.'
+                    type: string
+                  publicIpSource:
+                    description: The IP address source for pools in the public scope.
+                      Only used for provisioning IP address CIDRs to pools in the
+                      public scope. Valid values are byoip or amazon. Default is byoip.
+                    type: string
+                  publiclyAdvertisable:
+                    description: Defines whether or not IPv6 pool space is publicly
+                      advertisable over the internet. This argument is required if
+                      address_family = "ipv6" and public_ip_source = "byoip", default
+                      is false. This option is not available for IPv4 pool space or
+                      if public_ip_source = "amazon".
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -494,7 +574,8 @@ spec:
             x-kubernetes-validations:
             - message: addressFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)
+                || has(self.initProvider.addressFamily)'
           status:
             description: VPCIpamPoolStatus defines the observed state of VPCIpamPool.
             properties:

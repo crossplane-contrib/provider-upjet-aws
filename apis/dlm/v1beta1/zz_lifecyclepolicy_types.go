@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionInitParameters struct {
+
+	// The rule for copying shared snapshots across Regions. See the cross_region_copy configuration block.
+	CrossRegionCopy []CrossRegionCopyInitParameters `json:"crossRegionCopy,omitempty" tf:"cross_region_copy,omitempty"`
+
+	// A descriptive name for the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ActionObservation struct {
 
 	// The rule for copying shared snapshots across Regions. See the cross_region_copy configuration block.
@@ -25,12 +34,30 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// The rule for copying shared snapshots across Regions. See the cross_region_copy configuration block.
-	// +kubebuilder:validation:Required
-	CrossRegionCopy []CrossRegionCopyParameters `json:"crossRegionCopy" tf:"cross_region_copy,omitempty"`
+	// +kubebuilder:validation:Optional
+	CrossRegionCopy []CrossRegionCopyParameters `json:"crossRegionCopy,omitempty" tf:"cross_region_copy,omitempty"`
 
 	// A descriptive name for the action.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CreateRuleInitParameters struct {
+
+	// The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year.
+	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+
+	// Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost. Valid values are CLOUD and OUTPOST_LOCAL.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A list of times in 24 hour clock format that sets when the lifecycle policy should be evaluated. Max of 1.
+	Times []*string `json:"times,omitempty" tf:"times,omitempty"`
 }
 
 type CreateRuleObservation struct {
@@ -74,6 +101,18 @@ type CreateRuleParameters struct {
 	Times []*string `json:"times,omitempty" tf:"times,omitempty"`
 }
 
+type CrossRegionCopyInitParameters struct {
+
+	// The encryption settings for the copied snapshot. See the encryption_configuration block. Max of 1 per action.
+	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []RetainRuleInitParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
 type CrossRegionCopyObservation struct {
 
 	// The encryption settings for the copied snapshot. See the encryption_configuration block. Max of 1 per action.
@@ -89,16 +128,34 @@ type CrossRegionCopyObservation struct {
 type CrossRegionCopyParameters struct {
 
 	// The encryption settings for the copied snapshot. See the encryption_configuration block. Max of 1 per action.
-	// +kubebuilder:validation:Required
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration" tf:"encryption_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
 	RetainRule []RetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type CrossRegionCopyRuleInitParameters struct {
+
+	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// See the deprecate_rule block. Max of 1 per schedule.
+	DeprecateRule []DeprecateRuleInitParameters `json:"deprecateRule,omitempty" tf:"deprecate_rule,omitempty"`
+
+	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []CrossRegionCopyRuleRetainRuleInitParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyRuleObservation struct {
@@ -147,16 +204,25 @@ type CrossRegionCopyRuleParameters struct {
 	DeprecateRule []DeprecateRuleParameters `json:"deprecateRule,omitempty" tf:"deprecate_rule,omitempty"`
 
 	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
-	// +kubebuilder:validation:Required
-	Encrypted *bool `json:"encrypted" tf:"encrypted,omitempty"`
+	// +kubebuilder:validation:Optional
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
 	RetainRule []CrossRegionCopyRuleRetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type CrossRegionCopyRuleRetainRuleInitParameters struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type CrossRegionCopyRuleRetainRuleObservation struct {
@@ -171,12 +237,21 @@ type CrossRegionCopyRuleRetainRuleObservation struct {
 type CrossRegionCopyRuleRetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	// +kubebuilder:validation:Required
-	Interval *float64 `json:"interval" tf:"interval,omitempty"`
+	// +kubebuilder:validation:Optional
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
-	// +kubebuilder:validation:Required
-	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type DeprecateRuleInitParameters struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type DeprecateRuleObservation struct {
@@ -191,12 +266,21 @@ type DeprecateRuleObservation struct {
 type DeprecateRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	// +kubebuilder:validation:Required
-	Interval *float64 `json:"interval" tf:"interval,omitempty"`
+	// +kubebuilder:validation:Optional
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
-	// +kubebuilder:validation:Required
-	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type EncryptionConfigurationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
+
+	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -219,6 +303,15 @@ type EncryptionConfigurationParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 }
 
+type EventSourceInitParameters struct {
+
+	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
+	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The source of the event. Currently only managed CloudWatch Events rules are supported. Valid values are MANAGED_CWE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type EventSourceObservation struct {
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
@@ -231,12 +324,27 @@ type EventSourceObservation struct {
 type EventSourceParameters struct {
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
-	// +kubebuilder:validation:Required
-	Parameters []ParametersParameters `json:"parameters" tf:"parameters,omitempty"`
+	// +kubebuilder:validation:Optional
+	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The source of the event. Currently only managed CloudWatch Events rules are supported. Valid values are MANAGED_CWE.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type FastRestoreRuleInitParameters struct {
+
+	// The Availability Zones in which to enable fast snapshot restore.
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type FastRestoreRuleObservation struct {
@@ -257,8 +365,8 @@ type FastRestoreRuleObservation struct {
 type FastRestoreRuleParameters struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
-	// +kubebuilder:validation:Required
-	AvailabilityZones []*string `json:"availabilityZones" tf:"availability_zones,omitempty"`
+	// +kubebuilder:validation:Optional
+	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
 	// +kubebuilder:validation:Optional
@@ -271,6 +379,21 @@ type FastRestoreRuleParameters struct {
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type LifecyclePolicyInitParameters struct {
+
+	// A description for the DLM lifecycle policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// See the policy_details configuration block. Max of 1.
+	PolicyDetails []PolicyDetailsInitParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
+
+	// Whether the lifecycle policy should be enabled or disabled. ENABLED or DISABLED are valid values. Defaults to ENABLED.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LifecyclePolicyObservation struct {
@@ -338,6 +461,18 @@ type LifecyclePolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ParametersInitParameters struct {
+
+	// The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.
+	DescriptionRegex *string `json:"descriptionRegex,omitempty" tf:"description_regex,omitempty"`
+
+	// The type of event. Currently, only shareSnapshot events are supported.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
+}
+
 type ParametersObservation struct {
 
 	// The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.
@@ -353,16 +488,43 @@ type ParametersObservation struct {
 type ParametersParameters struct {
 
 	// The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.
-	// +kubebuilder:validation:Required
-	DescriptionRegex *string `json:"descriptionRegex" tf:"description_regex,omitempty"`
+	// +kubebuilder:validation:Optional
+	DescriptionRegex *string `json:"descriptionRegex,omitempty" tf:"description_regex,omitempty"`
 
 	// The type of event. Currently, only shareSnapshot events are supported.
-	// +kubebuilder:validation:Required
-	EventType *string `json:"eventType" tf:"event_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
 
 	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
-	// +kubebuilder:validation:Required
-	SnapshotOwner []*string `json:"snapshotOwner" tf:"snapshot_owner,omitempty"`
+	// +kubebuilder:validation:Optional
+	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
+}
+
+type PolicyDetailsInitParameters struct {
+
+	// The actions to be performed when the event-based policy is triggered. You can specify only one action per policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the action configuration block.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The event that triggers the event-based policy. This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter. See the event_source configuration block.
+	EventSource []EventSourceInitParameters `json:"eventSource,omitempty" tf:"event_source,omitempty"`
+
+	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
+	Parameters []PolicyDetailsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. Default value is EBS_SNAPSHOT_MANAGEMENT.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account. Valid values are CLOUD and OUTPOST.
+	ResourceLocations []*string `json:"resourceLocations,omitempty" tf:"resource_locations,omitempty"`
+
+	// A list of resource types that should be targeted by the lifecycle policy. Valid values are VOLUME and INSTANCE.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+
+	// See the schedule configuration block.
+	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
 type PolicyDetailsObservation struct {
@@ -427,6 +589,15 @@ type PolicyDetailsParameters struct {
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
+type PolicyDetailsParametersInitParameters struct {
+
+	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
+	ExcludeBootVolume *bool `json:"excludeBootVolume,omitempty" tf:"exclude_boot_volume,omitempty"`
+
+	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
+	NoReboot *bool `json:"noReboot,omitempty" tf:"no_reboot,omitempty"`
+}
+
 type PolicyDetailsParametersObservation struct {
 
 	// Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
@@ -447,6 +618,15 @@ type PolicyDetailsParametersParameters struct {
 	NoReboot *bool `json:"noReboot,omitempty" tf:"no_reboot,omitempty"`
 }
 
+type RetainRuleInitParameters struct {
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
 type RetainRuleObservation struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
@@ -459,12 +639,24 @@ type RetainRuleObservation struct {
 type RetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	// +kubebuilder:validation:Required
-	Interval *float64 `json:"interval" tf:"interval,omitempty"`
+	// +kubebuilder:validation:Optional
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
-	// +kubebuilder:validation:Required
-	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type ScheduleDeprecateRuleInitParameters struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type ScheduleDeprecateRuleObservation struct {
@@ -492,6 +684,39 @@ type ScheduleDeprecateRuleParameters struct {
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+}
+
+type ScheduleInitParameters struct {
+
+	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
+
+	// See the create_rule block. Max of 1 per schedule.
+	CreateRule []CreateRuleInitParameters `json:"createRule,omitempty" tf:"create_rule,omitempty"`
+
+	// See the cross_region_copy_rule block. Max of 3 per schedule.
+	CrossRegionCopyRule []CrossRegionCopyRuleInitParameters `json:"crossRegionCopyRule,omitempty" tf:"cross_region_copy_rule,omitempty"`
+
+	// See the deprecate_rule block. Max of 1 per schedule.
+	DeprecateRule []ScheduleDeprecateRuleInitParameters `json:"deprecateRule,omitempty" tf:"deprecate_rule,omitempty"`
+
+	// See the fast_restore_rule block. Max of 1 per schedule.
+	FastRestoreRule []FastRestoreRuleInitParameters `json:"fastRestoreRule,omitempty" tf:"fast_restore_rule,omitempty"`
+
+	// A descriptive name for the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
+	RetainRule []ScheduleRetainRuleInitParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+
+	// See the share_rule block. Max of 1 per schedule.
+	ShareRule []ShareRuleInitParameters `json:"shareRule,omitempty" tf:"share_rule,omitempty"`
+
+	// A map of tag keys and their values. DLM lifecycle policies will already tag the snapshot with the tags on the volume. This configuration adds extra tags on top of these.
+	TagsToAdd map[string]*string `json:"tagsToAdd,omitempty" tf:"tags_to_add,omitempty"`
+
+	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
+	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
 }
 
 type ScheduleObservation struct {
@@ -534,8 +759,8 @@ type ScheduleParameters struct {
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
 	// See the create_rule block. Max of 1 per schedule.
-	// +kubebuilder:validation:Required
-	CreateRule []CreateRuleParameters `json:"createRule" tf:"create_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	CreateRule []CreateRuleParameters `json:"createRule,omitempty" tf:"create_rule,omitempty"`
 
 	// See the cross_region_copy_rule block. Max of 3 per schedule.
 	// +kubebuilder:validation:Optional
@@ -550,12 +775,12 @@ type ScheduleParameters struct {
 	FastRestoreRule []FastRestoreRuleParameters `json:"fastRestoreRule,omitempty" tf:"fast_restore_rule,omitempty"`
 
 	// A descriptive name for the action.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
-	// +kubebuilder:validation:Required
-	RetainRule []ScheduleRetainRuleParameters `json:"retainRule" tf:"retain_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	RetainRule []ScheduleRetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
 
 	// See the share_rule block. Max of 1 per schedule.
 	// +kubebuilder:validation:Optional
@@ -568,6 +793,18 @@ type ScheduleParameters struct {
 	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
 	// +kubebuilder:validation:Optional
 	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
+}
+
+type ScheduleRetainRuleInitParameters struct {
+
+	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
 type ScheduleRetainRuleObservation struct {
@@ -597,6 +834,18 @@ type ScheduleRetainRuleParameters struct {
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
 }
 
+type ShareRuleInitParameters struct {
+
+	// The IDs of the AWS accounts with which to share the snapshots.
+	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
+
+	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
+	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
+
+	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
+	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
+}
+
 type ShareRuleObservation struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
@@ -612,8 +861,8 @@ type ShareRuleObservation struct {
 type ShareRuleParameters struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
-	// +kubebuilder:validation:Required
-	TargetAccounts []*string `json:"targetAccounts" tf:"target_accounts,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
@@ -628,6 +877,18 @@ type ShareRuleParameters struct {
 type LifecyclePolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LifecyclePolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LifecyclePolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // LifecyclePolicyStatus defines the observed state of LifecyclePolicy.
@@ -648,8 +909,8 @@ type LifecyclePolicyStatus struct {
 type LifecyclePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description)",message="description is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDetails)",message="policyDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || has(self.initProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDetails) || has(self.initProvider.policyDetails)",message="policyDetails is a required parameter"
 	Spec   LifecyclePolicySpec   `json:"spec"`
 	Status LifecyclePolicyStatus `json:"status,omitempty"`
 }

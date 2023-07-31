@@ -15,6 +15,3 @@ spec:
     - end: "06:00"
       start: "00:00"
     region: us-west-1
-
----
-

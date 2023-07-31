@@ -75,8 +75,6 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
-                      required:
-                      - desiredInstances
                       type: object
                     type: array
                   description:
@@ -329,6 +327,109 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  computeCapacity:
+                    description: Configuration block for the desired capacity of the
+                      fleet. See below.
+                    items:
+                      properties:
+                        desiredInstances:
+                          description: Desired number of streaming instances.
+                          type: number
+                      type: object
+                    type: array
+                  description:
+                    description: Description to display.
+                    type: string
+                  disconnectTimeoutInSeconds:
+                    description: Amount of time that a streaming session remains active
+                      after users disconnect.
+                    type: number
+                  displayName:
+                    description: Human-readable friendly name for the AppStream fleet.
+                    type: string
+                  domainJoinInfo:
+                    description: Configuration block for the name of the directory
+                      and organizational unit (OU) to use to join the fleet to a Microsoft
+                      Active Directory domain. See below.
+                    items:
+                      properties:
+                        directoryName:
+                          description: Fully qualified name of the directory (for
+                            example, corp.example.com).
+                          type: string
+                        organizationalUnitDistinguishedName:
+                          description: Distinguished name of the organizational unit
+                            for computer accounts.
+                          type: string
+                      type: object
+                    type: array
+                  enableDefaultInternetAccess:
+                    description: Enables or disables default internet access for the
+                      fleet.
+                    type: boolean
+                  fleetType:
+                    description: 'Fleet type. Valid values are: ON_DEMAND, ALWAYS_ON'
+                    type: string
+                  idleDisconnectTimeoutInSeconds:
+                    description: Amount of time that users can be idle (inactive)
+                      before they are disconnected from their streaming session and
+                      the disconnect_timeout_in_seconds time interval begins.
+                    type: number
+                  imageArn:
+                    description: ARN of the public, private, or shared image to use.
+                    type: string
+                  imageName:
+                    description: Name of the image used to create the fleet.
+                    type: string
+                  instanceType:
+                    description: Instance type to use when launching fleet instances.
+                    type: string
+                  maxUserDurationInSeconds:
+                    description: Maximum amount of time that a streaming session can
+                      remain active, in seconds.
+                    type: number
+                  name:
+                    description: Unique name for the fleet.
+                    type: string
+                  streamView:
+                    description: AppStream 2.0 view that is displayed to your users
+                      when they stream from the fleet. When APP is specified, only
+                      the windows of applications opened by users display. When DESKTOP
+                      is specified, the standard desktop that is provided by the operating
+                      system displays. If not specified, defaults to APP.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  vpcConfig:
+                    description: Configuration block for the VPC configuration for
+                      the image builder. See below.
+                    items:
+                      properties:
+                        securityGroupIds:
+                          description: Identifiers of the security groups for the
+                            fleet or image builder.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -529,13 +630,16 @@ spec:
             x-kubernetes-validations:
             - message: computeCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.computeCapacity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.computeCapacity)
+                || has(self.initProvider.computeCapacity)'
             - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
+                || has(self.initProvider.instanceType)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FleetStatus defines the observed state of Fleet.
             properties:

@@ -264,6 +264,48 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  direction:
+                    description: The direction of DNS queries to or from the Route
+                      53 Resolver endpoint. Valid values are INBOUND (resolver forwards
+                      DNS queries to the DNS service for a VPC from your network or
+                      another VPC) or OUTBOUND (resolver forwards DNS queries from
+                      the DNS service for a VPC to your network or another VPC).
+                    type: string
+                  ipAddress:
+                    description: The subnets and IP addresses in your VPC that you
+                      want DNS queries to pass through on the way from your VPCs to
+                      your network (for outbound endpoints) or on the way from your
+                      network to your VPCs (for inbound endpoints). Described below.
+                    items:
+                      properties:
+                        ip:
+                          description: The IP address in the subnet that you want
+                            to use for DNS queries.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The friendly name of the Route 53 Resolver endpoint.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -464,10 +506,12 @@ spec:
             x-kubernetes-validations:
             - message: direction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.direction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.direction)
+                || has(self.initProvider.direction)'
             - message: ipAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddress)
+                || has(self.initProvider.ipAddress)'
           status:
             description: EndpointStatus defines the observed state of Endpoint.
             properties:

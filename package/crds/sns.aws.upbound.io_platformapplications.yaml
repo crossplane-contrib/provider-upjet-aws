@@ -300,6 +300,54 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  applePlatformBundleId:
+                    description: The bundle identifier that's assigned to your iOS
+                      app. May only include alphanumeric characters, hyphens (-),
+                      and periods (.).
+                    type: string
+                  applePlatformTeamId:
+                    description: The identifier that's assigned to your Apple developer
+                      account team. Must be 10 alphanumeric characters.
+                    type: string
+                  eventDeliveryFailureTopicArn:
+                    description: The ARN of the SNS Topic triggered when a delivery
+                      to any of the platform endpoints associated with your platform
+                      application encounters a permanent failure.
+                    type: string
+                  eventEndpointCreatedTopicArn:
+                    description: The ARN of the SNS Topic triggered when a new platform
+                      endpoint is added to your platform application.
+                    type: string
+                  eventEndpointDeletedTopicArn:
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is deleted from your platform application.
+                    type: string
+                  eventEndpointUpdatedTopicArn:
+                    description: The ARN of the SNS Topic triggered when an existing
+                      platform endpoint is changed from your platform application.
+                    type: string
+                  platform:
+                    description: The platform that the app is registered with. See
+                      Platform for supported platforms.
+                    type: string
+                  successFeedbackSampleRate:
+                    description: The sample rate percentage (0-100) of successfully
+                      delivered messages.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -500,7 +548,8 @@ spec:
             x-kubernetes-validations:
             - message: platform is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)
+                || has(self.initProvider.platform)'
             - message: platformCredentialSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.platformCredentialSecretRef)'

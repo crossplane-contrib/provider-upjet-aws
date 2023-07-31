@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AMIDistributionConfigurationInitParameters struct {
+
+	// Key-value map of tags to apply to the distributed AMI.
+	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
+
+	// Description to apply to the distributed AMI.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
+	LaunchPermission []LaunchPermissionInitParameters `json:"launchPermission,omitempty" tf:"launch_permission,omitempty"`
+
+	// Name to apply to the distributed AMI.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Set of AWS Account identifiers to distribute the AMI.
+	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
+}
+
 type AMIDistributionConfigurationObservation struct {
 
 	// Key-value map of tags to apply to the distributed AMI.
@@ -61,6 +82,18 @@ type AMIDistributionConfigurationParameters struct {
 	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
 }
 
+type ContainerDistributionConfigurationInitParameters struct {
+
+	// Set of tags that are attached to the container distribution configuration.
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// Description of the container distribution configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block with the destination repository for the container distribution configuration.
+	TargetRepository []ContainerDistributionConfigurationTargetRepositoryInitParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
+}
+
 type ContainerDistributionConfigurationObservation struct {
 
 	// Set of tags that are attached to the container distribution configuration.
@@ -84,8 +117,17 @@ type ContainerDistributionConfigurationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Configuration block with the destination repository for the container distribution configuration.
-	// +kubebuilder:validation:Required
-	TargetRepository []ContainerDistributionConfigurationTargetRepositoryParameters `json:"targetRepository" tf:"target_repository,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetRepository []ContainerDistributionConfigurationTargetRepositoryParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
+}
+
+type ContainerDistributionConfigurationTargetRepositoryInitParameters struct {
+
+	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// The service in which this image is registered. Valid values: ECR.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type ContainerDistributionConfigurationTargetRepositoryObservation struct {
@@ -100,12 +142,27 @@ type ContainerDistributionConfigurationTargetRepositoryObservation struct {
 type ContainerDistributionConfigurationTargetRepositoryParameters struct {
 
 	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
-	// +kubebuilder:validation:Required
-	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
 	// The service in which this image is registered. Valid values: ECR.
-	// +kubebuilder:validation:Required
-	Service *string `json:"service" tf:"service,omitempty"`
+	// +kubebuilder:validation:Optional
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+}
+
+type DistributionConfigurationInitParameters struct {
+
+	// Description of the distribution configuration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// One or more configuration blocks with distribution settings. Detailed below.
+	Distribution []DistributionInitParameters `json:"distribution,omitempty" tf:"distribution,omitempty"`
+
+	// Name of the distribution configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DistributionConfigurationObservation struct {
@@ -162,6 +219,24 @@ type DistributionConfigurationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type DistributionInitParameters struct {
+
+	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
+	AMIDistributionConfiguration []AMIDistributionConfigurationInitParameters `json:"amiDistributionConfiguration,omitempty" tf:"ami_distribution_configuration,omitempty"`
+
+	// Configuration block with container distribution settings. Detailed below.
+	ContainerDistributionConfiguration []ContainerDistributionConfigurationInitParameters `json:"containerDistributionConfiguration,omitempty" tf:"container_distribution_configuration,omitempty"`
+
+	// Set of Windows faster-launching configurations to use for AMI distribution. Detailed below.
+	FastLaunchConfiguration []FastLaunchConfigurationInitParameters `json:"fastLaunchConfiguration,omitempty" tf:"fast_launch_configuration,omitempty"`
+
+	// Set of launch template configuration settings that apply to image distribution. Detailed below.
+	LaunchTemplateConfiguration []LaunchTemplateConfigurationInitParameters `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
+
+	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
+}
+
 type DistributionObservation struct {
 
 	// Configuration block with Amazon Machine Image (AMI) distribution settings. Detailed below.
@@ -210,6 +285,24 @@ type DistributionParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 }
 
+type FastLaunchConfigurationInitParameters struct {
+
+	// The owner account ID for the fast-launch enabled Windows AMI.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration block for the launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. Detailed below.
+	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// The maximum number of parallel instances that are launched for creating resources.
+	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+
+	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
+	SnapshotConfiguration []SnapshotConfigurationInitParameters `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
+}
+
 type FastLaunchConfigurationObservation struct {
 
 	// The owner account ID for the fast-launch enabled Windows AMI.
@@ -231,12 +324,12 @@ type FastLaunchConfigurationObservation struct {
 type FastLaunchConfigurationParameters struct {
 
 	// The owner account ID for the fast-launch enabled Windows AMI.
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Configuration block for the launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -249,6 +342,21 @@ type FastLaunchConfigurationParameters struct {
 	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
 	// +kubebuilder:validation:Optional
 	SnapshotConfiguration []SnapshotConfigurationParameters `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
+}
+
+type LaunchPermissionInitParameters struct {
+
+	// Set of AWS Organization ARNs to assign.
+	OrganizationArns []*string `json:"organizationArns,omitempty" tf:"organization_arns,omitempty"`
+
+	// Set of AWS Organizational Unit ARNs to assign.
+	OrganizationalUnitArns []*string `json:"organizationalUnitArns,omitempty" tf:"organizational_unit_arns,omitempty"`
+
+	// Set of EC2 launch permission user groups to assign. Use all to distribute a public AMI.
+	UserGroups []*string `json:"userGroups,omitempty" tf:"user_groups,omitempty"`
+
+	// Set of AWS Account identifiers to assign.
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type LaunchPermissionObservation struct {
@@ -285,6 +393,18 @@ type LaunchPermissionParameters struct {
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
+type LaunchTemplateConfigurationInitParameters struct {
+
+	// The account ID that this configuration applies to.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Indicates whether to set the specified Amazon EC2 launch template as the default launch template. Defaults to true.
+	Default *bool `json:"default,omitempty" tf:"default,omitempty"`
+
+	// The ID of the Amazon EC2 launch template to use.
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+}
+
 type LaunchTemplateConfigurationObservation struct {
 
 	// The account ID that this configuration applies to.
@@ -308,8 +428,20 @@ type LaunchTemplateConfigurationParameters struct {
 	Default *bool `json:"default,omitempty" tf:"default,omitempty"`
 
 	// The ID of the Amazon EC2 launch template to use.
-	// +kubebuilder:validation:Required
-	LaunchTemplateID *string `json:"launchTemplateId" tf:"launch_template_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+}
+
+type LaunchTemplateInitParameters struct {
+
+	// The ID of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// The name of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
+
+	// The version of the launch template to use for faster launching for a Windows AMI.
+	LaunchTemplateVersion *string `json:"launchTemplateVersion,omitempty" tf:"launch_template_version,omitempty"`
 }
 
 type LaunchTemplateObservation struct {
@@ -339,6 +471,12 @@ type LaunchTemplateParameters struct {
 	LaunchTemplateVersion *string `json:"launchTemplateVersion,omitempty" tf:"launch_template_version,omitempty"`
 }
 
+type SnapshotConfigurationInitParameters struct {
+
+	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
+}
+
 type SnapshotConfigurationObservation struct {
 
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
@@ -356,6 +494,18 @@ type SnapshotConfigurationParameters struct {
 type DistributionConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DistributionConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DistributionConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // DistributionConfigurationStatus defines the observed state of DistributionConfiguration.
@@ -376,8 +526,8 @@ type DistributionConfigurationStatus struct {
 type DistributionConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.distribution)",message="distribution is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.distribution) || has(self.initProvider.distribution)",message="distribution is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   DistributionConfigurationSpec   `json:"spec"`
 	Status DistributionConfigurationStatus `json:"status,omitempty"`
 }

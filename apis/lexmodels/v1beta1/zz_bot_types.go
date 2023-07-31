@@ -13,6 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AbortStatementInitParameters struct {
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
+	Message []MessageInitParameters `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
+}
+
 type AbortStatementObservation struct {
 
 	// A set of messages, each of which provides a message string and its type.
@@ -31,14 +44,56 @@ type AbortStatementParameters struct {
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message.
-	// +kubebuilder:validation:Required
-	Message []MessageParameters `json:"message" tf:"message,omitempty"`
+	// +kubebuilder:validation:Optional
+	Message []MessageParameters `json:"message,omitempty" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
 	// Example: Using a Response Card.
 	// +kubebuilder:validation:Optional
 	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
+}
+
+type BotInitParameters struct {
+
+	// The message that Amazon Lex uses to abort a conversation. Attributes are documented under statement.
+	AbortStatement []AbortStatementInitParameters `json:"abortStatement,omitempty" tf:"abort_statement,omitempty"`
+
+	// By specifying true, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. For more information see the Amazon Lex FAQ and the Amazon Lex PutBot API Docs.
+	ChildDirected *bool `json:"childDirected,omitempty" tf:"child_directed,omitempty"`
+
+	// The message that Amazon Lex uses when it doesn't understand the user's request. Attributes are documented under prompt.
+	ClarificationPrompt []ClarificationPromptInitParameters `json:"clarificationPrompt,omitempty" tf:"clarification_prompt,omitempty"`
+
+	// Determines if a new bot version is created when the initial resource is created and on each update. Defaults to false.
+	CreateVersion *bool `json:"createVersion,omitempty" tf:"create_version,omitempty"`
+
+	// A description of the bot. Must be less than or equal to 200 characters in length.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// When set to true user utterances are sent to Amazon Comprehend for sentiment analysis. If you don't specify detectSentiment, the default is false.
+	DetectSentiment *bool `json:"detectSentiment,omitempty" tf:"detect_sentiment,omitempty"`
+
+	// Set to true to enable access to natural language understanding improvements. When you set the enable_model_improvements parameter to true you can use the nlu_intent_confidence_threshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enable_model_improvements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. For more information see the Amazon Lex Bot PutBot API Docs.
+	EnableModelImprovements *bool `json:"enableModelImprovements,omitempty" tf:"enable_model_improvements,omitempty"`
+
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
+	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
+
+	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
+	Intent []IntentInitParameters `json:"intent,omitempty" tf:"intent,omitempty"`
+
+	// Specifies the target locale for the bot. Any intent used in the bot must be compatible with the locale of the bot. For available locales, see Amazon Lex Bot PutBot API Docs. Default is en-US.
+	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
+
+	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For more information see Amazon Lex Bot PutBot API Docs This value requires enable_model_improvements to be set to true and the default is 0. Must be a float between 0 and 1.
+	NluIntentConfidenceThreshold *float64 `json:"nluIntentConfidenceThreshold,omitempty" tf:"nlu_intent_confidence_threshold,omitempty"`
+
+	// If you set the process_behavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it. Default is SAVE.
+	ProcessBehavior *string `json:"processBehavior,omitempty" tf:"process_behavior,omitempty"`
+
+	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Available Voices in the Amazon Polly Developer Guide.
+	VoiceID *string `json:"voiceId,omitempty" tf:"voice_id,omitempty"`
 }
 
 type BotObservation struct {
@@ -169,6 +224,35 @@ type BotParameters struct {
 	VoiceID *string `json:"voiceId,omitempty" tf:"voice_id,omitempty"`
 }
 
+type ClarificationPromptInitParameters struct {
+
+	// The number of times to prompt the user for information.
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+
+	// A set of messages, each of which provides a message string and its type.
+	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
+	// Attributes are documented under message.
+	Message []ClarificationPromptMessageInitParameters `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The response card. Amazon Lex will substitute session attributes and
+	// slot values into the response card. For more information, see
+	// Example: Using a Response Card.
+	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
+}
+
+type ClarificationPromptMessageInitParameters struct {
+
+	// The text of the message.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+}
+
 type ClarificationPromptMessageObservation struct {
 
 	// The text of the message.
@@ -185,12 +269,12 @@ type ClarificationPromptMessageObservation struct {
 type ClarificationPromptMessageParameters struct {
 
 	// The text of the message.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The content type of the message string.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
@@ -217,20 +301,29 @@ type ClarificationPromptObservation struct {
 type ClarificationPromptParameters struct {
 
 	// The number of times to prompt the user for information.
-	// +kubebuilder:validation:Required
-	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message.
-	// +kubebuilder:validation:Required
-	Message []ClarificationPromptMessageParameters `json:"message" tf:"message,omitempty"`
+	// +kubebuilder:validation:Optional
+	Message []ClarificationPromptMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
 	// Example: Using a Response Card.
 	// +kubebuilder:validation:Optional
 	ResponseCard *string `json:"responseCard,omitempty" tf:"response_card,omitempty"`
+}
+
+type IntentInitParameters struct {
+
+	// The name of the intent. Must be less than or equal to 100 characters in length.
+	IntentName *string `json:"intentName,omitempty" tf:"intent_name,omitempty"`
+
+	// The version of the intent. Must be less than or equal to 64 characters in length.
+	IntentVersion *string `json:"intentVersion,omitempty" tf:"intent_version,omitempty"`
 }
 
 type IntentObservation struct {
@@ -245,12 +338,25 @@ type IntentObservation struct {
 type IntentParameters struct {
 
 	// The name of the intent. Must be less than or equal to 100 characters in length.
-	// +kubebuilder:validation:Required
-	IntentName *string `json:"intentName" tf:"intent_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntentName *string `json:"intentName,omitempty" tf:"intent_name,omitempty"`
 
 	// The version of the intent. Must be less than or equal to 64 characters in length.
-	// +kubebuilder:validation:Required
-	IntentVersion *string `json:"intentVersion" tf:"intent_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntentVersion *string `json:"intentVersion,omitempty" tf:"intent_version,omitempty"`
+}
+
+type MessageInitParameters struct {
+
+	// The text of the message.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The content type of the message string.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifies the message group that the message belongs to. When a group
+	// is assigned to a message, Amazon Lex returns one message from each group in the response.
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type MessageObservation struct {
@@ -269,12 +375,12 @@ type MessageObservation struct {
 type MessageParameters struct {
 
 	// The text of the message.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The content type of the message string.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
@@ -286,6 +392,18 @@ type MessageParameters struct {
 type BotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BotInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotStatus defines the observed state of Bot.
@@ -306,9 +424,9 @@ type BotStatus struct {
 type Bot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.abortStatement)",message="abortStatement is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.childDirected)",message="childDirected is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intent)",message="intent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.abortStatement) || has(self.initProvider.abortStatement)",message="abortStatement is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.childDirected) || has(self.initProvider.childDirected)",message="childDirected is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intent) || has(self.initProvider.intent)",message="intent is a required parameter"
 	Spec   BotSpec   `json:"spec"`
 	Status BotStatus `json:"status,omitempty"`
 }

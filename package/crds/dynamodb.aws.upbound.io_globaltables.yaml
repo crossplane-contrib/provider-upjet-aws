@@ -80,12 +80,35 @@ spec:
                           description: AWS region name of replica DynamoDB TableE.g.,
                             us-east-1
                           type: string
-                      required:
-                      - regionName
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  replica:
+                    description: Underlying DynamoDB Table. At least 1 replica must
+                      be defined. See below.
+                    items:
+                      properties:
+                        regionName:
+                          description: AWS region name of replica DynamoDB TableE.g.,
+                            us-east-1
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -287,7 +310,8 @@ spec:
             x-kubernetes-validations:
             - message: replica is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.replica)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.replica)
+                || has(self.initProvider.replica)'
           status:
             description: GlobalTableStatus defines the observed state of GlobalTable.
             properties:

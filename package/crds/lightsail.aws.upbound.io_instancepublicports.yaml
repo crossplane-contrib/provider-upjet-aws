@@ -176,10 +176,6 @@ spec:
                         toPort:
                           description: Last port in a range of open ports on an instance.
                           type: number
-                      required:
-                      - fromPort
-                      - protocol
-                      - toPort
                       type: object
                     type: array
                   region:
@@ -188,6 +184,53 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  portInfo:
+                    description: Configuration block with port information. AWS closes
+                      all currently open ports that are not included in the port_info.
+                      Detailed below.
+                    items:
+                      properties:
+                        cidrListAliases:
+                          description: Set of CIDR aliases that define access for
+                            a preconfigured range of IP addresses.
+                          items:
+                            type: string
+                          type: array
+                        cidrs:
+                          description: Set of CIDR blocks.
+                          items:
+                            type: string
+                          type: array
+                        fromPort:
+                          description: First port in a range of open ports on an instance.
+                          type: number
+                        ipv6Cidrs:
+                          items:
+                            type: string
+                          type: array
+                        protocol:
+                          description: IP protocol name. Valid values are tcp, all,
+                            udp, and icmp.
+                          type: string
+                        toPort:
+                          description: Last port in a range of open ports on an instance.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -389,7 +432,8 @@ spec:
             x-kubernetes-validations:
             - message: portInfo is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.portInfo)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.portInfo)
+                || has(self.initProvider.portInfo)'
           status:
             description: InstancePublicPortsStatus defines the observed state of InstancePublicPorts.
             properties:

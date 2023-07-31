@@ -88,9 +88,6 @@ spec:
                               minutes:
                                 description: Specifies the minute of closing.
                                 type: number
-                            required:
-                            - hours
-                            - minutes
                             type: object
                           type: array
                         startTime:
@@ -105,15 +102,8 @@ spec:
                               minutes:
                                 description: Specifies the minute of opening.
                                 type: number
-                            required:
-                            - hours
-                            - minutes
                             type: object
                           type: array
-                      required:
-                      - day
-                      - endTime
-                      - startTime
                       type: object
                     type: array
                   description:
@@ -213,6 +203,73 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  config:
+                    description: 'One or more config blocks which define the configuration
+                      information for the hours of operation: day, start time, and
+                      end time . Config blocks are documented below.'
+                    items:
+                      properties:
+                        day:
+                          description: Specifies the day that the hours of operation
+                            applies to.
+                          type: string
+                        endTime:
+                          description: A end time block specifies the time that your
+                            contact center closes. The end_time is documented below.
+                          items:
+                            properties:
+                              hours:
+                                description: Specifies the hour of closing.
+                                type: number
+                              minutes:
+                                description: Specifies the minute of closing.
+                                type: number
+                            type: object
+                          type: array
+                        startTime:
+                          description: A start time block specifies the time that
+                            your contact center opens. The start_time is documented
+                            below.
+                          items:
+                            properties:
+                              hours:
+                                description: Specifies the hour of opening.
+                                type: number
+                              minutes:
+                                description: Specifies the minute of opening.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies the description of the Hours of Operation.
+                    type: string
+                  name:
+                    description: Specifies the name of the Hours of Operation.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  timeZone:
+                    description: Specifies the time zone of the Hours of Operation.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -414,13 +471,16 @@ spec:
             x-kubernetes-validations:
             - message: config is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.config)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.config)
+                || has(self.initProvider.config)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: timeZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeZone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeZone)
+                || has(self.initProvider.timeZone)'
           status:
             description: HoursOfOperationStatus defines the observed state of HoursOfOperation.
             properties:

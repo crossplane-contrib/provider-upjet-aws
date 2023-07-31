@@ -91,9 +91,6 @@ spec:
                         value:
                           description: The value of the DB parameter.
                           type: string
-                      required:
-                      - name
-                      - value
                       type: object
                     type: array
                   region:
@@ -107,6 +104,51 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The description of the DB cluster parameter group.
+                    type: string
+                  family:
+                    description: The family of the DB cluster parameter group.
+                    type: string
+                  parameter:
+                    description: A list of DB parameters to apply. Note that parameters
+                      may differ from a family to an other. Full list of all parameters
+                      can be discovered via aws rds describe-db-cluster-parameters
+                      after initial creation of the group.
+                    items:
+                      properties:
+                        applyMethod:
+                          description: '"immediate" (default), or "pending-reboot".
+                            Some engines can''t apply some parameters without a reboot,
+                            and you will need to specify "pending-reboot" here.'
+                          type: string
+                        name:
+                          description: The name of the DB cluster parameter group.
+                          type: string
+                        value:
+                          description: The value of the DB parameter.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -308,7 +350,8 @@ spec:
             x-kubernetes-validations:
             - message: family is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.family)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.family)
+                || has(self.initProvider.family)'
           status:
             description: ClusterParameterGroupStatus defines the observed state of
               ClusterParameterGroup.

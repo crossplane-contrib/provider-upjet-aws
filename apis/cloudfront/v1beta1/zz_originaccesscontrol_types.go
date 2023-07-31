@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OriginAccessControlInitParameters struct {
+
+	// The description of the Origin Access Control.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A name that identifies the Origin Access Control.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of origin that this Origin Access Control is for. Valid values are s3, and mediastore.
+	OriginAccessControlOriginType *string `json:"originAccessControlOriginType,omitempty" tf:"origin_access_control_origin_type,omitempty"`
+
+	// Specifies which requests CloudFront signs. Specify always for the most common use case. Allowed values: always, never, and no-override.
+	SigningBehavior *string `json:"signingBehavior,omitempty" tf:"signing_behavior,omitempty"`
+
+	// Determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
+	SigningProtocol *string `json:"signingProtocol,omitempty" tf:"signing_protocol,omitempty"`
+}
+
 type OriginAccessControlObservation struct {
 
 	// The description of the Origin Access Control.
@@ -69,6 +87,18 @@ type OriginAccessControlParameters struct {
 type OriginAccessControlSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OriginAccessControlParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OriginAccessControlInitParameters `json:"initProvider,omitempty"`
 }
 
 // OriginAccessControlStatus defines the observed state of OriginAccessControl.
@@ -89,10 +119,10 @@ type OriginAccessControlStatus struct {
 type OriginAccessControl struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType)",message="originAccessControlOriginType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingBehavior)",message="signingBehavior is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingProtocol)",message="signingProtocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType) || has(self.initProvider.originAccessControlOriginType)",message="originAccessControlOriginType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingBehavior) || has(self.initProvider.signingBehavior)",message="signingBehavior is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingProtocol) || has(self.initProvider.signingProtocol)",message="signingProtocol is a required parameter"
 	Spec   OriginAccessControlSpec   `json:"spec"`
 	Status OriginAccessControlStatus `json:"status,omitempty"`
 }

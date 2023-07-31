@@ -111,6 +111,57 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  deliveryOptions:
+                    description: Whether messages that use the configuration set are
+                      required to use TLS. See below.
+                    items:
+                      properties:
+                        tlsPolicy:
+                          description: 'Whether messages that use the configuration
+                            set are required to use Transport Layer Security (TLS).
+                            If the value is Require, messages are only delivered if
+                            a TLS connection can be established. If the value is Optional,
+                            messages can be delivered in plain text if a TLS connection
+                            can''t be established. Valid values: Require or Optional.
+                            Defaults to Optional.'
+                          type: string
+                      type: object
+                    type: array
+                  reputationMetricsEnabled:
+                    description: Whether or not Amazon SES publishes reputation metrics
+                      for the configuration set, such as bounce and complaint rates,
+                      to Amazon CloudWatch. The default value is false.
+                    type: boolean
+                  sendingEnabled:
+                    description: Whether email sending is enabled or disabled for
+                      the configuration set. The default value is true.
+                    type: boolean
+                  trackingOptions:
+                    description: 'Domain that is used to redirect email recipients
+                      to an Amazon SES-operated domain. See below. NOTE: This functionality
+                      is best effort.'
+                    items:
+                      properties:
+                        customRedirectDomain:
+                          description: Custom subdomain that is used to redirect email
+                            recipients to the Amazon SES event tracking domain.
+                          type: string
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionPasswordEncryptionInitParameters struct {
+
+	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
+	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
+}
+
 type ConnectionPasswordEncryptionObservation struct {
 
 	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
@@ -39,8 +45,17 @@ type ConnectionPasswordEncryptionParameters struct {
 	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
-	// +kubebuilder:validation:Required
-	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted" tf:"return_connection_password_encrypted,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
+}
+
+type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters struct {
+
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
+	ConnectionPasswordEncryption []ConnectionPasswordEncryptionInitParameters `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
+
+	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
+	EncryptionAtRest []EncryptionAtRestInitParameters `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation struct {
@@ -55,12 +70,21 @@ type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsObservation struc
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct {
 
 	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
-	// +kubebuilder:validation:Required
-	ConnectionPasswordEncryption []ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption" tf:"connection_password_encryption,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionPasswordEncryption []ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
 
 	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
-	// +kubebuilder:validation:Required
-	EncryptionAtRest []EncryptionAtRestParameters `json:"encryptionAtRest" tf:"encryption_at_rest,omitempty"`
+	// +kubebuilder:validation:Optional
+	EncryptionAtRest []EncryptionAtRestParameters `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
+}
+
+type DataCatalogEncryptionSettingsInitParameters struct {
+
+	// –  The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  The security configuration to set. see Data Catalog Encryption Settings.
+	DataCatalogEncryptionSettings []DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters `json:"dataCatalogEncryptionSettings,omitempty" tf:"data_catalog_encryption_settings,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsObservation struct {
@@ -91,6 +115,12 @@ type DataCatalogEncryptionSettingsParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type EncryptionAtRestInitParameters struct {
+
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
+	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+}
+
 type EncryptionAtRestObservation struct {
 
 	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
@@ -103,8 +133,8 @@ type EncryptionAtRestObservation struct {
 type EncryptionAtRestParameters struct {
 
 	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
-	// +kubebuilder:validation:Required
-	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -125,6 +155,18 @@ type EncryptionAtRestParameters struct {
 type DataCatalogEncryptionSettingsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataCatalogEncryptionSettingsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataCatalogEncryptionSettingsInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataCatalogEncryptionSettingsStatus defines the observed state of DataCatalogEncryptionSettings.
@@ -145,7 +187,7 @@ type DataCatalogEncryptionSettingsStatus struct {
 type DataCatalogEncryptionSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataCatalogEncryptionSettings)",message="dataCatalogEncryptionSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataCatalogEncryptionSettings) || has(self.initProvider.dataCatalogEncryptionSettings)",message="dataCatalogEncryptionSettings is a required parameter"
 	Spec   DataCatalogEncryptionSettingsSpec   `json:"spec"`
 	Status DataCatalogEncryptionSettingsStatus `json:"status,omitempty"`
 }

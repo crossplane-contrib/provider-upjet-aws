@@ -121,6 +121,67 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  attributes:
+                    additionalProperties:
+                      type: string
+                    description: Matches attributes derived from the request.
+                    type: object
+                  fixedRate:
+                    description: The percentage of matching requests to instrument,
+                      after the reservoir is exhausted.
+                    type: number
+                  host:
+                    description: Matches the hostname from a request URL.
+                    type: string
+                  httpMethod:
+                    description: Matches the HTTP method of a request.
+                    type: string
+                  priority:
+                    description: The priority of the sampling rule.
+                    type: number
+                  reservoirSize:
+                    description: A fixed number of matching requests to instrument
+                      per second, prior to applying the fixed rate. The reservoir
+                      is not used directly by services, but applies to all services
+                      using the rule collectively.
+                    type: number
+                  resourceArn:
+                    description: Matches the ARN of the AWS resource on which the
+                      service runs.
+                    type: string
+                  serviceName:
+                    description: Matches the name that the service uses to identify
+                      itself in segments.
+                    type: string
+                  serviceType:
+                    description: Matches the origin that the service uses to identify
+                      its type in segments.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  urlPath:
+                    description: Matches the path from a request URL.
+                    type: string
+                  version:
+                    description: The version of the sampling rule format (1 )
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -321,34 +382,44 @@ spec:
             x-kubernetes-validations:
             - message: fixedRate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.fixedRate)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.fixedRate)
+                || has(self.initProvider.fixedRate)'
             - message: host is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.host)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.host)
+                || has(self.initProvider.host)'
             - message: httpMethod is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)
+                || has(self.initProvider.httpMethod)'
             - message: priority is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)
+                || has(self.initProvider.priority)'
             - message: reservoirSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.reservoirSize)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.reservoirSize)
+                || has(self.initProvider.reservoirSize)'
             - message: resourceArn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceArn)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceArn)
+                || has(self.initProvider.resourceArn)'
             - message: serviceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceName)
+                || has(self.initProvider.serviceName)'
             - message: serviceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceType)
+                || has(self.initProvider.serviceType)'
             - message: urlPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.urlPath)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.urlPath)
+                || has(self.initProvider.urlPath)'
             - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
+                || has(self.initProvider.version)'
           status:
             description: SamplingRuleStatus defines the observed state of SamplingRule.
             properties:

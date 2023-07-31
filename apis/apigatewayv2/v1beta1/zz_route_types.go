@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RequestParameterInitParameters struct {
+
+	// Request parameter key. This is a request data mapping parameter.
+	RequestParameterKey *string `json:"requestParameterKey,omitempty" tf:"request_parameter_key,omitempty"`
+
+	// Boolean whether or not the parameter is required.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+}
+
 type RequestParameterObservation struct {
 
 	// Request parameter key. This is a request data mapping parameter.
@@ -25,12 +34,45 @@ type RequestParameterObservation struct {
 type RequestParameterParameters struct {
 
 	// Request parameter key. This is a request data mapping parameter.
-	// +kubebuilder:validation:Required
-	RequestParameterKey *string `json:"requestParameterKey" tf:"request_parameter_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RequestParameterKey *string `json:"requestParameterKey,omitempty" tf:"request_parameter_key,omitempty"`
 
 	// Boolean whether or not the parameter is required.
-	// +kubebuilder:validation:Required
-	Required *bool `json:"required" tf:"required,omitempty"`
+	// +kubebuilder:validation:Optional
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+}
+
+type RouteInitParameters struct {
+
+	// Boolean whether an API key is required for the route. Defaults to false. Supported only for WebSocket APIs.
+	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
+
+	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
+
+	// Authorization type for the route.
+	// For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+	// For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+	// Defaults to NONE.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// The model selection expression for the route. Supported only for WebSocket APIs.
+	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
+
+	// Operation name for the route. Must be between 1 and 64 characters in length.
+	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+
+	// Request models for the route. Supported only for WebSocket APIs.
+	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
+
+	// Request parameters for the route. Supported only for WebSocket APIs.
+	RequestParameter []RequestParameterInitParameters `json:"requestParameter,omitempty" tf:"request_parameter,omitempty"`
+
+	// Route key for the route. For HTTP APIs, the route key can be either $default, or a combination of an HTTP method and resource path, for example, GET /pets.
+	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
+
+	// The route response selection expression for the route. Supported only for WebSocket APIs.
+	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 }
 
 type RouteObservation struct {
@@ -169,6 +211,18 @@ type RouteParameters struct {
 type RouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteStatus defines the observed state of Route.
@@ -189,7 +243,7 @@ type RouteStatus struct {
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routeKey)",message="routeKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routeKey) || has(self.initProvider.routeKey)",message="routeKey is a required parameter"
 	Spec   RouteSpec   `json:"spec"`
 	Status RouteStatus `json:"status,omitempty"`
 }

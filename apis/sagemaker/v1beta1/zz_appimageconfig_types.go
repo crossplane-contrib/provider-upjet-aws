@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppImageConfigInitParameters struct {
+
+	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	KernelGatewayImageConfig []KernelGatewayImageConfigInitParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppImageConfigObservation struct {
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this App Image Config.
@@ -47,6 +56,18 @@ type AppImageConfigParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type FileSystemConfigInitParameters struct {
+
+	// The default POSIX group ID (GID). If not specified, defaults to 100. Valid values are 0 and 100.
+	DefaultGID *float64 `json:"defaultGid,omitempty" tf:"default_gid,omitempty"`
+
+	// The default POSIX user ID (UID). If not specified, defaults to 1000. Valid values are 0 and 1000.
+	DefaultUID *float64 `json:"defaultUid,omitempty" tf:"default_uid,omitempty"`
+
+	// The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
 type FileSystemConfigObservation struct {
 
 	// The default POSIX group ID (GID). If not specified, defaults to 100. Valid values are 0 and 100.
@@ -74,6 +95,15 @@ type FileSystemConfigParameters struct {
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 }
 
+type KernelGatewayImageConfigInitParameters struct {
+
+	// The URL where the Git repository is located. See File System Config details below.
+	FileSystemConfig []FileSystemConfigInitParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
+
+	// The default branch for the Git repository. See Kernel Spec details below.
+	KernelSpec []KernelSpecInitParameters `json:"kernelSpec,omitempty" tf:"kernel_spec,omitempty"`
+}
+
 type KernelGatewayImageConfigObservation struct {
 
 	// The URL where the Git repository is located. See File System Config details below.
@@ -90,8 +120,17 @@ type KernelGatewayImageConfigParameters struct {
 	FileSystemConfig []FileSystemConfigParameters `json:"fileSystemConfig,omitempty" tf:"file_system_config,omitempty"`
 
 	// The default branch for the Git repository. See Kernel Spec details below.
-	// +kubebuilder:validation:Required
-	KernelSpec []KernelSpecParameters `json:"kernelSpec" tf:"kernel_spec,omitempty"`
+	// +kubebuilder:validation:Optional
+	KernelSpec []KernelSpecParameters `json:"kernelSpec,omitempty" tf:"kernel_spec,omitempty"`
+}
+
+type KernelSpecInitParameters struct {
+
+	// The display name of the kernel.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The name of the kernel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type KernelSpecObservation struct {
@@ -110,14 +149,26 @@ type KernelSpecParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The name of the kernel.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // AppImageConfigSpec defines the desired state of AppImageConfig
 type AppImageConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppImageConfigParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppImageConfigInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppImageConfigStatus defines the observed state of AppImageConfig.

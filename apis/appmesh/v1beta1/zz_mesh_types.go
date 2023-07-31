@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EgressFilterInitParameters struct {
+
+	// Egress filter type. By default, the type is DROP_ALL.
+	// Valid values are ALLOW_ALL and DROP_ALL.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type EgressFilterObservation struct {
 
 	// Egress filter type. By default, the type is DROP_ALL.
@@ -26,6 +33,15 @@ type EgressFilterParameters struct {
 	// Valid values are ALLOW_ALL and DROP_ALL.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MeshInitParameters struct {
+
+	// Service mesh specification to apply.
+	Spec []MeshSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MeshObservation struct {
@@ -74,6 +90,12 @@ type MeshParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type MeshSpecInitParameters struct {
+
+	// Egress filter rules for the service mesh.
+	EgressFilter []EgressFilterInitParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
+}
+
 type MeshSpecObservation struct {
 
 	// Egress filter rules for the service mesh.
@@ -91,6 +113,18 @@ type MeshSpecParameters struct {
 type MeshSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MeshParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MeshInitParameters `json:"initProvider,omitempty"`
 }
 
 // MeshStatus defines the observed state of Mesh.

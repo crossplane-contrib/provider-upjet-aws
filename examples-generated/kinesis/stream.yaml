@@ -18,6 +18,3 @@ spec:
     - streamMode: PROVISIONED
     tags:
       Environment: test
-
----
-

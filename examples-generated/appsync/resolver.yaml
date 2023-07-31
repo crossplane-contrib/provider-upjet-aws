@@ -76,6 +76,3 @@ spec:
     schema: "type Mutation {\n\tputPost(id: ID!, title: String!): Post\n}\n\ntype
       Post {\n\tid: ID!\n\ttitle: String!\n}\n\ntype Query {\n\tsinglePost(id: ID!):
       Post\n}\n\nschema {\n\tquery: Query\n\tmutation: Mutation\n}\n"
-
----
-

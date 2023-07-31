@@ -14,6 +14,3 @@ spec:
       - name: example
         sourceFileLocation: ${original.file}
       type: DELETE
-
----
-

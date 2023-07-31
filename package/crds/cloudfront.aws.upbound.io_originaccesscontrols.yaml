@@ -93,6 +93,39 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The description of the Origin Access Control.
+                    type: string
+                  name:
+                    description: A name that identifies the Origin Access Control.
+                    type: string
+                  originAccessControlOriginType:
+                    description: The type of origin that this Origin Access Control
+                      is for. Valid values are s3, and mediastore.
+                    type: string
+                  signingBehavior:
+                    description: 'Specifies which requests CloudFront signs. Specify
+                      always for the most common use case. Allowed values: always,
+                      never, and no-override.'
+                    type: string
+                  signingProtocol:
+                    description: Determines how CloudFront signs (authenticates) requests.
+                      The only valid value is sigv4.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -293,16 +326,20 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: originAccessControlOriginType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType)
+                || has(self.initProvider.originAccessControlOriginType)'
             - message: signingBehavior is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.signingBehavior)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.signingBehavior)
+                || has(self.initProvider.signingBehavior)'
             - message: signingProtocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.signingProtocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.signingProtocol)
+                || has(self.initProvider.signingProtocol)'
           status:
             description: OriginAccessControlStatus defines the observed state of OriginAccessControl.
             properties:

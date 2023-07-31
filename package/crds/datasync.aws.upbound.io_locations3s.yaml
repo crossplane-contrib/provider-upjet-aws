@@ -256,6 +256,45 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  agentArns:
+                    description: A list of DataSync Agent ARNs with which this location
+                      will be associated.
+                    items:
+                      type: string
+                    type: array
+                  s3Config:
+                    description: Configuration block containing information for connecting
+                      to S3.
+                    items:
+                      type: object
+                    type: array
+                  s3StorageClass:
+                    description: The Amazon S3 storage class that you want to store
+                      your files in when this location is used as a task destination.
+                      Valid values
+                    type: string
+                  subdirectory:
+                    description: Prefix to perform actions as source or destination.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -456,10 +495,12 @@ spec:
             x-kubernetes-validations:
             - message: s3Config is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Config)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Config)
+                || has(self.initProvider.s3Config)'
             - message: subdirectory is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subdirectory)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subdirectory)
+                || has(self.initProvider.subdirectory)'
           status:
             description: LocationS3Status defines the observed state of LocationS3.
             properties:

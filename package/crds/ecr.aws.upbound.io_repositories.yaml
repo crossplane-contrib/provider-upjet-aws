@@ -174,8 +174,6 @@ spec:
                           description: Indicates whether images are scanned after
                             being pushed to the repository (true) or not scanned (false).
                           type: boolean
-                      required:
-                      - scanOnPush
                       type: object
                     type: array
                   imageTagMutability:
@@ -193,6 +191,57 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  encryptionConfiguration:
+                    description: Encryption configuration for the repository. See
+                      below for schema.
+                    items:
+                      properties:
+                        encryptionType:
+                          description: The encryption type to use for the repository.
+                            Valid values are AES256 or KMS. Defaults to AES256.
+                          type: string
+                      type: object
+                    type: array
+                  forceDelete:
+                    description: If true, will delete the repository even if it contains
+                      images. Defaults to false.
+                    type: boolean
+                  imageScanningConfiguration:
+                    description: Configuration block that defines image scanning configuration
+                      for the repository. By default, image scanning must be manually
+                      triggered. See the ECR User Guide for more information about
+                      image scanning.
+                    items:
+                      properties:
+                        scanOnPush:
+                          description: Indicates whether images are scanned after
+                            being pushed to the repository (true) or not scanned (false).
+                          type: boolean
+                      type: object
+                    type: array
+                  imageTagMutability:
+                    description: 'The tag mutability setting for the repository. Must
+                      be one of: MUTABLE or IMMUTABLE. Defaults to MUTABLE.'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:

@@ -13,6 +13,40 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PermissionInitParameters struct {
+
+	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Event Source Token to validate.  Used with Alexa Skills.
+	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
+
+	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
+	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
+
+	// The principal who is getting this permission e.g., s3.amazonaws.com, an AWS account ID, or AWS IAM principal, or AWS service principal such as events.amazonaws.com or sns.amazonaws.com.
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
+	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
+
+	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
+	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`
+
+	// When the principal is an AWS service, the ARN of the specific resource within that service to grant permission to.
+	// Without this, any resource from principal will be granted permission – even if that resource is from another account.
+	// For S3, this should be the ARN of the S3 Bucket.
+	// For EventBridge events, this should be the ARN of the EventBridge Rule.
+	// For API Gateway, this should be the ARN of the API, as described here.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+
+	// A unique statement identifier.
+	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
+
+	// A statement identifier prefix. Conflicts with statement_id.
+	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
+}
+
 type PermissionObservation struct {
 
 	// The AWS Lambda action you want to allow in this statement. (e.g., lambda:InvokeFunction)
@@ -133,6 +167,18 @@ type PermissionParameters struct {
 type PermissionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PermissionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PermissionInitParameters `json:"initProvider,omitempty"`
 }
 
 // PermissionStatus defines the observed state of Permission.
@@ -153,8 +199,8 @@ type PermissionStatus struct {
 type Permission struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal)",message="principal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principal) || has(self.initProvider.principal)",message="principal is a required parameter"
 	Spec   PermissionSpec   `json:"spec"`
 	Status PermissionStatus `json:"status,omitempty"`
 }

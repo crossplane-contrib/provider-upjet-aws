@@ -121,6 +121,3 @@ spec:
     key: example_source.csv
     region: us-west-1
     source: example_source.csv
-
----
-

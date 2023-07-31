@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ByteMatchSetInitParameters struct {
+
+	// Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below.
+	ByteMatchTuples []ByteMatchTuplesInitParameters `json:"byteMatchTuples,omitempty" tf:"byte_match_tuples,omitempty"`
+
+	// The name or description of the ByteMatchSet.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ByteMatchSetObservation struct {
 
 	// Settings for the ByteMatchSet, such as the bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to search for in web requests. ByteMatchTuple documented below.
@@ -41,6 +50,21 @@ type ByteMatchSetParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type ByteMatchTuplesInitParameters struct {
+
+	// Settings for the ByteMatchTuple. FieldToMatch documented below.
+	FieldToMatch []FieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+
+	// Within the portion of a web request that you want to search.
+	PositionalConstraint *string `json:"positionalConstraint,omitempty" tf:"positional_constraint,omitempty"`
+
+	// The value that you want AWS WAF to search for. The maximum length of the value is 50 bytes.
+	TargetString *string `json:"targetString,omitempty" tf:"target_string,omitempty"`
+
+	// The formatting way for web request.
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+}
+
 type ByteMatchTuplesObservation struct {
 
 	// Settings for the ByteMatchTuple. FieldToMatch documented below.
@@ -59,20 +83,29 @@ type ByteMatchTuplesObservation struct {
 type ByteMatchTuplesParameters struct {
 
 	// Settings for the ByteMatchTuple. FieldToMatch documented below.
-	// +kubebuilder:validation:Required
-	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
 	// Within the portion of a web request that you want to search.
-	// +kubebuilder:validation:Required
-	PositionalConstraint *string `json:"positionalConstraint" tf:"positional_constraint,omitempty"`
+	// +kubebuilder:validation:Optional
+	PositionalConstraint *string `json:"positionalConstraint,omitempty" tf:"positional_constraint,omitempty"`
 
 	// The value that you want AWS WAF to search for. The maximum length of the value is 50 bytes.
 	// +kubebuilder:validation:Optional
 	TargetString *string `json:"targetString,omitempty" tf:"target_string,omitempty"`
 
 	// The formatting way for web request.
-	// +kubebuilder:validation:Required
-	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
+	// +kubebuilder:validation:Optional
+	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+}
+
+type FieldToMatchInitParameters struct {
+
+	// When the value of Type is HEADER, enter the name of the header that you want AWS WAF to search, for example, User-Agent or Referer. If the value of Type is any other value, omit Data.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// The part of the web request that you want AWS WAF to search for a specified string.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FieldToMatchObservation struct {
@@ -91,14 +124,26 @@ type FieldToMatchParameters struct {
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// The part of the web request that you want AWS WAF to search for a specified string.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ByteMatchSetSpec defines the desired state of ByteMatchSet
 type ByteMatchSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ByteMatchSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ByteMatchSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ByteMatchSetStatus defines the observed state of ByteMatchSet.
@@ -119,7 +164,7 @@ type ByteMatchSetStatus struct {
 type ByteMatchSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ByteMatchSetSpec   `json:"spec"`
 	Status ByteMatchSetStatus `json:"status,omitempty"`
 }

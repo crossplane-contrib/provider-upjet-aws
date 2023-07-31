@@ -250,6 +250,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  targetRole:
+                    description: Indicates whether the DB proxy endpoint can be used
+                      for read/write or read-only operations. The default is READ_WRITE.
+                      Valid values are READ_WRITE and READ_ONLY.
+                    type: string
+                  vpcSubnetIds:
+                    description: One or more VPC subnet IDs to associate with the
+                      new proxy.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -450,7 +480,8 @@ spec:
             x-kubernetes-validations:
             - message: vpcSubnetIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds)
+                || has(self.initProvider.vpcSubnetIds)'
           status:
             description: ProxyEndpointStatus defines the observed state of ProxyEndpoint.
             properties:

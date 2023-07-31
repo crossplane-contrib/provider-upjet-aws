@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OpenIDConnectProviderInitParameters struct {
+
+	// A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.)
+	ClientIDList []*string `json:"clientIdList,omitempty" tf:"client_id_list,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s).
+	ThumbprintList []*string `json:"thumbprintList,omitempty" tf:"thumbprint_list,omitempty"`
+
+	// The URL of the identity provider. Corresponds to the iss claim.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
 type OpenIDConnectProviderObservation struct {
 
 	// The ARN assigned by AWS for this provider.
@@ -59,6 +74,18 @@ type OpenIDConnectProviderParameters struct {
 type OpenIDConnectProviderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OpenIDConnectProviderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OpenIDConnectProviderInitParameters `json:"initProvider,omitempty"`
 }
 
 // OpenIDConnectProviderStatus defines the observed state of OpenIDConnectProvider.
@@ -79,9 +106,9 @@ type OpenIDConnectProviderStatus struct {
 type OpenIDConnectProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientIdList)",message="clientIdList is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thumbprintList)",message="thumbprintList is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientIdList) || has(self.initProvider.clientIdList)",message="clientIdList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thumbprintList) || has(self.initProvider.thumbprintList)",message="thumbprintList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
 	Spec   OpenIDConnectProviderSpec   `json:"spec"`
 	Status OpenIDConnectProviderStatus `json:"status,omitempty"`
 }

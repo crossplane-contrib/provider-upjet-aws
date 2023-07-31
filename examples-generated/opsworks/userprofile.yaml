@@ -12,6 +12,3 @@ spec:
     userArnSelector:
       matchLabels:
         testing.upbound.io/example-name: user
-
----
-

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeploymentInitParameters struct {
+
+	// Description of the deployment
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Description to set on the stage managed by the stage_name argument.
+	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
+
+	// Name of the stage to create with this deployment. If the specified stage already exists, it will be updated to point to the new deployment. We recommend using the aws_api_gateway_stage resource instead to manage stages.
+	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
+
+	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
+	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
+	// Map to set on the stage managed by the stage_name argument.
+	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
+}
+
 type DeploymentObservation struct {
 
 	// Creation date of the deployment
@@ -95,6 +113,18 @@ type DeploymentParameters struct {
 type DeploymentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeploymentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DeploymentInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeploymentStatus defines the observed state of Deployment.

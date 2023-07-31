@@ -69,6 +69,16 @@ func (tr *SigningJob) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SigningJob
+func (tr *SigningJob) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SigningJob using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SigningJob) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *SigningProfile) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SigningProfile
+func (tr *SigningProfile) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SigningProfile using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SigningProfile) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *SigningProfilePermission) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SigningProfilePermission
+func (tr *SigningProfilePermission) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SigningProfilePermission using its observed tfState.

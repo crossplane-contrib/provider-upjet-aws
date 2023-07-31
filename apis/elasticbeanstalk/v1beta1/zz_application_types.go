@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationInitParameters struct {
+	AppversionLifecycle []AppversionLifecycleInitParameters `json:"appversionLifecycle,omitempty" tf:"appversion_lifecycle,omitempty"`
+
+	// Short description of the application
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ApplicationObservation struct {
 	AppversionLifecycle []AppversionLifecycleObservation `json:"appversionLifecycle,omitempty" tf:"appversion_lifecycle,omitempty"`
 
@@ -48,6 +58,18 @@ type ApplicationParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AppversionLifecycleInitParameters struct {
+
+	// Set to true to delete a version's source bundle from S3 when the application version is deleted.
+	DeleteSourceFromS3 *bool `json:"deleteSourceFromS3,omitempty" tf:"delete_source_from_s3,omitempty"`
+
+	// The number of days to retain an application version ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
+	MaxAgeInDays *float64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
+
+	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
+	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 }
 
 type AppversionLifecycleObservation struct {
@@ -98,6 +120,18 @@ type AppversionLifecycleParameters struct {
 type ApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationStatus defines the observed state of Application.

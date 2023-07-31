@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationPolicyInitParameters struct {
+
+	// The policy document. This is a JSON formatted string.
+	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual AWS accounts.
+	ForceUpdate *bool `json:"forceUpdate,omitempty" tf:"force_update,omitempty"`
+}
+
 type DestinationPolicyObservation struct {
 
 	// The policy document. This is a JSON formatted string.
@@ -44,6 +53,18 @@ type DestinationPolicyParameters struct {
 type DestinationPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DestinationPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DestinationPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // DestinationPolicyStatus defines the observed state of DestinationPolicy.
@@ -64,7 +85,7 @@ type DestinationPolicyStatus struct {
 type DestinationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy)",message="accessPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy) || has(self.initProvider.accessPolicy)",message="accessPolicy is a required parameter"
 	Spec   DestinationPolicySpec   `json:"spec"`
 	Status DestinationPolicyStatus `json:"status,omitempty"`
 }

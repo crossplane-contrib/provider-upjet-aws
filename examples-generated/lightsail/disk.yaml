@@ -11,6 +11,3 @@ spec:
     availabilityZone: ${data.aws_availability_zones.available.names[0]}
     region: us-west-1
     sizeInGb: 8
-
----
-

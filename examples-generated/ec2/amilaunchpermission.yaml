@@ -13,6 +13,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
-
----
-

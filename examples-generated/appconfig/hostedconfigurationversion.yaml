@@ -21,6 +21,3 @@ spec:
     contentType: application/json
     description: Example Freeform Hosted Configuration Version
     region: us-west-1
-
----
-

@@ -76,6 +76,3 @@ spec:
     engine: aurora-postgresql
     instanceClass: db.r6g.large
     region: us-west-1
-
----
-

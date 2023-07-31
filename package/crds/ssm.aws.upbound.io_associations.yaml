@@ -199,8 +199,6 @@ spec:
                         s3Region:
                           description: The S3 bucket region.
                           type: string
-                      required:
-                      - s3BucketName
                       type: object
                     type: array
                   parameters:
@@ -233,9 +231,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - key
-                      - values
                       type: object
                     type: array
                   waitForSuccessTimeoutSeconds:
@@ -245,6 +240,111 @@ spec:
                     type: number
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  applyOnlyAtCronInterval:
+                    description: 'By default, when you create a new or update associations,
+                      the system runs it immediately and then according to the schedule
+                      you specified. Enable this option if you do not want an association
+                      to run immediately after you create or update it. This parameter
+                      is not supported for rate expressions. Default: false.'
+                    type: boolean
+                  associationName:
+                    description: The descriptive name for the association.
+                    type: string
+                  automationTargetParameterName:
+                    description: Specify the target for the association. This target
+                      is required for associations that use an Automation document
+                      and target resources by using rate controls. This should be
+                      set to the SSM document parameter that will define how your
+                      automation will branch out.
+                    type: string
+                  complianceSeverity:
+                    description: 'The compliance severity for the association. Can
+                      be one of the following: UNSPECIFIED, LOW, MEDIUM, HIGH or CRITICAL'
+                    type: string
+                  documentVersion:
+                    description: The document version you want to associate with the
+                      target(s). Can be a specific version or the default version.
+                    type: string
+                  instanceId:
+                    description: The instance ID to apply an SSM document to. Use
+                      targets with key InstanceIds for document schema versions 2.0
+                      and above.
+                    type: string
+                  maxConcurrency:
+                    description: The maximum number of targets allowed to run the
+                      association at the same time. You can specify a number, for
+                      example 10, or a percentage of the target set, for example 10%.
+                    type: string
+                  maxErrors:
+                    description: The number of errors that are allowed before the
+                      system stops sending requests to run the association on additional
+                      targets. You can specify a number, for example 10, or a percentage
+                      of the target set, for example 10%.
+                    type: string
+                  outputLocation:
+                    description: An output location block. Output Location is documented
+                      below.
+                    items:
+                      properties:
+                        s3BucketName:
+                          description: The S3 bucket name.
+                          type: string
+                        s3KeyPrefix:
+                          description: The S3 bucket prefix. Results stored in the
+                            root if not configured.
+                          type: string
+                        s3Region:
+                          description: The S3 bucket region.
+                          type: string
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A block of arbitrary string parameters to pass to
+                      the SSM document.
+                    type: object
+                  scheduleExpression:
+                    description: A cron or rate expression that specifies when the
+                      association runs.
+                    type: string
+                  targets:
+                    description: A block containing the targets of the SSM association.
+                      Targets are documented below. AWS currently supports a maximum
+                      of 5 targets.
+                    items:
+                      properties:
+                        key:
+                          description: Either InstanceIds or tag:Tag Name to specify
+                            an EC2 tag.
+                          type: string
+                        values:
+                          description: A list of instance IDs or tag values. AWS currently
+                            limits this list size to one value.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  waitForSuccessTimeoutSeconds:
+                    description: The number of seconds to wait for the association
+                      status to be Success. If Success status is not reached within
+                      the given time, create opration will fail.
+                    type: number
                 type: object
               managementPolicies:
                 default:

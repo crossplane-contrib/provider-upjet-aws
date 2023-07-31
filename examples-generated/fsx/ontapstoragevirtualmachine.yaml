@@ -13,6 +13,3 @@ spec:
         testing.upbound.io/example-name: test
     name: test
     region: us-west-1
-
----
-

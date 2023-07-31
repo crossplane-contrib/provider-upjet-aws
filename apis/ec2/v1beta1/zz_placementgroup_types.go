@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PlacementGroupInitParameters struct {
+
+	// The number of partitions to create in the
+	// placement group.  Can only be specified when the strategy is set to
+	// partition.  Valid values are 1 - 7 (default is 2).
+	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+
+	// Determines how placement groups spread instances. Can only be used
+	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
+	SpreadLevel *string `json:"spreadLevel,omitempty" tf:"spread_level,omitempty"`
+
+	// The placement strategy. Can be cluster, partition or spread.
+	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PlacementGroupObservation struct {
 
 	// Amazon Resource Name (ARN) of the placement group.
@@ -74,6 +92,18 @@ type PlacementGroupParameters struct {
 type PlacementGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PlacementGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PlacementGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // PlacementGroupStatus defines the observed state of PlacementGroup.
@@ -94,7 +124,7 @@ type PlacementGroupStatus struct {
 type PlacementGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.strategy)",message="strategy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.strategy) || has(self.initProvider.strategy)",message="strategy is a required parameter"
 	Spec   PlacementGroupSpec   `json:"spec"`
 	Status PlacementGroupStatus `json:"status,omitempty"`
 }

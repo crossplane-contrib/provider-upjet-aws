@@ -108,6 +108,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: bucket
     region: us-west-1
-
----
-

@@ -98,6 +98,44 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  dataSource:
+                    description: Specifies the geospatial data provider for the new
+                      place index.
+                    type: string
+                  dataSourceConfiguration:
+                    description: Configuration block with the data storage option
+                      chosen for requesting Places. Detailed below.
+                    items:
+                      properties:
+                        intendedUse:
+                          description: 'Specifies how the results of an operation
+                            will be stored by the caller. Valid values: SingleUse,
+                            Storage. Default: SingleUse.'
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: The optional description for the place index resource.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -298,7 +336,8 @@ spec:
             x-kubernetes-validations:
             - message: dataSource is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataSource)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataSource)
+                || has(self.initProvider.dataSource)'
           status:
             description: PlaceIndexStatus defines the observed state of PlaceIndex.
             properties:

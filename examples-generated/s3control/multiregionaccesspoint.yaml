@@ -50,6 +50,3 @@ spec:
   forProvider:
     provider: ${aws.primary_region}
     region: us-west-1
-
----
-

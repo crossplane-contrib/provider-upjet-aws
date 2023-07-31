@@ -85,6 +85,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: iam_for_lambda
     runtime: nodejs16.x
-
----
-

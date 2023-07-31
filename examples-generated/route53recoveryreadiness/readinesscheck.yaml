@@ -10,6 +10,3 @@ spec:
   forProvider:
     region: us-west-1
     resourceSetName: ${my-cw-alarm-set}
-
----
-

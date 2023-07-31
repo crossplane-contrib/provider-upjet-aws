@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppMonitorConfigurationInitParameters struct {
+
+	// If you set this to true, RUM web client sets two cookies, a session cookie  and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
+	AllowCookies *bool `json:"allowCookies,omitempty" tf:"allow_cookies,omitempty"`
+
+	// If you set this to true, RUM enables X-Ray tracing for the user sessions  that RUM samples. RUM adds an X-Ray trace header to allowed HTTP requests. It also records an X-Ray segment for allowed HTTP requests.
+	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
+
+	// A list of URLs in your website or application to exclude from RUM data collection.
+	ExcludedPages []*string `json:"excludedPages,omitempty" tf:"excluded_pages,omitempty"`
+
+	// A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
+	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
+
+	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
+	GuestRoleArn *string `json:"guestRoleArn,omitempty" tf:"guest_role_arn,omitempty"`
+
+	// The ID of the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// If this app monitor is to collect data from only certain pages in your application, this structure lists those pages.
+	IncludedPages []*string `json:"includedPages,omitempty" tf:"included_pages,omitempty"`
+
+	// Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. Default value is 0.1.
+	SessionSampleRate *float64 `json:"sessionSampleRate,omitempty" tf:"session_sample_rate,omitempty"`
+
+	// An array that lists the types of telemetry data that this app monitor is to collect. Valid values are errors, performance, and http.
+	Telemetries []*string `json:"telemetries,omitempty" tf:"telemetries,omitempty"`
+}
+
 type AppMonitorConfigurationObservation struct {
 
 	// If you set this to true, RUM web client sets two cookies, a session cookie  and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
@@ -82,6 +112,24 @@ type AppMonitorConfigurationParameters struct {
 	Telemetries []*string `json:"telemetries,omitempty" tf:"telemetries,omitempty"`
 }
 
+type AppMonitorInitParameters struct {
+
+	// configuration data for the app monitor. See app_monitor_configuration below.
+	AppMonitorConfiguration []AppMonitorConfigurationInitParameters `json:"appMonitorConfiguration,omitempty" tf:"app_monitor_configuration,omitempty"`
+
+	// Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are DISABLED. See custom_events below.
+	CustomEvents []CustomEventsInitParameters `json:"customEvents,omitempty" tf:"custom_events,omitempty"`
+
+	// Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter  specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges. Default value is false.
+	CwLogEnabled *bool `json:"cwLogEnabled,omitempty" tf:"cw_log_enabled,omitempty"`
+
+	// The top-level internet domain name for which your application has administrative authority.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppMonitorObservation struct {
 
 	// configuration data for the app monitor. See app_monitor_configuration below.
@@ -143,6 +191,12 @@ type AppMonitorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type CustomEventsInitParameters struct {
+
+	// Specifies whether this app monitor allows the web client to define and send custom events. The default is for custom events to be DISABLED. Valid values are DISABLED and ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type CustomEventsObservation struct {
 
 	// Specifies whether this app monitor allows the web client to define and send custom events. The default is for custom events to be DISABLED. Valid values are DISABLED and ENABLED.
@@ -160,6 +214,18 @@ type CustomEventsParameters struct {
 type AppMonitorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppMonitorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppMonitorInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppMonitorStatus defines the observed state of AppMonitor.
@@ -180,7 +246,7 @@ type AppMonitorStatus struct {
 type AppMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain)",message="domain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain) || has(self.initProvider.domain)",message="domain is a required parameter"
 	Spec   AppMonitorSpec   `json:"spec"`
 	Status AppMonitorStatus `json:"status,omitempty"`
 }

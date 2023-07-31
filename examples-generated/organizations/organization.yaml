@@ -13,6 +13,3 @@ spec:
     - config.amazonaws.com
     featureSet: ALL
     region: us-west-1
-
----
-

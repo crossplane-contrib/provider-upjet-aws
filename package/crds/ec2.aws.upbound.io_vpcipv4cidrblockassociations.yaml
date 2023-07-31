@@ -167,6 +167,36 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  cidrBlock:
+                    description: The IPv4 CIDR block for the VPC. CIDR can be explicitly
+                      set or it can be derived from IPAM using ipv4_netmask_length.
+                    type: string
+                  ipv4IpamPoolId:
+                    description: The ID of an IPv4 IPAM pool you want to use for allocating
+                      this VPC's CIDR. IPAM is a VPC feature that you can use to automate
+                      your IP address management workflows including assigning, tracking,
+                      troubleshooting, and auditing IP addresses across AWS Regions
+                      and accounts. Using IPAM you can monitor IP address usage throughout
+                      your AWS Organization.
+                    type: string
+                  ipv4NetmaskLength:
+                    description: The netmask length of the IPv4 CIDR you want to allocate
+                      to this VPC. Requires specifying a ipv4_ipam_pool_id.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'

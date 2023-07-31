@@ -318,6 +318,106 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Description for the network interface.
+                    type: string
+                  interfaceType:
+                    description: Type of network interface to create. Set to efa for
+                      Elastic Fabric Adapter. Changing interface_type will cause the
+                      resource to be destroyed and re-created.
+                    type: string
+                  ipv4PrefixCount:
+                    description: Number of IPv4 prefixes that AWS automatically assigns
+                      to the network interface.
+                    type: number
+                  ipv4Prefixes:
+                    description: One or more IPv4 prefixes assigned to the network
+                      interface.
+                    items:
+                      type: string
+                    type: array
+                  ipv6AddressCount:
+                    description: Number of IPv6 addresses to assign to a network interface.
+                      You can't use this option if specifying specific ipv6_addresses.
+                      If your subnet has the AssignIpv6AddressOnCreation attribute
+                      set to true, you can specify 0 to override this setting.
+                    type: number
+                  ipv6AddressList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order.
+                    items:
+                      type: string
+                    type: array
+                  ipv6AddressListEnabled:
+                    description: Whether ipv6_address_list is allowed and controls
+                      the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count
+                      become read-only. Default false.
+                    type: boolean
+                  ipv6Addresses:
+                    description: One or more specific IPv6 addresses from the IPv6
+                      CIDR block range of your subnet. Addresses are assigned without
+                      regard to order. You can't use this option if you're specifying
+                      ipv6_address_count.
+                    items:
+                      type: string
+                    type: array
+                  ipv6PrefixCount:
+                    description: Number of IPv6 prefixes that AWS automatically assigns
+                      to the network interface.
+                    type: number
+                  ipv6Prefixes:
+                    description: One or more IPv6 prefixes assigned to the network
+                      interface.
+                    items:
+                      type: string
+                    type: array
+                  privateIp:
+                    type: string
+                  privateIpList:
+                    description: List of private IPs to assign to the ENI in sequential
+                      order. Requires setting private_ip_list_enabled to true.
+                    items:
+                      type: string
+                    type: array
+                  privateIpListEnabled:
+                    description: Whether private_ip_list is allowed and controls the
+                      IPs to assign to the ENI and private_ips and private_ips_count
+                      become read-only. Default false.
+                    type: boolean
+                  privateIps:
+                    description: List of private IPs to assign to the ENI without
+                      regard to order.
+                    items:
+                      type: string
+                    type: array
+                  privateIpsCount:
+                    description: Number of secondary private IPs to assign to the
+                      ENI. The total number of private IPs will be 1 + private_ips_count,
+                      as a primary private IP will be assiged to an ENI by default.
+                    type: number
+                  sourceDestCheck:
+                    description: Whether to enable source destination checking for
+                      the ENI. Default true.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

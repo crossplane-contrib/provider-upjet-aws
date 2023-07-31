@@ -13,6 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ComponentInitParameters struct {
+
+	// Change description of the component.
+	ChangeDescription *string `json:"changeDescription,omitempty" tf:"change_description,omitempty"`
+
+	// Inline YAML string with data of the component. Exactly one of data and uri can be specified.
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// Description of the component.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Name of the component.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Platform of the component.
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Whether to retain the old version when the resource is destroyed or replacement is necessary. Defaults to false.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
+	// Set of Operating Systems (OS) supported by the component.
+	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// S3 URI with data of the component. Exactly one of data and uri can be specified.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Version of the component.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type ComponentObservation struct {
 
 	// Amazon Resource Name (ARN) of the component.
@@ -134,6 +167,18 @@ type ComponentParameters struct {
 type ComponentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ComponentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ComponentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ComponentStatus defines the observed state of Component.
@@ -154,9 +199,9 @@ type ComponentStatus struct {
 type Component struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platform)",message="platform is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version)",message="version is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platform) || has(self.initProvider.platform)",message="platform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.version) || has(self.initProvider.version)",message="version is a required parameter"
 	Spec   ComponentSpec   `json:"spec"`
 	Status ComponentStatus `json:"status,omitempty"`
 }

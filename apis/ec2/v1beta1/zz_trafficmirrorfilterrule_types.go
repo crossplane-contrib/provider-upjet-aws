@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DestinationPortRangeInitParameters struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
 type DestinationPortRangeObservation struct {
 
 	// Starting port of the range
@@ -30,6 +39,15 @@ type DestinationPortRangeParameters struct {
 
 	// Ending port of the range
 	// +kubebuilder:validation:Optional
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type SourcePortRangeInitParameters struct {
+
+	// Starting port of the range
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+
+	// Ending port of the range
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
@@ -51,6 +69,36 @@ type SourcePortRangeParameters struct {
 	// Ending port of the range
 	// +kubebuilder:validation:Optional
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+}
+
+type TrafficMirrorFilterRuleInitParameters struct {
+
+	// Description of the traffic mirror filter rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Destination CIDR block to assign to the Traffic Mirror rule.
+	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
+	// Destination port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
+	DestinationPortRange []DestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
+	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
+	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
+
+	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
+	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+
+	// Source CIDR block to assign to the Traffic Mirror rule.
+	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
+
+	// Source port range. Supported only when the protocol is set to TCP(6) or UDP(17). See Traffic mirror port range documented below
+	SourcePortRange []SourcePortRangeInitParameters `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+
+	// Direction of traffic to be captured. Valid values are ingress and egress
+	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
 }
 
 type TrafficMirrorFilterRuleObservation struct {
@@ -154,6 +202,18 @@ type TrafficMirrorFilterRuleParameters struct {
 type TrafficMirrorFilterRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrafficMirrorFilterRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TrafficMirrorFilterRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrafficMirrorFilterRuleStatus defines the observed state of TrafficMirrorFilterRule.
@@ -174,11 +234,11 @@ type TrafficMirrorFilterRuleStatus struct {
 type TrafficMirrorFilterRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleAction)",message="ruleAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleNumber)",message="ruleNumber is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceCidrBlock)",message="sourceCidrBlock is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficDirection)",message="trafficDirection is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock) || has(self.initProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleAction) || has(self.initProvider.ruleAction)",message="ruleAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleNumber) || has(self.initProvider.ruleNumber)",message="ruleNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceCidrBlock) || has(self.initProvider.sourceCidrBlock)",message="sourceCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficDirection) || has(self.initProvider.trafficDirection)",message="trafficDirection is a required parameter"
 	Spec   TrafficMirrorFilterRuleSpec   `json:"spec"`
 	Status TrafficMirrorFilterRuleStatus `json:"status,omitempty"`
 }

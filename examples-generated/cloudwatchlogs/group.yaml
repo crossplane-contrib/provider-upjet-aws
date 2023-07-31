@@ -12,6 +12,3 @@ spec:
     tags:
       Application: serviceA
       Environment: production
-
----
-

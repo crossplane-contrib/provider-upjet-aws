@@ -15,6 +15,3 @@ spec:
     - name: example
     tags:
       Name: example
-
----
-

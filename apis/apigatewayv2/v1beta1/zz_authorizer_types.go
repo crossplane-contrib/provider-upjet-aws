@@ -13,6 +13,43 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthorizerInitParameters struct {
+
+	// Required credentials as an IAM role for API Gateway to invoke the authorizer.
+	// Supported only for REQUEST authorizers.
+	AuthorizerCredentialsArn *string `json:"authorizerCredentialsArn,omitempty" tf:"authorizer_credentials_arn,omitempty"`
+
+	// Format of the payload sent to an HTTP API Lambda authorizer. Required for HTTP API Lambda authorizers.
+	// Valid values: 1.0, 2.0.
+	AuthorizerPayloadFormatVersion *string `json:"authorizerPayloadFormatVersion,omitempty" tf:"authorizer_payload_format_version,omitempty"`
+
+	// Time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
+	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
+	// Supported only for HTTP API Lambda authorizers.
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+
+	// Authorizer type. Valid values: JWT, REQUEST.
+	// Specify REQUEST for a Lambda function using incoming request parameters.
+	// For HTTP APIs, specify JWT to use JSON Web Tokens.
+	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
+
+	// Whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy.
+	// Supported only for HTTP APIs.
+	EnableSimpleResponses *bool `json:"enableSimpleResponses,omitempty" tf:"enable_simple_responses,omitempty"`
+
+	// Identity sources for which authorization is requested.
+	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
+	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
+	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
+
+	// Configuration of a JWT authorizer. Required for the JWT authorizer type.
+	// Supported only for HTTP APIs.
+	JwtConfiguration []JwtConfigurationInitParameters `json:"jwtConfiguration,omitempty" tf:"jwt_configuration,omitempty"`
+
+	// Name of the authorizer. Must be between 1 and 128 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type AuthorizerObservation struct {
 
 	// API identifier.
@@ -140,6 +177,15 @@ type AuthorizerParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type JwtConfigurationInitParameters struct {
+
+	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
+	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
+
+	// Base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+}
+
 type JwtConfigurationObservation struct {
 
 	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
@@ -164,6 +210,18 @@ type JwtConfigurationParameters struct {
 type AuthorizerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AuthorizerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AuthorizerInitParameters `json:"initProvider,omitempty"`
 }
 
 // AuthorizerStatus defines the observed state of Authorizer.
@@ -184,8 +242,8 @@ type AuthorizerStatus struct {
 type Authorizer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizerType)",message="authorizerType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizerType) || has(self.initProvider.authorizerType)",message="authorizerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AuthorizerSpec   `json:"spec"`
 	Status AuthorizerStatus `json:"status,omitempty"`
 }

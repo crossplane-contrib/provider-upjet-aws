@@ -12,6 +12,3 @@ spec:
     region: us-west-1
     tags:
       Key1: example Segment
-
----
-

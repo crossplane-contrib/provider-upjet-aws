@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReportDeliveryChannelInitParameters struct {
+
+	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
+	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
+
+	// The unique name of the S3 bucket that receives your reports.
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+}
+
 type ReportDeliveryChannelObservation struct {
 
 	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
@@ -32,12 +44,30 @@ type ReportDeliveryChannelParameters struct {
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
 	// The unique name of the S3 bucket that receives your reports.
-	// +kubebuilder:validation:Required
-	S3BucketName *string `json:"s3BucketName" tf:"s3_bucket_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
 	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+}
+
+type ReportPlanInitParameters struct {
+
+	// The description of the report plan with a maximum of 1,024 characters
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters, numbers, and underscores.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An object that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports. Detailed below.
+	ReportDeliveryChannel []ReportDeliveryChannelInitParameters `json:"reportDeliveryChannel,omitempty" tf:"report_delivery_channel,omitempty"`
+
+	// An object that identifies the report template for the report. Reports are built using a report template. Detailed below.
+	ReportSetting []ReportSettingInitParameters `json:"reportSetting,omitempty" tf:"report_setting,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ReportPlanObservation struct {
@@ -101,6 +131,27 @@ type ReportPlanParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ReportSettingInitParameters struct {
+
+	// Specifies the list of accounts a report covers.
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
+	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
+	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
+
+	// Specifies the number of frameworks a report covers.
+	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+
+	// Specifies the list of Organizational Units a report covers.
+	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
+
+	// Specifies the list of regions a report covers.
+	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+
+	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
+	ReportTemplate *string `json:"reportTemplate,omitempty" tf:"report_template,omitempty"`
+}
+
 type ReportSettingObservation struct {
 
 	// Specifies the list of accounts a report covers.
@@ -145,14 +196,26 @@ type ReportSettingParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
-	// +kubebuilder:validation:Required
-	ReportTemplate *string `json:"reportTemplate" tf:"report_template,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReportTemplate *string `json:"reportTemplate,omitempty" tf:"report_template,omitempty"`
 }
 
 // ReportPlanSpec defines the desired state of ReportPlan
 type ReportPlanSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReportPlanParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ReportPlanInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReportPlanStatus defines the observed state of ReportPlan.
@@ -173,9 +236,9 @@ type ReportPlanStatus struct {
 type ReportPlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reportDeliveryChannel)",message="reportDeliveryChannel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reportSetting)",message="reportSetting is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reportDeliveryChannel) || has(self.initProvider.reportDeliveryChannel)",message="reportDeliveryChannel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reportSetting) || has(self.initProvider.reportSetting)",message="reportSetting is a required parameter"
 	Spec   ReportPlanSpec   `json:"spec"`
 	Status ReportPlanStatus `json:"status,omitempty"`
 }

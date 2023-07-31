@@ -32,6 +32,3 @@ spec:
     description: oauth config
     isEnabled: true
     region: us-west-1
-
----
-

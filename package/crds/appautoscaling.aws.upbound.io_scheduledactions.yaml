@@ -358,6 +358,64 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  endTime:
+                    description: Date and time for the scheduled action to end in
+                      RFC 3339 format. The timezone is not affected by the setting
+                      of timezone.
+                    type: string
+                  name:
+                    description: Name of the scheduled action.
+                    type: string
+                  scalableTargetAction:
+                    description: New minimum and maximum capacity. You can set both
+                      values or just one. See below
+                    items:
+                      properties:
+                        maxCapacity:
+                          description: Maximum capacity. At least one of max_capacity
+                            or min_capacity must be set.
+                          type: string
+                        minCapacity:
+                          description: Minimum capacity. At least one of min_capacity
+                            or max_capacity must be set.
+                          type: string
+                      type: object
+                    type: array
+                  schedule:
+                    description: 'Schedule for this action. The following formats
+                      are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate
+                      expressions - rate(valueunit), Cron expressions - cron(fields).
+                      Times for at expressions and cron expressions are evaluated
+                      using the time zone configured in timezone. Documentation can
+                      be found in the Timezone parameter at: AWS Application Auto
+                      Scaling API Reference'
+                    type: string
+                  startTime:
+                    description: Date and time for the scheduled action to start in
+                      RFC 3339 format. The timezone is not affected by the setting
+                      of timezone.
+                    type: string
+                  timezone:
+                    description: Time zone used when setting a scheduled action by
+                      using an at or cron expression. Does not affect timezone for
+                      start_time and end_time. Valid values are the canonical names
+                      of the IANA time zones supported by Joda-Time, such as Etc/GMT+9
+                      or Pacific/Tahiti. Default is UTC.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -558,13 +616,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: scalableTargetAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scalableTargetAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scalableTargetAction)
+                || has(self.initProvider.scalableTargetAction)'
             - message: schedule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)
+                || has(self.initProvider.schedule)'
           status:
             description: ScheduledActionStatus defines the observed state of ScheduledAction.
             properties:

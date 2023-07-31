@@ -33,6 +33,3 @@ spec:
   forProvider:
     name: MyDemoAPI
     region: us-west-1
-
----
-

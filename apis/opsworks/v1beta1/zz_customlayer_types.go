@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudwatchConfigurationInitParameters struct {
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A block the specifies how an opsworks logs look like. See Log Streams.
+	LogStreams []LogStreamsInitParameters `json:"logStreams,omitempty" tf:"log_streams,omitempty"`
+}
+
 type CloudwatchConfigurationObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -28,6 +35,70 @@ type CloudwatchConfigurationParameters struct {
 	// A block the specifies how an opsworks logs look like. See Log Streams.
 	// +kubebuilder:validation:Optional
 	LogStreams []LogStreamsParameters `json:"logStreams,omitempty" tf:"log_streams,omitempty"`
+}
+
+type CustomLayerInitParameters struct {
+
+	// Whether to automatically assign an elastic IP address to the layer's instances.
+	AutoAssignElasticIps *bool `json:"autoAssignElasticIps,omitempty" tf:"auto_assign_elastic_ips,omitempty"`
+
+	// For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances.
+	AutoAssignPublicIps *bool `json:"autoAssignPublicIps,omitempty" tf:"auto_assign_public_ips,omitempty"`
+
+	// Whether to enable auto-healing for the layer.
+	AutoHealing *bool `json:"autoHealing,omitempty" tf:"auto_healing,omitempty"`
+
+	// Will create an EBS volume and connect it to the layer's instances. See Cloudwatch Configuration.
+	CloudwatchConfiguration []CloudwatchConfigurationInitParameters `json:"cloudwatchConfiguration,omitempty" tf:"cloudwatch_configuration,omitempty"`
+
+	CustomConfigureRecipes []*string `json:"customConfigureRecipes,omitempty" tf:"custom_configure_recipes,omitempty"`
+
+	CustomDeployRecipes []*string `json:"customDeployRecipes,omitempty" tf:"custom_deploy_recipes,omitempty"`
+
+	// The ARN of an IAM profile that will be used for the layer's instances.
+	CustomInstanceProfileArn *string `json:"customInstanceProfileArn,omitempty" tf:"custom_instance_profile_arn,omitempty"`
+
+	// Custom JSON attributes to apply to the layer.
+	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
+
+	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
+
+	CustomShutdownRecipes []*string `json:"customShutdownRecipes,omitempty" tf:"custom_shutdown_recipes,omitempty"`
+
+	CustomUndeployRecipes []*string `json:"customUndeployRecipes,omitempty" tf:"custom_undeploy_recipes,omitempty"`
+
+	// Whether to enable Elastic Load Balancing connection draining.
+	DrainELBOnShutdown *bool `json:"drainElbOnShutdown,omitempty" tf:"drain_elb_on_shutdown,omitempty"`
+
+	// Will create an EBS volume and connect it to the layer's instances. See EBS Volume.
+	EBSVolume []EBSVolumeInitParameters `json:"ebsVolume,omitempty" tf:"ebs_volume,omitempty"`
+
+	// Name of an Elastic Load Balancer to attach to this layer
+	ElasticLoadBalancer *string `json:"elasticLoadBalancer,omitempty" tf:"elastic_load_balancer,omitempty"`
+
+	// Whether to install OS and package updates on each instance when it boots.
+	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
+
+	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
+	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+
+	// Load-based auto scaling configuration. See Load Based AutoScaling
+	LoadBasedAutoScaling []LoadBasedAutoScalingInitParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
+
+	// A human-readable name for the layer.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A short, machine-readable name for the layer, which will be used to identify it in the Chef node JSON.
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
+
+	// Names of a set of system packages to install on the layer's instances.
+	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Whether to use EBS-optimized instances.
+	UseEBSOptimizedInstances *bool `json:"useEbsOptimizedInstances,omitempty" tf:"use_ebs_optimized_instances,omitempty"`
 }
 
 type CustomLayerObservation struct {
@@ -224,6 +295,30 @@ type CustomLayerParameters struct {
 	UseEBSOptimizedInstances *bool `json:"useEbsOptimizedInstances,omitempty" tf:"use_ebs_optimized_instances,omitempty"`
 }
 
+type DownscalingInitParameters struct {
+
+	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// The CPU utilization threshold, as a percent of the available CPU. A value of -1 disables the threshold.
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// The number of instances to add or remove when the load exceeds a threshold.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The load threshold. A value of -1 disables the threshold.
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// The memory utilization threshold, as a percent of the available memory. A value of -1 disables the threshold.
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+}
+
 type DownscalingObservation struct {
 
 	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.
@@ -279,6 +374,30 @@ type DownscalingParameters struct {
 	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
+type EBSVolumeInitParameters struct {
+
+	// Encrypt the volume.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// For PIOPS volumes, the IOPS per disk.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The path to mount the EBS volume on the layer's instances.
+	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
+
+	// The number of disks to use for the EBS volume.
+	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+
+	// The RAID level to use for the volume.
+	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
+
+	// The size of the volume in gigabytes.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The type of volume to create. This may be standard (the default), io1 or gp2.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type EBSVolumeObservation struct {
 
 	// Encrypt the volume.
@@ -314,24 +433,36 @@ type EBSVolumeParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
-	// +kubebuilder:validation:Required
-	MountPoint *string `json:"mountPoint" tf:"mount_point,omitempty"`
+	// +kubebuilder:validation:Optional
+	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	// +kubebuilder:validation:Required
-	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
+	// +kubebuilder:validation:Optional
+	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	// +kubebuilder:validation:Required
-	Size *float64 `json:"size" tf:"size,omitempty"`
+	// +kubebuilder:validation:Optional
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LoadBasedAutoScalingInitParameters struct {
+
+	// The downscaling settings, as defined below, used for load-based autoscaling
+	Downscaling []DownscalingInitParameters `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
+
+	// Whether load-based auto scaling is enabled for the layer.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The upscaling settings, as defined below, used for load-based autoscaling
+	Upscaling []UpscalingInitParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
 }
 
 type LoadBasedAutoScalingObservation struct {
@@ -359,6 +490,42 @@ type LoadBasedAutoScalingParameters struct {
 	// The upscaling settings, as defined below, used for load-based autoscaling
 	// +kubebuilder:validation:Optional
 	Upscaling []UpscalingParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
+}
+
+type LogStreamsInitParameters struct {
+
+	// Specifies the max number of log events in a batch, up to 10000. The default value is 1000.
+	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+
+	// Specifies the maximum size of log events in a batch, in bytes, up to 1048576 bytes. The default value is 32768 bytes.
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+
+	// Specifies the time duration for the batching of log events. The minimum value is 5000 and default value is 5000.
+	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+
+	// Specifies how the timestamp is extracted from logs. For more information, see the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
+
+	// Specifies the encoding of the log file so that the file can be read correctly. The default is utf_8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// Specifies log files that you want to push to CloudWatch Logs. File can point to a specific file or multiple files (by using wild card characters such as /var/log/system.log*).
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	// Specifies the range of lines for identifying a file. The valid values are one number, or two dash-delimited numbers, such as 1, 2-5. The default value is 1.
+	FileFingerprintLines *string `json:"fileFingerprintLines,omitempty" tf:"file_fingerprint_lines,omitempty"`
+
+	// Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file.
+	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
+
+	// Specifies the destination log group. A log group is created automatically if it doesn't already exist.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Specifies the pattern for identifying the start of a log message.
+	MultilineStartPattern *string `json:"multilineStartPattern,omitempty" tf:"multiline_start_pattern,omitempty"`
+
+	// Specifies the time zone of log event time stamps.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type LogStreamsObservation struct {
@@ -420,8 +587,8 @@ type LogStreamsParameters struct {
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// Specifies log files that you want to push to CloudWatch Logs. File can point to a specific file or multiple files (by using wild card characters such as /var/log/system.log*).
-	// +kubebuilder:validation:Required
-	File *string `json:"file" tf:"file,omitempty"`
+	// +kubebuilder:validation:Optional
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
 	// Specifies the range of lines for identifying a file. The valid values are one number, or two dash-delimited numbers, such as 1, 2-5. The default value is 1.
 	// +kubebuilder:validation:Optional
@@ -432,8 +599,8 @@ type LogStreamsParameters struct {
 	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
 
 	// Specifies the destination log group. A log group is created automatically if it doesn't already exist.
-	// +kubebuilder:validation:Required
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// Specifies the pattern for identifying the start of a log message.
 	// +kubebuilder:validation:Optional
@@ -442,6 +609,30 @@ type LogStreamsParameters struct {
 	// Specifies the time zone of log event time stamps.
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+}
+
+type UpscalingInitParameters struct {
+
+	// Custom Cloudwatch auto scaling alarms, to be used as thresholds. This parameter takes a list of up to five alarm names, which are case sensitive and must be in the same region as the stack.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// The CPU utilization threshold, as a percent of the available CPU. A value of -1 disables the threshold.
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	// The number of instances to add or remove when the load exceeds a threshold.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The load threshold. A value of -1 disables the threshold.
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	// The memory utilization threshold, as a percent of the available memory. A value of -1 disables the threshold.
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type UpscalingObservation struct {
@@ -503,6 +694,18 @@ type UpscalingParameters struct {
 type CustomLayerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CustomLayerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CustomLayerInitParameters `json:"initProvider,omitempty"`
 }
 
 // CustomLayerStatus defines the observed state of CustomLayer.
@@ -523,8 +726,8 @@ type CustomLayerStatus struct {
 type CustomLayer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shortName)",message="shortName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shortName) || has(self.initProvider.shortName)",message="shortName is a required parameter"
 	Spec   CustomLayerSpec   `json:"spec"`
 	Status CustomLayerStatus `json:"status,omitempty"`
 }

@@ -11,6 +11,3 @@ spec:
     awsRegion: us-east-1
     region: us-west-1
     requireEncryption: true
-
----
-

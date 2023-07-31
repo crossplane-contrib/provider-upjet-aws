@@ -82,6 +82,28 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  enableHybrid:
+                    description: Indicates that you are using both methods to grant
+                      cross-account. Valid values are TRUE and FALSE.
+                    type: string
+                  policy:
+                    description: –  The policy to be applied to the aws glue data
+                      catalog.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -282,7 +304,8 @@ spec:
             x-kubernetes-validations:
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: ResourcePolicyStatus defines the observed state of ResourcePolicy.
             properties:

@@ -20,6 +20,3 @@ spec:
     - bounce
     - send
     region: us-west-1
-
----
-

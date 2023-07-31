@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceRoleAssociationInitParameters struct {
+
+	// Name of the feature for association. This can be found in the AWS documentation relevant to the integration or a full list is available in the SupportedFeatureNames list returned by AWS CLI rds describe-db-engine-versions.
+	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
+}
+
 type InstanceRoleAssociationObservation struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
@@ -72,6 +78,18 @@ type InstanceRoleAssociationParameters struct {
 type InstanceRoleAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceRoleAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider InstanceRoleAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceRoleAssociationStatus defines the observed state of InstanceRoleAssociation.
@@ -92,7 +110,7 @@ type InstanceRoleAssociationStatus struct {
 type InstanceRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureName)",message="featureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureName) || has(self.initProvider.featureName)",message="featureName is a required parameter"
 	Spec   InstanceRoleAssociationSpec   `json:"spec"`
 	Status InstanceRoleAssociationStatus `json:"status,omitempty"`
 }

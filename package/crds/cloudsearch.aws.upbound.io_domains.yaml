@@ -128,9 +128,6 @@ spec:
                             double, double-array, int, int-array, literal, literal-array,
                             text, text-array.'
                           type: string
-                      required:
-                      - name
-                      - type
                       type: object
                     type: array
                   multiAz:
@@ -162,6 +159,106 @@ spec:
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  endpointOptions:
+                    description: Domain endpoint options. Documented below.
+                    items:
+                      properties:
+                        enforceHttps:
+                          description: Enables or disables the requirement that all
+                            requests to the domain arrive over HTTPS.
+                          type: boolean
+                        tlsSecurityPolicy:
+                          description: The minimum required TLS version. See the AWS
+                            documentation for valid values.
+                          type: string
+                      type: object
+                    type: array
+                  indexField:
+                    description: The index fields for documents added to the domain.
+                      Documented below.
+                    items:
+                      properties:
+                        analysisScheme:
+                          description: The analysis scheme you want to use for a text
+                            field. The analysis scheme specifies the language-specific
+                            text processing options that are used during indexing.
+                          type: string
+                        defaultValue:
+                          description: The default value for the field. This value
+                            is used when no value is specified for the field in the
+                            document data.
+                          type: string
+                        facet:
+                          description: You can get facet information by enabling this.
+                          type: boolean
+                        highlight:
+                          description: You can highlight information.
+                          type: boolean
+                        name:
+                          description: The name of the CloudSearch domain.
+                          type: string
+                        return:
+                          description: You can enable returning the value of all searchable
+                            fields.
+                          type: boolean
+                        search:
+                          description: You can set whether this index should be searchable
+                            or not.
+                          type: boolean
+                        sort:
+                          description: You can enable the property to be sortable.
+                          type: boolean
+                        sourceFields:
+                          description: A comma-separated list of source fields to
+                            map to the field. Specifying a source field copies data
+                            from one field to another, enabling you to use the same
+                            source data in different ways by configuring different
+                            options for the fields.
+                          type: string
+                        type:
+                          description: 'The field type. Valid values: date, date-array,
+                            double, double-array, int, int-array, literal, literal-array,
+                            text, text-array.'
+                          type: string
+                      type: object
+                    type: array
+                  multiAz:
+                    description: Whether or not to maintain extra instances for the
+                      domain in a second Availability Zone to ensure high availability.
+                    type: boolean
+                  scalingParameters:
+                    description: Domain scaling parameters. Documented below.
+                    items:
+                      properties:
+                        desiredInstanceType:
+                          description: The instance type that you want to preconfigure
+                            for your domain. See the AWS documentation for valid values.
+                          type: string
+                        desiredPartitionCount:
+                          description: The number of partitions you want to preconfigure
+                            for your domain. Only valid when you select search.2xlarge
+                            as the instance type.
+                          type: number
+                        desiredReplicationCount:
+                          description: The number of replicas you want to preconfigure
+                            for each index partition.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

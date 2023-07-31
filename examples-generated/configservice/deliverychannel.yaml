@@ -59,6 +59,3 @@ spec:
   forProvider:
     forceDestroy: true
     region: us-west-1
-
----
-

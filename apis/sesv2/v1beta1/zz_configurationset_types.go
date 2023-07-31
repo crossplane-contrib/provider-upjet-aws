@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationSetInitParameters struct {
+
+	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+	DeliveryOptions []DeliveryOptionsInitParameters `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
+
+	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.
+	ReputationOptions []ReputationOptionsInitParameters `json:"reputationOptions,omitempty" tf:"reputation_options,omitempty"`
+
+	// An object that defines whether or not Amazon SES can send email that you send using the configuration set.
+	SendingOptions []SendingOptionsInitParameters `json:"sendingOptions,omitempty" tf:"sending_options,omitempty"`
+
+	// An object that contains information about the suppression list preferences for your account.
+	SuppressionOptions []SuppressionOptionsInitParameters `json:"suppressionOptions,omitempty" tf:"suppression_options,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// An object that defines the open and click tracking options for emails that you send using the configuration set.
+	TrackingOptions []TrackingOptionsInitParameters `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
+
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	VdmOptions []VdmOptionsInitParameters `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
+}
+
 type ConfigurationSetObservation struct {
 
 	// ARN of the Configuration Set.
@@ -80,6 +104,12 @@ type ConfigurationSetParameters struct {
 	VdmOptions []VdmOptionsParameters `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
 }
 
+type DashboardOptionsInitParameters struct {
+
+	// Specifies the status of your VDM engagement metrics collection. Valid values: ENABLED, DISABLED.
+	EngagementMetrics *string `json:"engagementMetrics,omitempty" tf:"engagement_metrics,omitempty"`
+}
+
 type DashboardOptionsObservation struct {
 
 	// Specifies the status of your VDM engagement metrics collection. Valid values: ENABLED, DISABLED.
@@ -91,6 +121,15 @@ type DashboardOptionsParameters struct {
 	// Specifies the status of your VDM engagement metrics collection. Valid values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional
 	EngagementMetrics *string `json:"engagementMetrics,omitempty" tf:"engagement_metrics,omitempty"`
+}
+
+type DeliveryOptionsInitParameters struct {
+
+	// The name of the dedicated IP pool to associate with the configuration set.
+	SendingPoolName *string `json:"sendingPoolName,omitempty" tf:"sending_pool_name,omitempty"`
+
+	// Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). Valid values: REQUIRE, OPTIONAL.
+	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
 type DeliveryOptionsObservation struct {
@@ -113,6 +152,12 @@ type DeliveryOptionsParameters struct {
 	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
 }
 
+type GuardianOptionsInitParameters struct {
+
+	// Specifies the status of your VDM optimized shared delivery. Valid values: ENABLED, DISABLED.
+	OptimizedSharedDelivery *string `json:"optimizedSharedDelivery,omitempty" tf:"optimized_shared_delivery,omitempty"`
+}
+
 type GuardianOptionsObservation struct {
 
 	// Specifies the status of your VDM optimized shared delivery. Valid values: ENABLED, DISABLED.
@@ -124,6 +169,12 @@ type GuardianOptionsParameters struct {
 	// Specifies the status of your VDM optimized shared delivery. Valid values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional
 	OptimizedSharedDelivery *string `json:"optimizedSharedDelivery,omitempty" tf:"optimized_shared_delivery,omitempty"`
+}
+
+type ReputationOptionsInitParameters struct {
+
+	// If true, tracking of reputation metrics is enabled for the configuration set. If false, tracking of reputation metrics is disabled for the configuration set.
+	ReputationMetricsEnabled *bool `json:"reputationMetricsEnabled,omitempty" tf:"reputation_metrics_enabled,omitempty"`
 }
 
 type ReputationOptionsObservation struct {
@@ -142,6 +193,12 @@ type ReputationOptionsParameters struct {
 	ReputationMetricsEnabled *bool `json:"reputationMetricsEnabled,omitempty" tf:"reputation_metrics_enabled,omitempty"`
 }
 
+type SendingOptionsInitParameters struct {
+
+	// If true, email sending is enabled for the configuration set. If false, email sending is disabled for the configuration set.
+	SendingEnabled *bool `json:"sendingEnabled,omitempty" tf:"sending_enabled,omitempty"`
+}
+
 type SendingOptionsObservation struct {
 
 	// If true, email sending is enabled for the configuration set. If false, email sending is disabled for the configuration set.
@@ -153,6 +210,12 @@ type SendingOptionsParameters struct {
 	// If true, email sending is enabled for the configuration set. If false, email sending is disabled for the configuration set.
 	// +kubebuilder:validation:Optional
 	SendingEnabled *bool `json:"sendingEnabled,omitempty" tf:"sending_enabled,omitempty"`
+}
+
+type SuppressionOptionsInitParameters struct {
+
+	// A list that contains the reasons that email addresses are automatically added to the suppression list for your account. Valid values: BOUNCE, COMPLAINT.
+	SuppressedReasons []*string `json:"suppressedReasons,omitempty" tf:"suppressed_reasons,omitempty"`
 }
 
 type SuppressionOptionsObservation struct {
@@ -168,6 +231,12 @@ type SuppressionOptionsParameters struct {
 	SuppressedReasons []*string `json:"suppressedReasons,omitempty" tf:"suppressed_reasons,omitempty"`
 }
 
+type TrackingOptionsInitParameters struct {
+
+	// The domain to use for tracking open and click events.
+	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
+}
+
 type TrackingOptionsObservation struct {
 
 	// The domain to use for tracking open and click events.
@@ -177,8 +246,17 @@ type TrackingOptionsObservation struct {
 type TrackingOptionsParameters struct {
 
 	// The domain to use for tracking open and click events.
-	// +kubebuilder:validation:Required
-	CustomRedirectDomain *string `json:"customRedirectDomain" tf:"custom_redirect_domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
+}
+
+type VdmOptionsInitParameters struct {
+
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	DashboardOptions []DashboardOptionsInitParameters `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
+
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	GuardianOptions []GuardianOptionsInitParameters `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
 }
 
 type VdmOptionsObservation struct {
@@ -205,6 +283,18 @@ type VdmOptionsParameters struct {
 type ConfigurationSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConfigurationSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationSetStatus defines the observed state of ConfigurationSet.

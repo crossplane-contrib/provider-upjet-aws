@@ -13,6 +13,3 @@ spec:
       key: attribute.test-key.pem
       name: example-secret
       namespace: upbound-system
-
----
-

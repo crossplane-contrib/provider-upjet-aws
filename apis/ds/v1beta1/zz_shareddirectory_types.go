@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SharedDirectoryInitParameters struct {
+
+	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
+	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
+}
+
 type SharedDirectoryObservation struct {
 
 	// Identifier of the Managed Microsoft AD directory that you want to share with other accounts.
@@ -65,6 +74,15 @@ type SharedDirectoryParameters struct {
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
+type TargetInitParameters struct {
+
+	// Identifier of the directory consumer account.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of identifier to be used in the id field. Valid value is ACCOUNT. Default is ACCOUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type TargetObservation struct {
 
 	// Identifier of the directory consumer account.
@@ -77,8 +95,8 @@ type TargetObservation struct {
 type TargetParameters struct {
 
 	// Identifier of the directory consumer account.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Type of identifier to be used in the id field. Valid value is ACCOUNT. Default is ACCOUNT.
 	// +kubebuilder:validation:Optional
@@ -89,6 +107,18 @@ type TargetParameters struct {
 type SharedDirectorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SharedDirectoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SharedDirectoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // SharedDirectoryStatus defines the observed state of SharedDirectory.
@@ -109,7 +139,7 @@ type SharedDirectoryStatus struct {
 type SharedDirectory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target)",message="target is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.target) || has(self.initProvider.target)",message="target is a required parameter"
 	Spec   SharedDirectorySpec   `json:"spec"`
 	Status SharedDirectoryStatus `json:"status,omitempty"`
 }

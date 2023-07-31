@@ -89,8 +89,6 @@ spec:
                                 description: The part of the web request that you
                                   want AWS WAF to search for a specified string.
                                 type: string
-                            required:
-                            - type
                             type: object
                           type: array
                         positionalConstraint:
@@ -104,10 +102,6 @@ spec:
                         textTransformation:
                           description: The formatting way for web request.
                           type: string
-                      required:
-                      - fieldToMatch
-                      - positionalConstraint
-                      - textTransformation
                       type: object
                     type: array
                   name:
@@ -119,6 +113,60 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  byteMatchTuples:
+                    description: Settings for the ByteMatchSet, such as the bytes
+                      (typically a string that corresponds with ASCII characters)
+                      that you want AWS WAF to search for in web requests. ByteMatchTuple
+                      documented below.
+                    items:
+                      properties:
+                        fieldToMatch:
+                          description: Settings for the ByteMatchTuple. FieldToMatch
+                            documented below.
+                          items:
+                            properties:
+                              data:
+                                description: When the value of Type is HEADER, enter
+                                  the name of the header that you want AWS WAF to
+                                  search, for example, User-Agent or Referer. If the
+                                  value of Type is any other value, omit Data.
+                                type: string
+                              type:
+                                description: The part of the web request that you
+                                  want AWS WAF to search for a specified string.
+                                type: string
+                            type: object
+                          type: array
+                        positionalConstraint:
+                          description: Within the portion of a web request that you
+                            want to search.
+                          type: string
+                        targetString:
+                          description: The value that you want AWS WAF to search for.
+                            The maximum length of the value is 50 bytes.
+                          type: string
+                        textTransformation:
+                          description: The formatting way for web request.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name or description of the ByteMatchSet.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -320,7 +368,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ByteMatchSetStatus defines the observed state of ByteMatchSet.
             properties:

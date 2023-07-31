@@ -162,8 +162,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - event
                       type: object
                     type: array
                   name:
@@ -264,6 +262,50 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  duration:
+                    description: The duration of the inspector run.
+                    type: number
+                  eventSubscription:
+                    description: A block that enables sending notifications about
+                      a specified assessment template event to a designated SNS topic.
+                      See Event Subscriptions for details.
+                    items:
+                      properties:
+                        event:
+                          description: The event for which you want to receive SNS
+                            notifications. Valid values are ASSESSMENT_RUN_STARTED,
+                            ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED,
+                            and FINDING_REPORTED.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the assessment template.
+                    type: string
+                  rulesPackageArns:
+                    description: The rules to be used during the run.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -465,13 +507,16 @@ spec:
             x-kubernetes-validations:
             - message: duration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.duration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.duration)
+                || has(self.initProvider.duration)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: rulesPackageArns is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rulesPackageArns)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rulesPackageArns)
+                || has(self.initProvider.rulesPackageArns)'
           status:
             description: AssessmentTemplateStatus defines the observed state of AssessmentTemplate.
             properties:

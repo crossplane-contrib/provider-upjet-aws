@@ -54,6 +54,3 @@ spec:
     description: This is my API for demonstration purposes
     name: MyDemoAPI
     region: us-west-1
-
----
-

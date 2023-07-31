@@ -400,6 +400,107 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  aclName:
+                    description: The name of the Access Control List to associate
+                      with the cluster.
+                    type: string
+                  autoMinorVersionUpgrade:
+                    description: When set to true, the cluster will automatically
+                      receive minor engine version upgrades after launch. Defaults
+                      to true.
+                    type: boolean
+                  dataTiering:
+                    description: Enables data tiering. This option is not supported
+                      by all instance types. For more information, see Data tiering.
+                    type: boolean
+                  description:
+                    description: Description for the cluster.
+                    type: string
+                  engineVersion:
+                    description: Version number of the Redis engine to be used for
+                      the cluster. Downgrades are not supported.
+                    type: string
+                  finalSnapshotName:
+                    description: Name of the final cluster snapshot to be created
+                      when this resource is deleted. If omitted, no final snapshot
+                      will be made.
+                    type: string
+                  maintenanceWindow:
+                    description: 'Specifies the weekly time range during which maintenance
+                      on the cluster is performed. Specify as a range in the format
+                      ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+                      window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  nodeType:
+                    description: The compute and memory capacity of the nodes in the
+                      cluster. See AWS documentation on supported node types as well
+                      as vertical scaling.
+                    type: string
+                  numReplicasPerShard:
+                    description: The number of replicas to apply to each shard, up
+                      to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+                    type: number
+                  numShards:
+                    description: The number of shards in the cluster. Defaults to
+                      1.
+                    type: number
+                  parameterGroupName:
+                    description: The name of the parameter group associated with the
+                      cluster.
+                    type: string
+                  port:
+                    description: The port number on which each of the nodes accepts
+                      connections. Defaults to 6379.
+                    type: number
+                  snapshotArns:
+                    description: List of ARN-s that uniquely identify RDB snapshot
+                      files stored in S3. The snapshot files will be used to populate
+                      the new cluster. Object names in the ARN-s cannot contain any
+                      commas.
+                    items:
+                      type: string
+                    type: array
+                  snapshotName:
+                    description: The name of a snapshot from which to restore data
+                      into the new cluster.
+                    type: string
+                  snapshotRetentionLimit:
+                    description: The number of days for which MemoryDB retains automatic
+                      snapshots before deleting them. When set to 0, automatic backups
+                      are disabled. Defaults to 0.
+                    type: number
+                  snapshotWindow:
+                    description: 'The daily time range (in UTC) during which MemoryDB
+                      begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
+                    type: string
+                  snsTopicArn:
+                    description: ARN of the SNS topic to which cluster notifications
+                      are sent.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tlsEnabled:
+                    description: A flag to enable in-transit encryption on the cluster.
+                      When set to false, the acl_name must be open-access. Defaults
+                      to true.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -600,10 +701,12 @@ spec:
             x-kubernetes-validations:
             - message: aclName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.aclName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.aclName)
+                || has(self.initProvider.aclName)'
             - message: nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || has(self.initProvider.nodeType)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticateCognitoInitParameters struct {
+
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// Set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// Maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// ARN of the Cognito user pool.
+	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
+
+	// ID of the Cognito user pool client.
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+
+	// Domain prefix or fully-qualified domain name of the Cognito user pool.
+	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
+}
+
 type AuthenticateCognitoObservation struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
@@ -63,16 +90,49 @@ type AuthenticateCognitoParameters struct {
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
 	// ARN of the Cognito user pool.
-	// +kubebuilder:validation:Required
-	UserPoolArn *string `json:"userPoolArn" tf:"user_pool_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
 
 	// ID of the Cognito user pool client.
-	// +kubebuilder:validation:Required
-	UserPoolClientID *string `json:"userPoolClientId" tf:"user_pool_client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
 
 	// Domain prefix or fully-qualified domain name of the Cognito user pool.
-	// +kubebuilder:validation:Required
-	UserPoolDomain *string `json:"userPoolDomain" tf:"user_pool_domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
+}
+
+type AuthenticateOidcInitParameters struct {
+
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
+	// Authorization endpoint of the IdP.
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+
+	// OAuth 2.0 client identifier.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// OIDC issuer identifier of the IdP.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// Behavior if the user is not authenticated. Valid values: deny, allow and authenticate
+	OnUnauthenticatedRequest *string `json:"onUnauthenticatedRequest,omitempty" tf:"on_unauthenticated_request,omitempty"`
+
+	// Set of user claims to be requested from the IdP.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Name of the cookie used to maintain session information.
+	SessionCookieName *string `json:"sessionCookieName,omitempty" tf:"session_cookie_name,omitempty"`
+
+	// Maximum duration of the authentication session, in seconds.
+	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// Token endpoint of the IdP.
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+
+	// User info endpoint of the IdP.
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
 }
 
 type AuthenticateOidcObservation struct {
@@ -115,20 +175,20 @@ type AuthenticateOidcParameters struct {
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
 	// OAuth 2.0 client identifier.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// OAuth 2.0 client secret.
 	// +kubebuilder:validation:Required
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// OIDC issuer identifier of the IdP.
-	// +kubebuilder:validation:Required
-	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values: deny, allow and authenticate
 	// +kubebuilder:validation:Optional
@@ -147,12 +207,36 @@ type AuthenticateOidcParameters struct {
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
 
 	// Token endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	TokenEndpoint *string `json:"tokenEndpoint" tf:"token_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
 	// User info endpoint of the IdP.
-	// +kubebuilder:validation:Required
-	UserInfoEndpoint *string `json:"userInfoEndpoint" tf:"user_info_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+}
+
+type DefaultActionInitParameters struct {
+
+	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. Detailed below.
+	AuthenticateCognito []AuthenticateCognitoInitParameters `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
+
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
+	AuthenticateOidc []AuthenticateOidcInitParameters `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
+
+	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
+	FixedResponse []FixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
+
+	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn. Detailed below.
+	Forward []ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
+
+	// Order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. Valid values are between 1 and 50000.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
+	Redirect []RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DefaultActionObservation struct {
@@ -222,8 +306,20 @@ type DefaultActionParameters struct {
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type FixedResponseInitParameters struct {
+
+	// Content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Message body.
+	MessageBody *string `json:"messageBody,omitempty" tf:"message_body,omitempty"`
+
+	// HTTP response code. Valid values are 2XX, 4XX, or 5XX.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type FixedResponseObservation struct {
@@ -241,8 +337,8 @@ type FixedResponseObservation struct {
 type FixedResponseParameters struct {
 
 	// Content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Message body.
 	// +kubebuilder:validation:Optional
@@ -251,6 +347,15 @@ type FixedResponseParameters struct {
 	// HTTP response code. Valid values are 2XX, 4XX, or 5XX.
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type ForwardInitParameters struct {
+
+	// Configuration block for target group stickiness for the rule. Detailed below.
+	Stickiness []StickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
+
+	// Set of 1-5 target group blocks. Detailed below.
+	TargetGroup []TargetGroupInitParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type ForwardObservation struct {
@@ -269,8 +374,32 @@ type ForwardParameters struct {
 	Stickiness []StickinessParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
 	// Set of 1-5 target group blocks. Detailed below.
-	// +kubebuilder:validation:Required
-	TargetGroup []TargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetGroup []TargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+}
+
+type LBListenerInitParameters struct {
+
+	// Name of the Application-Layer Protocol Negotiation (ALPN) policy. Can be set if protocol is TLS. Valid values are HTTP1Only, HTTP2Only, HTTP2Optional, HTTP2Preferred, and None.
+	AlpnPolicy *string `json:"alpnPolicy,omitempty" tf:"alpn_policy,omitempty"`
+
+	// ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. For adding additional SSL certificates, see the aws_lb_listener_certificate resource.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Configuration block for default actions. Detailed below.
+	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
+	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LBListenerObservation struct {
@@ -358,6 +487,27 @@ type LBListenerParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RedirectInitParameters struct {
+
+	// Hostname. This component is not percent-encoded. The hostname can contain #{host}. Defaults to #{host}.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// Absolute path, starting with the leading "/". This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}. Defaults to /#{path}.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Port. Specify a value from 1 to 65535 or #{port}. Defaults to #{port}.
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol. Valid values are HTTP, HTTPS, or #{protocol}. Defaults to #{protocol}.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading "?". Defaults to #{query}.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
 type RedirectObservation struct {
 
 	// Hostname. This component is not percent-encoded. The hostname can contain #{host}. Defaults to #{host}.
@@ -402,8 +552,17 @@ type RedirectParameters struct {
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
-	// +kubebuilder:validation:Required
-	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type StickinessInitParameters struct {
+
+	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Whether target group stickiness is enabled. Default is false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type StickinessObservation struct {
@@ -418,12 +577,18 @@ type StickinessObservation struct {
 type StickinessParameters struct {
 
 	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
-	// +kubebuilder:validation:Required
-	Duration *float64 `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Whether target group stickiness is enabled. Default is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type TargetGroupInitParameters struct {
+
+	// Weight. The range is 0 to 999.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TargetGroupObservation struct {
@@ -459,6 +624,18 @@ type TargetGroupParameters struct {
 type LBListenerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBListenerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LBListenerInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBListenerStatus defines the observed state of LBListener.
@@ -479,7 +656,7 @@ type LBListenerStatus struct {
 type LBListener struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction) || has(self.initProvider.defaultAction)",message="defaultAction is a required parameter"
 	Spec   LBListenerSpec   `json:"spec"`
 	Status LBListenerStatus `json:"status,omitempty"`
 }

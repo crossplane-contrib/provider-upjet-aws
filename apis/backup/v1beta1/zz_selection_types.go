@@ -13,6 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConditionInitParameters struct {
+	StringEquals []StringEqualsInitParameters `json:"stringEquals,omitempty" tf:"string_equals,omitempty"`
+
+	StringLike []StringLikeInitParameters `json:"stringLike,omitempty" tf:"string_like,omitempty"`
+
+	StringNotEquals []StringNotEqualsInitParameters `json:"stringNotEquals,omitempty" tf:"string_not_equals,omitempty"`
+
+	StringNotLike []StringNotLikeInitParameters `json:"stringNotLike,omitempty" tf:"string_not_like,omitempty"`
+}
+
 type ConditionObservation struct {
 	StringEquals []StringEqualsObservation `json:"stringEquals,omitempty" tf:"string_equals,omitempty"`
 
@@ -36,6 +46,24 @@ type ConditionParameters struct {
 
 	// +kubebuilder:validation:Optional
 	StringNotLike []StringNotLikeParameters `json:"stringNotLike,omitempty" tf:"string_not_like,omitempty"`
+}
+
+type SelectionInitParameters struct {
+
+	// A list of conditions that you define to assign resources to your backup plans using tags.
+	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The display name of a resource selection document.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
+
+	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
+	SelectionTag []SelectionTagInitParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
 
 type SelectionObservation struct {
@@ -120,6 +148,18 @@ type SelectionParameters struct {
 	SelectionTag []SelectionTagParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
 }
 
+type SelectionTagInitParameters struct {
+
+	// The key in a key-value pair.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value in a key-value pair.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type SelectionTagObservation struct {
 
 	// The key in a key-value pair.
@@ -135,16 +175,25 @@ type SelectionTagObservation struct {
 type SelectionTagParameters struct {
 
 	// The key in a key-value pair.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The value in a key-value pair.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StringEqualsInitParameters struct {
+
+	// The key in a key-value pair.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value in a key-value pair.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringEqualsObservation struct {
@@ -159,12 +208,21 @@ type StringEqualsObservation struct {
 type StringEqualsParameters struct {
 
 	// The key in a key-value pair.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The value in a key-value pair.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StringLikeInitParameters struct {
+
+	// The key in a key-value pair.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value in a key-value pair.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringLikeObservation struct {
@@ -179,12 +237,21 @@ type StringLikeObservation struct {
 type StringLikeParameters struct {
 
 	// The key in a key-value pair.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The value in a key-value pair.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StringNotEqualsInitParameters struct {
+
+	// The key in a key-value pair.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value in a key-value pair.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotEqualsObservation struct {
@@ -199,12 +266,21 @@ type StringNotEqualsObservation struct {
 type StringNotEqualsParameters struct {
 
 	// The key in a key-value pair.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The value in a key-value pair.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StringNotLikeInitParameters struct {
+
+	// The key in a key-value pair.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value in a key-value pair.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type StringNotLikeObservation struct {
@@ -219,18 +295,30 @@ type StringNotLikeObservation struct {
 type StringNotLikeParameters struct {
 
 	// The key in a key-value pair.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The value in a key-value pair.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // SelectionSpec defines the desired state of Selection
 type SelectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SelectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SelectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SelectionStatus defines the observed state of Selection.
@@ -251,7 +339,7 @@ type SelectionStatus struct {
 type Selection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SelectionSpec   `json:"spec"`
 	Status SelectionStatus `json:"status,omitempty"`
 }

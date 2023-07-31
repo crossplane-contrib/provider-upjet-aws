@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DocumentationPartInitParameters struct {
+
+	// Location of the targeted API entity of the to-be-created documentation part. See below.
+	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
+	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
+}
+
 type DocumentationPartObservation struct {
 
 	// Unique ID of the Documentation Part
@@ -58,6 +67,24 @@ type DocumentationPartParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
+type LocationInitParameters struct {
+
+	// HTTP verb of a method. The default value is * for any method.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Name of the targeted API entity.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// URL path of the target. The default value is / for the root resource.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// HTTP status code of a response. The default value is * for any status code.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+
+	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type LocationObservation struct {
 
 	// HTTP verb of a method. The default value is * for any method.
@@ -95,14 +122,26 @@ type LocationParameters struct {
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 
 	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // DocumentationPartSpec defines the desired state of DocumentationPart
 type DocumentationPartSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DocumentationPartParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DocumentationPartInitParameters `json:"initProvider,omitempty"`
 }
 
 // DocumentationPartStatus defines the observed state of DocumentationPart.
@@ -123,8 +162,8 @@ type DocumentationPartStatus struct {
 type DocumentationPart struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.properties)",message="properties is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.properties) || has(self.initProvider.properties)",message="properties is a required parameter"
 	Spec   DocumentationPartSpec   `json:"spec"`
 	Status DocumentationPartStatus `json:"status,omitempty"`
 }

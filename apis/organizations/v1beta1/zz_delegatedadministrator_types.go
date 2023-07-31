@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DelegatedAdministratorInitParameters struct {
+
+	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
+	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
+}
+
 type DelegatedAdministratorObservation struct {
 
 	// The account ID number of the member account in the organization to register as a delegated administrator.
@@ -75,6 +81,18 @@ type DelegatedAdministratorParameters struct {
 type DelegatedAdministratorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DelegatedAdministratorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DelegatedAdministratorInitParameters `json:"initProvider,omitempty"`
 }
 
 // DelegatedAdministratorStatus defines the observed state of DelegatedAdministrator.
@@ -95,7 +113,7 @@ type DelegatedAdministratorStatus struct {
 type DelegatedAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.servicePrincipal)",message="servicePrincipal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.servicePrincipal) || has(self.initProvider.servicePrincipal)",message="servicePrincipal is a required parameter"
 	Spec   DelegatedAdministratorSpec   `json:"spec"`
 	Status DelegatedAdministratorStatus `json:"status,omitempty"`
 }

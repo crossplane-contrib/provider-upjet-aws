@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MappingRuleInitParameters struct {
+
+	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
+	Claim *string `json:"claim,omitempty" tf:"claim,omitempty"`
+
+	// The match condition that specifies how closely the claim value in the IdP token must match Value.
+	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
+
+	// A brief string that the claim must match, for example, "paid" or "yes".
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type MappingRuleObservation struct {
 
 	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
@@ -31,12 +43,12 @@ type MappingRuleObservation struct {
 type MappingRuleParameters struct {
 
 	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
-	// +kubebuilder:validation:Required
-	Claim *string `json:"claim" tf:"claim,omitempty"`
+	// +kubebuilder:validation:Optional
+	Claim *string `json:"claim,omitempty" tf:"claim,omitempty"`
 
 	// The match condition that specifies how closely the claim value in the IdP token must match Value.
-	// +kubebuilder:validation:Required
-	MatchType *string `json:"matchType" tf:"match_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
 
 	// The role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -53,8 +65,17 @@ type MappingRuleParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A brief string that the claim must match, for example, "paid" or "yes".
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PoolRolesAttachmentInitParameters struct {
+
+	// A List of Role Mapping.
+	RoleMapping []RoleMappingInitParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
+
+	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
+	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type PoolRolesAttachmentObservation struct {
@@ -102,6 +123,21 @@ type PoolRolesAttachmentParameters struct {
 	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
+type RoleMappingInitParameters struct {
+
+	// Specifies the action to be taken if either no rules match the claim value for the Rules type, or there is no cognito:preferred_role claim and there are multiple cognito:roles matches for the Token type. Required if you specify Token or Rules as the Type.
+	AmbiguousRoleResolution *string `json:"ambiguousRoleResolution,omitempty" tf:"ambiguous_role_resolution,omitempty"`
+
+	// A string identifying the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Depends on cognito_identity_providers set on aws_cognito_identity_pool resource or a aws_cognito_identity_provider resource.
+	IdentityProvider *string `json:"identityProvider,omitempty" tf:"identity_provider,omitempty"`
+
+	// The Rules Configuration to be used for mapping users to roles. You can specify up to 25 rules per identity provider. Rules are evaluated in order. The first one to match specifies the role.
+	MappingRule []MappingRuleInitParameters `json:"mappingRule,omitempty" tf:"mapping_rule,omitempty"`
+
+	// The role mapping type.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type RoleMappingObservation struct {
 
 	// Specifies the action to be taken if either no rules match the claim value for the Rules type, or there is no cognito:preferred_role claim and there are multiple cognito:roles matches for the Token type. Required if you specify Token or Rules as the Type.
@@ -124,22 +160,34 @@ type RoleMappingParameters struct {
 	AmbiguousRoleResolution *string `json:"ambiguousRoleResolution,omitempty" tf:"ambiguous_role_resolution,omitempty"`
 
 	// A string identifying the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Depends on cognito_identity_providers set on aws_cognito_identity_pool resource or a aws_cognito_identity_provider resource.
-	// +kubebuilder:validation:Required
-	IdentityProvider *string `json:"identityProvider" tf:"identity_provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	IdentityProvider *string `json:"identityProvider,omitempty" tf:"identity_provider,omitempty"`
 
 	// The Rules Configuration to be used for mapping users to roles. You can specify up to 25 rules per identity provider. Rules are evaluated in order. The first one to match specifies the role.
 	// +kubebuilder:validation:Optional
 	MappingRule []MappingRuleParameters `json:"mappingRule,omitempty" tf:"mapping_rule,omitempty"`
 
 	// The role mapping type.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // PoolRolesAttachmentSpec defines the desired state of PoolRolesAttachment
 type PoolRolesAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PoolRolesAttachmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PoolRolesAttachmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // PoolRolesAttachmentStatus defines the observed state of PoolRolesAttachment.
@@ -160,7 +208,7 @@ type PoolRolesAttachmentStatus struct {
 type PoolRolesAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles)",message="roles is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles) || has(self.initProvider.roles)",message="roles is a required parameter"
 	Spec   PoolRolesAttachmentSpec   `json:"spec"`
 	Status PoolRolesAttachmentStatus `json:"status,omitempty"`
 }

@@ -92,8 +92,6 @@ spec:
                                   see Allowing Users in Other Accounts to Use a CMK
                                   in the AWS Key Management Service Developer Guide.
                                 type: string
-                            required:
-                            - keyArn
                             type: object
                           type: array
                         resources:
@@ -102,9 +100,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - provider
-                      - resources
                       type: object
                     type: array
                   kubernetesNetworkConfig:
@@ -161,8 +156,6 @@ spec:
                                   Kubernetes control plane instances. This setting
                                   can't be changed after cluster creation.
                                 type: string
-                            required:
-                            - groupName
                             type: object
                           type: array
                         outpostArns:
@@ -173,9 +166,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - controlPlaneInstanceType
-                      - outpostArns
                       type: object
                     type: array
                   region:
@@ -483,6 +473,161 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  enabledClusterLogTypes:
+                    description: List of the desired control plane logging to enable.
+                      For more information, see Amazon EKS Control Plane Logging.
+                    items:
+                      type: string
+                    type: array
+                  encryptionConfig:
+                    description: Configuration block with encryption configuration
+                      for the cluster. Only available on Kubernetes 1.13 and above
+                      clusters created after March 6, 2020. Detailed below.
+                    items:
+                      properties:
+                        provider:
+                          description: Configuration block with provider for encryption.
+                            Detailed below.
+                          items:
+                            properties:
+                              keyArn:
+                                description: ARN of the Key Management Service (KMS)
+                                  customer master key (CMK). The CMK must be symmetric,
+                                  created in the same region as the cluster, and if
+                                  the CMK was created in a different account, the
+                                  user must have access to the CMK. For more information,
+                                  see Allowing Users in Other Accounts to Use a CMK
+                                  in the AWS Key Management Service Developer Guide.
+                                type: string
+                            type: object
+                          type: array
+                        resources:
+                          description: 'List of strings with resources to be encrypted.
+                            Valid values: secrets.'
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  kubernetesNetworkConfig:
+                    description: Configuration block with kubernetes network configuration
+                      for the cluster. Detailed below.
+                    items:
+                      properties:
+                        ipFamily:
+                          description: The IP family used to assign Kubernetes pod
+                            and service addresses. Valid values are ipv4 (default)
+                            and ipv6. You can only specify an IP family when you create
+                            a cluster, changing this value will force a new cluster
+                            to be created.
+                          type: string
+                        serviceIpv4Cidr:
+                          description: 'The CIDR block to assign Kubernetes pod and
+                            service IP addresses from. If you don''t specify a block,
+                            Kubernetes assigns addresses from either the 10.100.0.0/16
+                            or 172.20.0.0/16 CIDR blocks. We recommend that you specify
+                            a block that does not overlap with resources in other
+                            networks that are peered or connected to your VPC. You
+                            can only specify a custom CIDR block when you create a
+                            cluster, changing this value will force a new cluster
+                            to be created. The block must meet the following requirements:'
+                          type: string
+                      type: object
+                    type: array
+                  outpostConfig:
+                    description: Configuration block representing the configuration
+                      of your local Amazon EKS cluster on an AWS Outpost. This block
+                      isn't available for creating Amazon EKS clusters on the AWS
+                      cloud.
+                    items:
+                      properties:
+                        controlPlaneInstanceType:
+                          description: 'The Amazon EC2 instance type that you want
+                            to use for your local Amazon EKS cluster on Outposts.
+                            The instance type that you specify is used for all Kubernetes
+                            control plane instances. The instance type can''t be changed
+                            after cluster creation. Choose an instance type based
+                            on the number of nodes that your cluster will have. If
+                            your cluster will have:'
+                          type: string
+                        controlPlanePlacement:
+                          description: 'An object representing the placement configuration
+                            for all the control plane instances of your local Amazon
+                            EKS cluster on AWS Outpost. The following arguments are
+                            supported in the control_plane_placement configuration
+                            block:'
+                          items:
+                            properties:
+                              groupName:
+                                description: The name of the placement group for the
+                                  Kubernetes control plane instances. This setting
+                                  can't be changed after cluster creation.
+                                type: string
+                            type: object
+                          type: array
+                        outpostArns:
+                          description: The ARN of the Outpost that you want to use
+                            for your local Amazon EKS cluster on Outposts. This argument
+                            is a list of arns, but only a single Outpost ARN is supported
+                            currently.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  version:
+                    description: –  Desired Kubernetes master version. If you do not
+                      specify a value, the latest available version at resource creation
+                      is used and no upgrades will occur except those automatically
+                      triggered by EKS. The value must be configured and increased
+                      to upgrade the version when desired. Downgrades are not supported
+                      by EKS.
+                    type: string
+                  vpcConfig:
+                    description: Configuration block for the VPC associated with your
+                      cluster. Amazon EKS VPC resources have specific requirements
+                      to work properly with Kubernetes. For more information, see
+                      Cluster VPC Considerations and Cluster Security Group Considerations
+                      in the Amazon EKS User Guide. Detailed below. Also contains
+                      attributes detailed in the Attributes section.
+                    items:
+                      properties:
+                        endpointPrivateAccess:
+                          description: Whether the Amazon EKS private API server endpoint
+                            is enabled. Default is false.
+                          type: boolean
+                        endpointPublicAccess:
+                          description: Whether the Amazon EKS public API server endpoint
+                            is enabled. Default is true.
+                          type: boolean
+                        publicAccessCidrs:
+                          description: List of CIDR blocks. Indicates which CIDR blocks
+                            can access the Amazon EKS public API server endpoint when
+                            enabled. EKS defaults this to a list with 0.0.0.0/0.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -683,7 +828,8 @@ spec:
             x-kubernetes-validations:
             - message: vpcConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConfig)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConfig)
+                || has(self.initProvider.vpcConfig)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

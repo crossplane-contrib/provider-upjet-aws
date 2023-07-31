@@ -78,8 +78,6 @@ spec:
                         source:
                           description: Source of the events.
                           type: string
-                      required:
-                      - source
                       type: object
                     type: array
                   eventbridgeBus:
@@ -96,6 +94,41 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Description of the Event Integration.
+                    type: string
+                  eventFilter:
+                    description: Block that defines the configuration information
+                      for the event filter. The Event Filter block is documented below.
+                    items:
+                      properties:
+                        source:
+                          description: Source of the events.
+                          type: string
+                      type: object
+                    type: array
+                  eventbridgeBus:
+                    description: EventBridge bus.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -297,10 +330,12 @@ spec:
             x-kubernetes-validations:
             - message: eventFilter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventFilter)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventFilter)
+                || has(self.initProvider.eventFilter)'
             - message: eventbridgeBus is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventbridgeBus)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventbridgeBus)
+                || has(self.initProvider.eventbridgeBus)'
           status:
             description: EventIntegrationStatus defines the observed state of EventIntegration.
             properties:

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ElasticsearchSettingsInitParameters struct {
+
+	// Endpoint for the OpenSearch cluster.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
+	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
+	ErrorRetryDuration *float64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
+
+	// Maximum percentage of records that can fail to be written before a full load operation stops. Default is 10.
+	FullLoadErrorPercentage *float64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
+
+	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+}
+
 type ElasticsearchSettingsObservation struct {
 
 	// Endpoint for the OpenSearch cluster.
@@ -31,8 +46,8 @@ type ElasticsearchSettingsObservation struct {
 type ElasticsearchSettingsParameters struct {
 
 	// Endpoint for the OpenSearch cluster.
-	// +kubebuilder:validation:Required
-	EndpointURI *string `json:"endpointUri" tf:"endpoint_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
 	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
 	// +kubebuilder:validation:Optional
@@ -43,8 +58,65 @@ type ElasticsearchSettingsParameters struct {
 	FullLoadErrorPercentage *float64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
-	// +kubebuilder:validation:Required
-	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn" tf:"service_access_role_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+}
+
+type EndpointInitParameters struct {
+
+	// ARN for the certificate.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Name of the endpoint database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Configuration block for OpenSearch settings. See below.
+	ElasticsearchSettings []ElasticsearchSettingsInitParameters `json:"elasticsearchSettings,omitempty" tf:"elasticsearch_settings,omitempty"`
+
+	// Type of endpoint. Valid values are source, target.
+	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
+
+	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
+	ExtraConnectionAttributes *string `json:"extraConnectionAttributes,omitempty" tf:"extra_connection_attributes,omitempty"`
+
+	// Configuration block for Kafka settings. See below.
+	KafkaSettings []KafkaSettingsInitParameters `json:"kafkaSettings,omitempty" tf:"kafka_settings,omitempty"`
+
+	// Configuration block for Kinesis settings. See below.
+	KinesisSettings []KinesisSettingsInitParameters `json:"kinesisSettings,omitempty" tf:"kinesis_settings,omitempty"`
+
+	// Configuration block for MongoDB settings. See below.
+	MongodbSettings []MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
+
+	// Port used by the endpoint database.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	RedisSettings []RedisSettingsInitParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
+
+	// Configuration block for Redshift settings. See below.
+	RedshiftSettings []RedshiftSettingsInitParameters `json:"redshiftSettings,omitempty" tf:"redshift_settings,omitempty"`
+
+	// (Deprecated, use the aws_dms_s3_endpoint resource instead) Configuration block for S3 settings. See below.
+	// This argument is deprecated and will be removed in a future version; use aws_dms_s3_endpoint instead
+	S3Settings []S3SettingsInitParameters `json:"s3Settings,omitempty" tf:"s3_settings,omitempty"`
+
+	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
+	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
+
+	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
+	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
+
+	// Host name of the server.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// User name to be used to login to the endpoint database.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type EndpointObservation struct {
@@ -247,6 +319,57 @@ type EndpointParameters struct {
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
+type KafkaSettingsInitParameters struct {
+
+	// Kafka broker location. Specify in the form broker-hostname-or-ip:port.
+	Broker *string `json:"broker,omitempty" tf:"broker,omitempty"`
+
+	// Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. Default is false.
+	IncludeControlDetails *bool `json:"includeControlDetails,omitempty" tf:"include_control_details,omitempty"`
+
+	// Include NULL and empty columns for records migrated to the endpoint. Default is false.
+	IncludeNullAndEmpty *bool `json:"includeNullAndEmpty,omitempty" tf:"include_null_and_empty,omitempty"`
+
+	// Shows the partition value within the Kafka message output unless the partition type is schema-table-type. Default is false.
+	IncludePartitionValue *bool `json:"includePartitionValue,omitempty" tf:"include_partition_value,omitempty"`
+
+	// Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. Default is false.
+	IncludeTableAlterOperations *bool `json:"includeTableAlterOperations,omitempty" tf:"include_table_alter_operations,omitempty"`
+
+	// Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). Default is false.
+	IncludeTransactionDetails *bool `json:"includeTransactionDetails,omitempty" tf:"include_transaction_details,omitempty"`
+
+	// Output format for the records created on the endpoint. Message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).
+	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// Maximum size in bytes for records created on the endpoint Default is 1,000,000.
+	MessageMaxBytes *float64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
+
+	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the no_hex_prefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
+	NoHexPrefix *bool `json:"noHexPrefix,omitempty" tf:"no_hex_prefix,omitempty"`
+
+	// Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. Default is false.
+	PartitionIncludeSchemaTable *bool `json:"partitionIncludeSchemaTable,omitempty" tf:"partition_include_schema_table,omitempty"`
+
+	// ARN for the private certificate authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.
+	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
+
+	// ARN of the client certificate used to securely connect to a Kafka target endpoint.
+	SSLClientCertificateArn *string `json:"sslClientCertificateArn,omitempty" tf:"ssl_client_certificate_arn,omitempty"`
+
+	// ARN for the client private key used to securely connect to a Kafka target endpoint.
+	SSLClientKeyArn *string `json:"sslClientKeyArn,omitempty" tf:"ssl_client_key_arn,omitempty"`
+
+	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
+	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
+
+	// Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires sasl_username and sasl_password.
+	SecurityProtocol *string `json:"securityProtocol,omitempty" tf:"security_protocol,omitempty"`
+
+	// Kafka topic for migration. Default is kafka-default-topic.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
+}
+
 type KafkaSettingsObservation struct {
 
 	// Kafka broker location. Specify in the form broker-hostname-or-ip:port.
@@ -301,8 +424,8 @@ type KafkaSettingsObservation struct {
 type KafkaSettingsParameters struct {
 
 	// Kafka broker location. Specify in the form broker-hostname-or-ip:port.
-	// +kubebuilder:validation:Required
-	Broker *string `json:"broker" tf:"broker,omitempty"`
+	// +kubebuilder:validation:Optional
+	Broker *string `json:"broker,omitempty" tf:"broker,omitempty"`
 
 	// Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. Default is false.
 	// +kubebuilder:validation:Optional
@@ -371,6 +494,36 @@ type KafkaSettingsParameters struct {
 	// Kafka topic for migration. Default is kafka-default-topic.
 	// +kubebuilder:validation:Optional
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
+}
+
+type KinesisSettingsInitParameters struct {
+
+	// Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. Default is false.
+	IncludeControlDetails *bool `json:"includeControlDetails,omitempty" tf:"include_control_details,omitempty"`
+
+	// Include NULL and empty columns in the target. Default is false.
+	IncludeNullAndEmpty *bool `json:"includeNullAndEmpty,omitempty" tf:"include_null_and_empty,omitempty"`
+
+	// Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. Default is false.
+	IncludePartitionValue *bool `json:"includePartitionValue,omitempty" tf:"include_partition_value,omitempty"`
+
+	// Includes any data definition language (DDL) operations that change the table in the control data. Default is false.
+	IncludeTableAlterOperations *bool `json:"includeTableAlterOperations,omitempty" tf:"include_table_alter_operations,omitempty"`
+
+	// Provides detailed transaction information from the source database. Default is false.
+	IncludeTransactionDetails *bool `json:"includeTransactionDetails,omitempty" tf:"include_transaction_details,omitempty"`
+
+	// Output format for the records created. Default is json. Valid values are json and json-unformatted (a single line with no tab).
+	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// Prefixes schema and table names to partition values, when the partition type is primary-key-type. Default is false.
+	PartitionIncludeSchemaTable *bool `json:"partitionIncludeSchemaTable,omitempty" tf:"partition_include_schema_table,omitempty"`
+
+	// ARN of the IAM Role with permissions to write to the Kinesis data stream.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// ARN of the Kinesis data stream.
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
 type KinesisSettingsObservation struct {
@@ -442,6 +595,27 @@ type KinesisSettingsParameters struct {
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 }
 
+type MongodbSettingsInitParameters struct {
+
+	// Authentication mechanism to access the MongoDB source endpoint. Default is default.
+	AuthMechanism *string `json:"authMechanism,omitempty" tf:"auth_mechanism,omitempty"`
+
+	// Authentication database name. Not used when auth_type is no. Default is admin.
+	AuthSource *string `json:"authSource,omitempty" tf:"auth_source,omitempty"`
+
+	// Authentication type to access the MongoDB source endpoint. Default is password.
+	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
+
+	// Number of documents to preview to determine the document organization. Use this setting when nesting_level is set to one. Default is 1000.
+	DocsToInvestigate *string `json:"docsToInvestigate,omitempty" tf:"docs_to_investigate,omitempty"`
+
+	// Document ID. Use this setting when nesting_level is set to none. Default is false.
+	ExtractDocID *string `json:"extractDocId,omitempty" tf:"extract_doc_id,omitempty"`
+
+	// Specifies either document or table mode. Default is none. Valid values are one (table mode) and none (document mode).
+	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
+}
+
 type MongodbSettingsObservation struct {
 
 	// Authentication mechanism to access the MongoDB source endpoint. Default is default.
@@ -490,6 +664,27 @@ type MongodbSettingsParameters struct {
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
 }
 
+type RedisSettingsInitParameters struct {
+
+	// Authentication type to access the MongoDB source endpoint. Default is password.
+	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
+
+	// The username provided with the auth-role option of the AuthType setting for a Redis target endpoint.
+	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
+
+	// Port used by the endpoint database.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
+
+	// The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database. Options include plaintext, ssl-encryption. The default is ssl-encryption.
+	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
+
+	// Host name of the server.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+}
+
 type RedisSettingsObservation struct {
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
@@ -518,16 +713,16 @@ type RedisSettingsParameters struct {
 	AuthPasswordSecretRef *v1.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
-	// +kubebuilder:validation:Required
-	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
 
 	// The username provided with the auth-role option of the AuthType setting for a Redis target endpoint.
 	// +kubebuilder:validation:Optional
 	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
 
 	// Port used by the endpoint database.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	// +kubebuilder:validation:Optional
@@ -538,8 +733,26 @@ type RedisSettingsParameters struct {
 	SSLSecurityProtocol *string `json:"sslSecurityProtocol,omitempty" tf:"ssl_security_protocol,omitempty"`
 
 	// Host name of the server.
-	// +kubebuilder:validation:Required
-	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+}
+
+type RedshiftSettingsInitParameters struct {
+
+	// Custom S3 Bucket Object prefix for intermediate storage.
+	BucketFolder *string `json:"bucketFolder,omitempty" tf:"bucket_folder,omitempty"`
+
+	// Custom S3 Bucket name for intermediate storage.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The server-side encryption mode that you want to encrypt your intermediate .csv object files copied to S3. Defaults to SSE_S3. Valid values are SSE_S3 and SSE_KMS.
+	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
+
+	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
+	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
 }
 
 type RedshiftSettingsObservation struct {
@@ -581,6 +794,124 @@ type RedshiftSettingsParameters struct {
 	// Amazon Resource Name (ARN) of the IAM Role with permissions to read from or write to the S3 Bucket for intermediate storage.
 	// +kubebuilder:validation:Optional
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+}
+
+type S3SettingsInitParameters struct {
+
+	// Whether to add column name information to the .csv output file. Default is false.
+	AddColumnName *bool `json:"addColumnName,omitempty" tf:"add_column_name,omitempty"`
+
+	// S3 object prefix.
+	BucketFolder *string `json:"bucketFolder,omitempty" tf:"bucket_folder,omitempty"`
+
+	// S3 bucket name.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
+	CannedACLForObjects *string `json:"cannedAclForObjects,omitempty" tf:"canned_acl_for_objects,omitempty"`
+
+	// Whether to write insert and update operations to .csv or .parquet output files. Default is false.
+	CdcInsertsAndUpdates *bool `json:"cdcInsertsAndUpdates,omitempty" tf:"cdc_inserts_and_updates,omitempty"`
+
+	// Whether to write insert operations to .csv or .parquet output files. Default is false.
+	CdcInsertsOnly *bool `json:"cdcInsertsOnly,omitempty" tf:"cdc_inserts_only,omitempty"`
+
+	// Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3. Default is 60.
+	CdcMaxBatchInterval *float64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
+
+	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. Default is 32000. NOTE: Previously, this setting was measured in megabytes but now represents kilobytes. Update configurations accordingly.
+	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
+
+	// Folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
+	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
+
+	// Set to compress target files. Default is NONE. Valid values are GZIP and NONE.
+	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// Delimiter used to separate columns in the source files. Default is ,.
+	CsvDelimiter *string `json:"csvDelimiter,omitempty" tf:"csv_delimiter,omitempty"`
+
+	// String to use for all columns not included in the supplemental log.
+	CsvNoSupValue *string `json:"csvNoSupValue,omitempty" tf:"csv_no_sup_value,omitempty"`
+
+	// String to as null when writing to the target.
+	CsvNullValue *string `json:"csvNullValue,omitempty" tf:"csv_null_value,omitempty"`
+
+	// Delimiter used to separate rows in the source files. Default is \n.
+	CsvRowDelimiter *string `json:"csvRowDelimiter,omitempty" tf:"csv_row_delimiter,omitempty"`
+
+	// Output format for the files that AWS DMS uses to create S3 objects. Valid values are csv and parquet. Default is csv.
+	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
+
+	// Size of one data page in bytes. Default is 1048576 (1 MiB).
+	DataPageSize *float64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
+
+	// Date separating delimiter to use during folder partitioning. Valid values are SLASH, UNDERSCORE, DASH, and NONE. Default is SLASH.
+	DatePartitionDelimiter *string `json:"datePartitionDelimiter,omitempty" tf:"date_partition_delimiter,omitempty"`
+
+	// Partition S3 bucket folders based on transaction commit dates. Default is false.
+	DatePartitionEnabled *bool `json:"datePartitionEnabled,omitempty" tf:"date_partition_enabled,omitempty"`
+
+	// Date format to use during folder partitioning. Use this parameter when date_partition_enabled is set to true. Valid values are YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, and DDMMYYYY. Default is YYYYMMDD.
+	DatePartitionSequence *string `json:"datePartitionSequence,omitempty" tf:"date_partition_sequence,omitempty"`
+
+	// Maximum size in bytes of an encoded dictionary page of a column. Default is 1048576 (1 MiB).
+	DictPageSizeLimit *float64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
+
+	// Whether to enable statistics for Parquet pages and row groups. Default is true.
+	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
+
+	// Type of encoding to use. Value values are rle_dictionary, plain, and plain_dictionary. Default is rle_dictionary.
+	EncodingType *string `json:"encodingType,omitempty" tf:"encoding_type,omitempty"`
+
+	// Server-side encryption mode that you want to encrypt your .csv or .parquet object files copied to S3. Valid values are SSE_S3 and SSE_KMS. Default is SSE_S3.
+	EncryptionMode *string `json:"encryptionMode,omitempty" tf:"encryption_mode,omitempty"`
+
+	// JSON document that describes how AWS DMS should interpret the data.
+	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
+
+	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
+	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
+
+	// Deprecated. This setting has no effect. Will be removed in a future version.
+	// This setting has no effect, is deprecated, and will be removed in a future version
+	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
+
+	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
+	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
+
+	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. Default is 1048576 (1 GB).
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// - Specifies the precision of any TIMESTAMP column values written to an S3 object file in .parquet format. Default is false.
+	ParquetTimestampInMillisecond *bool `json:"parquetTimestampInMillisecond,omitempty" tf:"parquet_timestamp_in_millisecond,omitempty"`
+
+	// Version of the .parquet file format. Default is parquet-1-0. Valid values are parquet-1-0 and parquet-2-0.
+	ParquetVersion *string `json:"parquetVersion,omitempty" tf:"parquet_version,omitempty"`
+
+	// Whether DMS saves the transaction order for a CDC load on the S3 target specified by cdc_path. Default is false.
+	PreserveTransactions *bool `json:"preserveTransactions,omitempty" tf:"preserve_transactions,omitempty"`
+
+	// For an S3 source, whether each leading double quotation mark has to be followed by an ending double quotation mark. Default is true.
+	Rfc4180 *bool `json:"rfc4180,omitempty" tf:"rfc_4180,omitempty"`
+
+	// Number of rows in a row group. Default is 10000.
+	RowGroupLength *float64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
+
+	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
+	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
+
+	// ARN of the IAM Role with permissions to read from or write to the S3 Bucket.
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.
+	TimestampColumnName *string `json:"timestampColumnName,omitempty" tf:"timestamp_column_name,omitempty"`
+
+	// Whether to use csv_no_sup_value for columns not included in the supplemental log.
+	UseCsvNoSupValue *bool `json:"useCsvNoSupValue,omitempty" tf:"use_csv_no_sup_value,omitempty"`
+
+	// When set to true, uses the task start time as the timestamp column value instead of the time data is written to target. For full load, when set to true, each row of the timestamp column contains the task start time. For CDC loads, each row of the timestamp column contains the transaction commit time. When set to false, the full load timestamp in the timestamp column increments with the time data arrives at the target. Default is false.
+	UseTaskStartTimeForFullLoadTimestamp *bool `json:"useTaskStartTimeForFullLoadTimestamp,omitempty" tf:"use_task_start_time_for_full_load_timestamp,omitempty"`
 }
 
 type S3SettingsObservation struct {
@@ -861,6 +1192,18 @@ type S3SettingsParameters struct {
 type EndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // EndpointStatus defines the observed state of Endpoint.
@@ -881,8 +1224,8 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType)",message="endpointType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || has(self.initProvider.endpointType)",message="endpointType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
 	Spec   EndpointSpec   `json:"spec"`
 	Status EndpointStatus `json:"status,omitempty"`
 }

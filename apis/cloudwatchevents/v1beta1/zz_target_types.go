@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BatchTargetInitParameters struct {
+
+	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
+	ArraySize *float64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
+
+	// The number of times to attempt to retry, if the job fails. Valid values are 1 to 10.
+	JobAttempts *float64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
+
+	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
+	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
+
+	// The name to use for this execution of the job, if the target is an AWS Batch job.
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+}
+
 type BatchTargetObservation struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
@@ -39,12 +54,24 @@ type BatchTargetParameters struct {
 	JobAttempts *float64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
 
 	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
-	// +kubebuilder:validation:Required
-	JobDefinition *string `json:"jobDefinition" tf:"job_definition,omitempty"`
+	// +kubebuilder:validation:Optional
+	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
 
 	// The name to use for this execution of the job, if the target is an AWS Batch job.
-	// +kubebuilder:validation:Required
-	JobName *string `json:"jobName" tf:"job_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+}
+
+type CapacityProviderStrategyInitParameters struct {
+
+	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Short name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyObservation struct {
@@ -66,12 +93,18 @@ type CapacityProviderStrategyParameters struct {
 	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
-	// +kubebuilder:validation:Required
-	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
+	// +kubebuilder:validation:Optional
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type DeadLetterConfigInitParameters struct {
+
+	// - ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 }
 
 type DeadLetterConfigObservation struct {
@@ -85,6 +118,45 @@ type DeadLetterConfigParameters struct {
 	// - ARN of the SQS queue specified as the target for the dead-letter queue.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type EcsTargetInitParameters struct {
+
+	// The capacity provider strategy to use for the task. If a capacity_provider_strategy specified, the launch_type parameter must be omitted. If no capacity_provider_strategy or launch_type is specified, the default capacity provider strategy for the cluster is used. Can be one or more. See below.
+	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
+
+	// Specifies whether to enable Amazon ECS managed tags for the task.
+	EnableEcsManagedTags *bool `json:"enableEcsManagedTags,omitempty" tf:"enable_ecs_managed_tags,omitempty"`
+
+	// Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task.
+	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Specifies an ECS task group for the task. The maximum length is 255 characters.
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
+	// Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. Valid values include: EC2, EXTERNAL, or FARGATE.
+	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
+
+	// Use this if the ECS task uses the awsvpc network mode. This specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. Required if launch_type is FARGATE because the awsvpc mode is required for Fargate tasks.
+	NetworkConfiguration []NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
+
+	// An array of placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.
+	OrderedPlacementStrategy []OrderedPlacementStrategyInitParameters `json:"orderedPlacementStrategy,omitempty" tf:"ordered_placement_strategy,omitempty"`
+
+	// An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime). See Below.
+	PlacementConstraint []PlacementConstraintInitParameters `json:"placementConstraint,omitempty" tf:"placement_constraint,omitempty"`
+
+	// Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This is used only if LaunchType is FARGATE. For more information about valid platform versions, see AWS Fargate Platform Versions.
+	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
+
+	// Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. The only valid value is: TASK_DEFINITION.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// A map of tags to assign to ecs resources.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
+	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 }
 
 type EcsTargetObservation struct {
@@ -194,6 +266,18 @@ type EcsTargetParameters struct {
 	TaskDefinitionArnSelector *v1.Selector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
 }
 
+type HTTPTargetInitParameters struct {
+
+	// Enables you to specify HTTP headers to add to the request.
+	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
+
+	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
+	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
+
+	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
+	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
+}
+
 type HTTPTargetObservation struct {
 
 	// Enables you to specify HTTP headers to add to the request.
@@ -221,6 +305,15 @@ type HTTPTargetParameters struct {
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
+type InputTransformerInitParameters struct {
+
+	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
+	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
+
+	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
+	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
+}
+
 type InputTransformerObservation struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
@@ -237,8 +330,14 @@ type InputTransformerParameters struct {
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
-	// +kubebuilder:validation:Required
-	InputTemplate *string `json:"inputTemplate" tf:"input_template,omitempty"`
+	// +kubebuilder:validation:Optional
+	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
+}
+
+type KinesisTargetInitParameters struct {
+
+	// The JSON path to be extracted from the event and used as the partition key.
+	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
 }
 
 type KinesisTargetObservation struct {
@@ -252,6 +351,18 @@ type KinesisTargetParameters struct {
 	// The JSON path to be extracted from the event and used as the partition key.
 	// +kubebuilder:validation:Optional
 	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+}
+
+type NetworkConfigurationInitParameters struct {
+
+	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Defaults to false.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The subnets associated with the task or service.
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
@@ -277,8 +388,17 @@ type NetworkConfigurationParameters struct {
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
-	// +kubebuilder:validation:Required
-	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+}
+
+type OrderedPlacementStrategyInitParameters struct {
+
+	// The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used. For more information, see Amazon ECS task placement strategies.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// Type of placement strategy. The only valid values at this time are binpack, random and spread.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OrderedPlacementStrategyObservation struct {
@@ -297,8 +417,17 @@ type OrderedPlacementStrategyParameters struct {
 	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Type of placement strategy. The only valid values at this time are binpack, random and spread.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PlacementConstraintInitParameters struct {
+
+	// Cluster Query Language expression to apply to the constraint. Does not need to be specified for the distinctInstance type. For more information, see Cluster Query Language in the Amazon EC2 Container Service Developer Guide.
+	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
+
+	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PlacementConstraintObservation struct {
@@ -317,8 +446,29 @@ type PlacementConstraintParameters struct {
 	Expression *string `json:"expression,omitempty" tf:"expression,omitempty"`
 
 	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RedshiftTargetInitParameters struct {
+
+	// The database user name.
+	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
+
+	// The name of the database.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// The SQL statement text to run.
+	SQL *string `json:"sql,omitempty" tf:"sql,omitempty"`
+
+	// The name or ARN of the secret that enables access to the database.
+	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
+
+	// The name of the SQL statement.
+	StatementName *string `json:"statementName,omitempty" tf:"statement_name,omitempty"`
+
+	// Indicates whether to send an event back to EventBridge after the SQL statement runs.
+	WithEvent *bool `json:"withEvent,omitempty" tf:"with_event,omitempty"`
 }
 
 type RedshiftTargetObservation struct {
@@ -349,8 +499,8 @@ type RedshiftTargetParameters struct {
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The name of the database.
-	// +kubebuilder:validation:Required
-	Database *string `json:"database" tf:"database,omitempty"`
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The SQL statement text to run.
 	// +kubebuilder:validation:Optional
@@ -367,6 +517,15 @@ type RedshiftTargetParameters struct {
 	// Indicates whether to send an event back to EventBridge after the SQL statement runs.
 	// +kubebuilder:validation:Optional
 	WithEvent *bool `json:"withEvent,omitempty" tf:"with_event,omitempty"`
+}
+
+type RetryPolicyInitParameters struct {
+
+	// The age in seconds to continue to make retry attempts.
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+
+	// maximum number of retry attempts to make before the request fails
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyObservation struct {
@@ -389,6 +548,15 @@ type RetryPolicyParameters struct {
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
+type RunCommandTargetsInitParameters struct {
+
+	// Can be either tag:tag-key or InstanceIds.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// If Key is tag:tag-key, Values is a list of tag values. If Key is InstanceIds, Values is a list of Amazon EC2 instance IDs.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type RunCommandTargetsObservation struct {
 
 	// Can be either tag:tag-key or InstanceIds.
@@ -401,12 +569,18 @@ type RunCommandTargetsObservation struct {
 type RunCommandTargetsParameters struct {
 
 	// Can be either tag:tag-key or InstanceIds.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// If Key is tag:tag-key, Values is a list of tag values. If Key is InstanceIds, Values is a list of Amazon EC2 instance IDs.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type SqsTargetInitParameters struct {
+
+	// The FIFO message group ID to use as the target.
+	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
 }
 
 type SqsTargetObservation struct {
@@ -420,6 +594,51 @@ type SqsTargetParameters struct {
 	// The FIFO message group ID to use as the target.
 	// +kubebuilder:validation:Optional
 	MessageGroupID *string `json:"messageGroupId,omitempty" tf:"message_group_id,omitempty"`
+}
+
+type TargetInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the target.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an Amazon Batch Job. Documented below. A maximum of 1 are allowed.
+	BatchTarget []BatchTargetInitParameters `json:"batchTarget,omitempty" tf:"batch_target,omitempty"`
+
+	// Parameters used when you are providing a dead letter config. Documented below. A maximum of 1 are allowed.
+	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
+
+	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
+	EcsTarget []EcsTargetInitParameters `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
+	HTTPTarget []HTTPTargetInitParameters `json:"httpTarget,omitempty" tf:"http_target,omitempty"`
+
+	// Valid JSON text passed to the target. Conflicts with input_path and input_transformer.
+	Input *string `json:"input,omitempty" tf:"input,omitempty"`
+
+	// The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. Conflicts with input and input_transformer.
+	InputPath *string `json:"inputPath,omitempty" tf:"input_path,omitempty"`
+
+	// Parameters used when you are providing a custom input to a target based on certain event data. Conflicts with input and input_path.
+	InputTransformer []InputTransformerInitParameters `json:"inputTransformer,omitempty" tf:"input_transformer,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an Amazon Kinesis Stream. Documented below. A maximum of 1 are allowed.
+	KinesisTarget []KinesisTargetInitParameters `json:"kinesisTarget,omitempty" tf:"kinesis_target,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an Amazon Redshift Statement. Documented below. A maximum of 1 are allowed.
+	RedshiftTarget []RedshiftTargetInitParameters `json:"redshiftTarget,omitempty" tf:"redshift_target,omitempty"`
+
+	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
+	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
+	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
+	SqsTarget []SqsTargetInitParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
+
+	// The unique target assignment ID. If missing, will generate a random, unique id.
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 type TargetObservation struct {
@@ -588,6 +807,18 @@ type TargetParameters struct {
 type TargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // TargetStatus defines the observed state of Target.
@@ -608,7 +839,7 @@ type TargetStatus struct {
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.arn)",message="arn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.arn) || has(self.initProvider.arn)",message="arn is a required parameter"
 	Spec   TargetSpec   `json:"spec"`
 	Status TargetStatus `json:"status,omitempty"`
 }

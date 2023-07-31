@@ -176,6 +176,46 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  clientAffinity:
+                    description: 'Direct all requests from a user to the same endpoint.
+                      Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global
+                      Accelerator uses the "five-tuple" properties of source IP address,
+                      source port, destination IP address, destination port, and protocol
+                      to select the hash value. If SOURCE_IP, Global Accelerator uses
+                      the "two-tuple" properties of source (client) IP address and
+                      destination IP address to select the hash value.'
+                    type: string
+                  portRange:
+                    description: The list of port ranges for the connections from
+                      clients to the accelerator. Fields documented below.
+                    items:
+                      properties:
+                        fromPort:
+                          description: The first port in the range of ports, inclusive.
+                          type: number
+                        toPort:
+                          description: The last port in the range of ports, inclusive.
+                          type: number
+                      type: object
+                    type: array
+                  protocol:
+                    description: The protocol for the connections from clients to
+                      the accelerator. Valid values are TCP, UDP.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -376,10 +416,12 @@ spec:
             x-kubernetes-validations:
             - message: portRange is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.portRange)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.portRange)
+                || has(self.initProvider.portRange)'
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
           status:
             description: ListenerStatus defines the observed state of Listener.
             properties:

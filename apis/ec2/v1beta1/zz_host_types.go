@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HostInitParameters struct {
+
+	// Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. Valid values: on, off. Default: on.
+	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
+
+	// The Availability Zone in which to allocate the Dedicated Host.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Indicates whether to enable or disable host recovery for the Dedicated Host. Valid values: on, off. Default: off.
+	HostRecovery *string `json:"hostRecovery,omitempty" tf:"host_recovery,omitempty"`
+
+	// Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family. Exactly one of instance_family or instance_type must be specified.
+	InstanceFamily *string `json:"instanceFamily,omitempty" tf:"instance_family,omitempty"`
+
+	// Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only. Exactly one of instance_family or instance_type must be specified.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the AWS Outpost on which to allocate the Dedicated Host.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type HostObservation struct {
 
 	// The ARN of the Dedicated Host.
@@ -89,6 +113,18 @@ type HostParameters struct {
 type HostSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HostParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider HostInitParameters `json:"initProvider,omitempty"`
 }
 
 // HostStatus defines the observed state of Host.
@@ -109,7 +145,7 @@ type HostStatus struct {
 type Host struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone) || has(self.initProvider.availabilityZone)",message="availabilityZone is a required parameter"
 	Spec   HostSpec   `json:"spec"`
 	Status HostStatus `json:"status,omitempty"`
 }

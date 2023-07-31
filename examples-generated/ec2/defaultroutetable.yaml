@@ -23,6 +23,3 @@ spec:
       ipv6CidrBlock: ::/0
     tags:
       Name: example
-
----
-

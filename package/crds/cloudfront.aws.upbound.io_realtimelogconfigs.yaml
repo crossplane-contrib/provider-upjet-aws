@@ -251,9 +251,6 @@ spec:
                           description: The type of data stream where real-time log
                             data is sent. The only valid value is Kinesis.
                           type: string
-                      required:
-                      - kinesisStreamConfig
-                      - streamType
                       type: object
                     type: array
                   fields:
@@ -277,6 +274,51 @@ spec:
                     type: number
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  endpoint:
+                    description: The Amazon Kinesis data streams where real-time log
+                      data is sent.
+                    items:
+                      properties:
+                        kinesisStreamConfig:
+                          description: The Amazon Kinesis data stream configuration.
+                          items:
+                            type: object
+                          type: array
+                        streamType:
+                          description: The type of data stream where real-time log
+                            data is sent. The only valid value is Kinesis.
+                          type: string
+                      type: object
+                    type: array
+                  fields:
+                    description: The fields that are included in each real-time log
+                      record. See the AWS documentation for supported values.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The unique name to identify this real-time log configuration.
+                    type: string
+                  samplingRate:
+                    description: The sampling rate for this real-time log configuration.
+                      The sampling rate determines the percentage of viewer requests
+                      that are represented in the real-time log data. An integer between
+                      1 and 100, inclusive.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -478,16 +520,20 @@ spec:
             x-kubernetes-validations:
             - message: endpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpoint)
+                || has(self.initProvider.endpoint)'
             - message: fields is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.fields)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.fields)
+                || has(self.initProvider.fields)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: samplingRate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.samplingRate)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.samplingRate)
+                || has(self.initProvider.samplingRate)'
           status:
             description: RealtimeLogConfigStatus defines the observed state of RealtimeLogConfig.
             properties:

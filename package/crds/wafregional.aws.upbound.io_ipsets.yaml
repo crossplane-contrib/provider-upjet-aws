@@ -79,9 +79,6 @@ spec:
                         value:
                           description: The CIDR notation.
                           type: string
-                      required:
-                      - type
-                      - value
                       type: object
                     type: array
                   name:
@@ -93,6 +90,37 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  ipSetDescriptor:
+                    description: One or more pairs specifying the IP address type
+                      (IPV4 or IPV6) and the IP address range (in CIDR notation) from
+                      which web requests originate.
+                    items:
+                      properties:
+                        type:
+                          description: The string like IPV4 or IPV6.
+                          type: string
+                        value:
+                          description: The CIDR notation.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name or description of the IPSet.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -294,7 +322,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: IPSetStatus defines the observed state of IPSet.
             properties:

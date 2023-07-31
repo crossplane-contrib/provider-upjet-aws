@@ -37,6 +37,3 @@ spec:
     tags:
       foo: bar
     terminateInstanceOnFailure: true
-
----
-

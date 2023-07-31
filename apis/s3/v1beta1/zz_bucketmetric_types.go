@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketMetricFilterInitParameters struct {
+
+	// Object prefix for filtering (singular).
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BucketMetricFilterObservation struct {
 
 	// Object prefix for filtering (singular).
@@ -31,6 +40,15 @@ type BucketMetricFilterParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type BucketMetricInitParameters struct {
+
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	Filter []BucketMetricFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Unique identifier of the metrics configuration for the bucket. Must be less than or equal to 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type BucketMetricObservation struct {
@@ -81,6 +99,18 @@ type BucketMetricParameters struct {
 type BucketMetricSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketMetricParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketMetricInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketMetricStatus defines the observed state of BucketMetric.
@@ -101,7 +131,7 @@ type BucketMetricStatus struct {
 type BucketMetric struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   BucketMetricSpec   `json:"spec"`
 	Status BucketMetricStatus `json:"status,omitempty"`
 }

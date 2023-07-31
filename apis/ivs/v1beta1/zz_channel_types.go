@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ChannelInitParameters struct {
+
+	// If true, channel is private (enabled for playback authorization).
+	Authorized *bool `json:"authorized,omitempty" tf:"authorized,omitempty"`
+
+	// Channel latency mode. Valid values: NORMAL, LOW.
+	LatencyMode *string `json:"latencyMode,omitempty" tf:"latency_mode,omitempty"`
+
+	// Channel name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Recording configuration ARN.
+	RecordingConfigurationArn *string `json:"recordingConfigurationArn,omitempty" tf:"recording_configuration_arn,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Channel type, which determines the allowable resolution and bitrate. Valid values: STANDARD, BASIC.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ChannelObservation struct {
 
 	// ARN of the Channel.
@@ -84,6 +105,18 @@ type ChannelParameters struct {
 type ChannelSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ChannelParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ChannelInitParameters `json:"initProvider,omitempty"`
 }
 
 // ChannelStatus defines the observed state of Channel.

@@ -171,6 +171,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Description of the alias.
+                    type: string
+                  functionVersion:
+                    description: 'Lambda function version for which you are creating
+                      the alias. Pattern: (\$LATEST|[0-9]+).'
+                    type: string
+                  routingConfig:
+                    description: The Lambda alias' route configuration settings. Fields
+                      documented below
+                    items:
+                      properties:
+                        additionalVersionWeights:
+                          additionalProperties:
+                            type: number
+                          description: A map that defines the proportion of events
+                            that should be sent to different versions of a lambda
+                            function.
+                          type: object
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -371,7 +406,8 @@ spec:
             x-kubernetes-validations:
             - message: functionVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionVersion)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionVersion)
+                || has(self.initProvider.functionVersion)'
           status:
             description: AliasStatus defines the observed state of Alias.
             properties:

@@ -186,6 +186,55 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  autoResolveBestVoicesEnabled:
+                    description: Specifies whether auto resolve best voices is enabled.
+                      Defaults to true.
+                    type: boolean
+                  contactFlowLogsEnabled:
+                    description: Specifies whether contact flow logs are enabled.
+                      Defaults to false.
+                    type: boolean
+                  contactLensEnabled:
+                    description: Specifies whether contact lens is enabled. Defaults
+                      to true.
+                    type: boolean
+                  earlyMediaEnabled:
+                    description: Specifies whether early media for outbound calls
+                      is enabled . Defaults to true if outbound calls is enabled.
+                    type: boolean
+                  identityManagementType:
+                    description: 'Specifies the identity management type attached
+                      to the instance. Allowed Values are: SAML, CONNECT_MANAGED,
+                      EXISTING_DIRECTORY.'
+                    type: string
+                  inboundCallsEnabled:
+                    description: Specifies whether inbound calls are enabled.
+                    type: boolean
+                  instanceAlias:
+                    description: Specifies the name of the instance. Required if directory_id
+                      not specified.
+                    type: string
+                  multiPartyConferenceEnabled:
+                    description: Specifies whether multi-party calls/conference is
+                      enabled. Defaults to false.
+                    type: boolean
+                  outboundCallsEnabled:
+                    description: Specifies whether outbound calls are enabled.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -386,13 +435,16 @@ spec:
             x-kubernetes-validations:
             - message: identityManagementType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.identityManagementType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.identityManagementType)
+                || has(self.initProvider.identityManagementType)'
             - message: inboundCallsEnabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled)
+                || has(self.initProvider.inboundCallsEnabled)'
             - message: outboundCallsEnabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled)
+                || has(self.initProvider.outboundCallsEnabled)'
           status:
             description: InstanceStatus defines the observed state of Instance.
             properties:

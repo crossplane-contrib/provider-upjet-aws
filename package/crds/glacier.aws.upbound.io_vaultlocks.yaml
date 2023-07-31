@@ -167,6 +167,37 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  completeLock:
+                    description: Boolean whether to permanently apply this Glacier
+                      Lock Policy. Once completed, this cannot be undone. If set to
+                      false, the Glacier Lock Policy remains in a testing mode for
+                      24 hours. Changing this from false to true will show as resource
+                      recreation, which is expected. Changing this from true to false
+                      is not possible unless the Glacier Vault is recreated at the
+                      same time.
+                    type: boolean
+                  ignoreDeletionError:
+                    description: This should only be used in conjunction with complete_lock
+                      being set to true.
+                    type: boolean
+                  policy:
+                    description: JSON string containing the IAM policy to apply as
+                      the Glacier Vault Lock policy.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -367,10 +398,12 @@ spec:
             x-kubernetes-validations:
             - message: completeLock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.completeLock)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.completeLock)
+                || has(self.initProvider.completeLock)'
             - message: policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
+                || has(self.initProvider.policy)'
           status:
             description: VaultLockStatus defines the observed state of VaultLock.
             properties:

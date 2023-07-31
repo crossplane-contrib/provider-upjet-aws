@@ -273,6 +273,64 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Specifies the description of the Queue.
+                    type: string
+                  maxContacts:
+                    description: Specifies the maximum number of contacts that can
+                      be in the queue before it is considered full. Minimum value
+                      of 0.
+                    type: number
+                  name:
+                    description: Specifies the name of the Queue.
+                    type: string
+                  outboundCallerConfig:
+                    description: A block that defines the outbound caller ID name,
+                      number, and outbound whisper flow. The Outbound Caller Config
+                      block is documented below.
+                    items:
+                      properties:
+                        outboundCallerIdName:
+                          description: Specifies the caller ID name.
+                          type: string
+                        outboundCallerIdNumberId:
+                          description: Specifies the caller ID number.
+                          type: string
+                        outboundFlowId:
+                          description: Specifies outbound whisper flow to be used
+                            during an outbound call.
+                          type: string
+                      type: object
+                    type: array
+                  quickConnectIds:
+                    description: Specifies a list of quick connects ids that determine
+                      the quick connects available to agents who are working the queue.
+                    items:
+                      type: string
+                    type: array
+                  status:
+                    description: Specifies the description of the Queue. Valid values
+                      are ENABLED, DISABLED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -473,7 +531,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: QueueStatus defines the observed state of Queue.
             properties:

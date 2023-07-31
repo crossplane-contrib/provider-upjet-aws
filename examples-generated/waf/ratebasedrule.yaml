@@ -37,6 +37,3 @@ spec:
       value: 192.0.7.0/24
     name: tfIPSet
     region: us-west-1
-
----
-

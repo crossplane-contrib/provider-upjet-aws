@@ -13,6 +13,37 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type JavaAppLayerCloudwatchConfigurationInitParameters struct {
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	LogStreams []JavaAppLayerCloudwatchConfigurationLogStreamsInitParameters `json:"logStreams,omitempty" tf:"log_streams,omitempty"`
+}
+
+type JavaAppLayerCloudwatchConfigurationLogStreamsInitParameters struct {
+	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+
+	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+
+	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
+
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	FileFingerprintLines *string `json:"fileFingerprintLines,omitempty" tf:"file_fingerprint_lines,omitempty"`
+
+	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
+
+	// A human-readable name for the layer.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	MultilineStartPattern *string `json:"multilineStartPattern,omitempty" tf:"multiline_start_pattern,omitempty"`
+
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+}
+
 type JavaAppLayerCloudwatchConfigurationLogStreamsObservation struct {
 	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
@@ -55,8 +86,8 @@ type JavaAppLayerCloudwatchConfigurationLogStreamsParameters struct {
 	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
-	// +kubebuilder:validation:Required
-	File *string `json:"file" tf:"file,omitempty"`
+	// +kubebuilder:validation:Optional
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FileFingerprintLines *string `json:"fileFingerprintLines,omitempty" tf:"file_fingerprint_lines,omitempty"`
@@ -65,8 +96,8 @@ type JavaAppLayerCloudwatchConfigurationLogStreamsParameters struct {
 	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
 
 	// A human-readable name for the layer.
-	// +kubebuilder:validation:Required
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MultilineStartPattern *string `json:"multilineStartPattern,omitempty" tf:"multiline_start_pattern,omitempty"`
@@ -88,6 +119,28 @@ type JavaAppLayerCloudwatchConfigurationParameters struct {
 
 	// +kubebuilder:validation:Optional
 	LogStreams []JavaAppLayerCloudwatchConfigurationLogStreamsParameters `json:"logStreams,omitempty" tf:"log_streams,omitempty"`
+}
+
+type JavaAppLayerEBSVolumeInitParameters struct {
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// For PIOPS volumes, the IOPS per disk.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// The path to mount the EBS volume on the layer's instances.
+	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
+
+	// The number of disks to use for the EBS volume.
+	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+
+	// The RAID level to use for the volume.
+	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
+
+	// The size of the volume in gigabytes.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The type of volume to create. This may be standard (the default), io1 or gp2.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type JavaAppLayerEBSVolumeObservation struct {
@@ -122,24 +175,114 @@ type JavaAppLayerEBSVolumeParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
-	// +kubebuilder:validation:Required
-	MountPoint *string `json:"mountPoint" tf:"mount_point,omitempty"`
+	// +kubebuilder:validation:Optional
+	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	// +kubebuilder:validation:Required
-	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
+	// +kubebuilder:validation:Optional
+	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	// +kubebuilder:validation:Required
-	Size *float64 `json:"size" tf:"size,omitempty"`
+	// +kubebuilder:validation:Optional
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type JavaAppLayerInitParameters struct {
+
+	// Keyword for the application container to use. Defaults to "tomcat".
+	AppServer *string `json:"appServer,omitempty" tf:"app_server,omitempty"`
+
+	// Version of the selected application container to use. Defaults to "7".
+	AppServerVersion *string `json:"appServerVersion,omitempty" tf:"app_server_version,omitempty"`
+
+	// Whether to automatically assign an elastic IP address to the layer's instances.
+	AutoAssignElasticIps *bool `json:"autoAssignElasticIps,omitempty" tf:"auto_assign_elastic_ips,omitempty"`
+
+	// For stacks belonging to a VPC, whether to automatically assign a public IP address to each of the layer's instances.
+	AutoAssignPublicIps *bool `json:"autoAssignPublicIps,omitempty" tf:"auto_assign_public_ips,omitempty"`
+
+	// Whether to enable auto-healing for the layer.
+	AutoHealing *bool `json:"autoHealing,omitempty" tf:"auto_healing,omitempty"`
+
+	CloudwatchConfiguration []JavaAppLayerCloudwatchConfigurationInitParameters `json:"cloudwatchConfiguration,omitempty" tf:"cloudwatch_configuration,omitempty"`
+
+	CustomConfigureRecipes []*string `json:"customConfigureRecipes,omitempty" tf:"custom_configure_recipes,omitempty"`
+
+	CustomDeployRecipes []*string `json:"customDeployRecipes,omitempty" tf:"custom_deploy_recipes,omitempty"`
+
+	// The ARN of an IAM profile that will be used for the layer's instances.
+	CustomInstanceProfileArn *string `json:"customInstanceProfileArn,omitempty" tf:"custom_instance_profile_arn,omitempty"`
+
+	// Custom JSON attributes to apply to the layer.
+	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
+
+	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
+
+	CustomShutdownRecipes []*string `json:"customShutdownRecipes,omitempty" tf:"custom_shutdown_recipes,omitempty"`
+
+	CustomUndeployRecipes []*string `json:"customUndeployRecipes,omitempty" tf:"custom_undeploy_recipes,omitempty"`
+
+	// Whether to enable Elastic Load Balancing connection draining.
+	DrainELBOnShutdown *bool `json:"drainElbOnShutdown,omitempty" tf:"drain_elb_on_shutdown,omitempty"`
+
+	// ebs_volume blocks, as described below, will each create an EBS volume and connect it to the layer's instances.
+	EBSVolume []JavaAppLayerEBSVolumeInitParameters `json:"ebsVolume,omitempty" tf:"ebs_volume,omitempty"`
+
+	// Name of an Elastic Load Balancer to attach to this layer
+	ElasticLoadBalancer *string `json:"elasticLoadBalancer,omitempty" tf:"elastic_load_balancer,omitempty"`
+
+	// Whether to install OS and package updates on each instance when it boots.
+	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
+
+	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
+	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+
+	// Options to set for the JVM.
+	JvmOptions *string `json:"jvmOptions,omitempty" tf:"jvm_options,omitempty"`
+
+	// Keyword for the type of JVM to use. Defaults to openjdk.
+	JvmType *string `json:"jvmType,omitempty" tf:"jvm_type,omitempty"`
+
+	// Version of JVM to use. Defaults to "7".
+	JvmVersion *string `json:"jvmVersion,omitempty" tf:"jvm_version,omitempty"`
+
+	LoadBasedAutoScaling []JavaAppLayerLoadBasedAutoScalingInitParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
+
+	// A human-readable name for the layer.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Names of a set of system packages to install on the layer's instances.
+	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Whether to use EBS-optimized instances.
+	UseEBSOptimizedInstances *bool `json:"useEbsOptimizedInstances,omitempty" tf:"use_ebs_optimized_instances,omitempty"`
+}
+
+type JavaAppLayerLoadBasedAutoScalingDownscalingInitParameters struct {
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type JavaAppLayerLoadBasedAutoScalingDownscalingObservation struct {
@@ -182,6 +325,14 @@ type JavaAppLayerLoadBasedAutoScalingDownscalingParameters struct {
 	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
+type JavaAppLayerLoadBasedAutoScalingInitParameters struct {
+	Downscaling []JavaAppLayerLoadBasedAutoScalingDownscalingInitParameters `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
+
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	Upscaling []JavaAppLayerLoadBasedAutoScalingUpscalingInitParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
+}
+
 type JavaAppLayerLoadBasedAutoScalingObservation struct {
 	Downscaling []JavaAppLayerLoadBasedAutoScalingDownscalingObservation `json:"downscaling,omitempty" tf:"downscaling,omitempty"`
 
@@ -200,6 +351,22 @@ type JavaAppLayerLoadBasedAutoScalingParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Upscaling []JavaAppLayerLoadBasedAutoScalingUpscalingParameters `json:"upscaling,omitempty" tf:"upscaling,omitempty"`
+}
+
+type JavaAppLayerLoadBasedAutoScalingUpscalingInitParameters struct {
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
+
+	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
+
+	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
+
+	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type JavaAppLayerLoadBasedAutoScalingUpscalingObservation struct {
@@ -464,6 +631,18 @@ type JavaAppLayerParameters struct {
 type JavaAppLayerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     JavaAppLayerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider JavaAppLayerInitParameters `json:"initProvider,omitempty"`
 }
 
 // JavaAppLayerStatus defines the observed state of JavaAppLayer.

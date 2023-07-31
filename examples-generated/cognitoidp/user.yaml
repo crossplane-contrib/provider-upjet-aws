@@ -27,6 +27,3 @@ spec:
   forProvider:
     name: MyExamplePool
     region: us-west-1
-
----
-

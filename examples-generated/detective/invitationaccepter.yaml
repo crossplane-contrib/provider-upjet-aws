@@ -47,6 +47,3 @@ spec:
         testing.upbound.io/example-name: primary
     message: Message of the invite
     region: us-west-1
-
----
-

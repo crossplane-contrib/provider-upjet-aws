@@ -84,9 +84,6 @@ spec:
                             For more information on configuring the log format rules
                             visit the AWS documentation
                           type: string
-                      required:
-                      - destinationArn
-                      - format
                       type: object
                     type: array
                   cacheClusterEnabled:
@@ -307,6 +304,94 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  accessLogSettings:
+                    description: Enables access logs for the API stage. See Access
+                      Log Settings below.
+                    items:
+                      properties:
+                        destinationArn:
+                          description: ARN of the CloudWatch Logs log group or Kinesis
+                            Data Firehose delivery stream to receive access logs.
+                            If you specify a Kinesis Data Firehose delivery stream,
+                            the stream name must begin with amazon-apigateway-. Automatically
+                            removes trailing :* if present.
+                          type: string
+                        format:
+                          description: Formatting and values recorded in the logs.
+                            For more information on configuring the log format rules
+                            visit the AWS documentation
+                          type: string
+                      type: object
+                    type: array
+                  cacheClusterEnabled:
+                    description: Whether a cache cluster is enabled for the stage
+                    type: boolean
+                  cacheClusterSize:
+                    description: Size of the cache cluster for the stage, if enabled.
+                      Allowed values include 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118
+                      and 237.
+                    type: string
+                  canarySettings:
+                    description: Configuration settings of a canary deployment. See
+                      Canary Settings below.
+                    items:
+                      properties:
+                        percentTraffic:
+                          description: Percent 0.0 - 100.0 of traffic to divert to
+                            the canary deployment.
+                          type: number
+                        stageVariableOverrides:
+                          additionalProperties:
+                            type: string
+                          description: Map of overridden stage variables (including
+                            new variables) for the canary deployment.
+                          type: object
+                        useStageCache:
+                          description: Whether the canary deployment uses the stage
+                            cache. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  clientCertificateId:
+                    description: Identifier of a client certificate for the stage.
+                    type: string
+                  description:
+                    description: Description of the stage.
+                    type: string
+                  documentationVersion:
+                    description: Version of the associated API documentation
+                    type: string
+                  stageName:
+                    description: Name of the stage
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  variables:
+                    additionalProperties:
+                      type: string
+                    description: Map that defines the stage variables
+                    type: object
+                  xrayTracingEnabled:
+                    description: Whether active tracing with X-ray is enabled. Defaults
+                      to false.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -507,7 +592,8 @@ spec:
             x-kubernetes-validations:
             - message: stageName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.stageName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.stageName)
+                || has(self.initProvider.stageName)'
           status:
             description: StageStatus defines the observed state of Stage.
             properties:

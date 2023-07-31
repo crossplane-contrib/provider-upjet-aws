@@ -180,6 +180,48 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  acceptLanguage:
+                    description: 'Language code. Valid values: en (English), jp (Japanese),
+                      zh (Chinese). Default value is en.'
+                    type: string
+                  principalId:
+                    description: Identifier of the principal with whom you will share
+                      the portfolio. Valid values AWS account IDs and ARNs of AWS
+                      Organizations and organizational units.
+                    type: string
+                  sharePrincipals:
+                    description: Enables or disables Principal sharing when creating
+                      the portfolio share. If this flag is not provided, principal
+                      sharing is disabled.
+                    type: boolean
+                  shareTagOptions:
+                    description: Whether to enable sharing of aws_servicecatalog_tag_option
+                      resources when creating the portfolio share.
+                    type: boolean
+                  type:
+                    description: Type of portfolio share. Valid values are ACCOUNT
+                      (an external account), ORGANIZATION (a share to every account
+                      in an organization), ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
+                      (a share to an account in an organization).
+                    type: string
+                  waitForAcceptance:
+                    description: Whether to wait (up to the timeout) for the share
+                      to be accepted. Organizational shares are automatically accepted.
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -380,10 +422,12 @@ spec:
             x-kubernetes-validations:
             - message: principalId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalId)
+                || has(self.initProvider.principalId)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: PortfolioShareStatus defines the observed state of PortfolioShare.
             properties:

@@ -11,6 +11,3 @@ spec:
     imageId: ${data.aws_ami.ubuntu.id}
     instanceType: t2.micro
     region: us-west-1
-
----
-

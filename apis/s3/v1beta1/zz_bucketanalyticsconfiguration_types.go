@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BucketAnalyticsConfigurationFilterInitParameters struct {
+
+	// Object prefix for filtering.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BucketAnalyticsConfigurationFilterObservation struct {
 
 	// Object prefix for filtering.
@@ -31,6 +40,18 @@ type BucketAnalyticsConfigurationFilterParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type BucketAnalyticsConfigurationInitParameters struct {
+
+	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
+	Filter []BucketAnalyticsConfigurationFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Unique identifier of the analytics configuration for the bucket.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration for the analytics data export (documented below).
+	StorageClassAnalysis []StorageClassAnalysisInitParameters `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
 
 type BucketAnalyticsConfigurationObservation struct {
@@ -84,6 +105,12 @@ type BucketAnalyticsConfigurationParameters struct {
 	StorageClassAnalysis []StorageClassAnalysisParameters `json:"storageClassAnalysis,omitempty" tf:"storage_class_analysis,omitempty"`
 }
 
+type DataExportDestinationInitParameters struct {
+
+	// Analytics data export currently only supports an S3 bucket destination (documented below).
+	S3BucketDestination []S3BucketDestinationInitParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+}
+
 type DataExportDestinationObservation struct {
 
 	// Analytics data export currently only supports an S3 bucket destination (documented below).
@@ -93,8 +120,17 @@ type DataExportDestinationObservation struct {
 type DataExportDestinationParameters struct {
 
 	// Analytics data export currently only supports an S3 bucket destination (documented below).
-	// +kubebuilder:validation:Required
-	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination" tf:"s3_bucket_destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+}
+
+type DataExportInitParameters struct {
+
+	// Specifies the destination for the exported analytics data (documented below).
+	Destination []DataExportDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
+	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
 }
 
 type DataExportObservation struct {
@@ -109,12 +145,24 @@ type DataExportObservation struct {
 type DataExportParameters struct {
 
 	// Specifies the destination for the exported analytics data (documented below).
-	// +kubebuilder:validation:Required
-	Destination []DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destination []DataExportDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
 	// +kubebuilder:validation:Optional
 	OutputSchemaVersion *string `json:"outputSchemaVersion,omitempty" tf:"output_schema_version,omitempty"`
+}
+
+type S3BucketDestinationInitParameters struct {
+
+	// Account ID that owns the destination bucket.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
+	// Output format of exported analytics data. Allowed values: CSV. Default value: CSV.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// Object prefix for filtering.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type S3BucketDestinationObservation struct {
@@ -161,6 +209,12 @@ type S3BucketDestinationParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
+type StorageClassAnalysisInitParameters struct {
+
+	// Data export configuration (documented below).
+	DataExport []DataExportInitParameters `json:"dataExport,omitempty" tf:"data_export,omitempty"`
+}
+
 type StorageClassAnalysisObservation struct {
 
 	// Data export configuration (documented below).
@@ -170,14 +224,26 @@ type StorageClassAnalysisObservation struct {
 type StorageClassAnalysisParameters struct {
 
 	// Data export configuration (documented below).
-	// +kubebuilder:validation:Required
-	DataExport []DataExportParameters `json:"dataExport" tf:"data_export,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataExport []DataExportParameters `json:"dataExport,omitempty" tf:"data_export,omitempty"`
 }
 
 // BucketAnalyticsConfigurationSpec defines the desired state of BucketAnalyticsConfiguration
 type BucketAnalyticsConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BucketAnalyticsConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BucketAnalyticsConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BucketAnalyticsConfigurationStatus defines the observed state of BucketAnalyticsConfiguration.
@@ -198,7 +264,7 @@ type BucketAnalyticsConfigurationStatus struct {
 type BucketAnalyticsConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   BucketAnalyticsConfigurationSpec   `json:"spec"`
 	Status BucketAnalyticsConfigurationStatus `json:"status,omitempty"`
 }

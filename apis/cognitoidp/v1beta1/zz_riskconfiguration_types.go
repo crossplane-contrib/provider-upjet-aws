@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountTakeoverRiskConfigurationInitParameters struct {
+
+	// Account takeover risk configuration actions. See details below.
+	Actions []ActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The notify configuration used to construct email notifications. See details below.
+	NotifyConfiguration []NotifyConfigurationInitParameters `json:"notifyConfiguration,omitempty" tf:"notify_configuration,omitempty"`
+}
+
 type AccountTakeoverRiskConfigurationObservation struct {
 
 	// Account takeover risk configuration actions. See details below.
@@ -25,12 +34,24 @@ type AccountTakeoverRiskConfigurationObservation struct {
 type AccountTakeoverRiskConfigurationParameters struct {
 
 	// Account takeover risk configuration actions. See details below.
-	// +kubebuilder:validation:Required
-	Actions []ActionsParameters `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The notify configuration used to construct email notifications. See details below.
-	// +kubebuilder:validation:Required
-	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration" tf:"notify_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration,omitempty" tf:"notify_configuration,omitempty"`
+}
+
+type ActionsInitParameters struct {
+
+	// Action to take for a high risk. See action block below.
+	HighAction []HighActionInitParameters `json:"highAction,omitempty" tf:"high_action,omitempty"`
+
+	// Action to take for a low risk. See action block below.
+	LowAction []LowActionInitParameters `json:"lowAction,omitempty" tf:"low_action,omitempty"`
+
+	// Action to take for a medium risk. See action block below.
+	MediumAction []MediumActionInitParameters `json:"mediumAction,omitempty" tf:"medium_action,omitempty"`
 }
 
 type ActionsObservation struct {
@@ -60,6 +81,18 @@ type ActionsParameters struct {
 	MediumAction []MediumActionParameters `json:"mediumAction,omitempty" tf:"medium_action,omitempty"`
 }
 
+type BlockEmailInitParameters struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+}
+
 type BlockEmailObservation struct {
 
 	// The email HTML body.
@@ -75,16 +108,22 @@ type BlockEmailObservation struct {
 type BlockEmailParameters struct {
 
 	// The email HTML body.
-	// +kubebuilder:validation:Required
-	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
 
 	// The email subject.
-	// +kubebuilder:validation:Required
-	Subject *string `json:"subject" tf:"subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The email text body.
-	// +kubebuilder:validation:Required
-	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+}
+
+type CompromisedCredentialsRiskConfigurationActionsInitParameters struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationActionsObservation struct {
@@ -96,8 +135,17 @@ type CompromisedCredentialsRiskConfigurationActionsObservation struct {
 type CompromisedCredentialsRiskConfigurationActionsParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
-	// +kubebuilder:validation:Required
-	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+}
+
+type CompromisedCredentialsRiskConfigurationInitParameters struct {
+
+	// The compromised credentials risk configuration actions. See details below.
+	Actions []CompromisedCredentialsRiskConfigurationActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationObservation struct {
@@ -112,12 +160,21 @@ type CompromisedCredentialsRiskConfigurationObservation struct {
 type CompromisedCredentialsRiskConfigurationParameters struct {
 
 	// The compromised credentials risk configuration actions. See details below.
-	// +kubebuilder:validation:Required
-	Actions []CompromisedCredentialsRiskConfigurationActionsParameters `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []CompromisedCredentialsRiskConfigurationActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
 	// +kubebuilder:validation:Optional
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
+}
+
+type HighActionInitParameters struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type HighActionObservation struct {
@@ -132,12 +189,21 @@ type HighActionObservation struct {
 type HighActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
-	// +kubebuilder:validation:Required
-	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
-	// +kubebuilder:validation:Required
-	Notify *bool `json:"notify" tf:"notify,omitempty"`
+	// +kubebuilder:validation:Optional
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+}
+
+type LowActionInitParameters struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type LowActionObservation struct {
@@ -152,12 +218,21 @@ type LowActionObservation struct {
 type LowActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
-	// +kubebuilder:validation:Required
-	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
-	// +kubebuilder:validation:Required
-	Notify *bool `json:"notify" tf:"notify,omitempty"`
+	// +kubebuilder:validation:Optional
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+}
+
+type MediumActionInitParameters struct {
+
+	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+
+	// Whether to send a notification.
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
 }
 
 type MediumActionObservation struct {
@@ -172,12 +247,24 @@ type MediumActionObservation struct {
 type MediumActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
-	// +kubebuilder:validation:Required
-	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
-	// +kubebuilder:validation:Required
-	Notify *bool `json:"notify" tf:"notify,omitempty"`
+	// +kubebuilder:validation:Optional
+	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+}
+
+type MfaEmailInitParameters struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
 }
 
 type MfaEmailObservation struct {
@@ -195,16 +282,28 @@ type MfaEmailObservation struct {
 type MfaEmailParameters struct {
 
 	// The email HTML body.
-	// +kubebuilder:validation:Required
-	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
 
 	// The email subject.
-	// +kubebuilder:validation:Required
-	Subject *string `json:"subject" tf:"subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The email text body.
-	// +kubebuilder:validation:Required
-	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+}
+
+type NoActionEmailInitParameters struct {
+
+	// The email HTML body.
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+
+	// The email subject.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email text body.
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
 }
 
 type NoActionEmailObservation struct {
@@ -222,16 +321,37 @@ type NoActionEmailObservation struct {
 type NoActionEmailParameters struct {
 
 	// The email HTML body.
-	// +kubebuilder:validation:Required
-	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
 
 	// The email subject.
-	// +kubebuilder:validation:Required
-	Subject *string `json:"subject" tf:"subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The email text body.
-	// +kubebuilder:validation:Required
-	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
+	// +kubebuilder:validation:Optional
+	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+}
+
+type NotifyConfigurationInitParameters struct {
+
+	// Email template used when a detected risk event is blocked. See notify email type below.
+	BlockEmail []BlockEmailInitParameters `json:"blockEmail,omitempty" tf:"block_email,omitempty"`
+
+	// The email address that is sending the email. The address must be either individually verified with Amazon Simple Email Service, or from a domain that has been verified with Amazon SES.
+	From *string `json:"from,omitempty" tf:"from,omitempty"`
+
+	// The multi-factor authentication (MFA) email template used when MFA is challenged as part of a detected risk. See notify email type below.
+	MfaEmail []MfaEmailInitParameters `json:"mfaEmail,omitempty" tf:"mfa_email,omitempty"`
+
+	// The email template used when a detected risk event is allowed. See notify email type below.
+	NoActionEmail []NoActionEmailInitParameters `json:"noActionEmail,omitempty" tf:"no_action_email,omitempty"`
+
+	// The destination to which the receiver of an email should reply to.
+	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
 type NotifyConfigurationObservation struct {
@@ -278,8 +398,23 @@ type NotifyConfigurationParameters struct {
 	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
-	// +kubebuilder:validation:Required
-	SourceArn *string `json:"sourceArn" tf:"source_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+}
+
+type RiskConfigurationInitParameters struct {
+
+	// The account takeover risk configuration. See details below.
+	AccountTakeoverRiskConfiguration []AccountTakeoverRiskConfigurationInitParameters `json:"accountTakeoverRiskConfiguration,omitempty" tf:"account_takeover_risk_configuration,omitempty"`
+
+	// The app client ID. When the client ID is not provided, the same risk configuration is applied to all the clients in the User Pool.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The compromised credentials risk configuration. See details below.
+	CompromisedCredentialsRiskConfiguration []CompromisedCredentialsRiskConfigurationInitParameters `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
+
+	// The configuration to override the risk decision. See details below.
+	RiskExceptionConfiguration []RiskExceptionConfigurationInitParameters `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
 }
 
 type RiskConfigurationObservation struct {
@@ -341,6 +476,19 @@ type RiskConfigurationParameters struct {
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
+type RiskExceptionConfigurationInitParameters struct {
+
+	// Overrides the risk decision to always block the pre-authentication requests.
+	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
+	// Can contain a maximum of 200 items.
+	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
+
+	// Risk detection isn't performed on the IP addresses in this range list.
+	// The IP range is in CIDR notation.
+	// Can contain a maximum of 200 items.
+	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
+}
+
 type RiskExceptionConfigurationObservation struct {
 
 	// Overrides the risk decision to always block the pre-authentication requests.
@@ -373,6 +521,18 @@ type RiskExceptionConfigurationParameters struct {
 type RiskConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RiskConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RiskConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // RiskConfigurationStatus defines the observed state of RiskConfiguration.

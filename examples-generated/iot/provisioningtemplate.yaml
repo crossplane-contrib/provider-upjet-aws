@@ -85,6 +85,3 @@ spec:
   forProvider:
     policy: ${data.aws_iam_policy_document.device_policy.json}
     region: us-west-1
-
----
-

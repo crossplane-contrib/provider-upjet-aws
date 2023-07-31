@@ -96,6 +96,42 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  awsServiceAccessPrincipals:
+                    description: List of AWS service principal names for which you
+                      want to enable integration with your organization. This is typically
+                      in the form of a URL, such as service-abbreviation.amazonaws.com.
+                      Organization must have feature_set set to ALL. Some services
+                      do not support enablement via this endpoint, see warning in
+                      aws docs.
+                    items:
+                      type: string
+                    type: array
+                  enabledPolicyTypes:
+                    description: List of Organizations policy types to enable in the
+                      Organization Root. Organization must have feature_set set to
+                      ALL. For additional information about valid policy types (e.g.,
+                      AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY,
+                      and TAG_POLICY), see the AWS Organizations API Reference.
+                    items:
+                      type: string
+                    type: array
+                  featureSet:
+                    description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

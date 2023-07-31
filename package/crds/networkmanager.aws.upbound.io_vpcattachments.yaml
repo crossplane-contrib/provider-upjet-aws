@@ -327,6 +327,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  options:
+                    description: Options for the VPC attachment.
+                    items:
+                      properties:
+                        applianceModeSupport:
+                          description: Indicates whether appliance mode is supported.
+                            If enabled, traffic flow between a source and destination
+                            use the same Availability Zone for the VPC attachment
+                            for the lifetime of that flow.
+                          type: boolean
+                        ipv6Support:
+                          description: Indicates whether IPv6 is supported.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'

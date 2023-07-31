@@ -13,6 +13,51 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BranchInitParameters struct {
+
+	// ARN for a backend environment that is part of an Amplify app.
+	BackendEnvironmentArn *string `json:"backendEnvironmentArn,omitempty" tf:"backend_environment_arn,omitempty"`
+
+	// Description for the branch.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Display name for a branch. This is used as the default domain prefix.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Enables auto building for the branch.
+	EnableAutoBuild *bool `json:"enableAutoBuild,omitempty" tf:"enable_auto_build,omitempty"`
+
+	// Enables basic authorization for the branch.
+	EnableBasicAuth *bool `json:"enableBasicAuth,omitempty" tf:"enable_basic_auth,omitempty"`
+
+	// Enables notifications for the branch.
+	EnableNotification *bool `json:"enableNotification,omitempty" tf:"enable_notification,omitempty"`
+
+	// Enables performance mode for the branch.
+	EnablePerformanceMode *bool `json:"enablePerformanceMode,omitempty" tf:"enable_performance_mode,omitempty"`
+
+	// Enables pull request previews for this branch.
+	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
+
+	// Environment variables for the branch.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
+	// Framework for the branch.
+	Framework *string `json:"framework,omitempty" tf:"framework,omitempty"`
+
+	// Amplify environment name for the pull request.
+	PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty" tf:"pull_request_environment_name,omitempty"`
+
+	// Describes the current stage for the branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// Content Time To Live (TTL) for the website in seconds.
+	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BranchObservation struct {
 
 	// Unique ID for an Amplify app.
@@ -167,6 +212,18 @@ type BranchParameters struct {
 type BranchSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BranchParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BranchInitParameters `json:"initProvider,omitempty"`
 }
 
 // BranchStatus defines the observed state of Branch.

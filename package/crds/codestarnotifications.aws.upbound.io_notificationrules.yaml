@@ -267,6 +267,54 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  detailType:
+                    description: The level of detail to include in the notifications
+                      for this resource. Possible values are BASIC and FULL.
+                    type: string
+                  eventTypeIds:
+                    description: A list of event types associated with this notification
+                      rule. For list of allowed events see here.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of notification rule.
+                    type: string
+                  status:
+                    description: The status of the notification rule. Possible values
+                      are ENABLED and DISABLED, default is ENABLED.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  target:
+                    description: Configuration blocks containing notification target
+                      information. Can be specified multiple times. At least one target
+                      must be specified on creation.
+                    items:
+                      properties:
+                        type:
+                          description: The type of the notification target. Default
+                            value is SNS.
+                          type: string
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -467,13 +515,16 @@ spec:
             x-kubernetes-validations:
             - message: detailType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.detailType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.detailType)
+                || has(self.initProvider.detailType)'
             - message: eventTypeIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventTypeIds)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.eventTypeIds)
+                || has(self.initProvider.eventTypeIds)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: NotificationRuleStatus defines the observed state of NotificationRule.
             properties:

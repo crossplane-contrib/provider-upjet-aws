@@ -212,6 +212,78 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: Description of the traffic mirror filter rule.
+                    type: string
+                  destinationCidrBlock:
+                    description: Destination CIDR block to assign to the Traffic Mirror
+                      rule.
+                    type: string
+                  destinationPortRange:
+                    description: Destination port range. Supported only when the protocol
+                      is set to TCP(6) or UDP(17). See Traffic mirror port range documented
+                      below
+                    items:
+                      properties:
+                        fromPort:
+                          description: Starting port of the range
+                          type: number
+                        toPort:
+                          description: Ending port of the range
+                          type: number
+                      type: object
+                    type: array
+                  protocol:
+                    description: Protocol number, for example 17 (UDP), to assign
+                      to the Traffic Mirror rule. For information about the protocol
+                      value, see Protocol Numbers on the Internet Assigned Numbers
+                      Authority (IANA) website.
+                    type: number
+                  ruleAction:
+                    description: Action to take (accept | reject) on the filtered
+                      traffic. Valid values are accept and reject
+                    type: string
+                  ruleNumber:
+                    description: Number of the Traffic Mirror rule. This number must
+                      be unique for each Traffic Mirror rule in a given direction.
+                      The rules are processed in ascending order by rule number.
+                    type: number
+                  sourceCidrBlock:
+                    description: Source CIDR block to assign to the Traffic Mirror
+                      rule.
+                    type: string
+                  sourcePortRange:
+                    description: Source port range. Supported only when the protocol
+                      is set to TCP(6) or UDP(17). See Traffic mirror port range documented
+                      below
+                    items:
+                      properties:
+                        fromPort:
+                          description: Starting port of the range
+                          type: number
+                        toPort:
+                          description: Ending port of the range
+                          type: number
+                      type: object
+                    type: array
+                  trafficDirection:
+                    description: Direction of traffic to be captured. Valid values
+                      are ingress and egress
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -412,19 +484,24 @@ spec:
             x-kubernetes-validations:
             - message: destinationCidrBlock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock)
+                || has(self.initProvider.destinationCidrBlock)'
             - message: ruleAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)
+                || has(self.initProvider.ruleAction)'
             - message: ruleNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)
+                || has(self.initProvider.ruleNumber)'
             - message: sourceCidrBlock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceCidrBlock)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceCidrBlock)
+                || has(self.initProvider.sourceCidrBlock)'
             - message: trafficDirection is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.trafficDirection)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.trafficDirection)
+                || has(self.initProvider.trafficDirection)'
           status:
             description: TrafficMirrorFilterRuleStatus defines the observed state
               of TrafficMirrorFilterRule.

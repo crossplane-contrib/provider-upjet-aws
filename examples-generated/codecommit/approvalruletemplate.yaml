@@ -20,6 +20,3 @@ spec:
         })}
     description: This is an example approval rule template
     region: us-west-1
-
----
-

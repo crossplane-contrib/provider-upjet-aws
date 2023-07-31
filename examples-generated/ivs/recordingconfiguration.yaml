@@ -13,6 +13,3 @@ spec:
       - bucketName: ivs-stream-archive
     name: recording_configuration-1
     region: us-west-1
-
----
-

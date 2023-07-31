@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationProfileInitParameters struct {
+
+	// Description of the configuration profile. Can be at most 1024 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
+	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
+
+	// Name for the configuration profile. Must be between 1 and 64 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform.  Default: AWS.Freeform.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Set of methods for validating the configuration. Maximum of 2. See Validator below for more details.
+	Validator []ValidatorInitParameters `json:"validator,omitempty" tf:"validator,omitempty"`
+}
+
 type ConfigurationProfileObservation struct {
 
 	// Application ID. Must be between 4 and 7 characters in length.
@@ -112,6 +133,12 @@ type ConfigurationProfileParameters struct {
 	Validator []ValidatorParameters `json:"validator,omitempty" tf:"validator,omitempty"`
 }
 
+type ValidatorInitParameters struct {
+
+	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ValidatorObservation struct {
 
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
@@ -125,14 +152,26 @@ type ValidatorParameters struct {
 	ContentSecretRef *v1.SecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
 
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ConfigurationProfileSpec defines the desired state of ConfigurationProfile
 type ConfigurationProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConfigurationProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationProfileStatus defines the observed state of ConfigurationProfile.
@@ -153,8 +192,8 @@ type ConfigurationProfileStatus struct {
 type ConfigurationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.locationUri)",message="locationUri is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.locationUri) || has(self.initProvider.locationUri)",message="locationUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ConfigurationProfileSpec   `json:"spec"`
 	Status ConfigurationProfileStatus `json:"status,omitempty"`
 }

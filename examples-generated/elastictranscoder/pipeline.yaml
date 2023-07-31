@@ -26,6 +26,3 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: thumb_bucket
       storageClass: Standard
-
----
-

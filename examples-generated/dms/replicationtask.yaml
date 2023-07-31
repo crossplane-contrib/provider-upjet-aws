@@ -24,6 +24,3 @@ spec:
     targetEndpointArnSelector:
       matchLabels:
         testing.upbound.io/example-name: test-dms-target-endpoint-tf
-
----
-

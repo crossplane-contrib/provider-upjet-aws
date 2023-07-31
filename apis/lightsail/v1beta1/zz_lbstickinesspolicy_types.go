@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LBStickinessPolicyInitParameters struct {
+
+	// The cookie duration in seconds. This determines the length of the session stickiness.
+	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+
+	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type LBStickinessPolicyObservation struct {
 
 	// The cookie duration in seconds. This determines the length of the session stickiness.
@@ -45,6 +54,18 @@ type LBStickinessPolicyParameters struct {
 type LBStickinessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LBStickinessPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LBStickinessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // LBStickinessPolicyStatus defines the observed state of LBStickinessPolicy.
@@ -65,8 +86,8 @@ type LBStickinessPolicyStatus struct {
 type LBStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookieDuration)",message="cookieDuration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookieDuration) || has(self.initProvider.cookieDuration)",message="cookieDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
 	Spec   LBStickinessPolicySpec   `json:"spec"`
 	Status LBStickinessPolicyStatus `json:"status,omitempty"`
 }

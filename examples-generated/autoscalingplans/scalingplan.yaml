@@ -50,6 +50,3 @@ spec:
     - key: application
       propagate_at_launch: true
       value: example
-
----
-

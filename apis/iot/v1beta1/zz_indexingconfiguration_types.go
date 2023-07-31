@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomFieldInitParameters struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type CustomFieldObservation struct {
 
 	// The name of the field.
@@ -31,6 +40,15 @@ type CustomFieldParameters struct {
 	// The data type of the field. Valid values: Number, String, Boolean.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IndexingConfigurationInitParameters struct {
+
+	// Thing group indexing configuration. See below.
+	ThingGroupIndexingConfiguration []ThingGroupIndexingConfigurationInitParameters `json:"thingGroupIndexingConfiguration,omitempty" tf:"thing_group_indexing_configuration,omitempty"`
+
+	// Thing indexing configuration. See below.
+	ThingIndexingConfiguration []ThingIndexingConfigurationInitParameters `json:"thingIndexingConfiguration,omitempty" tf:"thing_indexing_configuration,omitempty"`
 }
 
 type IndexingConfigurationObservation struct {
@@ -59,6 +77,15 @@ type IndexingConfigurationParameters struct {
 	ThingIndexingConfiguration []ThingIndexingConfigurationParameters `json:"thingIndexingConfiguration,omitempty" tf:"thing_indexing_configuration,omitempty"`
 }
 
+type ManagedFieldInitParameters struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ManagedFieldObservation struct {
 
 	// The name of the field.
@@ -77,6 +104,18 @@ type ManagedFieldParameters struct {
 	// The data type of the field. Valid values: Number, String, Boolean.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ThingGroupIndexingConfigurationInitParameters struct {
+
+	// A list of thing group fields to index. This list cannot contain any managed fields. See below.
+	CustomField []CustomFieldInitParameters `json:"customField,omitempty" tf:"custom_field,omitempty"`
+
+	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
+	ManagedField []ManagedFieldInitParameters `json:"managedField,omitempty" tf:"managed_field,omitempty"`
+
+	// Thing group indexing mode. Valid values: OFF, ON.
+	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode,omitempty" tf:"thing_group_indexing_mode,omitempty"`
 }
 
 type ThingGroupIndexingConfigurationObservation struct {
@@ -102,8 +141,17 @@ type ThingGroupIndexingConfigurationParameters struct {
 	ManagedField []ManagedFieldParameters `json:"managedField,omitempty" tf:"managed_field,omitempty"`
 
 	// Thing group indexing mode. Valid values: OFF, ON.
-	// +kubebuilder:validation:Required
-	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode" tf:"thing_group_indexing_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode,omitempty" tf:"thing_group_indexing_mode,omitempty"`
+}
+
+type ThingIndexingConfigurationCustomFieldInitParameters struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ThingIndexingConfigurationCustomFieldObservation struct {
@@ -123,6 +171,36 @@ type ThingIndexingConfigurationCustomFieldParameters struct {
 
 	// The data type of the field. Valid values: Number, String, Boolean.
 	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ThingIndexingConfigurationInitParameters struct {
+
+	// Contains custom field names and their data type. See below.
+	CustomField []ThingIndexingConfigurationCustomFieldInitParameters `json:"customField,omitempty" tf:"custom_field,omitempty"`
+
+	// Device Defender indexing mode. Valid values: VIOLATIONS, OFF. Default: OFF.
+	DeviceDefenderIndexingMode *string `json:"deviceDefenderIndexingMode,omitempty" tf:"device_defender_indexing_mode,omitempty"`
+
+	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
+	ManagedField []ThingIndexingConfigurationManagedFieldInitParameters `json:"managedField,omitempty" tf:"managed_field,omitempty"`
+
+	// Named shadow indexing mode. Valid values: ON, OFF. Default: OFF.
+	NamedShadowIndexingMode *string `json:"namedShadowIndexingMode,omitempty" tf:"named_shadow_indexing_mode,omitempty"`
+
+	// Thing connectivity indexing mode. Valid values: STATUS, OFF. Default: OFF.
+	ThingConnectivityIndexingMode *string `json:"thingConnectivityIndexingMode,omitempty" tf:"thing_connectivity_indexing_mode,omitempty"`
+
+	// Thing indexing mode. Valid values: REGISTRY, REGISTRY_AND_SHADOW, OFF.
+	ThingIndexingMode *string `json:"thingIndexingMode,omitempty" tf:"thing_indexing_mode,omitempty"`
+}
+
+type ThingIndexingConfigurationManagedFieldInitParameters struct {
+
+	// The name of the field.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the field. Valid values: Number, String, Boolean.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -190,14 +268,26 @@ type ThingIndexingConfigurationParameters struct {
 	ThingConnectivityIndexingMode *string `json:"thingConnectivityIndexingMode,omitempty" tf:"thing_connectivity_indexing_mode,omitempty"`
 
 	// Thing indexing mode. Valid values: REGISTRY, REGISTRY_AND_SHADOW, OFF.
-	// +kubebuilder:validation:Required
-	ThingIndexingMode *string `json:"thingIndexingMode" tf:"thing_indexing_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	ThingIndexingMode *string `json:"thingIndexingMode,omitempty" tf:"thing_indexing_mode,omitempty"`
 }
 
 // IndexingConfigurationSpec defines the desired state of IndexingConfiguration
 type IndexingConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IndexingConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IndexingConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // IndexingConfigurationStatus defines the observed state of IndexingConfiguration.

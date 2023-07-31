@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TrafficPolicyInitParameters struct {
+
+	// Comment for the traffic policy.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Policy document. This is a JSON formatted string. For more information about building Route53 traffic policy documents, see the AWS Route53 Traffic Policy document format
+	Document *string `json:"document,omitempty" tf:"document,omitempty"`
+
+	// Name of the traffic policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type TrafficPolicyObservation struct {
 
 	// Comment for the traffic policy.
@@ -58,6 +70,18 @@ type TrafficPolicyParameters struct {
 type TrafficPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrafficPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TrafficPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrafficPolicyStatus defines the observed state of TrafficPolicy.
@@ -78,8 +102,8 @@ type TrafficPolicyStatus struct {
 type TrafficPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.document)",message="document is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.document) || has(self.initProvider.document)",message="document is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   TrafficPolicySpec   `json:"spec"`
 	Status TrafficPolicyStatus `json:"status,omitempty"`
 }

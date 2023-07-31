@@ -29,6 +29,3 @@ spec:
   forProvider:
     identityProviderType: SERVICE_MANAGED
     region: us-west-1
-
----
-

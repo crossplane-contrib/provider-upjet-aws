@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VaultLockConfigurationInitParameters struct {
+
+	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
+	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
+
+	// The maximum retention period that the vault retains its recovery points.
+	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
+
+	// The minimum retention period that the vault retains its recovery points.
+	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+}
+
 type VaultLockConfigurationObservation struct {
 
 	// The ARN of the vault.
@@ -70,6 +82,18 @@ type VaultLockConfigurationParameters struct {
 type VaultLockConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VaultLockConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VaultLockConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VaultLockConfigurationStatus defines the observed state of VaultLockConfiguration.

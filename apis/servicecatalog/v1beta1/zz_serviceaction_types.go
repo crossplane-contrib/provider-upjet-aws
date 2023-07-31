@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefinitionInitParameters struct {
+
+	// ARN of the role that performs the self-service actions on your behalf. For example, arn:aws:iam::12345678910:role/ActionRole. To reuse the provisioned product launch role, set to LAUNCH_ROLE.
+	AssumeRole *string `json:"assumeRole,omitempty" tf:"assume_role,omitempty"`
+
+	// Name of the SSM document. For example, AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide the ARN instead of the name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// List of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Service action definition type. Valid value is SSM_AUTOMATION. Default is SSM_AUTOMATION.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// SSM document version. For example, 1.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type DefinitionObservation struct {
 
 	// ARN of the role that performs the self-service actions on your behalf. For example, arn:aws:iam::12345678910:role/ActionRole. To reuse the provisioned product launch role, set to LAUNCH_ROLE.
@@ -38,8 +56,8 @@ type DefinitionParameters struct {
 	AssumeRole *string `json:"assumeRole,omitempty" tf:"assume_role,omitempty"`
 
 	// Name of the SSM document. For example, AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide the ARN instead of the name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
 	// +kubebuilder:validation:Optional
@@ -50,8 +68,23 @@ type DefinitionParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// SSM document version. For example, 1.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ServiceActionInitParameters struct {
+
+	// Language code. Valid values are en (English), jp (Japanese), and zh (Chinese). Default is en.
+	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
+
+	// Self-service action definition configuration block. Detailed below.
+	Definition []DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// Self-service action description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Self-service action name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ServiceActionObservation struct {
@@ -100,6 +133,18 @@ type ServiceActionParameters struct {
 type ServiceActionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceActionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ServiceActionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceActionStatus defines the observed state of ServiceAction.
@@ -120,8 +165,8 @@ type ServiceActionStatus struct {
 type ServiceAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition)",message="definition is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.definition) || has(self.initProvider.definition)",message="definition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ServiceActionSpec   `json:"spec"`
 	Status ServiceActionStatus `json:"status,omitempty"`
 }

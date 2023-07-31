@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SMSPreferencesInitParameters struct {
+
+	// The type of SMS message that you will send by default. Possible values are: Promotional, Transactional
+	DefaultSMSType *string `json:"defaultSmsType,omitempty" tf:"default_sms_type,omitempty"`
+
+	// A string, such as your business brand, that is displayed as the sender on the receiving device.
+	DefaultSenderID *string `json:"defaultSenderId,omitempty" tf:"default_sender_id,omitempty"`
+
+	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
+	DeliveryStatusSuccessSamplingRate *string `json:"deliveryStatusSuccessSamplingRate,omitempty" tf:"delivery_status_success_sampling_rate,omitempty"`
+
+	// The maximum amount in USD that you are willing to spend each month to send SMS messages.
+	MonthlySpendLimit *float64 `json:"monthlySpendLimit,omitempty" tf:"monthly_spend_limit,omitempty"`
+
+	// The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS.
+	UsageReportS3Bucket *string `json:"usageReportS3Bucket,omitempty" tf:"usage_report_s3_bucket,omitempty"`
+}
+
 type SMSPreferencesObservation struct {
 
 	// The type of SMS message that you will send by default. Possible values are: Promotional, Transactional
@@ -82,6 +100,18 @@ type SMSPreferencesParameters struct {
 type SMSPreferencesSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SMSPreferencesParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SMSPreferencesInitParameters `json:"initProvider,omitempty"`
 }
 
 // SMSPreferencesStatus defines the observed state of SMSPreferences.

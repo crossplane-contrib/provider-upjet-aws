@@ -20,6 +20,3 @@ spec:
         testing.upbound.io/example-name: example
     toPort: 65535
     type: ingress
-
----
-

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EntryInitParameters struct {
+
+	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
 type EntryObservation struct {
 
 	// CIDR block of this entry.
@@ -41,6 +47,24 @@ type EntryParameters struct {
 	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+}
+
+type ManagedPrefixListInitParameters struct {
+
+	// Address family (IPv4 or IPv6) of this prefix list.
+	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
+
+	// Configuration block for prefix list entry. Detailed below. Different entries may have overlapping CIDR blocks, but a particular CIDR should not be duplicated.
+	Entry []EntryInitParameters `json:"entry,omitempty" tf:"entry,omitempty"`
+
+	// Maximum number of entries that this prefix list can contain.
+	MaxEntries *float64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
+
+	// Name of this resource. The name must not start with com.amazonaws.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagedPrefixListObservation struct {
@@ -108,6 +132,18 @@ type ManagedPrefixListParameters struct {
 type ManagedPrefixListSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedPrefixListParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ManagedPrefixListInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedPrefixListStatus defines the observed state of ManagedPrefixList.
@@ -128,9 +164,9 @@ type ManagedPrefixListStatus struct {
 type ManagedPrefixList struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressFamily)",message="addressFamily is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxEntries)",message="maxEntries is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressFamily) || has(self.initProvider.addressFamily)",message="addressFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxEntries) || has(self.initProvider.maxEntries)",message="maxEntries is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ManagedPrefixListSpec   `json:"spec"`
 	Status ManagedPrefixListStatus `json:"status,omitempty"`
 }

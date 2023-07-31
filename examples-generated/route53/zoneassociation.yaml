@@ -68,6 +68,3 @@ spec:
     enableDnsHostnames: true
     enableDnsSupport: true
     region: us-west-1
-
----
-

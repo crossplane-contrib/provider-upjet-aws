@@ -13,6 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PolicyAttributeInitParameters struct {
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type PolicyAttributeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -36,6 +40,18 @@ type PolicyAttributeParameters struct {
 	// Selector for a Policy in elb to populate value.
 	// +kubebuilder:validation:Optional
 	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
+}
+
+type PolicyInitParameters struct {
+
+	// Policy attribute to apply to the policy.
+	PolicyAttribute []PolicyAttributeInitParameters `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`
+
+	// The name of the load balancer policy.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// The policy type.
+	PolicyTypeName *string `json:"policyTypeName,omitempty" tf:"policy_type_name,omitempty"`
 }
 
 type PolicyObservation struct {
@@ -93,6 +109,18 @@ type PolicyParameters struct {
 type PolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // PolicyStatus defines the observed state of Policy.
@@ -113,8 +141,8 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyName)",message="policyName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyTypeName)",message="policyTypeName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyName) || has(self.initProvider.policyName)",message="policyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyTypeName) || has(self.initProvider.policyTypeName)",message="policyTypeName is a required parameter"
 	Spec   PolicySpec   `json:"spec"`
 	Status PolicyStatus `json:"status,omitempty"`
 }

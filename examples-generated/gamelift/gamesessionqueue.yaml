@@ -20,6 +20,3 @@ spec:
     - maximumIndividualPlayerLatencyMilliseconds: 200
     region: us-west-1
     timeoutInSeconds: 60
-
----
-

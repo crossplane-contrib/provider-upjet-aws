@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EBSVolumeInitParameters struct {
+
+	// The AZ where the EBS volume will exist.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// If true, the disk will be encrypted.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// If true, snapshot will be created before volume deletion. Any tags on the volume will be migrated to the snapshot. By default set to false
+	FinalSnapshot *bool `json:"finalSnapshot,omitempty" tf:"final_snapshot,omitempty"`
+
+	// The amount of IOPS to provision for the disk. Only valid for type of io1, io2 or gp3.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Specifies whether to enable Amazon EBS Multi-Attach. Multi-Attach is supported on io1 and io2 volumes.
+	MultiAttachEnabled *bool `json:"multiAttachEnabled,omitempty" tf:"multi_attach_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Outpost.
+	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
+	// The size of the drive in GiBs.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// A snapshot to base the EBS volume off of.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The throughput that the volume supports, in MiB/s. Only valid for type of gp3.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// The type of EBS volume. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: gp2).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type EBSVolumeObservation struct {
 
 	// The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
@@ -130,6 +166,18 @@ type EBSVolumeParameters struct {
 type EBSVolumeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EBSVolumeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EBSVolumeInitParameters `json:"initProvider,omitempty"`
 }
 
 // EBSVolumeStatus defines the observed state of EBSVolume.
@@ -150,7 +198,7 @@ type EBSVolumeStatus struct {
 type EBSVolume struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone)",message="availabilityZone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.availabilityZone) || has(self.initProvider.availabilityZone)",message="availabilityZone is a required parameter"
 	Spec   EBSVolumeSpec   `json:"spec"`
 	Status EBSVolumeStatus `json:"status,omitempty"`
 }

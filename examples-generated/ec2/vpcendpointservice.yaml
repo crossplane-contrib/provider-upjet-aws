@@ -12,6 +12,3 @@ spec:
     networkLoadBalancerArns:
     - ${aws_lb.example.arn}
     region: us-west-1
-
----
-

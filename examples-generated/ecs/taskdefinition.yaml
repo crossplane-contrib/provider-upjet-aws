@@ -45,6 +45,3 @@ spec:
     volume:
     - hostPath: /ecs/service-storage
       name: service-storage
-
----
-

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TransitGatewayConnectPeerInitParameters struct {
+
+	// The BGP ASN number assigned customer device. If not provided, it will use the same BGP ASN as is associated with Transit Gateway.
+	BGPAsn *string `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+
+	// The CIDR block that will be used for addressing within the tunnel. It must contain exactly one IPv4 CIDR block and up to one IPv6 CIDR block. The IPv4 CIDR block must be /29 size and must be within 169.254.0.0/16 range, with exception of: 169.254.0.0/29, 169.254.1.0/29, 169.254.2.0/29, 169.254.3.0/29, 169.254.4.0/29, 169.254.5.0/29, 169.254.169.248/29. The IPv6 CIDR block must be /125 size and must be within fd00::/8. The first IP from each CIDR block is assigned for customer gateway, the second and third is for Transit Gateway (An example: from range 169.254.100.0/29, .1 is assigned to customer gateway and .2 and .3 are assigned to Transit Gateway)
+	InsideCidrBlocks []*string `json:"insideCidrBlocks,omitempty" tf:"inside_cidr_blocks,omitempty"`
+
+	// The IP addressed assigned to customer device, which will be used as tunnel endpoint. It can be IPv4 or IPv6 address, but must be the same address family as transit_gateway_address
+	PeerAddress *string `json:"peerAddress,omitempty" tf:"peer_address,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The IP address assigned to Transit Gateway, which will be used as tunnel endpoint. This address must be from associated Transit Gateway CIDR block. The address must be from the same address family as peer_address. If not set explicitly, it will be selected from associated Transit Gateway CIDR blocks
+	TransitGatewayAddress *string `json:"transitGatewayAddress,omitempty" tf:"transit_gateway_address,omitempty"`
+}
+
 type TransitGatewayConnectPeerObservation struct {
 
 	// EC2 Transit Gateway Connect Peer ARN
@@ -89,6 +107,18 @@ type TransitGatewayConnectPeerParameters struct {
 type TransitGatewayConnectPeerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TransitGatewayConnectPeerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TransitGatewayConnectPeerInitParameters `json:"initProvider,omitempty"`
 }
 
 // TransitGatewayConnectPeerStatus defines the observed state of TransitGatewayConnectPeer.
@@ -109,8 +139,8 @@ type TransitGatewayConnectPeerStatus struct {
 type TransitGatewayConnectPeer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.insideCidrBlocks)",message="insideCidrBlocks is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAddress)",message="peerAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.insideCidrBlocks) || has(self.initProvider.insideCidrBlocks)",message="insideCidrBlocks is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAddress) || has(self.initProvider.peerAddress)",message="peerAddress is a required parameter"
 	Spec   TransitGatewayConnectPeerSpec   `json:"spec"`
 	Status TransitGatewayConnectPeerStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CognitoMemberDefinitionInitParameters struct {
+}
+
 type CognitoMemberDefinitionObservation struct {
 
 	// An identifier for an application client. You must create the app client ID using Amazon Cognito.
@@ -70,6 +73,15 @@ type CognitoMemberDefinitionParameters struct {
 	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
+type MemberDefinitionInitParameters struct {
+
+	// The Amazon Cognito user group that is part of the work team. See Cognito Member Definition details below.
+	CognitoMemberDefinition []CognitoMemberDefinitionInitParameters `json:"cognitoMemberDefinition,omitempty" tf:"cognito_member_definition,omitempty"`
+
+	// A list user groups that exist in your OIDC Identity Provider (IdP). One to ten groups can be used to create a single private work team. See Cognito Member Definition details below.
+	OidcMemberDefinition []OidcMemberDefinitionInitParameters `json:"oidcMemberDefinition,omitempty" tf:"oidc_member_definition,omitempty"`
+}
+
 type MemberDefinitionObservation struct {
 
 	// The Amazon Cognito user group that is part of the work team. See Cognito Member Definition details below.
@@ -90,6 +102,12 @@ type MemberDefinitionParameters struct {
 	OidcMemberDefinition []OidcMemberDefinitionParameters `json:"oidcMemberDefinition,omitempty" tf:"oidc_member_definition,omitempty"`
 }
 
+type NotificationConfigurationInitParameters struct {
+
+	// The ARN for the SNS topic to which notifications should be published.
+	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
+}
+
 type NotificationConfigurationObservation struct {
 
 	// The ARN for the SNS topic to which notifications should be published.
@@ -103,6 +121,12 @@ type NotificationConfigurationParameters struct {
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 }
 
+type OidcMemberDefinitionInitParameters struct {
+
+	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+}
+
 type OidcMemberDefinitionObservation struct {
 
 	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
@@ -112,8 +136,23 @@ type OidcMemberDefinitionObservation struct {
 type OidcMemberDefinitionParameters struct {
 
 	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
-	// +kubebuilder:validation:Required
-	Groups []*string `json:"groups" tf:"groups,omitempty"`
+	// +kubebuilder:validation:Optional
+	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+}
+
+type WorkteamInitParameters struct {
+
+	// A description of the work team.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A list of Member Definitions that contains objects that identify the workers that make up the work team. Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use cognito_member_definition. For workforces created using your own OIDC identity provider (IdP) use oidc_member_definition. Do not provide input for both of these parameters in a single request. see Member Definition details below.
+	MemberDefinition []MemberDefinitionInitParameters `json:"memberDefinition,omitempty" tf:"member_definition,omitempty"`
+
+	// Configures notification of workers regarding available or expiring work items. see Notification Configuration details below.
+	NotificationConfiguration []NotificationConfigurationInitParameters `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WorkteamObservation struct {
@@ -188,6 +227,18 @@ type WorkteamParameters struct {
 type WorkteamSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkteamParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider WorkteamInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkteamStatus defines the observed state of Workteam.
@@ -208,8 +259,8 @@ type WorkteamStatus struct {
 type Workteam struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description)",message="description is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.memberDefinition)",message="memberDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || has(self.initProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.memberDefinition) || has(self.initProvider.memberDefinition)",message="memberDefinition is a required parameter"
 	Spec   WorkteamSpec   `json:"spec"`
 	Status WorkteamStatus `json:"status,omitempty"`
 }

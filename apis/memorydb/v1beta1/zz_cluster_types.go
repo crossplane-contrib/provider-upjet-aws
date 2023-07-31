@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterEndpointInitParameters struct {
+}
+
 type ClusterEndpointObservation struct {
 
 	// DNS hostname of the cluster configuration endpoint.
@@ -23,6 +26,66 @@ type ClusterEndpointObservation struct {
 }
 
 type ClusterEndpointParameters struct {
+}
+
+type ClusterInitParameters struct {
+
+	// The name of the Access Control List to associate with the cluster.
+	ACLName *string `json:"aclName,omitempty" tf:"acl_name,omitempty"`
+
+	// When set to true, the cluster will automatically receive minor engine version upgrades after launch. Defaults to true.
+	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
+
+	// Enables data tiering. This option is not supported by all instance types. For more information, see Data tiering.
+	DataTiering *bool `json:"dataTiering,omitempty" tf:"data_tiering,omitempty"`
+
+	// Description for the cluster.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
+	FinalSnapshotName *string `json:"finalSnapshotName,omitempty" tf:"final_snapshot_name,omitempty"`
+
+	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
+	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
+	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
+
+	// The number of shards in the cluster. Defaults to 1.
+	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
+
+	// The name of the parameter group associated with the cluster.
+	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// The port number on which each of the nodes accepts connections. Defaults to 6379.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// List of ARN-s that uniquely identify RDB snapshot files stored in S3. The snapshot files will be used to populate the new cluster. Object names in the ARN-s cannot contain any commas.
+	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
+
+	// The name of a snapshot from which to restore data into the new cluster.
+	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
+
+	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
+	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+
+	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
+	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
+
+	// ARN of the SNS topic to which cluster notifications are sent.
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// A flag to enable in-transit encryption on the cluster. When set to false, the acl_name must be open-access. Defaults to true.
+	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -237,6 +300,9 @@ type ClusterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type EndpointInitParameters struct {
+}
+
 type EndpointObservation struct {
 
 	// DNS hostname of the cluster configuration endpoint.
@@ -247,6 +313,9 @@ type EndpointObservation struct {
 }
 
 type EndpointParameters struct {
+}
+
+type NodesInitParameters struct {
 }
 
 type NodesObservation struct {
@@ -264,6 +333,9 @@ type NodesObservation struct {
 }
 
 type NodesParameters struct {
+}
+
+type ShardsInitParameters struct {
 }
 
 type ShardsObservation struct {
@@ -288,6 +360,18 @@ type ShardsParameters struct {
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.
@@ -308,8 +392,8 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.aclName)",message="aclName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.aclName) || has(self.initProvider.aclName)",message="aclName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || has(self.initProvider.nodeType)",message="nodeType is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`
 }

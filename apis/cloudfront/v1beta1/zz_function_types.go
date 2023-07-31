@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FunctionInitParameters struct {
+
+	// Comment.
+	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+}
+
 type FunctionObservation struct {
 
 	// Amazon Resource Name (ARN) identifying your CloudFront Function.
@@ -67,6 +79,18 @@ type FunctionParameters struct {
 type FunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionStatus defines the observed state of Function.
@@ -88,7 +112,7 @@ type Function struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.codeSecretRef)",message="codeSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.runtime)",message="runtime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.runtime) || has(self.initProvider.runtime)",message="runtime is a required parameter"
 	Spec   FunctionSpec   `json:"spec"`
 	Status FunctionStatus `json:"status,omitempty"`
 }

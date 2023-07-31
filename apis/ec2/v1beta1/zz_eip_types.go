@@ -13,6 +13,32 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EIPInitParameters struct {
+
+	// IP address from an EC2 BYOIP pool. This option is only available for VPC EIPs.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// User-specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
+	AssociateWithPrivateIP *string `json:"associateWithPrivateIp,omitempty" tf:"associate_with_private_ip,omitempty"`
+
+	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
+	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
+	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
+	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
+
+	// EC2 IPv4 address pool identifier or amazon.
+	// This option is only available for VPC EIPs.
+	PublicIPv4Pool *string `json:"publicIpv4Pool,omitempty" tf:"public_ipv4_pool,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Boolean if the EIP is in a VPC or not.
+	// Defaults to true unless the region supports EC2-Classic.
+	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
+}
+
 type EIPObservation struct {
 
 	// IP address from an EC2 BYOIP pool. This option is only available for VPC EIPs.
@@ -146,6 +172,18 @@ type EIPParameters struct {
 type EIPSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EIPParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EIPInitParameters `json:"initProvider,omitempty"`
 }
 
 // EIPStatus defines the observed state of EIP.

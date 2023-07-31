@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CPUOptionsInitParameters struct {
+
+	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. Valid values are enabled and disabled.
+	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
+
+	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+}
+
 type CPUOptionsObservation struct {
 
 	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. Valid values are enabled and disabled.
@@ -40,6 +52,15 @@ type CPUOptionsParameters struct {
 	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
+type CapacityReservationSpecificationInitParameters struct {
+
+	// Indicates the instance's Capacity Reservation preferences. Can be "open" or "none". (Default: "open").
+	CapacityReservationPreference *string `json:"capacityReservationPreference,omitempty" tf:"capacity_reservation_preference,omitempty"`
+
+	// Information about the target Capacity Reservation. See Capacity Reservation Target below for more details.
+	CapacityReservationTarget []CapacityReservationTargetInitParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
 type CapacityReservationSpecificationObservation struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Can be "open" or "none". (Default: "open").
@@ -58,6 +79,15 @@ type CapacityReservationSpecificationParameters struct {
 	// Information about the target Capacity Reservation. See Capacity Reservation Target below for more details.
 	// +kubebuilder:validation:Optional
 	CapacityReservationTarget []CapacityReservationTargetParameters `json:"capacityReservationTarget,omitempty" tf:"capacity_reservation_target,omitempty"`
+}
+
+type CapacityReservationTargetInitParameters struct {
+
+	// ID of the Capacity Reservation in which to run the instance.
+	CapacityReservationID *string `json:"capacityReservationId,omitempty" tf:"capacity_reservation_id,omitempty"`
+
+	// ARN of the Capacity Reservation resource group in which to run the instance.
+	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
 
 type CapacityReservationTargetObservation struct {
@@ -80,6 +110,12 @@ type CapacityReservationTargetParameters struct {
 	CapacityReservationResourceGroupArn *string `json:"capacityReservationResourceGroupArn,omitempty" tf:"capacity_reservation_resource_group_arn,omitempty"`
 }
 
+type CreditSpecificationInitParameters struct {
+
+	// Credit option for CPU usage. Valid values include standard or unlimited. T3 instances are launched as unlimited by default. T2 instances are launched as standard by default.
+	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
+}
+
 type CreditSpecificationObservation struct {
 
 	// Credit option for CPU usage. Valid values include standard or unlimited. T3 instances are launched as unlimited by default. T2 instances are launched as standard by default.
@@ -93,6 +129,12 @@ type CreditSpecificationParameters struct {
 	CPUCredits *string `json:"cpuCredits,omitempty" tf:"cpu_credits,omitempty"`
 }
 
+type EnclaveOptionsInitParameters struct {
+
+	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type EnclaveOptionsObservation struct {
 
 	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
@@ -104,6 +146,36 @@ type EnclaveOptionsParameters struct {
 	// Whether Nitro Enclaves will be enabled on the instance. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type InstanceEBSBlockDeviceInitParameters struct {
+
+	// Whether the volume should be destroyed on instance termination. Defaults to true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Name of the device to mount.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Enables EBS encryption on the volume. Defaults to false. Cannot be used with snapshot_id. Must be configured to perform drift detection.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Snapshot ID to mount.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Map of tags to assign to the device.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of the volume in gibibytes (GiB).
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type InstanceEBSBlockDeviceObservation struct {
@@ -149,8 +221,8 @@ type InstanceEBSBlockDeviceParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Name of the device to mount.
-	// +kubebuilder:validation:Required
-	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Enables EBS encryption on the volume. Defaults to false. Cannot be used with snapshot_id. Must be configured to perform drift detection.
 	// +kubebuilder:validation:Optional
@@ -194,6 +266,18 @@ type InstanceEBSBlockDeviceParameters struct {
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
+type InstanceEphemeralBlockDeviceInitParameters struct {
+
+	// Name of the block device to mount on the instance.
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+
+	// Suppresses the specified device included in the AMI's block device mapping.
+	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
+
+	// Instance Store Device Name (e.g., ephemeral0).
+	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+}
+
 type InstanceEphemeralBlockDeviceObservation struct {
 
 	// Name of the block device to mount on the instance.
@@ -209,8 +293,8 @@ type InstanceEphemeralBlockDeviceObservation struct {
 type InstanceEphemeralBlockDeviceParameters struct {
 
 	// Name of the block device to mount on the instance.
-	// +kubebuilder:validation:Required
-	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Suppresses the specified device included in the AMI's block device mapping.
 	// +kubebuilder:validation:Optional
@@ -219,6 +303,147 @@ type InstanceEphemeralBlockDeviceParameters struct {
 	// Instance Store Device Name (e.g., ephemeral0).
 	// +kubebuilder:validation:Optional
 	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+}
+
+type InstanceInitParameters struct {
+
+	// AMI to use for the instance. Required unless launch_template is specified and the Launch Template specifes an AMI. If an AMI is specified in the Launch Template, setting ami will override the AMI specified in the Launch Template.
+	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
+
+	// Whether to associate a public IP address with an instance in a VPC.
+	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
+
+	// AZ to start the instance in.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+
+	// The CPU options for the instance. See CPU Options below for more details.
+	CPUOptions []CPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
+
+	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
+	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+
+	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
+	CapacityReservationSpecification []CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
+
+	// Configuration block for customizing the credit specification of the instance. See Credit Specification below for more details. Removing this configuration on existing instances will only stop managing it. It will not change the configuration back to the default for the instance type.
+	CreditSpecification []CreditSpecificationInitParameters `json:"creditSpecification,omitempty" tf:"credit_specification,omitempty"`
+
+	// If true, enables EC2 Instance Stop Protection.
+	DisableAPIStop *bool `json:"disableApiStop,omitempty" tf:"disable_api_stop,omitempty"`
+
+	// If true, enables EC2 Instance Termination Protection.
+	DisableAPITermination *bool `json:"disableApiTermination,omitempty" tf:"disable_api_termination,omitempty"`
+
+	// One or more configuration blocks with additional EBS block devices to attach to the instance. Block device configurations only apply on resource creation. See Block Devices below for details on attributes and drift detection. When accessing this as an attribute reference, it is a set of objects.
+	EBSBlockDevice []InstanceEBSBlockDeviceInitParameters `json:"ebsBlockDevice,omitempty" tf:"ebs_block_device,omitempty"`
+
+	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
+	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
+	EnclaveOptions []EnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
+
+	// One or more configuration blocks to customize Ephemeral (also known as "Instance Store") volumes on the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a set of objects.
+	EphemeralBlockDevice []InstanceEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
+
+	// If true, wait for password data to become available and retrieve it. Useful for getting the administrator password for instances running Microsoft Windows. The password data is exported to the password_data attribute. See GetPasswordData for more information.
+	GetPasswordData *bool `json:"getPasswordData,omitempty" tf:"get_password_data,omitempty"`
+
+	// If true, the launched EC2 instance will support hibernation.
+	Hibernation *bool `json:"hibernation,omitempty" tf:"hibernation,omitempty"`
+
+	// ID of a dedicated host that the instance will be assigned to. Use when an instance is to be launched on a specific dedicated host.
+	HostID *string `json:"hostId,omitempty" tf:"host_id,omitempty"`
+
+	// ARN of the host resource group in which to launch the instances. If you specify an ARN, omit the tenancy parameter or set it to host.
+	HostResourceGroupArn *string `json:"hostResourceGroupArn,omitempty" tf:"host_resource_group_arn,omitempty"`
+
+	// IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the EC2 documentation, notably iam:PassRole.
+	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
+
+	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+
+	// Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface
+	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
+
+	// Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instances. See Shutdown Behavior for more information.
+	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
+
+	// Instance type to use for the instance. Required unless launch_template is specified and the Launch Template specifies an instance type. If an instance type is specified in the Launch Template, setting instance_type will override the instance type specified in the Launch Template. Updates to this field will trigger a stop/start of the EC2 instance.
+	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Key name of the Key Pair to use for the instance; which can be managed using the .
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// Specifies a Launch Template to configure the instance. Parameters configured on this resource will override the corresponding parameters in the Launch Template. See Launch Template Specification below for more details.
+	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// Maintenance and recovery options for the instance. See Maintenance Options below for more details.
+	MaintenanceOptions []MaintenanceOptionsInitParameters `json:"maintenanceOptions,omitempty" tf:"maintenance_options,omitempty"`
+
+	// Customize the metadata options of the instance. See Metadata Options below for more details.
+	MetadataOptions []MetadataOptionsInitParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	// If true, the launched EC2 instance will have detailed monitoring enabled. (Available since v0.6.0)
+	Monitoring *bool `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
+
+	// Customize network interfaces to be attached at instance boot time. See Network Interfaces below for more details.
+	NetworkInterface []InstanceNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+
+	// Placement Group to start the instance in.
+	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
+	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+
+	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
+	PrivateDNSNameOptions []PrivateDNSNameOptionsInitParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
+
+	// Private IP address to associate with the instance in a VPC.
+	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// Configuration block to customize details about the root block device of the instance. See Block Devices below for details. When accessing this as an attribute reference, it is a list containing one object.
+	RootBlockDevice []RootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
+
+	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
+	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
+
+	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
+	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
+	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
+
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
+
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
+
+	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
+	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
+}
+
+type InstanceNetworkInterfaceInitParameters struct {
+
+	// Whether or not to delete the network interface on instance termination. Defaults to false. Currently, the only valid value is false, as this is only supported when creating new network interfaces when launching an instance.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Integer index of the network interface attachment. Limited by instance type.
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+
+	// Integer index of the network card. Limited by instance type. The default index is 0.
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 }
 
 type InstanceNetworkInterfaceObservation struct {
@@ -243,8 +468,8 @@ type InstanceNetworkInterfaceParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Integer index of the network interface attachment. Limited by instance type.
-	// +kubebuilder:validation:Required
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Integer index of the network card. Limited by instance type. The default index is 0.
 	// +kubebuilder:validation:Optional
@@ -636,6 +861,18 @@ type InstanceParameters struct {
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
 
+type LaunchTemplateInitParameters struct {
+
+	// ID of the launch template. Conflicts with name.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the launch template. Conflicts with id.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Template version. Can be a specific version number, $Latest or $Default. The default value is $Default.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type LaunchTemplateObservation struct {
 
 	// ID of the launch template. Conflicts with name.
@@ -663,6 +900,12 @@ type LaunchTemplateParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type MaintenanceOptionsInitParameters struct {
+
+	// Automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
+	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
+}
+
 type MaintenanceOptionsObservation struct {
 
 	// Automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
@@ -674,6 +917,21 @@ type MaintenanceOptionsParameters struct {
 	// Automatic recovery behavior of the Instance. Can be "default" or "disabled". See Recover your instance for more details.
 	// +kubebuilder:validation:Optional
 	AutoRecovery *string `json:"autoRecovery,omitempty" tf:"auto_recovery,omitempty"`
+}
+
+type MetadataOptionsInitParameters struct {
+
+	// Whether the metadata service is available. Valid values include enabled or disabled. Defaults to enabled.
+	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
+
+	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
+
+	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
+	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type MetadataOptionsObservation struct {
@@ -710,6 +968,18 @@ type MetadataOptionsParameters struct {
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
+type PrivateDNSNameOptionsInitParameters struct {
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
+	EnableResourceNameDNSARecord *bool `json:"enableResourceNameDnsARecord,omitempty" tf:"enable_resource_name_dns_a_record,omitempty"`
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.
+	EnableResourceNameDNSAaaaRecord *bool `json:"enableResourceNameDnsAaaaRecord,omitempty" tf:"enable_resource_name_dns_aaaa_record,omitempty"`
+
+	// Type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
+	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
+}
+
 type PrivateDNSNameOptionsObservation struct {
 
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS A records.
@@ -735,6 +1005,30 @@ type PrivateDNSNameOptionsParameters struct {
 	// Type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. Valid values: ip-name and resource-name.
 	// +kubebuilder:validation:Optional
 	HostnameType *string `json:"hostnameType,omitempty" tf:"hostname_type,omitempty"`
+}
+
+type RootBlockDeviceInitParameters struct {
+
+	// Whether the volume should be destroyed on instance termination. Defaults to true.
+	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
+
+	// Whether to enable volume encryption. Defaults to false. Must be configured to perform drift detection.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Map of tags to assign to the device.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Size of the volume in gibibytes (GiB).
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
 type RootBlockDeviceObservation struct {
@@ -818,6 +1112,18 @@ type RootBlockDeviceParameters struct {
 type InstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider InstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceStatus defines the observed state of Instance.

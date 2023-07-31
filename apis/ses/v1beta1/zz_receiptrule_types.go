@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AddHeaderActionInitParameters struct {
+
+	// The name of the header to add
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// The value of the header to add
+	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+}
+
 type AddHeaderActionObservation struct {
 
 	// The name of the header to add
@@ -28,16 +40,37 @@ type AddHeaderActionObservation struct {
 type AddHeaderActionParameters struct {
 
 	// The name of the header to add
-	// +kubebuilder:validation:Required
-	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// The value of the header to add
-	// +kubebuilder:validation:Required
-	HeaderValue *string `json:"headerValue" tf:"header_value,omitempty"`
+	// +kubebuilder:validation:Optional
+	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+}
+
+type BounceActionInitParameters struct {
+
+	// The message to send
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The RFC 5321 SMTP reply code
+	SMTPReplyCode *string `json:"smtpReplyCode,omitempty" tf:"smtp_reply_code,omitempty"`
+
+	// The email address of the sender
+	Sender *string `json:"sender,omitempty" tf:"sender,omitempty"`
+
+	// The RFC 3463 SMTP enhanced status code
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+
+	// The ARN of an SNS topic to notify
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type BounceActionObservation struct {
@@ -64,20 +97,20 @@ type BounceActionObservation struct {
 type BounceActionParameters struct {
 
 	// The message to send
-	// +kubebuilder:validation:Required
-	Message *string `json:"message" tf:"message,omitempty"`
+	// +kubebuilder:validation:Optional
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The RFC 5321 SMTP reply code
-	// +kubebuilder:validation:Required
-	SMTPReplyCode *string `json:"smtpReplyCode" tf:"smtp_reply_code,omitempty"`
+	// +kubebuilder:validation:Optional
+	SMTPReplyCode *string `json:"smtpReplyCode,omitempty" tf:"smtp_reply_code,omitempty"`
 
 	// The email address of the sender
-	// +kubebuilder:validation:Required
-	Sender *string `json:"sender" tf:"sender,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sender *string `json:"sender,omitempty" tf:"sender,omitempty"`
 
 	// The RFC 3463 SMTP enhanced status code
 	// +kubebuilder:validation:Optional
@@ -85,6 +118,21 @@ type BounceActionParameters struct {
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type LambdaActionInitParameters struct {
+
+	// The ARN of the Lambda function to invoke
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Event or RequestResponse
+	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
@@ -106,20 +154,65 @@ type LambdaActionObservation struct {
 type LambdaActionParameters struct {
 
 	// The ARN of the Lambda function to invoke
-	// +kubebuilder:validation:Required
-	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
 	// Event or RequestResponse
 	// +kubebuilder:validation:Optional
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type ReceiptRuleInitParameters struct {
+
+	// A list of Add Header Action blocks. Documented below.
+	AddHeaderAction []AddHeaderActionInitParameters `json:"addHeaderAction,omitempty" tf:"add_header_action,omitempty"`
+
+	// The name of the rule to place this rule after
+	After *string `json:"after,omitempty" tf:"after,omitempty"`
+
+	// A list of Bounce Action blocks. Documented below.
+	BounceAction []BounceActionInitParameters `json:"bounceAction,omitempty" tf:"bounce_action,omitempty"`
+
+	// If true, the rule will be enabled
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of Lambda Action blocks. Documented below.
+	LambdaAction []LambdaActionInitParameters `json:"lambdaAction,omitempty" tf:"lambda_action,omitempty"`
+
+	// The name of the rule
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of email addresses
+	Recipients []*string `json:"recipients,omitempty" tf:"recipients,omitempty"`
+
+	// The name of the rule set
+	RuleSetName *string `json:"ruleSetName,omitempty" tf:"rule_set_name,omitempty"`
+
+	// A list of S3 Action blocks. Documented below.
+	S3Action []S3ActionInitParameters `json:"s3Action,omitempty" tf:"s3_action,omitempty"`
+
+	// If true, incoming emails will be scanned for spam and viruses
+	ScanEnabled *bool `json:"scanEnabled,omitempty" tf:"scan_enabled,omitempty"`
+
+	// A list of SNS Action blocks. Documented below.
+	SnsAction []SnsActionInitParameters `json:"snsAction,omitempty" tf:"sns_action,omitempty"`
+
+	// A list of Stop Action blocks. Documented below.
+	StopAction []StopActionInitParameters `json:"stopAction,omitempty" tf:"stop_action,omitempty"`
+
+	// Require or Optional
+	TLSPolicy *string `json:"tlsPolicy,omitempty" tf:"tls_policy,omitempty"`
+
+	// A list of WorkMail Action blocks. Documented below.
+	WorkmailAction []WorkmailActionInitParameters `json:"workmailAction,omitempty" tf:"workmail_action,omitempty"`
 }
 
 type ReceiptRuleObservation struct {
@@ -237,6 +330,24 @@ type ReceiptRuleParameters struct {
 	WorkmailAction []WorkmailActionParameters `json:"workmailAction,omitempty" tf:"workmail_action,omitempty"`
 }
 
+type S3ActionInitParameters struct {
+
+	// The name of the S3 bucket
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The ARN of the KMS key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The key prefix of the S3 bucket
+	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The ARN of an SNS topic to notify
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
 type S3ActionObservation struct {
 
 	// The name of the S3 bucket
@@ -258,8 +369,8 @@ type S3ActionObservation struct {
 type S3ActionParameters struct {
 
 	// The name of the S3 bucket
-	// +kubebuilder:validation:Required
-	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// The ARN of the KMS key
 	// +kubebuilder:validation:Optional
@@ -270,11 +381,23 @@ type S3ActionParameters struct {
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type SnsActionInitParameters struct {
+
+	// The encoding to use for the email within the Amazon SNS notification. Default value is UTF-8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
@@ -297,12 +420,24 @@ type SnsActionParameters struct {
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
-	// +kubebuilder:validation:Required
-	TopicArn *string `json:"topicArn" tf:"topic_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type StopActionInitParameters struct {
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The scope to apply. The only acceptable value is RuleSet.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The ARN of an SNS topic to notify
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
 type StopActionObservation struct {
@@ -320,15 +455,27 @@ type StopActionObservation struct {
 type StopActionParameters struct {
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The scope to apply. The only acceptable value is RuleSet.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+}
+
+type WorkmailActionInitParameters struct {
+
+	// The ARN of the WorkMail organization
+	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
+
+	// The position of the action in the receipt rule
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 }
 
@@ -347,12 +494,12 @@ type WorkmailActionObservation struct {
 type WorkmailActionParameters struct {
 
 	// The ARN of the WorkMail organization
-	// +kubebuilder:validation:Required
-	OrganizationArn *string `json:"organizationArn" tf:"organization_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
 
 	// The position of the action in the receipt rule
-	// +kubebuilder:validation:Required
-	Position *float64 `json:"position" tf:"position,omitempty"`
+	// +kubebuilder:validation:Optional
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -363,6 +510,18 @@ type WorkmailActionParameters struct {
 type ReceiptRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReceiptRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ReceiptRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReceiptRuleStatus defines the observed state of ReceiptRule.
@@ -383,8 +542,8 @@ type ReceiptRuleStatus struct {
 type ReceiptRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleSetName)",message="ruleSetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleSetName) || has(self.initProvider.ruleSetName)",message="ruleSetName is a required parameter"
 	Spec   ReceiptRuleSpec   `json:"spec"`
 	Status ReceiptRuleStatus `json:"status,omitempty"`
 }

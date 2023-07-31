@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MetricsDestinationInitParameters struct {
+
+	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+}
+
 type MetricsDestinationObservation struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
@@ -78,6 +87,18 @@ type MetricsDestinationParameters struct {
 type MetricsDestinationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MetricsDestinationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MetricsDestinationInitParameters `json:"initProvider,omitempty"`
 }
 
 // MetricsDestinationStatus defines the observed state of MetricsDestination.
@@ -98,7 +119,7 @@ type MetricsDestinationStatus struct {
 type MetricsDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination)",message="destination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destination) || has(self.initProvider.destination)",message="destination is a required parameter"
 	Spec   MetricsDestinationSpec   `json:"spec"`
 	Status MetricsDestinationStatus `json:"status,omitempty"`
 }

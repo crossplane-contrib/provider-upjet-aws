@@ -88,9 +88,6 @@ spec:
                         parameterValue:
                           description: The input value.
                           type: string
-                      required:
-                      - parameterName
-                      - parameterValue
                       type: object
                     type: array
                   region:
@@ -111,6 +108,55 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  deliveryS3Bucket:
+                    description: Amazon S3 bucket where AWS Config stores conformance
+                      pack templates. Maximum length of 63.
+                    type: string
+                  deliveryS3KeyPrefix:
+                    description: The prefix for the Amazon S3 bucket. Maximum length
+                      of 1024.
+                    type: string
+                  inputParameter:
+                    description: Set of configuration blocks describing input parameters
+                      passed to the conformance pack template. Documented below. When
+                      configured, the parameters must also be included in the template_body
+                      or in the template stored in Amazon S3 if using template_s3_uri.
+                    items:
+                      properties:
+                        parameterName:
+                          description: The input key.
+                          type: string
+                        parameterValue:
+                          description: The input value.
+                          type: string
+                      type: object
+                    type: array
+                  templateBody:
+                    description: A string containing full conformance pack template
+                      body. Maximum length of 51200. Drift detection is not possible
+                      with this argument.
+                    type: string
+                  templateS3Uri:
+                    description: Location of file, e.g., s3://bucketname/prefix, containing
+                      the template body. The uri must point to the conformance pack
+                      template that is located in an Amazon S3 bucket in the same
+                      region as the conformance pack. Maximum length of 1024. Drift
+                      detection is not possible with this argument.
+                    type: string
                 type: object
               managementPolicies:
                 default:

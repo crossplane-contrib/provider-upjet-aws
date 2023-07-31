@@ -16,6 +16,3 @@ spec:
     name: vif-foo
     region: us-west-1
     vlan: 4094
-
----
-

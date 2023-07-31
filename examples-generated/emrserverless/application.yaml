@@ -12,6 +12,3 @@ spec:
     region: us-west-1
     releaseLabel: emr-6.6.0
     type: hive
-
----
-

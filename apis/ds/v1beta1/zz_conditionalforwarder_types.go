@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConditionalForwarderInitParameters struct {
+
+	// A list of forwarder IP addresses.
+	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
+}
+
 type ConditionalForwarderObservation struct {
 
 	// A list of forwarder IP addresses.
@@ -61,6 +67,18 @@ type ConditionalForwarderParameters struct {
 type ConditionalForwarderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConditionalForwarderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConditionalForwarderInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConditionalForwarderStatus defines the observed state of ConditionalForwarder.
@@ -81,7 +99,7 @@ type ConditionalForwarderStatus struct {
 type ConditionalForwarder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsIps)",message="dnsIps is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsIps) || has(self.initProvider.dnsIps)",message="dnsIps is a required parameter"
 	Spec   ConditionalForwarderSpec   `json:"spec"`
 	Status ConditionalForwarderStatus `json:"status,omitempty"`
 }

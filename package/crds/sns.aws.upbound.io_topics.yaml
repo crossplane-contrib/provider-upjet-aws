@@ -892,6 +892,73 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  applicationSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
+                    type: number
+                  contentBasedDeduplication:
+                    description: Enables content-based deduplication for FIFO topics.
+                      For more information, see the related documentation
+                    type: boolean
+                  deliveryPolicy:
+                    description: The SNS delivery policy. More on AWS documentation
+                    type: string
+                  displayName:
+                    description: The display name for the topic
+                    type: string
+                  fifoTopic:
+                    description: Boolean indicating whether or not to create a FIFO
+                      (first-in-first-out) topic (default is false).
+                    type: boolean
+                  firehoseSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
+                    type: number
+                  httpSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
+                    type: number
+                  kmsMasterKeyId:
+                    description: The ID of an AWS-managed customer master key (CMK)
+                      for Amazon SNS or a custom CMK. For more information, see Key
+                      Terms
+                    type: string
+                  lambdaSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
+                    type: number
+                  policy:
+                    description: The fully-formed AWS policy as JSON.
+                    type: string
+                  signatureVersion:
+                    description: If SignatureVersion should be 1 (SHA1) or 2 (SHA256).
+                      The signature version corresponds to the hashing algorithm used
+                      while creating the signature of the notifications, subscription
+                      confirmations, or unsubscribe confirmation messages sent by
+                      Amazon SNS.
+                    type: number
+                  sqsSuccessFeedbackSampleRate:
+                    description: Percentage of success to sample
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tracingConfig:
+                    description: 'Tracing mode of an Amazon SNS topic. Valid values:
+                      "PassThrough", "Active".'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'

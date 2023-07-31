@@ -18,6 +18,3 @@ spec:
     region: us-west-1
     schedule:
     - scheduleExpression: cron(0 0 * * ? *)
-
----
-

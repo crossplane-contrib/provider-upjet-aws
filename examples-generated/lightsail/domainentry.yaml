@@ -29,6 +29,3 @@ spec:
   forProvider:
     domainName: mydomain.com
     region: us-west-1
-
----
-

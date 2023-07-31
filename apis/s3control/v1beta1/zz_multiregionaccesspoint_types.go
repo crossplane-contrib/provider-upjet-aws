@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DetailsInitParameters struct {
+
+	// The name of the Multi-Region Access Point.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
+	PublicAccessBlock []PublicAccessBlockInitParameters `json:"publicAccessBlock,omitempty" tf:"public_access_block,omitempty"`
+}
+
 type DetailsObservation struct {
 
 	// The name of the Multi-Region Access Point.
@@ -28,8 +37,8 @@ type DetailsObservation struct {
 type DetailsParameters struct {
 
 	// The name of the Multi-Region Access Point.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
 	// +kubebuilder:validation:Optional
@@ -38,6 +47,15 @@ type DetailsParameters struct {
 	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
 	// +kubebuilder:validation:Required
 	Region []RegionParameters `json:"region" tf:"region,omitempty"`
+}
+
+type MultiRegionAccessPointInitParameters struct {
+
+	// The AWS account ID for the owner of the buckets for which you want to create a Multi-Region Access Point.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// A configuration block containing details about the Multi-Region Access Point. See Details Configuration Block below for more details
+	Details []DetailsInitParameters `json:"details,omitempty" tf:"details,omitempty"`
 }
 
 type MultiRegionAccessPointObservation struct {
@@ -81,6 +99,21 @@ type MultiRegionAccessPointParameters struct {
 	Region *string `json:"region" tf:"-"`
 }
 
+type PublicAccessBlockInitParameters struct {
+
+	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
+	BlockPublicAcls *bool `json:"blockPublicAcls,omitempty" tf:"block_public_acls,omitempty"`
+
+	// Whether Amazon S3 should block public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect existing bucket policies. When set to true causes Amazon S3 to:
+	BlockPublicPolicy *bool `json:"blockPublicPolicy,omitempty" tf:"block_public_policy,omitempty"`
+
+	// Whether Amazon S3 should ignore public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. When set to true causes Amazon S3 to:
+	IgnorePublicAcls *bool `json:"ignorePublicAcls,omitempty" tf:"ignore_public_acls,omitempty"`
+
+	// Whether Amazon S3 should restrict public bucket policies for buckets in this account. Defaults to true. Enabling this setting does not affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. When set to true:
+	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
+}
+
 type PublicAccessBlockObservation struct {
 
 	// Whether Amazon S3 should block public ACLs for buckets in this account. Defaults to true. Enabling this setting does not affect existing policies or ACLs. When set to true causes the following behavior:
@@ -115,6 +148,9 @@ type PublicAccessBlockParameters struct {
 	RestrictPublicBuckets *bool `json:"restrictPublicBuckets,omitempty" tf:"restrict_public_buckets,omitempty"`
 }
 
+type RegionInitParameters struct {
+}
+
 type RegionObservation struct {
 
 	// The name of the associated bucket for the Region.
@@ -142,6 +178,18 @@ type RegionParameters struct {
 type MultiRegionAccessPointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MultiRegionAccessPointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MultiRegionAccessPointInitParameters `json:"initProvider,omitempty"`
 }
 
 // MultiRegionAccessPointStatus defines the observed state of MultiRegionAccessPoint.
@@ -162,7 +210,7 @@ type MultiRegionAccessPointStatus struct {
 type MultiRegionAccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.details)",message="details is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.details) || has(self.initProvider.details)",message="details is a required parameter"
 	Spec   MultiRegionAccessPointSpec   `json:"spec"`
 	Status MultiRegionAccessPointStatus `json:"status,omitempty"`
 }

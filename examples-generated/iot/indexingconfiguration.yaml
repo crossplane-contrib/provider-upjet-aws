@@ -23,6 +23,3 @@ spec:
       namedShadowIndexingMode: "ON"
       thingConnectivityIndexingMode: STATUS
       thingIndexingMode: REGISTRY_AND_SHADOW
-
----
-

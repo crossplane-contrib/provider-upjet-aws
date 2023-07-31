@@ -180,8 +180,6 @@ spec:
                             the deployment and creates a CloudWatch log. Valid values:
                             Warn, Enforce. Default value: Warn.'
                           type: string
-                      required:
-                      - untrustedArtifactOnDeployment
                       type: object
                     type: array
                   region:
@@ -190,6 +188,45 @@ spec:
                     type: string
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  allowedPublishers:
+                    description: A configuration block of allowed publishers as signing
+                      profiles for this code signing configuration. Detailed below.
+                    items:
+                      type: object
+                    type: array
+                  description:
+                    description: Descriptive name for this code signing configuration.
+                    type: string
+                  policies:
+                    description: A configuration block of code signing policies that
+                      define the actions to take if the validation checks fail. Detailed
+                      below.
+                    items:
+                      properties:
+                        untrustedArtifactOnDeployment:
+                          description: 'Code signing configuration policy for deployment
+                            validation failure. If you set the policy to Enforce,
+                            Lambda blocks the deployment request if code-signing validation
+                            checks fail. If you set the policy to Warn, Lambda allows
+                            the deployment and creates a CloudWatch log. Valid values:
+                            Warn, Enforce. Default value: Warn.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -391,7 +428,8 @@ spec:
             x-kubernetes-validations:
             - message: allowedPublishers is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.allowedPublishers)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.allowedPublishers)
+                || has(self.initProvider.allowedPublishers)'
           status:
             description: CodeSigningConfigStatus defines the observed state of CodeSigningConfig.
             properties:

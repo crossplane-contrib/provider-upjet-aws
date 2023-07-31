@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AmazonManagedKafkaEventSourceConfigInitParameters struct {
+
+	// A Kafka consumer group ID between 1 and 200 characters for use when creating this event source mapping. If one is not specified, this value will be automatically generated. See AmazonManagedKafkaEventSourceConfig Syntax.
+	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
+}
+
 type AmazonManagedKafkaEventSourceConfigObservation struct {
 
 	// A Kafka consumer group ID between 1 and 200 characters for use when creating this event source mapping. If one is not specified, this value will be automatically generated. See AmazonManagedKafkaEventSourceConfig Syntax.
@@ -26,6 +32,12 @@ type AmazonManagedKafkaEventSourceConfigParameters struct {
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 }
 
+type DestinationConfigInitParameters struct {
+
+	// The destination configuration for failed invocations. Detailed below.
+	OnFailure []OnFailureInitParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+}
+
 type DestinationConfigObservation struct {
 
 	// The destination configuration for failed invocations. Detailed below.
@@ -37,6 +49,18 @@ type DestinationConfigParameters struct {
 	// The destination configuration for failed invocations. Detailed below.
 	// +kubebuilder:validation:Optional
 	OnFailure []OnFailureParameters `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+}
+
+type DocumentDBEventSourceConfigInitParameters struct {
+
+	// The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.
+	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
+
+	// The name of the database to consume within the DocumentDB cluster.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
+	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
 }
 
 type DocumentDBEventSourceConfigObservation struct {
@@ -58,12 +82,81 @@ type DocumentDBEventSourceConfigParameters struct {
 	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
 
 	// The name of the database to consume within the DocumentDB cluster.
-	// +kubebuilder:validation:Required
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
 	// +kubebuilder:validation:Optional
 	FullDocument *string `json:"fullDocument,omitempty" tf:"full_document,omitempty"`
+}
+
+type EventSourceMappingInitParameters struct {
+
+	// Additional configuration block for Amazon Managed Kafka sources. Incompatible with "self_managed_event_source" and "self_managed_kafka_event_source_config". Detailed below.
+	AmazonManagedKafkaEventSourceConfig []AmazonManagedKafkaEventSourceConfigInitParameters `json:"amazonManagedKafkaEventSourceConfig,omitempty" tf:"amazon_managed_kafka_event_source_config,omitempty"`
+
+	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+
+	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
+	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
+
+	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
+	DestinationConfig []DestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
+
+	// Configuration settings for a DocumentDB event source. Detailed below.
+	DocumentDBEventSourceConfig []DocumentDBEventSourceConfigInitParameters `json:"documentDbEventSourceConfig,omitempty" tf:"document_db_event_source_config,omitempty"`
+
+	// Determines if the mapping will be enabled on creation. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The event source ARN - this is required for Kinesis stream, DynamoDB stream, SQS queue, MQ broker, MSK cluster or DocumentDB change stream.  It is incompatible with a Self Managed Kafka source.
+	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
+
+	// The criteria to use for event filtering Kinesis stream, DynamoDB stream, SQS queue event sources. Detailed below.
+	FilterCriteria []FilterCriteriaInitParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
+
+	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
+	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
+
+	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
+	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
+
+	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources (DynamoDB and Kinesis). Must be either -1 (forever, and the default value) or between 60 and 604800 (inclusive).
+	MaximumRecordAgeInSeconds *float64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
+
+	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+
+	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
+	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
+	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
+
+	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
+	ScalingConfig []ScalingConfigInitParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
+
+	// For Self Managed Kafka sources, the location of the self managed cluster. If set, configuration must also include source_access_configuration. Detailed below.
+	SelfManagedEventSource []SelfManagedEventSourceInitParameters `json:"selfManagedEventSource,omitempty" tf:"self_managed_event_source,omitempty"`
+
+	// Additional configuration block for Self Managed Kafka sources. Incompatible with "event_source_arn" and "amazon_managed_kafka_event_source_config". Detailed below.
+	SelfManagedKafkaEventSourceConfig []SelfManagedKafkaEventSourceConfigInitParameters `json:"selfManagedKafkaEventSourceConfig,omitempty" tf:"self_managed_kafka_event_source_config,omitempty"`
+
+	// :  For Self Managed Kafka sources, the access configuration for the source. If set, configuration must also include self_managed_event_source. Detailed below.
+	SourceAccessConfiguration []SourceAccessConfigurationInitParameters `json:"sourceAccessConfiguration,omitempty" tf:"source_access_configuration,omitempty"`
+
+	// The position in the stream where AWS Lambda should start reading. Must be one of AT_TIMESTAMP (Kinesis only), LATEST or TRIM_HORIZON if getting events from Kinesis, DynamoDB, MSK or Self Managed Apache Kafka. Must not be provided if getting events from SQS. More information about these positions can be found in the AWS DynamoDB Streams API Reference and AWS Kinesis API Reference.
+	StartingPosition *string `json:"startingPosition,omitempty" tf:"starting_position,omitempty"`
+
+	// A timestamp in RFC3339 format of the data record which to start reading when using starting_position set to AT_TIMESTAMP. If a record with this exact timestamp does not exist, the next later record is chosen. If the timestamp is older than the current trim horizon, the oldest available record is chosen.
+	StartingPositionTimestamp *string `json:"startingPositionTimestamp,omitempty" tf:"starting_position_timestamp,omitempty"`
+
+	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
+	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
+
+	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
+	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 }
 
 type EventSourceMappingObservation struct {
@@ -268,6 +361,12 @@ type EventSourceMappingParameters struct {
 	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 }
 
+type FilterCriteriaInitParameters struct {
+
+	// A set of up to 5 filter. If an event satisfies at least one, Lambda sends the event to the function or adds it to the next batch. Detailed below.
+	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+}
+
 type FilterCriteriaObservation struct {
 
 	// A set of up to 5 filter. If an event satisfies at least one, Lambda sends the event to the function or adds it to the next batch. Detailed below.
@@ -279,6 +378,12 @@ type FilterCriteriaParameters struct {
 	// A set of up to 5 filter. If an event satisfies at least one, Lambda sends the event to the function or adds it to the next batch. Detailed below.
 	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+}
+
+type FilterInitParameters struct {
+
+	// A filter pattern up to 4096 characters. See Filter Rule Syntax.
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
 type FilterObservation struct {
@@ -294,6 +399,12 @@ type FilterParameters struct {
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
+type OnFailureInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the destination resource.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+}
+
 type OnFailureObservation struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
@@ -303,8 +414,14 @@ type OnFailureObservation struct {
 type OnFailureParameters struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
-	// +kubebuilder:validation:Required
-	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+}
+
+type ScalingConfigInitParameters struct {
+
+	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
+	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type ScalingConfigObservation struct {
@@ -320,6 +437,12 @@ type ScalingConfigParameters struct {
 	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
+type SelfManagedEventSourceInitParameters struct {
+
+	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
+	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
+}
+
 type SelfManagedEventSourceObservation struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
@@ -329,8 +452,14 @@ type SelfManagedEventSourceObservation struct {
 type SelfManagedEventSourceParameters struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
-	// +kubebuilder:validation:Required
-	Endpoints map[string]*string `json:"endpoints" tf:"endpoints,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
+}
+
+type SelfManagedKafkaEventSourceConfigInitParameters struct {
+
+	// A Kafka consumer group ID between 1 and 200 characters for use when creating this event source mapping. If one is not specified, this value will be automatically generated. See SelfManagedKafkaEventSourceConfig Syntax.
+	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 }
 
 type SelfManagedKafkaEventSourceConfigObservation struct {
@@ -346,6 +475,15 @@ type SelfManagedKafkaEventSourceConfigParameters struct {
 	ConsumerGroupID *string `json:"consumerGroupId,omitempty" tf:"consumer_group_id,omitempty"`
 }
 
+type SourceAccessConfigurationInitParameters struct {
+
+	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The URI for this configuration.  For type VPC_SUBNET the value should be subnet:subnet_id where subnet_id is the value you would find in an aws_subnet resource's id attribute.  For type VPC_SECURITY_GROUP the value should be security_group:security_group_id where security_group_id is the value you would find in an aws_security_group resource's id attribute.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type SourceAccessConfigurationObservation struct {
 
 	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
@@ -358,18 +496,30 @@ type SourceAccessConfigurationObservation struct {
 type SourceAccessConfigurationParameters struct {
 
 	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The URI for this configuration.  For type VPC_SUBNET the value should be subnet:subnet_id where subnet_id is the value you would find in an aws_subnet resource's id attribute.  For type VPC_SECURITY_GROUP the value should be security_group:security_group_id where security_group_id is the value you would find in an aws_security_group resource's id attribute.
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 // EventSourceMappingSpec defines the desired state of EventSourceMapping
 type EventSourceMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventSourceMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EventSourceMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventSourceMappingStatus defines the observed state of EventSourceMapping.

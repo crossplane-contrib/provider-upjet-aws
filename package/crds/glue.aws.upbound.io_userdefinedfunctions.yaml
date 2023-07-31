@@ -174,14 +174,48 @@ spec:
                         uri:
                           description: The URI for accessing the resource.
                           type: string
-                      required:
-                      - resourceType
-                      - uri
                       type: object
                     type: array
                 required:
                 - catalogId
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  className:
+                    description: The Java class that contains the function code.
+                    type: string
+                  ownerName:
+                    description: The owner of the function.
+                    type: string
+                  ownerType:
+                    description: The owner type. can be one of USER, ROLE, and GROUP.
+                    type: string
+                  resourceUris:
+                    description: The configuration block for Resource URIs. See resource
+                      uris below for more details.
+                    items:
+                      properties:
+                        resourceType:
+                          description: The type of the resource. can be one of JAR,
+                            FILE, and ARCHIVE.
+                          type: string
+                        uri:
+                          description: The URI for accessing the resource.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -383,13 +417,16 @@ spec:
             x-kubernetes-validations:
             - message: className is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.className)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.className)
+                || has(self.initProvider.className)'
             - message: ownerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ownerName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ownerName)
+                || has(self.initProvider.ownerName)'
             - message: ownerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ownerType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ownerType)
+                || has(self.initProvider.ownerType)'
           status:
             description: UserDefinedFunctionStatus defines the observed state of UserDefinedFunction.
             properties:

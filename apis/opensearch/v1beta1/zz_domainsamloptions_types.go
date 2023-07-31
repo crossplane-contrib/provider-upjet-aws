@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DomainSAMLOptionsInitParameters struct {
+
+	// SAML authentication options for an AWS OpenSearch Domain.
+	SAMLOptions []SAMLOptionsInitParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
+}
+
 type DomainSAMLOptionsObservation struct {
 
 	// Name of the domain.
@@ -51,6 +57,15 @@ type DomainSAMLOptionsParameters struct {
 	SAMLOptions []SAMLOptionsParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 }
 
+type IdpInitParameters struct {
+
+	// Unique Entity ID of the application in SAML Identity Provider.
+	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
+
+	// Metadata of the SAML application in xml format.
+	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
+}
+
 type IdpObservation struct {
 
 	// Unique Entity ID of the application in SAML Identity Provider.
@@ -63,12 +78,33 @@ type IdpObservation struct {
 type IdpParameters struct {
 
 	// Unique Entity ID of the application in SAML Identity Provider.
-	// +kubebuilder:validation:Required
-	EntityID *string `json:"entityId" tf:"entity_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
 
 	// Metadata of the SAML application in xml format.
-	// +kubebuilder:validation:Required
-	MetadataContent *string `json:"metadataContent" tf:"metadata_content,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
+}
+
+type SAMLOptionsInitParameters struct {
+
+	// Whether SAML authentication is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Information from your identity provider.
+	Idp []IdpInitParameters `json:"idp,omitempty" tf:"idp,omitempty"`
+
+	// This backend role from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
+	MasterBackendRole *string `json:"masterBackendRole,omitempty" tf:"master_backend_role,omitempty"`
+
+	// Element of the SAML assertion to use for backend roles. Default is roles.
+	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
+
+	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
+	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+
+	// Element of the SAML assertion to use for username. Default is NameID.
+	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
 }
 
 type SAMLOptionsObservation struct {
@@ -127,6 +163,18 @@ type SAMLOptionsParameters struct {
 type DomainSAMLOptionsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DomainSAMLOptionsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DomainSAMLOptionsInitParameters `json:"initProvider,omitempty"`
 }
 
 // DomainSAMLOptionsStatus defines the observed state of DomainSAMLOptions.

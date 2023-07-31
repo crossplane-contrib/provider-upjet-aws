@@ -96,6 +96,41 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  autoScalingConfigurationName:
+                    description: Name of the auto scaling configuration.
+                    type: string
+                  maxConcurrency:
+                    description: Maximal number of concurrent requests that you want
+                      an instance to process. When the number of concurrent requests
+                      goes over this limit, App Runner scales up your service.
+                    type: number
+                  maxSize:
+                    description: Maximal number of instances that App Runner provisions
+                      for your service.
+                    type: number
+                  minSize:
+                    description: Minimal number of instances that App Runner provisions
+                      for your service.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -296,7 +331,8 @@ spec:
             x-kubernetes-validations:
             - message: autoScalingConfigurationName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoScalingConfigurationName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoScalingConfigurationName)
+                || has(self.initProvider.autoScalingConfigurationName)'
           status:
             description: AutoScalingConfigurationVersionStatus defines the observed
               state of AutoScalingConfigurationVersion.

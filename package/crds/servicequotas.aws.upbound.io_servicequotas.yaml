@@ -91,6 +91,37 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  quotaCode:
+                    description: 'Code of the service quota to track. For example:
+                      L-F678F1CE. Available values can be found with the AWS CLI service-quotas
+                      list-service-quotas command.'
+                    type: string
+                  serviceCode:
+                    description: 'Code of the service to track. For example: vpc.
+                      Available values can be found with the AWS CLI service-quotas
+                      list-services command.'
+                    type: string
+                  value:
+                    description: Float specifying the desired value for the service
+                      quota. If the desired value is higher than the current value,
+                      a quota increase request is submitted. When a known request
+                      is submitted and pending, the value reflects the desired value
+                      of the pending request.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -291,13 +322,16 @@ spec:
             x-kubernetes-validations:
             - message: quotaCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.quotaCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.quotaCode)
+                || has(self.initProvider.quotaCode)'
             - message: serviceCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceCode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceCode)
+                || has(self.initProvider.serviceCode)'
             - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
+                || has(self.initProvider.value)'
           status:
             description: ServiceQuotaStatus defines the observed state of ServiceQuota.
             properties:

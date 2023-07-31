@@ -165,6 +165,32 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The description of the new event archive.
+                    type: string
+                  eventPattern:
+                    description: Instructs the new event archive to only capture events
+                      matched by this pattern. By default, it attempts to archive
+                      every event received in the event_source_arn.
+                    type: string
+                  retentionDays:
+                    description: The maximum number of days to retain events in the
+                      new event archive. By default, it archives indefinitely.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'

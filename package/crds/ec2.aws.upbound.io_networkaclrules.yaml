@@ -186,6 +186,56 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  cidrBlock:
+                    description: The network range to allow or deny, in CIDR notation
+                      (for example 172.16.0.0/24 ).
+                    type: string
+                  egress:
+                    description: Indicates whether this is an egress rule (rule is
+                      applied to traffic leaving the subnet). Default false.
+                    type: boolean
+                  fromPort:
+                    description: The from port to match.
+                    type: number
+                  icmpCode:
+                    description: 'ICMP protocol: The ICMP code. Required if specifying
+                      ICMP for the protocolE.g., -1'
+                    type: number
+                  icmpType:
+                    description: 'ICMP protocol: The ICMP type. Required if specifying
+                      ICMP for the protocolE.g., -1'
+                    type: number
+                  ipv6CidrBlock:
+                    description: The IPv6 CIDR block to allow or deny.
+                    type: string
+                  protocol:
+                    description: The protocol. A value of -1 means all protocols.
+                    type: string
+                  ruleAction:
+                    description: 'Indicates whether to allow or deny the traffic that
+                      matches the rule. Accepted values: allow | deny'
+                    type: string
+                  ruleNumber:
+                    description: The rule number for the entry (for example, 100).
+                      ACL entries are processed in ascending order by rule number.
+                    type: number
+                  toPort:
+                    description: The to port to match.
+                    type: number
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -386,13 +436,16 @@ spec:
             x-kubernetes-validations:
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
             - message: ruleAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)
+                || has(self.initProvider.ruleAction)'
             - message: ruleNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)
+                || has(self.initProvider.ruleNumber)'
           status:
             description: NetworkACLRuleStatus defines the observed state of NetworkACLRule.
             properties:

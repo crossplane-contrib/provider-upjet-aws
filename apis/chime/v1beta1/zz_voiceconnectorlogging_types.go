@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VoiceConnectorLoggingInitParameters struct {
+
+	// When true, enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
+	EnableMediaMetricLogs *bool `json:"enableMediaMetricLogs,omitempty" tf:"enable_media_metric_logs,omitempty"`
+
+	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
+	EnableSIPLogs *bool `json:"enableSipLogs,omitempty" tf:"enable_sip_logs,omitempty"`
+}
+
 type VoiceConnectorLoggingObservation struct {
 
 	// When true, enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
@@ -62,6 +71,18 @@ type VoiceConnectorLoggingParameters struct {
 type VoiceConnectorLoggingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VoiceConnectorLoggingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VoiceConnectorLoggingInitParameters `json:"initProvider,omitempty"`
 }
 
 // VoiceConnectorLoggingStatus defines the observed state of VoiceConnectorLogging.

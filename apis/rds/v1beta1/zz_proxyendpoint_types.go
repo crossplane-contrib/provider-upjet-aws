@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProxyEndpointInitParameters struct {
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is READ_WRITE. Valid values are READ_WRITE and READ_ONLY.
+	TargetRole *string `json:"targetRole,omitempty" tf:"target_role,omitempty"`
+
+	// One or more VPC subnet IDs to associate with the new proxy.
+	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
+}
+
 type ProxyEndpointObservation struct {
 
 	// The Amazon Resource Name (ARN) for the proxy endpoint.
@@ -100,6 +112,18 @@ type ProxyEndpointParameters struct {
 type ProxyEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProxyEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ProxyEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProxyEndpointStatus defines the observed state of ProxyEndpoint.
@@ -120,7 +144,7 @@ type ProxyEndpointStatus struct {
 type ProxyEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || has(self.initProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
 	Spec   ProxyEndpointSpec   `json:"spec"`
 	Status ProxyEndpointStatus `json:"status,omitempty"`
 }

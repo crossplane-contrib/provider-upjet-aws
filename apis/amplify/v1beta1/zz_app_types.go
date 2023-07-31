@@ -13,6 +13,51 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppInitParameters struct {
+
+	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	AutoBranchCreationConfig []AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
+
+	// Automated branch creation glob patterns for an Amplify app.
+	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
+
+	// The build specification (build spec) for an Amplify app.
+	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
+
+	// Description for an Amplify app.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enables automated branch creation for an Amplify app.
+	EnableAutoBranchCreation *bool `json:"enableAutoBranchCreation,omitempty" tf:"enable_auto_branch_creation,omitempty"`
+
+	// Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app.
+	EnableBasicAuth *bool `json:"enableBasicAuth,omitempty" tf:"enable_basic_auth,omitempty"`
+
+	// Enables auto-building of branches for the Amplify App.
+	EnableBranchAutoBuild *bool `json:"enableBranchAutoBuild,omitempty" tf:"enable_branch_auto_build,omitempty"`
+
+	// Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository.
+	EnableBranchAutoDeletion *bool `json:"enableBranchAutoDeletion,omitempty" tf:"enable_branch_auto_deletion,omitempty"`
+
+	// Environment variables map for an Amplify app.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
+	// Name for an Amplify app.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB.
+	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// Repository for an Amplify app.
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AppObservation struct {
 
 	// ARN of the Amplify app.
@@ -166,6 +211,36 @@ type AppParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type AutoBranchCreationConfigInitParameters struct {
+
+	// Build specification (build spec) for the autocreated branch.
+	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// Enables auto building for the autocreated branch.
+	EnableAutoBuild *bool `json:"enableAutoBuild,omitempty" tf:"enable_auto_build,omitempty"`
+
+	// Enables basic authorization for the autocreated branch.
+	EnableBasicAuth *bool `json:"enableBasicAuth,omitempty" tf:"enable_basic_auth,omitempty"`
+
+	// Enables performance mode for the branch.
+	EnablePerformanceMode *bool `json:"enablePerformanceMode,omitempty" tf:"enable_performance_mode,omitempty"`
+
+	// Enables pull request previews for the autocreated branch.
+	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
+
+	// Environment variables for the autocreated branch.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
+	// Framework for the autocreated branch.
+	Framework *string `json:"framework,omitempty" tf:"framework,omitempty"`
+
+	// Amplify environment name for the pull request.
+	PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty" tf:"pull_request_environment_name,omitempty"`
+
+	// Describes the current stage for the autocreated branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+}
+
 type AutoBranchCreationConfigObservation struct {
 
 	// Build specification (build spec) for the autocreated branch.
@@ -239,6 +314,21 @@ type AutoBranchCreationConfigParameters struct {
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 }
 
+type CustomRuleInitParameters struct {
+
+	// Condition for a URL rewrite or redirect rule, such as a country code.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Source pattern for a URL rewrite or redirect rule.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// Status code for a URL rewrite or redirect rule. Valid values: 200, 301, 302, 404, 404-200.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Target pattern for a URL rewrite or redirect rule.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
 type CustomRuleObservation struct {
 
 	// Condition for a URL rewrite or redirect rule, such as a country code.
@@ -261,16 +351,19 @@ type CustomRuleParameters struct {
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Source pattern for a URL rewrite or redirect rule.
-	// +kubebuilder:validation:Required
-	Source *string `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Status code for a URL rewrite or redirect rule. Valid values: 200, 301, 302, 404, 404-200.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Target pattern for a URL rewrite or redirect rule.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type ProductionBranchInitParameters struct {
 }
 
 type ProductionBranchObservation struct {
@@ -295,6 +388,18 @@ type ProductionBranchParameters struct {
 type AppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppStatus defines the observed state of App.
@@ -315,7 +420,7 @@ type AppStatus struct {
 type App struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AppSpec   `json:"spec"`
 	Status AppStatus `json:"status,omitempty"`
 }

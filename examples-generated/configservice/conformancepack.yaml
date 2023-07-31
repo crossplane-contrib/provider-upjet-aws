@@ -24,6 +24,3 @@ spec:
               Owner: AWS
               SourceIdentifier: IAM_PASSWORD_POLICY
           Type: AWS::Config::ConfigRule
-
----
-

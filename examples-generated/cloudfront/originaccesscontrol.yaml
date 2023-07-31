@@ -14,6 +14,3 @@ spec:
     region: us-west-1
     signingBehavior: always
     signingProtocol: sigv4
-
----
-

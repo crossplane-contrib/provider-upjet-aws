@@ -11,6 +11,3 @@ spec:
     channelId: kitten-channel
     description: A channel dedicated to amusing videos of kittens.
     region: us-west-1
-
----
-

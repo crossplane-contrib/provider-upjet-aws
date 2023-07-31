@@ -15,6 +15,3 @@ spec:
     key: new_object_key
     region: us-west-1
     source: path/to/file
-
----
-

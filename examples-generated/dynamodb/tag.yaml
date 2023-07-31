@@ -30,6 +30,3 @@ spec:
     region: us-west-1
     replica:
     - regionName: ${data.aws_region.replica.name}
-
----
-

@@ -171,12 +171,50 @@ spec:
                             be used when creating or importing resources that correspond
                             to unversioned S3 buckets.'
                           type: string
-                      required:
-                      - status
                       type: object
                     type: array
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  expectedBucketOwner:
+                    description: Account ID of the expected bucket owner.
+                    type: string
+                  mfa:
+                    description: Concatenation of the authentication device's serial
+                      number, a space, and the value that is displayed on your authentication
+                      device.
+                    type: string
+                  versioningConfiguration:
+                    description: Configuration block for the versioning parameters.
+                      See below.
+                    items:
+                      properties:
+                        mfaDelete:
+                          description: 'Specifies whether MFA delete is enabled in
+                            the bucket versioning configuration. Valid values: Enabled
+                            or Disabled.'
+                          type: string
+                        status:
+                          description: 'Versioning state of the bucket. Valid values:
+                            Enabled, Suspended, or Disabled. Disabled should only
+                            be used when creating or importing resources that correspond
+                            to unversioned S3 buckets.'
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -378,7 +416,8 @@ spec:
             x-kubernetes-validations:
             - message: versioningConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.versioningConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.versioningConfiguration)
+                || has(self.initProvider.versioningConfiguration)'
           status:
             description: BucketVersioningStatus defines the observed state of BucketVersioning.
             properties:

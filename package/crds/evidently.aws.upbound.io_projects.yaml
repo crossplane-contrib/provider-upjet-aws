@@ -121,6 +121,67 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  dataDelivery:
+                    description: A block that contains information about where Evidently
+                      is to store evaluation events for longer term storage, if you
+                      choose to do so. If you choose not to store these events, Evidently
+                      deletes them after using them to produce metrics and other experiment
+                      results that you can view. See below.
+                    items:
+                      properties:
+                        cloudwatchLogs:
+                          description: A block that defines the CloudWatch Log Group
+                            that stores the evaluation events. See below.
+                          items:
+                            properties:
+                              logGroup:
+                                description: The name of the log group where the project
+                                  stores evaluation events.
+                                type: string
+                            type: object
+                          type: array
+                        s3Destination:
+                          description: A block that defines the S3 bucket and prefix
+                            that stores the evaluation events. See below.
+                          items:
+                            properties:
+                              bucket:
+                                description: The name of the bucket in which Evidently
+                                  stores evaluation events.
+                                type: string
+                              prefix:
+                                description: The bucket prefix in which Evidently
+                                  stores evaluation events.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies the description of the project.
+                    type: string
+                  name:
+                    description: A name for the project.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -321,7 +382,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ProjectStatus defines the observed state of Project.
             properties:

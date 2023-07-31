@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FindingAggregatorInitParameters struct {
+
+	// Indicates whether to aggregate findings from all of the available Regions or from a specified list. The options are ALL_REGIONS, ALL_REGIONS_EXCEPT_SPECIFIED or SPECIFIED_REGIONS. When ALL_REGIONS or ALL_REGIONS_EXCEPT_SPECIFIED are used, Security Hub will automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.
+	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
+
+	// List of regions to include or exclude
+	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
+}
+
 type FindingAggregatorObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -43,6 +52,18 @@ type FindingAggregatorParameters struct {
 type FindingAggregatorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FindingAggregatorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FindingAggregatorInitParameters `json:"initProvider,omitempty"`
 }
 
 // FindingAggregatorStatus defines the observed state of FindingAggregator.
@@ -63,7 +84,7 @@ type FindingAggregatorStatus struct {
 type FindingAggregator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkingMode)",message="linkingMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkingMode) || has(self.initProvider.linkingMode)",message="linkingMode is a required parameter"
 	Spec   FindingAggregatorSpec   `json:"spec"`
 	Status FindingAggregatorStatus `json:"status,omitempty"`
 }

@@ -60,6 +60,3 @@ spec:
     userData: ${filebase64("${path.module}/example.sh")}
     vpcSecurityGroupIdRefs:
     - name: example
-
----
-

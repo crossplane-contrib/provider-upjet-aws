@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TemplateInitParameters struct {
+
+	// The HTML body of the email. Must be less than 500KB in size, including both the text and HTML parts.
+	HTML *string `json:"html,omitempty" tf:"html,omitempty"`
+
+	// The subject line of the email.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The email body that will be visible to recipients whose email clients do not display HTML. Must be less than 500KB in size, including both the text and HTML parts.
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
 type TemplateObservation struct {
 
 	// The ARN of the SES template
@@ -55,6 +67,18 @@ type TemplateParameters struct {
 type TemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TemplateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // TemplateStatus defines the observed state of Template.

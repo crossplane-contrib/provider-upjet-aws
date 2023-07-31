@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExcludeFilterInitParameters struct {
+
+	// An array that defines the metrics you want to exclude for this metric namespace
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
+
+	// Name of the metric namespace in the filter.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
 type ExcludeFilterObservation struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
@@ -29,8 +38,17 @@ type ExcludeFilterParameters struct {
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type IncludeFilterInitParameters struct {
+
+	// An array that defines the metrics you want to include for this metric namespace
+	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
+
+	// Name of the metric namespace in the filter.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type IncludeFilterObservation struct {
@@ -49,8 +67,17 @@ type IncludeFilterParameters struct {
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type IncludeMetricInitParameters struct {
+
+	// The name of the metric.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+
+	// The namespace of the metric.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type IncludeMetricObservation struct {
@@ -65,12 +92,36 @@ type IncludeMetricObservation struct {
 type IncludeMetricParameters struct {
 
 	// The name of the metric.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// The namespace of the metric.
-	// +kubebuilder:validation:Required
-	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+}
+
+type MetricStreamInitParameters struct {
+
+	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces and the conditional metric names that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is excluded. Conflicts with include_filter.
+	ExcludeFilter []ExcludeFilterInitParameters `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
+
+	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
+	IncludeFilter []IncludeFilterInitParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
+
+	// account observability.
+	IncludeLinkedAccountsMetrics *bool `json:"includeLinkedAccountsMetrics,omitempty" tf:"include_linked_accounts_metrics,omitempty"`
+
+	// Friendly name of the metric stream. Conflicts with name_prefix.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	StatisticsConfiguration []StatisticsConfigurationInitParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MetricStreamObservation struct {
@@ -184,6 +235,15 @@ type MetricStreamParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type StatisticsConfigurationInitParameters struct {
+
+	// The additional statistics to stream for the metrics listed in include_metrics.
+	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
+
+	// An array that defines the metrics that are to have additional statistics streamed. See details below.
+	IncludeMetric []IncludeMetricInitParameters `json:"includeMetric,omitempty" tf:"include_metric,omitempty"`
+}
+
 type StatisticsConfigurationObservation struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
@@ -196,18 +256,30 @@ type StatisticsConfigurationObservation struct {
 type StatisticsConfigurationParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
-	// +kubebuilder:validation:Required
-	AdditionalStatistics []*string `json:"additionalStatistics" tf:"additional_statistics,omitempty"`
+	// +kubebuilder:validation:Optional
+	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
-	// +kubebuilder:validation:Required
-	IncludeMetric []IncludeMetricParameters `json:"includeMetric" tf:"include_metric,omitempty"`
+	// +kubebuilder:validation:Optional
+	IncludeMetric []IncludeMetricParameters `json:"includeMetric,omitempty" tf:"include_metric,omitempty"`
 }
 
 // MetricStreamSpec defines the desired state of MetricStream
 type MetricStreamSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MetricStreamParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MetricStreamInitParameters `json:"initProvider,omitempty"`
 }
 
 // MetricStreamStatus defines the observed state of MetricStream.
@@ -228,8 +300,8 @@ type MetricStreamStatus struct {
 type MetricStream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputFormat)",message="outputFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputFormat) || has(self.initProvider.outputFormat)",message="outputFormat is a required parameter"
 	Spec   MetricStreamSpec   `json:"spec"`
 	Status MetricStreamStatus `json:"status,omitempty"`
 }

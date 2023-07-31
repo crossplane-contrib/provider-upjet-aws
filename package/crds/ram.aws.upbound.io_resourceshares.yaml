@@ -96,6 +96,42 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  allowExternalPrincipals:
+                    description: Indicates whether principals outside your organization
+                      can be associated with a resource share.
+                    type: boolean
+                  name:
+                    description: The name of the resource share.
+                    type: string
+                  permissionArns:
+                    description: Specifies the Amazon Resource Names (ARNs) of the
+                      RAM permission to associate with the resource share. If you
+                      do not specify an ARN for the permission, RAM automatically
+                      attaches the default version of the permission for each resource
+                      type. You can associate only one permission with each resource
+                      type included in the resource share.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -296,7 +332,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ResourceShareStatus defines the observed state of ResourceShare.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProviderInitParameters struct {
+
+	// Virtual node associated with a virtual service.
+	VirtualNode []ProviderVirtualNodeInitParameters `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Virtual router associated with a virtual service.
+	VirtualRouter []ProviderVirtualRouterInitParameters `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
+}
+
 type ProviderObservation struct {
 
 	// Virtual node associated with a virtual service.
@@ -31,6 +40,9 @@ type ProviderParameters struct {
 	// Virtual router associated with a virtual service.
 	// +kubebuilder:validation:Optional
 	VirtualRouter []ProviderVirtualRouterParameters `json:"virtualRouter,omitempty" tf:"virtual_router,omitempty"`
+}
+
+type ProviderVirtualNodeInitParameters struct {
 }
 
 type ProviderVirtualNodeObservation struct {
@@ -56,6 +68,9 @@ type ProviderVirtualNodeParameters struct {
 	VirtualNodeNameSelector *v1.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
+type ProviderVirtualRouterInitParameters struct {
+}
+
 type ProviderVirtualRouterObservation struct {
 
 	// Name of the virtual router that is acting as a service provider. Must be between 1 and 255 characters in length.
@@ -77,6 +92,21 @@ type ProviderVirtualRouterParameters struct {
 	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
 	// +kubebuilder:validation:Optional
 	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
+}
+
+type VirtualServiceInitParameters_2 struct {
+
+	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
+	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
+
+	// Name to use for the virtual service. Must be between 1 and 255 characters in length.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Virtual service specification to apply.
+	Spec []VirtualServiceSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualServiceObservation_2 struct {
@@ -153,6 +183,12 @@ type VirtualServiceParameters_2 struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type VirtualServiceSpecInitParameters struct {
+
+	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
+	Provider []ProviderInitParameters `json:"provider,omitempty" tf:"provider,omitempty"`
+}
+
 type VirtualServiceSpecObservation struct {
 
 	// App Mesh object that is acting as the provider for a virtual service. You can specify a single virtual node or virtual router.
@@ -170,6 +206,18 @@ type VirtualServiceSpecParameters struct {
 type VirtualServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualServiceParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualServiceInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // VirtualServiceStatus defines the observed state of VirtualService.
@@ -190,8 +238,8 @@ type VirtualServiceStatus struct {
 type VirtualService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.spec)",message="spec is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.spec) || has(self.initProvider.spec)",message="spec is a required parameter"
 	Spec   VirtualServiceSpec   `json:"spec"`
 	Status VirtualServiceStatus `json:"status,omitempty"`
 }

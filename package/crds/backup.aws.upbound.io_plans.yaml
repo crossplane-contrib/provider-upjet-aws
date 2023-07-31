@@ -85,9 +85,6 @@ spec:
                             For VSS Windows backups, the only supported resource type
                             is Amazon EC2. Valid values: EC2.'
                           type: string
-                      required:
-                      - backupOptions
-                      - resourceType
                       type: object
                     type: array
                   name:
@@ -134,8 +131,6 @@ spec:
                                       type: number
                                   type: object
                                 type: array
-                            required:
-                            - destinationVaultArn
                             type: object
                           type: array
                         enableContinuousBackup:
@@ -257,8 +252,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - ruleName
                       type: object
                     type: array
                   tags:
@@ -268,6 +261,126 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  advancedBackupSetting:
+                    description: An object that specifies backup options for each
+                      resource type.
+                    items:
+                      properties:
+                        backupOptions:
+                          additionalProperties:
+                            type: string
+                          description: Specifies the backup option for a selected
+                            resource. This option is only available for Windows VSS
+                            backup jobs. Set to { WindowsVSS = "enabled" } to enable
+                            Windows VSS backup option and create a VSS Windows backup.
+                          type: object
+                        resourceType:
+                          description: 'The type of AWS resource to be backed up.
+                            For VSS Windows backups, the only supported resource type
+                            is Amazon EC2. Valid values: EC2.'
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The display name of a backup plan.
+                    type: string
+                  rule:
+                    description: A rule object that specifies a scheduled task that
+                      is used to back up a selection of resources.
+                    items:
+                      properties:
+                        completionWindow:
+                          description: The amount of time in minutes AWS Backup attempts
+                            a backup before canceling the job and returning an error.
+                          type: number
+                        copyAction:
+                          description: Configuration block(s) with copy operation
+                            settings. Detailed below.
+                          items:
+                            properties:
+                              destinationVaultArn:
+                                description: An Amazon Resource Name (ARN) that uniquely
+                                  identifies the destination backup vault for the
+                                  copied backup.
+                                type: string
+                              lifecycle:
+                                description: The lifecycle defines when a protected
+                                  resource is transitioned to cold storage and when
+                                  it expires.  Fields documented below.
+                                items:
+                                  properties:
+                                    coldStorageAfter:
+                                      description: Specifies the number of days after
+                                        creation that a recovery point is moved to
+                                        cold storage.
+                                      type: number
+                                    deleteAfter:
+                                      description: Specifies the number of days after
+                                        creation that a recovery point is deleted.
+                                        Must be 90 days greater than cold_storage_after.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        enableContinuousBackup:
+                          description: Enable continuous backups for supported resources.
+                          type: boolean
+                        lifecycle:
+                          description: The lifecycle defines when a protected resource
+                            is transitioned to cold storage and when it expires.  Fields
+                            documented below.
+                          items:
+                            properties:
+                              coldStorageAfter:
+                                description: Specifies the number of days after creation
+                                  that a recovery point is moved to cold storage.
+                                type: number
+                              deleteAfter:
+                                description: Specifies the number of days after creation
+                                  that a recovery point is deleted. Must be 90 days
+                                  greater than cold_storage_after.
+                                type: number
+                            type: object
+                          type: array
+                        recoveryPointTags:
+                          additionalProperties:
+                            type: string
+                          description: Metadata that you can assign to help organize
+                            the resources that you create.
+                          type: object
+                        ruleName:
+                          description: An display name for a backup rule.
+                          type: string
+                        schedule:
+                          description: A CRON expression specifying when AWS Backup
+                            initiates a backup job.
+                          type: string
+                        startWindow:
+                          description: The amount of time in minutes before beginning
+                            a backup.
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -469,10 +582,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
+                || has(self.initProvider.rule)'
           status:
             description: PlanStatus defines the observed state of Plan.
             properties:

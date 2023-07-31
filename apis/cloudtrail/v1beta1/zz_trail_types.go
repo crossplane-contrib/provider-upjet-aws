@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdvancedEventSelectorInitParameters struct {
+
+	// Specifies the selector statements in an advanced event selector. Fields documented below.
+	FieldSelector []FieldSelectorInitParameters `json:"fieldSelector,omitempty" tf:"field_selector,omitempty"`
+
+	// Name of the trail.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type AdvancedEventSelectorObservation struct {
 
 	// Specifies the selector statements in an advanced event selector. Fields documented below.
@@ -25,12 +34,21 @@ type AdvancedEventSelectorObservation struct {
 type AdvancedEventSelectorParameters struct {
 
 	// Specifies the selector statements in an advanced event selector. Fields documented below.
-	// +kubebuilder:validation:Required
-	FieldSelector []FieldSelectorParameters `json:"fieldSelector" tf:"field_selector,omitempty"`
+	// +kubebuilder:validation:Optional
+	FieldSelector []FieldSelectorParameters `json:"fieldSelector,omitempty" tf:"field_selector,omitempty"`
 
 	// Name of the trail.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type DataResourceInitParameters struct {
+
+	// Resource type in which you want to log data events. You can specify only the following value: "AWS::S3::Object", "AWS::Lambda::Function" and "AWS::DynamoDB::Table".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// List of ARN strings or partial ARN strings to specify selectors for data audit events over data resources. ARN list is specific to single-valued type. For example, arn:aws:s3:::<bucket name>/ for all objects in a bucket, arn:aws:s3:::<bucket name>/key for specific objects, arn:aws:lambda for all lambda events within an account, arn:aws:lambda:<region>:<account number>:function:<function name> for a specific Lambda function, arn:aws:dynamodb for all DDB events for all tables within an account, or arn:aws:dynamodb:<region>:<account number>:table/<table name> for a specific DynamoDB table.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type DataResourceObservation struct {
@@ -45,12 +63,27 @@ type DataResourceObservation struct {
 type DataResourceParameters struct {
 
 	// Resource type in which you want to log data events. You can specify only the following value: "AWS::S3::Object", "AWS::Lambda::Function" and "AWS::DynamoDB::Table".
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// List of ARN strings or partial ARN strings to specify selectors for data audit events over data resources. ARN list is specific to single-valued type. For example, arn:aws:s3:::<bucket name>/ for all objects in a bucket, arn:aws:s3:::<bucket name>/key for specific objects, arn:aws:lambda for all lambda events within an account, arn:aws:lambda:<region>:<account number>:function:<function name> for a specific Lambda function, arn:aws:dynamodb for all DDB events for all tables within an account, or arn:aws:dynamodb:<region>:<account number>:table/<table name> for a specific DynamoDB table.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type EventSelectorInitParameters struct {
+
+	// Configuration block for data events. See details below.
+	DataResource []DataResourceInitParameters `json:"dataResource,omitempty" tf:"data_resource,omitempty"`
+
+	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
+	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
+
+	// Whether to include management events for your trail. Defaults to true.
+	IncludeManagementEvents *bool `json:"includeManagementEvents,omitempty" tf:"include_management_events,omitempty"`
+
+	// Type of events to log. Valid values are ReadOnly, WriteOnly, All. Default value is All.
+	ReadWriteType *string `json:"readWriteType,omitempty" tf:"read_write_type,omitempty"`
 }
 
 type EventSelectorObservation struct {
@@ -85,6 +118,30 @@ type EventSelectorParameters struct {
 	// Type of events to log. Valid values are ReadOnly, WriteOnly, All. Default value is All.
 	// +kubebuilder:validation:Optional
 	ReadWriteType *string `json:"readWriteType,omitempty" tf:"read_write_type,omitempty"`
+}
+
+type FieldSelectorInitParameters struct {
+
+	// A list of values that includes events that match the last few characters of the event record field specified as the value of field.
+	EndsWith []*string `json:"endsWith,omitempty" tf:"ends_with,omitempty"`
+
+	// A list of values that includes events that match the exact value of the event record field specified as the value of field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.
+	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
+
+	// Field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+
+	// A list of values that excludes events that match the last few characters of the event record field specified as the value of field.
+	NotEndsWith []*string `json:"notEndsWith,omitempty" tf:"not_ends_with,omitempty"`
+
+	// A list of values that excludes events that match the exact value of the event record field specified as the value of field.
+	NotEquals []*string `json:"notEquals,omitempty" tf:"not_equals,omitempty"`
+
+	// A list of values that excludes events that match the first few characters of the event record field specified as the value of field.
+	NotStartsWith []*string `json:"notStartsWith,omitempty" tf:"not_starts_with,omitempty"`
+
+	// A list of values that includes events that match the first few characters of the event record field specified as the value of field.
+	StartsWith []*string `json:"startsWith,omitempty" tf:"starts_with,omitempty"`
 }
 
 type FieldSelectorObservation struct {
@@ -122,8 +179,8 @@ type FieldSelectorParameters struct {
 	Equals []*string `json:"equals,omitempty" tf:"equals,omitempty"`
 
 	// Field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
-	// +kubebuilder:validation:Required
-	Field *string `json:"field" tf:"field,omitempty"`
+	// +kubebuilder:validation:Optional
+	Field *string `json:"field,omitempty" tf:"field,omitempty"`
 
 	// A list of values that excludes events that match the last few characters of the event record field specified as the value of field.
 	// +kubebuilder:validation:Optional
@@ -142,6 +199,12 @@ type FieldSelectorParameters struct {
 	StartsWith []*string `json:"startsWith,omitempty" tf:"starts_with,omitempty"`
 }
 
+type InsightSelectorInitParameters struct {
+
+	// Type of insights to log on a trail. Valid values are: ApiCallRateInsight and ApiErrorRateInsight.
+	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+}
+
 type InsightSelectorObservation struct {
 
 	// Type of insights to log on a trail. Valid values are: ApiCallRateInsight and ApiErrorRateInsight.
@@ -151,8 +214,47 @@ type InsightSelectorObservation struct {
 type InsightSelectorParameters struct {
 
 	// Type of insights to log on a trail. Valid values are: ApiCallRateInsight and ApiErrorRateInsight.
-	// +kubebuilder:validation:Required
-	InsightType *string `json:"insightType" tf:"insight_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+}
+
+type TrailInitParameters struct {
+
+	// Specifies an advanced event selector for enabling data event logging. Fields documented below. Conflicts with event_selector.
+	AdvancedEventSelector []AdvancedEventSelectorInitParameters `json:"advancedEventSelector,omitempty" tf:"advanced_event_selector,omitempty"`
+
+	// Log group name using an ARN that represents the log group to which CloudTrail logs will be delivered. Note that CloudTrail requires the Log Stream wildcard.
+	CloudWatchLogsGroupArn *string `json:"cloudWatchLogsGroupArn,omitempty" tf:"cloud_watch_logs_group_arn,omitempty"`
+
+	// Whether log file integrity validation is enabled. Defaults to false.
+	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
+
+	// Enables logging for the trail. Defaults to true. Setting this to false will pause logging.
+	EnableLogging *bool `json:"enableLogging,omitempty" tf:"enable_logging,omitempty"`
+
+	// Specifies an event selector for enabling data event logging. Fields documented below. Please note the CloudTrail limits when configuring these. Conflicts with advanced_event_selector.
+	EventSelector []EventSelectorInitParameters `json:"eventSelector,omitempty" tf:"event_selector,omitempty"`
+
+	// Whether the trail is publishing events from global services such as IAM to the log files. Defaults to true.
+	IncludeGlobalServiceEvents *bool `json:"includeGlobalServiceEvents,omitempty" tf:"include_global_service_events,omitempty"`
+
+	// Configuration block for identifying unusual operational activity. See details below.
+	InsightSelector []InsightSelectorInitParameters `json:"insightSelector,omitempty" tf:"insight_selector,omitempty"`
+
+	// Whether the trail is created in the current region or in all regions. Defaults to false.
+	IsMultiRegionTrail *bool `json:"isMultiRegionTrail,omitempty" tf:"is_multi_region_trail,omitempty"`
+
+	// Whether the trail is an AWS Organizations trail. Organization trails log events for the master account and all member accounts. Can only be created in the organization master account. Defaults to false.
+	IsOrganizationTrail *bool `json:"isOrganizationTrail,omitempty" tf:"is_organization_trail,omitempty"`
+
+	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
+	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+
+	// Name of the Amazon SNS topic defined for notification of log file delivery.
+	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TrailObservation struct {
@@ -316,6 +418,18 @@ type TrailParameters struct {
 type TrailSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrailParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TrailInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrailStatus defines the observed state of Trail.

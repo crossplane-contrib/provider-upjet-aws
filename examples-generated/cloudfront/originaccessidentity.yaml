@@ -10,6 +10,3 @@ spec:
   forProvider:
     comment: Some comment
     region: us-west-1
-
----
-

@@ -251,6 +251,40 @@ spec:
                 required:
                 - region
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  distribution:
+                    description: The method used to distribute log data to the destination.
+                      By default log data is grouped by log stream, but the grouping
+                      can be set to random for a more even distribution. This property
+                      is only applicable when the destination is an Amazon Kinesis
+                      stream. Valid values are "Random" and "ByLogStream".
+                    type: string
+                  filterPattern:
+                    description: A valid CloudWatch Logs filter pattern for subscribing
+                      to a filtered stream of log events. Use empty string "" to match
+                      everything. For more information, see the Amazon CloudWatch
+                      Logs User Guide.
+                    type: string
+                  logGroupName:
+                    description: The name of the log group to associate the subscription
+                      filter with
+                    type: string
+                  name:
+                    description: A name for the subscription filter
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -451,13 +485,16 @@ spec:
             x-kubernetes-validations:
             - message: filterPattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterPattern)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterPattern)
+                || has(self.initProvider.filterPattern)'
             - message: logGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.logGroupName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.logGroupName)
+                || has(self.initProvider.logGroupName)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: SubscriptionFilterStatus defines the observed state of SubscriptionFilter.
             properties:

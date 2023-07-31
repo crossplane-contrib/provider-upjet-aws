@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSTargetResourceInitParameters struct {
+
+	// DNS Name that acts as the ingress point to a portion of application.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
+	HostedZoneArn *string `json:"hostedZoneArn,omitempty" tf:"hosted_zone_arn,omitempty"`
+
+	// Route53 record set id to uniquely identify a record given a domain_name and a record_type.
+	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
+
+	// Type of DNS Record of target resource.
+	RecordType *string `json:"recordType,omitempty" tf:"record_type,omitempty"`
+
+	// Target resource the R53 record specified with the above params points to.
+	TargetResource []TargetResourceInitParameters `json:"targetResource,omitempty" tf:"target_resource,omitempty"`
+}
+
 type DNSTargetResourceObservation struct {
 
 	// DNS Name that acts as the ingress point to a portion of application.
@@ -34,8 +52,8 @@ type DNSTargetResourceObservation struct {
 type DNSTargetResourceParameters struct {
 
 	// DNS Name that acts as the ingress point to a portion of application.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
 	// +kubebuilder:validation:Optional
@@ -54,6 +72,12 @@ type DNSTargetResourceParameters struct {
 	TargetResource []TargetResourceParameters `json:"targetResource,omitempty" tf:"target_resource,omitempty"`
 }
 
+type NlbResourceInitParameters struct {
+
+	// NLB resource ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
 type NlbResourceObservation struct {
 
 	// NLB resource ARN.
@@ -65,6 +89,15 @@ type NlbResourceParameters struct {
 	// NLB resource ARN.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+}
+
+type R53ResourceInitParameters struct {
+
+	// Domain name that is targeted.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Resource record set ID that is targeted.
+	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
 }
 
 type R53ResourceObservation struct {
@@ -85,6 +118,18 @@ type R53ResourceParameters struct {
 	// Resource record set ID that is targeted.
 	// +kubebuilder:validation:Optional
 	RecordSetID *string `json:"recordSetId,omitempty" tf:"record_set_id,omitempty"`
+}
+
+type ResourceSetInitParameters struct {
+
+	// Type of the resources in the resource set.
+	ResourceSetType *string `json:"resourceSetType,omitempty" tf:"resource_set_type,omitempty"`
+
+	// List of resources to add to this resource set. See below.
+	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ResourceSetObservation struct {
@@ -127,6 +172,15 @@ type ResourceSetParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ResourcesInitParameters struct {
+
+	// Component for DNS/Routing Control Readiness Checks.
+	DNSTargetResource []DNSTargetResourceInitParameters `json:"dnsTargetResource,omitempty" tf:"dns_target_resource,omitempty"`
+
+	// Recovery group ARN or cell ARN that contains this resource set.
+	ReadinessScopes []*string `json:"readinessScopes,omitempty" tf:"readiness_scopes,omitempty"`
+}
+
 type ResourcesObservation struct {
 
 	// Unique identified for DNS Target Resources, use for readiness checks.
@@ -167,6 +221,15 @@ type ResourcesParameters struct {
 	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
+type TargetResourceInitParameters struct {
+
+	// NLB resource a DNS Target Resource points to. Required if r53_resource is not set.
+	NlbResource []NlbResourceInitParameters `json:"nlbResource,omitempty" tf:"nlb_resource,omitempty"`
+
+	// Route53 resource a DNS Target Resource record points to.
+	R53Resource []R53ResourceInitParameters `json:"r53Resource,omitempty" tf:"r53_resource,omitempty"`
+}
+
 type TargetResourceObservation struct {
 
 	// NLB resource a DNS Target Resource points to. Required if r53_resource is not set.
@@ -191,6 +254,18 @@ type TargetResourceParameters struct {
 type ResourceSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ResourceSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceSetStatus defines the observed state of ResourceSet.
@@ -211,8 +286,8 @@ type ResourceSetStatus struct {
 type ResourceSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetType)",message="resourceSetType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resources)",message="resources is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetType) || has(self.initProvider.resourceSetType)",message="resourceSetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resources) || has(self.initProvider.resources)",message="resources is a required parameter"
 	Spec   ResourceSetSpec   `json:"spec"`
 	Status ResourceSetStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,46 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateInitParameters struct {
+
+	// ARN of an ACM PCA
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Certificate's PEM-formatted public key
+	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
+
+	// Certificate's PEM-formatted chain
+	CertificateChain *string `json:"certificateChain,omitempty" tf:"certificate_chain,omitempty"`
+
+	// Domain name for which the certificate should be issued
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Amount of time to start automatic renewal process before expiration.
+	// Has no effect if less than 60 days.
+	// Represented by either
+	// a subset of RFC 3339 duration supporting years, months, and days (e.g., P90D),
+	// or a string such as 2160h.
+	EarlyRenewalDuration *string `json:"earlyRenewalDuration,omitempty" tf:"early_renewal_duration,omitempty"`
+
+	// Specifies the algorithm of the public and private key pair that your Amazon issued certificate uses to encrypt data. See ACM Certificate characteristics for more details.
+	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
+
+	// Configuration block used to set certificate options. Detailed below.
+	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// Set of domains that should be SANs in the issued certificate.
+	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Which method to use for validation.
+	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
+
+	// Configuration block used to specify information about the initial validation of each domain name. Detailed below.
+	ValidationOption []ValidationOptionInitParameters `json:"validationOption,omitempty" tf:"validation_option,omitempty"`
+}
+
 type CertificateObservation struct {
 
 	// ARN of the certificate
@@ -151,6 +191,9 @@ type CertificateParameters struct {
 	ValidationOption []ValidationOptionParameters `json:"validationOption,omitempty" tf:"validation_option,omitempty"`
 }
 
+type DomainValidationOptionsInitParameters struct {
+}
+
 type DomainValidationOptionsObservation struct {
 
 	// Fully qualified domain name (FQDN) in the certificate.
@@ -169,6 +212,12 @@ type DomainValidationOptionsObservation struct {
 type DomainValidationOptionsParameters struct {
 }
 
+type OptionsInitParameters struct {
+
+	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
+	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
+}
+
 type OptionsObservation struct {
 
 	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
@@ -180,6 +229,9 @@ type OptionsParameters struct {
 	// Whether certificate details should be added to a certificate transparency log. Valid values are ENABLED or DISABLED. See https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency for more details.
 	// +kubebuilder:validation:Optional
 	CertificateTransparencyLoggingPreference *string `json:"certificateTransparencyLoggingPreference,omitempty" tf:"certificate_transparency_logging_preference,omitempty"`
+}
+
+type RenewalSummaryInitParameters struct {
 }
 
 type RenewalSummaryObservation struct {
@@ -196,6 +248,15 @@ type RenewalSummaryObservation struct {
 type RenewalSummaryParameters struct {
 }
 
+type ValidationOptionInitParameters struct {
+
+	// Fully qualified domain name (FQDN) in the certificate.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the domain_name value or a superdomain of the domain_name value. For example, if you request a certificate for "testing.example.com", you can specify "example.com" for this value.
+	ValidationDomain *string `json:"validationDomain,omitempty" tf:"validation_domain,omitempty"`
+}
+
 type ValidationOptionObservation struct {
 
 	// Fully qualified domain name (FQDN) in the certificate.
@@ -208,18 +269,30 @@ type ValidationOptionObservation struct {
 type ValidationOptionParameters struct {
 
 	// Fully qualified domain name (FQDN) in the certificate.
-	// +kubebuilder:validation:Required
-	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Domain name that you want ACM to use to send you validation emails. This domain name is the suffix of the email addresses that you want ACM to use. This must be the same as the domain_name value or a superdomain of the domain_name value. For example, if you request a certificate for "testing.example.com", you can specify "example.com" for this value.
-	// +kubebuilder:validation:Required
-	ValidationDomain *string `json:"validationDomain" tf:"validation_domain,omitempty"`
+	// +kubebuilder:validation:Optional
+	ValidationDomain *string `json:"validationDomain,omitempty" tf:"validation_domain,omitempty"`
 }
 
 // CertificateSpec defines the desired state of Certificate
 type CertificateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CertificateInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateStatus defines the observed state of Certificate.

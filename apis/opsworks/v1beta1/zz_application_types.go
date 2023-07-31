@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppSourceInitParameters struct {
+
+	// For sources that are version-aware, the revision to use.
+	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
+
+	// The type of source to use. For example, "archive".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The URL where the app resource can be found.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Username to use when authenticating to the source.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type AppSourceObservation struct {
 
 	// For sources that are version-aware, the revision to use.
@@ -43,8 +58,8 @@ type AppSourceParameters struct {
 	SSHKeySecretRef *v1.SecretKeySelector `json:"sshKeySecretRef,omitempty" tf:"-"`
 
 	// The type of source to use. For example, "archive".
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The URL where the app resource can be found.
 	// +kubebuilder:validation:Optional
@@ -53,6 +68,57 @@ type AppSourceParameters struct {
 	// Username to use when authenticating to the source.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type ApplicationInitParameters struct {
+
+	// SCM configuration of the app as described below.
+	AppSource []AppSourceInitParameters `json:"appSource,omitempty" tf:"app_source,omitempty"`
+
+	// Run bundle install when deploying for application of type rails.
+	AutoBundleOnDeploy *string `json:"autoBundleOnDeploy,omitempty" tf:"auto_bundle_on_deploy,omitempty"`
+
+	// Specify activity and workflow workers for your app using the aws-flow gem.
+	AwsFlowRubySettings *string `json:"awsFlowRubySettings,omitempty" tf:"aws_flow_ruby_settings,omitempty"`
+
+	// The data source's ARN.
+	DataSourceArn *string `json:"dataSourceArn,omitempty" tf:"data_source_arn,omitempty"`
+
+	// The database name.
+	DataSourceDatabaseName *string `json:"dataSourceDatabaseName,omitempty" tf:"data_source_database_name,omitempty"`
+
+	// The data source's type one of AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
+
+	// A description of the app.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Subfolder for the document root for application of type rails.
+	DocumentRoot *string `json:"documentRoot,omitempty" tf:"document_root,omitempty"`
+
+	// A list of virtual host alias.
+	Domains []*string `json:"domains,omitempty" tf:"domains,omitempty"`
+
+	// Whether to enable SSL for the app. This must be set in order to let ssl_configuration.private_key, ssl_configuration.certificate and ssl_configuration.chain take effect.
+	EnableSSL *bool `json:"enableSsl,omitempty" tf:"enable_ssl,omitempty"`
+
+	// Object to define environment variables.  Object is described below.
+	Environment []EnvironmentInitParameters `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// A human-readable name for the application.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Rails environment for application of type rails.
+	RailsEnv *string `json:"railsEnv,omitempty" tf:"rails_env,omitempty"`
+
+	// The SSL configuration of the app. Object is described below.
+	SSLConfiguration []SSLConfigurationInitParameters `json:"sslConfiguration,omitempty" tf:"ssl_configuration,omitempty"`
+
+	// A short, machine-readable name for the application. This can only be defined on resource creation and ignored on resource update.
+	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
+
+	// Opsworks application type. One of aws-flow-ruby, java, rails, php, nodejs, static or other.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ApplicationObservation struct {
@@ -193,6 +259,18 @@ type ApplicationParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type EnvironmentInitParameters struct {
+
+	// Variable name.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Set visibility of the variable value to true or false.
+	Secure *bool `json:"secure,omitempty" tf:"secure,omitempty"`
+
+	// Variable value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type EnvironmentObservation struct {
 
 	// Variable name.
@@ -208,16 +286,25 @@ type EnvironmentObservation struct {
 type EnvironmentParameters struct {
 
 	// Variable name.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Set visibility of the variable value to true or false.
 	// +kubebuilder:validation:Optional
 	Secure *bool `json:"secure,omitempty" tf:"secure,omitempty"`
 
 	// Variable value.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SSLConfigurationInitParameters struct {
+
+	// The contents of the certificate's domain.crt file.
+	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Can be used to specify an intermediate certificate authority key or client authentication.
+	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
 }
 
 type SSLConfigurationObservation struct {
@@ -232,8 +319,8 @@ type SSLConfigurationObservation struct {
 type SSLConfigurationParameters struct {
 
 	// The contents of the certificate's domain.crt file.
-	// +kubebuilder:validation:Required
-	Certificate *string `json:"certificate" tf:"certificate,omitempty"`
+	// +kubebuilder:validation:Optional
+	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Can be used to specify an intermediate certificate authority key or client authentication.
 	// +kubebuilder:validation:Optional
@@ -248,6 +335,18 @@ type SSLConfigurationParameters struct {
 type ApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationStatus defines the observed state of Application.
@@ -268,8 +367,8 @@ type ApplicationStatus struct {
 type Application struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   ApplicationSpec   `json:"spec"`
 	Status ApplicationStatus `json:"status,omitempty"`
 }

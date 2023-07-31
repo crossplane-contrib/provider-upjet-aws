@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MethodInitParameters struct {
+
+	// Specify if the method requires an API key
+	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
+
+	// Type of authorization used for the method (NONE, CUSTOM, AWS_IAM, COGNITO_USER_POOLS)
+	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
+
+	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
+	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
+
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// Function name that will be given to the method when generating an SDK through API Gateway. If omitted, API Gateway will generate a function name based on the resource path and HTTP verb.
+	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+
+	// Map of the API models used for the request's content type
+	// where key is the content type (e.g., application/json)
+	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
+
+	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
+	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
+
+	// ID of a aws_api_gateway_request_validator
+	RequestValidatorID *string `json:"requestValidatorId,omitempty" tf:"request_validator_id,omitempty"`
+}
+
 type MethodObservation struct {
 
 	// Specify if the method requires an API key
@@ -143,6 +173,18 @@ type MethodParameters struct {
 type MethodSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MethodParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MethodInitParameters `json:"initProvider,omitempty"`
 }
 
 // MethodStatus defines the observed state of Method.
@@ -163,8 +205,8 @@ type MethodStatus struct {
 type Method struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorization)",message="authorization is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod)",message="httpMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorization) || has(self.initProvider.authorization)",message="authorization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod) || has(self.initProvider.httpMethod)",message="httpMethod is a required parameter"
 	Spec   MethodSpec   `json:"spec"`
 	Status MethodStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GameSessionQueueInitParameters struct {
+
+	// Information to be added to all events that are related to this game session queue.
+	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
+
+	// List of fleet/alias ARNs used by session queue for placing game sessions.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// One or more policies used to choose fleet based on player latency. See below.
+	PlayerLatencyPolicy []PlayerLatencyPolicyInitParameters `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Maximum time a game session request can remain in the queue.
+	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
+}
+
 type GameSessionQueueObservation struct {
 
 	// Game Session Queue ARN.
@@ -84,6 +102,15 @@ type GameSessionQueueParameters struct {
 	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
 }
 
+type PlayerLatencyPolicyInitParameters struct {
+
+	// Maximum latency value that is allowed for any player.
+	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds,omitempty" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
+
+	// Length of time that the policy is enforced while placing a new game session. Absence of value for this attribute means that the policy is enforced until the queue times out.
+	PolicyDurationSeconds *float64 `json:"policyDurationSeconds,omitempty" tf:"policy_duration_seconds,omitempty"`
+}
+
 type PlayerLatencyPolicyObservation struct {
 
 	// Maximum latency value that is allowed for any player.
@@ -96,8 +123,8 @@ type PlayerLatencyPolicyObservation struct {
 type PlayerLatencyPolicyParameters struct {
 
 	// Maximum latency value that is allowed for any player.
-	// +kubebuilder:validation:Required
-	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds,omitempty" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
 
 	// Length of time that the policy is enforced while placing a new game session. Absence of value for this attribute means that the policy is enforced until the queue times out.
 	// +kubebuilder:validation:Optional
@@ -108,6 +135,18 @@ type PlayerLatencyPolicyParameters struct {
 type GameSessionQueueSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GameSessionQueueParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GameSessionQueueInitParameters `json:"initProvider,omitempty"`
 }
 
 // GameSessionQueueStatus defines the observed state of GameSessionQueue.

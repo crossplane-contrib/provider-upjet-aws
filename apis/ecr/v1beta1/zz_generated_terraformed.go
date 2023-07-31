@@ -69,6 +69,16 @@ func (tr *LifecyclePolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this LifecyclePolicy
+func (tr *LifecyclePolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this LifecyclePolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LifecyclePolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *PullThroughCacheRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this PullThroughCacheRule
+func (tr *PullThroughCacheRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this PullThroughCacheRule using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *RegistryPolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this RegistryPolicy
+func (tr *RegistryPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this RegistryPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RegistryPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *RegistryScanningConfiguration) SetParameters(params map[string]any) er
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this RegistryScanningConfiguration
+func (tr *RegistryScanningConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this RegistryScanningConfiguration using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *ReplicationConfiguration) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ReplicationConfiguration
+func (tr *ReplicationConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ReplicationConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ReplicationConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -439,6 +489,16 @@ func (tr *Repository) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Repository
+func (tr *Repository) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Repository using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Repository) LateInitialize(attrs []byte) (bool, error) {
@@ -511,6 +571,16 @@ func (tr *RepositoryPolicy) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this RepositoryPolicy
+func (tr *RepositoryPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this RepositoryPolicy using its observed tfState.

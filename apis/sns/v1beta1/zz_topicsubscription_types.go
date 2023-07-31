@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TopicSubscriptionInitParameters struct {
+
+	// Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is 1.
+	ConfirmationTimeoutInMinutes *float64 `json:"confirmationTimeoutInMinutes,omitempty" tf:"confirmation_timeout_in_minutes,omitempty"`
+
+	// JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
+	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
+
+	// Whether the endpoint is capable of auto confirming subscription (e.g., PagerDuty). Default is false.
+	EndpointAutoConfirms *bool `json:"endpointAutoConfirms,omitempty" tf:"endpoint_auto_confirms,omitempty"`
+
+	// JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource. Refer to the SNS docs for more details.
+	FilterPolicy *string `json:"filterPolicy,omitempty" tf:"filter_policy,omitempty"`
+
+	// Whether the filter_policy applies to MessageAttributes (default) or MessageBody.
+	FilterPolicyScope *string `json:"filterPolicyScope,omitempty" tf:"filter_policy_scope,omitempty"`
+
+	// Protocol to use. Valid values are: sqs, sms, lambda, firehose, and application. Protocols email, email-json, http and https are also valid but partially supported. See details below.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is false.
+	RawMessageDelivery *bool `json:"rawMessageDelivery,omitempty" tf:"raw_message_delivery,omitempty"`
+
+	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
+	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
+}
+
 type TopicSubscriptionObservation struct {
 
 	// ARN of the subscription.
@@ -150,6 +177,18 @@ type TopicSubscriptionParameters struct {
 type TopicSubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TopicSubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TopicSubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // TopicSubscriptionStatus defines the observed state of TopicSubscription.
@@ -170,7 +209,7 @@ type TopicSubscriptionStatus struct {
 type TopicSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
 	Spec   TopicSubscriptionSpec   `json:"spec"`
 	Status TopicSubscriptionStatus `json:"status,omitempty"`
 }

@@ -434,8 +434,8 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
-github.com/upbound/upjet v0.9.0-rc.0.0.20230727122232-e4ffeb8a7525 h1:2tcQ4rx245LSVKWg8DJOT5mSt/QKExNKPjrE7wfaZNY=
-github.com/upbound/upjet v0.9.0-rc.0.0.20230727122232-e4ffeb8a7525/go.mod h1:xCHefrWUjGkIBwFCy1dK+n5TgLczTriASLrejL8vdgU=
+github.com/upbound/upjet v0.9.0-rc.0.0.20230728172702-46549fea2147 h1:iDxepEAxrDpI8YeOkUDbxe2HvqCWi1WH8VHT84g86/I=
+github.com/upbound/upjet v0.9.0-rc.0.0.20230728172702-46549fea2147/go.mod h1:2RXHgpIugCL/S/Use1QJAeVaev901RBeUByQh5gUtGk=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=

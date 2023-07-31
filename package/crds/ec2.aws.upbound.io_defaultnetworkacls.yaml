@@ -178,12 +178,6 @@ spec:
                         toPort:
                           description: The to port to match.
                           type: number
-                      required:
-                      - action
-                      - fromPort
-                      - protocol
-                      - ruleNo
-                      - toPort
                       type: object
                     type: array
                   ingress:
@@ -298,12 +292,6 @@ spec:
                         toPort:
                           description: The to port to match.
                           type: number
-                      required:
-                      - action
-                      - fromPort
-                      - protocol
-                      - ruleNo
-                      - toPort
                       type: object
                     type: array
                   region:
@@ -400,6 +388,93 @@ spec:
                     type: object
                 required:
                 - region
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  egress:
+                    description: Configuration block for an egress rule. Detailed
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take.
+                          type: string
+                        cidrBlock:
+                          description: The CIDR block to match. This must be a valid
+                            network mask.
+                          type: string
+                        fromPort:
+                          description: The from port to match.
+                          type: number
+                        icmpCode:
+                          description: The ICMP type code to be used. Default 0.
+                          type: number
+                        icmpType:
+                          description: The ICMP type to be used. Default 0.
+                          type: number
+                        ipv6CidrBlock:
+                          description: The IPv6 CIDR block.
+                          type: string
+                        protocol:
+                          description: The protocol to match. If using the -1 'all'
+                            protocol, you must specify a from and to port of 0.
+                          type: string
+                        ruleNo:
+                          description: The rule number. Used for ordering.
+                          type: number
+                        toPort:
+                          description: The to port to match.
+                          type: number
+                      type: object
+                    type: array
+                  ingress:
+                    description: Configuration block for an ingress rule. Detailed
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take.
+                          type: string
+                        fromPort:
+                          description: The from port to match.
+                          type: number
+                        icmpCode:
+                          description: The ICMP type code to be used. Default 0.
+                          type: number
+                        icmpType:
+                          description: The ICMP type to be used. Default 0.
+                          type: number
+                        ipv6CidrBlock:
+                          description: The IPv6 CIDR block.
+                          type: string
+                        protocol:
+                          description: The protocol to match. If using the -1 'all'
+                            protocol, you must specify a from and to port of 0.
+                          type: string
+                        ruleNo:
+                          description: The rule number. Used for ordering.
+                          type: number
+                        toPort:
+                          description: The to port to match.
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
