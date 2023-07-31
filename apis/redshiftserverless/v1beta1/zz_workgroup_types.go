@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigParameterInitParameters struct {
+
+	// The key of the parameter. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
+	ParameterKey *string `json:"parameterKey,omitempty" tf:"parameter_key,omitempty"`
+
+	// The value of the parameter to set.
+	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+}
+
 type ConfigParameterObservation struct {
 
 	// The key of the parameter. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
@@ -25,12 +34,15 @@ type ConfigParameterObservation struct {
 type ConfigParameterParameters struct {
 
 	// The key of the parameter. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ParameterKey *string `json:"parameterKey" tf:"parameter_key,omitempty"`
 
 	// The value of the parameter to set.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
+}
+
+type EndpointInitParameters struct {
 }
 
 type EndpointObservation struct {
@@ -48,6 +60,9 @@ type EndpointObservation struct {
 type EndpointParameters struct {
 }
 
+type EndpointVPCEndpointInitParameters struct {
+}
+
 type EndpointVPCEndpointObservation struct {
 
 	// The network interfaces of the endpoint.. See Network Interface below.
@@ -61,6 +76,9 @@ type EndpointVPCEndpointObservation struct {
 }
 
 type EndpointVPCEndpointParameters struct {
+}
+
+type VPCEndpointNetworkInterfaceInitParameters struct {
 }
 
 type VPCEndpointNetworkInterfaceObservation struct {
@@ -79,6 +97,27 @@ type VPCEndpointNetworkInterfaceObservation struct {
 }
 
 type VPCEndpointNetworkInterfaceParameters struct {
+}
+
+type WorkgroupInitParameters struct {
+
+	// The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
+	BaseCapacity *float64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
+
+	// An array of parameters to set for more control over a serverless database. See Config Parameter below.
+	ConfigParameter []ConfigParameterInitParameters `json:"configParameter,omitempty" tf:"config_parameter,omitempty"`
+
+	// The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
+
+	// The name of the namespace.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// A value that specifies whether the workgroup can be accessed from a public network.
+	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WorkgroupObservation struct {
@@ -189,6 +228,18 @@ type WorkgroupParameters struct {
 type WorkgroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkgroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider WorkgroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkgroupStatus defines the observed state of Workgroup.
@@ -209,7 +260,7 @@ type WorkgroupStatus struct {
 type Workgroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespaceName)",message="namespaceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceName) || has(self.initProvider.namespaceName)",message="namespaceName is a required parameter"
 	Spec   WorkgroupSpec   `json:"spec"`
 	Status WorkgroupStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UsageLimitInitParameters struct {
+
+	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
+	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
+
+	// The action that Amazon Redshift Serverless takes when the limit is reached. Valid values are log, emit-metric, and deactivate. The default is log.
+	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
+
+	// The time period that the amount applies to. A weekly period begins on Sunday. Valid values are daily, weekly, and monthly. The default is monthly.
+	Period *string `json:"period,omitempty" tf:"period,omitempty"`
+
+	// The type of Amazon Redshift Serverless usage to create a usage limit for. Valid values are serverless-compute or cross-region-datasharing.
+	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
+}
+
 type UsageLimitObservation struct {
 
 	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
@@ -79,6 +94,18 @@ type UsageLimitParameters struct {
 type UsageLimitSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UsageLimitParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider UsageLimitInitParameters `json:"initProvider,omitempty"`
 }
 
 // UsageLimitStatus defines the observed state of UsageLimit.
@@ -99,8 +126,8 @@ type UsageLimitStatus struct {
 type UsageLimit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.amount)",message="amount is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.usageType)",message="usageType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.amount) || has(self.initProvider.amount)",message="amount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageType) || has(self.initProvider.usageType)",message="usageType is a required parameter"
 	Spec   UsageLimitSpec   `json:"spec"`
 	Status UsageLimitStatus `json:"status,omitempty"`
 }

@@ -91,7 +91,8 @@ func main() {
 	// This removes some complexity for setting up development environments.
 	setupConfig.DefaultScheduler = terraform.NewNoOpProviderScheduler()
 	if len(*setupConfig.NativeProviderPath) != 0 {
-		setupConfig.DefaultScheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL, terraform.WithNativeProviderPath(*setupConfig.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*setupConfig.NativeProviderSource))
+		setupConfig.DefaultScheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL,
+			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*setupConfig.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*setupConfig.NativeProviderSource)))
 	}
 
 	o := tjcontroller.Options{
@@ -102,10 +103,16 @@ func main() {
 			MaxConcurrentReconciles: *maxReconcileRate,
 			Features:                &feature.Flags{},
 		},
-		Provider:       config.GetProvider(),
-		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*setupConfig.NativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval)),
-		SetupFn:        clients.SelectTerraformSetup(log, setupConfig),
+		Provider: config.GetProvider(),
+		SetupFn:  clients.SelectTerraformSetup(log, setupConfig),
 	}
+
+	if *enableManagementPolicies {
+		o.Features.Enable(features.EnableAlphaManagementPolicies)
+		log.Info("Alpha feature enabled", "flag", features.EnableAlphaManagementPolicies)
+	}
+
+	o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*setupConfig.NativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval), terraform.WithFeatures(o.Features))
 
 	if *enableExternalSecretStores {
 		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
@@ -135,11 +142,6 @@ func main() {
 			},
 			Status: v1alpha1.StoreConfigStatus{},
 		})), "cannot create default store config")
-	}
-
-	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableAlphaManagementPolicies)
-		log.Info("Alpha feature enabled", "flag", features.EnableAlphaManagementPolicies)
 	}
 
 	kingpin.FatalIfError(controller.Setup_redshiftserverless(mgr, o), "Cannot setup AWS controllers")

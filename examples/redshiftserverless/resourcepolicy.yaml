@@ -5,23 +5,23 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-resourcepolicy
 spec:
   forProvider:
-    policy: |-
-      ${jsonencode({
-          Version = "2012-10-17"
-          Statement = [{
-            Effect = "Allow"
-            Principal = {
-              AWS = ["${data.aws_peer_account_id}"]
-            }
-            Action = [
-              "redshift-serverless:RestoreFromSnapshot",
-            ]
-            Sid = ""
-          }]
-        })}
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "redshift-serverless:RestoreFromSnapshot",
+            "Principal": {
+              "AWS": "${data.aws_peer_account_id}"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
     region: us-west-1
     resourceArnSelector:
       matchLabels:
@@ -34,7 +34,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-resourcepolicy
 spec:
   forProvider:
     namespaceName: example
@@ -47,7 +47,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-resourcepolicy
 spec:
   forProvider:
     region: us-west-1
@@ -59,7 +59,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-resourcepolicy
 spec:
   forProvider:
     namespaceName: example

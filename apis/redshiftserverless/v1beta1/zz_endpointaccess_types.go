@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EndpointAccessInitParameters struct {
+
+	// The name of the endpoint.
+	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
+
+	// The name of the workgroup.
+	WorkgroupName *string `json:"workgroupName,omitempty" tf:"workgroup_name,omitempty"`
+}
+
 type EndpointAccessObservation struct {
 
 	// The DNS address of the VPC endpoint.
@@ -89,6 +98,9 @@ type EndpointAccessParameters struct {
 	WorkgroupName *string `json:"workgroupName,omitempty" tf:"workgroup_name,omitempty"`
 }
 
+type NetworkInterfaceInitParameters struct {
+}
+
 type NetworkInterfaceObservation struct {
 
 	// The availability Zone.
@@ -105,6 +117,9 @@ type NetworkInterfaceObservation struct {
 }
 
 type NetworkInterfaceParameters struct {
+}
+
+type VPCEndpointInitParameters struct {
 }
 
 type VPCEndpointObservation struct {
@@ -126,6 +141,18 @@ type VPCEndpointParameters struct {
 type EndpointAccessSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EndpointAccessParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EndpointAccessInitParameters `json:"initProvider,omitempty"`
 }
 
 // EndpointAccessStatus defines the observed state of EndpointAccess.
@@ -146,8 +173,8 @@ type EndpointAccessStatus struct {
 type EndpointAccess struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointName)",message="endpointName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.workgroupName)",message="workgroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointName) || has(self.initProvider.endpointName)",message="endpointName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workgroupName) || has(self.initProvider.workgroupName)",message="workgroupName is a required parameter"
 	Spec   EndpointAccessSpec   `json:"spec"`
 	Status EndpointAccessStatus `json:"status,omitempty"`
 }

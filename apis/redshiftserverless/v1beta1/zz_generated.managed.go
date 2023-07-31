@@ -17,9 +17,9 @@ func (mg *EndpointAccess) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this EndpointAccess.
-func (mg *EndpointAccess) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this EndpointAccess.
+func (mg *EndpointAccess) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this EndpointAccess.
@@ -55,9 +55,9 @@ func (mg *EndpointAccess) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this EndpointAccess.
-func (mg *EndpointAccess) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this EndpointAccess.
+func (mg *EndpointAccess) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this EndpointAccess.
@@ -93,9 +93,9 @@ func (mg *RedshiftServerlessNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this RedshiftServerlessNamespace.
-func (mg *RedshiftServerlessNamespace) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this RedshiftServerlessNamespace.
+func (mg *RedshiftServerlessNamespace) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this RedshiftServerlessNamespace.
@@ -131,9 +131,9 @@ func (mg *RedshiftServerlessNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this RedshiftServerlessNamespace.
-func (mg *RedshiftServerlessNamespace) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this RedshiftServerlessNamespace.
+func (mg *RedshiftServerlessNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this RedshiftServerlessNamespace.
@@ -169,9 +169,9 @@ func (mg *ResourcePolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ResourcePolicy.
-func (mg *ResourcePolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ResourcePolicy.
+func (mg *ResourcePolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourcePolicy.
@@ -207,9 +207,9 @@ func (mg *ResourcePolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ResourcePolicy.
-func (mg *ResourcePolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ResourcePolicy.
+func (mg *ResourcePolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourcePolicy.
@@ -245,9 +245,9 @@ func (mg *Snapshot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Snapshot.
-func (mg *Snapshot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Snapshot.
+func (mg *Snapshot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Snapshot.
@@ -283,9 +283,9 @@ func (mg *Snapshot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Snapshot.
-func (mg *Snapshot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Snapshot.
+func (mg *Snapshot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Snapshot.
@@ -321,9 +321,9 @@ func (mg *UsageLimit) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this UsageLimit.
-func (mg *UsageLimit) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this UsageLimit.
+func (mg *UsageLimit) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this UsageLimit.
@@ -359,9 +359,9 @@ func (mg *UsageLimit) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this UsageLimit.
-func (mg *UsageLimit) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this UsageLimit.
+func (mg *UsageLimit) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this UsageLimit.
@@ -397,9 +397,9 @@ func (mg *Workgroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Workgroup.
-func (mg *Workgroup) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Workgroup.
+func (mg *Workgroup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Workgroup.
@@ -435,9 +435,9 @@ func (mg *Workgroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Workgroup.
-func (mg *Workgroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Workgroup.
+func (mg *Workgroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Workgroup.

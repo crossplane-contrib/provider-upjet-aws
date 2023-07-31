@@ -29,6 +29,3 @@ spec:
   forProvider:
     namespaceName: ${aws_redshiftserverless_namespace.example.namespace_name}
     region: us-west-1
-
----
-

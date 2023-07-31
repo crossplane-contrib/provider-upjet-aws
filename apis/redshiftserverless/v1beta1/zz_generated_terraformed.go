@@ -69,6 +69,16 @@ func (tr *EndpointAccess) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EndpointAccess
+func (tr *EndpointAccess) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this EndpointAccess using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EndpointAccess) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *RedshiftServerlessNamespace) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this RedshiftServerlessNamespace
+func (tr *RedshiftServerlessNamespace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this RedshiftServerlessNamespace using its observed tfState.
@@ -218,6 +238,16 @@ func (tr *ResourcePolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ResourcePolicy
+func (tr *ResourcePolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ResourcePolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourcePolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -290,6 +320,16 @@ func (tr *Snapshot) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Snapshot
+func (tr *Snapshot) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Snapshot using its observed tfState.
@@ -366,6 +406,16 @@ func (tr *UsageLimit) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this UsageLimit
+func (tr *UsageLimit) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this UsageLimit using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UsageLimit) LateInitialize(attrs []byte) (bool, error) {
@@ -438,6 +488,16 @@ func (tr *Workgroup) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Workgroup
+func (tr *Workgroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Workgroup using its observed tfState.

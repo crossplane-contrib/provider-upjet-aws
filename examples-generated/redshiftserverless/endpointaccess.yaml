@@ -11,6 +11,3 @@ spec:
     endpointName: example
     region: us-west-1
     workgroupName: example
-
----
-

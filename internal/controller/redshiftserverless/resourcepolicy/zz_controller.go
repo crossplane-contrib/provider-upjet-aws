@@ -15,6 +15,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
+	"github.com/upbound/upjet/pkg/controller/handler"
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
@@ -30,9 +31,11 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.SecretStoreConfigGVK != nil {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))
 	}
+	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.ResourcePolicy_GroupVersionKind)))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ResourcePolicy_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler))
 	opts := []managed.ReconcilerOption{
-		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_redshiftserverless_resource_policy"], tjcontroller.WithLogger(o.Logger),
-			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ResourcePolicy_GroupVersionKind))),
+		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["aws_redshiftserverless_resource_policy"], tjcontroller.WithLogger(o.Logger), tjcontroller.WithConnectorEventHandler(eventHandler),
+			tjcontroller.WithCallbackProvider(ac),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -50,6 +53,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1beta1.ResourcePolicy{}).
+		WithEventFilter(xpresource.DesiredStateChanged()).
+		Watches(&v1beta1.ResourcePolicy{}, eventHandler).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }
